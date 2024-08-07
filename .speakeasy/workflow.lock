@@ -1,6 +1,9 @@
 speakeasyVersion: 1.356.0
 sources: {}
 targets:
+    mistralai-azure-sdk:
+        source: mistral-azure-source
+        outLocation: ./packages/mistralai-azure
     mistralai-gcp-sdk:
         source: mistral-google-cloud-source
         outLocation: ./packages/mistralai-gcp
