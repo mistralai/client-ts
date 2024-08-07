@@ -37,6 +37,21 @@ yarn add @mistralai/mistralai zod
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
+## API Key Setup
+
+Before you begin, you will need a Mistral AI API key.
+
+1. Get your own Mistral API Key: <https://docs.mistral.ai/#api-access>
+2. Set your Mistral API Key as an environment variable. You only need to do this once.
+
+```bash
+# set Mistral API Key (using zsh for example)
+$ echo 'export MISTRAL_API_KEY=[your_key_here]' >> ~/.zshenv
+
+# reload the environment (or just quit and open a new terminal)
+$ source ~/.zshenv
+```
+
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
