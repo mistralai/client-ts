@@ -1,6 +1,9 @@
 speakeasyVersion: 1.356.0
 sources: {}
 targets:
+    mistralai-sdk:
+        source: mistral-openapi
+        outLocation: /github/workspace/repo
     mistralai-azure-sdk:
         source: mistral-azure-source
         outLocation: ./packages/mistralai-azure

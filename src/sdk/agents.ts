@@ -11,7 +11,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Agents extends ClientSDK {
     /**
-     * Chat Completion
+     * Agents Completion
      */
     async complete(
         request: components.AgentsCompletionRequest,

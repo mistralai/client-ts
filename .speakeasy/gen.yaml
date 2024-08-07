@@ -15,7 +15,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
 typescript:
-  version: 1.0.0-rc.3
+  version: 1.0.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -39,7 +39,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: commonjs
   outputModelSuffix: output
-  packageName: "@mistralai/mistralai"
+  packageName: '@mistralai/mistralai'
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true

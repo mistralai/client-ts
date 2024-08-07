@@ -23,7 +23,7 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Chat Completion
+ * Agents Completion
  */
 export async function agentsComplete(
     client$: MistralCore,

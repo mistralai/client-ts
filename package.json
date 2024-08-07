@@ -1,12 +1,12 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "1.0.0-rc.9",
+  "version": "1.0.0",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/mistralai/mistral-ts-client.git"
+    "url": "https://github.com/mistralai/client-ts.git"
   },
   "scripts": {
     "lint": "eslint --max-warnings=0 src",
