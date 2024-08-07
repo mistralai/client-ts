@@ -188,7 +188,7 @@ We have dedicated SDKs for the following providers:
 
 ### [agents](docs/sdks/agents/README.md)
 
-* [complete](docs/sdks/agents/README.md#complete) - Chat Completion
+* [complete](docs/sdks/agents/README.md#complete) - Agents Completion
 * [stream](docs/sdks/agents/README.md#stream) - Stream Agents completion
 
 ### [embeddings](docs/sdks/embeddings/README.md)
@@ -342,10 +342,10 @@ run();
 
 All SDK methods return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
 
-| Error Object               | Status Code | Content Type     |
-| -------------------------- | ----------- | ---------------- |
-| errors.HTTPValidationError | 422         | application/json |
-| errors.SDKError            | 4xx-5xx     | */*              |
+| Error Object               | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4xx-5xx                    | */*                        |
 
 Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging. 
 
@@ -397,9 +397,9 @@ run();
 
 You can override the default server globally by passing a server name to the `server` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name   | Server                   | Variables |
-| ------ | ------------------------ | --------- |
-| `prod` | `https://api.mistral.ai` | None      |
+| Name | Server | Variables |
+| ----- | ------ | --------- |
+| `prod` | `https://api.mistral.ai` | None |
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
@@ -501,9 +501,9 @@ const sdk = new Mistral({ httpClient });
 
 This SDK supports the following security scheme globally:
 
-| Name     | Type | Scheme      | Environment Variable |
-| -------- | ---- | ----------- | -------------------- |
-| `apiKey` | http | HTTP Bearer | `MISTRAL_API_KEY`    |
+| Name                 | Type                 | Scheme               | Environment Variable |
+| -------------------- | -------------------- | -------------------- | -------------------- |
+| `apiKey`             | http                 | HTTP Bearer          | `MISTRAL_API_KEY`    |
 
 To authenticate with the API the `nullT` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
