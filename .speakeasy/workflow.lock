@@ -4,6 +4,9 @@ targets:
     mistralai-azure-sdk:
         source: mistral-azure-source
         outLocation: ./packages/mistralai-azure
+    mistralai-gcp-sdk:
+        source: mistral-google-cloud-source
+        outLocation: ./packages/mistralai-gcp
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
