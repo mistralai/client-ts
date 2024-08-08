@@ -14,7 +14,7 @@ import * as z from "zod";
 export type DeltaMessage = {
     role?: string | undefined;
     content?: string | undefined;
-    toolCalls?: ToolCall | null | undefined;
+    toolCalls?: Array<ToolCall> | null | undefined;
 };
 
 /** @internal */
@@ -22,7 +22,7 @@ export const DeltaMessage$inboundSchema: z.ZodType<DeltaMessage, z.ZodTypeDef, u
     .object({
         role: z.string().optional(),
         content: z.string().optional(),
-        tool_calls: z.nullable(ToolCall$inboundSchema).optional(),
+        tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
     })
     .transform((v) => {
         return remap$(v, {
@@ -34,7 +34,7 @@ export const DeltaMessage$inboundSchema: z.ZodType<DeltaMessage, z.ZodTypeDef, u
 export type DeltaMessage$Outbound = {
     role?: string | undefined;
     content?: string | undefined;
-    tool_calls?: ToolCall$Outbound | null | undefined;
+    tool_calls?: Array<ToolCall$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -46,7 +46,7 @@ export const DeltaMessage$outboundSchema: z.ZodType<
     .object({
         role: z.string().optional(),
         content: z.string().optional(),
-        toolCalls: z.nullable(ToolCall$outboundSchema).optional(),
+        toolCalls: z.nullable(z.array(ToolCall$outboundSchema)).optional(),
     })
     .transform((v) => {
         return remap$(v, {

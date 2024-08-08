@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 9e7a46648104410da4d94d5c2b373d20
+  docChecksum: a7c4268dd1228c969aecfd7cfdb6ca3c
   docVersion: 0.0.2
-  speakeasyVersion: 1.356.0
-  generationVersion: 2.388.1
-  releaseVersion: 1.0.1
-  configChecksum: 9ca527cc3afc6d9feda073e428a6cab7
+  speakeasyVersion: 1.357.4
+  generationVersion: 2.390.6
+  releaseVersion: 1.0.2
+  configChecksum: 6c6983431817f47e5b2f8404eb1ab0dd
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -14,12 +14,12 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.6
-    core: 3.12.2
+    core: 3.12.3
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.1
     examples: 2.81.4
-    globalSecurity: 2.82.10
+    globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
