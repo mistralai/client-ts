@@ -505,7 +505,7 @@ This SDK supports the following security scheme globally:
 | -------------------- | -------------------- | -------------------- | -------------------- |
 | `apiKey`             | http                 | HTTP Bearer          | `MISTRAL_API_KEY`    |
 
-To authenticate with the API the `nullT` parameter must be set when initializing the SDK client instance. For example:
+To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
