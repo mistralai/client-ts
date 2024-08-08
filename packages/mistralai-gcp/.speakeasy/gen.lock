@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: 5daa3767285068a2f496f5fd41eb7a01
+  docChecksum: e2bc44269918d569bbc51b1521c4c29b
   docVersion: 0.0.2
-  speakeasyVersion: 1.356.0
-  generationVersion: 2.388.1
-  releaseVersion: 1.0.0
-  configChecksum: b007f88a6c9041814ca4ba963f7f964b
+  speakeasyVersion: 1.357.4
+  generationVersion: 2.390.6
+  releaseVersion: 1.0.2
+  configChecksum: a530616ee173c76a1e031e7301d7834e
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -15,11 +15,11 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.6
-    core: 3.12.2
+    core: 3.12.3
     defaultEnabledRetries: 0.1.0
     envVarSecurityUsage: 0.1.1
     examples: 2.81.4
-    globalSecurity: 2.82.10
+    globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
