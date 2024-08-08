@@ -1,4 +1,4 @@
-speakeasyVersion: 1.356.0
+speakeasyVersion: 1.357.4
 sources: {}
 targets:
     mistralai-azure-sdk:
