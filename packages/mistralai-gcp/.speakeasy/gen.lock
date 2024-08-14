@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: e2bc44269918d569bbc51b1521c4c29b
+  docChecksum: 92df54490ab91f38782a1495d03835bf
   docVersion: 0.0.2
-  speakeasyVersion: 1.357.4
-  generationVersion: 2.390.6
-  releaseVersion: 1.0.2
-  configChecksum: a530616ee173c76a1e031e7301d7834e
+  speakeasyVersion: 1.366.0
+  generationVersion: 2.396.0
+  releaseVersion: 1.1.0
+  configChecksum: 814cc68b27946d6b8e7bc99c8a2cbf1b
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -14,8 +14,8 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.6
-    core: 3.12.3
+    constsAndDefaults: 0.1.7
+    core: 3.13.1
     defaultEnabledRetries: 0.1.0
     envVarSecurityUsage: 0.1.1
     examples: 2.81.4
@@ -25,13 +25,14 @@ features:
     globalServerURLs: 2.82.4
     nameOverrides: 2.81.2
     nullables: 0.1.0
+    openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.1.0
     serverEvents: 0.1.4
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
-    unions: 2.85.6
+    unions: 2.85.7
 generatedFiles:
   - src/funcs/chatStream.ts
   - src/funcs/chatComplete.ts
@@ -41,6 +42,7 @@ generatedFiles:
   - src/sdk/fim.ts
   - .eslintrc.cjs
   - .npmignore
+  - FUNCTIONS.md
   - RUNTIMES.md
   - jsr.json
   - package.json
@@ -53,6 +55,7 @@ generatedFiles:
   - src/lib/event-streams.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
   - src/lib/matchers.ts
   - src/lib/primitives.ts
   - src/lib/retries.ts
@@ -65,6 +68,7 @@ generatedFiles:
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/types/blobs.ts
+  - src/types/constdatetime.ts
   - src/types/enums.ts
   - src/types/fp.ts
   - src/types/index.ts
@@ -104,6 +108,7 @@ generatedFiles:
   - docs/models/components/finishreason.md
   - docs/models/components/completionresponsestreamchoice.md
   - docs/models/components/deltamessage.md
+  - docs/models/components/tooltypes.md
   - docs/models/components/toolcall.md
   - docs/models/components/arguments.md
   - docs/models/components/functioncall.md
@@ -114,6 +119,7 @@ generatedFiles:
   - docs/models/components/messages.md
   - docs/models/components/toolchoice.md
   - docs/models/components/chatcompletionstreamrequest.md
+  - docs/models/components/tooltooltypes.md
   - docs/models/components/tool.md
   - docs/models/components/functiont.md
   - docs/models/components/responseformats.md

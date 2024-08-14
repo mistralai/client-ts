@@ -3,6 +3,32 @@
  */
 
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
+import {
+    AssistantMessage,
+    AssistantMessage$inboundSchema,
+    AssistantMessage$Outbound,
+    AssistantMessage$outboundSchema,
+} from "./assistantmessage.js";
+import {
+    ResponseFormat,
+    ResponseFormat$inboundSchema,
+    ResponseFormat$Outbound,
+    ResponseFormat$outboundSchema,
+} from "./responseformat.js";
+import { Tool, Tool$inboundSchema, Tool$Outbound, Tool$outboundSchema } from "./tool.js";
+import {
+    ToolMessage,
+    ToolMessage$inboundSchema,
+    ToolMessage$Outbound,
+    ToolMessage$outboundSchema,
+} from "./toolmessage.js";
+import {
+    UserMessage,
+    UserMessage$inboundSchema,
+    UserMessage$Outbound,
+    UserMessage$outboundSchema,
+} from "./usermessage.js";
 import * as z from "zod";
 
 /**
@@ -10,23 +36,21 @@ import * as z from "zod";
  */
 export type AgentsCompletionStreamRequestStop = string | Array<string>;
 
+export type AgentsCompletionStreamRequestMessages =
+    | (UserMessage & { role: "user" })
+    | (AssistantMessage & { role: "assistant" })
+    | (ToolMessage & { role: "tool" });
+
+export const AgentsCompletionStreamRequestToolChoice = {
+    Auto: "auto",
+    None: "none",
+    Any: "any",
+} as const;
+export type AgentsCompletionStreamRequestToolChoice = ClosedEnum<
+    typeof AgentsCompletionStreamRequestToolChoice
+>;
+
 export type AgentsCompletionStreamRequest = {
-    /**
-     * ID of the model to use. Only compatible for now with:
-     *
-     * @remarks
-     *   - `codestral-2405`
-     *   - `codestral-latest`
-     */
-    model: string | null;
-    /**
-     * What sampling temperature to use, between 0.0 and 1.0. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both.
-     */
-    temperature?: number | undefined;
-    /**
-     * Nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
-     */
-    topP?: number | undefined;
     /**
      * The maximum number of tokens to generate in the completion. The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
      */
@@ -45,13 +69,20 @@ export type AgentsCompletionStreamRequest = {
      */
     randomSeed?: number | null | undefined;
     /**
-     * The text/code to complete.
+     * The prompt(s) to generate completions for, encoded as a list of dict with role and content.
      */
-    prompt: string;
+    messages: Array<
+        | (UserMessage & { role: "user" })
+        | (AssistantMessage & { role: "assistant" })
+        | (ToolMessage & { role: "tool" })
+    >;
+    responseFormat?: ResponseFormat | undefined;
+    tools?: Array<Tool> | null | undefined;
+    toolChoice?: AgentsCompletionStreamRequestToolChoice | undefined;
     /**
-     * Optional text/code that adds more context for the model. When given a `prompt` and a `suffix` the model will fill what is between them. When `suffix` is not provided, the model will simply execute completion starting with `prompt`.
+     * The ID of the agent to use for this completion.
      */
-    suffix?: string | null | undefined;
+    agentId: string;
 };
 
 /** @internal */
@@ -85,44 +116,136 @@ export namespace AgentsCompletionStreamRequestStop$ {
 }
 
 /** @internal */
+export const AgentsCompletionStreamRequestMessages$inboundSchema: z.ZodType<
+    AgentsCompletionStreamRequestMessages,
+    z.ZodTypeDef,
+    unknown
+> = z.union([
+    UserMessage$inboundSchema.and(
+        z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role }))
+    ),
+    AssistantMessage$inboundSchema.and(
+        z.object({ role: z.literal("assistant") }).transform((v) => ({ role: v.role }))
+    ),
+    ToolMessage$inboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role }))
+    ),
+]);
+
+/** @internal */
+export type AgentsCompletionStreamRequestMessages$Outbound =
+    | (UserMessage$Outbound & { role: "user" })
+    | (AssistantMessage$Outbound & { role: "assistant" })
+    | (ToolMessage$Outbound & { role: "tool" });
+
+/** @internal */
+export const AgentsCompletionStreamRequestMessages$outboundSchema: z.ZodType<
+    AgentsCompletionStreamRequestMessages$Outbound,
+    z.ZodTypeDef,
+    AgentsCompletionStreamRequestMessages
+> = z.union([
+    UserMessage$outboundSchema.and(
+        z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role }))
+    ),
+    AssistantMessage$outboundSchema.and(
+        z.object({ role: z.literal("assistant") }).transform((v) => ({ role: v.role }))
+    ),
+    ToolMessage$outboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role }))
+    ),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AgentsCompletionStreamRequestMessages$ {
+    /** @deprecated use `AgentsCompletionStreamRequestMessages$inboundSchema` instead. */
+    export const inboundSchema = AgentsCompletionStreamRequestMessages$inboundSchema;
+    /** @deprecated use `AgentsCompletionStreamRequestMessages$outboundSchema` instead. */
+    export const outboundSchema = AgentsCompletionStreamRequestMessages$outboundSchema;
+    /** @deprecated use `AgentsCompletionStreamRequestMessages$Outbound` instead. */
+    export type Outbound = AgentsCompletionStreamRequestMessages$Outbound;
+}
+
+/** @internal */
+export const AgentsCompletionStreamRequestToolChoice$inboundSchema: z.ZodNativeEnum<
+    typeof AgentsCompletionStreamRequestToolChoice
+> = z.nativeEnum(AgentsCompletionStreamRequestToolChoice);
+
+/** @internal */
+export const AgentsCompletionStreamRequestToolChoice$outboundSchema: z.ZodNativeEnum<
+    typeof AgentsCompletionStreamRequestToolChoice
+> = AgentsCompletionStreamRequestToolChoice$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AgentsCompletionStreamRequestToolChoice$ {
+    /** @deprecated use `AgentsCompletionStreamRequestToolChoice$inboundSchema` instead. */
+    export const inboundSchema = AgentsCompletionStreamRequestToolChoice$inboundSchema;
+    /** @deprecated use `AgentsCompletionStreamRequestToolChoice$outboundSchema` instead. */
+    export const outboundSchema = AgentsCompletionStreamRequestToolChoice$outboundSchema;
+}
+
+/** @internal */
 export const AgentsCompletionStreamRequest$inboundSchema: z.ZodType<
     AgentsCompletionStreamRequest,
     z.ZodTypeDef,
     unknown
 > = z
     .object({
-        model: z.nullable(z.string()),
-        temperature: z.number().default(0.7),
-        top_p: z.number().default(1),
         max_tokens: z.nullable(z.number().int()).optional(),
         min_tokens: z.nullable(z.number().int()).optional(),
         stream: z.boolean().default(true),
         stop: z.union([z.string(), z.array(z.string())]).optional(),
         random_seed: z.nullable(z.number().int()).optional(),
-        prompt: z.string(),
-        suffix: z.nullable(z.string()).optional(),
+        messages: z.array(
+            z.union([
+                UserMessage$inboundSchema.and(
+                    z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role }))
+                ),
+                AssistantMessage$inboundSchema.and(
+                    z.object({ role: z.literal("assistant") }).transform((v) => ({ role: v.role }))
+                ),
+                ToolMessage$inboundSchema.and(
+                    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role }))
+                ),
+            ])
+        ),
+        response_format: ResponseFormat$inboundSchema.optional(),
+        tools: z.nullable(z.array(Tool$inboundSchema)).optional(),
+        tool_choice: AgentsCompletionStreamRequestToolChoice$inboundSchema.default("auto"),
+        agent_id: z.string(),
     })
     .transform((v) => {
         return remap$(v, {
-            top_p: "topP",
             max_tokens: "maxTokens",
             min_tokens: "minTokens",
             random_seed: "randomSeed",
+            response_format: "responseFormat",
+            tool_choice: "toolChoice",
+            agent_id: "agentId",
         });
     });
 
 /** @internal */
 export type AgentsCompletionStreamRequest$Outbound = {
-    model: string | null;
-    temperature: number;
-    top_p: number;
     max_tokens?: number | null | undefined;
     min_tokens?: number | null | undefined;
     stream: boolean;
     stop?: string | Array<string> | undefined;
     random_seed?: number | null | undefined;
-    prompt: string;
-    suffix?: string | null | undefined;
+    messages: Array<
+        | (UserMessage$Outbound & { role: "user" })
+        | (AssistantMessage$Outbound & { role: "assistant" })
+        | (ToolMessage$Outbound & { role: "tool" })
+    >;
+    response_format?: ResponseFormat$Outbound | undefined;
+    tools?: Array<Tool$Outbound> | null | undefined;
+    tool_choice: string;
+    agent_id: string;
 };
 
 /** @internal */
@@ -132,23 +255,37 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
     AgentsCompletionStreamRequest
 > = z
     .object({
-        model: z.nullable(z.string()),
-        temperature: z.number().default(0.7),
-        topP: z.number().default(1),
         maxTokens: z.nullable(z.number().int()).optional(),
         minTokens: z.nullable(z.number().int()).optional(),
         stream: z.boolean().default(true),
         stop: z.union([z.string(), z.array(z.string())]).optional(),
         randomSeed: z.nullable(z.number().int()).optional(),
-        prompt: z.string(),
-        suffix: z.nullable(z.string()).optional(),
+        messages: z.array(
+            z.union([
+                UserMessage$outboundSchema.and(
+                    z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role }))
+                ),
+                AssistantMessage$outboundSchema.and(
+                    z.object({ role: z.literal("assistant") }).transform((v) => ({ role: v.role }))
+                ),
+                ToolMessage$outboundSchema.and(
+                    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role }))
+                ),
+            ])
+        ),
+        responseFormat: ResponseFormat$outboundSchema.optional(),
+        tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
+        toolChoice: AgentsCompletionStreamRequestToolChoice$outboundSchema.default("auto"),
+        agentId: z.string(),
     })
     .transform((v) => {
         return remap$(v, {
-            topP: "top_p",
             maxTokens: "max_tokens",
             minTokens: "min_tokens",
             randomSeed: "random_seed",
+            responseFormat: "response_format",
+            toolChoice: "tool_choice",
+            agentId: "agent_id",
         });
     });
 

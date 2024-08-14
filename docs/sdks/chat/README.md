@@ -41,6 +41,45 @@ async function run() {
 run();
 ```
 
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { chatComplete } from "@mistralai/mistralai/funcs/chatComplete.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await chatComplete(mistral, {
+    model: "mistral-small-latest",
+    messages: [
+        {
+        content: "Who is the best French painter? Answer in one short sentence.",
+          role: "user",
+        },
+    ],
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -84,6 +123,46 @@ async function run() {
         },
     ],
   });
+
+  for await (const event of result) {
+    // Handle the event
+  }
+}
+
+run();
+```
+
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { chatStream } from "@mistralai/mistralai/funcs/chatStream.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await chatStream(mistral, {
+    model: "mistral-small-latest",
+    messages: [
+        {
+        content: "Who is the best French painter? Answer in one short sentence.",
+          role: "user",
+        },
+    ],
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
 
   for await (const event of result) {
     // Handle the event

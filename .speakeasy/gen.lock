@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: a7c4268dd1228c969aecfd7cfdb6ca3c
+  docChecksum: c3a7b8cc0fd70dd5c1c061ff478e5c35
   docVersion: 0.0.2
-  speakeasyVersion: 1.357.4
-  generationVersion: 2.390.6
-  releaseVersion: 1.0.2
-  configChecksum: 6c6983431817f47e5b2f8404eb1ab0dd
+  speakeasyVersion: 1.366.0
+  generationVersion: 2.396.0
+  releaseVersion: 1.1.0
+  configChecksum: 3cfbfb75f96325b8e28c3310024b3c4f
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.6
-    core: 3.12.3
+    constsAndDefaults: 0.1.7
+    core: 3.13.1
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.1
@@ -25,13 +25,14 @@ features:
     globalServerURLs: 2.82.4
     nameOverrides: 2.81.2
     nullables: 0.1.0
+    openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.1.0
     serverEvents: 0.1.4
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
-    unions: 2.85.6
+    unions: 2.85.7
 generatedFiles:
   - src/funcs/modelsList.ts
   - src/funcs/modelsRetrieve.ts
@@ -66,6 +67,7 @@ generatedFiles:
   - src/sdk/sdk.ts
   - .eslintrc.cjs
   - .npmignore
+  - FUNCTIONS.md
   - RUNTIMES.md
   - jsr.json
   - package.json
@@ -79,6 +81,7 @@ generatedFiles:
   - src/lib/event-streams.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
   - src/lib/matchers.ts
   - src/lib/primitives.ts
   - src/lib/retries.ts
@@ -91,6 +94,7 @@ generatedFiles:
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/types/blobs.ts
+  - src/types/constdatetime.ts
   - src/types/enums.ts
   - src/types/fp.ts
   - src/types/index.ts
@@ -219,6 +223,7 @@ generatedFiles:
   - docs/models/components/chatcompletionchoice.md
   - docs/models/components/assistantmessagerole.md
   - docs/models/components/assistantmessage.md
+  - docs/models/components/tooltypes.md
   - docs/models/components/toolcall.md
   - docs/models/components/arguments.md
   - docs/models/components/functioncall.md
@@ -227,6 +232,7 @@ generatedFiles:
   - docs/models/components/messages.md
   - docs/models/components/toolchoice.md
   - docs/models/components/chatcompletionrequest.md
+  - docs/models/components/tooltooltypes.md
   - docs/models/components/tool.md
   - docs/models/components/functiont.md
   - docs/models/components/responseformats.md
@@ -260,6 +266,8 @@ generatedFiles:
   - docs/models/components/agentscompletionrequesttoolchoice.md
   - docs/models/components/agentscompletionrequest.md
   - docs/models/components/agentscompletionstreamrequeststop.md
+  - docs/models/components/agentscompletionstreamrequestmessages.md
+  - docs/models/components/agentscompletionstreamrequesttoolchoice.md
   - docs/models/components/agentscompletionstreamrequest.md
   - docs/models/components/embeddingresponse.md
   - docs/models/components/embeddingresponsedata.md
