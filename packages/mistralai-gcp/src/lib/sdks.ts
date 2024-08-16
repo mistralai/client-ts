@@ -4,6 +4,7 @@
 
 import {
     HTTPClient,
+    matchContentType,
     matchStatusCode,
     isAbortError,
     isTimeoutError,
@@ -11,6 +12,7 @@ import {
 } from "./http.js";
 import { SecurityState } from "./security.js";
 import { retry, RetryConfig } from "./retries.js";
+import { Logger } from "./logger.js";
 import { encodeForm } from "./encodings.js";
 import { stringToBase64 } from "./base64.js";
 import { SDKOptions, SDK_METADATA, serverURLFromOptions } from "./config.js";
@@ -74,6 +76,7 @@ export class ClientSDK {
     private readonly httpClient: HTTPClient;
     protected readonly baseURL: URL | null;
     protected readonly hooks$: SDKHooks;
+    protected readonly logger?: Logger | undefined;
     public readonly options$: SDKOptions & { hooks?: SDKHooks };
 
     constructor(options: SDKOptions = {}) {
@@ -100,6 +103,7 @@ export class ClientSDK {
         });
         this.baseURL = baseURL;
         this.httpClient = client;
+        this.logger = options.debugLogger;
     }
 
     public createRequest$(
@@ -217,11 +221,12 @@ export class ClientSDK {
 
         return retry(
             async () => {
-                const req = request.clone();
-
-                let response = await this.httpClient.request(
-                    await this.hooks$.beforeRequest(context, req)
+                const req = await this.hooks$.beforeRequest(context, request.clone());
+                await logRequest(this.logger, req).catch((e) =>
+                    this.logger?.log("Failed to log request:", e)
                 );
+
+                let response = await this.httpClient.request(req);
 
                 if (matchStatusCode(response, errorCodes)) {
                     const result = await this.hooks$.afterError(context, response, null);
@@ -232,6 +237,10 @@ export class ClientSDK {
                 } else {
                     response = await this.hooks$.afterSuccess(context, response);
                 }
+
+                await logResponse(this.logger, response, req).catch((e) =>
+                    this.logger?.log("Failed to log response:", e)
+                );
 
                 return response;
             },
@@ -258,4 +267,91 @@ export class ClientSDK {
             }
         );
     }
+}
+
+const jsonLikeContentTypeRE = /^application\/(?:.{0,100}\+)?json/;
+async function logRequest(logger: Logger | undefined, req: Request) {
+    if (!logger) {
+        return;
+    }
+
+    const contentType = req.headers.get("content-type");
+    const ct = contentType?.split(";")[0] || "";
+
+    logger.group(`> Request: ${req.method} ${req.url}`);
+
+    logger.group("Headers:");
+    for (const [k, v] of req.headers.entries()) {
+        logger.log(`${k}: ${v}`);
+    }
+    logger.groupEnd();
+
+    logger.group("Body:");
+    switch (true) {
+        case jsonLikeContentTypeRE.test(ct):
+            logger.log(await req.clone().json());
+            break;
+        case ct.startsWith("text/"):
+            logger.log(await req.clone().text());
+            break;
+        case ct === "multipart/form-data": {
+            const body = await req.clone().formData();
+            for (const [k, v] of body) {
+                const vlabel = v instanceof Blob ? "<Blob>" : v;
+                logger.log(`${k}: ${vlabel}`);
+            }
+            break;
+        }
+        default:
+            logger.log(`<${contentType}>`);
+            break;
+    }
+    logger.groupEnd();
+
+    logger.groupEnd();
+}
+
+async function logResponse(logger: Logger | undefined, res: Response, req: Request) {
+    if (!logger) {
+        return;
+    }
+
+    const contentType = res.headers.get("content-type");
+    const ct = contentType?.split(";")[0] || "";
+
+    logger.group(`< Response: ${req.method} ${req.url}`);
+    logger.log("Status Code:", res.status, res.statusText);
+
+    logger.group("Headers:");
+    for (const [k, v] of res.headers.entries()) {
+        logger.log(`${k}: ${v}`);
+    }
+    logger.groupEnd();
+
+    logger.group("Body:");
+    switch (true) {
+        case matchContentType(res, "application/json") || jsonLikeContentTypeRE.test(ct):
+            logger.log(await res.clone().json());
+            break;
+        case matchContentType(res, "text/event-stream"):
+            logger.log(`<${contentType}>`);
+            break;
+        case matchContentType(res, "text/*"):
+            logger.log(await res.clone().text());
+            break;
+        case matchContentType(res, "multipart/form-data"): {
+            const body = await res.clone().formData();
+            for (const [k, v] of body) {
+                const vlabel = v instanceof Blob ? "<Blob>" : v;
+                logger.log(`${k}: ${vlabel}`);
+            }
+            break;
+        }
+        default:
+            logger.log(`<${contentType}>`);
+            break;
+    }
+    logger.groupEnd();
+
+    logger.groupEnd();
 }

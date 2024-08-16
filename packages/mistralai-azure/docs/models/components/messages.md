@@ -1,5 +1,12 @@
 # Messages
 
+## Example Usage
+
+```typescript
+import { Messages } from "@mistralai/mistralai-azure/models/components";
+
+let value: Messages = {};
+```
 
 ## Supported Types
 

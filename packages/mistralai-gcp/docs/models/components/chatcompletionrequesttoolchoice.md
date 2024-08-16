@@ -1,10 +1,15 @@
 # ChatCompletionRequestToolChoice
 
+## Example Usage
+
+```typescript
+import { ChatCompletionRequestToolChoice } from "@mistralai/mistralai-gcp/models/components";
+
+let value: ChatCompletionRequestToolChoice = "none";
+```
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `Auto` | auto   |
-| `None` | none   |
-| `Any`  | any    |
+```typescript
+"auto" | "none" | "any"
+```

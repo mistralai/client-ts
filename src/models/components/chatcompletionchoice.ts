@@ -23,7 +23,7 @@ export type FinishReason = ClosedEnum<typeof FinishReason>;
 
 export type ChatCompletionChoice = {
     index: number;
-    message?: AssistantMessage | undefined;
+    message: AssistantMessage;
     finishReason: FinishReason;
 };
 
@@ -54,7 +54,7 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
 > = z
     .object({
         index: z.number().int(),
-        message: AssistantMessage$inboundSchema.optional(),
+        message: AssistantMessage$inboundSchema,
         finish_reason: FinishReason$inboundSchema,
     })
     .transform((v) => {
@@ -66,7 +66,7 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
 /** @internal */
 export type ChatCompletionChoice$Outbound = {
     index: number;
-    message?: AssistantMessage$Outbound | undefined;
+    message: AssistantMessage$Outbound;
     finish_reason: string;
 };
 
@@ -78,7 +78,7 @@ export const ChatCompletionChoice$outboundSchema: z.ZodType<
 > = z
     .object({
         index: z.number().int(),
-        message: AssistantMessage$outboundSchema.optional(),
+        message: AssistantMessage$outboundSchema,
         finishReason: FinishReason$outboundSchema,
     })
     .transform((v) => {

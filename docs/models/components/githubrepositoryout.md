@@ -1,5 +1,16 @@
 # GithubRepositoryOut
 
+## Example Usage
+
+```typescript
+import { GithubRepositoryOut } from "@mistralai/mistralai/models/components";
+
+let value: GithubRepositoryOut = {
+    name: "<value>",
+    owner: "<value>",
+    commitId: "<value>",
+};
+```
 
 ## Fields
 

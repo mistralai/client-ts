@@ -2,6 +2,13 @@
 
 The fine-tuning hyperparameter settings used in a fine-tune job.
 
+## Example Usage
+
+```typescript
+import { TrainingParametersIn } from "@mistralai/mistralai/models/components";
+
+let value: TrainingParametersIn = {};
+```
 
 ## Fields
 

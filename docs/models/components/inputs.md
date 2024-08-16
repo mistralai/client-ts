@@ -2,6 +2,13 @@
 
 Text to embed.
 
+## Example Usage
+
+```typescript
+import { Inputs } from "@mistralai/mistralai/models/components";
+
+let value: Inputs = ["<value>"];
+```
 
 ## Supported Types
 

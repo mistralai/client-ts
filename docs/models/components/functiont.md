@@ -1,5 +1,17 @@
 # FunctionT
 
+## Example Usage
+
+```typescript
+import { FunctionT } from "@mistralai/mistralai/models/components";
+
+let value: FunctionT = {
+    name: "<value>",
+    parameters: {
+        key: "<value>",
+    },
+};
+```
 
 ## Fields
 

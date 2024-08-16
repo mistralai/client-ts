@@ -1,5 +1,16 @@
 # FIMCompletionRequest
 
+## Example Usage
+
+```typescript
+import { FIMCompletionRequest } from "@mistralai/mistralai-gcp/models/components";
+
+let value: FIMCompletionRequest = {
+    model: "codestral-2405",
+    prompt: "def",
+    suffix: "return a+b",
+};
+```
 
 ## Fields
 

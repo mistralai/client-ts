@@ -1,5 +1,14 @@
 # ContentChunk
 
+## Example Usage
+
+```typescript
+import { ContentChunk } from "@mistralai/mistralai-azure/models/components";
+
+let value: ContentChunk = {
+    text: "<value>",
+};
+```
 
 ## Fields
 

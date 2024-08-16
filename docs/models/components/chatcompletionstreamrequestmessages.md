@@ -1,5 +1,14 @@
 # ChatCompletionStreamRequestMessages
 
+## Example Usage
+
+```typescript
+import { ChatCompletionStreamRequestMessages } from "@mistralai/mistralai/models/components";
+
+let value: ChatCompletionStreamRequestMessages = {
+    content: "<value>",
+};
+```
 
 ## Supported Types
 

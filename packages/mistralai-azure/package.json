@@ -1,6 +1,6 @@
 {
   "name": "@mistralai/mistralai-azure",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,

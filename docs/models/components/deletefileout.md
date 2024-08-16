@@ -1,5 +1,16 @@
 # DeleteFileOut
 
+## Example Usage
+
+```typescript
+import { DeleteFileOut } from "@mistralai/mistralai/models/components";
+
+let value: DeleteFileOut = {
+    id: "497f6eca-6276-4993-bfeb-53cbbbba6f09",
+    object: "file",
+    deleted: false,
+};
+```
 
 ## Fields
 

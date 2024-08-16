@@ -1,11 +1,15 @@
 # CompletionResponseStreamChoiceFinishReason
 
+## Example Usage
+
+```typescript
+import { CompletionResponseStreamChoiceFinishReason } from "@mistralai/mistralai/models/components";
+
+let value: CompletionResponseStreamChoiceFinishReason = "length";
+```
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `Stop`      | stop        |
-| `Length`    | length      |
-| `Error`     | error       |
-| `ToolCalls` | tool_calls  |
+```typescript
+"stop" | "length" | "error" | "tool_calls"
+```

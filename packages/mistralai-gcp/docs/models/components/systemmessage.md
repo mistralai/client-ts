@@ -1,5 +1,14 @@
 # SystemMessage
 
+## Example Usage
+
+```typescript
+import { SystemMessage } from "@mistralai/mistralai-gcp/models/components";
+
+let value: SystemMessage = {
+    content: "<value>",
+};
+```
 
 ## Fields
 

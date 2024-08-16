@@ -1,5 +1,16 @@
 # CheckpointOut
 
+## Example Usage
+
+```typescript
+import { CheckpointOut } from "@mistralai/mistralai/models/components";
+
+let value: CheckpointOut = {
+    metrics: {},
+    stepNumber: 638921,
+    createdAt: 1716963433,
+};
+```
 
 ## Fields
 

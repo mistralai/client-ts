@@ -1,5 +1,16 @@
 # CompletionResponseStreamChoice
 
+## Example Usage
+
+```typescript
+import { CompletionResponseStreamChoice } from "@mistralai/mistralai-gcp/models/components";
+
+let value: CompletionResponseStreamChoice = {
+    index: 847252,
+    delta: {},
+    finishReason: "length",
+};
+```
 
 ## Fields
 

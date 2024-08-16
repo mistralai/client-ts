@@ -1,12 +1,15 @@
 # ChatCompletionChoiceFinishReason
 
+## Example Usage
+
+```typescript
+import { ChatCompletionChoiceFinishReason } from "@mistralai/mistralai-gcp/models/components";
+
+let value: ChatCompletionChoiceFinishReason = "stop";
+```
 
 ## Values
 
-| Name          | Value         |
-| ------------- | ------------- |
-| `Stop`        | stop          |
-| `Length`      | length        |
-| `ModelLength` | model_length  |
-| `Error`       | error         |
-| `ToolCalls`   | tool_calls    |
+```typescript
+"stop" | "length" | "model_length" | "error" | "tool_calls"
+```

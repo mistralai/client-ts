@@ -1,8 +1,15 @@
 # ToolMessageRole
 
+## Example Usage
+
+```typescript
+import { ToolMessageRole } from "@mistralai/mistralai-azure/models/components";
+
+let value: ToolMessageRole = "tool";
+```
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `Tool` | tool   |
+```typescript
+"tool"
+```

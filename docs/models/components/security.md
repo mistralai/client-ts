@@ -1,5 +1,12 @@
 # Security
 
+## Example Usage
+
+```typescript
+import { Security } from "@mistralai/mistralai/models/components";
+
+let value: Security = {};
+```
 
 ## Fields
 

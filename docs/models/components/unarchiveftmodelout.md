@@ -1,5 +1,14 @@
 # UnarchiveFTModelOut
 
+## Example Usage
+
+```typescript
+import { UnarchiveFTModelOut } from "@mistralai/mistralai/models/components";
+
+let value: UnarchiveFTModelOut = {
+    id: "<id>",
+};
+```
 
 ## Fields
 

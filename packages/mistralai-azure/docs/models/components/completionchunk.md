@@ -1,5 +1,27 @@
 # CompletionChunk
 
+## Example Usage
+
+```typescript
+import { CompletionChunk } from "@mistralai/mistralai-azure/models/components";
+
+let value: CompletionChunk = {
+    id: "<id>",
+    model: "Spyder",
+    usage: {
+        promptTokens: 16,
+        completionTokens: 34,
+        totalTokens: 50,
+    },
+    choices: [
+        {
+            index: 602763,
+            delta: {},
+            finishReason: "tool_calls",
+        },
+    ],
+};
+```
 
 ## Fields
 

@@ -157,7 +157,7 @@ export type StatusCodePredicate = number | string | (number | string)[];
 // segments in a media type string.
 const mediaParamSeparator = /\s*;\s*/g;
 
-function matchContentType(response: Response, pattern: string): boolean {
+export function matchContentType(response: Response, pattern: string): boolean {
   // `*` is a special case which means anything is acceptable.
   if (pattern === "*") {
     return true;

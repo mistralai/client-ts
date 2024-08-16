@@ -1,5 +1,12 @@
 # DeltaMessage
 
+## Example Usage
+
+```typescript
+import { DeltaMessage } from "@mistralai/mistralai-gcp/models/components";
+
+let value: DeltaMessage = {};
+```
 
 ## Fields
 

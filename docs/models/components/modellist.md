@@ -1,5 +1,12 @@
 # ModelList
 
+## Example Usage
+
+```typescript
+import { ModelList } from "@mistralai/mistralai/models/components";
+
+let value: ModelList = {};
+```
 
 ## Fields
 

@@ -1,5 +1,17 @@
 # FunctionCall
 
+## Example Usage
+
+```typescript
+import { FunctionCall } from "@mistralai/mistralai-gcp/models/components";
+
+let value: FunctionCall = {
+    name: "<value>",
+    arguments: {
+        key: "<value>",
+    },
+};
+```
 
 ## Fields
 

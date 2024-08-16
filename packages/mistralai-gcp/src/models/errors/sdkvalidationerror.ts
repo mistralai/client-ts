@@ -10,15 +10,17 @@ export class SDKValidationError extends Error {
    */
   public readonly rawValue: unknown;
 
+  /**
+   * The raw message that failed validation.
+   */
+  public readonly rawMessage: unknown;
+
   constructor(message: string, cause: unknown, rawValue: unknown) {
-    super(message);
+    super(`${message}: ${cause}`);
     this.name = "SDKValidationError";
     this.cause = cause;
     this.rawValue = rawValue;
-  }
-
-  public override toString(): string {
-    return `${this.message}: ${this.cause}`;
+    this.rawMessage = message;
   }
 
   /**
@@ -28,7 +30,7 @@ export class SDKValidationError extends Error {
    */
   public pretty(): string {
     if (this.cause instanceof z.ZodError) {
-      return `${this.message}\n${formatZodError(this.cause)}`;
+      return `${this.rawMessage}\n${formatZodError(this.cause)}`;
     } else {
       return this.toString();
     }

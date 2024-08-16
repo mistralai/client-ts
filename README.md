@@ -532,6 +532,63 @@ We also provide provider specific SDK for:
 - [GCP](packages/mistralai-gcp/README.md)
 - [Azure](packages/mistralai-azure/README.md)
 
+<!-- Start Standalone functions [standalone-funcs] -->
+## Standalone functions
+
+All the methods listed above are available as standalone functions. These
+functions are ideal for use in applications running in the browser, serverless
+runtimes or other environments where application bundle size is a primary
+concern. When using a bundler to build your application, all unused
+functionality will be either excluded from the final bundle or tree-shaken away.
+
+To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
+
+<details>
+
+<summary>Available standalone functions</summary>
+
+- [agentsComplete](docs/sdks/agents/README.md#complete)
+- [agentsStream](docs/sdks/agents/README.md#stream)
+- [chatComplete](docs/sdks/chat/README.md#complete)
+- [chatStream](docs/sdks/chat/README.md#stream)
+- [embeddingsCreate](docs/sdks/embeddings/README.md#create)
+- [filesDelete](docs/sdks/files/README.md#delete)
+- [filesList](docs/sdks/files/README.md#list)
+- [filesRetrieve](docs/sdks/files/README.md#retrieve)
+- [filesUpload](docs/sdks/files/README.md#upload)
+- [fimComplete](docs/sdks/fim/README.md#complete)
+- [fimStream](docs/sdks/fim/README.md#stream)
+- [fineTuningJobsCancel](docs/sdks/jobs/README.md#cancel)
+- [fineTuningJobsCreate](docs/sdks/jobs/README.md#create)
+- [fineTuningJobsGet](docs/sdks/jobs/README.md#get)
+- [fineTuningJobsList](docs/sdks/jobs/README.md#list)
+- [fineTuningJobsStart](docs/sdks/jobs/README.md#start)
+- [modelsArchive](docs/sdks/models/README.md#archive)
+- [modelsDelete](docs/sdks/models/README.md#delete)
+- [modelsList](docs/sdks/models/README.md#list)
+- [modelsRetrieve](docs/sdks/models/README.md#retrieve)
+- [modelsUnarchive](docs/sdks/models/README.md#unarchive)
+- [modelsUpdate](docs/sdks/models/README.md#update)
+
+
+</details>
+<!-- End Standalone functions [standalone-funcs] -->
+
+<!-- Start Debugging [debug] -->
+## Debugging
+
+To log HTTP requests and responses, you can pass a logger that matches `console`'s interface as an SDK option.
+
+> [!WARNING]
+> Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
+
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const sdk = new Mistral({ debugLogger: console });
+```
+<!-- End Debugging [debug] -->
+
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
 # Development

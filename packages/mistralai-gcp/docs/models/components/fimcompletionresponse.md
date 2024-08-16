@@ -1,5 +1,29 @@
 # FIMCompletionResponse
 
+## Example Usage
+
+```typescript
+import { FIMCompletionResponse } from "@mistralai/mistralai-gcp/models/components";
+
+let value: FIMCompletionResponse = {
+    id: "cmpl-e5cc70bb28c444948073e77776eb30ef",
+    object: "chat.completion",
+    model: "codestral-latest",
+    usage: {
+        promptTokens: 16,
+        completionTokens: 34,
+        totalTokens: 50,
+    },
+    created: 1702256327,
+    choices: [
+        {
+            index: 0,
+            message: {},
+            finishReason: "stop",
+        },
+    ],
+};
+```
 
 ## Fields
 

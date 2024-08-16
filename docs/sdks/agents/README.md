@@ -41,6 +41,45 @@ async function run() {
 run();
 ```
 
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { agentsComplete } from "@mistralai/mistralai/funcs/agentsComplete.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsComplete(mistral, {
+    messages: [
+        {
+        content: "Who is the best French painter? Answer in one short sentence.",
+          role: "user",
+        },
+    ],
+    agentId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result)
+}
+
+run();
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -76,10 +115,54 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.agents.stream({
-    model: "codestral-2405",
-    prompt: "def",
-    suffix: "return a+b",
+    messages: [
+        {
+        content: "Who is the best French painter? Answer in one short sentence.",
+          role: "user",
+        },
+    ],
+    agentId: "<value>",
   });
+
+  for await (const event of result) {
+    // Handle the event
+  }
+}
+
+run();
+```
+
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { agentsStream } from "@mistralai/mistralai/funcs/agentsStream.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsStream(mistral, {
+    messages: [
+        {
+        content: "Who is the best French painter? Answer in one short sentence.",
+          role: "user",
+        },
+    ],
+    agentId: "<value>",
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
 
   for await (const event of result) {
     // Handle the event

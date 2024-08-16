@@ -1,10 +1,15 @@
 # AgentsCompletionRequestToolChoice
 
+## Example Usage
+
+```typescript
+import { AgentsCompletionRequestToolChoice } from "@mistralai/mistralai/models/components";
+
+let value: AgentsCompletionRequestToolChoice = "none";
+```
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `Auto` | auto   |
-| `None` | none   |
-| `Any`  | any    |
+```typescript
+"auto" | "none" | "any"
+```

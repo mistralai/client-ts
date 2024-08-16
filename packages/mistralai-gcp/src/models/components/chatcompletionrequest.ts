@@ -57,7 +57,7 @@ export type ChatCompletionRequestToolChoice = ClosedEnum<typeof ChatCompletionRe
 
 export type ChatCompletionRequest = {
     /**
-     * ID of the model to use. You can use the [List Available Models](/api#operation/listModels) API to see all of your available models, or see our [Model overview](/models) for model descriptions.
+     * ID of the model to use. You can use the [List Available Models](/api/#tag/models/operation/list_models_v1_models_get) API to see all of your available models, or see our [Model overview](/models) for model descriptions.
      */
     model: string | null;
     /**

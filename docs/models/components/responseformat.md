@@ -1,5 +1,12 @@
 # ResponseFormat
 
+## Example Usage
+
+```typescript
+import { ResponseFormat } from "@mistralai/mistralai/models/components";
+
+let value: ResponseFormat = {};
+```
 
 ## Fields
 

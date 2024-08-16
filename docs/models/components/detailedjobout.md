@@ -1,5 +1,29 @@
 # DetailedJobOut
 
+## Example Usage
+
+```typescript
+import { DetailedJobOut } from "@mistralai/mistralai/models/components";
+
+let value: DetailedJobOut = {
+    id: "b0074f15-471b-45e6-a13b-99d488e1e91e",
+    autoStart: false,
+    hyperparameters: {},
+    model: "mistral-small-latest",
+    status: "VALIDATED",
+    jobType: "<value>",
+    createdAt: 9356,
+    modifiedAt: 667411,
+    trainingFiles: ["d2abd442-6980-42d5-82a9-4bb4f63c969e"],
+    checkpoints: [
+        {
+            metrics: {},
+            stepNumber: 572252,
+            createdAt: 1716963433,
+        },
+    ],
+};
+```
 
 ## Fields
 

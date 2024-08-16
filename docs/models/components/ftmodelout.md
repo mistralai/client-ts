@@ -1,5 +1,20 @@
 # FTModelOut
 
+## Example Usage
+
+```typescript
+import { FTModelOut } from "@mistralai/mistralai/models/components";
+
+let value: FTModelOut = {
+    id: "<id>",
+    created: 602763,
+    ownedBy: "<value>",
+    root: "<value>",
+    archived: false,
+    capabilities: {},
+    job: "d8d69a67-4e0f-4467-8c87-96ed151a05df",
+};
+```
 
 ## Fields
 

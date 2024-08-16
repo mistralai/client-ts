@@ -1,5 +1,12 @@
 # Arguments
 
+## Example Usage
+
+```typescript
+import { Arguments } from "@mistralai/mistralai-azure/models/components";
+
+let value: Arguments = "<value>";
+```
 
 ## Supported Types
 

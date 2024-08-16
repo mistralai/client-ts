@@ -1,9 +1,15 @@
 # Source
 
+## Example Usage
+
+```typescript
+import { Source } from "@mistralai/mistralai/models/components";
+
+let value: Source = "repository";
+```
 
 ## Values
 
-| Name         | Value        |
-| ------------ | ------------ |
-| `Upload`     | upload       |
-| `Repository` | repository   |
+```typescript
+"upload" | "repository"
+```

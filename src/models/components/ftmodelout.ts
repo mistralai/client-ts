@@ -30,7 +30,7 @@ export type FTModelOut = {
 export const FTModelOut$inboundSchema: z.ZodType<FTModelOut, z.ZodTypeDef, unknown> = z
     .object({
         id: z.string(),
-        object: z.literal("model"),
+        object: z.literal("model").default("model" as const),
         created: z.number().int(),
         owned_by: z.string(),
         root: z.string(),

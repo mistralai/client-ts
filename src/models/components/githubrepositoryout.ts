@@ -21,7 +21,7 @@ export const GithubRepositoryOut$inboundSchema: z.ZodType<
     unknown
 > = z
     .object({
-        type: z.literal("github"),
+        type: z.literal("github").default("github" as const),
         name: z.string(),
         owner: z.string(),
         ref: z.nullable(z.string()).optional(),

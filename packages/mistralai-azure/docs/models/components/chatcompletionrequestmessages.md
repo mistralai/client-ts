@@ -1,5 +1,18 @@
 # ChatCompletionRequestMessages
 
+## Example Usage
+
+```typescript
+import { ChatCompletionRequestMessages } from "@mistralai/mistralai-azure/models/components";
+
+let value: ChatCompletionRequestMessages = {
+    content: [
+        {
+            text: "<value>",
+        },
+    ],
+};
+```
 
 ## Supported Types
 

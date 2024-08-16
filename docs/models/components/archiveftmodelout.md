@@ -1,5 +1,14 @@
 # ArchiveFTModelOut
 
+## Example Usage
+
+```typescript
+import { ArchiveFTModelOut } from "@mistralai/mistralai/models/components";
+
+let value: ArchiveFTModelOut = {
+    id: "<id>",
+};
+```
 
 ## Fields
 

@@ -1,5 +1,16 @@
 # UserMessageContent
 
+## Example Usage
+
+```typescript
+import { UserMessageContent } from "@mistralai/mistralai/models/components";
+
+let value: UserMessageContent = [
+    {
+        text: "<value>",
+    },
+];
+```
 
 ## Supported Types
 
