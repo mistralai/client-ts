@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: 92df54490ab91f38782a1495d03835bf
+  docChecksum: 4cc6e7c5c5ba15491872c600d4a247ef
   docVersion: 0.0.2
   speakeasyVersion: 1.372.0
   generationVersion: 2.399.0
-  releaseVersion: 1.1.1
-  configChecksum: 50c316525d725616442c63213468ca2c
+  releaseVersion: 1.1.2
+  configChecksum: aee01235f4e46aef1a055407ead7ae83
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
