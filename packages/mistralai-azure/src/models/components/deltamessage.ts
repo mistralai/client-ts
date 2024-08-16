@@ -13,7 +13,7 @@ import * as z from "zod";
 
 export type DeltaMessage = {
     role?: string | undefined;
-    content?: string | undefined;
+    content?: string | null | undefined;
     toolCalls?: Array<ToolCall> | null | undefined;
 };
 
@@ -21,7 +21,7 @@ export type DeltaMessage = {
 export const DeltaMessage$inboundSchema: z.ZodType<DeltaMessage, z.ZodTypeDef, unknown> = z
     .object({
         role: z.string().optional(),
-        content: z.string().optional(),
+        content: z.nullable(z.string()).optional(),
         tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
     })
     .transform((v) => {
@@ -33,7 +33,7 @@ export const DeltaMessage$inboundSchema: z.ZodType<DeltaMessage, z.ZodTypeDef, u
 /** @internal */
 export type DeltaMessage$Outbound = {
     role?: string | undefined;
-    content?: string | undefined;
+    content?: string | null | undefined;
     tool_calls?: Array<ToolCall$Outbound> | null | undefined;
 };
 
@@ -45,7 +45,7 @@ export const DeltaMessage$outboundSchema: z.ZodType<
 > = z
     .object({
         role: z.string().optional(),
-        content: z.string().optional(),
+        content: z.nullable(z.string()).optional(),
         toolCalls: z.nullable(z.array(ToolCall$outboundSchema)).optional(),
     })
     .transform((v) => {

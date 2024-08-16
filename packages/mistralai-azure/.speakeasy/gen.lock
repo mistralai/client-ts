@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: 0f6edfd8ad8df6c49b3d429d1af7b9e2
+  docChecksum: 9128fabc3ae45ecc9ed7fae8991b3d3e
   docVersion: 0.0.2
-  speakeasyVersion: 1.372.0
+  speakeasyVersion: 1.373.1
   generationVersion: 2.399.0
-  releaseVersion: 1.1.1
-  configChecksum: 1f81ca42be4e26105da0dd6f61c4eee5
+  releaseVersion: 1.1.2
+  configChecksum: a56cbf1087f24fcd07809bce6cf083c4
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
