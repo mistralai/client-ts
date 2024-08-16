@@ -1,17 +1,15 @@
 # DetailedJobOutStatus
 
+## Example Usage
+
+```typescript
+import { DetailedJobOutStatus } from "@mistralai/mistralai/models/components";
+
+let value: DetailedJobOutStatus = "RUNNING";
+```
 
 ## Values
 
-| Name                    | Value                   |
-| ----------------------- | ----------------------- |
-| `Queued`                | QUEUED                  |
-| `Started`               | STARTED                 |
-| `Validating`            | VALIDATING              |
-| `Validated`             | VALIDATED               |
-| `Running`               | RUNNING                 |
-| `FailedValidation`      | FAILED_VALIDATION       |
-| `Failed`                | FAILED                  |
-| `Success`               | SUCCESS                 |
-| `Cancelled`             | CANCELLED               |
-| `CancellationRequested` | CANCELLATION_REQUESTED  |
+```typescript
+"QUEUED" | "STARTED" | "VALIDATING" | "VALIDATED" | "RUNNING" | "FAILED_VALIDATION" | "FAILED" | "SUCCESS" | "CANCELLED" | "CANCELLATION_REQUESTED"
+```

@@ -1,5 +1,15 @@
 # WandbIntegration
 
+## Example Usage
+
+```typescript
+import { WandbIntegration } from "@mistralai/mistralai/models/components";
+
+let value: WandbIntegration = {
+    project: "<value>",
+    apiKey: "<value>",
+};
+```
 
 ## Fields
 

@@ -14,7 +14,7 @@ export type JobsOut = {
 /** @internal */
 export const JobsOut$inboundSchema: z.ZodType<JobsOut, z.ZodTypeDef, unknown> = z.object({
     data: z.array(JobOut$inboundSchema).optional(),
-    object: z.literal("list"),
+    object: z.literal("list").default("list" as const),
     total: z.number().int(),
 });
 

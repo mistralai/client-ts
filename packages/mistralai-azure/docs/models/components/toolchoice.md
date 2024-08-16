@@ -1,10 +1,15 @@
 # ToolChoice
 
+## Example Usage
+
+```typescript
+import { ToolChoice } from "@mistralai/mistralai-azure/models/components";
+
+let value: ToolChoice = "any";
+```
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `Auto` | auto   |
-| `None` | none   |
-| `Any`  | any    |
+```typescript
+"auto" | "none" | "any"
+```

@@ -1,9 +1,15 @@
 # SampleType
 
+## Example Usage
+
+```typescript
+import { SampleType } from "@mistralai/mistralai/models/components";
+
+let value: SampleType = "instruct";
+```
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `Pretrain` | pretrain   |
-| `Instruct` | instruct   |
+```typescript
+"pretrain" | "instruct"
+```

@@ -1,5 +1,12 @@
 # Loc
 
+## Example Usage
+
+```typescript
+import { Loc } from "@mistralai/mistralai-azure/models/components";
+
+let value: Loc = "<value>";
+```
 
 ## Supported Types
 

@@ -1,5 +1,19 @@
 # Tool
 
+## Example Usage
+
+```typescript
+import { Tool } from "@mistralai/mistralai/models/components";
+
+let value: Tool = {
+    function: {
+        name: "<value>",
+        parameters: {
+            key: "<value>",
+        },
+    },
+};
+```
 
 ## Fields
 

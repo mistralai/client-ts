@@ -1,5 +1,16 @@
 # GithubRepositoryIn
 
+## Example Usage
+
+```typescript
+import { GithubRepositoryIn } from "@mistralai/mistralai/models/components";
+
+let value: GithubRepositoryIn = {
+    name: "<value>",
+    owner: "<value>",
+    token: "<value>",
+};
+```
 
 ## Fields
 

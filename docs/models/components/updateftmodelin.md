@@ -1,5 +1,12 @@
 # UpdateFTModelIn
 
+## Example Usage
+
+```typescript
+import { UpdateFTModelIn } from "@mistralai/mistralai/models/components";
+
+let value: UpdateFTModelIn = {};
+```
 
 ## Fields
 

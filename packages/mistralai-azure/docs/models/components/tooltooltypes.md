@@ -1,8 +1,17 @@
 # ToolToolTypes
 
+## Example Usage
+
+```typescript
+import { ToolToolTypes } from "@mistralai/mistralai-azure/models/components";
+
+let value: ToolToolTypes = "function";
+```
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `Function` | function   |
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
+
+```typescript
+"function" | Unrecognized<string>
+```

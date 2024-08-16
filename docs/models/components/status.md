@@ -2,18 +2,16 @@
 
 The current status of the fine-tuning job.
 
+## Example Usage
+
+```typescript
+import { Status } from "@mistralai/mistralai/models/components";
+
+let value: Status = "FAILED";
+```
 
 ## Values
 
-| Name                    | Value                   |
-| ----------------------- | ----------------------- |
-| `Queued`                | QUEUED                  |
-| `Started`               | STARTED                 |
-| `Validating`            | VALIDATING              |
-| `Validated`             | VALIDATED               |
-| `Running`               | RUNNING                 |
-| `FailedValidation`      | FAILED_VALIDATION       |
-| `Failed`                | FAILED                  |
-| `Success`               | SUCCESS                 |
-| `Cancelled`             | CANCELLED               |
-| `CancellationRequested` | CANCELLATION_REQUESTED  |
+```typescript
+"QUEUED" | "STARTED" | "VALIDATING" | "VALIDATED" | "RUNNING" | "FAILED_VALIDATION" | "FAILED" | "SUCCESS" | "CANCELLED" | "CANCELLATION_REQUESTED"
+```

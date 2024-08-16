@@ -1,5 +1,14 @@
 # AgentsCompletionStreamRequestMessages
 
+## Example Usage
+
+```typescript
+import { AgentsCompletionStreamRequestMessages } from "@mistralai/mistralai/models/components";
+
+let value: AgentsCompletionStreamRequestMessages = {
+    content: "<value>",
+};
+```
 
 ## Supported Types
 

@@ -1,8 +1,15 @@
 # UserMessageRole
 
+## Example Usage
+
+```typescript
+import { UserMessageRole } from "@mistralai/mistralai-gcp/models/components";
+
+let value: UserMessageRole = "user";
+```
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `User` | user   |
+```typescript
+"user"
+```

@@ -67,7 +67,7 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$inboundSchema: z.ZodTyp
     unknown
 > = z.object({
     file: z.lazy(() => FileT$inboundSchema),
-    purpose: z.literal("fine-tune"),
+    purpose: z.literal("fine-tune").default("fine-tune" as const),
 });
 
 /** @internal */

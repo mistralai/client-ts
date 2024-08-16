@@ -1,5 +1,12 @@
 # JobsApiRoutesFineTuningGetFineTuningJobsRequest
 
+## Example Usage
+
+```typescript
+import { JobsApiRoutesFineTuningGetFineTuningJobsRequest } from "@mistralai/mistralai/models/operations";
+
+let value: JobsApiRoutesFineTuningGetFineTuningJobsRequest = {};
+```
 
 ## Fields
 

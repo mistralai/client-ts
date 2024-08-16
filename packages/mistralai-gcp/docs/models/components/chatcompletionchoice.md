@@ -1,5 +1,16 @@
 # ChatCompletionChoice
 
+## Example Usage
+
+```typescript
+import { ChatCompletionChoice } from "@mistralai/mistralai-gcp/models/components";
+
+let value: ChatCompletionChoice = {
+    index: 0,
+    message: {},
+    finishReason: "stop",
+};
+```
 
 ## Fields
 

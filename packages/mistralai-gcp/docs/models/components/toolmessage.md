@@ -1,5 +1,14 @@
 # ToolMessage
 
+## Example Usage
+
+```typescript
+import { ToolMessage } from "@mistralai/mistralai-gcp/models/components";
+
+let value: ToolMessage = {
+    content: "<value>",
+};
+```
 
 ## Fields
 

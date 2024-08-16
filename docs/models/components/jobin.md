@@ -1,5 +1,15 @@
 # JobIn
 
+## Example Usage
+
+```typescript
+import { JobIn } from "@mistralai/mistralai/models/components";
+
+let value: JobIn = {
+    model: "codestral-latest",
+    hyperparameters: {},
+};
+```
 
 ## Fields
 

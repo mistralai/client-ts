@@ -1,5 +1,12 @@
 # JobMetadataOut
 
+## Example Usage
+
+```typescript
+import { JobMetadataOut } from "@mistralai/mistralai/models/components";
+
+let value: JobMetadataOut = {};
+```
 
 ## Fields
 

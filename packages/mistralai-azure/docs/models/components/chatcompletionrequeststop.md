@@ -2,6 +2,13 @@
 
 Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
 
+## Example Usage
+
+```typescript
+import { ChatCompletionRequestStop } from "@mistralai/mistralai-azure/models/components";
+
+let value: ChatCompletionRequestStop = ["<value>"];
+```
 
 ## Supported Types
 

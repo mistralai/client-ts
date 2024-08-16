@@ -1,5 +1,12 @@
 # FTModelCapabilitiesOut
 
+## Example Usage
+
+```typescript
+import { FTModelCapabilitiesOut } from "@mistralai/mistralai/models/components";
+
+let value: FTModelCapabilitiesOut = {};
+```
 
 ## Fields
 

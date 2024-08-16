@@ -1,5 +1,12 @@
 # AssistantMessage
 
+## Example Usage
+
+```typescript
+import { AssistantMessage } from "@mistralai/mistralai-gcp/models/components";
+
+let value: AssistantMessage = {};
+```
 
 ## Fields
 

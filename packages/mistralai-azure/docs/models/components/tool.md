@@ -1,5 +1,19 @@
 # Tool
 
+## Example Usage
+
+```typescript
+import { Tool } from "@mistralai/mistralai-azure/models/components";
+
+let value: Tool = {
+    function: {
+        name: "<value>",
+        parameters: {
+            key: "<value>",
+        },
+    },
+};
+```
 
 ## Fields
 

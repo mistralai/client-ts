@@ -1,5 +1,20 @@
 # AgentsCompletionStreamRequest
 
+## Example Usage
+
+```typescript
+import { AgentsCompletionStreamRequest } from "@mistralai/mistralai/models/components";
+
+let value: AgentsCompletionStreamRequest = {
+    messages: [
+        {
+            content: "Who is the best French painter? Answer in one short sentence.",
+            role: "user",
+        },
+    ],
+    agentId: "<value>",
+};
+```
 
 ## Fields
 

@@ -1,5 +1,14 @@
 # TextChunk
 
+## Example Usage
+
+```typescript
+import { TextChunk } from "@mistralai/mistralai-gcp/models/components";
+
+let value: TextChunk = {
+    text: "<value>",
+};
+```
 
 ## Fields
 

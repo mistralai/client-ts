@@ -1,5 +1,20 @@
 # ChatCompletionRequest
 
+## Example Usage
+
+```typescript
+import { ChatCompletionRequest } from "@mistralai/mistralai-azure/models/components";
+
+let value: ChatCompletionRequest = {
+    model: "azureai",
+    messages: [
+        {
+            content: "Who is the best French painter? Answer in one short sentence.",
+            role: "user",
+        },
+    ],
+};
+```
 
 ## Fields
 

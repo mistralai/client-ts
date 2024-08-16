@@ -1,5 +1,12 @@
 # TrainingParameters
 
+## Example Usage
+
+```typescript
+import { TrainingParameters } from "@mistralai/mistralai/models/components";
+
+let value: TrainingParameters = {};
+```
 
 ## Fields
 

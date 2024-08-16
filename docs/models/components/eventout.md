@@ -1,5 +1,15 @@
 # EventOut
 
+## Example Usage
+
+```typescript
+import { EventOut } from "@mistralai/mistralai/models/components";
+
+let value: EventOut = {
+    name: "<value>",
+    createdAt: 223081,
+};
+```
 
 ## Fields
 

@@ -1,5 +1,20 @@
 # ChatCompletionStreamRequest
 
+## Example Usage
+
+```typescript
+import { ChatCompletionStreamRequest } from "@mistralai/mistralai/models/components";
+
+let value: ChatCompletionStreamRequest = {
+    model: "mistral-small-latest",
+    messages: [
+        {
+            content: "Who is the best French painter? Answer in one short sentence.",
+            role: "user",
+        },
+    ],
+};
+```
 
 ## Fields
 

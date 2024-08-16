@@ -2,13 +2,16 @@
 
 The name of the model to fine-tune.
 
+## Example Usage
+
+```typescript
+import { FineTuneableModel } from "@mistralai/mistralai/models/components";
+
+let value: FineTuneableModel = "mistral-small-latest";
+```
 
 ## Values
 
-| Name                 | Value                |
-| -------------------- | -------------------- |
-| `OpenMistral7b`      | open-mistral-7b      |
-| `MistralSmallLatest` | mistral-small-latest |
-| `CodestralLatest`    | codestral-latest     |
-| `MistralLargeLatest` | mistral-large-latest |
-| `OpenMistralNemo`    | open-mistral-nemo    |
+```typescript
+"open-mistral-7b" | "mistral-small-latest" | "codestral-latest" | "mistral-large-latest" | "open-mistral-nemo"
+```

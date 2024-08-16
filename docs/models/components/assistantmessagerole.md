@@ -1,8 +1,15 @@
 # AssistantMessageRole
 
+## Example Usage
+
+```typescript
+import { AssistantMessageRole } from "@mistralai/mistralai/models/components";
+
+let value: AssistantMessageRole = "assistant";
+```
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `Assistant` | assistant   |
+```typescript
+"assistant"
+```

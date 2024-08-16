@@ -1,5 +1,15 @@
 # EmbeddingRequest
 
+## Example Usage
+
+```typescript
+import { EmbeddingRequest } from "@mistralai/mistralai/models/components";
+
+let value: EmbeddingRequest = {
+    inputs: "<value>",
+    model: "Focus",
+};
+```
 
 ## Fields
 

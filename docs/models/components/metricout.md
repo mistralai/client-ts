@@ -2,6 +2,13 @@
 
 Metrics at the step number during the fine-tuning job. Use these metrics to assess if the training is going smoothly (loss should decrease, token accuracy should increase).
 
+## Example Usage
+
+```typescript
+import { MetricOut } from "@mistralai/mistralai/models/components";
+
+let value: MetricOut = {};
+```
 
 ## Fields
 

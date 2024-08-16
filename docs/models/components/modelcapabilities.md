@@ -1,5 +1,12 @@
 # ModelCapabilities
 
+## Example Usage
+
+```typescript
+import { ModelCapabilities } from "@mistralai/mistralai/models/components";
+
+let value: ModelCapabilities = {};
+```
 
 ## Fields
 

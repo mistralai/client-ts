@@ -1,8 +1,17 @@
 # ToolTypes
 
+## Example Usage
+
+```typescript
+import { ToolTypes } from "@mistralai/mistralai-gcp/models/components";
+
+let value: ToolTypes = "function";
+```
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `Function` | function   |
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
+
+```typescript
+"function" | Unrecognized<string>
+```

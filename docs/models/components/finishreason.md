@@ -1,12 +1,15 @@
 # FinishReason
 
+## Example Usage
+
+```typescript
+import { FinishReason } from "@mistralai/mistralai/models/components";
+
+let value: FinishReason = "stop";
+```
 
 ## Values
 
-| Name          | Value         |
-| ------------- | ------------- |
-| `Stop`        | stop          |
-| `Length`      | length        |
-| `ModelLength` | model_length  |
-| `Error`       | error         |
-| `ToolCalls`   | tool_calls    |
+```typescript
+"stop" | "length" | "model_length" | "error" | "tool_calls"
+```

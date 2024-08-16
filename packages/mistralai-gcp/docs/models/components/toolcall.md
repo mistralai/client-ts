@@ -1,5 +1,17 @@
 # ToolCall
 
+## Example Usage
+
+```typescript
+import { ToolCall } from "@mistralai/mistralai-gcp/models/components";
+
+let value: ToolCall = {
+    function: {
+        name: "<value>",
+        arguments: "<value>",
+    },
+};
+```
 
 ## Fields
 

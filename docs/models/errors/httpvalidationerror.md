@@ -2,6 +2,13 @@
 
 Validation Error
 
+## Example Usage
+
+```typescript
+import { HTTPValidationError } from "@mistralai/mistralai/models/errors";
+
+// No examples available for this model
+```
 
 ## Fields
 

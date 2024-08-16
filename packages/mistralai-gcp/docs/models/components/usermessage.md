@@ -1,5 +1,18 @@
 # UserMessage
 
+## Example Usage
+
+```typescript
+import { UserMessage } from "@mistralai/mistralai-gcp/models/components";
+
+let value: UserMessage = {
+    content: [
+        {
+            text: "<value>",
+        },
+    ],
+};
+```
 
 ## Fields
 
