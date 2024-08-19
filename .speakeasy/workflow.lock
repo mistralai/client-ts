@@ -1,4 +1,4 @@
-speakeasyVersion: 1.373.1
+speakeasyVersion: 1.374.2
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
@@ -12,6 +12,7 @@ sources:
         sourceBlobDigest: sha256:a4c011f461c73809a7d6cf1c9823d3c51d5050895aad246287ff14ac971efb8c
         tags:
             - latest
+            - main
     mistral-openapi:
         sourceNamespace: mistral-openapi
         sourceRevisionDigest: sha256:088d899162941380ec90445852dc7e8c65a8e2eab6b32f552fd7f4fc6f152e76
