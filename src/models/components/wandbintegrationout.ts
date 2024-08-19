@@ -25,7 +25,7 @@ export const WandbIntegrationOut$inboundSchema: z.ZodType<
     unknown
 > = z
     .object({
-        type: z.literal("wandb").default("wandb" as const),
+        type: z.literal("wandb").default("wandb"),
         project: z.string(),
         name: z.nullable(z.string()).optional(),
         run_name: z.nullable(z.string()).optional(),

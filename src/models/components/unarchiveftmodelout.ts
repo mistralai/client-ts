@@ -17,8 +17,8 @@ export const UnarchiveFTModelOut$inboundSchema: z.ZodType<
     unknown
 > = z.object({
     id: z.string(),
-    object: z.literal("model").default("model" as const),
-    archived: z.boolean().default(false),
+    object: z.literal("model").default("model"),
+    archived: z.boolean(),
 });
 
 /** @internal */

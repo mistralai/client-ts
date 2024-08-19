@@ -14,7 +14,7 @@ export type ArchiveFTModelOut = {
 export const ArchiveFTModelOut$inboundSchema: z.ZodType<ArchiveFTModelOut, z.ZodTypeDef, unknown> =
     z.object({
         id: z.string(),
-        object: z.literal("model").default("model" as const),
+        object: z.literal("model").default("model"),
         archived: z.boolean().default(true),
     });
 

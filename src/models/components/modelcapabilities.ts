@@ -17,9 +17,9 @@ export const ModelCapabilities$inboundSchema: z.ZodType<ModelCapabilities, z.Zod
     z
         .object({
             completion_chat: z.boolean().default(true),
-            completion_fim: z.boolean().default(false),
+            completion_fim: z.boolean(),
             function_calling: z.boolean().default(true),
-            fine_tuning: z.boolean().default(false),
+            fine_tuning: z.boolean(),
         })
         .transform((v) => {
             return remap$(v, {

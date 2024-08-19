@@ -25,7 +25,7 @@ export type WandbIntegration = {
 /** @internal */
 export const WandbIntegration$inboundSchema: z.ZodType<WandbIntegration, z.ZodTypeDef, unknown> = z
     .object({
-        type: z.literal("wandb").default("wandb" as const),
+        type: z.literal("wandb").default("wandb"),
         project: z.string(),
         name: z.nullable(z.string()).optional(),
         api_key: z.string(),

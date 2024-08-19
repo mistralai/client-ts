@@ -62,7 +62,7 @@ export const LegacyJobMetadataOut$inboundSchema: z.ZodType<
         details: z.string(),
         epochs: z.nullable(z.number()).optional(),
         training_steps: z.nullable(z.number().int()).optional(),
-        object: z.literal("job.metadata").default("job.metadata" as const),
+        object: z.literal("job.metadata").default("job.metadata"),
     })
     .transform((v) => {
         return remap$(v, {

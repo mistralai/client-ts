@@ -121,7 +121,7 @@ export const DetailedJobOut$inboundSchema: z.ZodType<DetailedJobOut, z.ZodTypeDe
         modified_at: z.number().int(),
         training_files: z.array(z.string()),
         validation_files: z.nullable(z.array(z.string())).optional(),
-        object: z.literal("job").default("job" as const),
+        object: z.literal("job").default("job"),
         fine_tuned_model: z.nullable(z.string()).optional(),
         suffix: z.nullable(z.string()).optional(),
         integrations: z.nullable(z.array(WandbIntegrationOut$inboundSchema)).optional(),
