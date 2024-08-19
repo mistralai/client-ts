@@ -1,6 +1,6 @@
 import { Mistral } from "@mistralai/mistralai";
-import { UserMessage } from "@mistralai/mistralai/models/components/usermessage.js";
-
+import { ToolCall } from "@mistralai/mistralai/models/components/toolcall.js";
+import { AssisantMessage } from "@mistralai/mistralai/components/assistantmessage.js";
 const apiKey = process.env["MISTRAL_API_KEY"];
 if (!apiKey) {
   throw new Error("missing MISTRAL_API_KEY environment variable");
@@ -128,21 +128,23 @@ stream = await client.chat.stream({
   tools: tools,
 });
 
-full_content = "";
+let full_tool_call: ToolCall[] = [];
+
 for await (const event of stream) {
-  const content = event.data?.choices[0]?.delta.content;
-  if (!content) {
+
+  const toolCalls = event.data?.choices[0]?.delta.toolCalls;
+  if (!toolCalls) {
     continue;
   }
-
-  full_content += content;
-
-  process.stdout.write(content);
+  full_tool_call = toolCalls;
 }
 
-messages.push(response.choices[0].message);
+messages.push({
+  role: "assistant",
+  toolCalls: full_tool_call,
+});
 
-const toolCalls = response.choices[0].message.toolCalls;
+const toolCalls = full_tool_call;
 for (const toolCall of toolCalls) {
   const functionName = toolCall.function.name;
   const functionParams = JSON.parse(toolCall.function.arguments);
@@ -173,6 +175,6 @@ for await (const event of stream) {
     continue;
   }
 
-
   process.stdout.write(content);
 }
+console.log("\ndone")
