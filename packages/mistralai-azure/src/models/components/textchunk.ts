@@ -11,7 +11,7 @@ export type TextChunk = {
 
 /** @internal */
 export const TextChunk$inboundSchema: z.ZodType<TextChunk, z.ZodTypeDef, unknown> = z.object({
-    type: z.literal("text").default("text" as const),
+    type: z.literal("text").default("text"),
     text: z.string(),
 });
 
