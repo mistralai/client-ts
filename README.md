@@ -577,7 +577,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 <!-- Start Debugging [debug] -->
 ## Debugging
 
-To log HTTP requests and responses, you can pass a logger that matches `console`'s interface as an SDK option.
+You can setup your SDK to emit debug logs for SDK requests and responses.
+
+You can pass a logger that matches `console`'s interface as an SDK option.
 
 > [!WARNING]
 > Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
@@ -587,6 +589,8 @@ import { Mistral } from "@mistralai/mistralai";
 
 const sdk = new Mistral({ debugLogger: console });
 ```
+
+You can also enable a default debug logger by setting an environment variable `MISTRAL_DEBUG` to true.
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

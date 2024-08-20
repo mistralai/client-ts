@@ -8,6 +8,8 @@ import * as z from "zod";
 export type TrainingParameters = {
     trainingSteps?: number | null | undefined;
     learningRate?: number | undefined;
+    weightDecay?: number | null | undefined;
+    warmupFraction?: number | null | undefined;
     epochs?: number | null | undefined;
     fimRatio?: number | null | undefined;
 };
@@ -21,6 +23,8 @@ export const TrainingParameters$inboundSchema: z.ZodType<
     .object({
         training_steps: z.nullable(z.number().int()).optional(),
         learning_rate: z.number().default(0.0001),
+        weight_decay: z.nullable(z.number()).optional(),
+        warmup_fraction: z.nullable(z.number()).optional(),
         epochs: z.nullable(z.number()).optional(),
         fim_ratio: z.nullable(z.number()).optional(),
     })
@@ -28,6 +32,8 @@ export const TrainingParameters$inboundSchema: z.ZodType<
         return remap$(v, {
             training_steps: "trainingSteps",
             learning_rate: "learningRate",
+            weight_decay: "weightDecay",
+            warmup_fraction: "warmupFraction",
             fim_ratio: "fimRatio",
         });
     });
@@ -36,6 +42,8 @@ export const TrainingParameters$inboundSchema: z.ZodType<
 export type TrainingParameters$Outbound = {
     training_steps?: number | null | undefined;
     learning_rate: number;
+    weight_decay?: number | null | undefined;
+    warmup_fraction?: number | null | undefined;
     epochs?: number | null | undefined;
     fim_ratio?: number | null | undefined;
 };
@@ -49,6 +57,8 @@ export const TrainingParameters$outboundSchema: z.ZodType<
     .object({
         trainingSteps: z.nullable(z.number().int()).optional(),
         learningRate: z.number().default(0.0001),
+        weightDecay: z.nullable(z.number()).optional(),
+        warmupFraction: z.nullable(z.number()).optional(),
         epochs: z.nullable(z.number()).optional(),
         fimRatio: z.nullable(z.number()).optional(),
     })
@@ -56,6 +66,8 @@ export const TrainingParameters$outboundSchema: z.ZodType<
         return remap$(v, {
             trainingSteps: "training_steps",
             learningRate: "learning_rate",
+            weightDecay: "weight_decay",
+            warmupFraction: "warmup_fraction",
             fimRatio: "fim_ratio",
         });
     });

@@ -4,7 +4,13 @@
 
 import * as b64$ from "../../lib/base64.js";
 import { blobLikeSchema } from "../../types/blobs.js";
+import { catchUnrecognizedEnum, OpenEnum, Unrecognized } from "../../types/enums.js";
 import * as z from "zod";
+
+export const Purpose = {
+    FineTune: "fine-tune",
+} as const;
+export type Purpose = OpenEnum<typeof Purpose>;
 
 export type FileT = {
     fileName: string;
@@ -28,6 +34,29 @@ export type FilesApiRoutesUploadFileMultiPartBodyParams = {
     file: FileT | Blob;
     purpose?: "fine-tune" | undefined;
 };
+
+/** @internal */
+export const Purpose$inboundSchema: z.ZodType<Purpose, z.ZodTypeDef, unknown> = z.union([
+    z.nativeEnum(Purpose),
+    z.string().transform(catchUnrecognizedEnum),
+]);
+
+/** @internal */
+export const Purpose$outboundSchema: z.ZodType<Purpose, z.ZodTypeDef, Purpose> = z.union([
+    z.nativeEnum(Purpose),
+    z.string().and(z.custom<Unrecognized<string>>()),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Purpose$ {
+    /** @deprecated use `Purpose$inboundSchema` instead. */
+    export const inboundSchema = Purpose$inboundSchema;
+    /** @deprecated use `Purpose$outboundSchema` instead. */
+    export const outboundSchema = Purpose$outboundSchema;
+}
 
 /** @internal */
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z.object({
@@ -67,7 +96,7 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$inboundSchema: z.ZodTyp
     unknown
 > = z.object({
     file: z.lazy(() => FileT$inboundSchema),
-    purpose: z.literal("fine-tune").default("fine-tune" as const),
+    purpose: z.literal("fine-tune").default("fine-tune"),
 });
 
 /** @internal */
@@ -83,7 +112,7 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema: z.ZodTy
     FilesApiRoutesUploadFileMultiPartBodyParams
 > = z.object({
     file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
-    purpose: z.literal("fine-tune").default("fine-tune" as const),
+    purpose: z.literal("fine-tune").default("fine-tune"),
 });
 
 /**

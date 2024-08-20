@@ -100,7 +100,7 @@ export const JobsApiRoutesFineTuningGetFineTuningJobsRequest$inboundSchema: z.Zo
                     .transform((v) => new Date(v))
             )
             .optional(),
-        created_by_me: z.boolean().default(false),
+        created_by_me: z.boolean(),
         status: z.nullable(Status$inboundSchema).optional(),
         wandb_project: z.nullable(z.string()).optional(),
         wandb_name: z.nullable(z.string()).optional(),

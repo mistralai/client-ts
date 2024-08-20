@@ -20,9 +20,9 @@ export const FTModelCapabilitiesOut$inboundSchema: z.ZodType<
 > = z
     .object({
         completion_chat: z.boolean().default(true),
-        completion_fim: z.boolean().default(false),
-        function_calling: z.boolean().default(false),
-        fine_tuning: z.boolean().default(false),
+        completion_fim: z.boolean(),
+        function_calling: z.boolean(),
+        fine_tuning: z.boolean(),
     })
     .transform((v) => {
         return remap$(v, {
