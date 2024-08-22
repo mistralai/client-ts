@@ -3,7 +3,13 @@
  */
 
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import * as z from "zod";
+
+export const WandbIntegrationType = {
+    Wandb: "wandb",
+} as const;
+export type WandbIntegrationType = ClosedEnum<typeof WandbIntegrationType>;
 
 export type WandbIntegration = {
     type?: "wandb" | undefined;
@@ -23,9 +29,28 @@ export type WandbIntegration = {
 };
 
 /** @internal */
+export const WandbIntegrationType$inboundSchema: z.ZodNativeEnum<typeof WandbIntegrationType> =
+    z.nativeEnum(WandbIntegrationType);
+
+/** @internal */
+export const WandbIntegrationType$outboundSchema: z.ZodNativeEnum<typeof WandbIntegrationType> =
+    WandbIntegrationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WandbIntegrationType$ {
+    /** @deprecated use `WandbIntegrationType$inboundSchema` instead. */
+    export const inboundSchema = WandbIntegrationType$inboundSchema;
+    /** @deprecated use `WandbIntegrationType$outboundSchema` instead. */
+    export const outboundSchema = WandbIntegrationType$outboundSchema;
+}
+
+/** @internal */
 export const WandbIntegration$inboundSchema: z.ZodType<WandbIntegration, z.ZodTypeDef, unknown> = z
     .object({
-        type: z.literal("wandb").default("wandb" as const),
+        type: z.literal("wandb").default("wandb"),
         project: z.string(),
         name: z.nullable(z.string()).optional(),
         api_key: z.string(),
@@ -54,7 +79,7 @@ export const WandbIntegration$outboundSchema: z.ZodType<
     WandbIntegration
 > = z
     .object({
-        type: z.literal("wandb").default("wandb" as const),
+        type: z.literal("wandb").default("wandb"),
         project: z.string(),
         name: z.nullable(z.string()).optional(),
         apiKey: z.string(),

@@ -3,7 +3,13 @@
  */
 
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import * as z from "zod";
+
+export const LegacyJobMetadataOutObject = {
+    JobMetadata: "job.metadata",
+} as const;
+export type LegacyJobMetadataOutObject = ClosedEnum<typeof LegacyJobMetadataOutObject>;
 
 export type LegacyJobMetadataOut = {
     /**
@@ -45,6 +51,27 @@ export type LegacyJobMetadataOut = {
 };
 
 /** @internal */
+export const LegacyJobMetadataOutObject$inboundSchema: z.ZodNativeEnum<
+    typeof LegacyJobMetadataOutObject
+> = z.nativeEnum(LegacyJobMetadataOutObject);
+
+/** @internal */
+export const LegacyJobMetadataOutObject$outboundSchema: z.ZodNativeEnum<
+    typeof LegacyJobMetadataOutObject
+> = LegacyJobMetadataOutObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace LegacyJobMetadataOutObject$ {
+    /** @deprecated use `LegacyJobMetadataOutObject$inboundSchema` instead. */
+    export const inboundSchema = LegacyJobMetadataOutObject$inboundSchema;
+    /** @deprecated use `LegacyJobMetadataOutObject$outboundSchema` instead. */
+    export const outboundSchema = LegacyJobMetadataOutObject$outboundSchema;
+}
+
+/** @internal */
 export const LegacyJobMetadataOut$inboundSchema: z.ZodType<
     LegacyJobMetadataOut,
     z.ZodTypeDef,
@@ -62,7 +89,7 @@ export const LegacyJobMetadataOut$inboundSchema: z.ZodType<
         details: z.string(),
         epochs: z.nullable(z.number()).optional(),
         training_steps: z.nullable(z.number().int()).optional(),
-        object: z.literal("job.metadata").default("job.metadata" as const),
+        object: z.literal("job.metadata").default("job.metadata"),
     })
     .transform((v) => {
         return remap$(v, {
@@ -110,7 +137,7 @@ export const LegacyJobMetadataOut$outboundSchema: z.ZodType<
         details: z.string(),
         epochs: z.nullable(z.number()).optional(),
         trainingSteps: z.nullable(z.number().int()).optional(),
-        object: z.literal("job.metadata").default("job.metadata" as const),
+        object: z.literal("job.metadata").default("job.metadata"),
     })
     .transform((v) => {
         return remap$(v, {

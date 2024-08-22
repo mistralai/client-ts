@@ -61,6 +61,15 @@ export const DetailedJobOutStatus = {
 } as const;
 export type DetailedJobOutStatus = ClosedEnum<typeof DetailedJobOutStatus>;
 
+export const DetailedJobOutObject = {
+    Job: "job",
+} as const;
+export type DetailedJobOutObject = ClosedEnum<typeof DetailedJobOutObject>;
+
+export type DetailedJobOutIntegrations = WandbIntegrationOut;
+
+export type DetailedJobOutRepositories = GithubRepositoryOut;
+
 export type DetailedJobOut = {
     id: string;
     autoStart: boolean;
@@ -109,6 +118,85 @@ export namespace DetailedJobOutStatus$ {
 }
 
 /** @internal */
+export const DetailedJobOutObject$inboundSchema: z.ZodNativeEnum<typeof DetailedJobOutObject> =
+    z.nativeEnum(DetailedJobOutObject);
+
+/** @internal */
+export const DetailedJobOutObject$outboundSchema: z.ZodNativeEnum<typeof DetailedJobOutObject> =
+    DetailedJobOutObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DetailedJobOutObject$ {
+    /** @deprecated use `DetailedJobOutObject$inboundSchema` instead. */
+    export const inboundSchema = DetailedJobOutObject$inboundSchema;
+    /** @deprecated use `DetailedJobOutObject$outboundSchema` instead. */
+    export const outboundSchema = DetailedJobOutObject$outboundSchema;
+}
+
+/** @internal */
+export const DetailedJobOutIntegrations$inboundSchema: z.ZodType<
+    DetailedJobOutIntegrations,
+    z.ZodTypeDef,
+    unknown
+> = WandbIntegrationOut$inboundSchema;
+
+/** @internal */
+export type DetailedJobOutIntegrations$Outbound = WandbIntegrationOut$Outbound;
+
+/** @internal */
+export const DetailedJobOutIntegrations$outboundSchema: z.ZodType<
+    DetailedJobOutIntegrations$Outbound,
+    z.ZodTypeDef,
+    DetailedJobOutIntegrations
+> = WandbIntegrationOut$outboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DetailedJobOutIntegrations$ {
+    /** @deprecated use `DetailedJobOutIntegrations$inboundSchema` instead. */
+    export const inboundSchema = DetailedJobOutIntegrations$inboundSchema;
+    /** @deprecated use `DetailedJobOutIntegrations$outboundSchema` instead. */
+    export const outboundSchema = DetailedJobOutIntegrations$outboundSchema;
+    /** @deprecated use `DetailedJobOutIntegrations$Outbound` instead. */
+    export type Outbound = DetailedJobOutIntegrations$Outbound;
+}
+
+/** @internal */
+export const DetailedJobOutRepositories$inboundSchema: z.ZodType<
+    DetailedJobOutRepositories,
+    z.ZodTypeDef,
+    unknown
+> = GithubRepositoryOut$inboundSchema;
+
+/** @internal */
+export type DetailedJobOutRepositories$Outbound = GithubRepositoryOut$Outbound;
+
+/** @internal */
+export const DetailedJobOutRepositories$outboundSchema: z.ZodType<
+    DetailedJobOutRepositories$Outbound,
+    z.ZodTypeDef,
+    DetailedJobOutRepositories
+> = GithubRepositoryOut$outboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DetailedJobOutRepositories$ {
+    /** @deprecated use `DetailedJobOutRepositories$inboundSchema` instead. */
+    export const inboundSchema = DetailedJobOutRepositories$inboundSchema;
+    /** @deprecated use `DetailedJobOutRepositories$outboundSchema` instead. */
+    export const outboundSchema = DetailedJobOutRepositories$outboundSchema;
+    /** @deprecated use `DetailedJobOutRepositories$Outbound` instead. */
+    export type Outbound = DetailedJobOutRepositories$Outbound;
+}
+
+/** @internal */
 export const DetailedJobOut$inboundSchema: z.ZodType<DetailedJobOut, z.ZodTypeDef, unknown> = z
     .object({
         id: z.string(),
@@ -121,7 +209,7 @@ export const DetailedJobOut$inboundSchema: z.ZodType<DetailedJobOut, z.ZodTypeDe
         modified_at: z.number().int(),
         training_files: z.array(z.string()),
         validation_files: z.nullable(z.array(z.string())).optional(),
-        object: z.literal("job").default("job" as const),
+        object: z.literal("job").default("job"),
         fine_tuned_model: z.nullable(z.string()).optional(),
         suffix: z.nullable(z.string()).optional(),
         integrations: z.nullable(z.array(WandbIntegrationOut$inboundSchema)).optional(),
@@ -184,7 +272,7 @@ export const DetailedJobOut$outboundSchema: z.ZodType<
         modifiedAt: z.number().int(),
         trainingFiles: z.array(z.string()),
         validationFiles: z.nullable(z.array(z.string())).optional(),
-        object: z.literal("job").default("job" as const),
+        object: z.literal("job").default("job"),
         fineTunedModel: z.nullable(z.string()).optional(),
         suffix: z.nullable(z.string()).optional(),
         integrations: z.nullable(z.array(WandbIntegrationOut$outboundSchema)).optional(),

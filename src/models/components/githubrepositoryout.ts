@@ -3,7 +3,13 @@
  */
 
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import * as z from "zod";
+
+export const GithubRepositoryOutType = {
+    Github: "github",
+} as const;
+export type GithubRepositoryOutType = ClosedEnum<typeof GithubRepositoryOutType>;
 
 export type GithubRepositoryOut = {
     type?: "github" | undefined;
@@ -15,13 +21,34 @@ export type GithubRepositoryOut = {
 };
 
 /** @internal */
+export const GithubRepositoryOutType$inboundSchema: z.ZodNativeEnum<
+    typeof GithubRepositoryOutType
+> = z.nativeEnum(GithubRepositoryOutType);
+
+/** @internal */
+export const GithubRepositoryOutType$outboundSchema: z.ZodNativeEnum<
+    typeof GithubRepositoryOutType
+> = GithubRepositoryOutType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GithubRepositoryOutType$ {
+    /** @deprecated use `GithubRepositoryOutType$inboundSchema` instead. */
+    export const inboundSchema = GithubRepositoryOutType$inboundSchema;
+    /** @deprecated use `GithubRepositoryOutType$outboundSchema` instead. */
+    export const outboundSchema = GithubRepositoryOutType$outboundSchema;
+}
+
+/** @internal */
 export const GithubRepositoryOut$inboundSchema: z.ZodType<
     GithubRepositoryOut,
     z.ZodTypeDef,
     unknown
 > = z
     .object({
-        type: z.literal("github").default("github" as const),
+        type: z.literal("github").default("github"),
         name: z.string(),
         owner: z.string(),
         ref: z.nullable(z.string()).optional(),
@@ -51,7 +78,7 @@ export const GithubRepositoryOut$outboundSchema: z.ZodType<
     GithubRepositoryOut
 > = z
     .object({
-        type: z.literal("github").default("github" as const),
+        type: z.literal("github").default("github"),
         name: z.string(),
         owner: z.string(),
         ref: z.nullable(z.string()).optional(),

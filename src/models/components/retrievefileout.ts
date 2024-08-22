@@ -3,9 +3,21 @@
  */
 
 import { remap as remap$ } from "../../lib/primitives.js";
+import { catchUnrecognizedEnum, OpenEnum, Unrecognized } from "../../types/enums.js";
 import { SampleType, SampleType$inboundSchema, SampleType$outboundSchema } from "./sampletype.js";
 import { Source, Source$inboundSchema, Source$outboundSchema } from "./source.js";
 import * as z from "zod";
+
+/**
+ * The intended purpose of the uploaded file. Only accepts fine-tuning (`fine-tune`) for now.
+ */
+export const RetrieveFileOutPurpose = {
+    FineTune: "fine-tune",
+} as const;
+/**
+ * The intended purpose of the uploaded file. Only accepts fine-tuning (`fine-tune`) for now.
+ */
+export type RetrieveFileOutPurpose = OpenEnum<typeof RetrieveFileOutPurpose>;
 
 export type RetrieveFileOut = {
     /**
@@ -36,6 +48,34 @@ export type RetrieveFileOut = {
     numLines?: number | null | undefined;
     source: Source;
 };
+
+/** @internal */
+export const RetrieveFileOutPurpose$inboundSchema: z.ZodType<
+    RetrieveFileOutPurpose,
+    z.ZodTypeDef,
+    unknown
+> = z.union([z.nativeEnum(RetrieveFileOutPurpose), z.string().transform(catchUnrecognizedEnum)]);
+
+/** @internal */
+export const RetrieveFileOutPurpose$outboundSchema: z.ZodType<
+    RetrieveFileOutPurpose,
+    z.ZodTypeDef,
+    RetrieveFileOutPurpose
+> = z.union([
+    z.nativeEnum(RetrieveFileOutPurpose),
+    z.string().and(z.custom<Unrecognized<string>>()),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveFileOutPurpose$ {
+    /** @deprecated use `RetrieveFileOutPurpose$inboundSchema` instead. */
+    export const inboundSchema = RetrieveFileOutPurpose$inboundSchema;
+    /** @deprecated use `RetrieveFileOutPurpose$outboundSchema` instead. */
+    export const outboundSchema = RetrieveFileOutPurpose$outboundSchema;
+}
 
 /** @internal */
 export const RetrieveFileOut$inboundSchema: z.ZodType<RetrieveFileOut, z.ZodTypeDef, unknown> = z
@@ -83,7 +123,7 @@ export const RetrieveFileOut$outboundSchema: z.ZodType<
         bytes: z.number().int(),
         createdAt: z.number().int(),
         filename: z.string(),
-        purpose: z.literal("fine-tune").default("fine-tune" as const),
+        purpose: z.literal("fine-tune").default("fine-tune"),
         sampleType: SampleType$outboundSchema,
         numLines: z.nullable(z.number().int()).optional(),
         source: Source$outboundSchema,

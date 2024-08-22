@@ -34,6 +34,10 @@ import {
 } from "./wandbintegration.js";
 import * as z from "zod";
 
+export type JobInIntegrations = WandbIntegration;
+
+export type JobInRepositories = GithubRepositoryIn;
+
 export type JobIn = {
     /**
      * The name of the model to fine-tune.
@@ -62,6 +66,60 @@ export type JobIn = {
      */
     autoStart?: boolean | undefined;
 };
+
+/** @internal */
+export const JobInIntegrations$inboundSchema: z.ZodType<JobInIntegrations, z.ZodTypeDef, unknown> =
+    WandbIntegration$inboundSchema;
+
+/** @internal */
+export type JobInIntegrations$Outbound = WandbIntegration$Outbound;
+
+/** @internal */
+export const JobInIntegrations$outboundSchema: z.ZodType<
+    JobInIntegrations$Outbound,
+    z.ZodTypeDef,
+    JobInIntegrations
+> = WandbIntegration$outboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace JobInIntegrations$ {
+    /** @deprecated use `JobInIntegrations$inboundSchema` instead. */
+    export const inboundSchema = JobInIntegrations$inboundSchema;
+    /** @deprecated use `JobInIntegrations$outboundSchema` instead. */
+    export const outboundSchema = JobInIntegrations$outboundSchema;
+    /** @deprecated use `JobInIntegrations$Outbound` instead. */
+    export type Outbound = JobInIntegrations$Outbound;
+}
+
+/** @internal */
+export const JobInRepositories$inboundSchema: z.ZodType<JobInRepositories, z.ZodTypeDef, unknown> =
+    GithubRepositoryIn$inboundSchema;
+
+/** @internal */
+export type JobInRepositories$Outbound = GithubRepositoryIn$Outbound;
+
+/** @internal */
+export const JobInRepositories$outboundSchema: z.ZodType<
+    JobInRepositories$Outbound,
+    z.ZodTypeDef,
+    JobInRepositories
+> = GithubRepositoryIn$outboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace JobInRepositories$ {
+    /** @deprecated use `JobInRepositories$inboundSchema` instead. */
+    export const inboundSchema = JobInRepositories$inboundSchema;
+    /** @deprecated use `JobInRepositories$outboundSchema` instead. */
+    export const outboundSchema = JobInRepositories$outboundSchema;
+    /** @deprecated use `JobInRepositories$Outbound` instead. */
+    export type Outbound = JobInRepositories$Outbound;
+}
 
 /** @internal */
 export const JobIn$inboundSchema: z.ZodType<JobIn, z.ZodTypeDef, unknown> = z

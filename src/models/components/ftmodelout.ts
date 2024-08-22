@@ -3,6 +3,7 @@
  */
 
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import {
     FTModelCapabilitiesOut,
     FTModelCapabilitiesOut$inboundSchema,
@@ -10,6 +11,11 @@ import {
     FTModelCapabilitiesOut$outboundSchema,
 } from "./ftmodelcapabilitiesout.js";
 import * as z from "zod";
+
+export const FTModelOutObject = {
+    Model: "model",
+} as const;
+export type FTModelOutObject = ClosedEnum<typeof FTModelOutObject>;
 
 export type FTModelOut = {
     id: string;
@@ -27,10 +33,29 @@ export type FTModelOut = {
 };
 
 /** @internal */
+export const FTModelOutObject$inboundSchema: z.ZodNativeEnum<typeof FTModelOutObject> =
+    z.nativeEnum(FTModelOutObject);
+
+/** @internal */
+export const FTModelOutObject$outboundSchema: z.ZodNativeEnum<typeof FTModelOutObject> =
+    FTModelOutObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FTModelOutObject$ {
+    /** @deprecated use `FTModelOutObject$inboundSchema` instead. */
+    export const inboundSchema = FTModelOutObject$inboundSchema;
+    /** @deprecated use `FTModelOutObject$outboundSchema` instead. */
+    export const outboundSchema = FTModelOutObject$outboundSchema;
+}
+
+/** @internal */
 export const FTModelOut$inboundSchema: z.ZodType<FTModelOut, z.ZodTypeDef, unknown> = z
     .object({
         id: z.string(),
-        object: z.literal("model").default("model" as const),
+        object: z.literal("model").default("model"),
         created: z.number().int(),
         owned_by: z.string(),
         root: z.string(),
@@ -69,7 +94,7 @@ export type FTModelOut$Outbound = {
 export const FTModelOut$outboundSchema: z.ZodType<FTModelOut$Outbound, z.ZodTypeDef, FTModelOut> = z
     .object({
         id: z.string(),
-        object: z.literal("model").default("model" as const),
+        object: z.literal("model").default("model"),
         created: z.number().int(),
         ownedBy: z.string(),
         root: z.string(),
