@@ -9,10 +9,11 @@ sources:
             - main
     mistral-google-cloud-source:
         sourceNamespace: mistral-openapi-google-cloud
-        sourceRevisionDigest: sha256:7fee22ae1a434b8919112c7feae87af7f1378952fcc6bde081deb55f65e5bfc2
+        sourceRevisionDigest: sha256:6d8dfe3442be38fdac56eadabec39bcbe9e2d652080802d9cc46a68c28b38dbc
         sourceBlobDigest: sha256:a4c011f461c73809a7d6cf1c9823d3c51d5050895aad246287ff14ac971efb8c
         tags:
             - latest
+            - main
     mistral-openapi:
         sourceNamespace: mistral-openapi
         sourceRevisionDigest: sha256:088d899162941380ec90445852dc7e8c65a8e2eab6b32f552fd7f4fc6f152e76
@@ -29,7 +30,7 @@ targets:
     mistralai-gcp-sdk:
         source: mistral-google-cloud-source
         sourceNamespace: mistral-openapi-google-cloud
-        sourceRevisionDigest: sha256:7fee22ae1a434b8919112c7feae87af7f1378952fcc6bde081deb55f65e5bfc2
+        sourceRevisionDigest: sha256:6d8dfe3442be38fdac56eadabec39bcbe9e2d652080802d9cc46a68c28b38dbc
         sourceBlobDigest: sha256:a4c011f461c73809a7d6cf1c9823d3c51d5050895aad246287ff14ac971efb8c
         outLocation: ./packages/mistralai-gcp
     mistralai-sdk:

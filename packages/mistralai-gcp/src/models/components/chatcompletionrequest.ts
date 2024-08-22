@@ -225,7 +225,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
         top_p: z.number().default(1),
         max_tokens: z.nullable(z.number().int()).optional(),
         min_tokens: z.nullable(z.number().int()).optional(),
-        stream: z.boolean().default(false),
+        stream: z.boolean(),
         stop: z.union([z.string(), z.array(z.string())]).optional(),
         random_seed: z.nullable(z.number().int()).optional(),
         messages: z.array(
