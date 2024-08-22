@@ -8,11 +8,15 @@ import * as z from "zod";
 
 export interface Env {
     MISTRAL_API_KEY?: string | undefined;
+
+    MISTRAL_DEBUG?: boolean | undefined;
 }
 
 export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z
     .object({
         MISTRAL_API_KEY: z.string(),
+
+        MISTRAL_DEBUG: z.coerce.boolean(),
     })
     .partial();
 

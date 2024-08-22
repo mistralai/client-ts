@@ -237,7 +237,7 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
         response_format: ResponseFormat$inboundSchema.optional(),
         tools: z.nullable(z.array(Tool$inboundSchema)).optional(),
         tool_choice: ToolChoice$inboundSchema.default("auto"),
-        safe_prompt: z.boolean().default(false),
+        safe_prompt: z.boolean(),
     })
     .transform((v) => {
         return remap$(v, {

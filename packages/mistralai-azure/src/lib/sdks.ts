@@ -18,6 +18,7 @@ import { stringToBase64 } from "./base64.js";
 import { SDKOptions, SDK_METADATA, serverURLFromOptions } from "./config.js";
 import { SDKHooks } from "../hooks/hooks.js";
 import { HookContext } from "../hooks/types.js";
+import { env } from "./env.js";
 import {
     ConnectionError,
     InvalidRequestError,
@@ -104,6 +105,9 @@ export class ClientSDK {
         this.baseURL = baseURL;
         this.httpClient = client;
         this.logger = options.debugLogger;
+        if (!this.logger && env().MISTRAL_DEBUG) {
+            this.logger = console;
+        }
     }
 
     public createRequest$(

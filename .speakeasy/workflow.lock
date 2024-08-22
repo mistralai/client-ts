@@ -1,11 +1,12 @@
-speakeasyVersion: 1.373.1
+speakeasyVersion: 1.376.0
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
-        sourceRevisionDigest: sha256:becb324b11dfc5155aa0cc420ca312d0af5aecfcbad22fe90066a09561ae4e6a
+        sourceRevisionDigest: sha256:908fd38167347d1ad63b470b52ca11983df56e7c5e86759534cfa94b6dfabb81
         sourceBlobDigest: sha256:84928a6297c3a838dce719ffa3da1e221cba968ce4a6c74d5c3bb41bf86a7e5d
         tags:
             - latest
+            - main
     mistral-google-cloud-source:
         sourceNamespace: mistral-openapi-google-cloud
         sourceRevisionDigest: sha256:7fee22ae1a434b8919112c7feae87af7f1378952fcc6bde081deb55f65e5bfc2
@@ -22,7 +23,7 @@ targets:
     mistralai-azure-sdk:
         source: mistral-azure-source
         sourceNamespace: mistral-openapi-azure
-        sourceRevisionDigest: sha256:becb324b11dfc5155aa0cc420ca312d0af5aecfcbad22fe90066a09561ae4e6a
+        sourceRevisionDigest: sha256:908fd38167347d1ad63b470b52ca11983df56e7c5e86759534cfa94b6dfabb81
         sourceBlobDigest: sha256:84928a6297c3a838dce719ffa3da1e221cba968ce4a6c74d5c3bb41bf86a7e5d
         outLocation: ./packages/mistralai-azure
     mistralai-gcp-sdk:
