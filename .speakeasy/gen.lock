@@ -3,17 +3,17 @@ id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
   docChecksum: ad1a7d6946828a089ca3831e257d307d
   docVersion: 0.0.2
-  speakeasyVersion: 1.376.0
-  generationVersion: 2.402.5
-  releaseVersion: 1.0.3
-  configChecksum: 29f53c823f9a93ba50ba681063a0f8e8
+  speakeasyVersion: 1.378.0
+  generationVersion: 2.404.3
+  releaseVersion: 1.0.4
+  configChecksum: fed25c0901d68ea1f724aabbc1e3e84f
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.10
+    constsAndDefaults: 0.1.11
     core: 3.14.1
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0

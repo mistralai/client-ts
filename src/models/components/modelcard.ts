@@ -34,7 +34,7 @@ export const ModelCard$inboundSchema: z.ZodType<ModelCard, z.ZodTypeDef, unknown
         created: z.number().int().optional(),
         owned_by: z.string().default("mistralai"),
         root: z.nullable(z.string()).optional(),
-        archived: z.boolean(),
+        archived: z.boolean().default(false),
         name: z.nullable(z.string()).optional(),
         description: z.nullable(z.string()).optional(),
         capabilities: ModelCapabilities$inboundSchema,

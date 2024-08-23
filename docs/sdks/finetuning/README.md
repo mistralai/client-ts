@@ -1,5 +1,2 @@
 # FineTuning
 (*fineTuning*)
-
-### Available Operations
-
