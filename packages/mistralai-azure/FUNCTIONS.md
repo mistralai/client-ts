@@ -33,10 +33,10 @@ async function run() {
   const res = await chatComplete(mistralAzure, {
     model: "azureai",
     messages: [
-        {
+      {
         content: "Who is the best French painter? Answer in one short sentence.",
-          role: "user",
-        },
+        role: "user",
+      },
     ],
   });
 

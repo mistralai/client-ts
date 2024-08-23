@@ -229,7 +229,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
         top_p: z.number().default(1),
         max_tokens: z.nullable(z.number().int()).optional(),
         min_tokens: z.nullable(z.number().int()).optional(),
-        stream: z.boolean(),
+        stream: z.boolean().default(false),
         stop: z.union([z.string(), z.array(z.string())]).optional(),
         random_seed: z.nullable(z.number().int()).optional(),
         messages: z.array(
@@ -251,7 +251,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
         response_format: ResponseFormat$inboundSchema.optional(),
         tools: z.nullable(z.array(Tool$inboundSchema)).optional(),
         tool_choice: ChatCompletionRequestToolChoice$inboundSchema.default("auto"),
-        safe_prompt: z.boolean(),
+        safe_prompt: z.boolean().default(false),
     })
     .transform((v) => {
         return remap$(v, {
