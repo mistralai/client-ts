@@ -51,7 +51,7 @@ export const AssistantMessage$inboundSchema: z.ZodType<AssistantMessage, z.ZodTy
     .object({
         content: z.nullable(z.string()).optional(),
         tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
-        prefix: z.boolean(),
+        prefix: z.boolean().default(false),
         role: AssistantMessageRole$inboundSchema.default("assistant"),
     })
     .transform((v) => {

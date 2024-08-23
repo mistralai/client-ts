@@ -201,7 +201,7 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
     .object({
         max_tokens: z.nullable(z.number().int()).optional(),
         min_tokens: z.nullable(z.number().int()).optional(),
-        stream: z.boolean(),
+        stream: z.boolean().default(false),
         stop: z.union([z.string(), z.array(z.string())]).optional(),
         random_seed: z.nullable(z.number().int()).optional(),
         messages: z.array(

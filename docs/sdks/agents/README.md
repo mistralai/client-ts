@@ -26,10 +26,10 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.agents.complete({
     messages: [
-        {
+      {
         content: "Who is the best French painter? Answer in one short sentence.",
-          role: "user",
-        },
+        role: "user",
+      },
     ],
     agentId: "<value>",
   });
@@ -40,7 +40,6 @@ async function run() {
 
 run();
 ```
-
 
 ### Standalone function
 
@@ -59,10 +58,10 @@ const mistral = new MistralCore({
 async function run() {
   const res = await agentsComplete(mistral, {
     messages: [
-        {
+      {
         content: "Who is the best French painter? Answer in one short sentence.",
-          role: "user",
-        },
+        role: "user",
+      },
     ],
     agentId: "<value>",
   });
@@ -89,16 +88,17 @@ run();
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
-
 ### Response
 
 **Promise\<[components.ChatCompletionResponse](../../models/components/chatcompletionresponse.md)\>**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4xx-5xx                    | */*                        |
+
 
 ## stream
 
@@ -116,10 +116,10 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.agents.stream({
     messages: [
-        {
+      {
         content: "Who is the best French painter? Answer in one short sentence.",
-          role: "user",
-        },
+        role: "user",
+      },
     ],
     agentId: "<value>",
   });
@@ -131,7 +131,6 @@ async function run() {
 
 run();
 ```
-
 
 ### Standalone function
 
@@ -150,10 +149,10 @@ const mistral = new MistralCore({
 async function run() {
   const res = await agentsStream(mistral, {
     messages: [
-        {
+      {
         content: "Who is the best French painter? Answer in one short sentence.",
-          role: "user",
-        },
+        role: "user",
+      },
     ],
     agentId: "<value>",
   });
@@ -181,10 +180,10 @@ run();
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
-
 ### Response
 
 **Promise\<[EventStream<components.CompletionEvent>](../../models/.md)\>**
+
 ### Errors
 
 | Error Object               | Status Code                | Content Type               |
