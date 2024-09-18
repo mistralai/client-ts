@@ -29,7 +29,7 @@ async function run() {
     prompt: "def",
     suffix: "return a+b",
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -111,9 +111,10 @@ async function run() {
     prompt: "def",
     suffix: "return a+b",
   });
-
+  
   for await (const event of result) {
     // Handle the event
+    console.log(event);
   }
 }
 
@@ -149,6 +150,7 @@ async function run() {
 
   for await (const event of result) {
     // Handle the event
+    console.log(event);
   }
 }
 

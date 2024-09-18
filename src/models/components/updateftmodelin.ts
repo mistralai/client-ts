@@ -5,31 +5,34 @@
 import * as z from "zod";
 
 export type UpdateFTModelIn = {
-    name?: string | null | undefined;
-    description?: string | null | undefined;
+  name?: string | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
-export const UpdateFTModelIn$inboundSchema: z.ZodType<UpdateFTModelIn, z.ZodTypeDef, unknown> =
-    z.object({
-        name: z.nullable(z.string()).optional(),
-        description: z.nullable(z.string()).optional(),
-    });
+export const UpdateFTModelIn$inboundSchema: z.ZodType<
+  UpdateFTModelIn,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
+});
 
 /** @internal */
 export type UpdateFTModelIn$Outbound = {
-    name?: string | null | undefined;
-    description?: string | null | undefined;
+  name?: string | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
 export const UpdateFTModelIn$outboundSchema: z.ZodType<
-    UpdateFTModelIn$Outbound,
-    z.ZodTypeDef,
-    UpdateFTModelIn
+  UpdateFTModelIn$Outbound,
+  z.ZodTypeDef,
+  UpdateFTModelIn
 > = z.object({
-    name: z.nullable(z.string()).optional(),
-    description: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
 });
 
 /**
@@ -37,10 +40,10 @@ export const UpdateFTModelIn$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace UpdateFTModelIn$ {
-    /** @deprecated use `UpdateFTModelIn$inboundSchema` instead. */
-    export const inboundSchema = UpdateFTModelIn$inboundSchema;
-    /** @deprecated use `UpdateFTModelIn$outboundSchema` instead. */
-    export const outboundSchema = UpdateFTModelIn$outboundSchema;
-    /** @deprecated use `UpdateFTModelIn$Outbound` instead. */
-    export type Outbound = UpdateFTModelIn$Outbound;
+  /** @deprecated use `UpdateFTModelIn$inboundSchema` instead. */
+  export const inboundSchema = UpdateFTModelIn$inboundSchema;
+  /** @deprecated use `UpdateFTModelIn$outboundSchema` instead. */
+  export const outboundSchema = UpdateFTModelIn$outboundSchema;
+  /** @deprecated use `UpdateFTModelIn$Outbound` instead. */
+  export type Outbound = UpdateFTModelIn$Outbound;
 }

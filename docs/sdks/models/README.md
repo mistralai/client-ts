@@ -29,7 +29,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.models.list();
-
+  
   // Handle the result
   console.log(result)
 }
@@ -104,7 +104,7 @@ async function run() {
   const result = await mistral.models.retrieve({
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -155,7 +155,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ModelCard](../../models/components/modelcard.md)\>**
+**Promise\<[operations.RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet](../../models/operations/retrievemodelv1modelsmodelidgetresponseretrievemodelv1modelsmodelidget.md)\>**
 
 ### Errors
 
@@ -182,7 +182,7 @@ async function run() {
   const result = await mistral.models.delete({
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -261,7 +261,7 @@ async function run() {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
     updateFTModelIn: {},
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -339,7 +339,7 @@ async function run() {
   const result = await mistral.models.archive({
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -416,7 +416,7 @@ async function run() {
   const result = await mistral.models.unarchive({
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
-
+  
   // Handle the result
   console.log(result)
 }

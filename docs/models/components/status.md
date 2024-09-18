@@ -7,7 +7,7 @@ The current status of the fine-tuning job.
 ```typescript
 import { Status } from "@mistralai/mistralai/models/components";
 
-let value: Status = "FAILED";
+let value: Status = "CANCELLATION_REQUESTED";
 ```
 
 ## Values

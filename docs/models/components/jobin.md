@@ -6,8 +6,8 @@
 import { JobIn } from "@mistralai/mistralai/models/components";
 
 let value: JobIn = {
-    model: "codestral-latest",
-    hyperparameters: {},
+  model: "open-mistral-7b",
+  hyperparameters: {},
 };
 ```
 

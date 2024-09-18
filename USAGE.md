@@ -7,22 +7,17 @@ This example shows how to create chat completions.
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.chat.complete({
-        model: "mistral-small-latest",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistral.chat.complete({
+    model: "mistral-small-latest",
+    messages: [],
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -38,16 +33,16 @@ import { Mistral } from "@mistralai/mistralai";
 import { openAsBlob } from "node:fs";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.files.upload({
-        file: await openAsBlob("./sample-file"),
-    });
+  const result = await mistral.files.upload({
+    file: await openAsBlob("example.file"),
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -62,22 +57,23 @@ This example shows how to create agents completions.
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.agents.complete({
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-        agentId: "<value>",
-    });
+  const result = await mistral.agents.complete({
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+    agentId: "<value>",
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();

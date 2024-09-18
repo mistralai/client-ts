@@ -6,7 +6,7 @@
 import { UnarchiveFTModelOut } from "@mistralai/mistralai/models/components";
 
 let value: UnarchiveFTModelOut = {
-    id: "<id>",
+  id: "<id>",
 };
 ```
 

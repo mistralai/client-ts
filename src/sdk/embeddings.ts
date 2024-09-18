@@ -8,16 +8,20 @@ import * as components from "../models/components/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Embeddings extends ClientSDK {
-    /**
-     * Embeddings
-     *
-     * @remarks
-     * Embeddings
-     */
-    async create(
-        request: components.EmbeddingRequest,
-        options?: RequestOptions
-    ): Promise<components.EmbeddingResponse> {
-        return unwrapAsync(embeddingsCreate(this, request, options));
-    }
+  /**
+   * Embeddings
+   *
+   * @remarks
+   * Embeddings
+   */
+  async create(
+    request: components.EmbeddingRequest,
+    options?: RequestOptions,
+  ): Promise<components.EmbeddingResponse> {
+    return unwrapAsync(embeddingsCreate(
+      this,
+      request,
+      options,
+    ));
+  }
 }

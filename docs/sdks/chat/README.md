@@ -27,13 +27,10 @@ async function run() {
   const result = await mistral.chat.complete({
     model: "mistral-small-latest",
     messages: [
-      {
-        content: "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
-      },
+  
     ],
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -59,10 +56,7 @@ async function run() {
   const res = await chatComplete(mistral, {
     model: "mistral-small-latest",
     messages: [
-      {
-        content: "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
-      },
+  
     ],
   });
 
@@ -117,15 +111,13 @@ async function run() {
   const result = await mistral.chat.stream({
     model: "mistral-small-latest",
     messages: [
-      {
-        content: "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
-      },
+  
     ],
   });
-
+  
   for await (const event of result) {
     // Handle the event
+    console.log(event);
   }
 }
 
@@ -150,10 +142,7 @@ async function run() {
   const res = await chatStream(mistral, {
     model: "mistral-small-latest",
     messages: [
-      {
-        content: "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
-      },
+  
     ],
   });
 
@@ -165,6 +154,7 @@ async function run() {
 
   for await (const event of result) {
     // Handle the event
+    console.log(event);
   }
 }
 

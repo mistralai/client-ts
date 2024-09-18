@@ -7,7 +7,7 @@ Stop generation if this token is detected. Or if one of these tokens is detected
 ```typescript
 import { ChatCompletionStreamRequestStop } from "@mistralai/mistralai/models/components";
 
-let value: ChatCompletionStreamRequestStop = ["<value>"];
+let value: ChatCompletionStreamRequestStop = "<value>";
 ```
 
 ## Supported Types

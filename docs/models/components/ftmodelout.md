@@ -6,13 +6,13 @@
 import { FTModelOut } from "@mistralai/mistralai/models/components";
 
 let value: FTModelOut = {
-    id: "<id>",
-    created: 602763,
-    ownedBy: "<value>",
-    root: "<value>",
-    archived: false,
-    capabilities: {},
-    job: "d8d69a67-4e0f-4467-8c87-96ed151a05df",
+  id: "<id>",
+  created: 384382,
+  ownedBy: "<value>",
+  root: "<value>",
+  archived: false,
+  capabilities: {},
+  job: "74e0f467-cc87-496e-9151-a05dfc2ddf7c",
 };
 ```
 

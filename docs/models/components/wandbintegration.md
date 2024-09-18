@@ -6,8 +6,8 @@
 import { WandbIntegration } from "@mistralai/mistralai/models/components";
 
 let value: WandbIntegration = {
-    project: "<value>",
-    apiKey: "<value>",
+  project: "<value>",
+  apiKey: "<value>",
 };
 ```
 

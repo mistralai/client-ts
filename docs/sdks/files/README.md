@@ -32,9 +32,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.files.upload({
-    file: await openAsBlob("./sample-file"),
+    file: await openAsBlob("example.file"),
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -59,7 +59,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesUpload(mistral, {
-    file: await openAsBlob("./sample-file"),
+    file: await openAsBlob("example.file"),
   });
 
   if (!res.ok) {
@@ -110,7 +110,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.files.list();
-
+  
   // Handle the result
   console.log(result)
 }
@@ -184,7 +184,7 @@ async function run() {
   const result = await mistral.files.retrieve({
     fileId: "<value>",
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -261,7 +261,7 @@ async function run() {
   const result = await mistral.files.delete({
     fileId: "<value>",
   });
-
+  
   // Handle the result
   console.log(result)
 }

@@ -6,9 +6,11 @@
 import { ValidationError } from "@mistralai/mistralai/models/components";
 
 let value: ValidationError = {
-    loc: [844266],
-    msg: "<value>",
-    type: "<value>",
+  loc: [
+    645894,
+  ],
+  msg: "<value>",
+  type: "<value>",
 };
 ```
 

@@ -6,7 +6,7 @@
 import { Integrations } from "@mistralai/mistralai/models/components";
 
 let value: Integrations = {
-    project: "<value>",
+  project: "<value>",
 };
 ```
 

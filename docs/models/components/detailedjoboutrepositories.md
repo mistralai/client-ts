@@ -6,9 +6,9 @@
 import { DetailedJobOutRepositories } from "@mistralai/mistralai/models/components";
 
 let value: DetailedJobOutRepositories = {
-    name: "<value>",
-    owner: "<value>",
-    commitId: "<value>",
+  name: "<value>",
+  owner: "<value>",
+  commitId: "<value>",
 };
 ```
 

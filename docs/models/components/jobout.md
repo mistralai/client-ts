@@ -6,15 +6,17 @@
 import { JobOut } from "@mistralai/mistralai/models/components";
 
 let value: JobOut = {
-    id: "1ba928fc-8167-442c-b739-205929396fea",
-    autoStart: false,
-    hyperparameters: {},
-    model: "codestral-latest",
-    status: "VALIDATED",
-    jobType: "<value>",
-    createdAt: 613064,
-    modifiedAt: 437032,
-    trainingFiles: ["eb10faaa-2352-4c59-9590-7aff1a3a2fa9"],
+  id: "c816742c-b739-4205-9293-96fea7596eb1",
+  autoStart: false,
+  hyperparameters: {},
+  model: "open-mistral-7b",
+  status: "CANCELLATION_REQUESTED",
+  jobType: "<value>",
+  createdAt: 666767,
+  modifiedAt: 653140,
+  trainingFiles: [
+    "a2352c59-5590-47af-b1a3-a2fa94677392",
+  ],
 };
 ```
 

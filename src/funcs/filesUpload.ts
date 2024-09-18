@@ -3,6 +3,7 @@
  */
 
 import { MistralCore } from "../core.js";
+import { readableStreamToArrayBuffer } from "../lib/files.js";
 import * as m$ from "../lib/matchers.js";
 import * as schemas$ from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -10,17 +11,18 @@ import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
 import {
-    ConnectionError,
-    InvalidRequestError,
-    RequestAbortedError,
-    RequestTimeoutError,
-    UnexpectedClientError,
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKError } from "../models/errors/sdkerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { isBlobLike } from "../types/blobs.js";
 import { Result } from "../types/fp.js";
+import { isReadableStream } from "../types/streams.js";
 
 /**
  * Upload File
@@ -33,107 +35,109 @@ import { Result } from "../types/fp.js";
  * Please contact us if you need to increase these storage limits.
  */
 export async function filesUpload(
-    client$: MistralCore,
-    request: operations.FilesApiRoutesUploadFileMultiPartBodyParams,
-    options?: RequestOptions
+  client$: MistralCore,
+  request: operations.FilesApiRoutesUploadFileMultiPartBodyParams,
+  options?: RequestOptions,
 ): Promise<
-    Result<
-        components.UploadFileOut,
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >
+  Result<
+    components.UploadFileOut,
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >
 > {
-    const input$ = request;
+  const input$ = request;
 
-    const parsed$ = schemas$.safeParse(
-        input$,
-        (value$) =>
-            operations.FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema.parse(value$),
-        "Input validation failed"
+  const parsed$ = schemas$.safeParse(
+    input$,
+    (value$) =>
+      operations.FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema
+        .parse(value$),
+    "Input validation failed",
+  );
+  if (!parsed$.ok) {
+    return parsed$;
+  }
+  const payload$ = parsed$.value;
+  const body$ = new FormData();
+
+  if (isBlobLike(payload$.file)) {
+    body$.append("file", payload$.file);
+  } else if (isReadableStream(payload$.file.content)) {
+    const buffer = await readableStreamToArrayBuffer(payload$.file.content);
+    const blob = new Blob([buffer], { type: "application/octet-stream" });
+    body$.append("file", blob);
+  } else {
+    body$.append(
+      "file",
+      new Blob([payload$.file.content], { type: "application/octet-stream" }),
+      payload$.file.fileName,
     );
-    if (!parsed$.ok) {
-        return parsed$;
-    }
-    const payload$ = parsed$.value;
-    const body$ = new FormData();
+  }
+  if (payload$.purpose !== undefined) {
+    body$.append("purpose", payload$.purpose);
+  }
 
-    if (isBlobLike(payload$.file)) {
-        body$.append("file", payload$.file);
-    } else {
-        body$.append(
-            "file",
-            new Blob([payload$.file.content], { type: "application/octet-stream" }),
-            payload$.file.fileName
-        );
-    }
-    if (payload$.purpose !== undefined) {
-        body$.append("purpose", payload$.purpose);
-    }
+  const path$ = pathToFunc("/v1/files")();
 
-    const path$ = pathToFunc("/v1/files")();
+  const headers$ = new Headers({
+    Accept: "application/json",
+  });
 
-    const headers$ = new Headers({
-        Accept: "application/json",
-    });
+  const apiKey$ = await extractSecurity(client$.options$.apiKey);
+  const security$ = apiKey$ == null ? {} : { apiKey: apiKey$ };
+  const context = {
+    operationID: "files_api_routes_upload_file",
+    oAuth2Scopes: [],
+    securitySource: client$.options$.apiKey,
+  };
+  const securitySettings$ = resolveGlobalSecurity(security$);
 
-    const apiKey$ = await extractSecurity(client$.options$.apiKey);
-    const security$ = apiKey$ == null ? {} : { apiKey: apiKey$ };
-    const context = {
-        operationID: "files_api_routes_upload_file",
-        oAuth2Scopes: [],
-        securitySource: client$.options$.apiKey,
-    };
-    const securitySettings$ = resolveGlobalSecurity(security$);
+  const requestRes = client$.createRequest$(context, {
+    security: securitySettings$,
+    method: "POST",
+    path: path$,
+    headers: headers$,
+    body: body$,
+    timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return requestRes;
+  }
+  const request$ = requestRes.value;
 
-    const requestRes = client$.createRequest$(
-        context,
-        {
-            security: securitySettings$,
-            method: "POST",
-            path: path$,
-            headers: headers$,
-            body: body$,
-            timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
-        },
-        options
-    );
-    if (!requestRes.ok) {
-        return requestRes;
-    }
-    const request$ = requestRes.value;
+  const doResult = await client$.do$(request$, {
+    context,
+    errorCodes: ["4XX", "5XX"],
+    retryConfig: options?.retries
+      || client$.options$.retryConfig,
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+  });
+  if (!doResult.ok) {
+    return doResult;
+  }
+  const response = doResult.value;
 
-    const doResult = await client$.do$(request$, {
-        context,
-        errorCodes: ["4XX", "5XX"],
-        retryConfig: options?.retries || client$.options$.retryConfig,
-        retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
-    });
-    if (!doResult.ok) {
-        return doResult;
-    }
-    const response = doResult.value;
-
-    const [result$] = await m$.match<
-        components.UploadFileOut,
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >(
-        m$.json(200, components.UploadFileOut$inboundSchema),
-        m$.fail(["4XX", "5XX"])
-    )(response);
-    if (!result$.ok) {
-        return result$;
-    }
-
+  const [result$] = await m$.match<
+    components.UploadFileOut,
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >(
+    m$.json(200, components.UploadFileOut$inboundSchema),
+    m$.fail(["4XX", "5XX"]),
+  )(response);
+  if (!result$.ok) {
     return result$;
+  }
+
+  return result$;
 }

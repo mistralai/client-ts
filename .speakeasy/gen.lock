@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: ad1a7d6946828a089ca3831e257d307d
+  docChecksum: e75ca54601920b2770d9a559b299d272
   docVersion: 0.0.2
-  speakeasyVersion: 1.378.0
-  generationVersion: 2.404.3
-  releaseVersion: 1.0.4
-  configChecksum: fed25c0901d68ea1f724aabbc1e3e84f
+  speakeasyVersion: 1.399.2
+  generationVersion: 2.416.6
+  releaseVersion: 1.1.0
+  configChecksum: 3cfbfb75f96325b8e28c3310024b3c4f
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -14,9 +14,10 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.14.1
+    core: 3.17.4
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
+    enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.1
     examples: 2.81.4
     globalSecurity: 2.82.11
@@ -33,45 +34,195 @@ features:
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
     unions: 2.85.7
+    uploadStreams: 0.1.0
 generatedFiles:
-  - src/funcs/modelsList.ts
-  - src/funcs/modelsRetrieve.ts
-  - src/funcs/modelsDelete.ts
-  - src/funcs/modelsUpdate.ts
-  - src/funcs/modelsArchive.ts
-  - src/funcs/modelsUnarchive.ts
-  - src/funcs/filesUpload.ts
-  - src/funcs/filesList.ts
-  - src/funcs/filesRetrieve.ts
-  - src/funcs/filesDelete.ts
-  - src/funcs/chatComplete.ts
-  - src/funcs/chatStream.ts
-  - src/funcs/fimComplete.ts
-  - src/funcs/fimStream.ts
-  - src/funcs/agentsComplete.ts
-  - src/funcs/agentsStream.ts
-  - src/funcs/embeddingsCreate.ts
-  - src/funcs/fineTuningJobsList.ts
-  - src/funcs/fineTuningJobsCreate.ts
-  - src/funcs/fineTuningJobsGet.ts
-  - src/funcs/fineTuningJobsCancel.ts
-  - src/funcs/fineTuningJobsStart.ts
-  - src/sdk/models.ts
-  - src/sdk/files.ts
-  - src/sdk/jobs.ts
-  - src/sdk/finetuning.ts
-  - src/sdk/chat.ts
-  - src/sdk/fim.ts
-  - src/sdk/agents.ts
-  - src/sdk/embeddings.ts
-  - src/sdk/sdk.ts
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
   - .eslintrc.cjs
+  - .gitattributes
   - .npmignore
   - FUNCTIONS.md
   - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/components/agentscompletionrequest.md
+  - docs/models/components/agentscompletionrequestmessages.md
+  - docs/models/components/agentscompletionrequeststop.md
+  - docs/models/components/agentscompletionrequesttoolchoice.md
+  - docs/models/components/agentscompletionstreamrequest.md
+  - docs/models/components/agentscompletionstreamrequestmessages.md
+  - docs/models/components/agentscompletionstreamrequeststop.md
+  - docs/models/components/agentscompletionstreamrequesttoolchoice.md
+  - docs/models/components/archiveftmodelout.md
+  - docs/models/components/archiveftmodeloutobject.md
+  - docs/models/components/arguments.md
+  - docs/models/components/assistantmessage.md
+  - docs/models/components/assistantmessagerole.md
+  - docs/models/components/basemodelcard.md
+  - docs/models/components/chatcompletionchoice.md
+  - docs/models/components/chatcompletionrequest.md
+  - docs/models/components/chatcompletionrequesttoolchoice.md
+  - docs/models/components/chatcompletionresponse.md
+  - docs/models/components/chatcompletionstreamrequest.md
+  - docs/models/components/chatcompletionstreamrequestmessages.md
+  - docs/models/components/chatcompletionstreamrequeststop.md
+  - docs/models/components/chatcompletionstreamrequesttoolchoice.md
+  - docs/models/components/checkpointout.md
+  - docs/models/components/completionchunk.md
+  - docs/models/components/completionevent.md
+  - docs/models/components/completionresponsestreamchoice.md
+  - docs/models/components/completionresponsestreamchoicefinishreason.md
+  - docs/models/components/content.md
+  - docs/models/components/contentchunk.md
+  - docs/models/components/data.md
+  - docs/models/components/deletefileout.md
+  - docs/models/components/deletemodelout.md
+  - docs/models/components/deltamessage.md
+  - docs/models/components/detailedjobout.md
+  - docs/models/components/detailedjoboutintegrations.md
+  - docs/models/components/detailedjoboutobject.md
+  - docs/models/components/detailedjoboutrepositories.md
+  - docs/models/components/detailedjoboutstatus.md
+  - docs/models/components/embeddingrequest.md
+  - docs/models/components/embeddingresponse.md
+  - docs/models/components/embeddingresponsedata.md
+  - docs/models/components/eventout.md
+  - docs/models/components/fileschema.md
+  - docs/models/components/fileschemapurpose.md
+  - docs/models/components/fimcompletionrequest.md
+  - docs/models/components/fimcompletionrequeststop.md
+  - docs/models/components/fimcompletionresponse.md
+  - docs/models/components/fimcompletionstreamrequest.md
+  - docs/models/components/fimcompletionstreamrequeststop.md
+  - docs/models/components/finetuneablemodel.md
+  - docs/models/components/finishreason.md
+  - docs/models/components/ftmodelcapabilitiesout.md
+  - docs/models/components/ftmodelcard.md
+  - docs/models/components/ftmodelout.md
+  - docs/models/components/ftmodeloutobject.md
+  - docs/models/components/functioncall.md
+  - docs/models/components/functionname.md
+  - docs/models/components/functiont.md
+  - docs/models/components/githubrepositoryin.md
+  - docs/models/components/githubrepositoryintype.md
+  - docs/models/components/githubrepositoryout.md
+  - docs/models/components/githubrepositoryouttype.md
+  - docs/models/components/imageurl.md
+  - docs/models/components/imageurlchunk.md
+  - docs/models/components/imageurlchunkimageurl.md
+  - docs/models/components/imageurlchunktype.md
+  - docs/models/components/inputs.md
+  - docs/models/components/integrations.md
+  - docs/models/components/jobin.md
+  - docs/models/components/jobinintegrations.md
+  - docs/models/components/jobinrepositories.md
+  - docs/models/components/jobmetadataout.md
+  - docs/models/components/jobout.md
+  - docs/models/components/jobsout.md
+  - docs/models/components/jobsoutobject.md
+  - docs/models/components/legacyjobmetadataout.md
+  - docs/models/components/legacyjobmetadataoutobject.md
+  - docs/models/components/listfilesout.md
+  - docs/models/components/loc.md
+  - docs/models/components/messages.md
+  - docs/models/components/metricout.md
+  - docs/models/components/modelcapabilities.md
+  - docs/models/components/modellist.md
+  - docs/models/components/objectt.md
+  - docs/models/components/purpose.md
+  - docs/models/components/repositories.md
+  - docs/models/components/responseformat.md
+  - docs/models/components/responseformats.md
+  - docs/models/components/retrievefileout.md
+  - docs/models/components/retrievefileoutpurpose.md
+  - docs/models/components/role.md
+  - docs/models/components/sampletype.md
+  - docs/models/components/security.md
+  - docs/models/components/source.md
+  - docs/models/components/status.md
+  - docs/models/components/stop.md
+  - docs/models/components/systemmessage.md
+  - docs/models/components/textchunk.md
+  - docs/models/components/textchunktype.md
+  - docs/models/components/tool.md
+  - docs/models/components/toolcall.md
+  - docs/models/components/toolchoice.md
+  - docs/models/components/toolchoiceenum.md
+  - docs/models/components/toolmessage.md
+  - docs/models/components/toolmessagerole.md
+  - docs/models/components/tooltypes.md
+  - docs/models/components/trainingfile.md
+  - docs/models/components/trainingparameters.md
+  - docs/models/components/trainingparametersin.md
+  - docs/models/components/type.md
+  - docs/models/components/unarchiveftmodelout.md
+  - docs/models/components/unarchiveftmodeloutobject.md
+  - docs/models/components/updateftmodelin.md
+  - docs/models/components/uploadfileout.md
+  - docs/models/components/usageinfo.md
+  - docs/models/components/usermessage.md
+  - docs/models/components/usermessagecontent.md
+  - docs/models/components/usermessagerole.md
+  - docs/models/components/validationerror.md
+  - docs/models/components/wandbintegration.md
+  - docs/models/components/wandbintegrationout.md
+  - docs/models/components/wandbintegrationtype.md
+  - docs/models/errors/httpvalidationerror.md
+  - docs/models/operations/deletemodelv1modelsmodeliddeleterequest.md
+  - docs/models/operations/filesapiroutesdeletefilerequest.md
+  - docs/models/operations/filesapiroutesretrievefilerequest.md
+  - docs/models/operations/filesapiroutesuploadfilemultipartbodyparams.md
+  - docs/models/operations/filet.md
+  - docs/models/operations/jobsapiroutesfinetuningarchivefinetunedmodelrequest.md
+  - docs/models/operations/jobsapiroutesfinetuningcancelfinetuningjobrequest.md
+  - docs/models/operations/jobsapiroutesfinetuningcreatefinetuningjobresponse.md
+  - docs/models/operations/jobsapiroutesfinetuninggetfinetuningjobrequest.md
+  - docs/models/operations/jobsapiroutesfinetuninggetfinetuningjobsrequest.md
+  - docs/models/operations/jobsapiroutesfinetuningstartfinetuningjobrequest.md
+  - docs/models/operations/jobsapiroutesfinetuningunarchivefinetunedmodelrequest.md
+  - docs/models/operations/jobsapiroutesfinetuningupdatefinetunedmodelrequest.md
+  - docs/models/operations/purpose.md
+  - docs/models/operations/retrievemodelv1modelsmodelidgetrequest.md
+  - docs/models/operations/retrievemodelv1modelsmodelidgetresponseretrievemodelv1modelsmodelidget.md
+  - docs/models/operations/status.md
+  - docs/sdks/agents/README.md
+  - docs/sdks/chat/README.md
+  - docs/sdks/embeddings/README.md
+  - docs/sdks/files/README.md
+  - docs/sdks/fim/README.md
+  - docs/sdks/finetuning/README.md
+  - docs/sdks/jobs/README.md
+  - docs/sdks/mistral/README.md
+  - docs/sdks/models/README.md
   - jsr.json
   - package.json
   - src/core.ts
+  - src/funcs/agentsComplete.ts
+  - src/funcs/agentsStream.ts
+  - src/funcs/chatComplete.ts
+  - src/funcs/chatStream.ts
+  - src/funcs/embeddingsCreate.ts
+  - src/funcs/filesDelete.ts
+  - src/funcs/filesList.ts
+  - src/funcs/filesRetrieve.ts
+  - src/funcs/filesUpload.ts
+  - src/funcs/fimComplete.ts
+  - src/funcs/fimStream.ts
+  - src/funcs/fineTuningJobsCancel.ts
+  - src/funcs/fineTuningJobsCreate.ts
+  - src/funcs/fineTuningJobsGet.ts
+  - src/funcs/fineTuningJobsList.ts
+  - src/funcs/fineTuningJobsStart.ts
+  - src/funcs/modelsArchive.ts
+  - src/funcs/modelsDelete.ts
+  - src/funcs/modelsList.ts
+  - src/funcs/modelsRetrieve.ts
+  - src/funcs/modelsUnarchive.ts
+  - src/funcs/modelsUpdate.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
   - src/index.ts
   - src/lib/base64.ts
   - src/lib/config.ts
@@ -79,6 +230,7 @@ generatedFiles:
   - src/lib/encodings.ts
   - src/lib/env.ts
   - src/lib/event-streams.ts
+  - src/lib/files.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
   - src/lib/logger.ts
@@ -89,10 +241,107 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
-  - src/sdk/index.ts
+  - src/models/components/agentscompletionrequest.ts
+  - src/models/components/agentscompletionstreamrequest.ts
+  - src/models/components/archiveftmodelout.ts
+  - src/models/components/assistantmessage.ts
+  - src/models/components/basemodelcard.ts
+  - src/models/components/chatcompletionchoice.ts
+  - src/models/components/chatcompletionrequest.ts
+  - src/models/components/chatcompletionresponse.ts
+  - src/models/components/chatcompletionstreamrequest.ts
+  - src/models/components/checkpointout.ts
+  - src/models/components/completionchunk.ts
+  - src/models/components/completionevent.ts
+  - src/models/components/completionresponsestreamchoice.ts
+  - src/models/components/contentchunk.ts
+  - src/models/components/deletefileout.ts
+  - src/models/components/deletemodelout.ts
+  - src/models/components/deltamessage.ts
+  - src/models/components/detailedjobout.ts
+  - src/models/components/embeddingrequest.ts
+  - src/models/components/embeddingresponse.ts
+  - src/models/components/embeddingresponsedata.ts
+  - src/models/components/eventout.ts
+  - src/models/components/fileschema.ts
+  - src/models/components/fimcompletionrequest.ts
+  - src/models/components/fimcompletionresponse.ts
+  - src/models/components/fimcompletionstreamrequest.ts
+  - src/models/components/finetuneablemodel.ts
+  - src/models/components/ftmodelcapabilitiesout.ts
+  - src/models/components/ftmodelcard.ts
+  - src/models/components/ftmodelout.ts
+  - src/models/components/function.ts
+  - src/models/components/functioncall.ts
+  - src/models/components/functionname.ts
+  - src/models/components/githubrepositoryin.ts
+  - src/models/components/githubrepositoryout.ts
+  - src/models/components/imageurl.ts
+  - src/models/components/imageurlchunk.ts
+  - src/models/components/index.ts
+  - src/models/components/jobin.ts
+  - src/models/components/jobmetadataout.ts
+  - src/models/components/jobout.ts
+  - src/models/components/jobsout.ts
+  - src/models/components/legacyjobmetadataout.ts
+  - src/models/components/listfilesout.ts
+  - src/models/components/metricout.ts
+  - src/models/components/modelcapabilities.ts
+  - src/models/components/modellist.ts
+  - src/models/components/responseformat.ts
+  - src/models/components/responseformats.ts
+  - src/models/components/retrievefileout.ts
+  - src/models/components/sampletype.ts
+  - src/models/components/security.ts
+  - src/models/components/source.ts
+  - src/models/components/systemmessage.ts
+  - src/models/components/textchunk.ts
+  - src/models/components/tool.ts
+  - src/models/components/toolcall.ts
+  - src/models/components/toolchoice.ts
+  - src/models/components/toolchoiceenum.ts
+  - src/models/components/toolmessage.ts
+  - src/models/components/tooltypes.ts
+  - src/models/components/trainingfile.ts
+  - src/models/components/trainingparameters.ts
+  - src/models/components/trainingparametersin.ts
+  - src/models/components/unarchiveftmodelout.ts
+  - src/models/components/updateftmodelin.ts
+  - src/models/components/uploadfileout.ts
+  - src/models/components/usageinfo.ts
+  - src/models/components/usermessage.ts
+  - src/models/components/validationerror.ts
+  - src/models/components/wandbintegration.ts
+  - src/models/components/wandbintegrationout.ts
   - src/models/errors/httpclienterrors.ts
+  - src/models/errors/httpvalidationerror.ts
+  - src/models/errors/index.ts
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/operations/deletemodelv1modelsmodeliddelete.ts
+  - src/models/operations/filesapiroutesdeletefile.ts
+  - src/models/operations/filesapiroutesretrievefile.ts
+  - src/models/operations/filesapiroutesuploadfile.ts
+  - src/models/operations/index.ts
+  - src/models/operations/jobsapiroutesfinetuningarchivefinetunedmodel.ts
+  - src/models/operations/jobsapiroutesfinetuningcancelfinetuningjob.ts
+  - src/models/operations/jobsapiroutesfinetuningcreatefinetuningjob.ts
+  - src/models/operations/jobsapiroutesfinetuninggetfinetuningjob.ts
+  - src/models/operations/jobsapiroutesfinetuninggetfinetuningjobs.ts
+  - src/models/operations/jobsapiroutesfinetuningstartfinetuningjob.ts
+  - src/models/operations/jobsapiroutesfinetuningunarchivefinetunedmodel.ts
+  - src/models/operations/jobsapiroutesfinetuningupdatefinetunedmodel.ts
+  - src/models/operations/retrievemodelv1modelsmodelidget.ts
+  - src/sdk/agents.ts
+  - src/sdk/chat.ts
+  - src/sdk/embeddings.ts
+  - src/sdk/files.ts
+  - src/sdk/fim.ts
+  - src/sdk/finetuning.ts
+  - src/sdk/index.ts
+  - src/sdk/jobs.ts
+  - src/sdk/models.ts
+  - src/sdk/sdk.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -100,232 +349,158 @@ generatedFiles:
   - src/types/index.ts
   - src/types/operations.ts
   - src/types/rfcdate.ts
+  - src/types/streams.ts
   - tsconfig.json
-  - src/models/components/modellist.ts
-  - src/models/components/modelcard.ts
-  - src/models/components/modelcapabilities.ts
-  - src/models/components/validationerror.ts
-  - src/models/components/deletemodelout.ts
-  - src/models/components/ftmodelout.ts
-  - src/models/components/ftmodelcapabilitiesout.ts
-  - src/models/components/updateftmodelin.ts
-  - src/models/components/archiveftmodelout.ts
-  - src/models/components/unarchiveftmodelout.ts
-  - src/models/components/uploadfileout.ts
-  - src/models/components/source.ts
-  - src/models/components/sampletype.ts
-  - src/models/components/listfilesout.ts
-  - src/models/components/fileschema.ts
-  - src/models/components/retrievefileout.ts
-  - src/models/components/deletefileout.ts
-  - src/models/components/jobsout.ts
-  - src/models/components/jobout.ts
-  - src/models/components/jobmetadataout.ts
-  - src/models/components/githubrepositoryout.ts
-  - src/models/components/wandbintegrationout.ts
-  - src/models/components/finetuneablemodel.ts
-  - src/models/components/trainingparameters.ts
-  - src/models/components/legacyjobmetadataout.ts
-  - src/models/components/jobin.ts
-  - src/models/components/githubrepositoryin.ts
-  - src/models/components/wandbintegration.ts
-  - src/models/components/trainingparametersin.ts
-  - src/models/components/trainingfile.ts
-  - src/models/components/detailedjobout.ts
-  - src/models/components/checkpointout.ts
-  - src/models/components/metricout.ts
-  - src/models/components/eventout.ts
-  - src/models/components/chatcompletionresponse.ts
-  - src/models/components/chatcompletionchoice.ts
-  - src/models/components/assistantmessage.ts
-  - src/models/components/toolcall.ts
-  - src/models/components/functioncall.ts
-  - src/models/components/usageinfo.ts
-  - src/models/components/chatcompletionrequest.ts
-  - src/models/components/tool.ts
-  - src/models/components/function.ts
-  - src/models/components/responseformat.ts
-  - src/models/components/systemmessage.ts
-  - src/models/components/contentchunk.ts
-  - src/models/components/usermessage.ts
-  - src/models/components/textchunk.ts
-  - src/models/components/toolmessage.ts
-  - src/models/components/completionevent.ts
-  - src/models/components/completionchunk.ts
-  - src/models/components/completionresponsestreamchoice.ts
-  - src/models/components/deltamessage.ts
-  - src/models/components/chatcompletionstreamrequest.ts
-  - src/models/components/fimcompletionresponse.ts
-  - src/models/components/fimcompletionrequest.ts
-  - src/models/components/fimcompletionstreamrequest.ts
-  - src/models/components/agentscompletionrequest.ts
-  - src/models/components/agentscompletionstreamrequest.ts
-  - src/models/components/embeddingresponse.ts
-  - src/models/components/embeddingresponsedata.ts
-  - src/models/components/embeddingrequest.ts
-  - src/models/components/security.ts
-  - src/models/errors/httpvalidationerror.ts
-  - src/models/operations/retrievemodelv1modelsmodelidget.ts
-  - src/models/operations/deletemodelv1modelsmodeliddelete.ts
-  - src/models/operations/jobsapiroutesfinetuningupdatefinetunedmodel.ts
-  - src/models/operations/jobsapiroutesfinetuningarchivefinetunedmodel.ts
-  - src/models/operations/jobsapiroutesfinetuningunarchivefinetunedmodel.ts
-  - src/models/operations/filesapiroutesuploadfile.ts
-  - src/models/operations/filesapiroutesretrievefile.ts
-  - src/models/operations/filesapiroutesdeletefile.ts
-  - src/models/operations/jobsapiroutesfinetuninggetfinetuningjobs.ts
-  - src/models/operations/jobsapiroutesfinetuningcreatefinetuningjob.ts
-  - src/models/operations/jobsapiroutesfinetuninggetfinetuningjob.ts
-  - src/models/operations/jobsapiroutesfinetuningcancelfinetuningjob.ts
-  - src/models/operations/jobsapiroutesfinetuningstartfinetuningjob.ts
-  - src/models/errors/index.ts
-  - src/models/components/index.ts
-  - src/models/operations/index.ts
-  - docs/models/components/modellist.md
-  - docs/models/components/modelcard.md
-  - docs/models/components/modelcapabilities.md
-  - docs/models/components/loc.md
-  - docs/models/components/validationerror.md
-  - docs/models/components/deletemodelout.md
-  - docs/models/components/ftmodeloutobject.md
-  - docs/models/components/ftmodelout.md
-  - docs/models/components/ftmodelcapabilitiesout.md
-  - docs/models/components/updateftmodelin.md
-  - docs/models/components/archiveftmodeloutobject.md
-  - docs/models/components/archiveftmodelout.md
-  - docs/models/components/unarchiveftmodeloutobject.md
-  - docs/models/components/unarchiveftmodelout.md
-  - docs/models/components/purpose.md
-  - docs/models/components/uploadfileout.md
-  - docs/models/components/source.md
-  - docs/models/components/sampletype.md
-  - docs/models/components/listfilesout.md
-  - docs/models/components/fileschemapurpose.md
-  - docs/models/components/fileschema.md
-  - docs/models/components/retrievefileoutpurpose.md
-  - docs/models/components/retrievefileout.md
-  - docs/models/components/deletefileout.md
-  - docs/models/components/jobsoutobject.md
-  - docs/models/components/jobsout.md
-  - docs/models/components/status.md
-  - docs/models/components/objectt.md
-  - docs/models/components/integrations.md
-  - docs/models/components/repositories.md
-  - docs/models/components/jobout.md
-  - docs/models/components/jobmetadataout.md
-  - docs/models/components/githubrepositoryouttype.md
-  - docs/models/components/githubrepositoryout.md
-  - docs/models/components/type.md
-  - docs/models/components/wandbintegrationout.md
-  - docs/models/components/finetuneablemodel.md
-  - docs/models/components/trainingparameters.md
-  - docs/models/components/legacyjobmetadataoutobject.md
-  - docs/models/components/legacyjobmetadataout.md
-  - docs/models/components/jobinintegrations.md
-  - docs/models/components/jobinrepositories.md
-  - docs/models/components/jobin.md
-  - docs/models/components/githubrepositoryintype.md
-  - docs/models/components/githubrepositoryin.md
-  - docs/models/components/wandbintegrationtype.md
-  - docs/models/components/wandbintegration.md
-  - docs/models/components/trainingparametersin.md
-  - docs/models/components/trainingfile.md
-  - docs/models/components/detailedjoboutstatus.md
-  - docs/models/components/detailedjoboutobject.md
-  - docs/models/components/detailedjoboutintegrations.md
-  - docs/models/components/detailedjoboutrepositories.md
-  - docs/models/components/detailedjobout.md
-  - docs/models/components/checkpointout.md
-  - docs/models/components/metricout.md
-  - docs/models/components/eventout.md
-  - docs/models/components/chatcompletionresponse.md
-  - docs/models/components/finishreason.md
-  - docs/models/components/chatcompletionchoice.md
-  - docs/models/components/assistantmessagerole.md
-  - docs/models/components/assistantmessage.md
-  - docs/models/components/tooltypes.md
-  - docs/models/components/toolcall.md
-  - docs/models/components/arguments.md
-  - docs/models/components/functioncall.md
-  - docs/models/components/usageinfo.md
-  - docs/models/components/stop.md
-  - docs/models/components/messages.md
-  - docs/models/components/toolchoice.md
-  - docs/models/components/chatcompletionrequest.md
-  - docs/models/components/tooltooltypes.md
-  - docs/models/components/tool.md
-  - docs/models/components/functiont.md
-  - docs/models/components/responseformats.md
-  - docs/models/components/responseformat.md
-  - docs/models/components/content.md
-  - docs/models/components/role.md
-  - docs/models/components/systemmessage.md
-  - docs/models/components/contentchunk.md
-  - docs/models/components/usermessagecontent.md
-  - docs/models/components/usermessagerole.md
-  - docs/models/components/usermessage.md
-  - docs/models/components/textchunk.md
-  - docs/models/components/toolmessagerole.md
-  - docs/models/components/toolmessage.md
-  - docs/models/components/completionevent.md
-  - docs/models/components/completionchunk.md
-  - docs/models/components/completionresponsestreamchoicefinishreason.md
-  - docs/models/components/completionresponsestreamchoice.md
-  - docs/models/components/deltamessage.md
-  - docs/models/components/chatcompletionstreamrequeststop.md
-  - docs/models/components/chatcompletionstreamrequestmessages.md
-  - docs/models/components/chatcompletionstreamrequesttoolchoice.md
-  - docs/models/components/chatcompletionstreamrequest.md
-  - docs/models/components/fimcompletionresponse.md
-  - docs/models/components/fimcompletionrequeststop.md
-  - docs/models/components/fimcompletionrequest.md
-  - docs/models/components/fimcompletionstreamrequeststop.md
-  - docs/models/components/fimcompletionstreamrequest.md
-  - docs/models/components/agentscompletionrequeststop.md
-  - docs/models/components/agentscompletionrequestmessages.md
-  - docs/models/components/agentscompletionrequesttoolchoice.md
-  - docs/models/components/agentscompletionrequest.md
-  - docs/models/components/agentscompletionstreamrequeststop.md
-  - docs/models/components/agentscompletionstreamrequestmessages.md
-  - docs/models/components/agentscompletionstreamrequesttoolchoice.md
-  - docs/models/components/agentscompletionstreamrequest.md
-  - docs/models/components/embeddingresponse.md
-  - docs/models/components/embeddingresponsedata.md
-  - docs/models/components/inputs.md
-  - docs/models/components/embeddingrequest.md
-  - docs/models/components/security.md
-  - docs/models/errors/httpvalidationerror.md
-  - docs/models/operations/retrievemodelv1modelsmodelidgetrequest.md
-  - docs/models/operations/deletemodelv1modelsmodeliddeleterequest.md
-  - docs/models/operations/jobsapiroutesfinetuningupdatefinetunedmodelrequest.md
-  - docs/models/operations/jobsapiroutesfinetuningarchivefinetunedmodelrequest.md
-  - docs/models/operations/jobsapiroutesfinetuningunarchivefinetunedmodelrequest.md
-  - docs/models/operations/purpose.md
-  - docs/models/operations/filet.md
-  - docs/models/operations/filesapiroutesuploadfilemultipartbodyparams.md
-  - docs/models/operations/filesapiroutesretrievefilerequest.md
-  - docs/models/operations/filesapiroutesdeletefilerequest.md
-  - docs/models/operations/status.md
-  - docs/models/operations/jobsapiroutesfinetuninggetfinetuningjobsrequest.md
-  - docs/models/operations/jobsapiroutesfinetuningcreatefinetuningjobresponse.md
-  - docs/models/operations/jobsapiroutesfinetuninggetfinetuningjobrequest.md
-  - docs/models/operations/jobsapiroutesfinetuningcancelfinetuningjobrequest.md
-  - docs/models/operations/jobsapiroutesfinetuningstartfinetuningjobrequest.md
-  - docs/sdks/mistral/README.md
-  - docs/lib/utils/retryconfig.md
-  - docs/sdks/models/README.md
-  - docs/sdks/files/README.md
-  - docs/sdks/finetuning/README.md
-  - docs/sdks/jobs/README.md
-  - docs/sdks/chat/README.md
-  - docs/sdks/fim/README.md
-  - docs/sdks/agents/README.md
-  - docs/sdks/embeddings/README.md
-  - USAGE.md
-  - .gitattributes
-  - .devcontainer/README.md
-  - .devcontainer/devcontainer.json
-  - .devcontainer/setup.sh
-  - src/hooks/hooks.ts
-  - src/hooks/types.ts
-  - src/hooks/index.ts
+examples:
+  list_models_v1_models_get:
+    speakeasy-default-list-models-v1-models-get: {}
+  retrieve_model_v1_models__model_id__get:
+    "":
+      parameters:
+        path:
+          model_id: "ft:open-mistral-7b:587a6b29:20240514:7e773925"
+      responses:
+        "200":
+          application/json: {"id": "<id>"}
+        "422": {}
+  delete_model_v1_models__model_id__delete:
+    "":
+      parameters:
+        path:
+          model_id: "ft:open-mistral-7b:587a6b29:20240514:7e773925"
+      responses:
+        "200":
+          application/json: {"id": "ft:open-mistral-7b:587a6b29:20240514:7e773925", "deleted": true}
+        "422": {}
+  jobs_api_routes_fine_tuning_update_fine_tuned_model:
+    "":
+      parameters:
+        path:
+          model_id: "ft:open-mistral-7b:587a6b29:20240514:7e773925"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "created": 857478, "owned_by": "<value>", "root": "<value>", "archived": true, "job": "905bf4aa-77f2-404e-b754-c352acfe5407"}
+  jobs_api_routes_fine_tuning_archive_fine_tuned_model:
+    "":
+      parameters:
+        path:
+          model_id: "ft:open-mistral-7b:587a6b29:20240514:7e773925"
+      responses:
+        "200":
+          application/json: {"id": "<id>"}
+  jobs_api_routes_fine_tuning_unarchive_fine_tuned_model:
+    "":
+      parameters:
+        path:
+          model_id: "ft:open-mistral-7b:587a6b29:20240514:7e773925"
+      responses:
+        "200":
+          application/json: {"id": "<id>"}
+  files_api_routes_upload_file:
+    speakeasy-default-files-api-routes-upload-file:
+      requestBody:
+        multipart/form-data: {"file": {}}
+      responses:
+        "200":
+          application/json: {"id": "497f6eca-6276-4993-bfeb-53cbbbba6f09", "object": "file", "bytes": 13000, "created_at": 1716963433, "filename": "files_upload.jsonl", "sample_type": "pretrain", "source": "upload"}
+  files_api_routes_list_files:
+    speakeasy-default-files-api-routes-list-files:
+      responses:
+        "200":
+          application/json: {"data": [], "object": "<value>"}
+  files_api_routes_retrieve_file:
+    speakeasy-default-files-api-routes-retrieve-file:
+      parameters:
+        path:
+          file_id: "<value>"
+      responses:
+        "200":
+          application/json: {"id": "497f6eca-6276-4993-bfeb-53cbbbba6f09", "object": "file", "bytes": 13000, "created_at": 1716963433, "filename": "files_upload.jsonl", "sample_type": "pretrain", "source": "repository"}
+  files_api_routes_delete_file:
+    speakeasy-default-files-api-routes-delete-file:
+      parameters:
+        path:
+          file_id: "<value>"
+      responses:
+        "200":
+          application/json: {"id": "497f6eca-6276-4993-bfeb-53cbbbba6f09", "object": "file", "deleted": false}
+  jobs_api_routes_fine_tuning_get_fine_tuning_jobs:
+    speakeasy-default-jobs-api-routes-fine-tuning-get-fine-tuning-jobs:
+      responses:
+        "200":
+          application/json: {"total": 768578}
+  jobs_api_routes_fine_tuning_create_fine_tuning_job:
+    speakeasy-default-jobs-api-routes-fine-tuning-create-fine-tuning-job:
+      requestBody:
+        application/json: {"model": "codestral-latest"}
+      responses:
+        "200":
+          application/json: {"id": "ad642c1f-c6fe-4072-81bc-dd89dc7fa504", "auto_start": false, "model": "open-mistral-7b", "status": "FAILED_VALIDATION", "job_type": "<value>", "created_at": 230313, "modified_at": 207565, "training_files": []}
+  jobs_api_routes_fine_tuning_get_fine_tuning_job:
+    speakeasy-default-jobs-api-routes-fine-tuning-get-fine-tuning-job:
+      parameters:
+        path:
+          job_id: "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+      responses:
+        "200":
+          application/json: {"id": "58ccc65b-c928-4154-952e-30c048b8c2b5", "auto_start": false, "model": "open-mistral-nemo", "status": "VALIDATED", "job_type": "<value>", "created_at": 968091, "modified_at": 32069, "training_files": [], "checkpoints": []}
+  jobs_api_routes_fine_tuning_cancel_fine_tuning_job:
+    speakeasy-default-jobs-api-routes-fine-tuning-cancel-fine-tuning-job:
+      parameters:
+        path:
+          job_id: "03fa7112-315a-4072-a9f2-43f3f1ec962e"
+      responses:
+        "200":
+          application/json: {"id": "fb7dec95-f740-47b2-b8ee-d9b046936a67", "auto_start": true, "model": "mistral-large-latest", "status": "VALIDATED", "job_type": "<value>", "created_at": 252151, "modified_at": 56775, "training_files": [], "checkpoints": []}
+  jobs_api_routes_fine_tuning_start_fine_tuning_job:
+    speakeasy-default-jobs-api-routes-fine-tuning-start-fine-tuning-job:
+      parameters:
+        path:
+          job_id: "0eb0f807-fb9f-4e46-9c13-4e257df6e1ba"
+      responses:
+        "200":
+          application/json: {"id": "bc3810ce-43e6-4fde-85a4-cd01d1f9cf8f", "auto_start": true, "model": "codestral-latest", "status": "RUNNING", "job_type": "<value>", "created_at": 186591, "modified_at": 451468, "training_files": [], "checkpoints": []}
+  chat_completion_v1_chat_completions_post:
+    speakeasy-default-chat-completion-v1-chat-completions-post:
+      requestBody:
+        application/json: {"model": "mistral-small-latest", "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+      responses:
+        "200":
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": []}
+        "422": {}
+  stream_chat:
+    speakeasy-default-stream-chat:
+      requestBody:
+        application/json: {"model": "mistral-small-latest", "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+  fim_completion_v1_fim_completions_post:
+    speakeasy-default-fim-completion-v1-fim-completions-post:
+      requestBody:
+        application/json: {"model": "codestral-2405", "prompt": "def", "suffix": "return a+b"}
+      responses:
+        "200":
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "codestral-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": []}
+        "422": {}
+  stream_fim:
+    speakeasy-default-stream-fim:
+      requestBody:
+        application/json: {"model": "codestral-2405", "prompt": "def", "suffix": "return a+b"}
+  agents_completion_v1_agents_completions_post:
+    speakeasy-default-agents-completion-v1-agents-completions-post:
+      requestBody:
+        application/json: {"messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}], "agent_id": "<value>"}
+      responses:
+        "200":
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": []}
+        "422": {}
+  stream_agents:
+    speakeasy-default-stream-agents:
+      requestBody:
+        application/json: {"messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}], "agent_id": "<value>"}
+  embeddings_v1_embeddings_post:
+    speakeasy-default-embeddings-v1-embeddings-post:
+      requestBody:
+        application/json: {"input": "<value>", "model": "Wrangler"}
+      responses:
+        "200":
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "data": [{"object": "embedding", "embedding": [0.1, 0.2, 0.3], "index": 0}]}
+        "422": {}

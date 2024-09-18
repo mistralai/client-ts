@@ -3,43 +3,69 @@
  */
 
 import * as z from "zod";
+import {
+  ImageURLChunk,
+  ImageURLChunk$inboundSchema,
+  ImageURLChunk$Outbound,
+  ImageURLChunk$outboundSchema,
+} from "./imageurlchunk.js";
+import {
+  TextChunk,
+  TextChunk$inboundSchema,
+  TextChunk$Outbound,
+  TextChunk$outboundSchema,
+} from "./textchunk.js";
 
-export type ContentChunk = {
-    type?: "text" | undefined;
-    text: string;
-};
+export type ContentChunk =
+  | (ImageURLChunk & { type: "image_url" })
+  | (TextChunk & { type: "text" });
 
 /** @internal */
-export const ContentChunk$inboundSchema: z.ZodType<ContentChunk, z.ZodTypeDef, unknown> = z.object({
-    type: z.literal("text").default("text"),
-    text: z.string(),
-});
+export const ContentChunk$inboundSchema: z.ZodType<
+  ContentChunk,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  ImageURLChunk$inboundSchema.and(
+    z.object({ type: z.literal("image_url") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  TextChunk$inboundSchema.and(
+    z.object({ type: z.literal("text") }).transform((v) => ({ type: v.type })),
+  ),
+]);
 
 /** @internal */
-export type ContentChunk$Outbound = {
-    type: "text";
-    text: string;
-};
+export type ContentChunk$Outbound =
+  | (ImageURLChunk$Outbound & { type: "image_url" })
+  | (TextChunk$Outbound & { type: "text" });
 
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
-    ContentChunk$Outbound,
-    z.ZodTypeDef,
-    ContentChunk
-> = z.object({
-    type: z.literal("text").default("text" as const),
-    text: z.string(),
-});
+  ContentChunk$Outbound,
+  z.ZodTypeDef,
+  ContentChunk
+> = z.union([
+  ImageURLChunk$outboundSchema.and(
+    z.object({ type: z.literal("image_url") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  TextChunk$outboundSchema.and(
+    z.object({ type: z.literal("text") }).transform((v) => ({ type: v.type })),
+  ),
+]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace ContentChunk$ {
-    /** @deprecated use `ContentChunk$inboundSchema` instead. */
-    export const inboundSchema = ContentChunk$inboundSchema;
-    /** @deprecated use `ContentChunk$outboundSchema` instead. */
-    export const outboundSchema = ContentChunk$outboundSchema;
-    /** @deprecated use `ContentChunk$Outbound` instead. */
-    export type Outbound = ContentChunk$Outbound;
+  /** @deprecated use `ContentChunk$inboundSchema` instead. */
+  export const inboundSchema = ContentChunk$inboundSchema;
+  /** @deprecated use `ContentChunk$outboundSchema` instead. */
+  export const outboundSchema = ContentChunk$outboundSchema;
+  /** @deprecated use `ContentChunk$Outbound` instead. */
+  export type Outbound = ContentChunk$Outbound;
 }

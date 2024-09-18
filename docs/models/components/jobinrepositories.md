@@ -6,9 +6,9 @@
 import { JobInRepositories } from "@mistralai/mistralai/models/components";
 
 let value: JobInRepositories = {
-    name: "<value>",
-    owner: "<value>",
-    token: "<value>",
+  name: "<value>",
+  owner: "<value>",
+  token: "<value>",
 };
 ```
 

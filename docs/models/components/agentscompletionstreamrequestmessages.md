@@ -5,9 +5,7 @@
 ```typescript
 import { AgentsCompletionStreamRequestMessages } from "@mistralai/mistralai/models/components";
 
-let value: AgentsCompletionStreamRequestMessages = {
-    content: "<value>",
-};
+let value: AgentsCompletionStreamRequestMessages = {};
 ```
 
 ## Supported Types

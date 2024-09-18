@@ -6,9 +6,9 @@
 import { GithubRepositoryIn } from "@mistralai/mistralai/models/components";
 
 let value: GithubRepositoryIn = {
-    name: "<value>",
-    owner: "<value>",
-    token: "<value>",
+  name: "<value>",
+  owner: "<value>",
+  token: "<value>",
 };
 ```
 

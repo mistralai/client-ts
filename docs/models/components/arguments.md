@@ -5,7 +5,9 @@
 ```typescript
 import { Arguments } from "@mistralai/mistralai/models/components";
 
-let value: Arguments = "<value>";
+let value: Arguments = {
+  "key": "<value>",
+};
 ```
 
 ## Supported Types
