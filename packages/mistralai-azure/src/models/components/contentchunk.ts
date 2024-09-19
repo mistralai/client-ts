@@ -3,43 +3,41 @@
  */
 
 import * as z from "zod";
+import {
+  TextChunk,
+  TextChunk$inboundSchema,
+  TextChunk$Outbound,
+  TextChunk$outboundSchema,
+} from "./textchunk.js";
 
-export type ContentChunk = {
-    type?: "text" | undefined;
-    text: string;
-};
-
-/** @internal */
-export const ContentChunk$inboundSchema: z.ZodType<ContentChunk, z.ZodTypeDef, unknown> = z.object({
-    type: z.literal("text").default("text"),
-    text: z.string(),
-});
+export type ContentChunk = TextChunk;
 
 /** @internal */
-export type ContentChunk$Outbound = {
-    type: "text";
-    text: string;
-};
+export const ContentChunk$inboundSchema: z.ZodType<
+  ContentChunk,
+  z.ZodTypeDef,
+  unknown
+> = TextChunk$inboundSchema;
+
+/** @internal */
+export type ContentChunk$Outbound = TextChunk$Outbound;
 
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
-    ContentChunk$Outbound,
-    z.ZodTypeDef,
-    ContentChunk
-> = z.object({
-    type: z.literal("text").default("text" as const),
-    text: z.string(),
-});
+  ContentChunk$Outbound,
+  z.ZodTypeDef,
+  ContentChunk
+> = TextChunk$outboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace ContentChunk$ {
-    /** @deprecated use `ContentChunk$inboundSchema` instead. */
-    export const inboundSchema = ContentChunk$inboundSchema;
-    /** @deprecated use `ContentChunk$outboundSchema` instead. */
-    export const outboundSchema = ContentChunk$outboundSchema;
-    /** @deprecated use `ContentChunk$Outbound` instead. */
-    export type Outbound = ContentChunk$Outbound;
+  /** @deprecated use `ContentChunk$inboundSchema` instead. */
+  export const inboundSchema = ContentChunk$inboundSchema;
+  /** @deprecated use `ContentChunk$outboundSchema` instead. */
+  export const outboundSchema = ContentChunk$outboundSchema;
+  /** @deprecated use `ContentChunk$Outbound` instead. */
+  export type Outbound = ContentChunk$Outbound;
 }

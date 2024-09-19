@@ -3,40 +3,73 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../../types/enums.js";
+
+export const Type = {
+  Text: "text",
+} as const;
+export type Type = ClosedEnum<typeof Type>;
 
 export type TextChunk = {
-    type?: "text" | undefined;
-    text: string;
+  type?: "text" | undefined;
+  text: string;
 };
 
 /** @internal */
-export const TextChunk$inboundSchema: z.ZodType<TextChunk, z.ZodTypeDef, unknown> = z.object({
-    type: z.literal("text").default("text"),
-    text: z.string(),
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
+
+/** @internal */
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Type$ {
+  /** @deprecated use `Type$inboundSchema` instead. */
+  export const inboundSchema = Type$inboundSchema;
+  /** @deprecated use `Type$outboundSchema` instead. */
+  export const outboundSchema = Type$outboundSchema;
+}
+
+/** @internal */
+export const TextChunk$inboundSchema: z.ZodType<
+  TextChunk,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("text").default("text"),
+  text: z.string(),
 });
 
 /** @internal */
 export type TextChunk$Outbound = {
-    type: "text";
-    text: string;
+  type: "text";
+  text: string;
 };
 
 /** @internal */
-export const TextChunk$outboundSchema: z.ZodType<TextChunk$Outbound, z.ZodTypeDef, TextChunk> =
-    z.object({
-        type: z.literal("text").default("text" as const),
-        text: z.string(),
-    });
+export const TextChunk$outboundSchema: z.ZodType<
+  TextChunk$Outbound,
+  z.ZodTypeDef,
+  TextChunk
+> = z.object({
+  type: z.literal("text").default("text"),
+  text: z.string(),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace TextChunk$ {
-    /** @deprecated use `TextChunk$inboundSchema` instead. */
-    export const inboundSchema = TextChunk$inboundSchema;
-    /** @deprecated use `TextChunk$outboundSchema` instead. */
-    export const outboundSchema = TextChunk$outboundSchema;
-    /** @deprecated use `TextChunk$Outbound` instead. */
-    export type Outbound = TextChunk$Outbound;
+  /** @deprecated use `TextChunk$inboundSchema` instead. */
+  export const inboundSchema = TextChunk$inboundSchema;
+  /** @deprecated use `TextChunk$outboundSchema` instead. */
+  export const outboundSchema = TextChunk$outboundSchema;
+  /** @deprecated use `TextChunk$Outbound` instead. */
+  export type Outbound = TextChunk$Outbound;
 }
