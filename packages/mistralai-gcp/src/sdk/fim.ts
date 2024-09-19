@@ -10,29 +10,37 @@ import * as components from "../models/components/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Fim extends ClientSDK {
-    /**
-     * Stream fim completion
-     *
-     * @remarks
-     * Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
-     */
-    async stream(
-        request: components.FIMCompletionStreamRequest,
-        options?: RequestOptions
-    ): Promise<EventStream<components.CompletionEvent>> {
-        return unwrapAsync(fimStream(this, request, options));
-    }
+  /**
+   * Stream fim completion
+   *
+   * @remarks
+   * Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
+   */
+  async stream(
+    request: components.FIMCompletionStreamRequest,
+    options?: RequestOptions,
+  ): Promise<EventStream<components.CompletionEvent>> {
+    return unwrapAsync(fimStream(
+      this,
+      request,
+      options,
+    ));
+  }
 
-    /**
-     * Fim Completion
-     *
-     * @remarks
-     * FIM completion.
-     */
-    async complete(
-        request: components.FIMCompletionRequest,
-        options?: RequestOptions
-    ): Promise<components.FIMCompletionResponse> {
-        return unwrapAsync(fimComplete(this, request, options));
-    }
+  /**
+   * Fim Completion
+   *
+   * @remarks
+   * FIM completion.
+   */
+  async complete(
+    request: components.FIMCompletionRequest,
+    options?: RequestOptions,
+  ): Promise<components.FIMCompletionResponse> {
+    return unwrapAsync(fimComplete(
+      this,
+      request,
+      options,
+    ));
+  }
 }

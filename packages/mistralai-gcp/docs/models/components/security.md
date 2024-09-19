@@ -6,7 +6,7 @@
 import { Security } from "@mistralai/mistralai-gcp/models/components";
 
 let value: Security = {
-    apiKey: "<value>",
+  apiKey: "<value>",
 };
 ```
 

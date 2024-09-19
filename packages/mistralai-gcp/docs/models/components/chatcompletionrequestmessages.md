@@ -6,11 +6,11 @@
 import { ChatCompletionRequestMessages } from "@mistralai/mistralai-gcp/models/components";
 
 let value: ChatCompletionRequestMessages = {
-    content: [
-        {
-            text: "<value>",
-        },
-    ],
+  content: [
+    {
+      text: "<value>",
+    },
+  ],
 };
 ```
 

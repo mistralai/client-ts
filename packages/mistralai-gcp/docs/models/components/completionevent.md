@@ -6,22 +6,22 @@
 import { CompletionEvent } from "@mistralai/mistralai-gcp/models/components";
 
 let value: CompletionEvent = {
-    data: {
-        id: "<id>",
-        model: "Model S",
-        usage: {
-            promptTokens: 16,
-            completionTokens: 34,
-            totalTokens: 50,
-        },
-        choices: [
-            {
-                index: 592845,
-                delta: {},
-                finishReason: "error",
-            },
-        ],
+  data: {
+    id: "<id>",
+    model: "Model S",
+    usage: {
+      promptTokens: 16,
+      completionTokens: 34,
+      totalTokens: 50,
     },
+    choices: [
+      {
+        index: 592845,
+        delta: {},
+        finishReason: "error",
+      },
+    ],
+  },
 };
 ```
 

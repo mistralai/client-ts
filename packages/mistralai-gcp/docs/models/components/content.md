@@ -5,7 +5,11 @@
 ```typescript
 import { Content } from "@mistralai/mistralai-gcp/models/components";
 
-let value: Content = "<value>";
+let value: Content = [
+  {
+    text: "<value>",
+  },
+];
 ```
 
 ## Supported Types
@@ -16,9 +20,9 @@ let value: Content = "<value>";
 const value: string = /* values here */
 ```
 
-### `components.ContentChunk[]`
+### `components.TextChunk[]`
 
 ```typescript
-const value: components.ContentChunk[] = /* values here */
+const value: components.TextChunk[] = /* values here */
 ```
 
