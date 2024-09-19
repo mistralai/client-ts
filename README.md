@@ -95,7 +95,13 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.chat.complete({
     model: "mistral-small-latest",
-    messages: [],
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
   });
 
   // Handle the result
@@ -245,7 +251,13 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.chat.stream({
     model: "mistral-small-latest",
-    messages: [],
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
   });
 
   for await (const event of result) {

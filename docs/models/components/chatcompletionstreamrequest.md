@@ -7,7 +7,12 @@ import { ChatCompletionStreamRequest } from "@mistralai/mistralai/models/compone
 
 let value: ChatCompletionStreamRequest = {
   model: "mistral-small-latest",
-  messages: [],
+  messages: [
+    {
+      content: "Who is the best French painter? Answer in one short sentence.",
+      role: "user",
+    },
+  ],
 };
 ```
 

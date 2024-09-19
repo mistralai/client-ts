@@ -52,7 +52,7 @@ export async function fineTuningJobsList(
     input$,
     (value$) =>
       operations.JobsApiRoutesFineTuningGetFineTuningJobsRequest$outboundSchema
-        .parse(value$),
+        .optional().parse(value$),
     "Input validation failed",
   );
   if (!parsed$.ok) {

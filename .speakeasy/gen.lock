@@ -3,8 +3,8 @@ id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
   docChecksum: e75ca54601920b2770d9a559b299d272
   docVersion: 0.0.2
-  speakeasyVersion: 1.399.2
-  generationVersion: 2.416.6
+  speakeasyVersion: 1.399.3
+  generationVersion: 2.420.2
   releaseVersion: 1.1.0
   configChecksum: fa99b0d0b544e1003aaeca9cacf619db
   repoURL: https://github.com/mistralai/client-ts.git
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.17.4
+    core: 3.17.5
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -24,7 +24,7 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
-    methodArguments: 0.1.1
+    methodArguments: 0.1.2
     nameOverrides: 2.81.2
     nullables: 0.1.0
     openEnums: 0.1.1
