@@ -1,11 +1,11 @@
-# ChatCompletionRequestToolChoice
+# ChatCompletionStreamRequestToolChoice
 
 ## Example Usage
 
 ```typescript
-import { ChatCompletionRequestToolChoice } from "@mistralai/mistralai-azure/models/components";
+import { ChatCompletionStreamRequestToolChoice } from "@mistralai/mistralai-azure/models/components";
 
-let value: ChatCompletionRequestToolChoice = "auto";
+let value: ChatCompletionStreamRequestToolChoice = "none";
 ```
 
 ## Supported Types
