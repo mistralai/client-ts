@@ -36,7 +36,7 @@ typescript:
       webhooks: models/webhooks
   inputModelSuffix: input
   maxMethodParams: 0
-  methodArguments: require-security-and-request
+  methodArguments: infer-optional-args
   moduleFormat: commonjs
   outputModelSuffix: output
   packageName: '@mistralai/mistralai'

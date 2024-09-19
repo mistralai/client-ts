@@ -30,7 +30,9 @@ import { Result } from "../types/fp.js";
  */
 export async function fineTuningJobsList(
   client$: MistralCore,
-  request: operations.JobsApiRoutesFineTuningGetFineTuningJobsRequest,
+  request?:
+    | operations.JobsApiRoutesFineTuningGetFineTuningJobsRequest
+    | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<
@@ -62,15 +64,15 @@ export async function fineTuningJobsList(
   const path$ = pathToFunc("/v1/fine_tuning/jobs")();
 
   const query$ = encodeFormQuery$({
-    "created_after": payload$.created_after,
-    "created_by_me": payload$.created_by_me,
-    "model": payload$.model,
-    "page": payload$.page,
-    "page_size": payload$.page_size,
-    "status": payload$.status,
-    "suffix": payload$.suffix,
-    "wandb_name": payload$.wandb_name,
-    "wandb_project": payload$.wandb_project,
+    "created_after": payload$?.created_after,
+    "created_by_me": payload$?.created_by_me,
+    "model": payload$?.model,
+    "page": payload$?.page,
+    "page_size": payload$?.page_size,
+    "status": payload$?.status,
+    "suffix": payload$?.suffix,
+    "wandb_name": payload$?.wandb_name,
+    "wandb_project": payload$?.wandb_project,
   });
 
   const headers$ = new Headers({

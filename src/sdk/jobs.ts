@@ -20,7 +20,9 @@ export class Jobs extends ClientSDK {
    * Get a list of fine-tuning jobs for your organization and user.
    */
   async list(
-    request: operations.JobsApiRoutesFineTuningGetFineTuningJobsRequest,
+    request?:
+      | operations.JobsApiRoutesFineTuningGetFineTuningJobsRequest
+      | undefined,
     options?: RequestOptions,
   ): Promise<components.JobsOut> {
     return unwrapAsync(fineTuningJobsList(

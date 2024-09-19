@@ -6,7 +6,7 @@ management:
   speakeasyVersion: 1.399.2
   generationVersion: 2.416.6
   releaseVersion: 1.1.0
-  configChecksum: 3cfbfb75f96325b8e28c3310024b3c4f
+  configChecksum: fa99b0d0b544e1003aaeca9cacf619db
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -24,6 +24,7 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
+    methodArguments: 0.1.1
     nameOverrides: 2.81.2
     nullables: 0.1.0
     openEnums: 0.1.1
@@ -435,7 +436,7 @@ examples:
         application/json: {"model": "codestral-latest"}
       responses:
         "200":
-          application/json: {"id": "ad642c1f-c6fe-4072-81bc-dd89dc7fa504", "auto_start": false, "model": "open-mistral-7b", "status": "FAILED_VALIDATION", "job_type": "<value>", "created_at": 230313, "modified_at": 207565, "training_files": []}
+          application/json: {"id": "7ad642c1-fc6f-4e07-a41b-cdd89dc7fa50", "auto_start": true, "model": "open-mistral-nemo", "status": "QUEUED", "job_type": "<value>", "created_at": 519028, "modified_at": 230313, "training_files": []}
   jobs_api_routes_fine_tuning_get_fine_tuning_job:
     speakeasy-default-jobs-api-routes-fine-tuning-get-fine-tuning-job:
       parameters:
