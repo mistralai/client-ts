@@ -6,9 +6,9 @@
 import { CompletionResponseStreamChoice } from "@mistralai/mistralai/models/components";
 
 let value: CompletionResponseStreamChoice = {
-    index: 881736,
-    delta: {},
-    finishReason: "tool_calls",
+  index: 19193,
+  delta: {},
+  finishReason: "length",
 };
 ```
 

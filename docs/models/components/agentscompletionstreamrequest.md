@@ -6,13 +6,13 @@
 import { AgentsCompletionStreamRequest } from "@mistralai/mistralai/models/components";
 
 let value: AgentsCompletionStreamRequest = {
-    messages: [
-        {
-            content: "Who is the best French painter? Answer in one short sentence.",
-            role: "user",
-        },
-    ],
-    agentId: "<value>",
+  messages: [
+    {
+      content: "Who is the best French painter? Answer in one short sentence.",
+      role: "user",
+    },
+  ],
+  agentId: "<value>",
 };
 ```
 
@@ -28,5 +28,5 @@ let value: AgentsCompletionStreamRequest = {
 | `messages`                                                                                                                                             | *components.AgentsCompletionStreamRequestMessages*[]                                                                                                   | :heavy_check_mark:                                                                                                                                     | The prompt(s) to generate completions for, encoded as a list of dict with role and content.                                                            | [<br/>{<br/>"role": "user",<br/>"content": "Who is the best French painter? Answer in one short sentence."<br/>}<br/>]                                 |
 | `responseFormat`                                                                                                                                       | [components.ResponseFormat](../../models/components/responseformat.md)                                                                                 | :heavy_minus_sign:                                                                                                                                     | N/A                                                                                                                                                    |                                                                                                                                                        |
 | `tools`                                                                                                                                                | [components.Tool](../../models/components/tool.md)[]                                                                                                   | :heavy_minus_sign:                                                                                                                                     | N/A                                                                                                                                                    |                                                                                                                                                        |
-| `toolChoice`                                                                                                                                           | [components.AgentsCompletionStreamRequestToolChoice](../../models/components/agentscompletionstreamrequesttoolchoice.md)                               | :heavy_minus_sign:                                                                                                                                     | N/A                                                                                                                                                    |                                                                                                                                                        |
+| `toolChoice`                                                                                                                                           | *components.AgentsCompletionStreamRequestToolChoice*                                                                                                   | :heavy_minus_sign:                                                                                                                                     | N/A                                                                                                                                                    |                                                                                                                                                        |
 | `agentId`                                                                                                                                              | *string*                                                                                                                                               | :heavy_check_mark:                                                                                                                                     | The ID of the agent to use for this completion.                                                                                                        |                                                                                                                                                        |

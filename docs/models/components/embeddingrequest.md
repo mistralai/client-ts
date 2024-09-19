@@ -6,8 +6,8 @@
 import { EmbeddingRequest } from "@mistralai/mistralai/models/components";
 
 let value: EmbeddingRequest = {
-    inputs: "<value>",
-    model: "Focus",
+  inputs: "<value>",
+  model: "Model Y",
 };
 ```
 

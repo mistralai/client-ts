@@ -9,11 +9,11 @@ import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
 import {
-    ConnectionError,
-    InvalidRequestError,
-    RequestAbortedError,
-    RequestTimeoutError,
-    UnexpectedClientError,
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
 import { SDKError } from "../models/errors/sdkerror.js";
@@ -27,85 +27,82 @@ import { Result } from "../types/fp.js";
  * List all models available to the user.
  */
 export async function modelsList(
-    client$: MistralCore,
-    options?: RequestOptions
+  client$: MistralCore,
+  options?: RequestOptions,
 ): Promise<
-    Result<
-        components.ModelList,
-        | errors.HTTPValidationError
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >
+  Result<
+    components.ModelList,
+    | errors.HTTPValidationError
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >
 > {
-    const path$ = pathToFunc("/v1/models")();
+  const path$ = pathToFunc("/v1/models")();
 
-    const headers$ = new Headers({
-        Accept: "application/json",
-    });
+  const headers$ = new Headers({
+    Accept: "application/json",
+  });
 
-    const apiKey$ = await extractSecurity(client$.options$.apiKey);
-    const security$ = apiKey$ == null ? {} : { apiKey: apiKey$ };
-    const context = {
-        operationID: "list_models_v1_models_get",
-        oAuth2Scopes: [],
-        securitySource: client$.options$.apiKey,
-    };
-    const securitySettings$ = resolveGlobalSecurity(security$);
+  const apiKey$ = await extractSecurity(client$.options$.apiKey);
+  const security$ = apiKey$ == null ? {} : { apiKey: apiKey$ };
+  const context = {
+    operationID: "list_models_v1_models_get",
+    oAuth2Scopes: [],
+    securitySource: client$.options$.apiKey,
+  };
+  const securitySettings$ = resolveGlobalSecurity(security$);
 
-    const requestRes = client$.createRequest$(
-        context,
-        {
-            security: securitySettings$,
-            method: "GET",
-            path: path$,
-            headers: headers$,
-            timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
-        },
-        options
-    );
-    if (!requestRes.ok) {
-        return requestRes;
-    }
-    const request$ = requestRes.value;
+  const requestRes = client$.createRequest$(context, {
+    security: securitySettings$,
+    method: "GET",
+    path: path$,
+    headers: headers$,
+    timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return requestRes;
+  }
+  const request$ = requestRes.value;
 
-    const doResult = await client$.do$(request$, {
-        context,
-        errorCodes: ["422", "4XX", "5XX"],
-        retryConfig: options?.retries || client$.options$.retryConfig,
-        retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
-    });
-    if (!doResult.ok) {
-        return doResult;
-    }
-    const response = doResult.value;
+  const doResult = await client$.do$(request$, {
+    context,
+    errorCodes: ["422", "4XX", "5XX"],
+    retryConfig: options?.retries
+      || client$.options$.retryConfig,
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+  });
+  if (!doResult.ok) {
+    return doResult;
+  }
+  const response = doResult.value;
 
-    const responseFields$ = {
-        HttpMeta: { Response: response, Request: request$ },
-    };
+  const responseFields$ = {
+    HttpMeta: { Response: response, Request: request$ },
+  };
 
-    const [result$] = await m$.match<
-        components.ModelList,
-        | errors.HTTPValidationError
-        | SDKError
-        | SDKValidationError
-        | UnexpectedClientError
-        | InvalidRequestError
-        | RequestAbortedError
-        | RequestTimeoutError
-        | ConnectionError
-    >(
-        m$.json(200, components.ModelList$inboundSchema),
-        m$.jsonErr(422, errors.HTTPValidationError$inboundSchema),
-        m$.fail(["4XX", "5XX"])
-    )(response, { extraFields: responseFields$ });
-    if (!result$.ok) {
-        return result$;
-    }
-
+  const [result$] = await m$.match<
+    components.ModelList,
+    | errors.HTTPValidationError
+    | SDKError
+    | SDKValidationError
+    | UnexpectedClientError
+    | InvalidRequestError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | ConnectionError
+  >(
+    m$.json(200, components.ModelList$inboundSchema),
+    m$.jsonErr(422, errors.HTTPValidationError$inboundSchema),
+    m$.fail(["4XX", "5XX"]),
+  )(response, { extraFields: responseFields$ });
+  if (!result$.ok) {
     return result$;
+  }
+
+  return result$;
 }

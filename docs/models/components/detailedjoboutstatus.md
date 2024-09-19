@@ -5,7 +5,7 @@
 ```typescript
 import { DetailedJobOutStatus } from "@mistralai/mistralai/models/components";
 
-let value: DetailedJobOutStatus = "RUNNING";
+let value: DetailedJobOutStatus = "STARTED";
 ```
 
 ## Values

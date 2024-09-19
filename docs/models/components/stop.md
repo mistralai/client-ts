@@ -7,7 +7,9 @@ Stop generation if this token is detected. Or if one of these tokens is detected
 ```typescript
 import { Stop } from "@mistralai/mistralai/models/components";
 
-let value: Stop = "<value>";
+let value: Stop = [
+  "<value>",
+];
 ```
 
 ## Supported Types

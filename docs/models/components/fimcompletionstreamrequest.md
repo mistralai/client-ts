@@ -6,9 +6,9 @@
 import { FIMCompletionStreamRequest } from "@mistralai/mistralai/models/components";
 
 let value: FIMCompletionStreamRequest = {
-    model: "codestral-2405",
-    prompt: "def",
-    suffix: "return a+b",
+  model: "codestral-2405",
+  prompt: "def",
+  suffix: "return a+b",
 };
 ```
 

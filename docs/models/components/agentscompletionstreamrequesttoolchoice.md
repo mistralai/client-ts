@@ -5,11 +5,24 @@
 ```typescript
 import { AgentsCompletionStreamRequestToolChoice } from "@mistralai/mistralai/models/components";
 
-let value: AgentsCompletionStreamRequestToolChoice = "none";
+let value: AgentsCompletionStreamRequestToolChoice = {
+  function: {
+    name: "<value>",
+  },
+};
 ```
 
-## Values
+## Supported Types
+
+### `components.ToolChoice`
 
 ```typescript
-"auto" | "none" | "any"
+const value: components.ToolChoice = /* values here */
 ```
+
+### `components.ToolChoiceEnum`
+
+```typescript
+const value: components.ToolChoiceEnum = /* values here */
+```
+

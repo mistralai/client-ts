@@ -6,7 +6,7 @@
 import { JobsApiRoutesFineTuningCancelFineTuningJobRequest } from "@mistralai/mistralai/models/operations";
 
 let value: JobsApiRoutesFineTuningCancelFineTuningJobRequest = {
-    jobId: "909b3fe4-9a8d-49cb-b486-33323f9b77f3",
+  jobId: "1cddc692-601f-4b57-ab0d-5f0d30c5fbb2",
 };
 ```
 

@@ -6,22 +6,24 @@
 import { DetailedJobOut } from "@mistralai/mistralai/models/components";
 
 let value: DetailedJobOut = {
-    id: "b0074f15-471b-45e6-a13b-99d488e1e91e",
-    autoStart: false,
-    hyperparameters: {},
-    model: "mistral-small-latest",
-    status: "VALIDATED",
-    jobType: "<value>",
-    createdAt: 9356,
-    modifiedAt: 667411,
-    trainingFiles: ["d2abd442-6980-42d5-82a9-4bb4f63c969e"],
-    checkpoints: [
-        {
-            metrics: {},
-            stepNumber: 572252,
-            createdAt: 1716963433,
-        },
-    ],
+  id: "5471b5e6-e13b-499d-888e-1e91e450ad2a",
+  autoStart: false,
+  hyperparameters: {},
+  model: "mistral-large-latest",
+  status: "CANCELLED",
+  jobType: "<value>",
+  createdAt: 289406,
+  modifiedAt: 264730,
+  trainingFiles: [
+    "269802d5-02a9-44bb-8f63-c969e9a3efa7",
+  ],
+  checkpoints: [
+    {
+      metrics: {},
+      stepNumber: 449198,
+      createdAt: 1716963433,
+    },
+  ],
 };
 ```
 

@@ -10,26 +10,34 @@ import * as components from "../models/components/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Agents extends ClientSDK {
-    /**
-     * Agents Completion
-     */
-    async complete(
-        request: components.AgentsCompletionRequest,
-        options?: RequestOptions
-    ): Promise<components.ChatCompletionResponse> {
-        return unwrapAsync(agentsComplete(this, request, options));
-    }
+  /**
+   * Agents Completion
+   */
+  async complete(
+    request: components.AgentsCompletionRequest,
+    options?: RequestOptions,
+  ): Promise<components.ChatCompletionResponse> {
+    return unwrapAsync(agentsComplete(
+      this,
+      request,
+      options,
+    ));
+  }
 
-    /**
-     * Stream Agents completion
-     *
-     * @remarks
-     * Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
-     */
-    async stream(
-        request: components.AgentsCompletionStreamRequest,
-        options?: RequestOptions
-    ): Promise<EventStream<components.CompletionEvent>> {
-        return unwrapAsync(agentsStream(this, request, options));
-    }
+  /**
+   * Stream Agents completion
+   *
+   * @remarks
+   * Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
+   */
+  async stream(
+    request: components.AgentsCompletionStreamRequest,
+    options?: RequestOptions,
+  ): Promise<EventStream<components.CompletionEvent>> {
+    return unwrapAsync(agentsStream(
+      this,
+      request,
+      options,
+    ));
+  }
 }

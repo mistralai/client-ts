@@ -7,7 +7,7 @@ Stop generation if this token is detected. Or if one of these tokens is detected
 ```typescript
 import { FIMCompletionRequestStop } from "@mistralai/mistralai/models/components";
 
-let value: FIMCompletionRequestStop = ["<value>"];
+let value: FIMCompletionRequestStop = "<value>";
 ```
 
 ## Supported Types

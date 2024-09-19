@@ -6,7 +6,7 @@
 import { DetailedJobOutIntegrations } from "@mistralai/mistralai/models/components";
 
 let value: DetailedJobOutIntegrations = {
-    project: "<value>",
+  project: "<value>",
 };
 ```
 

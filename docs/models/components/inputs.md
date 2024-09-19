@@ -7,7 +7,9 @@ Text to embed.
 ```typescript
 import { Inputs } from "@mistralai/mistralai/models/components";
 
-let value: Inputs = ["<value>"];
+let value: Inputs = [
+  "<value>",
+];
 ```
 
 ## Supported Types

@@ -6,7 +6,7 @@
 import { ChatCompletionStreamRequestMessages } from "@mistralai/mistralai/models/components";
 
 let value: ChatCompletionStreamRequestMessages = {
-    content: "<value>",
+  content: "<value>",
 };
 ```
 

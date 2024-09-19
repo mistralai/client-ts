@@ -33,7 +33,7 @@ async function run() {
     ],
     agentId: "<value>",
   });
-
+  
   // Handle the result
   console.log(result)
 }
@@ -123,9 +123,10 @@ async function run() {
     ],
     agentId: "<value>",
   });
-
+  
   for await (const event of result) {
     // Handle the event
+    console.log(event);
   }
 }
 
@@ -165,6 +166,7 @@ async function run() {
 
   for await (const event of result) {
     // Handle the event
+    console.log(event);
   }
 }
 

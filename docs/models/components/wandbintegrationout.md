@@ -6,7 +6,7 @@
 import { WandbIntegrationOut } from "@mistralai/mistralai/models/components";
 
 let value: WandbIntegrationOut = {
-    project: "<value>",
+  project: "<value>",
 };
 ```
 

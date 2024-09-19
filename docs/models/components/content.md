@@ -16,9 +16,9 @@ let value: Content = "<value>";
 const value: string = /* values here */
 ```
 
-### `components.ContentChunk[]`
+### `components.TextChunk[]`
 
 ```typescript
-const value: components.ContentChunk[] = /* values here */
+const value: components.TextChunk[] = /* values here */
 ```
 

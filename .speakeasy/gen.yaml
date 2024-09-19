@@ -15,7 +15,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
 typescript:
-  version: 1.0.4
+  version: 1.1.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -36,7 +36,7 @@ typescript:
       webhooks: models/webhooks
   inputModelSuffix: input
   maxMethodParams: 0
-  methodArguments: require-security-and-request
+  methodArguments: infer-optional-args
   moduleFormat: commonjs
   outputModelSuffix: output
   packageName: '@mistralai/mistralai'

@@ -5,7 +5,7 @@
 ```typescript
 import { Loc } from "@mistralai/mistralai/models/components";
 
-let value: Loc = 592845;
+let value: Loc = 423655;
 ```
 
 ## Supported Types

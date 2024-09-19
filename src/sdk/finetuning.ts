@@ -6,8 +6,8 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Jobs } from "./jobs.js";
 
 export class FineTuning extends ClientSDK {
-    private _jobs?: Jobs;
-    get jobs(): Jobs {
-        return (this._jobs ??= new Jobs(this.options$));
-    }
+  private _jobs?: Jobs;
+  get jobs(): Jobs {
+    return (this._jobs ??= new Jobs(this.options$));
+  }
 }

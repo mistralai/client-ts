@@ -6,8 +6,8 @@
 import { JobInIntegrations } from "@mistralai/mistralai/models/components";
 
 let value: JobInIntegrations = {
-    project: "<value>",
-    apiKey: "<value>",
+  project: "<value>",
+  apiKey: "<value>",
 };
 ```
 

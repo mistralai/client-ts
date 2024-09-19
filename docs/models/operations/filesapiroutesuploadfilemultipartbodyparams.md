@@ -4,11 +4,8 @@
 
 ```typescript
 import { FilesApiRoutesUploadFileMultiPartBodyParams } from "@mistralai/mistralai/models/operations";
-import { openAsBlob } from "node:fs";
 
-let value: FilesApiRoutesUploadFileMultiPartBodyParams = {
-    file: await openAsBlob("./sample-file"),
-};
+// No examples available for this model
 ```
 
 ## Fields

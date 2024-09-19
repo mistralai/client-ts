@@ -32,7 +32,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesUpload(mistral, {
-    file: await openAsBlob("./sample-file"),
+    file: await openAsBlob("example.file"),
   });
 
   switch (true) {

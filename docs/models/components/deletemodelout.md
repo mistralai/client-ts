@@ -6,8 +6,8 @@
 import { DeleteModelOut } from "@mistralai/mistralai/models/components";
 
 let value: DeleteModelOut = {
-    id: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
-    deleted: true,
+  id: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
+  deleted: true,
 };
 ```
 

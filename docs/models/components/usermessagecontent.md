@@ -5,11 +5,7 @@
 ```typescript
 import { UserMessageContent } from "@mistralai/mistralai/models/components";
 
-let value: UserMessageContent = [
-    {
-        text: "<value>",
-    },
-];
+let value: UserMessageContent = "<value>";
 ```
 
 ## Supported Types
@@ -20,9 +16,9 @@ let value: UserMessageContent = [
 const value: string = /* values here */
 ```
 
-### `components.TextChunk[]`
+### `components.ContentChunk[]`
 
 ```typescript
-const value: components.TextChunk[] = /* values here */
+const value: components.ContentChunk[] = /* values here */
 ```
 

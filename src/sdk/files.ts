@@ -12,56 +12,73 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Files extends ClientSDK {
-    /**
-     * Upload File
-     *
-     * @remarks
-     * Upload a file that can be used across various endpoints.
-     *
-     * The size of individual files can be a maximum of 512 MB. The Fine-tuning API only supports .jsonl files.
-     *
-     * Please contact us if you need to increase these storage limits.
-     */
-    async upload(
-        request: operations.FilesApiRoutesUploadFileMultiPartBodyParams,
-        options?: RequestOptions
-    ): Promise<components.UploadFileOut> {
-        return unwrapAsync(filesUpload(this, request, options));
-    }
+  /**
+   * Upload File
+   *
+   * @remarks
+   * Upload a file that can be used across various endpoints.
+   *
+   * The size of individual files can be a maximum of 512 MB. The Fine-tuning API only supports .jsonl files.
+   *
+   * Please contact us if you need to increase these storage limits.
+   */
+  async upload(
+    request: operations.FilesApiRoutesUploadFileMultiPartBodyParams,
+    options?: RequestOptions,
+  ): Promise<components.UploadFileOut> {
+    return unwrapAsync(filesUpload(
+      this,
+      request,
+      options,
+    ));
+  }
 
-    /**
-     * List Files
-     *
-     * @remarks
-     * Returns a list of files that belong to the user's organization.
-     */
-    async list(options?: RequestOptions): Promise<components.ListFilesOut> {
-        return unwrapAsync(filesList(this, options));
-    }
+  /**
+   * List Files
+   *
+   * @remarks
+   * Returns a list of files that belong to the user's organization.
+   */
+  async list(
+    options?: RequestOptions,
+  ): Promise<components.ListFilesOut> {
+    return unwrapAsync(filesList(
+      this,
+      options,
+    ));
+  }
 
-    /**
-     * Retrieve File
-     *
-     * @remarks
-     * Returns information about a specific file.
-     */
-    async retrieve(
-        request: operations.FilesApiRoutesRetrieveFileRequest,
-        options?: RequestOptions
-    ): Promise<components.RetrieveFileOut> {
-        return unwrapAsync(filesRetrieve(this, request, options));
-    }
+  /**
+   * Retrieve File
+   *
+   * @remarks
+   * Returns information about a specific file.
+   */
+  async retrieve(
+    request: operations.FilesApiRoutesRetrieveFileRequest,
+    options?: RequestOptions,
+  ): Promise<components.RetrieveFileOut> {
+    return unwrapAsync(filesRetrieve(
+      this,
+      request,
+      options,
+    ));
+  }
 
-    /**
-     * Delete File
-     *
-     * @remarks
-     * Delete a file.
-     */
-    async delete(
-        request: operations.FilesApiRoutesDeleteFileRequest,
-        options?: RequestOptions
-    ): Promise<components.DeleteFileOut> {
-        return unwrapAsync(filesDelete(this, request, options));
-    }
+  /**
+   * Delete File
+   *
+   * @remarks
+   * Delete a file.
+   */
+  async delete(
+    request: operations.FilesApiRoutesDeleteFileRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeleteFileOut> {
+    return unwrapAsync(filesDelete(
+      this,
+      request,
+      options,
+    ));
+  }
 }

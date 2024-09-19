@@ -5,38 +5,38 @@
 import * as z from "zod";
 
 export type EmbeddingResponseData = {
-    object?: string | undefined;
-    embedding?: Array<number> | undefined;
-    index?: number | undefined;
+  object?: string | undefined;
+  embedding?: Array<number> | undefined;
+  index?: number | undefined;
 };
 
 /** @internal */
 export const EmbeddingResponseData$inboundSchema: z.ZodType<
-    EmbeddingResponseData,
-    z.ZodTypeDef,
-    unknown
+  EmbeddingResponseData,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
-    object: z.string().optional(),
-    embedding: z.array(z.number()).optional(),
-    index: z.number().int().optional(),
+  object: z.string().optional(),
+  embedding: z.array(z.number()).optional(),
+  index: z.number().int().optional(),
 });
 
 /** @internal */
 export type EmbeddingResponseData$Outbound = {
-    object?: string | undefined;
-    embedding?: Array<number> | undefined;
-    index?: number | undefined;
+  object?: string | undefined;
+  embedding?: Array<number> | undefined;
+  index?: number | undefined;
 };
 
 /** @internal */
 export const EmbeddingResponseData$outboundSchema: z.ZodType<
-    EmbeddingResponseData$Outbound,
-    z.ZodTypeDef,
-    EmbeddingResponseData
+  EmbeddingResponseData$Outbound,
+  z.ZodTypeDef,
+  EmbeddingResponseData
 > = z.object({
-    object: z.string().optional(),
-    embedding: z.array(z.number()).optional(),
-    index: z.number().int().optional(),
+  object: z.string().optional(),
+  embedding: z.array(z.number()).optional(),
+  index: z.number().int().optional(),
 });
 
 /**
@@ -44,10 +44,10 @@ export const EmbeddingResponseData$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace EmbeddingResponseData$ {
-    /** @deprecated use `EmbeddingResponseData$inboundSchema` instead. */
-    export const inboundSchema = EmbeddingResponseData$inboundSchema;
-    /** @deprecated use `EmbeddingResponseData$outboundSchema` instead. */
-    export const outboundSchema = EmbeddingResponseData$outboundSchema;
-    /** @deprecated use `EmbeddingResponseData$Outbound` instead. */
-    export type Outbound = EmbeddingResponseData$Outbound;
+  /** @deprecated use `EmbeddingResponseData$inboundSchema` instead. */
+  export const inboundSchema = EmbeddingResponseData$inboundSchema;
+  /** @deprecated use `EmbeddingResponseData$outboundSchema` instead. */
+  export const outboundSchema = EmbeddingResponseData$outboundSchema;
+  /** @deprecated use `EmbeddingResponseData$Outbound` instead. */
+  export type Outbound = EmbeddingResponseData$Outbound;
 }

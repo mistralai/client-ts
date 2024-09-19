@@ -5,44 +5,47 @@
 import * as z from "zod";
 
 export type DeleteFileOut = {
-    /**
-     * The ID of the deleted file.
-     */
-    id: string;
-    /**
-     * The object type that was deleted
-     */
-    object: string;
-    /**
-     * The deletion status.
-     */
-    deleted: boolean;
+  /**
+   * The ID of the deleted file.
+   */
+  id: string;
+  /**
+   * The object type that was deleted
+   */
+  object: string;
+  /**
+   * The deletion status.
+   */
+  deleted: boolean;
 };
 
 /** @internal */
-export const DeleteFileOut$inboundSchema: z.ZodType<DeleteFileOut, z.ZodTypeDef, unknown> =
-    z.object({
-        id: z.string(),
-        object: z.string(),
-        deleted: z.boolean(),
-    });
+export const DeleteFileOut$inboundSchema: z.ZodType<
+  DeleteFileOut,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  object: z.string(),
+  deleted: z.boolean(),
+});
 
 /** @internal */
 export type DeleteFileOut$Outbound = {
-    id: string;
-    object: string;
-    deleted: boolean;
+  id: string;
+  object: string;
+  deleted: boolean;
 };
 
 /** @internal */
 export const DeleteFileOut$outboundSchema: z.ZodType<
-    DeleteFileOut$Outbound,
-    z.ZodTypeDef,
-    DeleteFileOut
+  DeleteFileOut$Outbound,
+  z.ZodTypeDef,
+  DeleteFileOut
 > = z.object({
-    id: z.string(),
-    object: z.string(),
-    deleted: z.boolean(),
+  id: z.string(),
+  object: z.string(),
+  deleted: z.boolean(),
 });
 
 /**
@@ -50,10 +53,10 @@ export const DeleteFileOut$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace DeleteFileOut$ {
-    /** @deprecated use `DeleteFileOut$inboundSchema` instead. */
-    export const inboundSchema = DeleteFileOut$inboundSchema;
-    /** @deprecated use `DeleteFileOut$outboundSchema` instead. */
-    export const outboundSchema = DeleteFileOut$outboundSchema;
-    /** @deprecated use `DeleteFileOut$Outbound` instead. */
-    export type Outbound = DeleteFileOut$Outbound;
+  /** @deprecated use `DeleteFileOut$inboundSchema` instead. */
+  export const inboundSchema = DeleteFileOut$inboundSchema;
+  /** @deprecated use `DeleteFileOut$outboundSchema` instead. */
+  export const outboundSchema = DeleteFileOut$outboundSchema;
+  /** @deprecated use `DeleteFileOut$Outbound` instead. */
+  export type Outbound = DeleteFileOut$Outbound;
 }

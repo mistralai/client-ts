@@ -6,7 +6,7 @@
 import { DeleteModelV1ModelsModelIdDeleteRequest } from "@mistralai/mistralai/models/operations";
 
 let value: DeleteModelV1ModelsModelIdDeleteRequest = {
-    modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
+  modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
 };
 ```
 

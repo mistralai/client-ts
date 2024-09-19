@@ -1,7 +1,33 @@
 # Mistral Typescript Client
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create your account on [La Plateforme](https://console.mistral.ai) to get access and read the [docs](https://docs.mistral.ai) to learn how to use it.
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+
+* [SDK Installation](#sdk-installation)
+* [Requirements](#requirements)
+* [SDK Example Usage](#sdk-example-usage)
+* [Available Resources and Operations](#available-resources-and-operations)
+* [Standalone functions](#standalone-functions)
+* [Server-sent event streaming](#server-sent-event-streaming)
+* [File uploads](#file-uploads)
+* [Retries](#retries)
+* [Error Handling](#error-handling)
+* [Server Selection](#server-selection)
+* [Custom HTTP Client](#custom-http-client)
+* [Authentication](#authentication)
+* [Debugging](#debugging)
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
@@ -63,22 +89,23 @@ This example shows how to create chat completions.
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.chat.complete({
-        model: "mistral-small-latest",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistral.chat.complete({
+    model: "mistral-small-latest",
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -94,16 +121,16 @@ import { Mistral } from "@mistralai/mistralai";
 import { openAsBlob } from "node:fs";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.files.upload({
-        file: await openAsBlob("./sample-file"),
-    });
+  const result = await mistral.files.upload({
+    file: await openAsBlob("example.file"),
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -118,22 +145,23 @@ This example shows how to create agents completions.
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.agents.complete({
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-        agentId: "<value>",
-    });
+  const result = await mistral.agents.complete({
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+    agentId: "<value>",
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -151,6 +179,47 @@ We have dedicated SDKs for the following providers:
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
+<details open>
+<summary>Available methods</summary>
+
+### [agents](docs/sdks/agents/README.md)
+
+* [complete](docs/sdks/agents/README.md#complete) - Agents Completion
+* [stream](docs/sdks/agents/README.md#stream) - Stream Agents completion
+
+### [chat](docs/sdks/chat/README.md)
+
+* [complete](docs/sdks/chat/README.md#complete) - Chat Completion
+* [stream](docs/sdks/chat/README.md#stream) - Stream chat completion
+
+### [embeddings](docs/sdks/embeddings/README.md)
+
+* [create](docs/sdks/embeddings/README.md#create) - Embeddings
+
+### [files](docs/sdks/files/README.md)
+
+* [upload](docs/sdks/files/README.md#upload) - Upload File
+* [list](docs/sdks/files/README.md#list) - List Files
+* [retrieve](docs/sdks/files/README.md#retrieve) - Retrieve File
+* [delete](docs/sdks/files/README.md#delete) - Delete File
+
+### [fim](docs/sdks/fim/README.md)
+
+* [complete](docs/sdks/fim/README.md#complete) - Fim Completion
+* [stream](docs/sdks/fim/README.md#stream) - Stream fim completion
+
+### [fineTuning](docs/sdks/finetuning/README.md)
+
+
+#### [fineTuning.jobs](docs/sdks/jobs/README.md)
+
+* [list](docs/sdks/jobs/README.md#list) - Get Fine Tuning Jobs
+* [create](docs/sdks/jobs/README.md#create) - Create Fine Tuning Job
+* [get](docs/sdks/jobs/README.md#get) - Get Fine Tuning Job
+* [cancel](docs/sdks/jobs/README.md#cancel) - Cancel Fine Tuning Job
+* [start](docs/sdks/jobs/README.md#start) - Start Fine Tuning Job
+
+
 ### [models](docs/sdks/models/README.md)
 
 * [list](docs/sdks/models/README.md#list) - List Models
@@ -160,40 +229,7 @@ We have dedicated SDKs for the following providers:
 * [archive](docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
 * [unarchive](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
 
-### [files](docs/sdks/files/README.md)
-
-* [upload](docs/sdks/files/README.md#upload) - Upload File
-* [list](docs/sdks/files/README.md#list) - List Files
-* [retrieve](docs/sdks/files/README.md#retrieve) - Retrieve File
-* [delete](docs/sdks/files/README.md#delete) - Delete File
-
-
-### [fineTuning.jobs](docs/sdks/jobs/README.md)
-
-* [list](docs/sdks/jobs/README.md#list) - Get Fine Tuning Jobs
-* [create](docs/sdks/jobs/README.md#create) - Create Fine Tuning Job
-* [get](docs/sdks/jobs/README.md#get) - Get Fine Tuning Job
-* [cancel](docs/sdks/jobs/README.md#cancel) - Cancel Fine Tuning Job
-* [start](docs/sdks/jobs/README.md#start) - Start Fine Tuning Job
-
-### [chat](docs/sdks/chat/README.md)
-
-* [complete](docs/sdks/chat/README.md#complete) - Chat Completion
-* [stream](docs/sdks/chat/README.md#stream) - Stream chat completion
-
-### [fim](docs/sdks/fim/README.md)
-
-* [complete](docs/sdks/fim/README.md#complete) - Fim Completion
-* [stream](docs/sdks/fim/README.md#stream) - Stream fim completion
-
-### [agents](docs/sdks/agents/README.md)
-
-* [complete](docs/sdks/agents/README.md#complete) - Agents Completion
-* [stream](docs/sdks/agents/README.md#stream) - Stream Agents completion
-
-### [embeddings](docs/sdks/embeddings/README.md)
-
-* [create](docs/sdks/embeddings/README.md#create) - Embeddings
+</details>
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Server-sent event streaming [eventstream] -->
@@ -209,23 +245,25 @@ underlying connection.
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.chat.stream({
-        model: "mistral-small-latest",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistral.chat.stream({
+    model: "mistral-small-latest",
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+  });
 
-    for await (const event of result) {
-        // Handle the event
-    }
+  for await (const event of result) {
+    // Handle the event
+    console.log(event);
+  }
 }
 
 run();
@@ -255,16 +293,16 @@ import { Mistral } from "@mistralai/mistralai";
 import { openAsBlob } from "node:fs";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.files.upload({
-        file: await openAsBlob("./sample-file"),
-    });
+  const result = await mistral.files.upload({
+    file: await openAsBlob("example.file"),
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -282,25 +320,25 @@ To change the default retry strategy for a single API call, simply provide a ret
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.models.list({
-        retries: {
-            strategy: "backoff",
-            backoff: {
-                initialInterval: 1,
-                maxInterval: 50,
-                exponent: 1.1,
-                maxElapsedTime: 100,
-            },
-            retryConnectionErrors: false,
-        },
-    });
+  const result = await mistral.models.list({
+    retries: {
+      strategy: "backoff",
+      backoff: {
+        initialInterval: 1,
+        maxInterval: 50,
+        exponent: 1.1,
+        maxElapsedTime: 100,
+      },
+      retryConnectionErrors: false,
+    },
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -312,24 +350,24 @@ If you'd like to override the default retry strategy for all operations that sup
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    retryConfig: {
-        strategy: "backoff",
-        backoff: {
-            initialInterval: 1,
-            maxInterval: 50,
-            exponent: 1.1,
-            maxElapsedTime: 100,
-        },
-        retryConnectionErrors: false,
+  retryConfig: {
+    strategy: "backoff",
+    backoff: {
+      initialInterval: 1,
+      maxInterval: 50,
+      exponent: 1.1,
+      maxElapsedTime: 100,
     },
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+    retryConnectionErrors: false,
+  },
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.models.list();
+  const result = await mistral.models.list();
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -352,37 +390,41 @@ Validation errors can also occur when either method arguments or data returned f
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
-import { SDKValidationError } from "@mistralai/mistralai/models/errors";
+import {
+  HTTPValidationError,
+  SDKValidationError,
+} from "@mistralai/mistralai/models/errors";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    let result;
-    try {
-        result = await mistral.models.list();
-    } catch (err) {
-        switch (true) {
-            case err instanceof SDKValidationError: {
-                // Validation errors can be pretty-printed
-                console.error(err.pretty());
-                // Raw value may also be inspected
-                console.error(err.rawValue);
-                return;
-            }
-            case err instanceof errors.HTTPValidationError: {
-                console.error(err); // handle exception
-                return;
-            }
-            default: {
-                throw err;
-            }
-        }
-    }
+  let result;
+  try {
+    result = await mistral.models.list();
 
     // Handle the result
     console.log(result);
+  } catch (err) {
+    switch (true) {
+      case (err instanceof SDKValidationError): {
+        // Validation errors can be pretty-printed
+        console.error(err.pretty());
+        // Raw value may also be inspected
+        console.error(err.rawValue);
+        return;
+      }
+      case (err instanceof HTTPValidationError): {
+        // Handle err.data$: HTTPValidationErrorData
+        console.error(err);
+        return;
+      }
+      default: {
+        throw err;
+      }
+    }
+  }
 }
 
 run();
@@ -405,15 +447,15 @@ You can override the default server globally by passing a server name to the `se
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    server: "prod",
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  server: "prod",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.models.list();
+  const result = await mistral.models.list();
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -429,15 +471,15 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    serverURL: "https://api.mistral.ai",
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  serverURL: "https://api.mistral.ai",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.models.list();
+  const result = await mistral.models.list();
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -510,14 +552,14 @@ To authenticate with the API the `apiKey` parameter must be set when initializin
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-    apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-    const result = await mistral.models.list();
+  const result = await mistral.models.list();
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();

@@ -6,20 +6,20 @@
 import { CompletionChunk } from "@mistralai/mistralai/models/components";
 
 let value: CompletionChunk = {
-    id: "<id>",
-    model: "Mercielago",
-    usage: {
-        promptTokens: 16,
-        completionTokens: 34,
-        totalTokens: 50,
+  id: "<id>",
+  model: "PT Cruiser",
+  usage: {
+    promptTokens: 16,
+    completionTokens: 34,
+    totalTokens: 50,
+  },
+  choices: [
+    {
+      index: 618809,
+      delta: {},
+      finishReason: "error",
     },
-    choices: [
-        {
-            index: 249796,
-            delta: {},
-            finishReason: "error",
-        },
-    ],
+  ],
 };
 ```
 
