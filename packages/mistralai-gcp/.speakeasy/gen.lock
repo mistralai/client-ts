@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: b276b71cb6764f11b10461fe70962781
+  docChecksum: 823d9b94fcb9c6588d0af16b7301f4ac
   docVersion: 0.0.2
-  speakeasyVersion: 1.378.0
-  generationVersion: 2.404.3
-  releaseVersion: 1.0.4
-  configChecksum: 57e31cfc71fbade2eaad7f942bdff119
+  speakeasyVersion: 1.399.3
+  generationVersion: 2.420.2
+  releaseVersion: 1.1.0
+  configChecksum: 814cc68b27946d6b8e7bc99c8a2cbf1b
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -15,8 +15,9 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.14.1
+    core: 3.17.5
     defaultEnabledRetries: 0.1.0
+    enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.1
     examples: 2.81.4
     globalSecurity: 2.82.11
@@ -34,25 +35,79 @@ features:
     serverIDs: 2.81.2
     unions: 2.85.7
 generatedFiles:
-  - src/funcs/chatStream.ts
-  - src/funcs/chatComplete.ts
-  - src/funcs/fimStream.ts
-  - src/funcs/fimComplete.ts
-  - src/sdk/chat.ts
-  - src/sdk/fim.ts
   - .eslintrc.cjs
+  - .gitattributes
   - .npmignore
   - FUNCTIONS.md
   - RUNTIMES.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/components/arguments.md
+  - docs/models/components/assistantmessage.md
+  - docs/models/components/assistantmessagerole.md
+  - docs/models/components/chatcompletionchoice.md
+  - docs/models/components/chatcompletionchoicefinishreason.md
+  - docs/models/components/chatcompletionrequest.md
+  - docs/models/components/chatcompletionrequestmessages.md
+  - docs/models/components/chatcompletionrequeststop.md
+  - docs/models/components/chatcompletionrequesttoolchoice.md
+  - docs/models/components/chatcompletionresponse.md
+  - docs/models/components/chatcompletionstreamrequest.md
+  - docs/models/components/chatcompletionstreamrequesttoolchoice.md
+  - docs/models/components/completionchunk.md
+  - docs/models/components/completionevent.md
+  - docs/models/components/completionresponsestreamchoice.md
+  - docs/models/components/content.md
+  - docs/models/components/contentchunk.md
+  - docs/models/components/deltamessage.md
+  - docs/models/components/fimcompletionrequest.md
+  - docs/models/components/fimcompletionrequeststop.md
+  - docs/models/components/fimcompletionresponse.md
+  - docs/models/components/fimcompletionstreamrequest.md
+  - docs/models/components/fimcompletionstreamrequeststop.md
+  - docs/models/components/finishreason.md
+  - docs/models/components/functioncall.md
+  - docs/models/components/functionname.md
+  - docs/models/components/functiont.md
+  - docs/models/components/loc.md
+  - docs/models/components/messages.md
+  - docs/models/components/responseformat.md
+  - docs/models/components/responseformats.md
+  - docs/models/components/role.md
+  - docs/models/components/security.md
+  - docs/models/components/stop.md
+  - docs/models/components/systemmessage.md
+  - docs/models/components/textchunk.md
+  - docs/models/components/tool.md
+  - docs/models/components/toolcall.md
+  - docs/models/components/toolchoice.md
+  - docs/models/components/toolchoiceenum.md
+  - docs/models/components/toolmessage.md
+  - docs/models/components/toolmessagerole.md
+  - docs/models/components/tooltypes.md
+  - docs/models/components/type.md
+  - docs/models/components/usageinfo.md
+  - docs/models/components/usermessage.md
+  - docs/models/components/usermessagecontent.md
+  - docs/models/components/usermessagerole.md
+  - docs/models/components/validationerror.md
+  - docs/models/errors/httpvalidationerror.md
   - jsr.json
   - package.json
   - src/core.ts
+  - src/funcs/chatComplete.ts
+  - src/funcs/chatStream.ts
+  - src/funcs/fimComplete.ts
+  - src/funcs/fimStream.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
   - src/index.ts
   - src/lib/base64.ts
   - src/lib/config.ts
   - src/lib/dlv.ts
   - src/lib/encodings.ts
   - src/lib/event-streams.ts
+  - src/lib/files.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
   - src/lib/logger.ts
@@ -63,10 +118,45 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
-  - src/sdk/index.ts
+  - src/models/components/assistantmessage.ts
+  - src/models/components/chatcompletionchoice.ts
+  - src/models/components/chatcompletionrequest.ts
+  - src/models/components/chatcompletionresponse.ts
+  - src/models/components/chatcompletionstreamrequest.ts
+  - src/models/components/completionchunk.ts
+  - src/models/components/completionevent.ts
+  - src/models/components/completionresponsestreamchoice.ts
+  - src/models/components/contentchunk.ts
+  - src/models/components/deltamessage.ts
+  - src/models/components/fimcompletionrequest.ts
+  - src/models/components/fimcompletionresponse.ts
+  - src/models/components/fimcompletionstreamrequest.ts
+  - src/models/components/function.ts
+  - src/models/components/functioncall.ts
+  - src/models/components/functionname.ts
+  - src/models/components/index.ts
+  - src/models/components/responseformat.ts
+  - src/models/components/responseformats.ts
+  - src/models/components/security.ts
+  - src/models/components/systemmessage.ts
+  - src/models/components/textchunk.ts
+  - src/models/components/tool.ts
+  - src/models/components/toolcall.ts
+  - src/models/components/toolchoice.ts
+  - src/models/components/toolchoiceenum.ts
+  - src/models/components/toolmessage.ts
+  - src/models/components/tooltypes.ts
+  - src/models/components/usageinfo.ts
+  - src/models/components/usermessage.ts
+  - src/models/components/validationerror.ts
   - src/models/errors/httpclienterrors.ts
+  - src/models/errors/httpvalidationerror.ts
+  - src/models/errors/index.ts
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/sdk/chat.ts
+  - src/sdk/fim.ts
+  - src/sdk/index.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -74,84 +164,30 @@ generatedFiles:
   - src/types/index.ts
   - src/types/operations.ts
   - src/types/rfcdate.ts
+  - src/types/streams.ts
   - tsconfig.json
-  - src/models/components/completionevent.ts
-  - src/models/components/completionchunk.ts
-  - src/models/components/completionresponsestreamchoice.ts
-  - src/models/components/deltamessage.ts
-  - src/models/components/toolcall.ts
-  - src/models/components/functioncall.ts
-  - src/models/components/usageinfo.ts
-  - src/models/components/validationerror.ts
-  - src/models/components/chatcompletionstreamrequest.ts
-  - src/models/components/tool.ts
-  - src/models/components/function.ts
-  - src/models/components/responseformat.ts
-  - src/models/components/systemmessage.ts
-  - src/models/components/contentchunk.ts
-  - src/models/components/usermessage.ts
-  - src/models/components/textchunk.ts
-  - src/models/components/assistantmessage.ts
-  - src/models/components/toolmessage.ts
-  - src/models/components/chatcompletionresponse.ts
-  - src/models/components/chatcompletionchoice.ts
-  - src/models/components/chatcompletionrequest.ts
-  - src/models/components/fimcompletionstreamrequest.ts
-  - src/models/components/fimcompletionresponse.ts
-  - src/models/components/fimcompletionrequest.ts
-  - src/models/components/security.ts
-  - src/models/errors/httpvalidationerror.ts
-  - src/models/errors/index.ts
-  - src/models/components/index.ts
-  - docs/models/components/completionevent.md
-  - docs/models/components/completionchunk.md
-  - docs/models/components/finishreason.md
-  - docs/models/components/completionresponsestreamchoice.md
-  - docs/models/components/deltamessage.md
-  - docs/models/components/tooltypes.md
-  - docs/models/components/toolcall.md
-  - docs/models/components/arguments.md
-  - docs/models/components/functioncall.md
-  - docs/models/components/usageinfo.md
-  - docs/models/components/loc.md
-  - docs/models/components/validationerror.md
-  - docs/models/components/stop.md
-  - docs/models/components/messages.md
-  - docs/models/components/toolchoice.md
-  - docs/models/components/chatcompletionstreamrequest.md
-  - docs/models/components/tooltooltypes.md
-  - docs/models/components/tool.md
-  - docs/models/components/functiont.md
-  - docs/models/components/responseformats.md
-  - docs/models/components/responseformat.md
-  - docs/models/components/content.md
-  - docs/models/components/role.md
-  - docs/models/components/systemmessage.md
-  - docs/models/components/contentchunk.md
-  - docs/models/components/usermessagecontent.md
-  - docs/models/components/usermessagerole.md
-  - docs/models/components/usermessage.md
-  - docs/models/components/textchunk.md
-  - docs/models/components/assistantmessagerole.md
-  - docs/models/components/assistantmessage.md
-  - docs/models/components/toolmessagerole.md
-  - docs/models/components/toolmessage.md
-  - docs/models/components/chatcompletionresponse.md
-  - docs/models/components/chatcompletionchoicefinishreason.md
-  - docs/models/components/chatcompletionchoice.md
-  - docs/models/components/chatcompletionrequeststop.md
-  - docs/models/components/chatcompletionrequestmessages.md
-  - docs/models/components/chatcompletionrequesttoolchoice.md
-  - docs/models/components/chatcompletionrequest.md
-  - docs/models/components/fimcompletionstreamrequeststop.md
-  - docs/models/components/fimcompletionstreamrequest.md
-  - docs/models/components/fimcompletionresponse.md
-  - docs/models/components/fimcompletionrequeststop.md
-  - docs/models/components/fimcompletionrequest.md
-  - docs/models/components/security.md
-  - docs/models/errors/httpvalidationerror.md
-  - docs/lib/utils/retryconfig.md
-  - .gitattributes
-  - src/hooks/hooks.ts
-  - src/hooks/types.ts
-  - src/hooks/index.ts
+examples:
+  stream_chat:
+    speakeasy-default-stream-chat:
+      requestBody:
+        application/json: {"model": "mistral-small-latest", "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+  chat_completion_v1_chat_completions_post:
+    speakeasy-default-chat-completion-v1-chat-completions-post:
+      requestBody:
+        application/json: {"model": "mistral-small-latest", "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+      responses:
+        "200":
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}]}
+        "422": {}
+  stream_fim:
+    speakeasy-default-stream-fim:
+      requestBody:
+        application/json: {"model": "codestral-2405", "prompt": "def", "suffix": "return a+b"}
+  fim_completion_v1_fim_completions_post:
+    speakeasy-default-fim-completion-v1-fim-completions-post:
+      requestBody:
+        application/json: {"model": "codestral-2405", "prompt": "def", "suffix": "return a+b"}
+      responses:
+        "200":
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "codestral-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}]}
+        "422": {}

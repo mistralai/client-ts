@@ -6,9 +6,9 @@
 import { UsageInfo } from "@mistralai/mistralai-gcp/models/components";
 
 let value: UsageInfo = {
-    promptTokens: 16,
-    completionTokens: 34,
-    totalTokens: 50,
+  promptTokens: 16,
+  completionTokens: 34,
+  totalTokens: 50,
 };
 ```
 

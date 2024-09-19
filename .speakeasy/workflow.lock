@@ -1,4 +1,4 @@
-speakeasyVersion: 1.378.0
+speakeasyVersion: 1.399.3
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
@@ -9,8 +9,8 @@ sources:
             - main
     mistral-google-cloud-source:
         sourceNamespace: mistral-openapi-google-cloud
-        sourceRevisionDigest: sha256:6d8dfe3442be38fdac56eadabec39bcbe9e2d652080802d9cc46a68c28b38dbc
-        sourceBlobDigest: sha256:a4c011f461c73809a7d6cf1c9823d3c51d5050895aad246287ff14ac971efb8c
+        sourceRevisionDigest: sha256:3047ad3ff8797fded89618b375d1398d48924a3a5f9ea1000c4284a110567c43
+        sourceBlobDigest: sha256:02bbcef310f965d7ad089fb46d57b39f45b47cbc8f5cf90f728db03e960bdbca
         tags:
             - latest
             - main
@@ -27,19 +27,16 @@ targets:
         sourceNamespace: mistral-openapi-azure
         sourceRevisionDigest: sha256:908fd38167347d1ad63b470b52ca11983df56e7c5e86759534cfa94b6dfabb81
         sourceBlobDigest: sha256:84928a6297c3a838dce719ffa3da1e221cba968ce4a6c74d5c3bb41bf86a7e5d
-        outLocation: ./packages/mistralai-azure
     mistralai-gcp-sdk:
         source: mistral-google-cloud-source
         sourceNamespace: mistral-openapi-google-cloud
-        sourceRevisionDigest: sha256:6d8dfe3442be38fdac56eadabec39bcbe9e2d652080802d9cc46a68c28b38dbc
-        sourceBlobDigest: sha256:a4c011f461c73809a7d6cf1c9823d3c51d5050895aad246287ff14ac971efb8c
-        outLocation: ./packages/mistralai-gcp
+        sourceRevisionDigest: sha256:3047ad3ff8797fded89618b375d1398d48924a3a5f9ea1000c4284a110567c43
+        sourceBlobDigest: sha256:02bbcef310f965d7ad089fb46d57b39f45b47cbc8f5cf90f728db03e960bdbca
     mistralai-sdk:
         source: mistral-openapi
         sourceNamespace: mistral-openapi
         sourceRevisionDigest: sha256:421a4bd55fd50ba00d6ebf2db603888009e9996b642b0499110c223fd6ca21c2
         sourceBlobDigest: sha256:1c87b4b8287f6a3083167c13ab59c5e7ac180ab7e19ad1532f3f46495cc12a26
-        outLocation: /github/workspace/repo
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
