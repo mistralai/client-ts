@@ -6,10 +6,10 @@
 import { ToolCall } from "@mistralai/mistralai-azure/models/components";
 
 let value: ToolCall = {
-    function: {
-        name: "<value>",
-        arguments: "<value>",
-    },
+  function: {
+    name: "<value>",
+    arguments: "<value>",
+  },
 };
 ```
 

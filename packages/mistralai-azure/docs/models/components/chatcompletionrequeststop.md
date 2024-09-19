@@ -7,7 +7,9 @@ Stop generation if this token is detected. Or if one of these tokens is detected
 ```typescript
 import { ChatCompletionRequestStop } from "@mistralai/mistralai-azure/models/components";
 
-let value: ChatCompletionRequestStop = ["<value>"];
+let value: ChatCompletionRequestStop = [
+  "<value>",
+];
 ```
 
 ## Supported Types

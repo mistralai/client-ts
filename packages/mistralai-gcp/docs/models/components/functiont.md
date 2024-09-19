@@ -6,10 +6,10 @@
 import { FunctionT } from "@mistralai/mistralai-gcp/models/components";
 
 let value: FunctionT = {
-    name: "<value>",
-    parameters: {
-        key: "<value>",
-    },
+  name: "<value>",
+  parameters: {
+    "key": "<value>",
+  },
 };
 ```
 

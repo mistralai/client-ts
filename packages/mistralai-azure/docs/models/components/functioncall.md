@@ -6,10 +6,10 @@
 import { FunctionCall } from "@mistralai/mistralai-azure/models/components";
 
 let value: FunctionCall = {
-    name: "<value>",
-    arguments: {
-        key: "<value>",
-    },
+  name: "<value>",
+  arguments: {
+    "key": "<value>",
+  },
 };
 ```
 

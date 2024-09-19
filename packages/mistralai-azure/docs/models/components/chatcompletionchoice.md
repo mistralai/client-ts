@@ -6,9 +6,9 @@
 import { ChatCompletionChoice } from "@mistralai/mistralai-azure/models/components";
 
 let value: ChatCompletionChoice = {
-    index: 0,
-    message: {},
-    finishReason: "stop",
+  index: 0,
+  message: {},
+  finishReason: "stop",
 };
 ```
 

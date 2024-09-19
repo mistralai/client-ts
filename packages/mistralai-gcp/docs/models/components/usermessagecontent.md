@@ -6,9 +6,9 @@
 import { UserMessageContent } from "@mistralai/mistralai-gcp/models/components";
 
 let value: UserMessageContent = [
-    {
-        text: "<value>",
-    },
+  {
+    text: "<value>",
+  },
 ];
 ```
 
@@ -20,9 +20,9 @@ let value: UserMessageContent = [
 const value: string = /* values here */
 ```
 
-### `components.TextChunk[]`
+### `components.ContentChunk[]`
 
 ```typescript
-const value: components.TextChunk[] = /* values here */
+const value: components.ContentChunk[] = /* values here */
 ```
 

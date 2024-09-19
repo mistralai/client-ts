@@ -5,11 +5,20 @@
 ```typescript
 import { ChatCompletionRequestToolChoice } from "@mistralai/mistralai-azure/models/components";
 
-let value: ChatCompletionRequestToolChoice = "none";
+let value: ChatCompletionRequestToolChoice = "auto";
 ```
 
-## Values
+## Supported Types
+
+### `components.ToolChoice`
 
 ```typescript
-"auto" | "none" | "any"
+const value: components.ToolChoice = /* values here */
 ```
+
+### `components.ToolChoiceEnum`
+
+```typescript
+const value: components.ToolChoiceEnum = /* values here */
+```
+
