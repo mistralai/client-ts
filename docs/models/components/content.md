@@ -14,7 +14,9 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    text: "<value>",
+    imageUrl: {
+      url: "https://muted-pleasure.biz",
+    },
   },
 ];
 ```

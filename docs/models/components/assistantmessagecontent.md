@@ -14,7 +14,9 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: "https://spirited-earth.name",
+    imageUrl: {
+      url: "https://entire-ceramics.com/",
+    },
   },
 ];
 ```

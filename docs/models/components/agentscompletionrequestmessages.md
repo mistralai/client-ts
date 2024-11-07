@@ -13,11 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -35,9 +31,7 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      imageUrl: {
-        url: "https://worse-interviewer.info/",
-      },
+      text: "<value>",
     },
   ],
 };
