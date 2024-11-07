@@ -3,6 +3,7 @@
  */
 
 import { filesDelete } from "../funcs/filesDelete.js";
+import { filesDownload } from "../funcs/filesDownload.js";
 import { filesList } from "../funcs/filesList.js";
 import { filesRetrieve } from "../funcs/filesRetrieve.js";
 import { filesUpload } from "../funcs/filesUpload.js";
@@ -78,6 +79,23 @@ export class Files extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.DeleteFileOut> {
     return unwrapAsync(filesDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Download File
+   *
+   * @remarks
+   * Download a file
+   */
+  async download(
+    request: operations.FilesApiRoutesDownloadFileRequest,
+    options?: RequestOptions,
+  ): Promise<ReadableStream<Uint8Array>> {
+    return unwrapAsync(filesDownload(
       this,
       request,
       options,

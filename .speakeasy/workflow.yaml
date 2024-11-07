@@ -26,7 +26,7 @@ targets:
                 token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-azure:main-code-samples
+                location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-azure-code-samples
             blocking: false
     mistralai-gcp-sdk:
         target: typescript
@@ -37,7 +37,7 @@ targets:
                 token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-google-cloud:main-code-samples
+                location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-google-cloud-code-samples
             blocking: false
     mistralai-sdk:
         target: typescript
@@ -47,5 +47,5 @@ targets:
                 token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi:main-code-samples
+                location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-code-samples
             blocking: false

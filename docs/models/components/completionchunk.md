@@ -7,7 +7,7 @@ import { CompletionChunk } from "@mistralai/mistralai/models/components";
 
 let value: CompletionChunk = {
   id: "<id>",
-  model: "Silverado",
+  model: "A8",
   usage: {
     promptTokens: 16,
     completionTokens: 34,
@@ -15,9 +15,9 @@ let value: CompletionChunk = {
   },
   choices: [
     {
-      index: 338159,
+      index: 518835,
       delta: {},
-      finishReason: "tool_calls",
+      finishReason: "length",
     },
   ],
 };

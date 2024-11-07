@@ -4,9 +4,15 @@
 
 export * from "./agentscompletionrequest.js";
 export * from "./agentscompletionstreamrequest.js";
+export * from "./apiendpoint.js";
 export * from "./archiveftmodelout.js";
 export * from "./assistantmessage.js";
 export * from "./basemodelcard.js";
+export * from "./batcherror.js";
+export * from "./batchjobin.js";
+export * from "./batchjobout.js";
+export * from "./batchjobsout.js";
+export * from "./batchjobstatus.js";
 export * from "./chatclassificationrequest.js";
 export * from "./chatcompletionchoice.js";
 export * from "./chatcompletionrequest.js";

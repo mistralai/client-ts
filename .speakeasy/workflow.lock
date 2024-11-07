@@ -1,4 +1,4 @@
-speakeasyVersion: 1.434.2
+speakeasyVersion: 1.434.4
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
@@ -16,8 +16,8 @@ sources:
             - main
     mistral-openapi:
         sourceNamespace: mistral-openapi
-        sourceRevisionDigest: sha256:32a9827b9fab491a738a995ecc3121a91e368750dea9c9232cd506d787505305
-        sourceBlobDigest: sha256:4d0e31797809ba3ebec9a32308e2828b0605a3865efd64c4338d13d98427e02d
+        sourceRevisionDigest: sha256:e658442ebfc83351cbb7873fb17b03f07ff9edebd8eddfce5577e2c5c7bfafce
+        sourceBlobDigest: sha256:559403eaaa97c021eaf0022adddb1066694d879a946c87057e942806d5a2a2a2
         tags:
             - latest
             - main
@@ -35,10 +35,10 @@ targets:
     mistralai-sdk:
         source: mistral-openapi
         sourceNamespace: mistral-openapi
-        sourceRevisionDigest: sha256:32a9827b9fab491a738a995ecc3121a91e368750dea9c9232cd506d787505305
-        sourceBlobDigest: sha256:4d0e31797809ba3ebec9a32308e2828b0605a3865efd64c4338d13d98427e02d
-        codeSamplesNamespace: mistral-openapi
-        codeSamplesRevisionDigest: sha256:cd68cb25021eab25cd6125ed9e7b67c80b406bc84fb5423efb6554bf954d56de
+        sourceRevisionDigest: sha256:e658442ebfc83351cbb7873fb17b03f07ff9edebd8eddfce5577e2c5c7bfafce
+        sourceBlobDigest: sha256:559403eaaa97c021eaf0022adddb1066694d879a946c87057e942806d5a2a2a2
+        codeSamplesNamespace: mistral-openapi-code-samples
+        codeSamplesRevisionDigest: sha256:040e9e9020d7edd595d15e2879b2bc64e21dc00bea1952375373fef9e132f2fe
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -68,7 +68,7 @@ workflow:
                     token: $npm_token
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-azure:main-code-samples
+                    location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-azure-code-samples
                 blocking: false
         mistralai-gcp-sdk:
             target: typescript
@@ -79,7 +79,7 @@ workflow:
                     token: $npm_token
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-google-cloud:main-code-samples
+                    location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-google-cloud-code-samples
                 blocking: false
         mistralai-sdk:
             target: typescript
@@ -89,5 +89,5 @@ workflow:
                     token: $npm_token
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi:main-code-samples
+                    location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-code-samples
                 blocking: false

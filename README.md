@@ -215,6 +215,16 @@ We have dedicated SDKs for the following providers:
 * [complete](docs/sdks/agents/README.md#complete) - Agents Completion
 * [stream](docs/sdks/agents/README.md#stream) - Stream Agents completion
 
+### [batch](docs/sdks/batch/README.md)
+
+
+#### [batch.jobs](docs/sdks/mistraljobs/README.md)
+
+* [list](docs/sdks/mistraljobs/README.md#list) - Get Batch Jobs
+* [create](docs/sdks/mistraljobs/README.md#create) - Create Batch Job
+* [get](docs/sdks/mistraljobs/README.md#get) - Get Batch Job
+* [cancel](docs/sdks/mistraljobs/README.md#cancel) - Cancel Batch Job
+
 ### [chat](docs/sdks/chat/README.md)
 
 * [complete](docs/sdks/chat/README.md#complete) - Chat Completion
@@ -235,6 +245,7 @@ We have dedicated SDKs for the following providers:
 * [list](docs/sdks/files/README.md#list) - List Files
 * [retrieve](docs/sdks/files/README.md#retrieve) - Retrieve File
 * [delete](docs/sdks/files/README.md#delete) - Delete File
+* [download](docs/sdks/files/README.md#download) - Download File
 
 ### [fim](docs/sdks/fim/README.md)
 
@@ -635,12 +646,17 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 - [`agentsComplete`](docs/sdks/agents/README.md#complete) - Agents Completion
 - [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream Agents completion
+- [`batchJobsCancel`](docs/sdks/mistraljobs/README.md#cancel) - Cancel Batch Job
+- [`batchJobsCreate`](docs/sdks/mistraljobs/README.md#create) - Create Batch Job
+- [`batchJobsGet`](docs/sdks/mistraljobs/README.md#get) - Get Batch Job
+- [`batchJobsList`](docs/sdks/mistraljobs/README.md#list) - Get Batch Jobs
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersModerate`](docs/sdks/classifiers/README.md#moderate) - Moderations
 - [`classifiersModerateChat`](docs/sdks/classifiers/README.md#moderatechat) - Moderations Chat
 - [`embeddingsCreate`](docs/sdks/embeddings/README.md#create) - Embeddings
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete File
+- [`filesDownload`](docs/sdks/files/README.md#download) - Download File
 - [`filesList`](docs/sdks/files/README.md#list) - List Files
 - [`filesRetrieve`](docs/sdks/files/README.md#retrieve) - Retrieve File
 - [`filesUpload`](docs/sdks/files/README.md#upload) - Upload File

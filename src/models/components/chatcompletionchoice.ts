@@ -10,11 +10,11 @@ import {
   Unrecognized,
 } from "../../types/enums.js";
 import {
-  DeltaMessage,
-  DeltaMessage$inboundSchema,
-  DeltaMessage$Outbound,
-  DeltaMessage$outboundSchema,
-} from "./deltamessage.js";
+  AssistantMessage,
+  AssistantMessage$inboundSchema,
+  AssistantMessage$Outbound,
+  AssistantMessage$outboundSchema,
+} from "./assistantmessage.js";
 
 export const FinishReason = {
   Stop: "stop",
@@ -27,7 +27,7 @@ export type FinishReason = OpenEnum<typeof FinishReason>;
 
 export type ChatCompletionChoice = {
   index: number;
-  message: DeltaMessage;
+  message: AssistantMessage;
   finishReason: FinishReason;
 };
 
@@ -70,7 +70,7 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   index: z.number().int(),
-  message: DeltaMessage$inboundSchema,
+  message: AssistantMessage$inboundSchema,
   finish_reason: FinishReason$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -81,7 +81,7 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
 /** @internal */
 export type ChatCompletionChoice$Outbound = {
   index: number;
-  message: DeltaMessage$Outbound;
+  message: AssistantMessage$Outbound;
   finish_reason: string;
 };
 
@@ -92,7 +92,7 @@ export const ChatCompletionChoice$outboundSchema: z.ZodType<
   ChatCompletionChoice
 > = z.object({
   index: z.number().int(),
-  message: DeltaMessage$outboundSchema,
+  message: AssistantMessage$outboundSchema,
   finishReason: FinishReason$outboundSchema,
 }).transform((v) => {
   return remap$(v, {

@@ -4,6 +4,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
+import { Batch } from "./batch.js";
 import { Chat } from "./chat.js";
 import { Classifiers } from "./classifiers.js";
 import { Embeddings } from "./embeddings.js";
@@ -26,6 +27,11 @@ export class Mistral extends ClientSDK {
   private _fineTuning?: FineTuning;
   get fineTuning(): FineTuning {
     return (this._fineTuning ??= new FineTuning(this._options));
+  }
+
+  private _batch?: Batch;
+  get batch(): Batch {
+    return (this._batch ??= new Batch(this._options));
   }
 
   private _chat?: Chat;

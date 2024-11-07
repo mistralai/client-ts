@@ -7,9 +7,7 @@
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: {
-    url: "https://all-crocodile.info",
-  },
+  imageUrl: "https://bony-bonnet.net/",
 };
 ```
 
