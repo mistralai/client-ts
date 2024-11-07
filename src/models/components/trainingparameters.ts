@@ -12,6 +12,7 @@ export type TrainingParameters = {
   warmupFraction?: number | null | undefined;
   epochs?: number | null | undefined;
   fimRatio?: number | null | undefined;
+  seqLen?: number | null | undefined;
 };
 
 /** @internal */
@@ -26,6 +27,7 @@ export const TrainingParameters$inboundSchema: z.ZodType<
   warmup_fraction: z.nullable(z.number()).optional(),
   epochs: z.nullable(z.number()).optional(),
   fim_ratio: z.nullable(z.number()).optional(),
+  seq_len: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "training_steps": "trainingSteps",
@@ -33,6 +35,7 @@ export const TrainingParameters$inboundSchema: z.ZodType<
     "weight_decay": "weightDecay",
     "warmup_fraction": "warmupFraction",
     "fim_ratio": "fimRatio",
+    "seq_len": "seqLen",
   });
 });
 
@@ -44,6 +47,7 @@ export type TrainingParameters$Outbound = {
   warmup_fraction?: number | null | undefined;
   epochs?: number | null | undefined;
   fim_ratio?: number | null | undefined;
+  seq_len?: number | null | undefined;
 };
 
 /** @internal */
@@ -58,6 +62,7 @@ export const TrainingParameters$outboundSchema: z.ZodType<
   warmupFraction: z.nullable(z.number()).optional(),
   epochs: z.nullable(z.number()).optional(),
   fimRatio: z.nullable(z.number()).optional(),
+  seqLen: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     trainingSteps: "training_steps",
@@ -65,6 +70,7 @@ export const TrainingParameters$outboundSchema: z.ZodType<
     weightDecay: "weight_decay",
     warmupFraction: "warmup_fraction",
     fimRatio: "fim_ratio",
+    seqLen: "seq_len",
   });
 });
 

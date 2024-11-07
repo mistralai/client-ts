@@ -17,6 +17,12 @@ import {
   ResponseFormat$outboundSchema,
 } from "./responseformat.js";
 import {
+  SystemMessage,
+  SystemMessage$inboundSchema,
+  SystemMessage$Outbound,
+  SystemMessage$outboundSchema,
+} from "./systemmessage.js";
+import {
   Tool,
   Tool$inboundSchema,
   Tool$Outbound,
@@ -52,6 +58,7 @@ import {
 export type AgentsCompletionRequestStop = string | Array<string>;
 
 export type AgentsCompletionRequestMessages =
+  | (SystemMessage & { role: "system" })
   | (UserMessage & { role: "user" })
   | (AssistantMessage & { role: "assistant" })
   | (ToolMessage & { role: "tool" });
@@ -63,10 +70,6 @@ export type AgentsCompletionRequest = {
    * The maximum number of tokens to generate in the completion. The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
    */
   maxTokens?: number | null | undefined;
-  /**
-   * The minimum number of tokens to generate in the completion.
-   */
-  minTokens?: number | null | undefined;
   /**
    * Whether to stream back partial progress. If set, tokens will be sent as data-only server-side events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
    */
@@ -83,6 +86,7 @@ export type AgentsCompletionRequest = {
    * The prompt(s) to generate completions for, encoded as a list of dict with role and content.
    */
   messages: Array<
+    | (SystemMessage & { role: "system" })
     | (UserMessage & { role: "user" })
     | (AssistantMessage & { role: "assistant" })
     | (ToolMessage & { role: "tool" })
@@ -90,6 +94,18 @@ export type AgentsCompletionRequest = {
   responseFormat?: ResponseFormat | undefined;
   tools?: Array<Tool> | null | undefined;
   toolChoice?: ToolChoice | ToolChoiceEnum | undefined;
+  /**
+   * presence_penalty determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
+   */
+  presencePenalty?: number | undefined;
+  /**
+   * frequency_penalty penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
+   */
+  frequencyPenalty?: number | undefined;
+  /**
+   * Number of completions to return for each request, input tokens are only billed once.
+   */
+  n?: number | null | undefined;
   /**
    * The ID of the agent to use for this completion.
    */
@@ -132,6 +148,11 @@ export const AgentsCompletionRequestMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  SystemMessage$inboundSchema.and(
+    z.object({ role: z.literal("system") }).transform((v) => ({
+      role: v.role,
+    })),
+  ),
   UserMessage$inboundSchema.and(
     z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
   ),
@@ -147,6 +168,7 @@ export const AgentsCompletionRequestMessages$inboundSchema: z.ZodType<
 
 /** @internal */
 export type AgentsCompletionRequestMessages$Outbound =
+  | (SystemMessage$Outbound & { role: "system" })
   | (UserMessage$Outbound & { role: "user" })
   | (AssistantMessage$Outbound & { role: "assistant" })
   | (ToolMessage$Outbound & { role: "tool" });
@@ -157,6 +179,11 @@ export const AgentsCompletionRequestMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentsCompletionRequestMessages
 > = z.union([
+  SystemMessage$outboundSchema.and(
+    z.object({ role: z.literal("system") }).transform((v) => ({
+      role: v.role,
+    })),
+  ),
   UserMessage$outboundSchema.and(
     z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
   ),
@@ -223,12 +250,16 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   max_tokens: z.nullable(z.number().int()).optional(),
-  min_tokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(false),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   random_seed: z.nullable(z.number().int()).optional(),
   messages: z.array(
     z.union([
+      SystemMessage$inboundSchema.and(
+        z.object({ role: z.literal("system") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
       UserMessage$inboundSchema.and(
         z.object({ role: z.literal("user") }).transform((v) => ({
           role: v.role,
@@ -250,14 +281,18 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
   tools: z.nullable(z.array(Tool$inboundSchema)).optional(),
   tool_choice: z.union([ToolChoice$inboundSchema, ToolChoiceEnum$inboundSchema])
     .optional(),
+  presence_penalty: z.number().default(0),
+  frequency_penalty: z.number().default(0),
+  n: z.nullable(z.number().int()).optional(),
   agent_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "max_tokens": "maxTokens",
-    "min_tokens": "minTokens",
     "random_seed": "randomSeed",
     "response_format": "responseFormat",
     "tool_choice": "toolChoice",
+    "presence_penalty": "presencePenalty",
+    "frequency_penalty": "frequencyPenalty",
     "agent_id": "agentId",
   });
 });
@@ -265,11 +300,11 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type AgentsCompletionRequest$Outbound = {
   max_tokens?: number | null | undefined;
-  min_tokens?: number | null | undefined;
   stream: boolean;
   stop?: string | Array<string> | undefined;
   random_seed?: number | null | undefined;
   messages: Array<
+    | (SystemMessage$Outbound & { role: "system" })
     | (UserMessage$Outbound & { role: "user" })
     | (AssistantMessage$Outbound & { role: "assistant" })
     | (ToolMessage$Outbound & { role: "tool" })
@@ -277,6 +312,9 @@ export type AgentsCompletionRequest$Outbound = {
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
+  presence_penalty: number;
+  frequency_penalty: number;
+  n?: number | null | undefined;
   agent_id: string;
 };
 
@@ -287,12 +325,16 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   AgentsCompletionRequest
 > = z.object({
   maxTokens: z.nullable(z.number().int()).optional(),
-  minTokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(false),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.number().int()).optional(),
   messages: z.array(
     z.union([
+      SystemMessage$outboundSchema.and(
+        z.object({ role: z.literal("system") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
       UserMessage$outboundSchema.and(
         z.object({ role: z.literal("user") }).transform((v) => ({
           role: v.role,
@@ -316,14 +358,18 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),
+  presencePenalty: z.number().default(0),
+  frequencyPenalty: z.number().default(0),
+  n: z.nullable(z.number().int()).optional(),
   agentId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     maxTokens: "max_tokens",
-    minTokens: "min_tokens",
     randomSeed: "random_seed",
     responseFormat: "response_format",
     toolChoice: "tool_choice",
+    presencePenalty: "presence_penalty",
+    frequencyPenalty: "frequency_penalty",
     agentId: "agent_id",
   });
 });

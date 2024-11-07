@@ -4,16 +4,7 @@
 
 import * as z from "zod";
 import { blobLikeSchema } from "../../types/blobs.js";
-import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
-
-export const Purpose = {
-  FineTune: "fine-tune",
-} as const;
-export type Purpose = OpenEnum<typeof Purpose>;
+import * as components from "../components/index.js";
 
 export type FileT = {
   fileName: string;
@@ -35,34 +26,8 @@ export type FilesApiRoutesUploadFileMultiPartBodyParams = {
    *  ```
    */
   file: FileT | Blob;
-  purpose?: "fine-tune" | undefined;
+  purpose?: components.FilePurpose | undefined;
 };
-
-/** @internal */
-export const Purpose$inboundSchema: z.ZodType<Purpose, z.ZodTypeDef, unknown> =
-  z
-    .union([
-      z.nativeEnum(Purpose),
-      z.string().transform(catchUnrecognizedEnum),
-    ]);
-
-/** @internal */
-export const Purpose$outboundSchema: z.ZodType<Purpose, z.ZodTypeDef, Purpose> =
-  z.union([
-    z.nativeEnum(Purpose),
-    z.string().and(z.custom<Unrecognized<string>>()),
-  ]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Purpose$ {
-  /** @deprecated use `Purpose$inboundSchema` instead. */
-  export const inboundSchema = Purpose$inboundSchema;
-  /** @deprecated use `Purpose$outboundSchema` instead. */
-  export const outboundSchema = Purpose$outboundSchema;
-}
 
 /** @internal */
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
@@ -118,13 +83,13 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$inboundSchema:
     unknown
   > = z.object({
     file: z.lazy(() => FileT$inboundSchema),
-    purpose: z.literal("fine-tune").default("fine-tune"),
+    purpose: components.FilePurpose$inboundSchema.optional(),
   });
 
 /** @internal */
 export type FilesApiRoutesUploadFileMultiPartBodyParams$Outbound = {
   file: FileT$Outbound | Blob;
-  purpose: "fine-tune";
+  purpose?: string | undefined;
 };
 
 /** @internal */
@@ -135,7 +100,7 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema:
     FilesApiRoutesUploadFileMultiPartBodyParams
   > = z.object({
     file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
-    purpose: z.literal("fine-tune").default("fine-tune"),
+    purpose: components.FilePurpose$outboundSchema.optional(),
   });
 
 /**

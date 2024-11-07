@@ -13,11 +13,13 @@ let value: ListFilesOut = {
       bytes: 13000,
       createdAt: 1716963433,
       filename: "files_upload.jsonl",
+      purpose: "fine-tune",
       sampleType: "instruct",
-      source: "upload",
+      source: "repository",
     },
   ],
   object: "<value>",
+  total: 570197,
 };
 ```
 
@@ -27,3 +29,4 @@ let value: ListFilesOut = {
 | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `data`                                                           | [components.FileSchema](../../models/components/fileschema.md)[] | :heavy_check_mark:                                               | N/A                                                              |
 | `object`                                                         | *string*                                                         | :heavy_check_mark:                                               | N/A                                                              |
+| `total`                                                          | *number*                                                         | :heavy_check_mark:                                               | N/A                                                              |

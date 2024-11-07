@@ -1,24 +1,21 @@
 # ChatCompletionStreamRequestToolChoice
 
-## Example Usage
-
-```typescript
-import { ChatCompletionStreamRequestToolChoice } from "@mistralai/mistralai/models/components";
-
-let value: ChatCompletionStreamRequestToolChoice = "none";
-```
 
 ## Supported Types
 
 ### `components.ToolChoice`
 
 ```typescript
-const value: components.ToolChoice = /* values here */
+const value: components.ToolChoice = {
+  function: {
+    name: "<value>",
+  },
+};
 ```
 
 ### `components.ToolChoiceEnum`
 
 ```typescript
-const value: components.ToolChoiceEnum = /* values here */
+const value: components.ToolChoiceEnum = "none";
 ```
 

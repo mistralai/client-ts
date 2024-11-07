@@ -85,4 +85,32 @@ async function run() {
 run();
 
 ```
+
+### Create Embedding Request
+
+This example shows how to create embedding request.
+
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.embeddings.create({
+    inputs: [
+      "Embed this sentence.",
+      "As well as this one.",
+    ],
+    model: "Wrangler",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
 <!-- End SDK Example Usage [usage] -->

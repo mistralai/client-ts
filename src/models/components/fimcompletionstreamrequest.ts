@@ -20,9 +20,9 @@ export type FIMCompletionStreamRequest = {
    */
   model: string | null;
   /**
-   * What sampling temperature to use, between 0.0 and 1.0. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both.
+   * What sampling temperature to use, we recommend between 0.0 and 0.7. Higher values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both. The default value varies depending on the model you are targeting. Call the `/models` endpoint to retrieve the appropriate value.
    */
-  temperature?: number | undefined;
+  temperature?: number | null | undefined;
   /**
    * Nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
    */
@@ -31,10 +31,6 @@ export type FIMCompletionStreamRequest = {
    * The maximum number of tokens to generate in the completion. The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
    */
   maxTokens?: number | null | undefined;
-  /**
-   * The minimum number of tokens to generate in the completion.
-   */
-  minTokens?: number | null | undefined;
   stream?: boolean | undefined;
   /**
    * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -52,6 +48,10 @@ export type FIMCompletionStreamRequest = {
    * Optional text/code that adds more context for the model. When given a `prompt` and a `suffix` the model will fill what is between them. When `suffix` is not provided, the model will simply execute completion starting with `prompt`.
    */
   suffix?: string | null | undefined;
+  /**
+   * The minimum number of tokens to generate in the completion.
+   */
+  minTokens?: number | null | undefined;
 };
 
 /** @internal */
@@ -91,36 +91,36 @@ export const FIMCompletionStreamRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   model: z.nullable(z.string()),
-  temperature: z.number().default(0.7),
+  temperature: z.nullable(z.number()).optional(),
   top_p: z.number().default(1),
   max_tokens: z.nullable(z.number().int()).optional(),
-  min_tokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   random_seed: z.nullable(z.number().int()).optional(),
   prompt: z.string(),
   suffix: z.nullable(z.string()).optional(),
+  min_tokens: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_p": "topP",
     "max_tokens": "maxTokens",
-    "min_tokens": "minTokens",
     "random_seed": "randomSeed",
+    "min_tokens": "minTokens",
   });
 });
 
 /** @internal */
 export type FIMCompletionStreamRequest$Outbound = {
   model: string | null;
-  temperature: number;
+  temperature?: number | null | undefined;
   top_p: number;
   max_tokens?: number | null | undefined;
-  min_tokens?: number | null | undefined;
   stream: boolean;
   stop?: string | Array<string> | undefined;
   random_seed?: number | null | undefined;
   prompt: string;
   suffix?: string | null | undefined;
+  min_tokens?: number | null | undefined;
 };
 
 /** @internal */
@@ -130,21 +130,21 @@ export const FIMCompletionStreamRequest$outboundSchema: z.ZodType<
   FIMCompletionStreamRequest
 > = z.object({
   model: z.nullable(z.string()),
-  temperature: z.number().default(0.7),
+  temperature: z.nullable(z.number()).optional(),
   topP: z.number().default(1),
   maxTokens: z.nullable(z.number().int()).optional(),
-  minTokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.number().int()).optional(),
   prompt: z.string(),
   suffix: z.nullable(z.string()).optional(),
+  minTokens: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     topP: "top_p",
     maxTokens: "max_tokens",
-    minTokens: "min_tokens",
     randomSeed: "random_seed",
+    minTokens: "min_tokens",
   });
 });
 

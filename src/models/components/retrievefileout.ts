@@ -5,10 +5,10 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+  FilePurpose,
+  FilePurpose$inboundSchema,
+  FilePurpose$outboundSchema,
+} from "./filepurpose.js";
 import {
   SampleType,
   SampleType$inboundSchema,
@@ -19,17 +19,6 @@ import {
   Source$inboundSchema,
   Source$outboundSchema,
 } from "./source.js";
-
-/**
- * The intended purpose of the uploaded file. Only accepts fine-tuning (`fine-tune`) for now.
- */
-export const RetrieveFileOutPurpose = {
-  FineTune: "fine-tune",
-} as const;
-/**
- * The intended purpose of the uploaded file. Only accepts fine-tuning (`fine-tune`) for now.
- */
-export type RetrieveFileOutPurpose = OpenEnum<typeof RetrieveFileOutPurpose>;
 
 export type RetrieveFileOut = {
   /**
@@ -52,46 +41,12 @@ export type RetrieveFileOut = {
    * The name of the uploaded file.
    */
   filename: string;
-  /**
-   * The intended purpose of the uploaded file. Only accepts fine-tuning (`fine-tune`) for now.
-   */
-  purpose?: "fine-tune" | undefined;
+  purpose: FilePurpose;
   sampleType: SampleType;
   numLines?: number | null | undefined;
   source: Source;
+  deleted: boolean;
 };
-
-/** @internal */
-export const RetrieveFileOutPurpose$inboundSchema: z.ZodType<
-  RetrieveFileOutPurpose,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(RetrieveFileOutPurpose),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const RetrieveFileOutPurpose$outboundSchema: z.ZodType<
-  RetrieveFileOutPurpose,
-  z.ZodTypeDef,
-  RetrieveFileOutPurpose
-> = z.union([
-  z.nativeEnum(RetrieveFileOutPurpose),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveFileOutPurpose$ {
-  /** @deprecated use `RetrieveFileOutPurpose$inboundSchema` instead. */
-  export const inboundSchema = RetrieveFileOutPurpose$inboundSchema;
-  /** @deprecated use `RetrieveFileOutPurpose$outboundSchema` instead. */
-  export const outboundSchema = RetrieveFileOutPurpose$outboundSchema;
-}
 
 /** @internal */
 export const RetrieveFileOut$inboundSchema: z.ZodType<
@@ -104,10 +59,11 @@ export const RetrieveFileOut$inboundSchema: z.ZodType<
   bytes: z.number().int(),
   created_at: z.number().int(),
   filename: z.string(),
-  purpose: z.literal("fine-tune").optional(),
+  purpose: FilePurpose$inboundSchema,
   sample_type: SampleType$inboundSchema,
   num_lines: z.nullable(z.number().int()).optional(),
   source: Source$inboundSchema,
+  deleted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -123,10 +79,11 @@ export type RetrieveFileOut$Outbound = {
   bytes: number;
   created_at: number;
   filename: string;
-  purpose: "fine-tune";
+  purpose: string;
   sample_type: string;
   num_lines?: number | null | undefined;
   source: string;
+  deleted: boolean;
 };
 
 /** @internal */
@@ -140,10 +97,11 @@ export const RetrieveFileOut$outboundSchema: z.ZodType<
   bytes: z.number().int(),
   createdAt: z.number().int(),
   filename: z.string(),
-  purpose: z.literal("fine-tune").default("fine-tune"),
+  purpose: FilePurpose$outboundSchema,
   sampleType: SampleType$outboundSchema,
   numLines: z.nullable(z.number().int()).optional(),
   source: Source$outboundSchema,
+  deleted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

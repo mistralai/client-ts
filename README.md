@@ -167,6 +167,34 @@ async function run() {
 run();
 
 ```
+
+### Create Embedding Request
+
+This example shows how to create embedding request.
+
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.embeddings.create({
+    inputs: [
+      "Embed this sentence.",
+      "As well as this one.",
+    ],
+    model: "Wrangler",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
 <!-- End SDK Example Usage [usage] -->
 
 ## Providers' SDKs
@@ -191,6 +219,11 @@ We have dedicated SDKs for the following providers:
 
 * [complete](docs/sdks/chat/README.md#complete) - Chat Completion
 * [stream](docs/sdks/chat/README.md#stream) - Stream chat completion
+
+### [classifiers](docs/sdks/classifiers/README.md)
+
+* [moderate](docs/sdks/classifiers/README.md#moderate) - Moderations
+* [moderateChat](docs/sdks/classifiers/README.md#moderatechat) - Moderations Chat
 
 ### [embeddings](docs/sdks/embeddings/README.md)
 
@@ -378,15 +411,24 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-All SDK methods return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+All SDK methods return a response object or throw an error. By default, an API error will throw a `errors.SDKError`.
 
-| Error Object               | Status Code                | Content Type               |
+If a HTTP request fails, an operation my also throw an error from the `models/errors/httpclienterrors.ts` module:
+
+| HTTP Client Error                                    | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- |
+| RequestAbortedError                                  | HTTP request was aborted by the client               |
+| RequestTimeoutError                                  | HTTP request timed out due to an AbortSignal signal  |
+| ConnectionError                                      | HTTP client was unable to make a request to a server |
+| InvalidRequestError                                  | Any input used to create a request is invalid        |
+| UnexpectedClientError                                | Unrecognised or unexpected error                     |
+
+In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `list` method may throw the following errors:
+
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
-Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging. 
-
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
@@ -430,6 +472,8 @@ async function run() {
 run();
 
 ```
+
+Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -441,13 +485,13 @@ You can override the default server globally by passing a server name to the `se
 
 | Name | Server | Variables |
 | ----- | ------ | --------- |
-| `prod` | `https://api.mistral.ai` | None |
+| `eu` | `https://api.mistral.ai` | None |
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-  server: "prod",
+  server: "eu",
   apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
@@ -589,29 +633,30 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [agentsComplete](docs/sdks/agents/README.md#complete)
-- [agentsStream](docs/sdks/agents/README.md#stream)
-- [chatComplete](docs/sdks/chat/README.md#complete)
-- [chatStream](docs/sdks/chat/README.md#stream)
-- [embeddingsCreate](docs/sdks/embeddings/README.md#create)
-- [filesDelete](docs/sdks/files/README.md#delete)
-- [filesList](docs/sdks/files/README.md#list)
-- [filesRetrieve](docs/sdks/files/README.md#retrieve)
-- [filesUpload](docs/sdks/files/README.md#upload)
-- [fimComplete](docs/sdks/fim/README.md#complete)
-- [fimStream](docs/sdks/fim/README.md#stream)
-- [fineTuningJobsCancel](docs/sdks/jobs/README.md#cancel)
-- [fineTuningJobsCreate](docs/sdks/jobs/README.md#create)
-- [fineTuningJobsGet](docs/sdks/jobs/README.md#get)
-- [fineTuningJobsList](docs/sdks/jobs/README.md#list)
-- [fineTuningJobsStart](docs/sdks/jobs/README.md#start)
-- [modelsArchive](docs/sdks/models/README.md#archive)
-- [modelsDelete](docs/sdks/models/README.md#delete)
-- [modelsList](docs/sdks/models/README.md#list)
-- [modelsRetrieve](docs/sdks/models/README.md#retrieve)
-- [modelsUnarchive](docs/sdks/models/README.md#unarchive)
-- [modelsUpdate](docs/sdks/models/README.md#update)
-
+- [`agentsComplete`](docs/sdks/agents/README.md#complete) - Agents Completion
+- [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream Agents completion
+- [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
+- [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
+- [`classifiersModerate`](docs/sdks/classifiers/README.md#moderate) - Moderations
+- [`classifiersModerateChat`](docs/sdks/classifiers/README.md#moderatechat) - Moderations Chat
+- [`embeddingsCreate`](docs/sdks/embeddings/README.md#create) - Embeddings
+- [`filesDelete`](docs/sdks/files/README.md#delete) - Delete File
+- [`filesList`](docs/sdks/files/README.md#list) - List Files
+- [`filesRetrieve`](docs/sdks/files/README.md#retrieve) - Retrieve File
+- [`filesUpload`](docs/sdks/files/README.md#upload) - Upload File
+- [`fimComplete`](docs/sdks/fim/README.md#complete) - Fim Completion
+- [`fimStream`](docs/sdks/fim/README.md#stream) - Stream fim completion
+- [`fineTuningJobsCancel`](docs/sdks/jobs/README.md#cancel) - Cancel Fine Tuning Job
+- [`fineTuningJobsCreate`](docs/sdks/jobs/README.md#create) - Create Fine Tuning Job
+- [`fineTuningJobsGet`](docs/sdks/jobs/README.md#get) - Get Fine Tuning Job
+- [`fineTuningJobsList`](docs/sdks/jobs/README.md#list) - Get Fine Tuning Jobs
+- [`fineTuningJobsStart`](docs/sdks/jobs/README.md#start) - Start Fine Tuning Job
+- [`modelsArchive`](docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
+- [`modelsDelete`](docs/sdks/models/README.md#delete) - Delete Model
+- [`modelsList`](docs/sdks/models/README.md#list) - List Models
+- [`modelsRetrieve`](docs/sdks/models/README.md#retrieve) - Retrieve Model
+- [`modelsUnarchive`](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
+- [`modelsUpdate`](docs/sdks/models/README.md#update) - Update Fine Tuned Model
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->

@@ -5,11 +5,13 @@
 ```typescript
 import { SampleType } from "@mistralai/mistralai/models/components";
 
-let value: SampleType = "instruct";
+let value: SampleType = "batch_result";
 ```
 
 ## Values
 
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
+
 ```typescript
-"pretrain" | "instruct"
+"pretrain" | "instruct" | "batch_request" | "batch_result" | "batch_error" | Unrecognized<string>
 ```

@@ -71,9 +71,9 @@ export type ChatCompletionRequest = {
    */
   model: string | null;
   /**
-   * What sampling temperature to use, between 0.0 and 1.0. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both.
+   * What sampling temperature to use, we recommend between 0.0 and 0.7. Higher values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both. The default value varies depending on the model you are targeting. Call the `/models` endpoint to retrieve the appropriate value.
    */
-  temperature?: number | undefined;
+  temperature?: number | null | undefined;
   /**
    * Nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
    */
@@ -82,10 +82,6 @@ export type ChatCompletionRequest = {
    * The maximum number of tokens to generate in the completion. The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
    */
   maxTokens?: number | null | undefined;
-  /**
-   * The minimum number of tokens to generate in the completion.
-   */
-  minTokens?: number | null | undefined;
   /**
    * Whether to stream back partial progress. If set, tokens will be sent as data-only server-side events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
    */
@@ -110,6 +106,18 @@ export type ChatCompletionRequest = {
   responseFormat?: ResponseFormat | undefined;
   tools?: Array<Tool> | null | undefined;
   toolChoice?: ToolChoice | ToolChoiceEnum | undefined;
+  /**
+   * presence_penalty determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
+   */
+  presencePenalty?: number | undefined;
+  /**
+   * frequency_penalty penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
+   */
+  frequencyPenalty?: number | undefined;
+  /**
+   * Number of completions to return for each request, input tokens are only billed once.
+   */
+  n?: number | null | undefined;
   /**
    * Whether to inject a safety prompt before all conversations.
    */
@@ -247,10 +255,9 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   model: z.nullable(z.string()),
-  temperature: z.number().default(0.7),
+  temperature: z.nullable(z.number()).optional(),
   top_p: z.number().default(1),
   max_tokens: z.nullable(z.number().int()).optional(),
-  min_tokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(false),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   random_seed: z.nullable(z.number().int()).optional(),
@@ -282,15 +289,19 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
   tools: z.nullable(z.array(Tool$inboundSchema)).optional(),
   tool_choice: z.union([ToolChoice$inboundSchema, ToolChoiceEnum$inboundSchema])
     .optional(),
+  presence_penalty: z.number().default(0),
+  frequency_penalty: z.number().default(0),
+  n: z.nullable(z.number().int()).optional(),
   safe_prompt: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "top_p": "topP",
     "max_tokens": "maxTokens",
-    "min_tokens": "minTokens",
     "random_seed": "randomSeed",
     "response_format": "responseFormat",
     "tool_choice": "toolChoice",
+    "presence_penalty": "presencePenalty",
+    "frequency_penalty": "frequencyPenalty",
     "safe_prompt": "safePrompt",
   });
 });
@@ -298,10 +309,9 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ChatCompletionRequest$Outbound = {
   model: string | null;
-  temperature: number;
+  temperature?: number | null | undefined;
   top_p: number;
   max_tokens?: number | null | undefined;
-  min_tokens?: number | null | undefined;
   stream: boolean;
   stop?: string | Array<string> | undefined;
   random_seed?: number | null | undefined;
@@ -314,6 +324,9 @@ export type ChatCompletionRequest$Outbound = {
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
+  presence_penalty: number;
+  frequency_penalty: number;
+  n?: number | null | undefined;
   safe_prompt: boolean;
 };
 
@@ -324,10 +337,9 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   ChatCompletionRequest
 > = z.object({
   model: z.nullable(z.string()),
-  temperature: z.number().default(0.7),
+  temperature: z.nullable(z.number()).optional(),
   topP: z.number().default(1),
   maxTokens: z.nullable(z.number().int()).optional(),
-  minTokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(false),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.number().int()).optional(),
@@ -361,15 +373,19 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),
+  presencePenalty: z.number().default(0),
+  frequencyPenalty: z.number().default(0),
+  n: z.nullable(z.number().int()).optional(),
   safePrompt: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     topP: "top_p",
     maxTokens: "max_tokens",
-    minTokens: "min_tokens",
     randomSeed: "random_seed",
     responseFormat: "response_format",
     toolChoice: "tool_choice",
+    presencePenalty: "presence_penalty",
+    frequencyPenalty: "frequency_penalty",
     safePrompt: "safe_prompt",
   });
 });

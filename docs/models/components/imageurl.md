@@ -6,7 +6,7 @@
 import { ImageURL } from "@mistralai/mistralai/models/components";
 
 let value: ImageURL = {
-  url: "https://lost-mailman.org",
+  url: "https://oblong-contractor.com/",
 };
 ```
 

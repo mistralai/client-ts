@@ -5,11 +5,11 @@
 ```typescript
 import { Type } from "@mistralai/mistralai/models/components";
 
-let value: Type = "wandb";
+let value: Type = "base";
 ```
 
 ## Values
 
 ```typescript
-"wandb"
+"base"
 ```

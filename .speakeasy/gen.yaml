@@ -14,8 +14,9 @@ generation:
     requestResponseComponentNamesFeb2024: true
   auth:
     oAuth2ClientCredentialsEnabled: true
+    oAuth2PasswordEnabled: false
 typescript:
-  version: 1.1.0
+  version: 1.2.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -26,6 +27,7 @@ typescript:
   enumFormat: union
   envVarPrefix: MISTRAL
   flattenGlobalSecurity: true
+  flatteningOrder: body-first
   imports:
     option: openapi
     paths:

@@ -7,12 +7,12 @@ import { FTModelOut } from "@mistralai/mistralai/models/components";
 
 let value: FTModelOut = {
   id: "<id>",
-  created: 384382,
+  created: 383441,
   ownedBy: "<value>",
   root: "<value>",
   archived: false,
   capabilities: {},
-  job: "74e0f467-cc87-496e-9151-a05dfc2ddf7c",
+  job: "c89e110d-cdfc-47c1-9a2f-864c790999fa",
 };
 ```
 

@@ -18,3 +18,4 @@ let value: TrainingParameters = {};
 | `warmupFraction`   | *number*           | :heavy_minus_sign: | N/A                |
 | `epochs`           | *number*           | :heavy_minus_sign: | N/A                |
 | `fimRatio`         | *number*           | :heavy_minus_sign: | N/A                |
+| `seqLen`           | *number*           | :heavy_minus_sign: | N/A                |

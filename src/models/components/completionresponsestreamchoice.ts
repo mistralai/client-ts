@@ -4,7 +4,11 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
+import {
+  catchUnrecognizedEnum,
+  OpenEnum,
+  Unrecognized,
+} from "../../types/enums.js";
 import {
   DeltaMessage,
   DeltaMessage$inboundSchema,
@@ -18,7 +22,7 @@ export const CompletionResponseStreamChoiceFinishReason = {
   Error: "error",
   ToolCalls: "tool_calls",
 } as const;
-export type CompletionResponseStreamChoiceFinishReason = ClosedEnum<
+export type CompletionResponseStreamChoiceFinishReason = OpenEnum<
   typeof CompletionResponseStreamChoiceFinishReason
 >;
 
@@ -30,13 +34,23 @@ export type CompletionResponseStreamChoice = {
 
 /** @internal */
 export const CompletionResponseStreamChoiceFinishReason$inboundSchema:
-  z.ZodNativeEnum<typeof CompletionResponseStreamChoiceFinishReason> = z
-    .nativeEnum(CompletionResponseStreamChoiceFinishReason);
+  z.ZodType<CompletionResponseStreamChoiceFinishReason, z.ZodTypeDef, unknown> =
+    z
+      .union([
+        z.nativeEnum(CompletionResponseStreamChoiceFinishReason),
+        z.string().transform(catchUnrecognizedEnum),
+      ]);
 
 /** @internal */
 export const CompletionResponseStreamChoiceFinishReason$outboundSchema:
-  z.ZodNativeEnum<typeof CompletionResponseStreamChoiceFinishReason> =
-    CompletionResponseStreamChoiceFinishReason$inboundSchema;
+  z.ZodType<
+    CompletionResponseStreamChoiceFinishReason,
+    z.ZodTypeDef,
+    CompletionResponseStreamChoiceFinishReason
+  > = z.union([
+    z.nativeEnum(CompletionResponseStreamChoiceFinishReason),
+    z.string().and(z.custom<Unrecognized<string>>()),
+  ]);
 
 /**
  * @internal
