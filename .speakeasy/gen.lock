@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: e75ca54601920b2770d9a559b299d272
+  docChecksum: 8dbd12dc531838bb25980ce33654c8bf
   docVersion: 0.0.2
-  speakeasyVersion: 1.399.3
-  generationVersion: 2.420.2
-  releaseVersion: 1.1.0
-  configChecksum: fa99b0d0b544e1003aaeca9cacf619db
+  speakeasyVersion: 1.434.2
+  generationVersion: 2.452.0
+  releaseVersion: 1.2.0
+  configChecksum: 0f0d4b73e436e4fc46a2b3b9856dcfa3
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -14,11 +14,11 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.17.5
+    core: 3.18.3
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
-    envVarSecurityUsage: 0.1.1
+    envVarSecurityUsage: 0.1.2
     examples: 2.81.4
     globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
@@ -30,11 +30,12 @@ features:
     openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.1.0
-    serverEvents: 0.1.4
+    sdkHooks: 0.2.0
+    serverEvents: 0.1.5
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
-    unions: 2.85.7
+    tests: 0.7.0
+    unions: 2.85.8
     uploadStreams: 0.1.0
 generatedFiles:
   - .devcontainer/README.md
@@ -59,8 +60,11 @@ generatedFiles:
   - docs/models/components/archiveftmodeloutobject.md
   - docs/models/components/arguments.md
   - docs/models/components/assistantmessage.md
+  - docs/models/components/assistantmessagecontent.md
   - docs/models/components/assistantmessagerole.md
   - docs/models/components/basemodelcard.md
+  - docs/models/components/chatclassificationrequest.md
+  - docs/models/components/chatclassificationrequestinputs.md
   - docs/models/components/chatcompletionchoice.md
   - docs/models/components/chatcompletionrequest.md
   - docs/models/components/chatcompletionrequesttoolchoice.md
@@ -70,6 +74,10 @@ generatedFiles:
   - docs/models/components/chatcompletionstreamrequeststop.md
   - docs/models/components/chatcompletionstreamrequesttoolchoice.md
   - docs/models/components/checkpointout.md
+  - docs/models/components/classificationobject.md
+  - docs/models/components/classificationrequest.md
+  - docs/models/components/classificationrequestinputs.md
+  - docs/models/components/classificationresponse.md
   - docs/models/components/completionchunk.md
   - docs/models/components/completionevent.md
   - docs/models/components/completionresponsestreamchoice.md
@@ -89,8 +97,8 @@ generatedFiles:
   - docs/models/components/embeddingresponse.md
   - docs/models/components/embeddingresponsedata.md
   - docs/models/components/eventout.md
+  - docs/models/components/filepurpose.md
   - docs/models/components/fileschema.md
-  - docs/models/components/fileschemapurpose.md
   - docs/models/components/fimcompletionrequest.md
   - docs/models/components/fimcompletionrequeststop.md
   - docs/models/components/fimcompletionresponse.md
@@ -100,6 +108,7 @@ generatedFiles:
   - docs/models/components/finishreason.md
   - docs/models/components/ftmodelcapabilitiesout.md
   - docs/models/components/ftmodelcard.md
+  - docs/models/components/ftmodelcardtype.md
   - docs/models/components/ftmodelout.md
   - docs/models/components/ftmodeloutobject.md
   - docs/models/components/functioncall.md
@@ -131,12 +140,11 @@ generatedFiles:
   - docs/models/components/modelcapabilities.md
   - docs/models/components/modellist.md
   - docs/models/components/objectt.md
-  - docs/models/components/purpose.md
+  - docs/models/components/one.md
   - docs/models/components/repositories.md
   - docs/models/components/responseformat.md
   - docs/models/components/responseformats.md
   - docs/models/components/retrievefileout.md
-  - docs/models/components/retrievefileoutpurpose.md
   - docs/models/components/role.md
   - docs/models/components/sampletype.md
   - docs/models/components/security.md
@@ -144,6 +152,7 @@ generatedFiles:
   - docs/models/components/status.md
   - docs/models/components/stop.md
   - docs/models/components/systemmessage.md
+  - docs/models/components/systemmessagecontent.md
   - docs/models/components/textchunk.md
   - docs/models/components/textchunktype.md
   - docs/models/components/tool.md
@@ -156,6 +165,7 @@ generatedFiles:
   - docs/models/components/trainingfile.md
   - docs/models/components/trainingparameters.md
   - docs/models/components/trainingparametersin.md
+  - docs/models/components/two.md
   - docs/models/components/type.md
   - docs/models/components/unarchiveftmodelout.md
   - docs/models/components/unarchiveftmodeloutobject.md
@@ -168,10 +178,12 @@ generatedFiles:
   - docs/models/components/validationerror.md
   - docs/models/components/wandbintegration.md
   - docs/models/components/wandbintegrationout.md
+  - docs/models/components/wandbintegrationouttype.md
   - docs/models/components/wandbintegrationtype.md
   - docs/models/errors/httpvalidationerror.md
   - docs/models/operations/deletemodelv1modelsmodeliddeleterequest.md
   - docs/models/operations/filesapiroutesdeletefilerequest.md
+  - docs/models/operations/filesapirouteslistfilesrequest.md
   - docs/models/operations/filesapiroutesretrievefilerequest.md
   - docs/models/operations/filesapiroutesuploadfilemultipartbodyparams.md
   - docs/models/operations/filet.md
@@ -183,12 +195,12 @@ generatedFiles:
   - docs/models/operations/jobsapiroutesfinetuningstartfinetuningjobrequest.md
   - docs/models/operations/jobsapiroutesfinetuningunarchivefinetunedmodelrequest.md
   - docs/models/operations/jobsapiroutesfinetuningupdatefinetunedmodelrequest.md
-  - docs/models/operations/purpose.md
   - docs/models/operations/retrievemodelv1modelsmodelidgetrequest.md
   - docs/models/operations/retrievemodelv1modelsmodelidgetresponseretrievemodelv1modelsmodelidget.md
   - docs/models/operations/status.md
   - docs/sdks/agents/README.md
   - docs/sdks/chat/README.md
+  - docs/sdks/classifiers/README.md
   - docs/sdks/embeddings/README.md
   - docs/sdks/files/README.md
   - docs/sdks/fim/README.md
@@ -203,6 +215,8 @@ generatedFiles:
   - src/funcs/agentsStream.ts
   - src/funcs/chatComplete.ts
   - src/funcs/chatStream.ts
+  - src/funcs/classifiersModerate.ts
+  - src/funcs/classifiersModerateChat.ts
   - src/funcs/embeddingsCreate.ts
   - src/funcs/filesDelete.ts
   - src/funcs/filesList.ts
@@ -247,11 +261,15 @@ generatedFiles:
   - src/models/components/archiveftmodelout.ts
   - src/models/components/assistantmessage.ts
   - src/models/components/basemodelcard.ts
+  - src/models/components/chatclassificationrequest.ts
   - src/models/components/chatcompletionchoice.ts
   - src/models/components/chatcompletionrequest.ts
   - src/models/components/chatcompletionresponse.ts
   - src/models/components/chatcompletionstreamrequest.ts
   - src/models/components/checkpointout.ts
+  - src/models/components/classificationobject.ts
+  - src/models/components/classificationrequest.ts
+  - src/models/components/classificationresponse.ts
   - src/models/components/completionchunk.ts
   - src/models/components/completionevent.ts
   - src/models/components/completionresponsestreamchoice.ts
@@ -264,6 +282,7 @@ generatedFiles:
   - src/models/components/embeddingresponse.ts
   - src/models/components/embeddingresponsedata.ts
   - src/models/components/eventout.ts
+  - src/models/components/filepurpose.ts
   - src/models/components/fileschema.ts
   - src/models/components/fimcompletionrequest.ts
   - src/models/components/fimcompletionresponse.ts
@@ -321,6 +340,7 @@ generatedFiles:
   - src/models/errors/sdkvalidationerror.ts
   - src/models/operations/deletemodelv1modelsmodeliddelete.ts
   - src/models/operations/filesapiroutesdeletefile.ts
+  - src/models/operations/filesapirouteslistfiles.ts
   - src/models/operations/filesapiroutesretrievefile.ts
   - src/models/operations/filesapiroutesuploadfile.ts
   - src/models/operations/index.ts
@@ -335,6 +355,7 @@ generatedFiles:
   - src/models/operations/retrievemodelv1modelsmodelidget.ts
   - src/sdk/agents.ts
   - src/sdk/chat.ts
+  - src/sdk/classifiers.ts
   - src/sdk/embeddings.ts
   - src/sdk/files.ts
   - src/sdk/fim.ts
@@ -403,12 +424,12 @@ examples:
         multipart/form-data: {"file": {}}
       responses:
         "200":
-          application/json: {"id": "497f6eca-6276-4993-bfeb-53cbbbba6f09", "object": "file", "bytes": 13000, "created_at": 1716963433, "filename": "files_upload.jsonl", "sample_type": "pretrain", "source": "upload"}
+          application/json: {"id": "497f6eca-6276-4993-bfeb-53cbbbba6f09", "object": "file", "bytes": 13000, "created_at": 1716963433, "filename": "files_upload.jsonl", "purpose": "fine-tune", "sample_type": "pretrain", "source": "upload"}
   files_api_routes_list_files:
     speakeasy-default-files-api-routes-list-files:
       responses:
         "200":
-          application/json: {"data": [], "object": "<value>"}
+          application/json: {"data": [], "object": "<value>", "total": 768578}
   files_api_routes_retrieve_file:
     speakeasy-default-files-api-routes-retrieve-file:
       parameters:
@@ -416,7 +437,7 @@ examples:
           file_id: "<value>"
       responses:
         "200":
-          application/json: {"id": "497f6eca-6276-4993-bfeb-53cbbbba6f09", "object": "file", "bytes": 13000, "created_at": 1716963433, "filename": "files_upload.jsonl", "sample_type": "pretrain", "source": "repository"}
+          application/json: {"id": "497f6eca-6276-4993-bfeb-53cbbbba6f09", "object": "file", "bytes": 13000, "created_at": 1716963433, "filename": "files_upload.jsonl", "purpose": "fine-tune", "sample_type": "pretrain", "source": "repository", "deleted": false}
   files_api_routes_delete_file:
     speakeasy-default-files-api-routes-delete-file:
       parameters:
@@ -436,7 +457,7 @@ examples:
         application/json: {"model": "codestral-latest"}
       responses:
         "200":
-          application/json: {"id": "7ad642c1-fc6f-4e07-a41b-cdd89dc7fa50", "auto_start": true, "model": "open-mistral-nemo", "status": "QUEUED", "job_type": "<value>", "created_at": 519028, "modified_at": 230313, "training_files": []}
+          application/json: {"id": "a621cf02-1cd9-4cf5-8403-315211a509a3", "auto_start": false, "model": "open-mistral-7b", "status": "FAILED", "job_type": "<value>", "created_at": 550483, "modified_at": 906537, "training_files": ["74c2becc-3769-4177-b5e0-24985613de0e"]}
   jobs_api_routes_fine_tuning_get_fine_tuning_job:
     speakeasy-default-jobs-api-routes-fine-tuning-get-fine-tuning-job:
       parameters:
@@ -500,8 +521,24 @@ examples:
   embeddings_v1_embeddings_post:
     speakeasy-default-embeddings-v1-embeddings-post:
       requestBody:
-        application/json: {"input": "<value>", "model": "Wrangler"}
+        application/json: {"input": ["Embed this sentence.", "As well as this one."], "model": "Wrangler"}
       responses:
         "200":
           application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "data": [{"object": "embedding", "embedding": [0.1, 0.2, 0.3], "index": 0}]}
+        "422": {}
+  moderations_v1_moderations_post:
+    speakeasy-default-moderations-v1-moderations-post:
+      requestBody:
+        application/json: {"input": ["<value>"]}
+      responses:
+        "200":
+          application/json: {"id": "mod-e5cc70bb28c444948073e77776eb30ef"}
+        "422": {}
+  moderations_chat_v1_chat_moderations_post:
+    speakeasy-default-moderations-chat-v1-chat-moderations-post:
+      requestBody:
+        application/json: {"input": [[{"content": "<value>"}, {"content": []}, {"content": "<value>"}], []], "model": "V90"}
+      responses:
+        "200":
+          application/json: {"id": "mod-e5cc70bb28c444948073e77776eb30ef"}
         "422": {}

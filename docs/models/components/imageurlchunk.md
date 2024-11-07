@@ -8,7 +8,7 @@
 import { ImageURLChunk } from "@mistralai/mistralai/models/components";
 
 let value: ImageURLChunk = {
-  imageUrl: "<value>",
+  imageUrl: "https://minor-ceramics.net/",
 };
 ```
 

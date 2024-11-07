@@ -4,13 +4,17 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
 import {
-  AssistantMessage,
-  AssistantMessage$inboundSchema,
-  AssistantMessage$Outbound,
-  AssistantMessage$outboundSchema,
-} from "./assistantmessage.js";
+  catchUnrecognizedEnum,
+  OpenEnum,
+  Unrecognized,
+} from "../../types/enums.js";
+import {
+  DeltaMessage,
+  DeltaMessage$inboundSchema,
+  DeltaMessage$Outbound,
+  DeltaMessage$outboundSchema,
+} from "./deltamessage.js";
 
 export const FinishReason = {
   Stop: "stop",
@@ -19,21 +23,34 @@ export const FinishReason = {
   Error: "error",
   ToolCalls: "tool_calls",
 } as const;
-export type FinishReason = ClosedEnum<typeof FinishReason>;
+export type FinishReason = OpenEnum<typeof FinishReason>;
 
 export type ChatCompletionChoice = {
   index: number;
-  message: AssistantMessage;
+  message: DeltaMessage;
   finishReason: FinishReason;
 };
 
 /** @internal */
-export const FinishReason$inboundSchema: z.ZodNativeEnum<typeof FinishReason> =
-  z.nativeEnum(FinishReason);
+export const FinishReason$inboundSchema: z.ZodType<
+  FinishReason,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .union([
+    z.nativeEnum(FinishReason),
+    z.string().transform(catchUnrecognizedEnum),
+  ]);
 
 /** @internal */
-export const FinishReason$outboundSchema: z.ZodNativeEnum<typeof FinishReason> =
-  FinishReason$inboundSchema;
+export const FinishReason$outboundSchema: z.ZodType<
+  FinishReason,
+  z.ZodTypeDef,
+  FinishReason
+> = z.union([
+  z.nativeEnum(FinishReason),
+  z.string().and(z.custom<Unrecognized<string>>()),
+]);
 
 /**
  * @internal
@@ -53,7 +70,7 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   index: z.number().int(),
-  message: AssistantMessage$inboundSchema,
+  message: DeltaMessage$inboundSchema,
   finish_reason: FinishReason$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -64,7 +81,7 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
 /** @internal */
 export type ChatCompletionChoice$Outbound = {
   index: number;
-  message: AssistantMessage$Outbound;
+  message: DeltaMessage$Outbound;
   finish_reason: string;
 };
 
@@ -75,7 +92,7 @@ export const ChatCompletionChoice$outboundSchema: z.ZodType<
   ChatCompletionChoice
 > = z.object({
   index: z.number().int(),
-  message: AssistantMessage$outboundSchema,
+  message: DeltaMessage$outboundSchema,
   finishReason: FinishReason$outboundSchema,
 }).transform((v) => {
   return remap$(v, {

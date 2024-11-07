@@ -5,10 +5,10 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  catchUnrecognizedEnum,
-  OpenEnum,
-  Unrecognized,
-} from "../../types/enums.js";
+  FilePurpose,
+  FilePurpose$inboundSchema,
+  FilePurpose$outboundSchema,
+} from "./filepurpose.js";
 import {
   SampleType,
   SampleType$inboundSchema,
@@ -19,17 +19,6 @@ import {
   Source$inboundSchema,
   Source$outboundSchema,
 } from "./source.js";
-
-/**
- * The intended purpose of the uploaded file. Only accepts fine-tuning (`fine-tune`) for now.
- */
-export const FileSchemaPurpose = {
-  FineTune: "fine-tune",
-} as const;
-/**
- * The intended purpose of the uploaded file. Only accepts fine-tuning (`fine-tune`) for now.
- */
-export type FileSchemaPurpose = OpenEnum<typeof FileSchemaPurpose>;
 
 export type FileSchema = {
   /**
@@ -52,46 +41,11 @@ export type FileSchema = {
    * The name of the uploaded file.
    */
   filename: string;
-  /**
-   * The intended purpose of the uploaded file. Only accepts fine-tuning (`fine-tune`) for now.
-   */
-  purpose?: "fine-tune" | undefined;
+  purpose: FilePurpose;
   sampleType: SampleType;
   numLines?: number | null | undefined;
   source: Source;
 };
-
-/** @internal */
-export const FileSchemaPurpose$inboundSchema: z.ZodType<
-  FileSchemaPurpose,
-  z.ZodTypeDef,
-  unknown
-> = z
-  .union([
-    z.nativeEnum(FileSchemaPurpose),
-    z.string().transform(catchUnrecognizedEnum),
-  ]);
-
-/** @internal */
-export const FileSchemaPurpose$outboundSchema: z.ZodType<
-  FileSchemaPurpose,
-  z.ZodTypeDef,
-  FileSchemaPurpose
-> = z.union([
-  z.nativeEnum(FileSchemaPurpose),
-  z.string().and(z.custom<Unrecognized<string>>()),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileSchemaPurpose$ {
-  /** @deprecated use `FileSchemaPurpose$inboundSchema` instead. */
-  export const inboundSchema = FileSchemaPurpose$inboundSchema;
-  /** @deprecated use `FileSchemaPurpose$outboundSchema` instead. */
-  export const outboundSchema = FileSchemaPurpose$outboundSchema;
-}
 
 /** @internal */
 export const FileSchema$inboundSchema: z.ZodType<
@@ -104,7 +58,7 @@ export const FileSchema$inboundSchema: z.ZodType<
   bytes: z.number().int(),
   created_at: z.number().int(),
   filename: z.string(),
-  purpose: z.literal("fine-tune").optional(),
+  purpose: FilePurpose$inboundSchema,
   sample_type: SampleType$inboundSchema,
   num_lines: z.nullable(z.number().int()).optional(),
   source: Source$inboundSchema,
@@ -123,7 +77,7 @@ export type FileSchema$Outbound = {
   bytes: number;
   created_at: number;
   filename: string;
-  purpose: "fine-tune";
+  purpose: string;
   sample_type: string;
   num_lines?: number | null | undefined;
   source: string;
@@ -140,7 +94,7 @@ export const FileSchema$outboundSchema: z.ZodType<
   bytes: z.number().int(),
   createdAt: z.number().int(),
   filename: z.string(),
-  purpose: z.literal("fine-tune").default("fine-tune"),
+  purpose: FilePurpose$outboundSchema,
   sampleType: SampleType$outboundSchema,
   numLines: z.nullable(z.number().int()).optional(),
   source: Source$outboundSchema,

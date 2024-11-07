@@ -1,24 +1,19 @@
 # ImageURLChunkImageURL
 
-## Example Usage
-
-```typescript
-import { ImageURLChunkImageURL } from "@mistralai/mistralai/models/components";
-
-let value: ImageURLChunkImageURL = "<value>";
-```
 
 ## Supported Types
 
 ### `components.ImageURL`
 
 ```typescript
-const value: components.ImageURL = /* values here */
+const value: components.ImageURL = {
+  url: "https://left-dusk.name/",
+};
 ```
 
 ### `string`
 
 ```typescript
-const value: string = /* values here */
+const value: string = "<value>";
 ```
 

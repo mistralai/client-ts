@@ -18,7 +18,7 @@ export type EmbeddingRequest = {
   /**
    * ID of the model to use.
    */
-  model: string;
+  model?: string | undefined;
   /**
    * The format to return the embeddings in.
    */
@@ -59,7 +59,7 @@ export const EmbeddingRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   input: z.union([z.string(), z.array(z.string())]),
-  model: z.string(),
+  model: z.string().default("mistral-embed"),
   encoding_format: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -82,7 +82,7 @@ export const EmbeddingRequest$outboundSchema: z.ZodType<
   EmbeddingRequest
 > = z.object({
   inputs: z.union([z.string(), z.array(z.string())]),
-  model: z.string(),
+  model: z.string().default("mistral-embed"),
   encodingFormat: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

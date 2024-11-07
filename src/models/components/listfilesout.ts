@@ -13,6 +13,7 @@ import {
 export type ListFilesOut = {
   data: Array<FileSchema>;
   object: string;
+  total: number;
 };
 
 /** @internal */
@@ -23,12 +24,14 @@ export const ListFilesOut$inboundSchema: z.ZodType<
 > = z.object({
   data: z.array(FileSchema$inboundSchema),
   object: z.string(),
+  total: z.number().int(),
 });
 
 /** @internal */
 export type ListFilesOut$Outbound = {
   data: Array<FileSchema$Outbound>;
   object: string;
+  total: number;
 };
 
 /** @internal */
@@ -39,6 +42,7 @@ export const ListFilesOut$outboundSchema: z.ZodType<
 > = z.object({
   data: z.array(FileSchema$outboundSchema),
   object: z.string(),
+  total: z.number().int(),
 });
 
 /**

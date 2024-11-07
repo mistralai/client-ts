@@ -4,6 +4,7 @@
 
 export * from "./deletemodelv1modelsmodeliddelete.js";
 export * from "./filesapiroutesdeletefile.js";
+export * from "./filesapirouteslistfiles.js";
 export * from "./filesapiroutesretrievefile.js";
 export * from "./filesapiroutesuploadfile.js";
 export * from "./jobsapiroutesfinetuningarchivefinetunedmodel.js";

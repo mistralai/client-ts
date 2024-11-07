@@ -1,11 +1,11 @@
-# Purpose
+# FilePurpose
 
 ## Example Usage
 
 ```typescript
-import { Purpose } from "@mistralai/mistralai/models/operations";
+import { FilePurpose } from "@mistralai/mistralai/models/components";
 
-let value: Purpose = "fine-tune";
+let value: FilePurpose = "fine-tune";
 ```
 
 ## Values
@@ -13,5 +13,5 @@ let value: Purpose = "fine-tune";
 This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
-"fine-tune" | Unrecognized<string>
+"fine-tune" | "batch" | Unrecognized<string>
 ```

@@ -7,7 +7,7 @@ The name of the model to fine-tune.
 ```typescript
 import { FineTuneableModel } from "@mistralai/mistralai/models/components";
 
-let value: FineTuneableModel = "mistral-small-latest";
+let value: FineTuneableModel = "mistral-large-latest";
 ```
 
 ## Values

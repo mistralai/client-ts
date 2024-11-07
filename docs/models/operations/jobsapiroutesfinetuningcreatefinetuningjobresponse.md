@@ -2,12 +2,31 @@
 
 OK
 
-## Example Usage
+
+## Supported Types
+
+### `components.JobOut`
 
 ```typescript
-import { JobsApiRoutesFineTuningCreateFineTuningJobResponse } from "@mistralai/mistralai/models/operations";
+const value: components.JobOut = {
+  id: "211a368d-b420-4447-8ab4-62c0bcc45945",
+  autoStart: false,
+  hyperparameters: {},
+  model: "codestral-latest",
+  status: "QUEUED",
+  jobType: "<value>",
+  createdAt: 799796,
+  modifiedAt: 76956,
+  trainingFiles: [
+    "849fa068-8a42-46f2-be87-e7b6ebb5ca32",
+  ],
+};
+```
 
-let value: JobsApiRoutesFineTuningCreateFineTuningJobResponse = {
+### `components.LegacyJobMetadataOut`
+
+```typescript
+const value: components.LegacyJobMetadataOut = {
   expectedDurationSeconds: 220,
   cost: 10,
   costCurrency: "EUR",
@@ -18,19 +37,5 @@ let value: JobsApiRoutesFineTuningCreateFineTuningJobResponse = {
   epochs: 4.2922,
   trainingSteps: 10,
 };
-```
-
-## Supported Types
-
-### `components.JobOut`
-
-```typescript
-const value: components.JobOut = /* values here */
-```
-
-### `components.LegacyJobMetadataOut`
-
-```typescript
-const value: components.LegacyJobMetadataOut = /* values here */
 ```
 

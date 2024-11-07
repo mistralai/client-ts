@@ -40,10 +40,12 @@ export class Files extends ClientSDK {
    * Returns a list of files that belong to the user's organization.
    */
   async list(
+    request?: operations.FilesApiRoutesListFilesRequest | undefined,
     options?: RequestOptions,
   ): Promise<components.ListFilesOut> {
     return unwrapAsync(filesList(
       this,
+      request,
       options,
     ));
   }

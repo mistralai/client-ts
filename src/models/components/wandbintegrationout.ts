@@ -6,10 +6,12 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
-export const Type = {
+export const WandbIntegrationOutType = {
   Wandb: "wandb",
 } as const;
-export type Type = ClosedEnum<typeof Type>;
+export type WandbIntegrationOutType = ClosedEnum<
+  typeof WandbIntegrationOutType
+>;
 
 export type WandbIntegrationOut = {
   type?: "wandb" | undefined;
@@ -25,23 +27,24 @@ export type WandbIntegrationOut = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const WandbIntegrationOutType$inboundSchema: z.ZodNativeEnum<
+  typeof WandbIntegrationOutType
+> = z.nativeEnum(WandbIntegrationOutType);
 
 /** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
+export const WandbIntegrationOutType$outboundSchema: z.ZodNativeEnum<
+  typeof WandbIntegrationOutType
+> = WandbIntegrationOutType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Type$ {
-  /** @deprecated use `Type$inboundSchema` instead. */
-  export const inboundSchema = Type$inboundSchema;
-  /** @deprecated use `Type$outboundSchema` instead. */
-  export const outboundSchema = Type$outboundSchema;
+export namespace WandbIntegrationOutType$ {
+  /** @deprecated use `WandbIntegrationOutType$inboundSchema` instead. */
+  export const inboundSchema = WandbIntegrationOutType$inboundSchema;
+  /** @deprecated use `WandbIntegrationOutType$outboundSchema` instead. */
+  export const outboundSchema = WandbIntegrationOutType$outboundSchema;
 }
 
 /** @internal */

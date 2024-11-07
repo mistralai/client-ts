@@ -1,24 +1,21 @@
 # UserMessageContent
 
-## Example Usage
-
-```typescript
-import { UserMessageContent } from "@mistralai/mistralai/models/components";
-
-let value: UserMessageContent = "<value>";
-```
 
 ## Supported Types
 
 ### `string`
 
 ```typescript
-const value: string = /* values here */
+const value: string = "<value>";
 ```
 
 ### `components.ContentChunk[]`
 
 ```typescript
-const value: components.ContentChunk[] = /* values here */
+const value: components.ContentChunk[] = [
+  {
+    imageUrl: "https://whispered-embarrassment.biz",
+  },
+];
 ```
 

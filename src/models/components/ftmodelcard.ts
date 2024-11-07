@@ -4,12 +4,18 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import {
   ModelCapabilities,
   ModelCapabilities$inboundSchema,
   ModelCapabilities$Outbound,
   ModelCapabilities$outboundSchema,
 } from "./modelcapabilities.js";
+
+export const FTModelCardType = {
+  FineTuned: "fine-tuned",
+} as const;
+export type FTModelCardType = ClosedEnum<typeof FTModelCardType>;
 
 /**
  * Extra fields for fine-tuned models.
@@ -19,17 +25,39 @@ export type FTModelCard = {
   object?: string | undefined;
   created?: number | undefined;
   ownedBy?: string | undefined;
+  capabilities: ModelCapabilities;
   name?: string | null | undefined;
   description?: string | null | undefined;
   maxContextLength?: number | undefined;
   aliases?: Array<string> | undefined;
   deprecation?: Date | null | undefined;
-  capabilities: ModelCapabilities;
+  defaultModelTemperature?: number | null | undefined;
   type?: "fine-tuned" | undefined;
   job: string;
   root: string;
   archived?: boolean | undefined;
 };
+
+/** @internal */
+export const FTModelCardType$inboundSchema: z.ZodNativeEnum<
+  typeof FTModelCardType
+> = z.nativeEnum(FTModelCardType);
+
+/** @internal */
+export const FTModelCardType$outboundSchema: z.ZodNativeEnum<
+  typeof FTModelCardType
+> = FTModelCardType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FTModelCardType$ {
+  /** @deprecated use `FTModelCardType$inboundSchema` instead. */
+  export const inboundSchema = FTModelCardType$inboundSchema;
+  /** @deprecated use `FTModelCardType$outboundSchema` instead. */
+  export const outboundSchema = FTModelCardType$outboundSchema;
+}
 
 /** @internal */
 export const FTModelCard$inboundSchema: z.ZodType<
@@ -41,6 +69,7 @@ export const FTModelCard$inboundSchema: z.ZodType<
   object: z.string().default("model"),
   created: z.number().int().optional(),
   owned_by: z.string().default("mistralai"),
+  capabilities: ModelCapabilities$inboundSchema,
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   max_context_length: z.number().int().default(32768),
@@ -48,7 +77,7 @@ export const FTModelCard$inboundSchema: z.ZodType<
   deprecation: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  capabilities: ModelCapabilities$inboundSchema,
+  default_model_temperature: z.nullable(z.number()).optional(),
   type: z.literal("fine-tuned").default("fine-tuned"),
   job: z.string(),
   root: z.string(),
@@ -57,6 +86,7 @@ export const FTModelCard$inboundSchema: z.ZodType<
   return remap$(v, {
     "owned_by": "ownedBy",
     "max_context_length": "maxContextLength",
+    "default_model_temperature": "defaultModelTemperature",
   });
 });
 
@@ -66,12 +96,13 @@ export type FTModelCard$Outbound = {
   object: string;
   created?: number | undefined;
   owned_by: string;
+  capabilities: ModelCapabilities$Outbound;
   name?: string | null | undefined;
   description?: string | null | undefined;
   max_context_length: number;
   aliases?: Array<string> | undefined;
   deprecation?: string | null | undefined;
-  capabilities: ModelCapabilities$Outbound;
+  default_model_temperature?: number | null | undefined;
   type: "fine-tuned";
   job: string;
   root: string;
@@ -88,13 +119,14 @@ export const FTModelCard$outboundSchema: z.ZodType<
   object: z.string().default("model"),
   created: z.number().int().optional(),
   ownedBy: z.string().default("mistralai"),
+  capabilities: ModelCapabilities$outboundSchema,
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   maxContextLength: z.number().int().default(32768),
   aliases: z.array(z.string()).optional(),
   deprecation: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  capabilities: ModelCapabilities$outboundSchema,
-  type: z.literal("fine-tuned").default("fine-tuned" as const),
+  defaultModelTemperature: z.nullable(z.number()).optional(),
+  type: z.literal("fine-tuned").default("fine-tuned"),
   job: z.string(),
   root: z.string(),
   archived: z.boolean().default(false),
@@ -102,6 +134,7 @@ export const FTModelCard$outboundSchema: z.ZodType<
   return remap$(v, {
     ownedBy: "owned_by",
     maxContextLength: "max_context_length",
+    defaultModelTemperature: "default_model_temperature",
   });
 });
 

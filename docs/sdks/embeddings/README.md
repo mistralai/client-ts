@@ -24,12 +24,15 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.embeddings.create({
-    inputs: "<value>",
+    inputs: [
+      "Embed this sentence.",
+      "As well as this one.",
+    ],
     model: "Wrangler",
   });
-  
+
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -51,7 +54,10 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await embeddingsCreate(mistral, {
-    inputs: "<value>",
+    inputs: [
+      "Embed this sentence.",
+      "As well as this one.",
+    ],
     model: "Wrangler",
   });
 
@@ -62,7 +68,7 @@ async function run() {
   const { value: result } = res;
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -83,7 +89,7 @@ run();
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |

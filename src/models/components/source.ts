@@ -3,21 +3,32 @@
  */
 
 import * as z from "zod";
-import { ClosedEnum } from "../../types/enums.js";
+import {
+  catchUnrecognizedEnum,
+  OpenEnum,
+  Unrecognized,
+} from "../../types/enums.js";
 
 export const Source = {
   Upload: "upload",
   Repository: "repository",
+  Mistral: "mistral",
 } as const;
-export type Source = ClosedEnum<typeof Source>;
+export type Source = OpenEnum<typeof Source>;
 
 /** @internal */
-export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
-  .nativeEnum(Source);
+export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> = z
+  .union([
+    z.nativeEnum(Source),
+    z.string().transform(catchUnrecognizedEnum),
+  ]);
 
 /** @internal */
-export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
-  Source$inboundSchema;
+export const Source$outboundSchema: z.ZodType<Source, z.ZodTypeDef, Source> = z
+  .union([
+    z.nativeEnum(Source),
+    z.string().and(z.custom<Unrecognized<string>>()),
+  ]);
 
 /**
  * @internal
