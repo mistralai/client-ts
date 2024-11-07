@@ -3,6 +3,7 @@ import {SDKOptions} from "../lib/config.js";
 import {ClientSDK} from "../lib/sdks.js";
 import {Chat} from "./chat";
 import {Fim} from "./fim";
+import {SDKHooks} from "../hooks";
 
 export type GoogleCloudOptions = {
   /** The region of the Google Cloud AI Platform endpoint */
@@ -48,8 +49,14 @@ export class MistralGoogleCloud extends ClientSDK {
       }
     }
 
+    const hooks = new SDKHooks();
+
+    const superOptions: SDKOptions & { hooks?: SDKHooks } = options;
+    superOptions.hooks = hooks;
+
     super(options)
-    this.hooks$.registerBeforeCreateRequestHook({
+
+    hooks.registerBeforeCreateRequestHook({
       beforeCreateRequest: (_, input) => {
         if (!projectId) {
           throw new Error("projectId was not resolved by the auth hook");
@@ -102,12 +109,12 @@ export class MistralGoogleCloud extends ClientSDK {
 
   private _chat?: Chat;
   get chat(): Chat {
-    return (this._chat ??= new Chat(this.options$));
+    return (this._chat ??= new Chat(this._options));
   }
 
 
   private _fim?: Fim;
   get fim(): Fim {
-    return (this._fim ??= new Fim(this.options$));
+    return (this._fim ??= new Fim(this._options));
   }
 }

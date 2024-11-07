@@ -23,6 +23,6 @@ export class MistralAzure extends ClientSDK {
 
     private _chat?: Chat;
     get chat(): Chat {
-        return (this._chat ??= new Chat(this.options$));
+        return (this._chat ??= new Chat(this._options));
     }
 }
