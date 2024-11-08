@@ -19,7 +19,7 @@ export const UserMessageRole = {
 export type UserMessageRole = ClosedEnum<typeof UserMessageRole>;
 
 export type UserMessage = {
-  content: string | Array<ContentChunk>;
+  content: string | Array<ContentChunk> | null;
   role?: UserMessageRole | undefined;
 };
 
@@ -80,13 +80,15 @@ export const UserMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.union([z.string(), z.array(ContentChunk$inboundSchema)]),
+  content: z.nullable(
+    z.union([z.string(), z.array(ContentChunk$inboundSchema)]),
+  ),
   role: UserMessageRole$inboundSchema.default("user"),
 });
 
 /** @internal */
 export type UserMessage$Outbound = {
-  content: string | Array<ContentChunk$Outbound>;
+  content: string | Array<ContentChunk$Outbound> | null;
   role: string;
 };
 
@@ -96,7 +98,9 @@ export const UserMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserMessage
 > = z.object({
-  content: z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+  content: z.nullable(
+    z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+  ),
   role: UserMessageRole$outboundSchema.default("user"),
 });
 

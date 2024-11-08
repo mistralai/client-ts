@@ -72,6 +72,12 @@ export class EventStream<Event extends ServerEvent<unknown>> {
           yield event;
         }
       }
+    } catch (e: unknown) {
+      if (e instanceof Error && e.name === "AbortError") {
+        return;
+      }
+
+      throw e;
     } finally {
       reader.releaseLock();
     }

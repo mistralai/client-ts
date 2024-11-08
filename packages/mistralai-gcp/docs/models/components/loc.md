@@ -1,24 +1,17 @@
 # Loc
 
-## Example Usage
-
-```typescript
-import { Loc } from "@mistralai/mistralai-gcp/models/components";
-
-let value: Loc = "<value>";
-```
 
 ## Supported Types
 
 ### `string`
 
 ```typescript
-const value: string = /* values here */
+const value: string = "<value>";
 ```
 
 ### `number`
 
 ```typescript
-const value: number = /* values here */
+const value: number = 528895;
 ```
 

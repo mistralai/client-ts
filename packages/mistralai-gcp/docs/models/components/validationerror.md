@@ -7,7 +7,7 @@ import { ValidationError } from "@mistralai/mistralai-gcp/models/components";
 
 let value: ValidationError = {
   loc: [
-    "<value>",
+    925597,
   ],
   msg: "<value>",
   type: "<value>",
