@@ -4,10 +4,10 @@
 
 import * as z from "zod";
 import { MistralGoogleCloudCore } from "../core.js";
-import { encodeJSON as encodeJSON$ } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import { EventStream } from "../lib/event-streams.js";
-import * as m$ from "../lib/matchers.js";
-import * as schemas$ from "../lib/schemas.js";
+import * as M from "../lib/matchers.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
  */
 export async function fimStream(
-  client$: MistralGoogleCloudCore,
+  client: MistralGoogleCloudCore,
   request: components.FIMCompletionStreamRequest,
   options?: RequestOptions,
 ): Promise<
@@ -47,66 +47,68 @@ export async function fimStream(
     | ConnectionError
   >
 > {
-  const input$ = request;
-
-  const parsed$ = schemas$.safeParse(
-    input$,
-    (value$) =>
-      components.FIMCompletionStreamRequest$outboundSchema.parse(value$),
+  const parsed = safeParse(
+    request,
+    (value) =>
+      components.FIMCompletionStreamRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
-  if (!parsed$.ok) {
-    return parsed$;
+  if (!parsed.ok) {
+    return parsed;
   }
-  const payload$ = parsed$.value;
-  const body$ = encodeJSON$("body", payload$, { explode: true });
+  const payload = parsed.value;
+  const body = encodeJSON("body", payload, { explode: true });
 
-  const path$ = pathToFunc("/streamRawPredict#fim")();
+  const path = pathToFunc("/streamRawPredict#fim")();
 
-  const headers$ = new Headers({
+  const headers = new Headers({
     "Content-Type": "application/json",
     Accept: "text/event-stream",
   });
 
-  const apiKey$ = await extractSecurity(client$.options$.apiKey);
-  const security$ = apiKey$ == null ? {} : { apiKey: apiKey$ };
+  const secConfig = await extractSecurity(client._options.apiKey);
+  const securityInput = secConfig == null ? {} : { apiKey: secConfig };
+  const requestSecurity = resolveGlobalSecurity(securityInput);
+
   const context = {
     operationID: "stream_fim",
     oAuth2Scopes: [],
-    securitySource: client$.options$.apiKey,
+    securitySource: client._options.apiKey,
+    retryConfig: options?.retries
+      || client._options.retryConfig
+      || { strategy: "none" },
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
-  const securitySettings$ = resolveGlobalSecurity(security$);
 
-  const requestRes = client$.createRequest$(context, {
-    security: securitySettings$,
+  const requestRes = client._createRequest(context, {
+    security: requestSecurity,
     method: "POST",
-    path: path$,
-    headers: headers$,
-    body: body$,
-    timeoutMs: options?.timeoutMs || client$.options$.timeoutMs || -1,
+    path: path,
+    headers: headers,
+    body: body,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
     return requestRes;
   }
-  const request$ = requestRes.value;
+  const req = requestRes.value;
 
-  const doResult = await client$.do$(request$, {
+  const doResult = await client._do(req, {
     context,
     errorCodes: ["422", "4XX", "5XX"],
-    retryConfig: options?.retries
-      || client$.options$.retryConfig,
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
     return doResult;
   }
   const response = doResult.value;
 
-  const responseFields$ = {
-    HttpMeta: { Response: response, Request: request$ },
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
   };
 
-  const [result$] = await m$.match<
+  const [result] = await M.match<
     EventStream<components.CompletionEvent>,
     | errors.HTTPValidationError
     | SDKError
@@ -117,7 +119,7 @@ export async function fimStream(
     | RequestTimeoutError
     | ConnectionError
   >(
-    m$.sse(
+    M.sse(
       200,
       z.instanceof(ReadableStream<Uint8Array>).transform(stream => {
         return new EventStream({
@@ -130,12 +132,12 @@ export async function fimStream(
       }),
       { sseSentinel: "[DONE]" },
     ),
-    m$.jsonErr(422, errors.HTTPValidationError$inboundSchema),
-    m$.fail(["4XX", "5XX"]),
-  )(response, { extraFields: responseFields$ });
-  if (!result$.ok) {
-    return result$;
+    M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
+    M.fail(["4XX", "5XX"]),
+  )(response, { extraFields: responseFields });
+  if (!result.ok) {
+    return result;
   }
 
-  return result$;
+  return result;
 }

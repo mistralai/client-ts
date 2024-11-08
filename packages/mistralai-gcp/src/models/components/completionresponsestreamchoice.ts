@@ -4,7 +4,11 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
+import {
+  catchUnrecognizedEnum,
+  OpenEnum,
+  Unrecognized,
+} from "../../types/enums.js";
 import {
   DeltaMessage,
   DeltaMessage$inboundSchema,
@@ -18,7 +22,7 @@ export const FinishReason = {
   Error: "error",
   ToolCalls: "tool_calls",
 } as const;
-export type FinishReason = ClosedEnum<typeof FinishReason>;
+export type FinishReason = OpenEnum<typeof FinishReason>;
 
 export type CompletionResponseStreamChoice = {
   index: number;
@@ -27,12 +31,25 @@ export type CompletionResponseStreamChoice = {
 };
 
 /** @internal */
-export const FinishReason$inboundSchema: z.ZodNativeEnum<typeof FinishReason> =
-  z.nativeEnum(FinishReason);
+export const FinishReason$inboundSchema: z.ZodType<
+  FinishReason,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .union([
+    z.nativeEnum(FinishReason),
+    z.string().transform(catchUnrecognizedEnum),
+  ]);
 
 /** @internal */
-export const FinishReason$outboundSchema: z.ZodNativeEnum<typeof FinishReason> =
-  FinishReason$inboundSchema;
+export const FinishReason$outboundSchema: z.ZodType<
+  FinishReason,
+  z.ZodTypeDef,
+  FinishReason
+> = z.union([
+  z.nativeEnum(FinishReason),
+  z.string().and(z.custom<Unrecognized<string>>()),
+]);
 
 /**
  * @internal

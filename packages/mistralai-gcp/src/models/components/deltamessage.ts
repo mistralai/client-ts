@@ -5,17 +5,52 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  ContentChunk,
+  ContentChunk$inboundSchema,
+  ContentChunk$Outbound,
+  ContentChunk$outboundSchema,
+} from "./contentchunk.js";
+import {
   ToolCall,
   ToolCall$inboundSchema,
   ToolCall$Outbound,
   ToolCall$outboundSchema,
 } from "./toolcall.js";
 
+export type Content = string | Array<ContentChunk>;
+
 export type DeltaMessage = {
-  role?: string | undefined;
-  content?: string | null | undefined;
+  role?: string | null | undefined;
+  content?: string | Array<ContentChunk> | null | undefined;
   toolCalls?: Array<ToolCall> | null | undefined;
 };
+
+/** @internal */
+export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
+  z.union([z.string(), z.array(ContentChunk$inboundSchema)]);
+
+/** @internal */
+export type Content$Outbound = string | Array<ContentChunk$Outbound>;
+
+/** @internal */
+export const Content$outboundSchema: z.ZodType<
+  Content$Outbound,
+  z.ZodTypeDef,
+  Content
+> = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Content$ {
+  /** @deprecated use `Content$inboundSchema` instead. */
+  export const inboundSchema = Content$inboundSchema;
+  /** @deprecated use `Content$outboundSchema` instead. */
+  export const outboundSchema = Content$outboundSchema;
+  /** @deprecated use `Content$Outbound` instead. */
+  export type Outbound = Content$Outbound;
+}
 
 /** @internal */
 export const DeltaMessage$inboundSchema: z.ZodType<
@@ -23,8 +58,10 @@ export const DeltaMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  role: z.string().optional(),
-  content: z.nullable(z.string()).optional(),
+  role: z.nullable(z.string()).optional(),
+  content: z.nullable(
+    z.union([z.string(), z.array(ContentChunk$inboundSchema)]),
+  ).optional(),
   tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -34,8 +71,8 @@ export const DeltaMessage$inboundSchema: z.ZodType<
 
 /** @internal */
 export type DeltaMessage$Outbound = {
-  role?: string | undefined;
-  content?: string | null | undefined;
+  role?: string | null | undefined;
+  content?: string | Array<ContentChunk$Outbound> | null | undefined;
   tool_calls?: Array<ToolCall$Outbound> | null | undefined;
 };
 
@@ -45,8 +82,10 @@ export const DeltaMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeltaMessage
 > = z.object({
-  role: z.string().optional(),
-  content: z.nullable(z.string()).optional(),
+  role: z.nullable(z.string()).optional(),
+  content: z.nullable(
+    z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+  ).optional(),
   toolCalls: z.nullable(z.array(ToolCall$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {

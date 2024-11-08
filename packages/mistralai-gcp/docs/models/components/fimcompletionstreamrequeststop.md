@@ -2,25 +2,20 @@
 
 Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
 
-## Example Usage
-
-```typescript
-import { FIMCompletionStreamRequestStop } from "@mistralai/mistralai-gcp/models/components";
-
-let value: FIMCompletionStreamRequestStop = "<value>";
-```
 
 ## Supported Types
 
 ### `string`
 
 ```typescript
-const value: string = /* values here */
+const value: string = "<value>";
 ```
 
 ### `string[]`
 
 ```typescript
-const value: string[] = /* values here */
+const value: string[] = [
+  "<value>",
+];
 ```
 

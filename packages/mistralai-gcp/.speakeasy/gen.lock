@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: 823d9b94fcb9c6588d0af16b7301f4ac
+  docChecksum: 46baf8da7636ea1bf44557571d011045
   docVersion: 0.0.2
-  speakeasyVersion: 1.399.3
-  generationVersion: 2.420.2
-  releaseVersion: 1.1.0
-  configChecksum: 814cc68b27946d6b8e7bc99c8a2cbf1b
+  speakeasyVersion: 1.434.7
+  generationVersion: 2.452.0
+  releaseVersion: 1.3.0
+  configChecksum: 3b3800ab2f8b198bdbd47807fbe76770
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -15,10 +15,10 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.17.5
+    core: 3.18.3
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
-    envVarSecurityUsage: 0.1.1
+    envVarSecurityUsage: 0.1.2
     examples: 2.81.4
     globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
@@ -29,11 +29,12 @@ features:
     openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.1.0
-    serverEvents: 0.1.4
+    sdkHooks: 0.2.0
+    serverEvents: 0.1.5
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
-    unions: 2.85.7
+    tests: 0.7.0
+    unions: 2.85.8
 generatedFiles:
   - .eslintrc.cjs
   - .gitattributes
@@ -43,6 +44,7 @@ generatedFiles:
   - docs/lib/utils/retryconfig.md
   - docs/models/components/arguments.md
   - docs/models/components/assistantmessage.md
+  - docs/models/components/assistantmessagecontent.md
   - docs/models/components/assistantmessagerole.md
   - docs/models/components/chatcompletionchoice.md
   - docs/models/components/chatcompletionchoicefinishreason.md
@@ -76,6 +78,7 @@ generatedFiles:
   - docs/models/components/security.md
   - docs/models/components/stop.md
   - docs/models/components/systemmessage.md
+  - docs/models/components/systemmessagecontent.md
   - docs/models/components/textchunk.md
   - docs/models/components/tool.md
   - docs/models/components/toolcall.md

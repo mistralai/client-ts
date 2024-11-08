@@ -1,9 +1,9 @@
-import {GoogleAuth} from "google-auth-library";
-import {SDKOptions} from "../lib/config.js";
-import {ClientSDK} from "../lib/sdks.js";
-import {Chat} from "./chat";
-import {Fim} from "./fim";
-import {SDKHooks} from "../hooks";
+import { GoogleAuth } from "google-auth-library";
+import { SDKOptions } from "../lib/config.js";
+import { ClientSDK } from "../lib/sdks.js";
+import { Chat } from "./chat";
+import { Fim } from "./fim";
+import { SDKHooks } from "../hooks";
 
 export type GoogleCloudOptions = {
   /** The region of the Google Cloud AI Platform endpoint */
@@ -14,6 +14,21 @@ export type GoogleCloudOptions = {
   region?: string;
   apiKey: () => Promise<string>;
   projectId: string;
+}
+
+const LEGACY_MODEL_ID_FORMAT: { [key: string]: string } = {
+  "codestral-2405": "codestral@2405",
+  "mistral-large-2407": "mistral-large@2407",
+  "mistral-nemo-2407": "mistral-nemo@2407",
+};
+
+function getModelInfo(model: string): [string, string] {
+  let modelId = LEGACY_MODEL_ID_FORMAT[model];
+  if (modelId === undefined) {
+    modelId = model;
+  }
+  model = model.split("-").slice(0, -1).join("-");
+  return [model, modelId];
 }
 
 export class MistralGoogleCloud extends ClientSDK {
@@ -84,19 +99,13 @@ export class MistralGoogleCloud extends ClientSDK {
           throw new Error("body.model is required and must be a string");
         }
 
-        const modelParts = body.model.split("-");
-        if (modelParts.length < 2) {
+        const [model, modelId] = getModelInfo(body.model);
+
+        if (!model || !modelId) {
           throw new Error("model must be in the format 'model-version'");
         }
 
-        const modelVersion = modelParts.pop(); // Get the last element
-        const model = modelParts.join("-"); // Join the rest back together
-
-        if (!model || !modelVersion) {
-          throw new Error("model must be in the format 'model-version'");
-        }
-
-        input.url.pathname = `v1/projects/${projectId}/locations/${options.region}/publishers/mistralai/models/${model}@${modelVersion}:${rawPredictType}`;
+        input.url.pathname = `v1/projects/${projectId}/locations/${options.region}/publishers/mistralai/models/${modelId}:${rawPredictType}`;
 
         body.model = model
 

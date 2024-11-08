@@ -11,7 +11,7 @@ import {
   TextChunk$outboundSchema,
 } from "./textchunk.js";
 
-export type Content = string | Array<TextChunk>;
+export type SystemMessageContent = string | Array<TextChunk>;
 
 export const Role = {
   System: "system",
@@ -24,30 +24,33 @@ export type SystemMessage = {
 };
 
 /** @internal */
-export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
-  z.union([z.string(), z.array(TextChunk$inboundSchema)]);
-
-/** @internal */
-export type Content$Outbound = string | Array<TextChunk$Outbound>;
-
-/** @internal */
-export const Content$outboundSchema: z.ZodType<
-  Content$Outbound,
+export const SystemMessageContent$inboundSchema: z.ZodType<
+  SystemMessageContent,
   z.ZodTypeDef,
-  Content
+  unknown
+> = z.union([z.string(), z.array(TextChunk$inboundSchema)]);
+
+/** @internal */
+export type SystemMessageContent$Outbound = string | Array<TextChunk$Outbound>;
+
+/** @internal */
+export const SystemMessageContent$outboundSchema: z.ZodType<
+  SystemMessageContent$Outbound,
+  z.ZodTypeDef,
+  SystemMessageContent
 > = z.union([z.string(), z.array(TextChunk$outboundSchema)]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Content$ {
-  /** @deprecated use `Content$inboundSchema` instead. */
-  export const inboundSchema = Content$inboundSchema;
-  /** @deprecated use `Content$outboundSchema` instead. */
-  export const outboundSchema = Content$outboundSchema;
-  /** @deprecated use `Content$Outbound` instead. */
-  export type Outbound = Content$Outbound;
+export namespace SystemMessageContent$ {
+  /** @deprecated use `SystemMessageContent$inboundSchema` instead. */
+  export const inboundSchema = SystemMessageContent$inboundSchema;
+  /** @deprecated use `SystemMessageContent$outboundSchema` instead. */
+  export const outboundSchema = SystemMessageContent$outboundSchema;
+  /** @deprecated use `SystemMessageContent$Outbound` instead. */
+  export type Outbound = SystemMessageContent$Outbound;
 }
 
 /** @internal */
