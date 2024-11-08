@@ -16,7 +16,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
 typescript:
-  version: 1.3.0
+  version: 1.3.1
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -24,6 +24,7 @@ typescript:
   additionalPackageJSON: {}
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
+  defaultErrorName: SDKError
   enumFormat: union
   envVarPrefix: MISTRAL
   flattenGlobalSecurity: true

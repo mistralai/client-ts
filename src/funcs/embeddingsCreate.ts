@@ -35,7 +35,7 @@ export async function embeddingsCreate(
 ): Promise<
   Result<
     components.EmbeddingResponse,
-    | errors.HTTPValidationError
+    | errors.PayloadValidationError
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -107,7 +107,7 @@ export async function embeddingsCreate(
 
   const [result] = await M.match<
     components.EmbeddingResponse,
-    | errors.HTTPValidationError
+    | errors.PayloadValidationError
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -117,7 +117,7 @@ export async function embeddingsCreate(
     | ConnectionError
   >(
     M.json(200, components.EmbeddingResponse$inboundSchema),
-    M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
+    M.jsonErr(422, errors.PayloadValidationError$inboundSchema),
     M.fail(["4XX", "5XX"]),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

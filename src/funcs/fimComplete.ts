@@ -35,7 +35,7 @@ export async function fimComplete(
 ): Promise<
   Result<
     components.FIMCompletionResponse,
-    | errors.HTTPValidationError
+    | errors.PayloadValidationError
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -107,7 +107,7 @@ export async function fimComplete(
 
   const [result] = await M.match<
     components.FIMCompletionResponse,
-    | errors.HTTPValidationError
+    | errors.PayloadValidationError
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -117,7 +117,7 @@ export async function fimComplete(
     | ConnectionError
   >(
     M.json(200, components.FIMCompletionResponse$inboundSchema),
-    M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
+    M.jsonErr(422, errors.PayloadValidationError$inboundSchema),
     M.fail(["4XX", "5XX"]),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

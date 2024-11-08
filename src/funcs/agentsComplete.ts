@@ -32,7 +32,7 @@ export async function agentsComplete(
 ): Promise<
   Result<
     components.ChatCompletionResponse,
-    | errors.HTTPValidationError
+    | errors.PayloadValidationError
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -104,7 +104,7 @@ export async function agentsComplete(
 
   const [result] = await M.match<
     components.ChatCompletionResponse,
-    | errors.HTTPValidationError
+    | errors.PayloadValidationError
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -114,7 +114,7 @@ export async function agentsComplete(
     | ConnectionError
   >(
     M.json(200, components.ChatCompletionResponse$inboundSchema),
-    M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
+    M.jsonErr(422, errors.PayloadValidationError$inboundSchema),
     M.fail(["4XX", "5XX"]),
   )(response, { extraFields: responseFields });
   if (!result.ok) {

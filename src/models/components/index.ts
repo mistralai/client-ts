@@ -48,6 +48,7 @@ export * from "./functioncall.js";
 export * from "./functionname.js";
 export * from "./githubrepositoryin.js";
 export * from "./githubrepositoryout.js";
+export * from "./httpvalidationerror.js";
 export * from "./imageurl.js";
 export * from "./imageurlchunk.js";
 export * from "./jobin.js";

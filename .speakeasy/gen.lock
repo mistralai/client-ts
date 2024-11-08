@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: ee15d853ecc28d415d6b33191893a6ff
+  docChecksum: 376006cc2a5f2f90da74747765436115
   docVersion: 0.0.2
-  speakeasyVersion: 1.434.4
-  generationVersion: 2.452.0
-  releaseVersion: 1.3.0
-  configChecksum: d6bf2d23bd8b094865db557c870ba6fc
+  speakeasyVersion: 1.435.1
+  generationVersion: 2.455.2
+  releaseVersion: 1.3.1
+  configChecksum: 592c371e12e0bb88cff133b730e6b426
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -20,6 +20,7 @@ features:
     downloadStreams: 0.1.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
+    errorUnions: 0.1.1
     examples: 2.81.4
     globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
@@ -127,6 +128,7 @@ generatedFiles:
   - docs/models/components/githubrepositoryintype.md
   - docs/models/components/githubrepositoryout.md
   - docs/models/components/githubrepositoryouttype.md
+  - docs/models/components/httpvalidationerror.md
   - docs/models/components/imageurl.md
   - docs/models/components/imageurlchunk.md
   - docs/models/components/imageurlchunkimageurl.md
@@ -190,6 +192,8 @@ generatedFiles:
   - docs/models/components/wandbintegrationouttype.md
   - docs/models/components/wandbintegrationtype.md
   - docs/models/errors/httpvalidationerror.md
+  - docs/models/errors/payloadvalidationerror.md
+  - docs/models/errors/wrappedhttpvalidationerror.md
   - docs/models/operations/deletemodelv1modelsmodeliddeleterequest.md
   - docs/models/operations/filesapiroutesdeletefilerequest.md
   - docs/models/operations/filesapiroutesdownloadfilerequest.md
@@ -322,6 +326,7 @@ generatedFiles:
   - src/models/components/functionname.ts
   - src/models/components/githubrepositoryin.ts
   - src/models/components/githubrepositoryout.ts
+  - src/models/components/httpvalidationerror.ts
   - src/models/components/imageurl.ts
   - src/models/components/imageurlchunk.ts
   - src/models/components/index.ts
@@ -362,8 +367,10 @@ generatedFiles:
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/httpvalidationerror.ts
   - src/models/errors/index.ts
+  - src/models/errors/payloadvalidationerror.ts
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/wrappedhttpvalidationerror.ts
   - src/models/operations/deletemodelv1modelsmodeliddelete.ts
   - src/models/operations/filesapiroutesdeletefile.ts
   - src/models/operations/filesapiroutesdownloadfile.ts
