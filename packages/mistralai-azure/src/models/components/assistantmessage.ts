@@ -6,11 +6,19 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
+  ContentChunk,
+  ContentChunk$inboundSchema,
+  ContentChunk$Outbound,
+  ContentChunk$outboundSchema,
+} from "./contentchunk.js";
+import {
   ToolCall,
   ToolCall$inboundSchema,
   ToolCall$Outbound,
   ToolCall$outboundSchema,
 } from "./toolcall.js";
+
+export type AssistantMessageContent = string | Array<ContentChunk>;
 
 export const AssistantMessageRole = {
   Assistant: "assistant",
@@ -18,14 +26,43 @@ export const AssistantMessageRole = {
 export type AssistantMessageRole = ClosedEnum<typeof AssistantMessageRole>;
 
 export type AssistantMessage = {
-  content?: string | null | undefined;
+  content?: string | Array<ContentChunk> | null | undefined;
   toolCalls?: Array<ToolCall> | null | undefined;
-  /**
-   * Set this to `true` when adding an assistant message as prefix to condition the model response. The role of the prefix message is to force the model to start its answer by the content of the message.
-   */
   prefix?: boolean | undefined;
   role?: AssistantMessageRole | undefined;
 };
+
+/** @internal */
+export const AssistantMessageContent$inboundSchema: z.ZodType<
+  AssistantMessageContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(ContentChunk$inboundSchema)]);
+
+/** @internal */
+export type AssistantMessageContent$Outbound =
+  | string
+  | Array<ContentChunk$Outbound>;
+
+/** @internal */
+export const AssistantMessageContent$outboundSchema: z.ZodType<
+  AssistantMessageContent$Outbound,
+  z.ZodTypeDef,
+  AssistantMessageContent
+> = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AssistantMessageContent$ {
+  /** @deprecated use `AssistantMessageContent$inboundSchema` instead. */
+  export const inboundSchema = AssistantMessageContent$inboundSchema;
+  /** @deprecated use `AssistantMessageContent$outboundSchema` instead. */
+  export const outboundSchema = AssistantMessageContent$outboundSchema;
+  /** @deprecated use `AssistantMessageContent$Outbound` instead. */
+  export type Outbound = AssistantMessageContent$Outbound;
+}
 
 /** @internal */
 export const AssistantMessageRole$inboundSchema: z.ZodNativeEnum<
@@ -54,7 +91,9 @@ export const AssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.nullable(z.string()).optional(),
+  content: z.nullable(
+    z.union([z.string(), z.array(ContentChunk$inboundSchema)]),
+  ).optional(),
   tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
   prefix: z.boolean().default(false),
   role: AssistantMessageRole$inboundSchema.default("assistant"),
@@ -66,7 +105,7 @@ export const AssistantMessage$inboundSchema: z.ZodType<
 
 /** @internal */
 export type AssistantMessage$Outbound = {
-  content?: string | null | undefined;
+  content?: string | Array<ContentChunk$Outbound> | null | undefined;
   tool_calls?: Array<ToolCall$Outbound> | null | undefined;
   prefix: boolean;
   role: string;
@@ -78,7 +117,9 @@ export const AssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AssistantMessage
 > = z.object({
-  content: z.nullable(z.string()).optional(),
+  content: z.nullable(
+    z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+  ).optional(),
   toolCalls: z.nullable(z.array(ToolCall$outboundSchema)).optional(),
   prefix: z.boolean().default(false),
   role: AssistantMessageRole$outboundSchema.default("assistant"),

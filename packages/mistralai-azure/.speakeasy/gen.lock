@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: e99cb4d498ede912c81ab20b7828c0e3
+  docChecksum: 0f195020b1080b5c3b1fc5834d30a929
   docVersion: 0.0.2
-  speakeasyVersion: 1.399.3
-  generationVersion: 2.420.2
-  releaseVersion: 1.1.0
-  configChecksum: 394c4e8111cab57180b9bf30fa72d171
+  speakeasyVersion: 1.434.7
+  generationVersion: 2.452.0
+  releaseVersion: 1.3.0
+  configChecksum: 55c7ae5ef7c8b3cba4660d8a57efc248
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
@@ -15,10 +15,10 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.17.5
+    core: 3.18.3
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
-    envVarSecurityUsage: 0.1.1
+    envVarSecurityUsage: 0.1.2
     examples: 2.81.4
     globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
@@ -29,11 +29,12 @@ features:
     openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.1.0
-    serverEvents: 0.1.4
+    sdkHooks: 0.2.0
+    serverEvents: 0.1.5
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
-    unions: 2.85.7
+    tests: 0.7.0
+    unions: 2.85.8
 generatedFiles:
   - .eslintrc.cjs
   - .gitattributes
@@ -43,6 +44,7 @@ generatedFiles:
   - docs/lib/utils/retryconfig.md
   - docs/models/components/arguments.md
   - docs/models/components/assistantmessage.md
+  - docs/models/components/assistantmessagecontent.md
   - docs/models/components/assistantmessagerole.md
   - docs/models/components/chatcompletionchoice.md
   - docs/models/components/chatcompletionchoicefinishreason.md
@@ -71,6 +73,7 @@ generatedFiles:
   - docs/models/components/security.md
   - docs/models/components/stop.md
   - docs/models/components/systemmessage.md
+  - docs/models/components/systemmessagecontent.md
   - docs/models/components/textchunk.md
   - docs/models/components/tool.md
   - docs/models/components/toolcall.md
