@@ -6,7 +6,11 @@
 import { UserMessage } from "@mistralai/mistralai-azure/models/components";
 
 let value: UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+    },
+  ],
 };
 ```
 

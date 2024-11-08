@@ -1,4 +1,4 @@
-# Content
+# SystemMessageContent
 
 
 ## Supported Types
@@ -9,10 +9,10 @@
 const value: string = "<value>";
 ```
 
-### `components.ContentChunk[]`
+### `components.TextChunk[]`
 
 ```typescript
-const value: components.ContentChunk[] = [
+const value: components.TextChunk[] = [
   {
     text: "<value>",
   },

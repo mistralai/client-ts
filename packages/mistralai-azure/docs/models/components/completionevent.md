@@ -8,7 +8,7 @@ import { CompletionEvent } from "@mistralai/mistralai-azure/models/components";
 let value: CompletionEvent = {
   data: {
     id: "<id>",
-    model: "Model S",
+    model: "Golf",
     usage: {
       promptTokens: 16,
       completionTokens: 34,
@@ -16,7 +16,7 @@ let value: CompletionEvent = {
     },
     choices: [
       {
-        index: 592845,
+        index: 715190,
         delta: {},
         finishReason: "error",
       },
