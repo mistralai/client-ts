@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: 0f195020b1080b5c3b1fc5834d30a929
+  docChecksum: 8e53e1e879f29330a549f0df516740de
   docVersion: 0.0.2
-  speakeasyVersion: 1.434.7
-  generationVersion: 2.452.0
-  releaseVersion: 1.3.0
-  configChecksum: 55c7ae5ef7c8b3cba4660d8a57efc248
+  speakeasyVersion: 1.435.1
+  generationVersion: 2.455.2
+  releaseVersion: 1.3.1
+  configChecksum: 003b83d3c40dab3a6fbc894a958541d1
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
@@ -19,6 +19,7 @@ features:
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
+    errorUnions: 0.1.1
     examples: 2.81.4
     globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
@@ -65,6 +66,7 @@ generatedFiles:
   - docs/models/components/functioncall.md
   - docs/models/components/functionname.md
   - docs/models/components/functiont.md
+  - docs/models/components/httpvalidationerror.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
   - docs/models/components/responseformat.md
@@ -89,6 +91,8 @@ generatedFiles:
   - docs/models/components/usermessagerole.md
   - docs/models/components/validationerror.md
   - docs/models/errors/httpvalidationerror.md
+  - docs/models/errors/payloadvalidationerror.md
+  - docs/models/errors/wrappedhttpvalidationerror.md
   - jsr.json
   - package.json
   - src/core.ts
@@ -128,6 +132,7 @@ generatedFiles:
   - src/models/components/function.ts
   - src/models/components/functioncall.ts
   - src/models/components/functionname.ts
+  - src/models/components/httpvalidationerror.ts
   - src/models/components/index.ts
   - src/models/components/responseformat.ts
   - src/models/components/responseformats.ts
@@ -146,8 +151,10 @@ generatedFiles:
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/httpvalidationerror.ts
   - src/models/errors/index.ts
+  - src/models/errors/payloadvalidationerror.ts
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/wrappedhttpvalidationerror.ts
   - src/sdk/chat.ts
   - src/sdk/index.ts
   - src/types/blobs.ts
