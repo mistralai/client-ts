@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: 46baf8da7636ea1bf44557571d011045
+  docChecksum: 8bc1c90dedd2c59748c2223094996bd8
   docVersion: 0.0.2
-  speakeasyVersion: 1.434.7
-  generationVersion: 2.452.0
-  releaseVersion: 1.3.0
-  configChecksum: 3b3800ab2f8b198bdbd47807fbe76770
+  speakeasyVersion: 1.435.1
+  generationVersion: 2.455.2
+  releaseVersion: 1.3.1
+  configChecksum: 0e5490b5f6a45163ed1ce89547eb8e70
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -19,6 +19,7 @@ features:
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
+    errorUnions: 0.1.1
     examples: 2.81.4
     globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
@@ -70,6 +71,7 @@ generatedFiles:
   - docs/models/components/functioncall.md
   - docs/models/components/functionname.md
   - docs/models/components/functiont.md
+  - docs/models/components/httpvalidationerror.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
   - docs/models/components/responseformat.md
@@ -94,6 +96,8 @@ generatedFiles:
   - docs/models/components/usermessagerole.md
   - docs/models/components/validationerror.md
   - docs/models/errors/httpvalidationerror.md
+  - docs/models/errors/payloadvalidationerror.md
+  - docs/models/errors/wrappedhttpvalidationerror.md
   - jsr.json
   - package.json
   - src/core.ts
@@ -137,6 +141,7 @@ generatedFiles:
   - src/models/components/function.ts
   - src/models/components/functioncall.ts
   - src/models/components/functionname.ts
+  - src/models/components/httpvalidationerror.ts
   - src/models/components/index.ts
   - src/models/components/responseformat.ts
   - src/models/components/responseformats.ts
@@ -155,8 +160,10 @@ generatedFiles:
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/httpvalidationerror.ts
   - src/models/errors/index.ts
+  - src/models/errors/payloadvalidationerror.ts
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/wrappedhttpvalidationerror.ts
   - src/sdk/chat.ts
   - src/sdk/fim.ts
   - src/sdk/index.ts

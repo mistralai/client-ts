@@ -284,8 +284,8 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
   tools: z.nullable(z.array(Tool$inboundSchema)).optional(),
   tool_choice: z.union([ToolChoice$inboundSchema, ToolChoiceEnum$inboundSchema])
     .optional(),
-  presence_penalty: z.number().default(0),
-  frequency_penalty: z.number().default(0),
+  presence_penalty: z.number().optional(),
+  frequency_penalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -317,8 +317,8 @@ export type ChatCompletionStreamRequest$Outbound = {
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
-  presence_penalty: number;
-  frequency_penalty: number;
+  presence_penalty?: number | undefined;
+  frequency_penalty?: number | undefined;
   n?: number | null | undefined;
 };
 
@@ -365,8 +365,8 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),
-  presencePenalty: z.number().default(0),
-  frequencyPenalty: z.number().default(0),
+  presencePenalty: z.number().optional(),
+  frequencyPenalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {

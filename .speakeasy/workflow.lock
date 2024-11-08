@@ -1,4 +1,4 @@
-speakeasyVersion: 1.434.7
+speakeasyVersion: 1.435.1
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
@@ -9,8 +9,8 @@ sources:
             - main
     mistral-google-cloud-source:
         sourceNamespace: mistral-openapi-google-cloud
-        sourceRevisionDigest: sha256:b2ce8e0e63674ea7ccfa3a75ff231bb97a39748331bcc0a3629f29c158f5b31e
-        sourceBlobDigest: sha256:a895adbf903776492b28daa3dd8c624f509decbbfe9ca6cda6510a33226604be
+        sourceRevisionDigest: sha256:9e180387983037c6dc79c1b4fd558747be7eaf5dfbb8dab5350c004c7c68a70e
+        sourceBlobDigest: sha256:c649877b4ff61aaed57d05ce62b9caf8b2c4ae5fe81f76cc5dd5af8f4299d716
         tags:
             - latest
             - main
@@ -32,10 +32,10 @@ targets:
     mistralai-gcp-sdk:
         source: mistral-google-cloud-source
         sourceNamespace: mistral-openapi-google-cloud
-        sourceRevisionDigest: sha256:b2ce8e0e63674ea7ccfa3a75ff231bb97a39748331bcc0a3629f29c158f5b31e
-        sourceBlobDigest: sha256:a895adbf903776492b28daa3dd8c624f509decbbfe9ca6cda6510a33226604be
+        sourceRevisionDigest: sha256:9e180387983037c6dc79c1b4fd558747be7eaf5dfbb8dab5350c004c7c68a70e
+        sourceBlobDigest: sha256:c649877b4ff61aaed57d05ce62b9caf8b2c4ae5fe81f76cc5dd5af8f4299d716
         codeSamplesNamespace: mistral-openapi-google-cloud-code-samples
-        codeSamplesRevisionDigest: sha256:5126fed27553befa9735d0e0c2abdc089d6f6a22efe89475df630e375b496241
+        codeSamplesRevisionDigest: sha256:5792fe7fea37004eab3fb1992a01bff04a70a8b890fc2ff42734a511fa59ca3b
     mistralai-sdk:
         source: mistral-openapi
         sourceNamespace: mistral-openapi

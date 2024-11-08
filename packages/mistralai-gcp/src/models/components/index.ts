@@ -18,6 +18,7 @@ export * from "./fimcompletionstreamrequest.js";
 export * from "./function.js";
 export * from "./functioncall.js";
 export * from "./functionname.js";
+export * from "./httpvalidationerror.js";
 export * from "./responseformat.js";
 export * from "./responseformats.js";
 export * from "./security.js";
