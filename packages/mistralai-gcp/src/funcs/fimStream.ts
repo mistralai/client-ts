@@ -73,6 +73,9 @@ export async function fimStream(
   const context = {
     operationID: "stream_fim",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

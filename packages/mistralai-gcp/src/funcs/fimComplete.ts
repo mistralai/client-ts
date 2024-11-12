@@ -70,6 +70,9 @@ export async function fimComplete(
   const context = {
     operationID: "fim_completion_v1_fim_completions_post",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig
