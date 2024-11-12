@@ -77,6 +77,9 @@ export async function fineTuningJobsGet(
   const context = {
     operationID: "jobs_api_routes_fine_tuning_get_fine_tuning_job",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

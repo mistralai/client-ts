@@ -80,6 +80,9 @@ export async function modelsDelete(
   const context = {
     operationID: "delete_model_v1_models__model_id__delete",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

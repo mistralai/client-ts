@@ -79,6 +79,9 @@ export async function modelsRetrieve(
   const context = {
     operationID: "retrieve_model_v1_models__model_id__get",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

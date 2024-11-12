@@ -76,6 +76,9 @@ export async function filesRetrieve(
   const context = {
     operationID: "files_api_routes_retrieve_file",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

@@ -80,6 +80,9 @@ export async function batchJobsList(
   const context = {
     operationID: "jobs_api_routes_batch_get_batch_jobs",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

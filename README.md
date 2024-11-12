@@ -436,10 +436,10 @@ If a HTTP request fails, an operation my also throw an error from the `models/er
 
 In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `list` method may throw the following errors:
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type                 | Status Code | Content Type     |
+| -------------------------- | ----------- | ---------------- |
+| errors.HTTPValidationError | 422         | application/json |
+| errors.SDKError            | 4XX, 5XX    | \*/\*            |
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
@@ -492,11 +492,13 @@ Validation errors can also occur when either method arguments or data returned f
 
 ### Select Server by Name
 
-You can override the default server globally by passing a server name to the `server` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name | Server | Variables |
-| ----- | ------ | --------- |
-| `eu` | `https://api.mistral.ai` | None |
+| Name | Server                   |
+| ---- | ------------------------ |
+| `eu` | `https://api.mistral.ai` |
+
+#### Example
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
@@ -517,11 +519,9 @@ run();
 
 ```
 
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
-
+The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -598,9 +598,9 @@ const sdk = new Mistral({ httpClient });
 
 This SDK supports the following security scheme globally:
 
-| Name                 | Type                 | Scheme               | Environment Variable |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `apiKey`             | http                 | HTTP Bearer          | `MISTRAL_API_KEY`    |
+| Name     | Type | Scheme      | Environment Variable |
+| -------- | ---- | ----------- | -------------------- |
+| `apiKey` | http | HTTP Bearer | `MISTRAL_API_KEY`    |
 
 To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
 ```typescript

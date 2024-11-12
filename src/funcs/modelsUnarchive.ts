@@ -80,6 +80,9 @@ export async function modelsUnarchive(
   const context = {
     operationID: "jobs_api_routes_fine_tuning_unarchive_fine_tuned_model",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

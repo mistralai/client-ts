@@ -70,6 +70,9 @@ export async function embeddingsCreate(
   const context = {
     operationID: "embeddings_v1_embeddings_post",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

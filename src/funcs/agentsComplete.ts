@@ -67,6 +67,9 @@ export async function agentsComplete(
   const context = {
     operationID: "agents_completion_v1_agents_completions_post",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig
