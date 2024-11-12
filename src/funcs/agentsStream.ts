@@ -73,6 +73,9 @@ export async function agentsStream(
   const context = {
     operationID: "stream_agents",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

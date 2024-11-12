@@ -93,6 +93,9 @@ export async function filesUpload(
   const context = {
     operationID: "files_api_routes_upload_file",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

@@ -67,6 +67,9 @@ export async function classifiersModerate(
   const context = {
     operationID: "moderations_v1_moderations_post",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

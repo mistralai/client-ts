@@ -80,6 +80,9 @@ export async function modelsArchive(
   const context = {
     operationID: "jobs_api_routes_fine_tuning_archive_fine_tuned_model",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

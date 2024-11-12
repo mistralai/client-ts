@@ -67,6 +67,9 @@ export async function classifiersModerateChat(
   const context = {
     operationID: "moderations_chat_v1_chat_moderations_post",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

@@ -55,6 +55,9 @@ export async function modelsList(
   const context = {
     operationID: "list_models_v1_models_get",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

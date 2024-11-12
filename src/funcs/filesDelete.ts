@@ -76,6 +76,9 @@ export async function filesDelete(
   const context = {
     operationID: "files_api_routes_delete_file",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

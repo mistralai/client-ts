@@ -80,6 +80,9 @@ export async function filesList(
   const context = {
     operationID: "files_api_routes_list_files",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig
