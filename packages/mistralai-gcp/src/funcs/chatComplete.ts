@@ -67,6 +67,9 @@ export async function chatComplete(
   const context = {
     operationID: "chat_completion_v1_chat_completions_post",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig

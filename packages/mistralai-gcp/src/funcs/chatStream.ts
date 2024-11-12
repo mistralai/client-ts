@@ -73,6 +73,9 @@ export async function chatStream(
   const context = {
     operationID: "stream_chat",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.apiKey,
     retryConfig: options?.retries
       || client._options.retryConfig
