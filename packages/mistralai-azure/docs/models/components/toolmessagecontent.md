@@ -1,4 +1,4 @@
-# UserMessageContent
+# ToolMessageContent
 
 
 ## Supported Types
@@ -15,7 +15,7 @@ const value: string = "<value>";
 const value: components.ContentChunk[] = [
   {
     referenceIds: [
-      521848,
+      456150,
     ],
   },
 ];

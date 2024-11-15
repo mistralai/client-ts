@@ -6,11 +6,7 @@
 import { SystemMessage } from "@mistralai/mistralai-azure/models/components";
 
 let value: SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
