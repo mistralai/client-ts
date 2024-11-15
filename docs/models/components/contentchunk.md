@@ -19,3 +19,13 @@ const value: components.TextChunk = {
 };
 ```
 
+### `components.ReferenceChunk`
+
+```typescript
+const value: components.ReferenceChunk = {
+  referenceIds: [
+    245367,
+  ],
+};
+```
+

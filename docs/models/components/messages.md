@@ -21,7 +21,11 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: "https://sour-disposer.info",
+    },
+  ],
 };
 ```
 
@@ -29,7 +33,13 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: {
+        url: "https://lawful-apricot.net/",
+      },
+    },
+  ],
 };
 ```
 

@@ -59,6 +59,7 @@ export * from "./listfilesout.js";
 export * from "./metricout.js";
 export * from "./modelcapabilities.js";
 export * from "./modellist.js";
+export * from "./referencechunk.js";
 export * from "./responseformat.js";
 export * from "./responseformats.js";
 export * from "./retrievefileout.js";

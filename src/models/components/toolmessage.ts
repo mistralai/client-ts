@@ -5,6 +5,14 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import {
+  ContentChunk,
+  ContentChunk$inboundSchema,
+  ContentChunk$Outbound,
+  ContentChunk$outboundSchema,
+} from "./contentchunk.js";
+
+export type ToolMessageContent = string | Array<ContentChunk>;
 
 export const ToolMessageRole = {
   Tool: "tool",
@@ -12,11 +20,41 @@ export const ToolMessageRole = {
 export type ToolMessageRole = ClosedEnum<typeof ToolMessageRole>;
 
 export type ToolMessage = {
-  content: string;
+  content: string | Array<ContentChunk> | null;
   toolCallId?: string | null | undefined;
   name?: string | null | undefined;
   role?: ToolMessageRole | undefined;
 };
+
+/** @internal */
+export const ToolMessageContent$inboundSchema: z.ZodType<
+  ToolMessageContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(ContentChunk$inboundSchema)]);
+
+/** @internal */
+export type ToolMessageContent$Outbound = string | Array<ContentChunk$Outbound>;
+
+/** @internal */
+export const ToolMessageContent$outboundSchema: z.ZodType<
+  ToolMessageContent$Outbound,
+  z.ZodTypeDef,
+  ToolMessageContent
+> = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ToolMessageContent$ {
+  /** @deprecated use `ToolMessageContent$inboundSchema` instead. */
+  export const inboundSchema = ToolMessageContent$inboundSchema;
+  /** @deprecated use `ToolMessageContent$outboundSchema` instead. */
+  export const outboundSchema = ToolMessageContent$outboundSchema;
+  /** @deprecated use `ToolMessageContent$Outbound` instead. */
+  export type Outbound = ToolMessageContent$Outbound;
+}
 
 /** @internal */
 export const ToolMessageRole$inboundSchema: z.ZodNativeEnum<
@@ -45,7 +83,9 @@ export const ToolMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.string(),
+  content: z.nullable(
+    z.union([z.string(), z.array(ContentChunk$inboundSchema)]),
+  ),
   tool_call_id: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
   role: ToolMessageRole$inboundSchema.default("tool"),
@@ -57,7 +97,7 @@ export const ToolMessage$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ToolMessage$Outbound = {
-  content: string;
+  content: string | Array<ContentChunk$Outbound> | null;
   tool_call_id?: string | null | undefined;
   name?: string | null | undefined;
   role: string;
@@ -69,7 +109,9 @@ export const ToolMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolMessage
 > = z.object({
-  content: z.string(),
+  content: z.nullable(
+    z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+  ),
   toolCallId: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
   role: ToolMessageRole$outboundSchema.default("tool"),

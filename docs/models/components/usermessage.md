@@ -6,13 +6,7 @@
 import { UserMessage } from "@mistralai/mistralai/models/components";
 
 let value: UserMessage = {
-  content: [
-    {
-      imageUrl: {
-        url: "https://first-gallery.biz",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

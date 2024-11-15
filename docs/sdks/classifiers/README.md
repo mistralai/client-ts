@@ -109,7 +109,11 @@ async function run() {
     inputs: [
       [
         {
-          content: "<value>",
+          content: [
+            {
+              text: "<value>",
+            },
+          ],
         },
       ],
     ],
@@ -140,9 +144,9 @@ const mistral = new MistralCore({
 async function run() {
   const res = await classifiersModerateChat(mistral, {
     inputs: [
-      {
-        content: "<value>",
-      },
+      [
+        {},
+      ],
     ],
     model: "V90",
   });
