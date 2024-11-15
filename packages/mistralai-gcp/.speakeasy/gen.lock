@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: a4b0284a2171be4279ac869462fc2ba5
+  docChecksum: e6c0a4254e61b1f171b409862f717867
   docVersion: 0.0.2
   speakeasyVersion: 1.438.1
   generationVersion: 2.457.2
-  releaseVersion: 1.3.1
-  configChecksum: 0e5490b5f6a45163ed1ce89547eb8e70
+  releaseVersion: 1.3.4
+  configChecksum: dda464868f797196bfe7e83112f0516b
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -72,6 +72,8 @@ generatedFiles:
   - docs/models/components/functiont.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
+  - docs/models/components/referencechunk.md
+  - docs/models/components/referencechunktype.md
   - docs/models/components/responseformat.md
   - docs/models/components/responseformats.md
   - docs/models/components/role.md
@@ -85,6 +87,7 @@ generatedFiles:
   - docs/models/components/toolchoice.md
   - docs/models/components/toolchoiceenum.md
   - docs/models/components/toolmessage.md
+  - docs/models/components/toolmessagecontent.md
   - docs/models/components/toolmessagerole.md
   - docs/models/components/tooltypes.md
   - docs/models/components/type.md
@@ -138,6 +141,7 @@ generatedFiles:
   - src/models/components/functioncall.ts
   - src/models/components/functionname.ts
   - src/models/components/index.ts
+  - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
   - src/models/components/responseformats.ts
   - src/models/components/security.ts

@@ -4,30 +4,58 @@
 
 import * as z from "zod";
 import {
+  ReferenceChunk,
+  ReferenceChunk$inboundSchema,
+  ReferenceChunk$Outbound,
+  ReferenceChunk$outboundSchema,
+} from "./referencechunk.js";
+import {
   TextChunk,
   TextChunk$inboundSchema,
   TextChunk$Outbound,
   TextChunk$outboundSchema,
 } from "./textchunk.js";
 
-export type ContentChunk = TextChunk;
+export type ContentChunk =
+  | (TextChunk & { type: "text" })
+  | (ReferenceChunk & { type: "reference" });
 
 /** @internal */
 export const ContentChunk$inboundSchema: z.ZodType<
   ContentChunk,
   z.ZodTypeDef,
   unknown
-> = TextChunk$inboundSchema;
+> = z.union([
+  TextChunk$inboundSchema.and(
+    z.object({ type: z.literal("text") }).transform((v) => ({ type: v.type })),
+  ),
+  ReferenceChunk$inboundSchema.and(
+    z.object({ type: z.literal("reference") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+]);
 
 /** @internal */
-export type ContentChunk$Outbound = TextChunk$Outbound;
+export type ContentChunk$Outbound =
+  | (TextChunk$Outbound & { type: "text" })
+  | (ReferenceChunk$Outbound & { type: "reference" });
 
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
   ContentChunk$Outbound,
   z.ZodTypeDef,
   ContentChunk
-> = TextChunk$outboundSchema;
+> = z.union([
+  TextChunk$outboundSchema.and(
+    z.object({ type: z.literal("text") }).transform((v) => ({ type: v.type })),
+  ),
+  ReferenceChunk$outboundSchema.and(
+    z.object({ type: z.literal("reference") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+]);
 
 /**
  * @internal

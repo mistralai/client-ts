@@ -5,7 +5,7 @@
 ```typescript
 import { ToolChoiceEnum } from "@mistralai/mistralai-gcp/models/components";
 
-let value: ToolChoiceEnum = "required";
+let value: ToolChoiceEnum = "auto";
 ```
 
 ## Values
