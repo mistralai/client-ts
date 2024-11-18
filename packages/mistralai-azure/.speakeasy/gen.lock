@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: 1eac78d7698423fcd3bc58124f860d30
+  docChecksum: d0000cbe03848bfe843794965cba332f
   docVersion: 0.0.2
   speakeasyVersion: 1.438.1
   generationVersion: 2.457.2
-  releaseVersion: 1.3.1
-  configChecksum: 003b83d3c40dab3a6fbc894a958541d1
+  releaseVersion: 1.3.4
+  configChecksum: c701bbf71f3977510ce625c672b31284
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
@@ -67,6 +67,8 @@ generatedFiles:
   - docs/models/components/functiont.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
+  - docs/models/components/referencechunk.md
+  - docs/models/components/referencechunktype.md
   - docs/models/components/responseformat.md
   - docs/models/components/responseformats.md
   - docs/models/components/role.md
@@ -80,6 +82,7 @@ generatedFiles:
   - docs/models/components/toolchoice.md
   - docs/models/components/toolchoiceenum.md
   - docs/models/components/toolmessage.md
+  - docs/models/components/toolmessagecontent.md
   - docs/models/components/toolmessagerole.md
   - docs/models/components/tooltypes.md
   - docs/models/components/type.md
@@ -129,6 +132,7 @@ generatedFiles:
   - src/models/components/functioncall.ts
   - src/models/components/functionname.ts
   - src/models/components/index.ts
+  - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
   - src/models/components/responseformats.ts
   - src/models/components/security.ts
