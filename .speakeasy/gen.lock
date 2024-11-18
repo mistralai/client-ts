@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 87f5a2bcfbc64bec79241e2b0de25b9f
+  docChecksum: d066d98bdd0ef905d4126e0e69940946
   docVersion: 0.0.2
   speakeasyVersion: 1.438.1
   generationVersion: 2.457.2
-  releaseVersion: 1.3.1
-  configChecksum: 592c371e12e0bb88cff133b730e6b426
+  releaseVersion: 1.3.4
+  configChecksum: 4cee1a313f733ed74b7e454a4b175e31
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -150,6 +150,8 @@ generatedFiles:
   - docs/models/components/modellist.md
   - docs/models/components/objectt.md
   - docs/models/components/one.md
+  - docs/models/components/referencechunk.md
+  - docs/models/components/referencechunktype.md
   - docs/models/components/repositories.md
   - docs/models/components/responseformat.md
   - docs/models/components/responseformats.md
@@ -169,6 +171,7 @@ generatedFiles:
   - docs/models/components/toolchoice.md
   - docs/models/components/toolchoiceenum.md
   - docs/models/components/toolmessage.md
+  - docs/models/components/toolmessagecontent.md
   - docs/models/components/toolmessagerole.md
   - docs/models/components/tooltypes.md
   - docs/models/components/trainingfile.md
@@ -334,6 +337,7 @@ generatedFiles:
   - src/models/components/metricout.ts
   - src/models/components/modelcapabilities.ts
   - src/models/components/modellist.ts
+  - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
   - src/models/components/responseformats.ts
   - src/models/components/retrievefileout.ts
@@ -569,7 +573,7 @@ examples:
   moderations_chat_v1_chat_moderations_post:
     speakeasy-default-moderations-chat-v1-chat-moderations-post:
       requestBody:
-        application/json: {"input": [[{"content": "<value>"}, {"content": []}, {"content": "<value>"}], []], "model": "V90"}
+        application/json: {"input": [[{"content": "<value>"}, {"content": "<value>"}, {"content": "<value>"}], [{"content": "<value>"}]], "model": "V90"}
       responses:
         "200":
           application/json: {"id": "mod-e5cc70bb28c444948073e77776eb30ef"}

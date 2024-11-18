@@ -1,4 +1,4 @@
-# Content
+# ToolMessageContent
 
 
 ## Supported Types
@@ -14,9 +14,7 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    referenceIds: [
-      458604,
-    ],
+    text: "<value>",
   },
 ];
 ```

@@ -13,7 +13,11 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+    },
+  ],
 };
 ```
 
@@ -21,7 +25,13 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: {
+        url: "https://whimsical-impostor.name",
+      },
+    },
+  ],
 };
 ```
 

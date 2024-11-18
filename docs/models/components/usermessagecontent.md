@@ -14,7 +14,9 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    text: "<value>",
+    referenceIds: [
+      645570,
+    ],
   },
 ];
 ```

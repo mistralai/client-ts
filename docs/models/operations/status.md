@@ -7,7 +7,7 @@ The current job state to filter on. When set, the other results are not displaye
 ```typescript
 import { Status } from "@mistralai/mistralai/models/operations";
 
-let value: Status = "FAILED_VALIDATION";
+let value: Status = "VALIDATING";
 ```
 
 ## Values
