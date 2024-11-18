@@ -8,9 +8,7 @@ import { ToolCall } from "@mistralai/mistralai-gcp/models/components";
 let value: ToolCall = {
   function: {
     name: "<value>",
-    arguments: {
-      "key": "<value>",
-    },
+    arguments: "<value>",
   },
 };
 ```
