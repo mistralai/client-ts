@@ -28,7 +28,7 @@ targets:
         sourceRevisionDigest: sha256:c441f2d21e7879f5fb9d8d99e2ae242d1e5a84c0c06db971911eb578173e7f62
         sourceBlobDigest: sha256:de4af0f100f15fef89e093a6b5393302b2218fb154230594ec811aacdd4f2ec7
         codeSamplesNamespace: mistral-openapi-azure-code-samples
-        codeSamplesRevisionDigest: sha256:e986a6f674fde2807db8383cdfefc9229cc4df98276918d60a5f4189ce07fb98
+        codeSamplesRevisionDigest: sha256:e81dd02c41ded32d7976af69b30b0b52ae7ac35c7b00846e0c74f75d1e375447
     mistralai-gcp-sdk:
         source: mistral-google-cloud-source
         sourceNamespace: mistral-google-cloud-source
