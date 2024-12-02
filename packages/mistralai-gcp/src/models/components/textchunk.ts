@@ -11,8 +11,8 @@ export const Type = {
 export type Type = ClosedEnum<typeof Type>;
 
 export type TextChunk = {
-  type?: "text" | undefined;
   text: string;
+  type?: Type | undefined;
 };
 
 /** @internal */
@@ -41,14 +41,14 @@ export const TextChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("text").default("text"),
   text: z.string(),
+  type: Type$inboundSchema.default("text"),
 });
 
 /** @internal */
 export type TextChunk$Outbound = {
-  type: "text";
   text: string;
+  type: string;
 };
 
 /** @internal */
@@ -57,8 +57,8 @@ export const TextChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TextChunk
 > = z.object({
-  type: z.literal("text").default("text"),
   text: z.string(),
+  type: Type$outboundSchema.default("text"),
 });
 
 /**

@@ -12,8 +12,8 @@ export const ReferenceChunkType = {
 export type ReferenceChunkType = ClosedEnum<typeof ReferenceChunkType>;
 
 export type ReferenceChunk = {
-  type?: "reference" | undefined;
   referenceIds: Array<number>;
+  type?: ReferenceChunkType | undefined;
 };
 
 /** @internal */
@@ -43,8 +43,8 @@ export const ReferenceChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("reference").default("reference"),
   reference_ids: z.array(z.number().int()),
+  type: ReferenceChunkType$inboundSchema.default("reference"),
 }).transform((v) => {
   return remap$(v, {
     "reference_ids": "referenceIds",
@@ -53,8 +53,8 @@ export const ReferenceChunk$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ReferenceChunk$Outbound = {
-  type: "reference";
   reference_ids: Array<number>;
+  type: string;
 };
 
 /** @internal */
@@ -63,8 +63,8 @@ export const ReferenceChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReferenceChunk
 > = z.object({
-  type: z.literal("reference").default("reference"),
   referenceIds: z.array(z.number().int()),
+  type: ReferenceChunkType$outboundSchema.default("reference"),
 }).transform((v) => {
   return remap$(v, {
     referenceIds: "reference_ids",
