@@ -19,6 +19,7 @@ export type GoogleCloudOptions = {
 const LEGACY_MODEL_ID_FORMAT: { [key: string]: string } = {
   "codestral-2405": "codestral@2405",
   "mistral-large-2407": "mistral-large@2407",
+  "mistral-large-2411": "mistral-large@2411",
   "mistral-nemo-2407": "mistral-nemo@2407",
 };
 
