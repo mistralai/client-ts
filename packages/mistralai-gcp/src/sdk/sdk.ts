@@ -25,7 +25,7 @@ const LEGACY_MODEL_ID_FORMAT: { [key: string]: string } = {
 function getModelInfo(model: string): [string, string] {
   let modelId = LEGACY_MODEL_ID_FORMAT[model];
   if (modelId === undefined) {
-    modelId = model;
+    return [model, model];
   }
   model = model.split("-").slice(0, -1).join("-");
   return [model, modelId];
