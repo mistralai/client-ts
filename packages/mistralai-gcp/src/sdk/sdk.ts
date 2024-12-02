@@ -100,7 +100,7 @@ export class MistralGoogleCloud extends ClientSDK {
         }
 
         const [model, modelId] = getModelInfo(body.model);
-        console.log(model, modelId)
+
         if (!model || !modelId) {
           throw new Error("model must be in the format 'model-version'");
         }
