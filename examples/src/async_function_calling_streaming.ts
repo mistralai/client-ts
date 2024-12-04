@@ -157,7 +157,7 @@ for (const toolCall of toolCalls) {
     role: "tool",
     name: functionName,
     content: functionResult,
-    tool_call_id: toolCall.id,
+    toolCallId: toolCall.id,
   });
 }
 console.log(messages);
