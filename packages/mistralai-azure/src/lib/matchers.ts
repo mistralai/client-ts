@@ -206,7 +206,7 @@ export function match<T, E>(
         raw = await response.json();
         break;
       case "bytes":
-        raw = await response.arrayBuffer();
+        raw = new Uint8Array(await response.arrayBuffer());
         break;
       case "stream":
         raw = response.body;

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * this restriction of `Function` is used to select a specific function to call
@@ -45,4 +48,18 @@ export namespace FunctionName$ {
   export const outboundSchema = FunctionName$outboundSchema;
   /** @deprecated use `FunctionName$Outbound` instead. */
   export type Outbound = FunctionName$Outbound;
+}
+
+export function functionNameToJSON(functionName: FunctionName): string {
+  return JSON.stringify(FunctionName$outboundSchema.parse(functionName));
+}
+
+export function functionNameFromJSON(
+  jsonString: string,
+): SafeParseResult<FunctionName, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FunctionName$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionName' from JSON`,
+  );
 }
