@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FilesApiRoutesDeleteFileRequest = {
   fileId: string;
@@ -51,4 +54,24 @@ export namespace FilesApiRoutesDeleteFileRequest$ {
   export const outboundSchema = FilesApiRoutesDeleteFileRequest$outboundSchema;
   /** @deprecated use `FilesApiRoutesDeleteFileRequest$Outbound` instead. */
   export type Outbound = FilesApiRoutesDeleteFileRequest$Outbound;
+}
+
+export function filesApiRoutesDeleteFileRequestToJSON(
+  filesApiRoutesDeleteFileRequest: FilesApiRoutesDeleteFileRequest,
+): string {
+  return JSON.stringify(
+    FilesApiRoutesDeleteFileRequest$outboundSchema.parse(
+      filesApiRoutesDeleteFileRequest,
+    ),
+  );
+}
+
+export function filesApiRoutesDeleteFileRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<FilesApiRoutesDeleteFileRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FilesApiRoutesDeleteFileRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilesApiRoutesDeleteFileRequest' from JSON`,
+  );
 }

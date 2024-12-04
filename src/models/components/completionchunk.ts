@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CompletionResponseStreamChoice,
   CompletionResponseStreamChoice$inboundSchema,
@@ -74,4 +77,20 @@ export namespace CompletionChunk$ {
   export const outboundSchema = CompletionChunk$outboundSchema;
   /** @deprecated use `CompletionChunk$Outbound` instead. */
   export type Outbound = CompletionChunk$Outbound;
+}
+
+export function completionChunkToJSON(
+  completionChunk: CompletionChunk,
+): string {
+  return JSON.stringify(CompletionChunk$outboundSchema.parse(completionChunk));
+}
+
+export function completionChunkFromJSON(
+  jsonString: string,
+): SafeParseResult<CompletionChunk, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CompletionChunk$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CompletionChunk' from JSON`,
+  );
 }

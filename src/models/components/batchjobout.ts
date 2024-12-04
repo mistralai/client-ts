@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BatchError,
   BatchError$inboundSchema,
@@ -171,4 +174,18 @@ export namespace BatchJobOut$ {
   export const outboundSchema = BatchJobOut$outboundSchema;
   /** @deprecated use `BatchJobOut$Outbound` instead. */
   export type Outbound = BatchJobOut$Outbound;
+}
+
+export function batchJobOutToJSON(batchJobOut: BatchJobOut): string {
+  return JSON.stringify(BatchJobOut$outboundSchema.parse(batchJobOut));
+}
+
+export function batchJobOutFromJSON(
+  jsonString: string,
+): SafeParseResult<BatchJobOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BatchJobOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BatchJobOut' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Metrics at the step number during the fine-tuning job. Use these metrics to assess if the training is going smoothly (loss should decrease, token accuracy should increase).
@@ -66,4 +69,18 @@ export namespace MetricOut$ {
   export const outboundSchema = MetricOut$outboundSchema;
   /** @deprecated use `MetricOut$Outbound` instead. */
   export type Outbound = MetricOut$Outbound;
+}
+
+export function metricOutToJSON(metricOut: MetricOut): string {
+  return JSON.stringify(MetricOut$outboundSchema.parse(metricOut));
+}
+
+export function metricOutFromJSON(
+  jsonString: string,
+): SafeParseResult<MetricOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MetricOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MetricOut' from JSON`,
+  );
 }

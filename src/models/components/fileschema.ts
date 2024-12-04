@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FilePurpose,
   FilePurpose$inboundSchema,
@@ -117,4 +120,18 @@ export namespace FileSchema$ {
   export const outboundSchema = FileSchema$outboundSchema;
   /** @deprecated use `FileSchema$Outbound` instead. */
   export type Outbound = FileSchema$Outbound;
+}
+
+export function fileSchemaToJSON(fileSchema: FileSchema): string {
+  return JSON.stringify(FileSchema$outboundSchema.parse(fileSchema));
+}
+
+export function fileSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<FileSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FileSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileSchema' from JSON`,
+  );
 }

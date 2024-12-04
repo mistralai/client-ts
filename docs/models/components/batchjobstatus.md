@@ -5,7 +5,7 @@
 ```typescript
 import { BatchJobStatus } from "@mistralai/mistralai/models/components";
 
-let value: BatchJobStatus = "TIMEOUT_EXCEEDED";
+let value: BatchJobStatus = "CANCELLED";
 ```
 
 ## Values

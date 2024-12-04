@@ -7,11 +7,13 @@ import { ChatClassificationRequest } from "@mistralai/mistralai/models/component
 
 let value: ChatClassificationRequest = {
   inputs: [
-    {
-      content: "<value>",
-    },
+    [
+      {
+        content: "<value>",
+      },
+    ],
   ],
-  model: "Volt",
+  model: "Corvette",
 };
 ```
 

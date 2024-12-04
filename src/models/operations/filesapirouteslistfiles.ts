@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FilesApiRoutesListFilesRequest = {
   page?: number | undefined;
@@ -76,4 +79,24 @@ export namespace FilesApiRoutesListFilesRequest$ {
   export const outboundSchema = FilesApiRoutesListFilesRequest$outboundSchema;
   /** @deprecated use `FilesApiRoutesListFilesRequest$Outbound` instead. */
   export type Outbound = FilesApiRoutesListFilesRequest$Outbound;
+}
+
+export function filesApiRoutesListFilesRequestToJSON(
+  filesApiRoutesListFilesRequest: FilesApiRoutesListFilesRequest,
+): string {
+  return JSON.stringify(
+    FilesApiRoutesListFilesRequest$outboundSchema.parse(
+      filesApiRoutesListFilesRequest,
+    ),
+  );
+}
+
+export function filesApiRoutesListFilesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<FilesApiRoutesListFilesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FilesApiRoutesListFilesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilesApiRoutesListFilesRequest' from JSON`,
+  );
 }

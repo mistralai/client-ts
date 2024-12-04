@@ -7,7 +7,9 @@
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://bony-bonnet.net/",
+  imageUrl: {
+    url: "https://exotic-hepatitis.name",
+  },
 };
 ```
 
@@ -24,7 +26,7 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    245367,
+    860552,
   ],
 };
 ```

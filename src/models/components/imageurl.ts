@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ImageURL = {
   url: string;
@@ -46,4 +49,18 @@ export namespace ImageURL$ {
   export const outboundSchema = ImageURL$outboundSchema;
   /** @deprecated use `ImageURL$Outbound` instead. */
   export type Outbound = ImageURL$Outbound;
+}
+
+export function imageURLToJSON(imageURL: ImageURL): string {
+  return JSON.stringify(ImageURL$outboundSchema.parse(imageURL));
+}
+
+export function imageURLFromJSON(
+  jsonString: string,
+): SafeParseResult<ImageURL, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ImageURL$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ImageURL' from JSON`,
+  );
 }

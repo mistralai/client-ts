@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RetrieveModelV1ModelsModelIdGetRequest = {
   /**
@@ -66,6 +69,28 @@ export namespace RetrieveModelV1ModelsModelIdGetRequest$ {
   export type Outbound = RetrieveModelV1ModelsModelIdGetRequest$Outbound;
 }
 
+export function retrieveModelV1ModelsModelIdGetRequestToJSON(
+  retrieveModelV1ModelsModelIdGetRequest:
+    RetrieveModelV1ModelsModelIdGetRequest,
+): string {
+  return JSON.stringify(
+    RetrieveModelV1ModelsModelIdGetRequest$outboundSchema.parse(
+      retrieveModelV1ModelsModelIdGetRequest,
+    ),
+  );
+}
+
+export function retrieveModelV1ModelsModelIdGetRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveModelV1ModelsModelIdGetRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveModelV1ModelsModelIdGetRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveModelV1ModelsModelIdGetRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$inboundSchema:
   z.ZodType<
@@ -123,4 +148,31 @@ export namespace RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsMod
   /** @deprecated use `RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$Outbound` instead. */
   export type Outbound =
     RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$Outbound;
+}
+
+export function retrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGetToJSON(
+  retrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet:
+    RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet,
+): string {
+  return JSON.stringify(
+    RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$outboundSchema
+      .parse(
+        retrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet,
+      ),
+  );
+}
+
+export function retrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGetFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet' from JSON`,
+  );
 }

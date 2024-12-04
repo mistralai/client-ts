@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const TextChunkType = {
   Text: "text",
@@ -11,8 +14,8 @@ export const TextChunkType = {
 export type TextChunkType = ClosedEnum<typeof TextChunkType>;
 
 export type TextChunk = {
-  type?: "text" | undefined;
   text: string;
+  type?: TextChunkType | undefined;
 };
 
 /** @internal */
@@ -42,14 +45,14 @@ export const TextChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("text").default("text"),
   text: z.string(),
+  type: TextChunkType$inboundSchema.default("text"),
 });
 
 /** @internal */
 export type TextChunk$Outbound = {
-  type: "text";
   text: string;
+  type: string;
 };
 
 /** @internal */
@@ -58,8 +61,8 @@ export const TextChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TextChunk
 > = z.object({
-  type: z.literal("text").default("text"),
   text: z.string(),
+  type: TextChunkType$outboundSchema.default("text"),
 });
 
 /**
@@ -73,4 +76,18 @@ export namespace TextChunk$ {
   export const outboundSchema = TextChunk$outboundSchema;
   /** @deprecated use `TextChunk$Outbound` instead. */
   export type Outbound = TextChunk$Outbound;
+}
+
+export function textChunkToJSON(textChunk: TextChunk): string {
+  return JSON.stringify(TextChunk$outboundSchema.parse(textChunk));
+}
+
+export function textChunkFromJSON(
+  jsonString: string,
+): SafeParseResult<TextChunk, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TextChunk$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TextChunk' from JSON`,
+  );
 }

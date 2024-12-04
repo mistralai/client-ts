@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AssistantMessage,
   AssistantMessage$inboundSchema,
@@ -151,6 +154,26 @@ export namespace ChatCompletionStreamRequestStop$ {
   export type Outbound = ChatCompletionStreamRequestStop$Outbound;
 }
 
+export function chatCompletionStreamRequestStopToJSON(
+  chatCompletionStreamRequestStop: ChatCompletionStreamRequestStop,
+): string {
+  return JSON.stringify(
+    ChatCompletionStreamRequestStop$outboundSchema.parse(
+      chatCompletionStreamRequestStop,
+    ),
+  );
+}
+
+export function chatCompletionStreamRequestStopFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatCompletionStreamRequestStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChatCompletionStreamRequestStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionStreamRequestStop' from JSON`,
+  );
+}
+
 /** @internal */
 export const ChatCompletionStreamRequestMessages$inboundSchema: z.ZodType<
   ChatCompletionStreamRequestMessages,
@@ -221,6 +244,27 @@ export namespace ChatCompletionStreamRequestMessages$ {
   export type Outbound = ChatCompletionStreamRequestMessages$Outbound;
 }
 
+export function chatCompletionStreamRequestMessagesToJSON(
+  chatCompletionStreamRequestMessages: ChatCompletionStreamRequestMessages,
+): string {
+  return JSON.stringify(
+    ChatCompletionStreamRequestMessages$outboundSchema.parse(
+      chatCompletionStreamRequestMessages,
+    ),
+  );
+}
+
+export function chatCompletionStreamRequestMessagesFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatCompletionStreamRequestMessages, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ChatCompletionStreamRequestMessages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionStreamRequestMessages' from JSON`,
+  );
+}
+
 /** @internal */
 export const ChatCompletionStreamRequestToolChoice$inboundSchema: z.ZodType<
   ChatCompletionStreamRequestToolChoice,
@@ -253,6 +297,27 @@ export namespace ChatCompletionStreamRequestToolChoice$ {
     ChatCompletionStreamRequestToolChoice$outboundSchema;
   /** @deprecated use `ChatCompletionStreamRequestToolChoice$Outbound` instead. */
   export type Outbound = ChatCompletionStreamRequestToolChoice$Outbound;
+}
+
+export function chatCompletionStreamRequestToolChoiceToJSON(
+  chatCompletionStreamRequestToolChoice: ChatCompletionStreamRequestToolChoice,
+): string {
+  return JSON.stringify(
+    ChatCompletionStreamRequestToolChoice$outboundSchema.parse(
+      chatCompletionStreamRequestToolChoice,
+    ),
+  );
+}
+
+export function chatCompletionStreamRequestToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatCompletionStreamRequestToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ChatCompletionStreamRequestToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionStreamRequestToolChoice' from JSON`,
+  );
 }
 
 /** @internal */
@@ -408,4 +473,24 @@ export namespace ChatCompletionStreamRequest$ {
   export const outboundSchema = ChatCompletionStreamRequest$outboundSchema;
   /** @deprecated use `ChatCompletionStreamRequest$Outbound` instead. */
   export type Outbound = ChatCompletionStreamRequest$Outbound;
+}
+
+export function chatCompletionStreamRequestToJSON(
+  chatCompletionStreamRequest: ChatCompletionStreamRequest,
+): string {
+  return JSON.stringify(
+    ChatCompletionStreamRequest$outboundSchema.parse(
+      chatCompletionStreamRequest,
+    ),
+  );
+}
+
+export function chatCompletionStreamRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatCompletionStreamRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChatCompletionStreamRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionStreamRequest' from JSON`,
+  );
 }

@@ -10,7 +10,11 @@ Chat to classify
 ```typescript
 const value: components.One[] = [
   {
-    content: "<value>",
+    content: [
+      {
+        text: "<value>",
+      },
+    ],
   },
 ];
 ```

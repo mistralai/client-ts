@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FTModelCapabilitiesOut,
   FTModelCapabilitiesOut$inboundSchema,
@@ -130,4 +133,18 @@ export namespace FTModelOut$ {
   export const outboundSchema = FTModelOut$outboundSchema;
   /** @deprecated use `FTModelOut$Outbound` instead. */
   export type Outbound = FTModelOut$Outbound;
+}
+
+export function ftModelOutToJSON(ftModelOut: FTModelOut): string {
+  return JSON.stringify(FTModelOut$outboundSchema.parse(ftModelOut));
+}
+
+export function ftModelOutFromJSON(
+  jsonString: string,
+): SafeParseResult<FTModelOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FTModelOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FTModelOut' from JSON`,
+  );
 }

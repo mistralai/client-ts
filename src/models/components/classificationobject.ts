@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ClassificationObject = {
   /**
@@ -61,4 +64,22 @@ export namespace ClassificationObject$ {
   export const outboundSchema = ClassificationObject$outboundSchema;
   /** @deprecated use `ClassificationObject$Outbound` instead. */
   export type Outbound = ClassificationObject$Outbound;
+}
+
+export function classificationObjectToJSON(
+  classificationObject: ClassificationObject,
+): string {
+  return JSON.stringify(
+    ClassificationObject$outboundSchema.parse(classificationObject),
+  );
+}
+
+export function classificationObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<ClassificationObject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ClassificationObject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ClassificationObject' from JSON`,
+  );
 }

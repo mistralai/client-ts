@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AssistantMessage,
   AssistantMessage$inboundSchema,
@@ -142,6 +145,26 @@ export namespace AgentsCompletionRequestStop$ {
   export type Outbound = AgentsCompletionRequestStop$Outbound;
 }
 
+export function agentsCompletionRequestStopToJSON(
+  agentsCompletionRequestStop: AgentsCompletionRequestStop,
+): string {
+  return JSON.stringify(
+    AgentsCompletionRequestStop$outboundSchema.parse(
+      agentsCompletionRequestStop,
+    ),
+  );
+}
+
+export function agentsCompletionRequestStopFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentsCompletionRequestStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentsCompletionRequestStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsCompletionRequestStop' from JSON`,
+  );
+}
+
 /** @internal */
 export const AgentsCompletionRequestMessages$inboundSchema: z.ZodType<
   AgentsCompletionRequestMessages,
@@ -210,6 +233,26 @@ export namespace AgentsCompletionRequestMessages$ {
   export type Outbound = AgentsCompletionRequestMessages$Outbound;
 }
 
+export function agentsCompletionRequestMessagesToJSON(
+  agentsCompletionRequestMessages: AgentsCompletionRequestMessages,
+): string {
+  return JSON.stringify(
+    AgentsCompletionRequestMessages$outboundSchema.parse(
+      agentsCompletionRequestMessages,
+    ),
+  );
+}
+
+export function agentsCompletionRequestMessagesFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentsCompletionRequestMessages, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentsCompletionRequestMessages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsCompletionRequestMessages' from JSON`,
+  );
+}
+
 /** @internal */
 export const AgentsCompletionRequestToolChoice$inboundSchema: z.ZodType<
   AgentsCompletionRequestToolChoice,
@@ -241,6 +284,26 @@ export namespace AgentsCompletionRequestToolChoice$ {
     AgentsCompletionRequestToolChoice$outboundSchema;
   /** @deprecated use `AgentsCompletionRequestToolChoice$Outbound` instead. */
   export type Outbound = AgentsCompletionRequestToolChoice$Outbound;
+}
+
+export function agentsCompletionRequestToolChoiceToJSON(
+  agentsCompletionRequestToolChoice: AgentsCompletionRequestToolChoice,
+): string {
+  return JSON.stringify(
+    AgentsCompletionRequestToolChoice$outboundSchema.parse(
+      agentsCompletionRequestToolChoice,
+    ),
+  );
+}
+
+export function agentsCompletionRequestToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentsCompletionRequestToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentsCompletionRequestToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsCompletionRequestToolChoice' from JSON`,
+  );
 }
 
 /** @internal */
@@ -385,4 +448,22 @@ export namespace AgentsCompletionRequest$ {
   export const outboundSchema = AgentsCompletionRequest$outboundSchema;
   /** @deprecated use `AgentsCompletionRequest$Outbound` instead. */
   export type Outbound = AgentsCompletionRequest$Outbound;
+}
+
+export function agentsCompletionRequestToJSON(
+  agentsCompletionRequest: AgentsCompletionRequest,
+): string {
+  return JSON.stringify(
+    AgentsCompletionRequest$outboundSchema.parse(agentsCompletionRequest),
+  );
+}
+
+export function agentsCompletionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentsCompletionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentsCompletionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsCompletionRequest' from JSON`,
+  );
 }

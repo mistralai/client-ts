@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EmbeddingResponseData = {
   object?: string | undefined;
@@ -50,4 +53,22 @@ export namespace EmbeddingResponseData$ {
   export const outboundSchema = EmbeddingResponseData$outboundSchema;
   /** @deprecated use `EmbeddingResponseData$Outbound` instead. */
   export type Outbound = EmbeddingResponseData$Outbound;
+}
+
+export function embeddingResponseDataToJSON(
+  embeddingResponseData: EmbeddingResponseData,
+): string {
+  return JSON.stringify(
+    EmbeddingResponseData$outboundSchema.parse(embeddingResponseData),
+  );
+}
+
+export function embeddingResponseDataFromJSON(
+  jsonString: string,
+): SafeParseResult<EmbeddingResponseData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EmbeddingResponseData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmbeddingResponseData' from JSON`,
+  );
 }

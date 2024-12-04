@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The current job state to filter on. When set, the other results are not displayed.
@@ -166,4 +169,31 @@ export namespace JobsApiRoutesFineTuningGetFineTuningJobsRequest$ {
   /** @deprecated use `JobsApiRoutesFineTuningGetFineTuningJobsRequest$Outbound` instead. */
   export type Outbound =
     JobsApiRoutesFineTuningGetFineTuningJobsRequest$Outbound;
+}
+
+export function jobsApiRoutesFineTuningGetFineTuningJobsRequestToJSON(
+  jobsApiRoutesFineTuningGetFineTuningJobsRequest:
+    JobsApiRoutesFineTuningGetFineTuningJobsRequest,
+): string {
+  return JSON.stringify(
+    JobsApiRoutesFineTuningGetFineTuningJobsRequest$outboundSchema.parse(
+      jobsApiRoutesFineTuningGetFineTuningJobsRequest,
+    ),
+  );
+}
+
+export function jobsApiRoutesFineTuningGetFineTuningJobsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  JobsApiRoutesFineTuningGetFineTuningJobsRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      JobsApiRoutesFineTuningGetFineTuningJobsRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'JobsApiRoutesFineTuningGetFineTuningJobsRequest' from JSON`,
+  );
 }

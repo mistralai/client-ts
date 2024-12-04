@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   JobOut,
   JobOut$inboundSchema,
@@ -80,4 +83,18 @@ export namespace JobsOut$ {
   export const outboundSchema = JobsOut$outboundSchema;
   /** @deprecated use `JobsOut$Outbound` instead. */
   export type Outbound = JobsOut$Outbound;
+}
+
+export function jobsOutToJSON(jobsOut: JobsOut): string {
+  return JSON.stringify(JobsOut$outboundSchema.parse(jobsOut));
+}
+
+export function jobsOutFromJSON(
+  jsonString: string,
+): SafeParseResult<JobsOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JobsOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JobsOut' from JSON`,
+  );
 }

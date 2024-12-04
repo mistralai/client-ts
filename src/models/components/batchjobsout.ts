@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BatchJobOut,
   BatchJobOut$inboundSchema,
@@ -83,4 +86,18 @@ export namespace BatchJobsOut$ {
   export const outboundSchema = BatchJobsOut$outboundSchema;
   /** @deprecated use `BatchJobsOut$Outbound` instead. */
   export type Outbound = BatchJobsOut$Outbound;
+}
+
+export function batchJobsOutToJSON(batchJobsOut: BatchJobsOut): string {
+  return JSON.stringify(BatchJobsOut$outboundSchema.parse(batchJobsOut));
+}
+
+export function batchJobsOutFromJSON(
+  jsonString: string,
+): SafeParseResult<BatchJobsOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BatchJobsOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BatchJobsOut' from JSON`,
+  );
 }

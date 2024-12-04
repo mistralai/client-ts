@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FTModelCapabilitiesOut = {
   completionChat?: boolean | undefined;
@@ -69,4 +72,22 @@ export namespace FTModelCapabilitiesOut$ {
   export const outboundSchema = FTModelCapabilitiesOut$outboundSchema;
   /** @deprecated use `FTModelCapabilitiesOut$Outbound` instead. */
   export type Outbound = FTModelCapabilitiesOut$Outbound;
+}
+
+export function ftModelCapabilitiesOutToJSON(
+  ftModelCapabilitiesOut: FTModelCapabilitiesOut,
+): string {
+  return JSON.stringify(
+    FTModelCapabilitiesOut$outboundSchema.parse(ftModelCapabilitiesOut),
+  );
+}
+
+export function ftModelCapabilitiesOutFromJSON(
+  jsonString: string,
+): SafeParseResult<FTModelCapabilitiesOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FTModelCapabilitiesOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FTModelCapabilitiesOut' from JSON`,
+  );
 }

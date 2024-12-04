@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ClassificationObject,
   ClassificationObject$inboundSchema,
@@ -56,4 +59,22 @@ export namespace ClassificationResponse$ {
   export const outboundSchema = ClassificationResponse$outboundSchema;
   /** @deprecated use `ClassificationResponse$Outbound` instead. */
   export type Outbound = ClassificationResponse$Outbound;
+}
+
+export function classificationResponseToJSON(
+  classificationResponse: ClassificationResponse,
+): string {
+  return JSON.stringify(
+    ClassificationResponse$outboundSchema.parse(classificationResponse),
+  );
+}
+
+export function classificationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ClassificationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ClassificationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ClassificationResponse' from JSON`,
+  );
 }

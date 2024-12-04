@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelCapabilities = {
   completionChat?: boolean | undefined;
@@ -73,4 +76,22 @@ export namespace ModelCapabilities$ {
   export const outboundSchema = ModelCapabilities$outboundSchema;
   /** @deprecated use `ModelCapabilities$Outbound` instead. */
   export type Outbound = ModelCapabilities$Outbound;
+}
+
+export function modelCapabilitiesToJSON(
+  modelCapabilities: ModelCapabilities,
+): string {
+  return JSON.stringify(
+    ModelCapabilities$outboundSchema.parse(modelCapabilities),
+  );
+}
+
+export function modelCapabilitiesFromJSON(
+  jsonString: string,
+): SafeParseResult<ModelCapabilities, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ModelCapabilities$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelCapabilities' from JSON`,
+  );
 }

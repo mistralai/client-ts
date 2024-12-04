@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MetricOut,
   MetricOut$inboundSchema,
@@ -76,4 +79,18 @@ export namespace CheckpointOut$ {
   export const outboundSchema = CheckpointOut$outboundSchema;
   /** @deprecated use `CheckpointOut$Outbound` instead. */
   export type Outbound = CheckpointOut$Outbound;
+}
+
+export function checkpointOutToJSON(checkpointOut: CheckpointOut): string {
+  return JSON.stringify(CheckpointOut$outboundSchema.parse(checkpointOut));
+}
+
+export function checkpointOutFromJSON(
+  jsonString: string,
+): SafeParseResult<CheckpointOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CheckpointOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CheckpointOut' from JSON`,
+  );
 }

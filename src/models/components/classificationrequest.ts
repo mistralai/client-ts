@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Text to classify.
@@ -46,6 +49,26 @@ export namespace ClassificationRequestInputs$ {
   export const outboundSchema = ClassificationRequestInputs$outboundSchema;
   /** @deprecated use `ClassificationRequestInputs$Outbound` instead. */
   export type Outbound = ClassificationRequestInputs$Outbound;
+}
+
+export function classificationRequestInputsToJSON(
+  classificationRequestInputs: ClassificationRequestInputs,
+): string {
+  return JSON.stringify(
+    ClassificationRequestInputs$outboundSchema.parse(
+      classificationRequestInputs,
+    ),
+  );
+}
+
+export function classificationRequestInputsFromJSON(
+  jsonString: string,
+): SafeParseResult<ClassificationRequestInputs, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ClassificationRequestInputs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ClassificationRequestInputs' from JSON`,
+  );
 }
 
 /** @internal */
@@ -93,4 +116,22 @@ export namespace ClassificationRequest$ {
   export const outboundSchema = ClassificationRequest$outboundSchema;
   /** @deprecated use `ClassificationRequest$Outbound` instead. */
   export type Outbound = ClassificationRequest$Outbound;
+}
+
+export function classificationRequestToJSON(
+  classificationRequest: ClassificationRequest,
+): string {
+  return JSON.stringify(
+    ClassificationRequest$outboundSchema.parse(classificationRequest),
+  );
+}
+
+export function classificationRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ClassificationRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ClassificationRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ClassificationRequest' from JSON`,
+  );
 }

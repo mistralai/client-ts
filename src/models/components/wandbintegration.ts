@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const WandbIntegrationType = {
   Wandb: "wandb",
@@ -105,4 +108,22 @@ export namespace WandbIntegration$ {
   export const outboundSchema = WandbIntegration$outboundSchema;
   /** @deprecated use `WandbIntegration$Outbound` instead. */
   export type Outbound = WandbIntegration$Outbound;
+}
+
+export function wandbIntegrationToJSON(
+  wandbIntegration: WandbIntegration,
+): string {
+  return JSON.stringify(
+    WandbIntegration$outboundSchema.parse(wandbIntegration),
+  );
+}
+
+export function wandbIntegrationFromJSON(
+  jsonString: string,
+): SafeParseResult<WandbIntegration, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WandbIntegration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WandbIntegration' from JSON`,
+  );
 }

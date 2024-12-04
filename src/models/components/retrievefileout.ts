@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FilePurpose,
   FilePurpose$inboundSchema,
@@ -121,4 +124,20 @@ export namespace RetrieveFileOut$ {
   export const outboundSchema = RetrieveFileOut$outboundSchema;
   /** @deprecated use `RetrieveFileOut$Outbound` instead. */
   export type Outbound = RetrieveFileOut$Outbound;
+}
+
+export function retrieveFileOutToJSON(
+  retrieveFileOut: RetrieveFileOut,
+): string {
+  return JSON.stringify(RetrieveFileOut$outboundSchema.parse(retrieveFileOut));
+}
+
+export function retrieveFileOutFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveFileOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveFileOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveFileOut' from JSON`,
+  );
 }

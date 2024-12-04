@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TrainingFile = {
   fileId: string;
@@ -55,4 +58,18 @@ export namespace TrainingFile$ {
   export const outboundSchema = TrainingFile$outboundSchema;
   /** @deprecated use `TrainingFile$Outbound` instead. */
   export type Outbound = TrainingFile$Outbound;
+}
+
+export function trainingFileToJSON(trainingFile: TrainingFile): string {
+  return JSON.stringify(TrainingFile$outboundSchema.parse(trainingFile));
+}
+
+export function trainingFileFromJSON(
+  jsonString: string,
+): SafeParseResult<TrainingFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TrainingFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TrainingFile' from JSON`,
+  );
 }
