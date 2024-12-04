@@ -4,11 +4,14 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import {
   catchUnrecognizedEnum,
   OpenEnum,
   Unrecognized,
 } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AssistantMessage,
   AssistantMessage$inboundSchema,
@@ -113,4 +116,22 @@ export namespace ChatCompletionChoice$ {
   export const outboundSchema = ChatCompletionChoice$outboundSchema;
   /** @deprecated use `ChatCompletionChoice$Outbound` instead. */
   export type Outbound = ChatCompletionChoice$Outbound;
+}
+
+export function chatCompletionChoiceToJSON(
+  chatCompletionChoice: ChatCompletionChoice,
+): string {
+  return JSON.stringify(
+    ChatCompletionChoice$outboundSchema.parse(chatCompletionChoice),
+  );
+}
+
+export function chatCompletionChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatCompletionChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChatCompletionChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionChoice' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Arguments = { [k: string]: any } | string;
 
@@ -39,6 +42,20 @@ export namespace Arguments$ {
   export const outboundSchema = Arguments$outboundSchema;
   /** @deprecated use `Arguments$Outbound` instead. */
   export type Outbound = Arguments$Outbound;
+}
+
+export function argumentsToJSON(value: Arguments): string {
+  return JSON.stringify(Arguments$outboundSchema.parse(value));
+}
+
+export function argumentsFromJSON(
+  jsonString: string,
+): SafeParseResult<Arguments, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Arguments$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Arguments' from JSON`,
+  );
 }
 
 /** @internal */
@@ -78,4 +95,18 @@ export namespace FunctionCall$ {
   export const outboundSchema = FunctionCall$outboundSchema;
   /** @deprecated use `FunctionCall$Outbound` instead. */
   export type Outbound = FunctionCall$Outbound;
+}
+
+export function functionCallToJSON(functionCall: FunctionCall): string {
+  return JSON.stringify(FunctionCall$outboundSchema.parse(functionCall));
+}
+
+export function functionCallFromJSON(
+  jsonString: string,
+): SafeParseResult<FunctionCall, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FunctionCall$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionCall' from JSON`,
+  );
 }

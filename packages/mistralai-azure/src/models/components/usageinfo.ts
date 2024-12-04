@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UsageInfo = {
   promptTokens: number;
@@ -63,4 +66,18 @@ export namespace UsageInfo$ {
   export const outboundSchema = UsageInfo$outboundSchema;
   /** @deprecated use `UsageInfo$Outbound` instead. */
   export type Outbound = UsageInfo$Outbound;
+}
+
+export function usageInfoToJSON(usageInfo: UsageInfo): string {
+  return JSON.stringify(UsageInfo$outboundSchema.parse(usageInfo));
+}
+
+export function usageInfoFromJSON(
+  jsonString: string,
+): SafeParseResult<UsageInfo, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UsageInfo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UsageInfo' from JSON`,
+  );
 }

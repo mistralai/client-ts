@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FunctionCall,
   FunctionCall$inboundSchema,
@@ -61,4 +64,18 @@ export namespace ToolCall$ {
   export const outboundSchema = ToolCall$outboundSchema;
   /** @deprecated use `ToolCall$Outbound` instead. */
   export type Outbound = ToolCall$Outbound;
+}
+
+export function toolCallToJSON(toolCall: ToolCall): string {
+  return JSON.stringify(ToolCall$outboundSchema.parse(toolCall));
+}
+
+export function toolCallFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolCall, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolCall$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolCall' from JSON`,
+  );
 }
