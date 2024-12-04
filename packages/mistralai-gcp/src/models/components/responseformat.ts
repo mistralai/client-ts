@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ResponseFormats,
   ResponseFormats$inboundSchema,
@@ -50,4 +53,18 @@ export namespace ResponseFormat$ {
   export const outboundSchema = ResponseFormat$outboundSchema;
   /** @deprecated use `ResponseFormat$Outbound` instead. */
   export type Outbound = ResponseFormat$Outbound;
+}
+
+export function responseFormatToJSON(responseFormat: ResponseFormat): string {
+  return JSON.stringify(ResponseFormat$outboundSchema.parse(responseFormat));
+}
+
+export function responseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat' from JSON`,
+  );
 }

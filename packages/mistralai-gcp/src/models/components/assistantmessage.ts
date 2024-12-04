@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContentChunk,
   ContentChunk$inboundSchema,
@@ -62,6 +65,24 @@ export namespace AssistantMessageContent$ {
   export const outboundSchema = AssistantMessageContent$outboundSchema;
   /** @deprecated use `AssistantMessageContent$Outbound` instead. */
   export type Outbound = AssistantMessageContent$Outbound;
+}
+
+export function assistantMessageContentToJSON(
+  assistantMessageContent: AssistantMessageContent,
+): string {
+  return JSON.stringify(
+    AssistantMessageContent$outboundSchema.parse(assistantMessageContent),
+  );
+}
+
+export function assistantMessageContentFromJSON(
+  jsonString: string,
+): SafeParseResult<AssistantMessageContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AssistantMessageContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AssistantMessageContent' from JSON`,
+  );
 }
 
 /** @internal */
@@ -140,4 +161,22 @@ export namespace AssistantMessage$ {
   export const outboundSchema = AssistantMessage$outboundSchema;
   /** @deprecated use `AssistantMessage$Outbound` instead. */
   export type Outbound = AssistantMessage$Outbound;
+}
+
+export function assistantMessageToJSON(
+  assistantMessage: AssistantMessage,
+): string {
+  return JSON.stringify(
+    AssistantMessage$outboundSchema.parse(assistantMessage),
+  );
+}
+
+export function assistantMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<AssistantMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AssistantMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AssistantMessage' from JSON`,
+  );
 }

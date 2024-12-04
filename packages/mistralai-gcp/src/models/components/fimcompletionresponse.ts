@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ChatCompletionChoice,
   ChatCompletionChoice$inboundSchema,
@@ -74,4 +77,22 @@ export namespace FIMCompletionResponse$ {
   export const outboundSchema = FIMCompletionResponse$outboundSchema;
   /** @deprecated use `FIMCompletionResponse$Outbound` instead. */
   export type Outbound = FIMCompletionResponse$Outbound;
+}
+
+export function fimCompletionResponseToJSON(
+  fimCompletionResponse: FIMCompletionResponse,
+): string {
+  return JSON.stringify(
+    FIMCompletionResponse$outboundSchema.parse(fimCompletionResponse),
+  );
+}
+
+export function fimCompletionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<FIMCompletionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FIMCompletionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FIMCompletionResponse' from JSON`,
+  );
 }

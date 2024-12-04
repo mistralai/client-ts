@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -87,6 +90,24 @@ export namespace FIMCompletionRequestStop$ {
   export type Outbound = FIMCompletionRequestStop$Outbound;
 }
 
+export function fimCompletionRequestStopToJSON(
+  fimCompletionRequestStop: FIMCompletionRequestStop,
+): string {
+  return JSON.stringify(
+    FIMCompletionRequestStop$outboundSchema.parse(fimCompletionRequestStop),
+  );
+}
+
+export function fimCompletionRequestStopFromJSON(
+  jsonString: string,
+): SafeParseResult<FIMCompletionRequestStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FIMCompletionRequestStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FIMCompletionRequestStop' from JSON`,
+  );
+}
+
 /** @internal */
 export const FIMCompletionRequest$inboundSchema: z.ZodType<
   FIMCompletionRequest,
@@ -162,4 +183,22 @@ export namespace FIMCompletionRequest$ {
   export const outboundSchema = FIMCompletionRequest$outboundSchema;
   /** @deprecated use `FIMCompletionRequest$Outbound` instead. */
   export type Outbound = FIMCompletionRequest$Outbound;
+}
+
+export function fimCompletionRequestToJSON(
+  fimCompletionRequest: FIMCompletionRequest,
+): string {
+  return JSON.stringify(
+    FIMCompletionRequest$outboundSchema.parse(fimCompletionRequest),
+  );
+}
+
+export function fimCompletionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<FIMCompletionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FIMCompletionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FIMCompletionRequest' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FunctionT = {
   name: string;
@@ -50,4 +53,18 @@ export namespace FunctionT$ {
   export const outboundSchema = FunctionT$outboundSchema;
   /** @deprecated use `FunctionT$Outbound` instead. */
   export type Outbound = FunctionT$Outbound;
+}
+
+export function functionToJSON(functionT: FunctionT): string {
+  return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
+}
+
+export function functionFromJSON(
+  jsonString: string,
+): SafeParseResult<FunctionT, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FunctionT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionT' from JSON`,
+  );
 }
