@@ -27,9 +27,7 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      imageUrl: {
-        url: "https://whimsical-impostor.name",
-      },
+      imageUrl: "https://exalted-coast.net",
     },
   ],
 };

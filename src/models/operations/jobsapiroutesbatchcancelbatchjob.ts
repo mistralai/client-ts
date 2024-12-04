@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JobsApiRoutesBatchCancelBatchJobRequest = {
   jobId: string;
@@ -53,4 +56,31 @@ export namespace JobsApiRoutesBatchCancelBatchJobRequest$ {
     JobsApiRoutesBatchCancelBatchJobRequest$outboundSchema;
   /** @deprecated use `JobsApiRoutesBatchCancelBatchJobRequest$Outbound` instead. */
   export type Outbound = JobsApiRoutesBatchCancelBatchJobRequest$Outbound;
+}
+
+export function jobsApiRoutesBatchCancelBatchJobRequestToJSON(
+  jobsApiRoutesBatchCancelBatchJobRequest:
+    JobsApiRoutesBatchCancelBatchJobRequest,
+): string {
+  return JSON.stringify(
+    JobsApiRoutesBatchCancelBatchJobRequest$outboundSchema.parse(
+      jobsApiRoutesBatchCancelBatchJobRequest,
+    ),
+  );
+}
+
+export function jobsApiRoutesBatchCancelBatchJobRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  JobsApiRoutesBatchCancelBatchJobRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      JobsApiRoutesBatchCancelBatchJobRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'JobsApiRoutesBatchCancelBatchJobRequest' from JSON`,
+  );
 }

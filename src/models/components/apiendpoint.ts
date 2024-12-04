@@ -3,23 +3,41 @@
  */
 
 import * as z from "zod";
-import { ClosedEnum } from "../../types/enums.js";
+import {
+  catchUnrecognizedEnum,
+  OpenEnum,
+  Unrecognized,
+} from "../../types/enums.js";
 
 export const ApiEndpoint = {
   RootV1ChatCompletions: "/v1/chat/completions",
   RootV1Embeddings: "/v1/embeddings",
   RootV1FimCompletions: "/v1/fim/completions",
   RootV1Moderations: "/v1/moderations",
+  RootV1ChatModerations: "/v1/chat/moderations",
 } as const;
-export type ApiEndpoint = ClosedEnum<typeof ApiEndpoint>;
+export type ApiEndpoint = OpenEnum<typeof ApiEndpoint>;
 
 /** @internal */
-export const ApiEndpoint$inboundSchema: z.ZodNativeEnum<typeof ApiEndpoint> = z
-  .nativeEnum(ApiEndpoint);
+export const ApiEndpoint$inboundSchema: z.ZodType<
+  ApiEndpoint,
+  z.ZodTypeDef,
+  unknown
+> = z
+  .union([
+    z.nativeEnum(ApiEndpoint),
+    z.string().transform(catchUnrecognizedEnum),
+  ]);
 
 /** @internal */
-export const ApiEndpoint$outboundSchema: z.ZodNativeEnum<typeof ApiEndpoint> =
-  ApiEndpoint$inboundSchema;
+export const ApiEndpoint$outboundSchema: z.ZodType<
+  ApiEndpoint,
+  z.ZodTypeDef,
+  ApiEndpoint
+> = z.union([
+  z.nativeEnum(ApiEndpoint),
+  z.string().and(z.custom<Unrecognized<string>>()),
+]);
 
 /**
  * @internal

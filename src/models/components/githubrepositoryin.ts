@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const GithubRepositoryInType = {
   Github: "github",
@@ -89,4 +92,22 @@ export namespace GithubRepositoryIn$ {
   export const outboundSchema = GithubRepositoryIn$outboundSchema;
   /** @deprecated use `GithubRepositoryIn$Outbound` instead. */
   export type Outbound = GithubRepositoryIn$Outbound;
+}
+
+export function githubRepositoryInToJSON(
+  githubRepositoryIn: GithubRepositoryIn,
+): string {
+  return JSON.stringify(
+    GithubRepositoryIn$outboundSchema.parse(githubRepositoryIn),
+  );
+}
+
+export function githubRepositoryInFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubRepositoryIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubRepositoryIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubRepositoryIn' from JSON`,
+  );
 }

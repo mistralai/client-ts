@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Text to embed.
@@ -50,6 +53,20 @@ export namespace Inputs$ {
   export const outboundSchema = Inputs$outboundSchema;
   /** @deprecated use `Inputs$Outbound` instead. */
   export type Outbound = Inputs$Outbound;
+}
+
+export function inputsToJSON(inputs: Inputs): string {
+  return JSON.stringify(Inputs$outboundSchema.parse(inputs));
+}
+
+export function inputsFromJSON(
+  jsonString: string,
+): SafeParseResult<Inputs, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Inputs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Inputs' from JSON`,
+  );
 }
 
 /** @internal */
@@ -102,4 +119,22 @@ export namespace EmbeddingRequest$ {
   export const outboundSchema = EmbeddingRequest$outboundSchema;
   /** @deprecated use `EmbeddingRequest$Outbound` instead. */
   export type Outbound = EmbeddingRequest$Outbound;
+}
+
+export function embeddingRequestToJSON(
+  embeddingRequest: EmbeddingRequest,
+): string {
+  return JSON.stringify(
+    EmbeddingRequest$outboundSchema.parse(embeddingRequest),
+  );
+}
+
+export function embeddingRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<EmbeddingRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EmbeddingRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmbeddingRequest' from JSON`,
+  );
 }

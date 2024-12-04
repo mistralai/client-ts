@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const LegacyJobMetadataOutObject = {
   JobMetadata: "job.metadata",
@@ -160,4 +163,22 @@ export namespace LegacyJobMetadataOut$ {
   export const outboundSchema = LegacyJobMetadataOut$outboundSchema;
   /** @deprecated use `LegacyJobMetadataOut$Outbound` instead. */
   export type Outbound = LegacyJobMetadataOut$Outbound;
+}
+
+export function legacyJobMetadataOutToJSON(
+  legacyJobMetadataOut: LegacyJobMetadataOut,
+): string {
+  return JSON.stringify(
+    LegacyJobMetadataOut$outboundSchema.parse(legacyJobMetadataOut),
+  );
+}
+
+export function legacyJobMetadataOutFromJSON(
+  jsonString: string,
+): SafeParseResult<LegacyJobMetadataOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => LegacyJobMetadataOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LegacyJobMetadataOut' from JSON`,
+  );
 }

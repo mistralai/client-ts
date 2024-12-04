@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: d066d98bdd0ef905d4126e0e69940946
+  docChecksum: 36ad3563d9d2b3af47015100d060570b
   docVersion: 0.0.2
-  speakeasyVersion: 1.438.1
-  generationVersion: 2.457.2
-  releaseVersion: 1.3.4
-  configChecksum: 4cee1a313f733ed74b7e454a4b175e31
+  speakeasyVersion: 1.451.1
+  generationVersion: 2.470.1
+  releaseVersion: 1.3.5
+  configChecksum: d2307fad7fbd3b81b133559b4741a46a
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.3
+    core: 3.18.8
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     downloadStreams: 0.1.1
@@ -35,7 +35,6 @@ features:
     serverEvents: 0.1.5
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
-    tests: 0.7.0
     unions: 2.85.8
     uploadStreams: 0.1.0
 generatedFiles:
@@ -108,12 +107,12 @@ generatedFiles:
   - docs/models/components/eventout.md
   - docs/models/components/filepurpose.md
   - docs/models/components/fileschema.md
+  - docs/models/components/filesignedurl.md
   - docs/models/components/fimcompletionrequest.md
   - docs/models/components/fimcompletionrequeststop.md
   - docs/models/components/fimcompletionresponse.md
   - docs/models/components/fimcompletionstreamrequest.md
   - docs/models/components/fimcompletionstreamrequeststop.md
-  - docs/models/components/finetuneablemodel.md
   - docs/models/components/finishreason.md
   - docs/models/components/ftmodelcapabilitiesout.md
   - docs/models/components/ftmodelcard.md
@@ -196,6 +195,7 @@ generatedFiles:
   - docs/models/operations/deletemodelv1modelsmodeliddeleterequest.md
   - docs/models/operations/filesapiroutesdeletefilerequest.md
   - docs/models/operations/filesapiroutesdownloadfilerequest.md
+  - docs/models/operations/filesapiroutesgetsignedurlrequest.md
   - docs/models/operations/filesapirouteslistfilesrequest.md
   - docs/models/operations/filesapiroutesretrievefilerequest.md
   - docs/models/operations/filesapiroutesuploadfilemultipartbodyparams.md
@@ -242,6 +242,7 @@ generatedFiles:
   - src/funcs/embeddingsCreate.ts
   - src/funcs/filesDelete.ts
   - src/funcs/filesDownload.ts
+  - src/funcs/filesGetSignedUrl.ts
   - src/funcs/filesList.ts
   - src/funcs/filesRetrieve.ts
   - src/funcs/filesUpload.ts
@@ -313,10 +314,10 @@ generatedFiles:
   - src/models/components/eventout.ts
   - src/models/components/filepurpose.ts
   - src/models/components/fileschema.ts
+  - src/models/components/filesignedurl.ts
   - src/models/components/fimcompletionrequest.ts
   - src/models/components/fimcompletionresponse.ts
   - src/models/components/fimcompletionstreamrequest.ts
-  - src/models/components/finetuneablemodel.ts
   - src/models/components/ftmodelcapabilitiesout.ts
   - src/models/components/ftmodelcard.ts
   - src/models/components/ftmodelout.ts
@@ -371,6 +372,7 @@ generatedFiles:
   - src/models/operations/deletemodelv1modelsmodeliddelete.ts
   - src/models/operations/filesapiroutesdeletefile.ts
   - src/models/operations/filesapiroutesdownloadfile.ts
+  - src/models/operations/filesapiroutesgetsignedurl.ts
   - src/models/operations/filesapirouteslistfiles.ts
   - src/models/operations/filesapiroutesretrievefile.ts
   - src/models/operations/filesapiroutesuploadfile.ts
@@ -493,7 +495,7 @@ examples:
         application/json: {"model": "codestral-latest"}
       responses:
         "200":
-          application/json: {"id": "a621cf02-1cd9-4cf5-8403-315211a509a3", "auto_start": false, "model": "open-mistral-7b", "status": "FAILED", "job_type": "<value>", "created_at": 550483, "modified_at": 906537, "training_files": ["74c2becc-3769-4177-b5e0-24985613de0e"]}
+          application/json: {"id": "a621cf02-1cd9-4cf5-8403-315211a509a3", "auto_start": false, "model": "2", "status": "FAILED", "job_type": "<value>", "created_at": 550483, "modified_at": 906537, "training_files": ["74c2becc-3769-4177-b5e0-24985613de0e"]}
   jobs_api_routes_fine_tuning_get_fine_tuning_job:
     speakeasy-default-jobs-api-routes-fine-tuning-get-fine-tuning-job:
       parameters:
@@ -560,7 +562,7 @@ examples:
         application/json: {"input": ["Embed this sentence.", "As well as this one."], "model": "Wrangler"}
       responses:
         "200":
-          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "data": [{"object": "embedding", "embedding": [0.1, 0.2, 0.3], "index": 0}]}
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "data": [{"object": "embedding", "embedding": [0.1, 0.2, 0.3], "index": 0}, {"object": "embedding", "embedding": [0.4, 0.5, 0.6], "index": 1}]}
         "422": {}
   moderations_v1_moderations_post:
     speakeasy-default-moderations-v1-moderations-post:
@@ -611,3 +613,13 @@ examples:
       responses:
         "200":
           application/json: {"id": "<id>", "input_files": ["50fbe4e3-e326-4135-8744-d82f3fd6b3c1", "eb45e247-ac10-4cdc-8311-2f7cc9241230", "4afaa0f8-4bd4-4945-9116-89d07a64aa72"], "endpoint": "<value>", "model": "Alpine", "errors": [{"message": "<value>"}, {"message": "<value>"}], "status": "QUEUED", "created_at": 709109, "total_requests": 275794, "completed_requests": 158938, "succeeded_requests": 12381, "failed_requests": 11864}
+  files_api_routes_get_signed_url:
+    speakeasy-default-files-api-routes-get-signed-url:
+      parameters:
+        path:
+          file_id: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"url": "https://scornful-daughter.com/"}
+generatedTests: {}

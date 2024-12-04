@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContentChunk,
   ContentChunk$inboundSchema,
@@ -50,6 +53,20 @@ export namespace Content$ {
   export const outboundSchema = Content$outboundSchema;
   /** @deprecated use `Content$Outbound` instead. */
   export type Outbound = Content$Outbound;
+}
+
+export function contentToJSON(content: Content): string {
+  return JSON.stringify(Content$outboundSchema.parse(content));
+}
+
+export function contentFromJSON(
+  jsonString: string,
+): SafeParseResult<Content, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Content$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Content' from JSON`,
+  );
 }
 
 /** @internal */
@@ -104,4 +121,18 @@ export namespace DeltaMessage$ {
   export const outboundSchema = DeltaMessage$outboundSchema;
   /** @deprecated use `DeltaMessage$Outbound` instead. */
   export type Outbound = DeltaMessage$Outbound;
+}
+
+export function deltaMessageToJSON(deltaMessage: DeltaMessage): string {
+  return JSON.stringify(DeltaMessage$outboundSchema.parse(deltaMessage));
+}
+
+export function deltaMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<DeltaMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeltaMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeltaMessage' from JSON`,
+  );
 }

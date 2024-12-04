@@ -4,11 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  FineTuneableModel,
-  FineTuneableModel$inboundSchema,
-  FineTuneableModel$outboundSchema,
-} from "./finetuneablemodel.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubRepositoryIn,
   GithubRepositoryIn$inboundSchema,
@@ -42,7 +40,7 @@ export type JobIn = {
   /**
    * The name of the model to fine-tune.
    */
-  model: FineTuneableModel;
+  model: string;
   trainingFiles?: Array<TrainingFile> | undefined;
   /**
    * A list containing the IDs of uploaded files that contain validation data. If you provide these files, the data is used to generate validation metrics periodically during fine-tuning. These metrics can be viewed in `checkpoints` when getting the status of a running fine-tuning job. The same data should not be present in both train and validation files.
@@ -97,6 +95,24 @@ export namespace JobInIntegrations$ {
   export type Outbound = JobInIntegrations$Outbound;
 }
 
+export function jobInIntegrationsToJSON(
+  jobInIntegrations: JobInIntegrations,
+): string {
+  return JSON.stringify(
+    JobInIntegrations$outboundSchema.parse(jobInIntegrations),
+  );
+}
+
+export function jobInIntegrationsFromJSON(
+  jsonString: string,
+): SafeParseResult<JobInIntegrations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JobInIntegrations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JobInIntegrations' from JSON`,
+  );
+}
+
 /** @internal */
 export const JobInRepositories$inboundSchema: z.ZodType<
   JobInRepositories,
@@ -127,10 +143,28 @@ export namespace JobInRepositories$ {
   export type Outbound = JobInRepositories$Outbound;
 }
 
+export function jobInRepositoriesToJSON(
+  jobInRepositories: JobInRepositories,
+): string {
+  return JSON.stringify(
+    JobInRepositories$outboundSchema.parse(jobInRepositories),
+  );
+}
+
+export function jobInRepositoriesFromJSON(
+  jsonString: string,
+): SafeParseResult<JobInRepositories, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JobInRepositories$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JobInRepositories' from JSON`,
+  );
+}
+
 /** @internal */
 export const JobIn$inboundSchema: z.ZodType<JobIn, z.ZodTypeDef, unknown> = z
   .object({
-    model: FineTuneableModel$inboundSchema,
+    model: z.string(),
     training_files: z.array(TrainingFile$inboundSchema).optional(),
     validation_files: z.nullable(z.array(z.string())).optional(),
     hyperparameters: TrainingParametersIn$inboundSchema,
@@ -165,7 +199,7 @@ export const JobIn$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   JobIn
 > = z.object({
-  model: FineTuneableModel$outboundSchema,
+  model: z.string(),
   trainingFiles: z.array(TrainingFile$outboundSchema).optional(),
   validationFiles: z.nullable(z.array(z.string())).optional(),
   hyperparameters: TrainingParametersIn$outboundSchema,
@@ -192,4 +226,18 @@ export namespace JobIn$ {
   export const outboundSchema = JobIn$outboundSchema;
   /** @deprecated use `JobIn$Outbound` instead. */
   export type Outbound = JobIn$Outbound;
+}
+
+export function jobInToJSON(jobIn: JobIn): string {
+  return JSON.stringify(JobIn$outboundSchema.parse(jobIn));
+}
+
+export function jobInFromJSON(
+  jsonString: string,
+): SafeParseResult<JobIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JobIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JobIn' from JSON`,
+  );
 }

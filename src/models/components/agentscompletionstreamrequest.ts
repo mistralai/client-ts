@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AssistantMessage,
   AssistantMessage$inboundSchema,
@@ -142,6 +145,26 @@ export namespace AgentsCompletionStreamRequestStop$ {
   export type Outbound = AgentsCompletionStreamRequestStop$Outbound;
 }
 
+export function agentsCompletionStreamRequestStopToJSON(
+  agentsCompletionStreamRequestStop: AgentsCompletionStreamRequestStop,
+): string {
+  return JSON.stringify(
+    AgentsCompletionStreamRequestStop$outboundSchema.parse(
+      agentsCompletionStreamRequestStop,
+    ),
+  );
+}
+
+export function agentsCompletionStreamRequestStopFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentsCompletionStreamRequestStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentsCompletionStreamRequestStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsCompletionStreamRequestStop' from JSON`,
+  );
+}
+
 /** @internal */
 export const AgentsCompletionStreamRequestMessages$inboundSchema: z.ZodType<
   AgentsCompletionStreamRequestMessages,
@@ -212,6 +235,27 @@ export namespace AgentsCompletionStreamRequestMessages$ {
   export type Outbound = AgentsCompletionStreamRequestMessages$Outbound;
 }
 
+export function agentsCompletionStreamRequestMessagesToJSON(
+  agentsCompletionStreamRequestMessages: AgentsCompletionStreamRequestMessages,
+): string {
+  return JSON.stringify(
+    AgentsCompletionStreamRequestMessages$outboundSchema.parse(
+      agentsCompletionStreamRequestMessages,
+    ),
+  );
+}
+
+export function agentsCompletionStreamRequestMessagesFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentsCompletionStreamRequestMessages, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      AgentsCompletionStreamRequestMessages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsCompletionStreamRequestMessages' from JSON`,
+  );
+}
+
 /** @internal */
 export const AgentsCompletionStreamRequestToolChoice$inboundSchema: z.ZodType<
   AgentsCompletionStreamRequestToolChoice,
@@ -244,6 +288,33 @@ export namespace AgentsCompletionStreamRequestToolChoice$ {
     AgentsCompletionStreamRequestToolChoice$outboundSchema;
   /** @deprecated use `AgentsCompletionStreamRequestToolChoice$Outbound` instead. */
   export type Outbound = AgentsCompletionStreamRequestToolChoice$Outbound;
+}
+
+export function agentsCompletionStreamRequestToolChoiceToJSON(
+  agentsCompletionStreamRequestToolChoice:
+    AgentsCompletionStreamRequestToolChoice,
+): string {
+  return JSON.stringify(
+    AgentsCompletionStreamRequestToolChoice$outboundSchema.parse(
+      agentsCompletionStreamRequestToolChoice,
+    ),
+  );
+}
+
+export function agentsCompletionStreamRequestToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  AgentsCompletionStreamRequestToolChoice,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      AgentsCompletionStreamRequestToolChoice$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'AgentsCompletionStreamRequestToolChoice' from JSON`,
+  );
 }
 
 /** @internal */
@@ -388,4 +459,24 @@ export namespace AgentsCompletionStreamRequest$ {
   export const outboundSchema = AgentsCompletionStreamRequest$outboundSchema;
   /** @deprecated use `AgentsCompletionStreamRequest$Outbound` instead. */
   export type Outbound = AgentsCompletionStreamRequest$Outbound;
+}
+
+export function agentsCompletionStreamRequestToJSON(
+  agentsCompletionStreamRequest: AgentsCompletionStreamRequest,
+): string {
+  return JSON.stringify(
+    AgentsCompletionStreamRequest$outboundSchema.parse(
+      agentsCompletionStreamRequest,
+    ),
+  );
+}
+
+export function agentsCompletionStreamRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentsCompletionStreamRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentsCompletionStreamRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsCompletionStreamRequest' from JSON`,
+  );
 }

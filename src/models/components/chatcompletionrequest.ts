@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AssistantMessage,
   AssistantMessage$inboundSchema,
@@ -148,6 +151,20 @@ export namespace Stop$ {
   export type Outbound = Stop$Outbound;
 }
 
+export function stopToJSON(stop: Stop): string {
+  return JSON.stringify(Stop$outboundSchema.parse(stop));
+}
+
+export function stopFromJSON(
+  jsonString: string,
+): SafeParseResult<Stop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Stop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Stop' from JSON`,
+  );
+}
+
 /** @internal */
 export const Messages$inboundSchema: z.ZodType<
   Messages,
@@ -216,6 +233,20 @@ export namespace Messages$ {
   export type Outbound = Messages$Outbound;
 }
 
+export function messagesToJSON(messages: Messages): string {
+  return JSON.stringify(Messages$outboundSchema.parse(messages));
+}
+
+export function messagesFromJSON(
+  jsonString: string,
+): SafeParseResult<Messages, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Messages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Messages' from JSON`,
+  );
+}
+
 /** @internal */
 export const ChatCompletionRequestToolChoice$inboundSchema: z.ZodType<
   ChatCompletionRequestToolChoice,
@@ -246,6 +277,26 @@ export namespace ChatCompletionRequestToolChoice$ {
   export const outboundSchema = ChatCompletionRequestToolChoice$outboundSchema;
   /** @deprecated use `ChatCompletionRequestToolChoice$Outbound` instead. */
   export type Outbound = ChatCompletionRequestToolChoice$Outbound;
+}
+
+export function chatCompletionRequestToolChoiceToJSON(
+  chatCompletionRequestToolChoice: ChatCompletionRequestToolChoice,
+): string {
+  return JSON.stringify(
+    ChatCompletionRequestToolChoice$outboundSchema.parse(
+      chatCompletionRequestToolChoice,
+    ),
+  );
+}
+
+export function chatCompletionRequestToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatCompletionRequestToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChatCompletionRequestToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionRequestToolChoice' from JSON`,
+  );
 }
 
 /** @internal */
@@ -401,4 +452,22 @@ export namespace ChatCompletionRequest$ {
   export const outboundSchema = ChatCompletionRequest$outboundSchema;
   /** @deprecated use `ChatCompletionRequest$Outbound` instead. */
   export type Outbound = ChatCompletionRequest$Outbound;
+}
+
+export function chatCompletionRequestToJSON(
+  chatCompletionRequest: ChatCompletionRequest,
+): string {
+  return JSON.stringify(
+    ChatCompletionRequest$outboundSchema.parse(chatCompletionRequest),
+  );
+}
+
+export function chatCompletionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatCompletionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChatCompletionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionRequest' from JSON`,
+  );
 }

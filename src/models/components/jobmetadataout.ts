@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JobMetadataOut = {
   expectedDurationSeconds?: number | null | undefined;
@@ -85,4 +88,18 @@ export namespace JobMetadataOut$ {
   export const outboundSchema = JobMetadataOut$outboundSchema;
   /** @deprecated use `JobMetadataOut$Outbound` instead. */
   export type Outbound = JobMetadataOut$Outbound;
+}
+
+export function jobMetadataOutToJSON(jobMetadataOut: JobMetadataOut): string {
+  return JSON.stringify(JobMetadataOut$outboundSchema.parse(jobMetadataOut));
+}
+
+export function jobMetadataOutFromJSON(
+  jsonString: string,
+): SafeParseResult<JobMetadataOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JobMetadataOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JobMetadataOut' from JSON`,
+  );
 }

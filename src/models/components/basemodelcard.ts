@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ModelCapabilities,
   ModelCapabilities$inboundSchema,
@@ -133,4 +136,18 @@ export namespace BaseModelCard$ {
   export const outboundSchema = BaseModelCard$outboundSchema;
   /** @deprecated use `BaseModelCard$Outbound` instead. */
   export type Outbound = BaseModelCard$Outbound;
+}
+
+export function baseModelCardToJSON(baseModelCard: BaseModelCard): string {
+  return JSON.stringify(BaseModelCard$outboundSchema.parse(baseModelCard));
+}
+
+export function baseModelCardFromJSON(
+  jsonString: string,
+): SafeParseResult<BaseModelCard, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BaseModelCard$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BaseModelCard' from JSON`,
+  );
 }

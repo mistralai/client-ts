@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ApiEndpoint,
   ApiEndpoint$inboundSchema,
@@ -74,4 +77,18 @@ export namespace BatchJobIn$ {
   export const outboundSchema = BatchJobIn$outboundSchema;
   /** @deprecated use `BatchJobIn$Outbound` instead. */
   export type Outbound = BatchJobIn$Outbound;
+}
+
+export function batchJobInToJSON(batchJobIn: BatchJobIn): string {
+  return JSON.stringify(BatchJobIn$outboundSchema.parse(batchJobIn));
+}
+
+export function batchJobInFromJSON(
+  jsonString: string,
+): SafeParseResult<BatchJobIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BatchJobIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BatchJobIn' from JSON`,
+  );
 }

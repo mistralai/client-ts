@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContentChunk,
   ContentChunk$inboundSchema,
@@ -51,6 +54,24 @@ export namespace UserMessageContent$ {
   export const outboundSchema = UserMessageContent$outboundSchema;
   /** @deprecated use `UserMessageContent$Outbound` instead. */
   export type Outbound = UserMessageContent$Outbound;
+}
+
+export function userMessageContentToJSON(
+  userMessageContent: UserMessageContent,
+): string {
+  return JSON.stringify(
+    UserMessageContent$outboundSchema.parse(userMessageContent),
+  );
+}
+
+export function userMessageContentFromJSON(
+  jsonString: string,
+): SafeParseResult<UserMessageContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserMessageContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserMessageContent' from JSON`,
+  );
 }
 
 /** @internal */
@@ -115,4 +136,18 @@ export namespace UserMessage$ {
   export const outboundSchema = UserMessage$outboundSchema;
   /** @deprecated use `UserMessage$Outbound` instead. */
   export type Outbound = UserMessage$Outbound;
+}
+
+export function userMessageToJSON(userMessage: UserMessage): string {
+  return JSON.stringify(UserMessage$outboundSchema.parse(userMessage));
+}
+
+export function userMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<UserMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserMessage' from JSON`,
+  );
 }

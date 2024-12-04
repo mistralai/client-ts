@@ -6,7 +6,7 @@
 import { BatchJobsOut } from "@mistralai/mistralai/models/components";
 
 let value: BatchJobsOut = {
-  total: 947371,
+  total: 213312,
 };
 ```
 

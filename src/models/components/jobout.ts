@@ -4,12 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import {
-  FineTuneableModel,
-  FineTuneableModel$inboundSchema,
-  FineTuneableModel$outboundSchema,
-} from "./finetuneablemodel.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   GithubRepositoryOut,
   GithubRepositoryOut$inboundSchema,
@@ -80,7 +78,7 @@ export type JobOut = {
   /**
    * The name of the model to fine-tune.
    */
-  model: FineTuneableModel;
+  model: string;
   /**
    * The current status of the fine-tuning job.
    */
@@ -197,6 +195,20 @@ export namespace Integrations$ {
   export type Outbound = Integrations$Outbound;
 }
 
+export function integrationsToJSON(integrations: Integrations): string {
+  return JSON.stringify(Integrations$outboundSchema.parse(integrations));
+}
+
+export function integrationsFromJSON(
+  jsonString: string,
+): SafeParseResult<Integrations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Integrations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Integrations' from JSON`,
+  );
+}
+
 /** @internal */
 export const Repositories$inboundSchema: z.ZodType<
   Repositories,
@@ -227,13 +239,27 @@ export namespace Repositories$ {
   export type Outbound = Repositories$Outbound;
 }
 
+export function repositoriesToJSON(repositories: Repositories): string {
+  return JSON.stringify(Repositories$outboundSchema.parse(repositories));
+}
+
+export function repositoriesFromJSON(
+  jsonString: string,
+): SafeParseResult<Repositories, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Repositories$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Repositories' from JSON`,
+  );
+}
+
 /** @internal */
 export const JobOut$inboundSchema: z.ZodType<JobOut, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string(),
     auto_start: z.boolean(),
     hyperparameters: TrainingParameters$inboundSchema,
-    model: FineTuneableModel$inboundSchema,
+    model: z.string(),
     status: Status$inboundSchema,
     job_type: z.string(),
     created_at: z.number().int(),
@@ -291,7 +317,7 @@ export const JobOut$outboundSchema: z.ZodType<
   id: z.string(),
   autoStart: z.boolean(),
   hyperparameters: TrainingParameters$outboundSchema,
-  model: FineTuneableModel$outboundSchema,
+  model: z.string(),
   status: Status$outboundSchema,
   jobType: z.string(),
   createdAt: z.number().int(),
@@ -330,4 +356,18 @@ export namespace JobOut$ {
   export const outboundSchema = JobOut$outboundSchema;
   /** @deprecated use `JobOut$Outbound` instead. */
   export type Outbound = JobOut$Outbound;
+}
+
+export function jobOutToJSON(jobOut: JobOut): string {
+  return JSON.stringify(JobOut$outboundSchema.parse(jobOut));
+}
+
+export function jobOutFromJSON(
+  jsonString: string,
+): SafeParseResult<JobOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JobOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JobOut' from JSON`,
+  );
 }

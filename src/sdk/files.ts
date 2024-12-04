@@ -4,6 +4,7 @@
 
 import { filesDelete } from "../funcs/filesDelete.js";
 import { filesDownload } from "../funcs/filesDownload.js";
+import { filesGetSignedUrl } from "../funcs/filesGetSignedUrl.js";
 import { filesList } from "../funcs/filesList.js";
 import { filesRetrieve } from "../funcs/filesRetrieve.js";
 import { filesUpload } from "../funcs/filesUpload.js";
@@ -96,6 +97,20 @@ export class Files extends ClientSDK {
     options?: RequestOptions,
   ): Promise<ReadableStream<Uint8Array>> {
     return unwrapAsync(filesDownload(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Signed Url
+   */
+  async getSignedUrl(
+    request: operations.FilesApiRoutesGetSignedUrlRequest,
+    options?: RequestOptions,
+  ): Promise<components.FileSignedURL> {
+    return unwrapAsync(filesGetSignedUrl(
       this,
       request,
       options,

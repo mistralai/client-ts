@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FileT = {
   fileName: string;
@@ -75,6 +78,20 @@ export namespace FileT$ {
   export type Outbound = FileT$Outbound;
 }
 
+export function fileToJSON(fileT: FileT): string {
+  return JSON.stringify(FileT$outboundSchema.parse(fileT));
+}
+
+export function fileFromJSON(
+  jsonString: string,
+): SafeParseResult<FileT, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FileT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileT' from JSON`,
+  );
+}
+
 /** @internal */
 export const FilesApiRoutesUploadFileMultiPartBodyParams$inboundSchema:
   z.ZodType<
@@ -116,4 +133,31 @@ export namespace FilesApiRoutesUploadFileMultiPartBodyParams$ {
     FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema;
   /** @deprecated use `FilesApiRoutesUploadFileMultiPartBodyParams$Outbound` instead. */
   export type Outbound = FilesApiRoutesUploadFileMultiPartBodyParams$Outbound;
+}
+
+export function filesApiRoutesUploadFileMultiPartBodyParamsToJSON(
+  filesApiRoutesUploadFileMultiPartBodyParams:
+    FilesApiRoutesUploadFileMultiPartBodyParams,
+): string {
+  return JSON.stringify(
+    FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema.parse(
+      filesApiRoutesUploadFileMultiPartBodyParams,
+    ),
+  );
+}
+
+export function filesApiRoutesUploadFileMultiPartBodyParamsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  FilesApiRoutesUploadFileMultiPartBodyParams,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      FilesApiRoutesUploadFileMultiPartBodyParams$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'FilesApiRoutesUploadFileMultiPartBodyParams' from JSON`,
+  );
 }

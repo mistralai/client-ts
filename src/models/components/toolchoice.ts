@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FunctionName,
   FunctionName$inboundSchema,
@@ -63,4 +66,18 @@ export namespace ToolChoice$ {
   export const outboundSchema = ToolChoice$outboundSchema;
   /** @deprecated use `ToolChoice$Outbound` instead. */
   export type Outbound = ToolChoice$Outbound;
+}
+
+export function toolChoiceToJSON(toolChoice: ToolChoice): string {
+  return JSON.stringify(ToolChoice$outboundSchema.parse(toolChoice));
+}
+
+export function toolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolChoice' from JSON`,
+  );
 }

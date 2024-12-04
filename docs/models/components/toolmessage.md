@@ -8,7 +8,7 @@ import { ToolMessage } from "@mistralai/mistralai/models/components";
 let value: ToolMessage = {
   content: [
     {
-      text: "<value>",
+      imageUrl: "https://punctual-amnesty.info",
     },
   ],
 };

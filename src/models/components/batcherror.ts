@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BatchError = {
   message: string;
@@ -46,4 +49,18 @@ export namespace BatchError$ {
   export const outboundSchema = BatchError$outboundSchema;
   /** @deprecated use `BatchError$Outbound` instead. */
   export type Outbound = BatchError$Outbound;
+}
+
+export function batchErrorToJSON(batchError: BatchError): string {
+  return JSON.stringify(BatchError$outboundSchema.parse(batchError));
+}
+
+export function batchErrorFromJSON(
+  jsonString: string,
+): SafeParseResult<BatchError, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BatchError$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BatchError' from JSON`,
+  );
 }

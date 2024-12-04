@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EventOut = {
   /**
@@ -65,4 +68,18 @@ export namespace EventOut$ {
   export const outboundSchema = EventOut$outboundSchema;
   /** @deprecated use `EventOut$Outbound` instead. */
   export type Outbound = EventOut$Outbound;
+}
+
+export function eventOutToJSON(eventOut: EventOut): string {
+  return JSON.stringify(EventOut$outboundSchema.parse(eventOut));
+}
+
+export function eventOutFromJSON(
+  jsonString: string,
+): SafeParseResult<EventOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EventOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EventOut' from JSON`,
+  );
 }

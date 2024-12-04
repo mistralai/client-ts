@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   TextChunk,
   TextChunk$inboundSchema,
@@ -51,6 +54,24 @@ export namespace SystemMessageContent$ {
   export const outboundSchema = SystemMessageContent$outboundSchema;
   /** @deprecated use `SystemMessageContent$Outbound` instead. */
   export type Outbound = SystemMessageContent$Outbound;
+}
+
+export function systemMessageContentToJSON(
+  systemMessageContent: SystemMessageContent,
+): string {
+  return JSON.stringify(
+    SystemMessageContent$outboundSchema.parse(systemMessageContent),
+  );
+}
+
+export function systemMessageContentFromJSON(
+  jsonString: string,
+): SafeParseResult<SystemMessageContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SystemMessageContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SystemMessageContent' from JSON`,
+  );
 }
 
 /** @internal */
@@ -110,4 +131,18 @@ export namespace SystemMessage$ {
   export const outboundSchema = SystemMessage$outboundSchema;
   /** @deprecated use `SystemMessage$Outbound` instead. */
   export type Outbound = SystemMessage$Outbound;
+}
+
+export function systemMessageToJSON(systemMessage: SystemMessage): string {
+  return JSON.stringify(SystemMessage$outboundSchema.parse(systemMessage));
+}
+
+export function systemMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<SystemMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SystemMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SystemMessage' from JSON`,
+  );
 }

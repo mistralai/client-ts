@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const UnarchiveFTModelOutObject = {
   Model: "model",
@@ -79,4 +82,22 @@ export namespace UnarchiveFTModelOut$ {
   export const outboundSchema = UnarchiveFTModelOut$outboundSchema;
   /** @deprecated use `UnarchiveFTModelOut$Outbound` instead. */
   export type Outbound = UnarchiveFTModelOut$Outbound;
+}
+
+export function unarchiveFTModelOutToJSON(
+  unarchiveFTModelOut: UnarchiveFTModelOut,
+): string {
+  return JSON.stringify(
+    UnarchiveFTModelOut$outboundSchema.parse(unarchiveFTModelOut),
+  );
+}
+
+export function unarchiveFTModelOutFromJSON(
+  jsonString: string,
+): SafeParseResult<UnarchiveFTModelOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UnarchiveFTModelOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UnarchiveFTModelOut' from JSON`,
+  );
 }

@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * OK
@@ -53,4 +56,31 @@ export namespace JobsApiRoutesFineTuningCreateFineTuningJobResponse$ {
   /** @deprecated use `JobsApiRoutesFineTuningCreateFineTuningJobResponse$Outbound` instead. */
   export type Outbound =
     JobsApiRoutesFineTuningCreateFineTuningJobResponse$Outbound;
+}
+
+export function jobsApiRoutesFineTuningCreateFineTuningJobResponseToJSON(
+  jobsApiRoutesFineTuningCreateFineTuningJobResponse:
+    JobsApiRoutesFineTuningCreateFineTuningJobResponse,
+): string {
+  return JSON.stringify(
+    JobsApiRoutesFineTuningCreateFineTuningJobResponse$outboundSchema.parse(
+      jobsApiRoutesFineTuningCreateFineTuningJobResponse,
+    ),
+  );
+}
+
+export function jobsApiRoutesFineTuningCreateFineTuningJobResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  JobsApiRoutesFineTuningCreateFineTuningJobResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      JobsApiRoutesFineTuningCreateFineTuningJobResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'JobsApiRoutesFineTuningCreateFineTuningJobResponse' from JSON`,
+  );
 }

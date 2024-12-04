@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TrainingParameters = {
   trainingSteps?: number | null | undefined;
@@ -85,4 +88,22 @@ export namespace TrainingParameters$ {
   export const outboundSchema = TrainingParameters$outboundSchema;
   /** @deprecated use `TrainingParameters$Outbound` instead. */
   export type Outbound = TrainingParameters$Outbound;
+}
+
+export function trainingParametersToJSON(
+  trainingParameters: TrainingParameters,
+): string {
+  return JSON.stringify(
+    TrainingParameters$outboundSchema.parse(trainingParameters),
+  );
+}
+
+export function trainingParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<TrainingParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TrainingParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TrainingParameters' from JSON`,
+  );
 }

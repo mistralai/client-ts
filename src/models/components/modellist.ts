@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BaseModelCard,
   BaseModelCard$inboundSchema,
@@ -78,6 +81,20 @@ export namespace Data$ {
   export type Outbound = Data$Outbound;
 }
 
+export function dataToJSON(data: Data): string {
+  return JSON.stringify(Data$outboundSchema.parse(data));
+}
+
+export function dataFromJSON(
+  jsonString: string,
+): SafeParseResult<Data, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data' from JSON`,
+  );
+}
+
 /** @internal */
 export const ModelList$inboundSchema: z.ZodType<
   ModelList,
@@ -146,4 +163,18 @@ export namespace ModelList$ {
   export const outboundSchema = ModelList$outboundSchema;
   /** @deprecated use `ModelList$Outbound` instead. */
   export type Outbound = ModelList$Outbound;
+}
+
+export function modelListToJSON(modelList: ModelList): string {
+  return JSON.stringify(ModelList$outboundSchema.parse(modelList));
+}
+
+export function modelListFromJSON(
+  jsonString: string,
+): SafeParseResult<ModelList, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ModelList$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelList' from JSON`,
+  );
 }

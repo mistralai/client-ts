@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JobsApiRoutesFineTuningGetFineTuningJobRequest = {
   /**
@@ -59,4 +62,31 @@ export namespace JobsApiRoutesFineTuningGetFineTuningJobRequest$ {
   /** @deprecated use `JobsApiRoutesFineTuningGetFineTuningJobRequest$Outbound` instead. */
   export type Outbound =
     JobsApiRoutesFineTuningGetFineTuningJobRequest$Outbound;
+}
+
+export function jobsApiRoutesFineTuningGetFineTuningJobRequestToJSON(
+  jobsApiRoutesFineTuningGetFineTuningJobRequest:
+    JobsApiRoutesFineTuningGetFineTuningJobRequest,
+): string {
+  return JSON.stringify(
+    JobsApiRoutesFineTuningGetFineTuningJobRequest$outboundSchema.parse(
+      jobsApiRoutesFineTuningGetFineTuningJobRequest,
+    ),
+  );
+}
+
+export function jobsApiRoutesFineTuningGetFineTuningJobRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  JobsApiRoutesFineTuningGetFineTuningJobRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      JobsApiRoutesFineTuningGetFineTuningJobRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'JobsApiRoutesFineTuningGetFineTuningJobRequest' from JSON`,
+  );
 }

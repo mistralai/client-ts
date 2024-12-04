@@ -9,7 +9,7 @@ import { ImageURLChunk } from "@mistralai/mistralai/models/components";
 
 let value: ImageURLChunk = {
   imageUrl: {
-    url: "https://babyish-ethyl.biz/",
+    url: "https://lasting-plugin.net/",
   },
 };
 ```
@@ -18,5 +18,5 @@ let value: ImageURLChunk = {
 
 | Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `type`                                                                       | [components.ImageURLChunkType](../../models/components/imageurlchunktype.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
 | `imageUrl`                                                                   | *components.ImageURLChunkImageURL*                                           | :heavy_check_mark:                                                           | N/A                                                                          |
+| `type`                                                                       | [components.ImageURLChunkType](../../models/components/imageurlchunktype.md) | :heavy_minus_sign:                                                           | N/A                                                                          |

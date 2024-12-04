@@ -8,20 +8,27 @@ Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create yo
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [Mistral Typescript Client](#mistral-typescript-client)
+  * [SDK Installation](#sdk-installation)
+  * [Requirements](#requirements)
+  * [API Key Setup](#api-key-setup)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Providers' SDKs](#providers-sdks)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Server-sent event streaming](#server-sent-event-streaming)
+  * [File uploads](#file-uploads)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+  * [Providers Support](#providers-support)
+  * [Standalone functions](#standalone-functions)
+  * [Debugging](#debugging)
+* [Development](#development)
+  * [Contributions](#contributions)
 
-* [SDK Installation](#sdk-installation)
-* [Requirements](#requirements)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Standalone functions](#standalone-functions)
-* [Server-sent event streaming](#server-sent-event-streaming)
-* [File uploads](#file-uploads)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Debugging](#debugging)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -246,6 +253,7 @@ We have dedicated SDKs for the following providers:
 * [retrieve](docs/sdks/files/README.md#retrieve) - Retrieve File
 * [delete](docs/sdks/files/README.md#delete) - Delete File
 * [download](docs/sdks/files/README.md#download) - Download File
+* [getSignedUrl](docs/sdks/files/README.md#getsignedurl) - Get Signed Url
 
 ### [fim](docs/sdks/fim/README.md)
 
@@ -657,6 +665,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`embeddingsCreate`](docs/sdks/embeddings/README.md#create) - Embeddings
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete File
 - [`filesDownload`](docs/sdks/files/README.md#download) - Download File
+- [`filesGetSignedUrl`](docs/sdks/files/README.md#getsignedurl) - Get Signed Url
 - [`filesList`](docs/sdks/files/README.md#list) - List Files
 - [`filesRetrieve`](docs/sdks/files/README.md#retrieve) - Retrieve File
 - [`filesUpload`](docs/sdks/files/README.md#upload) - Upload File

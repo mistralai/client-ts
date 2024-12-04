@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AssistantMessage,
   AssistantMessage$inboundSchema,
@@ -153,6 +156,20 @@ export namespace Two$ {
   export type Outbound = Two$Outbound;
 }
 
+export function twoToJSON(two: Two): string {
+  return JSON.stringify(Two$outboundSchema.parse(two));
+}
+
+export function twoFromJSON(
+  jsonString: string,
+): SafeParseResult<Two, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Two$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two' from JSON`,
+  );
+}
+
 /** @internal */
 export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z.union(
   [
@@ -222,6 +239,20 @@ export namespace One$ {
   export const outboundSchema = One$outboundSchema;
   /** @deprecated use `One$Outbound` instead. */
   export type Outbound = One$Outbound;
+}
+
+export function oneToJSON(one: One): string {
+  return JSON.stringify(One$outboundSchema.parse(one));
+}
+
+export function oneFromJSON(
+  jsonString: string,
+): SafeParseResult<One, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => One$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'One' from JSON`,
+  );
 }
 
 /** @internal */
@@ -368,6 +399,26 @@ export namespace ChatClassificationRequestInputs$ {
   export const outboundSchema = ChatClassificationRequestInputs$outboundSchema;
   /** @deprecated use `ChatClassificationRequestInputs$Outbound` instead. */
   export type Outbound = ChatClassificationRequestInputs$Outbound;
+}
+
+export function chatClassificationRequestInputsToJSON(
+  chatClassificationRequestInputs: ChatClassificationRequestInputs,
+): string {
+  return JSON.stringify(
+    ChatClassificationRequestInputs$outboundSchema.parse(
+      chatClassificationRequestInputs,
+    ),
+  );
+}
+
+export function chatClassificationRequestInputsFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatClassificationRequestInputs, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChatClassificationRequestInputs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatClassificationRequestInputs' from JSON`,
+  );
 }
 
 /** @internal */
@@ -531,4 +582,22 @@ export namespace ChatClassificationRequest$ {
   export const outboundSchema = ChatClassificationRequest$outboundSchema;
   /** @deprecated use `ChatClassificationRequest$Outbound` instead. */
   export type Outbound = ChatClassificationRequest$Outbound;
+}
+
+export function chatClassificationRequestToJSON(
+  chatClassificationRequest: ChatClassificationRequest,
+): string {
+  return JSON.stringify(
+    ChatClassificationRequest$outboundSchema.parse(chatClassificationRequest),
+  );
+}
+
+export function chatClassificationRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ChatClassificationRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ChatClassificationRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatClassificationRequest' from JSON`,
+  );
 }

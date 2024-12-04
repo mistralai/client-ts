@@ -25,6 +25,7 @@ typescript:
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
   defaultErrorName: SDKError
+  enableReactQuery: false
   enumFormat: union
   envVarPrefix: MISTRAL
   flattenGlobalSecurity: true

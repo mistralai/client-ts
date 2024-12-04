@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CheckpointOut,
   CheckpointOut$inboundSchema,
@@ -17,11 +20,6 @@ import {
   EventOut$Outbound,
   EventOut$outboundSchema,
 } from "./eventout.js";
-import {
-  FineTuneableModel,
-  FineTuneableModel$inboundSchema,
-  FineTuneableModel$outboundSchema,
-} from "./finetuneablemodel.js";
 import {
   GithubRepositoryOut,
   GithubRepositoryOut$inboundSchema,
@@ -77,7 +75,7 @@ export type DetailedJobOut = {
   /**
    * The name of the model to fine-tune.
    */
-  model: FineTuneableModel;
+  model: string;
   status: DetailedJobOutStatus;
   jobType: string;
   createdAt: number;
@@ -170,6 +168,24 @@ export namespace DetailedJobOutIntegrations$ {
   export type Outbound = DetailedJobOutIntegrations$Outbound;
 }
 
+export function detailedJobOutIntegrationsToJSON(
+  detailedJobOutIntegrations: DetailedJobOutIntegrations,
+): string {
+  return JSON.stringify(
+    DetailedJobOutIntegrations$outboundSchema.parse(detailedJobOutIntegrations),
+  );
+}
+
+export function detailedJobOutIntegrationsFromJSON(
+  jsonString: string,
+): SafeParseResult<DetailedJobOutIntegrations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DetailedJobOutIntegrations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DetailedJobOutIntegrations' from JSON`,
+  );
+}
+
 /** @internal */
 export const DetailedJobOutRepositories$inboundSchema: z.ZodType<
   DetailedJobOutRepositories,
@@ -200,6 +216,24 @@ export namespace DetailedJobOutRepositories$ {
   export type Outbound = DetailedJobOutRepositories$Outbound;
 }
 
+export function detailedJobOutRepositoriesToJSON(
+  detailedJobOutRepositories: DetailedJobOutRepositories,
+): string {
+  return JSON.stringify(
+    DetailedJobOutRepositories$outboundSchema.parse(detailedJobOutRepositories),
+  );
+}
+
+export function detailedJobOutRepositoriesFromJSON(
+  jsonString: string,
+): SafeParseResult<DetailedJobOutRepositories, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DetailedJobOutRepositories$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DetailedJobOutRepositories' from JSON`,
+  );
+}
+
 /** @internal */
 export const DetailedJobOut$inboundSchema: z.ZodType<
   DetailedJobOut,
@@ -209,7 +243,7 @@ export const DetailedJobOut$inboundSchema: z.ZodType<
   id: z.string(),
   auto_start: z.boolean(),
   hyperparameters: TrainingParameters$inboundSchema,
-  model: FineTuneableModel$inboundSchema,
+  model: z.string(),
   status: DetailedJobOutStatus$inboundSchema,
   job_type: z.string(),
   created_at: z.number().int(),
@@ -271,7 +305,7 @@ export const DetailedJobOut$outboundSchema: z.ZodType<
   id: z.string(),
   autoStart: z.boolean(),
   hyperparameters: TrainingParameters$outboundSchema,
-  model: FineTuneableModel$outboundSchema,
+  model: z.string(),
   status: DetailedJobOutStatus$outboundSchema,
   jobType: z.string(),
   createdAt: z.number().int(),
@@ -312,4 +346,18 @@ export namespace DetailedJobOut$ {
   export const outboundSchema = DetailedJobOut$outboundSchema;
   /** @deprecated use `DetailedJobOut$Outbound` instead. */
   export type Outbound = DetailedJobOut$Outbound;
+}
+
+export function detailedJobOutToJSON(detailedJobOut: DetailedJobOut): string {
+  return JSON.stringify(DetailedJobOut$outboundSchema.parse(detailedJobOut));
+}
+
+export function detailedJobOutFromJSON(
+  jsonString: string,
+): SafeParseResult<DetailedJobOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DetailedJobOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DetailedJobOut' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FileSchema,
   FileSchema$inboundSchema,
@@ -56,4 +59,18 @@ export namespace ListFilesOut$ {
   export const outboundSchema = ListFilesOut$outboundSchema;
   /** @deprecated use `ListFilesOut$Outbound` instead. */
   export type Outbound = ListFilesOut$Outbound;
+}
+
+export function listFilesOutToJSON(listFilesOut: ListFilesOut): string {
+  return JSON.stringify(ListFilesOut$outboundSchema.parse(listFilesOut));
+}
+
+export function listFilesOutFromJSON(
+  jsonString: string,
+): SafeParseResult<ListFilesOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListFilesOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListFilesOut' from JSON`,
+  );
 }

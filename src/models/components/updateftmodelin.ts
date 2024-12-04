@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateFTModelIn = {
   name?: string | null | undefined;
@@ -46,4 +49,20 @@ export namespace UpdateFTModelIn$ {
   export const outboundSchema = UpdateFTModelIn$outboundSchema;
   /** @deprecated use `UpdateFTModelIn$Outbound` instead. */
   export type Outbound = UpdateFTModelIn$Outbound;
+}
+
+export function updateFTModelInToJSON(
+  updateFTModelIn: UpdateFTModelIn,
+): string {
+  return JSON.stringify(UpdateFTModelIn$outboundSchema.parse(updateFTModelIn));
+}
+
+export function updateFTModelInFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateFTModelIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateFTModelIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateFTModelIn' from JSON`,
+  );
 }

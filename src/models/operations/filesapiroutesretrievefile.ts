@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FilesApiRoutesRetrieveFileRequest = {
   fileId: string;
@@ -52,4 +55,24 @@ export namespace FilesApiRoutesRetrieveFileRequest$ {
     FilesApiRoutesRetrieveFileRequest$outboundSchema;
   /** @deprecated use `FilesApiRoutesRetrieveFileRequest$Outbound` instead. */
   export type Outbound = FilesApiRoutesRetrieveFileRequest$Outbound;
+}
+
+export function filesApiRoutesRetrieveFileRequestToJSON(
+  filesApiRoutesRetrieveFileRequest: FilesApiRoutesRetrieveFileRequest,
+): string {
+  return JSON.stringify(
+    FilesApiRoutesRetrieveFileRequest$outboundSchema.parse(
+      filesApiRoutesRetrieveFileRequest,
+    ),
+  );
+}
+
+export function filesApiRoutesRetrieveFileRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<FilesApiRoutesRetrieveFileRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FilesApiRoutesRetrieveFileRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilesApiRoutesRetrieveFileRequest' from JSON`,
+  );
 }

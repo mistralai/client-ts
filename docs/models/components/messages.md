@@ -13,7 +13,11 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+    },
+  ],
 };
 ```
 
@@ -23,7 +27,9 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      imageUrl: "https://sour-disposer.info",
+      referenceIds: [
+        259422,
+      ],
     },
   ],
 };
@@ -33,13 +39,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      imageUrl: {
-        url: "https://lawful-apricot.net/",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

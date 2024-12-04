@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const GithubRepositoryOutType = {
   Github: "github",
@@ -100,4 +103,22 @@ export namespace GithubRepositoryOut$ {
   export const outboundSchema = GithubRepositoryOut$outboundSchema;
   /** @deprecated use `GithubRepositoryOut$Outbound` instead. */
   export type Outbound = GithubRepositoryOut$Outbound;
+}
+
+export function githubRepositoryOutToJSON(
+  githubRepositoryOut: GithubRepositoryOut,
+): string {
+  return JSON.stringify(
+    GithubRepositoryOut$outboundSchema.parse(githubRepositoryOut),
+  );
+}
+
+export function githubRepositoryOutFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubRepositoryOut, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubRepositoryOut$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubRepositoryOut' from JSON`,
+  );
 }

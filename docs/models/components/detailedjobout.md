@@ -6,21 +6,21 @@
 import { DetailedJobOut } from "@mistralai/mistralai/models/components";
 
 let value: DetailedJobOut = {
-  id: "1b7bdfd0-5b28-4030-9c35-eb02993e989b",
+  id: "bdfd05b2-8030-4c35-8eb0-2993e989b463",
   autoStart: false,
   hyperparameters: {},
-  model: "mistral-small-latest",
-  status: "VALIDATING",
+  model: "Volt",
+  status: "SUCCESS",
   jobType: "<value>",
-  createdAt: 186193,
-  modifiedAt: 944373,
+  createdAt: 490459,
+  modifiedAt: 227414,
   trainingFiles: [
-    "b734064b-6201-4a78-8ef3-a40c569dad4c",
+    "4064b620-1a78-4ef3-8a40-c569dad4c2fa",
   ],
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 952792,
+      stepNumber: 947371,
       createdAt: 1716963433,
     },
   ],
@@ -34,7 +34,7 @@ let value: DetailedJobOut = {
 | `id`                                                                                                                               | *string*                                                                                                                           | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
 | `autoStart`                                                                                                                        | *boolean*                                                                                                                          | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
 | `hyperparameters`                                                                                                                  | [components.TrainingParameters](../../models/components/trainingparameters.md)                                                     | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
-| `model`                                                                                                                            | [components.FineTuneableModel](../../models/components/finetuneablemodel.md)                                                       | :heavy_check_mark:                                                                                                                 | The name of the model to fine-tune.                                                                                                |
+| `model`                                                                                                                            | *string*                                                                                                                           | :heavy_check_mark:                                                                                                                 | The name of the model to fine-tune.                                                                                                |
 | `status`                                                                                                                           | [components.DetailedJobOutStatus](../../models/components/detailedjoboutstatus.md)                                                 | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
 | `jobType`                                                                                                                          | *string*                                                                                                                           | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
 | `createdAt`                                                                                                                        | *number*                                                                                                                           | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |

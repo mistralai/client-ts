@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The fine-tuning hyperparameter settings used in a fine-tune job.
@@ -100,4 +103,22 @@ export namespace TrainingParametersIn$ {
   export const outboundSchema = TrainingParametersIn$outboundSchema;
   /** @deprecated use `TrainingParametersIn$Outbound` instead. */
   export type Outbound = TrainingParametersIn$Outbound;
+}
+
+export function trainingParametersInToJSON(
+  trainingParametersIn: TrainingParametersIn,
+): string {
+  return JSON.stringify(
+    TrainingParametersIn$outboundSchema.parse(trainingParametersIn),
+  );
+}
+
+export function trainingParametersInFromJSON(
+  jsonString: string,
+): SafeParseResult<TrainingParametersIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TrainingParametersIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TrainingParametersIn' from JSON`,
+  );
 }

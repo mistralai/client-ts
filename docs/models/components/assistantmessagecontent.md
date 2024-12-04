@@ -15,7 +15,7 @@ const value: string = "<value>";
 const value: components.ContentChunk[] = [
   {
     imageUrl: {
-      url: "https://entire-ceramics.com/",
+      url: "https://serpentine-address.net/",
     },
   },
 ];
