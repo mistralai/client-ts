@@ -79,3 +79,13 @@ Based on:
 - [typescript v1.3.4] packages/mistralai-gcp
 ### Releases
 - [NPM v1.3.4] https://www.npmjs.com/package/@mistralai/mistralai-gcp/v/1.3.4 - packages/mistralai-gcp
+
+## 2024-12-04 09:25:48
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.451.1 (2.470.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v1.3.5] packages/mistralai-gcp
+### Releases
+- [NPM v1.3.5] https://www.npmjs.com/package/@mistralai/mistralai-gcp/v/1.3.5 - packages/mistralai-gcp

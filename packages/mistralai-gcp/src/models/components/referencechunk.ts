@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const ReferenceChunkType = {
   Reference: "reference",
@@ -12,8 +15,8 @@ export const ReferenceChunkType = {
 export type ReferenceChunkType = ClosedEnum<typeof ReferenceChunkType>;
 
 export type ReferenceChunk = {
-  type?: "reference" | undefined;
   referenceIds: Array<number>;
+  type?: ReferenceChunkType | undefined;
 };
 
 /** @internal */
@@ -43,8 +46,8 @@ export const ReferenceChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("reference").default("reference"),
   reference_ids: z.array(z.number().int()),
+  type: ReferenceChunkType$inboundSchema.default("reference"),
 }).transform((v) => {
   return remap$(v, {
     "reference_ids": "referenceIds",
@@ -53,8 +56,8 @@ export const ReferenceChunk$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ReferenceChunk$Outbound = {
-  type: "reference";
   reference_ids: Array<number>;
+  type: string;
 };
 
 /** @internal */
@@ -63,8 +66,8 @@ export const ReferenceChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReferenceChunk
 > = z.object({
-  type: z.literal("reference").default("reference"),
   referenceIds: z.array(z.number().int()),
+  type: ReferenceChunkType$outboundSchema.default("reference"),
 }).transform((v) => {
   return remap$(v, {
     referenceIds: "reference_ids",
@@ -82,4 +85,18 @@ export namespace ReferenceChunk$ {
   export const outboundSchema = ReferenceChunk$outboundSchema;
   /** @deprecated use `ReferenceChunk$Outbound` instead. */
   export type Outbound = ReferenceChunk$Outbound;
+}
+
+export function referenceChunkToJSON(referenceChunk: ReferenceChunk): string {
+  return JSON.stringify(ReferenceChunk$outboundSchema.parse(referenceChunk));
+}
+
+export function referenceChunkFromJSON(
+  jsonString: string,
+): SafeParseResult<ReferenceChunk, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ReferenceChunk$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ReferenceChunk' from JSON`,
+  );
 }

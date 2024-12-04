@@ -4,11 +4,14 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import {
   catchUnrecognizedEnum,
   OpenEnum,
   Unrecognized,
 } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   DeltaMessage,
   DeltaMessage$inboundSchema,
@@ -110,4 +113,24 @@ export namespace CompletionResponseStreamChoice$ {
   export const outboundSchema = CompletionResponseStreamChoice$outboundSchema;
   /** @deprecated use `CompletionResponseStreamChoice$Outbound` instead. */
   export type Outbound = CompletionResponseStreamChoice$Outbound;
+}
+
+export function completionResponseStreamChoiceToJSON(
+  completionResponseStreamChoice: CompletionResponseStreamChoice,
+): string {
+  return JSON.stringify(
+    CompletionResponseStreamChoice$outboundSchema.parse(
+      completionResponseStreamChoice,
+    ),
+  );
+}
+
+export function completionResponseStreamChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<CompletionResponseStreamChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CompletionResponseStreamChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CompletionResponseStreamChoice' from JSON`,
+  );
 }

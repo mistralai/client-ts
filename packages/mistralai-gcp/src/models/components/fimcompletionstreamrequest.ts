@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -84,6 +87,26 @@ export namespace FIMCompletionStreamRequestStop$ {
   export type Outbound = FIMCompletionStreamRequestStop$Outbound;
 }
 
+export function fimCompletionStreamRequestStopToJSON(
+  fimCompletionStreamRequestStop: FIMCompletionStreamRequestStop,
+): string {
+  return JSON.stringify(
+    FIMCompletionStreamRequestStop$outboundSchema.parse(
+      fimCompletionStreamRequestStop,
+    ),
+  );
+}
+
+export function fimCompletionStreamRequestStopFromJSON(
+  jsonString: string,
+): SafeParseResult<FIMCompletionStreamRequestStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FIMCompletionStreamRequestStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FIMCompletionStreamRequestStop' from JSON`,
+  );
+}
+
 /** @internal */
 export const FIMCompletionStreamRequest$inboundSchema: z.ZodType<
   FIMCompletionStreamRequest,
@@ -159,4 +182,22 @@ export namespace FIMCompletionStreamRequest$ {
   export const outboundSchema = FIMCompletionStreamRequest$outboundSchema;
   /** @deprecated use `FIMCompletionStreamRequest$Outbound` instead. */
   export type Outbound = FIMCompletionStreamRequest$Outbound;
+}
+
+export function fimCompletionStreamRequestToJSON(
+  fimCompletionStreamRequest: FIMCompletionStreamRequest,
+): string {
+  return JSON.stringify(
+    FIMCompletionStreamRequest$outboundSchema.parse(fimCompletionStreamRequest),
+  );
+}
+
+export function fimCompletionStreamRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<FIMCompletionStreamRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FIMCompletionStreamRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FIMCompletionStreamRequest' from JSON`,
+  );
 }

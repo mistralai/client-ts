@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   CompletionChunk,
   CompletionChunk$inboundSchema,
@@ -58,4 +61,20 @@ export namespace CompletionEvent$ {
   export const outboundSchema = CompletionEvent$outboundSchema;
   /** @deprecated use `CompletionEvent$Outbound` instead. */
   export type Outbound = CompletionEvent$Outbound;
+}
+
+export function completionEventToJSON(
+  completionEvent: CompletionEvent,
+): string {
+  return JSON.stringify(CompletionEvent$outboundSchema.parse(completionEvent));
+}
+
+export function completionEventFromJSON(
+  jsonString: string,
+): SafeParseResult<CompletionEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CompletionEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CompletionEvent' from JSON`,
+  );
 }

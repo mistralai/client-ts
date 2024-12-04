@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContentChunk,
   ContentChunk$inboundSchema,
@@ -54,6 +57,24 @@ export namespace ToolMessageContent$ {
   export const outboundSchema = ToolMessageContent$outboundSchema;
   /** @deprecated use `ToolMessageContent$Outbound` instead. */
   export type Outbound = ToolMessageContent$Outbound;
+}
+
+export function toolMessageContentToJSON(
+  toolMessageContent: ToolMessageContent,
+): string {
+  return JSON.stringify(
+    ToolMessageContent$outboundSchema.parse(toolMessageContent),
+  );
+}
+
+export function toolMessageContentFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolMessageContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolMessageContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolMessageContent' from JSON`,
+  );
 }
 
 /** @internal */
@@ -132,4 +153,18 @@ export namespace ToolMessage$ {
   export const outboundSchema = ToolMessage$outboundSchema;
   /** @deprecated use `ToolMessage$Outbound` instead. */
   export type Outbound = ToolMessage$Outbound;
+}
+
+export function toolMessageToJSON(toolMessage: ToolMessage): string {
+  return JSON.stringify(ToolMessage$outboundSchema.parse(toolMessage));
+}
+
+export function toolMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolMessage' from JSON`,
+  );
 }
