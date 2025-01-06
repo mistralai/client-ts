@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: 26271aa279a7a7182f7af19df8b67038
+  docChecksum: 4da7c33f650ddf206c58fa6c941d347f
   docVersion: 0.0.2
-  speakeasyVersion: 1.451.1
-  generationVersion: 2.470.1
-  releaseVersion: 1.3.5
-  configChecksum: e32b498a394ce6079f7bced9cced33b5
+  speakeasyVersion: 1.462.2
+  generationVersion: 2.486.1
+  releaseVersion: 1.3.6
+  configChecksum: 1a7604afb27737dc44b544827a58e635
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
@@ -15,12 +15,12 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.8
+    core: 3.18.12
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     examples: 2.81.4
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
@@ -167,6 +167,9 @@ examples:
     speakeasy-default-stream-chat:
       requestBody:
         application/json: {"model": "azureai", "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+      responses:
+        "422":
+          application/json: {}
   chat_completion_v1_chat_completions_post:
     speakeasy-default-chat-completion-v1-chat-completions-post:
       requestBody:
@@ -174,5 +177,6 @@ examples:
       responses:
         "200":
           application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}]}
-        "422": {}
+        "422":
+          application/json: {}
 generatedTests: {}
