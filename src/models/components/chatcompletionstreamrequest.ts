@@ -328,7 +328,7 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
 > = z.object({
   model: z.nullable(z.string()),
   temperature: z.nullable(z.number()).optional(),
-  top_p: z.number().default(1),
+  top_p: z.number().optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
@@ -364,7 +364,7 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
   presence_penalty: z.number().optional(),
   frequency_penalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
-  safe_prompt: z.boolean().default(false),
+  safe_prompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_p": "topP",
@@ -382,7 +382,7 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
 export type ChatCompletionStreamRequest$Outbound = {
   model: string | null;
   temperature?: number | null | undefined;
-  top_p: number;
+  top_p?: number | undefined;
   max_tokens?: number | null | undefined;
   stream: boolean;
   stop?: string | Array<string> | undefined;
@@ -399,7 +399,7 @@ export type ChatCompletionStreamRequest$Outbound = {
   presence_penalty?: number | undefined;
   frequency_penalty?: number | undefined;
   n?: number | null | undefined;
-  safe_prompt: boolean;
+  safe_prompt?: boolean | undefined;
 };
 
 /** @internal */
@@ -410,7 +410,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.nullable(z.string()),
   temperature: z.nullable(z.number()).optional(),
-  topP: z.number().default(1),
+  topP: z.number().optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
@@ -448,7 +448,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   frequencyPenalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
-  safePrompt: z.boolean().default(false),
+  safePrompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     topP: "top_p",
