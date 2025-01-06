@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: d50a06ac34844141709fa2e57cc940c5
+  docChecksum: 849dde0ef239604ca71711ffc1220b54
   docVersion: 0.0.2
-  speakeasyVersion: 1.451.1
-  generationVersion: 2.470.1
-  releaseVersion: 1.3.5
-  configChecksum: 919939b6307829dceea203eaa634d4ec
+  speakeasyVersion: 1.462.2
+  generationVersion: 2.486.1
+  releaseVersion: 1.3.6
+  configChecksum: c5bd18e35398f8075849552f082a51a7
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -15,12 +15,12 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.8
+    core: 3.18.12
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     examples: 2.81.4
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
@@ -177,6 +177,9 @@ examples:
     speakeasy-default-stream-chat:
       requestBody:
         application/json: {"model": "mistral-small-latest", "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+      responses:
+        "422":
+          application/json: {}
   chat_completion_v1_chat_completions_post:
     speakeasy-default-chat-completion-v1-chat-completions-post:
       requestBody:
@@ -184,11 +187,15 @@ examples:
       responses:
         "200":
           application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}]}
-        "422": {}
+        "422":
+          application/json: {}
   stream_fim:
     speakeasy-default-stream-fim:
       requestBody:
         application/json: {"model": "codestral-2405", "prompt": "def", "suffix": "return a+b"}
+      responses:
+        "422":
+          application/json: {}
   fim_completion_v1_fim_completions_post:
     speakeasy-default-fim-completion-v1-fim-completions-post:
       requestBody:
@@ -196,5 +203,6 @@ examples:
       responses:
         "200":
           application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "codestral-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}]}
-        "422": {}
+        "422":
+          application/json: {}
 generatedTests: {}

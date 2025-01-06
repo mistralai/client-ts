@@ -319,7 +319,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
 > = z.object({
   model: z.nullable(z.string()),
   temperature: z.nullable(z.number()).optional(),
-  top_p: z.number().default(1),
+  top_p: z.number().optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(false),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
@@ -371,7 +371,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
 export type ChatCompletionRequest$Outbound = {
   model: string | null;
   temperature?: number | null | undefined;
-  top_p: number;
+  top_p?: number | undefined;
   max_tokens?: number | null | undefined;
   stream: boolean;
   stop?: string | Array<string> | undefined;
@@ -398,7 +398,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.nullable(z.string()),
   temperature: z.nullable(z.number()).optional(),
-  topP: z.number().default(1),
+  topP: z.number().optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   stream: z.boolean().default(false),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
