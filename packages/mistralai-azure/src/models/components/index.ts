@@ -15,6 +15,7 @@ export * from "./deltamessage.js";
 export * from "./function.js";
 export * from "./functioncall.js";
 export * from "./functionname.js";
+export * from "./prediction.js";
 export * from "./referencechunk.js";
 export * from "./responseformat.js";
 export * from "./responseformats.js";

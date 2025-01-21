@@ -22,6 +22,7 @@ export type ToolCall = {
   id?: string | undefined;
   type?: ToolTypes | undefined;
   function: FunctionCall;
+  index?: number | undefined;
 };
 
 /** @internal */
@@ -33,6 +34,7 @@ export const ToolCall$inboundSchema: z.ZodType<
   id: z.string().default("null"),
   type: ToolTypes$inboundSchema.optional(),
   function: FunctionCall$inboundSchema,
+  index: z.number().int().default(0),
 });
 
 /** @internal */
@@ -40,6 +42,7 @@ export type ToolCall$Outbound = {
   id: string;
   type?: string | undefined;
   function: FunctionCall$Outbound;
+  index: number;
 };
 
 /** @internal */
@@ -51,6 +54,7 @@ export const ToolCall$outboundSchema: z.ZodType<
   id: z.string().default("null"),
   type: ToolTypes$outboundSchema.optional(),
   function: FunctionCall$outboundSchema,
+  index: z.number().int().default(0),
 });
 
 /**

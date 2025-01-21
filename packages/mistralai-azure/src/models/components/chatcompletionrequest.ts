@@ -14,6 +14,12 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  Prediction,
+  Prediction$inboundSchema,
+  Prediction$Outbound,
+  Prediction$outboundSchema,
+} from "./prediction.js";
+import {
   ResponseFormat,
   ResponseFormat$inboundSchema,
   ResponseFormat$Outbound,
@@ -121,6 +127,7 @@ export type ChatCompletionRequest = {
    * Number of completions to return for each request, input tokens are only billed once.
    */
   n?: number | null | undefined;
+  prediction?: Prediction | undefined;
   /**
    * Whether to inject a safety prompt before all conversations.
    */
@@ -359,6 +366,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
   presence_penalty: z.number().optional(),
   frequency_penalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
+  prediction: Prediction$inboundSchema.optional(),
   safe_prompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -394,6 +402,7 @@ export type ChatCompletionRequest$Outbound = {
   presence_penalty?: number | undefined;
   frequency_penalty?: number | undefined;
   n?: number | null | undefined;
+  prediction?: Prediction$Outbound | undefined;
   safe_prompt?: boolean | undefined;
 };
 
@@ -443,6 +452,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   frequencyPenalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
+  prediction: Prediction$outboundSchema.optional(),
   safePrompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
