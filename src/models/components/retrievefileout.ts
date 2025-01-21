@@ -35,7 +35,7 @@ export type RetrieveFileOut = {
   /**
    * The size of the file, in bytes.
    */
-  bytes: number;
+  sizeBytes: number;
   /**
    * The UNIX timestamp (in seconds) of the event.
    */
@@ -69,6 +69,7 @@ export const RetrieveFileOut$inboundSchema: z.ZodType<
   deleted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
+    "bytes": "sizeBytes",
     "created_at": "createdAt",
     "sample_type": "sampleType",
     "num_lines": "numLines",
@@ -97,7 +98,7 @@ export const RetrieveFileOut$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   object: z.string(),
-  bytes: z.number().int(),
+  sizeBytes: z.number().int(),
   createdAt: z.number().int(),
   filename: z.string(),
   purpose: FilePurpose$outboundSchema,
@@ -107,6 +108,7 @@ export const RetrieveFileOut$outboundSchema: z.ZodType<
   deleted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
+    sizeBytes: "bytes",
     createdAt: "created_at",
     sampleType: "sample_type",
     numLines: "num_lines",

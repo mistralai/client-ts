@@ -14,6 +14,12 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  Prediction,
+  Prediction$inboundSchema,
+  Prediction$Outbound,
+  Prediction$outboundSchema,
+} from "./prediction.js";
+import {
   ResponseFormat,
   ResponseFormat$inboundSchema,
   ResponseFormat$Outbound,
@@ -109,6 +115,7 @@ export type AgentsCompletionRequest = {
    * Number of completions to return for each request, input tokens are only billed once.
    */
   n?: number | null | undefined;
+  prediction?: Prediction | undefined;
   /**
    * The ID of the agent to use for this completion.
    */
@@ -347,6 +354,7 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
   presence_penalty: z.number().optional(),
   frequency_penalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
+  prediction: Prediction$inboundSchema.optional(),
   agent_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -378,6 +386,7 @@ export type AgentsCompletionRequest$Outbound = {
   presence_penalty?: number | undefined;
   frequency_penalty?: number | undefined;
   n?: number | null | undefined;
+  prediction?: Prediction$Outbound | undefined;
   agent_id: string;
 };
 
@@ -424,6 +433,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   frequencyPenalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
+  prediction: Prediction$outboundSchema.optional(),
   agentId: z.string(),
 }).transform((v) => {
   return remap$(v, {
