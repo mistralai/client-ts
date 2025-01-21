@@ -110,7 +110,10 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.files.list();
+  const result = await mistral.files.list({
+    page: 0,
+    pageSize: 100,
+  });
 
   // Handle the result
   console.log(result);
@@ -134,7 +137,10 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await filesList(mistral);
+  const res = await filesList(mistral, {
+    page: 0,
+    pageSize: 100,
+  });
 
   if (!res.ok) {
     throw res.error;
@@ -183,7 +189,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.files.retrieve({
-    fileId: "<value>",
+    fileId: "<id>",
   });
 
   // Handle the result
@@ -209,7 +215,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesRetrieve(mistral, {
-    fileId: "<value>",
+    fileId: "<id>",
   });
 
   if (!res.ok) {
@@ -259,7 +265,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.files.delete({
-    fileId: "<value>",
+    fileId: "<id>",
   });
 
   // Handle the result
@@ -285,7 +291,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesDelete(mistral, {
-    fileId: "<value>",
+    fileId: "<id>",
   });
 
   if (!res.ok) {
@@ -412,6 +418,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.files.getSignedUrl({
     fileId: "<id>",
+    expiry: 24,
   });
 
   // Handle the result
@@ -438,6 +445,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await filesGetSignedUrl(mistral, {
     fileId: "<id>",
+    expiry: 24,
   });
 
   if (!res.ok) {

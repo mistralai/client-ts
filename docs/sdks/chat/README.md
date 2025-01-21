@@ -26,6 +26,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.chat.complete({
     model: "mistral-small-latest",
+    stream: false,
     messages: [
       {
         content: "Who is the best French painter? Answer in one short sentence.",
@@ -58,6 +59,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await chatComplete(mistral, {
     model: "mistral-small-latest",
+    stream: false,
     messages: [
       {
         content: "Who is the best French painter? Answer in one short sentence.",
@@ -115,6 +117,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.chat.stream({
     model: "mistral-small-latest",
+    stream: true,
     messages: [
       {
         content: "Who is the best French painter? Answer in one short sentence.",
@@ -149,6 +152,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await chatStream(mistral, {
     model: "mistral-small-latest",
+    stream: true,
     messages: [
       {
         content: "Who is the best French painter? Answer in one short sentence.",

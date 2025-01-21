@@ -109,15 +109,34 @@ async function run() {
     inputs: [
       [
         {
-          content: [
-            {
-              text: "<value>",
-            },
-          ],
+          content: "<value>",
+          role: "tool",
+        },
+        {
+          content: "<value>",
+          role: "tool",
+        },
+        {
+          content: "<value>",
+          role: "tool",
+        },
+      ],
+      [
+        {
+          prefix: false,
+          role: "assistant",
+        },
+        {
+          content: "<value>",
+          role: "user",
+        },
+        {
+          prefix: false,
+          role: "assistant",
         },
       ],
     ],
-    model: "V90",
+    model: "Roadster",
   });
 
   // Handle the result
@@ -145,10 +164,35 @@ async function run() {
   const res = await classifiersModerateChat(mistral, {
     inputs: [
       [
-        {},
+        {
+          content: "<value>",
+          role: "tool",
+        },
+        {
+          content: "<value>",
+          role: "tool",
+        },
+        {
+          content: "<value>",
+          role: "tool",
+        },
+      ],
+      [
+        {
+          prefix: false,
+          role: "assistant",
+        },
+        {
+          content: "<value>",
+          role: "user",
+        },
+        {
+          prefix: false,
+          role: "assistant",
+        },
       ],
     ],
-    model: "V90",
+    model: "Roadster",
   });
 
   if (!res.ok) {

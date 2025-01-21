@@ -25,7 +25,11 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.fineTuning.jobs.list();
+  const result = await mistral.fineTuning.jobs.list({
+    page: 0,
+    pageSize: 100,
+    createdByMe: false,
+  });
 
   // Handle the result
   console.log(result);
@@ -49,7 +53,11 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await fineTuningJobsList(mistral);
+  const res = await fineTuningJobsList(mistral, {
+    page: 0,
+    pageSize: 100,
+    createdByMe: false,
+  });
 
   if (!res.ok) {
     throw res.error;
@@ -98,8 +106,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fineTuning.jobs.create({
-    model: "codestral-latest",
-    hyperparameters: {},
+    model: "Fiesta",
+    hyperparameters: {
+      learningRate: 0.0001,
+    },
   });
 
   // Handle the result
@@ -125,8 +135,10 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsCreate(mistral, {
-    model: "codestral-latest",
-    hyperparameters: {},
+    model: "Fiesta",
+    hyperparameters: {
+      learningRate: 0.0001,
+    },
   });
 
   if (!res.ok) {
@@ -176,7 +188,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fineTuning.jobs.get({
-    jobId: "b18d8d81-fd7b-4764-a31e-475cb1f36591",
+    jobId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
   });
 
   // Handle the result
@@ -202,7 +214,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsGet(mistral, {
-    jobId: "b18d8d81-fd7b-4764-a31e-475cb1f36591",
+    jobId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
   });
 
   if (!res.ok) {
@@ -252,7 +264,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fineTuning.jobs.cancel({
-    jobId: "03fa7112-315a-4072-a9f2-43f3f1ec962e",
+    jobId: "0f713502-9233-41c6-9ebd-c570b7edb496",
   });
 
   // Handle the result
@@ -278,7 +290,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsCancel(mistral, {
-    jobId: "03fa7112-315a-4072-a9f2-43f3f1ec962e",
+    jobId: "0f713502-9233-41c6-9ebd-c570b7edb496",
   });
 
   if (!res.ok) {
@@ -328,7 +340,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fineTuning.jobs.start({
-    jobId: "0eb0f807-fb9f-4e46-9c13-4e257df6e1ba",
+    jobId: "0bf0f9e6-c3e5-4d61-aac8-0e36dcac0dfc",
   });
 
   // Handle the result
@@ -354,7 +366,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsStart(mistral, {
-    jobId: "0eb0f807-fb9f-4e46-9c13-4e257df6e1ba",
+    jobId: "0bf0f9e6-c3e5-4d61-aac8-0e36dcac0dfc",
   });
 
   if (!res.ok) {

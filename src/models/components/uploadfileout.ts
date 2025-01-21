@@ -35,7 +35,7 @@ export type UploadFileOut = {
   /**
    * The size of the file, in bytes.
    */
-  bytes: number;
+  sizeBytes: number;
   /**
    * The UNIX timestamp (in seconds) of the event.
    */
@@ -67,6 +67,7 @@ export const UploadFileOut$inboundSchema: z.ZodType<
   source: Source$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    "bytes": "sizeBytes",
     "created_at": "createdAt",
     "sample_type": "sampleType",
     "num_lines": "numLines",
@@ -94,7 +95,7 @@ export const UploadFileOut$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   object: z.string(),
-  bytes: z.number().int(),
+  sizeBytes: z.number().int(),
   createdAt: z.number().int(),
   filename: z.string(),
   purpose: FilePurpose$outboundSchema,
@@ -103,6 +104,7 @@ export const UploadFileOut$outboundSchema: z.ZodType<
   source: Source$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    sizeBytes: "bytes",
     createdAt: "created_at",
     sampleType: "sample_type",
     numLines: "num_lines",

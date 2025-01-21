@@ -28,7 +28,7 @@ async function run() {
       "Embed this sentence.",
       "As well as this one.",
     ],
-    model: "Wrangler",
+    model: "mistral-embed",
   });
 
   // Handle the result
@@ -58,7 +58,7 @@ async function run() {
       "Embed this sentence.",
       "As well as this one.",
     ],
-    model: "Wrangler",
+    model: "mistral-embed",
   });
 
   if (!res.ok) {

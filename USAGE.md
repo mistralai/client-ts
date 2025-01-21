@@ -13,6 +13,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.chat.complete({
     model: "mistral-small-latest",
+    stream: false,
     messages: [
       {
         content:
@@ -68,6 +69,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.agents.complete({
+    stream: false,
     messages: [
       {
         content:
@@ -75,7 +77,7 @@ async function run() {
         role: "user",
       },
     ],
-    agentId: "<value>",
+    agentId: "<id>",
   });
 
   // Handle the result
@@ -103,7 +105,7 @@ async function run() {
       "Embed this sentence.",
       "As well as this one.",
     ],
-    model: "Wrangler",
+    model: "mistral-embed",
   });
 
   // Handle the result
