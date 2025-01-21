@@ -32,6 +32,7 @@ const mistralAzure = new MistralAzureCore({
 async function run() {
   const res = await chatComplete(mistralAzure, {
     model: "azureai",
+    stream: false,
     messages: [
       {
         content: "Who is the best French painter? Answer in one short sentence.",

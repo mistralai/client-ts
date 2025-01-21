@@ -99,3 +99,13 @@ Based on:
 - [typescript v1.3.6] packages/mistralai-azure
 ### Releases
 - [NPM v1.3.6] https://www.npmjs.com/package/@mistralai/mistralai-azure/v/1.3.6 - packages/mistralai-azure
+
+## 2025-01-21 10:40:54
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.469.11 (2.493.32) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v1.4.0] packages/mistralai-azure
+### Releases
+- [NPM v1.4.0] https://www.npmjs.com/package/@mistralai/mistralai-azure/v/1.4.0 - packages/mistralai-azure

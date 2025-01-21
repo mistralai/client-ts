@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: 4da7c33f650ddf206c58fa6c941d347f
+  docChecksum: dabdab8f5be362f69e7703849f1be938
   docVersion: 0.0.2
-  speakeasyVersion: 1.462.2
-  generationVersion: 2.486.1
-  releaseVersion: 1.3.6
-  configChecksum: 1a7604afb27737dc44b544827a58e635
+  speakeasyVersion: 1.469.11
+  generationVersion: 2.493.32
+  releaseVersion: 1.4.0
+  configChecksum: 9e79792876850cc0a3dd114a3707f126
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
@@ -15,11 +15,11 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.12
+    core: 3.18.16
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    examples: 2.81.4
+    examples: 2.81.5
     globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
@@ -66,6 +66,8 @@ generatedFiles:
   - docs/models/components/functiont.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
+  - docs/models/components/prediction.md
+  - docs/models/components/predictiontype.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
   - docs/models/components/responseformat.md
@@ -131,6 +133,7 @@ generatedFiles:
   - src/models/components/functioncall.ts
   - src/models/components/functionname.ts
   - src/models/components/index.ts
+  - src/models/components/prediction.ts
   - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
   - src/models/components/responseformats.ts
@@ -166,17 +169,18 @@ examples:
   stream_chat:
     speakeasy-default-stream-chat:
       requestBody:
-        application/json: {"model": "azureai", "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+        application/json: {"model": "azureai", "stream": true, "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
       responses:
         "422":
           application/json: {}
   chat_completion_v1_chat_completions_post:
     speakeasy-default-chat-completion-v1-chat-completions-post:
       requestBody:
-        application/json: {"model": "azureai", "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+        application/json: {"model": "azureai", "stream": false, "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
       responses:
         "200":
-          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}, {"index": 0, "finish_reason": "stop"}]}
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}]}
         "422":
           application/json: {}
+examplesVersion: 1.0.0
 generatedTests: {}

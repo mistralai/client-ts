@@ -10,6 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type FunctionT = {
   name: string;
   description?: string | undefined;
+  strict?: boolean | undefined;
   parameters: { [k: string]: any };
 };
 
@@ -21,6 +22,7 @@ export const FunctionT$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   description: z.string().default(""),
+  strict: z.boolean().default(false),
   parameters: z.record(z.any()),
 });
 
@@ -28,6 +30,7 @@ export const FunctionT$inboundSchema: z.ZodType<
 export type FunctionT$Outbound = {
   name: string;
   description: string;
+  strict: boolean;
   parameters: { [k: string]: any };
 };
 
@@ -39,6 +42,7 @@ export const FunctionT$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   description: z.string().default(""),
+  strict: z.boolean().default(false),
   parameters: z.record(z.any()),
 });
 
