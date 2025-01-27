@@ -54,6 +54,7 @@ export * from "./jobin.js";
 export * from "./jobmetadataout.js";
 export * from "./jobout.js";
 export * from "./jobsout.js";
+export * from "./jsonschema.js";
 export * from "./legacyjobmetadataout.js";
 export * from "./listfilesout.js";
 export * from "./metricout.js";

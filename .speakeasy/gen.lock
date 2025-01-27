@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: dbfa566129ede53f4e3b2c91e81f6f74
+  docChecksum: 5ef33856df33168340ad3e69ffde3085
   docVersion: 0.0.2
-  speakeasyVersion: 1.469.11
-  generationVersion: 2.493.32
-  releaseVersion: 1.4.0
-  configChecksum: b573f2ca7682719c17d915af2c03d5b4
+  speakeasyVersion: 1.476.2
+  generationVersion: 2.495.1
+  releaseVersion: 1.4.1
+  configChecksum: ee3a35495de607ef15c159aa91d692a6
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.16
+    core: 3.18.17
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     downloadStreams: 0.1.1
@@ -139,6 +139,7 @@ generatedFiles:
   - docs/models/components/jobout.md
   - docs/models/components/jobsout.md
   - docs/models/components/jobsoutobject.md
+  - docs/models/components/jsonschema.md
   - docs/models/components/legacyjobmetadataout.md
   - docs/models/components/legacyjobmetadataoutobject.md
   - docs/models/components/listfilesout.md
@@ -335,6 +336,7 @@ generatedFiles:
   - src/models/components/jobmetadataout.ts
   - src/models/components/jobout.ts
   - src/models/components/jobsout.ts
+  - src/models/components/jsonschema.ts
   - src/models/components/legacyjobmetadataout.ts
   - src/models/components/listfilesout.ts
   - src/models/components/metricout.ts
@@ -606,6 +608,7 @@ examples:
       responses:
         "422":
           application/json: {}
+        "200": {}
   fim_completion_v1_fim_completions_post:
     speakeasy-default-fim-completion-v1-fim-completions-post:
       requestBody:
@@ -622,6 +625,7 @@ examples:
       responses:
         "422":
           application/json: {}
+        "200": {}
   agents_completion_v1_agents_completions_post:
     speakeasy-default-agents-completion-v1-agents-completions-post:
       requestBody:
@@ -638,6 +642,7 @@ examples:
       responses:
         "422":
           application/json: {}
+        "200": {}
   embeddings_v1_embeddings_post:
     speakeasy-default-embeddings-v1-embeddings-post:
       requestBody:
