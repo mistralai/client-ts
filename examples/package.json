@@ -18,7 +18,8 @@
   "dependencies": {
     "@mistralai/mistralai": "file:../",
     "@mistralai/mistralai-azure": "file:../packages/mistralai-azure",
-    "@mistralai/mistralai-gcp": "file:../packages/mistralai-gcp"
+    "@mistralai/mistralai-gcp": "file:../packages/mistralai-gcp",
+    "yargs": "^17.0.0"
   },
   "devDependencies": {
     "glob": "^11.0.0",
