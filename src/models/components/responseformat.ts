@@ -3,9 +3,16 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  JsonSchema,
+  JsonSchema$inboundSchema,
+  JsonSchema$Outbound,
+  JsonSchema$outboundSchema,
+} from "./jsonschema.js";
 import {
   ResponseFormats,
   ResponseFormats$inboundSchema,
@@ -17,6 +24,7 @@ export type ResponseFormat = {
    * An object specifying the format that the model must output. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message.
    */
   type?: ResponseFormats | undefined;
+  jsonSchema?: JsonSchema | null | undefined;
 };
 
 /** @internal */
@@ -26,11 +34,17 @@ export const ResponseFormat$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: ResponseFormats$inboundSchema.optional(),
+  json_schema: z.nullable(JsonSchema$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "json_schema": "jsonSchema",
+  });
 });
 
 /** @internal */
 export type ResponseFormat$Outbound = {
   type?: string | undefined;
+  json_schema?: JsonSchema$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -40,6 +54,11 @@ export const ResponseFormat$outboundSchema: z.ZodType<
   ResponseFormat
 > = z.object({
   type: ResponseFormats$outboundSchema.optional(),
+  jsonSchema: z.nullable(JsonSchema$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
 });
 
 /**
