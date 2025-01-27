@@ -8,8 +8,61 @@ import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import { unwrapAsync } from "../types/fp.js";
+// #region imports
+import { z } from "zod";
+import {
+  convertToParsedChatCompletionResponse,
+  ParsedChatCompletionRequest,
+  ParsedChatCompletionResponse,
+  transformToChatCompletionRequest,
+} from "../extra/structChat.js";
+// #endregion imports
 
 export class Chat extends ClientSDK {
+  // #region sdk-class-body
+  /**
+   * Chat Completion with the response parsed in the same format as the input requestFormat.
+   *
+   * @remarks
+   * The response will be parsed back to the initial Zod object passed in the requestFormat field.
+   */
+  async parse(
+    request: ParsedChatCompletionRequest<z.ZodTypeAny>,
+    options?: RequestOptions,
+  ): Promise<ParsedChatCompletionResponse<z.ZodTypeAny>> {
+    const ccr_request = transformToChatCompletionRequest(request);
+    const response = await unwrapAsync(chatComplete(
+      this,
+      ccr_request,
+      options,
+    ));
+    const parsed_response = convertToParsedChatCompletionResponse(
+      response,
+      request.responseFormat,
+    );
+    return parsed_response;
+  }
+
+  /**
+   * Stream chat completion with a parsed request input.
+   *
+   * @remarks
+   * Unlike the .parse method, this method will return a stream of events containing the JSON response. It will not be parsed back to the initial Zod object.
+   * If you need to parse the stream, see the examples/src/async_structured_outputs.ts file.
+   */
+  async parseStream(
+    request: ParsedChatCompletionRequest<z.ZodTypeAny>,
+    options?: RequestOptions,
+  ): Promise<EventStream<components.CompletionEvent>> {
+    const ccr_request = transformToChatCompletionRequest(request);
+    return unwrapAsync(chatStream(
+      this,
+      ccr_request,
+      options,
+    ));
+  }
+  // #endregion sdk-class-body
+
   /**
    * Chat Completion
    */
