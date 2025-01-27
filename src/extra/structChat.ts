@@ -34,7 +34,7 @@ export type ParsedChatCompletionResponse<T extends z.ZodTypeAny> = Omit<componen
 };
 
 
-export function convertToParsedChatCompletionResponse<T extends z.ZodTypeAny>(response: components.ChatCompletionResponse, responseFormat: z.ZodType<T>): ParsedChatCompletionResponse<T> {
+export function convertToParsedChatCompletionResponse<T extends z.ZodTypeAny>(response: components.ChatCompletionResponse, responseFormat: T): ParsedChatCompletionResponse<T> {
   if (response.choices === undefined || response.choices.length === 0) {
     return {
       ...response,
@@ -65,7 +65,7 @@ export function convertToParsedChatCompletionResponse<T extends z.ZodTypeAny>(re
 }
   
   // Function to convert Zod schema to strict JSON schema
-export function responseFormatFromZodObject<T extends z.ZodTypeAny>(responseFormat: z.ZodType<T>): ResponseFormat {
+export function responseFormatFromZodObject<T extends z.ZodTypeAny>(responseFormat: T): ResponseFormat {
   const responseJsonSchema = zodToJsonSchema(responseFormat);
   // It is not possible to get the variable name of a Zod object at runtime in TypeScript so we're using a placeholder name.
   // This has not impact on the parsing as the initial Zod object is used to parse the response.
