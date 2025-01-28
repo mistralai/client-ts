@@ -3,6 +3,7 @@
 /.speakeasy/reports
 /__tests__
 /core.*
+/extra
 /funcs
 /models
 /models/errors

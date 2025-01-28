@@ -1,5 +1,7 @@
 import { execSync } from "node:child_process";
 import { globSync } from "glob";
+import yargs from "yargs/yargs";
+import { hideBin } from "yargs/helpers";
 
 type Result = {
   file: string;
@@ -8,7 +10,21 @@ type Result = {
 
 const results: Result[] = [];
 
-const files = globSync("src/**/*.ts");
+// Parse command-line arguments
+const argv = yargs(hideBin(process.argv))
+  .option("files", {
+    alias: "f",
+    description: "Specify files to test",
+    type: "array",
+  })
+  .help()
+  .alias("help", "h").argv;
+
+const filesFromArgs = argv.files;
+
+// If no files are specified, run all tests
+const files = filesFromArgs && filesFromArgs.length > 0 ? filesFromArgs : globSync("src/**/*.ts");
+
 for (const file of files) {
   try {
     execSync(`npm run script -- ${file}`, { stdio: "inherit" });

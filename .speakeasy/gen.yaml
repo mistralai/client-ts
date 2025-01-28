@@ -16,16 +16,17 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
 typescript:
-  version: 1.4.0
+  version: 1.5.0
   additionalDependencies:
-    dependencies: {}
+    dependencies:
+      zod-to-json-schema: ^3.24.1
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
   defaultErrorName: SDKError
-  enableCustomCodeRegions: false
+  enableCustomCodeRegions: true
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: MISTRAL
