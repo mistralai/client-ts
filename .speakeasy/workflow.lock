@@ -41,7 +41,7 @@ targets:
         sourceRevisionDigest: sha256:af4a2854e017abc0ec9e4b557186611dcd69468d82d5ac7f81bfbe49165fc18d
         sourceBlobDigest: sha256:9f1bbc418fba3c7b5031bacdf9d431aff476fb4b2aa3838ed50fb3922563703c
         codeSamplesNamespace: mistral-openapi-code-samples
-        codeSamplesRevisionDigest: sha256:d7ebda4acb0c921e87d8a5cbe0c640d3869154779253f3af4b61da24f14198f0
+        codeSamplesRevisionDigest: sha256:853d382ceafcd57c5760354dafc51166271110abcc3f3db17435fc69b3a12e37
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
