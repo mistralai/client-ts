@@ -36,7 +36,7 @@ const transformedResponseFormat: ResponseFormat = {
   type: "json_schema",
   jsonSchema: {
     name: "placeholderName",
-    schema: {
+    schemaDefinition: {
       type: "object",
       properties: {
         steps: {

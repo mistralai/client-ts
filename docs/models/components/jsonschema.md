@@ -7,7 +7,7 @@ import { JsonSchema } from "@mistralai/mistralai/models/components";
 
 let value: JsonSchema = {
   name: "<value>",
-  schema: {
+  schemaDefinition: {
     "key": "<value>",
   },
 };
@@ -19,5 +19,5 @@ let value: JsonSchema = {
 | --------------------- | --------------------- | --------------------- | --------------------- |
 | `name`                | *string*              | :heavy_check_mark:    | N/A                   |
 | `description`         | *string*              | :heavy_minus_sign:    | N/A                   |
-| `schema`              | Record<string, *any*> | :heavy_check_mark:    | N/A                   |
+| `schemaDefinition`    | Record<string, *any*> | :heavy_check_mark:    | N/A                   |
 | `strict`              | *boolean*             | :heavy_minus_sign:    | N/A                   |

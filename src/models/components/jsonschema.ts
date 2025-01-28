@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -10,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type JsonSchema = {
   name: string;
   description?: string | null | undefined;
-  schema: { [k: string]: any };
+  schemaDefinition: { [k: string]: any };
   strict?: boolean | undefined;
 };
 
@@ -24,6 +25,10 @@ export const JsonSchema$inboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   schema: z.record(z.any()),
   strict: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    "schema": "schemaDefinition",
+  });
 });
 
 /** @internal */
@@ -42,8 +47,12 @@ export const JsonSchema$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  schema: z.record(z.any()),
+  schemaDefinition: z.record(z.any()),
   strict: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    schemaDefinition: "schema",
+  });
 });
 
 /**

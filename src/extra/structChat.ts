@@ -74,7 +74,7 @@ export function responseFormatFromZodObject<T extends z.ZodTypeAny>(responseForm
     type: "json_schema",
     jsonSchema: {
       name: placeholderName,
-      schema: responseJsonSchema,
+      schemaDefinition: responseJsonSchema,
       strict: true,
     },
   };
