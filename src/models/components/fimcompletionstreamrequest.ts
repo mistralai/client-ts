@@ -21,7 +21,7 @@ export type FIMCompletionStreamRequest = {
    *   - `codestral-2405`
    *   - `codestral-latest`
    */
-  model: string | null;
+  model: string;
   /**
    * What sampling temperature to use, we recommend between 0.0 and 0.7. Higher values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both. The default value varies depending on the model you are targeting. Call the `/models` endpoint to retrieve the appropriate value.
    */
@@ -113,7 +113,7 @@ export const FIMCompletionStreamRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  model: z.nullable(z.string()),
+  model: z.string(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.number().default(1),
   max_tokens: z.nullable(z.number().int()).optional(),
@@ -134,7 +134,7 @@ export const FIMCompletionStreamRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type FIMCompletionStreamRequest$Outbound = {
-  model: string | null;
+  model: string;
   temperature?: number | null | undefined;
   top_p: number;
   max_tokens?: number | null | undefined;
@@ -152,7 +152,7 @@ export const FIMCompletionStreamRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FIMCompletionStreamRequest
 > = z.object({
-  model: z.nullable(z.string()),
+  model: z.string(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.number().default(1),
   maxTokens: z.nullable(z.number().int()).optional(),

@@ -13,7 +13,11 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+    },
+  ],
 };
 ```
 
@@ -23,7 +27,7 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      text: "<value>",
+      documentUrl: "https://entire-obesity.com/",
     },
   ],
 };

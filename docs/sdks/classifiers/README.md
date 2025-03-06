@@ -25,6 +25,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.classifiers.moderate({
+    model: "V90",
     inputs: [
       "<value>",
     ],
@@ -53,6 +54,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await classifiersModerate(mistral, {
+    model: "V90",
     inputs: [
       "<value>",
     ],
@@ -106,6 +108,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.classifiers.moderateChat({
+    model: "Roadster",
     inputs: [
       [
         {
@@ -136,7 +139,7 @@ async function run() {
         },
       ],
     ],
-    model: "Roadster",
+    truncateForContextLength: false,
   });
 
   // Handle the result
@@ -162,6 +165,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await classifiersModerateChat(mistral, {
+    model: "Roadster",
     inputs: [
       [
         {
@@ -192,7 +196,7 @@ async function run() {
         },
       ],
     ],
-    model: "Roadster",
+    truncateForContextLength: false,
   });
 
   if (!res.ok) {
@@ -212,7 +216,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.ChatClassificationRequest](../../models/components/chatclassificationrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.ChatModerationRequest](../../models/components/chatmoderationrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

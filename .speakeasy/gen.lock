@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 553c31591e8dc33a58cb75f348c3aa72
+  docChecksum: 81cc8be96362e2f1cb145b08a2e6c4fa
   docVersion: 0.0.2
   speakeasyVersion: 1.477.0
   generationVersion: 2.497.0
-  releaseVersion: 1.5.0
-  configChecksum: 57756ceff46c7a2ee996ab8fd5b409c5
+  releaseVersion: 1.5.1
+  configChecksum: 950423978fd0eed1d5503306d5545b68
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -72,8 +72,6 @@ generatedFiles:
   - docs/models/components/batchjobsout.md
   - docs/models/components/batchjobsoutobject.md
   - docs/models/components/batchjobstatus.md
-  - docs/models/components/chatclassificationrequest.md
-  - docs/models/components/chatclassificationrequestinputs.md
   - docs/models/components/chatcompletionchoice.md
   - docs/models/components/chatcompletionrequest.md
   - docs/models/components/chatcompletionrequesttoolchoice.md
@@ -82,6 +80,8 @@ generatedFiles:
   - docs/models/components/chatcompletionstreamrequestmessages.md
   - docs/models/components/chatcompletionstreamrequeststop.md
   - docs/models/components/chatcompletionstreamrequesttoolchoice.md
+  - docs/models/components/chatmoderationrequest.md
+  - docs/models/components/chatmoderationrequestinputs.md
   - docs/models/components/checkpointout.md
   - docs/models/components/classificationobject.md
   - docs/models/components/classificationrequest.md
@@ -102,6 +102,8 @@ generatedFiles:
   - docs/models/components/detailedjoboutobject.md
   - docs/models/components/detailedjoboutrepositories.md
   - docs/models/components/detailedjoboutstatus.md
+  - docs/models/components/document.md
+  - docs/models/components/documenturlchunk.md
   - docs/models/components/embeddingrequest.md
   - docs/models/components/embeddingresponse.md
   - docs/models/components/embeddingresponsedata.md
@@ -150,9 +152,14 @@ generatedFiles:
   - docs/models/components/modelcapabilities.md
   - docs/models/components/modellist.md
   - docs/models/components/objectt.md
+  - docs/models/components/ocrimageobject.md
+  - docs/models/components/ocrpagedimensions.md
+  - docs/models/components/ocrpageobject.md
+  - docs/models/components/ocrrequest.md
+  - docs/models/components/ocrresponse.md
+  - docs/models/components/ocrusageinfo.md
   - docs/models/components/one.md
   - docs/models/components/prediction.md
-  - docs/models/components/predictiontype.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
   - docs/models/components/repositories.md
@@ -230,6 +237,7 @@ generatedFiles:
   - docs/sdks/mistral/README.md
   - docs/sdks/mistraljobs/README.md
   - docs/sdks/models/README.md
+  - docs/sdks/ocr/README.md
   - jsr.json
   - package.json
   - src/core.ts
@@ -263,6 +271,7 @@ generatedFiles:
   - src/funcs/modelsRetrieve.ts
   - src/funcs/modelsUnarchive.ts
   - src/funcs/modelsUpdate.ts
+  - src/funcs/ocrProcess.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -295,11 +304,11 @@ generatedFiles:
   - src/models/components/batchjobout.ts
   - src/models/components/batchjobsout.ts
   - src/models/components/batchjobstatus.ts
-  - src/models/components/chatclassificationrequest.ts
   - src/models/components/chatcompletionchoice.ts
   - src/models/components/chatcompletionrequest.ts
   - src/models/components/chatcompletionresponse.ts
   - src/models/components/chatcompletionstreamrequest.ts
+  - src/models/components/chatmoderationrequest.ts
   - src/models/components/checkpointout.ts
   - src/models/components/classificationobject.ts
   - src/models/components/classificationrequest.ts
@@ -312,6 +321,7 @@ generatedFiles:
   - src/models/components/deletemodelout.ts
   - src/models/components/deltamessage.ts
   - src/models/components/detailedjobout.ts
+  - src/models/components/documenturlchunk.ts
   - src/models/components/embeddingrequest.ts
   - src/models/components/embeddingresponse.ts
   - src/models/components/embeddingresponsedata.ts
@@ -343,6 +353,12 @@ generatedFiles:
   - src/models/components/metricout.ts
   - src/models/components/modelcapabilities.ts
   - src/models/components/modellist.ts
+  - src/models/components/ocrimageobject.ts
+  - src/models/components/ocrpagedimensions.ts
+  - src/models/components/ocrpageobject.ts
+  - src/models/components/ocrrequest.ts
+  - src/models/components/ocrresponse.ts
+  - src/models/components/ocrusageinfo.ts
   - src/models/components/prediction.ts
   - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
@@ -407,6 +423,7 @@ generatedFiles:
   - src/sdk/jobs.ts
   - src/sdk/mistraljobs.ts
   - src/sdk/models.ts
+  - src/sdk/ocr.ts
   - src/sdk/sdk.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
@@ -647,7 +664,7 @@ examples:
   embeddings_v1_embeddings_post:
     speakeasy-default-embeddings-v1-embeddings-post:
       requestBody:
-        application/json: {"input": ["Embed this sentence.", "As well as this one."], "model": "mistral-embed"}
+        application/json: {"model": "mistral-embed", "input": ["Embed this sentence.", "As well as this one."]}
       responses:
         "200":
           application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "data": [{"object": "embedding", "embedding": [0.1, 0.2, 0.3], "index": 0}, {"object": "embedding", "embedding": [0.4, 0.5, 0.6], "index": 1}]}
@@ -656,7 +673,7 @@ examples:
   moderations_v1_moderations_post:
     speakeasy-default-moderations-v1-moderations-post:
       requestBody:
-        application/json: {"input": ["<value>"]}
+        application/json: {"model": "V90", "input": ["<value>"]}
       responses:
         "200":
           application/json: {"id": "mod-e5cc70bb28c444948073e77776eb30ef"}
@@ -665,10 +682,19 @@ examples:
   moderations_chat_v1_chat_moderations_post:
     speakeasy-default-moderations-chat-v1-chat-moderations-post:
       requestBody:
-        application/json: {"input": [[{"content": "<value>", "role": "tool"}, {"content": "<value>", "role": "tool"}, {"content": "<value>", "role": "tool"}], [{"prefix": false, "role": "assistant"}, {"content": "<value>", "role": "user"}, {"prefix": false, "role": "assistant"}]], "model": "Roadster"}
+        application/json: {"model": "Roadster", "input": [[{"content": "<value>", "role": "tool"}, {"content": "<value>", "role": "tool"}, {"content": "<value>", "role": "tool"}], [{"prefix": false, "role": "assistant"}, {"content": "<value>", "role": "user"}, {"prefix": false, "role": "assistant"}]], "truncate_for_context_length": false}
       responses:
         "200":
           application/json: {"id": "mod-e5cc70bb28c444948073e77776eb30ef"}
+        "422":
+          application/json: {}
+  ocr_v1_ocr_post:
+    speakeasy-default-ocr-v1-ocr-post:
+      requestBody:
+        application/json: {"model": "Focus", "document": {"document_url": "https://dutiful-horst.org"}}
+      responses:
+        "200":
+          application/json: {"pages": [], "model": "A4", "usage_info": {"pages_processed": 442675}}
         "422":
           application/json: {}
 examplesVersion: 1.0.0

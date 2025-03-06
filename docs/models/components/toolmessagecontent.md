@@ -14,9 +14,9 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    referenceIds: [
-      76956,
-    ],
+    imageUrl: {
+      url: "https://muted-pleasure.biz",
+    },
   },
 ];
 ```

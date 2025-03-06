@@ -190,11 +190,11 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.embeddings.create({
+    model: "mistral-embed",
     inputs: [
       "Embed this sentence.",
       "As well as this one.",
     ],
-    model: "mistral-embed",
   });
 
   // Handle the result
@@ -282,6 +282,10 @@ We have dedicated SDKs for the following providers:
 * [update](docs/sdks/models/README.md#update) - Update Fine Tuned Model
 * [archive](docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
 * [unarchive](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
+
+### [ocr](docs/sdks/ocr/README.md)
+
+* [process](docs/sdks/ocr/README.md#process) - OCR
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -687,6 +691,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`modelsRetrieve`](docs/sdks/models/README.md#retrieve) - Retrieve Model
 - [`modelsUnarchive`](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
 - [`modelsUpdate`](docs/sdks/models/README.md#update) - Update Fine Tuned Model
+- [`ocrProcess`](docs/sdks/ocr/README.md#process) - OCR
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->

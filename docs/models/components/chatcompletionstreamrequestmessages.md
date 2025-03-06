@@ -13,7 +13,11 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+    },
+  ],
 };
 ```
 
@@ -23,7 +27,9 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      text: "<value>",
+      imageUrl: {
+        url: "https://whimsical-impostor.name",
+      },
     },
   ],
 };
@@ -35,7 +41,7 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      text: "<value>",
+      documentUrl: "https://optimistic-slide.org",
     },
   ],
 };

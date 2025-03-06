@@ -10,7 +10,7 @@ let value: Prediction = {};
 
 ## Fields
 
-| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `type`                                                                 | [components.PredictionType](../../models/components/predictiontype.md) | :heavy_minus_sign:                                                     | N/A                                                                    |
-| `content`                                                              | *string*                                                               | :heavy_minus_sign:                                                     | N/A                                                                    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *string*           | :heavy_minus_sign: | N/A                |
+| `content`          | *string*           | :heavy_minus_sign: | N/A                |

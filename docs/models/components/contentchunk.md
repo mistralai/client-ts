@@ -13,6 +13,14 @@ const value: components.ImageURLChunk = {
 };
 ```
 
+### `components.DocumentURLChunk`
+
+```typescript
+const value: components.DocumentURLChunk = {
+  documentUrl: "https://shabby-dream.com",
+};
+```
+
 ### `components.TextChunk`
 
 ```typescript
@@ -26,7 +34,7 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    860552,
+    55374,
   ],
 };
 ```

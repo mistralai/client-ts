@@ -13,11 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -27,7 +23,7 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      imageUrl: "https://exalted-coast.net",
+      documentUrl: "https://insistent-disk.org/",
     },
   ],
 };
@@ -37,11 +33,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

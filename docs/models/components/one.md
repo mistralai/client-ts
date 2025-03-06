@@ -29,11 +29,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      imageUrl: "https://hard-to-find-adviser.biz/",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

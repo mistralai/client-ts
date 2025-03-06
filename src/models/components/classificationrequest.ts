@@ -15,10 +15,13 @@ export type ClassificationRequestInputs = string | Array<string>;
 
 export type ClassificationRequest = {
   /**
+   * ID of the model to use.
+   */
+  model: string;
+  /**
    * Text to classify.
    */
   inputs: string | Array<string>;
-  model?: string | null | undefined;
 };
 
 /** @internal */
@@ -77,8 +80,8 @@ export const ClassificationRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  model: z.string(),
   input: z.union([z.string(), z.array(z.string())]),
-  model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "input": "inputs",
@@ -87,8 +90,8 @@ export const ClassificationRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ClassificationRequest$Outbound = {
+  model: string;
   input: string | Array<string>;
-  model?: string | null | undefined;
 };
 
 /** @internal */
@@ -97,8 +100,8 @@ export const ClassificationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ClassificationRequest
 > = z.object({
+  model: z.string(),
   inputs: z.union([z.string(), z.array(z.string())]),
-  model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     inputs: "input",

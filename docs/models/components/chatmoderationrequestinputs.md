@@ -1,4 +1,4 @@
-# ChatClassificationRequestInputs
+# ChatModerationRequestInputs
 
 Chat to classify
 
@@ -9,13 +9,7 @@ Chat to classify
 
 ```typescript
 const value: components.One[] = [
-  {
-    content: [
-      {
-        text: "<value>",
-      },
-    ],
-  },
+  {},
 ];
 ```
 
@@ -24,7 +18,9 @@ const value: components.One[] = [
 ```typescript
 const value: components.Two[][] = [
   [
-    {},
+    {
+      content: "<value>",
+    },
   ],
 ];
 ```

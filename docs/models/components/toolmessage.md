@@ -6,11 +6,7 @@
 import { ToolMessage } from "@mistralai/mistralai/models/components";
 
 let value: ToolMessage = {
-  content: [
-    {
-      imageUrl: "https://punctual-amnesty.info",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
