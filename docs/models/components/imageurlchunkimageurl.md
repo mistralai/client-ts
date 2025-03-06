@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.ImageURL = {
-  url: "https://finished-ceramic.com",
+  url: "https://fatal-import.net/",
 };
 ```
 

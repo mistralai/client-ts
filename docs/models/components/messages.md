@@ -13,11 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -25,13 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      referenceIds: [
-        259422,
-      ],
-    },
-  ],
+  content: "<value>",
 };
 ```
 

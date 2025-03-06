@@ -9,16 +9,16 @@ OK
 
 ```typescript
 const value: components.JobOut = {
-  id: "61434201-9ff6-42a7-bf1c-43a3a8684b65",
+  id: "38fadfcb-ff71-4426-a296-ef849e684763",
   autoStart: false,
   hyperparameters: {},
-  model: "V90",
-  status: "QUEUED",
+  model: "Colorado",
+  status: "VALIDATED",
   jobType: "<value>",
-  createdAt: 232627,
-  modifiedAt: 348519,
+  createdAt: 524970,
+  modifiedAt: 750595,
   trainingFiles: [
-    "dffe4f31-f3b0-4be4-a65b-3274d38fadfc",
+    "5ed04715-ba9b-435a-8e84-0b058e160594",
   ],
 };
 ```

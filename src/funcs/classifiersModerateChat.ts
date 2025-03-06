@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  */
 export async function classifiersModerateChat(
   client: MistralCore,
-  request: components.ChatClassificationRequest,
+  request: components.ChatModerationRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
@@ -45,7 +45,7 @@ export async function classifiersModerateChat(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.ChatClassificationRequest$outboundSchema.parse(value),
+    (value) => components.ChatModerationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

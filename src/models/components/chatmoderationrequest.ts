@@ -47,7 +47,7 @@ export type One =
 /**
  * Chat to classify
  */
-export type ChatClassificationRequestInputs =
+export type ChatModerationRequestInputs =
   | Array<
     | (SystemMessage & { role: "system" })
     | (UserMessage & { role: "user" })
@@ -63,7 +63,8 @@ export type ChatClassificationRequestInputs =
     >
   >;
 
-export type ChatClassificationRequest = {
+export type ChatModerationRequest = {
+  model: string;
   /**
    * Chat to classify
    */
@@ -82,7 +83,7 @@ export type ChatClassificationRequest = {
         | (ToolMessage & { role: "tool" })
       >
     >;
-  model: string | null;
+  truncateForContextLength?: boolean | undefined;
 };
 
 /** @internal */
@@ -256,8 +257,8 @@ export function oneFromJSON(
 }
 
 /** @internal */
-export const ChatClassificationRequestInputs$inboundSchema: z.ZodType<
-  ChatClassificationRequestInputs,
+export const ChatModerationRequestInputs$inboundSchema: z.ZodType<
+  ChatModerationRequestInputs,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -314,7 +315,7 @@ export const ChatClassificationRequestInputs$inboundSchema: z.ZodType<
 ]);
 
 /** @internal */
-export type ChatClassificationRequestInputs$Outbound =
+export type ChatModerationRequestInputs$Outbound =
   | Array<
     | (SystemMessage$Outbound & { role: "system" })
     | (UserMessage$Outbound & { role: "user" })
@@ -331,10 +332,10 @@ export type ChatClassificationRequestInputs$Outbound =
   >;
 
 /** @internal */
-export const ChatClassificationRequestInputs$outboundSchema: z.ZodType<
-  ChatClassificationRequestInputs$Outbound,
+export const ChatModerationRequestInputs$outboundSchema: z.ZodType<
+  ChatModerationRequestInputs$Outbound,
   z.ZodTypeDef,
-  ChatClassificationRequestInputs
+  ChatModerationRequestInputs
 > = z.union([
   z.array(
     z.union([
@@ -392,41 +393,42 @@ export const ChatClassificationRequestInputs$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChatClassificationRequestInputs$ {
-  /** @deprecated use `ChatClassificationRequestInputs$inboundSchema` instead. */
-  export const inboundSchema = ChatClassificationRequestInputs$inboundSchema;
-  /** @deprecated use `ChatClassificationRequestInputs$outboundSchema` instead. */
-  export const outboundSchema = ChatClassificationRequestInputs$outboundSchema;
-  /** @deprecated use `ChatClassificationRequestInputs$Outbound` instead. */
-  export type Outbound = ChatClassificationRequestInputs$Outbound;
+export namespace ChatModerationRequestInputs$ {
+  /** @deprecated use `ChatModerationRequestInputs$inboundSchema` instead. */
+  export const inboundSchema = ChatModerationRequestInputs$inboundSchema;
+  /** @deprecated use `ChatModerationRequestInputs$outboundSchema` instead. */
+  export const outboundSchema = ChatModerationRequestInputs$outboundSchema;
+  /** @deprecated use `ChatModerationRequestInputs$Outbound` instead. */
+  export type Outbound = ChatModerationRequestInputs$Outbound;
 }
 
-export function chatClassificationRequestInputsToJSON(
-  chatClassificationRequestInputs: ChatClassificationRequestInputs,
+export function chatModerationRequestInputsToJSON(
+  chatModerationRequestInputs: ChatModerationRequestInputs,
 ): string {
   return JSON.stringify(
-    ChatClassificationRequestInputs$outboundSchema.parse(
-      chatClassificationRequestInputs,
+    ChatModerationRequestInputs$outboundSchema.parse(
+      chatModerationRequestInputs,
     ),
   );
 }
 
-export function chatClassificationRequestInputsFromJSON(
+export function chatModerationRequestInputsFromJSON(
   jsonString: string,
-): SafeParseResult<ChatClassificationRequestInputs, SDKValidationError> {
+): SafeParseResult<ChatModerationRequestInputs, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ChatClassificationRequestInputs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChatClassificationRequestInputs' from JSON`,
+    (x) => ChatModerationRequestInputs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatModerationRequestInputs' from JSON`,
   );
 }
 
 /** @internal */
-export const ChatClassificationRequest$inboundSchema: z.ZodType<
-  ChatClassificationRequest,
+export const ChatModerationRequest$inboundSchema: z.ZodType<
+  ChatModerationRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  model: z.string(),
   input: z.union([
     z.array(
       z.union([
@@ -479,15 +481,17 @@ export const ChatClassificationRequest$inboundSchema: z.ZodType<
       ),
     ),
   ]),
-  model: z.nullable(z.string()),
+  truncate_for_context_length: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "input": "inputs",
+    "truncate_for_context_length": "truncateForContextLength",
   });
 });
 
 /** @internal */
-export type ChatClassificationRequest$Outbound = {
+export type ChatModerationRequest$Outbound = {
+  model: string;
   input:
     | Array<
       | (SystemMessage$Outbound & { role: "system" })
@@ -503,15 +507,16 @@ export type ChatClassificationRequest$Outbound = {
         | (ToolMessage$Outbound & { role: "tool" })
       >
     >;
-  model: string | null;
+  truncate_for_context_length: boolean;
 };
 
 /** @internal */
-export const ChatClassificationRequest$outboundSchema: z.ZodType<
-  ChatClassificationRequest$Outbound,
+export const ChatModerationRequest$outboundSchema: z.ZodType<
+  ChatModerationRequest$Outbound,
   z.ZodTypeDef,
-  ChatClassificationRequest
+  ChatModerationRequest
 > = z.object({
+  model: z.string(),
   inputs: z.union([
     z.array(
       z.union([
@@ -564,10 +569,11 @@ export const ChatClassificationRequest$outboundSchema: z.ZodType<
       ),
     ),
   ]),
-  model: z.nullable(z.string()),
+  truncateForContextLength: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     inputs: "input",
+    truncateForContextLength: "truncate_for_context_length",
   });
 });
 
@@ -575,29 +581,29 @@ export const ChatClassificationRequest$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChatClassificationRequest$ {
-  /** @deprecated use `ChatClassificationRequest$inboundSchema` instead. */
-  export const inboundSchema = ChatClassificationRequest$inboundSchema;
-  /** @deprecated use `ChatClassificationRequest$outboundSchema` instead. */
-  export const outboundSchema = ChatClassificationRequest$outboundSchema;
-  /** @deprecated use `ChatClassificationRequest$Outbound` instead. */
-  export type Outbound = ChatClassificationRequest$Outbound;
+export namespace ChatModerationRequest$ {
+  /** @deprecated use `ChatModerationRequest$inboundSchema` instead. */
+  export const inboundSchema = ChatModerationRequest$inboundSchema;
+  /** @deprecated use `ChatModerationRequest$outboundSchema` instead. */
+  export const outboundSchema = ChatModerationRequest$outboundSchema;
+  /** @deprecated use `ChatModerationRequest$Outbound` instead. */
+  export type Outbound = ChatModerationRequest$Outbound;
 }
 
-export function chatClassificationRequestToJSON(
-  chatClassificationRequest: ChatClassificationRequest,
+export function chatModerationRequestToJSON(
+  chatModerationRequest: ChatModerationRequest,
 ): string {
   return JSON.stringify(
-    ChatClassificationRequest$outboundSchema.parse(chatClassificationRequest),
+    ChatModerationRequest$outboundSchema.parse(chatModerationRequest),
   );
 }
 
-export function chatClassificationRequestFromJSON(
+export function chatModerationRequestFromJSON(
   jsonString: string,
-): SafeParseResult<ChatClassificationRequest, SDKValidationError> {
+): SafeParseResult<ChatModerationRequest, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ChatClassificationRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChatClassificationRequest' from JSON`,
+    (x) => ChatModerationRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatModerationRequest' from JSON`,
   );
 }

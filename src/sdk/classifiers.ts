@@ -27,7 +27,7 @@ export class Classifiers extends ClientSDK {
    * Moderations Chat
    */
   async moderateChat(
-    request: components.ChatClassificationRequest,
+    request: components.ChatModerationRequest,
     options?: RequestOptions,
   ): Promise<components.ClassificationResponse> {
     return unwrapAsync(classifiersModerateChat(

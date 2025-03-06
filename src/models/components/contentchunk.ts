@@ -7,6 +7,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  DocumentURLChunk,
+  DocumentURLChunk$inboundSchema,
+  DocumentURLChunk$Outbound,
+  DocumentURLChunk$outboundSchema,
+} from "./documenturlchunk.js";
+import {
   ImageURLChunk,
   ImageURLChunk$inboundSchema,
   ImageURLChunk$Outbound,
@@ -28,7 +34,8 @@ import {
 export type ContentChunk =
   | (ImageURLChunk & { type: "image_url" })
   | (TextChunk & { type: "text" })
-  | (ReferenceChunk & { type: "reference" });
+  | (ReferenceChunk & { type: "reference" })
+  | (DocumentURLChunk & { type: "document_url" });
 
 /** @internal */
 export const ContentChunk$inboundSchema: z.ZodType<
@@ -49,13 +56,19 @@ export const ContentChunk$inboundSchema: z.ZodType<
       type: v.type,
     })),
   ),
+  DocumentURLChunk$inboundSchema.and(
+    z.object({ type: z.literal("document_url") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
 ]);
 
 /** @internal */
 export type ContentChunk$Outbound =
   | (ImageURLChunk$Outbound & { type: "image_url" })
   | (TextChunk$Outbound & { type: "text" })
-  | (ReferenceChunk$Outbound & { type: "reference" });
+  | (ReferenceChunk$Outbound & { type: "reference" })
+  | (DocumentURLChunk$Outbound & { type: "document_url" });
 
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
@@ -73,6 +86,11 @@ export const ContentChunk$outboundSchema: z.ZodType<
   ),
   ReferenceChunk$outboundSchema.and(
     z.object({ type: z.literal("reference") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  DocumentURLChunk$outboundSchema.and(
+    z.object({ type: z.literal("document_url") }).transform((v) => ({
       type: v.type,
     })),
   ),

@@ -15,17 +15,13 @@ export type Inputs = string | Array<string>;
 
 export type EmbeddingRequest = {
   /**
-   * Text to embed.
-   */
-  inputs: string | Array<string>;
-  /**
    * ID of the model to use.
    */
   model?: string | undefined;
   /**
-   * The format to return the embeddings in.
+   * Text to embed.
    */
-  encodingFormat?: string | null | undefined;
+  inputs: string | Array<string>;
 };
 
 /** @internal */
@@ -75,21 +71,18 @@ export const EmbeddingRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.union([z.string(), z.array(z.string())]),
   model: z.string().default("mistral-embed"),
-  encoding_format: z.nullable(z.string()).optional(),
+  input: z.union([z.string(), z.array(z.string())]),
 }).transform((v) => {
   return remap$(v, {
     "input": "inputs",
-    "encoding_format": "encodingFormat",
   });
 });
 
 /** @internal */
 export type EmbeddingRequest$Outbound = {
-  input: string | Array<string>;
   model: string;
-  encoding_format?: string | null | undefined;
+  input: string | Array<string>;
 };
 
 /** @internal */
@@ -98,13 +91,11 @@ export const EmbeddingRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EmbeddingRequest
 > = z.object({
-  inputs: z.union([z.string(), z.array(z.string())]),
   model: z.string().default("mistral-embed"),
-  encodingFormat: z.nullable(z.string()).optional(),
+  inputs: z.union([z.string(), z.array(z.string())]),
 }).transform((v) => {
   return remap$(v, {
     inputs: "input",
-    encodingFormat: "encoding_format",
   });
 });
 

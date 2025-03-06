@@ -12,6 +12,7 @@ import { Files } from "./files.js";
 import { Fim } from "./fim.js";
 import { FineTuning } from "./finetuning.js";
 import { Models } from "./models.js";
+import { Ocr } from "./ocr.js";
 
 export class Mistral extends ClientSDK {
   private _models?: Models;
@@ -57,5 +58,10 @@ export class Mistral extends ClientSDK {
   private _classifiers?: Classifiers;
   get classifiers(): Classifiers {
     return (this._classifiers ??= new Classifiers(this._options));
+  }
+
+  private _ocr?: Ocr;
+  get ocr(): Ocr {
+    return (this._ocr ??= new Ocr(this._options));
   }
 }
