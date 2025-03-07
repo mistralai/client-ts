@@ -13,5 +13,5 @@ let value: FilePurpose = "fine-tune";
 This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
-"fine-tune" | "batch" | Unrecognized<string>
+"fine-tune" | "batch" | "ocr" | Unrecognized<string>
 ```
