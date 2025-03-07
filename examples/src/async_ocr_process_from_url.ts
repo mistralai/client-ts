@@ -7,7 +7,7 @@ const ocrResponse = await client.ocr.process({
     model: "mistral-ocr-latest",
     document: {
         type: "document_url",
-        documentUrl: "https://arxiv.org/pdf/2201.04234"
+        documentUrl: "https://arxiv.org/pdf/2201.04234.pdf"
     },
     include_image_base64: true
 });
