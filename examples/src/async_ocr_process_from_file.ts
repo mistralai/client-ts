@@ -18,10 +18,6 @@ const uploaded_pdf = await client.files.upload({
 
 client.files.retrieve({ fileId: uploaded_pdf.id })
 
-const signed_url = client.files.getSignedUrl({ fileId: uploaded_pdf.id })
-
-
-
 const ocrResponse = await client.ocr.process({
     model: "mistral-ocr-latest",
     document: {
