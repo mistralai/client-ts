@@ -12,6 +12,7 @@ import {
 export const FilePurpose = {
   FineTune: "fine-tune",
   Batch: "batch",
+  Ocr: "ocr",
 } as const;
 export type FilePurpose = OpenEnum<typeof FilePurpose>;
 
