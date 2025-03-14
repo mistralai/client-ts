@@ -24,11 +24,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.batch.jobs.list({
-    page: 0,
-    pageSize: 100,
-    createdByMe: false,
-  });
+  const result = await mistral.batch.jobs.list({});
 
   // Handle the result
   console.log(result);
@@ -52,11 +48,7 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await batchJobsList(mistral, {
-    page: 0,
-    pageSize: 100,
-    createdByMe: false,
-  });
+  const res = await batchJobsList(mistral, {});
 
   if (!res.ok) {
     throw res.error;
@@ -110,7 +102,6 @@ async function run() {
     ],
     endpoint: "/v1/fim/completions",
     model: "2",
-    timeoutHours: 24,
   });
 
   // Handle the result
@@ -141,7 +132,6 @@ async function run() {
     ],
     endpoint: "/v1/fim/completions",
     model: "2",
-    timeoutHours: 24,
   });
 
   if (!res.ok) {

@@ -15,6 +15,7 @@ const value: string = "<value>";
 const value: components.ContentChunk[] = [
   {
     text: "<value>",
+    type: "text",
   },
 ];
 ```

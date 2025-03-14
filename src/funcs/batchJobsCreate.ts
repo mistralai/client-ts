@@ -20,6 +20,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKError } from "../models/errors/sdkerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -28,11 +29,11 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Create a new batch job, it will be queued for processing.
  */
-export async function batchJobsCreate(
+export function batchJobsCreate(
   client: MistralCore,
   request: components.BatchJobIn,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.BatchJobOut,
     | SDKError
@@ -44,13 +45,39 @@ export async function batchJobsCreate(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: MistralCore,
+  request: components.BatchJobIn,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.BatchJobOut,
+      | SDKError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => components.BatchJobIn$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
@@ -67,6 +94,7 @@ export async function batchJobsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "jobs_api_routes_batch_create_batch_job",
     oAuth2Scopes: [],
 
@@ -89,7 +117,7 @@ export async function batchJobsCreate(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -100,7 +128,7 @@ export async function batchJobsCreate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -119,8 +147,8 @@ export async function batchJobsCreate(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

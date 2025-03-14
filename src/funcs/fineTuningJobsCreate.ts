@@ -21,6 +21,7 @@ import {
 import { SDKError } from "../models/errors/sdkerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -29,11 +30,11 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Create a new fine-tuning job, it will be queued for processing.
  */
-export async function fineTuningJobsCreate(
+export function fineTuningJobsCreate(
   client: MistralCore,
   request: components.JobIn,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.JobsApiRoutesFineTuningCreateFineTuningJobResponse,
     | SDKError
@@ -45,13 +46,39 @@ export async function fineTuningJobsCreate(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: MistralCore,
+  request: components.JobIn,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.JobsApiRoutesFineTuningCreateFineTuningJobResponse,
+      | SDKError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => components.JobIn$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
@@ -68,6 +95,7 @@ export async function fineTuningJobsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "jobs_api_routes_fine_tuning_create_fine_tuning_job",
     oAuth2Scopes: [],
 
@@ -90,7 +118,7 @@ export async function fineTuningJobsCreate(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -101,7 +129,7 @@ export async function fineTuningJobsCreate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -124,8 +152,8 @@ export async function fineTuningJobsCreate(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

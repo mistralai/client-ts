@@ -21,6 +21,7 @@ import {
 import { SDKError } from "../models/errors/sdkerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -29,11 +30,11 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Update a model name or description.
  */
-export async function modelsUpdate(
+export function modelsUpdate(
   client: MistralCore,
   request: operations.JobsApiRoutesFineTuningUpdateFineTunedModelRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.FTModelOut,
     | SDKError
@@ -45,6 +46,32 @@ export async function modelsUpdate(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: MistralCore,
+  request: operations.JobsApiRoutesFineTuningUpdateFineTunedModelRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.FTModelOut,
+      | SDKError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -54,7 +81,7 @@ export async function modelsUpdate(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = encodeJSON("body", payload.UpdateFTModelIn, { explode: true });
@@ -78,6 +105,7 @@ export async function modelsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "jobs_api_routes_fine_tuning_update_fine_tuned_model",
     oAuth2Scopes: [],
 
@@ -100,7 +128,7 @@ export async function modelsUpdate(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -111,7 +139,7 @@ export async function modelsUpdate(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -130,8 +158,8 @@ export async function modelsUpdate(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

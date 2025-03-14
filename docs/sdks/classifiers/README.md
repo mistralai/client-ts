@@ -139,7 +139,6 @@ async function run() {
         },
       ],
     ],
-    truncateForContextLength: false,
   });
 
   // Handle the result
@@ -196,7 +195,6 @@ async function run() {
         },
       ],
     ],
-    truncateForContextLength: false,
   });
 
   if (!res.ok) {

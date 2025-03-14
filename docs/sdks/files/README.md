@@ -110,10 +110,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.files.list({
-    page: 0,
-    pageSize: 100,
-  });
+  const result = await mistral.files.list({});
 
   // Handle the result
   console.log(result);
@@ -137,10 +134,7 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await filesList(mistral, {
-    page: 0,
-    pageSize: 100,
-  });
+  const res = await filesList(mistral, {});
 
   if (!res.ok) {
     throw res.error;
@@ -418,7 +412,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.files.getSignedUrl({
     fileId: "<id>",
-    expiry: 24,
   });
 
   // Handle the result
@@ -445,7 +438,6 @@ const mistral = new MistralCore({
 async function run() {
   const res = await filesGetSignedUrl(mistral, {
     fileId: "<id>",
-    expiry: 24,
   });
 
   if (!res.ok) {

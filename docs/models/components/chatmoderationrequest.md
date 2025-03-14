@@ -6,17 +6,19 @@
 import { ChatModerationRequest } from "@mistralai/mistralai/models/components";
 
 let value: ChatModerationRequest = {
-  model: "1",
+  model: "Accord",
   inputs: [
-    {
-      content: [
-        {
-          referenceIds: [
-            409054,
-          ],
-        },
-      ],
-    },
+    [
+      {
+        content: [
+          {
+            documentUrl: "https://probable-jungle.org/",
+            type: "document_url",
+          },
+        ],
+        role: "user",
+      },
+    ],
   ],
 };
 ```

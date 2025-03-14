@@ -10,13 +10,15 @@ generation:
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
+    securityFeb2025: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
 typescript:
-  version: 1.5.1
+  version: 1.5.2
   additionalDependencies:
     dependencies:
       zod-to-json-schema: ^3.24.1
@@ -27,6 +29,7 @@ typescript:
   clientServerStatusCodesAsErrors: true
   defaultErrorName: SDKError
   enableCustomCodeRegions: true
+  enableMCPServer: false
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: MISTRAL
@@ -41,6 +44,7 @@ typescript:
       shared: models/components
       webhooks: models/webhooks
   inputModelSuffix: input
+  jsonpath: legacy
   maxMethodParams: 0
   methodArguments: infer-optional-args
   moduleFormat: commonjs
@@ -49,4 +53,3 @@ typescript:
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true
-  enableMCPServer: false

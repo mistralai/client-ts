@@ -24,6 +24,7 @@ const value: components.ToolMessage = {
   content: [
     {
       documentUrl: "https://insistent-disk.org/",
+      type: "document_url",
     },
   ],
 };

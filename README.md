@@ -102,7 +102,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.chat.complete({
     model: "mistral-small-latest",
-    stream: false,
     messages: [
       {
         content:
@@ -158,7 +157,6 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.agents.complete({
-    stream: false,
     messages: [
       {
         content:
@@ -190,7 +188,6 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.embeddings.create({
-    model: "mistral-embed",
     inputs: [
       "Embed this sentence.",
       "As well as this one.",
@@ -309,7 +306,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.chat.stream({
     model: "mistral-small-latest",
-    stream: true,
     messages: [
       {
         content:
@@ -511,9 +507,9 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name | Server                   |
-| ---- | ------------------------ |
-| `eu` | `https://api.mistral.ai` |
+| Name | Server                   | Description          |
+| ---- | ------------------------ | -------------------- |
+| `eu` | `https://api.mistral.ai` | EU Production server |
 
 #### Example
 

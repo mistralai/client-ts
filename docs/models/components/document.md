@@ -9,7 +9,7 @@ Document to run OCR on
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://frequent-wriggler.biz",
+  documentUrl: "https://weird-dependency.net/",
 };
 ```
 
@@ -18,7 +18,7 @@ const value: components.DocumentURLChunk = {
 ```typescript
 const value: components.ImageURLChunk = {
   imageUrl: {
-    url: "https://equatorial-polyester.com",
+    url: "https://unconscious-dress.info",
   },
 };
 ```

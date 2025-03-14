@@ -24,15 +24,6 @@ let value: EmbeddingResponse = {
       ],
       index: 0,
     },
-    {
-      object: "embedding",
-      embedding: [
-        0.4,
-        0.5,
-        0.6,
-      ],
-      index: 1,
-    },
   ],
 };
 ```

@@ -26,8 +26,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.fim.complete({
     model: "codestral-2405",
-    topP: 1,
-    stream: false,
     prompt: "def",
     suffix: "return a+b",
   });
@@ -56,8 +54,6 @@ const mistral = new MistralCore({
 async function run() {
   const res = await fimComplete(mistral, {
     model: "codestral-2405",
-    topP: 1,
-    stream: false,
     prompt: "def",
     suffix: "return a+b",
   });
@@ -111,8 +107,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.fim.stream({
     model: "codestral-2405",
-    topP: 1,
-    stream: true,
     prompt: "def",
     suffix: "return a+b",
   });
@@ -143,8 +137,6 @@ const mistral = new MistralCore({
 async function run() {
   const res = await fimStream(mistral, {
     model: "codestral-2405",
-    topP: 1,
-    stream: true,
     prompt: "def",
     suffix: "return a+b",
   });

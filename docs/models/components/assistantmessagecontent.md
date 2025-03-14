@@ -17,6 +17,7 @@ const value: components.ContentChunk[] = [
     imageUrl: {
       url: "https://serpentine-address.net/",
     },
+    type: "image_url",
   },
 ];
 ```
