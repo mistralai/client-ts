@@ -21,6 +21,7 @@ import {
 import { SDKError } from "../models/errors/sdkerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -29,11 +30,11 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Un-archive a fine-tuned model.
  */
-export async function modelsUnarchive(
+export function modelsUnarchive(
   client: MistralCore,
   request: operations.JobsApiRoutesFineTuningUnarchiveFineTunedModelRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.UnarchiveFTModelOut,
     | SDKError
@@ -45,6 +46,32 @@ export async function modelsUnarchive(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: MistralCore,
+  request: operations.JobsApiRoutesFineTuningUnarchiveFineTunedModelRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.UnarchiveFTModelOut,
+      | SDKError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -54,7 +81,7 @@ export async function modelsUnarchive(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -79,6 +106,7 @@ export async function modelsUnarchive(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "jobs_api_routes_fine_tuning_unarchive_fine_tuned_model",
     oAuth2Scopes: [],
 
@@ -101,7 +129,7 @@ export async function modelsUnarchive(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -112,7 +140,7 @@ export async function modelsUnarchive(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -131,8 +159,8 @@ export async function modelsUnarchive(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

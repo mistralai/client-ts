@@ -16,6 +16,7 @@ const value: components.SystemMessage = {
   content: [
     {
       text: "<value>",
+      type: "text",
     },
   ],
 };
@@ -30,6 +31,7 @@ const value: components.ToolMessage = {
       imageUrl: {
         url: "https://whimsical-impostor.name",
       },
+      type: "image_url",
     },
   ],
 };
@@ -42,6 +44,7 @@ const value: components.UserMessage = {
   content: [
     {
       documentUrl: "https://optimistic-slide.org",
+      type: "document_url",
     },
   ],
 };

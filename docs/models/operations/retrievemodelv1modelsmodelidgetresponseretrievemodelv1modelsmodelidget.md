@@ -20,7 +20,7 @@ const value: components.BaseModelCard = {
 const value: components.FTModelCard = {
   id: "<id>",
   capabilities: {},
-  job: "Corporate Division Specialist",
+  job: "Dynamic Optimization Representative",
   root: "<value>",
 };
 ```

@@ -6,11 +6,12 @@
 import { OCRRequest } from "@mistralai/mistralai/models/components";
 
 let value: OCRRequest = {
-  model: "Model T",
+  model: "Durango",
   document: {
     imageUrl: {
-      url: "https://hospitable-republican.biz/",
+      url: "https://knotty-exasperation.org/",
     },
+    type: "image_url",
   },
 };
 ```

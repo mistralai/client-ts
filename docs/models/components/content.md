@@ -15,6 +15,7 @@ const value: string = "<value>";
 const value: components.ContentChunk[] = [
   {
     documentUrl: "https://rotating-premeditation.biz",
+    type: "document_url",
   },
 ];
 ```

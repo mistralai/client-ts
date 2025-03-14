@@ -27,6 +27,7 @@ async function run() {
     model: "Focus",
     document: {
       documentUrl: "https://dutiful-horst.org",
+      type: "document_url",
     },
   });
 
@@ -56,6 +57,7 @@ async function run() {
     model: "Focus",
     document: {
       documentUrl: "https://dutiful-horst.org",
+      type: "document_url",
     },
   });
 

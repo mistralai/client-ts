@@ -9,6 +9,7 @@ let value: UserMessage = {
   content: [
     {
       text: "<value>",
+      type: "text",
     },
   ],
 };

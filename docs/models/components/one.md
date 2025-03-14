@@ -21,7 +21,14 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: {
+        url: "https://black-director.biz/",
+      },
+      type: "image_url",
+    },
+  ],
 };
 ```
 
