@@ -16,6 +16,7 @@ const value: components.SystemMessage = {
   content: [
     {
       text: "<value>",
+      type: "text",
     },
   ],
 };
@@ -25,11 +26,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      documentUrl: "https://entire-obesity.com/",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

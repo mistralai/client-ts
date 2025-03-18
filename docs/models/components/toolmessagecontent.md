@@ -17,6 +17,7 @@ const value: components.ContentChunk[] = [
     imageUrl: {
       url: "https://muted-pleasure.biz",
     },
+    type: "image_url",
   },
 ];
 ```

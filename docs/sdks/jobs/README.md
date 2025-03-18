@@ -25,11 +25,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.fineTuning.jobs.list({
-    page: 0,
-    pageSize: 100,
-    createdByMe: false,
-  });
+  const result = await mistral.fineTuning.jobs.list({});
 
   // Handle the result
   console.log(result);
@@ -53,11 +49,7 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await fineTuningJobsList(mistral, {
-    page: 0,
-    pageSize: 100,
-    createdByMe: false,
-  });
+  const res = await fineTuningJobsList(mistral, {});
 
   if (!res.ok) {
     throw res.error;
@@ -107,9 +99,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.fineTuning.jobs.create({
     model: "Fiesta",
-    hyperparameters: {
-      learningRate: 0.0001,
-    },
+    hyperparameters: {},
   });
 
   // Handle the result
@@ -136,9 +126,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await fineTuningJobsCreate(mistral, {
     model: "Fiesta",
-    hyperparameters: {
-      learningRate: 0.0001,
-    },
+    hyperparameters: {},
   });
 
   if (!res.ok) {

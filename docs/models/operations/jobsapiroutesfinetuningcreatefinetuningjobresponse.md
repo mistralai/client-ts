@@ -9,16 +9,16 @@ OK
 
 ```typescript
 const value: components.JobOut = {
-  id: "38fadfcb-ff71-4426-a296-ef849e684763",
+  id: "dfcbff71-4262-496e-bf84-9e6847638458",
   autoStart: false,
   hyperparameters: {},
-  model: "Colorado",
-  status: "VALIDATED",
+  model: "Countach",
+  status: "CANCELLATION_REQUESTED",
   jobType: "<value>",
-  createdAt: 524970,
-  modifiedAt: 750595,
+  createdAt: 862319,
+  modifiedAt: 48690,
   trainingFiles: [
-    "5ed04715-ba9b-435a-8e84-0b058e160594",
+    "4715ba9b-35ae-4840-ab05-8e160594319b",
   ],
 };
 ```
