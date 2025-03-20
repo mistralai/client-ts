@@ -31,6 +31,9 @@ export type AssistantMessageRole = ClosedEnum<typeof AssistantMessageRole>;
 export type AssistantMessage = {
   content?: string | Array<ContentChunk> | null | undefined;
   toolCalls?: Array<ToolCall> | null | undefined;
+  /**
+   * Set this to `true` when adding an assistant message as prefix to condition the model response. The role of the prefix message is to force the model to start its answer by the content of the message.
+   */
   prefix?: boolean | undefined;
   role?: AssistantMessageRole | undefined;
 };

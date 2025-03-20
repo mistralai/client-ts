@@ -78,7 +78,7 @@ export type ChatCompletionRequest = {
   /**
    * ID of the model to use. You can use the [List Available Models](/api/#tag/models/operation/list_models_v1_models_get) API to see all of your available models, or see our [Model overview](/models) for model descriptions.
    */
-  model: string | null;
+  model: string;
   /**
    * What sampling temperature to use, we recommend between 0.0 and 0.7. Higher values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both. The default value varies depending on the model you are targeting. Call the `/models` endpoint to retrieve the appropriate value.
    */
@@ -128,6 +128,7 @@ export type ChatCompletionRequest = {
    */
   n?: number | null | undefined;
   prediction?: Prediction | undefined;
+  parallelToolCalls?: boolean | undefined;
 };
 
 /** @internal */
@@ -324,7 +325,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  model: z.nullable(z.string()),
+  model: z.string(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.number().optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
@@ -363,6 +364,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
   frequency_penalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$inboundSchema.optional(),
+  parallel_tool_calls: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_p": "topP",
@@ -372,12 +374,13 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "presence_penalty": "presencePenalty",
     "frequency_penalty": "frequencyPenalty",
+    "parallel_tool_calls": "parallelToolCalls",
   });
 });
 
 /** @internal */
 export type ChatCompletionRequest$Outbound = {
-  model: string | null;
+  model: string;
   temperature?: number | null | undefined;
   top_p?: number | undefined;
   max_tokens?: number | null | undefined;
@@ -397,6 +400,7 @@ export type ChatCompletionRequest$Outbound = {
   frequency_penalty?: number | undefined;
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
+  parallel_tool_calls?: boolean | undefined;
 };
 
 /** @internal */
@@ -405,7 +409,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ChatCompletionRequest
 > = z.object({
-  model: z.nullable(z.string()),
+  model: z.string(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.number().optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
@@ -446,6 +450,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   frequencyPenalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
+  parallelToolCalls: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     topP: "top_p",
@@ -455,6 +460,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     presencePenalty: "presence_penalty",
     frequencyPenalty: "frequency_penalty",
+    parallelToolCalls: "parallel_tool_calls",
   });
 });
 

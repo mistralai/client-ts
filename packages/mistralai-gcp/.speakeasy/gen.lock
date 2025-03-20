@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: 4d1111c8da8a6e8fbd1449ad669e8e0b
+  docChecksum: 28fe1ab59b4dee005217f2dbbd836060
   docVersion: 0.0.2
-  speakeasyVersion: 1.469.11
-  generationVersion: 2.493.32
-  releaseVersion: 1.4.0
-  configChecksum: c1fcea2ce26a053058da9d76eb003e28
+  speakeasyVersion: 1.517.3
+  generationVersion: 2.548.6
+  releaseVersion: 1.5.0
+  configChecksum: c21450c8c3f3f0056e48d9866b46a1f6
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -15,17 +15,18 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.16
+    core: 3.21.4
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     examples: 2.81.5
-    globalSecurity: 2.82.12
+    globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
+    mcpServer: 0.7.0
     nameOverrides: 2.81.2
-    nullables: 0.1.0
+    nullables: 0.1.1
     openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
@@ -35,7 +36,6 @@ features:
     serverIDs: 2.81.2
     unions: 2.85.8
 generatedFiles:
-  - .eslintrc.cjs
   - .gitattributes
   - .npmignore
   - FUNCTIONS.md
@@ -69,10 +69,14 @@ generatedFiles:
   - docs/models/components/functioncall.md
   - docs/models/components/functionname.md
   - docs/models/components/functiont.md
+  - docs/models/components/imageurl.md
+  - docs/models/components/imageurlchunk.md
+  - docs/models/components/imageurlchunkimageurl.md
+  - docs/models/components/imageurlchunktype.md
+  - docs/models/components/jsonschema.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
   - docs/models/components/prediction.md
-  - docs/models/components/predictiontype.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
   - docs/models/components/responseformat.md
@@ -98,6 +102,7 @@ generatedFiles:
   - docs/models/components/usermessagerole.md
   - docs/models/components/validationerror.md
   - docs/models/errors/httpvalidationerror.md
+  - eslint.config.mjs
   - jsr.json
   - package.json
   - src/core.ts
@@ -125,6 +130,22 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/mcp-server/build.mts
+  - src/mcp-server/cli.ts
+  - src/mcp-server/cli/start/command.ts
+  - src/mcp-server/cli/start/impl.ts
+  - src/mcp-server/console-logger.ts
+  - src/mcp-server/extensions.ts
+  - src/mcp-server/mcp-server.ts
+  - src/mcp-server/resources.ts
+  - src/mcp-server/scopes.ts
+  - src/mcp-server/server.ts
+  - src/mcp-server/shared.ts
+  - src/mcp-server/tools.ts
+  - src/mcp-server/tools/chatComplete.ts
+  - src/mcp-server/tools/chatStream.ts
+  - src/mcp-server/tools/fimComplete.ts
+  - src/mcp-server/tools/fimStream.ts
   - src/models/components/assistantmessage.ts
   - src/models/components/chatcompletionchoice.ts
   - src/models/components/chatcompletionrequest.ts
@@ -141,7 +162,10 @@ generatedFiles:
   - src/models/components/function.ts
   - src/models/components/functioncall.ts
   - src/models/components/functionname.ts
+  - src/models/components/imageurl.ts
+  - src/models/components/imageurlchunk.ts
   - src/models/components/index.ts
+  - src/models/components/jsonschema.ts
   - src/models/components/prediction.ts
   - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
@@ -166,6 +190,7 @@ generatedFiles:
   - src/sdk/chat.ts
   - src/sdk/fim.ts
   - src/sdk/index.ts
+  - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -183,6 +208,7 @@ examples:
       responses:
         "422":
           application/json: {}
+        "200": {}
   chat_completion_v1_chat_completions_post:
     speakeasy-default-chat-completion-v1-chat-completions-post:
       requestBody:
@@ -199,6 +225,7 @@ examples:
       responses:
         "422":
           application/json: {}
+        "200": {}
   fim_completion_v1_fim_completions_post:
     speakeasy-default-fim-completion-v1-fim-completions-post:
       requestBody:
