@@ -15,8 +15,9 @@ const value: string = "<value>";
 const value: components.ContentChunk[] = [
   {
     referenceIds: [
-      521848,
+      210382,
     ],
+    type: "reference",
   },
 ];
 ```

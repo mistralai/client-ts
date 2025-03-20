@@ -1,3 +1,6 @@
+/mcp-server
+/bin
+/.eslintcache
 /react-query
 /.speakeasy/reports
 /__tests__
