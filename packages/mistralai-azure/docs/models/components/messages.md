@@ -13,7 +13,12 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 
@@ -23,9 +28,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      referenceIds: [
-        870013,
-      ],
+      text: "<value>",
+      type: "text",
     },
   ],
 };
@@ -38,8 +42,9 @@ const value: components.UserMessage = {
   content: [
     {
       referenceIds: [
-        461479,
+        359508,
       ],
+      type: "reference",
     },
   ],
 };

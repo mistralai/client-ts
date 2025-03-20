@@ -7,11 +7,11 @@ An object specifying the format that the model must output. Setting to `{ "type"
 ```typescript
 import { ResponseFormats } from "@mistralai/mistralai-azure/models/components";
 
-let value: ResponseFormats = "json_object";
+let value: ResponseFormats = "text";
 ```
 
 ## Values
 
 ```typescript
-"text" | "json_object"
+"text" | "json_object" | "json_schema"
 ```

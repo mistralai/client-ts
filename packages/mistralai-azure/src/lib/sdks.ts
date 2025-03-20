@@ -79,7 +79,7 @@ export class ClientSDK {
   readonly #httpClient: HTTPClient;
   readonly #hooks: SDKHooks;
   readonly #logger?: Logger | undefined;
-  protected readonly _baseURL: URL | null;
+  public readonly _baseURL: URL | null;
   public readonly _options: SDKOptions & { hooks?: SDKHooks };
 
   constructor(options: SDKOptions = {}) {
@@ -195,14 +195,9 @@ export class ClientSDK {
 
     if (conf.body instanceof ReadableStream) {
       if (!fetchOptions) {
-        fetchOptions = {
-          // @ts-expect-error see https://github.com/node-fetch/node-fetch/issues/1769
-          duplex: "half",
-        };
-      } else {
-        // @ts-expect-error see https://github.com/node-fetch/node-fetch/issues/1769
-        fetchOptions.duplex = "half";
+        fetchOptions = {};
       }
+      Object.assign(fetchOptions, { duplex: "half" });
     }
 
     let input;

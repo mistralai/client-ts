@@ -21,16 +21,16 @@ export const FunctionT$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  description: z.string().default(""),
-  strict: z.boolean().default(false),
+  description: z.string().optional(),
+  strict: z.boolean().optional(),
   parameters: z.record(z.any()),
 });
 
 /** @internal */
 export type FunctionT$Outbound = {
   name: string;
-  description: string;
-  strict: boolean;
+  description?: string | undefined;
+  strict?: boolean | undefined;
   parameters: { [k: string]: any };
 };
 
@@ -41,8 +41,8 @@ export const FunctionT$outboundSchema: z.ZodType<
   FunctionT
 > = z.object({
   name: z.string(),
-  description: z.string().default(""),
-  strict: z.boolean().default(false),
+  description: z.string().optional(),
+  strict: z.boolean().optional(),
   parameters: z.record(z.any()),
 });
 

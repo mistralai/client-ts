@@ -7,7 +7,7 @@ import { ValidationError } from "@mistralai/mistralai-azure/models/components";
 
 let value: ValidationError = {
   loc: [
-    "<value>",
+    18789,
   ],
   msg: "<value>",
   type: "<value>",
