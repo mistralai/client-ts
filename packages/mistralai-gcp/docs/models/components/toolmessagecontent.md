@@ -14,9 +14,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    referenceIds: [
-      456150,
-    ],
+    imageUrl: {
+      url: "https://fair-insolence.biz",
+    },
+    type: "image_url",
   },
 ];
 ```

@@ -32,7 +32,6 @@ const mistralGoogleCloud = new MistralGoogleCloudCore({
 async function run() {
   const res = await chatComplete(mistralGoogleCloud, {
     model: "mistral-small-latest",
-    stream: false,
     messages: [
       {
         content: "Who is the best French painter? Answer in one short sentence.",

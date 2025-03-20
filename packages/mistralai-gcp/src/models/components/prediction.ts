@@ -4,40 +4,13 @@
 
 import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const PredictionType = {
-  Content: "content",
-} as const;
-export type PredictionType = ClosedEnum<typeof PredictionType>;
 
 export type Prediction = {
   type?: "content" | undefined;
   content?: string | undefined;
 };
-
-/** @internal */
-export const PredictionType$inboundSchema: z.ZodNativeEnum<
-  typeof PredictionType
-> = z.nativeEnum(PredictionType);
-
-/** @internal */
-export const PredictionType$outboundSchema: z.ZodNativeEnum<
-  typeof PredictionType
-> = PredictionType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PredictionType$ {
-  /** @deprecated use `PredictionType$inboundSchema` instead. */
-  export const inboundSchema = PredictionType$inboundSchema;
-  /** @deprecated use `PredictionType$outboundSchema` instead. */
-  export const outboundSchema = PredictionType$outboundSchema;
-}
 
 /** @internal */
 export const Prediction$inboundSchema: z.ZodType<
@@ -61,7 +34,7 @@ export const Prediction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Prediction
 > = z.object({
-  type: z.literal("content").default("content"),
+  type: z.literal("content").default("content" as const),
   content: z.string().default(""),
 });
 
