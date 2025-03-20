@@ -3,6 +3,14 @@
 
 ## Supported Types
 
+### `components.ImageURLChunk`
+
+```typescript
+const value: components.ImageURLChunk = {
+  imageUrl: "https://blaring-bog.com",
+};
+```
+
 ### `components.TextChunk`
 
 ```typescript
@@ -16,7 +24,7 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    568045,
+    832620,
   ],
 };
 ```

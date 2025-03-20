@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: dabdab8f5be362f69e7703849f1be938
+  docChecksum: 574e96caec9a63dbe3f39d646830f2c2
   docVersion: 0.0.2
-  speakeasyVersion: 1.469.11
-  generationVersion: 2.493.32
-  releaseVersion: 1.4.0
-  configChecksum: 9e79792876850cc0a3dd114a3707f126
+  speakeasyVersion: 1.517.3
+  generationVersion: 2.548.6
+  releaseVersion: 1.5.0
+  configChecksum: e970dc3539024fc88d627ee594ef2937
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
@@ -15,17 +15,17 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.16
+    core: 3.21.4
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     examples: 2.81.5
-    globalSecurity: 2.82.12
+    globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
     nameOverrides: 2.81.2
-    nullables: 0.1.0
+    nullables: 0.1.1
     openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
@@ -35,7 +35,6 @@ features:
     serverIDs: 2.81.2
     unions: 2.85.8
 generatedFiles:
-  - .eslintrc.cjs
   - .gitattributes
   - .npmignore
   - FUNCTIONS.md
@@ -64,10 +63,14 @@ generatedFiles:
   - docs/models/components/functioncall.md
   - docs/models/components/functionname.md
   - docs/models/components/functiont.md
+  - docs/models/components/imageurl.md
+  - docs/models/components/imageurlchunk.md
+  - docs/models/components/imageurlchunkimageurl.md
+  - docs/models/components/imageurlchunktype.md
+  - docs/models/components/jsonschema.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
   - docs/models/components/prediction.md
-  - docs/models/components/predictiontype.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
   - docs/models/components/responseformat.md
@@ -93,6 +96,7 @@ generatedFiles:
   - docs/models/components/usermessagerole.md
   - docs/models/components/validationerror.md
   - docs/models/errors/httpvalidationerror.md
+  - eslint.config.mjs
   - jsr.json
   - package.json
   - src/core.ts
@@ -132,7 +136,10 @@ generatedFiles:
   - src/models/components/function.ts
   - src/models/components/functioncall.ts
   - src/models/components/functionname.ts
+  - src/models/components/imageurl.ts
+  - src/models/components/imageurlchunk.ts
   - src/models/components/index.ts
+  - src/models/components/jsonschema.ts
   - src/models/components/prediction.ts
   - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
@@ -156,6 +163,7 @@ generatedFiles:
   - src/models/errors/sdkvalidationerror.ts
   - src/sdk/chat.ts
   - src/sdk/index.ts
+  - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -173,6 +181,7 @@ examples:
       responses:
         "422":
           application/json: {}
+        "200": {}
   chat_completion_v1_chat_completions_post:
     speakeasy-default-chat-completion-v1-chat-completions-post:
       requestBody:

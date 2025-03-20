@@ -14,7 +14,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    text: "<value>",
+    imageUrl: {
+      url: "https://jittery-window.com",
+    },
+    type: "image_url",
   },
 ];
 ```

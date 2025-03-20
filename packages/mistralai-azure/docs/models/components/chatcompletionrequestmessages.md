@@ -13,11 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -27,9 +23,10 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      referenceIds: [
-        943749,
-      ],
+      imageUrl: {
+        url: "https://sugary-brace.org/",
+      },
+      type: "image_url",
     },
   ],
 };
@@ -39,11 +36,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
