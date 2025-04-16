@@ -16,7 +16,7 @@ export type JobsApiRoutesBatchGetBatchJobsRequest = {
   metadata?: { [k: string]: any } | null | undefined;
   createdAfter?: Date | null | undefined;
   createdByMe?: boolean | undefined;
-  status?: components.BatchJobStatus | null | undefined;
+  status?: Array<components.BatchJobStatus> | null | undefined;
 };
 
 /** @internal */
@@ -33,7 +33,8 @@ export const JobsApiRoutesBatchGetBatchJobsRequest$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   created_by_me: z.boolean().default(false),
-  status: z.nullable(components.BatchJobStatus$inboundSchema).optional(),
+  status: z.nullable(z.array(components.BatchJobStatus$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "page_size": "pageSize",
@@ -50,7 +51,7 @@ export type JobsApiRoutesBatchGetBatchJobsRequest$Outbound = {
   metadata?: { [k: string]: any } | null | undefined;
   created_after?: string | null | undefined;
   created_by_me: boolean;
-  status?: string | null | undefined;
+  status?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -65,7 +66,8 @@ export const JobsApiRoutesBatchGetBatchJobsRequest$outboundSchema: z.ZodType<
   metadata: z.nullable(z.record(z.any())).optional(),
   createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   createdByMe: z.boolean().default(false),
-  status: z.nullable(components.BatchJobStatus$outboundSchema).optional(),
+  status: z.nullable(z.array(components.BatchJobStatus$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",

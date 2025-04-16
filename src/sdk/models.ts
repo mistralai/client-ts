@@ -74,7 +74,7 @@ export class Models extends ClientSDK {
   async update(
     request: operations.JobsApiRoutesFineTuningUpdateFineTunedModelRequest,
     options?: RequestOptions,
-  ): Promise<components.FTModelOut> {
+  ): Promise<operations.JobsApiRoutesFineTuningUpdateFineTunedModelResponse> {
     return unwrapAsync(modelsUpdate(
       this,
       request,

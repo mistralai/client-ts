@@ -115,6 +115,7 @@ export type AgentsCompletionStreamRequest = {
    */
   n?: number | null | undefined;
   prediction?: Prediction | undefined;
+  parallelToolCalls?: boolean | undefined;
   /**
    * The ID of the agent to use for this completion.
    */
@@ -366,6 +367,7 @@ export const AgentsCompletionStreamRequest$inboundSchema: z.ZodType<
   frequency_penalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$inboundSchema.optional(),
+  parallel_tool_calls: z.boolean().optional(),
   agent_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -375,6 +377,7 @@ export const AgentsCompletionStreamRequest$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "presence_penalty": "presencePenalty",
     "frequency_penalty": "frequencyPenalty",
+    "parallel_tool_calls": "parallelToolCalls",
     "agent_id": "agentId",
   });
 });
@@ -398,6 +401,7 @@ export type AgentsCompletionStreamRequest$Outbound = {
   frequency_penalty?: number | undefined;
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
+  parallel_tool_calls?: boolean | undefined;
   agent_id: string;
 };
 
@@ -445,6 +449,7 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
   frequencyPenalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
+  parallelToolCalls: z.boolean().optional(),
   agentId: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -454,6 +459,7 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     presencePenalty: "presence_penalty",
     frequencyPenalty: "frequency_penalty",
+    parallelToolCalls: "parallel_tool_calls",
     agentId: "agent_id",
   });
 });

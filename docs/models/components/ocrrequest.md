@@ -8,9 +8,7 @@ import { OCRRequest } from "@mistralai/mistralai/models/components";
 let value: OCRRequest = {
   model: "Durango",
   document: {
-    imageUrl: {
-      url: "https://knotty-exasperation.org/",
-    },
+    imageUrl: "https://hairy-technologist.net",
     type: "image_url",
   },
 };

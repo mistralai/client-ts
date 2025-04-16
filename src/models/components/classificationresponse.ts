@@ -7,16 +7,16 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ClassificationObject,
-  ClassificationObject$inboundSchema,
-  ClassificationObject$Outbound,
-  ClassificationObject$outboundSchema,
-} from "./classificationobject.js";
+  ClassificationTargetResult,
+  ClassificationTargetResult$inboundSchema,
+  ClassificationTargetResult$Outbound,
+  ClassificationTargetResult$outboundSchema,
+} from "./classificationtargetresult.js";
 
 export type ClassificationResponse = {
-  id?: string | undefined;
-  model?: string | undefined;
-  results?: Array<ClassificationObject> | undefined;
+  id: string;
+  model: string;
+  results: Array<{ [k: string]: ClassificationTargetResult }>;
 };
 
 /** @internal */
@@ -25,16 +25,16 @@ export const ClassificationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
-  model: z.string().optional(),
-  results: z.array(ClassificationObject$inboundSchema).optional(),
+  id: z.string(),
+  model: z.string(),
+  results: z.array(z.record(ClassificationTargetResult$inboundSchema)),
 });
 
 /** @internal */
 export type ClassificationResponse$Outbound = {
-  id?: string | undefined;
-  model?: string | undefined;
-  results?: Array<ClassificationObject$Outbound> | undefined;
+  id: string;
+  model: string;
+  results: Array<{ [k: string]: ClassificationTargetResult$Outbound }>;
 };
 
 /** @internal */
@@ -43,9 +43,9 @@ export const ClassificationResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ClassificationResponse
 > = z.object({
-  id: z.string().optional(),
-  model: z.string().optional(),
-  results: z.array(ClassificationObject$outboundSchema).optional(),
+  id: z.string(),
+  model: z.string(),
+  results: z.array(z.record(ClassificationTargetResult$outboundSchema)),
 });
 
 /**

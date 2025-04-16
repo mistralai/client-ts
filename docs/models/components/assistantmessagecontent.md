@@ -15,7 +15,7 @@ const value: string = "<value>";
 const value: components.ContentChunk[] = [
   {
     imageUrl: {
-      url: "https://serpentine-address.net/",
+      url: "https://palatable-permafrost.info/",
     },
     type: "image_url",
   },

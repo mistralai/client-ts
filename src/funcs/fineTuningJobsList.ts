@@ -93,6 +93,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "created_after": payload?.created_after,
+    "created_before": payload?.created_before,
     "created_by_me": payload?.created_by_me,
     "model": payload?.model,
     "page": payload?.page,

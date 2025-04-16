@@ -128,6 +128,7 @@ export type ChatCompletionRequest = {
    */
   n?: number | null | undefined;
   prediction?: Prediction | undefined;
+  parallelToolCalls?: boolean | undefined;
   /**
    * Whether to inject a safety prompt before all conversations.
    */
@@ -351,6 +352,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
   frequency_penalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$inboundSchema.optional(),
+  parallel_tool_calls: z.boolean().optional(),
   safe_prompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -361,6 +363,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "presence_penalty": "presencePenalty",
     "frequency_penalty": "frequencyPenalty",
+    "parallel_tool_calls": "parallelToolCalls",
     "safe_prompt": "safePrompt",
   });
 });
@@ -387,6 +390,7 @@ export type ChatCompletionRequest$Outbound = {
   frequency_penalty?: number | undefined;
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
+  parallel_tool_calls?: boolean | undefined;
   safe_prompt?: boolean | undefined;
 };
 
@@ -437,6 +441,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   frequencyPenalty: z.number().optional(),
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
+  parallelToolCalls: z.boolean().optional(),
   safePrompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -447,6 +452,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     presencePenalty: "presence_penalty",
     frequencyPenalty: "frequency_penalty",
+    parallelToolCalls: "parallel_tool_calls",
     safePrompt: "safe_prompt",
   });
 });

@@ -17,6 +17,13 @@ export type JobsApiRoutesFineTuningUpdateFineTunedModelRequest = {
   updateFTModelIn: components.UpdateFTModelIn;
 };
 
+/**
+ * OK
+ */
+export type JobsApiRoutesFineTuningUpdateFineTunedModelResponse =
+  | (components.CompletionFTModelOut & { modelType: "completion" })
+  | (components.ClassifierFTModelOut & { modelType: "classifier" });
+
 /** @internal */
 export const JobsApiRoutesFineTuningUpdateFineTunedModelRequest$inboundSchema:
   z.ZodType<
@@ -95,5 +102,91 @@ export function jobsApiRoutesFineTuningUpdateFineTunedModelRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'JobsApiRoutesFineTuningUpdateFineTunedModelRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const JobsApiRoutesFineTuningUpdateFineTunedModelResponse$inboundSchema:
+  z.ZodType<
+    JobsApiRoutesFineTuningUpdateFineTunedModelResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    components.CompletionFTModelOut$inboundSchema.and(
+      z.object({ model_type: z.literal("completion") }).transform((v) => ({
+        modelType: v.model_type,
+      })),
+    ),
+    components.ClassifierFTModelOut$inboundSchema.and(
+      z.object({ model_type: z.literal("classifier") }).transform((v) => ({
+        modelType: v.model_type,
+      })),
+    ),
+  ]);
+
+/** @internal */
+export type JobsApiRoutesFineTuningUpdateFineTunedModelResponse$Outbound =
+  | (components.CompletionFTModelOut$Outbound & { model_type: "completion" })
+  | (components.ClassifierFTModelOut$Outbound & { model_type: "classifier" });
+
+/** @internal */
+export const JobsApiRoutesFineTuningUpdateFineTunedModelResponse$outboundSchema:
+  z.ZodType<
+    JobsApiRoutesFineTuningUpdateFineTunedModelResponse$Outbound,
+    z.ZodTypeDef,
+    JobsApiRoutesFineTuningUpdateFineTunedModelResponse
+  > = z.union([
+    components.CompletionFTModelOut$outboundSchema.and(
+      z.object({ modelType: z.literal("completion") }).transform((v) => ({
+        model_type: v.modelType,
+      })),
+    ),
+    components.ClassifierFTModelOut$outboundSchema.and(
+      z.object({ modelType: z.literal("classifier") }).transform((v) => ({
+        model_type: v.modelType,
+      })),
+    ),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace JobsApiRoutesFineTuningUpdateFineTunedModelResponse$ {
+  /** @deprecated use `JobsApiRoutesFineTuningUpdateFineTunedModelResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    JobsApiRoutesFineTuningUpdateFineTunedModelResponse$inboundSchema;
+  /** @deprecated use `JobsApiRoutesFineTuningUpdateFineTunedModelResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    JobsApiRoutesFineTuningUpdateFineTunedModelResponse$outboundSchema;
+  /** @deprecated use `JobsApiRoutesFineTuningUpdateFineTunedModelResponse$Outbound` instead. */
+  export type Outbound =
+    JobsApiRoutesFineTuningUpdateFineTunedModelResponse$Outbound;
+}
+
+export function jobsApiRoutesFineTuningUpdateFineTunedModelResponseToJSON(
+  jobsApiRoutesFineTuningUpdateFineTunedModelResponse:
+    JobsApiRoutesFineTuningUpdateFineTunedModelResponse,
+): string {
+  return JSON.stringify(
+    JobsApiRoutesFineTuningUpdateFineTunedModelResponse$outboundSchema.parse(
+      jobsApiRoutesFineTuningUpdateFineTunedModelResponse,
+    ),
+  );
+}
+
+export function jobsApiRoutesFineTuningUpdateFineTunedModelResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  JobsApiRoutesFineTuningUpdateFineTunedModelResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      JobsApiRoutesFineTuningUpdateFineTunedModelResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'JobsApiRoutesFineTuningUpdateFineTunedModelResponse' from JSON`,
   );
 }

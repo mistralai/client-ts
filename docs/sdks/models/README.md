@@ -310,7 +310,7 @@ run();
 
 ### Response
 
-**Promise\<[components.FTModelOut](../../models/components/ftmodelout.md)\>**
+**Promise\<[operations.JobsApiRoutesFineTuningUpdateFineTunedModelResponse](../../models/operations/jobsapiroutesfinetuningupdatefinetunedmodelresponse.md)\>**
 
 ### Errors
 

@@ -8,7 +8,7 @@ import { CompletionEvent } from "@mistralai/mistralai/models/components";
 let value: CompletionEvent = {
   data: {
     id: "<id>",
-    model: "El Camino",
+    model: "Golf",
     usage: {
       promptTokens: 16,
       completionTokens: 34,
@@ -16,9 +16,9 @@ let value: CompletionEvent = {
     },
     choices: [
       {
-        index: 956406,
+        index: 110477,
         delta: {},
-        finishReason: "stop",
+        finishReason: "length",
       },
     ],
   },

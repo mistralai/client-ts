@@ -15,7 +15,7 @@ export const WandbIntegrationType = {
 export type WandbIntegrationType = ClosedEnum<typeof WandbIntegrationType>;
 
 export type WandbIntegration = {
-  type?: "wandb" | undefined;
+  type?: WandbIntegrationType | undefined;
   /**
    * The name of the project that the new run will be created under.
    */
@@ -58,7 +58,7 @@ export const WandbIntegration$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("wandb").default("wandb"),
+  type: WandbIntegrationType$inboundSchema.default("wandb"),
   project: z.string(),
   name: z.nullable(z.string()).optional(),
   api_key: z.string(),
@@ -72,7 +72,7 @@ export const WandbIntegration$inboundSchema: z.ZodType<
 
 /** @internal */
 export type WandbIntegration$Outbound = {
-  type: "wandb";
+  type: string;
   project: string;
   name?: string | null | undefined;
   api_key: string;
@@ -85,7 +85,7 @@ export const WandbIntegration$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WandbIntegration
 > = z.object({
-  type: z.literal("wandb").default("wandb"),
+  type: WandbIntegrationType$outboundSchema.default("wandb"),
   project: z.string(),
   name: z.nullable(z.string()).optional(),
   apiKey: z.string(),

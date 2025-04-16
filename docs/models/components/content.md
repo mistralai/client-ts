@@ -14,8 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    documentUrl: "https://rotating-premeditation.biz",
-    type: "document_url",
+    text: "<value>",
+    type: "text",
   },
 ];
 ```

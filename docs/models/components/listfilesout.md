@@ -13,13 +13,13 @@ let value: ListFilesOut = {
       sizeBytes: 13000,
       createdAt: 1716963433,
       filename: "files_upload.jsonl",
-      purpose: "fine-tune",
+      purpose: "batch",
       sampleType: "instruct",
       source: "repository",
     },
   ],
   object: "<value>",
-  total: 570197,
+  total: 93940,
 };
 ```
 

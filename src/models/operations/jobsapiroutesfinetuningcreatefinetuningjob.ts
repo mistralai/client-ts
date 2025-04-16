@@ -8,12 +8,80 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type One =
+  | (components.ClassifierJobOut & { jobType: "classifier" })
+  | (components.CompletionJobOut & { jobType: "completion" });
+
 /**
  * OK
  */
 export type JobsApiRoutesFineTuningCreateFineTuningJobResponse =
   | components.LegacyJobMetadataOut
-  | components.JobOut;
+  | (components.ClassifierJobOut & { jobType: "classifier" })
+  | (components.CompletionJobOut & { jobType: "completion" });
+
+/** @internal */
+export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z.union(
+  [
+    components.ClassifierJobOut$inboundSchema.and(
+      z.object({ job_type: z.literal("classifier") }).transform((v) => ({
+        jobType: v.job_type,
+      })),
+    ),
+    components.CompletionJobOut$inboundSchema.and(
+      z.object({ job_type: z.literal("completion") }).transform((v) => ({
+        jobType: v.job_type,
+      })),
+    ),
+  ],
+);
+
+/** @internal */
+export type One$Outbound =
+  | (components.ClassifierJobOut$Outbound & { job_type: "classifier" })
+  | (components.CompletionJobOut$Outbound & { job_type: "completion" });
+
+/** @internal */
+export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
+  .union([
+    components.ClassifierJobOut$outboundSchema.and(
+      z.object({ jobType: z.literal("classifier") }).transform((v) => ({
+        job_type: v.jobType,
+      })),
+    ),
+    components.CompletionJobOut$outboundSchema.and(
+      z.object({ jobType: z.literal("completion") }).transform((v) => ({
+        job_type: v.jobType,
+      })),
+    ),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace One$ {
+  /** @deprecated use `One$inboundSchema` instead. */
+  export const inboundSchema = One$inboundSchema;
+  /** @deprecated use `One$outboundSchema` instead. */
+  export const outboundSchema = One$outboundSchema;
+  /** @deprecated use `One$Outbound` instead. */
+  export type Outbound = One$Outbound;
+}
+
+export function oneToJSON(one: One): string {
+  return JSON.stringify(One$outboundSchema.parse(one));
+}
+
+export function oneFromJSON(
+  jsonString: string,
+): SafeParseResult<One, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => One$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'One' from JSON`,
+  );
+}
 
 /** @internal */
 export const JobsApiRoutesFineTuningCreateFineTuningJobResponse$inboundSchema:
@@ -23,13 +91,25 @@ export const JobsApiRoutesFineTuningCreateFineTuningJobResponse$inboundSchema:
     unknown
   > = z.union([
     components.LegacyJobMetadataOut$inboundSchema,
-    components.JobOut$inboundSchema,
+    z.union([
+      components.ClassifierJobOut$inboundSchema.and(
+        z.object({ job_type: z.literal("classifier") }).transform((v) => ({
+          jobType: v.job_type,
+        })),
+      ),
+      components.CompletionJobOut$inboundSchema.and(
+        z.object({ job_type: z.literal("completion") }).transform((v) => ({
+          jobType: v.job_type,
+        })),
+      ),
+    ]),
   ]);
 
 /** @internal */
 export type JobsApiRoutesFineTuningCreateFineTuningJobResponse$Outbound =
   | components.LegacyJobMetadataOut$Outbound
-  | components.JobOut$Outbound;
+  | (components.ClassifierJobOut$Outbound & { job_type: "classifier" })
+  | (components.CompletionJobOut$Outbound & { job_type: "completion" });
 
 /** @internal */
 export const JobsApiRoutesFineTuningCreateFineTuningJobResponse$outboundSchema:
@@ -39,7 +119,18 @@ export const JobsApiRoutesFineTuningCreateFineTuningJobResponse$outboundSchema:
     JobsApiRoutesFineTuningCreateFineTuningJobResponse
   > = z.union([
     components.LegacyJobMetadataOut$outboundSchema,
-    components.JobOut$outboundSchema,
+    z.union([
+      components.ClassifierJobOut$outboundSchema.and(
+        z.object({ jobType: z.literal("classifier") }).transform((v) => ({
+          job_type: v.jobType,
+        })),
+      ),
+      components.CompletionJobOut$outboundSchema.and(
+        z.object({ jobType: z.literal("completion") }).transform((v) => ({
+          job_type: v.jobType,
+        })),
+      ),
+    ]),
   ]);
 
 /**

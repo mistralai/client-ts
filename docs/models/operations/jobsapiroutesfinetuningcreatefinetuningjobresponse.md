@@ -5,21 +5,24 @@ OK
 
 ## Supported Types
 
-### `components.JobOut`
+### `operations.One`
 
 ```typescript
-const value: components.JobOut = {
-  id: "dfcbff71-4262-496e-bf84-9e6847638458",
+const value: operations.One = {
+  id: "b5c163a1-6485-4b0a-934c-f5d1ac26e109",
   autoStart: false,
-  hyperparameters: {},
-  model: "Countach",
+  model: "PT Cruiser",
   status: "CANCELLATION_REQUESTED",
-  jobType: "<value>",
-  createdAt: 862319,
-  modifiedAt: 48690,
+  createdAt: 299153,
+  modifiedAt: 388404,
   trainingFiles: [
-    "4715ba9b-35ae-4840-ab05-8e160594319b",
+    "79fb64f2-bea6-435b-baed-de4568a4064f",
   ],
+  object: "job",
+  jobType: "completion",
+  hyperparameters: {
+    learningRate: 0.0001,
+  },
 };
 ```
 

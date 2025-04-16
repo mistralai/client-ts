@@ -8,6 +8,29 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  ClassifierTargetIn,
+  ClassifierTargetIn$inboundSchema,
+  ClassifierTargetIn$Outbound,
+  ClassifierTargetIn$outboundSchema,
+} from "./classifiertargetin.js";
+import {
+  ClassifierTrainingParametersIn,
+  ClassifierTrainingParametersIn$inboundSchema,
+  ClassifierTrainingParametersIn$Outbound,
+  ClassifierTrainingParametersIn$outboundSchema,
+} from "./classifiertrainingparametersin.js";
+import {
+  CompletionTrainingParametersIn,
+  CompletionTrainingParametersIn$inboundSchema,
+  CompletionTrainingParametersIn$Outbound,
+  CompletionTrainingParametersIn$outboundSchema,
+} from "./completiontrainingparametersin.js";
+import {
+  FineTuneableModelType,
+  FineTuneableModelType$inboundSchema,
+  FineTuneableModelType$outboundSchema,
+} from "./finetuneablemodeltype.js";
+import {
   GithubRepositoryIn,
   GithubRepositoryIn$inboundSchema,
   GithubRepositoryIn$Outbound,
@@ -20,12 +43,6 @@ import {
   TrainingFile$outboundSchema,
 } from "./trainingfile.js";
 import {
-  TrainingParametersIn,
-  TrainingParametersIn$inboundSchema,
-  TrainingParametersIn$Outbound,
-  TrainingParametersIn$outboundSchema,
-} from "./trainingparametersin.js";
-import {
   WandbIntegration,
   WandbIntegration$inboundSchema,
   WandbIntegration$Outbound,
@@ -33,6 +50,10 @@ import {
 } from "./wandbintegration.js";
 
 export type JobInIntegrations = WandbIntegration;
+
+export type Hyperparameters =
+  | ClassifierTrainingParametersIn
+  | CompletionTrainingParametersIn;
 
 export type JobInRepositories = GithubRepositoryIn;
 
@@ -47,10 +68,6 @@ export type JobIn = {
    */
   validationFiles?: Array<string> | null | undefined;
   /**
-   * The fine-tuning hyperparameter settings used in a fine-tune job.
-   */
-  hyperparameters: TrainingParametersIn;
-  /**
    * A string that will be added to your fine-tuning model name. For example, a suffix of "my-great-model" would produce a model name like `ft:open-mistral-7b:my-great-model:xxx...`
    */
   suffix?: string | null | undefined;
@@ -58,11 +75,17 @@ export type JobIn = {
    * A list of integrations to enable for your fine-tuning job.
    */
   integrations?: Array<WandbIntegration> | null | undefined;
-  repositories?: Array<GithubRepositoryIn> | undefined;
   /**
    * This field will be required in a future release.
    */
   autoStart?: boolean | undefined;
+  invalidSampleSkipPercentage?: number | undefined;
+  jobType?: FineTuneableModelType | null | undefined;
+  hyperparameters:
+    | ClassifierTrainingParametersIn
+    | CompletionTrainingParametersIn;
+  repositories?: Array<GithubRepositoryIn> | null | undefined;
+  classifierTargets?: Array<ClassifierTargetIn> | null | undefined;
 };
 
 /** @internal */
@@ -110,6 +133,60 @@ export function jobInIntegrationsFromJSON(
     jsonString,
     (x) => JobInIntegrations$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'JobInIntegrations' from JSON`,
+  );
+}
+
+/** @internal */
+export const Hyperparameters$inboundSchema: z.ZodType<
+  Hyperparameters,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  ClassifierTrainingParametersIn$inboundSchema,
+  CompletionTrainingParametersIn$inboundSchema,
+]);
+
+/** @internal */
+export type Hyperparameters$Outbound =
+  | ClassifierTrainingParametersIn$Outbound
+  | CompletionTrainingParametersIn$Outbound;
+
+/** @internal */
+export const Hyperparameters$outboundSchema: z.ZodType<
+  Hyperparameters$Outbound,
+  z.ZodTypeDef,
+  Hyperparameters
+> = z.union([
+  ClassifierTrainingParametersIn$outboundSchema,
+  CompletionTrainingParametersIn$outboundSchema,
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Hyperparameters$ {
+  /** @deprecated use `Hyperparameters$inboundSchema` instead. */
+  export const inboundSchema = Hyperparameters$inboundSchema;
+  /** @deprecated use `Hyperparameters$outboundSchema` instead. */
+  export const outboundSchema = Hyperparameters$outboundSchema;
+  /** @deprecated use `Hyperparameters$Outbound` instead. */
+  export type Outbound = Hyperparameters$Outbound;
+}
+
+export function hyperparametersToJSON(
+  hyperparameters: Hyperparameters,
+): string {
+  return JSON.stringify(Hyperparameters$outboundSchema.parse(hyperparameters));
+}
+
+export function hyperparametersFromJSON(
+  jsonString: string,
+): SafeParseResult<Hyperparameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Hyperparameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Hyperparameters' from JSON`,
   );
 }
 
@@ -167,17 +244,28 @@ export const JobIn$inboundSchema: z.ZodType<JobIn, z.ZodTypeDef, unknown> = z
     model: z.string(),
     training_files: z.array(TrainingFile$inboundSchema).optional(),
     validation_files: z.nullable(z.array(z.string())).optional(),
-    hyperparameters: TrainingParametersIn$inboundSchema,
     suffix: z.nullable(z.string()).optional(),
     integrations: z.nullable(z.array(WandbIntegration$inboundSchema))
       .optional(),
-    repositories: z.array(GithubRepositoryIn$inboundSchema).optional(),
     auto_start: z.boolean().optional(),
+    invalid_sample_skip_percentage: z.number().default(0),
+    job_type: z.nullable(FineTuneableModelType$inboundSchema).optional(),
+    hyperparameters: z.union([
+      ClassifierTrainingParametersIn$inboundSchema,
+      CompletionTrainingParametersIn$inboundSchema,
+    ]),
+    repositories: z.nullable(z.array(GithubRepositoryIn$inboundSchema))
+      .optional(),
+    classifier_targets: z.nullable(z.array(ClassifierTargetIn$inboundSchema))
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "training_files": "trainingFiles",
       "validation_files": "validationFiles",
       "auto_start": "autoStart",
+      "invalid_sample_skip_percentage": "invalidSampleSkipPercentage",
+      "job_type": "jobType",
+      "classifier_targets": "classifierTargets",
     });
   });
 
@@ -186,11 +274,16 @@ export type JobIn$Outbound = {
   model: string;
   training_files?: Array<TrainingFile$Outbound> | undefined;
   validation_files?: Array<string> | null | undefined;
-  hyperparameters: TrainingParametersIn$Outbound;
   suffix?: string | null | undefined;
   integrations?: Array<WandbIntegration$Outbound> | null | undefined;
-  repositories?: Array<GithubRepositoryIn$Outbound> | undefined;
   auto_start?: boolean | undefined;
+  invalid_sample_skip_percentage: number;
+  job_type?: string | null | undefined;
+  hyperparameters:
+    | ClassifierTrainingParametersIn$Outbound
+    | CompletionTrainingParametersIn$Outbound;
+  repositories?: Array<GithubRepositoryIn$Outbound> | null | undefined;
+  classifier_targets?: Array<ClassifierTargetIn$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -202,16 +295,27 @@ export const JobIn$outboundSchema: z.ZodType<
   model: z.string(),
   trainingFiles: z.array(TrainingFile$outboundSchema).optional(),
   validationFiles: z.nullable(z.array(z.string())).optional(),
-  hyperparameters: TrainingParametersIn$outboundSchema,
   suffix: z.nullable(z.string()).optional(),
   integrations: z.nullable(z.array(WandbIntegration$outboundSchema)).optional(),
-  repositories: z.array(GithubRepositoryIn$outboundSchema).optional(),
   autoStart: z.boolean().optional(),
+  invalidSampleSkipPercentage: z.number().default(0),
+  jobType: z.nullable(FineTuneableModelType$outboundSchema).optional(),
+  hyperparameters: z.union([
+    ClassifierTrainingParametersIn$outboundSchema,
+    CompletionTrainingParametersIn$outboundSchema,
+  ]),
+  repositories: z.nullable(z.array(GithubRepositoryIn$outboundSchema))
+    .optional(),
+  classifierTargets: z.nullable(z.array(ClassifierTargetIn$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     trainingFiles: "training_files",
     validationFiles: "validation_files",
     autoStart: "auto_start",
+    invalidSampleSkipPercentage: "invalid_sample_skip_percentage",
+    jobType: "job_type",
+    classifierTargets: "classifier_targets",
   });
 });
 

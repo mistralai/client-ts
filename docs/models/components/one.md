@@ -21,14 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      imageUrl: {
-        url: "https://black-director.biz/",
-      },
-      type: "image_url",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -36,7 +29,12 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      documentUrl: "https://skeletal-transparency.com",
+      type: "document_url",
+    },
+  ],
 };
 ```
 

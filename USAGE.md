@@ -99,6 +99,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.embeddings.create({
+    model: "mistral-embed",
     inputs: [
       "Embed this sentence.",
       "As well as this one.",

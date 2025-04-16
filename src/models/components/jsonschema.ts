@@ -24,7 +24,7 @@ export const JsonSchema$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   schema: z.record(z.any()),
-  strict: z.boolean().default(false),
+  strict: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "schema": "schemaDefinition",
@@ -36,7 +36,7 @@ export type JsonSchema$Outbound = {
   name: string;
   description?: string | null | undefined;
   schema: { [k: string]: any };
-  strict: boolean;
+  strict?: boolean | undefined;
 };
 
 /** @internal */
@@ -48,7 +48,7 @@ export const JsonSchema$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   schemaDefinition: z.record(z.any()),
-  strict: z.boolean().default(false),
+  strict: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     schemaDefinition: "schema",

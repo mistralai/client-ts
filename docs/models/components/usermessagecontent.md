@@ -14,8 +14,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    text: "<value>",
-    type: "text",
+    imageUrl: {
+      url: "https://impish-pillow.info/",
+    },
+    type: "image_url",
   },
 ];
 ```

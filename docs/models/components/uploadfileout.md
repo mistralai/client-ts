@@ -11,8 +11,8 @@ let value: UploadFileOut = {
   sizeBytes: 13000,
   createdAt: 1716963433,
   filename: "files_upload.jsonl",
-  purpose: "batch",
-  sampleType: "batch_result",
+  purpose: "fine-tune",
+  sampleType: "pretrain",
   source: "upload",
 };
 ```

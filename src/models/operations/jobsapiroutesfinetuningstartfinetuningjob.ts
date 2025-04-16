@@ -6,11 +6,19 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JobsApiRoutesFineTuningStartFineTuningJobRequest = {
   jobId: string;
 };
+
+/**
+ * OK
+ */
+export type JobsApiRoutesFineTuningStartFineTuningJobResponse =
+  | (components.ClassifierDetailedJobOut & { jobType: "classifier" })
+  | (components.CompletionDetailedJobOut & { jobType: "completion" });
 
 /** @internal */
 export const JobsApiRoutesFineTuningStartFineTuningJobRequest$inboundSchema:
@@ -85,5 +93,91 @@ export function jobsApiRoutesFineTuningStartFineTuningJobRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'JobsApiRoutesFineTuningStartFineTuningJobRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const JobsApiRoutesFineTuningStartFineTuningJobResponse$inboundSchema:
+  z.ZodType<
+    JobsApiRoutesFineTuningStartFineTuningJobResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    components.ClassifierDetailedJobOut$inboundSchema.and(
+      z.object({ job_type: z.literal("classifier") }).transform((v) => ({
+        jobType: v.job_type,
+      })),
+    ),
+    components.CompletionDetailedJobOut$inboundSchema.and(
+      z.object({ job_type: z.literal("completion") }).transform((v) => ({
+        jobType: v.job_type,
+      })),
+    ),
+  ]);
+
+/** @internal */
+export type JobsApiRoutesFineTuningStartFineTuningJobResponse$Outbound =
+  | (components.ClassifierDetailedJobOut$Outbound & { job_type: "classifier" })
+  | (components.CompletionDetailedJobOut$Outbound & { job_type: "completion" });
+
+/** @internal */
+export const JobsApiRoutesFineTuningStartFineTuningJobResponse$outboundSchema:
+  z.ZodType<
+    JobsApiRoutesFineTuningStartFineTuningJobResponse$Outbound,
+    z.ZodTypeDef,
+    JobsApiRoutesFineTuningStartFineTuningJobResponse
+  > = z.union([
+    components.ClassifierDetailedJobOut$outboundSchema.and(
+      z.object({ jobType: z.literal("classifier") }).transform((v) => ({
+        job_type: v.jobType,
+      })),
+    ),
+    components.CompletionDetailedJobOut$outboundSchema.and(
+      z.object({ jobType: z.literal("completion") }).transform((v) => ({
+        job_type: v.jobType,
+      })),
+    ),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace JobsApiRoutesFineTuningStartFineTuningJobResponse$ {
+  /** @deprecated use `JobsApiRoutesFineTuningStartFineTuningJobResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    JobsApiRoutesFineTuningStartFineTuningJobResponse$inboundSchema;
+  /** @deprecated use `JobsApiRoutesFineTuningStartFineTuningJobResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    JobsApiRoutesFineTuningStartFineTuningJobResponse$outboundSchema;
+  /** @deprecated use `JobsApiRoutesFineTuningStartFineTuningJobResponse$Outbound` instead. */
+  export type Outbound =
+    JobsApiRoutesFineTuningStartFineTuningJobResponse$Outbound;
+}
+
+export function jobsApiRoutesFineTuningStartFineTuningJobResponseToJSON(
+  jobsApiRoutesFineTuningStartFineTuningJobResponse:
+    JobsApiRoutesFineTuningStartFineTuningJobResponse,
+): string {
+  return JSON.stringify(
+    JobsApiRoutesFineTuningStartFineTuningJobResponse$outboundSchema.parse(
+      jobsApiRoutesFineTuningStartFineTuningJobResponse,
+    ),
+  );
+}
+
+export function jobsApiRoutesFineTuningStartFineTuningJobResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  JobsApiRoutesFineTuningStartFineTuningJobResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      JobsApiRoutesFineTuningStartFineTuningJobResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'JobsApiRoutesFineTuningStartFineTuningJobResponse' from JSON`,
   );
 }

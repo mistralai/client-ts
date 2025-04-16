@@ -14,10 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: {
-      url: "https://muted-pleasure.biz",
-    },
-    type: "image_url",
+    documentUrl: "https://pleasing-begonia.net/",
+    type: "document_url",
   },
 ];
 ```

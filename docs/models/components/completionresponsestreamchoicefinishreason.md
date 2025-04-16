@@ -5,7 +5,7 @@
 ```typescript
 import { CompletionResponseStreamChoiceFinishReason } from "@mistralai/mistralai/models/components";
 
-let value: CompletionResponseStreamChoiceFinishReason = "tool_calls";
+let value: CompletionResponseStreamChoiceFinishReason = "error";
 ```
 
 ## Values

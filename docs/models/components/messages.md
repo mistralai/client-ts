@@ -29,7 +29,14 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: {
+        url: "https://baggy-instruction.com",
+      },
+      type: "image_url",
+    },
+  ],
 };
 ```
 
