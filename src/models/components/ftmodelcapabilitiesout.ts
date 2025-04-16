@@ -13,6 +13,7 @@ export type FTModelCapabilitiesOut = {
   completionFim?: boolean | undefined;
   functionCalling?: boolean | undefined;
   fineTuning?: boolean | undefined;
+  classification?: boolean | undefined;
 };
 
 /** @internal */
@@ -25,6 +26,7 @@ export const FTModelCapabilitiesOut$inboundSchema: z.ZodType<
   completion_fim: z.boolean().default(false),
   function_calling: z.boolean().default(false),
   fine_tuning: z.boolean().default(false),
+  classification: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "completion_chat": "completionChat",
@@ -40,6 +42,7 @@ export type FTModelCapabilitiesOut$Outbound = {
   completion_fim: boolean;
   function_calling: boolean;
   fine_tuning: boolean;
+  classification: boolean;
 };
 
 /** @internal */
@@ -52,6 +55,7 @@ export const FTModelCapabilitiesOut$outboundSchema: z.ZodType<
   completionFim: z.boolean().default(false),
   functionCalling: z.boolean().default(false),
   fineTuning: z.boolean().default(false),
+  classification: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     completionChat: "completion_chat",

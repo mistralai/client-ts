@@ -23,8 +23,10 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      documentUrl: "https://insistent-disk.org/",
-      type: "document_url",
+      referenceIds: [
+        373216,
+      ],
+      type: "reference",
     },
   ],
 };

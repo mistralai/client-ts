@@ -99,7 +99,9 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.fineTuning.jobs.create({
     model: "Fiesta",
-    hyperparameters: {},
+    hyperparameters: {
+      learningRate: 0.0001,
+    },
   });
 
   // Handle the result
@@ -126,7 +128,9 @@ const mistral = new MistralCore({
 async function run() {
   const res = await fineTuningJobsCreate(mistral, {
     model: "Fiesta",
-    hyperparameters: {},
+    hyperparameters: {
+      learningRate: 0.0001,
+    },
   });
 
   if (!res.ok) {
@@ -229,7 +233,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DetailedJobOut](../../models/components/detailedjobout.md)\>**
+**Promise\<[operations.JobsApiRoutesFineTuningGetFineTuningJobResponse](../../models/operations/jobsapiroutesfinetuninggetfinetuningjobresponse.md)\>**
 
 ### Errors
 
@@ -305,7 +309,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DetailedJobOut](../../models/components/detailedjobout.md)\>**
+**Promise\<[operations.JobsApiRoutesFineTuningCancelFineTuningJobResponse](../../models/operations/jobsapiroutesfinetuningcancelfinetuningjobresponse.md)\>**
 
 ### Errors
 
@@ -381,7 +385,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DetailedJobOut](../../models/components/detailedjobout.md)\>**
+**Promise\<[operations.JobsApiRoutesFineTuningStartFineTuningJobResponse](../../models/operations/jobsapiroutesfinetuningstartfinetuningjobresponse.md)\>**
 
 ### Errors
 

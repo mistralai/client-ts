@@ -21,7 +21,7 @@ export type BatchJobsOutObject = ClosedEnum<typeof BatchJobsOutObject>;
 
 export type BatchJobsOut = {
   data?: Array<BatchJobOut> | undefined;
-  object?: "list" | undefined;
+  object?: BatchJobsOutObject | undefined;
   total: number;
 };
 
@@ -53,14 +53,14 @@ export const BatchJobsOut$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(BatchJobOut$inboundSchema).optional(),
-  object: z.literal("list").default("list"),
+  object: BatchJobsOutObject$inboundSchema.default("list"),
   total: z.number().int(),
 });
 
 /** @internal */
 export type BatchJobsOut$Outbound = {
   data?: Array<BatchJobOut$Outbound> | undefined;
-  object: "list";
+  object: string;
   total: number;
 };
 
@@ -71,7 +71,7 @@ export const BatchJobsOut$outboundSchema: z.ZodType<
   BatchJobsOut
 > = z.object({
   data: z.array(BatchJobOut$outboundSchema).optional(),
-  object: z.literal("list").default("list"),
+  object: BatchJobsOutObject$outboundSchema.default("list"),
   total: z.number().int(),
 });
 

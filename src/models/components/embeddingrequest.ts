@@ -11,13 +11,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Text to embed.
  */
-export type Inputs = string | Array<string>;
+export type EmbeddingRequestInputs = string | Array<string>;
 
 export type EmbeddingRequest = {
   /**
    * ID of the model to use.
    */
-  model?: string | undefined;
+  model: string;
   /**
    * Text to embed.
    */
@@ -25,43 +25,50 @@ export type EmbeddingRequest = {
 };
 
 /** @internal */
-export const Inputs$inboundSchema: z.ZodType<Inputs, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.string())]);
-
-/** @internal */
-export type Inputs$Outbound = string | Array<string>;
-
-/** @internal */
-export const Inputs$outboundSchema: z.ZodType<
-  Inputs$Outbound,
+export const EmbeddingRequestInputs$inboundSchema: z.ZodType<
+  EmbeddingRequestInputs,
   z.ZodTypeDef,
-  Inputs
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+
+/** @internal */
+export type EmbeddingRequestInputs$Outbound = string | Array<string>;
+
+/** @internal */
+export const EmbeddingRequestInputs$outboundSchema: z.ZodType<
+  EmbeddingRequestInputs$Outbound,
+  z.ZodTypeDef,
+  EmbeddingRequestInputs
 > = z.union([z.string(), z.array(z.string())]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Inputs$ {
-  /** @deprecated use `Inputs$inboundSchema` instead. */
-  export const inboundSchema = Inputs$inboundSchema;
-  /** @deprecated use `Inputs$outboundSchema` instead. */
-  export const outboundSchema = Inputs$outboundSchema;
-  /** @deprecated use `Inputs$Outbound` instead. */
-  export type Outbound = Inputs$Outbound;
+export namespace EmbeddingRequestInputs$ {
+  /** @deprecated use `EmbeddingRequestInputs$inboundSchema` instead. */
+  export const inboundSchema = EmbeddingRequestInputs$inboundSchema;
+  /** @deprecated use `EmbeddingRequestInputs$outboundSchema` instead. */
+  export const outboundSchema = EmbeddingRequestInputs$outboundSchema;
+  /** @deprecated use `EmbeddingRequestInputs$Outbound` instead. */
+  export type Outbound = EmbeddingRequestInputs$Outbound;
 }
 
-export function inputsToJSON(inputs: Inputs): string {
-  return JSON.stringify(Inputs$outboundSchema.parse(inputs));
+export function embeddingRequestInputsToJSON(
+  embeddingRequestInputs: EmbeddingRequestInputs,
+): string {
+  return JSON.stringify(
+    EmbeddingRequestInputs$outboundSchema.parse(embeddingRequestInputs),
+  );
 }
 
-export function inputsFromJSON(
+export function embeddingRequestInputsFromJSON(
   jsonString: string,
-): SafeParseResult<Inputs, SDKValidationError> {
+): SafeParseResult<EmbeddingRequestInputs, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Inputs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Inputs' from JSON`,
+    (x) => EmbeddingRequestInputs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmbeddingRequestInputs' from JSON`,
   );
 }
 
@@ -71,7 +78,7 @@ export const EmbeddingRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  model: z.string().default("mistral-embed"),
+  model: z.string(),
   input: z.union([z.string(), z.array(z.string())]),
 }).transform((v) => {
   return remap$(v, {
@@ -91,7 +98,7 @@ export const EmbeddingRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EmbeddingRequest
 > = z.object({
-  model: z.string().default("mistral-embed"),
+  model: z.string(),
   inputs: z.union([z.string(), z.array(z.string())]),
 }).transform((v) => {
   return remap$(v, {

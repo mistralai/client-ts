@@ -33,7 +33,7 @@ export function classifiersModerate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ClassificationResponse,
+    components.ModerationResponse,
     | errors.HTTPValidationError
     | SDKError
     | SDKValidationError
@@ -58,7 +58,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ClassificationResponse,
+      components.ModerationResponse,
       | errors.HTTPValidationError
       | SDKError
       | SDKValidationError
@@ -137,7 +137,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.ClassificationResponse,
+    components.ModerationResponse,
     | errors.HTTPValidationError
     | SDKError
     | SDKValidationError
@@ -147,7 +147,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.ClassificationResponse$inboundSchema),
+    M.json(200, components.ModerationResponse$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

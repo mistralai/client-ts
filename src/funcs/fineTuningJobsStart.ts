@@ -10,7 +10,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -36,7 +35,7 @@ export function fineTuningJobsStart(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.DetailedJobOut,
+    operations.JobsApiRoutesFineTuningStartFineTuningJobResponse,
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -60,7 +59,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.DetailedJobOut,
+      operations.JobsApiRoutesFineTuningStartFineTuningJobResponse,
       | SDKError
       | SDKValidationError
       | UnexpectedClientError
@@ -142,7 +141,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.DetailedJobOut,
+    operations.JobsApiRoutesFineTuningStartFineTuningJobResponse,
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -151,7 +150,11 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.DetailedJobOut$inboundSchema),
+    M.json(
+      200,
+      operations
+        .JobsApiRoutesFineTuningStartFineTuningJobResponse$inboundSchema,
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response);

@@ -1,22 +1,35 @@
 # Inputs
 
-Text to embed.
+Chat to classify
 
 
 ## Supported Types
 
-### `string`
+### `components.InstructRequestInputs`
 
 ```typescript
-const value: string = "[\"Embed this sentence.\",\"As well as this one.\"]";
+const value: components.InstructRequestInputs = {
+  messages: [
+    {
+      content: "<value>",
+      role: "user",
+    },
+  ],
+};
 ```
 
-### `string[]`
+### `components.InstructRequest[]`
 
 ```typescript
-const value: string[] = [
-  "Embed this sentence.",
-  "As well as this one.",
+const value: components.InstructRequest[] = [
+  {
+    messages: [
+      {
+        prefix: false,
+        role: "assistant",
+      },
+    ],
+  },
 ];
 ```
 

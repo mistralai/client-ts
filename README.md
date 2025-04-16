@@ -188,6 +188,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.embeddings.create({
+    model: "mistral-embed",
     inputs: [
       "Embed this sentence.",
       "As well as this one.",
@@ -239,7 +240,9 @@ We have dedicated SDKs for the following providers:
 ### [classifiers](docs/sdks/classifiers/README.md)
 
 * [moderate](docs/sdks/classifiers/README.md#moderate) - Moderations
-* [moderateChat](docs/sdks/classifiers/README.md#moderatechat) - Moderations Chat
+* [moderateChat](docs/sdks/classifiers/README.md#moderatechat) - Chat Moderations
+* [classify](docs/sdks/classifiers/README.md#classify) - Classifications
+* [classifyChat](docs/sdks/classifiers/README.md#classifychat) - Chat Classifications
 
 ### [embeddings](docs/sdks/embeddings/README.md)
 
@@ -665,8 +668,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`batchJobsList`](docs/sdks/mistraljobs/README.md#list) - Get Batch Jobs
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
+- [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications
+- [`classifiersClassifyChat`](docs/sdks/classifiers/README.md#classifychat) - Chat Classifications
 - [`classifiersModerate`](docs/sdks/classifiers/README.md#moderate) - Moderations
-- [`classifiersModerateChat`](docs/sdks/classifiers/README.md#moderatechat) - Moderations Chat
+- [`classifiersModerateChat`](docs/sdks/classifiers/README.md#moderatechat) - Chat Moderations
 - [`embeddingsCreate`](docs/sdks/embeddings/README.md#create) - Embeddings
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete File
 - [`filesDownload`](docs/sdks/files/README.md#download) - Download File

@@ -64,7 +64,6 @@ export type ChatModerationRequestInputs =
   >;
 
 export type ChatModerationRequest = {
-  model: string;
   /**
    * Chat to classify
    */
@@ -83,7 +82,7 @@ export type ChatModerationRequest = {
         | (ToolMessage & { role: "tool" })
       >
     >;
-  truncateForContextLength?: boolean | undefined;
+  model: string;
 };
 
 /** @internal */
@@ -428,7 +427,6 @@ export const ChatModerationRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  model: z.string(),
   input: z.union([
     z.array(
       z.union([
@@ -481,17 +479,15 @@ export const ChatModerationRequest$inboundSchema: z.ZodType<
       ),
     ),
   ]),
-  truncate_for_context_length: z.boolean().default(false),
+  model: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "input": "inputs",
-    "truncate_for_context_length": "truncateForContextLength",
   });
 });
 
 /** @internal */
 export type ChatModerationRequest$Outbound = {
-  model: string;
   input:
     | Array<
       | (SystemMessage$Outbound & { role: "system" })
@@ -507,7 +503,7 @@ export type ChatModerationRequest$Outbound = {
         | (ToolMessage$Outbound & { role: "tool" })
       >
     >;
-  truncate_for_context_length: boolean;
+  model: string;
 };
 
 /** @internal */
@@ -516,7 +512,6 @@ export const ChatModerationRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ChatModerationRequest
 > = z.object({
-  model: z.string(),
   inputs: z.union([
     z.array(
       z.union([
@@ -569,11 +564,10 @@ export const ChatModerationRequest$outboundSchema: z.ZodType<
       ),
     ),
   ]),
-  truncateForContextLength: z.boolean().default(false),
+  model: z.string(),
 }).transform((v) => {
   return remap$(v, {
     inputs: "input",
-    truncateForContextLength: "truncate_for_context_length",
   });
 });
 

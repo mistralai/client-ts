@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JobsApiRoutesFineTuningGetFineTuningJobRequest = {
@@ -14,6 +15,13 @@ export type JobsApiRoutesFineTuningGetFineTuningJobRequest = {
    */
   jobId: string;
 };
+
+/**
+ * OK
+ */
+export type JobsApiRoutesFineTuningGetFineTuningJobResponse =
+  | (components.ClassifierDetailedJobOut & { jobType: "classifier" })
+  | (components.CompletionDetailedJobOut & { jobType: "completion" });
 
 /** @internal */
 export const JobsApiRoutesFineTuningGetFineTuningJobRequest$inboundSchema:
@@ -88,5 +96,91 @@ export function jobsApiRoutesFineTuningGetFineTuningJobRequestFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'JobsApiRoutesFineTuningGetFineTuningJobRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const JobsApiRoutesFineTuningGetFineTuningJobResponse$inboundSchema:
+  z.ZodType<
+    JobsApiRoutesFineTuningGetFineTuningJobResponse,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    components.ClassifierDetailedJobOut$inboundSchema.and(
+      z.object({ job_type: z.literal("classifier") }).transform((v) => ({
+        jobType: v.job_type,
+      })),
+    ),
+    components.CompletionDetailedJobOut$inboundSchema.and(
+      z.object({ job_type: z.literal("completion") }).transform((v) => ({
+        jobType: v.job_type,
+      })),
+    ),
+  ]);
+
+/** @internal */
+export type JobsApiRoutesFineTuningGetFineTuningJobResponse$Outbound =
+  | (components.ClassifierDetailedJobOut$Outbound & { job_type: "classifier" })
+  | (components.CompletionDetailedJobOut$Outbound & { job_type: "completion" });
+
+/** @internal */
+export const JobsApiRoutesFineTuningGetFineTuningJobResponse$outboundSchema:
+  z.ZodType<
+    JobsApiRoutesFineTuningGetFineTuningJobResponse$Outbound,
+    z.ZodTypeDef,
+    JobsApiRoutesFineTuningGetFineTuningJobResponse
+  > = z.union([
+    components.ClassifierDetailedJobOut$outboundSchema.and(
+      z.object({ jobType: z.literal("classifier") }).transform((v) => ({
+        job_type: v.jobType,
+      })),
+    ),
+    components.CompletionDetailedJobOut$outboundSchema.and(
+      z.object({ jobType: z.literal("completion") }).transform((v) => ({
+        job_type: v.jobType,
+      })),
+    ),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace JobsApiRoutesFineTuningGetFineTuningJobResponse$ {
+  /** @deprecated use `JobsApiRoutesFineTuningGetFineTuningJobResponse$inboundSchema` instead. */
+  export const inboundSchema =
+    JobsApiRoutesFineTuningGetFineTuningJobResponse$inboundSchema;
+  /** @deprecated use `JobsApiRoutesFineTuningGetFineTuningJobResponse$outboundSchema` instead. */
+  export const outboundSchema =
+    JobsApiRoutesFineTuningGetFineTuningJobResponse$outboundSchema;
+  /** @deprecated use `JobsApiRoutesFineTuningGetFineTuningJobResponse$Outbound` instead. */
+  export type Outbound =
+    JobsApiRoutesFineTuningGetFineTuningJobResponse$Outbound;
+}
+
+export function jobsApiRoutesFineTuningGetFineTuningJobResponseToJSON(
+  jobsApiRoutesFineTuningGetFineTuningJobResponse:
+    JobsApiRoutesFineTuningGetFineTuningJobResponse,
+): string {
+  return JSON.stringify(
+    JobsApiRoutesFineTuningGetFineTuningJobResponse$outboundSchema.parse(
+      jobsApiRoutesFineTuningGetFineTuningJobResponse,
+    ),
+  );
+}
+
+export function jobsApiRoutesFineTuningGetFineTuningJobResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  JobsApiRoutesFineTuningGetFineTuningJobResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      JobsApiRoutesFineTuningGetFineTuningJobResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'JobsApiRoutesFineTuningGetFineTuningJobResponse' from JSON`,
   );
 }

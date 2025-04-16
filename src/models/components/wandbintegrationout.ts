@@ -17,7 +17,7 @@ export type WandbIntegrationOutType = ClosedEnum<
 >;
 
 export type WandbIntegrationOut = {
-  type?: "wandb" | undefined;
+  type?: WandbIntegrationOutType | undefined;
   /**
    * The name of the project that the new run will be created under.
    */
@@ -27,6 +27,7 @@ export type WandbIntegrationOut = {
    */
   name?: string | null | undefined;
   runName?: string | null | undefined;
+  url?: string | null | undefined;
 };
 
 /** @internal */
@@ -56,10 +57,11 @@ export const WandbIntegrationOut$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("wandb").default("wandb"),
+  type: WandbIntegrationOutType$inboundSchema.default("wandb"),
   project: z.string(),
   name: z.nullable(z.string()).optional(),
   run_name: z.nullable(z.string()).optional(),
+  url: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "run_name": "runName",
@@ -68,10 +70,11 @@ export const WandbIntegrationOut$inboundSchema: z.ZodType<
 
 /** @internal */
 export type WandbIntegrationOut$Outbound = {
-  type: "wandb";
+  type: string;
   project: string;
   name?: string | null | undefined;
   run_name?: string | null | undefined;
+  url?: string | null | undefined;
 };
 
 /** @internal */
@@ -80,10 +83,11 @@ export const WandbIntegrationOut$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WandbIntegrationOut
 > = z.object({
-  type: z.literal("wandb").default("wandb"),
+  type: WandbIntegrationOutType$outboundSchema.default("wandb"),
   project: z.string(),
   name: z.nullable(z.string()).optional(),
   runName: z.nullable(z.string()).optional(),
+  url: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     runName: "run_name",

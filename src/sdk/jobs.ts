@@ -58,7 +58,7 @@ export class Jobs extends ClientSDK {
   async get(
     request: operations.JobsApiRoutesFineTuningGetFineTuningJobRequest,
     options?: RequestOptions,
-  ): Promise<components.DetailedJobOut> {
+  ): Promise<operations.JobsApiRoutesFineTuningGetFineTuningJobResponse> {
     return unwrapAsync(fineTuningJobsGet(
       this,
       request,
@@ -75,7 +75,7 @@ export class Jobs extends ClientSDK {
   async cancel(
     request: operations.JobsApiRoutesFineTuningCancelFineTuningJobRequest,
     options?: RequestOptions,
-  ): Promise<components.DetailedJobOut> {
+  ): Promise<operations.JobsApiRoutesFineTuningCancelFineTuningJobResponse> {
     return unwrapAsync(fineTuningJobsCancel(
       this,
       request,
@@ -92,7 +92,7 @@ export class Jobs extends ClientSDK {
   async start(
     request: operations.JobsApiRoutesFineTuningStartFineTuningJobRequest,
     options?: RequestOptions,
-  ): Promise<components.DetailedJobOut> {
+  ): Promise<operations.JobsApiRoutesFineTuningStartFineTuningJobResponse> {
     return unwrapAsync(fineTuningJobsStart(
       this,
       request,

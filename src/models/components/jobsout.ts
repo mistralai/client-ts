@@ -8,11 +8,21 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  JobOut,
-  JobOut$inboundSchema,
-  JobOut$Outbound,
-  JobOut$outboundSchema,
-} from "./jobout.js";
+  ClassifierJobOut,
+  ClassifierJobOut$inboundSchema,
+  ClassifierJobOut$Outbound,
+  ClassifierJobOut$outboundSchema,
+} from "./classifierjobout.js";
+import {
+  CompletionJobOut,
+  CompletionJobOut$inboundSchema,
+  CompletionJobOut$Outbound,
+  CompletionJobOut$outboundSchema,
+} from "./completionjobout.js";
+
+export type JobsOutData =
+  | (ClassifierJobOut & { jobType: "classifier" })
+  | (CompletionJobOut & { jobType: "completion" });
 
 export const JobsOutObject = {
   List: "list",
@@ -20,10 +30,83 @@ export const JobsOutObject = {
 export type JobsOutObject = ClosedEnum<typeof JobsOutObject>;
 
 export type JobsOut = {
-  data?: Array<JobOut> | undefined;
-  object?: "list" | undefined;
+  data?:
+    | Array<
+      | (ClassifierJobOut & { jobType: "classifier" })
+      | (CompletionJobOut & { jobType: "completion" })
+    >
+    | undefined;
+  object?: JobsOutObject | undefined;
   total: number;
 };
+
+/** @internal */
+export const JobsOutData$inboundSchema: z.ZodType<
+  JobsOutData,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  ClassifierJobOut$inboundSchema.and(
+    z.object({ job_type: z.literal("classifier") }).transform((v) => ({
+      jobType: v.job_type,
+    })),
+  ),
+  CompletionJobOut$inboundSchema.and(
+    z.object({ job_type: z.literal("completion") }).transform((v) => ({
+      jobType: v.job_type,
+    })),
+  ),
+]);
+
+/** @internal */
+export type JobsOutData$Outbound =
+  | (ClassifierJobOut$Outbound & { job_type: "classifier" })
+  | (CompletionJobOut$Outbound & { job_type: "completion" });
+
+/** @internal */
+export const JobsOutData$outboundSchema: z.ZodType<
+  JobsOutData$Outbound,
+  z.ZodTypeDef,
+  JobsOutData
+> = z.union([
+  ClassifierJobOut$outboundSchema.and(
+    z.object({ jobType: z.literal("classifier") }).transform((v) => ({
+      job_type: v.jobType,
+    })),
+  ),
+  CompletionJobOut$outboundSchema.and(
+    z.object({ jobType: z.literal("completion") }).transform((v) => ({
+      job_type: v.jobType,
+    })),
+  ),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace JobsOutData$ {
+  /** @deprecated use `JobsOutData$inboundSchema` instead. */
+  export const inboundSchema = JobsOutData$inboundSchema;
+  /** @deprecated use `JobsOutData$outboundSchema` instead. */
+  export const outboundSchema = JobsOutData$outboundSchema;
+  /** @deprecated use `JobsOutData$Outbound` instead. */
+  export type Outbound = JobsOutData$Outbound;
+}
+
+export function jobsOutDataToJSON(jobsOutData: JobsOutData): string {
+  return JSON.stringify(JobsOutData$outboundSchema.parse(jobsOutData));
+}
+
+export function jobsOutDataFromJSON(
+  jsonString: string,
+): SafeParseResult<JobsOutData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JobsOutData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JobsOutData' from JSON`,
+  );
+}
 
 /** @internal */
 export const JobsOutObject$inboundSchema: z.ZodNativeEnum<
@@ -49,15 +132,33 @@ export namespace JobsOutObject$ {
 /** @internal */
 export const JobsOut$inboundSchema: z.ZodType<JobsOut, z.ZodTypeDef, unknown> =
   z.object({
-    data: z.array(JobOut$inboundSchema).optional(),
-    object: z.literal("list").default("list"),
+    data: z.array(
+      z.union([
+        ClassifierJobOut$inboundSchema.and(
+          z.object({ job_type: z.literal("classifier") }).transform((v) => ({
+            jobType: v.job_type,
+          })),
+        ),
+        CompletionJobOut$inboundSchema.and(
+          z.object({ job_type: z.literal("completion") }).transform((v) => ({
+            jobType: v.job_type,
+          })),
+        ),
+      ]),
+    ).optional(),
+    object: JobsOutObject$inboundSchema.default("list"),
     total: z.number().int(),
   });
 
 /** @internal */
 export type JobsOut$Outbound = {
-  data?: Array<JobOut$Outbound> | undefined;
-  object: "list";
+  data?:
+    | Array<
+      | (ClassifierJobOut$Outbound & { job_type: "classifier" })
+      | (CompletionJobOut$Outbound & { job_type: "completion" })
+    >
+    | undefined;
+  object: string;
   total: number;
 };
 
@@ -67,8 +168,21 @@ export const JobsOut$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   JobsOut
 > = z.object({
-  data: z.array(JobOut$outboundSchema).optional(),
-  object: z.literal("list").default("list"),
+  data: z.array(
+    z.union([
+      ClassifierJobOut$outboundSchema.and(
+        z.object({ jobType: z.literal("classifier") }).transform((v) => ({
+          job_type: v.jobType,
+        })),
+      ),
+      CompletionJobOut$outboundSchema.and(
+        z.object({ jobType: z.literal("completion") }).transform((v) => ({
+          job_type: v.jobType,
+        })),
+      ),
+    ]),
+  ).optional(),
+  object: JobsOutObject$outboundSchema.default("list"),
   total: z.number().int(),
 });
 

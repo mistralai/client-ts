@@ -25,7 +25,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Moderations Chat
+ * Chat Moderations
  */
 export function classifiersModerateChat(
   client: MistralCore,
@@ -33,7 +33,7 @@ export function classifiersModerateChat(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ClassificationResponse,
+    components.ModerationResponse,
     | errors.HTTPValidationError
     | SDKError
     | SDKValidationError
@@ -58,7 +58,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ClassificationResponse,
+      components.ModerationResponse,
       | errors.HTTPValidationError
       | SDKError
       | SDKValidationError
@@ -95,7 +95,7 @@ async function $do(
 
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "moderations_chat_v1_chat_moderations_post",
+    operationID: "chat_moderations_v1_chat_moderations_post",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -137,7 +137,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.ClassificationResponse,
+    components.ModerationResponse,
     | errors.HTTPValidationError
     | SDKError
     | SDKValidationError
@@ -147,7 +147,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.ClassificationResponse$inboundSchema),
+    M.json(200, components.ModerationResponse$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

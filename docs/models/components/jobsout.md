@@ -6,7 +6,7 @@
 import { JobsOut } from "@mistralai/mistralai/models/components";
 
 let value: JobsOut = {
-  total: 110375,
+  total: 253941,
 };
 ```
 
@@ -14,6 +14,6 @@ let value: JobsOut = {
 
 | Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `data`                                                               | [components.JobOut](../../models/components/jobout.md)[]             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `data`                                                               | *components.JobsOutData*[]                                           | :heavy_minus_sign:                                                   | N/A                                                                  |
 | `object`                                                             | [components.JobsOutObject](../../models/components/jobsoutobject.md) | :heavy_minus_sign:                                                   | N/A                                                                  |
 | `total`                                                              | *number*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |

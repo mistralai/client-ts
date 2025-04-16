@@ -52,7 +52,7 @@ export type LegacyJobMetadataOut = {
    * The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset.
    */
   trainingSteps?: number | null | undefined;
-  object?: "job.metadata" | undefined;
+  object?: LegacyJobMetadataOutObject | undefined;
 };
 
 /** @internal */
@@ -93,7 +93,7 @@ export const LegacyJobMetadataOut$inboundSchema: z.ZodType<
   details: z.string(),
   epochs: z.nullable(z.number()).optional(),
   training_steps: z.nullable(z.number().int()).optional(),
-  object: z.literal("job.metadata").default("job.metadata"),
+  object: LegacyJobMetadataOutObject$inboundSchema.default("job.metadata"),
 }).transform((v) => {
   return remap$(v, {
     "expected_duration_seconds": "expectedDurationSeconds",
@@ -119,7 +119,7 @@ export type LegacyJobMetadataOut$Outbound = {
   details: string;
   epochs?: number | null | undefined;
   training_steps?: number | null | undefined;
-  object: "job.metadata";
+  object: string;
 };
 
 /** @internal */
@@ -139,7 +139,7 @@ export const LegacyJobMetadataOut$outboundSchema: z.ZodType<
   details: z.string(),
   epochs: z.nullable(z.number()).optional(),
   trainingSteps: z.nullable(z.number().int()).optional(),
-  object: z.literal("job.metadata").default("job.metadata"),
+  object: LegacyJobMetadataOutObject$outboundSchema.default("job.metadata"),
 }).transform((v) => {
   return remap$(v, {
     expectedDurationSeconds: "expected_duration_seconds",

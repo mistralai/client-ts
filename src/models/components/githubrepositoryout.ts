@@ -17,7 +17,7 @@ export type GithubRepositoryOutType = ClosedEnum<
 >;
 
 export type GithubRepositoryOut = {
-  type?: "github" | undefined;
+  type?: GithubRepositoryOutType | undefined;
   name: string;
   owner: string;
   ref?: string | null | undefined;
@@ -52,7 +52,7 @@ export const GithubRepositoryOut$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("github").default("github"),
+  type: GithubRepositoryOutType$inboundSchema.default("github"),
   name: z.string(),
   owner: z.string(),
   ref: z.nullable(z.string()).optional(),
@@ -66,7 +66,7 @@ export const GithubRepositoryOut$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GithubRepositoryOut$Outbound = {
-  type: "github";
+  type: string;
   name: string;
   owner: string;
   ref?: string | null | undefined;
@@ -80,7 +80,7 @@ export const GithubRepositoryOut$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GithubRepositoryOut
 > = z.object({
-  type: z.literal("github").default("github"),
+  type: GithubRepositoryOutType$outboundSchema.default("github"),
   name: z.string(),
   owner: z.string(),
   ref: z.nullable(z.string()).optional(),

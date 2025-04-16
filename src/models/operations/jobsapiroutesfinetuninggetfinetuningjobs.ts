@@ -46,6 +46,7 @@ export type JobsApiRoutesFineTuningGetFineTuningJobsRequest = {
    * The date/time to filter on. When set, the results for previous creation times are not displayed.
    */
   createdAfter?: Date | null | undefined;
+  createdBefore?: Date | null | undefined;
   /**
    * When set, only return results for jobs created by the API caller. Other results are not displayed.
    */
@@ -100,6 +101,9 @@ export const JobsApiRoutesFineTuningGetFineTuningJobsRequest$inboundSchema:
     created_after: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
+    created_before: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
     created_by_me: z.boolean().default(false),
     status: z.nullable(Status$inboundSchema).optional(),
     wandb_project: z.nullable(z.string()).optional(),
@@ -109,6 +113,7 @@ export const JobsApiRoutesFineTuningGetFineTuningJobsRequest$inboundSchema:
     return remap$(v, {
       "page_size": "pageSize",
       "created_after": "createdAfter",
+      "created_before": "createdBefore",
       "created_by_me": "createdByMe",
       "wandb_project": "wandbProject",
       "wandb_name": "wandbName",
@@ -121,6 +126,7 @@ export type JobsApiRoutesFineTuningGetFineTuningJobsRequest$Outbound = {
   page_size: number;
   model?: string | null | undefined;
   created_after?: string | null | undefined;
+  created_before?: string | null | undefined;
   created_by_me: boolean;
   status?: string | null | undefined;
   wandb_project?: string | null | undefined;
@@ -140,6 +146,8 @@ export const JobsApiRoutesFineTuningGetFineTuningJobsRequest$outboundSchema:
     model: z.nullable(z.string()).optional(),
     createdAfter: z.nullable(z.date().transform(v => v.toISOString()))
       .optional(),
+    createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
     createdByMe: z.boolean().default(false),
     status: z.nullable(Status$outboundSchema).optional(),
     wandbProject: z.nullable(z.string()).optional(),
@@ -149,6 +157,7 @@ export const JobsApiRoutesFineTuningGetFineTuningJobsRequest$outboundSchema:
     return remap$(v, {
       pageSize: "page_size",
       createdAfter: "created_after",
+      createdBefore: "created_before",
       createdByMe: "created_by_me",
       wandbProject: "wandb_project",
       wandbName: "wandb_name",

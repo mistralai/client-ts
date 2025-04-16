@@ -17,7 +17,7 @@ export type ArchiveFTModelOutObject = ClosedEnum<
 
 export type ArchiveFTModelOut = {
   id: string;
-  object?: "model" | undefined;
+  object?: ArchiveFTModelOutObject | undefined;
   archived?: boolean | undefined;
 };
 
@@ -49,14 +49,14 @@ export const ArchiveFTModelOut$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  object: z.literal("model").default("model"),
+  object: ArchiveFTModelOutObject$inboundSchema.default("model"),
   archived: z.boolean().default(true),
 });
 
 /** @internal */
 export type ArchiveFTModelOut$Outbound = {
   id: string;
-  object: "model";
+  object: string;
   archived: boolean;
 };
 
@@ -67,7 +67,7 @@ export const ArchiveFTModelOut$outboundSchema: z.ZodType<
   ArchiveFTModelOut
 > = z.object({
   id: z.string(),
-  object: z.literal("model").default("model"),
+  object: ArchiveFTModelOutObject$outboundSchema.default("model"),
   archived: z.boolean().default(true),
 });
 

@@ -6,7 +6,7 @@
 import { JobsApiRoutesBatchCancelBatchJobRequest } from "@mistralai/mistralai/models/operations";
 
 let value: JobsApiRoutesBatchCancelBatchJobRequest = {
-  jobId: "466a5ba6-691d-4ab8-9166-50b19baf1d08",
+  jobId: "17dd19d3-cec1-4034-b96b-525ef3c4e2a1",
 };
 ```
 

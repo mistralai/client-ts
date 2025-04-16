@@ -27,7 +27,7 @@ export type BatchJobOutObject = ClosedEnum<typeof BatchJobOutObject>;
 
 export type BatchJobOut = {
   id: string;
-  object?: "batch" | undefined;
+  object?: BatchJobOutObject | undefined;
   inputFiles: Array<string>;
   metadata?: { [k: string]: any } | null | undefined;
   endpoint: string;
@@ -73,7 +73,7 @@ export const BatchJobOut$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  object: z.literal("batch").default("batch"),
+  object: BatchJobOutObject$inboundSchema.default("batch"),
   input_files: z.array(z.string()),
   metadata: z.nullable(z.record(z.any())).optional(),
   endpoint: z.string(),
@@ -107,7 +107,7 @@ export const BatchJobOut$inboundSchema: z.ZodType<
 /** @internal */
 export type BatchJobOut$Outbound = {
   id: string;
-  object: "batch";
+  object: string;
   input_files: Array<string>;
   metadata?: { [k: string]: any } | null | undefined;
   endpoint: string;
@@ -132,7 +132,7 @@ export const BatchJobOut$outboundSchema: z.ZodType<
   BatchJobOut
 > = z.object({
   id: z.string(),
-  object: z.literal("batch").default("batch"),
+  object: BatchJobOutObject$outboundSchema.default("batch"),
   inputFiles: z.array(z.string()),
   metadata: z.nullable(z.record(z.any())).optional(),
   endpoint: z.string(),

@@ -24,6 +24,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.embeddings.create({
+    model: "mistral-embed",
     inputs: [
       "Embed this sentence.",
       "As well as this one.",
@@ -53,6 +54,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await embeddingsCreate(mistral, {
+    model: "mistral-embed",
     inputs: [
       "Embed this sentence.",
       "As well as this one.",

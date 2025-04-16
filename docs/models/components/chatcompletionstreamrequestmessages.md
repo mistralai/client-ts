@@ -28,9 +28,7 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      imageUrl: {
-        url: "https://whimsical-impostor.name",
-      },
+      imageUrl: "https://mushy-habit.name/",
       type: "image_url",
     },
   ],
@@ -41,12 +39,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      documentUrl: "https://optimistic-slide.org",
-      type: "document_url",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
