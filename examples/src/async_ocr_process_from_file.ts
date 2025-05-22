@@ -18,16 +18,12 @@ const uploaded_pdf = await client.files.upload({
 
 client.files.retrieve({ fileId: uploaded_pdf.id })
 
-const signed_url = client.files.getSignedUrl({ fileId: uploaded_pdf.id })
-
-
-
 const ocrResponse = await client.ocr.process({
     model: "mistral-ocr-latest",
     document: {
         type: "document_url",
         documentUrl: "https://arxiv.org/pdf/2201.04234"
     },
-    include_image_base64: true
+    includeImageBase64: true
 });
 console.log("OCR ", ocrResponse);
