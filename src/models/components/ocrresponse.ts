@@ -29,6 +29,10 @@ export type OCRResponse = {
    * The model used to generate the OCR.
    */
   model: string;
+  /**
+   * Formatted response in the request_format if provided in json str
+   */
+  documentAnnotation?: string | null | undefined;
   usageInfo: OCRUsageInfo;
 };
 
@@ -40,9 +44,11 @@ export const OCRResponse$inboundSchema: z.ZodType<
 > = z.object({
   pages: z.array(OCRPageObject$inboundSchema),
   model: z.string(),
+  document_annotation: z.nullable(z.string()).optional(),
   usage_info: OCRUsageInfo$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    "document_annotation": "documentAnnotation",
     "usage_info": "usageInfo",
   });
 });
@@ -51,6 +57,7 @@ export const OCRResponse$inboundSchema: z.ZodType<
 export type OCRResponse$Outbound = {
   pages: Array<OCRPageObject$Outbound>;
   model: string;
+  document_annotation?: string | null | undefined;
   usage_info: OCRUsageInfo$Outbound;
 };
 
@@ -62,9 +69,11 @@ export const OCRResponse$outboundSchema: z.ZodType<
 > = z.object({
   pages: z.array(OCRPageObject$outboundSchema),
   model: z.string(),
+  documentAnnotation: z.nullable(z.string()).optional(),
   usageInfo: OCRUsageInfo$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    documentAnnotation: "document_annotation",
     usageInfo: "usage_info",
   });
 });
