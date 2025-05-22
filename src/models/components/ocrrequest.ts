@@ -19,6 +19,12 @@ import {
   ImageURLChunk$Outbound,
   ImageURLChunk$outboundSchema,
 } from "./imageurlchunk.js";
+import {
+  ResponseFormat,
+  ResponseFormat$inboundSchema,
+  ResponseFormat$Outbound,
+  ResponseFormat$outboundSchema,
+} from "./responseformat.js";
 
 /**
  * Document to run OCR on
@@ -48,6 +54,14 @@ export type OCRRequest = {
    * Minimum height and width of image to extract
    */
   imageMinSize?: number | null | undefined;
+  /**
+   * Structured output class for extracting useful information from each extracted bounding box / image from document. Only json_schema is valid for this field
+   */
+  bboxAnnotationFormat?: ResponseFormat | null | undefined;
+  /**
+   * Structured output class for extracting useful information from the entire document. Only json_schema is valid for this field
+   */
+  documentAnnotationFormat?: ResponseFormat | null | undefined;
 };
 
 /** @internal */
@@ -112,11 +126,16 @@ export const OCRRequest$inboundSchema: z.ZodType<
   include_image_base64: z.nullable(z.boolean()).optional(),
   image_limit: z.nullable(z.number().int()).optional(),
   image_min_size: z.nullable(z.number().int()).optional(),
+  bbox_annotation_format: z.nullable(ResponseFormat$inboundSchema).optional(),
+  document_annotation_format: z.nullable(ResponseFormat$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "include_image_base64": "includeImageBase64",
     "image_limit": "imageLimit",
     "image_min_size": "imageMinSize",
+    "bbox_annotation_format": "bboxAnnotationFormat",
+    "document_annotation_format": "documentAnnotationFormat",
   });
 });
 
@@ -129,6 +148,8 @@ export type OCRRequest$Outbound = {
   include_image_base64?: boolean | null | undefined;
   image_limit?: number | null | undefined;
   image_min_size?: number | null | undefined;
+  bbox_annotation_format?: ResponseFormat$Outbound | null | undefined;
+  document_annotation_format?: ResponseFormat$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -147,11 +168,16 @@ export const OCRRequest$outboundSchema: z.ZodType<
   includeImageBase64: z.nullable(z.boolean()).optional(),
   imageLimit: z.nullable(z.number().int()).optional(),
   imageMinSize: z.nullable(z.number().int()).optional(),
+  bboxAnnotationFormat: z.nullable(ResponseFormat$outboundSchema).optional(),
+  documentAnnotationFormat: z.nullable(ResponseFormat$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     includeImageBase64: "include_image_base64",
     imageLimit: "image_limit",
     imageMinSize: "image_min_size",
+    bboxAnnotationFormat: "bbox_annotation_format",
+    documentAnnotationFormat: "document_annotation_format",
   });
 });
 

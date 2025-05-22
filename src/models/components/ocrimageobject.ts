@@ -33,6 +33,10 @@ export type OCRImageObject = {
    * Base64 string of the extracted image
    */
   imageBase64?: string | null | undefined;
+  /**
+   * Annotation of the extracted image in json str
+   */
+  imageAnnotation?: string | null | undefined;
 };
 
 /** @internal */
@@ -47,6 +51,7 @@ export const OCRImageObject$inboundSchema: z.ZodType<
   bottom_right_x: z.nullable(z.number().int()),
   bottom_right_y: z.nullable(z.number().int()),
   image_base64: z.nullable(z.string()).optional(),
+  image_annotation: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_left_x": "topLeftX",
@@ -54,6 +59,7 @@ export const OCRImageObject$inboundSchema: z.ZodType<
     "bottom_right_x": "bottomRightX",
     "bottom_right_y": "bottomRightY",
     "image_base64": "imageBase64",
+    "image_annotation": "imageAnnotation",
   });
 });
 
@@ -65,6 +71,7 @@ export type OCRImageObject$Outbound = {
   bottom_right_x: number | null;
   bottom_right_y: number | null;
   image_base64?: string | null | undefined;
+  image_annotation?: string | null | undefined;
 };
 
 /** @internal */
@@ -79,6 +86,7 @@ export const OCRImageObject$outboundSchema: z.ZodType<
   bottomRightX: z.nullable(z.number().int()),
   bottomRightY: z.nullable(z.number().int()),
   imageBase64: z.nullable(z.string()).optional(),
+  imageAnnotation: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     topLeftX: "top_left_x",
@@ -86,6 +94,7 @@ export const OCRImageObject$outboundSchema: z.ZodType<
     bottomRightX: "bottom_right_x",
     bottomRightY: "bottom_right_y",
     imageBase64: "image_base64",
+    imageAnnotation: "image_annotation",
   });
 });
 
