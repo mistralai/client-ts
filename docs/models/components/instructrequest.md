@@ -8,8 +8,13 @@ import { InstructRequest } from "@mistralai/mistralai/models/components";
 let value: InstructRequest = {
   messages: [
     {
-      content: "<value>",
-      role: "user",
+      content: [
+        {
+          documentUrl: "https://powerless-guide.info",
+          type: "document_url",
+        },
+      ],
+      role: "tool",
     },
   ],
 };

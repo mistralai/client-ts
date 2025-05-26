@@ -7,7 +7,7 @@ import { BatchJobIn } from "@mistralai/mistralai/models/components";
 
 let value: BatchJobIn = {
   inputFiles: [
-    "e2a71b30-00eb-4ea8-94f5-76f25a197438",
+    "6547a481-20f0-4291-9ebf-848e84e5035d",
   ],
   endpoint: "/v1/fim/completions",
   model: "Countach",

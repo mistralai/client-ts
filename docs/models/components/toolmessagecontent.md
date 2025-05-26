@@ -14,8 +14,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    documentUrl: "https://pleasing-begonia.net/",
-    type: "document_url",
+    referenceIds: [
+      932562,
+    ],
+    type: "reference",
   },
 ];
 ```

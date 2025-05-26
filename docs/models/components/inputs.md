@@ -11,8 +11,13 @@ Chat to classify
 const value: components.InstructRequestInputs = {
   messages: [
     {
-      content: "<value>",
-      role: "user",
+      content: [
+        {
+          text: "<value>",
+          type: "text",
+        },
+      ],
+      role: "system",
     },
   ],
 };
@@ -25,8 +30,13 @@ const value: components.InstructRequest[] = [
   {
     messages: [
       {
-        prefix: false,
-        role: "assistant",
+        content: [
+          {
+            documentUrl: "https://shocked-characterization.org",
+            type: "document_url",
+          },
+        ],
+        role: "user",
       },
     ],
   },

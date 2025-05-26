@@ -10,8 +10,8 @@ let value: InstructRequestInputs = {
     {
       content: [
         {
-          documentUrl: "https://vibrant-legislature.biz",
-          type: "document_url",
+          text: "<value>",
+          type: "text",
         },
       ],
       role: "user",

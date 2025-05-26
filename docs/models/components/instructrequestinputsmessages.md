@@ -13,7 +13,12 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 
@@ -21,7 +26,14 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: {
+        url: "https://mad-tectonics.biz",
+      },
+      type: "image_url",
+    },
+  ],
 };
 ```
 
@@ -31,10 +43,8 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      imageUrl: {
-        url: "https://bossy-swine.net",
-      },
-      type: "image_url",
+      documentUrl: "https://juvenile-hovel.info/",
+      type: "document_url",
     },
   ],
 };

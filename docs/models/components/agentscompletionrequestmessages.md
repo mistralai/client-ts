@@ -23,10 +23,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      referenceIds: [
-        373216,
-      ],
-      type: "reference",
+      text: "<value>",
+      type: "text",
     },
   ],
 };

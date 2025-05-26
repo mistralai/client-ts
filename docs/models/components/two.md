@@ -13,6 +13,14 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
+  content: "<value>",
+};
+```
+
+### `components.ToolMessage`
+
+```typescript
+const value: components.ToolMessage = {
   content: [
     {
       text: "<value>",
@@ -22,19 +30,16 @@ const value: components.SystemMessage = {
 };
 ```
 
-### `components.ToolMessage`
-
-```typescript
-const value: components.ToolMessage = {
-  content: "<value>",
-};
-```
-
 ### `components.UserMessage`
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      documentUrl: "https://authorized-embarrassment.net",
+      type: "document_url",
+    },
+  ],
 };
 ```
 

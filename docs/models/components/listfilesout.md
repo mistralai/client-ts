@@ -14,12 +14,12 @@ let value: ListFilesOut = {
       createdAt: 1716963433,
       filename: "files_upload.jsonl",
       purpose: "batch",
-      sampleType: "instruct",
-      source: "repository",
+      sampleType: "batch_request",
+      source: "upload",
     },
   ],
   object: "<value>",
-  total: 93940,
+  total: 586784,
 };
 ```
 

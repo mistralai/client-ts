@@ -11,9 +11,9 @@ let value: RetrieveFileOut = {
   sizeBytes: 13000,
   createdAt: 1716963433,
   filename: "files_upload.jsonl",
-  purpose: "ocr",
-  sampleType: "pretrain",
-  source: "mistral",
+  purpose: "fine-tune",
+  sampleType: "batch_result",
+  source: "repository",
   deleted: false,
 };
 ```

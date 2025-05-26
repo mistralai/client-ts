@@ -24,10 +24,8 @@ const value: components.Two[][] = [
     {
       content: [
         {
-          referenceIds: [
-            759283,
-          ],
-          type: "reference",
+          documentUrl: "https://milky-tackle.net/",
+          type: "document_url",
         },
       ],
       role: "user",

@@ -31,10 +31,10 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      imageUrl: {
-        url: "https://baggy-instruction.com",
-      },
-      type: "image_url",
+      referenceIds: [
+        102413,
+      ],
+      type: "reference",
     },
   ],
 };
