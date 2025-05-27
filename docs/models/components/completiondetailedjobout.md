@@ -6,20 +6,20 @@
 import { CompletionDetailedJobOut } from "@mistralai/mistralai/models/components";
 
 let value: CompletionDetailedJobOut = {
-  id: "6e1fd753-9006-4143-8420-19ff62a7f1c4",
+  id: "78b1369e-92fd-48e8-9edf-e026f42e7e2a",
   autoStart: false,
-  model: "Malibu",
-  status: "VALIDATING",
-  createdAt: 665859,
-  modifiedAt: 517309,
+  model: "A8",
+  status: "FAILED",
+  createdAt: 247399,
+  modifiedAt: 39615,
   trainingFiles: [
-    "684b65de-035d-4ffe-84f3-1f3b0be465b3",
+    "00ebea84-f576-4f25-aa19-7438575f2159",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 449292,
+      stepNumber: 397257,
       createdAt: 1716963433,
     },
   ],

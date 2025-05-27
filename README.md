@@ -232,6 +232,30 @@ We have dedicated SDKs for the following providers:
 * [get](docs/sdks/mistraljobs/README.md#get) - Get Batch Job
 * [cancel](docs/sdks/mistraljobs/README.md#cancel) - Cancel Batch Job
 
+### [beta](docs/sdks/beta/README.md)
+
+
+#### [beta.agents](docs/sdks/mistralagents/README.md)
+
+* [create](docs/sdks/mistralagents/README.md#create) - Create a agent that can be used within a conversation.
+* [list](docs/sdks/mistralagents/README.md#list) - List agent entities.
+* [get](docs/sdks/mistralagents/README.md#get) - Retrieve an agent entity.
+* [update](docs/sdks/mistralagents/README.md#update) - Update an agent entity.
+* [updateVersion](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.
+
+#### [beta.conversations](docs/sdks/conversations/README.md)
+
+* [start](docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
+* [list](docs/sdks/conversations/README.md#list) - List all created conversations.
+* [get](docs/sdks/conversations/README.md#get) - Retrieve a conversation information.
+* [append](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
+* [getHistory](docs/sdks/conversations/README.md#gethistory) - Retrieve all entries in a conversation.
+* [getMessages](docs/sdks/conversations/README.md#getmessages) - Retrieve all messages in a conversation.
+* [restart](docs/sdks/conversations/README.md#restart) - Restart a conversation starting from a given entry.
+* [startStream](docs/sdks/conversations/README.md#startstream) - Create a conversation and append entries to it.
+* [appendStream](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
+* [restartStream](docs/sdks/conversations/README.md#restartstream) - Restart a conversation starting from a given entry.
+
 ### [chat](docs/sdks/chat/README.md)
 
 * [complete](docs/sdks/chat/README.md#complete) - Chat Completion
@@ -307,15 +331,8 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.chat.stream({
-    model: "mistral-small-latest",
-    messages: [
-      {
-        content:
-          "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
-      },
-    ],
+  const result = await mistral.beta.conversations.startStream({
+    inputs: "<value>",
   });
 
   for await (const event of result) {
@@ -666,6 +683,21 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`batchJobsCreate`](docs/sdks/mistraljobs/README.md#create) - Create Batch Job
 - [`batchJobsGet`](docs/sdks/mistraljobs/README.md#get) - Get Batch Job
 - [`batchJobsList`](docs/sdks/mistraljobs/README.md#list) - Get Batch Jobs
+- [`betaAgentsCreate`](docs/sdks/mistralagents/README.md#create) - Create a agent that can be used within a conversation.
+- [`betaAgentsGet`](docs/sdks/mistralagents/README.md#get) - Retrieve an agent entity.
+- [`betaAgentsList`](docs/sdks/mistralagents/README.md#list) - List agent entities.
+- [`betaAgentsUpdate`](docs/sdks/mistralagents/README.md#update) - Update an agent entity.
+- [`betaAgentsUpdateVersion`](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.
+- [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
+- [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
+- [`betaConversationsGet`](docs/sdks/conversations/README.md#get) - Retrieve a conversation information.
+- [`betaConversationsGetHistory`](docs/sdks/conversations/README.md#gethistory) - Retrieve all entries in a conversation.
+- [`betaConversationsGetMessages`](docs/sdks/conversations/README.md#getmessages) - Retrieve all messages in a conversation.
+- [`betaConversationsList`](docs/sdks/conversations/README.md#list) - List all created conversations.
+- [`betaConversationsRestart`](docs/sdks/conversations/README.md#restart) - Restart a conversation starting from a given entry.
+- [`betaConversationsRestartStream`](docs/sdks/conversations/README.md#restartstream) - Restart a conversation starting from a given entry.
+- [`betaConversationsStart`](docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
+- [`betaConversationsStartStream`](docs/sdks/conversations/README.md#startstream) - Create a conversation and append entries to it.
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications

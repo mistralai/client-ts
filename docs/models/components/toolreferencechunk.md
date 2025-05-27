@@ -1,0 +1,22 @@
+# ToolReferenceChunk
+
+## Example Usage
+
+```typescript
+import { ToolReferenceChunk } from "@mistralai/mistralai/models/components";
+
+let value: ToolReferenceChunk = {
+  tool: "code_interpreter",
+  title: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `type`                                                                                 | [components.ToolReferenceChunkType](../../models/components/toolreferencechunktype.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `tool`                                                                                 | [components.BuiltInConnectors](../../models/components/builtinconnectors.md)           | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `title`                                                                                | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `url`                                                                                  | *string*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `source`                                                                               | *string*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |

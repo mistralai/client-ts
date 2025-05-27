@@ -6,7 +6,7 @@
 import { ImageURL } from "@mistralai/mistralai/models/components";
 
 let value: ImageURL = {
-  url: "https://voluminous-whale.info",
+  url: "https://runny-epic.net",
 };
 ```
 

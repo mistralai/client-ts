@@ -9,17 +9,17 @@ OK
 
 ```typescript
 const value: operations.One = {
-  id: "b5c163a1-6485-4b0a-934c-f5d1ac26e109",
+  id: "55fd60da-2f1d-446c-baf9-1ecb062dbefc",
   autoStart: false,
-  model: "PT Cruiser",
-  status: "CANCELLATION_REQUESTED",
-  createdAt: 299153,
-  modifiedAt: 388404,
+  model: "Jetta",
+  status: "QUEUED",
+  createdAt: 14251,
+  modifiedAt: 342104,
   trainingFiles: [
-    "79fb64f2-bea6-435b-baed-de4568a4064f",
+    "ddf10e48-f6a6-4c83-a448-bfbc256a445c",
   ],
   object: "job",
-  jobType: "completion",
+  jobType: "classifier",
   hyperparameters: {
     learningRate: 0.0001,
   },

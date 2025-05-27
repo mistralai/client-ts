@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "537fe10e-83aa-4140-8323-a012544cf8f6",
+  id: "62d05efa-b088-4513-b569-b55004baccdb",
   autoStart: false,
-  model: "Element",
-  status: "VALIDATING",
-  createdAt: 493407,
-  modifiedAt: 657044,
+  model: "Spyder",
+  status: "FAILED_VALIDATION",
+  createdAt: 588158,
+  modifiedAt: 34267,
   trainingFiles: [
-    "7eeb726b-41eb-49cd-97ee-4988f4fe7dca",
+    "f2bd531b-7be2-4e64-8ff3-a1ada6669ee0",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 196451,
+      stepNumber: 112224,
       createdAt: 1716963433,
     },
   ],
@@ -32,8 +32,8 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 6715.28,
-      lossFunction: "multi_class",
+      weight: 1933.34,
+      lossFunction: "single_class",
     },
   ],
 };
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "0a7e5782-bd04-40fa-9f8c-556a5ef03103",
+  id: "8abefadc-4e00-447a-81ac-2687cfc1c132",
   autoStart: false,
-  model: "Roadster",
-  status: "VALIDATING",
-  createdAt: 493945,
-  modifiedAt: 929619,
+  model: "Fortwo",
+  status: "FAILED",
+  createdAt: 470321,
+  modifiedAt: 959696,
   trainingFiles: [
-    "ac8f9036-9c6b-4c5f-aae8-bce286e1fe17",
+    "3cd87968-66b1-42dc-b46e-d9306add0353",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 738152,
+      stepNumber: 767466,
       createdAt: 1716963433,
     },
   ],

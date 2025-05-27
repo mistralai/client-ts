@@ -6,20 +6,20 @@
 import { ClassifierDetailedJobOut } from "@mistralai/mistralai/models/components";
 
 let value: ClassifierDetailedJobOut = {
-  id: "8fadfcbf-f714-4262-996e-f849e6847638",
+  id: "adfecb52-1368-4cf1-819b-def662aad179",
   autoStart: false,
-  model: "Durango",
-  status: "FAILED_VALIDATION",
-  createdAt: 750595,
-  modifiedAt: 333507,
+  model: "Beetle",
+  status: "CANCELLED",
+  createdAt: 58534,
+  modifiedAt: 470621,
   trainingFiles: [
-    "ed04715b-a9b3-45ae-8840-b058e1605943",
+    "17f6d146-6a5b-4a66-a91d-ab816650b19b",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 577140,
+      stepNumber: 959143,
       createdAt: 1716963433,
     },
   ],
@@ -29,7 +29,7 @@ let value: ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 6952.7,
+      weight: 1032.98,
       lossFunction: "multi_class",
     },
   ],

@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://stylish-wallaby.org",
+  imageUrl: "https://exhausted-cycle.com",
 };
 ```
 
@@ -15,7 +15,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://rundown-fisherman.com",
+  documentUrl: "https://free-ignorance.info",
 };
 ```
 
@@ -32,7 +32,7 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    62636,
+    778172,
   ],
 };
 ```

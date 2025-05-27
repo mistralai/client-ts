@@ -14,10 +14,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: {
-      url: "https://palatable-permafrost.info/",
-    },
-    type: "image_url",
+    referenceIds: [
+      991891,
+    ],
+    type: "reference",
   },
 ];
 ```

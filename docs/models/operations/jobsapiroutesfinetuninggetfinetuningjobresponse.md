@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "06a61142-f2c9-498f-b5c8-6f916cbe4c79",
+  id: "a515285f-f99f-4ec5-8537-fe10e83aa140",
   autoStart: false,
-  model: "XC90",
-  status: "CANCELLED",
-  createdAt: 359097,
-  modifiedAt: 887701,
+  model: "Alpine",
+  status: "STARTED",
+  createdAt: 685467,
+  modifiedAt: 49499,
   trainingFiles: [
-    "a60c8cbc-4c87-4a01-84f2-5055fd60da2f",
+    "12544cf8-f616-447a-97ee-b726b41eb9cd",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 867115,
+      stepNumber: 881189,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 2942.66,
+      weight: 9164.19,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "caf91ecb-062d-4bef-9cf9-005ddf10e48f",
+  id: "988f4fe7-dca5-43ad-b0a7-e5782bd040fa",
   autoStart: false,
-  model: "Malibu",
-  status: "RUNNING",
-  createdAt: 768195,
-  modifiedAt: 527715,
+  model: "Fortwo",
+  status: "CANCELLED",
+  createdAt: 374414,
+  modifiedAt: 353819,
   trainingFiles: [
-    "3448bfbc-256a-4445-bc91-15cbbc488bf4",
+    "6a5ef031-037d-437e-aac8-f90369c6bc5f",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 659971,
+      stepNumber: 880998,
       createdAt: 1716963433,
     },
   ],

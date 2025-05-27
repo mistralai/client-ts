@@ -56,13 +56,13 @@ export type Status = ClosedEnum<typeof Status>;
 /**
  * The object type of the fine-tuning job.
  */
-export const ObjectT = {
+export const CompletionJobOutObject = {
   Job: "job",
 } as const;
 /**
  * The object type of the fine-tuning job.
  */
-export type ObjectT = ClosedEnum<typeof ObjectT>;
+export type CompletionJobOutObject = ClosedEnum<typeof CompletionJobOutObject>;
 
 export type Integrations = WandbIntegrationOut;
 
@@ -112,7 +112,7 @@ export type CompletionJobOut = {
   /**
    * The object type of the fine-tuning job.
    */
-  object?: ObjectT | undefined;
+  object?: CompletionJobOutObject | undefined;
   /**
    * The name of the fine-tuned model that is being created. The value will be `null` if the fine-tuning job is still running.
    */
@@ -158,22 +158,24 @@ export namespace Status$ {
 }
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const CompletionJobOutObject$inboundSchema: z.ZodNativeEnum<
+  typeof CompletionJobOutObject
+> = z.nativeEnum(CompletionJobOutObject);
 
 /** @internal */
-export const ObjectT$outboundSchema: z.ZodNativeEnum<typeof ObjectT> =
-  ObjectT$inboundSchema;
+export const CompletionJobOutObject$outboundSchema: z.ZodNativeEnum<
+  typeof CompletionJobOutObject
+> = CompletionJobOutObject$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ObjectT$ {
-  /** @deprecated use `ObjectT$inboundSchema` instead. */
-  export const inboundSchema = ObjectT$inboundSchema;
-  /** @deprecated use `ObjectT$outboundSchema` instead. */
-  export const outboundSchema = ObjectT$outboundSchema;
+export namespace CompletionJobOutObject$ {
+  /** @deprecated use `CompletionJobOutObject$inboundSchema` instead. */
+  export const inboundSchema = CompletionJobOutObject$inboundSchema;
+  /** @deprecated use `CompletionJobOutObject$outboundSchema` instead. */
+  export const outboundSchema = CompletionJobOutObject$outboundSchema;
 }
 
 /** @internal */
@@ -297,7 +299,7 @@ export const CompletionJobOut$inboundSchema: z.ZodType<
   modified_at: z.number().int(),
   training_files: z.array(z.string()),
   validation_files: z.nullable(z.array(z.string())).optional(),
-  object: ObjectT$inboundSchema.default("job"),
+  object: CompletionJobOutObject$inboundSchema.default("job"),
   fine_tuned_model: z.nullable(z.string()).optional(),
   suffix: z.nullable(z.string()).optional(),
   integrations: z.nullable(z.array(WandbIntegrationOut$inboundSchema))
@@ -355,7 +357,7 @@ export const CompletionJobOut$outboundSchema: z.ZodType<
   modifiedAt: z.number().int(),
   trainingFiles: z.array(z.string()),
   validationFiles: z.nullable(z.array(z.string())).optional(),
-  object: ObjectT$outboundSchema.default("job"),
+  object: CompletionJobOutObject$outboundSchema.default("job"),
   fineTunedModel: z.nullable(z.string()).optional(),
   suffix: z.nullable(z.string()).optional(),
   integrations: z.nullable(z.array(WandbIntegrationOut$outboundSchema))

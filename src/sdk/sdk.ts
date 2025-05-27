@@ -5,6 +5,7 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
 import { Batch } from "./batch.js";
+import { Beta } from "./beta.js";
 import { Chat } from "./chat.js";
 import { Classifiers } from "./classifiers.js";
 import { Embeddings } from "./embeddings.js";
@@ -18,6 +19,11 @@ export class Mistral extends ClientSDK {
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
+  }
+
+  private _beta?: Beta;
+  get beta(): Beta {
+    return (this._beta ??= new Beta(this._options));
   }
 
   private _files?: Files;

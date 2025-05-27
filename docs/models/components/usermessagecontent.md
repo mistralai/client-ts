@@ -15,7 +15,7 @@ const value: string = "<value>";
 const value: components.ContentChunk[] = [
   {
     imageUrl: {
-      url: "https://impish-pillow.info/",
+      url: "https://oddball-devil.name/",
     },
     type: "image_url",
   },

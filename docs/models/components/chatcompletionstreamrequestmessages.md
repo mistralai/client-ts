@@ -28,8 +28,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      imageUrl: "https://mushy-habit.name/",
-      type: "image_url",
+      documentUrl: "https://formal-sushi.com",
+      type: "document_url",
     },
   ],
 };

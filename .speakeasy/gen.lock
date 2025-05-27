@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 3589e9f1ea5775264c5c8e0887b4ea0e
+  docChecksum: e9c447db719018a5721988252c09c2dc
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.6.1
-  configChecksum: ea37e34f94b70b5450182f5b18a45521
+  releaseVersion: 1.7.0
+  configChecksum: e0c90804ac48756c0248e6e1dd1515cc
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -48,6 +48,19 @@ generatedFiles:
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
+  - docs/models/components/agent.md
+  - docs/models/components/agentconversation.md
+  - docs/models/components/agentconversationobject.md
+  - docs/models/components/agentcreationrequest.md
+  - docs/models/components/agentcreationrequesttools.md
+  - docs/models/components/agenthandoffdoneevent.md
+  - docs/models/components/agenthandoffdoneeventtype.md
+  - docs/models/components/agenthandoffentry.md
+  - docs/models/components/agenthandoffentryobject.md
+  - docs/models/components/agenthandoffentrytype.md
+  - docs/models/components/agenthandoffstartedevent.md
+  - docs/models/components/agenthandoffstartedeventtype.md
+  - docs/models/components/agentobject.md
   - docs/models/components/agentscompletionrequest.md
   - docs/models/components/agentscompletionrequestmessages.md
   - docs/models/components/agentscompletionrequeststop.md
@@ -56,6 +69,9 @@ generatedFiles:
   - docs/models/components/agentscompletionstreamrequestmessages.md
   - docs/models/components/agentscompletionstreamrequeststop.md
   - docs/models/components/agentscompletionstreamrequesttoolchoice.md
+  - docs/models/components/agenttools.md
+  - docs/models/components/agentupdaterequest.md
+  - docs/models/components/agentupdaterequesttools.md
   - docs/models/components/apiendpoint.md
   - docs/models/components/archiveftmodelout.md
   - docs/models/components/archiveftmodeloutobject.md
@@ -71,6 +87,7 @@ generatedFiles:
   - docs/models/components/batchjobsout.md
   - docs/models/components/batchjobsoutobject.md
   - docs/models/components/batchjobstatus.md
+  - docs/models/components/builtinconnectors.md
   - docs/models/components/chatclassificationrequest.md
   - docs/models/components/chatcompletionchoice.md
   - docs/models/components/chatcompletionrequest.md
@@ -104,6 +121,10 @@ generatedFiles:
   - docs/models/components/classifiertargetout.md
   - docs/models/components/classifiertrainingparameters.md
   - docs/models/components/classifiertrainingparametersin.md
+  - docs/models/components/codeinterpretertool.md
+  - docs/models/components/codeinterpretertooltype.md
+  - docs/models/components/completionargs.md
+  - docs/models/components/completionargsstop.md
   - docs/models/components/completionchunk.md
   - docs/models/components/completiondetailedjobout.md
   - docs/models/components/completiondetailedjoboutintegrations.md
@@ -115,23 +136,49 @@ generatedFiles:
   - docs/models/components/completionftmodelout.md
   - docs/models/components/completionftmodeloutobject.md
   - docs/models/components/completionjobout.md
+  - docs/models/components/completionjoboutobject.md
   - docs/models/components/completionresponsestreamchoice.md
   - docs/models/components/completionresponsestreamchoicefinishreason.md
   - docs/models/components/completiontrainingparameters.md
   - docs/models/components/completiontrainingparametersin.md
   - docs/models/components/content.md
   - docs/models/components/contentchunk.md
+  - docs/models/components/conversationappendrequest.md
+  - docs/models/components/conversationappendrequesthandoffexecution.md
+  - docs/models/components/conversationappendstreamrequest.md
+  - docs/models/components/conversationappendstreamrequesthandoffexecution.md
+  - docs/models/components/conversationevents.md
+  - docs/models/components/conversationeventsdata.md
+  - docs/models/components/conversationhistory.md
+  - docs/models/components/conversationhistoryobject.md
+  - docs/models/components/conversationinputs.md
+  - docs/models/components/conversationmessages.md
+  - docs/models/components/conversationmessagesobject.md
+  - docs/models/components/conversationrequest.md
+  - docs/models/components/conversationresponse.md
+  - docs/models/components/conversationresponseobject.md
+  - docs/models/components/conversationrestartrequest.md
+  - docs/models/components/conversationrestartrequesthandoffexecution.md
+  - docs/models/components/conversationrestartstreamrequest.md
+  - docs/models/components/conversationrestartstreamrequesthandoffexecution.md
+  - docs/models/components/conversationstreamrequest.md
+  - docs/models/components/conversationstreamrequesthandoffexecution.md
+  - docs/models/components/conversationstreamrequesttools.md
+  - docs/models/components/conversationusageinfo.md
   - docs/models/components/data.md
   - docs/models/components/deletefileout.md
   - docs/models/components/deletemodelout.md
   - docs/models/components/deltamessage.md
   - docs/models/components/document.md
+  - docs/models/components/documentlibrarytool.md
+  - docs/models/components/documentlibrarytooltype.md
   - docs/models/components/documenturlchunk.md
   - docs/models/components/documenturlchunktype.md
   - docs/models/components/embeddingrequest.md
   - docs/models/components/embeddingrequestinputs.md
   - docs/models/components/embeddingresponse.md
   - docs/models/components/embeddingresponsedata.md
+  - docs/models/components/entries.md
   - docs/models/components/eventout.md
   - docs/models/components/filepurpose.md
   - docs/models/components/fileschema.md
@@ -148,17 +195,32 @@ generatedFiles:
   - docs/models/components/ftmodelcard.md
   - docs/models/components/ftmodelcardtype.md
   - docs/models/components/functioncall.md
+  - docs/models/components/functioncallentry.md
+  - docs/models/components/functioncallentryarguments.md
+  - docs/models/components/functioncallentryobject.md
+  - docs/models/components/functioncallentrytype.md
+  - docs/models/components/functioncallevent.md
+  - docs/models/components/functioncalleventtype.md
   - docs/models/components/functionname.md
+  - docs/models/components/functionresultentry.md
+  - docs/models/components/functionresultentryobject.md
+  - docs/models/components/functionresultentrytype.md
   - docs/models/components/functiont.md
+  - docs/models/components/functiontool.md
+  - docs/models/components/functiontooltype.md
   - docs/models/components/githubrepositoryin.md
   - docs/models/components/githubrepositoryintype.md
   - docs/models/components/githubrepositoryout.md
   - docs/models/components/githubrepositoryouttype.md
+  - docs/models/components/handoffexecution.md
   - docs/models/components/hyperparameters.md
+  - docs/models/components/imagegenerationtool.md
+  - docs/models/components/imagegenerationtooltype.md
   - docs/models/components/imageurl.md
   - docs/models/components/imageurlchunk.md
   - docs/models/components/imageurlchunkimageurl.md
   - docs/models/components/imageurlchunktype.md
+  - docs/models/components/inputentries.md
   - docs/models/components/inputs.md
   - docs/models/components/instructrequest.md
   - docs/models/components/instructrequestinputs.md
@@ -178,9 +240,28 @@ generatedFiles:
   - docs/models/components/legacyjobmetadataoutobject.md
   - docs/models/components/listfilesout.md
   - docs/models/components/loc.md
+  - docs/models/components/messageentries.md
+  - docs/models/components/messageinputcontentchunks.md
+  - docs/models/components/messageinputentry.md
+  - docs/models/components/messageinputentrycontent.md
+  - docs/models/components/messageinputentryrole.md
+  - docs/models/components/messageinputentrytype.md
+  - docs/models/components/messageoutputcontentchunks.md
+  - docs/models/components/messageoutputentry.md
+  - docs/models/components/messageoutputentrycontent.md
+  - docs/models/components/messageoutputentryobject.md
+  - docs/models/components/messageoutputentryrole.md
+  - docs/models/components/messageoutputentrytype.md
+  - docs/models/components/messageoutputevent.md
+  - docs/models/components/messageoutputeventcontent.md
+  - docs/models/components/messageoutputeventrole.md
+  - docs/models/components/messageoutputeventtype.md
   - docs/models/components/messages.md
   - docs/models/components/metricout.md
   - docs/models/components/modelcapabilities.md
+  - docs/models/components/modelconversation.md
+  - docs/models/components/modelconversationobject.md
+  - docs/models/components/modelconversationtools.md
   - docs/models/components/modellist.md
   - docs/models/components/modeltype.md
   - docs/models/components/moderationobject.md
@@ -193,17 +274,26 @@ generatedFiles:
   - docs/models/components/ocrresponse.md
   - docs/models/components/ocrusageinfo.md
   - docs/models/components/one.md
+  - docs/models/components/outputcontentchunks.md
+  - docs/models/components/outputs.md
   - docs/models/components/prediction.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
   - docs/models/components/repositories.md
+  - docs/models/components/responsedoneevent.md
+  - docs/models/components/responsedoneeventtype.md
+  - docs/models/components/responseerrorevent.md
+  - docs/models/components/responseerroreventtype.md
   - docs/models/components/responseformat.md
   - docs/models/components/responseformats.md
+  - docs/models/components/responsestartedevent.md
+  - docs/models/components/responsestartedeventtype.md
   - docs/models/components/retrievefileout.md
   - docs/models/components/role.md
   - docs/models/components/sampletype.md
   - docs/models/components/security.md
   - docs/models/components/source.md
+  - docs/models/components/ssetypes.md
   - docs/models/components/status.md
   - docs/models/components/stop.md
   - docs/models/components/systemmessage.md
@@ -214,9 +304,21 @@ generatedFiles:
   - docs/models/components/toolcall.md
   - docs/models/components/toolchoice.md
   - docs/models/components/toolchoiceenum.md
+  - docs/models/components/toolexecutiondoneevent.md
+  - docs/models/components/toolexecutiondoneeventtype.md
+  - docs/models/components/toolexecutionentry.md
+  - docs/models/components/toolexecutionentryobject.md
+  - docs/models/components/toolexecutionentrytype.md
+  - docs/models/components/toolexecutionstartedevent.md
+  - docs/models/components/toolexecutionstartedeventtype.md
+  - docs/models/components/toolfilechunk.md
+  - docs/models/components/toolfilechunktype.md
   - docs/models/components/toolmessage.md
   - docs/models/components/toolmessagecontent.md
   - docs/models/components/toolmessagerole.md
+  - docs/models/components/toolreferencechunk.md
+  - docs/models/components/toolreferencechunktype.md
+  - docs/models/components/tools.md
   - docs/models/components/tooltypes.md
   - docs/models/components/trainingfile.md
   - docs/models/components/two.md
@@ -234,7 +336,24 @@ generatedFiles:
   - docs/models/components/wandbintegrationout.md
   - docs/models/components/wandbintegrationouttype.md
   - docs/models/components/wandbintegrationtype.md
+  - docs/models/components/websearchpremiumtool.md
+  - docs/models/components/websearchpremiumtooltype.md
+  - docs/models/components/websearchtool.md
+  - docs/models/components/websearchtooltype.md
   - docs/models/errors/httpvalidationerror.md
+  - docs/models/operations/agentsapiv1agentsgetrequest.md
+  - docs/models/operations/agentsapiv1agentslistrequest.md
+  - docs/models/operations/agentsapiv1agentsupdaterequest.md
+  - docs/models/operations/agentsapiv1agentsupdateversionrequest.md
+  - docs/models/operations/agentsapiv1conversationsappendrequest.md
+  - docs/models/operations/agentsapiv1conversationsappendstreamrequest.md
+  - docs/models/operations/agentsapiv1conversationsgetrequest.md
+  - docs/models/operations/agentsapiv1conversationsgetresponsev1conversationsget.md
+  - docs/models/operations/agentsapiv1conversationshistoryrequest.md
+  - docs/models/operations/agentsapiv1conversationslistrequest.md
+  - docs/models/operations/agentsapiv1conversationsmessagesrequest.md
+  - docs/models/operations/agentsapiv1conversationsrestartrequest.md
+  - docs/models/operations/agentsapiv1conversationsrestartstreamrequest.md
   - docs/models/operations/deletemodelv1modelsmodeliddeleterequest.md
   - docs/models/operations/filesapiroutesdeletefilerequest.md
   - docs/models/operations/filesapiroutesdownloadfilerequest.md
@@ -259,19 +378,23 @@ generatedFiles:
   - docs/models/operations/jobsapiroutesfinetuningupdatefinetunedmodelrequest.md
   - docs/models/operations/jobsapiroutesfinetuningupdatefinetunedmodelresponse.md
   - docs/models/operations/one.md
+  - docs/models/operations/responsebody.md
   - docs/models/operations/retrievemodelv1modelsmodelidgetrequest.md
   - docs/models/operations/retrievemodelv1modelsmodelidgetresponseretrievemodelv1modelsmodelidget.md
   - docs/models/operations/status.md
   - docs/sdks/agents/README.md
   - docs/sdks/batch/README.md
+  - docs/sdks/beta/README.md
   - docs/sdks/chat/README.md
   - docs/sdks/classifiers/README.md
+  - docs/sdks/conversations/README.md
   - docs/sdks/embeddings/README.md
   - docs/sdks/files/README.md
   - docs/sdks/fim/README.md
   - docs/sdks/finetuning/README.md
   - docs/sdks/jobs/README.md
   - docs/sdks/mistral/README.md
+  - docs/sdks/mistralagents/README.md
   - docs/sdks/mistraljobs/README.md
   - docs/sdks/models/README.md
   - docs/sdks/ocr/README.md
@@ -285,6 +408,21 @@ generatedFiles:
   - src/funcs/batchJobsCreate.ts
   - src/funcs/batchJobsGet.ts
   - src/funcs/batchJobsList.ts
+  - src/funcs/betaAgentsCreate.ts
+  - src/funcs/betaAgentsGet.ts
+  - src/funcs/betaAgentsList.ts
+  - src/funcs/betaAgentsUpdate.ts
+  - src/funcs/betaAgentsUpdateVersion.ts
+  - src/funcs/betaConversationsAppend.ts
+  - src/funcs/betaConversationsAppendStream.ts
+  - src/funcs/betaConversationsGet.ts
+  - src/funcs/betaConversationsGetHistory.ts
+  - src/funcs/betaConversationsGetMessages.ts
+  - src/funcs/betaConversationsList.ts
+  - src/funcs/betaConversationsRestart.ts
+  - src/funcs/betaConversationsRestartStream.ts
+  - src/funcs/betaConversationsStart.ts
+  - src/funcs/betaConversationsStartStream.ts
   - src/funcs/chatComplete.ts
   - src/funcs/chatStream.ts
   - src/funcs/classifiersClassify.ts
@@ -333,8 +471,15 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/models/components/agent.ts
+  - src/models/components/agentconversation.ts
+  - src/models/components/agentcreationrequest.ts
+  - src/models/components/agenthandoffdoneevent.ts
+  - src/models/components/agenthandoffentry.ts
+  - src/models/components/agenthandoffstartedevent.ts
   - src/models/components/agentscompletionrequest.ts
   - src/models/components/agentscompletionstreamrequest.ts
+  - src/models/components/agentupdaterequest.ts
   - src/models/components/apiendpoint.ts
   - src/models/components/archiveftmodelout.ts
   - src/models/components/assistantmessage.ts
@@ -344,6 +489,7 @@ generatedFiles:
   - src/models/components/batchjobout.ts
   - src/models/components/batchjobsout.ts
   - src/models/components/batchjobstatus.ts
+  - src/models/components/builtinconnectors.ts
   - src/models/components/chatclassificationrequest.ts
   - src/models/components/chatcompletionchoice.ts
   - src/models/components/chatcompletionrequest.ts
@@ -361,6 +507,9 @@ generatedFiles:
   - src/models/components/classifiertargetout.ts
   - src/models/components/classifiertrainingparameters.ts
   - src/models/components/classifiertrainingparametersin.ts
+  - src/models/components/codeinterpretertool.ts
+  - src/models/components/completionargs.ts
+  - src/models/components/completionargsstop.ts
   - src/models/components/completionchunk.ts
   - src/models/components/completiondetailedjobout.ts
   - src/models/components/completionevent.ts
@@ -370,9 +519,22 @@ generatedFiles:
   - src/models/components/completiontrainingparameters.ts
   - src/models/components/completiontrainingparametersin.ts
   - src/models/components/contentchunk.ts
+  - src/models/components/conversationappendrequest.ts
+  - src/models/components/conversationappendstreamrequest.ts
+  - src/models/components/conversationevents.ts
+  - src/models/components/conversationhistory.ts
+  - src/models/components/conversationinputs.ts
+  - src/models/components/conversationmessages.ts
+  - src/models/components/conversationrequest.ts
+  - src/models/components/conversationresponse.ts
+  - src/models/components/conversationrestartrequest.ts
+  - src/models/components/conversationrestartstreamrequest.ts
+  - src/models/components/conversationstreamrequest.ts
+  - src/models/components/conversationusageinfo.ts
   - src/models/components/deletefileout.ts
   - src/models/components/deletemodelout.ts
   - src/models/components/deltamessage.ts
+  - src/models/components/documentlibrarytool.ts
   - src/models/components/documenturlchunk.ts
   - src/models/components/embeddingrequest.ts
   - src/models/components/embeddingresponse.ts
@@ -390,12 +552,19 @@ generatedFiles:
   - src/models/components/ftmodelcard.ts
   - src/models/components/function.ts
   - src/models/components/functioncall.ts
+  - src/models/components/functioncallentry.ts
+  - src/models/components/functioncallentryarguments.ts
+  - src/models/components/functioncallevent.ts
   - src/models/components/functionname.ts
+  - src/models/components/functionresultentry.ts
+  - src/models/components/functiontool.ts
   - src/models/components/githubrepositoryin.ts
   - src/models/components/githubrepositoryout.ts
+  - src/models/components/imagegenerationtool.ts
   - src/models/components/imageurl.ts
   - src/models/components/imageurlchunk.ts
   - src/models/components/index.ts
+  - src/models/components/inputentries.ts
   - src/models/components/inputs.ts
   - src/models/components/instructrequest.ts
   - src/models/components/jobin.ts
@@ -404,8 +573,15 @@ generatedFiles:
   - src/models/components/jsonschema.ts
   - src/models/components/legacyjobmetadataout.ts
   - src/models/components/listfilesout.ts
+  - src/models/components/messageentries.ts
+  - src/models/components/messageinputcontentchunks.ts
+  - src/models/components/messageinputentry.ts
+  - src/models/components/messageoutputcontentchunks.ts
+  - src/models/components/messageoutputentry.ts
+  - src/models/components/messageoutputevent.ts
   - src/models/components/metricout.ts
   - src/models/components/modelcapabilities.ts
+  - src/models/components/modelconversation.ts
   - src/models/components/modellist.ts
   - src/models/components/moderationobject.ts
   - src/models/components/moderationresponse.ts
@@ -415,21 +591,31 @@ generatedFiles:
   - src/models/components/ocrrequest.ts
   - src/models/components/ocrresponse.ts
   - src/models/components/ocrusageinfo.ts
+  - src/models/components/outputcontentchunks.ts
   - src/models/components/prediction.ts
   - src/models/components/referencechunk.ts
+  - src/models/components/responsedoneevent.ts
+  - src/models/components/responseerrorevent.ts
   - src/models/components/responseformat.ts
   - src/models/components/responseformats.ts
+  - src/models/components/responsestartedevent.ts
   - src/models/components/retrievefileout.ts
   - src/models/components/sampletype.ts
   - src/models/components/security.ts
   - src/models/components/source.ts
+  - src/models/components/ssetypes.ts
   - src/models/components/systemmessage.ts
   - src/models/components/textchunk.ts
   - src/models/components/tool.ts
   - src/models/components/toolcall.ts
   - src/models/components/toolchoice.ts
   - src/models/components/toolchoiceenum.ts
+  - src/models/components/toolexecutiondoneevent.ts
+  - src/models/components/toolexecutionentry.ts
+  - src/models/components/toolexecutionstartedevent.ts
+  - src/models/components/toolfilechunk.ts
   - src/models/components/toolmessage.ts
+  - src/models/components/toolreferencechunk.ts
   - src/models/components/tooltypes.ts
   - src/models/components/trainingfile.ts
   - src/models/components/unarchiveftmodelout.ts
@@ -440,11 +626,25 @@ generatedFiles:
   - src/models/components/validationerror.ts
   - src/models/components/wandbintegration.ts
   - src/models/components/wandbintegrationout.ts
+  - src/models/components/websearchpremiumtool.ts
+  - src/models/components/websearchtool.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/httpvalidationerror.ts
   - src/models/errors/index.ts
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/operations/agentsapiv1agentsget.ts
+  - src/models/operations/agentsapiv1agentslist.ts
+  - src/models/operations/agentsapiv1agentsupdate.ts
+  - src/models/operations/agentsapiv1agentsupdateversion.ts
+  - src/models/operations/agentsapiv1conversationsappend.ts
+  - src/models/operations/agentsapiv1conversationsappendstream.ts
+  - src/models/operations/agentsapiv1conversationsget.ts
+  - src/models/operations/agentsapiv1conversationshistory.ts
+  - src/models/operations/agentsapiv1conversationslist.ts
+  - src/models/operations/agentsapiv1conversationsmessages.ts
+  - src/models/operations/agentsapiv1conversationsrestart.ts
+  - src/models/operations/agentsapiv1conversationsrestartstream.ts
   - src/models/operations/deletemodelv1modelsmodeliddelete.ts
   - src/models/operations/filesapiroutesdeletefile.ts
   - src/models/operations/filesapiroutesdownloadfile.ts
@@ -467,14 +667,17 @@ generatedFiles:
   - src/models/operations/retrievemodelv1modelsmodelidget.ts
   - src/sdk/agents.ts
   - src/sdk/batch.ts
+  - src/sdk/beta.ts
   - src/sdk/chat.ts
   - src/sdk/classifiers.ts
+  - src/sdk/conversations.ts
   - src/sdk/embeddings.ts
   - src/sdk/files.ts
   - src/sdk/fim.ts
   - src/sdk/finetuning.ts
   - src/sdk/index.ts
   - src/sdk/jobs.ts
+  - src/sdk/mistralagents.ts
   - src/sdk/mistraljobs.ts
   - src/sdk/models.ts
   - src/sdk/ocr.ts
@@ -777,6 +980,161 @@ examples:
       responses:
         "200":
           application/json: {"id": "mod-e5cc70bb28c444948073e77776eb30ef", "model": "CX-9", "results": [{"key": {"scores": {"key": 4386.53, "key1": 2974.85}}, "key1": {"scores": {"key": 7100.52, "key1": 480.47}}}]}
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_start:
+    speakeasy-default-agents-api-v1-conversations-start:
+      requestBody:
+        application/json: {"inputs": "<value>", "stream": false}
+      responses:
+        "200":
+          application/json: {"object": "conversation.response", "conversation_id": "<id>", "outputs": [{"object": "entry", "type": "agent.handoff", "previous_agent_id": "<id>", "previous_agent_name": "<value>", "next_agent_id": "<id>", "next_agent_name": "<value>"}, {"object": "entry", "type": "message.output", "role": "assistant", "content": [{"type": "tool_reference", "tool": "web_search_premium", "title": "<value>"}, {"document_url": "https://unrealistic-fund.org/", "type": "document_url"}]}], "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}}
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_list:
+    speakeasy-default-agents-api-v1-conversations-list:
+      parameters:
+        query:
+          page: 0
+          page_size: 100
+      responses:
+        "200":
+          application/json: [{"object": "conversation", "id": "<id>", "created_at": "2025-01-13T10:26:00.433Z", "updated_at": "2023-07-14T18:23:27.528Z", "agent_id": "<id>"}, {"object": "conversation", "id": "<id>", "created_at": "2023-06-17T12:14:27.999Z", "updated_at": "2024-11-27T13:02:27.296Z", "model": "LeBaron"}, {"object": "conversation", "id": "<id>", "created_at": "2025-02-26T06:14:46.641Z", "updated_at": "2023-04-05T09:49:38.010Z", "model": "A8"}]
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_get:
+    speakeasy-default-agents-api-v1-conversations-get:
+      parameters:
+        path:
+          conversation_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "conversation", "id": "<id>", "created_at": "2024-09-04T11:33:52.011Z", "updated_at": "2024-08-19T11:11:04.610Z", "agent_id": "<id>"}
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_append:
+    speakeasy-default-agents-api-v1-conversations-append:
+      parameters:
+        path:
+          conversation_id: "<id>"
+      requestBody:
+        application/json: {"inputs": "<value>", "stream": false, "store": true, "handoff_execution": "server"}
+      responses:
+        "200":
+          application/json: {"object": "conversation.response", "conversation_id": "<id>", "outputs": [{"object": "entry", "type": "agent.handoff", "previous_agent_id": "<id>", "previous_agent_name": "<value>", "next_agent_id": "<id>", "next_agent_name": "<value>"}, {"object": "entry", "type": "function.call", "tool_call_id": "<id>", "name": "<value>", "arguments": "<value>"}], "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}}
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_history:
+    speakeasy-default-agents-api-v1-conversations-history:
+      parameters:
+        path:
+          conversation_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "conversation.history", "conversation_id": "<id>", "entries": [{"object": "entry", "type": "message.output", "role": "assistant", "content": [{"type": "tool_file", "tool": "web_search", "file_id": "<id>"}]}]}
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_messages:
+    speakeasy-default-agents-api-v1-conversations-messages:
+      parameters:
+        path:
+          conversation_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "conversation.messages", "conversation_id": "<id>", "messages": [{"object": "entry", "type": "message.input", "role": "assistant", "content": "<value>"}, {"object": "entry", "type": "message.input", "role": "assistant", "content": [{"document_url": "https://black-and-white-sauerkraut.biz", "type": "document_url"}, {"type": "tool_file", "tool": "code_interpreter", "file_id": "<id>"}, {"image_url": "https://emotional-couch.org", "type": "image_url"}]}, {"object": "entry", "type": "message.input", "role": "assistant", "content": "<value>"}]}
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_restart:
+    speakeasy-default-agents-api-v1-conversations-restart:
+      parameters:
+        path:
+          conversation_id: "<id>"
+      requestBody:
+        application/json: {"inputs": "<value>", "stream": false, "store": true, "handoff_execution": "server", "from_entry_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"object": "conversation.response", "conversation_id": "<id>", "outputs": [{"object": "entry", "type": "tool.execution", "name": "image_generation"}, {"object": "entry", "type": "tool.execution", "name": "web_search_premium"}], "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}}
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_start_stream:
+    speakeasy-default-agents-api-v1-conversations-start-stream:
+      requestBody:
+        application/json: {"inputs": "<value>", "stream": true}
+      responses:
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_append_stream:
+    speakeasy-default-agents-api-v1-conversations-append-stream:
+      parameters:
+        path:
+          conversation_id: "<id>"
+      requestBody:
+        application/json: {"inputs": "<value>", "stream": true, "store": true, "handoff_execution": "server"}
+      responses:
+        "422":
+          application/json: {}
+  agents_api_v1_conversations_restart_stream:
+    speakeasy-default-agents-api-v1-conversations-restart-stream:
+      parameters:
+        path:
+          conversation_id: "<id>"
+      requestBody:
+        application/json: {"inputs": "<value>", "stream": true, "store": true, "handoff_execution": "server", "from_entry_id": "<id>"}
+      responses:
+        "422":
+          application/json: {}
+  agents_api_v1_agents_create:
+    speakeasy-default-agents-api-v1-agents-create:
+      requestBody:
+        application/json: {"model": "Fiesta", "name": "<value>"}
+      responses:
+        "200":
+          application/json: {"model": "LeBaron", "name": "<value>", "object": "agent", "id": "<id>", "version": 417458, "created_at": "2023-05-28T06:20:22.766Z", "updated_at": "2023-03-17T15:39:20.911Z"}
+        "422":
+          application/json: {}
+  agents_api_v1_agents_list:
+    speakeasy-default-agents-api-v1-agents-list:
+      parameters:
+        query:
+          page: 0
+          page_size: 20
+      responses:
+        "200":
+          application/json: [{"model": "Golf", "name": "<value>", "object": "agent", "id": "<id>", "version": 678317, "created_at": "2023-07-14T18:23:27.528Z", "updated_at": "2023-09-09T18:28:08.953Z"}, {"model": "Aventador", "name": "<value>", "object": "agent", "id": "<id>", "version": 635532, "created_at": "2024-12-01T18:25:37.169Z", "updated_at": "2023-01-20T06:21:22.156Z"}, {"model": "Model T", "name": "<value>", "object": "agent", "id": "<id>", "version": 86140, "created_at": "2023-03-17T01:57:00.187Z", "updated_at": "2025-01-24T00:05:25.844Z"}]
+        "422":
+          application/json: {}
+  agents_api_v1_agents_get:
+    speakeasy-default-agents-api-v1-agents-get:
+      parameters:
+        path:
+          agent_id: "<id>"
+      responses:
+        "200":
+          application/json: {"model": "Model S", "name": "<value>", "object": "agent", "id": "<id>", "version": 558834, "created_at": "2024-08-19T11:11:04.610Z", "updated_at": "2024-07-25T06:33:15.810Z"}
+        "422":
+          application/json: {}
+  agents_api_v1_agents_update:
+    speakeasy-default-agents-api-v1-agents-update:
+      parameters:
+        path:
+          agent_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"model": "Sentra", "name": "<value>", "object": "agent", "id": "<id>", "version": 597129, "created_at": "2024-01-13T16:52:57.274Z", "updated_at": "2025-12-22T15:27:45.882Z"}
+        "422":
+          application/json: {}
+  agents_api_v1_agents_update_version:
+    speakeasy-default-agents-api-v1-agents-update-version:
+      parameters:
+        path:
+          agent_id: "<id>"
+        query:
+          version: 193920
+      responses:
+        "200":
+          application/json: {"model": "Mercielago", "name": "<value>", "object": "agent", "id": "<id>", "version": 253661, "created_at": "2023-02-14T22:44:06.703Z", "updated_at": "2025-12-15T06:22:04.120Z"}
         "422":
           application/json: {}
 examplesVersion: 1.0.0

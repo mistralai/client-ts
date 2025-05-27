@@ -29,12 +29,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      documentUrl: "https://skeletal-transparency.com",
-      type: "document_url",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

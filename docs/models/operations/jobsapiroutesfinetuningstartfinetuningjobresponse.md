@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "569b5500-4bac-4cdb-bfe9-90f2bd531b7b",
+  id: "ce13b342-2715-4606-a17d-d19d3cec1034",
   autoStart: false,
-  model: "Altima",
-  status: "CANCELLATION_REQUESTED",
-  createdAt: 411626,
-  modifiedAt: 305267,
+  model: "El Camino",
+  status: "SUCCESS",
+  createdAt: 353075,
+  modifiedAt: 154425,
   trainingFiles: [
-    "ff3a1ada-6669-4ee0-8213-58abefadc4e0",
+    "5ef3c4e2-a1fb-4d97-9987-c22651dc8f1c",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 273732,
+      stepNumber: 368599,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 4620.97,
+      weight: 2192.79,
       lossFunction: "multi_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "1ac2687c-fc1c-4132-a38a-7f3cd8796866",
+  id: "2da0caeb-8d48-44f3-b058-08db9ffd9709",
   autoStart: false,
-  model: "ATS",
-  status: "STARTED",
-  createdAt: 851199,
-  modifiedAt: 771078,
+  model: "Ranchero",
+  status: "VALIDATED",
+  createdAt: 152047,
+  modifiedAt: 784059,
   trainingFiles: [
-    "46ed9306-add0-4353-bcc8-f2e12b196bec",
+    "bfd81758-4dd5-496e-b2bf-23bc79371547",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 32945,
+      stepNumber: 181267,
       createdAt: 1716963433,
     },
   ],
