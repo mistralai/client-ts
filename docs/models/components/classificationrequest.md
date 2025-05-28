@@ -6,10 +6,8 @@
 import { ClassificationRequest } from "@mistralai/mistralai/models/components";
 
 let value: ClassificationRequest = {
-  model: "Aventador",
-  inputs: [
-    "<value>",
-  ],
+  model: "Jetta",
+  inputs: "<value>",
 };
 ```
 

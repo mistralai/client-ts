@@ -67,6 +67,7 @@ export * from "./deletemodelout.js";
 export * from "./deltamessage.js";
 export * from "./documentlibrarytool.js";
 export * from "./documenturlchunk.js";
+export * from "./embeddingdtype.js";
 export * from "./embeddingrequest.js";
 export * from "./embeddingresponse.js";
 export * from "./embeddingresponsedata.js";

@@ -13,7 +13,12 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 
@@ -23,8 +28,10 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      text: "<value>",
-      type: "text",
+      referenceIds: [
+        479385,
+      ],
+      type: "reference",
     },
   ],
 };
@@ -36,8 +43,10 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      documentUrl: "https://authorized-embarrassment.net",
-      type: "document_url",
+      imageUrl: {
+        url: "https://infinite-community.com",
+      },
+      type: "image_url",
     },
   ],
 };

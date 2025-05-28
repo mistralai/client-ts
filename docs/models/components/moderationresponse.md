@@ -7,7 +7,7 @@ import { ModerationResponse } from "@mistralai/mistralai/models/components";
 
 let value: ModerationResponse = {
   id: "mod-e5cc70bb28c444948073e77776eb30ef",
-  model: "Prius",
+  model: "Aventador",
   results: [
     {},
   ],

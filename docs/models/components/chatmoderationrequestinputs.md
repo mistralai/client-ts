@@ -11,7 +11,7 @@ Chat to classify
 const value: components.One[] = [
   {
     content: "<value>",
-    role: "user",
+    role: "system",
   },
 ];
 ```
@@ -24,11 +24,11 @@ const value: components.Two[][] = [
     {
       content: [
         {
-          documentUrl: "https://milky-tackle.net/",
-          type: "document_url",
+          text: "<value>",
+          type: "text",
         },
       ],
-      role: "user",
+      role: "tool",
     },
   ],
 ];
