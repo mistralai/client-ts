@@ -7,6 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  EmbeddingDtype,
+  EmbeddingDtype$inboundSchema,
+  EmbeddingDtype$outboundSchema,
+} from "./embeddingdtype.js";
 
 /**
  * Text to embed.
@@ -22,6 +27,11 @@ export type EmbeddingRequest = {
    * Text to embed.
    */
   inputs: string | Array<string>;
+  /**
+   * The dimension of the output embeddings.
+   */
+  outputDimension?: number | null | undefined;
+  outputDtype?: EmbeddingDtype | undefined;
 };
 
 /** @internal */
@@ -80,9 +90,13 @@ export const EmbeddingRequest$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   input: z.union([z.string(), z.array(z.string())]),
+  output_dimension: z.nullable(z.number().int()).optional(),
+  output_dtype: EmbeddingDtype$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "input": "inputs",
+    "output_dimension": "outputDimension",
+    "output_dtype": "outputDtype",
   });
 });
 
@@ -90,6 +104,8 @@ export const EmbeddingRequest$inboundSchema: z.ZodType<
 export type EmbeddingRequest$Outbound = {
   model: string;
   input: string | Array<string>;
+  output_dimension?: number | null | undefined;
+  output_dtype?: string | undefined;
 };
 
 /** @internal */
@@ -100,9 +116,13 @@ export const EmbeddingRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   inputs: z.union([z.string(), z.array(z.string())]),
+  outputDimension: z.nullable(z.number().int()).optional(),
+  outputDtype: EmbeddingDtype$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     inputs: "input",
+    outputDimension: "output_dimension",
+    outputDtype: "output_dtype",
   });
 });
 
