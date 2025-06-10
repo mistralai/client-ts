@@ -14,6 +14,11 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  MistralPromptMode,
+  MistralPromptMode$inboundSchema,
+  MistralPromptMode$outboundSchema,
+} from "./mistralpromptmode.js";
+import {
   Prediction,
   Prediction$inboundSchema,
   Prediction$Outbound,
@@ -129,6 +134,7 @@ export type ChatCompletionRequest = {
   n?: number | null | undefined;
   prediction?: Prediction | undefined;
   parallelToolCalls?: boolean | undefined;
+  promptMode?: MistralPromptMode | null | undefined;
   /**
    * Whether to inject a safety prompt before all conversations.
    */
@@ -353,6 +359,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$inboundSchema.optional(),
   parallel_tool_calls: z.boolean().optional(),
+  prompt_mode: z.nullable(MistralPromptMode$inboundSchema).optional(),
   safe_prompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -364,6 +371,7 @@ export const ChatCompletionRequest$inboundSchema: z.ZodType<
     "presence_penalty": "presencePenalty",
     "frequency_penalty": "frequencyPenalty",
     "parallel_tool_calls": "parallelToolCalls",
+    "prompt_mode": "promptMode",
     "safe_prompt": "safePrompt",
   });
 });
@@ -391,6 +399,7 @@ export type ChatCompletionRequest$Outbound = {
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
   parallel_tool_calls?: boolean | undefined;
+  prompt_mode?: string | null | undefined;
   safe_prompt?: boolean | undefined;
 };
 
@@ -442,6 +451,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
+  promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   safePrompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -453,6 +463,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
     presencePenalty: "presence_penalty",
     frequencyPenalty: "frequency_penalty",
     parallelToolCalls: "parallel_tool_calls",
+    promptMode: "prompt_mode",
     safePrompt: "safe_prompt",
   });
 });

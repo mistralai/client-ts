@@ -14,6 +14,11 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  MistralPromptMode,
+  MistralPromptMode$inboundSchema,
+  MistralPromptMode$outboundSchema,
+} from "./mistralpromptmode.js";
+import {
   Prediction,
   Prediction$inboundSchema,
   Prediction$Outbound,
@@ -117,6 +122,7 @@ export type AgentsCompletionRequest = {
   n?: number | null | undefined;
   prediction?: Prediction | undefined;
   parallelToolCalls?: boolean | undefined;
+  promptMode?: MistralPromptMode | null | undefined;
   /**
    * The ID of the agent to use for this completion.
    */
@@ -357,6 +363,7 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$inboundSchema.optional(),
   parallel_tool_calls: z.boolean().optional(),
+  prompt_mode: z.nullable(MistralPromptMode$inboundSchema).optional(),
   agent_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -367,6 +374,7 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
     "presence_penalty": "presencePenalty",
     "frequency_penalty": "frequencyPenalty",
     "parallel_tool_calls": "parallelToolCalls",
+    "prompt_mode": "promptMode",
     "agent_id": "agentId",
   });
 });
@@ -391,6 +399,7 @@ export type AgentsCompletionRequest$Outbound = {
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
   parallel_tool_calls?: boolean | undefined;
+  prompt_mode?: string | null | undefined;
   agent_id: string;
 };
 
@@ -439,6 +448,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
+  promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   agentId: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -449,6 +459,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
     presencePenalty: "presence_penalty",
     frequencyPenalty: "frequency_penalty",
     parallelToolCalls: "parallel_tool_calls",
+    promptMode: "prompt_mode",
     agentId: "agent_id",
   });
 });
