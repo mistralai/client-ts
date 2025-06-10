@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 12226a12b72a82af24e4b098c631ff42
+  docChecksum: 9c8bd4d6bf675b159a80173b97c1265c
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.7.1
-  configChecksum: 82605be5ee1cbe47d8905a522b7d55c9
+  releaseVersion: 1.7.2
+  configChecksum: 2231634947960f9c67d18ecb5c141174
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -259,6 +259,7 @@ generatedFiles:
   - docs/models/components/messageoutputeventtype.md
   - docs/models/components/messages.md
   - docs/models/components/metricout.md
+  - docs/models/components/mistralpromptmode.md
   - docs/models/components/modelcapabilities.md
   - docs/models/components/modelconversation.md
   - docs/models/components/modelconversationobject.md
@@ -582,6 +583,7 @@ generatedFiles:
   - src/models/components/messageoutputentry.ts
   - src/models/components/messageoutputevent.ts
   - src/models/components/metricout.ts
+  - src/models/components/mistralpromptmode.ts
   - src/models/components/modelcapabilities.ts
   - src/models/components/modelconversation.ts
   - src/models/components/modellist.ts
