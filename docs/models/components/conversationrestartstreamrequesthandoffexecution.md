@@ -5,7 +5,7 @@
 ```typescript
 import { ConversationRestartStreamRequestHandoffExecution } from "@mistralai/mistralai/models/components";
 
-let value: ConversationRestartStreamRequestHandoffExecution = "server";
+let value: ConversationRestartStreamRequestHandoffExecution = "client";
 ```
 
 ## Values

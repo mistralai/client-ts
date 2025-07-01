@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 9c8bd4d6bf675b159a80173b97c1265c
+  docChecksum: e0186c33d0269977e1790dfcc7d11aac
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.7.2
-  configChecksum: 2231634947960f9c67d18ecb5c141174
+  releaseVersion: 1.7.3
+  configChecksum: 56ba7c9a01b61f8ad043acd00caf7380
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -181,6 +181,7 @@ generatedFiles:
   - docs/models/components/embeddingresponsedata.md
   - docs/models/components/entries.md
   - docs/models/components/eventout.md
+  - docs/models/components/filechunk.md
   - docs/models/components/filepurpose.md
   - docs/models/components/fileschema.md
   - docs/models/components/filesignedurl.md
@@ -194,7 +195,6 @@ generatedFiles:
   - docs/models/components/ftclassifierlossfunction.md
   - docs/models/components/ftmodelcapabilitiesout.md
   - docs/models/components/ftmodelcard.md
-  - docs/models/components/ftmodelcardtype.md
   - docs/models/components/functioncall.md
   - docs/models/components/functioncallentry.md
   - docs/models/components/functioncallentryarguments.md
@@ -246,7 +246,6 @@ generatedFiles:
   - docs/models/components/messageinputentry.md
   - docs/models/components/messageinputentrycontent.md
   - docs/models/components/messageinputentryrole.md
-  - docs/models/components/messageinputentrytype.md
   - docs/models/components/messageoutputcontentchunks.md
   - docs/models/components/messageoutputentry.md
   - docs/models/components/messageoutputentrycontent.md
@@ -543,6 +542,7 @@ generatedFiles:
   - src/models/components/embeddingresponse.ts
   - src/models/components/embeddingresponsedata.ts
   - src/models/components/eventout.ts
+  - src/models/components/filechunk.ts
   - src/models/components/filepurpose.ts
   - src/models/components/fileschema.ts
   - src/models/components/filesignedurl.ts
@@ -711,7 +711,7 @@ examples:
           model_id: "ft:open-mistral-7b:587a6b29:20240514:7e773925"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "model", "owned_by": "mistralai", "capabilities": {"completion_chat": true, "completion_fim": false, "function_calling": true, "fine_tuning": false, "vision": false}, "max_context_length": 32768}
+          application/json: {"id": "<id>", "object": "model", "owned_by": "mistralai", "capabilities": {"completion_chat": true, "completion_fim": false, "function_calling": true, "fine_tuning": false, "vision": false, "classification": false}, "max_context_length": 32768}
         "422": {}
   delete_model_v1_models__model_id__delete:
     "":

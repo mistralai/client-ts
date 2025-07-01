@@ -8,7 +8,14 @@
 ```typescript
 const value: components.MessageInputEntry = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      imageUrl: {
+        url: "https://descriptive-unblinking.net/",
+      },
+      type: "image_url",
+    },
+  ],
 };
 ```
 
@@ -35,7 +42,9 @@ const value: components.FunctionResultEntry = {
 const value: components.FunctionCallEntry = {
   toolCallId: "<id>",
   name: "<value>",
-  arguments: "<value>",
+  arguments: {
+    "key": "<value>",
+  },
 };
 ```
 
@@ -43,7 +52,7 @@ const value: components.FunctionCallEntry = {
 
 ```typescript
 const value: components.ToolExecutionEntry = {
-  name: "image_generation",
+  name: "web_search_premium",
 };
 ```
 

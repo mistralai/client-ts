@@ -7,7 +7,10 @@ import { MessageOutputEvent } from "@mistralai/mistralai/models/components";
 
 let value: MessageOutputEvent = {
   id: "<id>",
-  content: "<value>",
+  content: {
+    documentUrl: "https://wee-ravioli.biz/",
+    type: "document_url",
+  },
 };
 ```
 

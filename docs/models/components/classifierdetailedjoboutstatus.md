@@ -5,7 +5,7 @@
 ```typescript
 import { ClassifierDetailedJobOutStatus } from "@mistralai/mistralai/models/components";
 
-let value: ClassifierDetailedJobOutStatus = "SUCCESS";
+let value: ClassifierDetailedJobOutStatus = "FAILED";
 ```
 
 ## Values

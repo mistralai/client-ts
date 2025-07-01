@@ -6,21 +6,21 @@
 import { OCRPageObject } from "@mistralai/mistralai/models/components";
 
 let value: OCRPageObject = {
-  index: 56877,
+  index: 948541,
   markdown: "<value>",
   images: [
     {
       id: "<id>",
-      topLeftX: 980486,
-      topLeftY: 96450,
-      bottomRightX: 863471,
-      bottomRightY: 566506,
+      topLeftX: 778276,
+      topLeftY: 848346,
+      bottomRightX: 490420,
+      bottomRightY: 185348,
     },
   ],
   dimensions: {
-    dpi: 367917,
-    height: 342342,
-    width: 757364,
+    dpi: 995816,
+    height: 129355,
+    width: 471457,
   },
 };
 ```

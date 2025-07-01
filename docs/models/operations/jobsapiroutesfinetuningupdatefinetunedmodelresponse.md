@@ -10,20 +10,20 @@ OK
 ```typescript
 const value: components.ClassifierFTModelOut = {
   id: "<id>",
-  created: 395233,
+  created: 700856,
   ownedBy: "<value>",
   root: "<value>",
   archived: false,
   capabilities: {},
-  job: "4b5bd3f2-4257-48de-8391-7557b1eb2f8f",
+  job: "e851ce1c-0f98-44e4-bdfc-817736527480",
   classifierTargets: [
     {
       name: "<value>",
       labels: [
         "<value>",
       ],
-      weight: 5349.08,
-      lossFunction: "single_class",
+      weight: 8163.65,
+      lossFunction: "multi_class",
     },
   ],
 };
@@ -34,12 +34,12 @@ const value: components.ClassifierFTModelOut = {
 ```typescript
 const value: components.CompletionFTModelOut = {
   id: "<id>",
-  created: 304173,
+  created: 851809,
   ownedBy: "<value>",
   root: "<value>",
   archived: false,
   capabilities: {},
-  job: "9ecb8e7d-d3c0-4538-bb18-f3a907b0e803",
+  job: "f1aff929-03f5-4a4f-8b5c-163a16485b0a",
 };
 ```
 

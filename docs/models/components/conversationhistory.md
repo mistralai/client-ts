@@ -14,13 +14,7 @@ let value: ConversationHistory = {
       object: "entry",
       type: "message.input",
       role: "assistant",
-      content: [
-        {
-          type: "tool_file",
-          tool: "web_search_premium",
-          fileId: "<id>",
-        },
-      ],
+      content: "<value>",
     },
   ],
 };

@@ -20,10 +20,10 @@ export const ObjectT = {
 } as const;
 export type ObjectT = ClosedEnum<typeof ObjectT>;
 
-export const MessageInputEntryType = {
+export const Type = {
   MessageInput: "message.input",
 } as const;
-export type MessageInputEntryType = ClosedEnum<typeof MessageInputEntryType>;
+export type Type = ClosedEnum<typeof Type>;
 
 export const MessageInputEntryRole = {
   Assistant: "assistant",
@@ -40,7 +40,7 @@ export type MessageInputEntryContent =
  */
 export type MessageInputEntry = {
   object?: ObjectT | undefined;
-  type?: MessageInputEntryType | undefined;
+  type?: Type | undefined;
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
@@ -68,24 +68,23 @@ export namespace ObjectT$ {
 }
 
 /** @internal */
-export const MessageInputEntryType$inboundSchema: z.ZodNativeEnum<
-  typeof MessageInputEntryType
-> = z.nativeEnum(MessageInputEntryType);
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
 
 /** @internal */
-export const MessageInputEntryType$outboundSchema: z.ZodNativeEnum<
-  typeof MessageInputEntryType
-> = MessageInputEntryType$inboundSchema;
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace MessageInputEntryType$ {
-  /** @deprecated use `MessageInputEntryType$inboundSchema` instead. */
-  export const inboundSchema = MessageInputEntryType$inboundSchema;
-  /** @deprecated use `MessageInputEntryType$outboundSchema` instead. */
-  export const outboundSchema = MessageInputEntryType$outboundSchema;
+export namespace Type$ {
+  /** @deprecated use `Type$inboundSchema` instead. */
+  export const inboundSchema = Type$inboundSchema;
+  /** @deprecated use `Type$outboundSchema` instead. */
+  export const outboundSchema = Type$outboundSchema;
 }
 
 /** @internal */
@@ -166,7 +165,7 @@ export const MessageInputEntry$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   object: ObjectT$inboundSchema.default("entry"),
-  type: MessageInputEntryType$inboundSchema.default("message.input"),
+  type: Type$inboundSchema.default("message.input"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
@@ -203,7 +202,7 @@ export const MessageInputEntry$outboundSchema: z.ZodType<
   MessageInputEntry
 > = z.object({
   object: ObjectT$outboundSchema.default("entry"),
-  type: MessageInputEntryType$outboundSchema.default("message.input"),
+  type: Type$outboundSchema.default("message.input"),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),

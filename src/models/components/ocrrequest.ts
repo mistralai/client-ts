@@ -14,6 +14,12 @@ import {
   DocumentURLChunk$outboundSchema,
 } from "./documenturlchunk.js";
 import {
+  FileChunk,
+  FileChunk$inboundSchema,
+  FileChunk$Outbound,
+  FileChunk$outboundSchema,
+} from "./filechunk.js";
+import {
   ImageURLChunk,
   ImageURLChunk$inboundSchema,
   ImageURLChunk$Outbound,
@@ -29,7 +35,7 @@ import {
 /**
  * Document to run OCR on
  */
-export type Document = ImageURLChunk | DocumentURLChunk;
+export type Document = FileChunk | ImageURLChunk | DocumentURLChunk;
 
 export type OCRRequest = {
   model: string | null;
@@ -37,7 +43,7 @@ export type OCRRequest = {
   /**
    * Document to run OCR on
    */
-  document: ImageURLChunk | DocumentURLChunk;
+  document: FileChunk | ImageURLChunk | DocumentURLChunk;
   /**
    * Specific pages user wants to process in various formats: single number, range, or list of both. Starts from 0
    */
@@ -69,10 +75,15 @@ export const Document$inboundSchema: z.ZodType<
   Document,
   z.ZodTypeDef,
   unknown
-> = z.union([ImageURLChunk$inboundSchema, DocumentURLChunk$inboundSchema]);
+> = z.union([
+  FileChunk$inboundSchema,
+  ImageURLChunk$inboundSchema,
+  DocumentURLChunk$inboundSchema,
+]);
 
 /** @internal */
 export type Document$Outbound =
+  | FileChunk$Outbound
   | ImageURLChunk$Outbound
   | DocumentURLChunk$Outbound;
 
@@ -81,7 +92,11 @@ export const Document$outboundSchema: z.ZodType<
   Document$Outbound,
   z.ZodTypeDef,
   Document
-> = z.union([ImageURLChunk$outboundSchema, DocumentURLChunk$outboundSchema]);
+> = z.union([
+  FileChunk$outboundSchema,
+  ImageURLChunk$outboundSchema,
+  DocumentURLChunk$outboundSchema,
+]);
 
 /**
  * @internal
@@ -119,6 +134,7 @@ export const OCRRequest$inboundSchema: z.ZodType<
   model: z.nullable(z.string()),
   id: z.string().optional(),
   document: z.union([
+    FileChunk$inboundSchema,
     ImageURLChunk$inboundSchema,
     DocumentURLChunk$inboundSchema,
   ]),
@@ -143,7 +159,10 @@ export const OCRRequest$inboundSchema: z.ZodType<
 export type OCRRequest$Outbound = {
   model: string | null;
   id?: string | undefined;
-  document: ImageURLChunk$Outbound | DocumentURLChunk$Outbound;
+  document:
+    | FileChunk$Outbound
+    | ImageURLChunk$Outbound
+    | DocumentURLChunk$Outbound;
   pages?: Array<number> | null | undefined;
   include_image_base64?: boolean | null | undefined;
   image_limit?: number | null | undefined;
@@ -161,6 +180,7 @@ export const OCRRequest$outboundSchema: z.ZodType<
   model: z.nullable(z.string()),
   id: z.string().optional(),
   document: z.union([
+    FileChunk$outboundSchema,
     ImageURLChunk$outboundSchema,
     DocumentURLChunk$outboundSchema,
   ]),

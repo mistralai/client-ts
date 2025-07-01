@@ -7,8 +7,8 @@ import { AgentConversation } from "@mistralai/mistralai/models/components";
 
 let value: AgentConversation = {
   id: "<id>",
-  createdAt: new Date("2024-01-30T12:51:46.829Z"),
-  updatedAt: new Date("2025-03-11T01:40:18.315Z"),
+  createdAt: new Date("2024-11-12T03:22:04.343Z"),
+  updatedAt: new Date("2024-09-24T15:25:14.861Z"),
   agentId: "<id>",
 };
 ```

@@ -6,7 +6,7 @@
 import { TrainingFile } from "@mistralai/mistralai/models/components";
 
 let value: TrainingFile = {
-  fileId: "840b058e-1605-4943-b19b-af0a99f0bd85",
+  fileId: "0bd85c17-8b13-469e-992f-d8e8edfe026f",
 };
 ```
 

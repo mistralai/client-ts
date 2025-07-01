@@ -10,6 +10,9 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentsApiV1ConversationsGetRequest = {
+  /**
+   * ID of the conversation from which we are fetching metadata.
+   */
   conversationId: string;
 };
 

@@ -6,9 +6,9 @@
 import { OCRPageDimensions } from "@mistralai/mistralai/models/components";
 
 let value: OCRPageDimensions = {
-  dpi: 314573,
-  height: 657319,
-  width: 517326,
+  dpi: 68093,
+  height: 943851,
+  width: 964925,
 };
 ```
 

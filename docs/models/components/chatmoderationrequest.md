@@ -8,16 +8,11 @@ import { ChatModerationRequest } from "@mistralai/mistralai/models/components";
 let value: ChatModerationRequest = {
   inputs: [
     {
-      content: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
+      content: "<value>",
       role: "tool",
     },
   ],
-  model: "Beetle",
+  model: "Model T",
 };
 ```
 

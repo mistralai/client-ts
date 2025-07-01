@@ -1,12 +1,12 @@
-# FilesApiRoutesDeleteFileRequest
+# FileChunk
 
 ## Example Usage
 
 ```typescript
-import { FilesApiRoutesDeleteFileRequest } from "@mistralai/mistralai/models/operations";
+import { FileChunk } from "@mistralai/mistralai/models/components";
 
-let value: FilesApiRoutesDeleteFileRequest = {
-  fileId: "0dc0a822-c9ff-4f1f-937c-39211506a611",
+let value: FileChunk = {
+  fileId: "7e04b621-d7eb-4658-beb0-beb2725ee459",
 };
 ```
 
@@ -14,4 +14,5 @@ let value: FilesApiRoutesDeleteFileRequest = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *string*           | :heavy_minus_sign: | N/A                |
 | `fileId`           | *string*           | :heavy_check_mark: | N/A                |

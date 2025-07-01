@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "a515285f-f99f-4ec5-8537-fe10e83aa140",
+  id: "7bbec47b-2374-4d95-adcf-d62d05efab08",
   autoStart: false,
-  model: "Alpine",
-  status: "STARTED",
-  createdAt: 685467,
-  modifiedAt: 49499,
+  model: "Countach",
+  status: "QUEUED",
+  createdAt: 228907,
+  modifiedAt: 357984,
   trainingFiles: [
-    "12544cf8-f616-447a-97ee-b726b41eb9cd",
+    "69b55004-bacc-4dbf-8e99-0f2bd531b7be",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 881189,
+      stepNumber: 919171,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 9164.19,
+      weight: 4116.26,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "988f4fe7-dca5-43ad-b0a7-e5782bd040fa",
+  id: "ff3a1ada-6669-4ee0-8213-58abefadc4e0",
   autoStart: false,
-  model: "Fortwo",
-  status: "CANCELLED",
-  createdAt: 374414,
-  modifiedAt: 353819,
+  model: "Charger",
+  status: "RUNNING",
+  createdAt: 638363,
+  modifiedAt: 101770,
   trainingFiles: [
-    "6a5ef031-037d-437e-aac8-f90369c6bc5f",
+    "ac2687cf-c1c1-4323-88a7-f3cd8796866b",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 880998,
+      stepNumber: 166542,
       createdAt: 1716963433,
     },
   ],

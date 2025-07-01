@@ -14,10 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.MessageInputContentChunks[] = [
   {
-    imageUrl: {
-      url: "https://strict-pressure.com",
-    },
-    type: "image_url",
+    documentUrl: "https://impure-battle.net",
+    type: "document_url",
   },
 ];
 ```

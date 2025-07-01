@@ -72,6 +72,7 @@ export * from "./embeddingrequest.js";
 export * from "./embeddingresponse.js";
 export * from "./embeddingresponsedata.js";
 export * from "./eventout.js";
+export * from "./filechunk.js";
 export * from "./filepurpose.js";
 export * from "./fileschema.js";
 export * from "./filesignedurl.js";

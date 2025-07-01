@@ -12,7 +12,7 @@ let value: FileSchema = {
   createdAt: 1716963433,
   filename: "files_upload.jsonl",
   purpose: "ocr",
-  sampleType: "pretrain",
+  sampleType: "instruct",
   source: "repository",
 };
 ```

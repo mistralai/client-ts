@@ -13,12 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -26,7 +21,12 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      documentUrl: "https://gracious-silk.com/",
+      type: "document_url",
+    },
+  ],
 };
 ```
 
@@ -34,12 +34,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

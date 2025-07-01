@@ -6,14 +6,14 @@
 import { ConversationEvents } from "@mistralai/mistralai/models/components";
 
 let value: ConversationEvents = {
-  event: "message.output.delta",
+  event: "conversation.response.started",
   data: {
-    type: "conversation.response.done",
-    usage: {
-      promptTokens: 0,
-      completionTokens: 0,
-      totalTokens: 0,
-    },
+    type: "message.output.delta",
+    outputIndex: 0,
+    id: "<id>",
+    contentIndex: 0,
+    role: "assistant",
+    content: "<value>",
   },
 };
 ```

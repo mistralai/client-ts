@@ -26,14 +26,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      referenceIds: [
-        479385,
-      ],
-      type: "reference",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -43,10 +36,8 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      imageUrl: {
-        url: "https://infinite-community.com",
-      },
-      type: "image_url",
+      documentUrl: "https://artistic-finger.com",
+      type: "document_url",
     },
   ],
 };

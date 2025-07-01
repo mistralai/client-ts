@@ -15,9 +15,10 @@ const value: string = "<value>";
 const value: components.InputEntries[] = [
   {
     object: "entry",
-    type: "function.result",
+    type: "function.call",
     toolCallId: "<id>",
-    result: "<value>",
+    name: "<value>",
+    arguments: "<value>",
   },
 ];
 ```

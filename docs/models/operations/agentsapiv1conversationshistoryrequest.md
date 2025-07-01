@@ -12,6 +12,6 @@ let value: AgentsApiV1ConversationsHistoryRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `conversationId`   | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `conversationId`                                           | *string*                                                   | :heavy_check_mark:                                         | ID of the conversation from which we are fetching entries. |

@@ -33,7 +33,7 @@ export class Models extends ClientSDK {
    * Retrieve Model
    *
    * @remarks
-   * Retrieve a model information.
+   * Retrieve information about a model.
    */
   async retrieve(
     request: operations.RetrieveModelV1ModelsModelIdGetRequest,

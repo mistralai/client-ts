@@ -13,7 +13,12 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 
@@ -21,7 +26,14 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: {
+        url: "https://clean-tenant.com/",
+      },
+      type: "image_url",
+    },
+  ],
 };
 ```
 
@@ -29,7 +41,12 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: "https://hidden-flint.net",
+      type: "image_url",
+    },
+  ],
 };
 ```
 

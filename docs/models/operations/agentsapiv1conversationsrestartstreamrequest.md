@@ -8,19 +8,7 @@ import { AgentsApiV1ConversationsRestartStreamRequest } from "@mistralai/mistral
 let value: AgentsApiV1ConversationsRestartStreamRequest = {
   conversationId: "<id>",
   conversationRestartStreamRequest: {
-    inputs: [
-      {
-        object: "entry",
-        type: "message.input",
-        role: "assistant",
-        content: [
-          {
-            text: "<value>",
-            type: "text",
-          },
-        ],
-      },
-    ],
+    inputs: "<value>",
     fromEntryId: "<id>",
   },
 };
@@ -30,5 +18,5 @@ let value: AgentsApiV1ConversationsRestartStreamRequest = {
 
 | Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `conversationId`                                                                                           | *string*                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `conversationId`                                                                                           | *string*                                                                                                   | :heavy_check_mark:                                                                                         | ID of the original conversation which is being restarted.                                                  |
 | `conversationRestartStreamRequest`                                                                         | [components.ConversationRestartStreamRequest](../../models/components/conversationrestartstreamrequest.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

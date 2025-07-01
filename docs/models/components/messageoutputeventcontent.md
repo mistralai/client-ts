@@ -13,8 +13,8 @@ const value: string = "<value>";
 
 ```typescript
 const value: components.OutputContentChunks = {
-  text: "<value>",
-  type: "text",
+  documentUrl: "https://firsthand-section.biz",
+  type: "document_url",
 };
 ```
 

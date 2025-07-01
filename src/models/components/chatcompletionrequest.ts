@@ -134,6 +134,9 @@ export type ChatCompletionRequest = {
   n?: number | null | undefined;
   prediction?: Prediction | undefined;
   parallelToolCalls?: boolean | undefined;
+  /**
+   * Allows toggling between the reasoning mode and no system prompt. When set to `reasoning` the system prompt for reasoning models will be used.
+   */
   promptMode?: MistralPromptMode | null | undefined;
   /**
    * Whether to inject a safety prompt before all conversations.

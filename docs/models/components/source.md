@@ -5,7 +5,7 @@
 ```typescript
 import { Source } from "@mistralai/mistralai/models/components";
 
-let value: Source = "upload";
+let value: Source = "mistral";
 ```
 
 ## Values

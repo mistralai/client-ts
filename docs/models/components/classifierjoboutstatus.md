@@ -7,7 +7,7 @@ The current status of the fine-tuning job.
 ```typescript
 import { ClassifierJobOutStatus } from "@mistralai/mistralai/models/components";
 
-let value: ClassifierJobOutStatus = "VALIDATING";
+let value: ClassifierJobOutStatus = "SUCCESS";
 ```
 
 ## Values

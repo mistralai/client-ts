@@ -10,6 +10,9 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentsApiV1ConversationsRestartStreamRequest = {
+  /**
+   * ID of the original conversation which is being restarted.
+   */
   conversationId: string;
   conversationRestartStreamRequest: components.ConversationRestartStreamRequest;
 };
