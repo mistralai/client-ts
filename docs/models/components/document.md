@@ -5,11 +5,19 @@ Document to run OCR on
 
 ## Supported Types
 
+### `components.FileChunk`
+
+```typescript
+const value: components.FileChunk = {
+  fileId: "2825ab06-ad7f-4407-b4d3-4cb8b600810f",
+};
+```
+
 ### `components.DocumentURLChunk`
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://apprehensive-saloon.biz",
+  documentUrl: "https://abandoned-tuxedo.biz/",
 };
 ```
 
@@ -17,7 +25,9 @@ const value: components.DocumentURLChunk = {
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://grave-bran.info/",
+  imageUrl: {
+    url: "https://charming-divine.org",
+  },
 };
 ```
 

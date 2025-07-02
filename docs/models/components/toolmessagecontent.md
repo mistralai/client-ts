@@ -14,10 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    referenceIds: [
-      932562,
-    ],
-    type: "reference",
+    documentUrl: "https://irresponsible-formation.org/",
+    type: "document_url",
   },
 ];
 ```

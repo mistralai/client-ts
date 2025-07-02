@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * Retrieve Model
  *
  * @remarks
- * Retrieve a model information.
+ * Retrieve information about a model.
  */
 export function modelsRetrieve(
   client: MistralCore,

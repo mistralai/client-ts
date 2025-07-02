@@ -88,7 +88,7 @@ run();
 
 ## retrieve
 
-Retrieve a model information.
+Retrieve information about a model.
 
 ### Example Usage
 

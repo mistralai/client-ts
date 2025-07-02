@@ -9,9 +9,10 @@ let value: ConversationAppendRequest = {
   inputs: [
     {
       object: "entry",
-      type: "message.input",
-      role: "assistant",
-      content: "<value>",
+      type: "function.call",
+      toolCallId: "<id>",
+      name: "<value>",
+      arguments: "<value>",
     },
   ],
 };

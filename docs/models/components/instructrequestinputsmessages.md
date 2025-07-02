@@ -13,12 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -26,14 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      imageUrl: {
-        url: "https://mad-tectonics.biz",
-      },
-      type: "image_url",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -43,8 +31,7 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      documentUrl: "https://juvenile-hovel.info/",
-      type: "document_url",
+      fileId: "e3917557-b1eb-42f8-bf38-449ecb8e7dd3",
     },
   ],
 };

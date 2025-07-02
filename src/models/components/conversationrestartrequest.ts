@@ -40,11 +40,11 @@ export type ConversationRestartRequest = {
    */
   store?: boolean | undefined;
   handoffExecution?: ConversationRestartRequestHandoffExecution | undefined;
-  fromEntryId: string;
   /**
    * White-listed arguments from the completion API
    */
   completionArgs?: CompletionArgs | undefined;
+  fromEntryId: string;
 };
 
 /** @internal */
@@ -81,13 +81,13 @@ export const ConversationRestartRequest$inboundSchema: z.ZodType<
   store: z.boolean().default(true),
   handoff_execution: ConversationRestartRequestHandoffExecution$inboundSchema
     .default("server"),
-  from_entry_id: z.string(),
   completion_args: CompletionArgs$inboundSchema.optional(),
+  from_entry_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "handoff_execution": "handoffExecution",
-    "from_entry_id": "fromEntryId",
     "completion_args": "completionArgs",
+    "from_entry_id": "fromEntryId",
   });
 });
 
@@ -97,8 +97,8 @@ export type ConversationRestartRequest$Outbound = {
   stream: boolean;
   store: boolean;
   handoff_execution: string;
-  from_entry_id: string;
   completion_args?: CompletionArgs$Outbound | undefined;
+  from_entry_id: string;
 };
 
 /** @internal */
@@ -112,13 +112,13 @@ export const ConversationRestartRequest$outboundSchema: z.ZodType<
   store: z.boolean().default(true),
   handoffExecution: ConversationRestartRequestHandoffExecution$outboundSchema
     .default("server"),
-  fromEntryId: z.string(),
   completionArgs: CompletionArgs$outboundSchema.optional(),
+  fromEntryId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",
-    fromEntryId: "from_entry_id",
     completionArgs: "completion_args",
+    fromEntryId: "from_entry_id",
   });
 });
 

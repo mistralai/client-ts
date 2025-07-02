@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "ce13b342-2715-4606-a17d-d19d3cec1034",
+  id: "f8d95368-0293-4d51-81e1-2d4ad9fb18bc",
   autoStart: false,
-  model: "El Camino",
-  status: "SUCCESS",
-  createdAt: 353075,
-  modifiedAt: 154425,
+  model: "Model T",
+  status: "CANCELLED",
+  createdAt: 746834,
+  modifiedAt: 512349,
   trainingFiles: [
-    "5ef3c4e2-a1fb-4d97-9987-c22651dc8f1c",
+    "78be9eb1-8445-459a-b420-920e81df7016",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 368599,
+      stepNumber: 148038,
       createdAt: 1716963433,
     },
   ],
@@ -32,8 +32,8 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 2192.79,
-      lossFunction: "multi_class",
+      weight: 8239.9,
+      lossFunction: "single_class",
     },
   ],
 };
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "2da0caeb-8d48-44f3-b058-08db9ffd9709",
+  id: "7a09f2b9-2008-4fab-8792-ecf432fc2862",
   autoStart: false,
-  model: "Ranchero",
+  model: "Wrangler",
   status: "VALIDATED",
-  createdAt: 152047,
-  modifiedAt: 784059,
+  createdAt: 941440,
+  modifiedAt: 75610,
   trainingFiles: [
-    "bfd81758-4dd5-496e-b2bf-23bc79371547",
+    "72081bb2-fb4b-4b56-a59e-2e0a6cb7a8c7",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 181267,
+      stepNumber: 250520,
       createdAt: 1716963433,
     },
   ],

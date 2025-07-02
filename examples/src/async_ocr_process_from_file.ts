@@ -16,13 +16,11 @@ const uploaded_pdf = await client.files.upload({
     purpose: "ocr"
 });
 
-client.files.retrieve({ fileId: uploaded_pdf.id })
-
 const ocrResponse = await client.ocr.process({
     model: "mistral-ocr-latest",
     document: {
-        type: "document_url",
-        documentUrl: "https://arxiv.org/pdf/2201.04234"
+        type: "file",
+        fileId: uploaded_pdf.id
     },
     includeImageBase64: true
 });

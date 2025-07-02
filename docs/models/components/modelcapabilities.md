@@ -17,3 +17,4 @@ let value: ModelCapabilities = {};
 | `functionCalling`  | *boolean*          | :heavy_minus_sign: | N/A                |
 | `fineTuning`       | *boolean*          | :heavy_minus_sign: | N/A                |
 | `vision`           | *boolean*          | :heavy_minus_sign: | N/A                |
+| `classification`   | *boolean*          | :heavy_minus_sign: | N/A                |

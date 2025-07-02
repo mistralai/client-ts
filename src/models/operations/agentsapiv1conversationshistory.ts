@@ -9,6 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentsApiV1ConversationsHistoryRequest = {
+  /**
+   * ID of the conversation from which we are fetching entries.
+   */
   conversationId: string;
 };
 

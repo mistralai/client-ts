@@ -6,9 +6,9 @@
 import { OCRRequest } from "@mistralai/mistralai/models/components";
 
 let value: OCRRequest = {
-  model: "Ranchero",
+  model: "LeBaron",
   document: {
-    documentUrl: "https://gracious-silk.com/",
+    documentUrl: "https://sorrowful-character.org/",
     type: "document_url",
   },
 };

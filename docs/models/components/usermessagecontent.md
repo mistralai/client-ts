@@ -14,10 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: {
-      url: "https://oddball-devil.name/",
-    },
-    type: "image_url",
+    text: "<value>",
+    type: "text",
   },
 ];
 ```

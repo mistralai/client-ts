@@ -13,6 +13,12 @@ import {
   DocumentURLChunk$outboundSchema,
 } from "./documenturlchunk.js";
 import {
+  FileChunk,
+  FileChunk$inboundSchema,
+  FileChunk$Outbound,
+  FileChunk$outboundSchema,
+} from "./filechunk.js";
+import {
   ImageURLChunk,
   ImageURLChunk$inboundSchema,
   ImageURLChunk$Outbound,
@@ -35,6 +41,7 @@ export type ContentChunk =
   | (ImageURLChunk & { type: "image_url" })
   | (TextChunk & { type: "text" })
   | (ReferenceChunk & { type: "reference" })
+  | (FileChunk & { type: "file" })
   | (DocumentURLChunk & { type: "document_url" });
 
 /** @internal */
@@ -56,6 +63,9 @@ export const ContentChunk$inboundSchema: z.ZodType<
       type: v.type,
     })),
   ),
+  FileChunk$inboundSchema.and(
+    z.object({ type: z.literal("file") }).transform((v) => ({ type: v.type })),
+  ),
   DocumentURLChunk$inboundSchema.and(
     z.object({ type: z.literal("document_url") }).transform((v) => ({
       type: v.type,
@@ -68,6 +78,7 @@ export type ContentChunk$Outbound =
   | (ImageURLChunk$Outbound & { type: "image_url" })
   | (TextChunk$Outbound & { type: "text" })
   | (ReferenceChunk$Outbound & { type: "reference" })
+  | (FileChunk$Outbound & { type: "file" })
   | (DocumentURLChunk$Outbound & { type: "document_url" });
 
 /** @internal */
@@ -88,6 +99,9 @@ export const ContentChunk$outboundSchema: z.ZodType<
     z.object({ type: z.literal("reference") }).transform((v) => ({
       type: v.type,
     })),
+  ),
+  FileChunk$outboundSchema.and(
+    z.object({ type: z.literal("file") }).transform((v) => ({ type: v.type })),
   ),
   DocumentURLChunk$outboundSchema.and(
     z.object({ type: z.literal("document_url") }).transform((v) => ({

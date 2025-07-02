@@ -12,7 +12,7 @@ let value: UploadFileOut = {
   createdAt: 1716963433,
   filename: "files_upload.jsonl",
   purpose: "fine-tune",
-  sampleType: "instruct",
+  sampleType: "batch_request",
   source: "repository",
 };
 ```

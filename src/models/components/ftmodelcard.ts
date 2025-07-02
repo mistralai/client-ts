@@ -5,7 +5,6 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,11 +13,6 @@ import {
   ModelCapabilities$Outbound,
   ModelCapabilities$outboundSchema,
 } from "./modelcapabilities.js";
-
-export const FTModelCardType = {
-  FineTuned: "fine-tuned",
-} as const;
-export type FTModelCardType = ClosedEnum<typeof FTModelCardType>;
 
 /**
  * Extra fields for fine-tuned models.
@@ -34,33 +28,13 @@ export type FTModelCard = {
   maxContextLength?: number | undefined;
   aliases?: Array<string> | undefined;
   deprecation?: Date | null | undefined;
+  deprecationReplacementModel?: string | null | undefined;
   defaultModelTemperature?: number | null | undefined;
   type?: "fine-tuned" | undefined;
   job: string;
   root: string;
   archived?: boolean | undefined;
 };
-
-/** @internal */
-export const FTModelCardType$inboundSchema: z.ZodNativeEnum<
-  typeof FTModelCardType
-> = z.nativeEnum(FTModelCardType);
-
-/** @internal */
-export const FTModelCardType$outboundSchema: z.ZodNativeEnum<
-  typeof FTModelCardType
-> = FTModelCardType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FTModelCardType$ {
-  /** @deprecated use `FTModelCardType$inboundSchema` instead. */
-  export const inboundSchema = FTModelCardType$inboundSchema;
-  /** @deprecated use `FTModelCardType$outboundSchema` instead. */
-  export const outboundSchema = FTModelCardType$outboundSchema;
-}
 
 /** @internal */
 export const FTModelCard$inboundSchema: z.ZodType<
@@ -80,6 +54,7 @@ export const FTModelCard$inboundSchema: z.ZodType<
   deprecation: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  deprecation_replacement_model: z.nullable(z.string()).optional(),
   default_model_temperature: z.nullable(z.number()).optional(),
   type: z.literal("fine-tuned").default("fine-tuned"),
   job: z.string(),
@@ -89,6 +64,7 @@ export const FTModelCard$inboundSchema: z.ZodType<
   return remap$(v, {
     "owned_by": "ownedBy",
     "max_context_length": "maxContextLength",
+    "deprecation_replacement_model": "deprecationReplacementModel",
     "default_model_temperature": "defaultModelTemperature",
   });
 });
@@ -105,6 +81,7 @@ export type FTModelCard$Outbound = {
   max_context_length: number;
   aliases?: Array<string> | undefined;
   deprecation?: string | null | undefined;
+  deprecation_replacement_model?: string | null | undefined;
   default_model_temperature?: number | null | undefined;
   type: "fine-tuned";
   job: string;
@@ -128,8 +105,9 @@ export const FTModelCard$outboundSchema: z.ZodType<
   maxContextLength: z.number().int().default(32768),
   aliases: z.array(z.string()).optional(),
   deprecation: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  deprecationReplacementModel: z.nullable(z.string()).optional(),
   defaultModelTemperature: z.nullable(z.number()).optional(),
-  type: z.literal("fine-tuned").default("fine-tuned"),
+  type: z.literal("fine-tuned").default("fine-tuned" as const),
   job: z.string(),
   root: z.string(),
   archived: z.boolean().default(false),
@@ -137,6 +115,7 @@ export const FTModelCard$outboundSchema: z.ZodType<
   return remap$(v, {
     ownedBy: "owned_by",
     maxContextLength: "max_context_length",
+    deprecationReplacementModel: "deprecation_replacement_model",
     defaultModelTemperature: "default_model_temperature",
   });
 });

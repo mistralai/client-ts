@@ -11,12 +11,7 @@ Chat to classify
 const value: components.InstructRequestInputs = {
   messages: [
     {
-      content: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
+      content: "<value>",
       role: "system",
     },
   ],
@@ -32,11 +27,11 @@ const value: components.InstructRequest[] = [
       {
         content: [
           {
-            documentUrl: "https://shocked-characterization.org",
-            type: "document_url",
+            imageUrl: "https://enchanting-planula.name",
+            type: "image_url",
           },
         ],
-        role: "user",
+        role: "tool",
       },
     ],
   },

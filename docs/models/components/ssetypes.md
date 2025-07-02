@@ -7,7 +7,7 @@ Server side events sent when streaming a conversation response.
 ```typescript
 import { SSETypes } from "@mistralai/mistralai/models/components";
 
-let value: SSETypes = "message.output.delta";
+let value: SSETypes = "tool.execution.started";
 ```
 
 ## Values

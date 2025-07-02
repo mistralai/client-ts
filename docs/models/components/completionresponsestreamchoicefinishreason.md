@@ -5,7 +5,7 @@
 ```typescript
 import { CompletionResponseStreamChoiceFinishReason } from "@mistralai/mistralai/models/components";
 
-let value: CompletionResponseStreamChoiceFinishReason = "length";
+let value: CompletionResponseStreamChoiceFinishReason = "stop";
 ```
 
 ## Values

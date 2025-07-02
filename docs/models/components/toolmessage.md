@@ -6,7 +6,14 @@
 import { ToolMessage } from "@mistralai/mistralai/models/components";
 
 let value: ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      referenceIds: [
+        289913,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 

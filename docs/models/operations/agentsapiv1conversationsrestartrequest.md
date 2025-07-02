@@ -11,9 +11,11 @@ let value: AgentsApiV1ConversationsRestartRequest = {
     inputs: [
       {
         object: "entry",
-        type: "function.result",
-        toolCallId: "<id>",
-        result: "<value>",
+        type: "agent.handoff",
+        previousAgentId: "<id>",
+        previousAgentName: "<value>",
+        nextAgentId: "<id>",
+        nextAgentName: "<value>",
       },
     ],
     fromEntryId: "<id>",
@@ -25,5 +27,5 @@ let value: AgentsApiV1ConversationsRestartRequest = {
 
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `conversationId`                                                                               | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `conversationId`                                                                               | *string*                                                                                       | :heavy_check_mark:                                                                             | ID of the original conversation which is being restarted.                                      |
 | `conversationRestartRequest`                                                                   | [components.ConversationRestartRequest](../../models/components/conversationrestartrequest.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |

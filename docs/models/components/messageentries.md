@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.MessageInputEntry = {
-  role: "user",
+  role: "assistant",
   content: "<value>",
 };
 ```

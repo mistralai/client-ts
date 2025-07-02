@@ -14,13 +14,7 @@ let value: ConversationMessages = {
       object: "entry",
       type: "message.output",
       role: "assistant",
-      content: [
-        {
-          type: "tool_file",
-          tool: "code_interpreter",
-          fileId: "<id>",
-        },
-      ],
+      content: "<value>",
     },
   ],
 };

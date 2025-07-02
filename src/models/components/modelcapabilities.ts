@@ -14,6 +14,7 @@ export type ModelCapabilities = {
   functionCalling?: boolean | undefined;
   fineTuning?: boolean | undefined;
   vision?: boolean | undefined;
+  classification?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,6 +28,7 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
   function_calling: z.boolean().default(true),
   fine_tuning: z.boolean().default(false),
   vision: z.boolean().default(false),
+  classification: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "completion_chat": "completionChat",
@@ -43,6 +45,7 @@ export type ModelCapabilities$Outbound = {
   function_calling: boolean;
   fine_tuning: boolean;
   vision: boolean;
+  classification: boolean;
 };
 
 /** @internal */
@@ -56,6 +59,7 @@ export const ModelCapabilities$outboundSchema: z.ZodType<
   functionCalling: z.boolean().default(true),
   fineTuning: z.boolean().default(false),
   vision: z.boolean().default(false),
+  classification: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     completionChat: "completion_chat",

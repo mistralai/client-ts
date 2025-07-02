@@ -8,10 +8,10 @@ Representation of an input message inside the conversation.
 import { MessageInputEntry } from "@mistralai/mistralai/models/components";
 
 let value: MessageInputEntry = {
-  role: "user",
+  role: "assistant",
   content: [
     {
-      documentUrl: "https://trivial-coil.name/",
+      documentUrl: "https://tight-address.info",
       type: "document_url",
     },
   ],
@@ -23,7 +23,7 @@ let value: MessageInputEntry = {
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `object`                                                                                      | [components.ObjectT](../../models/components/objectt.md)                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `type`                                                                                        | [components.MessageInputEntryType](../../models/components/messageinputentrytype.md)          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | [components.Type](../../models/components/type.md)                                            | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `completedAt`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |

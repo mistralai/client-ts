@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "62d05efa-b088-4513-b569-b55004baccdb",
+  id: "cd048634-f450-4d23-94e3-cce13b342271",
   autoStart: false,
-  model: "Spyder",
-  status: "FAILED_VALIDATION",
-  createdAt: 588158,
-  modifiedAt: 34267,
+  model: "Escalade",
+  status: "QUEUED",
+  createdAt: 388333,
+  modifiedAt: 94122,
   trainingFiles: [
-    "f2bd531b-7be2-4e64-8ff3-a1ada6669ee0",
+    "7dd19d3c-ec10-4349-a6b5-25ef3c4e2a1f",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 112224,
+      stepNumber: 841816,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 1933.34,
+      weight: 5666.69,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "8abefadc-4e00-447a-81ac-2687cfc1c132",
+  id: "987c2265-1dc8-4f1c-a453-c2da0caeb8d4",
   autoStart: false,
-  model: "Fortwo",
-  status: "FAILED",
-  createdAt: 470321,
-  modifiedAt: 959696,
+  model: "Civic",
+  status: "CANCELLATION_REQUESTED",
+  createdAt: 226196,
+  modifiedAt: 15738,
   trainingFiles: [
-    "3cd87968-66b1-42dc-b46e-d9306add0353",
+    "5808db9f-fd97-409f-9d52-cbfd817584dd",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 767466,
+      stepNumber: 599581,
       createdAt: 1716963433,
     },
   ],

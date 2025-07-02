@@ -31,10 +31,8 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      referenceIds: [
-        102413,
-      ],
-      type: "reference",
+      text: "<value>",
+      type: "text",
     },
   ],
 };

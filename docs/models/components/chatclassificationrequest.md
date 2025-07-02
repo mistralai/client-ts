@@ -6,17 +6,15 @@
 import { ChatClassificationRequest } from "@mistralai/mistralai/models/components";
 
 let value: ChatClassificationRequest = {
-  model: "Volt",
-  inputs: [
-    {
-      messages: [
-        {
-          content: "<value>",
-          role: "system",
-        },
-      ],
-    },
-  ],
+  model: "Aventador",
+  inputs: {
+    messages: [
+      {
+        prefix: false,
+        role: "assistant",
+      },
+    ],
+  },
 };
 ```
 

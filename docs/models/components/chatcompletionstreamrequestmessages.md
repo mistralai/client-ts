@@ -13,12 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -28,8 +23,10 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      documentUrl: "https://formal-sushi.com",
-      type: "document_url",
+      referenceIds: [
+        498180,
+      ],
+      type: "reference",
     },
   ],
 };
@@ -39,7 +36,14 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      referenceIds: [
+        401428,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 

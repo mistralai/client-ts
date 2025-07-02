@@ -8,7 +8,19 @@ import { AgentsApiV1ConversationsAppendRequest } from "@mistralai/mistralai/mode
 let value: AgentsApiV1ConversationsAppendRequest = {
   conversationId: "<id>",
   conversationAppendRequest: {
-    inputs: "<value>",
+    inputs: [
+      {
+        object: "entry",
+        type: "message.input",
+        role: "assistant",
+        content: [
+          {
+            imageUrl: "https://frilly-gown.info",
+            type: "image_url",
+          },
+        ],
+      },
+    ],
   },
 };
 ```

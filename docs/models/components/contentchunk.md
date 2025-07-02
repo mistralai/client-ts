@@ -7,7 +7,9 @@
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://exhausted-cycle.com",
+  imageUrl: {
+    url: "https://violent-grandpa.biz",
+  },
 };
 ```
 
@@ -15,7 +17,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://free-ignorance.info",
+  documentUrl: "https://lost-antelope.name/",
 };
 ```
 
@@ -32,8 +34,16 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    778172,
+    408303,
   ],
+};
+```
+
+### `components.FileChunk`
+
+```typescript
+const value: components.FileChunk = {
+  fileId: "6cbf5ec5-94d1-4326-ab87-0613e3dc291b",
 };
 ```
 

@@ -5,7 +5,6 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,11 +13,6 @@ import {
   ModelCapabilities$Outbound,
   ModelCapabilities$outboundSchema,
 } from "./modelcapabilities.js";
-
-export const Type = {
-  Base: "base",
-} as const;
-export type Type = ClosedEnum<typeof Type>;
 
 export type BaseModelCard = {
   id: string;
@@ -31,29 +25,10 @@ export type BaseModelCard = {
   maxContextLength?: number | undefined;
   aliases?: Array<string> | undefined;
   deprecation?: Date | null | undefined;
+  deprecationReplacementModel?: string | null | undefined;
   defaultModelTemperature?: number | null | undefined;
   type?: "base" | undefined;
 };
-
-/** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
-
-/** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Type$ {
-  /** @deprecated use `Type$inboundSchema` instead. */
-  export const inboundSchema = Type$inboundSchema;
-  /** @deprecated use `Type$outboundSchema` instead. */
-  export const outboundSchema = Type$outboundSchema;
-}
 
 /** @internal */
 export const BaseModelCard$inboundSchema: z.ZodType<
@@ -73,12 +48,14 @@ export const BaseModelCard$inboundSchema: z.ZodType<
   deprecation: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  deprecation_replacement_model: z.nullable(z.string()).optional(),
   default_model_temperature: z.nullable(z.number()).optional(),
   type: z.literal("base").default("base"),
 }).transform((v) => {
   return remap$(v, {
     "owned_by": "ownedBy",
     "max_context_length": "maxContextLength",
+    "deprecation_replacement_model": "deprecationReplacementModel",
     "default_model_temperature": "defaultModelTemperature",
   });
 });
@@ -95,6 +72,7 @@ export type BaseModelCard$Outbound = {
   max_context_length: number;
   aliases?: Array<string> | undefined;
   deprecation?: string | null | undefined;
+  deprecation_replacement_model?: string | null | undefined;
   default_model_temperature?: number | null | undefined;
   type: "base";
 };
@@ -115,12 +93,14 @@ export const BaseModelCard$outboundSchema: z.ZodType<
   maxContextLength: z.number().int().default(32768),
   aliases: z.array(z.string()).optional(),
   deprecation: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  deprecationReplacementModel: z.nullable(z.string()).optional(),
   defaultModelTemperature: z.nullable(z.number()).optional(),
-  type: z.literal("base").default("base"),
+  type: z.literal("base").default("base" as const),
 }).transform((v) => {
   return remap$(v, {
     ownedBy: "owned_by",
     maxContextLength: "max_context_length",
+    deprecationReplacementModel: "deprecation_replacement_model",
     defaultModelTemperature: "default_model_temperature",
   });
 });
