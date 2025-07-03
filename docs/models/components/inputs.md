@@ -25,13 +25,8 @@ const value: components.InstructRequest[] = [
   {
     messages: [
       {
-        content: [
-          {
-            imageUrl: "https://enchanting-planula.name",
-            type: "image_url",
-          },
-        ],
-        role: "tool",
+        prefix: false,
+        role: "assistant",
       },
     ],
   },

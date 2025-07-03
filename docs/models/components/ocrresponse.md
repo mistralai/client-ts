@@ -8,27 +8,27 @@ import { OCRResponse } from "@mistralai/mistralai/models/components";
 let value: OCRResponse = {
   pages: [
     {
-      index: 287544,
+      index: 806124,
       markdown: "<value>",
       images: [
         {
           id: "<id>",
-          topLeftX: 456704,
-          topLeftY: 20950,
-          bottomRightX: 411615,
-          bottomRightY: 489459,
+          topLeftX: 107301,
+          topLeftY: 9060,
+          bottomRightX: 191724,
+          bottomRightY: 270477,
         },
       ],
       dimensions: {
-        dpi: 243678,
-        height: 588639,
-        width: 753240,
+        dpi: 616183,
+        height: 384273,
+        width: 703407,
       },
     },
   ],
-  model: "Camry",
+  model: "Cruze",
   usageInfo: {
-    pagesProcessed: 620500,
+    pagesProcessed: 154425,
   },
 };
 ```

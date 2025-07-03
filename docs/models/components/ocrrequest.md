@@ -6,10 +6,10 @@
 import { OCRRequest } from "@mistralai/mistralai/models/components";
 
 let value: OCRRequest = {
-  model: "LeBaron",
+  model: "Land Cruiser",
   document: {
-    documentUrl: "https://sorrowful-character.org/",
-    type: "document_url",
+    imageUrl: "https://phony-joy.com",
+    type: "image_url",
   },
 };
 ```

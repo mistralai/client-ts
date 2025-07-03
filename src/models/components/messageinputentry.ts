@@ -46,6 +46,7 @@ export type MessageInputEntry = {
   id?: string | undefined;
   role: MessageInputEntryRole;
   content: string | Array<MessageInputContentChunks>;
+  prefix?: boolean | undefined;
 };
 
 /** @internal */
@@ -177,6 +178,7 @@ export const MessageInputEntry$inboundSchema: z.ZodType<
     z.string(),
     z.array(MessageInputContentChunks$inboundSchema),
   ]),
+  prefix: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -193,6 +195,7 @@ export type MessageInputEntry$Outbound = {
   id?: string | undefined;
   role: string;
   content: string | Array<MessageInputContentChunks$Outbound>;
+  prefix: boolean;
 };
 
 /** @internal */
@@ -211,6 +214,7 @@ export const MessageInputEntry$outboundSchema: z.ZodType<
     z.string(),
     z.array(MessageInputContentChunks$outboundSchema),
   ]),
+  prefix: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

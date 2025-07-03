@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "cd048634-f450-4d23-94e3-cce13b342271",
+  id: "7dac7abb-0150-466e-a9be-704de54e5a41",
   autoStart: false,
-  model: "Escalade",
-  status: "QUEUED",
-  createdAt: 388333,
-  modifiedAt: 94122,
+  model: "V90",
+  status: "FAILED",
+  createdAt: 208826,
+  modifiedAt: 682430,
   trainingFiles: [
-    "7dd19d3c-ec10-4349-a6b5-25ef3c4e2a1f",
+    "c58a2f7f-3720-4366-bea6-f95b7ee584af",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 841816,
+      stepNumber: 366410,
       createdAt: 1716963433,
     },
   ],
@@ -32,8 +32,8 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 5666.69,
-      lossFunction: "single_class",
+      weight: 953.8,
+      lossFunction: "multi_class",
     },
   ],
 };
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "987c2265-1dc8-4f1c-a453-c2da0caeb8d4",
+  id: "6457ff45-802e-4016-bb44-4d38fb5cf5b1",
   autoStart: false,
-  model: "Civic",
-  status: "CANCELLATION_REQUESTED",
-  createdAt: 226196,
-  modifiedAt: 15738,
+  model: "ATS",
+  status: "VALIDATED",
+  createdAt: 542506,
+  modifiedAt: 263577,
   trainingFiles: [
-    "5808db9f-fd97-409f-9d52-cbfd817584dd",
+    "a8b58ccb-8a17-4d9f-941a-1c48cc7f744b",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 599581,
+      stepNumber: 418788,
       createdAt: 1716963433,
     },
   ],

@@ -7,7 +7,7 @@ import { AgentsApiV1AgentsUpdateVersionRequest } from "@mistralai/mistralai/mode
 
 let value: AgentsApiV1AgentsUpdateVersionRequest = {
   agentId: "<id>",
-  version: 10,
+  version: 7,
 };
 ```
 

@@ -17,6 +17,7 @@ let value: ConversationRequest = {
           type: "image_url",
         },
       ],
+      prefix: false,
     },
   ],
 };

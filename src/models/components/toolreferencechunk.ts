@@ -23,7 +23,8 @@ export type ToolReferenceChunk = {
   tool: BuiltInConnectors;
   title: string;
   url?: string | null | undefined;
-  source?: string | null | undefined;
+  favicon?: string | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -57,7 +58,8 @@ export const ToolReferenceChunk$inboundSchema: z.ZodType<
   tool: BuiltInConnectors$inboundSchema,
   title: z.string(),
   url: z.nullable(z.string()).optional(),
-  source: z.nullable(z.string()).optional(),
+  favicon: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
 });
 
 /** @internal */
@@ -66,7 +68,8 @@ export type ToolReferenceChunk$Outbound = {
   tool: string;
   title: string;
   url?: string | null | undefined;
-  source?: string | null | undefined;
+  favicon?: string | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -79,7 +82,8 @@ export const ToolReferenceChunk$outboundSchema: z.ZodType<
   tool: BuiltInConnectors$outboundSchema,
   title: z.string(),
   url: z.nullable(z.string()).optional(),
-  source: z.nullable(z.string()).optional(),
+  favicon: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
 });
 
 /**

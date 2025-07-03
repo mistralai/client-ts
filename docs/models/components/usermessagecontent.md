@@ -14,8 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    text: "<value>",
-    type: "text",
+    documentUrl: "https://enchanting-formation.info/",
+    type: "document_url",
   },
 ];
 ```
