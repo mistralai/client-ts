@@ -5,7 +5,7 @@
 ```typescript
 import { EmbeddingDtype } from "@mistralai/mistralai/models/components";
 
-let value: EmbeddingDtype = "uint8";
+let value: EmbeddingDtype = "binary";
 ```
 
 ## Values

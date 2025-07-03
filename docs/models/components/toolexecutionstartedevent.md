@@ -7,7 +7,8 @@ import { ToolExecutionStartedEvent } from "@mistralai/mistralai/models/component
 
 let value: ToolExecutionStartedEvent = {
   id: "<id>",
-  name: "code_interpreter",
+  name: "document_library",
+  arguments: "<value>",
 };
 ```
 
@@ -20,3 +21,4 @@ let value: ToolExecutionStartedEvent = {
 | `outputIndex`                                                                                        | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
 | `id`                                                                                                 | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `name`                                                                                               | [components.BuiltInConnectors](../../models/components/builtinconnectors.md)                         | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `arguments`                                                                                          | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

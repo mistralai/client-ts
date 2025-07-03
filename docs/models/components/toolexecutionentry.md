@@ -7,6 +7,7 @@ import { ToolExecutionEntry } from "@mistralai/mistralai/models/components";
 
 let value: ToolExecutionEntry = {
   name: "document_library",
+  arguments: "<value>",
 };
 ```
 
@@ -20,4 +21,5 @@ let value: ToolExecutionEntry = {
 | `completedAt`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `name`                                                                                        | [components.BuiltInConnectors](../../models/components/builtinconnectors.md)                  | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `arguments`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `info`                                                                                        | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | N/A                                                                                           |

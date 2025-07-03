@@ -27,6 +27,7 @@ export type ToolExecutionStartedEvent = {
   outputIndex?: number | undefined;
   id: string;
   name: BuiltInConnectors;
+  arguments: string;
 };
 
 /** @internal */
@@ -64,6 +65,7 @@ export const ToolExecutionStartedEvent$inboundSchema: z.ZodType<
   output_index: z.number().int().default(0),
   id: z.string(),
   name: BuiltInConnectors$inboundSchema,
+  arguments: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -78,6 +80,7 @@ export type ToolExecutionStartedEvent$Outbound = {
   output_index: number;
   id: string;
   name: string;
+  arguments: string;
 };
 
 /** @internal */
@@ -93,6 +96,7 @@ export const ToolExecutionStartedEvent$outboundSchema: z.ZodType<
   outputIndex: z.number().int().default(0),
   id: z.string(),
   name: BuiltInConnectors$outboundSchema,
+  arguments: z.string(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

@@ -6,14 +6,7 @@
 import { ConversationStreamRequest } from "@mistralai/mistralai/models/components";
 
 let value: ConversationStreamRequest = {
-  inputs: [
-    {
-      object: "entry",
-      type: "function.result",
-      toolCallId: "<id>",
-      result: "<value>",
-    },
-  ],
+  inputs: "<value>",
 };
 ```
 

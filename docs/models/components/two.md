@@ -36,8 +36,7 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      documentUrl: "https://artistic-finger.com",
-      type: "document_url",
+      fileId: "c1c13238-a7f3-4cd8-a796-866b12dc46ed",
     },
   ],
 };

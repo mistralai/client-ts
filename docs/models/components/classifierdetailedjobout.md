@@ -6,20 +6,20 @@
 import { ClassifierDetailedJobOut } from "@mistralai/mistralai/models/components";
 
 let value: ClassifierDetailedJobOut = {
-  id: "ad17932d-0717-4f6d-a146-6a5ba6691dab",
+  id: "a6c83448-bfbc-4256-aa44-5c9115cbbc48",
   autoStart: false,
-  model: "Accord",
-  status: "RUNNING",
-  createdAt: 405373,
-  modifiedAt: 321043,
+  model: "Model X",
+  status: "CANCELLATION_REQUESTED",
+  createdAt: 277990,
+  modifiedAt: 793282,
   trainingFiles: [
-    "0b19baf1-d086-4853-b08d-531131411d28",
+    "a9cf02c1-834b-40d7-b88a-515285ff99fe",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 456410,
+      stepNumber: 313590,
       createdAt: 1716963433,
     },
   ],
@@ -29,7 +29,7 @@ let value: ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 1533.69,
+      weight: 3655.39,
       lossFunction: "single_class",
     },
   ],
