@@ -7,7 +7,7 @@ import { CheckpointOut } from "@mistralai/mistralai/models/components";
 
 let value: CheckpointOut = {
   metrics: {},
-  stepNumber: 380335,
+  stepNumber: 557987,
   createdAt: 1716963433,
 };
 ```

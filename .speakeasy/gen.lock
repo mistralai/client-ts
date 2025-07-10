@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: e0186c33d0269977e1790dfcc7d11aac
+  docChecksum: 82cf79b2dee6811d91e2912113c21d3a
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.7.3
-  configChecksum: 56ba7c9a01b61f8ad043acd00caf7380
+  releaseVersion: 1.7.4
+  configChecksum: 6da10f087cf01baf54e1e4c30ecde691
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -172,6 +172,9 @@ generatedFiles:
   - docs/models/components/document.md
   - docs/models/components/documentlibrarytool.md
   - docs/models/components/documentlibrarytooltype.md
+  - docs/models/components/documentout.md
+  - docs/models/components/documenttextcontent.md
+  - docs/models/components/documentupdatein.md
   - docs/models/components/documenturlchunk.md
   - docs/models/components/documenturlchunktype.md
   - docs/models/components/embeddingdtype.md
@@ -179,12 +182,14 @@ generatedFiles:
   - docs/models/components/embeddingrequestinputs.md
   - docs/models/components/embeddingresponse.md
   - docs/models/components/embeddingresponsedata.md
+  - docs/models/components/entitytype.md
   - docs/models/components/entries.md
   - docs/models/components/eventout.md
   - docs/models/components/filechunk.md
   - docs/models/components/filepurpose.md
   - docs/models/components/fileschema.md
   - docs/models/components/filesignedurl.md
+  - docs/models/components/filet.md
   - docs/models/components/fimcompletionrequest.md
   - docs/models/components/fimcompletionrequeststop.md
   - docs/models/components/fimcompletionresponse.md
@@ -195,6 +200,7 @@ generatedFiles:
   - docs/models/components/ftclassifierlossfunction.md
   - docs/models/components/ftmodelcapabilitiesout.md
   - docs/models/components/ftmodelcard.md
+  - docs/models/components/ftmodelcardtype.md
   - docs/models/components/functioncall.md
   - docs/models/components/functioncallentry.md
   - docs/models/components/functioncallentryarguments.md
@@ -239,13 +245,20 @@ generatedFiles:
   - docs/models/components/jsonschema.md
   - docs/models/components/legacyjobmetadataout.md
   - docs/models/components/legacyjobmetadataoutobject.md
+  - docs/models/components/libraryin.md
+  - docs/models/components/libraryinupdate.md
+  - docs/models/components/libraryout.md
+  - docs/models/components/listdocumentout.md
   - docs/models/components/listfilesout.md
+  - docs/models/components/listlibraryout.md
+  - docs/models/components/listsharingout.md
   - docs/models/components/loc.md
   - docs/models/components/messageentries.md
   - docs/models/components/messageinputcontentchunks.md
   - docs/models/components/messageinputentry.md
   - docs/models/components/messageinputentrycontent.md
   - docs/models/components/messageinputentryrole.md
+  - docs/models/components/messageinputentrytype.md
   - docs/models/components/messageoutputcontentchunks.md
   - docs/models/components/messageoutputentry.md
   - docs/models/components/messageoutputentrycontent.md
@@ -277,7 +290,9 @@ generatedFiles:
   - docs/models/components/one.md
   - docs/models/components/outputcontentchunks.md
   - docs/models/components/outputs.md
+  - docs/models/components/paginationinfo.md
   - docs/models/components/prediction.md
+  - docs/models/components/processingstatusout.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
   - docs/models/components/repositories.md
@@ -293,6 +308,10 @@ generatedFiles:
   - docs/models/components/role.md
   - docs/models/components/sampletype.md
   - docs/models/components/security.md
+  - docs/models/components/shareenum.md
+  - docs/models/components/sharingdelete.md
+  - docs/models/components/sharingin.md
+  - docs/models/components/sharingout.md
   - docs/models/components/source.md
   - docs/models/components/ssetypes.md
   - docs/models/components/status.md
@@ -305,6 +324,8 @@ generatedFiles:
   - docs/models/components/toolcall.md
   - docs/models/components/toolchoice.md
   - docs/models/components/toolchoiceenum.md
+  - docs/models/components/toolexecutiondeltaevent.md
+  - docs/models/components/toolexecutiondeltaeventtype.md
   - docs/models/components/toolexecutiondoneevent.md
   - docs/models/components/toolexecutiondoneeventtype.md
   - docs/models/components/toolexecutionentry.md
@@ -362,7 +383,6 @@ generatedFiles:
   - docs/models/operations/filesapirouteslistfilesrequest.md
   - docs/models/operations/filesapiroutesretrievefilerequest.md
   - docs/models/operations/filesapiroutesuploadfilemultipartbodyparams.md
-  - docs/models/operations/filet.md
   - docs/models/operations/jobsapiroutesbatchcancelbatchjobrequest.md
   - docs/models/operations/jobsapiroutesbatchgetbatchjobrequest.md
   - docs/models/operations/jobsapiroutesbatchgetbatchjobsrequest.md
@@ -378,22 +398,42 @@ generatedFiles:
   - docs/models/operations/jobsapiroutesfinetuningunarchivefinetunedmodelrequest.md
   - docs/models/operations/jobsapiroutesfinetuningupdatefinetunedmodelrequest.md
   - docs/models/operations/jobsapiroutesfinetuningupdatefinetunedmodelresponse.md
+  - docs/models/operations/librariesdeletev1request.md
+  - docs/models/operations/librariesdocumentsdeletev1request.md
+  - docs/models/operations/librariesdocumentsgetextractedtextsignedurlv1request.md
+  - docs/models/operations/librariesdocumentsgetsignedurlv1request.md
+  - docs/models/operations/librariesdocumentsgetstatusv1request.md
+  - docs/models/operations/librariesdocumentsgettextcontentv1request.md
+  - docs/models/operations/librariesdocumentsgetv1request.md
+  - docs/models/operations/librariesdocumentslistv1request.md
+  - docs/models/operations/librariesdocumentsreprocessv1request.md
+  - docs/models/operations/librariesdocumentsupdatev1request.md
+  - docs/models/operations/librariesdocumentsuploadv1documentupload.md
+  - docs/models/operations/librariesdocumentsuploadv1request.md
+  - docs/models/operations/librariesgetv1request.md
+  - docs/models/operations/librariessharecreatev1request.md
+  - docs/models/operations/librariessharedeletev1request.md
+  - docs/models/operations/librariessharelistv1request.md
+  - docs/models/operations/librariesupdatev1request.md
   - docs/models/operations/one.md
   - docs/models/operations/responsebody.md
   - docs/models/operations/retrievemodelv1modelsmodelidgetrequest.md
   - docs/models/operations/retrievemodelv1modelsmodelidgetresponseretrievemodelv1modelsmodelidget.md
   - docs/models/operations/status.md
+  - docs/sdks/accesses/README.md
   - docs/sdks/agents/README.md
   - docs/sdks/batch/README.md
   - docs/sdks/beta/README.md
   - docs/sdks/chat/README.md
   - docs/sdks/classifiers/README.md
   - docs/sdks/conversations/README.md
+  - docs/sdks/documents/README.md
   - docs/sdks/embeddings/README.md
   - docs/sdks/files/README.md
   - docs/sdks/fim/README.md
   - docs/sdks/finetuning/README.md
   - docs/sdks/jobs/README.md
+  - docs/sdks/libraries/README.md
   - docs/sdks/mistral/README.md
   - docs/sdks/mistralagents/README.md
   - docs/sdks/mistraljobs/README.md
@@ -424,6 +464,24 @@ generatedFiles:
   - src/funcs/betaConversationsRestartStream.ts
   - src/funcs/betaConversationsStart.ts
   - src/funcs/betaConversationsStartStream.ts
+  - src/funcs/betaLibrariesAccessesDelete.ts
+  - src/funcs/betaLibrariesAccessesList.ts
+  - src/funcs/betaLibrariesAccessesUpdateOrCreate.ts
+  - src/funcs/betaLibrariesCreate.ts
+  - src/funcs/betaLibrariesDelete.ts
+  - src/funcs/betaLibrariesDocumentsDelete.ts
+  - src/funcs/betaLibrariesDocumentsExtractedTextSignedUrl.ts
+  - src/funcs/betaLibrariesDocumentsGet.ts
+  - src/funcs/betaLibrariesDocumentsGetSignedUrl.ts
+  - src/funcs/betaLibrariesDocumentsList.ts
+  - src/funcs/betaLibrariesDocumentsReprocess.ts
+  - src/funcs/betaLibrariesDocumentsStatus.ts
+  - src/funcs/betaLibrariesDocumentsTextContent.ts
+  - src/funcs/betaLibrariesDocumentsUpdate.ts
+  - src/funcs/betaLibrariesDocumentsUpload.ts
+  - src/funcs/betaLibrariesGet.ts
+  - src/funcs/betaLibrariesList.ts
+  - src/funcs/betaLibrariesUpdate.ts
   - src/funcs/chatComplete.ts
   - src/funcs/chatStream.ts
   - src/funcs/classifiersClassify.ts
@@ -536,12 +594,17 @@ generatedFiles:
   - src/models/components/deletemodelout.ts
   - src/models/components/deltamessage.ts
   - src/models/components/documentlibrarytool.ts
+  - src/models/components/documentout.ts
+  - src/models/components/documenttextcontent.ts
+  - src/models/components/documentupdatein.ts
   - src/models/components/documenturlchunk.ts
   - src/models/components/embeddingdtype.ts
   - src/models/components/embeddingrequest.ts
   - src/models/components/embeddingresponse.ts
   - src/models/components/embeddingresponsedata.ts
+  - src/models/components/entitytype.ts
   - src/models/components/eventout.ts
+  - src/models/components/file.ts
   - src/models/components/filechunk.ts
   - src/models/components/filepurpose.ts
   - src/models/components/fileschema.ts
@@ -575,7 +638,13 @@ generatedFiles:
   - src/models/components/jobsout.ts
   - src/models/components/jsonschema.ts
   - src/models/components/legacyjobmetadataout.ts
+  - src/models/components/libraryin.ts
+  - src/models/components/libraryinupdate.ts
+  - src/models/components/libraryout.ts
+  - src/models/components/listdocumentout.ts
   - src/models/components/listfilesout.ts
+  - src/models/components/listlibraryout.ts
+  - src/models/components/listsharingout.ts
   - src/models/components/messageentries.ts
   - src/models/components/messageinputcontentchunks.ts
   - src/models/components/messageinputentry.ts
@@ -596,7 +665,9 @@ generatedFiles:
   - src/models/components/ocrresponse.ts
   - src/models/components/ocrusageinfo.ts
   - src/models/components/outputcontentchunks.ts
+  - src/models/components/paginationinfo.ts
   - src/models/components/prediction.ts
+  - src/models/components/processingstatusout.ts
   - src/models/components/referencechunk.ts
   - src/models/components/responsedoneevent.ts
   - src/models/components/responseerrorevent.ts
@@ -606,6 +677,10 @@ generatedFiles:
   - src/models/components/retrievefileout.ts
   - src/models/components/sampletype.ts
   - src/models/components/security.ts
+  - src/models/components/shareenum.ts
+  - src/models/components/sharingdelete.ts
+  - src/models/components/sharingin.ts
+  - src/models/components/sharingout.ts
   - src/models/components/source.ts
   - src/models/components/ssetypes.ts
   - src/models/components/systemmessage.ts
@@ -614,6 +689,7 @@ generatedFiles:
   - src/models/components/toolcall.ts
   - src/models/components/toolchoice.ts
   - src/models/components/toolchoiceenum.ts
+  - src/models/components/toolexecutiondeltaevent.ts
   - src/models/components/toolexecutiondoneevent.ts
   - src/models/components/toolexecutionentry.ts
   - src/models/components/toolexecutionstartedevent.ts
@@ -668,19 +744,38 @@ generatedFiles:
   - src/models/operations/jobsapiroutesfinetuningstartfinetuningjob.ts
   - src/models/operations/jobsapiroutesfinetuningunarchivefinetunedmodel.ts
   - src/models/operations/jobsapiroutesfinetuningupdatefinetunedmodel.ts
+  - src/models/operations/librariesdeletev1.ts
+  - src/models/operations/librariesdocumentsdeletev1.ts
+  - src/models/operations/librariesdocumentsgetextractedtextsignedurlv1.ts
+  - src/models/operations/librariesdocumentsgetsignedurlv1.ts
+  - src/models/operations/librariesdocumentsgetstatusv1.ts
+  - src/models/operations/librariesdocumentsgettextcontentv1.ts
+  - src/models/operations/librariesdocumentsgetv1.ts
+  - src/models/operations/librariesdocumentslistv1.ts
+  - src/models/operations/librariesdocumentsreprocessv1.ts
+  - src/models/operations/librariesdocumentsupdatev1.ts
+  - src/models/operations/librariesdocumentsuploadv1.ts
+  - src/models/operations/librariesgetv1.ts
+  - src/models/operations/librariessharecreatev1.ts
+  - src/models/operations/librariessharedeletev1.ts
+  - src/models/operations/librariessharelistv1.ts
+  - src/models/operations/librariesupdatev1.ts
   - src/models/operations/retrievemodelv1modelsmodelidget.ts
+  - src/sdk/accesses.ts
   - src/sdk/agents.ts
   - src/sdk/batch.ts
   - src/sdk/beta.ts
   - src/sdk/chat.ts
   - src/sdk/classifiers.ts
   - src/sdk/conversations.ts
+  - src/sdk/documents.ts
   - src/sdk/embeddings.ts
   - src/sdk/files.ts
   - src/sdk/fim.ts
   - src/sdk/finetuning.ts
   - src/sdk/index.ts
   - src/sdk/jobs.ts
+  - src/sdk/libraries.ts
   - src/sdk/mistralagents.ts
   - src/sdk/mistraljobs.ts
   - src/sdk/models.ts
@@ -1045,7 +1140,7 @@ examples:
           conversation_id: "<id>"
       responses:
         "200":
-          application/json: {"object": "conversation.messages", "conversation_id": "<id>", "messages": [{"object": "entry", "type": "message.input", "role": "assistant", "content": "<value>"}, {"object": "entry", "type": "message.input", "role": "assistant", "content": [{"document_url": "https://black-and-white-sauerkraut.biz", "type": "document_url"}, {"type": "tool_file", "tool": "code_interpreter", "file_id": "<id>"}, {"image_url": "https://emotional-couch.org", "type": "image_url"}]}, {"object": "entry", "type": "message.input", "role": "assistant", "content": "<value>"}]}
+          application/json: {"object": "conversation.messages", "conversation_id": "<id>", "messages": [{"object": "entry", "type": "message.input", "role": "assistant", "content": "<value>", "prefix": false}, {"object": "entry", "type": "message.input", "role": "assistant", "content": [{"document_url": "https://black-and-white-sauerkraut.biz", "type": "document_url"}, {"type": "tool_file", "tool": "code_interpreter", "file_id": "<id>"}, {"image_url": "https://emotional-couch.org", "type": "image_url"}], "prefix": false}, {"object": "entry", "type": "message.input", "role": "assistant", "content": "<value>", "prefix": false}]}
         "422":
           application/json: {}
   agents_api_v1_conversations_restart:
@@ -1057,7 +1152,7 @@ examples:
         application/json: {"inputs": "<value>", "stream": false, "store": true, "handoff_execution": "server", "from_entry_id": "<id>"}
       responses:
         "200":
-          application/json: {"object": "conversation.response", "conversation_id": "<id>", "outputs": [{"object": "entry", "type": "tool.execution", "name": "image_generation"}, {"object": "entry", "type": "tool.execution", "name": "web_search_premium"}], "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}}
+          application/json: {"object": "conversation.response", "conversation_id": "<id>", "outputs": [{"object": "entry", "type": "message.output", "role": "assistant", "content": [{"document_url": "https://expensive-swordfish.info/", "type": "document_url"}]}, {"object": "entry", "type": "agent.handoff", "previous_agent_id": "<id>", "previous_agent_name": "<value>", "next_agent_id": "<id>", "next_agent_name": "<value>"}], "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}}
         "422":
           application/json: {}
   agents_api_v1_conversations_start_stream:
@@ -1142,6 +1237,199 @@ examples:
       responses:
         "200":
           application/json: {"model": "Mercielago", "name": "<value>", "object": "agent", "id": "<id>", "version": 253661, "created_at": "2023-02-14T22:44:06.703Z", "updated_at": "2025-12-15T06:22:04.120Z"}
+        "422":
+          application/json: {}
+  libraries_list_v1:
+    speakeasy-default-libraries-list-v1:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "name": "<value>", "created_at": "2023-03-24T06:20:14.879Z", "updated_at": "2025-09-10T04:30:13.188Z", "owner_id": "2766718d-6d46-412e-80ae-e1b9ddf121dc", "owner_type": "<value>", "total_size": 664080, "nb_documents": 284580, "chunk_size": 781409}, {"id": "8104fb45-1a70-4cfc-b8fe-07fbc60ab960", "name": "<value>", "created_at": "2023-12-27T23:30:11.053Z", "updated_at": "2024-03-21T09:41:56.524Z", "owner_id": "11ff6573-e0a6-4233-91ad-7c07cc481991", "owner_type": "<value>", "total_size": 602487, "nb_documents": 385327, "chunk_size": 933854}, {"id": "bd834b7d-8c22-436e-9085-944ebceb27bd", "name": "<value>", "created_at": "2024-06-20T13:26:28.598Z", "updated_at": "2024-01-19T17:39:17.317Z", "owner_id": "3d0a17c4-78e3-429a-99ec-97938e1a630f", "owner_type": "<value>", "total_size": 939917, "nb_documents": 910479, "chunk_size": 233358}]}
+  libraries_create_v1:
+    speakeasy-default-libraries-create-v1:
+      requestBody:
+        application/json: {"name": "<value>"}
+      responses:
+        "201":
+          application/json: {"id": "7a621cf0-21cd-49cf-8540-3315211a509a", "name": "<value>", "created_at": "2023-01-18T01:06:03.366Z", "updated_at": "2024-07-27T18:44:31.482Z", "owner_id": "0a8e774c-2bec-4c37-8691-775e02498561", "owner_type": "<value>", "total_size": 813397, "nb_documents": 889164, "chunk_size": 5436}
+        "422":
+          application/json: {}
+  libraries_get_v1:
+    speakeasy-default-libraries-get-v1:
+      parameters:
+        path:
+          library_id: "b888f774-3e7c-4135-a18c-6b985523c4bc"
+      responses:
+        "200":
+          application/json: {"id": "e50f7622-81da-484b-9c66-1c8a99c6b71b", "name": "<value>", "created_at": "2025-09-22T11:43:32.718Z", "updated_at": "2025-04-06T10:37:18.493Z", "owner_id": "d62b8f71-12aa-4f0a-9b4e-43b4cca3716f", "owner_type": "<value>", "total_size": 168726, "nb_documents": 58014, "chunk_size": 546533}
+        "422":
+          application/json: {}
+  libraries_delete_v1:
+    speakeasy-default-libraries-delete-v1:
+      parameters:
+        path:
+          library_id: "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e"
+      responses:
+        "200":
+          application/json: {"id": "7aa10743-a04f-44af-84fe-b54259caa1ba", "name": "<value>", "created_at": "2024-06-28T18:31:19.658Z", "updated_at": "2023-10-04T16:31:14.706Z", "owner_id": "60ea4f91-d0d6-4c0a-97eb-f643773e381f", "owner_type": "<value>", "total_size": 182573, "nb_documents": 581935, "chunk_size": 888800}
+        "422":
+          application/json: {}
+  libraries_update_v1:
+    speakeasy-default-libraries-update-v1:
+      parameters:
+        path:
+          library_id: "d95fa7f0-e743-42ce-b47c-b60cc78135dd"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "b85898c1-25a1-4907-a1c5-562af6646dad", "name": "<value>", "created_at": "2023-08-12T00:40:23.342Z", "updated_at": "2025-01-05T19:25:16.577Z", "owner_id": "3435a245-0617-4e6b-9b05-79d6f9464a31", "owner_type": "<value>", "total_size": 532806, "nb_documents": 784089, "chunk_size": 556706}
+        "422":
+          application/json: {}
+  libraries_documents_list_v1:
+    speakeasy-default-libraries-documents-list-v1:
+      parameters:
+        path:
+          library_id: "c8a232aa-0b11-4b8a-b005-71e9e705d0e6"
+        query:
+          page_size: 100
+          page: 0
+          sort_by: "created_at"
+          sort_order: "desc"
+      responses:
+        "200":
+          application/json: {"pagination": {"total_items": 173090, "total_pages": 75058, "current_page": 897069, "page_size": 135572, "has_more": true}, "data": [{"id": "6718d6d4-612e-40ae-be1b-9ddf121dc2a4", "library_id": "8104fb45-1a70-4cfc-b8fe-07fbc60ab960", "hash": "<value>", "mime_type": "<value>", "extension": "wav", "size": 406391, "name": "<value>", "created_at": "2023-03-28T18:28:26.777Z", "processing_status": "<value>", "uploaded_by_id": "1ff6573e-0a62-4331-aad7-c07cc4819916", "uploaded_by_type": "<value>", "tokens_processing_total": 385327}]}
+        "422":
+          application/json: {}
+  libraries_documents_upload_v1:
+    speakeasy-default-libraries-documents-upload-v1:
+      parameters:
+        path:
+          library_id: "6886a454-7910-4a2b-b98a-ab61ec65fc41"
+      requestBody:
+        multipart/form-data: {"file": {"": "x-file: example.file"}}
+      responses:
+        "200":
+          application/json: {"id": "969747bc-6baf-4b54-a06f-cd23e5dc5306", "library_id": "2af6fb1e-5345-4644-b521-8f359f41a769", "hash": "<value>", "mime_type": "<value>", "extension": "png", "size": 987736, "name": "<value>", "created_at": "2024-07-06T11:06:30.806Z", "processing_status": "<value>", "uploaded_by_id": "28ecdbe5-8d22-41e5-8d6b-575cbfe273a1", "uploaded_by_type": "<value>", "tokens_processing_total": 42425}
+        "422":
+          application/json: {}
+  libraries_documents_get_v1:
+    speakeasy-default-libraries-documents-get-v1:
+      parameters:
+        path:
+          library_id: "b888f774-3e7c-4135-a18c-6b985523c4bc"
+          document_id: "e50f7622-81da-484b-9c66-1c8a99c6b71b"
+      responses:
+        "200":
+          application/json: {"id": "ecd62b8f-7112-4aaf-90ab-4e43b4cca371", "library_id": "f620807a-a1f8-4cf0-95d8-9d58ee381f6b", "hash": "<value>", "mime_type": "<value>", "extension": "mp4v", "size": 554334, "name": "<value>", "created_at": "2024-02-05T08:11:26.016Z", "processing_status": "<value>", "uploaded_by_id": "c09d541c-2936-4836-a4a1-5f8d7e75f517", "uploaded_by_type": "<value>", "tokens_processing_total": 913115}
+        "422":
+          application/json: {}
+  libraries_documents_update_v1:
+    speakeasy-default-libraries-documents-update-v1:
+      parameters:
+        path:
+          library_id: "d95fa7f0-e743-42ce-b47c-b60cc78135dd"
+          document_id: "b85898c1-25a1-4907-a1c5-562af6646dad"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "3a3435a2-4506-417e-86bb-0579d6f9464a", "library_id": "158c8760-f50e-4178-ba77-008b26dfcc1e", "hash": "<value>", "mime_type": "<value>", "extension": "jpeg", "size": 804705, "name": "<value>", "created_at": "2023-06-16T09:29:17.954Z", "processing_status": "<value>", "uploaded_by_id": "2f47d2c2-cb91-46f6-a6c9-4a48a104fbc5", "uploaded_by_type": "<value>", "tokens_processing_total": 245780}
+        "422":
+          application/json: {}
+  libraries_documents_delete_v1:
+    speakeasy-default-libraries-documents-delete-v1:
+      parameters:
+        path:
+          library_id: "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e"
+          document_id: "7aa10743-a04f-44af-84fe-b54259caa1ba"
+      responses:
+        "422":
+          application/json: {}
+  libraries_documents_get_text_content_v1:
+    speakeasy-default-libraries-documents-get-text-content-v1:
+      parameters:
+        path:
+          library_id: "ccb1b572-71d2-46fc-bb41-5dbd65167579"
+          document_id: "40825d2b-5bb4-4bda-9c77-1302c2bf5ce0"
+      responses:
+        "200":
+          application/json: {"text": "<value>"}
+        "422":
+          application/json: {}
+  libraries_documents_get_status_v1:
+    speakeasy-default-libraries-documents-get-status-v1:
+      parameters:
+        path:
+          library_id: "6dcdb4f8-c706-48d4-b2ae-267b72b23c1e"
+          document_id: "276aed56-72ae-4738-84ba-1dd740e0bd1f"
+      responses:
+        "200":
+          application/json: {"document_id": "ad526b3c-1fc3-445d-afc9-16ad3d418051", "processing_status": "<value>"}
+        "422":
+          application/json: {}
+  libraries_documents_get_signed_url_v1:
+    speakeasy-default-libraries-documents-get-signed-url-v1:
+      parameters:
+        path:
+          library_id: "2b31dadd-fc87-450c-9c52-e8a2548c3f17"
+          document_id: "b148735d-03fc-4319-af9e-00bbfcd5d89f"
+      responses:
+        "200":
+          application/json: "https://clear-amnesty.name/"
+        "422":
+          application/json: {}
+  libraries_documents_get_extracted_text_signed_url_v1:
+    speakeasy-default-libraries-documents-get-extracted-text-signed-url-v1:
+      parameters:
+        path:
+          library_id: "3ed81b4a-207f-4581-aacc-d3f1af7a03bb"
+          document_id: "8eeba8e7-77cb-4f1f-96cf-16788d5632fe"
+      responses:
+        "200":
+          application/json: "https://married-hovel.com"
+        "422":
+          application/json: {}
+  libraries_documents_reprocess_v1:
+    speakeasy-default-libraries-documents-reprocess-v1:
+      parameters:
+        path:
+          library_id: "3838a038-529e-4160-82a5-29ab80423efb"
+          document_id: "7162b7a5-2eb5-4f2e-836c-d24617b1f407"
+      responses:
+        "422":
+          application/json: {}
+  libraries_share_list_v1:
+    speakeasy-default-libraries-share-list-v1:
+      parameters:
+        path:
+          library_id: "c8a232aa-0b11-4b8a-b005-71e9e705d0e6"
+      responses:
+        "200":
+          application/json: {"data": []}
+        "422":
+          application/json: {}
+  libraries_share_create_v1:
+    speakeasy-default-libraries-share-create-v1:
+      parameters:
+        path:
+          library_id: "e24dc3a8-24c6-4b2e-8108-3f00cec89687"
+      requestBody:
+        application/json: {"org_id": "9543b76d-ef36-4022-8fc2-3cdec423babe", "level": "Editor", "share_with_uuid": "5c2bae94-726a-4824-98ee-0429525e4adf", "share_with_type": "Org"}
+      responses:
+        "200":
+          application/json: {"library_id": "d97ac414-c55b-4d50-9cec-9f80e5a0f5b4", "org_id": "f1f0e163-44cc-4aba-9026-394b4e2bda58", "role": "<value>", "share_with_type": "<value>", "share_with_uuid": "ac278437-7542-43fb-bfb2-a365aac6006b"}
+        "422":
+          application/json: {}
+  libraries_share_delete_v1:
+    speakeasy-default-libraries-share-delete-v1:
+      parameters:
+        path:
+          library_id: "460ea4f9-1d0d-46c0-ba7e-bf643773e381"
+      requestBody:
+        application/json: {"org_id": "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e", "share_with_uuid": "7aa10743-a04f-44af-84fe-b54259caa1ba", "share_with_type": "Workspace"}
+      responses:
+        "200":
+          application/json: {"library_id": "429e55a6-fe3f-45fd-8128-205f7b825109", "org_id": "098a71ce-6e33-4d0a-8a2d-9a9e96fe241f", "role": "<value>", "share_with_type": "<value>", "share_with_uuid": "5049e21f-c1aa-492b-abbc-3f5136368d32"}
         "422":
           application/json: {}
 examplesVersion: 1.0.0

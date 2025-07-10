@@ -53,6 +53,7 @@ const value: components.FunctionCallEntry = {
 ```typescript
 const value: components.ToolExecutionEntry = {
   name: "web_search_premium",
+  arguments: "<value>",
 };
 ```
 

@@ -11,9 +11,9 @@ let value: FileSchema = {
   sizeBytes: 13000,
   createdAt: 1716963433,
   filename: "files_upload.jsonl",
-  purpose: "ocr",
+  purpose: "fine-tune",
   sampleType: "instruct",
-  source: "repository",
+  source: "upload",
 };
 ```
 

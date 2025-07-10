@@ -8,7 +8,14 @@ Request to restart a new conversation from a given entry in the conversation.
 import { ConversationRestartStreamRequest } from "@mistralai/mistralai/models/components";
 
 let value: ConversationRestartStreamRequest = {
-  inputs: "<value>",
+  inputs: [
+    {
+      object: "entry",
+      type: "tool.execution",
+      name: "image_generation",
+      arguments: "<value>",
+    },
+  ],
   fromEntryId: "<id>",
 };
 ```

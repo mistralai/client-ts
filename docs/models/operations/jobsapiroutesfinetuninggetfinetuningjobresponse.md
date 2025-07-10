@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "7bbec47b-2374-4d95-adcf-d62d05efab08",
+  id: "799f24b3-d520-49d4-bec0-993570226bd2",
   autoStart: false,
-  model: "Countach",
-  status: "QUEUED",
-  createdAt: 228907,
-  modifiedAt: 357984,
+  model: "Mercielago",
+  status: "CANCELLED",
+  createdAt: 968792,
+  modifiedAt: 124460,
   trainingFiles: [
-    "69b55004-bacc-4dbf-8e99-0f2bd531b7be",
+    "1c23ef5d-d999-4493-b26b-9fa22139de68",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 919171,
+      stepNumber: 312070,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 4116.26,
+      weight: 5956.69,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "ff3a1ada-6669-4ee0-8213-58abefadc4e0",
+  id: "72766324-3bb9-4191-9053-9ebcfa99d6ca",
   autoStart: false,
-  model: "Charger",
-  status: "RUNNING",
-  createdAt: 638363,
-  modifiedAt: 101770,
+  model: "1",
+  status: "VALIDATING",
+  createdAt: 699989,
+  modifiedAt: 579690,
   trainingFiles: [
-    "ac2687cf-c1c1-4323-88a7-f3cd8796866b",
+    "46a26688-5c10-46e4-b2e2-5b436ce02f98",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 166542,
+      stepNumber: 39783,
       createdAt: 1716963433,
     },
   ],

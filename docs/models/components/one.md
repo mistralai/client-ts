@@ -21,12 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      documentUrl: "https://gracious-silk.com/",
-      type: "document_url",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

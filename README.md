@@ -256,6 +256,33 @@ We have dedicated SDKs for the following providers:
 * [appendStream](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
 * [restartStream](docs/sdks/conversations/README.md#restartstream) - Restart a conversation starting from a given entry.
 
+#### [beta.libraries](docs/sdks/libraries/README.md)
+
+* [list](docs/sdks/libraries/README.md#list) - List all libraries you have access to.
+* [create](docs/sdks/libraries/README.md#create) - Create a new Library.
+* [get](docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
+* [delete](docs/sdks/libraries/README.md#delete) - Delete a library and all of it's document.
+* [update](docs/sdks/libraries/README.md#update) - Update a library.
+
+#### [beta.libraries.accesses](docs/sdks/accesses/README.md)
+
+* [list](docs/sdks/accesses/README.md#list) - List all of the access to this library.
+* [updateOrCreate](docs/sdks/accesses/README.md#updateorcreate) - Create or update an access level.
+* [delete](docs/sdks/accesses/README.md#delete) - Delete an access level.
+
+#### [beta.libraries.documents](docs/sdks/documents/README.md)
+
+* [list](docs/sdks/documents/README.md#list) - List document in a given library.
+* [upload](docs/sdks/documents/README.md#upload) - Upload a new document.
+* [get](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
+* [update](docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
+* [delete](docs/sdks/documents/README.md#delete) - Delete a document.
+* [textContent](docs/sdks/documents/README.md#textcontent) - Retrieve the text content of a specific document.
+* [status](docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
+* [getSignedUrl](docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
+* [extractedTextSignedUrl](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
+* [reprocess](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
+
 ### [chat](docs/sdks/chat/README.md)
 
 * [complete](docs/sdks/chat/README.md#complete) - Chat Completion
@@ -372,8 +399,11 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.files.upload({
-    file: await openAsBlob("example.file"),
+  const result = await mistral.beta.libraries.documents.upload({
+    libraryId: "6886a454-7910-4a2b-b98a-ab61ec65fc41",
+    requestBody: {
+      file: await openAsBlob("example.file"),
+    },
   });
 
   // Handle the result
@@ -698,6 +728,24 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaConversationsRestartStream`](docs/sdks/conversations/README.md#restartstream) - Restart a conversation starting from a given entry.
 - [`betaConversationsStart`](docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
 - [`betaConversationsStartStream`](docs/sdks/conversations/README.md#startstream) - Create a conversation and append entries to it.
+- [`betaLibrariesAccessesDelete`](docs/sdks/accesses/README.md#delete) - Delete an access level.
+- [`betaLibrariesAccessesList`](docs/sdks/accesses/README.md#list) - List all of the access to this library.
+- [`betaLibrariesAccessesUpdateOrCreate`](docs/sdks/accesses/README.md#updateorcreate) - Create or update an access level.
+- [`betaLibrariesCreate`](docs/sdks/libraries/README.md#create) - Create a new Library.
+- [`betaLibrariesDelete`](docs/sdks/libraries/README.md#delete) - Delete a library and all of it's document.
+- [`betaLibrariesDocumentsDelete`](docs/sdks/documents/README.md#delete) - Delete a document.
+- [`betaLibrariesDocumentsExtractedTextSignedUrl`](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
+- [`betaLibrariesDocumentsGet`](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
+- [`betaLibrariesDocumentsGetSignedUrl`](docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
+- [`betaLibrariesDocumentsList`](docs/sdks/documents/README.md#list) - List document in a given library.
+- [`betaLibrariesDocumentsReprocess`](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
+- [`betaLibrariesDocumentsStatus`](docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
+- [`betaLibrariesDocumentsTextContent`](docs/sdks/documents/README.md#textcontent) - Retrieve the text content of a specific document.
+- [`betaLibrariesDocumentsUpdate`](docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
+- [`betaLibrariesDocumentsUpload`](docs/sdks/documents/README.md#upload) - Upload a new document.
+- [`betaLibrariesGet`](docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
+- [`betaLibrariesList`](docs/sdks/libraries/README.md#list) - List all libraries you have access to.
+- [`betaLibrariesUpdate`](docs/sdks/libraries/README.md#update) - Update a library.
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications

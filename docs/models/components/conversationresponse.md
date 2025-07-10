@@ -14,6 +14,7 @@ let value: ConversationResponse = {
       object: "entry",
       type: "tool.execution",
       name: "web_search",
+      arguments: "<value>",
     },
   ],
   usage: {},

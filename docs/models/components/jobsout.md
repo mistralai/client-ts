@@ -6,7 +6,7 @@
 import { JobsOut } from "@mistralai/mistralai/models/components";
 
 let value: JobsOut = {
-  total: 232744,
+  total: 100251,
 };
 ```
 

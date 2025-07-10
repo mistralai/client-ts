@@ -7,9 +7,7 @@
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: {
-    url: "https://violent-grandpa.biz",
-  },
+  imageUrl: "https://stingy-gerbil.info",
 };
 ```
 
@@ -17,7 +15,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://lost-antelope.name/",
+  documentUrl: "https://questionable-fort.org/",
 };
 ```
 
@@ -34,7 +32,7 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    408303,
+    983275,
   ],
 };
 ```
@@ -43,7 +41,7 @@ const value: components.ReferenceChunk = {
 
 ```typescript
 const value: components.FileChunk = {
-  fileId: "6cbf5ec5-94d1-4326-ab87-0613e3dc291b",
+  fileId: "031037d3-7eac-48f9-b036-9c6bc5fae8bc",
 };
 ```
 

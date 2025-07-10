@@ -15,6 +15,7 @@ let value: ConversationHistory = {
       type: "message.input",
       role: "assistant",
       content: "<value>",
+      prefix: false,
     },
   ],
 };

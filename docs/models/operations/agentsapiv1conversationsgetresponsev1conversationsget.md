@@ -10,9 +10,9 @@ Successful Response
 ```typescript
 const value: components.ModelConversation = {
   id: "<id>",
-  createdAt: new Date("2023-04-24T23:22:30.007Z"),
-  updatedAt: new Date("2024-11-25T20:15:12.243Z"),
-  model: "Model Y",
+  createdAt: new Date("2025-11-15T09:46:43.129Z"),
+  updatedAt: new Date("2025-02-15T22:27:20.816Z"),
+  model: "Accord",
 };
 ```
 
@@ -21,8 +21,8 @@ const value: components.ModelConversation = {
 ```typescript
 const value: components.AgentConversation = {
   id: "<id>",
-  createdAt: new Date("2023-06-20T22:50:36.308Z"),
-  updatedAt: new Date("2024-04-11T21:34:00.499Z"),
+  createdAt: new Date("2024-09-04T00:25:02.418Z"),
+  updatedAt: new Date("2025-02-26T03:10:42.176Z"),
   agentId: "<id>",
 };
 ```

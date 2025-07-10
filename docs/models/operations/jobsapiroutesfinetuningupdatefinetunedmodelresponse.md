@@ -10,19 +10,19 @@ OK
 ```typescript
 const value: components.ClassifierFTModelOut = {
   id: "<id>",
-  created: 700856,
+  created: 340604,
   ownedBy: "<value>",
   root: "<value>",
   archived: false,
   capabilities: {},
-  job: "e851ce1c-0f98-44e4-bdfc-817736527480",
+  job: "2cbfd817-584d-4d59-96e2-bf23bc793715",
   classifierTargets: [
     {
       name: "<value>",
       labels: [
         "<value>",
       ],
-      weight: 8163.65,
+      weight: 4446.25,
       lossFunction: "multi_class",
     },
   ],
@@ -34,12 +34,12 @@ const value: components.ClassifierFTModelOut = {
 ```typescript
 const value: components.CompletionFTModelOut = {
   id: "<id>",
-  created: 851809,
+  created: 181267,
   ownedBy: "<value>",
   root: "<value>",
   archived: false,
   capabilities: {},
-  job: "f1aff929-03f5-4a4f-8b5c-163a16485b0a",
+  job: "69f2e177-357d-4f8d-8953-680293d511e1",
 };
 ```
 

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { FileT } from "@mistralai/mistralai/models/operations";
+import { FileT } from "@mistralai/mistralai/models/components";
 
 // No examples available for this model
 ```

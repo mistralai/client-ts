@@ -16,6 +16,7 @@ const value: components.MessageOutputEntry = {
 ```typescript
 const value: components.ToolExecutionEntry = {
   name: "web_search",
+  arguments: "<value>",
 };
 ```
 
