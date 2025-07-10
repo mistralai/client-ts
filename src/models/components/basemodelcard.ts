@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,6 +14,11 @@ import {
   ModelCapabilities$Outbound,
   ModelCapabilities$outboundSchema,
 } from "./modelcapabilities.js";
+
+export const Type = {
+  Base: "base",
+} as const;
+export type Type = ClosedEnum<typeof Type>;
 
 export type BaseModelCard = {
   id: string;
@@ -29,6 +35,26 @@ export type BaseModelCard = {
   defaultModelTemperature?: number | null | undefined;
   type?: "base" | undefined;
 };
+
+/** @internal */
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
+
+/** @internal */
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Type$ {
+  /** @deprecated use `Type$inboundSchema` instead. */
+  export const inboundSchema = Type$inboundSchema;
+  /** @deprecated use `Type$outboundSchema` instead. */
+  export const outboundSchema = Type$outboundSchema;
+}
 
 /** @internal */
 export const BaseModelCard$inboundSchema: z.ZodType<
@@ -95,7 +121,7 @@ export const BaseModelCard$outboundSchema: z.ZodType<
   deprecation: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deprecationReplacementModel: z.nullable(z.string()).optional(),
   defaultModelTemperature: z.nullable(z.number()).optional(),
-  type: z.literal("base").default("base" as const),
+  type: z.literal("base").default("base"),
 }).transform((v) => {
   return remap$(v, {
     ownedBy: "owned_by",

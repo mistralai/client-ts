@@ -5,7 +5,7 @@
 ```typescript
 import { FineTuneableModelType } from "@mistralai/mistralai/models/components";
 
-let value: FineTuneableModelType = "classifier";
+let value: FineTuneableModelType = "completion";
 ```
 
 ## Values

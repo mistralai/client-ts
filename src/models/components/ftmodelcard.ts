@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,6 +14,11 @@ import {
   ModelCapabilities$Outbound,
   ModelCapabilities$outboundSchema,
 } from "./modelcapabilities.js";
+
+export const FTModelCardType = {
+  FineTuned: "fine-tuned",
+} as const;
+export type FTModelCardType = ClosedEnum<typeof FTModelCardType>;
 
 /**
  * Extra fields for fine-tuned models.
@@ -35,6 +41,27 @@ export type FTModelCard = {
   root: string;
   archived?: boolean | undefined;
 };
+
+/** @internal */
+export const FTModelCardType$inboundSchema: z.ZodNativeEnum<
+  typeof FTModelCardType
+> = z.nativeEnum(FTModelCardType);
+
+/** @internal */
+export const FTModelCardType$outboundSchema: z.ZodNativeEnum<
+  typeof FTModelCardType
+> = FTModelCardType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FTModelCardType$ {
+  /** @deprecated use `FTModelCardType$inboundSchema` instead. */
+  export const inboundSchema = FTModelCardType$inboundSchema;
+  /** @deprecated use `FTModelCardType$outboundSchema` instead. */
+  export const outboundSchema = FTModelCardType$outboundSchema;
+}
 
 /** @internal */
 export const FTModelCard$inboundSchema: z.ZodType<
@@ -107,7 +134,7 @@ export const FTModelCard$outboundSchema: z.ZodType<
   deprecation: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   deprecationReplacementModel: z.nullable(z.string()).optional(),
   defaultModelTemperature: z.nullable(z.number()).optional(),
-  type: z.literal("fine-tuned").default("fine-tuned" as const),
+  type: z.literal("fine-tuned").default("fine-tuned"),
   job: z.string(),
   root: z.string(),
   archived: z.boolean().default(false),

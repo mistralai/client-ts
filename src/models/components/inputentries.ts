@@ -44,10 +44,10 @@ import {
 } from "./toolexecutionentry.js";
 
 export type InputEntries =
-  | MessageInputEntry
   | FunctionResultEntry
-  | ToolExecutionEntry
+  | MessageInputEntry
   | FunctionCallEntry
+  | ToolExecutionEntry
   | MessageOutputEntry
   | AgentHandoffEntry;
 
@@ -57,20 +57,20 @@ export const InputEntries$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  MessageInputEntry$inboundSchema,
   FunctionResultEntry$inboundSchema,
-  ToolExecutionEntry$inboundSchema,
+  MessageInputEntry$inboundSchema,
   FunctionCallEntry$inboundSchema,
+  ToolExecutionEntry$inboundSchema,
   MessageOutputEntry$inboundSchema,
   AgentHandoffEntry$inboundSchema,
 ]);
 
 /** @internal */
 export type InputEntries$Outbound =
-  | MessageInputEntry$Outbound
   | FunctionResultEntry$Outbound
-  | ToolExecutionEntry$Outbound
+  | MessageInputEntry$Outbound
   | FunctionCallEntry$Outbound
+  | ToolExecutionEntry$Outbound
   | MessageOutputEntry$Outbound
   | AgentHandoffEntry$Outbound;
 
@@ -80,10 +80,10 @@ export const InputEntries$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InputEntries
 > = z.union([
-  MessageInputEntry$outboundSchema,
   FunctionResultEntry$outboundSchema,
-  ToolExecutionEntry$outboundSchema,
+  MessageInputEntry$outboundSchema,
   FunctionCallEntry$outboundSchema,
+  ToolExecutionEntry$outboundSchema,
   MessageOutputEntry$outboundSchema,
   AgentHandoffEntry$outboundSchema,
 ]);

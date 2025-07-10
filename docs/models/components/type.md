@@ -5,11 +5,11 @@
 ```typescript
 import { Type } from "@mistralai/mistralai/models/components";
 
-let value: Type = "message.input";
+let value: Type = "base";
 ```
 
 ## Values
 
 ```typescript
-"message.input"
+"base"
 ```

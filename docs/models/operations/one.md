@@ -7,14 +7,14 @@
 
 ```typescript
 const value: components.ClassifierJobOut = {
-  id: "af91ecb0-62db-4efc-af90-05ddf10e48f6",
+  id: "c0196a4e-c1cf-4fb1-894f-b9b75e506caf",
   autoStart: false,
-  model: "Element",
-  status: "SUCCESS",
-  createdAt: 527715,
-  modifiedAt: 237523,
+  model: "Taurus",
+  status: "VALIDATED",
+  createdAt: 474003,
+  modifiedAt: 428482,
   trainingFiles: [
-    "448bfbc2-56a4-445c-a911-5cbbc488bf4c",
+    "13b020d9-2cfe-4e09-8495-277f04dadac7",
   ],
   hyperparameters: {},
 };
@@ -24,14 +24,14 @@ const value: components.ClassifierJobOut = {
 
 ```typescript
 const value: components.CompletionJobOut = {
-  id: "9cf02c18-34b0-4d78-98a5-15285ff99fec",
+  id: "c92cf541-af27-410a-bd5e-13e89020e2d5",
   autoStart: false,
   model: "Cruze",
   status: "VALIDATING",
-  createdAt: 487148,
-  modifiedAt: 990369,
+  createdAt: 93660,
+  modifiedAt: 280706,
   trainingFiles: [
-    "e10e83aa-1403-423a-a012-544cf8f61647",
+    "7d7f806b-3b80-4c81-b74e-4f85db6acdd2",
   ],
   hyperparameters: {},
 };

@@ -6,7 +6,14 @@
 import { UserMessage } from "@mistralai/mistralai/models/components";
 
 let value: UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      referenceIds: [
+        317632,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 

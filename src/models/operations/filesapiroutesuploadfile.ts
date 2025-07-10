@@ -9,11 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileT = {
-  fileName: string;
-  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
-};
-
 export type FilesApiRoutesUploadFileMultiPartBodyParams = {
   /**
    * The File object (not file name) to be uploaded.
@@ -28,69 +23,9 @@ export type FilesApiRoutesUploadFileMultiPartBodyParams = {
    *  file=@path/to/your/file.jsonl
    *  ```
    */
-  file: FileT | Blob;
+  file: components.FileT | Blob;
   purpose?: components.FilePurpose | undefined;
 };
-
-/** @internal */
-export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .object({
-    fileName: z.string(),
-    content: z.union([
-      z.instanceof(ReadableStream<Uint8Array>),
-      z.instanceof(Blob),
-      z.instanceof(ArrayBuffer),
-      z.instanceof(Uint8Array),
-    ]),
-  });
-
-/** @internal */
-export type FileT$Outbound = {
-  fileName: string;
-  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
-};
-
-/** @internal */
-export const FileT$outboundSchema: z.ZodType<
-  FileT$Outbound,
-  z.ZodTypeDef,
-  FileT
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileT$ {
-  /** @deprecated use `FileT$inboundSchema` instead. */
-  export const inboundSchema = FileT$inboundSchema;
-  /** @deprecated use `FileT$outboundSchema` instead. */
-  export const outboundSchema = FileT$outboundSchema;
-  /** @deprecated use `FileT$Outbound` instead. */
-  export type Outbound = FileT$Outbound;
-}
-
-export function fileToJSON(fileT: FileT): string {
-  return JSON.stringify(FileT$outboundSchema.parse(fileT));
-}
-
-export function fileFromJSON(
-  jsonString: string,
-): SafeParseResult<FileT, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileT$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileT' from JSON`,
-  );
-}
 
 /** @internal */
 export const FilesApiRoutesUploadFileMultiPartBodyParams$inboundSchema:
@@ -99,13 +34,13 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    file: z.lazy(() => FileT$inboundSchema),
+    file: components.FileT$inboundSchema,
     purpose: components.FilePurpose$inboundSchema.optional(),
   });
 
 /** @internal */
 export type FilesApiRoutesUploadFileMultiPartBodyParams$Outbound = {
-  file: FileT$Outbound | Blob;
+  file: components.FileT$Outbound | Blob;
   purpose?: string | undefined;
 };
 
@@ -116,7 +51,7 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema:
     z.ZodTypeDef,
     FilesApiRoutesUploadFileMultiPartBodyParams
   > = z.object({
-    file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
+    file: components.FileT$outboundSchema.or(blobLikeSchema),
     purpose: components.FilePurpose$outboundSchema.optional(),
   });
 

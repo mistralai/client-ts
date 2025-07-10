@@ -12,13 +12,15 @@ let value: AgentsApiV1ConversationsAppendRequest = {
       {
         object: "entry",
         type: "message.input",
-        role: "assistant",
+        role: "user",
         content: [
           {
-            imageUrl: "https://frilly-gown.info",
-            type: "image_url",
+            type: "tool_file",
+            tool: "code_interpreter",
+            fileId: "<id>",
           },
         ],
+        prefix: false,
       },
     ],
   },

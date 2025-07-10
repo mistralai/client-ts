@@ -72,12 +72,22 @@ const value: components.MessageOutputEvent = {
 };
 ```
 
+### `components.ToolExecutionDeltaEvent`
+
+```typescript
+const value: components.ToolExecutionDeltaEvent = {
+  id: "<id>",
+  name: "image_generation",
+  arguments: "<value>",
+};
+```
+
 ### `components.ToolExecutionDoneEvent`
 
 ```typescript
 const value: components.ToolExecutionDoneEvent = {
   id: "<id>",
-  name: "image_generation",
+  name: "web_search_premium",
 };
 ```
 
@@ -86,7 +96,8 @@ const value: components.ToolExecutionDoneEvent = {
 ```typescript
 const value: components.ToolExecutionStartedEvent = {
   id: "<id>",
-  name: "web_search_premium",
+  name: "web_search",
+  arguments: "<value>",
 };
 ```
 

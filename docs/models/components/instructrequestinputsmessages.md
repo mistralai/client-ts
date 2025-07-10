@@ -29,11 +29,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      fileId: "e3917557-b1eb-42f8-bf38-449ecb8e7dd3",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

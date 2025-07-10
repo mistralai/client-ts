@@ -33,6 +33,7 @@ export type ToolExecutionEntry = {
   completedAt?: Date | null | undefined;
   id?: string | undefined;
   name: BuiltInConnectors;
+  arguments: string;
   info?: { [k: string]: any } | undefined;
 };
 
@@ -93,6 +94,7 @@ export const ToolExecutionEntry$inboundSchema: z.ZodType<
   ).optional(),
   id: z.string().optional(),
   name: BuiltInConnectors$inboundSchema,
+  arguments: z.string(),
   info: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -109,6 +111,7 @@ export type ToolExecutionEntry$Outbound = {
   completed_at?: string | null | undefined;
   id?: string | undefined;
   name: string;
+  arguments: string;
   info?: { [k: string]: any } | undefined;
 };
 
@@ -124,6 +127,7 @@ export const ToolExecutionEntry$outboundSchema: z.ZodType<
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),
   name: BuiltInConnectors$outboundSchema,
+  arguments: z.string(),
   info: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {

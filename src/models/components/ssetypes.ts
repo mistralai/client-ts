@@ -14,6 +14,7 @@ export const SSETypes = {
   ConversationResponseError: "conversation.response.error",
   MessageOutputDelta: "message.output.delta",
   ToolExecutionStarted: "tool.execution.started",
+  ToolExecutionDelta: "tool.execution.delta",
   ToolExecutionDone: "tool.execution.done",
   AgentHandoffStarted: "agent.handoff.started",
   AgentHandoffDone: "agent.handoff.done",

@@ -14,7 +14,7 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    documentUrl: "https://irresponsible-formation.org/",
+    documentUrl: "https://apt-dish.net/",
     type: "document_url",
   },
 ];
