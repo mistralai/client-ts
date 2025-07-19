@@ -52,7 +52,7 @@ export class HTTPClient {
 
   async request(request: Request): Promise<Response> {
     let req = request;
-    for (const hook of this.requestHooks) {
+    for await (const hook of this.requestHooks) {
       const nextRequest = await hook(req);
       if (nextRequest) {
         req = nextRequest;
@@ -62,13 +62,13 @@ export class HTTPClient {
     try {
       const res = await this.fetcher(req);
 
-      for (const hook of this.responseHooks) {
+      for await (const hook of this.responseHooks) {
         await hook(res, req);
       }
 
       return res;
     } catch (err) {
-      for (const hook of this.requestErrorHooks) {
+      for await (const hook of this.requestErrorHooks) {
         await hook(err, req);
       }
 

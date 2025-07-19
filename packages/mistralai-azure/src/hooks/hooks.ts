@@ -93,7 +93,7 @@ export class SDKHooks implements Hooks {
   ): Promise<Request> {
     let req = request;
 
-    for (const hook of this.beforeRequestHooks) {
+    for await (const hook of this.beforeRequestHooks) {
       req = await hook.beforeRequest(hookCtx, req);
     }
 
@@ -106,7 +106,7 @@ export class SDKHooks implements Hooks {
   ): Promise<Response> {
     let res = response;
 
-    for (const hook of this.afterSuccessHooks) {
+    for await (const hook of this.afterSuccessHooks) {
       res = await hook.afterSuccess(hookCtx, res);
     }
 
@@ -121,7 +121,7 @@ export class SDKHooks implements Hooks {
     let res = response;
     let err = error;
 
-    for (const hook of this.afterErrorHooks) {
+    for await (const hook of this.afterErrorHooks) {
       const result = await hook.afterError(hookCtx, res, err);
       res = result.response;
       err = result.error;
