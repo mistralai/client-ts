@@ -6,8 +6,8 @@
 import { LibrariesDocumentsGetStatusV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: LibrariesDocumentsGetStatusV1Request = {
-  libraryId: "c84a9e0e-805b-47f6-a5d8-aca619e6e89d",
-  documentId: "1f3b873b-1fd8-4648-ae48-353f9b15e12a",
+  libraryId: "7ac84a9e-0e80-45b7-af65-d8aca619e6e8",
+  documentId: "d91f3b87-3b1f-4d86-848e-48353f9b15e1",
 };
 ```
 

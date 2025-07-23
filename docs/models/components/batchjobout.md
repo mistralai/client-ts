@@ -11,18 +11,17 @@ let value: BatchJobOut = {
     "fe10e83a-a140-4323-9a01-2544cf8f6164",
   ],
   endpoint: "<value>",
-  model: "Malibu",
   errors: [
     {
       message: "<value>",
     },
   ],
-  status: "FAILED",
-  createdAt: 935161,
-  totalRequests: 884765,
-  completedRequests: 701978,
-  succeededRequests: 489685,
-  failedRequests: 131687,
+  status: "TIMEOUT_EXCEEDED",
+  createdAt: 461050,
+  totalRequests: 935161,
+  completedRequests: 884765,
+  succeededRequests: 701978,
+  failedRequests: 489685,
 };
 ```
 
@@ -35,7 +34,8 @@ let value: BatchJobOut = {
 | `inputFiles`                                                                 | *string*[]                                                                   | :heavy_check_mark:                                                           | N/A                                                                          |
 | `metadata`                                                                   | Record<string, *any*>                                                        | :heavy_minus_sign:                                                           | N/A                                                                          |
 | `endpoint`                                                                   | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
-| `model`                                                                      | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `model`                                                                      | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `agentId`                                                                    | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
 | `outputFile`                                                                 | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
 | `errorFile`                                                                  | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
 | `errors`                                                                     | [components.BatchError](../../models/components/batcherror.md)[]             | :heavy_check_mark:                                                           | N/A                                                                          |

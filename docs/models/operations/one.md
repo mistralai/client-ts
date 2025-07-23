@@ -7,14 +7,14 @@
 
 ```typescript
 const value: components.ClassifierJobOut = {
-  id: "c0196a4e-c1cf-4fb1-894f-b9b75e506caf",
+  id: "55c0196a-4ec1-4cff-ab19-4fb9b75e506c",
   autoStart: false,
-  model: "Taurus",
-  status: "VALIDATED",
-  createdAt: 474003,
-  modifiedAt: 428482,
+  model: "Wrangler",
+  status: "STARTED",
+  createdAt: 911547,
+  modifiedAt: 368849,
   trainingFiles: [
-    "13b020d9-2cfe-4e09-8495-277f04dadac7",
+    "7613b020-d92c-4fee-b094-95277f04dada",
   ],
   hyperparameters: {},
 };
@@ -24,14 +24,14 @@ const value: components.ClassifierJobOut = {
 
 ```typescript
 const value: components.CompletionJobOut = {
-  id: "c92cf541-af27-410a-bd5e-13e89020e2d5",
+  id: "73c92cf5-41af-4271-b0ad-5e13e89020e2",
   autoStart: false,
   model: "Cruze",
-  status: "VALIDATING",
-  createdAt: 93660,
-  modifiedAt: 280706,
+  status: "CANCELLED",
+  createdAt: 365043,
+  modifiedAt: 267684,
   trainingFiles: [
-    "7d7f806b-3b80-4c81-b74e-4f85db6acdd2",
+    "147d7f80-6b3b-480c-b817-4e4f85db6acd",
   ],
   hyperparameters: {},
 };

@@ -31,7 +31,8 @@ export type BatchJobOut = {
   inputFiles: Array<string>;
   metadata?: { [k: string]: any } | null | undefined;
   endpoint: string;
-  model: string;
+  model?: string | null | undefined;
+  agentId?: string | null | undefined;
   outputFile?: string | null | undefined;
   errorFile?: string | null | undefined;
   errors: Array<BatchError>;
@@ -77,7 +78,8 @@ export const BatchJobOut$inboundSchema: z.ZodType<
   input_files: z.array(z.string()),
   metadata: z.nullable(z.record(z.any())).optional(),
   endpoint: z.string(),
-  model: z.string(),
+  model: z.nullable(z.string()).optional(),
+  agent_id: z.nullable(z.string()).optional(),
   output_file: z.nullable(z.string()).optional(),
   error_file: z.nullable(z.string()).optional(),
   errors: z.array(BatchError$inboundSchema),
@@ -92,6 +94,7 @@ export const BatchJobOut$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "input_files": "inputFiles",
+    "agent_id": "agentId",
     "output_file": "outputFile",
     "error_file": "errorFile",
     "created_at": "createdAt",
@@ -111,7 +114,8 @@ export type BatchJobOut$Outbound = {
   input_files: Array<string>;
   metadata?: { [k: string]: any } | null | undefined;
   endpoint: string;
-  model: string;
+  model?: string | null | undefined;
+  agent_id?: string | null | undefined;
   output_file?: string | null | undefined;
   error_file?: string | null | undefined;
   errors: Array<BatchError$Outbound>;
@@ -136,7 +140,8 @@ export const BatchJobOut$outboundSchema: z.ZodType<
   inputFiles: z.array(z.string()),
   metadata: z.nullable(z.record(z.any())).optional(),
   endpoint: z.string(),
-  model: z.string(),
+  model: z.nullable(z.string()).optional(),
+  agentId: z.nullable(z.string()).optional(),
   outputFile: z.nullable(z.string()).optional(),
   errorFile: z.nullable(z.string()).optional(),
   errors: z.array(BatchError$outboundSchema),
@@ -151,6 +156,7 @@ export const BatchJobOut$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     inputFiles: "input_files",
+    agentId: "agent_id",
     outputFile: "output_file",
     errorFile: "error_file",
     createdAt: "created_at",

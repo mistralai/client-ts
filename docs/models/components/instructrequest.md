@@ -8,13 +8,8 @@ import { InstructRequest } from "@mistralai/mistralai/models/components";
 let value: InstructRequest = {
   messages: [
     {
-      content: [
-        {
-          imageUrl: "https://everlasting-riser.org",
-          type: "image_url",
-        },
-      ],
-      role: "user",
+      prefix: false,
+      role: "assistant",
     },
   ],
 };

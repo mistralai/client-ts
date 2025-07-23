@@ -4,6 +4,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
+import { Audio } from "./audio.js";
 import { Batch } from "./batch.js";
 import { Beta } from "./beta.js";
 import { Chat } from "./chat.js";
@@ -69,5 +70,10 @@ export class Mistral extends ClientSDK {
   private _ocr?: Ocr;
   get ocr(): Ocr {
     return (this._ocr ??= new Ocr(this._options));
+  }
+
+  private _audio?: Audio;
+  get audio(): Audio {
+    return (this._audio ??= new Audio(this._options));
   }
 }

@@ -9,7 +9,7 @@ let value: InstructRequestInputs = {
   messages: [
     {
       content: "<value>",
-      role: "system",
+      role: "tool",
     },
   ],
 };

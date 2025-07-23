@@ -88,6 +88,7 @@ async function $do(
   const path = pathToFunc("/v1/batch/jobs")();
 
   const query = encodeFormQuery({
+    "agent_id": payload?.agent_id,
     "created_after": payload?.created_after,
     "created_by_me": payload?.created_by_me,
     "metadata": payload?.metadata,

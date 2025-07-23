@@ -7,12 +7,12 @@ import { ClassificationResponse } from "@mistralai/mistralai/models/components";
 
 let value: ClassificationResponse = {
   id: "mod-e5cc70bb28c444948073e77776eb30ef",
-  model: "PT Cruiser",
+  model: "Countach",
   results: [
     {
       "key": {
         scores: {
-          "key": 8080.5,
+          "key": 1887.32,
         },
       },
     },

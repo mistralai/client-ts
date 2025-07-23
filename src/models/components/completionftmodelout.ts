@@ -32,7 +32,9 @@ export type CompletionFTModelOut = {
   object?: CompletionFTModelOutObject | undefined;
   created: number;
   ownedBy: string;
+  workspaceId: string;
   root: string;
+  rootVersion: string;
   archived: boolean;
   name?: string | null | undefined;
   description?: string | null | undefined;
@@ -93,7 +95,9 @@ export const CompletionFTModelOut$inboundSchema: z.ZodType<
   object: CompletionFTModelOutObject$inboundSchema.default("model"),
   created: z.number().int(),
   owned_by: z.string(),
+  workspace_id: z.string(),
   root: z.string(),
+  root_version: z.string(),
   archived: z.boolean(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
@@ -105,6 +109,8 @@ export const CompletionFTModelOut$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "owned_by": "ownedBy",
+    "workspace_id": "workspaceId",
+    "root_version": "rootVersion",
     "max_context_length": "maxContextLength",
     "model_type": "modelType",
   });
@@ -116,7 +122,9 @@ export type CompletionFTModelOut$Outbound = {
   object: string;
   created: number;
   owned_by: string;
+  workspace_id: string;
   root: string;
+  root_version: string;
   archived: boolean;
   name?: string | null | undefined;
   description?: string | null | undefined;
@@ -137,7 +145,9 @@ export const CompletionFTModelOut$outboundSchema: z.ZodType<
   object: CompletionFTModelOutObject$outboundSchema.default("model"),
   created: z.number().int(),
   ownedBy: z.string(),
+  workspaceId: z.string(),
   root: z.string(),
+  rootVersion: z.string(),
   archived: z.boolean(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
@@ -149,6 +159,8 @@ export const CompletionFTModelOut$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     ownedBy: "owned_by",
+    workspaceId: "workspace_id",
+    rootVersion: "root_version",
     maxContextLength: "max_context_length",
     modelType: "model_type",
   });

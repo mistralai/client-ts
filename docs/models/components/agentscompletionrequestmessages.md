@@ -21,11 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      fileId: "2e64ff3a-1ada-4666-b9ee-021358abefad",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -33,7 +29,11 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      fileId: "befadc4e-0047-4a1a-ac26-87cfc1c13238",
+    },
+  ],
 };
 ```
 

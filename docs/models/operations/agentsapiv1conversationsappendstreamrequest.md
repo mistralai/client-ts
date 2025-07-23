@@ -11,9 +11,9 @@ let value: AgentsApiV1ConversationsAppendStreamRequest = {
     inputs: [
       {
         object: "entry",
-        type: "tool.execution",
-        name: "document_library",
-        arguments: "<value>",
+        type: "function.result",
+        toolCallId: "<id>",
+        result: "<value>",
       },
     ],
   },

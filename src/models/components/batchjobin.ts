@@ -16,7 +16,8 @@ import {
 export type BatchJobIn = {
   inputFiles: Array<string>;
   endpoint: ApiEndpoint;
-  model: string;
+  model?: string | null | undefined;
+  agentId?: string | null | undefined;
   metadata?: { [k: string]: string } | null | undefined;
   timeoutHours?: number | undefined;
 };
@@ -29,12 +30,14 @@ export const BatchJobIn$inboundSchema: z.ZodType<
 > = z.object({
   input_files: z.array(z.string()),
   endpoint: ApiEndpoint$inboundSchema,
-  model: z.string(),
+  model: z.nullable(z.string()).optional(),
+  agent_id: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.string())).optional(),
   timeout_hours: z.number().int().default(24),
 }).transform((v) => {
   return remap$(v, {
     "input_files": "inputFiles",
+    "agent_id": "agentId",
     "timeout_hours": "timeoutHours",
   });
 });
@@ -43,7 +46,8 @@ export const BatchJobIn$inboundSchema: z.ZodType<
 export type BatchJobIn$Outbound = {
   input_files: Array<string>;
   endpoint: string;
-  model: string;
+  model?: string | null | undefined;
+  agent_id?: string | null | undefined;
   metadata?: { [k: string]: string } | null | undefined;
   timeout_hours: number;
 };
@@ -56,12 +60,14 @@ export const BatchJobIn$outboundSchema: z.ZodType<
 > = z.object({
   inputFiles: z.array(z.string()),
   endpoint: ApiEndpoint$outboundSchema,
-  model: z.string(),
+  model: z.nullable(z.string()).optional(),
+  agentId: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.string())).optional(),
   timeoutHours: z.number().int().default(24),
 }).transform((v) => {
   return remap$(v, {
     inputFiles: "input_files",
+    agentId: "agent_id",
     timeoutHours: "timeout_hours",
   });
 });

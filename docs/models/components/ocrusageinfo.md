@@ -6,7 +6,7 @@
 import { OCRUsageInfo } from "@mistralai/mistralai/models/components";
 
 let value: OCRUsageInfo = {
-  pagesProcessed: 312690,
+  pagesProcessed: 206451,
 };
 ```
 

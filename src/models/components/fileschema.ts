@@ -47,7 +47,9 @@ export type FileSchema = {
   purpose: FilePurpose;
   sampleType: SampleType;
   numLines?: number | null | undefined;
+  mimetype?: string | null | undefined;
   source: Source;
+  signature?: string | null | undefined;
 };
 
 /** @internal */
@@ -64,7 +66,9 @@ export const FileSchema$inboundSchema: z.ZodType<
   purpose: FilePurpose$inboundSchema,
   sample_type: SampleType$inboundSchema,
   num_lines: z.nullable(z.number().int()).optional(),
+  mimetype: z.nullable(z.string()).optional(),
   source: Source$inboundSchema,
+  signature: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "bytes": "sizeBytes",
@@ -84,7 +88,9 @@ export type FileSchema$Outbound = {
   purpose: string;
   sample_type: string;
   num_lines?: number | null | undefined;
+  mimetype?: string | null | undefined;
   source: string;
+  signature?: string | null | undefined;
 };
 
 /** @internal */
@@ -101,7 +107,9 @@ export const FileSchema$outboundSchema: z.ZodType<
   purpose: FilePurpose$outboundSchema,
   sampleType: SampleType$outboundSchema,
   numLines: z.nullable(z.number().int()).optional(),
+  mimetype: z.nullable(z.string()).optional(),
   source: Source$outboundSchema,
+  signature: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sizeBytes: "bytes",

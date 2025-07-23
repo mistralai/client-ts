@@ -38,7 +38,7 @@ export type CompletionArgs = {
   stop?: CompletionArgsStop | null | undefined;
   presencePenalty?: number | null | undefined;
   frequencyPenalty?: number | null | undefined;
-  temperature?: number | undefined;
+  temperature?: number | null | undefined;
   topP?: number | null | undefined;
   maxTokens?: number | null | undefined;
   randomSeed?: number | null | undefined;
@@ -56,7 +56,7 @@ export const CompletionArgs$inboundSchema: z.ZodType<
   stop: z.nullable(CompletionArgsStop$inboundSchema).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
-  temperature: z.number().default(0.3),
+  temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   random_seed: z.nullable(z.number().int()).optional(),
@@ -80,7 +80,7 @@ export type CompletionArgs$Outbound = {
   stop?: CompletionArgsStop$Outbound | null | undefined;
   presence_penalty?: number | null | undefined;
   frequency_penalty?: number | null | undefined;
-  temperature: number;
+  temperature?: number | null | undefined;
   top_p?: number | null | undefined;
   max_tokens?: number | null | undefined;
   random_seed?: number | null | undefined;
@@ -98,7 +98,7 @@ export const CompletionArgs$outboundSchema: z.ZodType<
   stop: z.nullable(CompletionArgsStop$outboundSchema).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
-  temperature: z.number().default(0.3),
+  temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   randomSeed: z.nullable(z.number().int()).optional(),

@@ -14,8 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    documentUrl: "https://enchanting-formation.info/",
-    type: "document_url",
+    imageUrl: "https://grizzled-bathrobe.biz",
+    type: "image_url",
   },
 ];
 ```

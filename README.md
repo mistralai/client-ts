@@ -222,6 +222,14 @@ We have dedicated SDKs for the following providers:
 * [complete](docs/sdks/agents/README.md#complete) - Agents Completion
 * [stream](docs/sdks/agents/README.md#stream) - Stream Agents completion
 
+### [audio](docs/sdks/audio/README.md)
+
+
+#### [audio.transcriptions](docs/sdks/transcriptions/README.md)
+
+* [complete](docs/sdks/transcriptions/README.md#complete) - Create Transcription
+* [stream](docs/sdks/transcriptions/README.md#stream) - Create streaming transcription (SSE)
+
 ### [batch](docs/sdks/batch/README.md)
 
 
@@ -709,6 +717,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 - [`agentsComplete`](docs/sdks/agents/README.md#complete) - Agents Completion
 - [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream Agents completion
+- [`audioTranscriptionsComplete`](docs/sdks/transcriptions/README.md#complete) - Create Transcription
+- [`audioTranscriptionsStream`](docs/sdks/transcriptions/README.md#stream) - Create streaming transcription (SSE)
 - [`batchJobsCancel`](docs/sdks/mistraljobs/README.md#cancel) - Cancel Batch Job
 - [`batchJobsCreate`](docs/sdks/mistraljobs/README.md#create) - Create Batch Job
 - [`batchJobsGet`](docs/sdks/mistraljobs/README.md#get) - Get Batch Job

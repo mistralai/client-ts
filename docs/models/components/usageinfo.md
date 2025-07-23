@@ -5,17 +5,15 @@
 ```typescript
 import { UsageInfo } from "@mistralai/mistralai/models/components";
 
-let value: UsageInfo = {
-  promptTokens: 16,
-  completionTokens: 34,
-  totalTokens: 50,
-};
+let value: UsageInfo = {};
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `promptTokens`     | *number*           | :heavy_check_mark: | N/A                | 16                 |
-| `completionTokens` | *number*           | :heavy_check_mark: | N/A                | 34                 |
-| `totalTokens`      | *number*           | :heavy_check_mark: | N/A                | 50                 |
+| Field                  | Type                   | Required               | Description            |
+| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `promptTokens`         | *number*               | :heavy_minus_sign:     | N/A                    |
+| `completionTokens`     | *number*               | :heavy_minus_sign:     | N/A                    |
+| `totalTokens`          | *number*               | :heavy_minus_sign:     | N/A                    |
+| `promptAudioSeconds`   | *number*               | :heavy_minus_sign:     | N/A                    |
+| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
