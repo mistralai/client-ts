@@ -14,8 +14,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    documentUrl: "https://apt-dish.net/",
-    type: "document_url",
+    referenceIds: [
+      590927,
+    ],
+    type: "reference",
   },
 ];
 ```

@@ -6,11 +6,11 @@
 import { LibrariesShareCreateV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: LibrariesShareCreateV1Request = {
-  libraryId: "d3581164-67ff-42e1-a825-b6cbf8c55661",
+  libraryId: "0bd35811-6467-4ff2-9e18-25b6cbf8c556",
   sharingIn: {
-    orgId: "1e0742cb-2acc-41ab-bd87-fc85d717d709",
+    orgId: "181e0742-cb2a-4cc1-8abd-87fc85d717d7",
     level: "Editor",
-    shareWithUuid: "9ed79bd0-c7ac-4826-b1bf-c69484b4fa10",
+    shareWithUuid: "fd9ed79b-d0c7-4ac8-8261-bfc69484b4fa",
     shareWithType: "User",
   },
 };

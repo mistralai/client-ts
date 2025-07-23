@@ -15,10 +15,10 @@ import {
   ModelCapabilities$outboundSchema,
 } from "./modelcapabilities.js";
 
-export const Type = {
+export const BaseModelCardType = {
   Base: "base",
 } as const;
-export type Type = ClosedEnum<typeof Type>;
+export type BaseModelCardType = ClosedEnum<typeof BaseModelCardType>;
 
 export type BaseModelCard = {
   id: string;
@@ -37,23 +37,24 @@ export type BaseModelCard = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const BaseModelCardType$inboundSchema: z.ZodNativeEnum<
+  typeof BaseModelCardType
+> = z.nativeEnum(BaseModelCardType);
 
 /** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
+export const BaseModelCardType$outboundSchema: z.ZodNativeEnum<
+  typeof BaseModelCardType
+> = BaseModelCardType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Type$ {
-  /** @deprecated use `Type$inboundSchema` instead. */
-  export const inboundSchema = Type$inboundSchema;
-  /** @deprecated use `Type$outboundSchema` instead. */
-  export const outboundSchema = Type$outboundSchema;
+export namespace BaseModelCardType$ {
+  /** @deprecated use `BaseModelCardType$inboundSchema` instead. */
+  export const inboundSchema = BaseModelCardType$inboundSchema;
+  /** @deprecated use `BaseModelCardType$outboundSchema` instead. */
+  export const outboundSchema = BaseModelCardType$outboundSchema;
 }
 
 /** @internal */

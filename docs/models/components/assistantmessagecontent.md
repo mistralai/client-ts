@@ -14,8 +14,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: "https://bad-elver.com",
-    type: "image_url",
+    referenceIds: [
+      514767,
+    ],
+    type: "reference",
   },
 ];
 ```

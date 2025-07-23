@@ -7,17 +7,14 @@ import { ChatModerationRequest } from "@mistralai/mistralai/models/components";
 
 let value: ChatModerationRequest = {
   inputs: [
-    {
-      content: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
-      role: "system",
-    },
+    [
+      {
+        content: "<value>",
+        role: "user",
+      },
+    ],
   ],
-  model: "CX-9",
+  model: "Camry",
 };
 ```
 

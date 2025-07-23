@@ -47,7 +47,9 @@ export type RetrieveFileOut = {
   purpose: FilePurpose;
   sampleType: SampleType;
   numLines?: number | null | undefined;
+  mimetype?: string | null | undefined;
   source: Source;
+  signature?: string | null | undefined;
   deleted: boolean;
 };
 
@@ -65,7 +67,9 @@ export const RetrieveFileOut$inboundSchema: z.ZodType<
   purpose: FilePurpose$inboundSchema,
   sample_type: SampleType$inboundSchema,
   num_lines: z.nullable(z.number().int()).optional(),
+  mimetype: z.nullable(z.string()).optional(),
   source: Source$inboundSchema,
+  signature: z.nullable(z.string()).optional(),
   deleted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
@@ -86,7 +90,9 @@ export type RetrieveFileOut$Outbound = {
   purpose: string;
   sample_type: string;
   num_lines?: number | null | undefined;
+  mimetype?: string | null | undefined;
   source: string;
+  signature?: string | null | undefined;
   deleted: boolean;
 };
 
@@ -104,7 +110,9 @@ export const RetrieveFileOut$outboundSchema: z.ZodType<
   purpose: FilePurpose$outboundSchema,
   sampleType: SampleType$outboundSchema,
   numLines: z.nullable(z.number().int()).optional(),
+  mimetype: z.nullable(z.string()).optional(),
   source: Source$outboundSchema,
+  signature: z.nullable(z.string()).optional(),
   deleted: z.boolean(),
 }).transform((v) => {
   return remap$(v, {

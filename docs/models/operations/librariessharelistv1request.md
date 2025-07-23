@@ -6,7 +6,7 @@
 import { LibrariesShareListV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: LibrariesShareListV1Request = {
-  libraryId: "39a9dfc7-d1a8-42f5-a9e8-1d5fed5cf870",
+  libraryId: "8039a9df-c7d1-4a82-9f59-e81d5fed5cf8",
 };
 ```
 

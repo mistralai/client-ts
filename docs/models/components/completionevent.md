@@ -8,17 +8,12 @@ import { CompletionEvent } from "@mistralai/mistralai/models/components";
 let value: CompletionEvent = {
   data: {
     id: "<id>",
-    model: "Sentra",
-    usage: {
-      promptTokens: 16,
-      completionTokens: 34,
-      totalTokens: 50,
-    },
+    model: "Corvette",
     choices: [
       {
-        index: 720319,
+        index: 19691,
         delta: {},
-        finishReason: "tool_calls",
+        finishReason: "stop",
       },
     ],
   },

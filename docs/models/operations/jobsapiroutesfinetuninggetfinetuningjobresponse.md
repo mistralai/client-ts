@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "799f24b3-d520-49d4-bec0-993570226bd2",
+  id: "fb799f24-b3d5-4209-bd4e-c0993570226b",
   autoStart: false,
-  model: "Mercielago",
-  status: "CANCELLED",
-  createdAt: 968792,
-  modifiedAt: 124460,
+  model: "Aventador",
+  status: "SUCCESS",
+  createdAt: 670710,
+  modifiedAt: 890688,
   trainingFiles: [
-    "1c23ef5d-d999-4493-b26b-9fa22139de68",
+    "f11c23ef-5dd9-4994-9932-6b9fa22139de",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 312070,
+      stepNumber: 558583,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 5956.69,
+      weight: 8092,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "72766324-3bb9-4191-9053-9ebcfa99d6ca",
+  id: "92727663-243b-4b91-b910-539ebcfa99d6",
   autoStart: false,
-  model: "1",
-  status: "VALIDATING",
-  createdAt: 699989,
-  modifiedAt: 579690,
+  model: "Malibu",
+  status: "VALIDATED",
+  createdAt: 13688,
+  modifiedAt: 209920,
   trainingFiles: [
-    "46a26688-5c10-46e4-b2e2-5b436ce02f98",
+    "b946a266-885c-4106-ae42-e25b436ce02f",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 39783,
+      stepNumber: 551410,
       createdAt: 1716963433,
     },
   ],

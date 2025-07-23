@@ -8,21 +8,7 @@ import { AgentsApiV1ConversationsAppendRequest } from "@mistralai/mistralai/mode
 let value: AgentsApiV1ConversationsAppendRequest = {
   conversationId: "<id>",
   conversationAppendRequest: {
-    inputs: [
-      {
-        object: "entry",
-        type: "message.input",
-        role: "user",
-        content: [
-          {
-            type: "tool_file",
-            tool: "code_interpreter",
-            fileId: "<id>",
-          },
-        ],
-        prefix: false,
-      },
-    ],
+    inputs: "<value>",
   },
 };
 ```

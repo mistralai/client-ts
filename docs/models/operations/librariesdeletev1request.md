@@ -6,7 +6,7 @@
 import { LibrariesDeleteV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: LibrariesDeleteV1Request = {
-  libraryId: "f2b92008-fab7-492e-8cf4-32fc28622f4f",
+  libraryId: "09f2b920-08fa-4b79-92ec-f432fc28622f",
 };
 ```
 

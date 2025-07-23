@@ -6,10 +6,9 @@
 import { OCRRequest } from "@mistralai/mistralai/models/components";
 
 let value: OCRRequest = {
-  model: "Land Cruiser",
+  model: "Beetle",
   document: {
-    imageUrl: "https://phony-joy.com",
-    type: "image_url",
+    fileId: "651dc8f1-c453-4c2d-aa0c-aeb8d484f305",
   },
 };
 ```

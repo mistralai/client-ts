@@ -5,7 +5,7 @@
 ```typescript
 import { ApiEndpoint } from "@mistralai/mistralai/models/components";
 
-let value: ApiEndpoint = "/v1/fim/completions";
+let value: ApiEndpoint = "/v1/embeddings";
 ```
 
 ## Values

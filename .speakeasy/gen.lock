@@ -1,18 +1,19 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 82cf79b2dee6811d91e2912113c21d3a
+  docChecksum: c33c788946fa446bfcf90b60f68abde9
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.7.4
-  configChecksum: 6da10f087cf01baf54e1e4c30ecde691
+  releaseVersion: 1.7.5
+  configChecksum: f68bcf36968d227158f2693a5e2aed1a
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
+    additionalProperties: 0.1.1
     constsAndDefaults: 0.1.11
     core: 3.21.4
     customCodeRegions: 0.1.0
@@ -79,7 +80,12 @@ generatedFiles:
   - docs/models/components/assistantmessage.md
   - docs/models/components/assistantmessagecontent.md
   - docs/models/components/assistantmessagerole.md
+  - docs/models/components/audiochunk.md
+  - docs/models/components/audiochunktype.md
+  - docs/models/components/audiotranscriptionrequest.md
+  - docs/models/components/audiotranscriptionrequeststream.md
   - docs/models/components/basemodelcard.md
+  - docs/models/components/basemodelcardtype.md
   - docs/models/components/batcherror.md
   - docs/models/components/batchjobin.md
   - docs/models/components/batchjobout.md
@@ -270,6 +276,7 @@ generatedFiles:
   - docs/models/components/messageoutputeventrole.md
   - docs/models/components/messageoutputeventtype.md
   - docs/models/components/messages.md
+  - docs/models/components/metadata.md
   - docs/models/components/metricout.md
   - docs/models/components/mistralpromptmode.md
   - docs/models/components/modelcapabilities.md
@@ -320,6 +327,10 @@ generatedFiles:
   - docs/models/components/systemmessagecontent.md
   - docs/models/components/textchunk.md
   - docs/models/components/textchunktype.md
+  - docs/models/components/thinkchunk.md
+  - docs/models/components/thinkchunktype.md
+  - docs/models/components/thinking.md
+  - docs/models/components/timestampgranularity.md
   - docs/models/components/tool.md
   - docs/models/components/toolcall.md
   - docs/models/components/toolchoice.md
@@ -343,6 +354,19 @@ generatedFiles:
   - docs/models/components/tools.md
   - docs/models/components/tooltypes.md
   - docs/models/components/trainingfile.md
+  - docs/models/components/transcriptionresponse.md
+  - docs/models/components/transcriptionsegmentchunk.md
+  - docs/models/components/transcriptionstreamdone.md
+  - docs/models/components/transcriptionstreamdonetype.md
+  - docs/models/components/transcriptionstreamevents.md
+  - docs/models/components/transcriptionstreameventsdata.md
+  - docs/models/components/transcriptionstreameventtypes.md
+  - docs/models/components/transcriptionstreamlanguage.md
+  - docs/models/components/transcriptionstreamlanguagetype.md
+  - docs/models/components/transcriptionstreamsegmentdelta.md
+  - docs/models/components/transcriptionstreamsegmentdeltatype.md
+  - docs/models/components/transcriptionstreamtextdelta.md
+  - docs/models/components/transcriptionstreamtextdeltatype.md
   - docs/models/components/two.md
   - docs/models/components/type.md
   - docs/models/components/unarchiveftmodelout.md
@@ -422,6 +446,7 @@ generatedFiles:
   - docs/models/operations/status.md
   - docs/sdks/accesses/README.md
   - docs/sdks/agents/README.md
+  - docs/sdks/audio/README.md
   - docs/sdks/batch/README.md
   - docs/sdks/beta/README.md
   - docs/sdks/chat/README.md
@@ -439,12 +464,15 @@ generatedFiles:
   - docs/sdks/mistraljobs/README.md
   - docs/sdks/models/README.md
   - docs/sdks/ocr/README.md
+  - docs/sdks/transcriptions/README.md
   - eslint.config.mjs
   - jsr.json
   - package.json
   - src/core.ts
   - src/funcs/agentsComplete.ts
   - src/funcs/agentsStream.ts
+  - src/funcs/audioTranscriptionsComplete.ts
+  - src/funcs/audioTranscriptionsStream.ts
   - src/funcs/batchJobsCancel.ts
   - src/funcs/batchJobsCreate.ts
   - src/funcs/batchJobsGet.ts
@@ -542,6 +570,9 @@ generatedFiles:
   - src/models/components/apiendpoint.ts
   - src/models/components/archiveftmodelout.ts
   - src/models/components/assistantmessage.ts
+  - src/models/components/audiochunk.ts
+  - src/models/components/audiotranscriptionrequest.ts
+  - src/models/components/audiotranscriptionrequeststream.ts
   - src/models/components/basemodelcard.ts
   - src/models/components/batcherror.ts
   - src/models/components/batchjobin.ts
@@ -685,6 +716,8 @@ generatedFiles:
   - src/models/components/ssetypes.ts
   - src/models/components/systemmessage.ts
   - src/models/components/textchunk.ts
+  - src/models/components/thinkchunk.ts
+  - src/models/components/timestampgranularity.ts
   - src/models/components/tool.ts
   - src/models/components/toolcall.ts
   - src/models/components/toolchoice.ts
@@ -698,6 +731,14 @@ generatedFiles:
   - src/models/components/toolreferencechunk.ts
   - src/models/components/tooltypes.ts
   - src/models/components/trainingfile.ts
+  - src/models/components/transcriptionresponse.ts
+  - src/models/components/transcriptionsegmentchunk.ts
+  - src/models/components/transcriptionstreamdone.ts
+  - src/models/components/transcriptionstreamevents.ts
+  - src/models/components/transcriptionstreameventtypes.ts
+  - src/models/components/transcriptionstreamlanguage.ts
+  - src/models/components/transcriptionstreamsegmentdelta.ts
+  - src/models/components/transcriptionstreamtextdelta.ts
   - src/models/components/unarchiveftmodelout.ts
   - src/models/components/updateftmodelin.ts
   - src/models/components/uploadfileout.ts
@@ -763,6 +804,7 @@ generatedFiles:
   - src/models/operations/retrievemodelv1modelsmodelidget.ts
   - src/sdk/accesses.ts
   - src/sdk/agents.ts
+  - src/sdk/audio.ts
   - src/sdk/batch.ts
   - src/sdk/beta.ts
   - src/sdk/chat.ts
@@ -781,6 +823,7 @@ generatedFiles:
   - src/sdk/models.ts
   - src/sdk/ocr.ts
   - src/sdk/sdk.ts
+  - src/sdk/transcriptions.ts
   - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
@@ -826,7 +869,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "model", "created": 597129, "owned_by": "<value>", "root": "<value>", "archived": true, "capabilities": {"completion_chat": true, "completion_fim": false, "function_calling": false, "fine_tuning": false, "classification": false}, "max_context_length": 32768, "job": "fa7f0e74-32ce-447c-9b60-cc78135ddeb8", "model_type": "completion"}
+          application/json: {"id": "<id>", "object": "model", "created": 597129, "owned_by": "<value>", "workspace_id": "<id>", "root": "<value>", "root_version": "<value>", "archived": true, "capabilities": {"completion_chat": true, "completion_fim": false, "function_calling": false, "fine_tuning": false, "classification": false}, "max_context_length": 32768, "job": "fa7f0e74-32ce-447c-9b60-cc78135ddeb8", "model_type": "completion"}
   jobs_api_routes_fine_tuning_archive_fine_tuned_model:
     "":
       parameters:
@@ -1432,5 +1475,16 @@ examples:
           application/json: {"library_id": "429e55a6-fe3f-45fd-8128-205f7b825109", "org_id": "098a71ce-6e33-4d0a-8a2d-9a9e96fe241f", "role": "<value>", "share_with_type": "<value>", "share_with_uuid": "5049e21f-c1aa-492b-abbc-3f5136368d32"}
         "422":
           application/json: {}
+  audio_api_v1_transcriptions_post:
+    speakeasy-default-audio-api-v1-transcriptions-post:
+      requestBody:
+        multipart/form-data: {"model": "Ranchero", "stream": false}
+      responses:
+        "200":
+          application/json: {"model": "Prius", "text": "<value>", "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}, "language": "<value>", "key": "<value>", "key1": "<value>", "key2": "<value>"}
+  audio_api_v1_transcriptions_post_stream:
+    speakeasy-default-audio-api-v1-transcriptions-post-stream:
+      requestBody:
+        multipart/form-data: {"model": "Ranchero", "stream": true}
 examplesVersion: 1.0.0
 generatedTests: {}

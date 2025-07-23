@@ -8,10 +8,8 @@ import { ToolMessage } from "@mistralai/mistralai/models/components";
 let value: ToolMessage = {
   content: [
     {
-      referenceIds: [
-        768920,
-      ],
-      type: "reference",
+      text: "<value>",
+      type: "text",
     },
   ],
 };

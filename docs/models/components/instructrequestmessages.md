@@ -29,7 +29,12 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 

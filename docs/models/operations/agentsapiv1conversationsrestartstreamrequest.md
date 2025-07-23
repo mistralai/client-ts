@@ -11,11 +11,9 @@ let value: AgentsApiV1ConversationsRestartStreamRequest = {
     inputs: [
       {
         object: "entry",
-        type: "agent.handoff",
-        previousAgentId: "<id>",
-        previousAgentName: "<value>",
-        nextAgentId: "<id>",
-        nextAgentName: "<value>",
+        type: "tool.execution",
+        name: "document_library",
+        arguments: "<value>",
       },
     ],
     fromEntryId: "<id>",

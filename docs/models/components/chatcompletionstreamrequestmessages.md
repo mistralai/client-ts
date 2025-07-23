@@ -13,7 +13,12 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 
@@ -21,7 +26,11 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      fileId: "0f2bd531-b7be-42e6-84ff-3a1ada6669ee",
+    },
+  ],
 };
 ```
 

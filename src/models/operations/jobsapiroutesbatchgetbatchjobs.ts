@@ -13,6 +13,7 @@ export type JobsApiRoutesBatchGetBatchJobsRequest = {
   page?: number | undefined;
   pageSize?: number | undefined;
   model?: string | null | undefined;
+  agentId?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   createdAfter?: Date | null | undefined;
   createdByMe?: boolean | undefined;
@@ -28,6 +29,7 @@ export const JobsApiRoutesBatchGetBatchJobsRequest$inboundSchema: z.ZodType<
   page: z.number().int().default(0),
   page_size: z.number().int().default(100),
   model: z.nullable(z.string()).optional(),
+  agent_id: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
   created_after: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -38,6 +40,7 @@ export const JobsApiRoutesBatchGetBatchJobsRequest$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "page_size": "pageSize",
+    "agent_id": "agentId",
     "created_after": "createdAfter",
     "created_by_me": "createdByMe",
   });
@@ -48,6 +51,7 @@ export type JobsApiRoutesBatchGetBatchJobsRequest$Outbound = {
   page: number;
   page_size: number;
   model?: string | null | undefined;
+  agent_id?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   created_after?: string | null | undefined;
   created_by_me: boolean;
@@ -63,6 +67,7 @@ export const JobsApiRoutesBatchGetBatchJobsRequest$outboundSchema: z.ZodType<
   page: z.number().int().default(0),
   pageSize: z.number().int().default(100),
   model: z.nullable(z.string()).optional(),
+  agentId: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
   createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   createdByMe: z.boolean().default(false),
@@ -71,6 +76,7 @@ export const JobsApiRoutesBatchGetBatchJobsRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
+    agentId: "agent_id",
     createdAfter: "created_after",
     createdByMe: "created_by_me",
   });

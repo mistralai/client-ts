@@ -6,11 +6,11 @@
 import { LibrariesShareDeleteV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: LibrariesShareDeleteV1Request = {
-  libraryId: "53ea8859-63a5-4c68-8c7f-cdf69baf44ec",
+  libraryId: "f353ea88-5963-4a5c-b68c-7fcdf69baf44",
   sharingDelete: {
-    orgId: "9b5697c0-659c-412a-ab9f-72a998f21239",
-    shareWithUuid: "3777c7c2-8d27-492c-81f7-516a14da32e4",
-    shareWithType: "Org",
+    orgId: "c39b5697-c065-49c1-82ab-9f72a998f212",
+    shareWithUuid: "993777c7-c28d-4279-b2c1-f7516a14da32",
+    shareWithType: "User",
   },
 };
 ```

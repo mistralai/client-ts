@@ -9,20 +9,16 @@ let value: EmbeddingResponse = {
   id: "cmpl-e5cc70bb28c444948073e77776eb30ef",
   object: "chat.completion",
   model: "mistral-small-latest",
-  usage: {
-    promptTokens: 16,
-    completionTokens: 34,
-    totalTokens: 50,
-  },
+  usage: {},
   data: [
     {
       object: "embedding",
       embedding: [
-        0.4,
-        0.5,
-        0.6,
+        0.1,
+        0.2,
+        0.3,
       ],
-      index: 1,
+      index: 0,
     },
   ],
 };

@@ -8,9 +8,9 @@
 ```typescript
 const value: components.ModelConversation = {
   id: "<id>",
-  createdAt: new Date("2025-08-03T11:34:04.757Z"),
-  updatedAt: new Date("2023-10-06T16:47:41.923Z"),
-  model: "Malibu",
+  createdAt: new Date("2023-10-06T16:47:41.923Z"),
+  updatedAt: new Date("2024-12-30T21:11:09.271Z"),
+  model: "Ranchero",
 };
 ```
 
@@ -19,8 +19,8 @@ const value: components.ModelConversation = {
 ```typescript
 const value: components.AgentConversation = {
   id: "<id>",
-  createdAt: new Date("2025-06-14T03:09:08.898Z"),
-  updatedAt: new Date("2024-10-27T11:16:46.409Z"),
+  createdAt: new Date("2024-10-27T11:16:46.409Z"),
+  updatedAt: new Date("2025-11-15T09:46:43.129Z"),
   agentId: "<id>",
 };
 ```

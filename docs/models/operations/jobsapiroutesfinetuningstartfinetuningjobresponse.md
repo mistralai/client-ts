@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "c5a424e7-350c-4390-9d20-4e4864ecc8d7",
+  id: "25c5a424-e735-40c3-b90d-204e4864ecc8",
   autoStart: false,
-  model: "Fiesta",
-  status: "VALIDATING",
-  createdAt: 923652,
-  modifiedAt: 258750,
+  model: "Explorer",
+  status: "RUNNING",
+  createdAt: 493774,
+  modifiedAt: 236910,
   trainingFiles: [
-    "33dc60f2-dcfc-4536-a3bd-a2097358a7f0",
+    "e433dc60-f2dc-4fc5-b363-bda2097358a7",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 909558,
+      stepNumber: 46226,
       createdAt: 1716963433,
     },
   ],
@@ -32,8 +32,8 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 2365.64,
-      lossFunction: "single_class",
+      weight: 6582.08,
+      lossFunction: "multi_class",
     },
   ],
 };
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "c7f9e02a-6d6b-491b-8b18-5761213d06c1",
+  id: "33c7f9e0-2a6d-46b9-b1bb-185761213d06",
   autoStart: false,
-  model: "Model T",
-  status: "FAILED",
-  createdAt: 563024,
-  modifiedAt: 171640,
+  model: "Accord",
+  status: "VALIDATING",
+  createdAt: 727440,
+  modifiedAt: 647553,
   trainingFiles: [
-    "c22c5545-5b35-4ce9-918a-5dc92be4fc49",
+    "92c22c55-455b-435c-9e91-8a5dc92be4fc",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 99467,
+      stepNumber: 616821,
       createdAt: 1716963433,
     },
   ],
