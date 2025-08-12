@@ -18,6 +18,7 @@ export * from "./functionname.js";
 export * from "./imageurl.js";
 export * from "./imageurlchunk.js";
 export * from "./jsonschema.js";
+export * from "./mistralpromptmode.js";
 export * from "./prediction.js";
 export * from "./referencechunk.js";
 export * from "./responseformat.js";

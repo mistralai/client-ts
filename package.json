@@ -1,6 +1,6 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,

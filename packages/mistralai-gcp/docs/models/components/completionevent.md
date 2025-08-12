@@ -9,11 +9,6 @@ let value: CompletionEvent = {
   data: {
     id: "<id>",
     model: "Golf",
-    usage: {
-      promptTokens: 16,
-      completionTokens: 34,
-      totalTokens: 50,
-    },
     choices: [
       {
         index: 715190,

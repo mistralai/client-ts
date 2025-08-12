@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: 28fe1ab59b4dee005217f2dbbd836060
-  docVersion: 0.0.2
+  docChecksum: c01cfc13b9e60701ce05c06c9d8ba0f7
+  docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.5.0
-  configChecksum: 1c5e28cded8c5d3a7d735e20f6f09b99
+  releaseVersion: 2.0.0
+  configChecksum: 45752110e9dbd0945a4aafd8918b7271
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -14,6 +14,7 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
+    additionalProperties: 0.1.1
     constsAndDefaults: 0.1.11
     core: 3.21.4
     defaultEnabledRetries: 0.1.0
@@ -75,6 +76,8 @@ generatedFiles:
   - docs/models/components/jsonschema.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
+  - docs/models/components/metadata.md
+  - docs/models/components/mistralpromptmode.md
   - docs/models/components/prediction.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
@@ -149,6 +152,7 @@ generatedFiles:
   - src/models/components/imageurlchunk.ts
   - src/models/components/index.ts
   - src/models/components/jsonschema.ts
+  - src/models/components/mistralpromptmode.ts
   - src/models/components/prediction.ts
   - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts

@@ -8,11 +8,6 @@ import { CompletionChunk } from "@mistralai/mistralai-azure/models/components";
 let value: CompletionChunk = {
   id: "<id>",
   model: "Golf",
-  usage: {
-    promptTokens: 16,
-    completionTokens: 34,
-    totalTokens: 50,
-  },
   choices: [
     {
       index: 423655,

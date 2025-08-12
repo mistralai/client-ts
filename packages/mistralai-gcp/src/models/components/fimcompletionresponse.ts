@@ -24,8 +24,8 @@ export type FIMCompletionResponse = {
   object: string;
   model: string;
   usage: UsageInfo;
-  created?: number | undefined;
-  choices?: Array<ChatCompletionChoice> | undefined;
+  created: number;
+  choices: Array<ChatCompletionChoice>;
 };
 
 /** @internal */
@@ -38,8 +38,8 @@ export const FIMCompletionResponse$inboundSchema: z.ZodType<
   object: z.string(),
   model: z.string(),
   usage: UsageInfo$inboundSchema,
-  created: z.number().int().optional(),
-  choices: z.array(ChatCompletionChoice$inboundSchema).optional(),
+  created: z.number().int(),
+  choices: z.array(ChatCompletionChoice$inboundSchema),
 });
 
 /** @internal */
@@ -48,8 +48,8 @@ export type FIMCompletionResponse$Outbound = {
   object: string;
   model: string;
   usage: UsageInfo$Outbound;
-  created?: number | undefined;
-  choices?: Array<ChatCompletionChoice$Outbound> | undefined;
+  created: number;
+  choices: Array<ChatCompletionChoice$Outbound>;
 };
 
 /** @internal */
@@ -62,8 +62,8 @@ export const FIMCompletionResponse$outboundSchema: z.ZodType<
   object: z.string(),
   model: z.string(),
   usage: UsageInfo$outboundSchema,
-  created: z.number().int().optional(),
-  choices: z.array(ChatCompletionChoice$outboundSchema).optional(),
+  created: z.number().int(),
+  choices: z.array(ChatCompletionChoice$outboundSchema),
 });
 
 /**

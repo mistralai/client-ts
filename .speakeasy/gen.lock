@@ -5,8 +5,8 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.7.5
-  configChecksum: f68bcf36968d227158f2693a5e2aed1a
+  releaseVersion: 1.7.6
+  configChecksum: 08636728ae7da6d822a2478216ba8ea6
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true

@@ -14,6 +14,11 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  MistralPromptMode,
+  MistralPromptMode$inboundSchema,
+  MistralPromptMode$outboundSchema,
+} from "./mistralpromptmode.js";
+import {
   Prediction,
   Prediction$inboundSchema,
   Prediction$Outbound,
@@ -126,6 +131,10 @@ export type ChatCompletionStreamRequest = {
   n?: number | null | undefined;
   prediction?: Prediction | undefined;
   parallelToolCalls?: boolean | undefined;
+  /**
+   * Allows toggling between the reasoning mode and no system prompt. When set to `reasoning` the system prompt for reasoning models will be used.
+   */
+  promptMode?: MistralPromptMode | null | undefined;
 };
 
 /** @internal */
@@ -349,6 +358,7 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$inboundSchema.optional(),
   parallel_tool_calls: z.boolean().optional(),
+  prompt_mode: z.nullable(MistralPromptMode$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_p": "topP",
@@ -359,6 +369,7 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
     "presence_penalty": "presencePenalty",
     "frequency_penalty": "frequencyPenalty",
     "parallel_tool_calls": "parallelToolCalls",
+    "prompt_mode": "promptMode",
   });
 });
 
@@ -385,6 +396,7 @@ export type ChatCompletionStreamRequest$Outbound = {
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
   parallel_tool_calls?: boolean | undefined;
+  prompt_mode?: string | null | undefined;
 };
 
 /** @internal */
@@ -435,6 +447,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
+  promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     topP: "top_p",
@@ -445,6 +458,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
     presencePenalty: "presence_penalty",
     frequencyPenalty: "frequency_penalty",
     parallelToolCalls: "parallel_tool_calls",
+    promptMode: "prompt_mode",
   });
 });
 
