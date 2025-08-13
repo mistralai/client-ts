@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.ImageURL = {
-  url: "https://white-digestive.name",
+  url: "https://remarkable-dream.net/",
 };
 ```
 

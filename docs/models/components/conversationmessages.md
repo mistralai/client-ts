@@ -12,9 +12,10 @@ let value: ConversationMessages = {
   messages: [
     {
       object: "entry",
-      type: "message.output",
+      type: "message.input",
       role: "assistant",
       content: "<value>",
+      prefix: false,
     },
   ],
 };

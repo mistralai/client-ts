@@ -6,12 +6,7 @@
 import { ToolMessage } from "@mistralai/mistralai/models/components";
 
 let value: ToolMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

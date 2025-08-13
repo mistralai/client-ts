@@ -6,15 +6,15 @@
 import { LibraryOut } from "@mistralai/mistralai/models/components";
 
 let value: LibraryOut = {
-  id: "ab462c0b-cc45-4945-9370-c1849fa0688a",
+  id: "0447ab46-2c0b-4cc4-9594-5370c1849fa0",
   name: "<value>",
-  createdAt: new Date("2023-05-22T05:32:53.930Z"),
-  updatedAt: new Date("2024-03-06T08:56:27.585Z"),
-  ownerId: "f2e87e7b-6ebb-45ca-932c-f79d7f9ded2a",
+  createdAt: new Date("2024-07-12T23:28:59.820Z"),
+  updatedAt: new Date("2024-08-10T15:36:46.154Z"),
+  ownerId: "a426f2e8-7e7b-46eb-bb5c-a32cf79d7f9d",
   ownerType: "<value>",
-  totalSize: 62713,
-  nbDocuments: 424032,
-  chunkSize: 258684,
+  totalSize: 815524,
+  nbDocuments: 159414,
+  chunkSize: 628899,
 };
 ```
 

@@ -7,8 +7,8 @@ import { TranscriptionStreamSegmentDelta } from "@mistralai/mistralai/models/com
 
 let value: TranscriptionStreamSegmentDelta = {
   text: "<value>",
-  start: 6077.42,
-  end: 4877.65,
+  start: 5556.63,
+  end: 1012.84,
 };
 ```
 

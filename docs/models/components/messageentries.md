@@ -7,8 +7,15 @@
 
 ```typescript
 const value: components.MessageInputEntry = {
-  role: "assistant",
-  content: "<value>",
+  role: "user",
+  content: [
+    {
+      imageUrl: {
+        url: "https://baggy-hovercraft.biz/",
+      },
+      type: "image_url",
+    },
+  ],
 };
 ```
 
@@ -16,7 +23,13 @@ const value: components.MessageInputEntry = {
 
 ```typescript
 const value: components.MessageOutputEntry = {
-  content: "<value>",
+  content: [
+    {
+      type: "tool_file",
+      tool: "web_search",
+      fileId: "<id>",
+    },
+  ],
 };
 ```
 

@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://fragrant-annual.org/",
+  imageUrl: "https://bad-elver.com",
 };
 ```
 
@@ -15,7 +15,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://whopping-longboat.net",
+  documentUrl: "https://raw-viability.name",
 };
 ```
 
@@ -32,7 +32,7 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    374414,
+    802069,
   ],
 };
 ```
@@ -41,7 +41,7 @@ const value: components.ReferenceChunk = {
 
 ```typescript
 const value: components.FileChunk = {
-  fileId: "56a5ef03-1037-4d37-beac-8f90369c6bc5",
+  fileId: "556a5ef0-3103-47d3-97ea-c8f90369c6bc",
 };
 ```
 

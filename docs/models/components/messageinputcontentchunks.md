@@ -15,7 +15,9 @@ const value: components.TextChunk = {
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://misguided-avalanche.biz/",
+  imageUrl: {
+    url: "https://kosher-puppet.org",
+  },
 };
 ```
 
@@ -23,7 +25,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.ToolFileChunk = {
-  tool: "web_search",
+  tool: "document_library",
   fileId: "<id>",
 };
 ```
@@ -32,7 +34,7 @@ const value: components.ToolFileChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://elliptical-fog.org",
+  documentUrl: "https://advanced-fort.net",
 };
 ```
 

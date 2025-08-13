@@ -6,11 +6,11 @@
 import { SharingOut } from "@mistralai/mistralai/models/components";
 
 let value: SharingOut = {
-  libraryId: "ce0e6ebf-c586-4547-9a48-120f0291ebf8",
-  orgId: "8e84e503-5d77-45ef-9f6f-ca332e477cd2",
+  libraryId: "3685cce0-e6eb-4fc5-8865-47a48120f029",
+  orgId: "ebf848e8-4e50-435d-9775-eff6fca332e4",
   role: "<value>",
   shareWithType: "<value>",
-  shareWithUuid: "dd124161-9391-4fe6-9347-0a66cbf5ec59",
+  shareWithUuid: "7cd26dd1-2416-4193-991f-e63470a66cbf",
 };
 ```
 

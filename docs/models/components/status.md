@@ -7,7 +7,7 @@ The current status of the fine-tuning job.
 ```typescript
 import { Status } from "@mistralai/mistralai/models/components";
 
-let value: Status = "SUCCESS";
+let value: Status = "VALIDATED";
 ```
 
 ## Values

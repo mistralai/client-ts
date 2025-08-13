@@ -8,8 +8,8 @@ import { MessageOutputEvent } from "@mistralai/mistralai/models/components";
 let value: MessageOutputEvent = {
   id: "<id>",
   content: {
-    documentUrl: "https://earnest-legend.com/",
-    type: "document_url",
+    imageUrl: "https://ecstatic-understanding.net",
+    type: "image_url",
   },
 };
 ```

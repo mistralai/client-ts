@@ -7,7 +7,7 @@ import { ToolExecutionDeltaEvent } from "@mistralai/mistralai/models/components"
 
 let value: ToolExecutionDeltaEvent = {
   id: "<id>",
-  name: "image_generation",
+  name: "web_search_premium",
   arguments: "<value>",
 };
 ```

@@ -6,7 +6,7 @@
 import { ProcessingStatusOut } from "@mistralai/mistralai/models/components";
 
 let value: ProcessingStatusOut = {
-  documentId: "576f25a1-9743-4857-b5f2-159a6f5badfe",
+  documentId: "ea84f576-f25a-4197-a438-575f2159a6f5",
   processingStatus: "<value>",
 };
 ```

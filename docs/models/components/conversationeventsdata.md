@@ -36,7 +36,7 @@ const value: components.ResponseDoneEvent = {
 ```typescript
 const value: components.ResponseErrorEvent = {
   message: "<value>",
-  code: 536579,
+  code: 679393,
 };
 ```
 
@@ -64,11 +64,7 @@ const value: components.FunctionCallEvent = {
 ```typescript
 const value: components.MessageOutputEvent = {
   id: "<id>",
-  content: {
-    type: "tool_reference",
-    tool: "web_search_premium",
-    title: "<value>",
-  },
+  content: "<value>",
 };
 ```
 
@@ -77,7 +73,7 @@ const value: components.MessageOutputEvent = {
 ```typescript
 const value: components.ToolExecutionDeltaEvent = {
   id: "<id>",
-  name: "image_generation",
+  name: "code_interpreter",
   arguments: "<value>",
 };
 ```
@@ -87,7 +83,7 @@ const value: components.ToolExecutionDeltaEvent = {
 ```typescript
 const value: components.ToolExecutionDoneEvent = {
   id: "<id>",
-  name: "web_search_premium",
+  name: "document_library",
 };
 ```
 
@@ -96,7 +92,7 @@ const value: components.ToolExecutionDoneEvent = {
 ```typescript
 const value: components.ToolExecutionStartedEvent = {
   id: "<id>",
-  name: "web_search",
+  name: "document_library",
   arguments: "<value>",
 };
 ```

@@ -7,7 +7,7 @@ import { ToolExecutionDoneEvent } from "@mistralai/mistralai/models/components";
 
 let value: ToolExecutionDoneEvent = {
   id: "<id>",
-  name: "document_library",
+  name: "web_search_premium",
 };
 ```
 

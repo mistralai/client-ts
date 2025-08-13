@@ -6,11 +6,14 @@
 import { ConversationEvents } from "@mistralai/mistralai/models/components";
 
 let value: ConversationEvents = {
-  event: "agent.handoff.started",
+  event: "conversation.response.error",
   data: {
-    type: "conversation.response.error",
-    message: "<value>",
-    code: 383464,
+    type: "message.output.delta",
+    outputIndex: 0,
+    id: "<id>",
+    contentIndex: 0,
+    role: "assistant",
+    content: "<value>",
   },
 };
 ```

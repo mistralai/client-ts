@@ -6,10 +6,10 @@
 import { SharingIn } from "@mistralai/mistralai/models/components";
 
 let value: SharingIn = {
-  orgId: "d1326b87-0613-4e3d-bc29-1bac7e04b621",
-  level: "Viewer",
-  shareWithUuid: "eb658eb0-beb2-4725-9ee4-59f24d7e2855",
-  shareWithType: "Workspace",
+  orgId: "ec594d13-26b8-4706-913e-3dc291bac7e0",
+  level: "Editor",
+  shareWithUuid: "621d7eb6-58eb-40be-bb27-25ee459f24d7",
+  shareWithType: "User",
 };
 ```
 

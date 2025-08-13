@@ -14,13 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    thinking: [
-      {
-        text: "<value>",
-        type: "text",
-      },
-    ],
-    type: "thinking",
+    text: "<value>",
+    type: "text",
   },
 ];
 ```

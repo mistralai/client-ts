@@ -18,59 +18,12 @@ import {
   ToolTypes$outboundSchema,
 } from "./tooltypes.js";
 
-export type Metadata = {};
-
 export type ToolCall = {
   id?: string | undefined;
   type?: ToolTypes | undefined;
   function: FunctionCall;
   index?: number | undefined;
-  metadata?: Metadata | null | undefined;
 };
-
-/** @internal */
-export const Metadata$inboundSchema: z.ZodType<
-  Metadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-/** @internal */
-export type Metadata$Outbound = {};
-
-/** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
-  z.ZodTypeDef,
-  Metadata
-> = z.object({});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Metadata$ {
-  /** @deprecated use `Metadata$inboundSchema` instead. */
-  export const inboundSchema = Metadata$inboundSchema;
-  /** @deprecated use `Metadata$outboundSchema` instead. */
-  export const outboundSchema = Metadata$outboundSchema;
-  /** @deprecated use `Metadata$Outbound` instead. */
-  export type Outbound = Metadata$Outbound;
-}
-
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
-}
-
-export function metadataFromJSON(
-  jsonString: string,
-): SafeParseResult<Metadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metadata' from JSON`,
-  );
-}
 
 /** @internal */
 export const ToolCall$inboundSchema: z.ZodType<
@@ -82,7 +35,6 @@ export const ToolCall$inboundSchema: z.ZodType<
   type: ToolTypes$inboundSchema.optional(),
   function: FunctionCall$inboundSchema,
   index: z.number().int().default(0),
-  metadata: z.nullable(z.lazy(() => Metadata$inboundSchema)).optional(),
 });
 
 /** @internal */
@@ -91,7 +43,6 @@ export type ToolCall$Outbound = {
   type?: string | undefined;
   function: FunctionCall$Outbound;
   index: number;
-  metadata?: Metadata$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -104,7 +55,6 @@ export const ToolCall$outboundSchema: z.ZodType<
   type: ToolTypes$outboundSchema.optional(),
   function: FunctionCall$outboundSchema,
   index: z.number().int().default(0),
-  metadata: z.nullable(z.lazy(() => Metadata$outboundSchema)).optional(),
 });
 
 /**

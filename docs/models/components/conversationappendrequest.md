@@ -6,15 +6,7 @@
 import { ConversationAppendRequest } from "@mistralai/mistralai/models/components";
 
 let value: ConversationAppendRequest = {
-  inputs: [
-    {
-      object: "entry",
-      type: "function.call",
-      toolCallId: "<id>",
-      name: "<value>",
-      arguments: "<value>",
-    },
-  ],
+  inputs: "<value>",
 };
 ```
 

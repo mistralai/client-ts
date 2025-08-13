@@ -6,13 +6,7 @@
 import { MessageOutputEntry } from "@mistralai/mistralai/models/components";
 
 let value: MessageOutputEntry = {
-  content: [
-    {
-      type: "tool_reference",
-      tool: "web_search_premium",
-      title: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

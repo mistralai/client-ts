@@ -28,8 +28,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      documentUrl: "https://variable-skyline.name/",
-      type: "document_url",
+      imageUrl: "https://esteemed-citizen.biz/",
+      type: "image_url",
     },
   ],
 };
@@ -39,7 +39,11 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      fileId: "7f3cd879-6866-4b12-9dc4-6ed9306add03",
+    },
+  ],
 };
 ```
 
