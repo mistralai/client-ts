@@ -6,14 +6,14 @@
 import { CompletionJobOut } from "@mistralai/mistralai/models/components";
 
 let value: CompletionJobOut = {
-  id: "0f984e4d-fc81-4773-b652-7480ed8df1af",
+  id: "1ce1c0f9-84e4-4dfc-b817-736527480ed8",
   autoStart: false,
-  model: "Jetta",
+  model: "Wrangler",
   status: "STARTED",
-  createdAt: 583193,
-  modifiedAt: 2064,
+  createdAt: 630832,
+  modifiedAt: 997994,
   trainingFiles: [
-    "3f5a4fb5-c163-4a16-8485-b0a34cf5d1ac",
+    "f92903f5-a4fb-45c1-963a-16485b0a34cf",
   ],
   hyperparameters: {},
 };

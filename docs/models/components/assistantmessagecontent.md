@@ -14,10 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    referenceIds: [
-      514767,
-    ],
-    type: "reference",
+    imageUrl: "https://unrealistic-feather.info/",
+    type: "image_url",
   },
 ];
 ```

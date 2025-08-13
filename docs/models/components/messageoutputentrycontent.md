@@ -14,8 +14,9 @@ const value: string = "<value>";
 ```typescript
 const value: components.MessageOutputContentChunks[] = [
   {
-    documentUrl: "https://favorite-lid.com",
-    type: "document_url",
+    type: "tool_reference",
+    tool: "code_interpreter",
+    title: "<value>",
   },
 ];
 ```

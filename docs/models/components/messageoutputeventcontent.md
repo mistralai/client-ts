@@ -13,8 +13,8 @@ const value: string = "<value>";
 
 ```typescript
 const value: components.OutputContentChunks = {
-  imageUrl: "https://well-groomed-poetry.biz/",
-  type: "image_url",
+  documentUrl: "https://practical-supplier.biz",
+  type: "document_url",
 };
 ```
 

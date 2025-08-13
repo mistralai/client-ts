@@ -5,7 +5,7 @@
 ```typescript
 import { BuiltInConnectors } from "@mistralai/mistralai/models/components";
 
-let value: BuiltInConnectors = "document_library";
+let value: BuiltInConnectors = "web_search_premium";
 ```
 
 ## Values

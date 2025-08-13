@@ -7,7 +7,7 @@ import { ResponseErrorEvent } from "@mistralai/mistralai/models/components";
 
 let value: ResponseErrorEvent = {
   message: "<value>",
-  code: 588317,
+  code: 20651,
 };
 ```
 

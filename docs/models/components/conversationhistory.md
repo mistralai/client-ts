@@ -12,10 +12,14 @@ let value: ConversationHistory = {
   entries: [
     {
       object: "entry",
-      type: "message.input",
+      type: "message.output",
       role: "assistant",
-      content: "<value>",
-      prefix: false,
+      content: [
+        {
+          documentUrl: "https://overcooked-ravioli.biz",
+          type: "document_url",
+        },
+      ],
     },
   ],
 };

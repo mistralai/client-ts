@@ -8,11 +8,11 @@ import { EmbeddingResponseData } from "@mistralai/mistralai/models/components";
 let value: EmbeddingResponseData = {
   object: "embedding",
   embedding: [
-    0.4,
-    0.5,
-    0.6,
+    0.1,
+    0.2,
+    0.3,
   ],
-  index: 1,
+  index: 0,
 };
 ```
 

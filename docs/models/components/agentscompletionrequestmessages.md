@@ -21,7 +21,12 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      inputAudio: "<value>",
+      type: "input_audio",
+    },
+  ],
 };
 ```
 
@@ -31,7 +36,10 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      fileId: "befadc4e-0047-4a1a-ac26-87cfc1c13238",
+      imageUrl: {
+        url: "https://diligent-fold.name/",
+      },
+      type: "image_url",
     },
   ],
 };

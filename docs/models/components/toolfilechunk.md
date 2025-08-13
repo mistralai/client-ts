@@ -6,7 +6,7 @@
 import { ToolFileChunk } from "@mistralai/mistralai/models/components";
 
 let value: ToolFileChunk = {
-  tool: "web_search_premium",
+  tool: "image_generation",
   fileId: "<id>",
 };
 ```

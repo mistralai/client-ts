@@ -16,7 +16,7 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ImageURLChunk = {
   imageUrl: {
-    url: "https://hospitable-information.biz/",
+    url: "https://minty-airman.biz/",
   },
 };
 ```
@@ -34,7 +34,7 @@ const value: components.ToolFileChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://clear-cut-league.com",
+  documentUrl: "https://left-dusk.name/",
 };
 ```
 
@@ -42,8 +42,23 @@ const value: components.DocumentURLChunk = {
 
 ```typescript
 const value: components.ToolReferenceChunk = {
-  tool: "image_generation",
+  tool: "document_library",
   title: "<value>",
+};
+```
+
+### `components.ThinkChunk`
+
+```typescript
+const value: components.ThinkChunk = {
+  thinking: [
+    {
+      referenceIds: [
+        517379,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 

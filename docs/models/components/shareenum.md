@@ -5,7 +5,7 @@
 ```typescript
 import { ShareEnum } from "@mistralai/mistralai/models/components";
 
-let value: ShareEnum = "Editor";
+let value: ShareEnum = "Viewer";
 ```
 
 ## Values

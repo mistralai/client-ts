@@ -6,7 +6,7 @@
 import { FilesApiRoutesDeleteFileRequest } from "@mistralai/mistralai/models/operations";
 
 let value: FilesApiRoutesDeleteFileRequest = {
-  fileId: "825e5a82-ad1c-4bd1-94b0-bd76402fd4f5",
+  fileId: "d1cbd14b-0bd7-4640-a2fd-4f542ef5b516",
 };
 ```
 
