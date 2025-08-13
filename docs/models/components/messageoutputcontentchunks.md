@@ -15,7 +15,7 @@ const value: components.TextChunk = {
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://second-hand-elevation.biz/",
+  imageUrl: "https://optimistic-travel.biz/",
 };
 ```
 
@@ -23,7 +23,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.ToolFileChunk = {
-  tool: "code_interpreter",
+  tool: "image_generation",
   fileId: "<id>",
 };
 ```
@@ -32,7 +32,7 @@ const value: components.ToolFileChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://surprised-accelerator.net/",
+  documentUrl: "https://second-hand-elevation.biz/",
 };
 ```
 
@@ -40,8 +40,23 @@ const value: components.DocumentURLChunk = {
 
 ```typescript
 const value: components.ToolReferenceChunk = {
-  tool: "web_search_premium",
+  tool: "code_interpreter",
   title: "<value>",
+};
+```
+
+### `components.ThinkChunk`
+
+```typescript
+const value: components.ThinkChunk = {
+  thinking: [
+    {
+      referenceIds: [
+        828940,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 

@@ -9,7 +9,9 @@ let value: TranscriptionStreamEvents = {
   event: "transcription.done",
   data: {
     text: "<value>",
-    type: "transcription.text.delta",
+    start: 9670.47,
+    end: 8748.43,
+    type: "transcription.segment",
   },
 };
 ```

@@ -9,7 +9,7 @@ Document to run OCR on
 
 ```typescript
 const value: components.FileChunk = {
-  fileId: "617dd19d-3cec-4103-8496-b525ef3c4e2a",
+  fileId: "ec103496-b525-4ef3-8c4e-2a1fbd97987c",
 };
 ```
 
@@ -17,7 +17,7 @@ const value: components.FileChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://rural-sprinkles.name",
+  documentUrl: "https://intrepid-fax.com/",
 };
 ```
 
@@ -25,9 +25,7 @@ const value: components.DocumentURLChunk = {
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: {
-    url: "https://motionless-institute.net",
-  },
+  imageUrl: "https://neat-waterspout.com",
 };
 ```
 

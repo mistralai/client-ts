@@ -5,8 +5,8 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 2.0.0
-  configChecksum: 45752110e9dbd0945a4aafd8918b7271
+  releaseVersion: 2.0.1
+  configChecksum: 31bbf834d216db547ca6c2607e33ba70
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp

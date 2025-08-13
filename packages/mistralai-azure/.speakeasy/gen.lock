@@ -5,8 +5,8 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 2.0.0
-  configChecksum: ed30f05e3fe450f53fc98ffe1aa5193e
+  releaseVersion: 2.0.1
+  configChecksum: 4bdfcbfaecc4a71fd4c4c41ce351ad52
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure

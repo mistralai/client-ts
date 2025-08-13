@@ -14,8 +14,9 @@ const value: string = "<value>";
 ```typescript
 const value: components.MessageInputContentChunks[] = [
   {
-    documentUrl: "https://impure-battle.net",
-    type: "document_url",
+    type: "tool_file",
+    tool: "web_search",
+    fileId: "<id>",
   },
 ];
 ```

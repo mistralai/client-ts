@@ -25,8 +25,9 @@ const value: components.MessageInputEntry = {
 const value: components.MessageOutputEntry = {
   content: [
     {
-      documentUrl: "https://creative-summary.com",
-      type: "document_url",
+      type: "tool_reference",
+      tool: "document_library",
+      title: "<value>",
     },
   ],
 };
@@ -47,7 +48,9 @@ const value: components.FunctionResultEntry = {
 const value: components.FunctionCallEntry = {
   toolCallId: "<id>",
   name: "<value>",
-  arguments: "<value>",
+  arguments: {
+    "key": "<value>",
+  },
 };
 ```
 
@@ -55,7 +58,7 @@ const value: components.FunctionCallEntry = {
 
 ```typescript
 const value: components.ToolExecutionEntry = {
-  name: "web_search",
+  name: "document_library",
   arguments: "<value>",
 };
 ```

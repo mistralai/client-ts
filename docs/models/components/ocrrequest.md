@@ -6,9 +6,9 @@
 import { OCRRequest } from "@mistralai/mistralai/models/components";
 
 let value: OCRRequest = {
-  model: "Beetle",
+  model: "Mustang",
   document: {
-    fileId: "651dc8f1-c453-4c2d-aa0c-aeb8d484f305",
+    fileId: "53c2da0c-aeb8-4d48-94f3-05808db9ffd9",
   },
 };
 ```

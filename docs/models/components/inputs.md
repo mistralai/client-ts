@@ -12,7 +12,7 @@ const value: components.InstructRequestInputs = {
   messages: [
     {
       content: "<value>",
-      role: "tool",
+      role: "system",
     },
   ],
 };
@@ -25,18 +25,8 @@ const value: components.InstructRequest[] = [
   {
     messages: [
       {
-        content: [
-          {
-            thinking: [
-              {
-                text: "<value>",
-                type: "text",
-              },
-            ],
-            type: "thinking",
-          },
-        ],
-        role: "tool",
+        prefix: false,
+        role: "assistant",
       },
     ],
   },

@@ -7,14 +7,14 @@
 
 ```typescript
 const value: components.ClassifierJobOut = {
-  id: "55c0196a-4ec1-4cff-ab19-4fb9b75e506c",
+  id: "ec1cffb1-94fb-49b7-a5e5-06caf1e57613",
   autoStart: false,
-  model: "Wrangler",
+  model: "2",
   status: "STARTED",
-  createdAt: 911547,
-  modifiedAt: 368849,
+  createdAt: 25210,
+  modifiedAt: 857388,
   trainingFiles: [
-    "7613b020-d92c-4fee-b094-95277f04dada",
+    "92cfee09-4952-477f-904d-adac73c92cf5",
   ],
   hyperparameters: {},
 };
@@ -24,14 +24,14 @@ const value: components.ClassifierJobOut = {
 
 ```typescript
 const value: components.CompletionJobOut = {
-  id: "73c92cf5-41af-4271-b0ad-5e13e89020e2",
+  id: "1af2710a-d5e1-43e8-9902-0e2d5c54147d",
   autoStart: false,
-  model: "Cruze",
-  status: "CANCELLED",
-  createdAt: 365043,
-  modifiedAt: 267684,
+  model: "XC90",
+  status: "FAILED_VALIDATION",
+  createdAt: 24945,
+  modifiedAt: 415367,
   trainingFiles: [
-    "147d7f80-6b3b-480c-b817-4e4f85db6acd",
+    "b3b80c81-74e4-4f85-9db6-acdd2d039194",
   ],
   hyperparameters: {},
 };

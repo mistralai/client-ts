@@ -7,13 +7,12 @@
 
 ```typescript
 const value: components.MessageInputEntry = {
-  role: "user",
+  role: "assistant",
   content: [
     {
-      imageUrl: {
-        url: "https://descriptive-unblinking.net/",
-      },
-      type: "image_url",
+      type: "tool_file",
+      tool: "web_search",
+      fileId: "<id>",
     },
   ],
 };
@@ -42,9 +41,7 @@ const value: components.FunctionResultEntry = {
 const value: components.FunctionCallEntry = {
   toolCallId: "<id>",
   name: "<value>",
-  arguments: {
-    "key": "<value>",
-  },
+  arguments: "<value>",
 };
 ```
 
@@ -52,7 +49,7 @@ const value: components.FunctionCallEntry = {
 
 ```typescript
 const value: components.ToolExecutionEntry = {
-  name: "web_search_premium",
+  name: "code_interpreter",
   arguments: "<value>",
 };
 ```

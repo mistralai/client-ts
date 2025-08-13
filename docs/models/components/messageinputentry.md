@@ -8,11 +8,12 @@ Representation of an input message inside the conversation.
 import { MessageInputEntry } from "@mistralai/mistralai/models/components";
 
 let value: MessageInputEntry = {
-  role: "assistant",
+  role: "user",
   content: [
     {
-      documentUrl: "https://tight-address.info",
-      type: "document_url",
+      type: "tool_file",
+      tool: "code_interpreter",
+      fileId: "<id>",
     },
   ],
 };

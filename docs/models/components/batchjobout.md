@@ -8,7 +8,7 @@ import { BatchJobOut } from "@mistralai/mistralai/models/components";
 let value: BatchJobOut = {
   id: "<id>",
   inputFiles: [
-    "fe10e83a-a140-4323-9a01-2544cf8f6164",
+    "c5537fe1-0e83-4aa1-b403-23a012544cf8",
   ],
   endpoint: "<value>",
   errors: [
@@ -16,12 +16,12 @@ let value: BatchJobOut = {
       message: "<value>",
     },
   ],
-  status: "TIMEOUT_EXCEEDED",
-  createdAt: 461050,
-  totalRequests: 935161,
-  completedRequests: 884765,
-  succeededRequests: 701978,
-  failedRequests: 489685,
+  status: "SUCCESS",
+  createdAt: 106682,
+  totalRequests: 408774,
+  completedRequests: 296128,
+  succeededRequests: 493407,
+  failedRequests: 657044,
 };
 ```
 
