@@ -8,14 +8,7 @@ import { AgentsApiV1ConversationsAppendStreamRequest } from "@mistralai/mistrala
 let value: AgentsApiV1ConversationsAppendStreamRequest = {
   conversationId: "<id>",
   conversationAppendStreamRequest: {
-    inputs: [
-      {
-        object: "entry",
-        type: "function.result",
-        toolCallId: "<id>",
-        result: "<value>",
-      },
-    ],
+    inputs: "<value>",
   },
 };
 ```

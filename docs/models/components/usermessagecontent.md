@@ -14,8 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: "https://grizzled-bathrobe.biz",
-    type: "image_url",
+    text: "<value>",
+    type: "text",
   },
 ];
 ```

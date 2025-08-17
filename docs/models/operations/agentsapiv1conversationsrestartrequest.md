@@ -11,9 +11,9 @@ let value: AgentsApiV1ConversationsRestartRequest = {
     inputs: [
       {
         object: "entry",
-        type: "tool.execution",
-        name: "image_generation",
-        arguments: "<value>",
+        type: "message.output",
+        role: "assistant",
+        content: "<value>",
       },
     ],
     fromEntryId: "<id>",

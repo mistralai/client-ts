@@ -6,10 +6,10 @@
 import { PaginationInfo } from "@mistralai/mistralai/models/components";
 
 let value: PaginationInfo = {
-  totalItems: 672582,
-  totalPages: 528940,
-  currentPage: 304446,
-  pageSize: 997963,
+  totalItems: 59944,
+  totalPages: 61078,
+  currentPage: 907733,
+  pageSize: 739884,
   hasMore: false,
 };
 ```

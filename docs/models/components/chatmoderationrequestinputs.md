@@ -24,11 +24,13 @@ const value: components.Two[][] = [
     {
       content: [
         {
-          text: "<value>",
-          type: "text",
+          referenceIds: [
+            982927,
+          ],
+          type: "reference",
         },
       ],
-      role: "system",
+      role: "user",
     },
   ],
 ];

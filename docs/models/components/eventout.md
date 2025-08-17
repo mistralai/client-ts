@@ -7,7 +7,7 @@ import { EventOut } from "@mistralai/mistralai/models/components";
 
 let value: EventOut = {
   name: "<value>",
-  createdAt: 982445,
+  createdAt: 65121,
 };
 ```
 

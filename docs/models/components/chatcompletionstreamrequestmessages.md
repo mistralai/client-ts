@@ -28,7 +28,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      fileId: "0f2bd531-b7be-42e6-84ff-3a1ada6669ee",
+      documentUrl: "https://cavernous-pear.net",
+      type: "document_url",
     },
   ],
 };
@@ -38,7 +39,12 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 

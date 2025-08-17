@@ -8,10 +8,8 @@ import { ThinkChunk } from "@mistralai/mistralai/models/components";
 let value: ThinkChunk = {
   thinking: [
     {
-      referenceIds: [
-        840641,
-      ],
-      type: "reference",
+      text: "<value>",
+      type: "text",
     },
   ],
 };
