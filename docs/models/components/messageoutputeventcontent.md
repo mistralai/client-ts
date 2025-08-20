@@ -13,8 +13,9 @@ const value: string = "<value>";
 
 ```typescript
 const value: components.OutputContentChunks = {
-  documentUrl: "https://practical-supplier.biz",
-  type: "document_url",
+  type: "tool_file",
+  tool: "code_interpreter",
+  fileId: "<id>",
 };
 ```
 

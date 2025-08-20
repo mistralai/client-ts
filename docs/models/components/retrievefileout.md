@@ -11,7 +11,7 @@ let value: RetrieveFileOut = {
   sizeBytes: 13000,
   createdAt: 1716963433,
   filename: "files_upload.jsonl",
-  purpose: "fine-tune",
+  purpose: "batch",
   sampleType: "batch_error",
   source: "upload",
   deleted: false,

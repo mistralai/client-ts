@@ -7,14 +7,8 @@
 
 ```typescript
 const value: components.MessageInputEntry = {
-  role: "assistant",
-  content: [
-    {
-      type: "tool_file",
-      tool: "web_search",
-      fileId: "<id>",
-    },
-  ],
+  role: "user",
+  content: "<value>",
 };
 ```
 
@@ -41,7 +35,9 @@ const value: components.FunctionResultEntry = {
 const value: components.FunctionCallEntry = {
   toolCallId: "<id>",
   name: "<value>",
-  arguments: "<value>",
+  arguments: {
+    "key": "<value>",
+  },
 };
 ```
 
@@ -49,7 +45,7 @@ const value: components.FunctionCallEntry = {
 
 ```typescript
 const value: components.ToolExecutionEntry = {
-  name: "code_interpreter",
+  name: "image_generation",
   arguments: "<value>",
 };
 ```

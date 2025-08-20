@@ -13,12 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -26,12 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      inputAudio: "<value>",
-      type: "input_audio",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -41,13 +31,7 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: [
     {
-      thinking: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
-      type: "thinking",
+      fileId: "ccdbfe99-0f2b-4d53-b1b7-be2e64ff3a1a",
     },
   ],
 };

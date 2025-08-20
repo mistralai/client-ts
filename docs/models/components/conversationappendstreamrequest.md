@@ -6,7 +6,14 @@
 import { ConversationAppendStreamRequest } from "@mistralai/mistralai/models/components";
 
 let value: ConversationAppendStreamRequest = {
-  inputs: "<value>",
+  inputs: [
+    {
+      object: "entry",
+      type: "message.output",
+      role: "assistant",
+      content: "<value>",
+    },
+  ],
 };
 ```
 

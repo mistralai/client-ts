@@ -36,27 +36,25 @@ const value: components.DocumentURLChunk = {
 };
 ```
 
-### `components.ToolReferenceChunk`
-
-```typescript
-const value: components.ToolReferenceChunk = {
-  tool: "code_interpreter",
-  title: "<value>",
-};
-```
-
 ### `components.ThinkChunk`
 
 ```typescript
 const value: components.ThinkChunk = {
   thinking: [
     {
-      referenceIds: [
-        828940,
-      ],
-      type: "reference",
+      text: "<value>",
+      type: "text",
     },
   ],
+};
+```
+
+### `components.ToolReferenceChunk`
+
+```typescript
+const value: components.ToolReferenceChunk = {
+  tool: "web_search",
+  title: "<value>",
 };
 ```
 

@@ -5,7 +5,7 @@
 ```typescript
 import { MessageInputEntryRole } from "@mistralai/mistralai/models/components";
 
-let value: MessageInputEntryRole = "assistant";
+let value: MessageInputEntryRole = "user";
 ```
 
 ## Values

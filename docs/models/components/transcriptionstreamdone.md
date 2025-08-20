@@ -6,7 +6,7 @@
 import { TranscriptionStreamDone } from "@mistralai/mistralai/models/components";
 
 let value: TranscriptionStreamDone = {
-  model: "Fiesta",
+  model: "XC90",
   text: "<value>",
   usage: {},
   language: "<value>",

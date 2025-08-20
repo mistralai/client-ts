@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "b015066e-9be7-404d-ae54-e5a418e93ac5",
+  id: "36ce02f9-8d00-4fdb-b27e-e0c0f6f545b3",
   autoStart: false,
-  model: "Mercielago",
-  status: "STARTED",
-  createdAt: 964101,
-  modifiedAt: 451252,
+  model: "Impala",
+  status: "CANCELLATION_REQUESTED",
+  createdAt: 987085,
+  modifiedAt: 185182,
   trainingFiles: [
-    "f3720366-ea6f-495b-97ee-584afd51f645",
+    "f00ff277-dac7-4abb-9015-066e9be704de",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 956752,
+      stepNumber: 293991,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 9866.23,
+      weight: 9245.06,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "5802e016-b444-4d38-afb5-cf5b1e1584a8",
+  id: "a418e93a-c58a-42f7-9f37-20366ea6f95b",
   autoStart: false,
-  model: "Cruze",
-  status: "FAILED_VALIDATION",
-  createdAt: 812186,
-  modifiedAt: 810697,
+  model: "Silverado",
+  status: "CANCELLED",
+  createdAt: 367350,
+  modifiedAt: 562339,
   trainingFiles: [
-    "b8a17d9f-41a1-4c48-8cc7-f744b6604dcb",
+    "4afd51f6-457f-4f45-a802-e016b444d38f",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 26990,
+      stepNumber: 336350,
       createdAt: 1716963433,
     },
   ],

@@ -14,8 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: "https://unrealistic-feather.info/",
-    type: "image_url",
+    documentUrl: "https://monumental-luck.org",
+    type: "document_url",
   },
 ];
 ```

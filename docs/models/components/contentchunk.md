@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://bad-elver.com",
+  imageUrl: "https://subtle-runway.net/",
 };
 ```
 
@@ -15,7 +15,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://raw-viability.name",
+  documentUrl: "https://dirty-pillow.org/",
 };
 ```
 
@@ -32,7 +32,7 @@ const value: components.TextChunk = {
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    802069,
+    16252,
   ],
 };
 ```
@@ -41,7 +41,7 @@ const value: components.ReferenceChunk = {
 
 ```typescript
 const value: components.FileChunk = {
-  fileId: "556a5ef0-3103-47d3-97ea-c8f90369c6bc",
+  fileId: "a7e5782b-d040-4faf-b8c5-56a5ef031037",
 };
 ```
 
@@ -51,8 +51,10 @@ const value: components.FileChunk = {
 const value: components.ThinkChunk = {
   thinking: [
     {
-      text: "<value>",
-      type: "text",
+      referenceIds: [
+        493945,
+      ],
+      type: "reference",
     },
   ],
 };

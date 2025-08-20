@@ -6,14 +6,14 @@
 import { ClassifierJobOut } from "@mistralai/mistralai/models/components";
 
 let value: ClassifierJobOut = {
-  id: "1ac26e10-96ce-4467-b9fb-64f2bea635ba",
+  id: "3a16485b-0a34-4cf5-9d1a-c26e1096ce46",
   autoStart: false,
-  model: "Silverado",
-  status: "CANCELLED",
-  createdAt: 911451,
-  modifiedAt: 276337,
+  model: "Impala",
+  status: "CANCELLATION_REQUESTED",
+  createdAt: 697330,
+  modifiedAt: 389548,
   trainingFiles: [
-    "568a4064-feda-458d-81c0-dc0a822c9fff",
+    "4f2bea63-5bae-4dde-b456-8a4064feda58",
   ],
   hyperparameters: {},
 };

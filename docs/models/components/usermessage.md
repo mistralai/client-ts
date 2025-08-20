@@ -6,12 +6,7 @@
 import { UserMessage } from "@mistralai/mistralai/models/components";
 
 let value: UserMessage = {
-  content: [
-    {
-      inputAudio: "<value>",
-      type: "input_audio",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "7350c390-d204-4e48-b64e-cc8d7773e433",
+  id: "8cc7f744-b660-44dc-ab00-47e649ebd228",
   autoStart: false,
-  model: "Mustang",
-  status: "RUNNING",
-  createdAt: 13781,
-  modifiedAt: 975736,
+  model: "Wrangler",
+  status: "VALIDATED",
+  createdAt: 346557,
+  modifiedAt: 515854,
   trainingFiles: [
-    "2dcfc536-3bda-4209-a735-8a7f0ae33c7f",
+    "a9b6d25c-5a42-44e7-9350-c390d204e486",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 923442,
+      stepNumber: 927354,
       createdAt: 1716963433,
     },
   ],
@@ -32,8 +32,8 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 122.1,
-      lossFunction: "single_class",
+      weight: 7889.95,
+      lossFunction: "multi_class",
     },
   ],
 };
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "a6d6b91b-b185-4761-8213-d06c13ba92c2",
+  id: "8d7773e4-33dc-460f-92dc-fc5363bda209",
   autoStart: false,
-  model: "PT Cruiser",
+  model: "CTS",
   status: "VALIDATED",
-  createdAt: 312617,
-  modifiedAt: 278672,
+  createdAt: 541466,
+  modifiedAt: 632917,
   trainingFiles: [
-    "55b35ce9-18a5-4dc9-b2be-4fc4941da926",
+    "7f0ae33c-7f9e-402a-86d6-b91bb1857612",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 163304,
+      stepNumber: 192447,
       createdAt: 1716963433,
     },
   ],

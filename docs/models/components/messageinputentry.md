@@ -11,9 +11,15 @@ let value: MessageInputEntry = {
   role: "user",
   content: [
     {
-      type: "tool_file",
-      tool: "code_interpreter",
-      fileId: "<id>",
+      thinking: [
+        {
+          referenceIds: [
+            868126,
+          ],
+          type: "reference",
+        },
+      ],
+      type: "thinking",
     },
   ],
 };

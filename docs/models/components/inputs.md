@@ -11,7 +11,12 @@ Chat to classify
 const value: components.InstructRequestInputs = {
   messages: [
     {
-      content: "<value>",
+      content: [
+        {
+          text: "<value>",
+          type: "text",
+        },
+      ],
       role: "system",
     },
   ],
@@ -25,8 +30,15 @@ const value: components.InstructRequest[] = [
   {
     messages: [
       {
-        prefix: false,
-        role: "assistant",
+        content: [
+          {
+            imageUrl: {
+              url: "https://determined-sesame.net/",
+            },
+            type: "image_url",
+          },
+        ],
+        role: "user",
       },
     ],
   },

@@ -7,12 +7,12 @@ import { CompletionChunk } from "@mistralai/mistralai/models/components";
 
 let value: CompletionChunk = {
   id: "<id>",
-  model: "Explorer",
+  model: "V90",
   choices: [
     {
-      index: 713718,
+      index: 960767,
       delta: {},
-      finishReason: "tool_calls",
+      finishReason: "error",
     },
   ],
 };

@@ -6,7 +6,7 @@
 import { ToolExecutionEntry } from "@mistralai/mistralai/models/components";
 
 let value: ToolExecutionEntry = {
-  name: "document_library",
+  name: "code_interpreter",
   arguments: "<value>",
 };
 ```

@@ -6,20 +6,20 @@
 import { CompletionDetailedJobOut } from "@mistralai/mistralai/models/components";
 
 let value: CompletionDetailedJobOut = {
-  id: "e4c79ffd-5ea6-40c8-9cbc-4c87a014f250",
+  id: "2c998f5c-86f9-416c-abe4-c79ffd5ea60c",
   autoStart: false,
-  model: "Corvette",
-  status: "CANCELLATION_REQUESTED",
-  createdAt: 845154,
-  modifiedAt: 382764,
+  model: "PT Cruiser",
+  status: "SUCCESS",
+  createdAt: 793568,
+  modifiedAt: 300651,
   trainingFiles: [
-    "0da2f1d4-6caf-491e-bcb0-62dbefcf9005",
+    "c87a014f-2505-45fd-b60d-a2f1d46caf91",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 866135,
+      stepNumber: 769156,
       createdAt: 1716963433,
     },
   ],

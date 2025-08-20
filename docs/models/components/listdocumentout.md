@@ -7,26 +7,26 @@ import { ListDocumentOut } from "@mistralai/mistralai/models/components";
 
 let value: ListDocumentOut = {
   pagination: {
-    totalItems: 398434,
-    totalPages: 62713,
-    currentPage: 424032,
-    pageSize: 258684,
+    totalItems: 636061,
+    totalPages: 240020,
+    currentPage: 160538,
+    pageSize: 796392,
     hasMore: false,
   },
   data: [
     {
-      id: "d0f55026-e1fd-4753-8900-614342019ff6",
-      libraryId: "a7f1c43a-3a86-484b-b65d-e035dffe4f31",
+      id: "f79d7f9d-ed2a-4616-84d0-f55026e1fd75",
+      libraryId: "90061434-2019-4ff6-a2a7-f1c43a3a8684",
       hash: "<value>",
       mimeType: "<value>",
-      extension: "wav",
-      size: 689768,
+      extension: "png",
+      size: 360545,
       name: "<value>",
-      createdAt: new Date("2023-03-05T23:00:20.399Z"),
+      createdAt: new Date("2025-06-27T04:59:29.330Z"),
       processingStatus: "<value>",
-      uploadedById: "be465b32-74d3-48fa-bdfc-bff71426296e",
+      uploadedById: "e035dffe-4f31-4f3b-a0be-465b3274d38f",
       uploadedByType: "<value>",
-      tokensProcessingTotal: 546885,
+      tokensProcessingTotal: 867290,
     },
   ],
 };

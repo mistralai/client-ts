@@ -15,10 +15,14 @@ const value: string = "<value>";
 const value: components.InputEntries[] = [
   {
     object: "entry",
-    type: "function.call",
-    toolCallId: "<id>",
-    name: "<value>",
-    arguments: "<value>",
+    type: "message.output",
+    role: "assistant",
+    content: [
+      {
+        imageUrl: "https://concrete-equal.name/",
+        type: "image_url",
+      },
+    ],
   },
 ];
 ```

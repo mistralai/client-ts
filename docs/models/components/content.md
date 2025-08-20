@@ -14,8 +14,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    text: "<value>",
-    type: "text",
+    referenceIds: [
+      340101,
+    ],
+    type: "reference",
   },
 ];
 ```

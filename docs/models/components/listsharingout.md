@@ -8,11 +8,11 @@ import { ListSharingOut } from "@mistralai/mistralai/models/components";
 let value: ListSharingOut = {
   data: [
     {
-      libraryId: "adfecb52-1368-4cf1-819b-def662aad179",
-      orgId: "2d0717f6-d146-46a5-aba6-691dab816650",
+      libraryId: "438575f2-159a-46f5-8bad-fecb521368cf",
+      orgId: "19bdef66-2aad-4179-932d-0717f6d1466a",
       role: "<value>",
       shareWithType: "<value>",
-      shareWithUuid: "19baf1d0-8685-4308-8d53-1131411d28c7",
+      shareWithUuid: "ba6691da-b816-4650-ab19-baf1d0868530",
     },
   ],
 };

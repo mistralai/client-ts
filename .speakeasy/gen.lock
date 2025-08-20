@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 52e6a68dbdc371fd28af0f2ae79505fa
+  docChecksum: a38b769b82bac0658cf02fed22bdbde0
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.9.17
-  configChecksum: 8cf68b4060e122e6439c2634da3f4453
+  releaseVersion: 1.9.18
+  configChecksum: ad171129c8e92921246c234649d55ff4
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true

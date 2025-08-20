@@ -14,9 +14,13 @@ const value: string = "<value>";
 ```typescript
 const value: components.MessageOutputContentChunks[] = [
   {
-    type: "tool_reference",
-    tool: "code_interpreter",
-    title: "<value>",
+    thinking: [
+      {
+        text: "<value>",
+        type: "text",
+      },
+    ],
+    type: "thinking",
   },
 ];
 ```

@@ -25,6 +25,12 @@ import {
   TextChunk$outboundSchema,
 } from "./textchunk.js";
 import {
+  ThinkChunk,
+  ThinkChunk$inboundSchema,
+  ThinkChunk$Outbound,
+  ThinkChunk$outboundSchema,
+} from "./thinkchunk.js";
+import {
   ToolFileChunk,
   ToolFileChunk$inboundSchema,
   ToolFileChunk$Outbound,
@@ -35,6 +41,7 @@ export type MessageInputContentChunks =
   | TextChunk
   | ImageURLChunk
   | DocumentURLChunk
+  | ThinkChunk
   | ToolFileChunk;
 
 /** @internal */
@@ -46,6 +53,7 @@ export const MessageInputContentChunks$inboundSchema: z.ZodType<
   TextChunk$inboundSchema,
   ImageURLChunk$inboundSchema,
   DocumentURLChunk$inboundSchema,
+  ThinkChunk$inboundSchema,
   ToolFileChunk$inboundSchema,
 ]);
 
@@ -54,6 +62,7 @@ export type MessageInputContentChunks$Outbound =
   | TextChunk$Outbound
   | ImageURLChunk$Outbound
   | DocumentURLChunk$Outbound
+  | ThinkChunk$Outbound
   | ToolFileChunk$Outbound;
 
 /** @internal */
@@ -65,6 +74,7 @@ export const MessageInputContentChunks$outboundSchema: z.ZodType<
   TextChunk$outboundSchema,
   ImageURLChunk$outboundSchema,
   DocumentURLChunk$outboundSchema,
+  ThinkChunk$outboundSchema,
   ToolFileChunk$outboundSchema,
 ]);
 

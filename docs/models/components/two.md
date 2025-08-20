@@ -21,19 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      thinking: [
-        {
-          referenceIds: [
-            415125,
-          ],
-          type: "reference",
-        },
-      ],
-      type: "thinking",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -41,14 +29,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      referenceIds: [
-        799830,
-      ],
-      type: "reference",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
