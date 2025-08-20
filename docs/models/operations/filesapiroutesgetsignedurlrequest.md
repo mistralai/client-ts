@@ -6,7 +6,7 @@
 import { FilesApiRoutesGetSignedUrlRequest } from "@mistralai/mistralai/models/operations";
 
 let value: FilesApiRoutesGetSignedUrlRequest = {
-  fileId: "4f5167cf-de7b-4415-ab4d-c35d355c0196",
+  fileId: "402fd4f5-42ef-45b5-8168-1d739c5b6fc5",
 };
 ```
 

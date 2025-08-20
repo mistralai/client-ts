@@ -5,7 +5,7 @@
 ```typescript
 import { CompletionDetailedJobOutStatus } from "@mistralai/mistralai/models/components";
 
-let value: CompletionDetailedJobOutStatus = "FAILED";
+let value: CompletionDetailedJobOutStatus = "CANCELLATION_REQUESTED";
 ```
 
 ## Values

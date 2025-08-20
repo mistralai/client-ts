@@ -6,7 +6,7 @@
 import { ToolReferenceChunk } from "@mistralai/mistralai/models/components";
 
 let value: ToolReferenceChunk = {
-  tool: "document_library",
+  tool: "image_generation",
   title: "<value>",
 };
 ```

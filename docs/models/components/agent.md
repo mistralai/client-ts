@@ -6,12 +6,12 @@
 import { Agent } from "@mistralai/mistralai/models/components";
 
 let value: Agent = {
-  model: "Cruze",
+  model: "CX-9",
   name: "<value>",
   id: "<id>",
-  version: 10,
-  createdAt: new Date("2025-04-18T19:06:55.714Z"),
-  updatedAt: new Date("2025-03-31T12:50:52.284Z"),
+  version: 4,
+  createdAt: new Date("2024-02-15T02:10:01.786Z"),
+  updatedAt: new Date("2024-05-23T01:53:16.665Z"),
 };
 ```
 

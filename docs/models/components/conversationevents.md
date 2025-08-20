@@ -6,7 +6,7 @@
 import { ConversationEvents } from "@mistralai/mistralai/models/components";
 
 let value: ConversationEvents = {
-  event: "conversation.response.error",
+  event: "message.output.delta",
   data: {
     type: "message.output.delta",
     outputIndex: 0,

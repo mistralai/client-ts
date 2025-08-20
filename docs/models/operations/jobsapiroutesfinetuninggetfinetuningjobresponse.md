@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "3d5209d4-ec09-4935-8702-26bd2caef11c",
+  id: "5c9c6b61-874e-4606-b6dc-3d3510ae7dca",
   autoStart: false,
-  model: "CTS",
-  status: "CANCELLED",
-  createdAt: 938965,
-  modifiedAt: 318471,
+  model: "Prius",
+  status: "VALIDATING",
+  createdAt: 789015,
+  modifiedAt: 692662,
   trainingFiles: [
-    "dd999493-26b9-4fa2-9213-9de68c492727",
+    "613c3fb7-99f2-44b3-8d52-09d4ec099357",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 433265,
+      stepNumber: 149776,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 2437.12,
+      weight: 1640.04,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "43bb9191-0539-4ebc-afa9-9d6ca403b946",
+  id: "bd2caef1-1c23-4ef5-8dd9-9949326b9fa2",
   autoStart: false,
-  model: "Alpine",
-  status: "RUNNING",
-  createdAt: 416624,
-  modifiedAt: 542601,
+  model: "ATS",
+  status: "STARTED",
+  createdAt: 597951,
+  modifiedAt: 838287,
   trainingFiles: [
-    "85c106e4-2e25-4b43-96ce-02f98d00fdb2",
+    "e68c4927-2766-4324-a3bb-91910539ebcf",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 937294,
+      stepNumber: 577731,
       createdAt: 1716963433,
     },
   ],

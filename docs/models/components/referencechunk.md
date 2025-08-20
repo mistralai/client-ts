@@ -7,7 +7,7 @@ import { ReferenceChunk } from "@mistralai/mistralai/models/components";
 
 let value: ReferenceChunk = {
   referenceIds: [
-    501324,
+    692532,
   ],
 };
 ```

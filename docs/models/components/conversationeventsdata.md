@@ -36,7 +36,7 @@ const value: components.ResponseDoneEvent = {
 ```typescript
 const value: components.ResponseErrorEvent = {
   message: "<value>",
-  code: 679393,
+  code: 186193,
 };
 ```
 
@@ -64,7 +64,17 @@ const value: components.FunctionCallEvent = {
 ```typescript
 const value: components.MessageOutputEvent = {
   id: "<id>",
-  content: "<value>",
+  content: {
+    thinking: [
+      {
+        referenceIds: [
+          227414,
+        ],
+        type: "reference",
+      },
+    ],
+    type: "thinking",
+  },
 };
 ```
 
@@ -73,7 +83,7 @@ const value: components.MessageOutputEvent = {
 ```typescript
 const value: components.ToolExecutionDeltaEvent = {
   id: "<id>",
-  name: "code_interpreter",
+  name: "web_search_premium",
   arguments: "<value>",
 };
 ```
@@ -83,7 +93,7 @@ const value: components.ToolExecutionDeltaEvent = {
 ```typescript
 const value: components.ToolExecutionDoneEvent = {
   id: "<id>",
-  name: "document_library",
+  name: "web_search",
 };
 ```
 
@@ -92,7 +102,7 @@ const value: components.ToolExecutionDoneEvent = {
 ```typescript
 const value: components.ToolExecutionStartedEvent = {
   id: "<id>",
-  name: "document_library",
+  name: "code_interpreter",
   arguments: "<value>",
 };
 ```

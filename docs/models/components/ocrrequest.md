@@ -6,9 +6,10 @@
 import { OCRRequest } from "@mistralai/mistralai/models/components";
 
 let value: OCRRequest = {
-  model: "Mustang",
+  model: "XC90",
   document: {
-    fileId: "53c2da0c-aeb8-4d48-94f3-05808db9ffd9",
+    imageUrl: "https://live-omelet.name",
+    type: "image_url",
   },
 };
 ```

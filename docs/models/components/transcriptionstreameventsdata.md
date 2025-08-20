@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.TranscriptionStreamDone = {
-  model: "Ranchero",
+  model: "Beetle",
   text: "<value>",
   usage: {},
   language: "<value>",
@@ -27,8 +27,8 @@ const value: components.TranscriptionStreamLanguage = {
 ```typescript
 const value: components.TranscriptionStreamSegmentDelta = {
   text: "<value>",
-  start: 3406.04,
-  end: 1520.47,
+  start: 4318.43,
+  end: 3207.48,
 };
 ```
 

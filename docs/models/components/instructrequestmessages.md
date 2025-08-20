@@ -26,7 +26,12 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      documentUrl: "https://clear-coin.net",
+      type: "document_url",
+    },
+  ],
 };
 ```
 

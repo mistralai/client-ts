@@ -14,12 +14,7 @@ let value: ConversationHistory = {
       object: "entry",
       type: "message.output",
       role: "assistant",
-      content: [
-        {
-          documentUrl: "https://overcooked-ravioli.biz",
-          type: "document_url",
-        },
-      ],
+      content: "<value>",
     },
   ],
 };

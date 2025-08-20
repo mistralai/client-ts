@@ -7,13 +7,12 @@
 
 ```typescript
 const value: components.MessageInputEntry = {
-  role: "user",
+  role: "assistant",
   content: [
     {
-      imageUrl: {
-        url: "https://baggy-hovercraft.biz/",
-      },
-      type: "image_url",
+      type: "tool_file",
+      tool: "web_search_premium",
+      fileId: "<id>",
     },
   ],
 };
@@ -25,9 +24,8 @@ const value: components.MessageInputEntry = {
 const value: components.MessageOutputEntry = {
   content: [
     {
-      type: "tool_file",
-      tool: "web_search",
-      fileId: "<id>",
+      documentUrl: "https://overcooked-ravioli.biz",
+      type: "document_url",
     },
   ],
 };

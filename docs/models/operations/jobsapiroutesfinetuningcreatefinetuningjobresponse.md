@@ -9,14 +9,14 @@ OK
 
 ```typescript
 const value: operations.One = {
-  id: "18f94f6b-afe2-41ce-a7b1-329304a95d44",
+  id: "0e2d5c54-147d-47f8-a06b-3b80c8174e4f",
   autoStart: false,
-  model: "F-150",
-  status: "RUNNING",
-  createdAt: 155785,
-  modifiedAt: 504646,
+  model: "Corvette",
+  status: "CANCELLED",
+  createdAt: 697401,
+  modifiedAt: 413962,
   trainingFiles: [
-    "46bec69b-652b-4d5c-b9c6-b61874e6066d",
+    "acdd2d03-9194-4651-a8f9-4f6bafe21ce7",
   ],
   object: "job",
   jobType: "classifier",

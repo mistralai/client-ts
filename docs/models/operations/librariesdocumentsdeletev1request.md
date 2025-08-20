@@ -6,8 +6,8 @@
 import { LibrariesDocumentsDeleteV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: LibrariesDocumentsDeleteV1Request = {
-  libraryId: "d66ea185-f09b-44fd-ae09-4da818af9ffa",
-  documentId: "7e011c5a-968a-4f99-81f8-c0644c970ff3",
+  libraryId: "ad35b606-e65f-4a51-acbe-31b325d807a8",
+  documentId: "3d8bf6e0-0943-445b-99cd-d66ea185f09b",
 };
 ```
 

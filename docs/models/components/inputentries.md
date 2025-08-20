@@ -7,13 +7,11 @@
 
 ```typescript
 const value: components.MessageInputEntry = {
-  role: "assistant",
+  role: "user",
   content: [
     {
-      imageUrl: {
-        url: "https://strict-pressure.com",
-      },
-      type: "image_url",
+      documentUrl: "https://intrepid-technician.info",
+      type: "document_url",
     },
   ],
 };
@@ -23,13 +21,7 @@ const value: components.MessageInputEntry = {
 
 ```typescript
 const value: components.MessageOutputEntry = {
-  content: [
-    {
-      type: "tool_reference",
-      tool: "document_library",
-      title: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -48,9 +40,7 @@ const value: components.FunctionResultEntry = {
 const value: components.FunctionCallEntry = {
   toolCallId: "<id>",
   name: "<value>",
-  arguments: {
-    "key": "<value>",
-  },
+  arguments: "<value>",
 };
 ```
 

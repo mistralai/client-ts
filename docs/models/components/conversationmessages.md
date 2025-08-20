@@ -12,10 +12,14 @@ let value: ConversationMessages = {
   messages: [
     {
       object: "entry",
-      type: "message.input",
+      type: "message.output",
       role: "assistant",
-      content: "<value>",
-      prefix: false,
+      content: [
+        {
+          text: "<value>",
+          type: "text",
+        },
+      ],
     },
   ],
 };

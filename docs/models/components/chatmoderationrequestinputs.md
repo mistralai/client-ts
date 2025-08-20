@@ -10,8 +10,13 @@ Chat to classify
 ```typescript
 const value: components.One[] = [
   {
-    prefix: false,
-    role: "assistant",
+    content: [
+      {
+        text: "<value>",
+        type: "text",
+      },
+    ],
+    role: "system",
   },
 ];
 ```
@@ -22,15 +27,8 @@ const value: components.One[] = [
 const value: components.Two[][] = [
   [
     {
-      content: [
-        {
-          referenceIds: [
-            982927,
-          ],
-          type: "reference",
-        },
-      ],
-      role: "user",
+      prefix: false,
+      role: "assistant",
     },
   ],
 ];

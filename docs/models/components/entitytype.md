@@ -7,7 +7,7 @@ The type of entity, used to share a library.
 ```typescript
 import { EntityType } from "@mistralai/mistralai/models/components";
 
-let value: EntityType = "Workspace";
+let value: EntityType = "User";
 ```
 
 ## Values

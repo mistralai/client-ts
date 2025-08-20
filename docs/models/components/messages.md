@@ -28,8 +28,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      text: "<value>",
-      type: "text",
+      inputAudio: "<value>",
+      type: "input_audio",
     },
   ],
 };
@@ -39,7 +39,12 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 

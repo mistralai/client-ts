@@ -8,7 +8,7 @@
 ```typescript
 const value: components.ReferenceChunk = {
   referenceIds: [
-    692532,
+    581273,
   ],
 };
 ```

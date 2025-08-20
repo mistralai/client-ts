@@ -13,7 +13,12 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      text: "<value>",
+      type: "text",
+    },
+  ],
 };
 ```
 
@@ -23,8 +28,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      inputAudio: "<value>",
-      type: "input_audio",
+      text: "<value>",
+      type: "text",
     },
   ],
 };
@@ -34,14 +39,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      imageUrl: {
-        url: "https://diligent-fold.name/",
-      },
-      type: "image_url",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

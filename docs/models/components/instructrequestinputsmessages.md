@@ -26,7 +26,12 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      documentUrl: "https://variable-skyline.name/",
+      type: "document_url",
+    },
+  ],
 };
 ```
 

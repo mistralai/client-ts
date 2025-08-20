@@ -14,7 +14,13 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    fileId: "b0885135-69b5-4500-b4ba-ccdbfe990f2b",
+    thinking: [
+      {
+        text: "<value>",
+        type: "text",
+      },
+    ],
+    type: "thinking",
   },
 ];
 ```

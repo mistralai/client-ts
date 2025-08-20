@@ -6,20 +6,7 @@
 import { ConversationRequest } from "@mistralai/mistralai/models/components";
 
 let value: ConversationRequest = {
-  inputs: [
-    {
-      object: "entry",
-      type: "message.input",
-      role: "assistant",
-      content: [
-        {
-          imageUrl: "https://concrete-equal.name/",
-          type: "image_url",
-        },
-      ],
-      prefix: false,
-    },
-  ],
+  inputs: "<value>",
 };
 ```
 

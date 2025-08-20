@@ -14,9 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.MessageInputContentChunks[] = [
   {
-    type: "tool_file",
-    tool: "web_search",
-    fileId: "<id>",
+    text: "<value>",
+    type: "text",
   },
 ];
 ```
