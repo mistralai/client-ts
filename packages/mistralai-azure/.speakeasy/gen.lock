@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: 574e96caec9a63dbe3f39d646830f2c2
-  docVersion: 0.0.2
+  docChecksum: 87653f040f5b36c90e066870f34c478e
+  docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.5.0
-  configChecksum: e970dc3539024fc88d627ee594ef2937
+  releaseVersion: 1.6.0
+  configChecksum: 9a8039f55bb9f5f2ed7dc48f15005ec5
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
@@ -14,6 +14,7 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
+    additionalProperties: 0.1.1
     constsAndDefaults: 0.1.11
     core: 3.21.4
     defaultEnabledRetries: 0.1.0
@@ -59,6 +60,10 @@ generatedFiles:
   - docs/models/components/content.md
   - docs/models/components/contentchunk.md
   - docs/models/components/deltamessage.md
+  - docs/models/components/document.md
+  - docs/models/components/documenturlchunk.md
+  - docs/models/components/documenturlchunktype.md
+  - docs/models/components/filechunk.md
   - docs/models/components/finishreason.md
   - docs/models/components/functioncall.md
   - docs/models/components/functionname.md
@@ -70,6 +75,13 @@ generatedFiles:
   - docs/models/components/jsonschema.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
+  - docs/models/components/mistralpromptmode.md
+  - docs/models/components/ocrimageobject.md
+  - docs/models/components/ocrpagedimensions.md
+  - docs/models/components/ocrpageobject.md
+  - docs/models/components/ocrrequest.md
+  - docs/models/components/ocrresponse.md
+  - docs/models/components/ocrusageinfo.md
   - docs/models/components/prediction.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
@@ -102,6 +114,7 @@ generatedFiles:
   - src/core.ts
   - src/funcs/chatComplete.ts
   - src/funcs/chatStream.ts
+  - src/funcs/ocrProcess.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -133,6 +146,8 @@ generatedFiles:
   - src/models/components/completionresponsestreamchoice.ts
   - src/models/components/contentchunk.ts
   - src/models/components/deltamessage.ts
+  - src/models/components/documenturlchunk.ts
+  - src/models/components/filechunk.ts
   - src/models/components/function.ts
   - src/models/components/functioncall.ts
   - src/models/components/functionname.ts
@@ -140,6 +155,13 @@ generatedFiles:
   - src/models/components/imageurlchunk.ts
   - src/models/components/index.ts
   - src/models/components/jsonschema.ts
+  - src/models/components/mistralpromptmode.ts
+  - src/models/components/ocrimageobject.ts
+  - src/models/components/ocrpagedimensions.ts
+  - src/models/components/ocrpageobject.ts
+  - src/models/components/ocrrequest.ts
+  - src/models/components/ocrresponse.ts
+  - src/models/components/ocrusageinfo.ts
   - src/models/components/prediction.ts
   - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
@@ -163,6 +185,7 @@ generatedFiles:
   - src/models/errors/sdkvalidationerror.ts
   - src/sdk/chat.ts
   - src/sdk/index.ts
+  - src/sdk/ocr.ts
   - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
@@ -189,6 +212,15 @@ examples:
       responses:
         "200":
           application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}]}
+        "422":
+          application/json: {}
+  ocr_v1_ocr_post:
+    speakeasy-default-ocr-v1-ocr-post:
+      requestBody:
+        application/json: {"model": "Focus", "document": {"type": "file", "file_id": "d36f3178-f390-4532-8486-0e0b118bbaba"}}
+      responses:
+        "200":
+          application/json: {"pages": [], "model": "Expedition", "usage_info": {"pages_processed": 487025}}
         "422":
           application/json: {}
 examplesVersion: 1.0.0
