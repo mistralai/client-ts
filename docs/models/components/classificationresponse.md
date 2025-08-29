@@ -7,12 +7,12 @@ import { ClassificationResponse } from "@mistralai/mistralai/models/components";
 
 let value: ClassificationResponse = {
   id: "mod-e5cc70bb28c444948073e77776eb30ef",
-  model: "Grand Caravan",
+  model: "CTS",
   results: [
     {
       "key": {
         scores: {
-          "key": 4169.34,
+          "key": 8029.76,
         },
       },
     },

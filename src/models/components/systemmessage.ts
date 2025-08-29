@@ -8,13 +8,29 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  ReferenceChunk,
+  ReferenceChunk$inboundSchema,
+  ReferenceChunk$Outbound,
+  ReferenceChunk$outboundSchema,
+} from "./referencechunk.js";
+import {
   TextChunk,
   TextChunk$inboundSchema,
   TextChunk$Outbound,
   TextChunk$outboundSchema,
 } from "./textchunk.js";
+import {
+  ThinkChunk,
+  ThinkChunk$inboundSchema,
+  ThinkChunk$Outbound,
+  ThinkChunk$outboundSchema,
+} from "./thinkchunk.js";
 
-export type SystemMessageContent = string | Array<TextChunk>;
+export type Two = TextChunk | ReferenceChunk | ThinkChunk;
+
+export type SystemMessageContent =
+  | string
+  | Array<TextChunk | ReferenceChunk | ThinkChunk>;
 
 export const Role = {
   System: "system",
@@ -22,26 +38,96 @@ export const Role = {
 export type Role = ClosedEnum<typeof Role>;
 
 export type SystemMessage = {
-  content: string | Array<TextChunk>;
+  content: string | Array<TextChunk | ReferenceChunk | ThinkChunk>;
   role?: Role | undefined;
 };
+
+/** @internal */
+export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
+  [
+    TextChunk$inboundSchema,
+    ReferenceChunk$inboundSchema,
+    ThinkChunk$inboundSchema,
+  ],
+);
+
+/** @internal */
+export type Two$Outbound =
+  | TextChunk$Outbound
+  | ReferenceChunk$Outbound
+  | ThinkChunk$Outbound;
+
+/** @internal */
+export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
+  .union([
+    TextChunk$outboundSchema,
+    ReferenceChunk$outboundSchema,
+    ThinkChunk$outboundSchema,
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Two$ {
+  /** @deprecated use `Two$inboundSchema` instead. */
+  export const inboundSchema = Two$inboundSchema;
+  /** @deprecated use `Two$outboundSchema` instead. */
+  export const outboundSchema = Two$outboundSchema;
+  /** @deprecated use `Two$Outbound` instead. */
+  export type Outbound = Two$Outbound;
+}
+
+export function twoToJSON(two: Two): string {
+  return JSON.stringify(Two$outboundSchema.parse(two));
+}
+
+export function twoFromJSON(
+  jsonString: string,
+): SafeParseResult<Two, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Two$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two' from JSON`,
+  );
+}
 
 /** @internal */
 export const SystemMessageContent$inboundSchema: z.ZodType<
   SystemMessageContent,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(TextChunk$inboundSchema)]);
+> = z.union([
+  z.string(),
+  z.array(
+    z.union([
+      TextChunk$inboundSchema,
+      ReferenceChunk$inboundSchema,
+      ThinkChunk$inboundSchema,
+    ]),
+  ),
+]);
 
 /** @internal */
-export type SystemMessageContent$Outbound = string | Array<TextChunk$Outbound>;
+export type SystemMessageContent$Outbound =
+  | string
+  | Array<TextChunk$Outbound | ReferenceChunk$Outbound | ThinkChunk$Outbound>;
 
 /** @internal */
 export const SystemMessageContent$outboundSchema: z.ZodType<
   SystemMessageContent$Outbound,
   z.ZodTypeDef,
   SystemMessageContent
-> = z.union([z.string(), z.array(TextChunk$outboundSchema)]);
+> = z.union([
+  z.string(),
+  z.array(
+    z.union([
+      TextChunk$outboundSchema,
+      ReferenceChunk$outboundSchema,
+      ThinkChunk$outboundSchema,
+    ]),
+  ),
+]);
 
 /**
  * @internal
@@ -100,13 +186,24 @@ export const SystemMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.union([z.string(), z.array(TextChunk$inboundSchema)]),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        TextChunk$inboundSchema,
+        ReferenceChunk$inboundSchema,
+        ThinkChunk$inboundSchema,
+      ]),
+    ),
+  ]),
   role: Role$inboundSchema.default("system"),
 });
 
 /** @internal */
 export type SystemMessage$Outbound = {
-  content: string | Array<TextChunk$Outbound>;
+  content:
+    | string
+    | Array<TextChunk$Outbound | ReferenceChunk$Outbound | ThinkChunk$Outbound>;
   role: string;
 };
 
@@ -116,7 +213,16 @@ export const SystemMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SystemMessage
 > = z.object({
-  content: z.union([z.string(), z.array(TextChunk$outboundSchema)]),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        TextChunk$outboundSchema,
+        ReferenceChunk$outboundSchema,
+        ThinkChunk$outboundSchema,
+      ]),
+    ),
+  ]),
   role: Role$outboundSchema.default("system"),
 });
 

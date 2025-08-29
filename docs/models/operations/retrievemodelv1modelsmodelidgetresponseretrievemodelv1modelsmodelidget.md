@@ -20,7 +20,7 @@ const value: components.BaseModelCard = {
 const value: components.FTModelCard = {
   id: "<id>",
   capabilities: {},
-  job: "Forward Functionality Coordinator",
+  job: "Internal Paradigm Planner",
   root: "<value>",
 };
 ```

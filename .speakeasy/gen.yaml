@@ -18,7 +18,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
 typescript:
-  version: 1.9.18
+  version: 1.9.19
   additionalDependencies:
     dependencies:
       zod-to-json-schema: ^3.24.1

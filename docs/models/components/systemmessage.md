@@ -8,8 +8,15 @@ import { SystemMessage } from "@mistralai/mistralai/models/components";
 let value: SystemMessage = {
   content: [
     {
-      text: "<value>",
-      type: "text",
+      thinking: [
+        {
+          referenceIds: [
+            848833,
+          ],
+          type: "reference",
+        },
+      ],
+      type: "thinking",
     },
   ],
 };

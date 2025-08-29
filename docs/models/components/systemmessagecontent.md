@@ -9,12 +9,13 @@
 const value: string = "<value>";
 ```
 
-### `components.TextChunk[]`
+### `components.Two[]`
 
 ```typescript
-const value: components.TextChunk[] = [
+const value: components.Two[] = [
   {
     text: "<value>",
+    type: "text",
   },
 ];
 ```

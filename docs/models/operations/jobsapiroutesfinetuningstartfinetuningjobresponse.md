@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "8cc7f744-b660-44dc-ab00-47e649ebd228",
+  id: "0c390d20-4e48-464e-8cc8-d7773e433dc6",
   autoStart: false,
-  model: "Wrangler",
-  status: "VALIDATED",
-  createdAt: 346557,
-  modifiedAt: 515854,
+  model: "XC90",
+  status: "STARTED",
+  createdAt: 851423,
+  modifiedAt: 781723,
   trainingFiles: [
-    "a9b6d25c-5a42-44e7-9350-c390d204e486",
+    "fc5363bd-a209-4735-88a7-f0ae33c7f9e0",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 927354,
+      stepNumber: 684419,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 7889.95,
+      weight: 4164.66,
       lossFunction: "multi_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "8d7773e4-33dc-460f-92dc-fc5363bda209",
+  id: "6b91bb18-5761-4213-9d06-c13ba92c22c5",
   autoStart: false,
-  model: "CTS",
+  model: "Charger",
   status: "VALIDATED",
-  createdAt: 541466,
-  modifiedAt: 632917,
+  createdAt: 340587,
+  modifiedAt: 696368,
   trainingFiles: [
-    "7f0ae33c-7f9e-402a-86d6-b91bb1857612",
+    "35ce918a-5dc9-42be-84fc-4941da926e20",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 192447,
+      stepNumber: 250180,
       createdAt: 1716963433,
     },
   ],

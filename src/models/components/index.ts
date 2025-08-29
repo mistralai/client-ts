@@ -77,6 +77,7 @@ export * from "./embeddingdtype.js";
 export * from "./embeddingrequest.js";
 export * from "./embeddingresponse.js";
 export * from "./embeddingresponsedata.js";
+export * from "./encodingformat.js";
 export * from "./entitytype.js";
 export * from "./eventout.js";
 export * from "./file.js";

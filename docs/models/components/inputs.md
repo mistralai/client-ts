@@ -13,8 +13,15 @@ const value: components.InstructRequestInputs = {
     {
       content: [
         {
-          text: "<value>",
-          type: "text",
+          thinking: [
+            {
+              referenceIds: [
+                307874,
+              ],
+              type: "reference",
+            },
+          ],
+          type: "thinking",
         },
       ],
       role: "system",
@@ -30,14 +37,7 @@ const value: components.InstructRequest[] = [
   {
     messages: [
       {
-        content: [
-          {
-            imageUrl: {
-              url: "https://determined-sesame.net/",
-            },
-            type: "image_url",
-          },
-        ],
+        content: "<value>",
         role: "user",
       },
     ],

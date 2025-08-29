@@ -8,15 +8,7 @@ import { ToolMessage } from "@mistralai/mistralai/models/components";
 let value: ToolMessage = {
   content: [
     {
-      thinking: [
-        {
-          referenceIds: [
-            127499,
-          ],
-          type: "reference",
-        },
-      ],
-      type: "thinking",
+      fileId: "08851356-9b55-4004-9bac-cdbfe990f2bd",
     },
   ],
 };

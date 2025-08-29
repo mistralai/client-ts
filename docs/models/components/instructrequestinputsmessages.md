@@ -26,12 +26,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      documentUrl: "https://variable-skyline.name/",
-      type: "document_url",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -39,7 +34,12 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: "https://shadowy-tenement.net/",
+      type: "image_url",
+    },
+  ],
 };
 ```
 

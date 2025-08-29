@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "5c9c6b61-874e-4606-b6dc-3d3510ae7dca",
+  id: "209d4ec0-9935-4702-b26b-d2caef11c23e",
   autoStart: false,
-  model: "Prius",
-  status: "VALIDATING",
-  createdAt: 789015,
-  modifiedAt: 692662,
+  model: "Corvette",
+  status: "CANCELLED",
+  createdAt: 858857,
+  modifiedAt: 605391,
   trainingFiles: [
-    "613c3fb7-99f2-44b3-8d52-09d4ec099357",
+    "9949326b-9fa2-4213-89de-68c492727663",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 149776,
+      stepNumber: 275665,
       createdAt: 1716963433,
     },
   ],
@@ -32,8 +32,8 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 1640.04,
-      lossFunction: "single_class",
+      weight: 2395.8,
+      lossFunction: "multi_class",
     },
   ],
 };
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "bd2caef1-1c23-4ef5-8dd9-9949326b9fa2",
+  id: "b9191053-9ebc-4fa9-99d6-ca403b946a26",
   autoStart: false,
-  model: "ATS",
-  status: "STARTED",
-  createdAt: 597951,
-  modifiedAt: 838287,
+  model: "Golf",
+  status: "FAILED_VALIDATION",
+  createdAt: 367727,
+  modifiedAt: 762734,
   trainingFiles: [
-    "e68c4927-2766-4324-a3bb-91910539ebcf",
+    "106e42e2-5b43-46ce-802f-98d00fdb27ee",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 577731,
+      stepNumber: 752492,
       createdAt: 1716963433,
     },
   ],
