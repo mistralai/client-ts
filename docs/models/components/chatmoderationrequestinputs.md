@@ -10,21 +10,16 @@ Chat to classify
 ```typescript
 const value: components.One[] = [
   {
-    content: [
-      {
-        text: "<value>",
-        type: "text",
-      },
-    ],
-    role: "system",
+    prefix: false,
+    role: "assistant",
   },
 ];
 ```
 
-### `components.Two[][]`
+### `components.Inputs2[][]`
 
 ```typescript
-const value: components.Two[][] = [
+const value: components.Inputs2[][] = [
   [
     {
       prefix: false,

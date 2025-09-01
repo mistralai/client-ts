@@ -3,33 +3,36 @@
 
 ## Supported Types
 
-### `components.AssistantMessage`
+### `components.TextChunk`
 
 ```typescript
-const value: components.AssistantMessage = {};
-```
-
-### `components.SystemMessage`
-
-```typescript
-const value: components.SystemMessage = {
-  content: "<value>",
+const value: components.TextChunk = {
+  text: "<value>",
 };
 ```
 
-### `components.ToolMessage`
+### `components.ThinkChunk`
 
 ```typescript
-const value: components.ToolMessage = {
-  content: "<value>",
+const value: components.ThinkChunk = {
+  thinking: [
+    {
+      referenceIds: [
+        193990,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 
-### `components.UserMessage`
+### `components.ReferenceChunk`
 
 ```typescript
-const value: components.UserMessage = {
-  content: "<value>",
+const value: components.ReferenceChunk = {
+  referenceIds: [
+    481042,
+  ],
 };
 ```
 

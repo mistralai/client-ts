@@ -9,17 +9,17 @@ OK
 
 ```typescript
 const value: operations.One = {
-  id: "0e2d5c54-147d-47f8-a06b-3b80c8174e4f",
+  id: "94f6bafe-21ce-47b1-8329-304a95d44877",
   autoStart: false,
-  model: "Corvette",
-  status: "CANCELLED",
-  createdAt: 697401,
-  modifiedAt: 413962,
+  model: "Focus",
+  status: "VALIDATING",
+  createdAt: 392180,
+  modifiedAt: 733571,
   trainingFiles: [
-    "acdd2d03-9194-4651-a8f9-4f6bafe21ce7",
+    "ec69b652-bd5c-49c6-8b61-874e6066dc3d",
   ],
   object: "job",
-  jobType: "classifier",
+  jobType: "completion",
   hyperparameters: {
     learningRate: 0.0001,
   },

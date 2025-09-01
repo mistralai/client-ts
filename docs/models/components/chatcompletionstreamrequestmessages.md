@@ -13,7 +13,14 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: "<value>",
+  content: [
+    {
+      referenceIds: [
+        198892,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 
@@ -21,7 +28,12 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: "https://right-heating.info",
+      type: "image_url",
+    },
+  ],
 };
 ```
 

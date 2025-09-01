@@ -1,4 +1,4 @@
-# One
+# Inputs2
 
 
 ## Supported Types
@@ -15,10 +15,15 @@ const value: components.AssistantMessage = {};
 const value: components.SystemMessage = {
   content: [
     {
-      referenceIds: [
-        281454,
+      thinking: [
+        {
+          referenceIds: [
+            695347,
+          ],
+          type: "reference",
+        },
       ],
-      type: "reference",
+      type: "thinking",
     },
   ],
 };
@@ -36,17 +41,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      thinking: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
-      type: "thinking",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

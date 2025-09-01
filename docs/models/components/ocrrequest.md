@@ -6,10 +6,9 @@
 import { OCRRequest } from "@mistralai/mistralai/models/components";
 
 let value: OCRRequest = {
-  model: "XC90",
+  model: "PT Cruiser",
   document: {
-    imageUrl: "https://live-omelet.name",
-    type: "image_url",
+    fileId: "da0caeb8-d484-4f30-b580-8db9ffd9709f",
   },
 };
 ```

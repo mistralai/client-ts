@@ -8,12 +8,12 @@ import { CompletionEvent } from "@mistralai/mistralai/models/components";
 let value: CompletionEvent = {
   data: {
     id: "<id>",
-    model: "Roadster",
+    model: "CTS",
     choices: [
       {
-        index: 59757,
+        index: 98759,
         delta: {},
-        finishReason: "length",
+        finishReason: "error",
       },
     ],
   },

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: a38b769b82bac0658cf02fed22bdbde0
+  docChecksum: d88fc6da836fc7237380df90b01bc7a5
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.9.18
-  configChecksum: ad171129c8e92921246c234649d55ff4
+  releaseVersion: 1.9.19
+  configChecksum: a4b6872b651b5b2131054dd5a0ac8b01
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -188,6 +188,7 @@ generatedFiles:
   - docs/models/components/embeddingrequestinputs.md
   - docs/models/components/embeddingresponse.md
   - docs/models/components/embeddingresponsedata.md
+  - docs/models/components/encodingformat.md
   - docs/models/components/entitytype.md
   - docs/models/components/entries.md
   - docs/models/components/eventout.md
@@ -235,6 +236,7 @@ generatedFiles:
   - docs/models/components/imageurlchunktype.md
   - docs/models/components/inputentries.md
   - docs/models/components/inputs.md
+  - docs/models/components/inputs2.md
   - docs/models/components/instructrequest.md
   - docs/models/components/instructrequestinputs.md
   - docs/models/components/instructrequestinputsmessages.md
@@ -632,6 +634,7 @@ generatedFiles:
   - src/models/components/embeddingrequest.ts
   - src/models/components/embeddingresponse.ts
   - src/models/components/embeddingresponsedata.ts
+  - src/models/components/encodingformat.ts
   - src/models/components/entitytype.ts
   - src/models/components/eventout.ts
   - src/models/components/file.ts

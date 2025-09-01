@@ -14,10 +14,13 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: {
-      url: "https://frightened-stump.name/",
-    },
-    type: "image_url",
+    thinking: [
+      {
+        text: "<value>",
+        type: "text",
+      },
+    ],
+    type: "thinking",
   },
 ];
 ```

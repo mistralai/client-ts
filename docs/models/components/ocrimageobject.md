@@ -7,10 +7,10 @@ import { OCRImageObject } from "@mistralai/mistralai/models/components";
 
 let value: OCRImageObject = {
   id: "<id>",
-  topLeftX: 927021,
-  topLeftY: 115561,
-  bottomRightX: 217279,
-  bottomRightY: 742899,
+  topLeftX: 890765,
+  topLeftY: 806124,
+  bottomRightX: 107301,
+  bottomRightY: 9060,
 };
 ```
 

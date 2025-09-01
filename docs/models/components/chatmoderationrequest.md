@@ -7,21 +7,24 @@ import { ChatModerationRequest } from "@mistralai/mistralai/models/components";
 
 let value: ChatModerationRequest = {
   inputs: [
-    [
-      {
-        content: [
-          {
-            referenceIds: [
-              596185,
-            ],
-            type: "reference",
-          },
-        ],
-        role: "user",
-      },
-    ],
+    {
+      content: [
+        {
+          thinking: [
+            {
+              referenceIds: [
+                244157,
+              ],
+              type: "reference",
+            },
+          ],
+          type: "thinking",
+        },
+      ],
+      role: "tool",
+    },
   ],
-  model: "Escalade",
+  model: "Countach",
 };
 ```
 

@@ -32,7 +32,7 @@ import {
   UserMessage$outboundSchema,
 } from "./usermessage.js";
 
-export type Two =
+export type Inputs2 =
   | (SystemMessage & { role: "system" })
   | (UserMessage & { role: "user" })
   | (AssistantMessage & { role: "assistant" })
@@ -86,8 +86,8 @@ export type ChatModerationRequest = {
 };
 
 /** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
-  [
+export const Inputs2$inboundSchema: z.ZodType<Inputs2, z.ZodTypeDef, unknown> =
+  z.union([
     SystemMessage$inboundSchema.and(
       z.object({ role: z.literal("system") }).transform((v) => ({
         role: v.role,
@@ -108,65 +108,63 @@ export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
         role: v.role,
       })),
     ),
-  ],
-);
+  ]);
 
 /** @internal */
-export type Two$Outbound =
+export type Inputs2$Outbound =
   | (SystemMessage$Outbound & { role: "system" })
   | (UserMessage$Outbound & { role: "user" })
   | (AssistantMessage$Outbound & { role: "assistant" })
   | (ToolMessage$Outbound & { role: "tool" });
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .union([
-    SystemMessage$outboundSchema.and(
-      z.object({ role: z.literal("system") }).transform((v) => ({
-        role: v.role,
-      })),
-    ),
-    UserMessage$outboundSchema.and(
-      z.object({ role: z.literal("user") }).transform((v) => ({
-        role: v.role,
-      })),
-    ),
-    AssistantMessage$outboundSchema.and(
-      z.object({ role: z.literal("assistant") }).transform((v) => ({
-        role: v.role,
-      })),
-    ),
-    ToolMessage$outboundSchema.and(
-      z.object({ role: z.literal("tool") }).transform((v) => ({
-        role: v.role,
-      })),
-    ),
-  ]);
+export const Inputs2$outboundSchema: z.ZodType<
+  Inputs2$Outbound,
+  z.ZodTypeDef,
+  Inputs2
+> = z.union([
+  SystemMessage$outboundSchema.and(
+    z.object({ role: z.literal("system") }).transform((v) => ({
+      role: v.role,
+    })),
+  ),
+  UserMessage$outboundSchema.and(
+    z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
+  ),
+  AssistantMessage$outboundSchema.and(
+    z.object({ role: z.literal("assistant") }).transform((v) => ({
+      role: v.role,
+    })),
+  ),
+  ToolMessage$outboundSchema.and(
+    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
+  ),
+]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Two$ {
-  /** @deprecated use `Two$inboundSchema` instead. */
-  export const inboundSchema = Two$inboundSchema;
-  /** @deprecated use `Two$outboundSchema` instead. */
-  export const outboundSchema = Two$outboundSchema;
-  /** @deprecated use `Two$Outbound` instead. */
-  export type Outbound = Two$Outbound;
+export namespace Inputs2$ {
+  /** @deprecated use `Inputs2$inboundSchema` instead. */
+  export const inboundSchema = Inputs2$inboundSchema;
+  /** @deprecated use `Inputs2$outboundSchema` instead. */
+  export const outboundSchema = Inputs2$outboundSchema;
+  /** @deprecated use `Inputs2$Outbound` instead. */
+  export type Outbound = Inputs2$Outbound;
 }
 
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
+export function inputs2ToJSON(inputs2: Inputs2): string {
+  return JSON.stringify(Inputs2$outboundSchema.parse(inputs2));
 }
 
-export function twoFromJSON(
+export function inputs2FromJSON(
   jsonString: string,
-): SafeParseResult<Two, SDKValidationError> {
+): SafeParseResult<Inputs2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Two$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two' from JSON`,
+    (x) => Inputs2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Inputs2' from JSON`,
   );
 }
 

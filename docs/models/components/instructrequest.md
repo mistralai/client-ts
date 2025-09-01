@@ -8,8 +8,13 @@ import { InstructRequest } from "@mistralai/mistralai/models/components";
 let value: InstructRequest = {
   messages: [
     {
-      content: "<value>",
-      role: "tool",
+      content: [
+        {
+          inputAudio: "<value>",
+          type: "input_audio",
+        },
+      ],
+      role: "user",
     },
   ],
 };
