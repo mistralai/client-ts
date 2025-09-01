@@ -3,18 +3,14 @@
 
 ## Supported Types
 
-### `components.CodeInterpreterTool`
-
-```typescript
-const value: components.CodeInterpreterTool = {};
-```
-
 ### `components.DocumentLibraryTool`
 
 ```typescript
 const value: components.DocumentLibraryTool = {
   libraryIds: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```
@@ -30,6 +26,12 @@ const value: components.FunctionTool = {
     },
   },
 };
+```
+
+### `components.CodeInterpreterTool`
+
+```typescript
+const value: components.CodeInterpreterTool = {};
 ```
 
 ### `components.ImageGenerationTool`

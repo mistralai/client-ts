@@ -7,24 +7,15 @@ import { ClassifierFTModelOut } from "@mistralai/mistralai/models/components";
 
 let value: ClassifierFTModelOut = {
   id: "<id>",
-  created: 437032,
+  created: 111228,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
-  archived: false,
+  archived: true,
   capabilities: {},
-  job: "b0aa3255-97f1-432a-b473-21a235d1d1f7",
-  classifierTargets: [
-    {
-      name: "<value>",
-      labels: [
-        "<value>",
-      ],
-      weight: 6048.46,
-      lossFunction: "multi_class",
-    },
-  ],
+  job: "b1e6e408-c7c5-4c7c-9c65-efca1702bf4b",
+  classifierTargets: [],
 };
 ```
 

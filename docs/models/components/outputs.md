@@ -28,6 +28,8 @@ const value: components.FunctionCallEntry = {
   name: "<value>",
   arguments: {
     "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```

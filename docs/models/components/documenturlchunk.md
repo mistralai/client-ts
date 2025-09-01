@@ -6,7 +6,7 @@
 import { DocumentURLChunk } from "@mistralai/mistralai/models/components";
 
 let value: DocumentURLChunk = {
-  documentUrl: "https://stylish-gripper.org/",
+  documentUrl: "https://other-reach.net",
 };
 ```
 

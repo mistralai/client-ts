@@ -18,6 +18,7 @@ Moderations
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="moderations_v1_moderations_post" method="post" path="/v1/moderations" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -27,13 +28,13 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.classifiers.moderate({
-    model: "V90",
+    model: "Durango",
     inputs: [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -56,20 +57,18 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await classifiersModerate(mistral, {
-    model: "V90",
+    model: "Durango",
     inputs: [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("classifiersModerate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -101,6 +100,7 @@ Chat Moderations
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="chat_moderations_v1_chat_moderations_post" method="post" path="/v1/chat/moderations" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -111,39 +111,14 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.classifiers.moderateChat({
     inputs: [
-      [
-        {
-          content: "<value>",
-          role: "tool",
-        },
-        {
-          content: "<value>",
-          role: "tool",
-        },
-        {
-          content: "<value>",
-          role: "tool",
-        },
-      ],
-      [
-        {
-          prefix: false,
-          role: "assistant",
-        },
-        {
-          content: "<value>",
-          role: "user",
-        },
-        {
-          prefix: false,
-          role: "assistant",
-        },
-      ],
+      {
+        content: "<value>",
+        role: "tool",
+      },
     ],
-    model: "Roadster",
+    model: "LeBaron",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -167,46 +142,19 @@ const mistral = new MistralCore({
 async function run() {
   const res = await classifiersModerateChat(mistral, {
     inputs: [
-      [
-        {
-          content: "<value>",
-          role: "tool",
-        },
-        {
-          content: "<value>",
-          role: "tool",
-        },
-        {
-          content: "<value>",
-          role: "tool",
-        },
-      ],
-      [
-        {
-          prefix: false,
-          role: "assistant",
-        },
-        {
-          content: "<value>",
-          role: "user",
-        },
-        {
-          prefix: false,
-          role: "assistant",
-        },
-      ],
+      {
+        content: "<value>",
+        role: "tool",
+      },
     ],
-    model: "Roadster",
+    model: "LeBaron",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("classifiersModerateChat failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -238,6 +186,7 @@ Classifications
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="classifications_v1_classifications_post" method="post" path="/v1/classifications" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -247,11 +196,12 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.classifiers.classify({
-    model: "Altima",
-    inputs: "<value>",
+    model: "Silverado",
+    inputs: [
+      "<value 1>",
+    ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -274,18 +224,17 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await classifiersClassify(mistral, {
-    model: "Altima",
-    inputs: "<value>",
+    model: "Silverado",
+    inputs: [
+      "<value 1>",
+    ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("classifiersClassify failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -317,6 +266,7 @@ Chat Classifications
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="chat_classifications_v1_chat_classifications_post" method="post" path="/v1/chat/classifications" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -326,24 +276,19 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.classifiers.classifyChat({
-    model: "Fortwo",
+    model: "Camry",
     inputs: [
       {
         messages: [
           {
-            prefix: false,
-            role: "assistant",
-          },
-          {
-            prefix: false,
-            role: "assistant",
+            content: "<value>",
+            role: "system",
           },
         ],
       },
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -366,31 +311,24 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await classifiersClassifyChat(mistral, {
-    model: "Fortwo",
+    model: "Camry",
     inputs: [
       {
         messages: [
           {
-            prefix: false,
-            role: "assistant",
-          },
-          {
-            prefix: false,
-            role: "assistant",
+            content: "<value>",
+            role: "system",
           },
         ],
       },
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("classifiersClassifyChat failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

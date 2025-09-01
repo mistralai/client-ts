@@ -20,15 +20,15 @@ import {
 } from "./ftmodelcard.js";
 
 export type Data =
-  | (BaseModelCard & { type: "base" })
-  | (FTModelCard & { type: "fine-tuned" });
+  | (FTModelCard & { type: "fine-tuned" })
+  | (BaseModelCard & { type: "base" });
 
 export type ModelList = {
   object?: string | undefined;
   data?:
     | Array<
-      | (BaseModelCard & { type: "base" })
       | (FTModelCard & { type: "fine-tuned" })
+      | (BaseModelCard & { type: "base" })
     >
     | undefined;
 };
@@ -36,13 +36,13 @@ export type ModelList = {
 /** @internal */
 export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
   .union([
-    BaseModelCard$inboundSchema.and(
-      z.object({ type: z.literal("base") }).transform((v) => ({
+    FTModelCard$inboundSchema.and(
+      z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
         type: v.type,
       })),
     ),
-    FTModelCard$inboundSchema.and(
-      z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
+    BaseModelCard$inboundSchema.and(
+      z.object({ type: z.literal("base") }).transform((v) => ({
         type: v.type,
       })),
     ),
@@ -50,19 +50,19 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
 
 /** @internal */
 export type Data$Outbound =
-  | (BaseModelCard$Outbound & { type: "base" })
-  | (FTModelCard$Outbound & { type: "fine-tuned" });
+  | (FTModelCard$Outbound & { type: "fine-tuned" })
+  | (BaseModelCard$Outbound & { type: "base" });
 
 /** @internal */
 export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
   z.union([
-    BaseModelCard$outboundSchema.and(
-      z.object({ type: z.literal("base") }).transform((v) => ({
+    FTModelCard$outboundSchema.and(
+      z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
         type: v.type,
       })),
     ),
-    FTModelCard$outboundSchema.and(
-      z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
+    BaseModelCard$outboundSchema.and(
+      z.object({ type: z.literal("base") }).transform((v) => ({
         type: v.type,
       })),
     ),
@@ -104,13 +104,13 @@ export const ModelList$inboundSchema: z.ZodType<
   object: z.string().default("list"),
   data: z.array(
     z.union([
-      BaseModelCard$inboundSchema.and(
-        z.object({ type: z.literal("base") }).transform((v) => ({
+      FTModelCard$inboundSchema.and(
+        z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
           type: v.type,
         })),
       ),
-      FTModelCard$inboundSchema.and(
-        z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
+      BaseModelCard$inboundSchema.and(
+        z.object({ type: z.literal("base") }).transform((v) => ({
           type: v.type,
         })),
       ),
@@ -123,8 +123,8 @@ export type ModelList$Outbound = {
   object: string;
   data?:
     | Array<
-      | (BaseModelCard$Outbound & { type: "base" })
       | (FTModelCard$Outbound & { type: "fine-tuned" })
+      | (BaseModelCard$Outbound & { type: "base" })
     >
     | undefined;
 };
@@ -138,13 +138,13 @@ export const ModelList$outboundSchema: z.ZodType<
   object: z.string().default("list"),
   data: z.array(
     z.union([
-      BaseModelCard$outboundSchema.and(
-        z.object({ type: z.literal("base") }).transform((v) => ({
+      FTModelCard$outboundSchema.and(
+        z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
           type: v.type,
         })),
       ),
-      FTModelCard$outboundSchema.and(
-        z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
+      BaseModelCard$outboundSchema.and(
+        z.object({ type: z.literal("base") }).transform((v) => ({
           type: v.type,
         })),
       ),

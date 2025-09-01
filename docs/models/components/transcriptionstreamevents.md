@@ -6,10 +6,12 @@
 import { TranscriptionStreamEvents } from "@mistralai/mistralai/models/components";
 
 let value: TranscriptionStreamEvents = {
-  event: "transcription.language",
+  event: "transcription.done",
   data: {
     text: "<value>",
-    type: "transcription.text.delta",
+    start: 2155.98,
+    end: 208.46,
+    type: "transcription.segment",
   },
 };
 ```

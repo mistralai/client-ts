@@ -6,7 +6,7 @@
 import { FilesApiRoutesDownloadFileRequest } from "@mistralai/mistralai/models/operations";
 
 let value: FilesApiRoutesDownloadFileRequest = {
-  fileId: "e24643c5-1825-4e5a-982a-d1cbd14b0bd7",
+  fileId: "e31bf706-2bf8-4451-968b-02260de5e9e8",
 };
 ```
 

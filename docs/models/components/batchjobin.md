@@ -7,9 +7,9 @@ import { BatchJobIn } from "@mistralai/mistralai/models/components";
 
 let value: BatchJobIn = {
   inputFiles: [
-    "12544cf8-f616-447a-97ee-b726b41eb9cd",
+    "7f16333a-2967-488a-ae48-e45fd08dcc6a",
   ],
-  endpoint: "/v1/chat/moderations",
+  endpoint: "/v1/embeddings",
 };
 ```
 

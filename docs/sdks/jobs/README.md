@@ -17,6 +17,7 @@ Get a list of fine-tuning jobs for your organization and user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_fine_tuning_get_fine_tuning_jobs" method="get" path="/v1/fine_tuning/jobs" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -27,7 +28,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.fineTuning.jobs.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -50,15 +50,12 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsList(mistral, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("fineTuningJobsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -89,6 +86,7 @@ Create a new fine-tuning job, it will be queued for processing.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_fine_tuning_create_fine_tuning_job" method="post" path="/v1/fine_tuning/jobs" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -98,13 +96,12 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fineTuning.jobs.create({
-    model: "Fiesta",
+    model: "Camaro",
     hyperparameters: {
       learningRate: 0.0001,
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -127,20 +124,17 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsCreate(mistral, {
-    model: "Fiesta",
+    model: "Camaro",
     hyperparameters: {
       learningRate: 0.0001,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("fineTuningJobsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -171,6 +165,7 @@ Get a fine-tuned job details by its UUID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_fine_tuning_get_fine_tuning_job" method="get" path="/v1/fine_tuning/jobs/{job_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -180,10 +175,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fineTuning.jobs.get({
-    jobId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
+    jobId: "c167a961-ffca-4bcf-93ac-6169468dd389",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -206,17 +200,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsGet(mistral, {
-    jobId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
+    jobId: "c167a961-ffca-4bcf-93ac-6169468dd389",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("fineTuningJobsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -247,6 +238,7 @@ Request the cancellation of a fine tuning job.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_fine_tuning_cancel_fine_tuning_job" method="post" path="/v1/fine_tuning/jobs/{job_id}/cancel" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -256,10 +248,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fineTuning.jobs.cancel({
-    jobId: "0f713502-9233-41c6-9ebd-c570b7edb496",
+    jobId: "6188a2f6-7513-4e0f-89cc-3f8088523a49",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -282,17 +273,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsCancel(mistral, {
-    jobId: "0f713502-9233-41c6-9ebd-c570b7edb496",
+    jobId: "6188a2f6-7513-4e0f-89cc-3f8088523a49",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("fineTuningJobsCancel failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -323,6 +311,7 @@ Request the start of a validated fine tuning job.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_fine_tuning_start_fine_tuning_job" method="post" path="/v1/fine_tuning/jobs/{job_id}/start" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -332,10 +321,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fineTuning.jobs.start({
-    jobId: "0bf0f9e6-c3e5-4d61-aac8-0e36dcac0dfc",
+    jobId: "56553e4d-0679-471e-b9ac-59a77d671103",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -358,17 +346,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fineTuningJobsStart(mistral, {
-    jobId: "0bf0f9e6-c3e5-4d61-aac8-0e36dcac0dfc",
+    jobId: "56553e4d-0679-471e-b9ac-59a77d671103",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("fineTuningJobsStart failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

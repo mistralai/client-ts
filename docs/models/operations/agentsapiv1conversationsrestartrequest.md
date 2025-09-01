@@ -8,7 +8,7 @@ import { AgentsApiV1ConversationsRestartRequest } from "@mistralai/mistralai/mod
 let value: AgentsApiV1ConversationsRestartRequest = {
   conversationId: "<id>",
   conversationRestartRequest: {
-    inputs: "<value>",
+    inputs: [],
     fromEntryId: "<id>",
   },
 };

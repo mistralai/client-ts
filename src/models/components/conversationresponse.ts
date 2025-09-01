@@ -47,10 +47,10 @@ export type ConversationResponseObject = ClosedEnum<
 >;
 
 export type Outputs =
-  | ToolExecutionEntry
+  | AgentHandoffEntry
   | FunctionCallEntry
-  | MessageOutputEntry
-  | AgentHandoffEntry;
+  | ToolExecutionEntry
+  | MessageOutputEntry;
 
 /**
  * The response after appending new entries to the conversation.
@@ -59,10 +59,10 @@ export type ConversationResponse = {
   object?: ConversationResponseObject | undefined;
   conversationId: string;
   outputs: Array<
-    | ToolExecutionEntry
-    | FunctionCallEntry
-    | MessageOutputEntry
     | AgentHandoffEntry
+    | FunctionCallEntry
+    | ToolExecutionEntry
+    | MessageOutputEntry
   >;
   usage: ConversationUsageInfo;
 };
@@ -91,18 +91,18 @@ export namespace ConversationResponseObject$ {
 /** @internal */
 export const Outputs$inboundSchema: z.ZodType<Outputs, z.ZodTypeDef, unknown> =
   z.union([
-    ToolExecutionEntry$inboundSchema,
-    FunctionCallEntry$inboundSchema,
-    MessageOutputEntry$inboundSchema,
     AgentHandoffEntry$inboundSchema,
+    FunctionCallEntry$inboundSchema,
+    ToolExecutionEntry$inboundSchema,
+    MessageOutputEntry$inboundSchema,
   ]);
 
 /** @internal */
 export type Outputs$Outbound =
-  | ToolExecutionEntry$Outbound
+  | AgentHandoffEntry$Outbound
   | FunctionCallEntry$Outbound
-  | MessageOutputEntry$Outbound
-  | AgentHandoffEntry$Outbound;
+  | ToolExecutionEntry$Outbound
+  | MessageOutputEntry$Outbound;
 
 /** @internal */
 export const Outputs$outboundSchema: z.ZodType<
@@ -110,10 +110,10 @@ export const Outputs$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Outputs
 > = z.union([
-  ToolExecutionEntry$outboundSchema,
-  FunctionCallEntry$outboundSchema,
-  MessageOutputEntry$outboundSchema,
   AgentHandoffEntry$outboundSchema,
+  FunctionCallEntry$outboundSchema,
+  ToolExecutionEntry$outboundSchema,
+  MessageOutputEntry$outboundSchema,
 ]);
 
 /**
@@ -155,10 +155,10 @@ export const ConversationResponse$inboundSchema: z.ZodType<
   conversation_id: z.string(),
   outputs: z.array(
     z.union([
-      ToolExecutionEntry$inboundSchema,
-      FunctionCallEntry$inboundSchema,
-      MessageOutputEntry$inboundSchema,
       AgentHandoffEntry$inboundSchema,
+      FunctionCallEntry$inboundSchema,
+      ToolExecutionEntry$inboundSchema,
+      MessageOutputEntry$inboundSchema,
     ]),
   ),
   usage: ConversationUsageInfo$inboundSchema,
@@ -173,10 +173,10 @@ export type ConversationResponse$Outbound = {
   object: string;
   conversation_id: string;
   outputs: Array<
-    | ToolExecutionEntry$Outbound
-    | FunctionCallEntry$Outbound
-    | MessageOutputEntry$Outbound
     | AgentHandoffEntry$Outbound
+    | FunctionCallEntry$Outbound
+    | ToolExecutionEntry$Outbound
+    | MessageOutputEntry$Outbound
   >;
   usage: ConversationUsageInfo$Outbound;
 };
@@ -193,10 +193,10 @@ export const ConversationResponse$outboundSchema: z.ZodType<
   conversationId: z.string(),
   outputs: z.array(
     z.union([
-      ToolExecutionEntry$outboundSchema,
-      FunctionCallEntry$outboundSchema,
-      MessageOutputEntry$outboundSchema,
       AgentHandoffEntry$outboundSchema,
+      FunctionCallEntry$outboundSchema,
+      ToolExecutionEntry$outboundSchema,
+      MessageOutputEntry$outboundSchema,
     ]),
   ),
   usage: ConversationUsageInfo$outboundSchema,

@@ -14,7 +14,9 @@ const value: components.CodeInterpreterTool = {};
 ```typescript
 const value: components.DocumentLibraryTool = {
   libraryIds: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```

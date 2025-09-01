@@ -6,8 +6,8 @@
 import { SharingDelete } from "@mistralai/mistralai/models/components";
 
 let value: SharingDelete = {
-  orgId: "25ee459f-24d7-4e28-8557-65ebb49cc5cb",
-  shareWithUuid: "d777997d-a66c-4530-9ee1-521e0f1d955c",
+  orgId: "33c1d1d5-b6b7-43ef-a338-5ddf0da5c8e8",
+  shareWithUuid: "8c9881d1-b753-49ab-8af0-6499dc0fbb8f",
   shareWithType: "Workspace",
 };
 ```

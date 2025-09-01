@@ -13,7 +13,7 @@ let value: ConversationResponse = {
     {
       object: "entry",
       type: "tool.execution",
-      name: "web_search",
+      name: "code_interpreter",
       arguments: "<value>",
     },
   ],

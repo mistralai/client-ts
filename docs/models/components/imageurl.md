@@ -6,7 +6,7 @@
 import { ImageURL } from "@mistralai/mistralai/models/components";
 
 let value: ImageURL = {
-  url: "https://elliptical-valentine.info",
+  url: "https://grim-farm.name/",
 };
 ```
 

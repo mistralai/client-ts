@@ -8,7 +8,9 @@ import { ClassifierTargetIn } from "@mistralai/mistralai/models/components";
 let value: ClassifierTargetIn = {
   name: "<value>",
   labels: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```

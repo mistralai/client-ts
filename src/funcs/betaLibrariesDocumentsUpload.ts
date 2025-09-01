@@ -4,7 +4,10 @@
 
 import { MistralCore } from "../core.js";
 import { appendForm, encodeSimple } from "../lib/encodings.js";
-import { readableStreamToArrayBuffer } from "../lib/files.js";
+import {
+  getContentTypeFromFileName,
+  readableStreamToArrayBuffer,
+} from "../lib/files.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -20,7 +23,8 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
-import { SDKError } from "../models/errors/sdkerror.js";
+import { MistralError } from "../models/errors/mistralerror.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -42,13 +46,14 @@ export function betaLibrariesDocumentsUpload(
   Result<
     components.DocumentOut,
     | errors.HTTPValidationError
-    | SDKError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | MistralError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -67,13 +72,14 @@ async function $do(
     Result<
       components.DocumentOut,
       | errors.HTTPValidationError
-      | SDKError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | MistralError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -96,15 +102,19 @@ async function $do(
     const buffer = await readableStreamToArrayBuffer(
       payload.RequestBody.file.content,
     );
-    const blob = new Blob([buffer], { type: "application/octet-stream" });
-    appendForm(body, "file", blob);
+    const contentType =
+      getContentTypeFromFileName(payload.RequestBody.file.fileName)
+      || "application/octet-stream";
+    const blob = new Blob([buffer], { type: contentType });
+    appendForm(body, "file", blob, payload.RequestBody.file.fileName);
   } else {
+    const contentType =
+      getContentTypeFromFileName(payload.RequestBody.file.fileName)
+      || "application/octet-stream";
     appendForm(
       body,
       "file",
-      new Blob([payload.RequestBody.file.content], {
-        type: "application/octet-stream",
-      }),
+      new Blob([payload.RequestBody.file.content], { type: contentType }),
       payload.RequestBody.file.fileName,
     );
   }
@@ -127,6 +137,7 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "libraries_documents_upload_v1",
     oAuth2Scopes: [],
@@ -147,6 +158,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -172,19 +184,20 @@ async function $do(
   const [result] = await M.match<
     components.DocumentOut,
     | errors.HTTPValidationError
-    | SDKError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | MistralError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.json([200, 201], components.DocumentOut$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

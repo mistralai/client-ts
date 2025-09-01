@@ -7,7 +7,9 @@ import { ClassificationTargetResult } from "@mistralai/mistralai/models/componen
 
 let value: ClassificationTargetResult = {
   scores: {
-    "key": 4004.7,
+    "key": 7155.73,
+    "key1": 6875.27,
+    "key2": 2740.18,
   },
 };
 ```

@@ -7,14 +7,14 @@ import { CompletionFTModelOut } from "@mistralai/mistralai/models/components";
 
 let value: CompletionFTModelOut = {
   id: "<id>",
-  created: 383441,
+  created: 787475,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
   archived: false,
   capabilities: {},
-  job: "c89e110d-cdfc-47c1-9a2f-864c790999fa",
+  job: "0f147667-0d54-46fd-934d-6a88bd2ec484",
 };
 ```
 

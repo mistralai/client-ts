@@ -15,7 +15,7 @@ const value: components.TextChunk = {
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://optimistic-travel.biz/",
+  imageUrl: "https://darling-distinction.org",
 };
 ```
 
@@ -32,7 +32,7 @@ const value: components.ToolFileChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://second-hand-elevation.biz/",
+  documentUrl: "https://other-reach.net",
 };
 ```
 
@@ -40,12 +40,7 @@ const value: components.DocumentURLChunk = {
 
 ```typescript
 const value: components.ThinkChunk = {
-  thinking: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  thinking: [],
 };
 ```
 
@@ -53,7 +48,7 @@ const value: components.ThinkChunk = {
 
 ```typescript
 const value: components.ToolReferenceChunk = {
-  tool: "web_search",
+  tool: "image_generation",
   title: "<value>",
 };
 ```

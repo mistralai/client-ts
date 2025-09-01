@@ -8,15 +8,15 @@ import { ListLibraryOut } from "@mistralai/mistralai/models/components";
 let value: ListLibraryOut = {
   data: [
     {
-      id: "9d182b69-2275-4fcb-9e18-9f4310eac491",
+      id: "22dccd56-b81f-4bed-b1e1-e58e1be5f8ad",
       name: "<value>",
-      createdAt: new Date("2025-12-07T08:01:55.761Z"),
-      updatedAt: new Date("2025-08-18T15:35:38.302Z"),
-      ownerId: "5f3ffcad-4d90-452f-977a-52d3831dffec",
+      createdAt: new Date("2024-09-24T02:11:48.876Z"),
+      updatedAt: new Date("2023-05-26T21:02:03.177Z"),
+      ownerId: "501f55c8-818b-4455-af1c-cb4326795686",
       ownerType: "<value>",
-      totalSize: 81101,
-      nbDocuments: 407241,
-      chunkSize: 232234,
+      totalSize: 511025,
+      nbDocuments: 199415,
+      chunkSize: 843252,
     },
   ],
 };

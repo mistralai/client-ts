@@ -6,10 +6,9 @@
 import { OCRRequest } from "@mistralai/mistralai/models/components";
 
 let value: OCRRequest = {
-  model: "XC90",
+  model: "Aventador",
   document: {
-    imageUrl: "https://live-omelet.name",
-    type: "image_url",
+    fileId: "ea6400b9-bfdc-4769-82dc-df5d318855aa",
   },
 };
 ```

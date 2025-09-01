@@ -20,8 +20,8 @@ export type AgentsApiV1ConversationsGetRequest = {
  * Successful Response
  */
 export type AgentsApiV1ConversationsGetResponseV1ConversationsGet =
-  | components.AgentConversation
-  | components.ModelConversation;
+  | components.ModelConversation
+  | components.AgentConversation;
 
 /** @internal */
 export const AgentsApiV1ConversationsGetRequest$inboundSchema: z.ZodType<
@@ -96,14 +96,14 @@ export const AgentsApiV1ConversationsGetResponseV1ConversationsGet$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.AgentConversation$inboundSchema,
     components.ModelConversation$inboundSchema,
+    components.AgentConversation$inboundSchema,
   ]);
 
 /** @internal */
 export type AgentsApiV1ConversationsGetResponseV1ConversationsGet$Outbound =
-  | components.AgentConversation$Outbound
-  | components.ModelConversation$Outbound;
+  | components.ModelConversation$Outbound
+  | components.AgentConversation$Outbound;
 
 /** @internal */
 export const AgentsApiV1ConversationsGetResponseV1ConversationsGet$outboundSchema:
@@ -112,8 +112,8 @@ export const AgentsApiV1ConversationsGetResponseV1ConversationsGet$outboundSchem
     z.ZodTypeDef,
     AgentsApiV1ConversationsGetResponseV1ConversationsGet
   > = z.union([
-    components.AgentConversation$outboundSchema,
     components.ModelConversation$outboundSchema,
+    components.AgentConversation$outboundSchema,
   ]);
 
 /**

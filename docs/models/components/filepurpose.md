@@ -5,7 +5,7 @@
 ```typescript
 import { FilePurpose } from "@mistralai/mistralai/models/components";
 
-let value: FilePurpose = "ocr";
+let value: FilePurpose = "fine-tune";
 ```
 
 ## Values

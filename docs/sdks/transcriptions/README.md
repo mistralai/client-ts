@@ -16,6 +16,7 @@ Create Transcription
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="audio_api_v1_transcriptions_post" method="post" path="/v1/audio/transcriptions" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -25,10 +26,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.audio.transcriptions.complete({
-    model: "Ranchero",
+    model: "Model X",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -51,17 +51,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await audioTranscriptionsComplete(mistral, {
-    model: "Ranchero",
+    model: "Model X",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("audioTranscriptionsComplete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -92,6 +89,7 @@ Create streaming transcription (SSE)
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="audio_api_v1_transcriptions_post_stream" method="post" path="/v1/audio/transcriptions#stream" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -101,7 +99,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.audio.transcriptions.stream({
-    model: "Ranchero",
+    model: "Camry",
   });
 
   for await (const event of result) {
@@ -129,18 +127,16 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await audioTranscriptionsStream(mistral, {
-    model: "Ranchero",
+    model: "Camry",
   });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  for await (const event of result) {
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
     // Handle the event
     console.log(event);
+  }
+  } else {
+    console.log("audioTranscriptionsStream failed:", res.error);
   }
 }
 

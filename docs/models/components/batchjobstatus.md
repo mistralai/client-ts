@@ -5,7 +5,7 @@
 ```typescript
 import { BatchJobStatus } from "@mistralai/mistralai/models/components";
 
-let value: BatchJobStatus = "QUEUED";
+let value: BatchJobStatus = "CANCELLATION_REQUESTED";
 ```
 
 ## Values

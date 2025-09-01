@@ -24,6 +24,7 @@ Given a library, lists the document that have been uploaded to that library.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_list_v1" method="get" path="/v1/libraries/{library_id}/documents" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -33,10 +34,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.list({
-    libraryId: "c8a232aa-0b11-4b8a-b005-71e9e705d0e6",
+    libraryId: "5c3ca4cd-62bc-4c71-ad8a-1531ae80d078",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -59,17 +59,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsList(mistral, {
-    libraryId: "c8a232aa-0b11-4b8a-b005-71e9e705d0e6",
+    libraryId: "5c3ca4cd-62bc-4c71-ad8a-1531ae80d078",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -101,6 +98,7 @@ Given a library, upload a new document to that library. It is queued for process
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_upload_v1" method="post" path="/v1/libraries/{library_id}/documents" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 import { openAsBlob } from "node:fs";
@@ -111,13 +109,12 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.upload({
-    libraryId: "6886a454-7910-4a2b-b98a-ab61ec65fc41",
+    libraryId: "a02150d9-5ee0-4877-b62c-28b1fcdf3b76",
     requestBody: {
       file: await openAsBlob("example.file"),
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -141,20 +138,17 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsUpload(mistral, {
-    libraryId: "6886a454-7910-4a2b-b98a-ab61ec65fc41",
+    libraryId: "a02150d9-5ee0-4877-b62c-28b1fcdf3b76",
     requestBody: {
       file: await openAsBlob("example.file"),
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsUpload failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -186,6 +180,7 @@ Given a library and a document in this library, you can retrieve the metadata of
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_get_v1" method="get" path="/v1/libraries/{library_id}/documents/{document_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -195,11 +190,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.get({
-    libraryId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
-    documentId: "e50f7622-81da-484b-9c66-1c8a99c6b71b",
+    libraryId: "03d908c8-90a1-44fd-bf3a-8490fb7c9a03",
+    documentId: "90973aec-0508-4375-8b00-91d732414745",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -222,18 +216,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsGet(mistral, {
-    libraryId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
-    documentId: "e50f7622-81da-484b-9c66-1c8a99c6b71b",
+    libraryId: "03d908c8-90a1-44fd-bf3a-8490fb7c9a03",
+    documentId: "90973aec-0508-4375-8b00-91d732414745",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -265,6 +256,7 @@ Given a library and a document in that library, update the name of that document
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_update_v1" method="put" path="/v1/libraries/{library_id}/documents/{document_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -274,12 +266,11 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.update({
-    libraryId: "d95fa7f0-e743-42ce-b47c-b60cc78135dd",
-    documentId: "b85898c1-25a1-4907-a1c5-562af6646dad",
+    libraryId: "3ddd8d93-dca5-4a6d-980d-173226c35742",
+    documentId: "2a25e44c-b160-40ca-b5c2-b65fb2fcae34",
     documentUpdateIn: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -302,19 +293,16 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsUpdate(mistral, {
-    libraryId: "d95fa7f0-e743-42ce-b47c-b60cc78135dd",
-    documentId: "b85898c1-25a1-4907-a1c5-562af6646dad",
+    libraryId: "3ddd8d93-dca5-4a6d-980d-173226c35742",
+    documentId: "2a25e44c-b160-40ca-b5c2-b65fb2fcae34",
     documentUpdateIn: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -346,6 +334,7 @@ Given a library and a document in that library, delete that document. The docume
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_delete_v1" method="delete" path="/v1/libraries/{library_id}/documents/{document_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -355,8 +344,8 @@ const mistral = new Mistral({
 
 async function run() {
   await mistral.beta.libraries.documents.delete({
-    libraryId: "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e",
-    documentId: "7aa10743-a04f-44af-84fe-b54259caa1ba",
+    libraryId: "005daae9-d42e-407d-82d7-2261c6a1496c",
+    documentId: "edc236b0-baff-49a9-884b-4ca36a258da4",
   });
 
 
@@ -381,17 +370,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsDelete(mistral, {
-    libraryId: "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e",
-    documentId: "7aa10743-a04f-44af-84fe-b54259caa1ba",
+    libraryId: "005daae9-d42e-407d-82d7-2261c6a1496c",
+    documentId: "edc236b0-baff-49a9-884b-4ca36a258da4",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("betaLibrariesDocumentsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -423,6 +410,7 @@ Given a library and a document in that library, you can retrieve the text conten
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_get_text_content_v1" method="get" path="/v1/libraries/{library_id}/documents/{document_id}/text_content" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -432,11 +420,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.textContent({
-    libraryId: "ccb1b572-71d2-46fc-bb41-5dbd65167579",
-    documentId: "40825d2b-5bb4-4bda-9c77-1302c2bf5ce0",
+    libraryId: "1d177215-3b6b-45ba-9fa9-baf773223bec",
+    documentId: "60214c91-2aba-4692-a4e6-a53365de8caf",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -459,18 +446,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsTextContent(mistral, {
-    libraryId: "ccb1b572-71d2-46fc-bb41-5dbd65167579",
-    documentId: "40825d2b-5bb4-4bda-9c77-1302c2bf5ce0",
+    libraryId: "1d177215-3b6b-45ba-9fa9-baf773223bec",
+    documentId: "60214c91-2aba-4692-a4e6-a53365de8caf",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsTextContent failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -502,6 +486,7 @@ Given a library and a document in that library, retrieve the processing status o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_get_status_v1" method="get" path="/v1/libraries/{library_id}/documents/{document_id}/status" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -511,11 +496,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.status({
-    libraryId: "6dcdb4f8-c706-48d4-b2ae-267b72b23c1e",
-    documentId: "276aed56-72ae-4738-84ba-1dd740e0bd1f",
+    libraryId: "e6906f70-368f-4155-80da-c1718f01bc43",
+    documentId: "2c904915-d831-4e9d-a345-8ce405bcef66",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -538,18 +522,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsStatus(mistral, {
-    libraryId: "6dcdb4f8-c706-48d4-b2ae-267b72b23c1e",
-    documentId: "276aed56-72ae-4738-84ba-1dd740e0bd1f",
+    libraryId: "e6906f70-368f-4155-80da-c1718f01bc43",
+    documentId: "2c904915-d831-4e9d-a345-8ce405bcef66",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsStatus failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -581,6 +562,7 @@ Given a library and a document in that library, retrieve the signed URL of a spe
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_get_signed_url_v1" method="get" path="/v1/libraries/{library_id}/documents/{document_id}/signed-url" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -590,11 +572,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.getSignedUrl({
-    libraryId: "2b31dadd-fc87-450c-9c52-e8a2548c3f17",
-    documentId: "b148735d-03fc-4319-af9e-00bbfcd5d89f",
+    libraryId: "23cf6904-a602-4ee8-9f5b-8efc557c336d",
+    documentId: "48598486-df71-4994-acbb-1133c72efa8c",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -617,18 +598,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsGetSignedUrl(mistral, {
-    libraryId: "2b31dadd-fc87-450c-9c52-e8a2548c3f17",
-    documentId: "b148735d-03fc-4319-af9e-00bbfcd5d89f",
+    libraryId: "23cf6904-a602-4ee8-9f5b-8efc557c336d",
+    documentId: "48598486-df71-4994-acbb-1133c72efa8c",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsGetSignedUrl failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -660,6 +638,7 @@ Given a library and a document in that library, retrieve the signed URL of text 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_get_extracted_text_signed_url_v1" method="get" path="/v1/libraries/{library_id}/documents/{document_id}/extracted-text-signed-url" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -669,11 +648,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.extractedTextSignedUrl({
-    libraryId: "3ed81b4a-207f-4581-aacc-d3f1af7a03bb",
-    documentId: "8eeba8e7-77cb-4f1f-96cf-16788d5632fe",
+    libraryId: "a6f15de3-1e82-4f95-af82-851499042ef8",
+    documentId: "9749d4f9-24e5-4ca2-99a3-a406863f805d",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -696,18 +674,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsExtractedTextSignedUrl(mistral, {
-    libraryId: "3ed81b4a-207f-4581-aacc-d3f1af7a03bb",
-    documentId: "8eeba8e7-77cb-4f1f-96cf-16788d5632fe",
+    libraryId: "a6f15de3-1e82-4f95-af82-851499042ef8",
+    documentId: "9749d4f9-24e5-4ca2-99a3-a406863f805d",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsExtractedTextSignedUrl failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -739,6 +714,7 @@ Given a library and a document in that library, reprocess that document, it will
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_reprocess_v1" method="post" path="/v1/libraries/{library_id}/documents/{document_id}/reprocess" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -748,8 +724,8 @@ const mistral = new Mistral({
 
 async function run() {
   await mistral.beta.libraries.documents.reprocess({
-    libraryId: "3838a038-529e-4160-82a5-29ab80423efb",
-    documentId: "7162b7a5-2eb5-4f2e-836c-d24617b1f407",
+    libraryId: "51b29371-de8f-4ba4-932b-a0bafb3a7f64",
+    documentId: "3052422c-49ca-45ac-a918-cadb35d61fd8",
   });
 
 
@@ -774,17 +750,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsReprocess(mistral, {
-    libraryId: "3838a038-529e-4160-82a5-29ab80423efb",
-    documentId: "7162b7a5-2eb5-4f2e-836c-d24617b1f407",
+    libraryId: "51b29371-de8f-4ba4-932b-a0bafb3a7f64",
+    documentId: "3052422c-49ca-45ac-a918-cadb35d61fd8",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("betaLibrariesDocumentsReprocess failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

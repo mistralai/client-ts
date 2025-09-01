@@ -7,8 +7,8 @@
 
 ```typescript
 const value: components.MessageInputEntry = {
-  role: "user",
-  content: "<value>",
+  role: "assistant",
+  content: [],
 };
 ```
 
@@ -37,6 +37,8 @@ const value: components.FunctionCallEntry = {
   name: "<value>",
   arguments: {
     "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```
@@ -45,7 +47,7 @@ const value: components.FunctionCallEntry = {
 
 ```typescript
 const value: components.ToolExecutionEntry = {
-  name: "image_generation",
+  name: "web_search",
   arguments: "<value>",
 };
 ```

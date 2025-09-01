@@ -66,12 +66,12 @@ export type ConversationStreamRequestHandoffExecution = ClosedEnum<
 >;
 
 export type ConversationStreamRequestTools =
+  | (DocumentLibraryTool & { type: "document_library" })
+  | (FunctionTool & { type: "function" })
   | (CodeInterpreterTool & { type: "code_interpreter" })
   | (ImageGenerationTool & { type: "image_generation" })
   | (WebSearchTool & { type: "web_search" })
-  | (WebSearchPremiumTool & { type: "web_search_premium" })
-  | (DocumentLibraryTool & { type: "document_library" })
-  | (FunctionTool & { type: "function" });
+  | (WebSearchPremiumTool & { type: "web_search_premium" });
 
 export type ConversationStreamRequest = {
   inputs: ConversationInputs;
@@ -84,12 +84,12 @@ export type ConversationStreamRequest = {
   instructions?: string | null | undefined;
   tools?:
     | Array<
+      | (DocumentLibraryTool & { type: "document_library" })
+      | (FunctionTool & { type: "function" })
       | (CodeInterpreterTool & { type: "code_interpreter" })
       | (ImageGenerationTool & { type: "image_generation" })
       | (WebSearchTool & { type: "web_search" })
       | (WebSearchPremiumTool & { type: "web_search_premium" })
-      | (DocumentLibraryTool & { type: "document_library" })
-      | (FunctionTool & { type: "function" })
     >
     | null
     | undefined;
@@ -129,6 +129,16 @@ export const ConversationStreamRequestTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  DocumentLibraryTool$inboundSchema.and(
+    z.object({ type: z.literal("document_library") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  FunctionTool$inboundSchema.and(
+    z.object({ type: z.literal("function") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
   CodeInterpreterTool$inboundSchema.and(
     z.object({ type: z.literal("code_interpreter") }).transform((v) => ({
       type: v.type,
@@ -149,26 +159,16 @@ export const ConversationStreamRequestTools$inboundSchema: z.ZodType<
       type: v.type,
     })),
   ),
-  DocumentLibraryTool$inboundSchema.and(
-    z.object({ type: z.literal("document_library") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  FunctionTool$inboundSchema.and(
-    z.object({ type: z.literal("function") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
 ]);
 
 /** @internal */
 export type ConversationStreamRequestTools$Outbound =
+  | (DocumentLibraryTool$Outbound & { type: "document_library" })
+  | (FunctionTool$Outbound & { type: "function" })
   | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
   | (ImageGenerationTool$Outbound & { type: "image_generation" })
   | (WebSearchTool$Outbound & { type: "web_search" })
-  | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" })
-  | (DocumentLibraryTool$Outbound & { type: "document_library" })
-  | (FunctionTool$Outbound & { type: "function" });
+  | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" });
 
 /** @internal */
 export const ConversationStreamRequestTools$outboundSchema: z.ZodType<
@@ -176,6 +176,16 @@ export const ConversationStreamRequestTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConversationStreamRequestTools
 > = z.union([
+  DocumentLibraryTool$outboundSchema.and(
+    z.object({ type: z.literal("document_library") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  FunctionTool$outboundSchema.and(
+    z.object({ type: z.literal("function") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
   CodeInterpreterTool$outboundSchema.and(
     z.object({ type: z.literal("code_interpreter") }).transform((v) => ({
       type: v.type,
@@ -193,16 +203,6 @@ export const ConversationStreamRequestTools$outboundSchema: z.ZodType<
   ),
   WebSearchPremiumTool$outboundSchema.and(
     z.object({ type: z.literal("web_search_premium") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  DocumentLibraryTool$outboundSchema.and(
-    z.object({ type: z.literal("document_library") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  FunctionTool$outboundSchema.and(
-    z.object({ type: z.literal("function") }).transform((v) => ({
       type: v.type,
     })),
   ),
@@ -257,6 +257,16 @@ export const ConversationStreamRequest$inboundSchema: z.ZodType<
   tools: z.nullable(
     z.array(
       z.union([
+        DocumentLibraryTool$inboundSchema.and(
+          z.object({ type: z.literal("document_library") }).transform((v) => ({
+            type: v.type,
+          })),
+        ),
+        FunctionTool$inboundSchema.and(
+          z.object({ type: z.literal("function") }).transform((v) => ({
+            type: v.type,
+          })),
+        ),
         CodeInterpreterTool$inboundSchema.and(
           z.object({ type: z.literal("code_interpreter") }).transform((v) => ({
             type: v.type,
@@ -276,16 +286,6 @@ export const ConversationStreamRequest$inboundSchema: z.ZodType<
           z.object({ type: z.literal("web_search_premium") }).transform((
             v,
           ) => ({ type: v.type })),
-        ),
-        DocumentLibraryTool$inboundSchema.and(
-          z.object({ type: z.literal("document_library") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        FunctionTool$inboundSchema.and(
-          z.object({ type: z.literal("function") }).transform((v) => ({
-            type: v.type,
-          })),
         ),
       ]),
     ),
@@ -312,12 +312,12 @@ export type ConversationStreamRequest$Outbound = {
   instructions?: string | null | undefined;
   tools?:
     | Array<
+      | (DocumentLibraryTool$Outbound & { type: "document_library" })
+      | (FunctionTool$Outbound & { type: "function" })
       | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
       | (ImageGenerationTool$Outbound & { type: "image_generation" })
       | (WebSearchTool$Outbound & { type: "web_search" })
       | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" })
-      | (DocumentLibraryTool$Outbound & { type: "document_library" })
-      | (FunctionTool$Outbound & { type: "function" })
     >
     | null
     | undefined;
@@ -344,6 +344,16 @@ export const ConversationStreamRequest$outboundSchema: z.ZodType<
   tools: z.nullable(
     z.array(
       z.union([
+        DocumentLibraryTool$outboundSchema.and(
+          z.object({ type: z.literal("document_library") }).transform((v) => ({
+            type: v.type,
+          })),
+        ),
+        FunctionTool$outboundSchema.and(
+          z.object({ type: z.literal("function") }).transform((v) => ({
+            type: v.type,
+          })),
+        ),
         CodeInterpreterTool$outboundSchema.and(
           z.object({ type: z.literal("code_interpreter") }).transform((v) => ({
             type: v.type,
@@ -363,16 +373,6 @@ export const ConversationStreamRequest$outboundSchema: z.ZodType<
           z.object({ type: z.literal("web_search_premium") }).transform((
             v,
           ) => ({ type: v.type })),
-        ),
-        DocumentLibraryTool$outboundSchema.and(
-          z.object({ type: z.literal("document_library") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        FunctionTool$outboundSchema.and(
-          z.object({ type: z.literal("function") }).transform((v) => ({
-            type: v.type,
-          })),
         ),
       ]),
     ),

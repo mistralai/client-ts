@@ -24,19 +24,19 @@ export type AudioTranscriptionRequest = {
   model: string;
   file?: FileT | Blob | undefined;
   /**
-   * ID of a file uploaded to /v1/files
-   */
-  fileId?: string | null | undefined;
-  /**
    * Url of a file to be transcribed
    */
   fileUrl?: string | null | undefined;
   /**
+   * ID of a file uploaded to /v1/files
+   */
+  fileId?: string | null | undefined;
+  /**
    * Language of the audio, e.g. 'en'. Providing the language can boost accuracy.
    */
   language?: string | null | undefined;
-  stream?: false | undefined;
   temperature?: number | null | undefined;
+  stream?: false | undefined;
   /**
    * Granularities of timestamps to include in the response.
    */
@@ -51,17 +51,17 @@ export const AudioTranscriptionRequest$inboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   file: FileT$inboundSchema.optional(),
-  file_id: z.nullable(z.string()).optional(),
   file_url: z.nullable(z.string()).optional(),
+  file_id: z.nullable(z.string()).optional(),
   language: z.nullable(z.string()).optional(),
-  stream: z.literal(false).default(false),
   temperature: z.nullable(z.number()).optional(),
+  stream: z.literal(false).default(false),
   timestamp_granularities: z.array(TimestampGranularity$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    "file_id": "fileId",
     "file_url": "fileUrl",
+    "file_id": "fileId",
     "timestamp_granularities": "timestampGranularities",
   });
 });
@@ -70,11 +70,11 @@ export const AudioTranscriptionRequest$inboundSchema: z.ZodType<
 export type AudioTranscriptionRequest$Outbound = {
   model: string;
   file?: FileT$Outbound | Blob | undefined;
-  file_id?: string | null | undefined;
   file_url?: string | null | undefined;
+  file_id?: string | null | undefined;
   language?: string | null | undefined;
-  stream: false;
   temperature?: number | null | undefined;
+  stream: false;
   timestamp_granularities?: Array<string> | undefined;
 };
 
@@ -86,17 +86,17 @@ export const AudioTranscriptionRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   file: FileT$outboundSchema.or(blobLikeSchema).optional(),
-  fileId: z.nullable(z.string()).optional(),
   fileUrl: z.nullable(z.string()).optional(),
+  fileId: z.nullable(z.string()).optional(),
   language: z.nullable(z.string()).optional(),
-  stream: z.literal(false).default(false as const),
   temperature: z.nullable(z.number()).optional(),
+  stream: z.literal(false).default(false as const),
   timestampGranularities: z.array(TimestampGranularity$outboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    fileId: "file_id",
     fileUrl: "file_url",
+    fileId: "file_id",
     timestampGranularities: "timestamp_granularities",
   });
 });

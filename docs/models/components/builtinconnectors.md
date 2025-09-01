@@ -5,7 +5,7 @@
 ```typescript
 import { BuiltInConnectors } from "@mistralai/mistralai/models/components";
 
-let value: BuiltInConnectors = "image_generation";
+let value: BuiltInConnectors = "document_library";
 ```
 
 ## Values

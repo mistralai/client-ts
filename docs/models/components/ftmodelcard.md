@@ -10,7 +10,7 @@ import { FTModelCard } from "@mistralai/mistralai/models/components";
 let value: FTModelCard = {
   id: "<id>",
   capabilities: {},
-  job: "Global Group Technician",
+  job: "Global Interactions Strategist",
   root: "<value>",
 };
 ```

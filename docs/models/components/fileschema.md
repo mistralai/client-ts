@@ -12,8 +12,8 @@ let value: FileSchema = {
   createdAt: 1716963433,
   filename: "files_upload.jsonl",
   purpose: "fine-tune",
-  sampleType: "instruct",
-  source: "upload",
+  sampleType: "batch_request",
+  source: "mistral",
 };
 ```
 

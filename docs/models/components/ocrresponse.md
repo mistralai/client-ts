@@ -6,29 +6,10 @@
 import { OCRResponse } from "@mistralai/mistralai/models/components";
 
 let value: OCRResponse = {
-  pages: [
-    {
-      index: 728474,
-      markdown: "<value>",
-      images: [
-        {
-          id: "<id>",
-          topLeftX: 900676,
-          topLeftY: 769872,
-          bottomRightX: 849690,
-          bottomRightY: 32945,
-        },
-      ],
-      dimensions: {
-        dpi: 310195,
-        height: 515433,
-        width: 415953,
-      },
-    },
-  ],
-  model: "Camaro",
+  pages: [],
+  model: "Mustang",
   usageInfo: {
-    pagesProcessed: 307874,
+    pagesProcessed: 819030,
   },
 };
 ```

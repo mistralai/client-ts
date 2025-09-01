@@ -6,7 +6,7 @@
 import { ToolExecutionEntry } from "@mistralai/mistralai/models/components";
 
 let value: ToolExecutionEntry = {
-  name: "code_interpreter",
+  name: "web_search",
   arguments: "<value>",
 };
 ```

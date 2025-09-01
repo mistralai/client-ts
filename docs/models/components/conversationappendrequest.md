@@ -6,7 +6,16 @@
 import { ConversationAppendRequest } from "@mistralai/mistralai/models/components";
 
 let value: ConversationAppendRequest = {
-  inputs: "<value>",
+  inputs: [
+    {
+      object: "entry",
+      type: "agent.handoff",
+      previousAgentId: "<id>",
+      previousAgentName: "<value>",
+      nextAgentId: "<id>",
+      nextAgentName: "<value>",
+    },
+  ],
 };
 ```
 

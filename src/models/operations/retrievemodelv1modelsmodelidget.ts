@@ -20,8 +20,8 @@ export type RetrieveModelV1ModelsModelIdGetRequest = {
  * Successful Response
  */
 export type RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet =
-  | (components.BaseModelCard & { type: "base" })
-  | (components.FTModelCard & { type: "fine-tuned" });
+  | (components.FTModelCard & { type: "fine-tuned" })
+  | (components.BaseModelCard & { type: "base" });
 
 /** @internal */
 export const RetrieveModelV1ModelsModelIdGetRequest$inboundSchema: z.ZodType<
@@ -98,13 +98,13 @@ export const RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelId
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.BaseModelCard$inboundSchema.and(
-      z.object({ type: z.literal("base") }).transform((v) => ({
+    components.FTModelCard$inboundSchema.and(
+      z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
         type: v.type,
       })),
     ),
-    components.FTModelCard$inboundSchema.and(
-      z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
+    components.BaseModelCard$inboundSchema.and(
+      z.object({ type: z.literal("base") }).transform((v) => ({
         type: v.type,
       })),
     ),
@@ -112,8 +112,8 @@ export const RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelId
 
 /** @internal */
 export type RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$Outbound =
-  | (components.BaseModelCard$Outbound & { type: "base" })
-  | (components.FTModelCard$Outbound & { type: "fine-tuned" });
+  | (components.FTModelCard$Outbound & { type: "fine-tuned" })
+  | (components.BaseModelCard$Outbound & { type: "base" });
 
 /** @internal */
 export const RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$outboundSchema:
@@ -122,13 +122,13 @@ export const RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelId
     z.ZodTypeDef,
     RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet
   > = z.union([
-    components.BaseModelCard$outboundSchema.and(
-      z.object({ type: z.literal("base") }).transform((v) => ({
+    components.FTModelCard$outboundSchema.and(
+      z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
         type: v.type,
       })),
     ),
-    components.FTModelCard$outboundSchema.and(
-      z.object({ type: z.literal("fine-tuned") }).transform((v) => ({
+    components.BaseModelCard$outboundSchema.and(
+      z.object({ type: z.literal("base") }).transform((v) => ({
         type: v.type,
       })),
     ),

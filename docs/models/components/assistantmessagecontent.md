@@ -12,11 +12,6 @@ const value: string = "<value>";
 ### `components.ContentChunk[]`
 
 ```typescript
-const value: components.ContentChunk[] = [
-  {
-    documentUrl: "https://monumental-luck.org",
-    type: "document_url",
-  },
-];
+const value: components.ContentChunk[] = [];
 ```
 

@@ -9,39 +9,13 @@ Chat to classify
 
 ```typescript
 const value: components.InstructRequestInputs = {
-  messages: [
-    {
-      content: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
-      role: "system",
-    },
-  ],
+  messages: [],
 };
 ```
 
 ### `components.InstructRequest[]`
 
 ```typescript
-const value: components.InstructRequest[] = [
-  {
-    messages: [
-      {
-        content: [
-          {
-            imageUrl: {
-              url: "https://determined-sesame.net/",
-            },
-            type: "image_url",
-          },
-        ],
-        role: "user",
-      },
-    ],
-  },
-];
+const value: components.InstructRequest[] = [];
 ```
 

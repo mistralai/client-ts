@@ -9,33 +9,25 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "8cc7f744-b660-44dc-ab00-47e649ebd228",
-  autoStart: false,
-  model: "Wrangler",
-  status: "VALIDATED",
-  createdAt: 346557,
-  modifiedAt: 515854,
+  id: "9324efc1-74d2-4cfb-aacc-8c936806a157",
+  autoStart: true,
+  model: "Land Cruiser",
+  status: "CANCELLATION_REQUESTED",
+  createdAt: 306183,
+  modifiedAt: 163064,
   trainingFiles: [
-    "a9b6d25c-5a42-44e7-9350-c390d204e486",
+    "4aadd7e9-6b01-477f-86b6-3ada38b71e42",
+    "689691d3-0952-4741-a8e0-c05d353daf37",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 927354,
+      stepNumber: 738998,
       createdAt: 1716963433,
     },
   ],
-  classifierTargets: [
-    {
-      name: "<value>",
-      labels: [
-        "<value>",
-      ],
-      weight: 7889.95,
-      lossFunction: "multi_class",
-    },
-  ],
+  classifierTargets: [],
 };
 ```
 
@@ -43,20 +35,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "8d7773e4-33dc-460f-92dc-fc5363bda209",
+  id: "456fe44d-6df9-48f2-930f-131af06a7b94",
   autoStart: false,
-  model: "CTS",
+  model: "Taurus",
   status: "VALIDATED",
-  createdAt: 541466,
-  modifiedAt: 632917,
+  createdAt: 45490,
+  modifiedAt: 318849,
   trainingFiles: [
-    "7f0ae33c-7f9e-402a-86d6-b91bb1857612",
+    "c6396397-fb35-4d61-8f27-af5626373d30",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 192447,
+      stepNumber: 738998,
       createdAt: 1716963433,
     },
   ],

@@ -44,12 +44,12 @@ import {
 } from "./toolreferencechunk.js";
 
 export type OutputContentChunks =
+  | ToolFileChunk
+  | ToolReferenceChunk
   | TextChunk
   | ImageURLChunk
   | DocumentURLChunk
-  | ThinkChunk
-  | ToolFileChunk
-  | ToolReferenceChunk;
+  | ThinkChunk;
 
 /** @internal */
 export const OutputContentChunks$inboundSchema: z.ZodType<
@@ -57,22 +57,22 @@ export const OutputContentChunks$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  ToolFileChunk$inboundSchema,
+  ToolReferenceChunk$inboundSchema,
   TextChunk$inboundSchema,
   ImageURLChunk$inboundSchema,
   DocumentURLChunk$inboundSchema,
   ThinkChunk$inboundSchema,
-  ToolFileChunk$inboundSchema,
-  ToolReferenceChunk$inboundSchema,
 ]);
 
 /** @internal */
 export type OutputContentChunks$Outbound =
+  | ToolFileChunk$Outbound
+  | ToolReferenceChunk$Outbound
   | TextChunk$Outbound
   | ImageURLChunk$Outbound
   | DocumentURLChunk$Outbound
-  | ThinkChunk$Outbound
-  | ToolFileChunk$Outbound
-  | ToolReferenceChunk$Outbound;
+  | ThinkChunk$Outbound;
 
 /** @internal */
 export const OutputContentChunks$outboundSchema: z.ZodType<
@@ -80,12 +80,12 @@ export const OutputContentChunks$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   OutputContentChunks
 > = z.union([
+  ToolFileChunk$outboundSchema,
+  ToolReferenceChunk$outboundSchema,
   TextChunk$outboundSchema,
   ImageURLChunk$outboundSchema,
   DocumentURLChunk$outboundSchema,
   ThinkChunk$outboundSchema,
-  ToolFileChunk$outboundSchema,
-  ToolReferenceChunk$outboundSchema,
 ]);
 
 /**

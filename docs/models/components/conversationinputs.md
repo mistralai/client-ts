@@ -15,14 +15,9 @@ const value: string = "<value>";
 const value: components.InputEntries[] = [
   {
     object: "entry",
-    type: "message.output",
-    role: "assistant",
-    content: [
-      {
-        imageUrl: "https://concrete-equal.name/",
-        type: "image_url",
-      },
-    ],
+    type: "function.result",
+    toolCallId: "<id>",
+    result: "<value>",
   },
 ];
 ```

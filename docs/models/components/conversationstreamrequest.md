@@ -6,7 +6,7 @@
 import { ConversationStreamRequest } from "@mistralai/mistralai/models/components";
 
 let value: ConversationStreamRequest = {
-  inputs: "<value>",
+  inputs: [],
 };
 ```
 

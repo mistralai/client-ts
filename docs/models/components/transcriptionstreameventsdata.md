@@ -7,18 +7,10 @@
 
 ```typescript
 const value: components.TranscriptionStreamDone = {
-  model: "Beetle",
+  model: "Charger",
   text: "<value>",
   usage: {},
   language: "<value>",
-};
-```
-
-### `components.TranscriptionStreamLanguage`
-
-```typescript
-const value: components.TranscriptionStreamLanguage = {
-  audioLanguage: "<value>",
 };
 ```
 
@@ -27,8 +19,16 @@ const value: components.TranscriptionStreamLanguage = {
 ```typescript
 const value: components.TranscriptionStreamSegmentDelta = {
   text: "<value>",
-  start: 4318.43,
-  end: 3207.48,
+  start: 1796.95,
+  end: 2412.74,
+};
+```
+
+### `components.TranscriptionStreamLanguage`
+
+```typescript
+const value: components.TranscriptionStreamLanguage = {
+  audioLanguage: "<value>",
 };
 ```
 

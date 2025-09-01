@@ -6,12 +6,7 @@
 import { ThinkChunk } from "@mistralai/mistralai/models/components";
 
 let value: ThinkChunk = {
-  thinking: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  thinking: [],
 };
 ```
 

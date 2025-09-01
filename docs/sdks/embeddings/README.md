@@ -15,6 +15,7 @@ Embeddings
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="embeddings_v1_embeddings_post" method="post" path="/v1/embeddings" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -31,7 +32,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -60,15 +60,12 @@ async function run() {
       "As well as this one.",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("embeddingsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

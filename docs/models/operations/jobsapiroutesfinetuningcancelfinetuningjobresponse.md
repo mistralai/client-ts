@@ -9,33 +9,25 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "36ce02f9-8d00-4fdb-b27e-e0c0f6f545b3",
-  autoStart: false,
-  model: "Impala",
+  id: "9324efc1-74d2-4cfb-aacc-8c936806a157",
+  autoStart: true,
+  model: "Land Cruiser",
   status: "CANCELLATION_REQUESTED",
-  createdAt: 987085,
-  modifiedAt: 185182,
+  createdAt: 306183,
+  modifiedAt: 163064,
   trainingFiles: [
-    "f00ff277-dac7-4abb-9015-066e9be704de",
+    "4aadd7e9-6b01-477f-86b6-3ada38b71e42",
+    "689691d3-0952-4741-a8e0-c05d353daf37",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 293991,
+      stepNumber: 738998,
       createdAt: 1716963433,
     },
   ],
-  classifierTargets: [
-    {
-      name: "<value>",
-      labels: [
-        "<value>",
-      ],
-      weight: 9245.06,
-      lossFunction: "single_class",
-    },
-  ],
+  classifierTargets: [],
 };
 ```
 
@@ -43,20 +35,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "a418e93a-c58a-42f7-9f37-20366ea6f95b",
+  id: "456fe44d-6df9-48f2-930f-131af06a7b94",
   autoStart: false,
-  model: "Silverado",
-  status: "CANCELLED",
-  createdAt: 367350,
-  modifiedAt: 562339,
+  model: "Taurus",
+  status: "VALIDATED",
+  createdAt: 45490,
+  modifiedAt: 318849,
   trainingFiles: [
-    "4afd51f6-457f-4f45-a802-e016b444d38f",
+    "c6396397-fb35-4d61-8f27-af5626373d30",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 336350,
+      stepNumber: 738998,
       createdAt: 1716963433,
     },
   ],

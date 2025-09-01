@@ -53,12 +53,12 @@ export type ConversationHistoryObject = ClosedEnum<
 >;
 
 export type Entries =
-  | FunctionResultEntry
-  | MessageInputEntry
+  | AgentHandoffEntry
   | FunctionCallEntry
+  | MessageInputEntry
+  | FunctionResultEntry
   | ToolExecutionEntry
-  | MessageOutputEntry
-  | AgentHandoffEntry;
+  | MessageOutputEntry;
 
 /**
  * Retrieve all entries in a conversation.
@@ -67,12 +67,12 @@ export type ConversationHistory = {
   object?: ConversationHistoryObject | undefined;
   conversationId: string;
   entries: Array<
-    | FunctionResultEntry
-    | MessageInputEntry
+    | AgentHandoffEntry
     | FunctionCallEntry
+    | MessageInputEntry
+    | FunctionResultEntry
     | ToolExecutionEntry
     | MessageOutputEntry
-    | AgentHandoffEntry
   >;
 };
 
@@ -100,22 +100,22 @@ export namespace ConversationHistoryObject$ {
 /** @internal */
 export const Entries$inboundSchema: z.ZodType<Entries, z.ZodTypeDef, unknown> =
   z.union([
-    FunctionResultEntry$inboundSchema,
-    MessageInputEntry$inboundSchema,
+    AgentHandoffEntry$inboundSchema,
     FunctionCallEntry$inboundSchema,
+    MessageInputEntry$inboundSchema,
+    FunctionResultEntry$inboundSchema,
     ToolExecutionEntry$inboundSchema,
     MessageOutputEntry$inboundSchema,
-    AgentHandoffEntry$inboundSchema,
   ]);
 
 /** @internal */
 export type Entries$Outbound =
-  | FunctionResultEntry$Outbound
-  | MessageInputEntry$Outbound
+  | AgentHandoffEntry$Outbound
   | FunctionCallEntry$Outbound
+  | MessageInputEntry$Outbound
+  | FunctionResultEntry$Outbound
   | ToolExecutionEntry$Outbound
-  | MessageOutputEntry$Outbound
-  | AgentHandoffEntry$Outbound;
+  | MessageOutputEntry$Outbound;
 
 /** @internal */
 export const Entries$outboundSchema: z.ZodType<
@@ -123,12 +123,12 @@ export const Entries$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Entries
 > = z.union([
-  FunctionResultEntry$outboundSchema,
-  MessageInputEntry$outboundSchema,
+  AgentHandoffEntry$outboundSchema,
   FunctionCallEntry$outboundSchema,
+  MessageInputEntry$outboundSchema,
+  FunctionResultEntry$outboundSchema,
   ToolExecutionEntry$outboundSchema,
   MessageOutputEntry$outboundSchema,
-  AgentHandoffEntry$outboundSchema,
 ]);
 
 /**
@@ -170,12 +170,12 @@ export const ConversationHistory$inboundSchema: z.ZodType<
   conversation_id: z.string(),
   entries: z.array(
     z.union([
-      FunctionResultEntry$inboundSchema,
-      MessageInputEntry$inboundSchema,
+      AgentHandoffEntry$inboundSchema,
       FunctionCallEntry$inboundSchema,
+      MessageInputEntry$inboundSchema,
+      FunctionResultEntry$inboundSchema,
       ToolExecutionEntry$inboundSchema,
       MessageOutputEntry$inboundSchema,
-      AgentHandoffEntry$inboundSchema,
     ]),
   ),
 }).transform((v) => {
@@ -189,12 +189,12 @@ export type ConversationHistory$Outbound = {
   object: string;
   conversation_id: string;
   entries: Array<
-    | FunctionResultEntry$Outbound
-    | MessageInputEntry$Outbound
+    | AgentHandoffEntry$Outbound
     | FunctionCallEntry$Outbound
+    | MessageInputEntry$Outbound
+    | FunctionResultEntry$Outbound
     | ToolExecutionEntry$Outbound
     | MessageOutputEntry$Outbound
-    | AgentHandoffEntry$Outbound
   >;
 };
 
@@ -210,12 +210,12 @@ export const ConversationHistory$outboundSchema: z.ZodType<
   conversationId: z.string(),
   entries: z.array(
     z.union([
-      FunctionResultEntry$outboundSchema,
-      MessageInputEntry$outboundSchema,
+      AgentHandoffEntry$outboundSchema,
       FunctionCallEntry$outboundSchema,
+      MessageInputEntry$outboundSchema,
+      FunctionResultEntry$outboundSchema,
       ToolExecutionEntry$outboundSchema,
       MessageOutputEntry$outboundSchema,
-      AgentHandoffEntry$outboundSchema,
     ]),
   ),
 }).transform((v) => {
