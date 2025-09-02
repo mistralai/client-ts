@@ -1,13 +1,20 @@
 import { Mistral } from '@mistralai/mistralai';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from "url";
 
 const apiKey = process.env.MISTRAL_API_KEY;
 
 const client = new Mistral({ apiKey: apiKey });
 
 
-const file_path = "/path/to/uploaded_file.pdf"
-const uploaded_file = fs.readFileSync(file_path);
+// Get the absolute directory path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const filePath = path.join(__dirname, "ocr.pdf")
+
+// Upload the file and run ocr
+const uploaded_file = fs.readFileSync(filePath);
 const uploaded_pdf = await client.files.upload({
     file: {
         fileName: "uploaded_file.pdf",

@@ -90,7 +90,7 @@ const tools = [
   },
 ];
 
-const model = "mistral-large-latest";
+const model = "mistral-small-latest";
 
 const client = new Mistral({ apiKey: apiKey });
 

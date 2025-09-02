@@ -8,7 +8,7 @@ if (!apiKey) {
 const mistral = new Mistral({ apiKey: apiKey });
 
 const chatResponse = await mistral.chat.complete({
-  model: "mistral-large-latest",
+  model: "mistral-small-latest",
   messages: [{ role: "user", content: "What is the best French cheese?" }],
   responseFormat: { type: "json_object" },
 });
