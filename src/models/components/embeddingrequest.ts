@@ -12,6 +12,11 @@ import {
   EmbeddingDtype$inboundSchema,
   EmbeddingDtype$outboundSchema,
 } from "./embeddingdtype.js";
+import {
+  EncodingFormat,
+  EncodingFormat$inboundSchema,
+  EncodingFormat$outboundSchema,
+} from "./encodingformat.js";
 
 /**
  * Text to embed.
@@ -32,6 +37,7 @@ export type EmbeddingRequest = {
    */
   outputDimension?: number | null | undefined;
   outputDtype?: EmbeddingDtype | undefined;
+  encodingFormat?: EncodingFormat | undefined;
 };
 
 /** @internal */
@@ -92,11 +98,13 @@ export const EmbeddingRequest$inboundSchema: z.ZodType<
   input: z.union([z.string(), z.array(z.string())]),
   output_dimension: z.nullable(z.number().int()).optional(),
   output_dtype: EmbeddingDtype$inboundSchema.optional(),
+  encoding_format: EncodingFormat$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "input": "inputs",
     "output_dimension": "outputDimension",
     "output_dtype": "outputDtype",
+    "encoding_format": "encodingFormat",
   });
 });
 
@@ -106,6 +114,7 @@ export type EmbeddingRequest$Outbound = {
   input: string | Array<string>;
   output_dimension?: number | null | undefined;
   output_dtype?: string | undefined;
+  encoding_format?: string | undefined;
 };
 
 /** @internal */
@@ -118,11 +127,13 @@ export const EmbeddingRequest$outboundSchema: z.ZodType<
   inputs: z.union([z.string(), z.array(z.string())]),
   outputDimension: z.nullable(z.number().int()).optional(),
   outputDtype: EmbeddingDtype$outboundSchema.optional(),
+  encodingFormat: EncodingFormat$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     inputs: "input",
     outputDimension: "output_dimension",
     outputDtype: "output_dtype",
+    encodingFormat: "encoding_format",
   });
 });
 

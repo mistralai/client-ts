@@ -29,7 +29,14 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      referenceIds: [
+        713718,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 

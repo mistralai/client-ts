@@ -6,7 +6,7 @@
 import { TranscriptionResponse } from "@mistralai/mistralai/models/components";
 
 let value: TranscriptionResponse = {
-  model: "F-150",
+  model: "XC90",
   text: "<value>",
   usage: {},
   language: "<value>",

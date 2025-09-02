@@ -15,6 +15,11 @@ export const ApiEndpoint = {
   RootV1FimCompletions: "/v1/fim/completions",
   RootV1Moderations: "/v1/moderations",
   RootV1ChatModerations: "/v1/chat/moderations",
+  RootV1Ocr: "/v1/ocr",
+  RootV1Classifications: "/v1/classifications",
+  RootV1ChatClassifications: "/v1/chat/classifications",
+  RootV1Conversations: "/v1/conversations",
+  RootV1AudioTranscriptions: "/v1/audio/transcriptions",
 } as const;
 export type ApiEndpoint = OpenEnum<typeof ApiEndpoint>;
 

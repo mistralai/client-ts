@@ -8,8 +8,13 @@ import { InstructRequestInputs } from "@mistralai/mistralai/models/components";
 let value: InstructRequestInputs = {
   messages: [
     {
-      prefix: false,
-      role: "assistant",
+      content: [
+        {
+          documentUrl: "https://miserable-icebreaker.net/",
+          type: "document_url",
+        },
+      ],
+      role: "tool",
     },
   ],
 };

@@ -15,8 +15,13 @@ const value: components.AssistantMessage = {};
 const value: components.SystemMessage = {
   content: [
     {
-      text: "<value>",
-      type: "text",
+      thinking: [
+        {
+          text: "<value>",
+          type: "text",
+        },
+      ],
+      type: "thinking",
     },
   ],
 };
@@ -28,8 +33,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      documentUrl: "https://variable-skyline.name/",
-      type: "document_url",
+      text: "<value>",
+      type: "text",
     },
   ],
 };
@@ -39,7 +44,14 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      imageUrl: {
+        url: "https://lean-packaging.com/",
+      },
+      type: "image_url",
+    },
+  ],
 };
 ```
 

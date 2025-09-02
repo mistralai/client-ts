@@ -16,6 +16,6 @@ const value: components.ToolChoice = {
 ### `components.ToolChoiceEnum`
 
 ```typescript
-const value: components.ToolChoiceEnum = "auto";
+const value: components.ToolChoiceEnum = "none";
 ```
 

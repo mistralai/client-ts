@@ -14,10 +14,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.ContentChunk[] = [
   {
-    imageUrl: {
-      url: "https://frightened-stump.name/",
-    },
-    type: "image_url",
+    inputAudio: "<value>",
+    type: "input_audio",
   },
 ];
 ```
