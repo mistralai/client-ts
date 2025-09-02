@@ -1,5 +1,7 @@
 import * as fs from "fs";
 import { Mistral } from "@mistralai/mistralai";
+import path from 'path';
+import { fileURLToPath } from "url";
 
 const apiKey = process.env["MISTRAL_API_KEY"];
 if (!apiKey) {
@@ -8,8 +10,13 @@ if (!apiKey) {
 
 const mistral = new Mistral();
 
+// Get the absolute directory path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const filePath = path.join(__dirname, "file.jsonl");
+
 // Create a new file
-const blob = new Blob([fs.readFileSync("src/file.jsonl")], {
+const blob = new Blob([fs.readFileSync(filePath)], {
   type: "application/json",
 });
 const createdFile = await mistral.files.upload({ file: blob });

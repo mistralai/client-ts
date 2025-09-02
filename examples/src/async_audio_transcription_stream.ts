@@ -13,5 +13,6 @@ const stream = await mistral.audio.transcriptions.stream({
 });
 
 for await (const event of stream) {
-    process.stdout.write(event);
+    process.stdout.write(JSON.stringify(event));
+    process.stdout.write("\n");
 }

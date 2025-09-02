@@ -1,25 +1,25 @@
 import * as fs from "fs";
 import { Mistral } from "@mistralai/mistralai";
+import path from 'path';
+import { fileURLToPath } from "url";
 
 const apiKey = process.env["MISTRAL_API_KEY"];
 if (!apiKey) {
   throw new Error("missing MISTRAL_API_KEY environment variable");
 }
 
+// Get the absolute directory path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const client = new Mistral({ apiKey: apiKey });
 
 // Create a new file
-const blob = new Blob([fs.readFileSync("./src/file.jsonl")], {
+const filePath = path.join(__dirname, "file.jsonl");
+const blob = new Blob([fs.readFileSync(filePath)], {
   type: "application/json",
 });
 const createdFile = await client.files.upload({ file: blob, });
-// const createdFile = await client.files.upload(
-//   {
-//     file: {
-//       fileName: "./src/file.jsonl",
-//       content: fs.readFileSync("./src/file.jsonl")
-//     },
-//   });
 
 console.log(createdFile);
 
