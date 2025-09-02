@@ -131,7 +131,6 @@ stream = await client.chat.stream({
 let full_tool_call: ToolCall[] = [];
 
 for await (const event of stream) {
-
   const toolCalls = event.data?.choices[0]?.delta.toolCalls;
   if (!toolCalls) {
     continue;
@@ -177,4 +176,4 @@ for await (const event of stream) {
 
   process.stdout.write(content);
 }
-console.log("\ndone")
+console.log("\ndone");

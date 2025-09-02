@@ -22,12 +22,12 @@ const chatResponse = await client.chat.complete({
   model: "codestral-latest",
   messages: [
     { role: "user", content: refactorPrompt },
-    { role: "user", content: code }
+    { role: "user", content: code },
   ],
   prediction: {
     type: "content",
-    content: code
-  }
+    content: code,
+  },
 });
 
-console.log(chatResponse.choices[0].message.content);
+console.log(chatResponse.choices[0]?.message.content);
