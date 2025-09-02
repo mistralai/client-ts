@@ -9,11 +9,7 @@ let value: FIMCompletionResponse = {
   id: "cmpl-e5cc70bb28c444948073e77776eb30ef",
   object: "chat.completion",
   model: "codestral-latest",
-  usage: {
-    promptTokens: 16,
-    completionTokens: 34,
-    totalTokens: 50,
-  },
+  usage: {},
   created: 1702256327,
   choices: [
     {
@@ -33,5 +29,5 @@ let value: FIMCompletionResponse = {
 | `object`                                                                             | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  | chat.completion                                                                      |
 | `model`                                                                              | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  | codestral-latest                                                                     |
 | `usage`                                                                              | [components.UsageInfo](../../models/components/usageinfo.md)                         | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
-| `created`                                                                            | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  | 1702256327                                                                           |
-| `choices`                                                                            | [components.ChatCompletionChoice](../../models/components/chatcompletionchoice.md)[] | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
+| `created`                                                                            | *number*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  | 1702256327                                                                           |
+| `choices`                                                                            | [components.ChatCompletionChoice](../../models/components/chatcompletionchoice.md)[] | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |

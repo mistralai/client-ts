@@ -7,19 +7,8 @@ import { CompletionChunk } from "@mistralai/mistralai-gcp/models/components";
 
 let value: CompletionChunk = {
   id: "<id>",
-  model: "Golf",
-  usage: {
-    promptTokens: 16,
-    completionTokens: 34,
-    totalTokens: 50,
-  },
-  choices: [
-    {
-      index: 423655,
-      delta: {},
-      finishReason: "error",
-    },
-  ],
+  model: "Prius",
+  choices: [],
 };
 ```
 
