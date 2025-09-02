@@ -8,13 +8,13 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  TextChunk,
-  TextChunk$inboundSchema,
-  TextChunk$Outbound,
-  TextChunk$outboundSchema,
-} from "./textchunk.js";
+  SystemMessageContentChunks,
+  SystemMessageContentChunks$inboundSchema,
+  SystemMessageContentChunks$Outbound,
+  SystemMessageContentChunks$outboundSchema,
+} from "./systemmessagecontentchunks.js";
 
-export type SystemMessageContent = string | Array<TextChunk>;
+export type SystemMessageContent = string | Array<SystemMessageContentChunks>;
 
 export const Role = {
   System: "system",
@@ -22,7 +22,7 @@ export const Role = {
 export type Role = ClosedEnum<typeof Role>;
 
 export type SystemMessage = {
-  content: string | Array<TextChunk>;
+  content: string | Array<SystemMessageContentChunks>;
   role?: Role | undefined;
 };
 
@@ -31,17 +31,19 @@ export const SystemMessageContent$inboundSchema: z.ZodType<
   SystemMessageContent,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(TextChunk$inboundSchema)]);
+> = z.union([z.string(), z.array(SystemMessageContentChunks$inboundSchema)]);
 
 /** @internal */
-export type SystemMessageContent$Outbound = string | Array<TextChunk$Outbound>;
+export type SystemMessageContent$Outbound =
+  | string
+  | Array<SystemMessageContentChunks$Outbound>;
 
 /** @internal */
 export const SystemMessageContent$outboundSchema: z.ZodType<
   SystemMessageContent$Outbound,
   z.ZodTypeDef,
   SystemMessageContent
-> = z.union([z.string(), z.array(TextChunk$outboundSchema)]);
+> = z.union([z.string(), z.array(SystemMessageContentChunks$outboundSchema)]);
 
 /**
  * @internal
@@ -100,13 +102,16 @@ export const SystemMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.union([z.string(), z.array(TextChunk$inboundSchema)]),
+  content: z.union([
+    z.string(),
+    z.array(SystemMessageContentChunks$inboundSchema),
+  ]),
   role: Role$inboundSchema.default("system"),
 });
 
 /** @internal */
 export type SystemMessage$Outbound = {
-  content: string | Array<TextChunk$Outbound>;
+  content: string | Array<SystemMessageContentChunks$Outbound>;
   role: string;
 };
 
@@ -116,7 +121,10 @@ export const SystemMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SystemMessage
 > = z.object({
-  content: z.union([z.string(), z.array(TextChunk$outboundSchema)]),
+  content: z.union([
+    z.string(),
+    z.array(SystemMessageContentChunks$outboundSchema),
+  ]),
   role: Role$outboundSchema.default("system"),
 });
 

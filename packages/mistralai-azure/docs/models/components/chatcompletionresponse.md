@@ -11,13 +11,7 @@ let value: ChatCompletionResponse = {
   model: "mistral-small-latest",
   usage: {},
   created: 1702256327,
-  choices: [
-    {
-      index: 0,
-      message: {},
-      finishReason: "stop",
-    },
-  ],
+  choices: [],
 };
 ```
 

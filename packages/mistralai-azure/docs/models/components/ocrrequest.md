@@ -6,10 +6,9 @@
 import { OCRRequest } from "@mistralai/mistralai-azure/models/components";
 
 let value: OCRRequest = {
-  model: "Malibu",
+  model: "Aventador",
   document: {
-    documentUrl: "https://unlucky-fund.info/",
-    type: "document_url",
+    fileId: "ea6400b9-bfdc-4769-82dc-df5d318855aa",
   },
 };
 ```

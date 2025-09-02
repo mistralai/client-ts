@@ -9,6 +9,7 @@ let value: JsonSchema = {
   name: "<value>",
   schemaDefinition: {
     "key": "<value>",
+    "key1": "<value>",
   },
 };
 ```
