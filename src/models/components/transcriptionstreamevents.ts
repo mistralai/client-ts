@@ -37,18 +37,18 @@ import {
 } from "./transcriptionstreamtextdelta.js";
 
 export type TranscriptionStreamEventsData =
-  | (TranscriptionStreamLanguage & { type: "transcription.language" })
-  | (TranscriptionStreamTextDelta & { type: "transcription.text.delta" })
+  | (TranscriptionStreamDone & { type: "transcription.done" })
   | (TranscriptionStreamSegmentDelta & { type: "transcription.segment" })
-  | (TranscriptionStreamDone & { type: "transcription.done" });
+  | (TranscriptionStreamLanguage & { type: "transcription.language" })
+  | (TranscriptionStreamTextDelta & { type: "transcription.text.delta" });
 
 export type TranscriptionStreamEvents = {
   event: TranscriptionStreamEventTypes;
   data:
-    | (TranscriptionStreamLanguage & { type: "transcription.language" })
-    | (TranscriptionStreamTextDelta & { type: "transcription.text.delta" })
+    | (TranscriptionStreamDone & { type: "transcription.done" })
     | (TranscriptionStreamSegmentDelta & { type: "transcription.segment" })
-    | (TranscriptionStreamDone & { type: "transcription.done" });
+    | (TranscriptionStreamLanguage & { type: "transcription.language" })
+    | (TranscriptionStreamTextDelta & { type: "transcription.text.delta" });
 };
 
 /** @internal */
@@ -57,6 +57,16 @@ export const TranscriptionStreamEventsData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  TranscriptionStreamDone$inboundSchema.and(
+    z.object({ type: z.literal("transcription.done") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  TranscriptionStreamSegmentDelta$inboundSchema.and(
+    z.object({ type: z.literal("transcription.segment") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
   TranscriptionStreamLanguage$inboundSchema.and(
     z.object({ type: z.literal("transcription.language") }).transform((v) => ({
       type: v.type,
@@ -67,28 +77,18 @@ export const TranscriptionStreamEventsData$inboundSchema: z.ZodType<
       v,
     ) => ({ type: v.type })),
   ),
-  TranscriptionStreamSegmentDelta$inboundSchema.and(
-    z.object({ type: z.literal("transcription.segment") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  TranscriptionStreamDone$inboundSchema.and(
-    z.object({ type: z.literal("transcription.done") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
 ]);
 
 /** @internal */
 export type TranscriptionStreamEventsData$Outbound =
-  | (TranscriptionStreamLanguage$Outbound & { type: "transcription.language" })
-  | (TranscriptionStreamTextDelta$Outbound & {
-    type: "transcription.text.delta";
-  })
+  | (TranscriptionStreamDone$Outbound & { type: "transcription.done" })
   | (TranscriptionStreamSegmentDelta$Outbound & {
     type: "transcription.segment";
   })
-  | (TranscriptionStreamDone$Outbound & { type: "transcription.done" });
+  | (TranscriptionStreamLanguage$Outbound & { type: "transcription.language" })
+  | (TranscriptionStreamTextDelta$Outbound & {
+    type: "transcription.text.delta";
+  });
 
 /** @internal */
 export const TranscriptionStreamEventsData$outboundSchema: z.ZodType<
@@ -96,6 +96,16 @@ export const TranscriptionStreamEventsData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TranscriptionStreamEventsData
 > = z.union([
+  TranscriptionStreamDone$outboundSchema.and(
+    z.object({ type: z.literal("transcription.done") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  TranscriptionStreamSegmentDelta$outboundSchema.and(
+    z.object({ type: z.literal("transcription.segment") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
   TranscriptionStreamLanguage$outboundSchema.and(
     z.object({ type: z.literal("transcription.language") }).transform((v) => ({
       type: v.type,
@@ -105,16 +115,6 @@ export const TranscriptionStreamEventsData$outboundSchema: z.ZodType<
     z.object({ type: z.literal("transcription.text.delta") }).transform((
       v,
     ) => ({ type: v.type })),
-  ),
-  TranscriptionStreamSegmentDelta$outboundSchema.and(
-    z.object({ type: z.literal("transcription.segment") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  TranscriptionStreamDone$outboundSchema.and(
-    z.object({ type: z.literal("transcription.done") }).transform((v) => ({
-      type: v.type,
-    })),
   ),
 ]);
 
@@ -170,6 +170,16 @@ export const TranscriptionStreamEvents$inboundSchema: z.ZodType<
     }
   }).pipe(
     z.union([
+      TranscriptionStreamDone$inboundSchema.and(
+        z.object({ type: z.literal("transcription.done") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      TranscriptionStreamSegmentDelta$inboundSchema.and(
+        z.object({ type: z.literal("transcription.segment") }).transform((
+          v,
+        ) => ({ type: v.type })),
+      ),
       TranscriptionStreamLanguage$inboundSchema.and(
         z.object({ type: z.literal("transcription.language") }).transform((
           v,
@@ -180,16 +190,6 @@ export const TranscriptionStreamEvents$inboundSchema: z.ZodType<
           v,
         ) => ({ type: v.type })),
       ),
-      TranscriptionStreamSegmentDelta$inboundSchema.and(
-        z.object({ type: z.literal("transcription.segment") }).transform((
-          v,
-        ) => ({ type: v.type })),
-      ),
-      TranscriptionStreamDone$inboundSchema.and(
-        z.object({ type: z.literal("transcription.done") }).transform((v) => ({
-          type: v.type,
-        })),
-      ),
     ]),
   ),
 });
@@ -198,16 +198,16 @@ export const TranscriptionStreamEvents$inboundSchema: z.ZodType<
 export type TranscriptionStreamEvents$Outbound = {
   event: string;
   data:
+    | (TranscriptionStreamDone$Outbound & { type: "transcription.done" })
+    | (TranscriptionStreamSegmentDelta$Outbound & {
+      type: "transcription.segment";
+    })
     | (TranscriptionStreamLanguage$Outbound & {
       type: "transcription.language";
     })
     | (TranscriptionStreamTextDelta$Outbound & {
       type: "transcription.text.delta";
-    })
-    | (TranscriptionStreamSegmentDelta$Outbound & {
-      type: "transcription.segment";
-    })
-    | (TranscriptionStreamDone$Outbound & { type: "transcription.done" });
+    });
 };
 
 /** @internal */
@@ -218,6 +218,16 @@ export const TranscriptionStreamEvents$outboundSchema: z.ZodType<
 > = z.object({
   event: TranscriptionStreamEventTypes$outboundSchema,
   data: z.union([
+    TranscriptionStreamDone$outboundSchema.and(
+      z.object({ type: z.literal("transcription.done") }).transform((v) => ({
+        type: v.type,
+      })),
+    ),
+    TranscriptionStreamSegmentDelta$outboundSchema.and(
+      z.object({ type: z.literal("transcription.segment") }).transform((v) => ({
+        type: v.type,
+      })),
+    ),
     TranscriptionStreamLanguage$outboundSchema.and(
       z.object({ type: z.literal("transcription.language") }).transform((
         v,
@@ -227,16 +237,6 @@ export const TranscriptionStreamEvents$outboundSchema: z.ZodType<
       z.object({ type: z.literal("transcription.text.delta") }).transform((
         v,
       ) => ({ type: v.type })),
-    ),
-    TranscriptionStreamSegmentDelta$outboundSchema.and(
-      z.object({ type: z.literal("transcription.segment") }).transform((v) => ({
-        type: v.type,
-      })),
-    ),
-    TranscriptionStreamDone$outboundSchema.and(
-      z.object({ type: z.literal("transcription.done") }).transform((v) => ({
-        type: v.type,
-      })),
     ),
   ]),
 });

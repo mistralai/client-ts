@@ -21,8 +21,8 @@ export type JobsApiRoutesFineTuningUpdateFineTunedModelRequest = {
  * OK
  */
 export type JobsApiRoutesFineTuningUpdateFineTunedModelResponse =
-  | (components.CompletionFTModelOut & { modelType: "completion" })
-  | (components.ClassifierFTModelOut & { modelType: "classifier" });
+  | (components.ClassifierFTModelOut & { modelType: "classifier" })
+  | (components.CompletionFTModelOut & { modelType: "completion" });
 
 /** @internal */
 export const JobsApiRoutesFineTuningUpdateFineTunedModelRequest$inboundSchema:
@@ -112,13 +112,13 @@ export const JobsApiRoutesFineTuningUpdateFineTunedModelResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.CompletionFTModelOut$inboundSchema.and(
-      z.object({ model_type: z.literal("completion") }).transform((v) => ({
+    components.ClassifierFTModelOut$inboundSchema.and(
+      z.object({ model_type: z.literal("classifier") }).transform((v) => ({
         modelType: v.model_type,
       })),
     ),
-    components.ClassifierFTModelOut$inboundSchema.and(
-      z.object({ model_type: z.literal("classifier") }).transform((v) => ({
+    components.CompletionFTModelOut$inboundSchema.and(
+      z.object({ model_type: z.literal("completion") }).transform((v) => ({
         modelType: v.model_type,
       })),
     ),
@@ -126,8 +126,8 @@ export const JobsApiRoutesFineTuningUpdateFineTunedModelResponse$inboundSchema:
 
 /** @internal */
 export type JobsApiRoutesFineTuningUpdateFineTunedModelResponse$Outbound =
-  | (components.CompletionFTModelOut$Outbound & { model_type: "completion" })
-  | (components.ClassifierFTModelOut$Outbound & { model_type: "classifier" });
+  | (components.ClassifierFTModelOut$Outbound & { model_type: "classifier" })
+  | (components.CompletionFTModelOut$Outbound & { model_type: "completion" });
 
 /** @internal */
 export const JobsApiRoutesFineTuningUpdateFineTunedModelResponse$outboundSchema:
@@ -136,13 +136,13 @@ export const JobsApiRoutesFineTuningUpdateFineTunedModelResponse$outboundSchema:
     z.ZodTypeDef,
     JobsApiRoutesFineTuningUpdateFineTunedModelResponse
   > = z.union([
-    components.CompletionFTModelOut$outboundSchema.and(
-      z.object({ modelType: z.literal("completion") }).transform((v) => ({
+    components.ClassifierFTModelOut$outboundSchema.and(
+      z.object({ modelType: z.literal("classifier") }).transform((v) => ({
         model_type: v.modelType,
       })),
     ),
-    components.ClassifierFTModelOut$outboundSchema.and(
-      z.object({ modelType: z.literal("classifier") }).transform((v) => ({
+    components.CompletionFTModelOut$outboundSchema.and(
+      z.object({ modelType: z.literal("completion") }).transform((v) => ({
         model_type: v.modelType,
       })),
     ),

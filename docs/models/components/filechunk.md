@@ -6,7 +6,7 @@
 import { FileChunk } from "@mistralai/mistralai/models/components";
 
 let value: FileChunk = {
-  fileId: "eac8f903-69c6-4bc5-9fae-8bce286e1fe1",
+  fileId: "9a7a83aa-6211-475c-88de-7116b47d91cd",
 };
 ```
 

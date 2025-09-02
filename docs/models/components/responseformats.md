@@ -7,7 +7,7 @@ An object specifying the format that the model must output. Setting to `{ "type"
 ```typescript
 import { ResponseFormats } from "@mistralai/mistralai/models/components";
 
-let value: ResponseFormats = "text";
+let value: ResponseFormats = "json_object";
 ```
 
 ## Values

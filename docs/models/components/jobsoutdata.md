@@ -7,14 +7,14 @@
 
 ```typescript
 const value: components.ClassifierJobOut = {
-  id: "31b64b5b-d3f2-4425-878d-e3917557b1eb",
-  autoStart: false,
-  model: "Volt",
+  id: "94361cba-dbfe-4cb8-b157-dba88d484a3b",
+  autoStart: true,
+  model: "Mercielago",
   status: "FAILED_VALIDATION",
-  createdAt: 999809,
-  modifiedAt: 197259,
+  createdAt: 604693,
+  modifiedAt: 540214,
   trainingFiles: [
-    "8449ecb8-e7dd-43c0-a538-b18f3a907b0e",
+    "8db2006d-0f95-498b-8a1c-8b96bd790c50",
   ],
   hyperparameters: {},
 };
@@ -24,14 +24,16 @@ const value: components.ClassifierJobOut = {
 
 ```typescript
 const value: components.CompletionJobOut = {
-  id: "03f91470-6739-4c39-9afc-d72f271ffb54",
+  id: "ad07d8f7-c8e8-41df-a05e-52088cd2b04b",
   autoStart: false,
-  model: "Alpine",
-  status: "FAILED_VALIDATION",
-  createdAt: 141817,
-  modifiedAt: 316730,
+  model: "Jetta",
+  status: "CANCELLED",
+  createdAt: 508554,
+  modifiedAt: 47551,
   trainingFiles: [
-    "ab06ad7f-4074-4d34-9cb8-b600810fd20f",
+    "0befa7d5-b534-4a53-8e8f-ae6a6f8e2d47",
+    "fc6abeaa-0a91-4111-9774-6e9c6a29d66a",
+    "f06b4756-0fe1-4e67-8ec2-5b8b8680fedc",
   ],
   hyperparameters: {},
 };

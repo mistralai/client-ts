@@ -7,18 +7,10 @@
 
 ```typescript
 const value: components.TranscriptionStreamDone = {
-  model: "Grand Cherokee",
+  model: "Charger",
   text: "<value>",
   usage: {},
   language: "<value>",
-};
-```
-
-### `components.TranscriptionStreamLanguage`
-
-```typescript
-const value: components.TranscriptionStreamLanguage = {
-  audioLanguage: "<value>",
 };
 ```
 
@@ -27,8 +19,16 @@ const value: components.TranscriptionStreamLanguage = {
 ```typescript
 const value: components.TranscriptionStreamSegmentDelta = {
   text: "<value>",
-  start: 4768.01,
-  end: 6218.83,
+  start: 1796.95,
+  end: 2412.74,
+};
+```
+
+### `components.TranscriptionStreamLanguage`
+
+```typescript
+const value: components.TranscriptionStreamLanguage = {
+  audioLanguage: "<value>",
 };
 ```
 

@@ -8,20 +8,8 @@ Representation of an input message inside the conversation.
 import { MessageInputEntry } from "@mistralai/mistralai/models/components";
 
 let value: MessageInputEntry = {
-  role: "user",
-  content: [
-    {
-      thinking: [
-        {
-          referenceIds: [
-            868126,
-          ],
-          type: "reference",
-        },
-      ],
-      type: "thinking",
-    },
-  ],
+  role: "assistant",
+  content: [],
 };
 ```
 

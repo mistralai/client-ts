@@ -8,12 +8,7 @@ import { InstructRequest } from "@mistralai/mistralai/models/components";
 let value: InstructRequest = {
   messages: [
     {
-      content: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
+      content: "<value>",
       role: "system",
     },
   ],

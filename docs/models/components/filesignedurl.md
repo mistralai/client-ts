@@ -6,7 +6,7 @@
 import { FileSignedURL } from "@mistralai/mistralai/models/components";
 
 let value: FileSignedURL = {
-  url: "https://gracious-silk.com/",
+  url: "https://devoted-skyline.com",
 };
 ```
 

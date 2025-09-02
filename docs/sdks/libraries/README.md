@@ -19,6 +19,7 @@ List all libraries that you have created or have been shared with you.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_list_v1" method="get" path="/v1/libraries" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -29,7 +30,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.libraries.list();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -52,15 +52,12 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesList(mistral);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -90,6 +87,7 @@ Create a new Library, you will be marked as the owner and only you will have the
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_create_v1" method="post" path="/v1/libraries" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -102,7 +100,6 @@ async function run() {
     name: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -127,15 +124,12 @@ async function run() {
   const res = await betaLibrariesCreate(mistral, {
     name: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -167,6 +161,7 @@ Given a library id, details information about that Library.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_get_v1" method="get" path="/v1/libraries/{library_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -176,10 +171,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.get({
-    libraryId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
+    libraryId: "d0d23a1e-bfe5-45e7-b7bb-22a4ea78d47f",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -202,17 +196,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesGet(mistral, {
-    libraryId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
+    libraryId: "d0d23a1e-bfe5-45e7-b7bb-22a4ea78d47f",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -244,6 +235,7 @@ Given a library id, deletes it together with all documents that have been upload
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_delete_v1" method="delete" path="/v1/libraries/{library_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -253,10 +245,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.delete({
-    libraryId: "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e",
+    libraryId: "6cad0b6e-fd2e-4d11-a48b-21d30fb7c17a",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -279,17 +270,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDelete(mistral, {
-    libraryId: "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e",
+    libraryId: "6cad0b6e-fd2e-4d11-a48b-21d30fb7c17a",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -321,6 +309,7 @@ Given a library id, you can update the name and description.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_update_v1" method="put" path="/v1/libraries/{library_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -330,11 +319,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.update({
-    libraryId: "d95fa7f0-e743-42ce-b47c-b60cc78135dd",
+    libraryId: "e01880c3-d0b5-4a29-8b1b-abdb8ce917e4",
     libraryInUpdate: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -357,18 +345,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesUpdate(mistral, {
-    libraryId: "d95fa7f0-e743-42ce-b47c-b60cc78135dd",
+    libraryId: "e01880c3-d0b5-4a29-8b1b-abdb8ce917e4",
     libraryInUpdate: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

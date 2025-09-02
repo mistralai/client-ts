@@ -3,29 +3,11 @@
 
 ## Supported Types
 
-### `components.AssistantMessage`
-
-```typescript
-const value: components.AssistantMessage = {};
-```
-
 ### `components.SystemMessage`
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      thinking: [
-        {
-          referenceIds: [
-            328954,
-          ],
-          type: "reference",
-        },
-      ],
-      type: "thinking",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -33,7 +15,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: "<value>",
+  content: [],
 };
 ```
 
@@ -43,5 +25,11 @@ const value: components.ToolMessage = {
 const value: components.UserMessage = {
   content: "<value>",
 };
+```
+
+### `components.AssistantMessage`
+
+```typescript
+const value: components.AssistantMessage = {};
 ```
 

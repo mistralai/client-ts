@@ -6,8 +6,8 @@
 import { LibrariesDocumentsGetSignedUrlV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: LibrariesDocumentsGetSignedUrlV1Request = {
-  libraryId: "8aca619e-6e89-4d91-9f3b-873b1fd8648e",
-  documentId: "8353f9b1-5e12-4a9d-9e24-601374e5ef73",
+  libraryId: "b136410b-6b61-4eb0-b930-20a0251ca33f",
+  documentId: "43e779c5-c23c-4b34-b84a-508035dcb8c7",
 };
 ```
 

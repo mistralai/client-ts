@@ -12,8 +12,8 @@ let value: UploadFileOut = {
   createdAt: 1716963433,
   filename: "files_upload.jsonl",
   purpose: "batch",
-  sampleType: "batch_request",
-  source: "mistral",
+  sampleType: "batch_error",
+  source: "repository",
 };
 ```
 

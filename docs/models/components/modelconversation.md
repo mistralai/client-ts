@@ -7,9 +7,9 @@ import { ModelConversation } from "@mistralai/mistralai/models/components";
 
 let value: ModelConversation = {
   id: "<id>",
-  createdAt: new Date("2025-08-07T13:19:14.525Z"),
-  updatedAt: new Date("2025-12-05T04:07:03.604Z"),
-  model: "Sentra",
+  createdAt: new Date("2024-06-14T04:21:29.555Z"),
+  updatedAt: new Date("2025-10-08T03:17:09.039Z"),
+  model: "Escalade",
 };
 ```
 

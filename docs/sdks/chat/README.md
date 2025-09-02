@@ -16,6 +16,7 @@ Chat Completion
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="chat_completion_v1_chat_completions_post" method="post" path="/v1/chat/completions" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -34,7 +35,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -65,15 +65,12 @@ async function run() {
       },
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("chatComplete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -105,6 +102,7 @@ Mistral AI provides the ability to stream responses back to a client in order to
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="stream_chat" method="post" path="/v1/chat/completions#stream" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -156,16 +154,14 @@ async function run() {
       },
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  for await (const event of result) {
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
     // Handle the event
     console.log(event);
+  }
+  } else {
+    console.log("chatStream failed:", res.error);
   }
 }
 

@@ -10,24 +10,15 @@ OK
 ```typescript
 const value: components.ClassifierFTModelOut = {
   id: "<id>",
-  created: 771603,
+  created: 111228,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
-  archived: false,
+  archived: true,
   capabilities: {},
-  job: "8f1c453c-2da0-4cae-ab8d-484f305808db",
-  classifierTargets: [
-    {
-      name: "<value>",
-      labels: [
-        "<value>",
-      ],
-      weight: 9559.62,
-      lossFunction: "multi_class",
-    },
-  ],
+  job: "b1e6e408-c7c5-4c7c-9c65-efca1702bf4b",
+  classifierTargets: [],
 };
 ```
 
@@ -36,14 +27,14 @@ const value: components.ClassifierFTModelOut = {
 ```typescript
 const value: components.CompletionFTModelOut = {
   id: "<id>",
-  created: 824267,
+  created: 787475,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
   archived: false,
   capabilities: {},
-  job: "9709fd52-cbfd-4817-b584-dd596e2bf23b",
+  job: "0f147667-0d54-46fd-934d-6a88bd2ec484",
 };
 ```
 

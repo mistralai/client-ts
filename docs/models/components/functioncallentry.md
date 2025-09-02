@@ -8,7 +8,11 @@ import { FunctionCallEntry } from "@mistralai/mistralai/models/components";
 let value: FunctionCallEntry = {
   toolCallId: "<id>",
   name: "<value>",
-  arguments: "<value>",
+  arguments: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
 };
 ```
 

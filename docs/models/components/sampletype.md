@@ -5,7 +5,7 @@
 ```typescript
 import { SampleType } from "@mistralai/mistralai/models/components";
 
-let value: SampleType = "batch_error";
+let value: SampleType = "batch_request";
 ```
 
 ## Values

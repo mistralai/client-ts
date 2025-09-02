@@ -8,9 +8,11 @@ import { ClassifierTargetOut } from "@mistralai/mistralai/models/components";
 let value: ClassifierTargetOut = {
   name: "<value>",
   labels: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
-  weight: 391.87,
+  weight: 6166.16,
   lossFunction: "single_class",
 };
 ```

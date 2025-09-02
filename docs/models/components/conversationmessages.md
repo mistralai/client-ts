@@ -9,19 +9,7 @@ import { ConversationMessages } from "@mistralai/mistralai/models/components";
 
 let value: ConversationMessages = {
   conversationId: "<id>",
-  messages: [
-    {
-      object: "entry",
-      type: "message.output",
-      role: "assistant",
-      content: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
-    },
-  ],
+  messages: [],
 };
 ```
 

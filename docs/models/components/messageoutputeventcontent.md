@@ -13,9 +13,8 @@ const value: string = "<value>";
 
 ```typescript
 const value: components.OutputContentChunks = {
-  type: "tool_file",
-  tool: "code_interpreter",
-  fileId: "<id>",
+  documentUrl: "https://super-tool.biz",
+  type: "document_url",
 };
 ```
 

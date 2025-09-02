@@ -24,6 +24,7 @@ Create a new conversation, using a base model or an agent and append entries. Co
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_start" method="post" path="/v1/conversations" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -36,7 +37,6 @@ async function run() {
     inputs: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -61,15 +61,12 @@ async function run() {
   const res = await betaConversationsStart(mistral, {
     inputs: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConversationsStart failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -101,6 +98,7 @@ Retrieve a list of conversation entities sorted by creation time.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_list" method="get" path="/v1/conversations" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -111,7 +109,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.conversations.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -134,15 +131,12 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaConversationsList(mistral, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConversationsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -174,6 +168,7 @@ Given a conversation_id retrieve a conversation entity with its attributes.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_get" method="get" path="/v1/conversations/{conversation_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -186,7 +181,6 @@ async function run() {
     conversationId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -211,15 +205,12 @@ async function run() {
   const res = await betaConversationsGet(mistral, {
     conversationId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConversationsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -251,6 +242,7 @@ Run completion on the history of the conversation and the user entries. Return t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_append" method="post" path="/v1/conversations/{conversation_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -262,11 +254,10 @@ async function run() {
   const result = await mistral.beta.conversations.append({
     conversationId: "<id>",
     conversationAppendRequest: {
-      inputs: "<value>",
+      inputs: [],
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -291,18 +282,15 @@ async function run() {
   const res = await betaConversationsAppend(mistral, {
     conversationId: "<id>",
     conversationAppendRequest: {
-      inputs: "<value>",
+      inputs: [],
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConversationsAppend failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -334,6 +322,7 @@ Given a conversation_id retrieve all the entries belonging to that conversation.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_history" method="get" path="/v1/conversations/{conversation_id}/history" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -346,7 +335,6 @@ async function run() {
     conversationId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -371,15 +359,12 @@ async function run() {
   const res = await betaConversationsGetHistory(mistral, {
     conversationId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConversationsGetHistory failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -411,6 +396,7 @@ Given a conversation_id retrieve all the messages belonging to that conversation
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_messages" method="get" path="/v1/conversations/{conversation_id}/messages" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -423,7 +409,6 @@ async function run() {
     conversationId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -448,15 +433,12 @@ async function run() {
   const res = await betaConversationsGetMessages(mistral, {
     conversationId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConversationsGetMessages failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -488,6 +470,7 @@ Given a conversation_id and an id, recreate a conversation from this point and r
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_restart" method="post" path="/v1/conversations/{conversation_id}/restart" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -504,7 +487,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -533,15 +515,12 @@ async function run() {
       fromEntryId: "<id>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConversationsRestart failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -573,6 +552,7 @@ Create a new conversation, using a base model or an agent and append entries. Co
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_start_stream" method="post" path="/v1/conversations#stream" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -582,7 +562,16 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.conversations.startStream({
-    inputs: "<value>",
+    inputs: [
+      {
+        object: "entry",
+        type: "agent.handoff",
+        previousAgentId: "<id>",
+        previousAgentName: "<value>",
+        nextAgentId: "<id>",
+        nextAgentName: "<value>",
+      },
+    ],
   });
 
   for await (const event of result) {
@@ -610,18 +599,25 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaConversationsStartStream(mistral, {
-    inputs: "<value>",
+    inputs: [
+      {
+        object: "entry",
+        type: "agent.handoff",
+        previousAgentId: "<id>",
+        previousAgentName: "<value>",
+        nextAgentId: "<id>",
+        nextAgentName: "<value>",
+      },
+    ],
   });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  for await (const event of result) {
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
     // Handle the event
     console.log(event);
+  }
+  } else {
+    console.log("betaConversationsStartStream failed:", res.error);
   }
 }
 
@@ -654,6 +650,7 @@ Run completion on the history of the conversation and the user entries. Return t
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_append_stream" method="post" path="/v1/conversations/{conversation_id}#stream" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -699,16 +696,14 @@ async function run() {
       inputs: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  for await (const event of result) {
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
     // Handle the event
     console.log(event);
+  }
+  } else {
+    console.log("betaConversationsAppendStream failed:", res.error);
   }
 }
 
@@ -741,6 +736,7 @@ Given a conversation_id and an id, recreate a conversation from this point and r
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_restart_stream" method="post" path="/v1/conversations/{conversation_id}/restart#stream" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -752,7 +748,15 @@ async function run() {
   const result = await mistral.beta.conversations.restartStream({
     conversationId: "<id>",
     conversationRestartStreamRequest: {
-      inputs: "<value>",
+      inputs: [
+        {
+          object: "entry",
+          type: "message.input",
+          role: "assistant",
+          content: "<value>",
+          prefix: false,
+        },
+      ],
       fromEntryId: "<id>",
     },
   });
@@ -784,20 +788,26 @@ async function run() {
   const res = await betaConversationsRestartStream(mistral, {
     conversationId: "<id>",
     conversationRestartStreamRequest: {
-      inputs: "<value>",
+      inputs: [
+        {
+          object: "entry",
+          type: "message.input",
+          role: "assistant",
+          content: "<value>",
+          prefix: false,
+        },
+      ],
       fromEntryId: "<id>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  for await (const event of result) {
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
     // Handle the event
     console.log(event);
+  }
+  } else {
+    console.log("betaConversationsRestartStream failed:", res.error);
   }
 }
 

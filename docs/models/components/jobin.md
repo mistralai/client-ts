@@ -6,7 +6,7 @@
 import { JobIn } from "@mistralai/mistralai/models/components";
 
 let value: JobIn = {
-  model: "ATS",
+  model: "Wrangler",
   hyperparameters: {
     learningRate: 0.0001,
   },

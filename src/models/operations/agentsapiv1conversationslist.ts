@@ -15,8 +15,8 @@ export type AgentsApiV1ConversationsListRequest = {
 };
 
 export type ResponseBody =
-  | components.AgentConversation
-  | components.ModelConversation;
+  | components.ModelConversation
+  | components.AgentConversation;
 
 /** @internal */
 export const AgentsApiV1ConversationsListRequest$inboundSchema: z.ZodType<
@@ -94,14 +94,14 @@ export const ResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.AgentConversation$inboundSchema,
   components.ModelConversation$inboundSchema,
+  components.AgentConversation$inboundSchema,
 ]);
 
 /** @internal */
 export type ResponseBody$Outbound =
-  | components.AgentConversation$Outbound
-  | components.ModelConversation$Outbound;
+  | components.ModelConversation$Outbound
+  | components.AgentConversation$Outbound;
 
 /** @internal */
 export const ResponseBody$outboundSchema: z.ZodType<
@@ -109,8 +109,8 @@ export const ResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody
 > = z.union([
-  components.AgentConversation$outboundSchema,
   components.ModelConversation$outboundSchema,
+  components.AgentConversation$outboundSchema,
 ]);
 
 /**

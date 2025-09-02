@@ -7,7 +7,7 @@ import { ToolExecutionDoneEvent } from "@mistralai/mistralai/models/components";
 
 let value: ToolExecutionDoneEvent = {
   id: "<id>",
-  name: "image_generation",
+  name: "code_interpreter",
 };
 ```
 

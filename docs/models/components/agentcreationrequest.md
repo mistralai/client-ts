@@ -6,7 +6,7 @@
 import { AgentCreationRequest } from "@mistralai/mistralai/models/components";
 
 let value: AgentCreationRequest = {
-  model: "Charger",
+  model: "Accord",
   name: "<value>",
 };
 ```

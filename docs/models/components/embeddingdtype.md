@@ -5,7 +5,7 @@
 ```typescript
 import { EmbeddingDtype } from "@mistralai/mistralai/models/components";
 
-let value: EmbeddingDtype = "float";
+let value: EmbeddingDtype = "int8";
 ```
 
 ## Values

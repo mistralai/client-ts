@@ -6,18 +6,18 @@
 import { DocumentOut } from "@mistralai/mistralai/models/components";
 
 let value: DocumentOut = {
-  id: "fcbff714-2629-46ef-9849-e6847638458c",
-  libraryId: "ed04715b-a9b3-45ae-8840-b058e1605943",
+  id: "baffe13e-7139-4dca-9da9-6808efbb8966",
+  libraryId: "f85c6cfe-ffba-4130-8350-eb7bc74cf318",
   hash: "<value>",
   mimeType: "<value>",
-  extension: "gif",
-  size: 695270,
+  extension: "jpe",
+  size: 557590,
   name: "<value>",
-  createdAt: new Date("2025-01-06T11:09:38.255Z"),
+  createdAt: new Date("2023-04-27T09:47:22.828Z"),
   processingStatus: "<value>",
-  uploadedById: "f0a99f0b-d85c-4178-bb13-69e92fd8e8ed",
+  uploadedById: "a07ae014-de08-46b2-9005-78a53e12d7f6",
   uploadedByType: "<value>",
-  tokensProcessingTotal: 919783,
+  tokensProcessingTotal: 554819,
 };
 ```
 

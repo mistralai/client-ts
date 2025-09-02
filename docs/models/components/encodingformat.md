@@ -5,7 +5,7 @@
 ```typescript
 import { EncodingFormat } from "@mistralai/mistralai/models/components";
 
-let value: EncodingFormat = "base64";
+let value: EncodingFormat = "float";
 ```
 
 ## Values

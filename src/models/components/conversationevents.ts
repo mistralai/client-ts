@@ -73,16 +73,16 @@ import {
 } from "./toolexecutionstartedevent.js";
 
 export type ConversationEventsData =
-  | (ResponseDoneEvent & { type: "conversation.response.done" })
-  | (ResponseStartedEvent & { type: "conversation.response.started" })
-  | (ResponseErrorEvent & { type: "conversation.response.error" })
+  | (FunctionCallEvent & { type: "function.call.delta" })
   | (AgentHandoffDoneEvent & { type: "agent.handoff.done" })
   | (AgentHandoffStartedEvent & { type: "agent.handoff.started" })
   | (ToolExecutionDeltaEvent & { type: "tool.execution.delta" })
-  | (ToolExecutionDoneEvent & { type: "tool.execution.done" })
   | (ToolExecutionStartedEvent & { type: "tool.execution.started" })
-  | (FunctionCallEvent & { type: "function.call.delta" })
-  | (MessageOutputEvent & { type: "message.output.delta" });
+  | (ResponseErrorEvent & { type: "conversation.response.error" })
+  | (MessageOutputEvent & { type: "message.output.delta" })
+  | (ToolExecutionDoneEvent & { type: "tool.execution.done" })
+  | (ResponseDoneEvent & { type: "conversation.response.done" })
+  | (ResponseStartedEvent & { type: "conversation.response.started" });
 
 export type ConversationEvents = {
   /**
@@ -90,16 +90,16 @@ export type ConversationEvents = {
    */
   event: SSETypes;
   data:
-    | (ResponseDoneEvent & { type: "conversation.response.done" })
-    | (ResponseStartedEvent & { type: "conversation.response.started" })
-    | (ResponseErrorEvent & { type: "conversation.response.error" })
+    | (FunctionCallEvent & { type: "function.call.delta" })
     | (AgentHandoffDoneEvent & { type: "agent.handoff.done" })
     | (AgentHandoffStartedEvent & { type: "agent.handoff.started" })
     | (ToolExecutionDeltaEvent & { type: "tool.execution.delta" })
-    | (ToolExecutionDoneEvent & { type: "tool.execution.done" })
     | (ToolExecutionStartedEvent & { type: "tool.execution.started" })
-    | (FunctionCallEvent & { type: "function.call.delta" })
-    | (MessageOutputEvent & { type: "message.output.delta" });
+    | (ResponseErrorEvent & { type: "conversation.response.error" })
+    | (MessageOutputEvent & { type: "message.output.delta" })
+    | (ToolExecutionDoneEvent & { type: "tool.execution.done" })
+    | (ResponseDoneEvent & { type: "conversation.response.done" })
+    | (ResponseStartedEvent & { type: "conversation.response.started" });
 };
 
 /** @internal */
@@ -108,20 +108,10 @@ export const ConversationEventsData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  ResponseDoneEvent$inboundSchema.and(
-    z.object({ type: z.literal("conversation.response.done") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  ResponseStartedEvent$inboundSchema.and(
-    z.object({ type: z.literal("conversation.response.started") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  ResponseErrorEvent$inboundSchema.and(
-    z.object({ type: z.literal("conversation.response.error") }).transform((
-      v,
-    ) => ({ type: v.type })),
+  FunctionCallEvent$inboundSchema.and(
+    z.object({ type: z.literal("function.call.delta") }).transform((v) => ({
+      type: v.type,
+    })),
   ),
   AgentHandoffDoneEvent$inboundSchema.and(
     z.object({ type: z.literal("agent.handoff.done") }).transform((v) => ({
@@ -138,40 +128,50 @@ export const ConversationEventsData$inboundSchema: z.ZodType<
       type: v.type,
     })),
   ),
-  ToolExecutionDoneEvent$inboundSchema.and(
-    z.object({ type: z.literal("tool.execution.done") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
   ToolExecutionStartedEvent$inboundSchema.and(
     z.object({ type: z.literal("tool.execution.started") }).transform((v) => ({
       type: v.type,
     })),
   ),
-  FunctionCallEvent$inboundSchema.and(
-    z.object({ type: z.literal("function.call.delta") }).transform((v) => ({
-      type: v.type,
-    })),
+  ResponseErrorEvent$inboundSchema.and(
+    z.object({ type: z.literal("conversation.response.error") }).transform((
+      v,
+    ) => ({ type: v.type })),
   ),
   MessageOutputEvent$inboundSchema.and(
     z.object({ type: z.literal("message.output.delta") }).transform((v) => ({
       type: v.type,
     })),
   ),
+  ToolExecutionDoneEvent$inboundSchema.and(
+    z.object({ type: z.literal("tool.execution.done") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  ResponseDoneEvent$inboundSchema.and(
+    z.object({ type: z.literal("conversation.response.done") }).transform((
+      v,
+    ) => ({ type: v.type })),
+  ),
+  ResponseStartedEvent$inboundSchema.and(
+    z.object({ type: z.literal("conversation.response.started") }).transform((
+      v,
+    ) => ({ type: v.type })),
+  ),
 ]);
 
 /** @internal */
 export type ConversationEventsData$Outbound =
-  | (ResponseDoneEvent$Outbound & { type: "conversation.response.done" })
-  | (ResponseStartedEvent$Outbound & { type: "conversation.response.started" })
-  | (ResponseErrorEvent$Outbound & { type: "conversation.response.error" })
+  | (FunctionCallEvent$Outbound & { type: "function.call.delta" })
   | (AgentHandoffDoneEvent$Outbound & { type: "agent.handoff.done" })
   | (AgentHandoffStartedEvent$Outbound & { type: "agent.handoff.started" })
   | (ToolExecutionDeltaEvent$Outbound & { type: "tool.execution.delta" })
-  | (ToolExecutionDoneEvent$Outbound & { type: "tool.execution.done" })
   | (ToolExecutionStartedEvent$Outbound & { type: "tool.execution.started" })
-  | (FunctionCallEvent$Outbound & { type: "function.call.delta" })
-  | (MessageOutputEvent$Outbound & { type: "message.output.delta" });
+  | (ResponseErrorEvent$Outbound & { type: "conversation.response.error" })
+  | (MessageOutputEvent$Outbound & { type: "message.output.delta" })
+  | (ToolExecutionDoneEvent$Outbound & { type: "tool.execution.done" })
+  | (ResponseDoneEvent$Outbound & { type: "conversation.response.done" })
+  | (ResponseStartedEvent$Outbound & { type: "conversation.response.started" });
 
 /** @internal */
 export const ConversationEventsData$outboundSchema: z.ZodType<
@@ -179,20 +179,10 @@ export const ConversationEventsData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConversationEventsData
 > = z.union([
-  ResponseDoneEvent$outboundSchema.and(
-    z.object({ type: z.literal("conversation.response.done") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  ResponseStartedEvent$outboundSchema.and(
-    z.object({ type: z.literal("conversation.response.started") }).transform((
-      v,
-    ) => ({ type: v.type })),
-  ),
-  ResponseErrorEvent$outboundSchema.and(
-    z.object({ type: z.literal("conversation.response.error") }).transform((
-      v,
-    ) => ({ type: v.type })),
+  FunctionCallEvent$outboundSchema.and(
+    z.object({ type: z.literal("function.call.delta") }).transform((v) => ({
+      type: v.type,
+    })),
   ),
   AgentHandoffDoneEvent$outboundSchema.and(
     z.object({ type: z.literal("agent.handoff.done") }).transform((v) => ({
@@ -209,25 +199,35 @@ export const ConversationEventsData$outboundSchema: z.ZodType<
       type: v.type,
     })),
   ),
-  ToolExecutionDoneEvent$outboundSchema.and(
-    z.object({ type: z.literal("tool.execution.done") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
   ToolExecutionStartedEvent$outboundSchema.and(
     z.object({ type: z.literal("tool.execution.started") }).transform((v) => ({
       type: v.type,
     })),
   ),
-  FunctionCallEvent$outboundSchema.and(
-    z.object({ type: z.literal("function.call.delta") }).transform((v) => ({
-      type: v.type,
-    })),
+  ResponseErrorEvent$outboundSchema.and(
+    z.object({ type: z.literal("conversation.response.error") }).transform((
+      v,
+    ) => ({ type: v.type })),
   ),
   MessageOutputEvent$outboundSchema.and(
     z.object({ type: z.literal("message.output.delta") }).transform((v) => ({
       type: v.type,
     })),
+  ),
+  ToolExecutionDoneEvent$outboundSchema.and(
+    z.object({ type: z.literal("tool.execution.done") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  ResponseDoneEvent$outboundSchema.and(
+    z.object({ type: z.literal("conversation.response.done") }).transform((
+      v,
+    ) => ({ type: v.type })),
+  ),
+  ResponseStartedEvent$outboundSchema.and(
+    z.object({ type: z.literal("conversation.response.started") }).transform((
+      v,
+    ) => ({ type: v.type })),
   ),
 ]);
 
@@ -281,19 +281,10 @@ export const ConversationEvents$inboundSchema: z.ZodType<
     }
   }).pipe(
     z.union([
-      ResponseDoneEvent$inboundSchema.and(
-        z.object({ type: z.literal("conversation.response.done") }).transform((
-          v,
-        ) => ({ type: v.type })),
-      ),
-      ResponseStartedEvent$inboundSchema.and(
-        z.object({ type: z.literal("conversation.response.started") })
-          .transform((v) => ({ type: v.type })),
-      ),
-      ResponseErrorEvent$inboundSchema.and(
-        z.object({ type: z.literal("conversation.response.error") }).transform((
-          v,
-        ) => ({ type: v.type })),
+      FunctionCallEvent$inboundSchema.and(
+        z.object({ type: z.literal("function.call.delta") }).transform((v) => ({
+          type: v.type,
+        })),
       ),
       AgentHandoffDoneEvent$inboundSchema.and(
         z.object({ type: z.literal("agent.handoff.done") }).transform((v) => ({
@@ -310,25 +301,34 @@ export const ConversationEvents$inboundSchema: z.ZodType<
           v,
         ) => ({ type: v.type })),
       ),
-      ToolExecutionDoneEvent$inboundSchema.and(
-        z.object({ type: z.literal("tool.execution.done") }).transform((v) => ({
-          type: v.type,
-        })),
-      ),
       ToolExecutionStartedEvent$inboundSchema.and(
         z.object({ type: z.literal("tool.execution.started") }).transform((
           v,
         ) => ({ type: v.type })),
       ),
-      FunctionCallEvent$inboundSchema.and(
-        z.object({ type: z.literal("function.call.delta") }).transform((v) => ({
-          type: v.type,
-        })),
+      ResponseErrorEvent$inboundSchema.and(
+        z.object({ type: z.literal("conversation.response.error") }).transform((
+          v,
+        ) => ({ type: v.type })),
       ),
       MessageOutputEvent$inboundSchema.and(
         z.object({ type: z.literal("message.output.delta") }).transform((
           v,
         ) => ({ type: v.type })),
+      ),
+      ToolExecutionDoneEvent$inboundSchema.and(
+        z.object({ type: z.literal("tool.execution.done") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      ResponseDoneEvent$inboundSchema.and(
+        z.object({ type: z.literal("conversation.response.done") }).transform((
+          v,
+        ) => ({ type: v.type })),
+      ),
+      ResponseStartedEvent$inboundSchema.and(
+        z.object({ type: z.literal("conversation.response.started") })
+          .transform((v) => ({ type: v.type })),
       ),
     ]),
   ),
@@ -338,18 +338,18 @@ export const ConversationEvents$inboundSchema: z.ZodType<
 export type ConversationEvents$Outbound = {
   event: string;
   data:
-    | (ResponseDoneEvent$Outbound & { type: "conversation.response.done" })
-    | (ResponseStartedEvent$Outbound & {
-      type: "conversation.response.started";
-    })
-    | (ResponseErrorEvent$Outbound & { type: "conversation.response.error" })
+    | (FunctionCallEvent$Outbound & { type: "function.call.delta" })
     | (AgentHandoffDoneEvent$Outbound & { type: "agent.handoff.done" })
     | (AgentHandoffStartedEvent$Outbound & { type: "agent.handoff.started" })
     | (ToolExecutionDeltaEvent$Outbound & { type: "tool.execution.delta" })
-    | (ToolExecutionDoneEvent$Outbound & { type: "tool.execution.done" })
     | (ToolExecutionStartedEvent$Outbound & { type: "tool.execution.started" })
-    | (FunctionCallEvent$Outbound & { type: "function.call.delta" })
-    | (MessageOutputEvent$Outbound & { type: "message.output.delta" });
+    | (ResponseErrorEvent$Outbound & { type: "conversation.response.error" })
+    | (MessageOutputEvent$Outbound & { type: "message.output.delta" })
+    | (ToolExecutionDoneEvent$Outbound & { type: "tool.execution.done" })
+    | (ResponseDoneEvent$Outbound & { type: "conversation.response.done" })
+    | (ResponseStartedEvent$Outbound & {
+      type: "conversation.response.started";
+    });
 };
 
 /** @internal */
@@ -360,20 +360,10 @@ export const ConversationEvents$outboundSchema: z.ZodType<
 > = z.object({
   event: SSETypes$outboundSchema,
   data: z.union([
-    ResponseDoneEvent$outboundSchema.and(
-      z.object({ type: z.literal("conversation.response.done") }).transform((
-        v,
-      ) => ({ type: v.type })),
-    ),
-    ResponseStartedEvent$outboundSchema.and(
-      z.object({ type: z.literal("conversation.response.started") }).transform((
-        v,
-      ) => ({ type: v.type })),
-    ),
-    ResponseErrorEvent$outboundSchema.and(
-      z.object({ type: z.literal("conversation.response.error") }).transform((
-        v,
-      ) => ({ type: v.type })),
+    FunctionCallEvent$outboundSchema.and(
+      z.object({ type: z.literal("function.call.delta") }).transform((v) => ({
+        type: v.type,
+      })),
     ),
     AgentHandoffDoneEvent$outboundSchema.and(
       z.object({ type: z.literal("agent.handoff.done") }).transform((v) => ({
@@ -390,25 +380,35 @@ export const ConversationEvents$outboundSchema: z.ZodType<
         type: v.type,
       })),
     ),
-    ToolExecutionDoneEvent$outboundSchema.and(
-      z.object({ type: z.literal("tool.execution.done") }).transform((v) => ({
-        type: v.type,
-      })),
-    ),
     ToolExecutionStartedEvent$outboundSchema.and(
       z.object({ type: z.literal("tool.execution.started") }).transform((
         v,
       ) => ({ type: v.type })),
     ),
-    FunctionCallEvent$outboundSchema.and(
-      z.object({ type: z.literal("function.call.delta") }).transform((v) => ({
-        type: v.type,
-      })),
+    ResponseErrorEvent$outboundSchema.and(
+      z.object({ type: z.literal("conversation.response.error") }).transform((
+        v,
+      ) => ({ type: v.type })),
     ),
     MessageOutputEvent$outboundSchema.and(
       z.object({ type: z.literal("message.output.delta") }).transform((v) => ({
         type: v.type,
       })),
+    ),
+    ToolExecutionDoneEvent$outboundSchema.and(
+      z.object({ type: z.literal("tool.execution.done") }).transform((v) => ({
+        type: v.type,
+      })),
+    ),
+    ResponseDoneEvent$outboundSchema.and(
+      z.object({ type: z.literal("conversation.response.done") }).transform((
+        v,
+      ) => ({ type: v.type })),
+    ),
+    ResponseStartedEvent$outboundSchema.and(
+      z.object({ type: z.literal("conversation.response.started") }).transform((
+        v,
+      ) => ({ type: v.type })),
     ),
   ]),
 });

@@ -8,20 +8,17 @@ import { BatchJobOut } from "@mistralai/mistralai/models/components";
 let value: BatchJobOut = {
   id: "<id>",
   inputFiles: [
-    "788a5152-85ff-499f-8ec5-537fe10e83aa",
+    "7aed7fbb-d4ba-43ca-a916-fcfc0c52ffa5",
+    "d0b6081e-1c47-4ee0-92e8-b5332c027357",
   ],
   endpoint: "<value>",
-  errors: [
-    {
-      message: "<value>",
-    },
-  ],
-  status: "RUNNING",
-  createdAt: 60078,
-  totalRequests: 209860,
-  completedRequests: 132305,
-  succeededRequests: 193236,
-  failedRequests: 685467,
+  errors: [],
+  status: "CANCELLED",
+  createdAt: 718647,
+  totalRequests: 966604,
+  completedRequests: 914399,
+  succeededRequests: 807847,
+  failedRequests: 528840,
 };
 ```
 

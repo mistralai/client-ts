@@ -38,11 +38,11 @@ import {
 } from "./toolfilechunk.js";
 
 export type MessageInputContentChunks =
+  | ToolFileChunk
   | TextChunk
   | ImageURLChunk
   | DocumentURLChunk
-  | ThinkChunk
-  | ToolFileChunk;
+  | ThinkChunk;
 
 /** @internal */
 export const MessageInputContentChunks$inboundSchema: z.ZodType<
@@ -50,20 +50,20 @@ export const MessageInputContentChunks$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  ToolFileChunk$inboundSchema,
   TextChunk$inboundSchema,
   ImageURLChunk$inboundSchema,
   DocumentURLChunk$inboundSchema,
   ThinkChunk$inboundSchema,
-  ToolFileChunk$inboundSchema,
 ]);
 
 /** @internal */
 export type MessageInputContentChunks$Outbound =
+  | ToolFileChunk$Outbound
   | TextChunk$Outbound
   | ImageURLChunk$Outbound
   | DocumentURLChunk$Outbound
-  | ThinkChunk$Outbound
-  | ToolFileChunk$Outbound;
+  | ThinkChunk$Outbound;
 
 /** @internal */
 export const MessageInputContentChunks$outboundSchema: z.ZodType<
@@ -71,11 +71,11 @@ export const MessageInputContentChunks$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessageInputContentChunks
 > = z.union([
+  ToolFileChunk$outboundSchema,
   TextChunk$outboundSchema,
   ImageURLChunk$outboundSchema,
   DocumentURLChunk$outboundSchema,
   ThinkChunk$outboundSchema,
-  ToolFileChunk$outboundSchema,
 ]);
 
 /**
