@@ -5,7 +5,7 @@
 ```typescript
 import { TranscriptionStreamEventTypes } from "@mistralai/mistralai/models/components";
 
-let value: TranscriptionStreamEventTypes = "transcription.language";
+let value: TranscriptionStreamEventTypes = "transcription.segment";
 ```
 
 ## Values

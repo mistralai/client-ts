@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "5c9c6b61-874e-4606-b6dc-3d3510ae7dca",
+  id: "2bd5c9c6-b618-474e-b606-6dc3d3510ae7",
   autoStart: false,
-  model: "Prius",
-  status: "VALIDATING",
-  createdAt: 789015,
-  modifiedAt: 692662,
+  model: "PT Cruiser",
+  status: "FAILED",
+  createdAt: 978229,
+  modifiedAt: 802188,
   trainingFiles: [
-    "613c3fb7-99f2-44b3-8d52-09d4ec099357",
+    "4cb613c3-fb79-49f2-84b3-d5209d4ec099",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 149776,
+      stepNumber: 334544,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 1640.04,
+      weight: 4582.79,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "bd2caef1-1c23-4ef5-8dd9-9949326b9fa2",
+  id: "226bd2ca-ef11-4c23-bef5-dd99949326b9",
   autoStart: false,
-  model: "ATS",
+  model: "LeBaron",
   status: "STARTED",
-  createdAt: 597951,
-  modifiedAt: 838287,
+  createdAt: 161218,
+  modifiedAt: 93067,
   trainingFiles: [
-    "e68c4927-2766-4324-a3bb-91910539ebcf",
+    "39de68c4-9272-4766-a324-3bb91910539e",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 577731,
+      stepNumber: 767361,
       createdAt: 1716963433,
     },
   ],

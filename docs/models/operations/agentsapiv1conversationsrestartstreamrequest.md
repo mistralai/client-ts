@@ -8,7 +8,15 @@ import { AgentsApiV1ConversationsRestartStreamRequest } from "@mistralai/mistral
 let value: AgentsApiV1ConversationsRestartStreamRequest = {
   conversationId: "<id>",
   conversationRestartStreamRequest: {
-    inputs: "<value>",
+    inputs: [
+      {
+        object: "entry",
+        type: "message.input",
+        role: "assistant",
+        content: "<value>",
+        prefix: false,
+      },
+    ],
     fromEntryId: "<id>",
   },
 };

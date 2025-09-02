@@ -13,12 +13,7 @@ const value: components.AssistantMessage = {};
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -28,8 +23,8 @@ const value: components.SystemMessage = {
 const value: components.ToolMessage = {
   content: [
     {
-      documentUrl: "https://clear-coin.net",
-      type: "document_url",
+      inputAudio: "<value>",
+      type: "input_audio",
     },
   ],
 };
@@ -39,7 +34,14 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: "<value>",
+  content: [
+    {
+      referenceIds: [
+        596185,
+      ],
+      type: "reference",
+    },
+  ],
 };
 ```
 

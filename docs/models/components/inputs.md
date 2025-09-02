@@ -13,11 +13,11 @@ const value: components.InstructRequestInputs = {
     {
       content: [
         {
-          text: "<value>",
-          type: "text",
+          imageUrl: "https://esteemed-citizen.biz/",
+          type: "image_url",
         },
       ],
-      role: "system",
+      role: "user",
     },
   ],
 };
@@ -32,13 +32,13 @@ const value: components.InstructRequest[] = [
       {
         content: [
           {
-            imageUrl: {
-              url: "https://determined-sesame.net/",
-            },
-            type: "image_url",
+            referenceIds: [
+              959696,
+            ],
+            type: "reference",
           },
         ],
-        role: "user",
+        role: "tool",
       },
     ],
   },

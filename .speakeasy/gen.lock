@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: a38b769b82bac0658cf02fed22bdbde0
+  docChecksum: c3693e4872a0785b2ed46c59a8464804
   docVersion: 1.0.0
   speakeasyVersion: 1.517.3
   generationVersion: 2.548.6
-  releaseVersion: 1.9.18
-  configChecksum: ad171129c8e92921246c234649d55ff4
+  releaseVersion: 1.9.19
+  configChecksum: a4b6872b651b5b2131054dd5a0ac8b01
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -188,6 +188,7 @@ generatedFiles:
   - docs/models/components/embeddingrequestinputs.md
   - docs/models/components/embeddingresponse.md
   - docs/models/components/embeddingresponsedata.md
+  - docs/models/components/encodingformat.md
   - docs/models/components/entitytype.md
   - docs/models/components/entries.md
   - docs/models/components/eventout.md
@@ -324,6 +325,7 @@ generatedFiles:
   - docs/models/components/stop.md
   - docs/models/components/systemmessage.md
   - docs/models/components/systemmessagecontent.md
+  - docs/models/components/systemmessagecontentchunks.md
   - docs/models/components/textchunk.md
   - docs/models/components/textchunktype.md
   - docs/models/components/thinkchunk.md
@@ -632,6 +634,7 @@ generatedFiles:
   - src/models/components/embeddingrequest.ts
   - src/models/components/embeddingresponse.ts
   - src/models/components/embeddingresponsedata.ts
+  - src/models/components/encodingformat.ts
   - src/models/components/entitytype.ts
   - src/models/components/eventout.ts
   - src/models/components/file.ts
@@ -714,6 +717,7 @@ generatedFiles:
   - src/models/components/source.ts
   - src/models/components/ssetypes.ts
   - src/models/components/systemmessage.ts
+  - src/models/components/systemmessagecontentchunks.ts
   - src/models/components/textchunk.ts
   - src/models/components/thinkchunk.ts
   - src/models/components/timestampgranularity.ts

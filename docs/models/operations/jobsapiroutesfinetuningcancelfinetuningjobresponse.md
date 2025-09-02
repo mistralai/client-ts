@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "36ce02f9-8d00-4fdb-b27e-e0c0f6f545b3",
+  id: "5b436ce0-2f98-4d00-9fdb-27ee0c0f6f54",
   autoStart: false,
-  model: "Impala",
-  status: "CANCELLATION_REQUESTED",
-  createdAt: 987085,
-  modifiedAt: 185182,
+  model: "Model T",
+  status: "STARTED",
+  createdAt: 864058,
+  modifiedAt: 590573,
   trainingFiles: [
-    "f00ff277-dac7-4abb-9015-066e9be704de",
+    "ff2f00ff-277d-4ac7-9abb-015066e9be70",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 293991,
+      stepNumber: 814159,
       createdAt: 1716963433,
     },
   ],
@@ -32,7 +32,7 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 9245.06,
+      weight: 9018.42,
       lossFunction: "single_class",
     },
   ],
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "a418e93a-c58a-42f7-9f37-20366ea6f95b",
+  id: "4e5a418e-93ac-458a-a2f7-f3720366ea6f",
   autoStart: false,
-  model: "Silverado",
-  status: "CANCELLED",
-  createdAt: 367350,
-  modifiedAt: 562339,
+  model: "Corvette",
+  status: "FAILED",
+  createdAt: 495700,
+  modifiedAt: 881168,
   trainingFiles: [
-    "4afd51f6-457f-4f45-a802-e016b444d38f",
+    "e584afd5-1f64-457f-8f45-802e016b444d",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 336350,
+      stepNumber: 562402,
       createdAt: 1716963433,
     },
   ],

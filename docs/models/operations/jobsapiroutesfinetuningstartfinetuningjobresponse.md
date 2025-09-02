@@ -9,20 +9,20 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "8cc7f744-b660-44dc-ab00-47e649ebd228",
+  id: "1c48cc7f-744b-4660-84dc-b0047e649ebd",
   autoStart: false,
-  model: "Wrangler",
-  status: "VALIDATED",
-  createdAt: 346557,
-  modifiedAt: 515854,
+  model: "Alpine",
+  status: "FAILED_VALIDATION",
+  createdAt: 697371,
+  modifiedAt: 954989,
   trainingFiles: [
-    "a9b6d25c-5a42-44e7-9350-c390d204e486",
+    "558a9b6d-25c5-4a42-94e7-350c390d204e",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 927354,
+      stepNumber: 503479,
       createdAt: 1716963433,
     },
   ],
@@ -32,8 +32,8 @@ const value: components.ClassifierDetailedJobOut = {
       labels: [
         "<value>",
       ],
-      weight: 7889.95,
-      lossFunction: "multi_class",
+      weight: 4072.3,
+      lossFunction: "single_class",
     },
   ],
 };
@@ -43,20 +43,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "8d7773e4-33dc-460f-92dc-fc5363bda209",
+  id: "ecc8d777-3e43-43dc-860f-2dcfc5363bda",
   autoStart: false,
-  model: "CTS",
-  status: "VALIDATED",
-  createdAt: 541466,
-  modifiedAt: 632917,
+  model: "911",
+  status: "FAILED_VALIDATION",
+  createdAt: 462673,
+  modifiedAt: 199704,
   trainingFiles: [
-    "7f0ae33c-7f9e-402a-86d6-b91bb1857612",
+    "58a7f0ae-33c7-4f9e-902a-6d6b91bb1857",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 192447,
+      stepNumber: 104774,
       createdAt: 1716963433,
     },
   ],

@@ -12,11 +12,11 @@ const value: components.One[] = [
   {
     content: [
       {
-        text: "<value>",
-        type: "text",
+        documentUrl: "https://cavernous-pear.net",
+        type: "document_url",
       },
     ],
-    role: "system",
+    role: "user",
   },
 ];
 ```
@@ -27,8 +27,8 @@ const value: components.One[] = [
 const value: components.Two[][] = [
   [
     {
-      prefix: false,
-      role: "assistant",
+      content: "<value>",
+      role: "tool",
     },
   ],
 ];

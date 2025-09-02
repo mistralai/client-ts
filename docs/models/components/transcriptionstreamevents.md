@@ -6,10 +6,10 @@
 import { TranscriptionStreamEvents } from "@mistralai/mistralai/models/components";
 
 let value: TranscriptionStreamEvents = {
-  event: "transcription.language",
+  event: "transcription.text.delta",
   data: {
-    text: "<value>",
-    type: "transcription.text.delta",
+    type: "transcription.language",
+    audioLanguage: "<value>",
   },
 };
 ```
