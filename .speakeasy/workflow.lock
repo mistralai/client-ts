@@ -1,12 +1,12 @@
-speakeasyVersion: 1.517.3
+speakeasyVersion: 1.606.10
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
-        sourceRevisionDigest: sha256:670c460702ec74f7077491464a6dc5ee9d873969c80e812c48dbf4deb160e470
-        sourceBlobDigest: sha256:5a3ebfa4cb00a015bb7bb03ec7442fc7e0b9c17ca66ab35d3045290b2ad87eac
+        sourceRevisionDigest: sha256:597774940087aa6fcd0d62d088533e695b2b98c6f1048ceb73712688484e96f4
+        sourceBlobDigest: sha256:d7f5753d129b1f4a2a5631130ec30c13dc29c6b763d18e0e1d96ae2fe9e0fc62
         tags:
             - latest
-            - speakeasy-sdk-regen-1756133560
+            - speakeasy-sdk-regen-1756820965
     mistral-google-cloud-source:
         sourceNamespace: mistral-openapi-google-cloud
         sourceRevisionDigest: sha256:4a5343e63c6a78152e472b00ccc46d7bcb15594496bc94c8040039d3a9d4c5f8
@@ -25,10 +25,10 @@ targets:
     mistralai-azure-sdk:
         source: mistral-azure-source
         sourceNamespace: mistral-openapi-azure
-        sourceRevisionDigest: sha256:670c460702ec74f7077491464a6dc5ee9d873969c80e812c48dbf4deb160e470
-        sourceBlobDigest: sha256:5a3ebfa4cb00a015bb7bb03ec7442fc7e0b9c17ca66ab35d3045290b2ad87eac
+        sourceRevisionDigest: sha256:597774940087aa6fcd0d62d088533e695b2b98c6f1048ceb73712688484e96f4
+        sourceBlobDigest: sha256:d7f5753d129b1f4a2a5631130ec30c13dc29c6b763d18e0e1d96ae2fe9e0fc62
         codeSamplesNamespace: mistral-openapi-azure-code-samples
-        codeSamplesRevisionDigest: sha256:d373ba4abaf784b31d5e84bf6df764cfefc312dc926b6ac1503f95c2a0c5cfee
+        codeSamplesRevisionDigest: sha256:d911a84daedd405bf470148ad76626dd4e38c21bf0b4b2aaead7aec5efdd760c
     mistralai-gcp-sdk:
         source: mistral-google-cloud-source
         sourceNamespace: mistral-openapi-google-cloud
@@ -45,7 +45,7 @@ targets:
         codeSamplesRevisionDigest: sha256:34e2099c693e2889e7a954dd68353d33403f7b2bdb0eb39e2c69f3c8c1e58b70
 workflow:
     workflowVersion: 1.0.0
-    speakeasyVersion: 1.517.3
+    speakeasyVersion: v1.606.10
     sources:
         mistral-azure-source:
             inputs:

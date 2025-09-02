@@ -6,7 +6,7 @@
 import { ToolMessage } from "@mistralai/mistralai-azure/models/components";
 
 let value: ToolMessage = {
-  content: "<value>",
+  content: [],
 };
 ```
 

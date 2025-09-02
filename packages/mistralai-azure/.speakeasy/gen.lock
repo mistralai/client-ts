@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01e8a40b-3df3-4d9a-9501-2eb9e0d26c05
 management:
-  docChecksum: 87653f040f5b36c90e066870f34c478e
+  docChecksum: 65d0e29b5374a9509e9af311f51a1b21
   docVersion: 1.0.0
-  speakeasyVersion: 1.517.3
-  generationVersion: 2.548.6
-  releaseVersion: 1.6.0
-  configChecksum: 9a8039f55bb9f5f2ed7dc48f15005ec5
+  speakeasyVersion: 1.606.10
+  generationVersion: 2.687.13
+  releaseVersion: 1.7.0
+  configChecksum: 7ac97405dd6668d2395562f99adc191b
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-azure
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-azure
@@ -15,26 +15,26 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.1
-    constsAndDefaults: 0.1.11
-    core: 3.21.4
+    constsAndDefaults: 0.1.12
+    core: 3.21.20
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    examples: 2.81.5
+    examples: 2.82.3
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.4
+    globalServerURLs: 2.82.5
     nameOverrides: 2.81.2
     nullables: 0.1.1
     openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.2.0
-    serverEvents: 0.1.5
+    sdkHooks: 0.3.0
+    serverEvents: 0.1.8
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
-    unions: 2.85.8
+    unions: 2.85.11
 generatedFiles:
   - .gitattributes
   - .npmignore
@@ -92,7 +92,11 @@ generatedFiles:
   - docs/models/components/stop.md
   - docs/models/components/systemmessage.md
   - docs/models/components/systemmessagecontent.md
+  - docs/models/components/systemmessagecontentchunks.md
   - docs/models/components/textchunk.md
+  - docs/models/components/thinkchunk.md
+  - docs/models/components/thinkchunktype.md
+  - docs/models/components/thinking.md
   - docs/models/components/tool.md
   - docs/models/components/toolcall.md
   - docs/models/components/toolchoice.md
@@ -109,6 +113,9 @@ generatedFiles:
   - docs/models/components/validationerror.md
   - docs/models/errors/httpvalidationerror.md
   - eslint.config.mjs
+  - examples/.env.template
+  - examples/chatComplete.example.ts
+  - examples/package.json
   - jsr.json
   - package.json
   - src/core.ts
@@ -168,7 +175,9 @@ generatedFiles:
   - src/models/components/responseformats.ts
   - src/models/components/security.ts
   - src/models/components/systemmessage.ts
+  - src/models/components/systemmessagecontentchunks.ts
   - src/models/components/textchunk.ts
+  - src/models/components/thinkchunk.ts
   - src/models/components/tool.ts
   - src/models/components/toolcall.ts
   - src/models/components/toolchoice.ts
@@ -181,6 +190,8 @@ generatedFiles:
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/httpvalidationerror.ts
   - src/models/errors/index.ts
+  - src/models/errors/mistralazureerror.ts
+  - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/sdk/chat.ts
@@ -204,24 +215,24 @@ examples:
       responses:
         "422":
           application/json: {}
-        "200": {}
   chat_completion_v1_chat_completions_post:
     speakeasy-default-chat-completion-v1-chat-completions-post:
       requestBody:
         application/json: {"model": "azureai", "stream": false, "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
       responses:
         "200":
-          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}]}
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}, "created": 1702256327, "choices": []}
         "422":
           application/json: {}
   ocr_v1_ocr_post:
     speakeasy-default-ocr-v1-ocr-post:
       requestBody:
-        application/json: {"model": "Focus", "document": {"type": "file", "file_id": "d36f3178-f390-4532-8486-0e0b118bbaba"}}
+        application/json: {"model": "CX-9", "document": {"document_url": "https://upset-labourer.net/", "type": "document_url"}}
       responses:
         "200":
-          application/json: {"pages": [], "model": "Expedition", "usage_info": {"pages_processed": 487025}}
+          application/json: {"pages": [], "model": "Golf", "usage_info": {"pages_processed": 944919}}
         "422":
           application/json: {}
-examplesVersion: 1.0.0
+examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## SDK Changes Detected:\n* `mistralazure.chat.complete()`: \n  *  `request.messages.[].[assistant].content.[array]` **Changed** **Breaking** :warning:\n"
