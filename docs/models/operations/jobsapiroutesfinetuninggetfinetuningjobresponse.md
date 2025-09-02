@@ -9,33 +9,25 @@ OK
 
 ```typescript
 const value: components.ClassifierDetailedJobOut = {
-  id: "2bd5c9c6-b618-474e-b606-6dc3d3510ae7",
-  autoStart: false,
-  model: "PT Cruiser",
-  status: "FAILED",
-  createdAt: 978229,
-  modifiedAt: 802188,
+  id: "9324efc1-74d2-4cfb-aacc-8c936806a157",
+  autoStart: true,
+  model: "Land Cruiser",
+  status: "CANCELLATION_REQUESTED",
+  createdAt: 306183,
+  modifiedAt: 163064,
   trainingFiles: [
-    "4cb613c3-fb79-49f2-84b3-d5209d4ec099",
+    "4aadd7e9-6b01-477f-86b6-3ada38b71e42",
+    "689691d3-0952-4741-a8e0-c05d353daf37",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 334544,
+      stepNumber: 738998,
       createdAt: 1716963433,
     },
   ],
-  classifierTargets: [
-    {
-      name: "<value>",
-      labels: [
-        "<value>",
-      ],
-      weight: 4582.79,
-      lossFunction: "single_class",
-    },
-  ],
+  classifierTargets: [],
 };
 ```
 
@@ -43,20 +35,20 @@ const value: components.ClassifierDetailedJobOut = {
 
 ```typescript
 const value: components.CompletionDetailedJobOut = {
-  id: "226bd2ca-ef11-4c23-bef5-dd99949326b9",
+  id: "456fe44d-6df9-48f2-930f-131af06a7b94",
   autoStart: false,
-  model: "LeBaron",
-  status: "STARTED",
-  createdAt: 161218,
-  modifiedAt: 93067,
+  model: "Taurus",
+  status: "VALIDATED",
+  createdAt: 45490,
+  modifiedAt: 318849,
   trainingFiles: [
-    "39de68c4-9272-4766-a324-3bb91910539e",
+    "c6396397-fb35-4d61-8f27-af5626373d30",
   ],
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 767361,
+      stepNumber: 738998,
       createdAt: 1716963433,
     },
   ],

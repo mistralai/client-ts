@@ -15,9 +15,7 @@ const value: components.TextChunk = {
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: {
-    url: "https://cluttered-steak.net",
-  },
+  imageUrl: "https://darling-distinction.org",
 };
 ```
 
@@ -25,7 +23,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.ToolFileChunk = {
-  tool: "code_interpreter",
+  tool: "image_generation",
   fileId: "<id>",
 };
 ```
@@ -34,7 +32,7 @@ const value: components.ToolFileChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://black-and-white-postbox.info/",
+  documentUrl: "https://other-reach.net",
 };
 ```
 
@@ -42,12 +40,7 @@ const value: components.DocumentURLChunk = {
 
 ```typescript
 const value: components.ThinkChunk = {
-  thinking: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  thinking: [],
 };
 ```
 

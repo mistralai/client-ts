@@ -16,6 +16,7 @@ Get a list of batch jobs for your organization and user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_batch_get_batch_jobs" method="get" path="/v1/batch/jobs" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -26,7 +27,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.batch.jobs.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -49,15 +49,12 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await batchJobsList(mistral, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("batchJobsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -88,6 +85,7 @@ Create a new batch job, it will be queued for processing.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_batch_create_batch_job" method="post" path="/v1/batch/jobs" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -98,13 +96,11 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.batch.jobs.create({
     inputFiles: [
-      "a621cf02-1cd9-4cf5-8403-315211a509a3",
+      "fe3343a2-3b8d-404b-ba32-a78dede2614a",
     ],
-    endpoint: "/v1/fim/completions",
-    model: "2",
+    endpoint: "/v1/classifications",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -128,20 +124,16 @@ const mistral = new MistralCore({
 async function run() {
   const res = await batchJobsCreate(mistral, {
     inputFiles: [
-      "a621cf02-1cd9-4cf5-8403-315211a509a3",
+      "fe3343a2-3b8d-404b-ba32-a78dede2614a",
     ],
-    endpoint: "/v1/fim/completions",
-    model: "2",
+    endpoint: "/v1/classifications",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("batchJobsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -172,6 +164,7 @@ Get a batch job details by its UUID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_batch_get_batch_job" method="get" path="/v1/batch/jobs/{job_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -181,10 +174,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.batch.jobs.get({
-    jobId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
+    jobId: "4017dc9f-b629-42f4-9700-8c681b9e7f0f",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -207,17 +199,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await batchJobsGet(mistral, {
-    jobId: "b888f774-3e7c-4135-a18c-6b985523c4bc",
+    jobId: "4017dc9f-b629-42f4-9700-8c681b9e7f0f",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("batchJobsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -248,6 +237,7 @@ Request the cancellation of a batch job.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_batch_cancel_batch_job" method="post" path="/v1/batch/jobs/{job_id}/cancel" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -257,10 +247,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.batch.jobs.cancel({
-    jobId: "0f713502-9233-41c6-9ebd-c570b7edb496",
+    jobId: "4fb29d1c-535b-4f0a-a1cb-2167f86da569",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -283,17 +272,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await batchJobsCancel(mistral, {
-    jobId: "0f713502-9233-41c6-9ebd-c570b7edb496",
+    jobId: "4fb29d1c-535b-4f0a-a1cb-2167f86da569",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("batchJobsCancel failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

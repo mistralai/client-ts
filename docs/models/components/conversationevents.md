@@ -6,14 +6,13 @@
 import { ConversationEvents } from "@mistralai/mistralai/models/components";
 
 let value: ConversationEvents = {
-  event: "message.output.delta",
+  event: "function.call.delta",
   data: {
-    type: "message.output.delta",
+    type: "tool.execution.started",
     outputIndex: 0,
     id: "<id>",
-    contentIndex: 0,
-    role: "assistant",
-    content: "<value>",
+    name: "code_interpreter",
+    arguments: "<value>",
   },
 };
 ```

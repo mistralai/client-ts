@@ -52,8 +52,8 @@ import {
 export type JobInIntegrations = WandbIntegration;
 
 export type Hyperparameters =
-  | ClassifierTrainingParametersIn
-  | CompletionTrainingParametersIn;
+  | CompletionTrainingParametersIn
+  | ClassifierTrainingParametersIn;
 
 export type JobInRepositories = GithubRepositoryIn;
 
@@ -82,8 +82,8 @@ export type JobIn = {
   invalidSampleSkipPercentage?: number | undefined;
   jobType?: FineTuneableModelType | null | undefined;
   hyperparameters:
-    | ClassifierTrainingParametersIn
-    | CompletionTrainingParametersIn;
+    | CompletionTrainingParametersIn
+    | ClassifierTrainingParametersIn;
   repositories?: Array<GithubRepositoryIn> | null | undefined;
   classifierTargets?: Array<ClassifierTargetIn> | null | undefined;
 };
@@ -142,14 +142,14 @@ export const Hyperparameters$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  ClassifierTrainingParametersIn$inboundSchema,
   CompletionTrainingParametersIn$inboundSchema,
+  ClassifierTrainingParametersIn$inboundSchema,
 ]);
 
 /** @internal */
 export type Hyperparameters$Outbound =
-  | ClassifierTrainingParametersIn$Outbound
-  | CompletionTrainingParametersIn$Outbound;
+  | CompletionTrainingParametersIn$Outbound
+  | ClassifierTrainingParametersIn$Outbound;
 
 /** @internal */
 export const Hyperparameters$outboundSchema: z.ZodType<
@@ -157,8 +157,8 @@ export const Hyperparameters$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Hyperparameters
 > = z.union([
-  ClassifierTrainingParametersIn$outboundSchema,
   CompletionTrainingParametersIn$outboundSchema,
+  ClassifierTrainingParametersIn$outboundSchema,
 ]);
 
 /**
@@ -251,8 +251,8 @@ export const JobIn$inboundSchema: z.ZodType<JobIn, z.ZodTypeDef, unknown> = z
     invalid_sample_skip_percentage: z.number().default(0),
     job_type: z.nullable(FineTuneableModelType$inboundSchema).optional(),
     hyperparameters: z.union([
-      ClassifierTrainingParametersIn$inboundSchema,
       CompletionTrainingParametersIn$inboundSchema,
+      ClassifierTrainingParametersIn$inboundSchema,
     ]),
     repositories: z.nullable(z.array(GithubRepositoryIn$inboundSchema))
       .optional(),
@@ -280,8 +280,8 @@ export type JobIn$Outbound = {
   invalid_sample_skip_percentage: number;
   job_type?: string | null | undefined;
   hyperparameters:
-    | ClassifierTrainingParametersIn$Outbound
-    | CompletionTrainingParametersIn$Outbound;
+    | CompletionTrainingParametersIn$Outbound
+    | ClassifierTrainingParametersIn$Outbound;
   repositories?: Array<GithubRepositoryIn$Outbound> | null | undefined;
   classifier_targets?: Array<ClassifierTargetIn$Outbound> | null | undefined;
 };
@@ -301,8 +301,8 @@ export const JobIn$outboundSchema: z.ZodType<
   invalidSampleSkipPercentage: z.number().default(0),
   jobType: z.nullable(FineTuneableModelType$outboundSchema).optional(),
   hyperparameters: z.union([
-    ClassifierTrainingParametersIn$outboundSchema,
     CompletionTrainingParametersIn$outboundSchema,
+    ClassifierTrainingParametersIn$outboundSchema,
   ]),
   repositories: z.nullable(z.array(GithubRepositoryIn$outboundSchema))
     .optional(),

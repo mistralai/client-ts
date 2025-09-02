@@ -15,14 +15,7 @@ const value: components.TextChunk = {
 
 ```typescript
 const value: components.ThinkChunk = {
-  thinking: [
-    {
-      referenceIds: [
-        298246,
-      ],
-      type: "reference",
-    },
-  ],
+  thinking: [],
 };
 ```
 

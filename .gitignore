@@ -1,3 +1,9 @@
+/examples/node_modules
+.DS_Store
+**/.speakeasy/temp/
+**/.speakeasy/logs/
+.DS_Store
+.env.*.local
 /mcp-server
 /bin
 /.eslintcache

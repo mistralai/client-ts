@@ -22,7 +22,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -47,7 +46,6 @@ async function run() {
     file: await openAsBlob("example.file"),
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -78,7 +76,6 @@ async function run() {
     agentId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -106,7 +103,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 

@@ -15,6 +15,7 @@ OCR
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ocr_v1_ocr_post" method="post" path="/v1/ocr" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -24,14 +25,13 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.ocr.process({
-    model: "Focus",
+    model: "CX-9",
     document: {
-      documentUrl: "https://dutiful-horst.org",
+      documentUrl: "https://upset-labourer.net/",
       type: "document_url",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -54,21 +54,18 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await ocrProcess(mistral, {
-    model: "Focus",
+    model: "CX-9",
     document: {
-      documentUrl: "https://dutiful-horst.org",
+      documentUrl: "https://upset-labourer.net/",
       type: "document_url",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("ocrProcess failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

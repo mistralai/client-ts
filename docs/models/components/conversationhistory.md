@@ -12,9 +12,9 @@ let value: ConversationHistory = {
   entries: [
     {
       object: "entry",
-      type: "message.output",
-      role: "assistant",
-      content: "<value>",
+      type: "function.result",
+      toolCallId: "<id>",
+      result: "<value>",
     },
   ],
 };

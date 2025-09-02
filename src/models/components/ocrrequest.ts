@@ -35,7 +35,7 @@ import {
 /**
  * Document to run OCR on
  */
-export type Document = FileChunk | ImageURLChunk | DocumentURLChunk;
+export type Document = FileChunk | DocumentURLChunk | ImageURLChunk;
 
 export type OCRRequest = {
   model: string | null;
@@ -43,7 +43,7 @@ export type OCRRequest = {
   /**
    * Document to run OCR on
    */
-  document: FileChunk | ImageURLChunk | DocumentURLChunk;
+  document: FileChunk | DocumentURLChunk | ImageURLChunk;
   /**
    * Specific pages user wants to process in various formats: single number, range, or list of both. Starts from 0
    */
@@ -77,15 +77,15 @@ export const Document$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   FileChunk$inboundSchema,
-  ImageURLChunk$inboundSchema,
   DocumentURLChunk$inboundSchema,
+  ImageURLChunk$inboundSchema,
 ]);
 
 /** @internal */
 export type Document$Outbound =
   | FileChunk$Outbound
-  | ImageURLChunk$Outbound
-  | DocumentURLChunk$Outbound;
+  | DocumentURLChunk$Outbound
+  | ImageURLChunk$Outbound;
 
 /** @internal */
 export const Document$outboundSchema: z.ZodType<
@@ -94,8 +94,8 @@ export const Document$outboundSchema: z.ZodType<
   Document
 > = z.union([
   FileChunk$outboundSchema,
-  ImageURLChunk$outboundSchema,
   DocumentURLChunk$outboundSchema,
+  ImageURLChunk$outboundSchema,
 ]);
 
 /**
@@ -135,8 +135,8 @@ export const OCRRequest$inboundSchema: z.ZodType<
   id: z.string().optional(),
   document: z.union([
     FileChunk$inboundSchema,
-    ImageURLChunk$inboundSchema,
     DocumentURLChunk$inboundSchema,
+    ImageURLChunk$inboundSchema,
   ]),
   pages: z.nullable(z.array(z.number().int())).optional(),
   include_image_base64: z.nullable(z.boolean()).optional(),
@@ -161,8 +161,8 @@ export type OCRRequest$Outbound = {
   id?: string | undefined;
   document:
     | FileChunk$Outbound
-    | ImageURLChunk$Outbound
-    | DocumentURLChunk$Outbound;
+    | DocumentURLChunk$Outbound
+    | ImageURLChunk$Outbound;
   pages?: Array<number> | null | undefined;
   include_image_base64?: boolean | null | undefined;
   image_limit?: number | null | undefined;
@@ -181,8 +181,8 @@ export const OCRRequest$outboundSchema: z.ZodType<
   id: z.string().optional(),
   document: z.union([
     FileChunk$outboundSchema,
-    ImageURLChunk$outboundSchema,
     DocumentURLChunk$outboundSchema,
+    ImageURLChunk$outboundSchema,
   ]),
   pages: z.nullable(z.array(z.number().int())).optional(),
   includeImageBase64: z.nullable(z.boolean()).optional(),

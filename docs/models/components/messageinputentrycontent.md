@@ -12,11 +12,6 @@ const value: string = "<value>";
 ### `components.MessageInputContentChunks[]`
 
 ```typescript
-const value: components.MessageInputContentChunks[] = [
-  {
-    text: "<value>",
-    type: "text",
-  },
-];
+const value: components.MessageInputContentChunks[] = [];
 ```
 

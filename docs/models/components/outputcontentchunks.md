@@ -15,7 +15,7 @@ const value: components.TextChunk = {
 
 ```typescript
 const value: components.ImageURLChunk = {
-  imageUrl: "https://ajar-reward.biz/",
+  imageUrl: "https://darling-distinction.org",
 };
 ```
 
@@ -23,7 +23,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.ToolFileChunk = {
-  tool: "web_search_premium",
+  tool: "image_generation",
   fileId: "<id>",
 };
 ```
@@ -32,7 +32,7 @@ const value: components.ToolFileChunk = {
 
 ```typescript
 const value: components.DocumentURLChunk = {
-  documentUrl: "https://swift-ostrich.org",
+  documentUrl: "https://other-reach.net",
 };
 ```
 
@@ -40,14 +40,7 @@ const value: components.DocumentURLChunk = {
 
 ```typescript
 const value: components.ThinkChunk = {
-  thinking: [
-    {
-      referenceIds: [
-        798047,
-      ],
-      type: "reference",
-    },
-  ],
+  thinking: [],
 };
 ```
 
@@ -55,7 +48,7 @@ const value: components.ThinkChunk = {
 
 ```typescript
 const value: components.ToolReferenceChunk = {
-  tool: "web_search",
+  tool: "image_generation",
   title: "<value>",
 };
 ```

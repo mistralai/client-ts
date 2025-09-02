@@ -39,16 +39,16 @@ import {
 
 export type InstructRequestInputsMessages =
   | (SystemMessage & { role: "system" })
+  | (ToolMessage & { role: "tool" })
   | (UserMessage & { role: "user" })
-  | (AssistantMessage & { role: "assistant" })
-  | (ToolMessage & { role: "tool" });
+  | (AssistantMessage & { role: "assistant" });
 
 export type InstructRequestInputs = {
   messages: Array<
     | (SystemMessage & { role: "system" })
+    | (ToolMessage & { role: "tool" })
     | (UserMessage & { role: "user" })
     | (AssistantMessage & { role: "assistant" })
-    | (ToolMessage & { role: "tool" })
   >;
 };
 
@@ -68,6 +68,9 @@ export const InstructRequestInputsMessages$inboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
+  ToolMessage$inboundSchema.and(
+    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
+  ),
   UserMessage$inboundSchema.and(
     z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
   ),
@@ -76,17 +79,14 @@ export const InstructRequestInputsMessages$inboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
-  ToolMessage$inboundSchema.and(
-    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
-  ),
 ]);
 
 /** @internal */
 export type InstructRequestInputsMessages$Outbound =
   | (SystemMessage$Outbound & { role: "system" })
+  | (ToolMessage$Outbound & { role: "tool" })
   | (UserMessage$Outbound & { role: "user" })
-  | (AssistantMessage$Outbound & { role: "assistant" })
-  | (ToolMessage$Outbound & { role: "tool" });
+  | (AssistantMessage$Outbound & { role: "assistant" });
 
 /** @internal */
 export const InstructRequestInputsMessages$outboundSchema: z.ZodType<
@@ -99,6 +99,9 @@ export const InstructRequestInputsMessages$outboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
+  ToolMessage$outboundSchema.and(
+    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
+  ),
   UserMessage$outboundSchema.and(
     z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
   ),
@@ -106,9 +109,6 @@ export const InstructRequestInputsMessages$outboundSchema: z.ZodType<
     z.object({ role: z.literal("assistant") }).transform((v) => ({
       role: v.role,
     })),
-  ),
-  ToolMessage$outboundSchema.and(
-    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
   ),
 ]);
 
@@ -158,6 +158,11 @@ export const InstructRequestInputs$inboundSchema: z.ZodType<
           role: v.role,
         })),
       ),
+      ToolMessage$inboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
       UserMessage$inboundSchema.and(
         z.object({ role: z.literal("user") }).transform((v) => ({
           role: v.role,
@@ -165,11 +170,6 @@ export const InstructRequestInputs$inboundSchema: z.ZodType<
       ),
       AssistantMessage$inboundSchema.and(
         z.object({ role: z.literal("assistant") }).transform((v) => ({
-          role: v.role,
-        })),
-      ),
-      ToolMessage$inboundSchema.and(
-        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),
@@ -181,9 +181,9 @@ export const InstructRequestInputs$inboundSchema: z.ZodType<
 export type InstructRequestInputs$Outbound = {
   messages: Array<
     | (SystemMessage$Outbound & { role: "system" })
+    | (ToolMessage$Outbound & { role: "tool" })
     | (UserMessage$Outbound & { role: "user" })
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (ToolMessage$Outbound & { role: "tool" })
   >;
 };
 
@@ -200,6 +200,11 @@ export const InstructRequestInputs$outboundSchema: z.ZodType<
           role: v.role,
         })),
       ),
+      ToolMessage$outboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
       UserMessage$outboundSchema.and(
         z.object({ role: z.literal("user") }).transform((v) => ({
           role: v.role,
@@ -207,11 +212,6 @@ export const InstructRequestInputs$outboundSchema: z.ZodType<
       ),
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }).transform((v) => ({
-          role: v.role,
-        })),
-      ),
-      ToolMessage$outboundSchema.and(
-        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),

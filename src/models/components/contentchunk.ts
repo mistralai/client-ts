@@ -51,12 +51,12 @@ import {
 
 export type ContentChunk =
   | (ImageURLChunk & { type: "image_url" })
+  | (DocumentURLChunk & { type: "document_url" })
   | (TextChunk & { type: "text" })
   | (ReferenceChunk & { type: "reference" })
   | (FileChunk & { type: "file" })
-  | (AudioChunk & { type: "input_audio" })
-  | (DocumentURLChunk & { type: "document_url" })
-  | (ThinkChunk & { type: "thinking" });
+  | (ThinkChunk & { type: "thinking" })
+  | (AudioChunk & { type: "input_audio" });
 
 /** @internal */
 export const ContentChunk$inboundSchema: z.ZodType<
@@ -66,6 +66,11 @@ export const ContentChunk$inboundSchema: z.ZodType<
 > = z.union([
   ImageURLChunk$inboundSchema.and(
     z.object({ type: z.literal("image_url") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  DocumentURLChunk$inboundSchema.and(
+    z.object({ type: z.literal("document_url") }).transform((v) => ({
       type: v.type,
     })),
   ),
@@ -80,18 +85,13 @@ export const ContentChunk$inboundSchema: z.ZodType<
   FileChunk$inboundSchema.and(
     z.object({ type: z.literal("file") }).transform((v) => ({ type: v.type })),
   ),
-  AudioChunk$inboundSchema.and(
-    z.object({ type: z.literal("input_audio") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  DocumentURLChunk$inboundSchema.and(
-    z.object({ type: z.literal("document_url") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
   ThinkChunk$inboundSchema.and(
     z.object({ type: z.literal("thinking") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  AudioChunk$inboundSchema.and(
+    z.object({ type: z.literal("input_audio") }).transform((v) => ({
       type: v.type,
     })),
   ),
@@ -100,12 +100,12 @@ export const ContentChunk$inboundSchema: z.ZodType<
 /** @internal */
 export type ContentChunk$Outbound =
   | (ImageURLChunk$Outbound & { type: "image_url" })
+  | (DocumentURLChunk$Outbound & { type: "document_url" })
   | (TextChunk$Outbound & { type: "text" })
   | (ReferenceChunk$Outbound & { type: "reference" })
   | (FileChunk$Outbound & { type: "file" })
-  | (AudioChunk$Outbound & { type: "input_audio" })
-  | (DocumentURLChunk$Outbound & { type: "document_url" })
-  | (ThinkChunk$Outbound & { type: "thinking" });
+  | (ThinkChunk$Outbound & { type: "thinking" })
+  | (AudioChunk$Outbound & { type: "input_audio" });
 
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
@@ -115,6 +115,11 @@ export const ContentChunk$outboundSchema: z.ZodType<
 > = z.union([
   ImageURLChunk$outboundSchema.and(
     z.object({ type: z.literal("image_url") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  DocumentURLChunk$outboundSchema.and(
+    z.object({ type: z.literal("document_url") }).transform((v) => ({
       type: v.type,
     })),
   ),
@@ -129,18 +134,13 @@ export const ContentChunk$outboundSchema: z.ZodType<
   FileChunk$outboundSchema.and(
     z.object({ type: z.literal("file") }).transform((v) => ({ type: v.type })),
   ),
-  AudioChunk$outboundSchema.and(
-    z.object({ type: z.literal("input_audio") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
-  DocumentURLChunk$outboundSchema.and(
-    z.object({ type: z.literal("document_url") }).transform((v) => ({
-      type: v.type,
-    })),
-  ),
   ThinkChunk$outboundSchema.and(
     z.object({ type: z.literal("thinking") }).transform((v) => ({
+      type: v.type,
+    })),
+  ),
+  AudioChunk$outboundSchema.and(
+    z.object({ type: z.literal("input_audio") }).transform((v) => ({
       type: v.type,
     })),
   ),

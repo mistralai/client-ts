@@ -21,12 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      inputAudio: "<value>",
-      type: "input_audio",
-    },
-  ],
+  content: [],
 };
 ```
 
@@ -34,14 +29,7 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      referenceIds: [
-        596185,
-      ],
-      type: "reference",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

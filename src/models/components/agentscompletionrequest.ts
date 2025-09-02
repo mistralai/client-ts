@@ -73,9 +73,9 @@ export type AgentsCompletionRequestStop = string | Array<string>;
 
 export type AgentsCompletionRequestMessages =
   | (SystemMessage & { role: "system" })
+  | (ToolMessage & { role: "tool" })
   | (UserMessage & { role: "user" })
-  | (AssistantMessage & { role: "assistant" })
-  | (ToolMessage & { role: "tool" });
+  | (AssistantMessage & { role: "assistant" });
 
 export type AgentsCompletionRequestToolChoice = ToolChoice | ToolChoiceEnum;
 
@@ -101,9 +101,9 @@ export type AgentsCompletionRequest = {
    */
   messages: Array<
     | (SystemMessage & { role: "system" })
+    | (ToolMessage & { role: "tool" })
     | (UserMessage & { role: "user" })
     | (AssistantMessage & { role: "assistant" })
-    | (ToolMessage & { role: "tool" })
   >;
   responseFormat?: ResponseFormat | undefined;
   tools?: Array<Tool> | null | undefined;
@@ -193,6 +193,9 @@ export const AgentsCompletionRequestMessages$inboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
+  ToolMessage$inboundSchema.and(
+    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
+  ),
   UserMessage$inboundSchema.and(
     z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
   ),
@@ -201,17 +204,14 @@ export const AgentsCompletionRequestMessages$inboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
-  ToolMessage$inboundSchema.and(
-    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
-  ),
 ]);
 
 /** @internal */
 export type AgentsCompletionRequestMessages$Outbound =
   | (SystemMessage$Outbound & { role: "system" })
+  | (ToolMessage$Outbound & { role: "tool" })
   | (UserMessage$Outbound & { role: "user" })
-  | (AssistantMessage$Outbound & { role: "assistant" })
-  | (ToolMessage$Outbound & { role: "tool" });
+  | (AssistantMessage$Outbound & { role: "assistant" });
 
 /** @internal */
 export const AgentsCompletionRequestMessages$outboundSchema: z.ZodType<
@@ -224,6 +224,9 @@ export const AgentsCompletionRequestMessages$outboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
+  ToolMessage$outboundSchema.and(
+    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
+  ),
   UserMessage$outboundSchema.and(
     z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
   ),
@@ -231,9 +234,6 @@ export const AgentsCompletionRequestMessages$outboundSchema: z.ZodType<
     z.object({ role: z.literal("assistant") }).transform((v) => ({
       role: v.role,
     })),
-  ),
-  ToolMessage$outboundSchema.and(
-    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
   ),
 ]);
 
@@ -340,6 +340,11 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
           role: v.role,
         })),
       ),
+      ToolMessage$inboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
       UserMessage$inboundSchema.and(
         z.object({ role: z.literal("user") }).transform((v) => ({
           role: v.role,
@@ -347,11 +352,6 @@ export const AgentsCompletionRequest$inboundSchema: z.ZodType<
       ),
       AssistantMessage$inboundSchema.and(
         z.object({ role: z.literal("assistant") }).transform((v) => ({
-          role: v.role,
-        })),
-      ),
-      ToolMessage$inboundSchema.and(
-        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),
@@ -390,9 +390,9 @@ export type AgentsCompletionRequest$Outbound = {
   random_seed?: number | null | undefined;
   messages: Array<
     | (SystemMessage$Outbound & { role: "system" })
+    | (ToolMessage$Outbound & { role: "tool" })
     | (UserMessage$Outbound & { role: "user" })
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (ToolMessage$Outbound & { role: "tool" })
   >;
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
@@ -423,6 +423,11 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
           role: v.role,
         })),
       ),
+      ToolMessage$outboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
       UserMessage$outboundSchema.and(
         z.object({ role: z.literal("user") }).transform((v) => ({
           role: v.role,
@@ -430,11 +435,6 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
       ),
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }).transform((v) => ({
-          role: v.role,
-        })),
-      ),
-      ToolMessage$outboundSchema.and(
-        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),

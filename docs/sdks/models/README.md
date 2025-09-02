@@ -20,6 +20,7 @@ List all models available to the user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="list_models_v1_models_get" method="get" path="/v1/models" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -30,7 +31,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.models.list();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -53,15 +53,12 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await modelsList(mistral);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("modelsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -92,6 +89,7 @@ Retrieve information about a model.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="retrieve_model_v1_models__model_id__get" method="get" path="/v1/models/{model_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -104,7 +102,6 @@ async function run() {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -129,15 +126,12 @@ async function run() {
   const res = await modelsRetrieve(mistral, {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("modelsRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -169,6 +163,7 @@ Delete a fine-tuned model.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="delete_model_v1_models__model_id__delete" method="delete" path="/v1/models/{model_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -181,7 +176,6 @@ async function run() {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -206,15 +200,12 @@ async function run() {
   const res = await modelsDelete(mistral, {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("modelsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -246,6 +237,7 @@ Update a model name or description.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_fine_tuning_update_fine_tuned_model" method="patch" path="/v1/fine_tuning/models/{model_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -259,7 +251,6 @@ async function run() {
     updateFTModelIn: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -285,15 +276,12 @@ async function run() {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
     updateFTModelIn: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("modelsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -324,6 +312,7 @@ Archive a fine-tuned model.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_fine_tuning_archive_fine_tuned_model" method="post" path="/v1/fine_tuning/models/{model_id}/archive" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -336,7 +325,6 @@ async function run() {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -361,15 +349,12 @@ async function run() {
   const res = await modelsArchive(mistral, {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("modelsArchive failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -400,6 +385,7 @@ Un-archive a fine-tuned model.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="jobs_api_routes_fine_tuning_unarchive_fine_tuned_model" method="delete" path="/v1/fine_tuning/models/{model_id}/archive" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -412,7 +398,6 @@ async function run() {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -437,15 +422,12 @@ async function run() {
   const res = await modelsUnarchive(mistral, {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("modelsUnarchive failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

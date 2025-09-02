@@ -17,6 +17,7 @@ Given a library, list all of the Entity that have access and to what level.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_share_list_v1" method="get" path="/v1/libraries/{library_id}/share" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -26,10 +27,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.accesses.list({
-    libraryId: "c8a232aa-0b11-4b8a-b005-71e9e705d0e6",
+    libraryId: "d2169833-d8e2-416e-a372-76518d3d99c2",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -52,17 +52,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesAccessesList(mistral, {
-    libraryId: "c8a232aa-0b11-4b8a-b005-71e9e705d0e6",
+    libraryId: "d2169833-d8e2-416e-a372-76518d3d99c2",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesAccessesList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -94,6 +91,7 @@ Given a library id, you can create or update the access level of an entity. You 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_share_create_v1" method="put" path="/v1/libraries/{library_id}/share" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -103,16 +101,15 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.accesses.updateOrCreate({
-    libraryId: "e24dc3a8-24c6-4b2e-8108-3f00cec89687",
+    libraryId: "36de3a24-5b1c-4c8f-9d84-d5642205a976",
     sharingIn: {
-      orgId: "9543b76d-ef36-4022-8fc2-3cdec423babe",
-      level: "Editor",
-      shareWithUuid: "5c2bae94-726a-4824-98ee-0429525e4adf",
-      shareWithType: "Org",
+      orgId: "aadd9ae1-f285-4437-884a-091c77efa6fd",
+      level: "Viewer",
+      shareWithUuid: "0ae92ecb-21ed-47c5-9f7e-0b2cbe325a20",
+      shareWithType: "User",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -135,23 +132,20 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesAccessesUpdateOrCreate(mistral, {
-    libraryId: "e24dc3a8-24c6-4b2e-8108-3f00cec89687",
+    libraryId: "36de3a24-5b1c-4c8f-9d84-d5642205a976",
     sharingIn: {
-      orgId: "9543b76d-ef36-4022-8fc2-3cdec423babe",
-      level: "Editor",
-      shareWithUuid: "5c2bae94-726a-4824-98ee-0429525e4adf",
-      shareWithType: "Org",
+      orgId: "aadd9ae1-f285-4437-884a-091c77efa6fd",
+      level: "Viewer",
+      shareWithUuid: "0ae92ecb-21ed-47c5-9f7e-0b2cbe325a20",
+      shareWithType: "User",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesAccessesUpdateOrCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -183,6 +177,7 @@ Given a library id, you can delete the access level of an entity. An owner canno
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="libraries_share_delete_v1" method="delete" path="/v1/libraries/{library_id}/share" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -192,15 +187,14 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.accesses.delete({
-    libraryId: "460ea4f9-1d0d-46c0-ba7e-bf643773e381",
+    libraryId: "709e3cad-9fb2-4f4e-bf88-143cf1808107",
     sharingDelete: {
-      orgId: "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e",
-      shareWithUuid: "7aa10743-a04f-44af-84fe-b54259caa1ba",
-      shareWithType: "Workspace",
+      orgId: "0814a235-c2d0-4814-875a-4b85f93d3dc7",
+      shareWithUuid: "b843cc47-ce8f-4354-8cfc-5fcd7fb2865b",
+      shareWithType: "User",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -223,22 +217,19 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesAccessesDelete(mistral, {
-    libraryId: "460ea4f9-1d0d-46c0-ba7e-bf643773e381",
+    libraryId: "709e3cad-9fb2-4f4e-bf88-143cf1808107",
     sharingDelete: {
-      orgId: "8b6fe91a-a0b1-4b3e-ab7b-e83a32f2399e",
-      shareWithUuid: "7aa10743-a04f-44af-84fe-b54259caa1ba",
-      shareWithType: "Workspace",
+      orgId: "0814a235-c2d0-4814-875a-4b85f93d3dc7",
+      shareWithUuid: "b843cc47-ce8f-4354-8cfc-5fcd7fb2865b",
+      shareWithType: "User",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesAccessesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

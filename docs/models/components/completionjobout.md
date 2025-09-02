@@ -6,14 +6,16 @@
 import { CompletionJobOut } from "@mistralai/mistralai/models/components";
 
 let value: CompletionJobOut = {
-  id: "14fa86c2-fd90-4be8-b51c-e1c0f984e4df",
+  id: "ad07d8f7-c8e8-41df-a05e-52088cd2b04b",
   autoStart: false,
-  model: "Fortwo",
-  status: "QUEUED",
-  createdAt: 472414,
-  modifiedAt: 438256,
+  model: "Jetta",
+  status: "CANCELLED",
+  createdAt: 508554,
+  modifiedAt: 47551,
   trainingFiles: [
-    "36527480-ed8d-4f1a-8ff9-2903f5a4fb5c",
+    "0befa7d5-b534-4a53-8e8f-ae6a6f8e2d47",
+    "fc6abeaa-0a91-4111-9774-6e9c6a29d66a",
+    "f06b4756-0fe1-4e67-8ec2-5b8b8680fedc",
   ],
   hyperparameters: {},
 };

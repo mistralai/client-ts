@@ -7,13 +7,8 @@
 
 ```typescript
 const value: components.MessageInputEntry = {
-  role: "user",
-  content: [
-    {
-      documentUrl: "https://intrepid-technician.info",
-      type: "document_url",
-    },
-  ],
+  role: "assistant",
+  content: [],
 };
 ```
 
@@ -40,7 +35,11 @@ const value: components.FunctionResultEntry = {
 const value: components.FunctionCallEntry = {
   toolCallId: "<id>",
   name: "<value>",
-  arguments: "<value>",
+  arguments: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
 };
 ```
 
@@ -48,7 +47,7 @@ const value: components.FunctionCallEntry = {
 
 ```typescript
 const value: components.ToolExecutionEntry = {
-  name: "document_library",
+  name: "web_search",
   arguments: "<value>",
 };
 ```

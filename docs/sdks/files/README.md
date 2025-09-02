@@ -24,6 +24,7 @@ Please contact us if you need to increase these storage limits.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_upload_file" method="post" path="/v1/files" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 import { openAsBlob } from "node:fs";
@@ -37,7 +38,6 @@ async function run() {
     file: await openAsBlob("example.file"),
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -63,15 +63,12 @@ async function run() {
   const res = await filesUpload(mistral, {
     file: await openAsBlob("example.file"),
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesUpload failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -102,6 +99,7 @@ Returns a list of files that belong to the user's organization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_list_files" method="get" path="/v1/files" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -112,7 +110,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.files.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -135,15 +132,12 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesList(mistral, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -174,6 +168,7 @@ Returns information about a specific file.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_retrieve_file" method="get" path="/v1/files/{file_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -183,10 +178,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.files.retrieve({
-    fileId: "<id>",
+    fileId: "f2a27685-ca4e-4dc2-9f2b-88c422c3e0f6",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -209,17 +203,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesRetrieve(mistral, {
-    fileId: "<id>",
+    fileId: "f2a27685-ca4e-4dc2-9f2b-88c422c3e0f6",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -250,6 +241,7 @@ Delete a file.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_delete_file" method="delete" path="/v1/files/{file_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -259,10 +251,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.files.delete({
-    fileId: "<id>",
+    fileId: "3b6d45eb-e30b-416f-8019-f47e2e93d930",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -285,17 +276,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesDelete(mistral, {
-    fileId: "<id>",
+    fileId: "3b6d45eb-e30b-416f-8019-f47e2e93d930",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -326,6 +314,7 @@ Download a file
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_download_file" method="get" path="/v1/files/{file_id}/content" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -335,10 +324,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.files.download({
-    fileId: "<id>",
+    fileId: "f8919994-a4a1-46b2-8b5b-06335a4300ce",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -361,17 +349,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesDownload(mistral, {
-    fileId: "<id>",
+    fileId: "f8919994-a4a1-46b2-8b5b-06335a4300ce",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesDownload failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -402,6 +387,7 @@ Get Signed Url
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_get_signed_url" method="get" path="/v1/files/{file_id}/url" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -411,10 +397,9 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.files.getSignedUrl({
-    fileId: "<id>",
+    fileId: "06a020ab-355c-49a6-b19d-304b7c01699f",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -437,17 +422,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await filesGetSignedUrl(mistral, {
-    fileId: "<id>",
+    fileId: "06a020ab-355c-49a6-b19d-304b7c01699f",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesGetSignedUrl failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

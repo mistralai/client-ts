@@ -44,12 +44,12 @@ import {
 } from "./toolexecutionentry.js";
 
 export type InputEntries =
-  | FunctionResultEntry
-  | MessageInputEntry
+  | AgentHandoffEntry
   | FunctionCallEntry
+  | MessageInputEntry
+  | FunctionResultEntry
   | ToolExecutionEntry
-  | MessageOutputEntry
-  | AgentHandoffEntry;
+  | MessageOutputEntry;
 
 /** @internal */
 export const InputEntries$inboundSchema: z.ZodType<
@@ -57,22 +57,22 @@ export const InputEntries$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  FunctionResultEntry$inboundSchema,
-  MessageInputEntry$inboundSchema,
+  AgentHandoffEntry$inboundSchema,
   FunctionCallEntry$inboundSchema,
+  MessageInputEntry$inboundSchema,
+  FunctionResultEntry$inboundSchema,
   ToolExecutionEntry$inboundSchema,
   MessageOutputEntry$inboundSchema,
-  AgentHandoffEntry$inboundSchema,
 ]);
 
 /** @internal */
 export type InputEntries$Outbound =
-  | FunctionResultEntry$Outbound
-  | MessageInputEntry$Outbound
+  | AgentHandoffEntry$Outbound
   | FunctionCallEntry$Outbound
+  | MessageInputEntry$Outbound
+  | FunctionResultEntry$Outbound
   | ToolExecutionEntry$Outbound
-  | MessageOutputEntry$Outbound
-  | AgentHandoffEntry$Outbound;
+  | MessageOutputEntry$Outbound;
 
 /** @internal */
 export const InputEntries$outboundSchema: z.ZodType<
@@ -80,12 +80,12 @@ export const InputEntries$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InputEntries
 > = z.union([
-  FunctionResultEntry$outboundSchema,
-  MessageInputEntry$outboundSchema,
+  AgentHandoffEntry$outboundSchema,
   FunctionCallEntry$outboundSchema,
+  MessageInputEntry$outboundSchema,
+  FunctionResultEntry$outboundSchema,
   ToolExecutionEntry$outboundSchema,
   MessageOutputEntry$outboundSchema,
-  AgentHandoffEntry$outboundSchema,
 ]);
 
 /**

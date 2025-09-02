@@ -8,9 +8,8 @@ import { MessageOutputEvent } from "@mistralai/mistralai/models/components";
 let value: MessageOutputEvent = {
   id: "<id>",
   content: {
-    type: "tool_reference",
-    tool: "web_search_premium",
-    title: "<value>",
+    thinking: [],
+    type: "thinking",
   },
 };
 ```

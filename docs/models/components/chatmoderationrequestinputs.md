@@ -10,12 +10,7 @@ Chat to classify
 ```typescript
 const value: components.One[] = [
   {
-    content: [
-      {
-        documentUrl: "https://cavernous-pear.net",
-        type: "document_url",
-      },
-    ],
+    content: null,
     role: "user",
   },
 ];
@@ -25,12 +20,7 @@ const value: components.One[] = [
 
 ```typescript
 const value: components.Two[][] = [
-  [
-    {
-      content: "<value>",
-      role: "tool",
-    },
-  ],
+  [],
 ];
 ```
 

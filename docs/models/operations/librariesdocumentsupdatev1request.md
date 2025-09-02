@@ -6,8 +6,8 @@
 import { LibrariesDocumentsUpdateV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: LibrariesDocumentsUpdateV1Request = {
-  libraryId: "0e4c04b8-1669-4ad7-862c-b68a20597bd7",
-  documentId: "d9bbf4b5-635f-4439-847d-3698fabf6502",
+  libraryId: "f8c3cedb-476c-435b-8370-dc3e2f727191",
+  documentId: "3417b15c-8ef6-448c-be5f-d7db55388085",
   documentUpdateIn: {},
 };
 ```

@@ -7,7 +7,9 @@ import { DocumentLibraryTool } from "@mistralai/mistralai/models/components";
 
 let value: DocumentLibraryTool = {
   libraryIds: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```

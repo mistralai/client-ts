@@ -3,27 +3,11 @@
 
 ## Supported Types
 
-### `components.AssistantMessage`
-
-```typescript
-const value: components.AssistantMessage = {};
-```
-
 ### `components.SystemMessage`
 
 ```typescript
 const value: components.SystemMessage = {
-  content: [
-    {
-      thinking: [
-        {
-          text: "<value>",
-          type: "text",
-        },
-      ],
-      type: "thinking",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
@@ -31,12 +15,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: [],
 };
 ```
 
@@ -44,14 +23,13 @@ const value: components.ToolMessage = {
 
 ```typescript
 const value: components.UserMessage = {
-  content: [
-    {
-      imageUrl: {
-        url: "https://lean-packaging.com/",
-      },
-      type: "image_url",
-    },
-  ],
+  content: "<value>",
 };
+```
+
+### `components.AssistantMessage`
+
+```typescript
+const value: components.AssistantMessage = {};
 ```
 

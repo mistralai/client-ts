@@ -19,6 +19,7 @@ Create a new agent giving it instructions, tools, description. The agent is then
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_create" method="post" path="/v1/agents" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -28,11 +29,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.agents.create({
-    model: "Fiesta",
+    model: "LeBaron",
     name: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,18 +55,15 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaAgentsCreate(mistral, {
-    model: "Fiesta",
+    model: "LeBaron",
     name: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaAgentsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -98,6 +95,7 @@ Retrieve a list of agent entities sorted by creation time.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_list" method="get" path="/v1/agents" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -108,7 +106,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.agents.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -131,15 +128,12 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaAgentsList(mistral, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaAgentsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -171,6 +165,7 @@ Given an agent retrieve an agent entity with its attributes.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_get" method="get" path="/v1/agents/{agent_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -183,7 +178,6 @@ async function run() {
     agentId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -208,15 +202,12 @@ async function run() {
   const res = await betaAgentsGet(mistral, {
     agentId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaAgentsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -248,6 +239,7 @@ Update an agent attributes and create a new version.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_update" method="patch" path="/v1/agents/{agent_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -261,7 +253,6 @@ async function run() {
     agentUpdateRequest: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -287,15 +278,12 @@ async function run() {
     agentId: "<id>",
     agentUpdateRequest: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaAgentsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -327,6 +315,7 @@ Switch the version of an agent.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_update_version" method="patch" path="/v1/agents/{agent_id}/version" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -337,10 +326,9 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.agents.updateVersion({
     agentId: "<id>",
-    version: 193920,
+    version: 157995,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -364,17 +352,14 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaAgentsUpdateVersion(mistral, {
     agentId: "<id>",
-    version: 193920,
+    version: 157995,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaAgentsUpdateVersion failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

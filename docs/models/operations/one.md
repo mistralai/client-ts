@@ -7,14 +7,14 @@
 
 ```typescript
 const value: components.ClassifierJobOut = {
-  id: "50a31ef4-427d-4bd3-9be4-b64f5167cfde",
-  autoStart: false,
-  model: "Model T",
-  status: "VALIDATED",
-  createdAt: 69587,
-  modifiedAt: 365473,
+  id: "94361cba-dbfe-4cb8-b157-dba88d484a3b",
+  autoStart: true,
+  model: "Mercielago",
+  status: "FAILED_VALIDATION",
+  createdAt: 604693,
+  modifiedAt: 540214,
   trainingFiles: [
-    "b4dc35d3-55c0-4196-aa4e-c1cffb194fb9",
+    "8db2006d-0f95-498b-8a1c-8b96bd790c50",
   ],
   hyperparameters: {},
 };
@@ -24,14 +24,16 @@ const value: components.ClassifierJobOut = {
 
 ```typescript
 const value: components.CompletionJobOut = {
-  id: "75e506ca-f1e5-4761-a3b0-20d92cfee094",
+  id: "ad07d8f7-c8e8-41df-a05e-52088cd2b04b",
   autoStart: false,
-  model: "Corvette",
-  status: "STARTED",
-  createdAt: 444494,
-  modifiedAt: 495096,
+  model: "Jetta",
+  status: "CANCELLED",
+  createdAt: 508554,
+  modifiedAt: 47551,
   trainingFiles: [
-    "f04dadac-73c9-42cf-b541-af2710ad5e13",
+    "0befa7d5-b534-4a53-8e8f-ae6a6f8e2d47",
+    "fc6abeaa-0a91-4111-9774-6e9c6a29d66a",
+    "f06b4756-0fe1-4e67-8ec2-5b8b8680fedc",
   ],
   hyperparameters: {},
 };

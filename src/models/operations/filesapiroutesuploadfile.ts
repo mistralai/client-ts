@@ -10,6 +10,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FilesApiRoutesUploadFileMultiPartBodyParams = {
+  purpose?: components.FilePurpose | undefined;
   /**
    * The File object (not file name) to be uploaded.
    *
@@ -24,7 +25,6 @@ export type FilesApiRoutesUploadFileMultiPartBodyParams = {
    *  ```
    */
   file: components.FileT | Blob;
-  purpose?: components.FilePurpose | undefined;
 };
 
 /** @internal */
@@ -34,14 +34,14 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    file: components.FileT$inboundSchema,
     purpose: components.FilePurpose$inboundSchema.optional(),
+    file: components.FileT$inboundSchema,
   });
 
 /** @internal */
 export type FilesApiRoutesUploadFileMultiPartBodyParams$Outbound = {
-  file: components.FileT$Outbound | Blob;
   purpose?: string | undefined;
+  file: components.FileT$Outbound | Blob;
 };
 
 /** @internal */
@@ -51,8 +51,8 @@ export const FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema:
     z.ZodTypeDef,
     FilesApiRoutesUploadFileMultiPartBodyParams
   > = z.object({
-    file: components.FileT$outboundSchema.or(blobLikeSchema),
     purpose: components.FilePurpose$outboundSchema.optional(),
+    file: components.FileT$outboundSchema.or(blobLikeSchema),
   });
 
 /**

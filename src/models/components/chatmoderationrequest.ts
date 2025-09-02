@@ -34,15 +34,15 @@ import {
 
 export type Two =
   | (SystemMessage & { role: "system" })
+  | (ToolMessage & { role: "tool" })
   | (UserMessage & { role: "user" })
-  | (AssistantMessage & { role: "assistant" })
-  | (ToolMessage & { role: "tool" });
+  | (AssistantMessage & { role: "assistant" });
 
 export type One =
   | (SystemMessage & { role: "system" })
+  | (ToolMessage & { role: "tool" })
   | (UserMessage & { role: "user" })
-  | (AssistantMessage & { role: "assistant" })
-  | (ToolMessage & { role: "tool" });
+  | (AssistantMessage & { role: "assistant" });
 
 /**
  * Chat to classify
@@ -50,16 +50,16 @@ export type One =
 export type ChatModerationRequestInputs =
   | Array<
     | (SystemMessage & { role: "system" })
+    | (ToolMessage & { role: "tool" })
     | (UserMessage & { role: "user" })
     | (AssistantMessage & { role: "assistant" })
-    | (ToolMessage & { role: "tool" })
   >
   | Array<
     Array<
       | (SystemMessage & { role: "system" })
+      | (ToolMessage & { role: "tool" })
       | (UserMessage & { role: "user" })
       | (AssistantMessage & { role: "assistant" })
-      | (ToolMessage & { role: "tool" })
     >
   >;
 
@@ -70,16 +70,16 @@ export type ChatModerationRequest = {
   inputs:
     | Array<
       | (SystemMessage & { role: "system" })
+      | (ToolMessage & { role: "tool" })
       | (UserMessage & { role: "user" })
       | (AssistantMessage & { role: "assistant" })
-      | (ToolMessage & { role: "tool" })
     >
     | Array<
       Array<
         | (SystemMessage & { role: "system" })
+        | (ToolMessage & { role: "tool" })
         | (UserMessage & { role: "user" })
         | (AssistantMessage & { role: "assistant" })
-        | (ToolMessage & { role: "tool" })
       >
     >;
   model: string;
@@ -93,6 +93,11 @@ export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
         role: v.role,
       })),
     ),
+    ToolMessage$inboundSchema.and(
+      z.object({ role: z.literal("tool") }).transform((v) => ({
+        role: v.role,
+      })),
+    ),
     UserMessage$inboundSchema.and(
       z.object({ role: z.literal("user") }).transform((v) => ({
         role: v.role,
@@ -103,26 +108,26 @@ export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
         role: v.role,
       })),
     ),
-    ToolMessage$inboundSchema.and(
-      z.object({ role: z.literal("tool") }).transform((v) => ({
-        role: v.role,
-      })),
-    ),
   ],
 );
 
 /** @internal */
 export type Two$Outbound =
   | (SystemMessage$Outbound & { role: "system" })
+  | (ToolMessage$Outbound & { role: "tool" })
   | (UserMessage$Outbound & { role: "user" })
-  | (AssistantMessage$Outbound & { role: "assistant" })
-  | (ToolMessage$Outbound & { role: "tool" });
+  | (AssistantMessage$Outbound & { role: "assistant" });
 
 /** @internal */
 export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
   .union([
     SystemMessage$outboundSchema.and(
       z.object({ role: z.literal("system") }).transform((v) => ({
+        role: v.role,
+      })),
+    ),
+    ToolMessage$outboundSchema.and(
+      z.object({ role: z.literal("tool") }).transform((v) => ({
         role: v.role,
       })),
     ),
@@ -133,11 +138,6 @@ export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
     ),
     AssistantMessage$outboundSchema.and(
       z.object({ role: z.literal("assistant") }).transform((v) => ({
-        role: v.role,
-      })),
-    ),
-    ToolMessage$outboundSchema.and(
-      z.object({ role: z.literal("tool") }).transform((v) => ({
         role: v.role,
       })),
     ),
@@ -178,6 +178,11 @@ export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z.union(
         role: v.role,
       })),
     ),
+    ToolMessage$inboundSchema.and(
+      z.object({ role: z.literal("tool") }).transform((v) => ({
+        role: v.role,
+      })),
+    ),
     UserMessage$inboundSchema.and(
       z.object({ role: z.literal("user") }).transform((v) => ({
         role: v.role,
@@ -188,26 +193,26 @@ export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z.union(
         role: v.role,
       })),
     ),
-    ToolMessage$inboundSchema.and(
-      z.object({ role: z.literal("tool") }).transform((v) => ({
-        role: v.role,
-      })),
-    ),
   ],
 );
 
 /** @internal */
 export type One$Outbound =
   | (SystemMessage$Outbound & { role: "system" })
+  | (ToolMessage$Outbound & { role: "tool" })
   | (UserMessage$Outbound & { role: "user" })
-  | (AssistantMessage$Outbound & { role: "assistant" })
-  | (ToolMessage$Outbound & { role: "tool" });
+  | (AssistantMessage$Outbound & { role: "assistant" });
 
 /** @internal */
 export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
   .union([
     SystemMessage$outboundSchema.and(
       z.object({ role: z.literal("system") }).transform((v) => ({
+        role: v.role,
+      })),
+    ),
+    ToolMessage$outboundSchema.and(
+      z.object({ role: z.literal("tool") }).transform((v) => ({
         role: v.role,
       })),
     ),
@@ -218,11 +223,6 @@ export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
     ),
     AssistantMessage$outboundSchema.and(
       z.object({ role: z.literal("assistant") }).transform((v) => ({
-        role: v.role,
-      })),
-    ),
-    ToolMessage$outboundSchema.and(
-      z.object({ role: z.literal("tool") }).transform((v) => ({
         role: v.role,
       })),
     ),
@@ -268,6 +268,11 @@ export const ChatModerationRequestInputs$inboundSchema: z.ZodType<
           role: v.role,
         })),
       ),
+      ToolMessage$inboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
       UserMessage$inboundSchema.and(
         z.object({ role: z.literal("user") }).transform((v) => ({
           role: v.role,
@@ -275,11 +280,6 @@ export const ChatModerationRequestInputs$inboundSchema: z.ZodType<
       ),
       AssistantMessage$inboundSchema.and(
         z.object({ role: z.literal("assistant") }).transform((v) => ({
-          role: v.role,
-        })),
-      ),
-      ToolMessage$inboundSchema.and(
-        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),
@@ -293,6 +293,11 @@ export const ChatModerationRequestInputs$inboundSchema: z.ZodType<
             role: v.role,
           })),
         ),
+        ToolMessage$inboundSchema.and(
+          z.object({ role: z.literal("tool") }).transform((v) => ({
+            role: v.role,
+          })),
+        ),
         UserMessage$inboundSchema.and(
           z.object({ role: z.literal("user") }).transform((v) => ({
             role: v.role,
@@ -300,11 +305,6 @@ export const ChatModerationRequestInputs$inboundSchema: z.ZodType<
         ),
         AssistantMessage$inboundSchema.and(
           z.object({ role: z.literal("assistant") }).transform((v) => ({
-            role: v.role,
-          })),
-        ),
-        ToolMessage$inboundSchema.and(
-          z.object({ role: z.literal("tool") }).transform((v) => ({
             role: v.role,
           })),
         ),
@@ -317,16 +317,16 @@ export const ChatModerationRequestInputs$inboundSchema: z.ZodType<
 export type ChatModerationRequestInputs$Outbound =
   | Array<
     | (SystemMessage$Outbound & { role: "system" })
+    | (ToolMessage$Outbound & { role: "tool" })
     | (UserMessage$Outbound & { role: "user" })
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (ToolMessage$Outbound & { role: "tool" })
   >
   | Array<
     Array<
       | (SystemMessage$Outbound & { role: "system" })
+      | (ToolMessage$Outbound & { role: "tool" })
       | (UserMessage$Outbound & { role: "user" })
       | (AssistantMessage$Outbound & { role: "assistant" })
-      | (ToolMessage$Outbound & { role: "tool" })
     >
   >;
 
@@ -343,6 +343,11 @@ export const ChatModerationRequestInputs$outboundSchema: z.ZodType<
           role: v.role,
         })),
       ),
+      ToolMessage$outboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
       UserMessage$outboundSchema.and(
         z.object({ role: z.literal("user") }).transform((v) => ({
           role: v.role,
@@ -350,11 +355,6 @@ export const ChatModerationRequestInputs$outboundSchema: z.ZodType<
       ),
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }).transform((v) => ({
-          role: v.role,
-        })),
-      ),
-      ToolMessage$outboundSchema.and(
-        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),
@@ -368,6 +368,11 @@ export const ChatModerationRequestInputs$outboundSchema: z.ZodType<
             role: v.role,
           })),
         ),
+        ToolMessage$outboundSchema.and(
+          z.object({ role: z.literal("tool") }).transform((v) => ({
+            role: v.role,
+          })),
+        ),
         UserMessage$outboundSchema.and(
           z.object({ role: z.literal("user") }).transform((v) => ({
             role: v.role,
@@ -375,11 +380,6 @@ export const ChatModerationRequestInputs$outboundSchema: z.ZodType<
         ),
         AssistantMessage$outboundSchema.and(
           z.object({ role: z.literal("assistant") }).transform((v) => ({
-            role: v.role,
-          })),
-        ),
-        ToolMessage$outboundSchema.and(
-          z.object({ role: z.literal("tool") }).transform((v) => ({
             role: v.role,
           })),
         ),
@@ -435,6 +435,11 @@ export const ChatModerationRequest$inboundSchema: z.ZodType<
             role: v.role,
           })),
         ),
+        ToolMessage$inboundSchema.and(
+          z.object({ role: z.literal("tool") }).transform((v) => ({
+            role: v.role,
+          })),
+        ),
         UserMessage$inboundSchema.and(
           z.object({ role: z.literal("user") }).transform((v) => ({
             role: v.role,
@@ -442,11 +447,6 @@ export const ChatModerationRequest$inboundSchema: z.ZodType<
         ),
         AssistantMessage$inboundSchema.and(
           z.object({ role: z.literal("assistant") }).transform((v) => ({
-            role: v.role,
-          })),
-        ),
-        ToolMessage$inboundSchema.and(
-          z.object({ role: z.literal("tool") }).transform((v) => ({
             role: v.role,
           })),
         ),
@@ -460,6 +460,11 @@ export const ChatModerationRequest$inboundSchema: z.ZodType<
               role: v.role,
             })),
           ),
+          ToolMessage$inboundSchema.and(
+            z.object({ role: z.literal("tool") }).transform((v) => ({
+              role: v.role,
+            })),
+          ),
           UserMessage$inboundSchema.and(
             z.object({ role: z.literal("user") }).transform((v) => ({
               role: v.role,
@@ -467,11 +472,6 @@ export const ChatModerationRequest$inboundSchema: z.ZodType<
           ),
           AssistantMessage$inboundSchema.and(
             z.object({ role: z.literal("assistant") }).transform((v) => ({
-              role: v.role,
-            })),
-          ),
-          ToolMessage$inboundSchema.and(
-            z.object({ role: z.literal("tool") }).transform((v) => ({
               role: v.role,
             })),
           ),
@@ -491,16 +491,16 @@ export type ChatModerationRequest$Outbound = {
   input:
     | Array<
       | (SystemMessage$Outbound & { role: "system" })
+      | (ToolMessage$Outbound & { role: "tool" })
       | (UserMessage$Outbound & { role: "user" })
       | (AssistantMessage$Outbound & { role: "assistant" })
-      | (ToolMessage$Outbound & { role: "tool" })
     >
     | Array<
       Array<
         | (SystemMessage$Outbound & { role: "system" })
+        | (ToolMessage$Outbound & { role: "tool" })
         | (UserMessage$Outbound & { role: "user" })
         | (AssistantMessage$Outbound & { role: "assistant" })
-        | (ToolMessage$Outbound & { role: "tool" })
       >
     >;
   model: string;
@@ -520,6 +520,11 @@ export const ChatModerationRequest$outboundSchema: z.ZodType<
             role: v.role,
           })),
         ),
+        ToolMessage$outboundSchema.and(
+          z.object({ role: z.literal("tool") }).transform((v) => ({
+            role: v.role,
+          })),
+        ),
         UserMessage$outboundSchema.and(
           z.object({ role: z.literal("user") }).transform((v) => ({
             role: v.role,
@@ -527,11 +532,6 @@ export const ChatModerationRequest$outboundSchema: z.ZodType<
         ),
         AssistantMessage$outboundSchema.and(
           z.object({ role: z.literal("assistant") }).transform((v) => ({
-            role: v.role,
-          })),
-        ),
-        ToolMessage$outboundSchema.and(
-          z.object({ role: z.literal("tool") }).transform((v) => ({
             role: v.role,
           })),
         ),
@@ -545,6 +545,11 @@ export const ChatModerationRequest$outboundSchema: z.ZodType<
               role: v.role,
             })),
           ),
+          ToolMessage$outboundSchema.and(
+            z.object({ role: z.literal("tool") }).transform((v) => ({
+              role: v.role,
+            })),
+          ),
           UserMessage$outboundSchema.and(
             z.object({ role: z.literal("user") }).transform((v) => ({
               role: v.role,
@@ -552,11 +557,6 @@ export const ChatModerationRequest$outboundSchema: z.ZodType<
           ),
           AssistantMessage$outboundSchema.and(
             z.object({ role: z.literal("assistant") }).transform((v) => ({
-              role: v.role,
-            })),
-          ),
-          ToolMessage$outboundSchema.and(
-            z.object({ role: z.literal("tool") }).transform((v) => ({
               role: v.role,
             })),
           ),

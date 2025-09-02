@@ -21,7 +21,6 @@ specific category of applications.
 ```typescript
 import { MistralCore } from "@mistralai/mistralai/core.js";
 import { filesUpload } from "@mistralai/mistralai/funcs/filesUpload.js";
-import { SDKValidationError } from "@mistralai/mistralai/models/errors/sdkvalidationerror.js";
 import { openAsBlob } from "node:fs";
 
 // Use `MistralCore` for best tree-shaking performance.
@@ -34,28 +33,12 @@ async function run() {
   const res = await filesUpload(mistral, {
     file: await openAsBlob("example.file"),
   });
-
-  switch (true) {
-    case res.ok:
-      // The success case will be handled outside of the switch block
-      break;
-    case res.error instanceof SDKValidationError:
-      // Pretty-print validation errors.
-      return console.log(res.error.pretty());
-    case res.error instanceof Error:
-      return console.log(res.error);
-    default:
-      // TypeScript's type checking will fail on the following line if the above
-      // cases were not exhaustive.
-      res.error satisfies never;
-      throw new Error("Assertion failed: expected error checks to be exhaustive: " + res.error);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesUpload failed:", res.error);
   }
-
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
