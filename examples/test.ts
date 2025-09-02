@@ -23,7 +23,10 @@ const argv = yargs(hideBin(process.argv))
 const filesFromArgs = argv.files;
 
 // If no files are specified, run all tests
-const files = filesFromArgs && filesFromArgs.length > 0 ? filesFromArgs : globSync("src/**/*.ts");
+const files =
+  filesFromArgs && filesFromArgs.length > 0
+    ? filesFromArgs
+    : globSync("src/**/*.ts");
 
 for (const file of files) {
   try {

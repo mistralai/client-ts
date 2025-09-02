@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { Mistral } from "@mistralai/mistralai";
-import path from 'path';
+import path from "path";
 import { fileURLToPath } from "url";
 
 const apiKey = process.env["MISTRAL_API_KEY"];
@@ -19,7 +19,7 @@ const filePath = path.join(__dirname, "file.jsonl");
 const blob = new Blob([fs.readFileSync(filePath)], {
   type: "application/json",
 });
-const createdFile = await client.files.upload({ file: blob, });
+const createdFile = await client.files.upload({ file: blob });
 
 console.log(createdFile);
 

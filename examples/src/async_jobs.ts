@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { Mistral } from "@mistralai/mistralai";
-import path from 'path';
+import path from "path";
 import { fileURLToPath } from "url";
 
 const apiKey = process.env["MISTRAL_API_KEY"];
@@ -39,7 +39,9 @@ const jobs = await mistral.fineTuning.jobs.list();
 console.log(jobs);
 
 // Retrieve a job
-const retrievedJob = await mistral.fineTuning.jobs.get({ jobId: createdJob.id });
+const retrievedJob = await mistral.fineTuning.jobs.get({
+  jobId: createdJob.id,
+});
 console.log(retrievedJob);
 
 // Cancel a job

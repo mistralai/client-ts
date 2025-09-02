@@ -10,7 +10,8 @@
     "gcp": "npm run script -- ./src/gcp/async_chat_no_streaming.ts",
     "azure": "npm run script -- ./src/azure/async_chat_no_streaming.ts",
     "format": "prettier --write .",
-    "test": "tsx ./test.ts"
+    "test": "tsx ./test.ts",
+    "build:examples": "echo 'skipping build examples'"
   },
   "keywords": [],
   "author": "",
@@ -22,9 +23,10 @@
     "yargs": "^17.0.0"
   },
   "devDependencies": {
-    "glob": "^11.0.0",
     "@types/node": "^20.11.4",
+    "glob": "^11.0.0",
     "prettier": "3.3.3",
-    "tsx": "^4.7.0"
+    "tsx": "^4.7.0",
+    "typescript": "^5.9.2"
   }
 }

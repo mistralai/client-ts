@@ -35,6 +35,7 @@ typescript:
   envVarPrefix: MISTRAL
   flattenGlobalSecurity: true
   flatteningOrder: body-first
+  generateExamples: true
   imports:
     option: openapi
     paths:
