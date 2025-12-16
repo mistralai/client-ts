@@ -7,7 +7,7 @@
 
 ### Available Operations
 
-* [list](#list) - List document in a given library.
+* [list](#list) - List documents in a given library.
 * [upload](#upload) - Upload a new document.
 * [get](#get) - Retrieve the metadata of a specific document.
 * [update](#update) - Update the metadata of a specific document.

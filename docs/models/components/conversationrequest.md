@@ -14,6 +14,11 @@ let value: ConversationRequest = {
       arguments: "<value>",
     },
   ],
+  completionArgs: {
+    responseFormat: {
+      type: "text",
+    },
+  },
 };
 ```
 
@@ -26,9 +31,11 @@ let value: ConversationRequest = {
 | `store`                                                                    | *boolean*                                                                  | :heavy_minus_sign:                                                         | N/A                                                                        |
 | `handoffExecution`                                                         | [components.HandoffExecution](../../models/components/handoffexecution.md) | :heavy_minus_sign:                                                         | N/A                                                                        |
 | `instructions`                                                             | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |
-| `tools`                                                                    | *components.Tools*[]                                                       | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `tools`                                                                    | *components.Tools*[]                                                       | :heavy_minus_sign:                                                         | List of tools which are available to the model during the conversation.    |
 | `completionArgs`                                                           | [components.CompletionArgs](../../models/components/completionargs.md)     | :heavy_minus_sign:                                                         | N/A                                                                        |
 | `name`                                                                     | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |
 | `description`                                                              | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `metadata`                                                                 | Record<string, *any*>                                                      | :heavy_minus_sign:                                                         | N/A                                                                        |
 | `agentId`                                                                  | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `agentVersion`                                                             | *number*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |
 | `model`                                                                    | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |

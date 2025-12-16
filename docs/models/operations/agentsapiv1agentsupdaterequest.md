@@ -7,7 +7,13 @@ import { AgentsApiV1AgentsUpdateRequest } from "@mistralai/mistralai/models/oper
 
 let value: AgentsApiV1AgentsUpdateRequest = {
   agentId: "<id>",
-  agentUpdateRequest: {},
+  agentUpdateRequest: {
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
+  },
 };
 ```
 

@@ -13,18 +13,21 @@ export type LibraryOut = {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  ownerId: string;
+  ownerId: string | null;
   ownerType: string;
   totalSize: number;
   nbDocuments: number;
   chunkSize: number | null;
   emoji?: string | null | undefined;
   description?: string | null | undefined;
-  generatedName?: string | null | undefined;
   generatedDescription?: string | null | undefined;
   explicitUserMembersCount?: number | null | undefined;
   explicitWorkspaceMembersCount?: number | null | undefined;
   orgSharingRole?: string | null | undefined;
+  /**
+   * Generated Name
+   */
+  generatedName?: string | null | undefined;
 };
 
 /** @internal */
@@ -37,18 +40,18 @@ export const LibraryOut$inboundSchema: z.ZodType<
   name: z.string(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  owner_id: z.string(),
+  owner_id: z.nullable(z.string()),
   owner_type: z.string(),
   total_size: z.number().int(),
   nb_documents: z.number().int(),
   chunk_size: z.nullable(z.number().int()),
   emoji: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  generated_name: z.nullable(z.string()).optional(),
   generated_description: z.nullable(z.string()).optional(),
   explicit_user_members_count: z.nullable(z.number().int()).optional(),
   explicit_workspace_members_count: z.nullable(z.number().int()).optional(),
   org_sharing_role: z.nullable(z.string()).optional(),
+  generated_name: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -58,11 +61,11 @@ export const LibraryOut$inboundSchema: z.ZodType<
     "total_size": "totalSize",
     "nb_documents": "nbDocuments",
     "chunk_size": "chunkSize",
-    "generated_name": "generatedName",
     "generated_description": "generatedDescription",
     "explicit_user_members_count": "explicitUserMembersCount",
     "explicit_workspace_members_count": "explicitWorkspaceMembersCount",
     "org_sharing_role": "orgSharingRole",
+    "generated_name": "generatedName",
   });
 });
 
@@ -72,18 +75,18 @@ export type LibraryOut$Outbound = {
   name: string;
   created_at: string;
   updated_at: string;
-  owner_id: string;
+  owner_id: string | null;
   owner_type: string;
   total_size: number;
   nb_documents: number;
   chunk_size: number | null;
   emoji?: string | null | undefined;
   description?: string | null | undefined;
-  generated_name?: string | null | undefined;
   generated_description?: string | null | undefined;
   explicit_user_members_count?: number | null | undefined;
   explicit_workspace_members_count?: number | null | undefined;
   org_sharing_role?: string | null | undefined;
+  generated_name?: string | null | undefined;
 };
 
 /** @internal */
@@ -96,18 +99,18 @@ export const LibraryOut$outboundSchema: z.ZodType<
   name: z.string(),
   createdAt: z.date().transform(v => v.toISOString()),
   updatedAt: z.date().transform(v => v.toISOString()),
-  ownerId: z.string(),
+  ownerId: z.nullable(z.string()),
   ownerType: z.string(),
   totalSize: z.number().int(),
   nbDocuments: z.number().int(),
   chunkSize: z.nullable(z.number().int()),
   emoji: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  generatedName: z.nullable(z.string()).optional(),
   generatedDescription: z.nullable(z.string()).optional(),
   explicitUserMembersCount: z.nullable(z.number().int()).optional(),
   explicitWorkspaceMembersCount: z.nullable(z.number().int()).optional(),
   orgSharingRole: z.nullable(z.string()).optional(),
+  generatedName: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
@@ -117,11 +120,11 @@ export const LibraryOut$outboundSchema: z.ZodType<
     totalSize: "total_size",
     nbDocuments: "nb_documents",
     chunkSize: "chunk_size",
-    generatedName: "generated_name",
     generatedDescription: "generated_description",
     explicitUserMembersCount: "explicit_user_members_count",
     explicitWorkspaceMembersCount: "explicit_workspace_members_count",
     orgSharingRole: "org_sharing_role",
+    generatedName: "generated_name",
   });
 });
 

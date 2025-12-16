@@ -6,6 +6,11 @@
 import { AgentCreationRequest } from "@mistralai/mistralai/models/components";
 
 let value: AgentCreationRequest = {
+  completionArgs: {
+    responseFormat: {
+      type: "text",
+    },
+  },
   model: "Accord",
   name: "<value>",
 };
@@ -22,3 +27,4 @@ let value: AgentCreationRequest = {
 | `name`                                                                  | *string*                                                                | :heavy_check_mark:                                                      | N/A                                                                     |
 | `description`                                                           | *string*                                                                | :heavy_minus_sign:                                                      | N/A                                                                     |
 | `handoffs`                                                              | *string*[]                                                              | :heavy_minus_sign:                                                      | N/A                                                                     |
+| `metadata`                                                              | Record<string, *any*>                                                   | :heavy_minus_sign:                                                      | N/A                                                                     |

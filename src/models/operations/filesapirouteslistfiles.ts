@@ -12,6 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type FilesApiRoutesListFilesRequest = {
   page?: number | undefined;
   pageSize?: number | undefined;
+  includeTotal?: boolean | undefined;
   sampleType?: Array<components.SampleType> | null | undefined;
   source?: Array<components.Source> | null | undefined;
   search?: string | null | undefined;
@@ -26,6 +27,7 @@ export const FilesApiRoutesListFilesRequest$inboundSchema: z.ZodType<
 > = z.object({
   page: z.number().int().default(0),
   page_size: z.number().int().default(100),
+  include_total: z.boolean().default(true),
   sample_type: z.nullable(z.array(components.SampleType$inboundSchema))
     .optional(),
   source: z.nullable(z.array(components.Source$inboundSchema)).optional(),
@@ -34,6 +36,7 @@ export const FilesApiRoutesListFilesRequest$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "page_size": "pageSize",
+    "include_total": "includeTotal",
     "sample_type": "sampleType",
   });
 });
@@ -42,6 +45,7 @@ export const FilesApiRoutesListFilesRequest$inboundSchema: z.ZodType<
 export type FilesApiRoutesListFilesRequest$Outbound = {
   page: number;
   page_size: number;
+  include_total: boolean;
   sample_type?: Array<string> | null | undefined;
   source?: Array<string> | null | undefined;
   search?: string | null | undefined;
@@ -56,6 +60,7 @@ export const FilesApiRoutesListFilesRequest$outboundSchema: z.ZodType<
 > = z.object({
   page: z.number().int().default(0),
   pageSize: z.number().int().default(100),
+  includeTotal: z.boolean().default(true),
   sampleType: z.nullable(z.array(components.SampleType$outboundSchema))
     .optional(),
   source: z.nullable(z.array(components.Source$outboundSchema)).optional(),
@@ -64,6 +69,7 @@ export const FilesApiRoutesListFilesRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
+    includeTotal: "include_total",
     sampleType: "sample_type",
   });
 });

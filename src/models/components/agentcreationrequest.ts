@@ -84,6 +84,7 @@ export type AgentCreationRequest = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -248,6 +249,7 @@ export const AgentCreationRequest$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "completion_args": "completionArgs",
@@ -272,6 +274,7 @@ export type AgentCreationRequest$Outbound = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -320,6 +323,7 @@ export const AgentCreationRequest$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     completionArgs: "completion_args",

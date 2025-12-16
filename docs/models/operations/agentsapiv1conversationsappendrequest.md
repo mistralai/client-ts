@@ -9,6 +9,11 @@ let value: AgentsApiV1ConversationsAppendRequest = {
   conversationId: "<id>",
   conversationAppendRequest: {
     inputs: "<value>",
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
   },
 };
 ```

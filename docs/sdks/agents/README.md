@@ -118,6 +118,9 @@ async function run() {
         role: "user",
       },
     ],
+    responseFormat: {
+      type: "text",
+    },
     agentId: "<id>",
   });
 
@@ -152,6 +155,9 @@ async function run() {
         role: "user",
       },
     ],
+    responseFormat: {
+      type: "text",
+    },
     agentId: "<id>",
   });
   if (res.ok) {

@@ -6,6 +6,11 @@
 import { ModelConversation } from "@mistralai/mistralai/models/components";
 
 let value: ModelConversation = {
+  completionArgs: {
+    responseFormat: {
+      type: "text",
+    },
+  },
   id: "<id>",
   createdAt: new Date("2024-06-14T04:21:29.555Z"),
   updatedAt: new Date("2025-10-08T03:17:09.039Z"),
@@ -22,6 +27,7 @@ let value: ModelConversation = {
 | `completionArgs`                                                                              | [components.CompletionArgs](../../models/components/completionargs.md)                        | :heavy_minus_sign:                                                                            | White-listed arguments from the completion API                                                |
 | `name`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | Name given to the conversation.                                                               |
 | `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | Description of the what the conversation is about.                                            |
+| `metadata`                                                                                    | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | Custom metadata for the conversation.                                                         |
 | `object`                                                                                      | [components.ModelConversationObject](../../models/components/modelconversationobject.md)      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |

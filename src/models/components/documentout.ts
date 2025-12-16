@@ -11,20 +11,22 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type DocumentOut = {
   id: string;
   libraryId: string;
-  hash: string;
-  mimeType: string;
-  extension: string;
-  size: number;
+  hash: string | null;
+  mimeType: string | null;
+  extension: string | null;
+  size: number | null;
   name: string;
   summary?: string | null | undefined;
   createdAt: Date;
   lastProcessedAt?: Date | null | undefined;
   numberOfPages?: number | null | undefined;
   processingStatus: string;
-  uploadedById: string;
+  uploadedById: string | null;
   uploadedByType: string;
   tokensProcessingMainContent?: number | null | undefined;
   tokensProcessingSummary?: number | null | undefined;
+  url?: string | null | undefined;
+  attributes?: { [k: string]: any } | null | undefined;
   tokensProcessingTotal: number;
 };
 
@@ -36,10 +38,10 @@ export const DocumentOut$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   library_id: z.string(),
-  hash: z.string(),
-  mime_type: z.string(),
-  extension: z.string(),
-  size: z.number().int(),
+  hash: z.nullable(z.string()),
+  mime_type: z.nullable(z.string()),
+  extension: z.nullable(z.string()),
+  size: z.nullable(z.number().int()),
   name: z.string(),
   summary: z.nullable(z.string()).optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -48,10 +50,12 @@ export const DocumentOut$inboundSchema: z.ZodType<
   ).optional(),
   number_of_pages: z.nullable(z.number().int()).optional(),
   processing_status: z.string(),
-  uploaded_by_id: z.string(),
+  uploaded_by_id: z.nullable(z.string()),
   uploaded_by_type: z.string(),
   tokens_processing_main_content: z.nullable(z.number().int()).optional(),
   tokens_processing_summary: z.nullable(z.number().int()).optional(),
+  url: z.nullable(z.string()).optional(),
+  attributes: z.nullable(z.record(z.any())).optional(),
   tokens_processing_total: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
@@ -73,20 +77,22 @@ export const DocumentOut$inboundSchema: z.ZodType<
 export type DocumentOut$Outbound = {
   id: string;
   library_id: string;
-  hash: string;
-  mime_type: string;
-  extension: string;
-  size: number;
+  hash: string | null;
+  mime_type: string | null;
+  extension: string | null;
+  size: number | null;
   name: string;
   summary?: string | null | undefined;
   created_at: string;
   last_processed_at?: string | null | undefined;
   number_of_pages?: number | null | undefined;
   processing_status: string;
-  uploaded_by_id: string;
+  uploaded_by_id: string | null;
   uploaded_by_type: string;
   tokens_processing_main_content?: number | null | undefined;
   tokens_processing_summary?: number | null | undefined;
+  url?: string | null | undefined;
+  attributes?: { [k: string]: any } | null | undefined;
   tokens_processing_total: number;
 };
 
@@ -98,10 +104,10 @@ export const DocumentOut$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   libraryId: z.string(),
-  hash: z.string(),
-  mimeType: z.string(),
-  extension: z.string(),
-  size: z.number().int(),
+  hash: z.nullable(z.string()),
+  mimeType: z.nullable(z.string()),
+  extension: z.nullable(z.string()),
+  size: z.nullable(z.number().int()),
   name: z.string(),
   summary: z.nullable(z.string()).optional(),
   createdAt: z.date().transform(v => v.toISOString()),
@@ -109,10 +115,12 @@ export const DocumentOut$outboundSchema: z.ZodType<
     .optional(),
   numberOfPages: z.nullable(z.number().int()).optional(),
   processingStatus: z.string(),
-  uploadedById: z.string(),
+  uploadedById: z.nullable(z.string()),
   uploadedByType: z.string(),
   tokensProcessingMainContent: z.nullable(z.number().int()).optional(),
   tokensProcessingSummary: z.nullable(z.number().int()).optional(),
+  url: z.nullable(z.string()).optional(),
+  attributes: z.nullable(z.record(z.any())).optional(),
   tokensProcessingTotal: z.number().int(),
 }).transform((v) => {
   return remap$(v, {

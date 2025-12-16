@@ -99,6 +99,7 @@ async function run() {
       "fe3343a2-3b8d-404b-ba32-a78dede2614a",
     ],
     endpoint: "/v1/classifications",
+    model: "mistral-small-latest",
   });
 
   console.log(result);
@@ -127,6 +128,7 @@ async function run() {
       "fe3343a2-3b8d-404b-ba32-a78dede2614a",
     ],
     endpoint: "/v1/classifications",
+    model: "mistral-small-latest",
   });
   if (res.ok) {
     const { value: result } = res;

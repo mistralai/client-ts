@@ -94,6 +94,7 @@ async function $do(
   const path = pathToFunc("/v1/conversations")();
 
   const query = encodeFormQuery({
+    "metadata": payload?.metadata,
     "page": payload?.page,
     "page_size": payload?.page_size,
   });

@@ -10,7 +10,7 @@ let value: SharingOut = {
   orgId: "af1ac545-f4b4-4855-885a-3ffe8790cc1b",
   role: "<value>",
   shareWithType: "<value>",
-  shareWithUuid: "3c6b633e-c2c5-4908-8be7-0be9aa1957ad",
+  shareWithUuid: "c6b633ec-2c59-408b-8e70-be9aa1957ad2",
 };
 ```
 

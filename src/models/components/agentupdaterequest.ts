@@ -84,6 +84,8 @@ export type AgentUpdateRequest = {
   name?: string | null | undefined;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
+  deploymentChat?: boolean | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -248,9 +250,12 @@ export const AgentUpdateRequest$inboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
+  deployment_chat: z.nullable(z.boolean()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "completion_args": "completionArgs",
+    "deployment_chat": "deploymentChat",
   });
 });
 
@@ -272,6 +277,8 @@ export type AgentUpdateRequest$Outbound = {
   name?: string | null | undefined;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
+  deployment_chat?: boolean | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -320,9 +327,12 @@ export const AgentUpdateRequest$outboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
+  deploymentChat: z.nullable(z.boolean()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     completionArgs: "completion_args",
+    deploymentChat: "deployment_chat",
   });
 });
 

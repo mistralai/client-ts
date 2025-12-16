@@ -3,17 +3,6 @@
 
 ## Supported Types
 
-### `components.FunctionCallEvent`
-
-```typescript
-const value: components.FunctionCallEvent = {
-  id: "<id>",
-  name: "<value>",
-  toolCallId: "<id>",
-  arguments: "<value>",
-};
-```
-
 ### `components.AgentHandoffDoneEvent`
 
 ```typescript
@@ -34,23 +23,11 @@ const value: components.AgentHandoffStartedEvent = {
 };
 ```
 
-### `components.ToolExecutionDeltaEvent`
+### `components.ResponseDoneEvent`
 
 ```typescript
-const value: components.ToolExecutionDeltaEvent = {
-  id: "<id>",
-  name: "code_interpreter",
-  arguments: "<value>",
-};
-```
-
-### `components.ToolExecutionStartedEvent`
-
-```typescript
-const value: components.ToolExecutionStartedEvent = {
-  id: "<id>",
-  name: "web_search_premium",
-  arguments: "<value>",
+const value: components.ResponseDoneEvent = {
+  usage: {},
 };
 ```
 
@@ -60,6 +37,25 @@ const value: components.ToolExecutionStartedEvent = {
 const value: components.ResponseErrorEvent = {
   message: "<value>",
   code: 451589,
+};
+```
+
+### `components.ResponseStartedEvent`
+
+```typescript
+const value: components.ResponseStartedEvent = {
+  conversationId: "<id>",
+};
+```
+
+### `components.FunctionCallEvent`
+
+```typescript
+const value: components.FunctionCallEvent = {
+  id: "<id>",
+  name: "<value>",
+  toolCallId: "<id>",
+  arguments: "<value>",
 };
 ```
 
@@ -75,28 +71,32 @@ const value: components.MessageOutputEvent = {
 };
 ```
 
+### `components.ToolExecutionDeltaEvent`
+
+```typescript
+const value: components.ToolExecutionDeltaEvent = {
+  id: "<id>",
+  name: "web_search_premium",
+  arguments: "<value>",
+};
+```
+
 ### `components.ToolExecutionDoneEvent`
 
 ```typescript
 const value: components.ToolExecutionDoneEvent = {
   id: "<id>",
-  name: "code_interpreter",
+  name: "document_library",
 };
 ```
 
-### `components.ResponseDoneEvent`
+### `components.ToolExecutionStartedEvent`
 
 ```typescript
-const value: components.ResponseDoneEvent = {
-  usage: {},
-};
-```
-
-### `components.ResponseStartedEvent`
-
-```typescript
-const value: components.ResponseStartedEvent = {
-  conversationId: "<id>",
+const value: components.ToolExecutionStartedEvent = {
+  id: "<id>",
+  name: "image_generation",
+  arguments: "<value>",
 };
 ```
 

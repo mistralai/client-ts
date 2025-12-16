@@ -96,6 +96,10 @@ export type ModelConversation = {
    * Description of the what the conversation is about.
    */
   description?: string | null | undefined;
+  /**
+   * Custom metadata for the conversation.
+   */
+  metadata?: { [k: string]: any } | null | undefined;
   object?: ModelConversationObject | undefined;
   id: string;
   createdAt: Date;
@@ -284,6 +288,7 @@ export const ModelConversation$inboundSchema: z.ZodType<
   completion_args: CompletionArgs$inboundSchema.optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   object: ModelConversationObject$inboundSchema.default("conversation"),
   id: z.string(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -313,6 +318,7 @@ export type ModelConversation$Outbound = {
   completion_args?: CompletionArgs$Outbound | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   object: string;
   id: string;
   created_at: string;
@@ -364,6 +370,7 @@ export const ModelConversation$outboundSchema: z.ZodType<
   completionArgs: CompletionArgs$outboundSchema.optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   object: ModelConversationObject$outboundSchema.default("conversation"),
   id: z.string(),
   createdAt: z.date().transform(v => v.toISOString()),

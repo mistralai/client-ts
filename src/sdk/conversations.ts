@@ -4,6 +4,7 @@
 
 import { betaConversationsAppend } from "../funcs/betaConversationsAppend.js";
 import { betaConversationsAppendStream } from "../funcs/betaConversationsAppendStream.js";
+import { betaConversationsDelete } from "../funcs/betaConversationsDelete.js";
 import { betaConversationsGet } from "../funcs/betaConversationsGet.js";
 import { betaConversationsGetHistory } from "../funcs/betaConversationsGetHistory.js";
 import { betaConversationsGetMessages } from "../funcs/betaConversationsGetMessages.js";
@@ -64,6 +65,23 @@ export class Conversations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.AgentsApiV1ConversationsGetResponseV1ConversationsGet> {
     return unwrapAsync(betaConversationsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a conversation.
+   *
+   * @remarks
+   * Delete a conversation given a conversation_id.
+   */
+  async delete(
+    request: operations.AgentsApiV1ConversationsDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(betaConversationsDelete(
       this,
       request,
       options,

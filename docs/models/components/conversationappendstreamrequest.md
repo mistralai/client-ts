@@ -7,6 +7,11 @@ import { ConversationAppendStreamRequest } from "@mistralai/mistralai/models/com
 
 let value: ConversationAppendStreamRequest = {
   inputs: "<value>",
+  completionArgs: {
+    responseFormat: {
+      type: "text",
+    },
+  },
 };
 ```
 

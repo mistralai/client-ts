@@ -104,7 +104,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fim.stream({
-    model: "codestral-2405",
+    model: "codestral-latest",
     prompt: "def",
     suffix: "return a+b",
   });
@@ -134,7 +134,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fimStream(mistral, {
-    model: "codestral-2405",
+    model: "codestral-latest",
     prompt: "def",
     suffix: "return a+b",
   });

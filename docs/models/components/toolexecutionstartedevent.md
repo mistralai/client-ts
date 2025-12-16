@@ -7,7 +7,7 @@ import { ToolExecutionStartedEvent } from "@mistralai/mistralai/models/component
 
 let value: ToolExecutionStartedEvent = {
   id: "<id>",
-  name: "web_search_premium",
+  name: "image_generation",
   arguments: "<value>",
 };
 ```
@@ -20,5 +20,5 @@ let value: ToolExecutionStartedEvent = {
 | `createdAt`                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)        | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
 | `outputIndex`                                                                                        | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
 | `id`                                                                                                 | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `name`                                                                                               | [components.BuiltInConnectors](../../models/components/builtinconnectors.md)                         | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `name`                                                                                               | *components.ToolExecutionStartedEventName*                                                           | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `arguments`                                                                                          | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

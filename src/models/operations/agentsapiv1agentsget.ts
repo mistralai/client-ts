@@ -10,6 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentsApiV1AgentsGetRequest = {
   agentId: string;
+  agentVersion?: number | null | undefined;
 };
 
 /** @internal */
@@ -19,15 +20,18 @@ export const AgentsApiV1AgentsGetRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   agent_id: z.string(),
+  agent_version: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "agent_id": "agentId",
+    "agent_version": "agentVersion",
   });
 });
 
 /** @internal */
 export type AgentsApiV1AgentsGetRequest$Outbound = {
   agent_id: string;
+  agent_version?: number | null | undefined;
 };
 
 /** @internal */
@@ -37,9 +41,11 @@ export const AgentsApiV1AgentsGetRequest$outboundSchema: z.ZodType<
   AgentsApiV1AgentsGetRequest
 > = z.object({
   agentId: z.string(),
+  agentVersion: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",
+    agentVersion: "agent_version",
   });
 });
 

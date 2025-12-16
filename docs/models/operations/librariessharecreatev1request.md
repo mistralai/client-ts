@@ -8,10 +8,9 @@ import { LibrariesShareCreateV1Request } from "@mistralai/mistralai/models/opera
 let value: LibrariesShareCreateV1Request = {
   libraryId: "b7dc8216-e4ce-4ff1-a455-580e870d6c11",
   sharingIn: {
-    orgId: "487e3359-6b01-47f9-969c-f4387c394ce9",
     level: "Viewer",
-    shareWithUuid: "b4d43faf-9d92-4c96-b0b5-23e55802be64",
-    shareWithType: "Workspace",
+    shareWithUuid: "87e33596-b017-4f96-89cf-4387c394ce94",
+    shareWithType: "Org",
   },
 };
 ```

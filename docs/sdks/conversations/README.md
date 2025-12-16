@@ -10,6 +10,7 @@
 * [start](#start) - Create a conversation and append entries to it.
 * [list](#list) - List all created conversations.
 * [get](#get) - Retrieve a conversation information.
+* [delete](#delete) - Delete a conversation.
 * [append](#append) - Append new entries to an existing conversation.
 * [getHistory](#gethistory) - Retrieve all entries in a conversation.
 * [getMessages](#getmessages) - Retrieve all messages in a conversation.
@@ -35,6 +36,11 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.conversations.start({
     inputs: "<value>",
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
   });
 
   console.log(result);
@@ -60,6 +66,11 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaConversationsStart(mistral, {
     inputs: "<value>",
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -236,6 +247,80 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## delete
+
+Delete a conversation given a conversation_id.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_conversations_delete" method="delete" path="/v1/conversations/{conversation_id}" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  await mistral.beta.conversations.delete({
+    conversationId: "<id>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaConversationsDelete } from "@mistralai/mistralai/funcs/betaConversationsDelete.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaConversationsDelete(mistral, {
+    conversationId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("betaConversationsDelete failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.AgentsApiV1ConversationsDeleteRequest](../../models/operations/agentsapiv1conversationsdeleterequest.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
 ## append
 
 Run completion on the history of the conversation and the user entries. Return the new created entries.
@@ -255,6 +340,11 @@ async function run() {
     conversationId: "<id>",
     conversationAppendRequest: {
       inputs: [],
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
     },
   });
 
@@ -283,6 +373,11 @@ async function run() {
     conversationId: "<id>",
     conversationAppendRequest: {
       inputs: [],
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
     },
   });
   if (res.ok) {
@@ -483,6 +578,11 @@ async function run() {
     conversationId: "<id>",
     conversationRestartRequest: {
       inputs: "<value>",
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
       fromEntryId: "<id>",
     },
   });
@@ -512,6 +612,11 @@ async function run() {
     conversationId: "<id>",
     conversationRestartRequest: {
       inputs: "<value>",
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
       fromEntryId: "<id>",
     },
   });
@@ -572,6 +677,11 @@ async function run() {
         nextAgentName: "<value>",
       },
     ],
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
   });
 
   for await (const event of result) {
@@ -609,6 +719,11 @@ async function run() {
         nextAgentName: "<value>",
       },
     ],
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -663,6 +778,11 @@ async function run() {
     conversationId: "<id>",
     conversationAppendStreamRequest: {
       inputs: "<value>",
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
     },
   });
 
@@ -694,6 +814,11 @@ async function run() {
     conversationId: "<id>",
     conversationAppendStreamRequest: {
       inputs: "<value>",
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
     },
   });
   if (res.ok) {
@@ -757,6 +882,11 @@ async function run() {
           prefix: false,
         },
       ],
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
       fromEntryId: "<id>",
     },
   });
@@ -797,6 +927,11 @@ async function run() {
           prefix: false,
         },
       ],
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
       fromEntryId: "<id>",
     },
   });

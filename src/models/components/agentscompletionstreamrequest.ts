@@ -95,6 +95,7 @@ export type AgentsCompletionStreamRequest = {
    * The seed to use for random sampling. If set, different calls will generate deterministic results.
    */
   randomSeed?: number | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   /**
    * The prompt(s) to generate completions for, encoded as a list of dict with role and content.
    */
@@ -104,21 +105,27 @@ export type AgentsCompletionStreamRequest = {
     | (UserMessage & { role: "user" })
     | (AssistantMessage & { role: "assistant" })
   >;
+  /**
+   * Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.
+   */
   responseFormat?: ResponseFormat | undefined;
   tools?: Array<Tool> | null | undefined;
   toolChoice?: ToolChoice | ToolChoiceEnum | undefined;
   /**
-   * presence_penalty determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
+   * The `presence_penalty` determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
    */
   presencePenalty?: number | undefined;
   /**
-   * frequency_penalty penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
+   * The `frequency_penalty` penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
    */
   frequencyPenalty?: number | undefined;
   /**
    * Number of completions to return for each request, input tokens are only billed once.
    */
   n?: number | null | undefined;
+  /**
+   * Enable users to specify an expected completion, optimizing response times by leveraging known or predictable content.
+   */
   prediction?: Prediction | undefined;
   parallelToolCalls?: boolean | undefined;
   /**
@@ -344,6 +351,7 @@ export const AgentsCompletionStreamRequest$inboundSchema: z.ZodType<
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   random_seed: z.nullable(z.number().int()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   messages: z.array(
     z.union([
       SystemMessage$inboundSchema.and(
@@ -399,6 +407,7 @@ export type AgentsCompletionStreamRequest$Outbound = {
   stream: boolean;
   stop?: string | Array<string> | undefined;
   random_seed?: number | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
     | (SystemMessage$Outbound & { role: "system" })
     | (ToolMessage$Outbound & { role: "tool" })
@@ -427,6 +436,7 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.number().int()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   messages: z.array(
     z.union([
       SystemMessage$outboundSchema.and(

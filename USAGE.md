@@ -12,7 +12,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.chat.complete({
-    model: "mistral-small-latest",
+    model: "mistral-large-latest",
     messages: [
       {
         content:
@@ -20,6 +20,9 @@ async function run() {
         role: "user",
       },
     ],
+    responseFormat: {
+      type: "text",
+    },
   });
 
   console.log(result);

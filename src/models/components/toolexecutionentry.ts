@@ -26,13 +26,15 @@ export const ToolExecutionEntryType = {
 } as const;
 export type ToolExecutionEntryType = ClosedEnum<typeof ToolExecutionEntryType>;
 
+export type Name = BuiltInConnectors | string;
+
 export type ToolExecutionEntry = {
   object?: ToolExecutionEntryObject | undefined;
   type?: ToolExecutionEntryType | undefined;
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
-  name: BuiltInConnectors;
+  name: BuiltInConnectors | string;
   arguments: string;
   info?: { [k: string]: any } | undefined;
 };
@@ -80,6 +82,44 @@ export namespace ToolExecutionEntryType$ {
 }
 
 /** @internal */
+export const Name$inboundSchema: z.ZodType<Name, z.ZodTypeDef, unknown> = z
+  .union([BuiltInConnectors$inboundSchema, z.string()]);
+
+/** @internal */
+export type Name$Outbound = string | string;
+
+/** @internal */
+export const Name$outboundSchema: z.ZodType<Name$Outbound, z.ZodTypeDef, Name> =
+  z.union([BuiltInConnectors$outboundSchema, z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Name$ {
+  /** @deprecated use `Name$inboundSchema` instead. */
+  export const inboundSchema = Name$inboundSchema;
+  /** @deprecated use `Name$outboundSchema` instead. */
+  export const outboundSchema = Name$outboundSchema;
+  /** @deprecated use `Name$Outbound` instead. */
+  export type Outbound = Name$Outbound;
+}
+
+export function nameToJSON(name: Name): string {
+  return JSON.stringify(Name$outboundSchema.parse(name));
+}
+
+export function nameFromJSON(
+  jsonString: string,
+): SafeParseResult<Name, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Name$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Name' from JSON`,
+  );
+}
+
+/** @internal */
 export const ToolExecutionEntry$inboundSchema: z.ZodType<
   ToolExecutionEntry,
   z.ZodTypeDef,
@@ -93,7 +133,7 @@ export const ToolExecutionEntry$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   id: z.string().optional(),
-  name: BuiltInConnectors$inboundSchema,
+  name: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   arguments: z.string(),
   info: z.record(z.any()).optional(),
 }).transform((v) => {
@@ -110,7 +150,7 @@ export type ToolExecutionEntry$Outbound = {
   created_at?: string | undefined;
   completed_at?: string | null | undefined;
   id?: string | undefined;
-  name: string;
+  name: string | string;
   arguments: string;
   info?: { [k: string]: any } | undefined;
 };
@@ -126,7 +166,7 @@ export const ToolExecutionEntry$outboundSchema: z.ZodType<
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),
-  name: BuiltInConnectors$outboundSchema,
+  name: z.union([BuiltInConnectors$outboundSchema, z.string()]),
   arguments: z.string(),
   info: z.record(z.any()).optional(),
 }).transform((v) => {

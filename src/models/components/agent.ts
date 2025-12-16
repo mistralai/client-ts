@@ -90,11 +90,15 @@ export type Agent = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   object?: AgentObject | undefined;
   id: string;
   version: number;
+  versions: Array<number>;
   createdAt: Date;
   updatedAt: Date;
+  deploymentChat: boolean;
+  source: string;
 };
 
 /** @internal */
@@ -271,20 +275,25 @@ export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
     name: z.string(),
     description: z.nullable(z.string()).optional(),
     handoffs: z.nullable(z.array(z.string())).optional(),
+    metadata: z.nullable(z.record(z.any())).optional(),
     object: AgentObject$inboundSchema.default("agent"),
     id: z.string(),
     version: z.number().int(),
+    versions: z.array(z.number().int()),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ),
     updated_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ),
+    deployment_chat: z.boolean(),
+    source: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "completion_args": "completionArgs",
       "created_at": "createdAt",
       "updated_at": "updatedAt",
+      "deployment_chat": "deploymentChat",
     });
   });
 
@@ -306,11 +315,15 @@ export type Agent$Outbound = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   object: string;
   id: string;
   version: number;
+  versions: Array<number>;
   created_at: string;
   updated_at: string;
+  deployment_chat: boolean;
+  source: string;
 };
 
 /** @internal */
@@ -359,16 +372,21 @@ export const Agent$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   object: AgentObject$outboundSchema.default("agent"),
   id: z.string(),
   version: z.number().int(),
+  versions: z.array(z.number().int()),
   createdAt: z.date().transform(v => v.toISOString()),
   updatedAt: z.date().transform(v => v.toISOString()),
+  deploymentChat: z.boolean(),
+  source: z.string(),
 }).transform((v) => {
   return remap$(v, {
     completionArgs: "completion_args",
     createdAt: "created_at",
     updatedAt: "updated_at",
+    deploymentChat: "deployment_chat",
   });
 });
 

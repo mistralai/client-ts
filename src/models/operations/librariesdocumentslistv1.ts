@@ -13,6 +13,7 @@ export type LibrariesDocumentsListV1Request = {
   search?: string | null | undefined;
   pageSize?: number | undefined;
   page?: number | undefined;
+  filtersAttributes?: string | null | undefined;
   sortBy?: string | undefined;
   sortOrder?: string | undefined;
 };
@@ -27,12 +28,14 @@ export const LibrariesDocumentsListV1Request$inboundSchema: z.ZodType<
   search: z.nullable(z.string()).optional(),
   page_size: z.number().int().default(100),
   page: z.number().int().default(0),
+  filters_attributes: z.nullable(z.string()).optional(),
   sort_by: z.string().default("created_at"),
   sort_order: z.string().default("desc"),
 }).transform((v) => {
   return remap$(v, {
     "library_id": "libraryId",
     "page_size": "pageSize",
+    "filters_attributes": "filtersAttributes",
     "sort_by": "sortBy",
     "sort_order": "sortOrder",
   });
@@ -44,6 +47,7 @@ export type LibrariesDocumentsListV1Request$Outbound = {
   search?: string | null | undefined;
   page_size: number;
   page: number;
+  filters_attributes?: string | null | undefined;
   sort_by: string;
   sort_order: string;
 };
@@ -58,12 +62,14 @@ export const LibrariesDocumentsListV1Request$outboundSchema: z.ZodType<
   search: z.nullable(z.string()).optional(),
   pageSize: z.number().int().default(100),
   page: z.number().int().default(0),
+  filtersAttributes: z.nullable(z.string()).optional(),
   sortBy: z.string().default("created_at"),
   sortOrder: z.string().default("desc"),
 }).transform((v) => {
   return remap$(v, {
     libraryId: "library_id",
     pageSize: "page_size",
+    filtersAttributes: "filters_attributes",
     sortBy: "sort_by",
     sortOrder: "sort_order",
   });

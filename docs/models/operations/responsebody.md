@@ -7,6 +7,11 @@
 
 ```typescript
 const value: components.ModelConversation = {
+  completionArgs: {
+    responseFormat: {
+      type: "text",
+    },
+  },
   id: "<id>",
   createdAt: new Date("2024-06-14T04:21:29.555Z"),
   updatedAt: new Date("2025-10-08T03:17:09.039Z"),

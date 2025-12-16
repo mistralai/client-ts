@@ -101,7 +101,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.chat.complete({
-    model: "mistral-small-latest",
+    model: "mistral-large-latest",
     messages: [
       {
         content:
@@ -109,6 +109,9 @@ async function run() {
         role: "user",
       },
     ],
+    responseFormat: {
+      type: "text",
+    },
   });
 
   console.log(result);
@@ -224,7 +227,7 @@ We have dedicated SDKs for the following providers:
 #### [audio.transcriptions](docs/sdks/transcriptions/README.md)
 
 * [complete](docs/sdks/transcriptions/README.md#complete) - Create Transcription
-* [stream](docs/sdks/transcriptions/README.md#stream) - Create streaming transcription (SSE)
+* [stream](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
 
 ### [batch](docs/sdks/batch/README.md)
 
@@ -245,6 +248,7 @@ We have dedicated SDKs for the following providers:
 * [list](docs/sdks/mistralagents/README.md#list) - List agent entities.
 * [get](docs/sdks/mistralagents/README.md#get) - Retrieve an agent entity.
 * [update](docs/sdks/mistralagents/README.md#update) - Update an agent entity.
+* [delete](docs/sdks/mistralagents/README.md#delete) - Delete an agent entity.
 * [updateVersion](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.
 
 #### [beta.conversations](docs/sdks/conversations/README.md)
@@ -252,6 +256,7 @@ We have dedicated SDKs for the following providers:
 * [start](docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
 * [list](docs/sdks/conversations/README.md#list) - List all created conversations.
 * [get](docs/sdks/conversations/README.md#get) - Retrieve a conversation information.
+* [delete](docs/sdks/conversations/README.md#delete) - Delete a conversation.
 * [append](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 * [getHistory](docs/sdks/conversations/README.md#gethistory) - Retrieve all entries in a conversation.
 * [getMessages](docs/sdks/conversations/README.md#getmessages) - Retrieve all messages in a conversation.
@@ -276,7 +281,7 @@ We have dedicated SDKs for the following providers:
 
 #### [beta.libraries.documents](docs/sdks/documents/README.md)
 
-* [list](docs/sdks/documents/README.md#list) - List document in a given library.
+* [list](docs/sdks/documents/README.md#list) - List documents in a given library.
 * [upload](docs/sdks/documents/README.md#upload) - Upload a new document.
 * [get](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
 * [update](docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
@@ -373,6 +378,11 @@ async function run() {
         nextAgentName: "<value>",
       },
     ],
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
   });
 
   for await (const event of result) {
@@ -515,7 +525,9 @@ const mistral = new Mistral({
 
 async function run() {
   try {
-    const result = await mistral.models.list();
+    const result = await mistral.models.retrieve({
+      modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
+    });
 
     console.log(result);
   } catch (error) {
@@ -555,7 +567,7 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 47 of 68 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 48 of 70 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -720,18 +732,20 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`agentsComplete`](docs/sdks/agents/README.md#complete) - Agents Completion
 - [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream Agents completion
 - [`audioTranscriptionsComplete`](docs/sdks/transcriptions/README.md#complete) - Create Transcription
-- [`audioTranscriptionsStream`](docs/sdks/transcriptions/README.md#stream) - Create streaming transcription (SSE)
+- [`audioTranscriptionsStream`](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
 - [`batchJobsCancel`](docs/sdks/mistraljobs/README.md#cancel) - Cancel Batch Job
 - [`batchJobsCreate`](docs/sdks/mistraljobs/README.md#create) - Create Batch Job
 - [`batchJobsGet`](docs/sdks/mistraljobs/README.md#get) - Get Batch Job
 - [`batchJobsList`](docs/sdks/mistraljobs/README.md#list) - Get Batch Jobs
 - [`betaAgentsCreate`](docs/sdks/mistralagents/README.md#create) - Create a agent that can be used within a conversation.
+- [`betaAgentsDelete`](docs/sdks/mistralagents/README.md#delete) - Delete an agent entity.
 - [`betaAgentsGet`](docs/sdks/mistralagents/README.md#get) - Retrieve an agent entity.
 - [`betaAgentsList`](docs/sdks/mistralagents/README.md#list) - List agent entities.
 - [`betaAgentsUpdate`](docs/sdks/mistralagents/README.md#update) - Update an agent entity.
 - [`betaAgentsUpdateVersion`](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.
 - [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 - [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
+- [`betaConversationsDelete`](docs/sdks/conversations/README.md#delete) - Delete a conversation.
 - [`betaConversationsGet`](docs/sdks/conversations/README.md#get) - Retrieve a conversation information.
 - [`betaConversationsGetHistory`](docs/sdks/conversations/README.md#gethistory) - Retrieve all entries in a conversation.
 - [`betaConversationsGetMessages`](docs/sdks/conversations/README.md#getmessages) - Retrieve all messages in a conversation.
@@ -749,7 +763,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaLibrariesDocumentsExtractedTextSignedUrl`](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
 - [`betaLibrariesDocumentsGet`](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
 - [`betaLibrariesDocumentsGetSignedUrl`](docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
-- [`betaLibrariesDocumentsList`](docs/sdks/documents/README.md#list) - List document in a given library.
+- [`betaLibrariesDocumentsList`](docs/sdks/documents/README.md#list) - List documents in a given library.
 - [`betaLibrariesDocumentsReprocess`](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
 - [`betaLibrariesDocumentsStatus`](docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
 - [`betaLibrariesDocumentsTextContent`](docs/sdks/documents/README.md#textcontent) - Retrieve the text content of a specific document.

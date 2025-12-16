@@ -18,6 +18,12 @@ import {
   OCRPageDimensions$Outbound,
   OCRPageDimensions$outboundSchema,
 } from "./ocrpagedimensions.js";
+import {
+  OCRTableObject,
+  OCRTableObject$inboundSchema,
+  OCRTableObject$Outbound,
+  OCRTableObject$outboundSchema,
+} from "./ocrtableobject.js";
 
 export type OCRPageObject = {
   /**
@@ -33,6 +39,22 @@ export type OCRPageObject = {
    */
   images: Array<OCRImageObject>;
   /**
+   * List of all extracted tables in the page
+   */
+  tables?: Array<OCRTableObject> | undefined;
+  /**
+   * List of all hyperlinks in the page
+   */
+  hyperlinks?: Array<string> | undefined;
+  /**
+   * Header of the page
+   */
+  header?: string | null | undefined;
+  /**
+   * Footer of the page
+   */
+  footer?: string | null | undefined;
+  /**
    * The dimensions of the PDF Page's screenshot image
    */
   dimensions: OCRPageDimensions | null;
@@ -47,6 +69,10 @@ export const OCRPageObject$inboundSchema: z.ZodType<
   index: z.number().int(),
   markdown: z.string(),
   images: z.array(OCRImageObject$inboundSchema),
+  tables: z.array(OCRTableObject$inboundSchema).optional(),
+  hyperlinks: z.array(z.string()).optional(),
+  header: z.nullable(z.string()).optional(),
+  footer: z.nullable(z.string()).optional(),
   dimensions: z.nullable(OCRPageDimensions$inboundSchema),
 });
 
@@ -55,6 +81,10 @@ export type OCRPageObject$Outbound = {
   index: number;
   markdown: string;
   images: Array<OCRImageObject$Outbound>;
+  tables?: Array<OCRTableObject$Outbound> | undefined;
+  hyperlinks?: Array<string> | undefined;
+  header?: string | null | undefined;
+  footer?: string | null | undefined;
   dimensions: OCRPageDimensions$Outbound | null;
 };
 
@@ -67,6 +97,10 @@ export const OCRPageObject$outboundSchema: z.ZodType<
   index: z.number().int(),
   markdown: z.string(),
   images: z.array(OCRImageObject$outboundSchema),
+  tables: z.array(OCRTableObject$outboundSchema).optional(),
+  hyperlinks: z.array(z.string()).optional(),
+  header: z.nullable(z.string()).optional(),
+  footer: z.nullable(z.string()).optional(),
   dimensions: z.nullable(OCRPageDimensions$outboundSchema),
 });
 

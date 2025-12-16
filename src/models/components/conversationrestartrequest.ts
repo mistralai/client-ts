@@ -44,7 +44,15 @@ export type ConversationRestartRequest = {
    * White-listed arguments from the completion API
    */
   completionArgs?: CompletionArgs | undefined;
+  /**
+   * Custom metadata for the conversation.
+   */
+  metadata?: { [k: string]: any } | null | undefined;
   fromEntryId: string;
+  /**
+   * Specific version of the agent to use when restarting. If not provided, uses the current version.
+   */
+  agentVersion?: number | null | undefined;
 };
 
 /** @internal */
@@ -82,12 +90,15 @@ export const ConversationRestartRequest$inboundSchema: z.ZodType<
   handoff_execution: ConversationRestartRequestHandoffExecution$inboundSchema
     .default("server"),
   completion_args: CompletionArgs$inboundSchema.optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   from_entry_id: z.string(),
+  agent_version: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "handoff_execution": "handoffExecution",
     "completion_args": "completionArgs",
     "from_entry_id": "fromEntryId",
+    "agent_version": "agentVersion",
   });
 });
 
@@ -98,7 +109,9 @@ export type ConversationRestartRequest$Outbound = {
   store: boolean;
   handoff_execution: string;
   completion_args?: CompletionArgs$Outbound | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   from_entry_id: string;
+  agent_version?: number | null | undefined;
 };
 
 /** @internal */
@@ -113,12 +126,15 @@ export const ConversationRestartRequest$outboundSchema: z.ZodType<
   handoffExecution: ConversationRestartRequestHandoffExecution$outboundSchema
     .default("server"),
   completionArgs: CompletionArgs$outboundSchema.optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   fromEntryId: z.string(),
+  agentVersion: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",
     completionArgs: "completion_args",
     fromEntryId: "from_entry_id",
+    agentVersion: "agent_version",
   });
 });
 

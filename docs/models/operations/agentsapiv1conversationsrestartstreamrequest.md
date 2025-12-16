@@ -9,6 +9,11 @@ let value: AgentsApiV1ConversationsRestartStreamRequest = {
   conversationId: "<id>",
   conversationRestartStreamRequest: {
     inputs: "<value>",
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
     fromEntryId: "<id>",
   },
 };
