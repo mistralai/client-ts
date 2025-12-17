@@ -12,6 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type AgentsApiV1ConversationsListRequest = {
   page?: number | undefined;
   pageSize?: number | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 export type ResponseBody =
@@ -26,6 +27,7 @@ export const AgentsApiV1ConversationsListRequest$inboundSchema: z.ZodType<
 > = z.object({
   page: z.number().int().default(0),
   page_size: z.number().int().default(100),
+  metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "page_size": "pageSize",
@@ -36,6 +38,7 @@ export const AgentsApiV1ConversationsListRequest$inboundSchema: z.ZodType<
 export type AgentsApiV1ConversationsListRequest$Outbound = {
   page: number;
   page_size: number;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -46,6 +49,7 @@ export const AgentsApiV1ConversationsListRequest$outboundSchema: z.ZodType<
 > = z.object({
   page: z.number().int().default(0),
   pageSize: z.number().int().default(100),
+  metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",

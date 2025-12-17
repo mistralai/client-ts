@@ -10,11 +10,11 @@ let value: LibraryOut = {
   name: "<value>",
   createdAt: new Date("2025-05-24T20:35:31.746Z"),
   updatedAt: new Date("2023-05-31T16:25:42.207Z"),
-  ownerId: "4b968264-87b9-4f01-b2e4-16eab2c650a9",
+  ownerId: "b9682648-7b9f-4012-ae41-6eab2c650a9f",
   ownerType: "<value>",
-  totalSize: 562979,
-  nbDocuments: 360239,
-  chunkSize: 310648,
+  totalSize: 360239,
+  nbDocuments: 639599,
+  chunkSize: 378573,
 };
 ```
 
@@ -33,8 +33,8 @@ let value: LibraryOut = {
 | `chunkSize`                                                                                   | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `emoji`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `generatedName`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `generatedDescription`                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `explicitUserMembersCount`                                                                    | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `explicitWorkspaceMembersCount`                                                               | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `orgSharingRole`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `generatedName`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | Generated Name                                                                                |

@@ -103,7 +103,6 @@ async function run() {
   const result = await mistral.beta.libraries.accesses.updateOrCreate({
     libraryId: "36de3a24-5b1c-4c8f-9d84-d5642205a976",
     sharingIn: {
-      orgId: "aadd9ae1-f285-4437-884a-091c77efa6fd",
       level: "Viewer",
       shareWithUuid: "0ae92ecb-21ed-47c5-9f7e-0b2cbe325a20",
       shareWithType: "User",
@@ -134,7 +133,6 @@ async function run() {
   const res = await betaLibrariesAccessesUpdateOrCreate(mistral, {
     libraryId: "36de3a24-5b1c-4c8f-9d84-d5642205a976",
     sharingIn: {
-      orgId: "aadd9ae1-f285-4437-884a-091c77efa6fd",
       level: "Viewer",
       shareWithUuid: "0ae92ecb-21ed-47c5-9f7e-0b2cbe325a20",
       shareWithType: "User",
@@ -189,7 +187,6 @@ async function run() {
   const result = await mistral.beta.libraries.accesses.delete({
     libraryId: "709e3cad-9fb2-4f4e-bf88-143cf1808107",
     sharingDelete: {
-      orgId: "0814a235-c2d0-4814-875a-4b85f93d3dc7",
       shareWithUuid: "b843cc47-ce8f-4354-8cfc-5fcd7fb2865b",
       shareWithType: "User",
     },
@@ -219,7 +216,6 @@ async function run() {
   const res = await betaLibrariesAccessesDelete(mistral, {
     libraryId: "709e3cad-9fb2-4f4e-bf88-143cf1808107",
     sharingDelete: {
-      orgId: "0814a235-c2d0-4814-875a-4b85f93d3dc7",
       shareWithUuid: "b843cc47-ce8f-4354-8cfc-5fcd7fb2865b",
       shareWithType: "User",
     },

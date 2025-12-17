@@ -21,6 +21,9 @@ import {
 } from "./timestampgranularity.js";
 
 export type AudioTranscriptionRequest = {
+  /**
+   * ID of the model to be used.
+   */
   model: string;
   file?: FileT | Blob | undefined;
   /**

@@ -33,7 +33,7 @@ import { Result } from "../types/fp.js";
 import { isReadableStream } from "../types/streams.js";
 
 /**
- * Create streaming transcription (SSE)
+ * Create Streaming Transcription (SSE)
  */
 export function audioTranscriptionsStream(
   client: MistralCore,

@@ -8,8 +8,8 @@ import { InstructRequest } from "@mistralai/mistralai/models/components";
 let value: InstructRequest = {
   messages: [
     {
-      content: "<value>",
-      role: "system",
+      content: null,
+      role: "tool",
     },
   ],
 };

@@ -196,7 +196,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.classifiers.classify({
-    model: "Silverado",
+    model: "mistral-moderation-latest",
     inputs: [
       "<value 1>",
     ],
@@ -224,7 +224,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await classifiersClassify(mistral, {
-    model: "Silverado",
+    model: "mistral-moderation-latest",
     inputs: [
       "<value 1>",
     ],

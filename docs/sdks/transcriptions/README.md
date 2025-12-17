@@ -8,7 +8,7 @@ API for audio transcription.
 ### Available Operations
 
 * [complete](#complete) - Create Transcription
-* [stream](#stream) - Create streaming transcription (SSE)
+* [stream](#stream) - Create Streaming Transcription (SSE)
 
 ## complete
 
@@ -85,7 +85,7 @@ run();
 
 ## stream
 
-Create streaming transcription (SSE)
+Create Streaming Transcription (SSE)
 
 ### Example Usage
 

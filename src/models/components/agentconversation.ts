@@ -25,11 +25,16 @@ export type AgentConversation = {
    * Description of the what the conversation is about.
    */
   description?: string | null | undefined;
+  /**
+   * Custom metadata for the conversation.
+   */
+  metadata?: { [k: string]: any } | null | undefined;
   object?: AgentConversationObject | undefined;
   id: string;
   createdAt: Date;
   updatedAt: Date;
   agentId: string;
+  agentVersion?: number | null | undefined;
 };
 
 /** @internal */
@@ -61,16 +66,19 @@ export const AgentConversation$inboundSchema: z.ZodType<
 > = z.object({
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   object: AgentConversationObject$inboundSchema.default("conversation"),
   id: z.string(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   agent_id: z.string(),
+  agent_version: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
     "updated_at": "updatedAt",
     "agent_id": "agentId",
+    "agent_version": "agentVersion",
   });
 });
 
@@ -78,11 +86,13 @@ export const AgentConversation$inboundSchema: z.ZodType<
 export type AgentConversation$Outbound = {
   name?: string | null | undefined;
   description?: string | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   object: string;
   id: string;
   created_at: string;
   updated_at: string;
   agent_id: string;
+  agent_version?: number | null | undefined;
 };
 
 /** @internal */
@@ -93,16 +103,19 @@ export const AgentConversation$outboundSchema: z.ZodType<
 > = z.object({
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   object: AgentConversationObject$outboundSchema.default("conversation"),
   id: z.string(),
   createdAt: z.date().transform(v => v.toISOString()),
   updatedAt: z.date().transform(v => v.toISOString()),
   agentId: z.string(),
+  agentVersion: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
     updatedAt: "updated_at",
     agentId: "agent_id",
+    agentVersion: "agent_version",
   });
 });
 

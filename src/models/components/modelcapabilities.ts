@@ -10,11 +10,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelCapabilities = {
   completionChat?: boolean | undefined;
-  completionFim?: boolean | undefined;
   functionCalling?: boolean | undefined;
+  completionFim?: boolean | undefined;
   fineTuning?: boolean | undefined;
   vision?: boolean | undefined;
+  ocr?: boolean | undefined;
   classification?: boolean | undefined;
+  moderation?: boolean | undefined;
+  audio?: boolean | undefined;
 };
 
 /** @internal */
@@ -23,17 +26,20 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  completion_chat: z.boolean().default(true),
+  completion_chat: z.boolean().default(false),
+  function_calling: z.boolean().default(false),
   completion_fim: z.boolean().default(false),
-  function_calling: z.boolean().default(true),
   fine_tuning: z.boolean().default(false),
   vision: z.boolean().default(false),
+  ocr: z.boolean().default(false),
   classification: z.boolean().default(false),
+  moderation: z.boolean().default(false),
+  audio: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "completion_chat": "completionChat",
-    "completion_fim": "completionFim",
     "function_calling": "functionCalling",
+    "completion_fim": "completionFim",
     "fine_tuning": "fineTuning",
   });
 });
@@ -41,11 +47,14 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
 /** @internal */
 export type ModelCapabilities$Outbound = {
   completion_chat: boolean;
-  completion_fim: boolean;
   function_calling: boolean;
+  completion_fim: boolean;
   fine_tuning: boolean;
   vision: boolean;
+  ocr: boolean;
   classification: boolean;
+  moderation: boolean;
+  audio: boolean;
 };
 
 /** @internal */
@@ -54,17 +63,20 @@ export const ModelCapabilities$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelCapabilities
 > = z.object({
-  completionChat: z.boolean().default(true),
+  completionChat: z.boolean().default(false),
+  functionCalling: z.boolean().default(false),
   completionFim: z.boolean().default(false),
-  functionCalling: z.boolean().default(true),
   fineTuning: z.boolean().default(false),
   vision: z.boolean().default(false),
+  ocr: z.boolean().default(false),
   classification: z.boolean().default(false),
+  moderation: z.boolean().default(false),
+  audio: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     completionChat: "completion_chat",
-    completionFim: "completion_fim",
     functionCalling: "function_calling",
+    completionFim: "completion_fim",
     fineTuning: "fine_tuning",
   });
 });

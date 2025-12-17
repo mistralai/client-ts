@@ -96,8 +96,13 @@ async function $do(
   const path = pathToFunc("/v1/agents")();
 
   const query = encodeFormQuery({
+    "deployment_chat": payload?.deployment_chat,
+    "id": payload?.id,
+    "metadata": payload?.metadata,
+    "name": payload?.name,
     "page": payload?.page,
     "page_size": payload?.page_size,
+    "sources": payload?.sources,
   });
 
   const headers = new Headers(compactMap({

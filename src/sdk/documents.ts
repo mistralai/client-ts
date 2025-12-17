@@ -19,7 +19,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Documents extends ClientSDK {
   /**
-   * List document in a given library.
+   * List documents in a given library.
    *
    * @remarks
    * Given a library, lists the document that have been uploaded to that library.

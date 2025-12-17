@@ -77,6 +77,9 @@ export type ConversationRequest = {
   store?: boolean | null | undefined;
   handoffExecution?: HandoffExecution | null | undefined;
   instructions?: string | null | undefined;
+  /**
+   * List of tools which are available to the model during the conversation.
+   */
   tools?:
     | Array<
       | (DocumentLibraryTool & { type: "document_library" })
@@ -86,12 +89,13 @@ export type ConversationRequest = {
       | (WebSearchTool & { type: "web_search" })
       | (WebSearchPremiumTool & { type: "web_search_premium" })
     >
-    | null
     | undefined;
   completionArgs?: CompletionArgs | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   agentId?: string | null | undefined;
+  agentVersion?: number | null | undefined;
   model?: string | null | undefined;
 };
 
@@ -236,52 +240,53 @@ export const ConversationRequest$inboundSchema: z.ZodType<
   store: z.nullable(z.boolean()).optional(),
   handoff_execution: z.nullable(HandoffExecution$inboundSchema).optional(),
   instructions: z.nullable(z.string()).optional(),
-  tools: z.nullable(
-    z.array(
-      z.union([
-        DocumentLibraryTool$inboundSchema.and(
-          z.object({ type: z.literal("document_library") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        FunctionTool$inboundSchema.and(
-          z.object({ type: z.literal("function") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        CodeInterpreterTool$inboundSchema.and(
-          z.object({ type: z.literal("code_interpreter") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        ImageGenerationTool$inboundSchema.and(
-          z.object({ type: z.literal("image_generation") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        WebSearchTool$inboundSchema.and(
-          z.object({ type: z.literal("web_search") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        WebSearchPremiumTool$inboundSchema.and(
-          z.object({ type: z.literal("web_search_premium") }).transform((
-            v,
-          ) => ({ type: v.type })),
-        ),
-      ]),
-    ),
+  tools: z.array(
+    z.union([
+      DocumentLibraryTool$inboundSchema.and(
+        z.object({ type: z.literal("document_library") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      FunctionTool$inboundSchema.and(
+        z.object({ type: z.literal("function") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      CodeInterpreterTool$inboundSchema.and(
+        z.object({ type: z.literal("code_interpreter") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      ImageGenerationTool$inboundSchema.and(
+        z.object({ type: z.literal("image_generation") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      WebSearchTool$inboundSchema.and(
+        z.object({ type: z.literal("web_search") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      WebSearchPremiumTool$inboundSchema.and(
+        z.object({ type: z.literal("web_search_premium") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+    ]),
   ).optional(),
   completion_args: z.nullable(CompletionArgs$inboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   agent_id: z.nullable(z.string()).optional(),
+  agent_version: z.nullable(z.number().int()).optional(),
   model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "handoff_execution": "handoffExecution",
     "completion_args": "completionArgs",
     "agent_id": "agentId",
+    "agent_version": "agentVersion",
   });
 });
 
@@ -301,12 +306,13 @@ export type ConversationRequest$Outbound = {
       | (WebSearchTool$Outbound & { type: "web_search" })
       | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" })
     >
-    | null
     | undefined;
   completion_args?: CompletionArgs$Outbound | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   agent_id?: string | null | undefined;
+  agent_version?: number | null | undefined;
   model?: string | null | undefined;
 };
 
@@ -321,52 +327,53 @@ export const ConversationRequest$outboundSchema: z.ZodType<
   store: z.nullable(z.boolean()).optional(),
   handoffExecution: z.nullable(HandoffExecution$outboundSchema).optional(),
   instructions: z.nullable(z.string()).optional(),
-  tools: z.nullable(
-    z.array(
-      z.union([
-        DocumentLibraryTool$outboundSchema.and(
-          z.object({ type: z.literal("document_library") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        FunctionTool$outboundSchema.and(
-          z.object({ type: z.literal("function") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        CodeInterpreterTool$outboundSchema.and(
-          z.object({ type: z.literal("code_interpreter") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        ImageGenerationTool$outboundSchema.and(
-          z.object({ type: z.literal("image_generation") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        WebSearchTool$outboundSchema.and(
-          z.object({ type: z.literal("web_search") }).transform((v) => ({
-            type: v.type,
-          })),
-        ),
-        WebSearchPremiumTool$outboundSchema.and(
-          z.object({ type: z.literal("web_search_premium") }).transform((
-            v,
-          ) => ({ type: v.type })),
-        ),
-      ]),
-    ),
+  tools: z.array(
+    z.union([
+      DocumentLibraryTool$outboundSchema.and(
+        z.object({ type: z.literal("document_library") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      FunctionTool$outboundSchema.and(
+        z.object({ type: z.literal("function") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      CodeInterpreterTool$outboundSchema.and(
+        z.object({ type: z.literal("code_interpreter") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      ImageGenerationTool$outboundSchema.and(
+        z.object({ type: z.literal("image_generation") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      WebSearchTool$outboundSchema.and(
+        z.object({ type: z.literal("web_search") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+      WebSearchPremiumTool$outboundSchema.and(
+        z.object({ type: z.literal("web_search_premium") }).transform((v) => ({
+          type: v.type,
+        })),
+      ),
+    ]),
   ).optional(),
   completionArgs: z.nullable(CompletionArgs$outboundSchema).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   agentId: z.nullable(z.string()).optional(),
+  agentVersion: z.nullable(z.number().int()).optional(),
   model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",
     completionArgs: "completion_args",
     agentId: "agent_id",
+    agentVersion: "agent_version",
   });
 });
 

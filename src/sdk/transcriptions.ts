@@ -25,7 +25,7 @@ export class Transcriptions extends ClientSDK {
   }
 
   /**
-   * Create streaming transcription (SSE)
+   * Create Streaming Transcription (SSE)
    */
   async stream(
     request: components.AudioTranscriptionRequestStream,

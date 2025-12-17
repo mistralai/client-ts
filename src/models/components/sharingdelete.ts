@@ -14,7 +14,7 @@ import {
 } from "./entitytype.js";
 
 export type SharingDelete = {
-  orgId: string;
+  orgId?: string | null | undefined;
   /**
    * The id of the entity (user, workspace or organization) to share with
    */
@@ -31,7 +31,7 @@ export const SharingDelete$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  org_id: z.string(),
+  org_id: z.nullable(z.string()).optional(),
   share_with_uuid: z.string(),
   share_with_type: EntityType$inboundSchema,
 }).transform((v) => {
@@ -44,7 +44,7 @@ export const SharingDelete$inboundSchema: z.ZodType<
 
 /** @internal */
 export type SharingDelete$Outbound = {
-  org_id: string;
+  org_id?: string | null | undefined;
   share_with_uuid: string;
   share_with_type: string;
 };
@@ -55,7 +55,7 @@ export const SharingDelete$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SharingDelete
 > = z.object({
-  orgId: z.string(),
+  orgId: z.nullable(z.string()).optional(),
   shareWithUuid: z.string(),
   shareWithType: EntityType$outboundSchema,
 }).transform((v) => {

@@ -14,7 +14,7 @@ export type SharingOut = {
   orgId: string;
   role: string;
   shareWithType: string;
-  shareWithUuid: string;
+  shareWithUuid: string | null;
 };
 
 /** @internal */
@@ -28,7 +28,7 @@ export const SharingOut$inboundSchema: z.ZodType<
   org_id: z.string(),
   role: z.string(),
   share_with_type: z.string(),
-  share_with_uuid: z.string(),
+  share_with_uuid: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "library_id": "libraryId",
@@ -46,7 +46,7 @@ export type SharingOut$Outbound = {
   org_id: string;
   role: string;
   share_with_type: string;
-  share_with_uuid: string;
+  share_with_uuid: string | null;
 };
 
 /** @internal */
@@ -60,7 +60,7 @@ export const SharingOut$outboundSchema: z.ZodType<
   orgId: z.string(),
   role: z.string(),
   shareWithType: z.string(),
-  shareWithUuid: z.string(),
+  shareWithUuid: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     libraryId: "library_id",

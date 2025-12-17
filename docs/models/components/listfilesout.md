@@ -19,7 +19,6 @@ let value: ListFilesOut = {
     },
   ],
   object: "<value>",
-  total: 220942,
 };
 ```
 
@@ -29,4 +28,4 @@ let value: ListFilesOut = {
 | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `data`                                                           | [components.FileSchema](../../models/components/fileschema.md)[] | :heavy_check_mark:                                               | N/A                                                              |
 | `object`                                                         | *string*                                                         | :heavy_check_mark:                                               | N/A                                                              |
-| `total`                                                          | *number*                                                         | :heavy_check_mark:                                               | N/A                                                              |
+| `total`                                                          | *number*                                                         | :heavy_minus_sign:                                               | N/A                                                              |

@@ -5,7 +5,13 @@
 ```typescript
 import { AgentUpdateRequest } from "@mistralai/mistralai/models/components";
 
-let value: AgentUpdateRequest = {};
+let value: AgentUpdateRequest = {
+  completionArgs: {
+    responseFormat: {
+      type: "text",
+    },
+  },
+};
 ```
 
 ## Fields
@@ -19,3 +25,5 @@ let value: AgentUpdateRequest = {};
 | `name`                                                                  | *string*                                                                | :heavy_minus_sign:                                                      | N/A                                                                     |
 | `description`                                                           | *string*                                                                | :heavy_minus_sign:                                                      | N/A                                                                     |
 | `handoffs`                                                              | *string*[]                                                              | :heavy_minus_sign:                                                      | N/A                                                                     |
+| `deploymentChat`                                                        | *boolean*                                                               | :heavy_minus_sign:                                                      | N/A                                                                     |
+| `metadata`                                                              | Record<string, *any*>                                                   | :heavy_minus_sign:                                                      | N/A                                                                     |

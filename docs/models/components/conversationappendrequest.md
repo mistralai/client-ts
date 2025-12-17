@@ -16,6 +16,11 @@ let value: ConversationAppendRequest = {
       nextAgentName: "<value>",
     },
   ],
+  completionArgs: {
+    responseFormat: {
+      type: "text",
+    },
+  },
 };
 ```
 

@@ -24,7 +24,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 1.10.0
+  version: 1.11.0
   additionalDependencies:
     dependencies:
       zod-to-json-schema: ^3.24.1

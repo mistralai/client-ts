@@ -3,6 +3,7 @@
  */
 
 import { betaAgentsCreate } from "../funcs/betaAgentsCreate.js";
+import { betaAgentsDelete } from "../funcs/betaAgentsDelete.js";
 import { betaAgentsGet } from "../funcs/betaAgentsGet.js";
 import { betaAgentsList } from "../funcs/betaAgentsList.js";
 import { betaAgentsUpdate } from "../funcs/betaAgentsUpdate.js";
@@ -75,6 +76,20 @@ export class MistralAgents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Agent> {
     return unwrapAsync(betaAgentsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an agent entity.
+   */
+  async delete(
+    request: operations.AgentsApiV1AgentsDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(betaAgentsDelete(
       this,
       request,
       options,

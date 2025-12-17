@@ -9,6 +9,11 @@ let value: AgentsApiV1ConversationsAppendStreamRequest = {
   conversationId: "<id>",
   conversationAppendStreamRequest: {
     inputs: "<value>",
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
   },
 };
 ```

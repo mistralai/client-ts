@@ -27,7 +27,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List document in a given library.
+ * List documents in a given library.
  *
  * @remarks
  * Given a library, lists the document that have been uploaded to that library.
@@ -100,6 +100,7 @@ async function $do(
   const path = pathToFunc("/v1/libraries/{library_id}/documents")(pathParams);
 
   const query = encodeFormQuery({
+    "filters_attributes": payload.filters_attributes,
     "page": payload.page,
     "page_size": payload.page_size,
     "search": payload.search,

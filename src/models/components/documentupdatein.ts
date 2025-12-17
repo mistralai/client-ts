@@ -7,9 +7,108 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type Attributes =
+  | boolean
+  | string
+  | number
+  | number
+  | Date
+  | Array<string>
+  | Array<number>
+  | Array<number>
+  | Array<boolean>;
+
 export type DocumentUpdateIn = {
   name?: string | null | undefined;
+  attributes?:
+    | {
+      [k: string]:
+        | boolean
+        | string
+        | number
+        | number
+        | Date
+        | Array<string>
+        | Array<number>
+        | Array<number>
+        | Array<boolean>;
+    }
+    | null
+    | undefined;
 };
+
+/** @internal */
+export const Attributes$inboundSchema: z.ZodType<
+  Attributes,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.boolean(),
+  z.string(),
+  z.number().int(),
+  z.number(),
+  z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  z.array(z.string()),
+  z.array(z.number().int()),
+  z.array(z.number()),
+  z.array(z.boolean()),
+]);
+
+/** @internal */
+export type Attributes$Outbound =
+  | boolean
+  | string
+  | number
+  | number
+  | string
+  | Array<string>
+  | Array<number>
+  | Array<number>
+  | Array<boolean>;
+
+/** @internal */
+export const Attributes$outboundSchema: z.ZodType<
+  Attributes$Outbound,
+  z.ZodTypeDef,
+  Attributes
+> = z.union([
+  z.boolean(),
+  z.string(),
+  z.number().int(),
+  z.number(),
+  z.date().transform(v => v.toISOString()),
+  z.array(z.string()),
+  z.array(z.number().int()),
+  z.array(z.number()),
+  z.array(z.boolean()),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Attributes$ {
+  /** @deprecated use `Attributes$inboundSchema` instead. */
+  export const inboundSchema = Attributes$inboundSchema;
+  /** @deprecated use `Attributes$outboundSchema` instead. */
+  export const outboundSchema = Attributes$outboundSchema;
+  /** @deprecated use `Attributes$Outbound` instead. */
+  export type Outbound = Attributes$Outbound;
+}
+
+export function attributesToJSON(attributes: Attributes): string {
+  return JSON.stringify(Attributes$outboundSchema.parse(attributes));
+}
+
+export function attributesFromJSON(
+  jsonString: string,
+): SafeParseResult<Attributes, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Attributes$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Attributes' from JSON`,
+  );
+}
 
 /** @internal */
 export const DocumentUpdateIn$inboundSchema: z.ZodType<
@@ -18,11 +117,41 @@ export const DocumentUpdateIn$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.nullable(z.string()).optional(),
+  attributes: z.nullable(
+    z.record(
+      z.union([
+        z.boolean(),
+        z.string(),
+        z.number().int(),
+        z.number(),
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+        z.array(z.string()),
+        z.array(z.number().int()),
+        z.array(z.number()),
+        z.array(z.boolean()),
+      ]),
+    ),
+  ).optional(),
 });
 
 /** @internal */
 export type DocumentUpdateIn$Outbound = {
   name?: string | null | undefined;
+  attributes?:
+    | {
+      [k: string]:
+        | boolean
+        | string
+        | number
+        | number
+        | string
+        | Array<string>
+        | Array<number>
+        | Array<number>
+        | Array<boolean>;
+    }
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -32,6 +161,21 @@ export const DocumentUpdateIn$outboundSchema: z.ZodType<
   DocumentUpdateIn
 > = z.object({
   name: z.nullable(z.string()).optional(),
+  attributes: z.nullable(
+    z.record(
+      z.union([
+        z.boolean(),
+        z.string(),
+        z.number().int(),
+        z.number(),
+        z.date().transform(v => v.toISOString()),
+        z.array(z.string()),
+        z.array(z.number().int()),
+        z.array(z.number()),
+        z.array(z.boolean()),
+      ]),
+    ),
+  ).optional(),
 });
 
 /**

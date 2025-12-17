@@ -11,6 +11,7 @@
 * [list](#list) - List agent entities.
 * [get](#get) - Retrieve an agent entity.
 * [update](#update) - Update an agent entity.
+* [delete](#delete) - Delete an agent entity.
 * [updateVersion](#updateversion) - Update an agent version.
 
 ## create
@@ -29,6 +30,11 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.agents.create({
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
     model: "LeBaron",
     name: "<value>",
   });
@@ -55,6 +61,11 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaAgentsCreate(mistral, {
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
     model: "LeBaron",
     name: "<value>",
   });
@@ -250,7 +261,13 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.agents.update({
     agentId: "<id>",
-    agentUpdateRequest: {},
+    agentUpdateRequest: {
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
+    },
   });
 
   console.log(result);
@@ -276,7 +293,13 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaAgentsUpdate(mistral, {
     agentId: "<id>",
-    agentUpdateRequest: {},
+    agentUpdateRequest: {
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -301,6 +324,80 @@ run();
 ### Response
 
 **Promise\<[components.Agent](../../models/components/agent.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## delete
+
+Delete an agent entity.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_delete" method="delete" path="/v1/agents/{agent_id}" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  await mistral.beta.agents.delete({
+    agentId: "<id>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaAgentsDelete } from "@mistralai/mistralai/funcs/betaAgentsDelete.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaAgentsDelete(mistral, {
+    agentId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("betaAgentsDelete failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.AgentsApiV1AgentsDeleteRequest](../../models/operations/agentsapiv1agentsdeleterequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
 
 ### Errors
 

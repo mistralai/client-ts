@@ -19,7 +19,7 @@ import {
 } from "./shareenum.js";
 
 export type SharingIn = {
-  orgId: string;
+  orgId?: string | null | undefined;
   level: ShareEnum;
   /**
    * The id of the entity (user, workspace or organization) to share with
@@ -37,7 +37,7 @@ export const SharingIn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  org_id: z.string(),
+  org_id: z.nullable(z.string()).optional(),
   level: ShareEnum$inboundSchema,
   share_with_uuid: z.string(),
   share_with_type: EntityType$inboundSchema,
@@ -51,7 +51,7 @@ export const SharingIn$inboundSchema: z.ZodType<
 
 /** @internal */
 export type SharingIn$Outbound = {
-  org_id: string;
+  org_id?: string | null | undefined;
   level: string;
   share_with_uuid: string;
   share_with_type: string;
@@ -63,7 +63,7 @@ export const SharingIn$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SharingIn
 > = z.object({
-  orgId: z.string(),
+  orgId: z.nullable(z.string()).optional(),
   level: ShareEnum$outboundSchema,
   shareWithUuid: z.string(),
   shareWithType: EntityType$outboundSchema,

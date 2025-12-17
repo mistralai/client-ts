@@ -6,11 +6,17 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentsApiV1AgentsListRequest = {
   page?: number | undefined;
   pageSize?: number | undefined;
+  deploymentChat?: boolean | null | undefined;
+  sources?: Array<components.RequestSource> | null | undefined;
+  name?: string | null | undefined;
+  id?: string | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -21,9 +27,16 @@ export const AgentsApiV1AgentsListRequest$inboundSchema: z.ZodType<
 > = z.object({
   page: z.number().int().default(0),
   page_size: z.number().int().default(20),
+  deployment_chat: z.nullable(z.boolean()).optional(),
+  sources: z.nullable(z.array(components.RequestSource$inboundSchema))
+    .optional(),
+  name: z.nullable(z.string()).optional(),
+  id: z.nullable(z.string()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "page_size": "pageSize",
+    "deployment_chat": "deploymentChat",
   });
 });
 
@@ -31,6 +44,11 @@ export const AgentsApiV1AgentsListRequest$inboundSchema: z.ZodType<
 export type AgentsApiV1AgentsListRequest$Outbound = {
   page: number;
   page_size: number;
+  deployment_chat?: boolean | null | undefined;
+  sources?: Array<string> | null | undefined;
+  name?: string | null | undefined;
+  id?: string | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -41,9 +59,16 @@ export const AgentsApiV1AgentsListRequest$outboundSchema: z.ZodType<
 > = z.object({
   page: z.number().int().default(0),
   pageSize: z.number().int().default(20),
+  deploymentChat: z.nullable(z.boolean()).optional(),
+  sources: z.nullable(z.array(components.RequestSource$outboundSchema))
+    .optional(),
+  name: z.nullable(z.string()).optional(),
+  id: z.nullable(z.string()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
+    deploymentChat: "deployment_chat",
   });
 });
 

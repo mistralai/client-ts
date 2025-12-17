@@ -21,12 +21,14 @@ export type ToolExecutionDeltaEventType = ClosedEnum<
   typeof ToolExecutionDeltaEventType
 >;
 
+export type ToolExecutionDeltaEventName = BuiltInConnectors | string;
+
 export type ToolExecutionDeltaEvent = {
   type?: ToolExecutionDeltaEventType | undefined;
   createdAt?: Date | undefined;
   outputIndex?: number | undefined;
   id: string;
-  name: BuiltInConnectors;
+  name: BuiltInConnectors | string;
   arguments: string;
 };
 
@@ -52,6 +54,56 @@ export namespace ToolExecutionDeltaEventType$ {
 }
 
 /** @internal */
+export const ToolExecutionDeltaEventName$inboundSchema: z.ZodType<
+  ToolExecutionDeltaEventName,
+  z.ZodTypeDef,
+  unknown
+> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
+
+/** @internal */
+export type ToolExecutionDeltaEventName$Outbound = string | string;
+
+/** @internal */
+export const ToolExecutionDeltaEventName$outboundSchema: z.ZodType<
+  ToolExecutionDeltaEventName$Outbound,
+  z.ZodTypeDef,
+  ToolExecutionDeltaEventName
+> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ToolExecutionDeltaEventName$ {
+  /** @deprecated use `ToolExecutionDeltaEventName$inboundSchema` instead. */
+  export const inboundSchema = ToolExecutionDeltaEventName$inboundSchema;
+  /** @deprecated use `ToolExecutionDeltaEventName$outboundSchema` instead. */
+  export const outboundSchema = ToolExecutionDeltaEventName$outboundSchema;
+  /** @deprecated use `ToolExecutionDeltaEventName$Outbound` instead. */
+  export type Outbound = ToolExecutionDeltaEventName$Outbound;
+}
+
+export function toolExecutionDeltaEventNameToJSON(
+  toolExecutionDeltaEventName: ToolExecutionDeltaEventName,
+): string {
+  return JSON.stringify(
+    ToolExecutionDeltaEventName$outboundSchema.parse(
+      toolExecutionDeltaEventName,
+    ),
+  );
+}
+
+export function toolExecutionDeltaEventNameFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolExecutionDeltaEventName, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolExecutionDeltaEventName$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolExecutionDeltaEventName' from JSON`,
+  );
+}
+
+/** @internal */
 export const ToolExecutionDeltaEvent$inboundSchema: z.ZodType<
   ToolExecutionDeltaEvent,
   z.ZodTypeDef,
@@ -64,7 +116,7 @@ export const ToolExecutionDeltaEvent$inboundSchema: z.ZodType<
     .optional(),
   output_index: z.number().int().default(0),
   id: z.string(),
-  name: BuiltInConnectors$inboundSchema,
+  name: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   arguments: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -79,7 +131,7 @@ export type ToolExecutionDeltaEvent$Outbound = {
   created_at?: string | undefined;
   output_index: number;
   id: string;
-  name: string;
+  name: string | string;
   arguments: string;
 };
 
@@ -95,7 +147,7 @@ export const ToolExecutionDeltaEvent$outboundSchema: z.ZodType<
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   outputIndex: z.number().int().default(0),
   id: z.string(),
-  name: BuiltInConnectors$outboundSchema,
+  name: z.union([BuiltInConnectors$outboundSchema, z.string()]),
   arguments: z.string(),
 }).transform((v) => {
   return remap$(v, {

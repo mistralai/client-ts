@@ -19,21 +19,21 @@ import {
 } from "./encodingformat.js";
 
 /**
- * Text to embed.
+ * The text content to be embedded, can be a string or an array of strings for fast processing in bulk.
  */
 export type EmbeddingRequestInputs = string | Array<string>;
 
 export type EmbeddingRequest = {
   /**
-   * ID of the model to use.
+   * The ID of the model to be used for embedding.
    */
   model: string;
   /**
-   * Text to embed.
+   * The text content to be embedded, can be a string or an array of strings for fast processing in bulk.
    */
   inputs: string | Array<string>;
   /**
-   * The dimension of the output embeddings.
+   * The dimension of the output embeddings when feature available. If not provided, a default output dimension will be used.
    */
   outputDimension?: number | null | undefined;
   outputDtype?: EmbeddingDtype | undefined;

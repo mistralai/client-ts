@@ -10,14 +10,14 @@ let value: DocumentOut = {
   libraryId: "f85c6cfe-ffba-4130-8350-eb7bc74cf318",
   hash: "<value>",
   mimeType: "<value>",
-  extension: "jpe",
-  size: 557590,
+  extension: "pdf",
+  size: 33345,
   name: "<value>",
-  createdAt: new Date("2023-04-27T09:47:22.828Z"),
+  createdAt: new Date("2024-05-11T19:53:21.776Z"),
   processingStatus: "<value>",
-  uploadedById: "a07ae014-de08-46b2-9005-78a53e12d7f6",
+  uploadedById: "e014de08-6b20-4057-a8a5-3e12d7f66822",
   uploadedByType: "<value>",
-  tokensProcessingTotal: 554819,
+  tokensProcessingTotal: 288375,
 };
 ```
 
@@ -41,4 +41,6 @@ let value: DocumentOut = {
 | `uploadedByType`                                                                              | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `tokensProcessingMainContent`                                                                 | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `tokensProcessingSummary`                                                                     | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `url`                                                                                         | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `attributes`                                                                                  | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `tokensProcessingTotal`                                                                       | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

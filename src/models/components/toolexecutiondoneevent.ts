@@ -21,12 +21,14 @@ export type ToolExecutionDoneEventType = ClosedEnum<
   typeof ToolExecutionDoneEventType
 >;
 
+export type ToolExecutionDoneEventName = BuiltInConnectors | string;
+
 export type ToolExecutionDoneEvent = {
   type?: ToolExecutionDoneEventType | undefined;
   createdAt?: Date | undefined;
   outputIndex?: number | undefined;
   id: string;
-  name: BuiltInConnectors;
+  name: BuiltInConnectors | string;
   info?: { [k: string]: any } | undefined;
 };
 
@@ -52,6 +54,54 @@ export namespace ToolExecutionDoneEventType$ {
 }
 
 /** @internal */
+export const ToolExecutionDoneEventName$inboundSchema: z.ZodType<
+  ToolExecutionDoneEventName,
+  z.ZodTypeDef,
+  unknown
+> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
+
+/** @internal */
+export type ToolExecutionDoneEventName$Outbound = string | string;
+
+/** @internal */
+export const ToolExecutionDoneEventName$outboundSchema: z.ZodType<
+  ToolExecutionDoneEventName$Outbound,
+  z.ZodTypeDef,
+  ToolExecutionDoneEventName
+> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ToolExecutionDoneEventName$ {
+  /** @deprecated use `ToolExecutionDoneEventName$inboundSchema` instead. */
+  export const inboundSchema = ToolExecutionDoneEventName$inboundSchema;
+  /** @deprecated use `ToolExecutionDoneEventName$outboundSchema` instead. */
+  export const outboundSchema = ToolExecutionDoneEventName$outboundSchema;
+  /** @deprecated use `ToolExecutionDoneEventName$Outbound` instead. */
+  export type Outbound = ToolExecutionDoneEventName$Outbound;
+}
+
+export function toolExecutionDoneEventNameToJSON(
+  toolExecutionDoneEventName: ToolExecutionDoneEventName,
+): string {
+  return JSON.stringify(
+    ToolExecutionDoneEventName$outboundSchema.parse(toolExecutionDoneEventName),
+  );
+}
+
+export function toolExecutionDoneEventNameFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolExecutionDoneEventName, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolExecutionDoneEventName$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolExecutionDoneEventName' from JSON`,
+  );
+}
+
+/** @internal */
 export const ToolExecutionDoneEvent$inboundSchema: z.ZodType<
   ToolExecutionDoneEvent,
   z.ZodTypeDef,
@@ -62,7 +112,7 @@ export const ToolExecutionDoneEvent$inboundSchema: z.ZodType<
     .optional(),
   output_index: z.number().int().default(0),
   id: z.string(),
-  name: BuiltInConnectors$inboundSchema,
+  name: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   info: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -77,7 +127,7 @@ export type ToolExecutionDoneEvent$Outbound = {
   created_at?: string | undefined;
   output_index: number;
   id: string;
-  name: string;
+  name: string | string;
   info?: { [k: string]: any } | undefined;
 };
 
@@ -93,7 +143,7 @@ export const ToolExecutionDoneEvent$outboundSchema: z.ZodType<
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   outputIndex: z.number().int().default(0),
   id: z.string(),
-  name: BuiltInConnectors$outboundSchema,
+  name: z.union([BuiltInConnectors$outboundSchema, z.string()]),
   info: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {

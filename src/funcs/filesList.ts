@@ -92,6 +92,7 @@ async function $do(
   const path = pathToFunc("/v1/files")();
 
   const query = encodeFormQuery({
+    "include_total": payload?.include_total,
     "page": payload?.page,
     "page_size": payload?.page_size,
     "purpose": payload?.purpose,

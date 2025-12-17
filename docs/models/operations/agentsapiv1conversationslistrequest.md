@@ -10,7 +10,8 @@ let value: AgentsApiV1ConversationsListRequest = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `page`             | *number*           | :heavy_minus_sign: | N/A                |
-| `pageSize`         | *number*           | :heavy_minus_sign: | N/A                |
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `page`                | *number*              | :heavy_minus_sign:    | N/A                   |
+| `pageSize`            | *number*              | :heavy_minus_sign:    | N/A                   |
+| `metadata`            | Record<string, *any*> | :heavy_minus_sign:    | N/A                   |
