@@ -7,3 +7,4 @@ export * as files from "./lib/files.js";
 export { HTTPClient } from "./lib/http.js";
 export type { Fetcher, HTTPClientOptions } from "./lib/http.js";
 export * from "./sdk/sdk.js";
+export type {Messages as Message} from "./models/components/chatcompletionrequest.js"
