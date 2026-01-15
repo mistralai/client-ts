@@ -14,6 +14,7 @@ const value: components.AssistantMessage = {};
 ```typescript
 const value: components.SystemMessage = {
   content: "<value>",
+  role: "system",
 };
 ```
 
@@ -21,14 +22,8 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      imageUrl: {
-        url: "https://sugary-brace.org/",
-      },
-      type: "image_url",
-    },
-  ],
+  content: [],
+  role: "tool",
 };
 ```
 
@@ -37,6 +32,7 @@ const value: components.ToolMessage = {
 ```typescript
 const value: components.UserMessage = {
   content: "<value>",
+  role: "user",
 };
 ```
 
