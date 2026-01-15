@@ -6,7 +6,7 @@
 import { ImageURL } from "@mistralai/mistralai-gcp/models/components";
 
 let value: ImageURL = {
-  url: "https://misguided-hawk.biz",
+  url: "https://grim-farm.name/",
 };
 ```
 

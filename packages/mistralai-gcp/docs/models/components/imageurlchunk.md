@@ -8,9 +8,7 @@
 import { ImageURLChunk } from "@mistralai/mistralai-gcp/models/components";
 
 let value: ImageURLChunk = {
-  imageUrl: {
-    url: "https://close-paintwork.com",
-  },
+  imageUrl: "https://darling-distinction.org",
 };
 ```
 
