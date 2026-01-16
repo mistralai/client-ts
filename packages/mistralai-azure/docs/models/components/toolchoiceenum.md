@@ -5,7 +5,7 @@
 ```typescript
 import { ToolChoiceEnum } from "@mistralai/mistralai-azure/models/components";
 
-let value: ToolChoiceEnum = "any";
+let value: ToolChoiceEnum = "required";
 ```
 
 ## Values

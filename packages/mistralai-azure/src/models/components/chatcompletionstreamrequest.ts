@@ -73,10 +73,13 @@ export type Stop = string | Array<string>;
 
 export type Messages =
   | (SystemMessage & { role: "system" })
+  | (ToolMessage & { role: "tool" })
   | (UserMessage & { role: "user" })
-  | (AssistantMessage & { role: "assistant" })
-  | (ToolMessage & { role: "tool" });
+  | (AssistantMessage & { role: "assistant" });
 
+/**
+ * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
+ */
 export type ChatCompletionStreamRequestToolChoice = ToolChoice | ToolChoiceEnum;
 
 export type ChatCompletionStreamRequest = {
@@ -105,31 +108,47 @@ export type ChatCompletionStreamRequest = {
    * The seed to use for random sampling. If set, different calls will generate deterministic results.
    */
   randomSeed?: number | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   /**
    * The prompt(s) to generate completions for, encoded as a list of dict with role and content.
    */
   messages: Array<
     | (SystemMessage & { role: "system" })
+    | (ToolMessage & { role: "tool" })
     | (UserMessage & { role: "user" })
     | (AssistantMessage & { role: "assistant" })
-    | (ToolMessage & { role: "tool" })
   >;
+  /**
+   * Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.
+   */
   responseFormat?: ResponseFormat | undefined;
+  /**
+   * A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.
+   */
   tools?: Array<Tool> | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
+   */
   toolChoice?: ToolChoice | ToolChoiceEnum | undefined;
   /**
-   * presence_penalty determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
+   * The `presence_penalty` determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
    */
   presencePenalty?: number | undefined;
   /**
-   * frequency_penalty penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
+   * The `frequency_penalty` penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
    */
   frequencyPenalty?: number | undefined;
   /**
    * Number of completions to return for each request, input tokens are only billed once.
    */
   n?: number | null | undefined;
+  /**
+   * Enable users to specify an expected completion, optimizing response times by leveraging known or predictable content.
+   */
   prediction?: Prediction | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use, when enabled the model can call multiple tools in parallel.
+   */
   parallelToolCalls?: boolean | undefined;
   /**
    * Allows toggling between the reasoning mode and no system prompt. When set to `reasoning` the system prompt for reasoning models will be used.
@@ -190,6 +209,9 @@ export const Messages$inboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
+  ToolMessage$inboundSchema.and(
+    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
+  ),
   UserMessage$inboundSchema.and(
     z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
   ),
@@ -198,17 +220,14 @@ export const Messages$inboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
-  ToolMessage$inboundSchema.and(
-    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
-  ),
 ]);
 
 /** @internal */
 export type Messages$Outbound =
   | (SystemMessage$Outbound & { role: "system" })
+  | (ToolMessage$Outbound & { role: "tool" })
   | (UserMessage$Outbound & { role: "user" })
-  | (AssistantMessage$Outbound & { role: "assistant" })
-  | (ToolMessage$Outbound & { role: "tool" });
+  | (AssistantMessage$Outbound & { role: "assistant" });
 
 /** @internal */
 export const Messages$outboundSchema: z.ZodType<
@@ -221,6 +240,9 @@ export const Messages$outboundSchema: z.ZodType<
       role: v.role,
     })),
   ),
+  ToolMessage$outboundSchema.and(
+    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
+  ),
   UserMessage$outboundSchema.and(
     z.object({ role: z.literal("user") }).transform((v) => ({ role: v.role })),
   ),
@@ -228,9 +250,6 @@ export const Messages$outboundSchema: z.ZodType<
     z.object({ role: z.literal("assistant") }).transform((v) => ({
       role: v.role,
     })),
-  ),
-  ToolMessage$outboundSchema.and(
-    z.object({ role: z.literal("tool") }).transform((v) => ({ role: v.role })),
   ),
 ]);
 
@@ -329,10 +348,16 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   random_seed: z.nullable(z.number().int()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   messages: z.array(
     z.union([
       SystemMessage$inboundSchema.and(
         z.object({ role: z.literal("system") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
+      ToolMessage$inboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),
@@ -343,11 +368,6 @@ export const ChatCompletionStreamRequest$inboundSchema: z.ZodType<
       ),
       AssistantMessage$inboundSchema.and(
         z.object({ role: z.literal("assistant") }).transform((v) => ({
-          role: v.role,
-        })),
-      ),
-      ToolMessage$inboundSchema.and(
-        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),
@@ -388,11 +408,12 @@ export type ChatCompletionStreamRequest$Outbound = {
   stream: boolean;
   stop?: string | Array<string> | undefined;
   random_seed?: number | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
     | (SystemMessage$Outbound & { role: "system" })
+    | (ToolMessage$Outbound & { role: "tool" })
     | (UserMessage$Outbound & { role: "user" })
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (ToolMessage$Outbound & { role: "tool" })
   >;
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
@@ -419,10 +440,16 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.number().int()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   messages: z.array(
     z.union([
       SystemMessage$outboundSchema.and(
         z.object({ role: z.literal("system") }).transform((v) => ({
+          role: v.role,
+        })),
+      ),
+      ToolMessage$outboundSchema.and(
+        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),
@@ -433,11 +460,6 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
       ),
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }).transform((v) => ({
-          role: v.role,
-        })),
-      ),
-      ToolMessage$outboundSchema.and(
-        z.object({ role: z.literal("tool") }).transform((v) => ({
           role: v.role,
         })),
       ),

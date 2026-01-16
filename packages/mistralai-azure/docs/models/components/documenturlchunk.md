@@ -6,7 +6,7 @@
 import { DocumentURLChunk } from "@mistralai/mistralai-azure/models/components";
 
 let value: DocumentURLChunk = {
-  documentUrl: "https://elliptical-fog.org",
+  documentUrl: "https://other-reach.net",
 };
 ```
 

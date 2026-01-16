@@ -4,6 +4,7 @@ generation:
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
@@ -11,18 +12,25 @@ generation:
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: false
+    sharedErrorComponentsApr2025: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 typescript:
-  version: 1.6.0
+  version: 1.11.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
   author: Speakeasy
+  baseErrorName: MistralAzureError
   clientServerStatusCodesAsErrors: true
+  constFieldsAlwaysOptional: true
   defaultErrorName: SDKError
   enableCustomCodeRegions: false
   enableMCPServer: false
@@ -31,6 +39,7 @@ typescript:
   envVarPrefix: MISTRAL
   flattenGlobalSecurity: true
   flatteningOrder: body-first
+  generateExamples: true
   imports:
     option: openapi
     paths:
@@ -48,4 +57,5 @@ typescript:
   packageName: '@mistralai/mistralai-azure'
   responseFormat: flat
   templateVersion: v2
+  usageSDKInitImports: []
   useIndexModules: true
