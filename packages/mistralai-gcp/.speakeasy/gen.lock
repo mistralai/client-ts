@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c6044247-eaf9-46da-b078-0e1334e93be2
 management:
-  docChecksum: 28fe1ab59b4dee005217f2dbbd836060
-  docVersion: 0.0.2
-  speakeasyVersion: 1.517.3
-  generationVersion: 2.548.6
-  releaseVersion: 1.5.0
-  configChecksum: 1c5e28cded8c5d3a7d735e20f6f09b99
+  docChecksum: a7d9a161ca71328c62514af87c72bd88
+  docVersion: 1.0.0
+  speakeasyVersion: 1.606.10
+  generationVersion: 2.687.13
+  releaseVersion: 1.11.0
+  configChecksum: 33d6f22d0d886423d7d45163bb77834e
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
@@ -14,26 +14,28 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.11
-    core: 3.21.4
+    additionalProperties: 0.1.1
+    constsAndDefaults: 0.1.12
+    core: 3.21.20
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    examples: 2.81.5
+    examples: 2.82.3
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.4
+    globalServerURLs: 2.82.5
+    includes: 2.81.1
     nameOverrides: 2.81.2
     nullables: 0.1.1
     openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.2.0
-    serverEvents: 0.1.5
+    sdkHooks: 0.3.0
+    serverEvents: 0.1.8
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
-    unions: 2.85.8
+    unions: 2.85.11
 generatedFiles:
   - .gitattributes
   - .npmignore
@@ -75,6 +77,7 @@ generatedFiles:
   - docs/models/components/jsonschema.md
   - docs/models/components/loc.md
   - docs/models/components/messages.md
+  - docs/models/components/mistralpromptmode.md
   - docs/models/components/prediction.md
   - docs/models/components/referencechunk.md
   - docs/models/components/referencechunktype.md
@@ -85,7 +88,11 @@ generatedFiles:
   - docs/models/components/stop.md
   - docs/models/components/systemmessage.md
   - docs/models/components/systemmessagecontent.md
+  - docs/models/components/systemmessagecontentchunks.md
   - docs/models/components/textchunk.md
+  - docs/models/components/thinkchunk.md
+  - docs/models/components/thinkchunktype.md
+  - docs/models/components/thinking.md
   - docs/models/components/tool.md
   - docs/models/components/toolcall.md
   - docs/models/components/toolchoice.md
@@ -102,6 +109,9 @@ generatedFiles:
   - docs/models/components/validationerror.md
   - docs/models/errors/httpvalidationerror.md
   - eslint.config.mjs
+  - examples/.env.template
+  - examples/chatComplete.example.ts
+  - examples/package.json
   - jsr.json
   - package.json
   - src/core.ts
@@ -149,13 +159,16 @@ generatedFiles:
   - src/models/components/imageurlchunk.ts
   - src/models/components/index.ts
   - src/models/components/jsonschema.ts
+  - src/models/components/mistralpromptmode.ts
   - src/models/components/prediction.ts
   - src/models/components/referencechunk.ts
   - src/models/components/responseformat.ts
   - src/models/components/responseformats.ts
   - src/models/components/security.ts
   - src/models/components/systemmessage.ts
+  - src/models/components/systemmessagecontentchunks.ts
   - src/models/components/textchunk.ts
+  - src/models/components/thinkchunk.ts
   - src/models/components/tool.ts
   - src/models/components/toolcall.ts
   - src/models/components/toolchoice.ts
@@ -168,6 +181,8 @@ generatedFiles:
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/httpvalidationerror.ts
   - src/models/errors/index.ts
+  - src/models/errors/mistralgoogleclouderror.ts
+  - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkerror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/sdk/chat.ts
@@ -187,36 +202,33 @@ examples:
   stream_chat:
     speakeasy-default-stream-chat:
       requestBody:
-        application/json: {"model": "mistral-small-latest", "stream": true, "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+        application/json: {"model": "mistral-large-latest", "stream": true, "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}], "response_format": {"type": "text"}}
       responses:
         "422":
           application/json: {}
-        "200": {}
   chat_completion_v1_chat_completions_post:
     speakeasy-default-chat-completion-v1-chat-completions-post:
       requestBody:
-        application/json: {"model": "mistral-small-latest", "stream": false, "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}]}
+        application/json: {"model": "mistral-large-latest", "stream": false, "messages": [{"content": "Who is the best French painter? Answer in one short sentence.", "role": "user"}], "response_format": {"type": "text"}}
       responses:
         "200":
-          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}]}
+          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "mistral-small-latest", "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}, "created": 1702256327, "choices": []}
         "422":
           application/json: {}
   stream_fim:
     speakeasy-default-stream-fim:
       requestBody:
-        application/json: {"model": "codestral-2405", "top_p": 1, "stream": true, "prompt": "def", "suffix": "return a+b"}
+        application/json: {"model": "codestral-latest", "top_p": 1, "stream": true, "prompt": "def", "suffix": "return a+b"}
       responses:
         "422":
           application/json: {}
-        "200": {}
   fim_completion_v1_fim_completions_post:
-    speakeasy-default-fim-completion-v1-fim-completions-post:
+    userExample:
       requestBody:
-        application/json: {"model": "codestral-2405", "top_p": 1, "stream": false, "prompt": "def", "suffix": "return a+b"}
+        application/json: {"model": "codestral-latest", "top_p": 1, "stream": false, "prompt": "def", "suffix": "return a+b"}
       responses:
         "200":
-          application/json: {"id": "cmpl-e5cc70bb28c444948073e77776eb30ef", "object": "chat.completion", "model": "codestral-latest", "usage": {"prompt_tokens": 16, "completion_tokens": 34, "total_tokens": 50}, "created": 1702256327, "choices": [{"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}, {"index": 0, "message": {"prefix": false, "role": "assistant"}, "finish_reason": "stop"}]}
-        "422":
-          application/json: {}
-examplesVersion: 1.0.0
+          application/json: {"id": "447e3e0d457e42e98248b5d2ef52a2a3", "object": "chat.completion", "model": "codestral-2508", "usage": {"prompt_tokens": 8, "completion_tokens": 91, "total_tokens": 99}, "created": 1759496862, "choices": [{"index": 0, "message": {"content": "add_numbers(a: int, b: int) -> int:\n    \"\"\"\n    You are given two integers `a` and `b`. Your task is to write a function that\n    returns the sum of these two integers. The function should be implemented in a\n    way that it can handle very large integers (up to 10^18). As a reminder, your\n    code has to be in python\n    \"\"\"\n", "tool_calls": null, "prefix": false, "role": "assistant"}, "finish_reason": "stop"}]}
+examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## SDK Changes Detected:\n* `mistralgooglecloud.chat.complete()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response` **Changed**\n* `mistralgooglecloud.fim.complete()`: \n  *  `request.metadata` **Added**\n  *  `response` **Changed**\n"
