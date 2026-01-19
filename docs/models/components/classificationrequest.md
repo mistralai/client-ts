@@ -19,4 +19,5 @@ let value: ClassificationRequest = {
 | Field                                    | Type                                     | Required                                 | Description                              | Example                                  |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | `model`                                  | *string*                                 | :heavy_check_mark:                       | ID of the model to use.                  | mistral-moderation-latest                |
+| `metadata`                               | Record<string, *any*>                    | :heavy_minus_sign:                       | N/A                                      |                                          |
 | `inputs`                                 | *components.ClassificationRequestInputs* | :heavy_check_mark:                       | Text to classify.                        |                                          |

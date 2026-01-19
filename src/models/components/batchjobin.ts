@@ -12,12 +12,19 @@ import {
   ApiEndpoint$inboundSchema,
   ApiEndpoint$outboundSchema,
 } from "./apiendpoint.js";
+import {
+  BatchRequest,
+  BatchRequest$inboundSchema,
+  BatchRequest$Outbound,
+  BatchRequest$outboundSchema,
+} from "./batchrequest.js";
 
 export type BatchJobIn = {
   /**
    * The list of input files to be used for batch inference, these files should be `jsonl` files, containing the input data corresponding to the bory request for the batch inference in a "body" field. An example of such file is the following: ```json {"custom_id": "0", "body": {"max_tokens": 100, "messages": [{"role": "user", "content": "What is the best French cheese?"}]}} {"custom_id": "1", "body": {"max_tokens": 100, "messages": [{"role": "user", "content": "What is the best French wine?"}]}} ```
    */
-  inputFiles: Array<string>;
+  inputFiles?: Array<string> | null | undefined;
+  requests?: Array<BatchRequest> | null | undefined;
   endpoint: ApiEndpoint;
   /**
    * The model to be used for batch inference.
@@ -43,7 +50,8 @@ export const BatchJobIn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input_files: z.array(z.string()),
+  input_files: z.nullable(z.array(z.string())).optional(),
+  requests: z.nullable(z.array(BatchRequest$inboundSchema)).optional(),
   endpoint: ApiEndpoint$inboundSchema,
   model: z.nullable(z.string()).optional(),
   agent_id: z.nullable(z.string()).optional(),
@@ -59,7 +67,8 @@ export const BatchJobIn$inboundSchema: z.ZodType<
 
 /** @internal */
 export type BatchJobIn$Outbound = {
-  input_files: Array<string>;
+  input_files?: Array<string> | null | undefined;
+  requests?: Array<BatchRequest$Outbound> | null | undefined;
   endpoint: string;
   model?: string | null | undefined;
   agent_id?: string | null | undefined;
@@ -73,7 +82,8 @@ export const BatchJobIn$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BatchJobIn
 > = z.object({
-  inputFiles: z.array(z.string()),
+  inputFiles: z.nullable(z.array(z.string())).optional(),
+  requests: z.nullable(z.array(BatchRequest$outboundSchema)).optional(),
   endpoint: ApiEndpoint$outboundSchema,
   model: z.nullable(z.string()).optional(),
   agentId: z.nullable(z.string()).optional(),

@@ -18,9 +18,11 @@ export const ToolReferenceChunkType = {
 } as const;
 export type ToolReferenceChunkType = ClosedEnum<typeof ToolReferenceChunkType>;
 
+export type ToolReferenceChunkTool = BuiltInConnectors | string;
+
 export type ToolReferenceChunk = {
   type?: ToolReferenceChunkType | undefined;
-  tool: BuiltInConnectors;
+  tool: BuiltInConnectors | string;
   title: string;
   url?: string | null | undefined;
   favicon?: string | null | undefined;
@@ -49,13 +51,61 @@ export namespace ToolReferenceChunkType$ {
 }
 
 /** @internal */
+export const ToolReferenceChunkTool$inboundSchema: z.ZodType<
+  ToolReferenceChunkTool,
+  z.ZodTypeDef,
+  unknown
+> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
+
+/** @internal */
+export type ToolReferenceChunkTool$Outbound = string | string;
+
+/** @internal */
+export const ToolReferenceChunkTool$outboundSchema: z.ZodType<
+  ToolReferenceChunkTool$Outbound,
+  z.ZodTypeDef,
+  ToolReferenceChunkTool
+> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ToolReferenceChunkTool$ {
+  /** @deprecated use `ToolReferenceChunkTool$inboundSchema` instead. */
+  export const inboundSchema = ToolReferenceChunkTool$inboundSchema;
+  /** @deprecated use `ToolReferenceChunkTool$outboundSchema` instead. */
+  export const outboundSchema = ToolReferenceChunkTool$outboundSchema;
+  /** @deprecated use `ToolReferenceChunkTool$Outbound` instead. */
+  export type Outbound = ToolReferenceChunkTool$Outbound;
+}
+
+export function toolReferenceChunkToolToJSON(
+  toolReferenceChunkTool: ToolReferenceChunkTool,
+): string {
+  return JSON.stringify(
+    ToolReferenceChunkTool$outboundSchema.parse(toolReferenceChunkTool),
+  );
+}
+
+export function toolReferenceChunkToolFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolReferenceChunkTool, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolReferenceChunkTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolReferenceChunkTool' from JSON`,
+  );
+}
+
+/** @internal */
 export const ToolReferenceChunk$inboundSchema: z.ZodType<
   ToolReferenceChunk,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: ToolReferenceChunkType$inboundSchema.default("tool_reference"),
-  tool: BuiltInConnectors$inboundSchema,
+  tool: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   title: z.string(),
   url: z.nullable(z.string()).optional(),
   favicon: z.nullable(z.string()).optional(),
@@ -65,7 +115,7 @@ export const ToolReferenceChunk$inboundSchema: z.ZodType<
 /** @internal */
 export type ToolReferenceChunk$Outbound = {
   type: string;
-  tool: string;
+  tool: string | string;
   title: string;
   url?: string | null | undefined;
   favicon?: string | null | undefined;
@@ -79,7 +129,7 @@ export const ToolReferenceChunk$outboundSchema: z.ZodType<
   ToolReferenceChunk
 > = z.object({
   type: ToolReferenceChunkType$outboundSchema.default("tool_reference"),
-  tool: BuiltInConnectors$outboundSchema,
+  tool: z.union([BuiltInConnectors$outboundSchema, z.string()]),
   title: z.string(),
   url: z.nullable(z.string()).optional(),
   favicon: z.nullable(z.string()).optional(),

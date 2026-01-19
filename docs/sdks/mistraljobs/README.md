@@ -95,9 +95,6 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.batch.jobs.create({
-    inputFiles: [
-      "fe3343a2-3b8d-404b-ba32-a78dede2614a",
-    ],
     endpoint: "/v1/classifications",
     model: "mistral-small-latest",
   });
@@ -124,9 +121,6 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await batchJobsCreate(mistral, {
-    inputFiles: [
-      "fe3343a2-3b8d-404b-ba32-a78dede2614a",
-    ],
     endpoint: "/v1/classifications",
     model: "mistral-small-latest",
   });
@@ -163,6 +157,9 @@ run();
 ## get
 
 Get a batch job details by its UUID.
+
+Args:
+    inline: If True, return results inline in the response.
 
 ### Example Usage
 

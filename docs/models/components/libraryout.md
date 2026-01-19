@@ -8,8 +8,8 @@ import { LibraryOut } from "@mistralai/mistralai/models/components";
 let value: LibraryOut = {
   id: "febcb426-e820-4f83-afe7-9e6c830557ac",
   name: "<value>",
-  createdAt: new Date("2025-05-24T20:35:31.746Z"),
-  updatedAt: new Date("2023-05-31T16:25:42.207Z"),
+  createdAt: new Date("2026-05-24T20:35:31.746Z"),
+  updatedAt: new Date("2024-05-30T16:25:42.207Z"),
   ownerId: "b9682648-7b9f-4012-ae41-6eab2c650a9f",
   ownerType: "<value>",
   totalSize: 360239,

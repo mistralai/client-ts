@@ -30,7 +30,7 @@ const value: number = 1284.03;
 ### `Date`
 
 ```typescript
-const value: Date = new Date("2023-12-07T03:31:58.587Z");
+const value: Date = new Date("2024-12-06T03:31:58.587Z");
 ```
 
 ### `string[]`

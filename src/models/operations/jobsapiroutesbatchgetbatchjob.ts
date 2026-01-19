@@ -10,6 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JobsApiRoutesBatchGetBatchJobRequest = {
   jobId: string;
+  inline?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -19,6 +20,7 @@ export const JobsApiRoutesBatchGetBatchJobRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   job_id: z.string(),
+  inline: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "job_id": "jobId",
@@ -28,6 +30,7 @@ export const JobsApiRoutesBatchGetBatchJobRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type JobsApiRoutesBatchGetBatchJobRequest$Outbound = {
   job_id: string;
+  inline?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -37,6 +40,7 @@ export const JobsApiRoutesBatchGetBatchJobRequest$outboundSchema: z.ZodType<
   JobsApiRoutesBatchGetBatchJobRequest
 > = z.object({
   jobId: z.string(),
+  inline: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     jobId: "job_id",

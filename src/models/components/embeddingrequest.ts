@@ -28,6 +28,7 @@ export type EmbeddingRequest = {
    * The ID of the model to be used for embedding.
    */
   model: string;
+  metadata?: { [k: string]: any } | null | undefined;
   /**
    * The text content to be embedded, can be a string or an array of strings for fast processing in bulk.
    */
@@ -95,6 +96,7 @@ export const EmbeddingRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   model: z.string(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   input: z.union([z.string(), z.array(z.string())]),
   output_dimension: z.nullable(z.number().int()).optional(),
   output_dtype: EmbeddingDtype$inboundSchema.optional(),
@@ -111,6 +113,7 @@ export const EmbeddingRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type EmbeddingRequest$Outbound = {
   model: string;
+  metadata?: { [k: string]: any } | null | undefined;
   input: string | Array<string>;
   output_dimension?: number | null | undefined;
   output_dtype?: string | undefined;
@@ -124,6 +127,7 @@ export const EmbeddingRequest$outboundSchema: z.ZodType<
   EmbeddingRequest
 > = z.object({
   model: z.string(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   inputs: z.union([z.string(), z.array(z.string())]),
   outputDimension: z.nullable(z.number().int()).optional(),
   outputDtype: EmbeddingDtype$outboundSchema.optional(),

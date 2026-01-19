@@ -23,7 +23,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.ToolFileChunk = {
-  tool: "image_generation",
+  tool: "<value>",
   fileId: "<id>",
 };
 ```
@@ -48,7 +48,7 @@ const value: components.ThinkChunk = {
 
 ```typescript
 const value: components.ToolReferenceChunk = {
-  tool: "image_generation",
+  tool: "<value>",
   title: "<value>",
 };
 ```
