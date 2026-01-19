@@ -36,6 +36,7 @@ export type BatchJobOut = {
   outputFile?: string | null | undefined;
   errorFile?: string | null | undefined;
   errors: Array<BatchError>;
+  outputs?: Array<{ [k: string]: any }> | null | undefined;
   status: BatchJobStatus;
   createdAt: number;
   totalRequests: number;
@@ -83,6 +84,7 @@ export const BatchJobOut$inboundSchema: z.ZodType<
   output_file: z.nullable(z.string()).optional(),
   error_file: z.nullable(z.string()).optional(),
   errors: z.array(BatchError$inboundSchema),
+  outputs: z.nullable(z.array(z.record(z.any()))).optional(),
   status: BatchJobStatus$inboundSchema,
   created_at: z.number().int(),
   total_requests: z.number().int(),
@@ -119,6 +121,7 @@ export type BatchJobOut$Outbound = {
   output_file?: string | null | undefined;
   error_file?: string | null | undefined;
   errors: Array<BatchError$Outbound>;
+  outputs?: Array<{ [k: string]: any }> | null | undefined;
   status: string;
   created_at: number;
   total_requests: number;
@@ -145,6 +148,7 @@ export const BatchJobOut$outboundSchema: z.ZodType<
   outputFile: z.nullable(z.string()).optional(),
   errorFile: z.nullable(z.string()).optional(),
   errors: z.array(BatchError$outboundSchema),
+  outputs: z.nullable(z.array(z.record(z.any()))).optional(),
   status: BatchJobStatus$outboundSchema,
   createdAt: z.number().int(),
   totalRequests: z.number().int(),

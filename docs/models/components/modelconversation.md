@@ -12,8 +12,8 @@ let value: ModelConversation = {
     },
   },
   id: "<id>",
-  createdAt: new Date("2024-06-14T04:21:29.555Z"),
-  updatedAt: new Date("2025-10-08T03:17:09.039Z"),
+  createdAt: new Date("2025-06-14T04:21:29.555Z"),
+  updatedAt: new Date("2026-10-08T03:17:09.039Z"),
   model: "Escalade",
 };
 ```

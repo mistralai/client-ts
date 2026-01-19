@@ -51,6 +51,9 @@ export class MistralJobs extends ClientSDK {
    *
    * @remarks
    * Get a batch job details by its UUID.
+   *
+   * Args:
+   *     inline: If True, return results inline in the response.
    */
   async get(
     request: operations.JobsApiRoutesBatchGetBatchJobRequest,

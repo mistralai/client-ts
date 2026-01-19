@@ -11,7 +11,7 @@ Chat to classify
 const value: components.One[] = [
   {
     content: null,
-    role: "user",
+    role: "tool",
   },
 ];
 ```

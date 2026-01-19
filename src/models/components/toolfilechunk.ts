@@ -19,9 +19,11 @@ export const ToolFileChunkType = {
 } as const;
 export type ToolFileChunkType = ClosedEnum<typeof ToolFileChunkType>;
 
+export type ToolFileChunkTool = BuiltInConnectors | string;
+
 export type ToolFileChunk = {
   type?: ToolFileChunkType | undefined;
-  tool: BuiltInConnectors;
+  tool: BuiltInConnectors | string;
   fileId: string;
   fileName?: string | null | undefined;
   fileType?: string | null | undefined;
@@ -49,13 +51,61 @@ export namespace ToolFileChunkType$ {
 }
 
 /** @internal */
+export const ToolFileChunkTool$inboundSchema: z.ZodType<
+  ToolFileChunkTool,
+  z.ZodTypeDef,
+  unknown
+> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
+
+/** @internal */
+export type ToolFileChunkTool$Outbound = string | string;
+
+/** @internal */
+export const ToolFileChunkTool$outboundSchema: z.ZodType<
+  ToolFileChunkTool$Outbound,
+  z.ZodTypeDef,
+  ToolFileChunkTool
+> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ToolFileChunkTool$ {
+  /** @deprecated use `ToolFileChunkTool$inboundSchema` instead. */
+  export const inboundSchema = ToolFileChunkTool$inboundSchema;
+  /** @deprecated use `ToolFileChunkTool$outboundSchema` instead. */
+  export const outboundSchema = ToolFileChunkTool$outboundSchema;
+  /** @deprecated use `ToolFileChunkTool$Outbound` instead. */
+  export type Outbound = ToolFileChunkTool$Outbound;
+}
+
+export function toolFileChunkToolToJSON(
+  toolFileChunkTool: ToolFileChunkTool,
+): string {
+  return JSON.stringify(
+    ToolFileChunkTool$outboundSchema.parse(toolFileChunkTool),
+  );
+}
+
+export function toolFileChunkToolFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolFileChunkTool, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolFileChunkTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolFileChunkTool' from JSON`,
+  );
+}
+
+/** @internal */
 export const ToolFileChunk$inboundSchema: z.ZodType<
   ToolFileChunk,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: ToolFileChunkType$inboundSchema.default("tool_file"),
-  tool: BuiltInConnectors$inboundSchema,
+  tool: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   file_id: z.string(),
   file_name: z.nullable(z.string()).optional(),
   file_type: z.nullable(z.string()).optional(),
@@ -70,7 +120,7 @@ export const ToolFileChunk$inboundSchema: z.ZodType<
 /** @internal */
 export type ToolFileChunk$Outbound = {
   type: string;
-  tool: string;
+  tool: string | string;
   file_id: string;
   file_name?: string | null | undefined;
   file_type?: string | null | undefined;
@@ -83,7 +133,7 @@ export const ToolFileChunk$outboundSchema: z.ZodType<
   ToolFileChunk
 > = z.object({
   type: ToolFileChunkType$outboundSchema.default("tool_file"),
-  tool: BuiltInConnectors$outboundSchema,
+  tool: z.union([BuiltInConnectors$outboundSchema, z.string()]),
   fileId: z.string(),
   fileName: z.nullable(z.string()).optional(),
   fileType: z.nullable(z.string()).optional(),

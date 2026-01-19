@@ -15,3 +15,4 @@ let value: JobsApiRoutesBatchGetBatchJobRequest = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `jobId`            | *string*           | :heavy_check_mark: | N/A                |
+| `inline`           | *boolean*          | :heavy_minus_sign: | N/A                |

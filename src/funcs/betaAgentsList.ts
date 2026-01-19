@@ -4,7 +4,11 @@
 
 import * as z from "zod";
 import { MistralCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import {
+  encodeFormQuery,
+  encodeJSONQuery,
+  queryJoin,
+} from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -95,15 +99,19 @@ async function $do(
 
   const path = pathToFunc("/v1/agents")();
 
-  const query = encodeFormQuery({
-    "deployment_chat": payload?.deployment_chat,
-    "id": payload?.id,
-    "metadata": payload?.metadata,
-    "name": payload?.name,
-    "page": payload?.page,
-    "page_size": payload?.page_size,
-    "sources": payload?.sources,
-  });
+  const query = queryJoin(
+    encodeFormQuery({
+      "deployment_chat": payload?.deployment_chat,
+      "id": payload?.id,
+      "name": payload?.name,
+      "page": payload?.page,
+      "page_size": payload?.page_size,
+      "sources": payload?.sources,
+    }),
+    encodeJSONQuery({
+      "metadata": payload?.metadata,
+    }, { explode: false }),
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

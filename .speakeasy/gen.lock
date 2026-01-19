@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 81b65c50-f2e3-40a3-bd65-346524007b3d
 management:
-  docChecksum: 3135f1ce6dd57e0487ee2840362ced1a
+  docChecksum: 274d02258259534e27fc706556e295ef
   docVersion: 1.0.0
   speakeasyVersion: 1.606.10
   generationVersion: 2.687.13
-  releaseVersion: 1.11.0
-  configChecksum: a3d5a1c5fda2d05060881addd292fd96
+  releaseVersion: 1.12.0
+  configChecksum: 4152536eb4b5b68f6d81491d6dc40ae3
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
@@ -27,6 +27,7 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.5
+    includes: 2.81.1
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
     nullables: 0.1.1
@@ -83,6 +84,8 @@ generatedFiles:
   - docs/models/components/attributes.md
   - docs/models/components/audiochunk.md
   - docs/models/components/audiochunktype.md
+  - docs/models/components/audioencoding.md
+  - docs/models/components/audioformat.md
   - docs/models/components/audiotranscriptionrequest.md
   - docs/models/components/audiotranscriptionrequeststream.md
   - docs/models/components/basemodelcard.md
@@ -94,6 +97,7 @@ generatedFiles:
   - docs/models/components/batchjobsout.md
   - docs/models/components/batchjobsoutobject.md
   - docs/models/components/batchjobstatus.md
+  - docs/models/components/batchrequest.md
   - docs/models/components/builtinconnectors.md
   - docs/models/components/chatclassificationrequest.md
   - docs/models/components/chatcompletionchoice.md
@@ -355,11 +359,13 @@ generatedFiles:
   - docs/models/components/toolexecutionstartedeventname.md
   - docs/models/components/toolexecutionstartedeventtype.md
   - docs/models/components/toolfilechunk.md
+  - docs/models/components/toolfilechunktool.md
   - docs/models/components/toolfilechunktype.md
   - docs/models/components/toolmessage.md
   - docs/models/components/toolmessagecontent.md
   - docs/models/components/toolmessagerole.md
   - docs/models/components/toolreferencechunk.md
+  - docs/models/components/toolreferencechunktool.md
   - docs/models/components/toolreferencechunktype.md
   - docs/models/components/tools.md
   - docs/models/components/tooltypes.md
@@ -585,6 +591,8 @@ generatedFiles:
   - src/models/components/archiveftmodelout.ts
   - src/models/components/assistantmessage.ts
   - src/models/components/audiochunk.ts
+  - src/models/components/audioencoding.ts
+  - src/models/components/audioformat.ts
   - src/models/components/audiotranscriptionrequest.ts
   - src/models/components/audiotranscriptionrequeststream.ts
   - src/models/components/basemodelcard.ts
@@ -593,6 +601,7 @@ generatedFiles:
   - src/models/components/batchjobout.ts
   - src/models/components/batchjobsout.ts
   - src/models/components/batchjobstatus.ts
+  - src/models/components/batchrequest.ts
   - src/models/components/builtinconnectors.ts
   - src/models/components/chatclassificationrequest.ts
   - src/models/components/chatcompletionchoice.ts
@@ -1418,7 +1427,7 @@ examples:
   jobs_api_routes_batch_create_batch_job:
     speakeasy-default-jobs-api-routes-batch-create-batch-job:
       requestBody:
-        application/json: {"input_files": ["fe3343a2-3b8d-404b-ba32-a78dede2614a"], "endpoint": "/v1/classifications", "model": "mistral-small-latest", "timeout_hours": 24}
+        application/json: {"endpoint": "/v1/classifications", "model": "mistral-small-latest", "timeout_hours": 24}
       responses:
         "200":
           application/json: {"id": "<id>", "object": "batch", "input_files": [], "endpoint": "<value>", "errors": [{"message": "<value>", "count": 1}], "status": "FAILED", "created_at": 740240, "total_requests": 155947, "completed_requests": 358424, "succeeded_requests": 317170, "failed_requests": 190260}
@@ -1611,4 +1620,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## SDK Changes Detected:\n* `mistral.beta.libraries.create()`:  `response.owner_id` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.documents.get()`:  `response` **Changed** **Breaking** :warning:\n* `mistral.models.list()`: \n  *  `response.data.[].[fine-tuned].capabilities` **Changed**\n  *  `error.status[422]` **Removed** **Breaking** :warning:\n* `mistral.files.list()`: \n  *  `request.includeTotal` **Added**\n  *  `response.total` **Changed** **Breaking** :warning:\n* `mistral.beta.conversations.start()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.outputs.[].[toolExecutionEntry].name` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.accesses.delete()`: \n  *  `request.sharingDelete.orgId` **Changed**\n  *  `response.share_with_uuid` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.accesses.updateOrCreate()`: \n  *  `request.sharingIn.orgId` **Changed**\n  *  `response.share_with_uuid` **Changed** **Breaking** :warning:\n* `mistral.beta.conversations.append()`: \n  *  `request.conversationAppendRequest.inputs.[array].[].[toolExecutionEntry].name` **Changed** **Breaking** :warning:\n  *  `response.outputs.[].[toolExecutionEntry].name` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.accesses.list()`:  `response.data.[].shareWithUuid` **Changed** **Breaking** :warning:\n* `mistral.beta.conversations.restart()`: \n  *  `request.conversationRestartRequest` **Changed** **Breaking** :warning:\n  *  `response.outputs.[].[toolExecutionEntry].name` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.documents.update()`: \n  *  `request.documentUpdateIn.attributes` **Added**\n  *  `response` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.documents.upload()`:  `response` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.documents.list()`: \n  *  `request.filtersAttributes` **Added**\n  *  `response.data.[]` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.update()`:  `response.owner_id` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.delete()`:  `response.owner_id` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.get()`:  `response.owner_id` **Changed** **Breaking** :warning:\n* `mistral.beta.conversations.getHistory()`:  `response.entries.[].[toolExecutionEntry].name` **Changed** **Breaking** :warning:\n* `mistral.beta.libraries.list()`:  `response.data.[].ownerId` **Changed** **Breaking** :warning:\n* `mistral.models.retrieve()`:  `response.[base].capabilities` **Changed**\n* `mistral.agents.complete()`: \n  *  `request.metadata` **Added**\n* `mistral.beta.agents.get()`: \n  *  `request.agentVersion` **Added**\n  *  `response` **Changed**\n* `mistral.beta.agents.list()`: \n  *  `request` **Changed**\n  *  `response.[]` **Changed**\n* `mistral.beta.agents.updateVersion()`:  `response` **Changed**\n* `mistral.beta.agents.delete()`: **Added**\n* `mistral.beta.conversations.list()`: \n  *  `request.metadata` **Added**\n  *  `response.[]` **Changed**\n* `mistral.beta.conversations.get()`:  `response` **Changed**\n* `mistral.beta.agents.update()`: \n  *  `request.agentUpdateRequest` **Changed**\n  *  `response` **Changed**\n* `mistral.beta.conversations.delete()`: **Added**\n* `mistral.chat.complete()`: \n  *  `request.metadata` **Added**\n* `mistral.fim.complete()`: \n  *  `request.metadata` **Added**\n* `mistral.beta.agents.create()`: \n  *  `request.metadata` **Added**\n  *  `response` **Changed**\n* `mistral.ocr.process()`: \n  *  `request` **Changed**\n  *  `response.pages.[]` **Changed**\n"
+releaseNotes: "## SDK Changes Detected:\n* `mistral.beta.conversations.restart()`: \n  *  `request.conversationRestartRequest.inputs.[array].[]` **Changed** **Breaking** :warning:\n  *  `response.outputs.[].[messageOutputEntry].content.[array].[]` **Changed** **Breaking** :warning:\n* `mistral.beta.conversations.start()`: \n  *  `request.inputs.[array].[]` **Changed** **Breaking** :warning:\n  *  `response.outputs.[].[messageOutputEntry].content.[array].[]` **Changed** **Breaking** :warning:\n* `mistral.beta.conversations.append()`: \n  *  `request.conversationAppendRequest.inputs.[array].[]` **Changed** **Breaking** :warning:\n  *  `response.outputs.[].[messageOutputEntry].content.[array].[]` **Changed** **Breaking** :warning:\n* `mistral.beta.conversations.getHistory()`:  `response.entries.[]` **Changed** **Breaking** :warning:\n* `mistral.beta.conversations.getMessages()`:  `response.messages.[].[messageOutputEntry].content.[array].[]` **Changed** **Breaking** :warning:\n* `mistral.beta.agents.list()`: \n  *  `request.metadata` **Changed**\n* `mistral.beta.conversations.list()`: \n  *  `request.metadata` **Changed**\n* `mistral.batch.jobs.list()`:  `response.data.[].outputs` **Added**\n* `mistral.batch.jobs.create()`: \n  *  `request` **Changed**\n  *  `response.outputs` **Added**\n* `mistral.batch.jobs.get()`: \n  *  `request.inline` **Added**\n  *  `response.outputs` **Added**\n* `mistral.batch.jobs.cancel()`:  `response.outputs` **Added**\n* `mistral.embeddings.create()`: \n  *  `request.metadata` **Added**\n* `mistral.classifiers.moderate()`: \n  *  `request.metadata` **Added**\n* `mistral.classifiers.classify()`: \n  *  `request.metadata` **Added**\n"

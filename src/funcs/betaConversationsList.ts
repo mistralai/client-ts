@@ -4,7 +4,11 @@
 
 import * as z from "zod";
 import { MistralCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import {
+  encodeFormQuery,
+  encodeJSONQuery,
+  queryJoin,
+} from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -93,11 +97,15 @@ async function $do(
 
   const path = pathToFunc("/v1/conversations")();
 
-  const query = encodeFormQuery({
-    "metadata": payload?.metadata,
-    "page": payload?.page,
-    "page_size": payload?.page_size,
-  });
+  const query = queryJoin(
+    encodeFormQuery({
+      "page": payload?.page,
+      "page_size": payload?.page_size,
+    }),
+    encodeJSONQuery({
+      "metadata": payload?.metadata,
+    }, { explode: false }),
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
