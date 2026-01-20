@@ -15,11 +15,7 @@ export type FIMCompletionStreamRequestStop = string | Array<string>;
 
 export type FIMCompletionStreamRequest = {
   /**
-   * ID of the model to use. Only compatible for now with:
-   *
-   * @remarks
-   *   - `codestral-2405`
-   *   - `codestral-latest`
+   * ID of the model with FIM to use.
    */
   model: string;
   /**
@@ -43,6 +39,7 @@ export type FIMCompletionStreamRequest = {
    * The seed to use for random sampling. If set, different calls will generate deterministic results.
    */
   randomSeed?: number | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   /**
    * The text/code to complete.
    */
@@ -120,6 +117,7 @@ export const FIMCompletionStreamRequest$inboundSchema: z.ZodType<
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   random_seed: z.nullable(z.number().int()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   prompt: z.string(),
   suffix: z.nullable(z.string()).optional(),
   min_tokens: z.nullable(z.number().int()).optional(),
@@ -141,6 +139,7 @@ export type FIMCompletionStreamRequest$Outbound = {
   stream: boolean;
   stop?: string | Array<string> | undefined;
   random_seed?: number | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   prompt: string;
   suffix?: string | null | undefined;
   min_tokens?: number | null | undefined;
@@ -159,6 +158,7 @@ export const FIMCompletionStreamRequest$outboundSchema: z.ZodType<
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.number().int()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
   prompt: z.string(),
   suffix: z.nullable(z.string()).optional(),
   minTokens: z.nullable(z.number().int()).optional(),

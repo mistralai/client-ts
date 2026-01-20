@@ -7,6 +7,9 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Enable users to specify an expected completion, optimizing response times by leveraging known or predictable content.
+ */
 export type Prediction = {
   type?: "content" | undefined;
   content?: string | undefined;
