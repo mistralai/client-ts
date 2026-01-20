@@ -7,14 +7,8 @@ import { CompletionChunk } from "@mistralai/mistralai-azure/models/components";
 
 let value: CompletionChunk = {
   id: "<id>",
-  model: "Golf",
-  choices: [
-    {
-      index: 423655,
-      delta: {},
-      finishReason: "error",
-    },
-  ],
+  model: "Prius",
+  choices: [],
 };
 ```
 

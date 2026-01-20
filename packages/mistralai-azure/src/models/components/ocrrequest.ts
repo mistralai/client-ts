@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,7 +36,13 @@ import {
 /**
  * Document to run OCR on
  */
-export type Document = FileChunk | ImageURLChunk | DocumentURLChunk;
+export type Document = FileChunk | DocumentURLChunk | ImageURLChunk;
+
+export const TableFormat = {
+  Markdown: "markdown",
+  Html: "html",
+} as const;
+export type TableFormat = ClosedEnum<typeof TableFormat>;
 
 export type OCRRequest = {
   model: string | null;
@@ -43,7 +50,7 @@ export type OCRRequest = {
   /**
    * Document to run OCR on
    */
-  document: FileChunk | ImageURLChunk | DocumentURLChunk;
+  document: FileChunk | DocumentURLChunk | ImageURLChunk;
   /**
    * Specific pages user wants to process in various formats: single number, range, or list of both. Starts from 0
    */
@@ -68,6 +75,9 @@ export type OCRRequest = {
    * Structured output class for extracting useful information from the entire document. Only json_schema is valid for this field
    */
   documentAnnotationFormat?: ResponseFormat | null | undefined;
+  tableFormat?: TableFormat | null | undefined;
+  extractHeader?: boolean | undefined;
+  extractFooter?: boolean | undefined;
 };
 
 /** @internal */
@@ -77,15 +87,15 @@ export const Document$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   FileChunk$inboundSchema,
-  ImageURLChunk$inboundSchema,
   DocumentURLChunk$inboundSchema,
+  ImageURLChunk$inboundSchema,
 ]);
 
 /** @internal */
 export type Document$Outbound =
   | FileChunk$Outbound
-  | ImageURLChunk$Outbound
-  | DocumentURLChunk$Outbound;
+  | DocumentURLChunk$Outbound
+  | ImageURLChunk$Outbound;
 
 /** @internal */
 export const Document$outboundSchema: z.ZodType<
@@ -94,8 +104,8 @@ export const Document$outboundSchema: z.ZodType<
   Document
 > = z.union([
   FileChunk$outboundSchema,
-  ImageURLChunk$outboundSchema,
   DocumentURLChunk$outboundSchema,
+  ImageURLChunk$outboundSchema,
 ]);
 
 /**
@@ -126,6 +136,25 @@ export function documentFromJSON(
 }
 
 /** @internal */
+export const TableFormat$inboundSchema: z.ZodNativeEnum<typeof TableFormat> = z
+  .nativeEnum(TableFormat);
+
+/** @internal */
+export const TableFormat$outboundSchema: z.ZodNativeEnum<typeof TableFormat> =
+  TableFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TableFormat$ {
+  /** @deprecated use `TableFormat$inboundSchema` instead. */
+  export const inboundSchema = TableFormat$inboundSchema;
+  /** @deprecated use `TableFormat$outboundSchema` instead. */
+  export const outboundSchema = TableFormat$outboundSchema;
+}
+
+/** @internal */
 export const OCRRequest$inboundSchema: z.ZodType<
   OCRRequest,
   z.ZodTypeDef,
@@ -135,8 +164,8 @@ export const OCRRequest$inboundSchema: z.ZodType<
   id: z.string().optional(),
   document: z.union([
     FileChunk$inboundSchema,
-    ImageURLChunk$inboundSchema,
     DocumentURLChunk$inboundSchema,
+    ImageURLChunk$inboundSchema,
   ]),
   pages: z.nullable(z.array(z.number().int())).optional(),
   include_image_base64: z.nullable(z.boolean()).optional(),
@@ -145,6 +174,9 @@ export const OCRRequest$inboundSchema: z.ZodType<
   bbox_annotation_format: z.nullable(ResponseFormat$inboundSchema).optional(),
   document_annotation_format: z.nullable(ResponseFormat$inboundSchema)
     .optional(),
+  table_format: z.nullable(TableFormat$inboundSchema).optional(),
+  extract_header: z.boolean().optional(),
+  extract_footer: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "include_image_base64": "includeImageBase64",
@@ -152,6 +184,9 @@ export const OCRRequest$inboundSchema: z.ZodType<
     "image_min_size": "imageMinSize",
     "bbox_annotation_format": "bboxAnnotationFormat",
     "document_annotation_format": "documentAnnotationFormat",
+    "table_format": "tableFormat",
+    "extract_header": "extractHeader",
+    "extract_footer": "extractFooter",
   });
 });
 
@@ -161,14 +196,17 @@ export type OCRRequest$Outbound = {
   id?: string | undefined;
   document:
     | FileChunk$Outbound
-    | ImageURLChunk$Outbound
-    | DocumentURLChunk$Outbound;
+    | DocumentURLChunk$Outbound
+    | ImageURLChunk$Outbound;
   pages?: Array<number> | null | undefined;
   include_image_base64?: boolean | null | undefined;
   image_limit?: number | null | undefined;
   image_min_size?: number | null | undefined;
   bbox_annotation_format?: ResponseFormat$Outbound | null | undefined;
   document_annotation_format?: ResponseFormat$Outbound | null | undefined;
+  table_format?: string | null | undefined;
+  extract_header?: boolean | undefined;
+  extract_footer?: boolean | undefined;
 };
 
 /** @internal */
@@ -181,8 +219,8 @@ export const OCRRequest$outboundSchema: z.ZodType<
   id: z.string().optional(),
   document: z.union([
     FileChunk$outboundSchema,
-    ImageURLChunk$outboundSchema,
     DocumentURLChunk$outboundSchema,
+    ImageURLChunk$outboundSchema,
   ]),
   pages: z.nullable(z.array(z.number().int())).optional(),
   includeImageBase64: z.nullable(z.boolean()).optional(),
@@ -191,6 +229,9 @@ export const OCRRequest$outboundSchema: z.ZodType<
   bboxAnnotationFormat: z.nullable(ResponseFormat$outboundSchema).optional(),
   documentAnnotationFormat: z.nullable(ResponseFormat$outboundSchema)
     .optional(),
+  tableFormat: z.nullable(TableFormat$outboundSchema).optional(),
+  extractHeader: z.boolean().optional(),
+  extractFooter: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     includeImageBase64: "include_image_base64",
@@ -198,6 +239,9 @@ export const OCRRequest$outboundSchema: z.ZodType<
     imageMinSize: "image_min_size",
     bboxAnnotationFormat: "bbox_annotation_format",
     documentAnnotationFormat: "document_annotation_format",
+    tableFormat: "table_format",
+    extractHeader: "extract_header",
+    extractFooter: "extract_footer",
   });
 });
 
