@@ -2,7 +2,7 @@
 
 {
   "name": "@mistralai/mistralai-gcp",
-  "version": "2.0.0",
+  "version": "1.7.0",
   "exports": {
     ".": "./src/index.ts",    
     "./models/errors": "./src/models/errors/index.ts",    

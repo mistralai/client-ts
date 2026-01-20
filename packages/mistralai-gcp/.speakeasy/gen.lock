@@ -5,16 +5,16 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.690.1
   generationVersion: 2.797.1
-  releaseVersion: 2.0.0
-  configChecksum: 85adc45fd93e91cdfcc913546d857d22
+  releaseVersion: 1.7.0
+  configChecksum: 0c984acdd762a6c70b20061360ae4bdd
   repoURL: https://github.com/mistralai/client-ts.git
   repoSubDirectory: packages/mistralai-gcp
   installationURL: https://gitpkg.now.sh/mistralai/client-ts/packages/mistralai-gcp
   published: true
 persistentEdits:
-  generation_id: d5bd8cc2-44d9-4e14-9737-67b1aaffe210
-  pristine_commit_hash: 2fddda4f53c815cfd5e908d1398773e9c89e2ed0
-  pristine_tree_hash: b9e07f269d29fdf36f316cf1442fceea7ec6a7d8
+  generation_id: 27c046f5-b10c-4904-bb94-9e277e93ee6e
+  pristine_commit_hash: 0f4ef3b7ac7b3adca1269dfc5b9d0e30a5a5f089
+  pristine_tree_hash: b80b6475844ff44874731f8ae7cf58348165491c
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -343,12 +343,12 @@ trackedFiles:
     pristine_git_object: b980d03b01bdd2fbde1311b8ed1c05c0139f5296
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:0d06a0ea7caea18f1a2d8f972842d1dcce9fd376
-    pristine_git_object: 4bdda1d5e323d5e8d25d17003db9c00f9f4f554a
+    last_write_checksum: sha1:8f7c524a13aa2f38fe472e7ff331f1f1aa5772a1
+    pristine_git_object: f51f512721338f50330792ae910a263a0c912a52
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:fbbf870c21add89219aec9314aa0500f65d86b09
-    pristine_git_object: f1a4bd12da9d927187464585012f7b7e4c055c65
+    last_write_checksum: sha1:4bc2b57293713a3d50925879d86767ab0cc8c1c7
+    pristine_git_object: 7ede2fd23d2d5dff454f8959c0e321fe092708f5
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:a48cc19405a479a1651729b8c5160065a0ead8d8
@@ -391,8 +391,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:eb565f5e3f82b9f7283d3a0350f92ad26a230a33
-    pristine_git_object: 31bdde11573b30a4398b18607b8a8837c4e59cd1
+    last_write_checksum: sha1:ebfd1c692337c47991a5e518d1bcf1b96d289946
+    pristine_git_object: 576a5caaf1462a6ca02d2ee4e4ba7e5265b43ab8
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
