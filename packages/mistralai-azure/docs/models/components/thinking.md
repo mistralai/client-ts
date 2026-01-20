@@ -16,6 +16,7 @@ const value: components.ReferenceChunk = {
 ```typescript
 const value: components.TextChunk = {
   text: "<value>",
+  type: "text",
 };
 ```
 

@@ -18,7 +18,7 @@ const mistralAzure = new MistralAzure({
 });
 
 async function main() {
-  const result = await mistralAzure.complete({
+  const result = await mistralAzure.chat.complete({
     messages: [
       {
         content:

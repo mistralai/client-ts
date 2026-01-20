@@ -16,6 +16,7 @@ const value: components.ImageURLChunk = {
 ```typescript
 const value: components.TextChunk = {
   text: "<value>",
+  type: "text",
 };
 ```
 

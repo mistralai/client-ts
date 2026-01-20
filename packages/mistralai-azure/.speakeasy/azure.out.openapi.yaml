@@ -1,0 +1,1249 @@
+openapi: 3.1.0
+info:
+    title: Mistral AI API
+    version: 1.0.0
+    description: Our Chat Completion and Embeddings APIs specification. Create your account on [La Plateforme](https://console.mistral.ai) to get access and read the [docs](https://docs.mistral.ai) to learn how to use it.
+paths:
+    /chat/completions#stream:
+        post:
+            tags:
+                - chat
+            operationId: stream_chat
+            x-speakeasy-name-override: stream
+            summary: Stream chat completion
+            description: 'Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ChatCompletionStreamRequest'
+            responses:
+                '200':
+                    description: A stream of chat completion events
+                    content:
+                        text/event-stream:
+                            x-speakeasy-sse-sentinel: '[DONE]'
+                            schema:
+                                $ref: '#/components/schemas/CompletionEvent'
+                '422':
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HTTPValidationError'
+    /chat/completions:
+        post:
+            summary: Chat Completion
+            operationId: chat_completion_v1_chat_completions_post
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ChatCompletionRequest'
+                required: true
+            responses:
+                '200':
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ChatCompletionResponse'
+                '422':
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HTTPValidationError'
+            tags:
+                - chat
+            x-speakeasy-name-override: complete
+            x-speakeasy-usage-example:
+                title: Create Chat Completions
+                description: This example shows how to create chat completions.
+                position: 1
+    /ocr:
+        post:
+            summary: OCR
+            operationId: ocr_v1_ocr_post
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/OCRRequest'
+                required: true
+            responses:
+                '200':
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/OCRResponse'
+                            examples:
+                                userExample:
+                                    value:
+                                        pages:
+                                            - index: 1
+                                              markdown: |
+                                                # LEVERAGING UNLABELED DATA TO PREDICT OUT-OF-DISTRIBUTION PERFORMANCE
+                                                Saurabh Garg*<br> Carnegie Mellon University<br> sgarg2@andrew.cmu.edu<br> Sivaraman Balakrishnan<br> Carnegie Mellon University<br> sbalakri@andrew.cmu.edu<br> Zachary C. Lipton<br> Carnegie Mellon University<br> zlipton@andrew.cmu.edu
+                                                ## Behnam Neyshabur
+                                                Google Research, Blueshift team<br> neyshabur@google.com
+                                                Hanie Sedghi<br> Google Research, Brain team<br> hsedghi@google.com
+                                                #### Abstract
+                                                Real-world machine learning deployments are characterized by mismatches between the source (training) and target (test) distributions that may cause performance drops. In this work, we investigate methods for predicting the target domain accuracy using only labeled source data and unlabeled target data. We propose Average Thresholded Confidence (ATC), a practical method that learns a threshold on the model's confidence, predicting accuracy as the fraction of unlabeled examples for which model confidence exceeds that threshold. ATC outperforms previous methods across several model architectures, types of distribution shifts (e.g., due to synthetic corruptions, dataset reproduction, or novel subpopulations), and datasets (WILDS, ImageNet, BREEDS, CIFAR, and MNIST). In our experiments, ATC estimates target performance $2-4 \times$ more accurately than prior methods. We also explore the theoretical foundations of the problem, proving that, in general, identifying the accuracy is just as hard as identifying the optimal predictor and thus, the efficacy of any method rests upon (perhaps unstated) assumptions on the nature of the shift. Finally, analyzing our method on some toy distributions, we provide insights concerning when it works ${ }^{1}$.
+                                                ## 1 INTRODUCTION
+                                                Machine learning models deployed in the real world typically encounter examples from previously unseen distributions. While the IID assumption enables us to evaluate models using held-out data from the source distribution (from which training data is sampled), this estimate is no longer valid in presence of a distribution shift. Moreover, under such shifts, model accuracy tends to degrade (Szegedy et al., 2014; Recht et al., 2019; Koh et al., 2021). Commonly, the only data available to the practitioner are a labeled training set (source) and unlabeled deployment-time data which makes the problem more difficult. In this setting, detecting shifts in the distribution of covariates is known to be possible (but difficult) in theory (Ramdas et al., 2015), and in practice (Rabanser et al., 2018). However, producing an optimal predictor using only labeled source and unlabeled target data is well-known to be impossible absent further assumptions (Ben-David et al., 2010; Lipton et al., 2018).
+                                                Two vital questions that remain are: (i) the precise conditions under which we can estimate a classifier's target-domain accuracy; and (ii) which methods are most practically useful. To begin, the straightforward way to assess the performance of a model under distribution shift would be to collect labeled (target domain) examples and then to evaluate the model on that data. However, collecting fresh labeled data from the target distribution is prohibitively expensive and time-consuming, especially if the target distribution is non-stationary. Hence, instead of using labeled data, we aim to use unlabeled data from the target distribution, that is comparatively abundant, to predict model performance. Note that in this work, our focus is not to improve performance on the target but, rather, to estimate the accuracy on the target for a given classifier.
+                                                [^0]: Work done in part while Saurabh Garg was interning at Google ${ }^{1}$ Code is available at [https://github.com/saurabhgarg1996/ATC_code](https://github.com/saurabhgarg1996/ATC_code).
+                                              images: []
+                                              dimensions:
+                                                dpi: 200
+                                                height: 2200
+                                                width: 1700
+                                            - index: 2
+                                              markdown: |
+                                                ![img-0.jpeg](img-0.jpeg)
+                                                Figure 1: Illustration of our proposed method ATC. Left: using source domain validation data, we identify a threshold on a score (e.g. negative entropy) computed on model confidence such that fraction of examples above the threshold matches the validation set accuracy. ATC estimates accuracy on unlabeled target data as the fraction of examples with the score above the threshold. Interestingly, this threshold yields accurate estimates on a wide set of target distributions resulting from natural and synthetic shifts. Right: Efficacy of ATC over previously proposed approaches on our testbed with a post-hoc calibrated model. To obtain errors on the same scale, we rescale all errors with Average Confidence (AC) error. Lower estimation error is better. See Table 1 for exact numbers and comparison on various types of distribution shift. See Sec. 5 for details on our testbed.
+                                                Recently, numerous methods have been proposed for this purpose (Deng & Zheng, 2021; Chen et al., 2021b; Jiang et al., 2021; Deng et al., 2021; Guillory et al., 2021). These methods either require calibration on the target domain to yield consistent estimates (Jiang et al., 2021; Guillory et al., 2021) or additional labeled data from several target domains to learn a linear regression function on a distributional distance that then predicts model performance (Deng et al., 2021; Deng & Zheng, 2021; Guillory et al., 2021). However, methods that require calibration on the target domain typically yield poor estimates since deep models trained and calibrated on source data are not, in general, calibrated on a (previously unseen) target domain (Ovadia et al., 2019). Besides, methods that leverage labeled data from target domains rely on the fact that unseen target domains exhibit strong linear correlation with seen target domains on the underlying distance measure and, hence, can be rendered ineffective when such target domains with labeled data are unavailable (in Sec. 5.1 we demonstrate such a failure on a real-world distribution shift problem). Therefore, throughout the paper, we assume access to labeled source data and only unlabeled data from target domain(s).
+                                                In this work, we first show that absent assumptions on the source classifier or the nature of the shift, no method of estimating accuracy will work generally (even in non-contrived settings). To estimate accuracy on target domain perfectly, we highlight that even given perfect knowledge of the labeled source distribution (i.e., $p_{s}(x, y)$ ) and unlabeled target distribution (i.e., $p_{t}(x)$ ), we need restrictions on the nature of the shift such that we can uniquely identify the target conditional $p_{t}(y \mid x)$. Thus, in general, identifying the accuracy of the classifier is as hard as identifying the optimal predictor.
+                                                Second, motivated by the superiority of methods that use maximum softmax probability (or logit) of a model for Out-Of-Distribution (OOD) detection (Hendrycks & Gimpel, 2016; Hendrycks et al., 2019), we propose a simple method that leverages softmax probability to predict model performance. Our method, Average Thresholded Confidence (ATC), learns a threshold on a score (e.g., maximum confidence or negative entropy) of model confidence on validation source data and predicts target domain accuracy as the fraction of unlabeled target points that receive a score above that threshold. ATC selects a threshold on validation source data such that the fraction of source examples that receive the score above the threshold match the accuracy of those examples. Our primary contribution in ATC is the proposal of obtaining the threshold and observing its efficacy on (practical) accuracy estimation. Importantly, our work takes a step forward in positively answering the question raised in Deng & Zheng (2021); Deng et al. (2021) about a practical strategy to select a threshold that enables accuracy prediction with thresholded model confidence.
+                                              images:
+                                                - id: img-0.jpeg
+                                                  top_left_x: 292
+                                                  top_left_y: 217
+                                                  bottom_right_x: 1405
+                                                  bottom_right_y: 649
+                                                  image_base64: '...'
+                                              dimensions:
+                                                dpi: 200
+                                                height: 2200
+                                                width: 1700
+                                            - index: 3
+                                              markdown: '...'
+                                              images: []
+                                              dimensions: {}
+                                            - index: 27
+                                              markdown: |
+                                                ![img-8.jpeg](img-8.jpeg)
+                                                Figure 9: Scatter plot of predicted accuracy versus (true) OOD accuracy for vision datasets except MNIST with a ResNet50 model. Results reported by aggregating MAE numbers over 4 different seeds.
+                                              images:
+                                                - id: img-8.jpeg
+                                                  top_left_x: 290
+                                                  top_left_y: 226
+                                                  bottom_right_x: 1405
+                                                  bottom_right_y: 1834
+                                                  image_base64: '...'
+                                              dimensions:
+                                                dpi: 200
+                                                height: 2200
+                                                width: 1700
+                                            - index: 28
+                                              markdown: |
+                                                | Dataset | Shift | IM |  | AC |  | DOC |  | GDE | ATC-MC (Ours) |  | ATC-NE (Ours) |  | | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | |  |  | Pre T | Post T | Pre T | Post T | Pre T | Post T | Post T | Pre T | Post T | Pre T | Post T | | CIFAR10 | Natural | 6.60 | 5.74 | 9.88 | 6.89 | 7.25 | 6.07 | 4.77 | 3.21 | 3.02 | 2.99 | 2.85 | |  |  | (0.35) | (0.30) | (0.16) | (0.13) | (0.15) | (0.16) | (0.13) | (0.49) | (0.40) | (0.37) | (0.29) | |  | Synthetic | 12.33 | 10.20 | 16.50 | 11.91 | 13.87 | 11.08 | 6.55 | 4.65 | 4.25 | 4.21 | 3.87 | |  |  | (0.51) | (0.48) | (0.26) | (0.17) | (0.18) | (0.17) | (0.35) | (0.55) | (0.55) | (0.55) | (0.75) | | CIFAR100 | Synthetic | 13.69 | 11.51 | 23.61 | 13.10 | 14.60 | 10.14 | 9.85 | 5.50 | 4.75 | 4.72 | 4.94 | |  |  | (0.55) | (0.41) | (1.16) | (0.80) | (0.77) | (0.64) | (0.57) | (0.70) | (0.73) | (0.74) | (0.74) | | ImageNet200 | Natural | 12.37 | 8.19 | 22.07 | 8.61 | 15.17 | 7.81 | 5.13 | 4.37 | 2.04 | 3.79 | 1.45 | |  |  | (0.25) | (0.33) | (0.08) | (0.25) | (0.11) | (0.29) | (0.08) | (0.39) | (0.24) | (0.30) | (0.27) | |  | Synthetic | 19.86 | 12.94 | 32.44 | 13.35 | 25.02 | 12.38 | 5.41 | 5.93 | 3.09 | 5.00 | 2.68 | |  |  | (1.38) | (1.81) | (1.00) | (1.30) | (1.10) | (1.38) | (0.89) | (1.38) | (0.87) | (1.28) | (0.45) | | ImageNet | Natural | 7.77 | 6.50 | 18.13 | 6.02 | 8.13 | 5.76 | 6.23 | 3.88 | 2.17 | 2.06 | 0.80 | |  |  | (0.27) | (0.33) | (0.23) | (0.34) | (0.27) | (0.37) | (0.41) | (0.53) | (0.62) | (0.54) | (0.44) | |  | Synthetic | 13.39 | 10.12 | 24.62 | 8.51 | 13.55 | 7.90 | 6.32 | 3.34 | 2.53 | 2.61 | 4.89 | |  |  | (0.53) | (0.63) | (0.64) | (0.71) | (0.61) | (0.72) | (0.33) | (0.53) | (0.36) | (0.33) | (0.83) | | FMoW-WILDS | Natural | 5.53 | 4.31 | 33.53 | 12.84 | 5.94 | 4.45 | 5.74 | 3.06 | 2.70 | 3.02 | 2.72 | |  |  | (0.33) | (0.63) | (0.13) | (12.06) | (0.36) | (0.77) | (0.55) | (0.36) | (0.54) | (0.35) | (0.44) | | RxRx1-WILDS | Natural | 5.80 | 5.72 | 7.90 | 4.84 | 5.98 | 5.98 | 6.03 | 4.66 | 4.56 | 4.41 | 4.47 | |  |  | (0.17) | (0.15) | (0.24) | (0.09) | (0.15) | (0.13) | (0.08) | (0.38) | (0.38) | (0.31) | (0.26) | | Amazon-WILDS | Natural | 2.40 | 2.29 | 8.01 | 2.38 | 2.40 | 2.28 | 17.87 | 1.65 | 1.62 | 1.60 | 1.59 | |  |  | (0.08) | (0.09) | (0.53) | (0.17) | (0.09) | (0.09) | (0.18) | (0.06) | (0.05) | (0.14) | (0.15) | | CivilCom.-WILDS | Natural | 12.64 | 10.80 | 16.76 | 11.03 | 13.31 | 10.99 | 16.65 |  | 7.14 |  |  | |  |  | (0.52) | (0.48) | (0.53) | (0.49) | (0.52) | (0.49) | (0.25) |  | (0.41) |  |  | | MNIST | Natural | 18.48 | 15.99 | 21.17 | 14.81 | 20.19 | 14.56 | 24.42 | 5.02 | 2.40 | 3.14 | 3.50 | |  |  | (0.45) | (1.53) | (0.24) | (3.89) | (0.23) | (3.47) | (0.41) | (0.44) | (1.83) | (0.49) | (0.17) | | ENTITY-13 | Same | 16.23 | 11.14 | 24.97 | 10.88 | 19.08 | 10.47 | 10.71 | 5.39 | 3.88 | 4.58 | 4.19 | |  |  | (0.77) | (0.65) | (0.70) | (0.77) | (0.65) | (0.72) | (0.74) | (0.92) | (0.61) | (0.85) | (0.16) | |  | Novel | 28.53 | 22.02 | 38.33 | 21.64 | 32.43 | 21.22 | 20.61 | 13.58 | 10.28 | 12.25 | 6.63 | |  |  | (0.82) | (0.68) | (0.75) | (0.86) | (0.69) | (0.80) | (0.60) | (1.15) | (1.34) | (1.21) | (0.93) | | ENTITY-30 | Same | 18.59 | 14.46 | 28.82 | 14.30 | 21.63 | 13.46 | 12.92 | 9.12 | 7.75 | 8.15 | 7.64 | |  |  | (0.51) | (0.52) | (0.43) | (0.71) | (0.37) | (0.59) | (0.14) | (0.62) | (0.72) | (0.68) | (0.88) | |  | Novel | 32.34 | 26.85 | 44.02 | 26.27 | 36.82 | 25.42 | 23.16 | 17.75 | 14.30 | 15.60 | 10.57 | |  |  | (0.60) | (0.58) | (0.56) | (0.79) | (0.47) | (0.68) | (0.12) | (0.76) | (0.85) | (0.86) | (0.86) | | NONLIVING-26 | Same | 18.66 | 17.17 | 26.39 | 16.14 | 19.86 | 15.58 | 16.63 | 10.87 | 10.24 | 10.07 | 10.26 | |  |  | (0.76) | (0.74) | (0.82) | (0.81) | (0.67) | (0.76) | (0.45) | (0.98) | (0.83) | (0.92) | (1.18) | |  | Novel | 33.43 | 31.53 | 41.66 | 29.87 | 35.13 | 29.31 | 29.56 | 21.70 | 20.12 | 19.08 | 18.26 | |  |  | (0.67) | (0.65) | (0.67) | (0.71) | (0.54) | (0.64) | (0.21) | (0.86) | (0.75) | (0.82) | (1.12) | | LIVING-17 | Same | 12.63 | 11.05 | 18.32 | 10.46 | 14.43 | 10.14 | 9.87 | 4.57 | 3.95 | 3.81 | 4.21 | |  |  | (1.25) | (1.20) | (1.01) | (1.12) | (1.11) | (1.16) | (0.61) | (0.71) | (0.48) | (0.22) | (0.53) | |  | Novel | 29.03 | 26.96 | 35.67 | 26.11 | 31.73 | 25.73 | 23.53 | 16.15 | 14.49 | 12.97 | 11.39 | |  |  | (1.44) | (1.38) | (1.09) | (1.27) | (1.19) | (1.35) | (0.52) | (1.36) | (1.46) | (1.52) | (1.72) |
+                                                Table 3: Mean Absolute estimation Error (MAE) results for different datasets in our setup grouped by the nature of shift. 'Same' refers to same subpopulation shifts and 'Novel' refers novel subpopulation shifts. We include details about the target sets considered in each shift in Table 2. Post T denotes use of TS calibration on source. For language datasets, we use DistilBERT-base-uncased, for vision dataset we report results with DenseNet model with the exception of MNIST where we use FCN. Across all datasets, we observe that ATC achieves superior performance (lower MAE is better). For GDE post T and pre T estimates match since TS doesn't alter the argmax prediction. Results reported by aggregating MAE numbers over 4 different seeds. Values in parenthesis (i.e., $(\cdot)$ ) denote standard deviation values.
+                                              images: []
+                                              dimensions:
+                                                dpi: 200
+                                                height: 2200
+                                                width: 1700
+                                            - index: 29
+                                              markdown: |
+                                                | Dataset | Shift | IM |  | AC |  | DOC |  | GDE | ATC-MC (Ours) |  | ATC-NE (Ours) |  | | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | |  |  | Pre T | Post T | Pre T | Post T | Pre T | Post T | Post T | Pre T | Post T | Pre T | Post T | | CIFAR10 | Natural | 7.14 | 6.20 | 10.25 | 7.06 | 7.68 | 6.35 | 5.74 | 4.02 | 3.85 | 3.76 | 3.38 | |  |  | (0.14) | (0.11) | (0.31) | (0.33) | (0.28) | (0.27) | (0.25) | (0.38) | (0.30) | (0.33) | (0.32) | |  | Synthetic | 12.62 | 10.75 | 16.50 | 11.91 | 13.93 | 11.20 | 7.97 | 5.66 | 5.03 | 4.87 | 3.63 | |  |  | (0.76) | (0.71) | (0.28) | (0.24) | (0.29) | (0.28) | (0.13) | (0.64) | (0.71) | (0.71) | (0.62) | | CIFAR100 | Synthetic | 12.77 | 12.34 | 16.89 | 12.73 | 11.18 | 9.63 | 12.00 | 5.61 | 5.55 | 5.65 | 5.76 | |  |  | (0.43) | (0.68) | (0.20) | (2.59) | (0.35) | (1.25) | (0.48) | (0.51) | (0.55) | (0.35) | (0.27) | | ImageNet200 | Natural | 12.63 | 7.99 | 23.08 | 7.22 | 15.40 | 6.33 | 5.00 | 4.60 | 1.80 | 4.06 | 1.38 | |  |  | (0.59) | (0.47) | (0.31) | (0.22) | (0.42) | (0.24) | (0.36) | (0.63) | (0.17) | (0.69) | (0.29) | |  | Synthetic | 20.17 | 11.74 | 33.69 | 9.51 | 25.49 | 8.61 | 4.19 | 5.37 | 2.78 | 4.53 | 3.58 | |  |  | (0.74) | (0.80) | (0.73) | (0.51) | (0.66) | (0.50) | (0.14) | (0.88) | (0.23) | (0.79) | (0.33) | | ImageNet | Natural | 8.09 | 6.42 | 21.66 | 5.91 | 8.53 | 5.21 | 5.90 | 3.93 | 1.89 | 2.45 | 0.73 | |  |  | (0.25) | (0.28) | (0.38) | (0.22) | (0.26) | (0.25) | (0.44) | (0.26) | (0.21) | (0.16) | (0.10) | |  | Synthetic | 13.93 | 9.90 | 28.05 | 7.56 | 13.82 | 6.19 | 6.70 | 3.33 | 2.55 | 2.12 | 5.06 | |  |  | (0.14) | (0.23) | (0.39) | (0.13) | (0.31) | (0.07) | (0.52) | (0.25) | (0.25) | (0.31) | (0.27) | | FMoW-WILDS | Natural | 5.15 | 3.55 | 34.64 | 5.03 | 5.58 | 3.46 | 5.08 | 2.59 | 2.33 | 2.52 | 2.22 | |  |  | (0.19) | (0.41) | (0.22) | (0.29) | (0.17) | (0.37) | (0.46) | (0.32) | (0.28) | (0.25) | (0.30) | | RxRx1-WILDS | Natural | 6.17 | 6.11 | 21.05 | 5.21 | 6.54 | 6.27 | 6.82 | 5.30 | 5.20 | 5.19 | 5.63 | |  |  | (0.20) | (0.24) | (0.31) | (0.18) | (0.21) | (0.20) | (0.31) | (0.30) | (0.44) | (0.43) | (0.55) | | Entity-13 | Same | 18.32 | 14.38 | 27.79 | 13.56 | 20.50 | 13.22 | 16.09 | 9.35 | 7.50 | 7.80 | 6.94 | |  |  | (0.29) | (0.53) | (1.18) | (0.58) | (0.47) | (0.58) | (0.84) | (0.79) | (0.65) | (0.62) | (0.71) | |  | Novel | 28.82 | 24.03 | 38.97 | 22.96 | 31.66 | 22.61 | 25.26 | 17.11 | 13.96 | 14.75 | 9.94 | |  |  | (0.30) | (0.55) | (1.32) | (0.59) | (0.54) | (0.58) | (1.08) | (0.93) | (0.64) | (0.78) |  | | Entity-30 | Same | 16.91 | 14.61 | 26.84 | 14.37 | 18.60 | 13.11 | 13.74 | 8.54 | 7.94 | 7.77 | 8.04 | |  |  | (1.33) | (1.11) | (2.15) | (1.34) | (1.69) | (1.30) | (1.07) | (1.47) | (1.38) | (1.44) | (1.51) | |  | Novel | 28.66 | 25.83 | 39.21 | 25.03 | 30.95 | 23.73 | 23.15 | 15.57 | 13.24 | 12.44 | 11.05 | |  |  | (1.16) | (0.88) | (2.03) | (1.11) | (1.64) | (1.11) | (0.51) | (1.44) | (1.15) | (1.26) | (1.13) | | NonLIVING-26 | Same | 17.43 | 15.95 | 27.70 | 15.40 | 18.06 | 14.58 | 16.99 | 10.79 | 10.13 | 10.05 | 10.29 | |  |  | (0.90) | (0.86) | (0.90) | (0.69) | (1.00) | (0.78) | (1.25) | (0.62) | (0.32) | (0.46) | (0.79) | |  | Novel | 29.51 | 27.75 | 40.02 | 26.77 | 30.36 | 25.93 | 27.70 | 19.64 | 17.75 | 16.90 | 15.69 | |  |  | (0.86) | (0.82) | (0.76) | (0.82) | (0.95) | (0.80) | (1.42) | (0.68) | (0.53) | (0.60) | (0.83) | | LIVING-17 | Same | 14.28 | 12.21 | 23.46 | 11.16 | 15.22 | 10.78 | 10.49 | 4.92 | 4.23 | 4.19 | 4.73 | |  |  | (0.96) | (0.93) | (1.16) | (0.90) | (0.96) | (0.99) | (0.97) | (0.57) | (0.42) | (0.35) | (0.24) | |  | Novel | 28.91 | 26.35 | 38.62 | 24.91 | 30.32 | 24.52 | 22.49 | 15.42 | 13.02 | 12.29 | 10.34 | |  |  | (0.66) | (0.73) | (1.01) | (0.61) | (0.59) | (0.74) | (0.85) | (0.59) | (0.53) | (0.73) | (0.62) |
+                                                Table 4: Mean Absolute estimation Error (MAE) results for different datasets in our setup grouped by the nature of shift for ResNet model. 'Same' refers to same subpopulation shifts and 'Novel' refers novel subpopulation shifts. We include details about the target sets considered in each shift in Table 2. Post T denotes use of TS calibration on source. Across all datasets, we observe that ATC achieves superior performance (lower MAE is better). For GDE post T and pre T estimates match since TS doesn't alter the argmax prediction. Results reported by aggregating MAE numbers over 4 different seeds. Values in parenthesis (i.e., $(\cdot)$ ) denote standard deviation values.
+                                              images: []
+                                              dimensions:
+                                                dpi: 200
+                                                height: 2200
+                                                width: 1700
+                                        model: mistral-ocr-2503-completion
+                                        usage_info:
+                                            pages_processed: 29
+                                            doc_size_bytes: null
+                '422':
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HTTPValidationError'
+            tags:
+                - ocr
+            x-speakeasy-name-override: process
+components:
+    schemas:
+        HTTPValidationError:
+            properties:
+                detail:
+                    items:
+                        $ref: '#/components/schemas/ValidationError'
+                    type: array
+                    title: Detail
+            type: object
+            title: HTTPValidationError
+        ValidationError:
+            properties:
+                loc:
+                    items:
+                        anyOf:
+                            - type: string
+                            - type: integer
+                    type: array
+                    title: Location
+                msg:
+                    type: string
+                    title: Message
+                type:
+                    type: string
+                    title: Error Type
+            type: object
+            required:
+                - loc
+                - msg
+                - type
+            title: ValidationError
+        DocumentURLChunk:
+            properties:
+                document_url:
+                    type: string
+                    title: Document Url
+                document_name:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Document Name
+                    description: The filename of the document
+                type:
+                    type: string
+                    enum:
+                        - document_url
+                    title: Type
+                    default: document_url
+            additionalProperties: false
+            type: object
+            required:
+                - document_url
+            title: DocumentURLChunk
+        Function:
+            properties:
+                name:
+                    type: string
+                    title: Name
+                description:
+                    type: string
+                    title: Description
+                strict:
+                    type: boolean
+                    title: Strict
+                parameters:
+                    additionalProperties: true
+                    type: object
+                    title: Parameters
+            additionalProperties: false
+            type: object
+            required:
+                - name
+                - parameters
+            title: Function
+        ImageURLChunk:
+            properties:
+                image_url:
+                    anyOf:
+                        - $ref: '#/components/schemas/ImageURL'
+                        - type: string
+                    title: Image Url
+                type:
+                    type: string
+                    enum:
+                        - image_url
+                    title: Type
+                    default: image_url
+            additionalProperties: false
+            type: object
+            required:
+                - image_url
+            title: ImageURLChunk
+            description: '{"type":"image_url","image_url":{"url":"data:image/png;base64,iVBORw0'
+        JsonSchema:
+            properties:
+                name:
+                    type: string
+                    title: Name
+                description:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Description
+                schema:
+                    additionalProperties: true
+                    type: object
+                    title: Schema
+                    x-speakeasy-name-override: schema_definition
+                strict:
+                    type: boolean
+                    title: Strict
+            additionalProperties: false
+            type: object
+            required:
+                - name
+                - schema
+            title: JsonSchema
+        Prediction:
+            properties:
+                type:
+                    type: string
+                    const: content
+                    title: Type
+                    default: content
+                content:
+                    type: string
+                    title: Content
+                    default: ''
+            additionalProperties: false
+            type: object
+            title: Prediction
+            description: Enable users to specify an expected completion, optimizing response times by leveraging known or predictable content.
+        ResponseFormat:
+            properties:
+                type:
+                    $ref: '#/components/schemas/ResponseFormats'
+                    default: text
+                json_schema:
+                    anyOf:
+                        - $ref: '#/components/schemas/JsonSchema'
+                        - type: 'null'
+            additionalProperties: false
+            type: object
+            title: ResponseFormat
+            description: 'Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.'
+            examples:
+                - type: text
+                - type: json_object
+                - type: json_schema
+                  json_schema:
+                    schema:
+                        properties:
+                            name:
+                                title: Name
+                                type: string
+                            authors:
+                                items:
+                                    type: string
+                                title: Authors
+                                type: array
+                        required:
+                            - name
+                            - authors
+                        title: Book
+                        type: object
+                        additionalProperties: false
+                    name: book
+                    strict: true
+        ResponseFormats:
+            type: string
+            enum:
+                - text
+                - json_object
+                - json_schema
+            title: ResponseFormats
+        TextChunk:
+            properties:
+                text:
+                    type: string
+                    title: Text
+                type:
+                    type: string
+                    enum:
+                        - text
+                    title: Type
+                    default: text
+            additionalProperties: false
+            type: object
+            required:
+                - text
+            title: TextChunk
+        ThinkChunk:
+            properties:
+                thinking:
+                    items:
+                        anyOf:
+                            - $ref: '#/components/schemas/ReferenceChunk'
+                            - $ref: '#/components/schemas/TextChunk'
+                    type: array
+                    title: Thinking
+                closed:
+                    type: boolean
+                    title: Closed
+                    description: Whether the thinking chunk is closed or not. Currently only used for prefixing.
+                type:
+                    type: string
+                    enum:
+                        - thinking
+                    title: Type
+                    default: thinking
+            additionalProperties: false
+            type: object
+            required:
+                - thinking
+            title: ThinkChunk
+        ToolChoiceEnum:
+            type: string
+            enum:
+                - auto
+                - none
+                - any
+                - required
+            title: ToolChoiceEnum
+        AssistantMessage:
+            properties:
+                content:
+                    title: Content
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                        - items:
+                            $ref: '#/components/schemas/ContentChunk'
+                          type: array
+                tool_calls:
+                    anyOf:
+                        - items:
+                            $ref: '#/components/schemas/ToolCall'
+                          type: array
+                        - type: 'null'
+                    title: Tool Calls
+                prefix:
+                    type: boolean
+                    title: Prefix
+                    default: false
+                    description: Set this to `true` when adding an assistant message as prefix to condition the model response. The role of the prefix message is to force the model to start its answer by the content of the message.
+                role:
+                    type: string
+                    default: assistant
+                    title: Role
+                    enum:
+                        - assistant
+            additionalProperties: false
+            type: object
+            title: AssistantMessage
+        ChatCompletionRequest:
+            properties:
+                model:
+                    title: Model
+                    type: string
+                    description: The ID of the model to use for this request.
+                    example: azureai
+                    default: azureai
+                temperature:
+                    anyOf:
+                        - type: number
+                          maximum: 1.5
+                          minimum: 0
+                        - type: 'null'
+                    title: Temperature
+                    description: What sampling temperature to use, we recommend between 0.0 and 0.7. Higher values like 0.7 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. We generally recommend altering this or `top_p` but not both. The default value varies depending on the model you are targeting. Call the `/models` endpoint to retrieve the appropriate value.
+                top_p:
+                    type: number
+                    maximum: 1
+                    minimum: 0
+                    title: Top P
+                    description: Nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
+                max_tokens:
+                    anyOf:
+                        - type: integer
+                          minimum: 0
+                        - type: 'null'
+                    title: Max Tokens
+                    description: The maximum number of tokens to generate in the completion. The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
+                stream:
+                    type: boolean
+                    title: Stream
+                    default: false
+                    description: 'Whether to stream back partial progress. If set, tokens will be sent as data-only server-side events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.'
+                stop:
+                    anyOf:
+                        - type: string
+                        - items:
+                            type: string
+                          type: array
+                    title: Stop
+                    description: Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
+                random_seed:
+                    anyOf:
+                        - type: integer
+                          minimum: 0
+                        - type: 'null'
+                    title: Random Seed
+                    description: The seed to use for random sampling. If set, different calls will generate deterministic results.
+                metadata:
+                    anyOf:
+                        - additionalProperties: true
+                          type: object
+                        - type: 'null'
+                    title: Metadata
+                messages:
+                    items:
+                        oneOf:
+                            - $ref: '#/components/schemas/SystemMessage'
+                            - $ref: '#/components/schemas/UserMessage'
+                            - $ref: '#/components/schemas/AssistantMessage'
+                            - $ref: '#/components/schemas/ToolMessage'
+                        discriminator:
+                            propertyName: role
+                            mapping:
+                                assistant: '#/components/schemas/AssistantMessage'
+                                system: '#/components/schemas/SystemMessage'
+                                tool: '#/components/schemas/ToolMessage'
+                                user: '#/components/schemas/UserMessage'
+                    type: array
+                    title: Messages
+                    description: The prompt(s) to generate completions for, encoded as a list of dict with role and content.
+                    examples:
+                        - - role: user
+                            content: Who is the best French painter? Answer in one short sentence.
+                response_format:
+                    $ref: '#/components/schemas/ResponseFormat'
+                tools:
+                    anyOf:
+                        - items:
+                            $ref: '#/components/schemas/Tool'
+                          type: array
+                        - type: 'null'
+                    title: Tools
+                    description: A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.
+                tool_choice:
+                    anyOf:
+                        - $ref: '#/components/schemas/ToolChoice'
+                        - $ref: '#/components/schemas/ToolChoiceEnum'
+                    title: Tool Choice
+                    default: auto
+                    description: 'Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.'
+                presence_penalty:
+                    type: number
+                    maximum: 2
+                    minimum: -2
+                    title: Presence Penalty
+                    description: The `presence_penalty` determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
+                frequency_penalty:
+                    type: number
+                    maximum: 2
+                    minimum: -2
+                    title: Frequency Penalty
+                    description: The `frequency_penalty` penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
+                n:
+                    anyOf:
+                        - type: integer
+                          minimum: 1
+                        - type: 'null'
+                    title: N
+                    description: Number of completions to return for each request, input tokens are only billed once.
+                prediction:
+                    $ref: '#/components/schemas/Prediction'
+                    default:
+                        type: content
+                        content: ''
+                    description: Enable users to specify expected results, optimizing response times by leveraging known or predictable content. This approach is especially effective for updating text documents or code files with minimal changes, reducing latency while maintaining high-quality results.
+                parallel_tool_calls:
+                    type: boolean
+                    title: Parallel Tool Calls
+                    description: Whether to enable parallel function calling during tool use, when enabled the model can call multiple tools in parallel.
+                prompt_mode:
+                    anyOf:
+                        - $ref: '#/components/schemas/MistralPromptMode'
+                        - type: 'null'
+                    description: Allows toggling between the reasoning mode and no system prompt. When set to `reasoning` the system prompt for reasoning models will be used.
+                safe_prompt:
+                    type: boolean
+                    description: Whether to inject a safety prompt before all conversations.
+            additionalProperties: false
+            type: object
+            title: ChatCompletionRequest
+            required:
+                - messages
+        FileChunk:
+            properties:
+                type:
+                    type: string
+                    const: file
+                    title: Type
+                    default: file
+                file_id:
+                    type: string
+                    format: uuid
+                    title: File Id
+            additionalProperties: false
+            type: object
+            required:
+                - file_id
+            title: FileChunk
+        FunctionCall:
+            properties:
+                name:
+                    type: string
+                    title: Name
+                arguments:
+                    title: Arguments
+                    anyOf:
+                        - type: object
+                          additionalProperties: true
+                        - type: string
+            additionalProperties: false
+            type: object
+            required:
+                - name
+                - arguments
+            title: FunctionCall
+        FunctionName:
+            properties:
+                name:
+                    type: string
+                    title: Name
+            additionalProperties: false
+            type: object
+            required:
+                - name
+            title: FunctionName
+            description: this restriction of `Function` is used to select a specific function to call
+        ImageURL:
+            properties:
+                url:
+                    type: string
+                    title: Url
+                detail:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Detail
+            additionalProperties: false
+            type: object
+            required:
+                - url
+            title: ImageURL
+        MistralPromptMode:
+            type: string
+            title: MistralPromptMode
+            enum:
+                - reasoning
+            x-speakeasy-unknown-values: allow
+        OCRImageObject:
+            properties:
+                id:
+                    type: string
+                    title: Id
+                    description: Image ID for extracted image in a page
+                top_left_x:
+                    anyOf:
+                        - type: integer
+                          minimum: 0
+                        - type: 'null'
+                    title: Top Left X
+                    description: X coordinate of top-left corner of the extracted image
+                top_left_y:
+                    anyOf:
+                        - type: integer
+                          minimum: 0
+                        - type: 'null'
+                    title: Top Left Y
+                    description: Y coordinate of top-left corner of the extracted image
+                bottom_right_x:
+                    anyOf:
+                        - type: integer
+                          minimum: 0
+                        - type: 'null'
+                    title: Bottom Right X
+                    description: X coordinate of bottom-right corner of the extracted image
+                bottom_right_y:
+                    anyOf:
+                        - type: integer
+                          minimum: 0
+                        - type: 'null'
+                    title: Bottom Right Y
+                    description: Y coordinate of bottom-right corner of the extracted image
+                image_base64:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Image Base64
+                    description: Base64 string of the extracted image
+                image_annotation:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Image Annotation
+                    description: Annotation of the extracted image in json str
+            additionalProperties: false
+            type: object
+            required:
+                - id
+                - top_left_x
+                - top_left_y
+                - bottom_right_x
+                - bottom_right_y
+            title: OCRImageObject
+        OCRPageDimensions:
+            properties:
+                dpi:
+                    type: integer
+                    minimum: 0
+                    title: Dpi
+                    description: Dots per inch of the page-image
+                height:
+                    type: integer
+                    minimum: 0
+                    title: Height
+                    description: Height of the image in pixels
+                width:
+                    type: integer
+                    minimum: 0
+                    title: Width
+                    description: Width of the image in pixels
+            additionalProperties: false
+            type: object
+            required:
+                - dpi
+                - height
+                - width
+            title: OCRPageDimensions
+        OCRPageObject:
+            properties:
+                index:
+                    type: integer
+                    minimum: 0
+                    title: Index
+                    description: The page index in a pdf document starting from 0
+                markdown:
+                    type: string
+                    title: Markdown
+                    description: The markdown string response of the page
+                images:
+                    items:
+                        $ref: '#/components/schemas/OCRImageObject'
+                    type: array
+                    title: Images
+                    description: List of all extracted images in the page
+                tables:
+                    items:
+                        $ref: '#/components/schemas/OCRTableObject'
+                    type: array
+                    title: Tables
+                    description: List of all extracted tables in the page
+                hyperlinks:
+                    items:
+                        type: string
+                    type: array
+                    title: Hyperlinks
+                    description: List of all hyperlinks in the page
+                header:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Header
+                    description: Header of the page
+                footer:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Footer
+                    description: Footer of the page
+                dimensions:
+                    anyOf:
+                        - $ref: '#/components/schemas/OCRPageDimensions'
+                        - type: 'null'
+                    description: The dimensions of the PDF Page's screenshot image
+            additionalProperties: false
+            type: object
+            required:
+                - index
+                - markdown
+                - images
+                - dimensions
+            title: OCRPageObject
+        OCRRequest:
+            properties:
+                model:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Model
+                id:
+                    type: string
+                    title: Id
+                document:
+                    anyOf:
+                        - $ref: '#/components/schemas/FileChunk'
+                        - $ref: '#/components/schemas/DocumentURLChunk'
+                        - $ref: '#/components/schemas/ImageURLChunk'
+                    title: Document
+                    description: Document to run OCR on
+                pages:
+                    anyOf:
+                        - items:
+                            type: integer
+                          type: array
+                        - type: 'null'
+                    title: Pages
+                    description: 'Specific pages user wants to process in various formats: single number, range, or list of both. Starts from 0'
+                include_image_base64:
+                    anyOf:
+                        - type: boolean
+                        - type: 'null'
+                    title: Include Image Base64
+                    description: Include image URLs in response
+                image_limit:
+                    anyOf:
+                        - type: integer
+                        - type: 'null'
+                    title: Image Limit
+                    description: Max images to extract
+                image_min_size:
+                    anyOf:
+                        - type: integer
+                        - type: 'null'
+                    title: Image Min Size
+                    description: Minimum height and width of image to extract
+                bbox_annotation_format:
+                    anyOf:
+                        - $ref: '#/components/schemas/ResponseFormat'
+                        - type: 'null'
+                    description: Structured output class for extracting useful information from each extracted bounding box / image from document. Only json_schema is valid for this field
+                document_annotation_format:
+                    anyOf:
+                        - $ref: '#/components/schemas/ResponseFormat'
+                        - type: 'null'
+                    description: Structured output class for extracting useful information from the entire document. Only json_schema is valid for this field
+                table_format:
+                    anyOf:
+                        - type: string
+                          enum:
+                            - markdown
+                            - html
+                        - type: 'null'
+                    title: Table Format
+                extract_header:
+                    type: boolean
+                    title: Extract Header
+                extract_footer:
+                    type: boolean
+                    title: Extract Footer
+            additionalProperties: false
+            type: object
+            required:
+                - document
+                - model
+            title: OCRRequest
+        OCRResponse:
+            properties:
+                pages:
+                    items:
+                        $ref: '#/components/schemas/OCRPageObject'
+                    type: array
+                    title: Pages
+                    description: List of OCR info for pages.
+                model:
+                    type: string
+                    title: Model
+                    description: The model used to generate the OCR.
+                document_annotation:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Document Annotation
+                    description: Formatted response in the request_format if provided in json str
+                usage_info:
+                    $ref: '#/components/schemas/OCRUsageInfo'
+                    description: Usage info for the OCR request.
+            additionalProperties: false
+            type: object
+            required:
+                - pages
+                - model
+                - usage_info
+            title: OCRResponse
+        OCRTableObject:
+            properties:
+                id:
+                    type: string
+                    title: Id
+                    description: Table ID for extracted table in a page
+                content:
+                    type: string
+                    title: Content
+                    description: Content of the table in the given format
+                format:
+                    type: string
+                    enum:
+                        - markdown
+                        - html
+                    title: Format
+                    description: Format of the table
+            additionalProperties: false
+            type: object
+            required:
+                - id
+                - content
+                - format
+            title: OCRTableObject
+        OCRUsageInfo:
+            properties:
+                pages_processed:
+                    type: integer
+                    minimum: 0
+                    title: Pages Processed
+                    description: Number of pages processed
+                doc_size_bytes:
+                    anyOf:
+                        - type: integer
+                        - type: 'null'
+                    title: Doc Size Bytes
+                    description: Document size in bytes
+            additionalProperties: false
+            type: object
+            required:
+                - pages_processed
+            title: OCRUsageInfo
+        ReferenceChunk:
+            properties:
+                reference_ids:
+                    items:
+                        type: integer
+                    type: array
+                    title: Reference Ids
+                type:
+                    type: string
+                    enum:
+                        - reference
+                    title: Type
+                    default: reference
+            additionalProperties: false
+            type: object
+            required:
+                - reference_ids
+            title: ReferenceChunk
+        SystemMessage:
+            properties:
+                content:
+                    title: Content
+                    anyOf:
+                        - type: string
+                        - items:
+                            $ref: '#/components/schemas/SystemMessageContentChunks'
+                          type: array
+                role:
+                    type: string
+                    default: system
+                    enum:
+                        - system
+            additionalProperties: false
+            type: object
+            required:
+                - content
+            title: SystemMessage
+        Tool:
+            properties:
+                type:
+                    $ref: '#/components/schemas/ToolTypes'
+                    default: function
+                function:
+                    $ref: '#/components/schemas/Function'
+            additionalProperties: false
+            type: object
+            required:
+                - function
+            title: Tool
+        ToolCall:
+            properties:
+                id:
+                    type: string
+                    title: Id
+                    default: 'null'
+                type:
+                    $ref: '#/components/schemas/ToolTypes'
+                    default: function
+                function:
+                    $ref: '#/components/schemas/FunctionCall'
+                index:
+                    type: integer
+                    title: Index
+                    default: 0
+            additionalProperties: false
+            type: object
+            required:
+                - function
+            title: ToolCall
+        ToolChoice:
+            properties:
+                type:
+                    $ref: '#/components/schemas/ToolTypes'
+                    default: function
+                function:
+                    $ref: '#/components/schemas/FunctionName'
+            additionalProperties: false
+            type: object
+            required:
+                - function
+            title: ToolChoice
+            description: ToolChoice is either a ToolChoiceEnum or a ToolChoice
+        ToolMessage:
+            properties:
+                content:
+                    title: Content
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                        - items:
+                            $ref: '#/components/schemas/ContentChunk'
+                          type: array
+                tool_call_id:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Tool Call Id
+                name:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                    title: Name
+                role:
+                    type: string
+                    default: tool
+                    enum:
+                        - tool
+            additionalProperties: false
+            type: object
+            required:
+                - content
+            title: ToolMessage
+        UsageInfo:
+            properties:
+                prompt_tokens:
+                    type: integer
+                    title: Prompt Tokens
+                    default: 0
+                completion_tokens:
+                    title: Completion Tokens
+                    default: 0
+                    type: integer
+                total_tokens:
+                    type: integer
+                    title: Total Tokens
+                    default: 0
+                prompt_audio_seconds:
+                    anyOf:
+                        - type: integer
+                        - type: 'null'
+                    title: Prompt Audio Seconds
+            type: object
+            title: UsageInfo
+            x-speakeasy-include: true
+            required:
+                - prompt_tokens
+                - completion_tokens
+                - total_tokens
+            additionalProperties: true
+        UserMessage:
+            properties:
+                content:
+                    title: Content
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                        - items:
+                            $ref: '#/components/schemas/ContentChunk'
+                          type: array
+                role:
+                    type: string
+                    default: user
+                    enum:
+                        - user
+            additionalProperties: false
+            type: object
+            required:
+                - content
+            title: UserMessage
+        SystemMessageContentChunks:
+            oneOf:
+                - $ref: '#/components/schemas/TextChunk'
+                - $ref: '#/components/schemas/ThinkChunk'
+            discriminator:
+                propertyName: type
+                mapping:
+                    text: '#/components/schemas/TextChunk'
+                    thinking: '#/components/schemas/ThinkChunk'
+            title: SystemMessageContentChunks
+        CompletionEvent:
+            title: CompletionEvent
+            type: object
+            required:
+                - data
+            properties:
+                data:
+                    $ref: '#/components/schemas/CompletionChunk'
+        CompletionChunk:
+            title: CompletionChunk
+            type: object
+            required:
+                - id
+                - model
+                - choices
+            properties:
+                id:
+                    type: string
+                object:
+                    type: string
+                created:
+                    type: integer
+                model:
+                    type: string
+                usage:
+                    $ref: '#/components/schemas/UsageInfo'
+                choices:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CompletionResponseStreamChoice'
+        CompletionResponseStreamChoice:
+            title: CompletionResponseStreamChoice
+            type: object
+            required:
+                - index
+                - delta
+                - finish_reason
+            properties:
+                index:
+                    type: integer
+                delta:
+                    $ref: '#/components/schemas/DeltaMessage'
+                finish_reason:
+                    type:
+                        - string
+                        - 'null'
+                    enum:
+                        - stop
+                        - length
+                        - error
+                        - tool_calls
+                        - null
+                    x-speakeasy-unknown-values: allow
+        ResponseBase:
+            type: object
+            title: ResponseBase
+            properties:
+                id:
+                    type: string
+                    example: cmpl-e5cc70bb28c444948073e77776eb30ef
+                object:
+                    type: string
+                    example: chat.completion
+                model:
+                    type: string
+                    example: mistral-small-latest
+                usage:
+                    $ref: '#/components/schemas/UsageInfo'
+        ChatCompletionChoice:
+            title: ChatCompletionChoice
+            type: object
+            required:
+                - index
+                - finish_reason
+                - message
+            properties:
+                index:
+                    type: integer
+                    example: 0
+                message:
+                    $ref: '#/components/schemas/AssistantMessage'
+                finish_reason:
+                    type: string
+                    enum:
+                        - stop
+                        - length
+                        - model_length
+                        - error
+                        - tool_calls
+                    example: stop
+                    x-speakeasy-unknown-values: allow
+        DeltaMessage:
+            title: DeltaMessage
+            type: object
+            properties:
+                role:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                content:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
+                        - items:
+                            $ref: '#/components/schemas/ContentChunk'
+                          type: array
+                tool_calls:
+                    anyOf:
+                        - type: 'null'
+                        - type: array
+                          items:
+                            $ref: '#/components/schemas/ToolCall'
+        ChatCompletionResponseBase:
+            allOf:
+                - $ref: '#/components/schemas/ResponseBase'
+                - type: object
+                  title: ChatCompletionResponseBase
+                  properties:
+                    created:
+                        type: integer
+                        example: 1702256327
+        ChatCompletionResponse:
+            allOf:
+                - $ref: '#/components/schemas/ChatCompletionResponseBase'
+                - type: object
+                  title: ChatCompletionResponse
+                  properties:
+                    choices:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/ChatCompletionChoice'
+                  required:
+                    - id
+                    - object
+                    - data
+                    - model
+                    - usage
+                    - created
+                    - choices
+        ChatCompletionStreamRequest:
+            allOf:
+                - $ref: '#/components/schemas/ChatCompletionRequest'
+                - type: object
+                  properties:
+                    stream:
+                        type: boolean
+                        default: true
+        ToolTypes:
+            type: string
+            enum:
+                - function
+            title: ToolTypes
+            x-speakeasy-unknown-values: allow
+        ContentChunk:
+            oneOf:
+                - $ref: '#/components/schemas/TextChunk'
+                - $ref: '#/components/schemas/ImageURLChunk'
+                - $ref: '#/components/schemas/ReferenceChunk'
+            discriminator:
+                propertyName: type
+                mapping:
+                    image_url: '#/components/schemas/ImageURLChunk'
+                    text: '#/components/schemas/TextChunk'
+                    reference: '#/components/schemas/ReferenceChunk'
+            title: ContentChunk
+    securitySchemes:
+        ApiKey:
+            type: http
+            scheme: bearer
+security:
+    - ApiKey: []
+servers:
+    - url: https://api.mistral.ai
+      x-speakeasy-server-id: eu
+      description: EU Production server
+tags:
+    - name: chat
+      x-displayName: Chat
+      description: Chat Completion API.

@@ -3,11 +3,18 @@
 
 ## Supported Types
 
+### `components.AssistantMessage`
+
+```typescript
+const value: components.AssistantMessage = {};
+```
+
 ### `components.SystemMessage`
 
 ```typescript
 const value: components.SystemMessage = {
   content: "<value>",
+  role: "system",
 };
 ```
 
@@ -16,6 +23,7 @@ const value: components.SystemMessage = {
 ```typescript
 const value: components.ToolMessage = {
   content: [],
+  role: "tool",
 };
 ```
 
@@ -24,12 +32,7 @@ const value: components.ToolMessage = {
 ```typescript
 const value: components.UserMessage = {
   content: "<value>",
+  role: "user",
 };
-```
-
-### `components.AssistantMessage`
-
-```typescript
-const value: components.AssistantMessage = {};
 ```
 

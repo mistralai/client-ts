@@ -1,4 +1,4 @@
-speakeasyVersion: 1.606.10
+speakeasyVersion: 1.690.1
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
@@ -6,7 +6,6 @@ sources:
         sourceBlobDigest: sha256:41c72401329a30983907c32a60063da8ccd82137cf79d7f452089b5b83bb9d92
         tags:
             - latest
-            - speakeasy-sdk-regen-1768916512
     mistral-google-cloud-source:
         sourceNamespace: mistral-openapi-google-cloud
         sourceRevisionDigest: sha256:4a5343e63c6a78152e472b00ccc46d7bcb15594496bc94c8040039d3a9d4c5f8
@@ -28,7 +27,7 @@ targets:
         sourceRevisionDigest: sha256:544a7fd4d099e72a9a12681b326d44201f1b163e4df2f5fd643d831167255d84
         sourceBlobDigest: sha256:41c72401329a30983907c32a60063da8ccd82137cf79d7f452089b5b83bb9d92
         codeSamplesNamespace: mistral-openapi-azure-code-samples
-        codeSamplesRevisionDigest: sha256:17762518b694ea65be58fbc82897df749b0aadb7a5e19b926fa23537601ddcc5
+        codeSamplesRevisionDigest: sha256:c497b011d2d8e1ef577405afd3e8c83facfe417133c8410f748c1a5cad5875bb
     mistralai-gcp-sdk:
         source: mistral-google-cloud-source
         sourceNamespace: mistral-openapi-google-cloud
@@ -45,17 +44,20 @@ targets:
         codeSamplesRevisionDigest: sha256:117de06138ed8a24e0e5fb4b0652e9fa452e33040956c7d153830c66bda88769
 workflow:
     workflowVersion: 1.0.0
-    speakeasyVersion: v1.606.10
+    speakeasyVersion: v1.690.1
     sources:
         mistral-azure-source:
             inputs:
                 - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-azure:main
+            output: ./packages/mistralai-azure/.speakeasy/azure.out.openapi.yaml
         mistral-google-cloud-source:
             inputs:
                 - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-google-cloud:main
+            output: ./packages/mistralai-gcp/.speakeasy/gcp.out.openapi.yaml
         mistral-openapi:
             inputs:
                 - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi:main
+            output: .speakeasy/main.out.openapi.yaml
     targets:
         mistralai-azure-sdk:
             target: typescript
