@@ -1,5 +1,7 @@
 # Prediction
 
+Enable users to specify an expected completion, optimizing response times by leveraging known or predictable content.
+
 ## Example Usage
 
 ```typescript
@@ -12,5 +14,5 @@ let value: Prediction = {};
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `type`             | *string*           | :heavy_minus_sign: | N/A                |
+| `type`             | *"content"*        | :heavy_minus_sign: | N/A                |
 | `content`          | *string*           | :heavy_minus_sign: | N/A                |

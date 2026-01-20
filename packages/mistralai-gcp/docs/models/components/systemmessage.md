@@ -6,12 +6,7 @@
 import { SystemMessage } from "@mistralai/mistralai-gcp/models/components";
 
 let value: SystemMessage = {
-  content: [
-    {
-      text: "<value>",
-      type: "text",
-    },
-  ],
+  content: "<value>",
 };
 ```
 
