@@ -46,6 +46,7 @@ typescript:
   moduleFormat: commonjs
   outputModelSuffix: output
   packageName: '@mistralai/mistralai-gcp'
+  preApplyUnionDiscriminators: false
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true

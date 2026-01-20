@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { ClosedEnum } from "../../types/enums.js";
 import {
   ReferenceChunk,
   ReferenceChunk$Outbound,
@@ -14,36 +15,46 @@ import {
   TextChunk$outboundSchema,
 } from "./textchunk.js";
 
-export type Thinking = TextChunk | ReferenceChunk;
+export type Thinking = ReferenceChunk | TextChunk;
+
+export const ThinkChunkType = {
+  Thinking: "thinking",
+} as const;
+export type ThinkChunkType = ClosedEnum<typeof ThinkChunkType>;
 
 export type ThinkChunk = {
-  thinking: Array<TextChunk | ReferenceChunk>;
+  thinking: Array<ReferenceChunk | TextChunk>;
   /**
    * Whether the thinking chunk is closed or not. Currently only used for prefixing.
    */
   closed?: boolean | undefined;
-  type: "thinking";
+  type?: ThinkChunkType | undefined;
 };
 
 /** @internal */
-export type Thinking$Outbound = TextChunk$Outbound | ReferenceChunk$Outbound;
+export type Thinking$Outbound = ReferenceChunk$Outbound | TextChunk$Outbound;
 
 /** @internal */
 export const Thinking$outboundSchema: z.ZodType<
   Thinking$Outbound,
   z.ZodTypeDef,
   Thinking
-> = z.union([TextChunk$outboundSchema, ReferenceChunk$outboundSchema]);
+> = z.union([ReferenceChunk$outboundSchema, TextChunk$outboundSchema]);
 
 export function thinkingToJSON(thinking: Thinking): string {
   return JSON.stringify(Thinking$outboundSchema.parse(thinking));
 }
 
 /** @internal */
+export const ThinkChunkType$outboundSchema: z.ZodNativeEnum<
+  typeof ThinkChunkType
+> = z.nativeEnum(ThinkChunkType);
+
+/** @internal */
 export type ThinkChunk$Outbound = {
-  thinking: Array<TextChunk$Outbound | ReferenceChunk$Outbound>;
+  thinking: Array<ReferenceChunk$Outbound | TextChunk$Outbound>;
   closed?: boolean | undefined;
-  type: "thinking";
+  type: string;
 };
 
 /** @internal */
@@ -53,10 +64,10 @@ export const ThinkChunk$outboundSchema: z.ZodType<
   ThinkChunk
 > = z.object({
   thinking: z.array(
-    z.union([TextChunk$outboundSchema, ReferenceChunk$outboundSchema]),
+    z.union([ReferenceChunk$outboundSchema, TextChunk$outboundSchema]),
   ),
   closed: z.boolean().optional(),
-  type: z.literal("thinking"),
+  type: ThinkChunkType$outboundSchema.default("thinking"),
 });
 
 export function thinkChunkToJSON(thinkChunk: ThinkChunk): string {

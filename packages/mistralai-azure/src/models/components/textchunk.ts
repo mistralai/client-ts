@@ -4,13 +4,27 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const Type = {
+  Text: "text",
+} as const;
+export type Type = ClosedEnum<typeof Type>;
+
 export type TextChunk = {
   text: string;
-  type: "text";
+  type?: Type | undefined;
 };
+
+/** @internal */
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
+/** @internal */
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
 
 /** @internal */
 export const TextChunk$inboundSchema: z.ZodType<
@@ -19,12 +33,12 @@ export const TextChunk$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   text: z.string(),
-  type: z.literal("text"),
+  type: Type$inboundSchema.default("text"),
 });
 /** @internal */
 export type TextChunk$Outbound = {
   text: string;
-  type: "text";
+  type: string;
 };
 
 /** @internal */
@@ -34,7 +48,7 @@ export const TextChunk$outboundSchema: z.ZodType<
   TextChunk
 > = z.object({
   text: z.string(),
-  type: z.literal("text"),
+  type: Type$outboundSchema.default("text"),
 });
 
 export function textChunkToJSON(textChunk: TextChunk): string {

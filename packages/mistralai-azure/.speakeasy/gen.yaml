@@ -73,7 +73,7 @@ typescript:
   multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: '@mistralai/mistralai-azure'
-  preApplyUnionDiscriminators: true
+  preApplyUnionDiscriminators: false
   preserveModelFieldNames: false
   responseFormat: flat
   sseFlatResponse: false

@@ -14,19 +14,24 @@ import {
   ThinkChunk$outboundSchema,
 } from "./thinkchunk.js";
 
-export type SystemMessageContentChunks = TextChunk | ThinkChunk;
+export type SystemMessageContentChunks =
+  | (TextChunk & { type: "text" })
+  | (ThinkChunk & { type: "thinking" });
 
 /** @internal */
 export type SystemMessageContentChunks$Outbound =
-  | TextChunk$Outbound
-  | ThinkChunk$Outbound;
+  | (TextChunk$Outbound & { type: "text" })
+  | (ThinkChunk$Outbound & { type: "thinking" });
 
 /** @internal */
 export const SystemMessageContentChunks$outboundSchema: z.ZodType<
   SystemMessageContentChunks$Outbound,
   z.ZodTypeDef,
   SystemMessageContentChunks
-> = z.union([TextChunk$outboundSchema, ThinkChunk$outboundSchema]);
+> = z.union([
+  TextChunk$outboundSchema.and(z.object({ type: z.literal("text") })),
+  ThinkChunk$outboundSchema.and(z.object({ type: z.literal("thinking") })),
+]);
 
 export function systemMessageContentChunksToJSON(
   systemMessageContentChunks: SystemMessageContentChunks,

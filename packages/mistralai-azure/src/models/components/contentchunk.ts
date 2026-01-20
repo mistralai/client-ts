@@ -27,7 +27,7 @@ import {
 
 export type ContentChunk =
   | (ImageURLChunk & { type: "image_url" })
-  | TextChunk
+  | (TextChunk & { type: "text" })
   | (ReferenceChunk & { type: "reference" });
 
 /** @internal */
@@ -37,13 +37,13 @@ export const ContentChunk$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   ImageURLChunk$inboundSchema.and(z.object({ type: z.literal("image_url") })),
-  TextChunk$inboundSchema,
+  TextChunk$inboundSchema.and(z.object({ type: z.literal("text") })),
   ReferenceChunk$inboundSchema.and(z.object({ type: z.literal("reference") })),
 ]);
 /** @internal */
 export type ContentChunk$Outbound =
   | (ImageURLChunk$Outbound & { type: "image_url" })
-  | TextChunk$Outbound
+  | (TextChunk$Outbound & { type: "text" })
   | (ReferenceChunk$Outbound & { type: "reference" });
 
 /** @internal */
@@ -53,7 +53,7 @@ export const ContentChunk$outboundSchema: z.ZodType<
   ContentChunk
 > = z.union([
   ImageURLChunk$outboundSchema.and(z.object({ type: z.literal("image_url") })),
-  TextChunk$outboundSchema,
+  TextChunk$outboundSchema.and(z.object({ type: z.literal("text") })),
   ReferenceChunk$outboundSchema.and(z.object({ type: z.literal("reference") })),
 ]);
 

@@ -56,9 +56,9 @@ export type Stop = string | Array<string>;
 
 export type Messages =
   | (AssistantMessage & { role: "assistant" })
-  | SystemMessage
-  | ToolMessage
-  | UserMessage;
+  | (SystemMessage & { role: "system" })
+  | (ToolMessage & { role: "tool" })
+  | (UserMessage & { role: "user" });
 
 /**
  * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
@@ -97,9 +97,9 @@ export type ChatCompletionStreamRequest = {
    */
   messages: Array<
     | (AssistantMessage & { role: "assistant" })
-    | SystemMessage
-    | ToolMessage
-    | UserMessage
+    | (SystemMessage & { role: "system" })
+    | (ToolMessage & { role: "tool" })
+    | (UserMessage & { role: "user" })
   >;
   /**
    * Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.
@@ -157,9 +157,9 @@ export function stopToJSON(stop: Stop): string {
 /** @internal */
 export type Messages$Outbound =
   | (AssistantMessage$Outbound & { role: "assistant" })
-  | SystemMessage$Outbound
-  | ToolMessage$Outbound
-  | UserMessage$Outbound;
+  | (SystemMessage$Outbound & { role: "system" })
+  | (ToolMessage$Outbound & { role: "tool" })
+  | (UserMessage$Outbound & { role: "user" });
 
 /** @internal */
 export const Messages$outboundSchema: z.ZodType<
@@ -170,9 +170,9 @@ export const Messages$outboundSchema: z.ZodType<
   AssistantMessage$outboundSchema.and(
     z.object({ role: z.literal("assistant") }),
   ),
-  SystemMessage$outboundSchema,
-  ToolMessage$outboundSchema,
-  UserMessage$outboundSchema,
+  SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
+  ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
+  UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
 ]);
 
 export function messagesToJSON(messages: Messages): string {
@@ -213,9 +213,9 @@ export type ChatCompletionStreamRequest$Outbound = {
   metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | SystemMessage$Outbound
-    | ToolMessage$Outbound
-    | UserMessage$Outbound
+    | (SystemMessage$Outbound & { role: "system" })
+    | (ToolMessage$Outbound & { role: "tool" })
+    | (UserMessage$Outbound & { role: "user" })
   >;
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
@@ -248,9 +248,9 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }),
       ),
-      SystemMessage$outboundSchema,
-      ToolMessage$outboundSchema,
-      UserMessage$outboundSchema,
+      SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
+      ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
+      UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
