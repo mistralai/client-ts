@@ -4,12 +4,15 @@ sources:
     mistral-azure-source:
         inputs:
             - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-azure:main
+        output: ./packages/mistralai-azure/.speakeasy/azure.out.openapi.yaml
     mistral-google-cloud-source:
         inputs:
             - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-google-cloud:main
+        output: ./packages/mistralai-gcp/.speakeasy/gcp.out.openapi.yaml
     mistral-openapi:
         inputs:
             - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi:main
+        output: .speakeasy/main.out.openapi.yaml
 targets:
     mistralai-azure-sdk:
         target: typescript

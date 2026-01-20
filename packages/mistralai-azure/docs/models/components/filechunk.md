@@ -6,7 +6,7 @@
 import { FileChunk } from "@mistralai/mistralai-azure/models/components";
 
 let value: FileChunk = {
-  fileId: "ecb1ebf2-d291-4dc9-861b-7bdfd05b2803",
+  fileId: "9a7a83aa-6211-475c-88de-7116b47d91cd",
 };
 ```
 
@@ -14,5 +14,5 @@ let value: FileChunk = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `type`             | *string*           | :heavy_minus_sign: | N/A                |
+| `type`             | *"file"*           | :heavy_minus_sign: | N/A                |
 | `fileId`           | *string*           | :heavy_check_mark: | N/A                |
