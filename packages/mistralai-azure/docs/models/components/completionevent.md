@@ -8,14 +8,8 @@ import { CompletionEvent } from "@mistralai/mistralai-azure/models/components";
 let value: CompletionEvent = {
   data: {
     id: "<id>",
-    model: "Golf",
-    choices: [
-      {
-        index: 715190,
-        delta: {},
-        finishReason: "error",
-      },
-    ],
+    model: "Model S",
+    choices: [],
   },
 };
 ```

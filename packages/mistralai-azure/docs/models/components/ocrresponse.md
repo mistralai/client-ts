@@ -6,29 +6,10 @@
 import { OCRResponse } from "@mistralai/mistralai-azure/models/components";
 
 let value: OCRResponse = {
-  pages: [
-    {
-      index: 468651,
-      markdown: "<value>",
-      images: [
-        {
-          id: "<id>",
-          topLeftX: 976762,
-          topLeftY: 604846,
-          bottomRightX: 739264,
-          bottomRightY: 39187,
-        },
-      ],
-      dimensions: {
-        dpi: 282807,
-        height: 120196,
-        width: 296140,
-      },
-    },
-  ],
-  model: "Alpine",
+  pages: [],
+  model: "Mustang",
   usageInfo: {
-    pagesProcessed: 317983,
+    pagesProcessed: 819030,
   },
 };
 ```

@@ -5,7 +5,7 @@
 ```typescript
 import { FinishReason } from "@mistralai/mistralai-azure/models/components";
 
-let value: FinishReason = "length";
+let value: FinishReason = "error";
 ```
 
 ## Values

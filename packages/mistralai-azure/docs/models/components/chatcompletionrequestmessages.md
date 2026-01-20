@@ -21,14 +21,7 @@ const value: components.SystemMessage = {
 
 ```typescript
 const value: components.ToolMessage = {
-  content: [
-    {
-      imageUrl: {
-        url: "https://sugary-brace.org/",
-      },
-      type: "image_url",
-    },
-  ],
+  content: [],
 };
 ```
 
