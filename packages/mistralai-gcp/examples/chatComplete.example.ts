@@ -18,7 +18,7 @@ const mistralGoogleCloud = new MistralGoogleCloud({
 });
 
 async function main() {
-  const result = await mistralGoogleCloud.complete({
+  const result = await mistralGoogleCloud.chat.complete({
     model: "mistral-large-latest",
     messages: [
       {

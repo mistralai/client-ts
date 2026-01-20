@@ -46,6 +46,7 @@ typescript:
   moduleFormat: commonjs
   outputModelSuffix: output
   packageName: '@mistralai/mistralai-azure'
+  preApplyUnionDiscriminators: false
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true

@@ -1,4 +1,4 @@
-speakeasyVersion: 1.606.10
+speakeasyVersion: 1.690.1
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
@@ -13,7 +13,6 @@ sources:
         sourceBlobDigest: sha256:7a525230930debff23fec4e92e3ad2a57889ea46de86cc96d519615709ae8a16
         tags:
             - latest
-            - speakeasy-sdk-regen-1768916529
     mistral-openapi:
         sourceNamespace: mistral-openapi
         sourceRevisionDigest: sha256:ebe60088ce4a3780c57a08de7bc73f973f529822a05db12c5d9c6084e9a934e0
@@ -35,7 +34,7 @@ targets:
         sourceRevisionDigest: sha256:e3dd3079347edf744151936aaee4ec0ce3eeeb8f46b5c7f31f8e224221e879d4
         sourceBlobDigest: sha256:7a525230930debff23fec4e92e3ad2a57889ea46de86cc96d519615709ae8a16
         codeSamplesNamespace: mistral-openapi-google-cloud-code-samples
-        codeSamplesRevisionDigest: sha256:b0037be955a22666d7ae56e05cb8a0881d97beeed4ebcefad21316c361a5dc2b
+        codeSamplesRevisionDigest: sha256:8fd35c20604997796d5abfadbc8003baedc9e3f4e0da25039491bbad21ad2c4f
     mistralai-sdk:
         source: mistral-openapi
         sourceNamespace: mistral-openapi
@@ -45,7 +44,7 @@ targets:
         codeSamplesRevisionDigest: sha256:117de06138ed8a24e0e5fb4b0652e9fa452e33040956c7d153830c66bda88769
 workflow:
     workflowVersion: 1.0.0
-    speakeasyVersion: v1.606.10
+    speakeasyVersion: v1.690.1
     sources:
         mistral-azure-source:
             inputs:
