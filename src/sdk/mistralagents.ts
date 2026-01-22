@@ -5,7 +5,9 @@
 import { betaAgentsCreate } from "../funcs/betaAgentsCreate.js";
 import { betaAgentsDelete } from "../funcs/betaAgentsDelete.js";
 import { betaAgentsGet } from "../funcs/betaAgentsGet.js";
+import { betaAgentsGetVersion } from "../funcs/betaAgentsGetVersion.js";
 import { betaAgentsList } from "../funcs/betaAgentsList.js";
+import { betaAgentsListVersions } from "../funcs/betaAgentsListVersions.js";
 import { betaAgentsUpdate } from "../funcs/betaAgentsUpdate.js";
 import { betaAgentsUpdateVersion } from "../funcs/betaAgentsUpdateVersion.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -107,6 +109,40 @@ export class MistralAgents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Agent> {
     return unwrapAsync(betaAgentsUpdateVersion(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List all versions of an agent.
+   *
+   * @remarks
+   * Retrieve all versions for a specific agent with full agent context. Supports pagination.
+   */
+  async listVersions(
+    request: operations.AgentsApiV1AgentsListVersionsRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.Agent>> {
+    return unwrapAsync(betaAgentsListVersions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a specific version of an agent.
+   *
+   * @remarks
+   * Get a specific agent version by version number.
+   */
+  async getVersion(
+    request: operations.AgentsApiV1AgentsGetVersionRequest,
+    options?: RequestOptions,
+  ): Promise<components.Agent> {
+    return unwrapAsync(betaAgentsGetVersion(
       this,
       request,
       options,

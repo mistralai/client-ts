@@ -8,11 +8,8 @@ import { ConversationEvents } from "@mistralai/mistralai/models/components";
 let value: ConversationEvents = {
   event: "function.call.delta",
   data: {
-    type: "tool.execution.started",
-    outputIndex: 0,
-    id: "<id>",
-    name: "<value>",
-    arguments: "<value>",
+    type: "conversation.response.started",
+    conversationId: "<id>",
   },
 };
 ```
