@@ -4,7 +4,9 @@
 
 export * from "./agentsapiv1agentsdelete.js";
 export * from "./agentsapiv1agentsget.js";
+export * from "./agentsapiv1agentsgetversion.js";
 export * from "./agentsapiv1agentslist.js";
+export * from "./agentsapiv1agentslistversions.js";
 export * from "./agentsapiv1agentsupdate.js";
 export * from "./agentsapiv1agentsupdateversion.js";
 export * from "./agentsapiv1conversationsappend.js";

@@ -6,12 +6,7 @@
 import { InstructRequest } from "@mistralai/mistralai/models/components";
 
 let value: InstructRequest = {
-  messages: [
-    {
-      content: null,
-      role: "tool",
-    },
-  ],
+  messages: [],
 };
 ```
 

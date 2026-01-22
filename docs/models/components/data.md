@@ -3,6 +3,15 @@
 
 ## Supported Types
 
+### `components.BaseModelCard`
+
+```typescript
+const value: components.BaseModelCard = {
+  id: "<id>",
+  capabilities: {},
+};
+```
+
 ### `components.FTModelCard`
 
 ```typescript
@@ -11,15 +20,6 @@ const value: components.FTModelCard = {
   capabilities: {},
   job: "Global Interactions Strategist",
   root: "<value>",
-};
-```
-
-### `components.BaseModelCard`
-
-```typescript
-const value: components.BaseModelCard = {
-  id: "<id>",
-  capabilities: {},
 };
 ```
 

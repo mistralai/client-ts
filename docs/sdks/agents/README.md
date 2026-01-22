@@ -1,5 +1,4 @@
 # Agents
-(*agents*)
 
 ## Overview
 
@@ -125,7 +124,6 @@ async function run() {
   });
 
   for await (const event of result) {
-    // Handle the event
     console.log(event);
   }
 }
@@ -163,7 +161,6 @@ async function run() {
   if (res.ok) {
     const { value: result } = res;
     for await (const event of result) {
-    // Handle the event
     console.log(event);
   }
   } else {

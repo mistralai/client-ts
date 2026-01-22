@@ -10,8 +10,8 @@ let value: ChatClassificationRequest = {
   inputs: {
     messages: [
       {
-        content: "<value>",
-        role: "tool",
+        content: [],
+        role: "system",
       },
     ],
   },
