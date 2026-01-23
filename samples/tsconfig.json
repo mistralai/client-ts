@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "openapi": ["../src/index"],
+      "openapi/*": ["../src/*"]
+    }
+  },
+  "include": ["./**/*.ts"]
+}
