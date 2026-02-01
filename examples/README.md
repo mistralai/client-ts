@@ -42,3 +42,12 @@ If you just want to run one example file, you can do so with:
 ```properties
 npm run test --prefix examples -- --files src/stag_async_moderation.ts
 ```
+
+### Realtime transcription from a file
+
+This example streams a local audio file over WebSocket and uses ffmpeg to
+convert non-PCM input (unless you pass `--no-convert`).
+
+```properties
+npm run script -- ./src/realtime_transcription.ts path/to/audio.wav
+```
