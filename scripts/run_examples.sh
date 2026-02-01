@@ -1,6 +1,7 @@
 #!/bin/bash
 
 failed=0
+exclude_files=("examples/src/realtime_microphone.ts")
 
 for file in examples/src/*.ts; do
     # Check if the file is not in the exclude list
