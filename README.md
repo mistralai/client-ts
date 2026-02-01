@@ -240,6 +240,8 @@ We have dedicated SDKs for the following providers:
 * [updateVersion](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.
 * [listVersions](docs/sdks/mistralagents/README.md#listversions) - List all versions of an agent.
 * [getVersion](docs/sdks/mistralagents/README.md#getversion) - Retrieve a specific version of an agent.
+* [createVersionAlias](docs/sdks/mistralagents/README.md#createversionalias) - Create or update an agent version alias.
+* [listVersionAliases](docs/sdks/mistralagents/README.md#listversionaliases) - List all aliases for an agent.
 
 ### [Beta.Conversations](docs/sdks/conversations/README.md)
 
@@ -552,7 +554,7 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 50 of 72 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 52 of 74 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -723,10 +725,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`batchJobsGet`](docs/sdks/mistraljobs/README.md#get) - Get Batch Job
 - [`batchJobsList`](docs/sdks/mistraljobs/README.md#list) - Get Batch Jobs
 - [`betaAgentsCreate`](docs/sdks/mistralagents/README.md#create) - Create a agent that can be used within a conversation.
+- [`betaAgentsCreateVersionAlias`](docs/sdks/mistralagents/README.md#createversionalias) - Create or update an agent version alias.
 - [`betaAgentsDelete`](docs/sdks/mistralagents/README.md#delete) - Delete an agent entity.
 - [`betaAgentsGet`](docs/sdks/mistralagents/README.md#get) - Retrieve an agent entity.
 - [`betaAgentsGetVersion`](docs/sdks/mistralagents/README.md#getversion) - Retrieve a specific version of an agent.
 - [`betaAgentsList`](docs/sdks/mistralagents/README.md#list) - List agent entities.
+- [`betaAgentsListVersionAliases`](docs/sdks/mistralagents/README.md#listversionaliases) - List all aliases for an agent.
 - [`betaAgentsListVersions`](docs/sdks/mistralagents/README.md#listversions) - List all versions of an agent.
 - [`betaAgentsUpdate`](docs/sdks/mistralagents/README.md#update) - Update an agent entity.
 - [`betaAgentsUpdateVersion`](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.

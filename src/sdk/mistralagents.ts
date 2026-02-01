@@ -3,10 +3,12 @@
  */
 
 import { betaAgentsCreate } from "../funcs/betaAgentsCreate.js";
+import { betaAgentsCreateVersionAlias } from "../funcs/betaAgentsCreateVersionAlias.js";
 import { betaAgentsDelete } from "../funcs/betaAgentsDelete.js";
 import { betaAgentsGet } from "../funcs/betaAgentsGet.js";
 import { betaAgentsGetVersion } from "../funcs/betaAgentsGetVersion.js";
 import { betaAgentsList } from "../funcs/betaAgentsList.js";
+import { betaAgentsListVersionAliases } from "../funcs/betaAgentsListVersionAliases.js";
 import { betaAgentsListVersions } from "../funcs/betaAgentsListVersions.js";
 import { betaAgentsUpdate } from "../funcs/betaAgentsUpdate.js";
 import { betaAgentsUpdateVersion } from "../funcs/betaAgentsUpdateVersion.js";
@@ -54,7 +56,7 @@ export class MistralAgents extends ClientSDK {
    * Retrieve an agent entity.
    *
    * @remarks
-   * Given an agent retrieve an agent entity with its attributes.
+   * Given an agent, retrieve an agent entity with its attributes. The agent_version parameter can be an integer version number or a string alias.
    */
   async get(
     request: operations.AgentsApiV1AgentsGetRequest,
@@ -143,6 +145,40 @@ export class MistralAgents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Agent> {
     return unwrapAsync(betaAgentsGetVersion(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create or update an agent version alias.
+   *
+   * @remarks
+   * Create a new alias or update an existing alias to point to a specific version. Aliases are unique per agent and can be reassigned to different versions.
+   */
+  async createVersionAlias(
+    request: operations.AgentsApiV1AgentsCreateOrUpdateAliasRequest,
+    options?: RequestOptions,
+  ): Promise<components.AgentAliasResponse> {
+    return unwrapAsync(betaAgentsCreateVersionAlias(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List all aliases for an agent.
+   *
+   * @remarks
+   * Retrieve all version aliases for a specific agent.
+   */
+  async listVersionAliases(
+    request: operations.AgentsApiV1AgentsListVersionAliasesRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.AgentAliasResponse>> {
+    return unwrapAsync(betaAgentsListVersionAliases(
       this,
       request,
       options,

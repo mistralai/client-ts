@@ -18,6 +18,7 @@ export type ModelCapabilities = {
   classification: boolean | undefined;
   moderation: boolean | undefined;
   audio: boolean | undefined;
+  audioTranscription: boolean | undefined;
 };
 
 /** @internal */
@@ -35,12 +36,14 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
   classification: z.boolean().default(false),
   moderation: z.boolean().default(false),
   audio: z.boolean().default(false),
+  audio_transcription: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "completion_chat": "completionChat",
     "function_calling": "functionCalling",
     "completion_fim": "completionFim",
     "fine_tuning": "fineTuning",
+    "audio_transcription": "audioTranscription",
   });
 });
 

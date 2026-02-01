@@ -529,7 +529,7 @@ paths:
     /v1/agents/{agent_id}:
         get:
             summary: Retrieve an agent entity.
-            description: Given an agent retrieve an agent entity with its attributes.
+            description: Given an agent, retrieve an agent entity with its attributes. The agent_version parameter can be an integer version number or a string alias.
             operationId: agents_api_v1_agents_get
             parameters:
                 - name: agent_id
@@ -544,6 +544,7 @@ paths:
                   schema:
                     anyOf:
                         - type: integer
+                        - type: string
                         - type: 'null'
                     title: Agent Version
             responses:
@@ -703,7 +704,7 @@ paths:
             tags:
                 - beta.agents
             x-speakeasy-name-override: list_versions
-    /v1/agents/{agent_id}/version/{version}:
+    /v1/agents/{agent_id}/versions/{version}:
         get:
             summary: Retrieve a specific version of an agent.
             description: Get a specific agent version by version number.
@@ -719,7 +720,7 @@ paths:
                   in: path
                   required: true
                   schema:
-                    type: integer
+                    type: string
                     title: Version
             responses:
                 '200':
@@ -737,6 +738,79 @@ paths:
             tags:
                 - beta.agents
             x-speakeasy-name-override: get_version
+    /v1/agents/{agent_id}/aliases:
+        put:
+            summary: Create or update an agent version alias.
+            description: Create a new alias or update an existing alias to point to a specific version. Aliases are unique per agent and can be reassigned to different versions.
+            operationId: agents_api_v1_agents_create_or_update_alias
+            parameters:
+                - name: agent_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    title: Agent Id
+                - name: alias
+                  in: query
+                  required: true
+                  schema:
+                    type: string
+                    minLength: 1
+                    maxLength: 64
+                    pattern: ^[a-z]([a-z0-9_-]*[a-z0-9])?$
+                    title: Alias
+                - name: version
+                  in: query
+                  required: true
+                  schema:
+                    type: integer
+                    title: Version
+            responses:
+                '200':
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AgentAliasResponse'
+                '422':
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HTTPValidationError'
+            tags:
+                - beta.agents
+            x-speakeasy-name-override: create_version_alias
+        get:
+            summary: List all aliases for an agent.
+            description: Retrieve all version aliases for a specific agent.
+            operationId: agents_api_v1_agents_list_version_aliases
+            parameters:
+                - name: agent_id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    title: Agent Id
+            responses:
+                '200':
+                    description: Successful Response
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/AgentAliasResponse'
+                                title: Response V1 Agents List Version Aliases
+                '422':
+                    description: Validation Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HTTPValidationError'
+            tags:
+                - beta.agents
+            x-speakeasy-name-override: list_version_aliases
     /v1/conversations#stream:
         post:
             summary: Create a conversation and append entries to it.
@@ -948,6 +1022,16 @@ paths:
                     anyOf:
                         - $ref: '#/components/schemas/FilePurpose'
                         - type: 'null'
+                  required: false
+                - in: query
+                  name: mimetypes
+                  schema:
+                    anyOf:
+                        - items:
+                            type: string
+                          type: array
+                        - type: 'null'
+                    title: Mimetypes
                   required: false
             responses:
                 '200':
@@ -3073,6 +3157,10 @@ components:
                     type: boolean
                     title: Audio
                     default: false
+                audio_transcription:
+                    type: boolean
+                    title: Audio Transcription
+                    default: false
             type: object
             title: ModelCapabilities
         ModelList:
@@ -3215,6 +3303,30 @@ components:
                 - deployment_chat
                 - source
             title: Agent
+        AgentAliasResponse:
+            properties:
+                alias:
+                    type: string
+                    title: Alias
+                version:
+                    type: integer
+                    title: Version
+                created_at:
+                    type: string
+                    format: date-time
+                    title: Created At
+                updated_at:
+                    type: string
+                    format: date-time
+                    title: Updated At
+            additionalProperties: false
+            type: object
+            required:
+                - alias
+                - version
+                - created_at
+                - updated_at
+            title: AgentAliasResponse
         AgentConversation:
             properties:
                 name:
@@ -3256,6 +3368,7 @@ components:
                     title: Agent Id
                 agent_version:
                     anyOf:
+                        - type: string
                         - type: integer
                         - type: 'null'
                     title: Agent Version
@@ -4823,6 +4936,7 @@ components:
                     title: Agent Id
                 agent_version:
                     anyOf:
+                        - type: string
                         - type: integer
                         - type: 'null'
                     default:
@@ -4920,6 +5034,7 @@ components:
                     title: From Entry Id
                 agent_version:
                     anyOf:
+                        - type: string
                         - type: integer
                         - type: 'null'
                     title: Agent Version
@@ -7397,6 +7512,11 @@ components:
         MistralPromptMode:
             type: string
             title: MistralPromptMode
+            description: 'Available options to the prompt_mode argument on the chat completion endpoint.
+
+                Values represent high-level intent. Assignment to actual SPs is handled internally.
+
+                System prompt may include knowledge cutoff date, model capabilities, tone to use, safety guidelines, etc.'
             enum:
                 - reasoning
             x-speakeasy-unknown-values: allow
@@ -8170,6 +8290,107 @@ components:
                 - encoding
                 - sample_rate
             title: AudioFormat
+            type: object
+            x-speakeasy-include: true
+        RealtimeTranscriptionServerMessage:
+            discriminator:
+                mapping:
+                    error: '#/components/schemas/RealtimeTranscriptionError'
+                    session.created: '#/components/schemas/RealtimeTranscriptionSessionCreated'
+                    session.updated: '#/components/schemas/RealtimeTranscriptionSessionUpdated'
+                    transcription.done: '#/components/schemas/TranscriptionStreamDone'
+                    transcription.language: '#/components/schemas/TranscriptionStreamLanguage'
+                    transcription.text.delta: '#/components/schemas/TranscriptionStreamTextDelta'
+                propertyName: type
+            oneOf:
+                - $ref: '#/components/schemas/RealtimeTranscriptionSessionCreated'
+                - $ref: '#/components/schemas/RealtimeTranscriptionSessionUpdated'
+                - $ref: '#/components/schemas/RealtimeTranscriptionError'
+                - $ref: '#/components/schemas/TranscriptionStreamTextDelta'
+                - $ref: '#/components/schemas/TranscriptionStreamLanguage'
+                - $ref: '#/components/schemas/TranscriptionStreamDone'
+            title: RealtimeTranscriptionServerMessage
+        RealtimeTranscriptionError:
+            additionalProperties: false
+            properties:
+                type:
+                    const: error
+                    default: error
+                    title: Type
+                    type: string
+                error:
+                    $ref: '#/components/schemas/RealtimeTranscriptionErrorDetail'
+            required:
+                - error
+            title: RealtimeTranscriptionError
+            type: object
+            x-speakeasy-include: true
+        RealtimeTranscriptionErrorDetail:
+            additionalProperties: false
+            properties:
+                message:
+                    anyOf:
+                        - type: string
+                        - additionalProperties: true
+                          type: object
+                    description: Human-readable error message.
+                    title: Message
+                code:
+                    description: Internal error code for debugging.
+                    title: Code
+                    type: integer
+            required:
+                - message
+                - code
+            title: RealtimeTranscriptionErrorDetail
+            type: object
+            x-speakeasy-include: true
+        RealtimeTranscriptionSession:
+            additionalProperties: false
+            properties:
+                request_id:
+                    title: Request Id
+                    type: string
+                model:
+                    title: Model
+                    type: string
+                audio_format:
+                    $ref: '#/components/schemas/AudioFormat'
+            required:
+                - request_id
+                - model
+                - audio_format
+            title: RealtimeTranscriptionSession
+            type: object
+            x-speakeasy-include: true
+        RealtimeTranscriptionSessionCreated:
+            additionalProperties: false
+            properties:
+                type:
+                    const: session.created
+                    default: session.created
+                    title: Type
+                    type: string
+                session:
+                    $ref: '#/components/schemas/RealtimeTranscriptionSession'
+            required:
+                - session
+            title: RealtimeTranscriptionSessionCreated
+            type: object
+            x-speakeasy-include: true
+        RealtimeTranscriptionSessionUpdated:
+            additionalProperties: false
+            properties:
+                type:
+                    const: session.updated
+                    default: session.updated
+                    title: Type
+                    type: string
+                session:
+                    $ref: '#/components/schemas/RealtimeTranscriptionSession'
+            required:
+                - session
+            title: RealtimeTranscriptionSessionUpdated
             type: object
             x-speakeasy-include: true
         AgentsCompletionRequest:

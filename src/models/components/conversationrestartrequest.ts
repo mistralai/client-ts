@@ -25,6 +25,11 @@ export type ConversationRestartRequestHandoffExecution = ClosedEnum<
 >;
 
 /**
+ * Specific version of the agent to use when restarting. If not provided, uses the current version.
+ */
+export type ConversationRestartRequestAgentVersion = string | number;
+
+/**
  * Request to restart a new conversation from a given entry in the conversation.
  */
 export type ConversationRestartRequest = {
@@ -47,13 +52,34 @@ export type ConversationRestartRequest = {
   /**
    * Specific version of the agent to use when restarting. If not provided, uses the current version.
    */
-  agentVersion?: number | null | undefined;
+  agentVersion?: string | number | null | undefined;
 };
 
 /** @internal */
 export const ConversationRestartRequestHandoffExecution$outboundSchema:
   z.ZodNativeEnum<typeof ConversationRestartRequestHandoffExecution> = z
     .nativeEnum(ConversationRestartRequestHandoffExecution);
+
+/** @internal */
+export type ConversationRestartRequestAgentVersion$Outbound = string | number;
+
+/** @internal */
+export const ConversationRestartRequestAgentVersion$outboundSchema: z.ZodType<
+  ConversationRestartRequestAgentVersion$Outbound,
+  z.ZodTypeDef,
+  ConversationRestartRequestAgentVersion
+> = z.union([z.string(), z.number().int()]);
+
+export function conversationRestartRequestAgentVersionToJSON(
+  conversationRestartRequestAgentVersion:
+    ConversationRestartRequestAgentVersion,
+): string {
+  return JSON.stringify(
+    ConversationRestartRequestAgentVersion$outboundSchema.parse(
+      conversationRestartRequestAgentVersion,
+    ),
+  );
+}
 
 /** @internal */
 export type ConversationRestartRequest$Outbound = {
@@ -64,7 +90,7 @@ export type ConversationRestartRequest$Outbound = {
   completion_args?: CompletionArgs$Outbound | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   from_entry_id: string;
-  agent_version?: number | null | undefined;
+  agent_version?: string | number | null | undefined;
 };
 
 /** @internal */
@@ -81,7 +107,7 @@ export const ConversationRestartRequest$outboundSchema: z.ZodType<
   completionArgs: CompletionArgs$outboundSchema.optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
   fromEntryId: z.string(),
-  agentVersion: z.nullable(z.number().int()).optional(),
+  agentVersion: z.nullable(z.union([z.string(), z.number().int()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",

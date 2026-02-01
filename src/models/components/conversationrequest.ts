@@ -60,6 +60,8 @@ export type Tools =
   | (WebSearchTool & { type: "web_search" })
   | (WebSearchPremiumTool & { type: "web_search_premium" });
 
+export type AgentVersion = string | number;
+
 export type ConversationRequest = {
   inputs: ConversationInputs;
   stream?: boolean | undefined;
@@ -84,7 +86,7 @@ export type ConversationRequest = {
   description?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   agentId?: string | null | undefined;
-  agentVersion?: number | null | undefined;
+  agentVersion?: string | number | null | undefined;
   model?: string | null | undefined;
 };
 
@@ -129,6 +131,20 @@ export function toolsToJSON(tools: Tools): string {
 }
 
 /** @internal */
+export type AgentVersion$Outbound = string | number;
+
+/** @internal */
+export const AgentVersion$outboundSchema: z.ZodType<
+  AgentVersion$Outbound,
+  z.ZodTypeDef,
+  AgentVersion
+> = z.union([z.string(), z.number().int()]);
+
+export function agentVersionToJSON(agentVersion: AgentVersion): string {
+  return JSON.stringify(AgentVersion$outboundSchema.parse(agentVersion));
+}
+
+/** @internal */
 export type ConversationRequest$Outbound = {
   inputs: ConversationInputs$Outbound;
   stream: boolean;
@@ -150,7 +166,7 @@ export type ConversationRequest$Outbound = {
   description?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   agent_id?: string | null | undefined;
-  agent_version?: number | null | undefined;
+  agent_version?: string | number | null | undefined;
   model?: string | null | undefined;
 };
 
@@ -192,7 +208,7 @@ export const ConversationRequest$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
   agentId: z.nullable(z.string()).optional(),
-  agentVersion: z.nullable(z.number().int()).optional(),
+  agentVersion: z.nullable(z.union([z.string(), z.number().int()])).optional(),
   model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

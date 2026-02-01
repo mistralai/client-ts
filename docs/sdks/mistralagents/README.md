@@ -14,6 +14,8 @@
 * [updateVersion](#updateversion) - Update an agent version.
 * [listVersions](#listversions) - List all versions of an agent.
 * [getVersion](#getversion) - Retrieve a specific version of an agent.
+* [createVersionAlias](#createversionalias) - Create or update an agent version alias.
+* [listVersionAliases](#listversionaliases) - List all aliases for an agent.
 
 ## create
 
@@ -173,7 +175,7 @@ run();
 
 ## get
 
-Given an agent retrieve an agent entity with its attributes.
+Given an agent, retrieve an agent entity with its attributes. The agent_version parameter can be an integer version number or a string alias.
 
 ### Example Usage
 
@@ -563,7 +565,7 @@ Get a specific agent version by version number.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_get_version" method="get" path="/v1/agents/{agent_id}/version/{version}" -->
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_get_version" method="get" path="/v1/agents/{agent_id}/versions/{version}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -574,7 +576,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.agents.getVersion({
     agentId: "<id>",
-    version: 788393,
+    version: "788393",
   });
 
   console.log(result);
@@ -600,7 +602,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaAgentsGetVersion(mistral, {
     agentId: "<id>",
-    version: 788393,
+    version: "788393",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -625,6 +627,158 @@ run();
 ### Response
 
 **Promise\<[components.Agent](../../models/components/agent.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## createVersionAlias
+
+Create a new alias or update an existing alias to point to a specific version. Aliases are unique per agent and can be reassigned to different versions.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_create_or_update_alias" method="put" path="/v1/agents/{agent_id}/aliases" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.agents.createVersionAlias({
+    agentId: "<id>",
+    alias: "<value>",
+    version: 595141,
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaAgentsCreateVersionAlias } from "@mistralai/mistralai/funcs/betaAgentsCreateVersionAlias.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaAgentsCreateVersionAlias(mistral, {
+    agentId: "<id>",
+    alias: "<value>",
+    version: 595141,
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaAgentsCreateVersionAlias failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.AgentsApiV1AgentsCreateOrUpdateAliasRequest](../../models/operations/agentsapiv1agentscreateorupdatealiasrequest.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.AgentAliasResponse](../../models/components/agentaliasresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## listVersionAliases
+
+Retrieve all version aliases for a specific agent.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="agents_api_v1_agents_list_version_aliases" method="get" path="/v1/agents/{agent_id}/aliases" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.agents.listVersionAliases({
+    agentId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaAgentsListVersionAliases } from "@mistralai/mistralai/funcs/betaAgentsListVersionAliases.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaAgentsListVersionAliases(mistral, {
+    agentId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaAgentsListVersionAliases failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.AgentsApiV1AgentsListVersionAliasesRequest](../../models/operations/agentsapiv1agentslistversionaliasesrequest.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.AgentAliasResponse[]](../../models/.md)\>**
 
 ### Errors
 

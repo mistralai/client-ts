@@ -7,13 +7,13 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type AgentsApiV1AgentsGetVersionRequest = {
   agentId: string;
-  version: number;
+  version: string;
 };
 
 /** @internal */
 export type AgentsApiV1AgentsGetVersionRequest$Outbound = {
   agent_id: string;
-  version: number;
+  version: string;
 };
 
 /** @internal */
@@ -23,7 +23,7 @@ export const AgentsApiV1AgentsGetVersionRequest$outboundSchema: z.ZodType<
   AgentsApiV1AgentsGetVersionRequest
 > = z.object({
   agentId: z.string(),
-  version: z.number().int(),
+  version: z.string(),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",

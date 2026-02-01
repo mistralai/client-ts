@@ -16,6 +16,8 @@ export type AgentConversationObject = ClosedEnum<
   typeof AgentConversationObject
 >;
 
+export type AgentConversationAgentVersion = string | number;
+
 export type AgentConversation = {
   /**
    * Name given to the conversation.
@@ -34,13 +36,30 @@ export type AgentConversation = {
   createdAt: Date;
   updatedAt: Date;
   agentId: string;
-  agentVersion?: number | null | undefined;
+  agentVersion?: string | number | null | undefined;
 };
 
 /** @internal */
 export const AgentConversationObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentConversationObject
 > = z.nativeEnum(AgentConversationObject);
+
+/** @internal */
+export const AgentConversationAgentVersion$inboundSchema: z.ZodType<
+  AgentConversationAgentVersion,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number().int()]);
+
+export function agentConversationAgentVersionFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentConversationAgentVersion, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentConversationAgentVersion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentConversationAgentVersion' from JSON`,
+  );
+}
 
 /** @internal */
 export const AgentConversation$inboundSchema: z.ZodType<
@@ -56,7 +75,7 @@ export const AgentConversation$inboundSchema: z.ZodType<
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   agent_id: z.string(),
-  agent_version: z.nullable(z.number().int()).optional(),
+  agent_version: z.nullable(z.union([z.string(), z.number().int()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

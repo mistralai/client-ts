@@ -309,3 +309,13 @@ Based on:
 - [typescript v1.13.0] .
 ### Releases
 - [NPM v1.13.0] https://www.npmjs.com/package/@mistralai/mistralai/v/1.13.0 - .
+
+## 2026-02-01 21:12:00
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.690.1 (2.797.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v1.14.0] .
+### Releases
+- [NPM v1.14.0] https://www.npmjs.com/package/@mistralai/mistralai/v/1.14.0 - .

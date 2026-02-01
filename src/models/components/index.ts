@@ -3,6 +3,7 @@
  */
 
 export * from "./agent.js";
+export * from "./agentaliasresponse.js";
 export * from "./agentconversation.js";
 export * from "./agentcreationrequest.js";
 export * from "./agenthandoffdoneevent.js";
@@ -147,6 +148,11 @@ export * from "./outputcontentchunks.js";
 export * from "./paginationinfo.js";
 export * from "./prediction.js";
 export * from "./processingstatusout.js";
+export * from "./realtimetranscriptionerror.js";
+export * from "./realtimetranscriptionerrordetail.js";
+export * from "./realtimetranscriptionsession.js";
+export * from "./realtimetranscriptionsessioncreated.js";
+export * from "./realtimetranscriptionsessionupdated.js";
 export * from "./referencechunk.js";
 export * from "./requestsource.js";
 export * from "./responsedoneevent.js";

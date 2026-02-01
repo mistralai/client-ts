@@ -12,7 +12,7 @@ let value: AgentsApiV1AgentsGetRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `agentId`          | *string*           | :heavy_check_mark: | N/A                |
-| `agentVersion`     | *number*           | :heavy_minus_sign: | N/A                |
+| Field                     | Type                      | Required                  | Description               |
+| ------------------------- | ------------------------- | ------------------------- | ------------------------- |
+| `agentId`                 | *string*                  | :heavy_check_mark:        | N/A                       |
+| `agentVersion`            | *operations.AgentVersion* | :heavy_minus_sign:        | N/A                       |
