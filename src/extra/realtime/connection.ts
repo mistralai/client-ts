@@ -269,7 +269,7 @@ export class RealtimeConnection implements AsyncIterable<RealtimeEvent> {
   private async sendJson(payload: unknown): Promise<void> {
     const message = JSON.stringify(payload);
     await new Promise<void>((resolve, reject) => {
-      this.websocket.send(message, (err) => {
+      this.websocket.send(message, (err: Error | undefined) => {
         if (err) {
           reject(err);
           return;
