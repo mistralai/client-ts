@@ -11,5 +11,5 @@ let value: TimestampGranularity = "segment";
 ## Values
 
 ```typescript
-"segment"
+"segment" | "word"
 ```

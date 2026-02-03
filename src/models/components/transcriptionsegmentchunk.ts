@@ -21,6 +21,8 @@ export type TranscriptionSegmentChunk = {
   text: string;
   start: number;
   end: number;
+  score?: number | null | undefined;
+  speakerId?: string | null | undefined;
   type?: Type | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
 };
@@ -43,16 +45,24 @@ export const TranscriptionSegmentChunk$inboundSchema: z.ZodType<
     text: z.string(),
     start: z.number(),
     end: z.number(),
+    score: z.nullable(z.number()).optional(),
+    speaker_id: z.nullable(z.string()).optional(),
     type: Type$inboundSchema.default("transcription_segment"),
   }).catchall(z.any()),
   "additionalProperties",
   true,
-);
+).transform((v) => {
+  return remap$(v, {
+    "speaker_id": "speakerId",
+  });
+});
 /** @internal */
 export type TranscriptionSegmentChunk$Outbound = {
   text: string;
   start: number;
   end: number;
+  score?: number | null | undefined;
+  speaker_id?: string | null | undefined;
   type: string;
   [additionalProperties: string]: unknown;
 };
@@ -66,12 +76,15 @@ export const TranscriptionSegmentChunk$outboundSchema: z.ZodType<
   text: z.string(),
   start: z.number(),
   end: z.number(),
+  score: z.nullable(z.number()).optional(),
+  speakerId: z.nullable(z.string()).optional(),
   type: Type$outboundSchema.default("transcription_segment"),
   additionalProperties: z.record(z.any()).optional(),
 }).transform((v) => {
   return {
     ...v.additionalProperties,
     ...remap$(v, {
+      speakerId: "speaker_id",
       additionalProperties: null,
     }),
   };

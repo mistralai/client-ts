@@ -92,6 +92,12 @@ async function $do(
   const body = new FormData();
 
   appendForm(body, "model", payload.model);
+  if (payload.context_bias !== undefined) {
+    appendForm(body, "context_bias", payload.context_bias);
+  }
+  if (payload.diarize !== undefined) {
+    appendForm(body, "diarize", payload.diarize);
+  }
   if (payload.file !== undefined) {
     if (isBlobLike(payload.file)) {
       appendForm(body, "file", payload.file);

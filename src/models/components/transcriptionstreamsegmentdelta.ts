@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
@@ -22,6 +23,7 @@ export type TranscriptionStreamSegmentDelta = {
   text: string;
   start: number;
   end: number;
+  speakerId?: string | null | undefined;
   type: TranscriptionStreamSegmentDeltaType | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
 };
@@ -41,13 +43,18 @@ export const TranscriptionStreamSegmentDelta$inboundSchema: z.ZodType<
     text: z.string(),
     start: z.number(),
     end: z.number(),
+    speaker_id: z.nullable(z.string()).optional(),
     type: TranscriptionStreamSegmentDeltaType$inboundSchema.default(
       "transcription.segment",
     ),
   }).catchall(z.any()),
   "additionalProperties",
   true,
-);
+).transform((v) => {
+  return remap$(v, {
+    "speaker_id": "speakerId",
+  });
+});
 
 export function transcriptionStreamSegmentDeltaFromJSON(
   jsonString: string,
