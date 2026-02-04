@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve an agent entity.
  *
  * @remarks
- * Given an agent retrieve an agent entity with its attributes.
+ * Given an agent, retrieve an agent entity with its attributes. The agent_version parameter can be an integer version number or a string alias.
  */
 export function betaAgentsGet(
   client: MistralCore,

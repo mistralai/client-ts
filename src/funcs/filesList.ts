@@ -93,6 +93,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "include_total": payload?.include_total,
+    "mimetypes": payload?.mimetypes,
     "page": payload?.page,
     "page_size": payload?.page_size,
     "purpose": payload?.purpose,

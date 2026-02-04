@@ -28,6 +28,8 @@ export type AudioTranscriptionRequestStream = {
   language?: string | null | undefined;
   temperature?: number | null | undefined;
   stream?: true | undefined;
+  diarize?: boolean | undefined;
+  contextBias?: Array<string> | undefined;
   /**
    * Granularities of timestamps to include in the response.
    */
@@ -43,6 +45,8 @@ export type AudioTranscriptionRequestStream$Outbound = {
   language?: string | null | undefined;
   temperature?: number | null | undefined;
   stream: true;
+  diarize: boolean;
+  context_bias?: Array<string> | undefined;
   timestamp_granularities?: Array<string> | undefined;
 };
 
@@ -59,12 +63,15 @@ export const AudioTranscriptionRequestStream$outboundSchema: z.ZodType<
   language: z.nullable(z.string()).optional(),
   temperature: z.nullable(z.number()).optional(),
   stream: z.literal(true).default(true as const),
+  diarize: z.boolean().default(false),
+  contextBias: z.array(z.string()).optional(),
   timestampGranularities: z.array(TimestampGranularity$outboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     fileUrl: "file_url",
     fileId: "file_id",
+    contextBias: "context_bias",
     timestampGranularities: "timestamp_granularities",
   });
 });

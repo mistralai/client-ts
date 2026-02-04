@@ -5,15 +5,31 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+export type AgentVersion = number | string;
+
 export type AgentsApiV1AgentsGetRequest = {
   agentId: string;
-  agentVersion?: number | null | undefined;
+  agentVersion?: number | string | null | undefined;
 };
+
+/** @internal */
+export type AgentVersion$Outbound = number | string;
+
+/** @internal */
+export const AgentVersion$outboundSchema: z.ZodType<
+  AgentVersion$Outbound,
+  z.ZodTypeDef,
+  AgentVersion
+> = z.union([z.number().int(), z.string()]);
+
+export function agentVersionToJSON(agentVersion: AgentVersion): string {
+  return JSON.stringify(AgentVersion$outboundSchema.parse(agentVersion));
+}
 
 /** @internal */
 export type AgentsApiV1AgentsGetRequest$Outbound = {
   agent_id: string;
-  agent_version?: number | null | undefined;
+  agent_version?: number | string | null | undefined;
 };
 
 /** @internal */
@@ -23,7 +39,7 @@ export const AgentsApiV1AgentsGetRequest$outboundSchema: z.ZodType<
   AgentsApiV1AgentsGetRequest
 > = z.object({
   agentId: z.string(),
-  agentVersion: z.nullable(z.number().int()).optional(),
+  agentVersion: z.nullable(z.union([z.number().int(), z.string()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",

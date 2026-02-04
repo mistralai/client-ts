@@ -7,6 +7,7 @@ import { ClosedEnum } from "../../types/enums.js";
 
 export const TimestampGranularity = {
   Segment: "segment",
+  Word: "word",
 } as const;
 export type TimestampGranularity = ClosedEnum<typeof TimestampGranularity>;
 

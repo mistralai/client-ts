@@ -62,6 +62,8 @@ export type ConversationStreamRequestTools =
   | (WebSearchTool & { type: "web_search" })
   | (WebSearchPremiumTool & { type: "web_search_premium" });
 
+export type ConversationStreamRequestAgentVersion = string | number;
+
 export type ConversationStreamRequest = {
   inputs: ConversationInputs;
   stream?: boolean | undefined;
@@ -89,7 +91,7 @@ export type ConversationStreamRequest = {
   description?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   agentId?: string | null | undefined;
-  agentVersion?: number | null | undefined;
+  agentVersion?: string | number | null | undefined;
   model?: string | null | undefined;
 };
 
@@ -140,6 +142,26 @@ export function conversationStreamRequestToolsToJSON(
 }
 
 /** @internal */
+export type ConversationStreamRequestAgentVersion$Outbound = string | number;
+
+/** @internal */
+export const ConversationStreamRequestAgentVersion$outboundSchema: z.ZodType<
+  ConversationStreamRequestAgentVersion$Outbound,
+  z.ZodTypeDef,
+  ConversationStreamRequestAgentVersion
+> = z.union([z.string(), z.number().int()]);
+
+export function conversationStreamRequestAgentVersionToJSON(
+  conversationStreamRequestAgentVersion: ConversationStreamRequestAgentVersion,
+): string {
+  return JSON.stringify(
+    ConversationStreamRequestAgentVersion$outboundSchema.parse(
+      conversationStreamRequestAgentVersion,
+    ),
+  );
+}
+
+/** @internal */
 export type ConversationStreamRequest$Outbound = {
   inputs: ConversationInputs$Outbound;
   stream: boolean;
@@ -161,7 +183,7 @@ export type ConversationStreamRequest$Outbound = {
   description?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   agent_id?: string | null | undefined;
-  agent_version?: number | null | undefined;
+  agent_version?: string | number | null | undefined;
   model?: string | null | undefined;
 };
 
@@ -205,7 +227,7 @@ export const ConversationStreamRequest$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
   agentId: z.nullable(z.string()).optional(),
-  agentVersion: z.nullable(z.number().int()).optional(),
+  agentVersion: z.nullable(z.union([z.string(), z.number().int()])).optional(),
   model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

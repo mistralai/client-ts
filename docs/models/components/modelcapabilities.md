@@ -10,14 +10,15 @@ let value: ModelCapabilities = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `completionChat`   | *boolean*          | :heavy_minus_sign: | N/A                |
-| `functionCalling`  | *boolean*          | :heavy_minus_sign: | N/A                |
-| `completionFim`    | *boolean*          | :heavy_minus_sign: | N/A                |
-| `fineTuning`       | *boolean*          | :heavy_minus_sign: | N/A                |
-| `vision`           | *boolean*          | :heavy_minus_sign: | N/A                |
-| `ocr`              | *boolean*          | :heavy_minus_sign: | N/A                |
-| `classification`   | *boolean*          | :heavy_minus_sign: | N/A                |
-| `moderation`       | *boolean*          | :heavy_minus_sign: | N/A                |
-| `audio`            | *boolean*          | :heavy_minus_sign: | N/A                |
+| Field                | Type                 | Required             | Description          |
+| -------------------- | -------------------- | -------------------- | -------------------- |
+| `completionChat`     | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `functionCalling`    | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `completionFim`      | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `fineTuning`         | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `vision`             | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `ocr`                | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `classification`     | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `moderation`         | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `audio`              | *boolean*            | :heavy_minus_sign:   | N/A                  |
+| `audioTranscription` | *boolean*            | :heavy_minus_sign:   | N/A                  |

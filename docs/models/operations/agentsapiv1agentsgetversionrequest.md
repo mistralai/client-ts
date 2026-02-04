@@ -7,7 +7,7 @@ import { AgentsApiV1AgentsGetVersionRequest } from "@mistralai/mistralai/models/
 
 let value: AgentsApiV1AgentsGetVersionRequest = {
   agentId: "<id>",
-  version: 970368,
+  version: "<value>",
 };
 ```
 
@@ -16,4 +16,4 @@ let value: AgentsApiV1AgentsGetVersionRequest = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `agentId`          | *string*           | :heavy_check_mark: | N/A                |
-| `version`          | *number*           | :heavy_check_mark: | N/A                |
+| `version`          | *string*           | :heavy_check_mark: | N/A                |

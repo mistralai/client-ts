@@ -101,7 +101,7 @@ async function $do(
     }),
   };
 
-  const path = pathToFunc("/v1/agents/{agent_id}/version/{version}")(
+  const path = pathToFunc("/v1/agents/{agent_id}/versions/{version}")(
     pathParams,
   );
 

@@ -14,6 +14,7 @@ export type FilesApiRoutesListFilesRequest = {
   source?: Array<components.Source> | null | undefined;
   search?: string | null | undefined;
   purpose?: components.FilePurpose | null | undefined;
+  mimetypes?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -25,6 +26,7 @@ export type FilesApiRoutesListFilesRequest$Outbound = {
   source?: Array<string> | null | undefined;
   search?: string | null | undefined;
   purpose?: string | null | undefined;
+  mimetypes?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -41,6 +43,7 @@ export const FilesApiRoutesListFilesRequest$outboundSchema: z.ZodType<
   source: z.nullable(z.array(components.Source$outboundSchema)).optional(),
   search: z.nullable(z.string()).optional(),
   purpose: z.nullable(components.FilePurpose$outboundSchema).optional(),
+  mimetypes: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
