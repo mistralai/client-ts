@@ -34,8 +34,11 @@ typescript:
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
+      ws: ^8.18.0
       zod-to-json-schema: ^3.24.1
-    devDependencies: {}
+    devDependencies:
+      "@types/node": ^22.0.0
+      "@types/ws": ^8.5.13
     peerDependencies: {}
   additionalPackageJSON: {}
   additionalScripts: {}
