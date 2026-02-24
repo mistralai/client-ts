@@ -5,27 +5,14 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const ResponseStartedEventType = {
-  ConversationResponseStarted: "conversation.response.started",
-} as const;
-export type ResponseStartedEventType = ClosedEnum<
-  typeof ResponseStartedEventType
->;
-
 export type ResponseStartedEvent = {
-  type: ResponseStartedEventType | undefined;
+  type?: "conversation.response.started" | undefined;
   createdAt?: Date | undefined;
   conversationId: string;
 };
-
-/** @internal */
-export const ResponseStartedEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseStartedEventType
-> = z.nativeEnum(ResponseStartedEventType);
 
 /** @internal */
 export const ResponseStartedEvent$inboundSchema: z.ZodType<
@@ -33,7 +20,7 @@ export const ResponseStartedEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ResponseStartedEventType$inboundSchema.default(
+  type: z.literal("conversation.response.started").default(
     "conversation.response.started",
   ),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))

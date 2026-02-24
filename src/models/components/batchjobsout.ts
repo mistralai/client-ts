@@ -4,26 +4,15 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { BatchJobOut, BatchJobOut$inboundSchema } from "./batchjobout.js";
 
-export const BatchJobsOutObject = {
-  List: "list",
-} as const;
-export type BatchJobsOutObject = ClosedEnum<typeof BatchJobsOutObject>;
-
 export type BatchJobsOut = {
   data?: Array<BatchJobOut> | undefined;
-  object: BatchJobsOutObject | undefined;
+  object?: "list" | undefined;
   total: number;
 };
-
-/** @internal */
-export const BatchJobsOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof BatchJobsOutObject
-> = z.nativeEnum(BatchJobsOutObject);
 
 /** @internal */
 export const BatchJobsOut$inboundSchema: z.ZodType<
@@ -32,7 +21,7 @@ export const BatchJobsOut$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(BatchJobOut$inboundSchema).optional(),
-  object: BatchJobsOutObject$inboundSchema.default("list"),
+  object: z.literal("list").default("list"),
   total: z.number().int(),
 });
 

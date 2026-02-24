@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { BatchError, BatchError$inboundSchema } from "./batcherror.js";
@@ -14,14 +13,9 @@ import {
   BatchJobStatus$inboundSchema,
 } from "./batchjobstatus.js";
 
-export const BatchJobOutObject = {
-  Batch: "batch",
-} as const;
-export type BatchJobOutObject = ClosedEnum<typeof BatchJobOutObject>;
-
 export type BatchJobOut = {
   id: string;
-  object: BatchJobOutObject | undefined;
+  object?: "batch" | undefined;
   inputFiles: Array<string>;
   metadata?: { [k: string]: any } | null | undefined;
   endpoint: string;
@@ -42,18 +36,13 @@ export type BatchJobOut = {
 };
 
 /** @internal */
-export const BatchJobOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof BatchJobOutObject
-> = z.nativeEnum(BatchJobOutObject);
-
-/** @internal */
 export const BatchJobOut$inboundSchema: z.ZodType<
   BatchJobOut,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
-  object: BatchJobOutObject$inboundSchema.default("batch"),
+  object: z.literal("batch").default("batch"),
   input_files: z.array(z.string()),
   metadata: z.nullable(z.record(z.any())).optional(),
   endpoint: z.string(),

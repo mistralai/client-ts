@@ -11,7 +11,6 @@ let value: ChatClassificationRequest = {
     messages: [
       {
         content: [],
-        role: "system",
       },
     ],
   },

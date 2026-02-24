@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,21 +12,9 @@ import {
   FTModelCapabilitiesOut$inboundSchema,
 } from "./ftmodelcapabilitiesout.js";
 
-export const CompletionFTModelOutObject = {
-  Model: "model",
-} as const;
-export type CompletionFTModelOutObject = ClosedEnum<
-  typeof CompletionFTModelOutObject
->;
-
-export const ModelType = {
-  Completion: "completion",
-} as const;
-export type ModelType = ClosedEnum<typeof ModelType>;
-
 export type CompletionFTModelOut = {
   id: string;
-  object: CompletionFTModelOutObject | undefined;
+  object?: "model" | undefined;
   created: number;
   ownedBy: string;
   workspaceId: string;
@@ -40,17 +27,8 @@ export type CompletionFTModelOut = {
   maxContextLength: number | undefined;
   aliases?: Array<string> | undefined;
   job: string;
-  modelType: ModelType | undefined;
+  modelType?: "completion" | undefined;
 };
-
-/** @internal */
-export const CompletionFTModelOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof CompletionFTModelOutObject
-> = z.nativeEnum(CompletionFTModelOutObject);
-
-/** @internal */
-export const ModelType$inboundSchema: z.ZodNativeEnum<typeof ModelType> = z
-  .nativeEnum(ModelType);
 
 /** @internal */
 export const CompletionFTModelOut$inboundSchema: z.ZodType<
@@ -59,7 +37,7 @@ export const CompletionFTModelOut$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  object: CompletionFTModelOutObject$inboundSchema.default("model"),
+  object: z.literal("model").default("model"),
   created: z.number().int(),
   owned_by: z.string(),
   workspace_id: z.string(),
@@ -72,7 +50,7 @@ export const CompletionFTModelOut$inboundSchema: z.ZodType<
   max_context_length: z.number().int().default(32768),
   aliases: z.array(z.string()).optional(),
   job: z.string(),
-  model_type: ModelType$inboundSchema.default("completion"),
+  model_type: z.literal("completion").default("completion"),
 }).transform((v) => {
   return remap$(v, {
     "owned_by": "ownedBy",

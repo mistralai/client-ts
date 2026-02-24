@@ -5,6 +5,7 @@
 import { betaAgentsCreate } from "../funcs/betaAgentsCreate.js";
 import { betaAgentsCreateVersionAlias } from "../funcs/betaAgentsCreateVersionAlias.js";
 import { betaAgentsDelete } from "../funcs/betaAgentsDelete.js";
+import { betaAgentsDeleteVersionAlias } from "../funcs/betaAgentsDeleteVersionAlias.js";
 import { betaAgentsGet } from "../funcs/betaAgentsGet.js";
 import { betaAgentsGetVersion } from "../funcs/betaAgentsGetVersion.js";
 import { betaAgentsList } from "../funcs/betaAgentsList.js";
@@ -179,6 +180,23 @@ export class MistralAgents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<Array<components.AgentAliasResponse>> {
     return unwrapAsync(betaAgentsListVersionAliases(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an agent version alias.
+   *
+   * @remarks
+   * Delete an existing alias for an agent.
+   */
+  async deleteVersionAlias(
+    request: operations.AgentsApiV1AgentsDeleteAliasRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(betaAgentsDeleteVersionAlias(
       this,
       request,
       options,

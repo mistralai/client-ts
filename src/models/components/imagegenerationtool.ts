@@ -3,10 +3,17 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ToolConfiguration,
+  ToolConfiguration$inboundSchema,
+  ToolConfiguration$Outbound,
+  ToolConfiguration$outboundSchema,
+} from "./toolconfiguration.js";
 
 export const ImageGenerationToolType = {
   ImageGeneration: "image_generation",
@@ -16,6 +23,7 @@ export type ImageGenerationToolType = ClosedEnum<
 >;
 
 export type ImageGenerationTool = {
+  toolConfiguration?: ToolConfiguration | null | undefined;
   type?: ImageGenerationToolType | undefined;
 };
 
@@ -34,10 +42,16 @@ export const ImageGenerationTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
   type: ImageGenerationToolType$inboundSchema.default("image_generation"),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_configuration": "toolConfiguration",
+  });
 });
 /** @internal */
 export type ImageGenerationTool$Outbound = {
+  tool_configuration?: ToolConfiguration$Outbound | null | undefined;
   type: string;
 };
 
@@ -47,7 +61,12 @@ export const ImageGenerationTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ImageGenerationTool
 > = z.object({
+  toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),
   type: ImageGenerationToolType$outboundSchema.default("image_generation"),
+}).transform((v) => {
+  return remap$(v, {
+    toolConfiguration: "tool_configuration",
+  });
 });
 
 export function imageGenerationToolToJSON(

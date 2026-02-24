@@ -5,28 +5,13 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const AudioChunkType = {
-  InputAudio: "input_audio",
-} as const;
-export type AudioChunkType = ClosedEnum<typeof AudioChunkType>;
-
 export type AudioChunk = {
+  type?: "input_audio" | undefined;
   inputAudio: string;
-  type?: AudioChunkType | undefined;
 };
-
-/** @internal */
-export const AudioChunkType$inboundSchema: z.ZodNativeEnum<
-  typeof AudioChunkType
-> = z.nativeEnum(AudioChunkType);
-/** @internal */
-export const AudioChunkType$outboundSchema: z.ZodNativeEnum<
-  typeof AudioChunkType
-> = AudioChunkType$inboundSchema;
 
 /** @internal */
 export const AudioChunk$inboundSchema: z.ZodType<
@@ -34,8 +19,8 @@ export const AudioChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  type: z.literal("input_audio").default("input_audio"),
   input_audio: z.string(),
-  type: AudioChunkType$inboundSchema.default("input_audio"),
 }).transform((v) => {
   return remap$(v, {
     "input_audio": "inputAudio",
@@ -43,8 +28,8 @@ export const AudioChunk$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AudioChunk$Outbound = {
+  type: "input_audio";
   input_audio: string;
-  type: string;
 };
 
 /** @internal */
@@ -53,8 +38,8 @@ export const AudioChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AudioChunk
 > = z.object({
+  type: z.literal("input_audio").default("input_audio" as const),
   inputAudio: z.string(),
-  type: AudioChunkType$outboundSchema.default("input_audio"),
 }).transform((v) => {
   return remap$(v, {
     inputAudio: "input_audio",

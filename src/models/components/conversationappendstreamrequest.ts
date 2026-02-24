@@ -15,6 +15,11 @@ import {
   ConversationInputs$Outbound,
   ConversationInputs$outboundSchema,
 } from "./conversationinputs.js";
+import {
+  ToolCallConfirmation,
+  ToolCallConfirmation$Outbound,
+  ToolCallConfirmation$outboundSchema,
+} from "./toolcallconfirmation.js";
 
 export const ConversationAppendStreamRequestHandoffExecution = {
   Client: "client",
@@ -25,7 +30,7 @@ export type ConversationAppendStreamRequestHandoffExecution = ClosedEnum<
 >;
 
 export type ConversationAppendStreamRequest = {
-  inputs: ConversationInputs;
+  inputs?: ConversationInputs | undefined;
   stream?: boolean | undefined;
   /**
    * Whether to store the results into our servers or not.
@@ -38,6 +43,7 @@ export type ConversationAppendStreamRequest = {
    * White-listed arguments from the completion API
    */
   completionArgs?: CompletionArgs | undefined;
+  toolConfirmations?: Array<ToolCallConfirmation> | null | undefined;
 };
 
 /** @internal */
@@ -47,11 +53,12 @@ export const ConversationAppendStreamRequestHandoffExecution$outboundSchema:
 
 /** @internal */
 export type ConversationAppendStreamRequest$Outbound = {
-  inputs: ConversationInputs$Outbound;
+  inputs?: ConversationInputs$Outbound | undefined;
   stream: boolean;
   store: boolean;
   handoff_execution: string;
   completion_args?: CompletionArgs$Outbound | undefined;
+  tool_confirmations?: Array<ToolCallConfirmation$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -60,7 +67,7 @@ export const ConversationAppendStreamRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ConversationAppendStreamRequest
 > = z.object({
-  inputs: ConversationInputs$outboundSchema,
+  inputs: ConversationInputs$outboundSchema.optional(),
   stream: z.boolean().default(true),
   store: z.boolean().default(true),
   handoffExecution:
@@ -68,10 +75,13 @@ export const ConversationAppendStreamRequest$outboundSchema: z.ZodType<
       "server",
     ),
   completionArgs: CompletionArgs$outboundSchema.optional(),
+  toolConfirmations: z.nullable(z.array(ToolCallConfirmation$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",
     completionArgs: "completion_args",
+    toolConfirmations: "tool_confirmations",
   });
 });
 

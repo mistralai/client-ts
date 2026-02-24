@@ -20,13 +20,13 @@ export type DocumentOut = {
   createdAt: Date;
   lastProcessedAt?: Date | null | undefined;
   numberOfPages?: number | null | undefined;
-  processingStatus: string;
   uploadedById: string | null;
   uploadedByType: string;
   tokensProcessingMainContent?: number | null | undefined;
   tokensProcessingSummary?: number | null | undefined;
   url?: string | null | undefined;
   attributes?: { [k: string]: any } | null | undefined;
+  processingStatus: string;
   tokensProcessingTotal: number;
 };
 
@@ -49,13 +49,13 @@ export const DocumentOut$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   number_of_pages: z.nullable(z.number().int()).optional(),
-  processing_status: z.string(),
   uploaded_by_id: z.nullable(z.string()),
   uploaded_by_type: z.string(),
   tokens_processing_main_content: z.nullable(z.number().int()).optional(),
   tokens_processing_summary: z.nullable(z.number().int()).optional(),
   url: z.nullable(z.string()).optional(),
   attributes: z.nullable(z.record(z.any())).optional(),
+  processing_status: z.string(),
   tokens_processing_total: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
@@ -64,11 +64,11 @@ export const DocumentOut$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "last_processed_at": "lastProcessedAt",
     "number_of_pages": "numberOfPages",
-    "processing_status": "processingStatus",
     "uploaded_by_id": "uploadedById",
     "uploaded_by_type": "uploadedByType",
     "tokens_processing_main_content": "tokensProcessingMainContent",
     "tokens_processing_summary": "tokensProcessingSummary",
+    "processing_status": "processingStatus",
     "tokens_processing_total": "tokensProcessingTotal",
   });
 });

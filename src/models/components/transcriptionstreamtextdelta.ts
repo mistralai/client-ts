@@ -8,31 +8,14 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const TranscriptionStreamTextDeltaType = {
-  TranscriptionTextDelta: "transcription.text.delta",
-} as const;
-export type TranscriptionStreamTextDeltaType = ClosedEnum<
-  typeof TranscriptionStreamTextDeltaType
->;
-
 export type TranscriptionStreamTextDelta = {
+  type?: "transcription.text.delta" | undefined;
   text: string;
-  type?: TranscriptionStreamTextDeltaType | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const TranscriptionStreamTextDeltaType$inboundSchema: z.ZodNativeEnum<
-  typeof TranscriptionStreamTextDeltaType
-> = z.nativeEnum(TranscriptionStreamTextDeltaType);
-/** @internal */
-export const TranscriptionStreamTextDeltaType$outboundSchema: z.ZodNativeEnum<
-  typeof TranscriptionStreamTextDeltaType
-> = TranscriptionStreamTextDeltaType$inboundSchema;
 
 /** @internal */
 export const TranscriptionStreamTextDelta$inboundSchema: z.ZodType<
@@ -41,18 +24,18 @@ export const TranscriptionStreamTextDelta$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
-    text: z.string(),
-    type: TranscriptionStreamTextDeltaType$inboundSchema.default(
+    type: z.literal("transcription.text.delta").default(
       "transcription.text.delta",
     ),
+    text: z.string(),
   }).catchall(z.any()),
   "additionalProperties",
   true,
 );
 /** @internal */
 export type TranscriptionStreamTextDelta$Outbound = {
+  type: "transcription.text.delta";
   text: string;
-  type: string;
   [additionalProperties: string]: unknown;
 };
 
@@ -62,10 +45,10 @@ export const TranscriptionStreamTextDelta$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TranscriptionStreamTextDelta
 > = z.object({
-  text: z.string(),
-  type: TranscriptionStreamTextDeltaType$outboundSchema.default(
-    "transcription.text.delta",
+  type: z.literal("transcription.text.delta").default(
+    "transcription.text.delta" as const,
   ),
+  text: z.string(),
   additionalProperties: z.record(z.any()).optional(),
 }).transform((v) => {
   return {

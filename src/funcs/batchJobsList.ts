@@ -96,6 +96,7 @@ async function $do(
     "created_by_me": payload?.created_by_me,
     "metadata": payload?.metadata,
     "model": payload?.model,
+    "order_by": payload?.order_by,
     "page": payload?.page,
     "page_size": payload?.page_size,
     "status": payload?.status,

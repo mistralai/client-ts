@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,11 +38,6 @@ export type AgentTools =
   | (WebSearchTool & { type: "web_search" })
   | (WebSearchPremiumTool & { type: "web_search_premium" });
 
-export const AgentObject = {
-  Agent: "agent",
-} as const;
-export type AgentObject = ClosedEnum<typeof AgentObject>;
-
 export type Agent = {
   /**
    * Instruction prompt the model will follow during the conversation.
@@ -71,7 +65,7 @@ export type Agent = {
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
-  object: AgentObject | undefined;
+  object?: "agent" | undefined;
   id: string;
   version: number;
   versions: Array<number>;
@@ -79,6 +73,7 @@ export type Agent = {
   updatedAt: Date;
   deploymentChat: boolean;
   source: string;
+  versionMessage?: string | null | undefined;
 };
 
 /** @internal */
@@ -114,10 +109,6 @@ export function agentToolsFromJSON(
 }
 
 /** @internal */
-export const AgentObject$inboundSchema: z.ZodNativeEnum<typeof AgentObject> = z
-  .nativeEnum(AgentObject);
-
-/** @internal */
 export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
   .object({
     instructions: z.nullable(z.string()).optional(),
@@ -149,7 +140,7 @@ export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
     description: z.nullable(z.string()).optional(),
     handoffs: z.nullable(z.array(z.string())).optional(),
     metadata: z.nullable(z.record(z.any())).optional(),
-    object: AgentObject$inboundSchema.default("agent"),
+    object: z.literal("agent").default("agent"),
     id: z.string(),
     version: z.number().int(),
     versions: z.array(z.number().int()),
@@ -161,12 +152,14 @@ export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
     ),
     deployment_chat: z.boolean(),
     source: z.string(),
+    version_message: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "completion_args": "completionArgs",
       "created_at": "createdAt",
       "updated_at": "updatedAt",
       "deployment_chat": "deploymentChat",
+      "version_message": "versionMessage",
     });
   });
 

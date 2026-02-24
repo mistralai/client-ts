@@ -5,26 +5,15 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const ResponseErrorEventType = {
-  ConversationResponseError: "conversation.response.error",
-} as const;
-export type ResponseErrorEventType = ClosedEnum<typeof ResponseErrorEventType>;
-
 export type ResponseErrorEvent = {
-  type: ResponseErrorEventType | undefined;
+  type?: "conversation.response.error" | undefined;
   createdAt?: Date | undefined;
   message: string;
   code: number;
 };
-
-/** @internal */
-export const ResponseErrorEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseErrorEventType
-> = z.nativeEnum(ResponseErrorEventType);
 
 /** @internal */
 export const ResponseErrorEvent$inboundSchema: z.ZodType<
@@ -32,7 +21,7 @@ export const ResponseErrorEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ResponseErrorEventType$inboundSchema.default(
+  type: z.literal("conversation.response.error").default(
     "conversation.response.error",
   ),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))

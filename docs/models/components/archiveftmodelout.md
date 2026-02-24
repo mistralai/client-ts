@@ -12,8 +12,8 @@ let value: ArchiveFTModelOut = {
 
 ## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `id`                                                                                     | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `object`                                                                                 | [components.ArchiveFTModelOutObject](../../models/components/archiveftmodeloutobject.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `archived`                                                                               | *boolean*                                                                                | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `id`               | *string*           | :heavy_check_mark: | N/A                |
+| `object`           | *"model"*          | :heavy_minus_sign: | N/A                |
+| `archived`         | *boolean*          | :heavy_minus_sign: | N/A                |

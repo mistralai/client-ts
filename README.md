@@ -101,9 +101,9 @@ async function run() {
     model: "mistral-large-latest",
     messages: [
       {
+        role: "user",
         content:
           "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
       },
     ],
     responseFormat: {
@@ -157,9 +157,9 @@ async function run() {
   const result = await mistral.agents.complete({
     messages: [
       {
+        role: "user",
         content:
           "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
       },
     ],
     agentId: "<id>",
@@ -242,6 +242,7 @@ We have dedicated SDKs for the following providers:
 * [getVersion](docs/sdks/mistralagents/README.md#getversion) - Retrieve a specific version of an agent.
 * [createVersionAlias](docs/sdks/mistralagents/README.md#createversionalias) - Create or update an agent version alias.
 * [listVersionAliases](docs/sdks/mistralagents/README.md#listversionaliases) - List all aliases for an agent.
+* [deleteVersionAlias](docs/sdks/mistralagents/README.md#deleteversionalias) - Delete an agent version alias.
 
 ### [Beta.Conversations](docs/sdks/conversations/README.md)
 
@@ -554,7 +555,7 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 52 of 74 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 53 of 75 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -727,6 +728,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaAgentsCreate`](docs/sdks/mistralagents/README.md#create) - Create a agent that can be used within a conversation.
 - [`betaAgentsCreateVersionAlias`](docs/sdks/mistralagents/README.md#createversionalias) - Create or update an agent version alias.
 - [`betaAgentsDelete`](docs/sdks/mistralagents/README.md#delete) - Delete an agent entity.
+- [`betaAgentsDeleteVersionAlias`](docs/sdks/mistralagents/README.md#deleteversionalias) - Delete an agent version alias.
 - [`betaAgentsGet`](docs/sdks/mistralagents/README.md#get) - Retrieve an agent entity.
 - [`betaAgentsGetVersion`](docs/sdks/mistralagents/README.md#getversion) - Retrieve a specific version of an agent.
 - [`betaAgentsList`](docs/sdks/mistralagents/README.md#list) - List agent entities.

@@ -15,9 +15,9 @@ async function run() {
     model: "mistral-large-latest",
     messages: [
       {
+        role: "user",
         content:
           "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
       },
     ],
     responseFormat: {
@@ -71,9 +71,9 @@ async function run() {
   const result = await mistral.agents.complete({
     messages: [
       {
+        role: "user",
         content:
           "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
       },
     ],
     agentId: "<id>",

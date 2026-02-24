@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,28 +12,16 @@ import {
   BuiltInConnectors$inboundSchema,
 } from "./builtinconnectors.js";
 
-export const ToolExecutionStartedEventType = {
-  ToolExecutionStarted: "tool.execution.started",
-} as const;
-export type ToolExecutionStartedEventType = ClosedEnum<
-  typeof ToolExecutionStartedEventType
->;
-
 export type ToolExecutionStartedEventName = BuiltInConnectors | string;
 
 export type ToolExecutionStartedEvent = {
-  type: ToolExecutionStartedEventType | undefined;
+  type?: "tool.execution.started" | undefined;
   createdAt?: Date | undefined;
   outputIndex: number | undefined;
   id: string;
   name: BuiltInConnectors | string;
   arguments: string;
 };
-
-/** @internal */
-export const ToolExecutionStartedEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ToolExecutionStartedEventType
-> = z.nativeEnum(ToolExecutionStartedEventType);
 
 /** @internal */
 export const ToolExecutionStartedEventName$inboundSchema: z.ZodType<
@@ -59,9 +46,7 @@ export const ToolExecutionStartedEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolExecutionStartedEventType$inboundSchema.default(
-    "tool.execution.started",
-  ),
+  type: z.literal("tool.execution.started").default("tool.execution.started"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

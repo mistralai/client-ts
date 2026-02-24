@@ -5,18 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ModelCapabilities,
   ModelCapabilities$inboundSchema,
 } from "./modelcapabilities.js";
-
-export const BaseModelCardType = {
-  Base: "base",
-} as const;
-export type BaseModelCardType = ClosedEnum<typeof BaseModelCardType>;
 
 export type BaseModelCard = {
   id: string;
@@ -33,11 +27,6 @@ export type BaseModelCard = {
   defaultModelTemperature?: number | null | undefined;
   type?: "base" | undefined;
 };
-
-/** @internal */
-export const BaseModelCardType$inboundSchema: z.ZodNativeEnum<
-  typeof BaseModelCardType
-> = z.nativeEnum(BaseModelCardType);
 
 /** @internal */
 export const BaseModelCard$inboundSchema: z.ZodType<

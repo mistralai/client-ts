@@ -111,8 +111,8 @@ async function run() {
   const result = await mistral.classifiers.moderateChat({
     inputs: [
       {
-        content: "<value>",
         role: "tool",
+        content: "<value>",
       },
     ],
     model: "LeBaron",
@@ -142,8 +142,8 @@ async function run() {
   const res = await classifiersModerateChat(mistral, {
     inputs: [
       {
-        content: "<value>",
         role: "tool",
+        content: "<value>",
       },
     ],
     model: "LeBaron",
@@ -280,8 +280,8 @@ async function run() {
       {
         messages: [
           {
-            content: "<value>",
             role: "system",
+            content: "<value>",
           },
         ],
       },
@@ -315,8 +315,8 @@ async function run() {
       {
         messages: [
           {
-            content: "<value>",
             role: "system",
+            content: "<value>",
           },
         ],
       },

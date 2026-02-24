@@ -45,29 +45,7 @@ export const Status = {
  */
 export type Status = ClosedEnum<typeof Status>;
 
-/**
- * The object type of the fine-tuning job.
- */
-export const CompletionJobOutObject = {
-  Job: "job",
-} as const;
-/**
- * The object type of the fine-tuning job.
- */
-export type CompletionJobOutObject = ClosedEnum<typeof CompletionJobOutObject>;
-
 export type Integrations = WandbIntegrationOut;
-
-/**
- * The type of job (`FT` for fine-tuning).
- */
-export const JobType = {
-  Completion: "completion",
-} as const;
-/**
- * The type of job (`FT` for fine-tuning).
- */
-export type JobType = ClosedEnum<typeof JobType>;
 
 export type Repositories = GithubRepositoryOut;
 
@@ -77,9 +55,6 @@ export type CompletionJobOut = {
    */
   id: string;
   autoStart: boolean;
-  /**
-   * The name of the model to fine-tune.
-   */
   model: string;
   /**
    * The current status of the fine-tuning job.
@@ -104,7 +79,7 @@ export type CompletionJobOut = {
   /**
    * The object type of the fine-tuning job.
    */
-  object: CompletionJobOutObject | undefined;
+  object?: "job" | undefined;
   /**
    * The name of the fine-tuned model that is being created. The value will be `null` if the fine-tuning job is still running.
    */
@@ -125,7 +100,7 @@ export type CompletionJobOut = {
   /**
    * The type of job (`FT` for fine-tuning).
    */
-  jobType: JobType | undefined;
+  jobType?: "completion" | undefined;
   hyperparameters: CompletionTrainingParameters;
   repositories?: Array<GithubRepositoryOut> | undefined;
 };
@@ -133,11 +108,6 @@ export type CompletionJobOut = {
 /** @internal */
 export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
   .nativeEnum(Status);
-
-/** @internal */
-export const CompletionJobOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof CompletionJobOutObject
-> = z.nativeEnum(CompletionJobOutObject);
 
 /** @internal */
 export const Integrations$inboundSchema: z.ZodType<
@@ -155,10 +125,6 @@ export function integrationsFromJSON(
     `Failed to parse 'Integrations' from JSON`,
   );
 }
-
-/** @internal */
-export const JobType$inboundSchema: z.ZodNativeEnum<typeof JobType> = z
-  .nativeEnum(JobType);
 
 /** @internal */
 export const Repositories$inboundSchema: z.ZodType<
@@ -191,14 +157,14 @@ export const CompletionJobOut$inboundSchema: z.ZodType<
   modified_at: z.number().int(),
   training_files: z.array(z.string()),
   validation_files: z.nullable(z.array(z.string())).optional(),
-  object: CompletionJobOutObject$inboundSchema.default("job"),
+  object: z.literal("job").default("job"),
   fine_tuned_model: z.nullable(z.string()).optional(),
   suffix: z.nullable(z.string()).optional(),
   integrations: z.nullable(z.array(WandbIntegrationOut$inboundSchema))
     .optional(),
   trained_tokens: z.nullable(z.number().int()).optional(),
   metadata: z.nullable(JobMetadataOut$inboundSchema).optional(),
-  job_type: JobType$inboundSchema.default("completion"),
+  job_type: z.literal("completion").default("completion"),
   hyperparameters: CompletionTrainingParameters$inboundSchema,
   repositories: z.array(GithubRepositoryOut$inboundSchema).optional(),
 }).transform((v) => {

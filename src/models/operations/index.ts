@@ -4,6 +4,7 @@
 
 export * from "./agentsapiv1agentscreateorupdatealias.js";
 export * from "./agentsapiv1agentsdelete.js";
+export * from "./agentsapiv1agentsdeletealias.js";
 export * from "./agentsapiv1agentsget.js";
 export * from "./agentsapiv1agentsgetversion.js";
 export * from "./agentsapiv1agentslist.js";

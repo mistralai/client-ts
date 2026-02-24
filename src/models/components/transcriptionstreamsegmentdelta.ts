@@ -8,30 +8,17 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const TranscriptionStreamSegmentDeltaType = {
-  TranscriptionSegment: "transcription.segment",
-} as const;
-export type TranscriptionStreamSegmentDeltaType = ClosedEnum<
-  typeof TranscriptionStreamSegmentDeltaType
->;
-
 export type TranscriptionStreamSegmentDelta = {
+  type?: "transcription.segment" | undefined;
   text: string;
   start: number;
   end: number;
   speakerId?: string | null | undefined;
-  type: TranscriptionStreamSegmentDeltaType | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const TranscriptionStreamSegmentDeltaType$inboundSchema: z.ZodNativeEnum<
-  typeof TranscriptionStreamSegmentDeltaType
-> = z.nativeEnum(TranscriptionStreamSegmentDeltaType);
 
 /** @internal */
 export const TranscriptionStreamSegmentDelta$inboundSchema: z.ZodType<
@@ -40,13 +27,11 @@ export const TranscriptionStreamSegmentDelta$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
+    type: z.literal("transcription.segment").default("transcription.segment"),
     text: z.string(),
     start: z.number(),
     end: z.number(),
     speaker_id: z.nullable(z.string()).optional(),
-    type: TranscriptionStreamSegmentDeltaType$inboundSchema.default(
-      "transcription.segment",
-    ),
   }).catchall(z.any()),
   "additionalProperties",
   true,

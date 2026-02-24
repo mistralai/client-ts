@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,28 +12,16 @@ import {
   BuiltInConnectors$inboundSchema,
 } from "./builtinconnectors.js";
 
-export const ToolExecutionDoneEventType = {
-  ToolExecutionDone: "tool.execution.done",
-} as const;
-export type ToolExecutionDoneEventType = ClosedEnum<
-  typeof ToolExecutionDoneEventType
->;
-
 export type ToolExecutionDoneEventName = BuiltInConnectors | string;
 
 export type ToolExecutionDoneEvent = {
-  type: ToolExecutionDoneEventType | undefined;
+  type?: "tool.execution.done" | undefined;
   createdAt?: Date | undefined;
   outputIndex: number | undefined;
   id: string;
   name: BuiltInConnectors | string;
   info?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const ToolExecutionDoneEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ToolExecutionDoneEventType
-> = z.nativeEnum(ToolExecutionDoneEventType);
 
 /** @internal */
 export const ToolExecutionDoneEventName$inboundSchema: z.ZodType<
@@ -59,7 +46,7 @@ export const ToolExecutionDoneEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolExecutionDoneEventType$inboundSchema.default("tool.execution.done"),
+  type: z.literal("tool.execution.done").default("tool.execution.done"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

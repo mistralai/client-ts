@@ -17,7 +17,7 @@ let value: FunctionTool = {
 
 ## Fields
 
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `type`                                                                     | [components.FunctionToolType](../../models/components/functiontooltype.md) | :heavy_minus_sign:                                                         | N/A                                                                        |
-| `function`                                                                 | [components.FunctionT](../../models/components/functiont.md)               | :heavy_check_mark:                                                         | N/A                                                                        |
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `type`                                                       | [components.Type](../../models/components/type.md)           | :heavy_minus_sign:                                           | N/A                                                          |
+| `function`                                                   | [components.FunctionT](../../models/components/functiont.md) | :heavy_check_mark:                                           | N/A                                                          |

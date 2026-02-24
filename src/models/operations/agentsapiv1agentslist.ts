@@ -17,7 +17,14 @@ export type AgentsApiV1AgentsListRequest = {
   pageSize?: number | undefined;
   deploymentChat?: boolean | null | undefined;
   sources?: Array<components.RequestSource> | null | undefined;
+  /**
+   * Filter by agent name
+   */
   name?: string | null | undefined;
+  /**
+   * Search agents by name or ID
+   */
+  search?: string | null | undefined;
   id?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
 };
@@ -29,6 +36,7 @@ export type AgentsApiV1AgentsListRequest$Outbound = {
   deployment_chat?: boolean | null | undefined;
   sources?: Array<string> | null | undefined;
   name?: string | null | undefined;
+  search?: string | null | undefined;
   id?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
 };
@@ -45,6 +53,7 @@ export const AgentsApiV1AgentsListRequest$outboundSchema: z.ZodType<
   sources: z.nullable(z.array(components.RequestSource$outboundSchema))
     .optional(),
   name: z.nullable(z.string()).optional(),
+  search: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {

@@ -14,7 +14,7 @@ let value: ImageURLChunk = {
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `imageUrl`                                                                   | *components.ImageURLChunkImageURL*                                           | :heavy_check_mark:                                                           | N/A                                                                          |
-| `type`                                                                       | [components.ImageURLChunkType](../../models/components/imageurlchunktype.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| Field                              | Type                               | Required                           | Description                        |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| `type`                             | *"image_url"*                      | :heavy_minus_sign:                 | N/A                                |
+| `imageUrl`                         | *components.ImageURLChunkImageURL* | :heavy_check_mark:                 | N/A                                |

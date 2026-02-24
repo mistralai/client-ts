@@ -8,8 +8,6 @@ import { ConversationRequest } from "@mistralai/mistralai/models/components";
 let value: ConversationRequest = {
   inputs: [
     {
-      object: "entry",
-      type: "tool.execution",
       name: "web_search_premium",
       arguments: "<value>",
     },

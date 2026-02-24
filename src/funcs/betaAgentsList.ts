@@ -106,6 +106,7 @@ async function $do(
       "name": payload?.name,
       "page": payload?.page,
       "page_size": payload?.page_size,
+      "search": payload?.search,
       "sources": payload?.sources,
     }),
     encodeJSONQuery({

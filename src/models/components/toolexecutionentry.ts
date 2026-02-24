@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,23 +13,11 @@ import {
   BuiltInConnectors$outboundSchema,
 } from "./builtinconnectors.js";
 
-export const ToolExecutionEntryObject = {
-  Entry: "entry",
-} as const;
-export type ToolExecutionEntryObject = ClosedEnum<
-  typeof ToolExecutionEntryObject
->;
-
-export const ToolExecutionEntryType = {
-  ToolExecution: "tool.execution",
-} as const;
-export type ToolExecutionEntryType = ClosedEnum<typeof ToolExecutionEntryType>;
-
 export type Name = BuiltInConnectors | string;
 
 export type ToolExecutionEntry = {
-  object?: ToolExecutionEntryObject | undefined;
-  type?: ToolExecutionEntryType | undefined;
+  object?: "entry" | undefined;
+  type?: "tool.execution" | undefined;
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
@@ -38,24 +25,6 @@ export type ToolExecutionEntry = {
   arguments: string;
   info?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const ToolExecutionEntryObject$inboundSchema: z.ZodNativeEnum<
-  typeof ToolExecutionEntryObject
-> = z.nativeEnum(ToolExecutionEntryObject);
-/** @internal */
-export const ToolExecutionEntryObject$outboundSchema: z.ZodNativeEnum<
-  typeof ToolExecutionEntryObject
-> = ToolExecutionEntryObject$inboundSchema;
-
-/** @internal */
-export const ToolExecutionEntryType$inboundSchema: z.ZodNativeEnum<
-  typeof ToolExecutionEntryType
-> = z.nativeEnum(ToolExecutionEntryType);
-/** @internal */
-export const ToolExecutionEntryType$outboundSchema: z.ZodNativeEnum<
-  typeof ToolExecutionEntryType
-> = ToolExecutionEntryType$inboundSchema;
 
 /** @internal */
 export const Name$inboundSchema: z.ZodType<Name, z.ZodTypeDef, unknown> = z
@@ -86,8 +55,8 @@ export const ToolExecutionEntry$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: ToolExecutionEntryObject$inboundSchema.default("entry"),
-  type: ToolExecutionEntryType$inboundSchema.default("tool.execution"),
+  object: z.literal("entry").default("entry"),
+  type: z.literal("tool.execution").default("tool.execution"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
@@ -105,8 +74,8 @@ export const ToolExecutionEntry$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ToolExecutionEntry$Outbound = {
-  object: string;
-  type: string;
+  object: "entry";
+  type: "tool.execution";
   created_at?: string | undefined;
   completed_at?: string | null | undefined;
   id?: string | undefined;
@@ -121,8 +90,8 @@ export const ToolExecutionEntry$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolExecutionEntry
 > = z.object({
-  object: ToolExecutionEntryObject$outboundSchema.default("entry"),
-  type: ToolExecutionEntryType$outboundSchema.default("tool.execution"),
+  object: z.literal("entry").default("entry" as const),
+  type: z.literal("tool.execution").default("tool.execution" as const),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),

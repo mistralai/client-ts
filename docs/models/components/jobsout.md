@@ -12,8 +12,8 @@ let value: JobsOut = {
 
 ## Fields
 
-| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `data`                                                               | *components.JobsOutData*[]                                           | :heavy_minus_sign:                                                   | N/A                                                                  |
-| `object`                                                             | [components.JobsOutObject](../../models/components/jobsoutobject.md) | :heavy_minus_sign:                                                   | N/A                                                                  |
-| `total`                                                              | *number*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| Field                      | Type                       | Required                   | Description                |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `data`                     | *components.JobsOutData*[] | :heavy_minus_sign:         | N/A                        |
+| `object`                   | *"list"*                   | :heavy_minus_sign:         | N/A                        |
+| `total`                    | *number*                   | :heavy_check_mark:         | N/A                        |

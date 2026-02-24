@@ -5,18 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ModelCapabilities,
   ModelCapabilities$inboundSchema,
 } from "./modelcapabilities.js";
-
-export const FTModelCardType = {
-  FineTuned: "fine-tuned",
-} as const;
-export type FTModelCardType = ClosedEnum<typeof FTModelCardType>;
 
 /**
  * Extra fields for fine-tuned models.
@@ -39,11 +33,6 @@ export type FTModelCard = {
   root: string;
   archived: boolean | undefined;
 };
-
-/** @internal */
-export const FTModelCardType$inboundSchema: z.ZodNativeEnum<
-  typeof FTModelCardType
-> = z.nativeEnum(FTModelCardType);
 
 /** @internal */
 export const FTModelCard$inboundSchema: z.ZodType<

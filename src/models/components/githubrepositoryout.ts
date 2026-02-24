@@ -5,19 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const GithubRepositoryOutType = {
-  Github: "github",
-} as const;
-export type GithubRepositoryOutType = ClosedEnum<
-  typeof GithubRepositoryOutType
->;
-
 export type GithubRepositoryOut = {
-  type: GithubRepositoryOutType | undefined;
+  type?: "github" | undefined;
   name: string;
   owner: string;
   ref?: string | null | undefined;
@@ -26,17 +18,12 @@ export type GithubRepositoryOut = {
 };
 
 /** @internal */
-export const GithubRepositoryOutType$inboundSchema: z.ZodNativeEnum<
-  typeof GithubRepositoryOutType
-> = z.nativeEnum(GithubRepositoryOutType);
-
-/** @internal */
 export const GithubRepositoryOut$inboundSchema: z.ZodType<
   GithubRepositoryOut,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GithubRepositoryOutType$inboundSchema.default("github"),
+  type: z.literal("github").default("github"),
   name: z.string(),
   owner: z.string(),
   ref: z.nullable(z.string()).optional(),

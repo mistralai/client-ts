@@ -12,7 +12,7 @@ let value: AudioChunk = {
 
 ## Fields
 
-| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `inputAudio`                                                           | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
-| `type`                                                                 | [components.AudioChunkType](../../models/components/audiochunktype.md) | :heavy_minus_sign:                                                     | N/A                                                                    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"input_audio"*    | :heavy_minus_sign: | N/A                |
+| `inputAudio`       | *string*           | :heavy_check_mark: | N/A                |
