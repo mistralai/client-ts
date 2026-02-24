@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ToolConfiguration,
+  ToolConfiguration$inboundSchema,
+  ToolConfiguration$Outbound,
+  ToolConfiguration$outboundSchema,
+} from "./toolconfiguration.js";
 
 export const DocumentLibraryToolType = {
   DocumentLibrary: "document_library",
@@ -17,6 +23,7 @@ export type DocumentLibraryToolType = ClosedEnum<
 >;
 
 export type DocumentLibraryTool = {
+  toolConfiguration?: ToolConfiguration | null | undefined;
   type?: DocumentLibraryToolType | undefined;
   /**
    * Ids of the library in which to search.
@@ -39,15 +46,18 @@ export const DocumentLibraryTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
   type: DocumentLibraryToolType$inboundSchema.default("document_library"),
   library_ids: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {
+    "tool_configuration": "toolConfiguration",
     "library_ids": "libraryIds",
   });
 });
 /** @internal */
 export type DocumentLibraryTool$Outbound = {
+  tool_configuration?: ToolConfiguration$Outbound | null | undefined;
   type: string;
   library_ids: Array<string>;
 };
@@ -58,10 +68,12 @@ export const DocumentLibraryTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DocumentLibraryTool
 > = z.object({
+  toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),
   type: DocumentLibraryToolType$outboundSchema.default("document_library"),
   libraryIds: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {
+    toolConfiguration: "tool_configuration",
     libraryIds: "library_ids",
   });
 });

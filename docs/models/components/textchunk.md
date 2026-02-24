@@ -12,7 +12,7 @@ let value: TextChunk = {
 
 ## Fields
 
-| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `text`                                                               | *string*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
-| `type`                                                               | [components.TextChunkType](../../models/components/textchunktype.md) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"text"*           | :heavy_minus_sign: | N/A                |
+| `text`             | *string*           | :heavy_check_mark: | N/A                |

@@ -8,7 +8,6 @@ import { AgentsApiV1ConversationsAppendStreamRequest } from "@mistralai/mistrala
 let value: AgentsApiV1ConversationsAppendStreamRequest = {
   conversationId: "<id>",
   conversationAppendStreamRequest: {
-    inputs: "<value>",
     completionArgs: {
       responseFormat: {
         type: "text",

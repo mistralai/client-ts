@@ -18,8 +18,6 @@ const value: operations.One = {
   trainingFiles: [
     "9f003c6f-9c82-4b28-9533-cb5576df3462",
   ],
-  object: "job",
-  jobType: "completion",
   hyperparameters: {
     learningRate: 0.0001,
   },

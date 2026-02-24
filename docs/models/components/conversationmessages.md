@@ -15,8 +15,8 @@ let value: ConversationMessages = {
 
 ## Fields
 
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `object`                                                                                       | [components.ConversationMessagesObject](../../models/components/conversationmessagesobject.md) | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `conversationId`                                                                               | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `messages`                                                                                     | *components.MessageEntries*[]                                                                  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| Field                         | Type                          | Required                      | Description                   |
+| ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
+| `object`                      | *"conversation.messages"*     | :heavy_minus_sign:            | N/A                           |
+| `conversationId`              | *string*                      | :heavy_check_mark:            | N/A                           |
+| `messages`                    | *components.MessageEntries*[] | :heavy_check_mark:            | N/A                           |

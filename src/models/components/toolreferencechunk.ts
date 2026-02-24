@@ -4,7 +4,6 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,30 +12,16 @@ import {
   BuiltInConnectors$outboundSchema,
 } from "./builtinconnectors.js";
 
-export const ToolReferenceChunkType = {
-  ToolReference: "tool_reference",
-} as const;
-export type ToolReferenceChunkType = ClosedEnum<typeof ToolReferenceChunkType>;
-
 export type ToolReferenceChunkTool = BuiltInConnectors | string;
 
 export type ToolReferenceChunk = {
-  type?: ToolReferenceChunkType | undefined;
+  type?: "tool_reference" | undefined;
   tool: BuiltInConnectors | string;
   title: string;
   url?: string | null | undefined;
   favicon?: string | null | undefined;
   description?: string | null | undefined;
 };
-
-/** @internal */
-export const ToolReferenceChunkType$inboundSchema: z.ZodNativeEnum<
-  typeof ToolReferenceChunkType
-> = z.nativeEnum(ToolReferenceChunkType);
-/** @internal */
-export const ToolReferenceChunkType$outboundSchema: z.ZodNativeEnum<
-  typeof ToolReferenceChunkType
-> = ToolReferenceChunkType$inboundSchema;
 
 /** @internal */
 export const ToolReferenceChunkTool$inboundSchema: z.ZodType<
@@ -77,7 +62,7 @@ export const ToolReferenceChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolReferenceChunkType$inboundSchema.default("tool_reference"),
+  type: z.literal("tool_reference").default("tool_reference"),
   tool: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   title: z.string(),
   url: z.nullable(z.string()).optional(),
@@ -86,7 +71,7 @@ export const ToolReferenceChunk$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ToolReferenceChunk$Outbound = {
-  type: string;
+  type: "tool_reference";
   tool: string | string;
   title: string;
   url?: string | null | undefined;
@@ -100,7 +85,7 @@ export const ToolReferenceChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolReferenceChunk
 > = z.object({
-  type: ToolReferenceChunkType$outboundSchema.default("tool_reference"),
+  type: z.literal("tool_reference").default("tool_reference" as const),
   tool: z.union([BuiltInConnectors$outboundSchema, z.string()]),
   title: z.string(),
   url: z.nullable(z.string()).optional(),

@@ -75,6 +75,7 @@ export type AgentCreationRequest = {
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
+  versionMessage?: string | null | undefined;
 };
 
 /** @internal */
@@ -135,6 +136,7 @@ export type AgentCreationRequest$Outbound = {
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
+  version_message?: string | null | undefined;
 };
 
 /** @internal */
@@ -172,9 +174,11 @@ export const AgentCreationRequest$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
+  versionMessage: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     completionArgs: "completion_args",
+    versionMessage: "version_message",
   });
 });
 

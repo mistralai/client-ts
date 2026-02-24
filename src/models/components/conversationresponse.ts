@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,13 +28,6 @@ import {
   ToolExecutionEntry$inboundSchema,
 } from "./toolexecutionentry.js";
 
-export const ConversationResponseObject = {
-  ConversationResponse: "conversation.response",
-} as const;
-export type ConversationResponseObject = ClosedEnum<
-  typeof ConversationResponseObject
->;
-
 export type Outputs =
   | AgentHandoffEntry
   | FunctionCallEntry
@@ -46,7 +38,7 @@ export type Outputs =
  * The response after appending new entries to the conversation.
  */
 export type ConversationResponse = {
-  object: ConversationResponseObject | undefined;
+  object?: "conversation.response" | undefined;
   conversationId: string;
   outputs: Array<
     | AgentHandoffEntry
@@ -56,11 +48,6 @@ export type ConversationResponse = {
   >;
   usage: ConversationUsageInfo;
 };
-
-/** @internal */
-export const ConversationResponseObject$inboundSchema: z.ZodNativeEnum<
-  typeof ConversationResponseObject
-> = z.nativeEnum(ConversationResponseObject);
 
 /** @internal */
 export const Outputs$inboundSchema: z.ZodType<Outputs, z.ZodTypeDef, unknown> =
@@ -87,9 +74,7 @@ export const ConversationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: ConversationResponseObject$inboundSchema.default(
-    "conversation.response",
-  ),
+  object: z.literal("conversation.response").default("conversation.response"),
   conversation_id: z.string(),
   outputs: z.array(
     z.union([

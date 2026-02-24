@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,26 +12,14 @@ import {
   MessageEntries$inboundSchema,
 } from "./messageentries.js";
 
-export const ConversationMessagesObject = {
-  ConversationMessages: "conversation.messages",
-} as const;
-export type ConversationMessagesObject = ClosedEnum<
-  typeof ConversationMessagesObject
->;
-
 /**
  * Similar to the conversation history but only keep the messages
  */
 export type ConversationMessages = {
-  object: ConversationMessagesObject | undefined;
+  object?: "conversation.messages" | undefined;
   conversationId: string;
   messages: Array<MessageEntries>;
 };
-
-/** @internal */
-export const ConversationMessagesObject$inboundSchema: z.ZodNativeEnum<
-  typeof ConversationMessagesObject
-> = z.nativeEnum(ConversationMessagesObject);
 
 /** @internal */
 export const ConversationMessages$inboundSchema: z.ZodType<
@@ -40,9 +27,7 @@ export const ConversationMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: ConversationMessagesObject$inboundSchema.default(
-    "conversation.messages",
-  ),
+  object: z.literal("conversation.messages").default("conversation.messages"),
   conversation_id: z.string(),
   messages: z.array(MessageEntries$inboundSchema),
 }).transform((v) => {

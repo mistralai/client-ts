@@ -5,27 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const FunctionResultEntryObject = {
-  Entry: "entry",
-} as const;
-export type FunctionResultEntryObject = ClosedEnum<
-  typeof FunctionResultEntryObject
->;
-
-export const FunctionResultEntryType = {
-  FunctionResult: "function.result",
-} as const;
-export type FunctionResultEntryType = ClosedEnum<
-  typeof FunctionResultEntryType
->;
-
 export type FunctionResultEntry = {
-  object?: FunctionResultEntryObject | undefined;
-  type?: FunctionResultEntryType | undefined;
+  object?: "entry" | undefined;
+  type?: "function.result" | undefined;
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
@@ -34,31 +19,13 @@ export type FunctionResultEntry = {
 };
 
 /** @internal */
-export const FunctionResultEntryObject$inboundSchema: z.ZodNativeEnum<
-  typeof FunctionResultEntryObject
-> = z.nativeEnum(FunctionResultEntryObject);
-/** @internal */
-export const FunctionResultEntryObject$outboundSchema: z.ZodNativeEnum<
-  typeof FunctionResultEntryObject
-> = FunctionResultEntryObject$inboundSchema;
-
-/** @internal */
-export const FunctionResultEntryType$inboundSchema: z.ZodNativeEnum<
-  typeof FunctionResultEntryType
-> = z.nativeEnum(FunctionResultEntryType);
-/** @internal */
-export const FunctionResultEntryType$outboundSchema: z.ZodNativeEnum<
-  typeof FunctionResultEntryType
-> = FunctionResultEntryType$inboundSchema;
-
-/** @internal */
 export const FunctionResultEntry$inboundSchema: z.ZodType<
   FunctionResultEntry,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: FunctionResultEntryObject$inboundSchema.default("entry"),
-  type: FunctionResultEntryType$inboundSchema.default("function.result"),
+  object: z.literal("entry").default("entry"),
+  type: z.literal("function.result").default("function.result"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
@@ -76,8 +43,8 @@ export const FunctionResultEntry$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type FunctionResultEntry$Outbound = {
-  object: string;
-  type: string;
+  object: "entry";
+  type: "function.result";
   created_at?: string | undefined;
   completed_at?: string | null | undefined;
   id?: string | undefined;
@@ -91,8 +58,8 @@ export const FunctionResultEntry$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionResultEntry
 > = z.object({
-  object: FunctionResultEntryObject$outboundSchema.default("entry"),
-  type: FunctionResultEntryType$outboundSchema.default("function.result"),
+  object: z.literal("entry").default("entry" as const),
+  type: z.literal("function.result").default("function.result" as const),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),

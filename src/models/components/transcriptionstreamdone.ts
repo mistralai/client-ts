@@ -8,7 +8,6 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,31 +23,15 @@ import {
   UsageInfo$outboundSchema,
 } from "./usageinfo.js";
 
-export const TranscriptionStreamDoneType = {
-  TranscriptionDone: "transcription.done",
-} as const;
-export type TranscriptionStreamDoneType = ClosedEnum<
-  typeof TranscriptionStreamDoneType
->;
-
 export type TranscriptionStreamDone = {
   model: string;
   text: string;
   segments?: Array<TranscriptionSegmentChunk> | undefined;
   usage: UsageInfo;
-  type?: TranscriptionStreamDoneType | undefined;
+  type?: "transcription.done" | undefined;
   language: string | null;
   additionalProperties?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const TranscriptionStreamDoneType$inboundSchema: z.ZodNativeEnum<
-  typeof TranscriptionStreamDoneType
-> = z.nativeEnum(TranscriptionStreamDoneType);
-/** @internal */
-export const TranscriptionStreamDoneType$outboundSchema: z.ZodNativeEnum<
-  typeof TranscriptionStreamDoneType
-> = TranscriptionStreamDoneType$inboundSchema;
 
 /** @internal */
 export const TranscriptionStreamDone$inboundSchema: z.ZodType<
@@ -61,9 +44,7 @@ export const TranscriptionStreamDone$inboundSchema: z.ZodType<
     text: z.string(),
     segments: z.array(TranscriptionSegmentChunk$inboundSchema).optional(),
     usage: UsageInfo$inboundSchema,
-    type: TranscriptionStreamDoneType$inboundSchema.default(
-      "transcription.done",
-    ),
+    type: z.literal("transcription.done").default("transcription.done"),
     language: z.nullable(z.string()),
   }).catchall(z.any()),
   "additionalProperties",
@@ -75,7 +56,7 @@ export type TranscriptionStreamDone$Outbound = {
   text: string;
   segments?: Array<TranscriptionSegmentChunk$Outbound> | undefined;
   usage: UsageInfo$Outbound;
-  type: string;
+  type: "transcription.done";
   language: string | null;
   [additionalProperties: string]: unknown;
 };
@@ -90,9 +71,7 @@ export const TranscriptionStreamDone$outboundSchema: z.ZodType<
   text: z.string(),
   segments: z.array(TranscriptionSegmentChunk$outboundSchema).optional(),
   usage: UsageInfo$outboundSchema,
-  type: TranscriptionStreamDoneType$outboundSchema.default(
-    "transcription.done",
-  ),
+  type: z.literal("transcription.done").default("transcription.done" as const),
   language: z.nullable(z.string()),
   additionalProperties: z.record(z.any()).optional(),
 }).transform((v) => {

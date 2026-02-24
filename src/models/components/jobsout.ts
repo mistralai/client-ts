@@ -4,7 +4,6 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -20,11 +19,6 @@ export type JobsOutData =
   | (ClassifierJobOut & { jobType: "classifier" })
   | (CompletionJobOut & { jobType: "completion" });
 
-export const JobsOutObject = {
-  List: "list",
-} as const;
-export type JobsOutObject = ClosedEnum<typeof JobsOutObject>;
-
 export type JobsOut = {
   data?:
     | Array<
@@ -32,7 +26,7 @@ export type JobsOut = {
       | (CompletionJobOut & { jobType: "completion" })
     >
     | undefined;
-  object: JobsOutObject | undefined;
+  object?: "list" | undefined;
   total: number;
 };
 
@@ -65,11 +59,6 @@ export function jobsOutDataFromJSON(
 }
 
 /** @internal */
-export const JobsOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof JobsOutObject
-> = z.nativeEnum(JobsOutObject);
-
-/** @internal */
 export const JobsOut$inboundSchema: z.ZodType<JobsOut, z.ZodTypeDef, unknown> =
   z.object({
     data: z.array(
@@ -86,7 +75,7 @@ export const JobsOut$inboundSchema: z.ZodType<JobsOut, z.ZodTypeDef, unknown> =
         ),
       ]),
     ).optional(),
-    object: JobsOutObject$inboundSchema.default("list"),
+    object: z.literal("list").default("list"),
     total: z.number().int(),
   });
 

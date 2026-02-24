@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,29 +13,15 @@ import {
   BuiltInConnectors$outboundSchema,
 } from "./builtinconnectors.js";
 
-export const ToolFileChunkType = {
-  ToolFile: "tool_file",
-} as const;
-export type ToolFileChunkType = ClosedEnum<typeof ToolFileChunkType>;
-
 export type ToolFileChunkTool = BuiltInConnectors | string;
 
 export type ToolFileChunk = {
-  type?: ToolFileChunkType | undefined;
+  type?: "tool_file" | undefined;
   tool: BuiltInConnectors | string;
   fileId: string;
   fileName?: string | null | undefined;
   fileType?: string | null | undefined;
 };
-
-/** @internal */
-export const ToolFileChunkType$inboundSchema: z.ZodNativeEnum<
-  typeof ToolFileChunkType
-> = z.nativeEnum(ToolFileChunkType);
-/** @internal */
-export const ToolFileChunkType$outboundSchema: z.ZodNativeEnum<
-  typeof ToolFileChunkType
-> = ToolFileChunkType$inboundSchema;
 
 /** @internal */
 export const ToolFileChunkTool$inboundSchema: z.ZodType<
@@ -77,7 +62,7 @@ export const ToolFileChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolFileChunkType$inboundSchema.default("tool_file"),
+  type: z.literal("tool_file").default("tool_file"),
   tool: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   file_id: z.string(),
   file_name: z.nullable(z.string()).optional(),
@@ -91,7 +76,7 @@ export const ToolFileChunk$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ToolFileChunk$Outbound = {
-  type: string;
+  type: "tool_file";
   tool: string | string;
   file_id: string;
   file_name?: string | null | undefined;
@@ -104,7 +89,7 @@ export const ToolFileChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolFileChunk
 > = z.object({
-  type: ToolFileChunkType$outboundSchema.default("tool_file"),
+  type: z.literal("tool_file").default("tool_file" as const),
   tool: z.union([BuiltInConnectors$outboundSchema, z.string()]),
   fileId: z.string(),
   fileName: z.nullable(z.string()).optional(),

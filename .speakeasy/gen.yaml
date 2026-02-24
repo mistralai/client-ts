@@ -30,15 +30,15 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 1.14.0
+  version: 1.14.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
       ws: ^8.18.0
       zod-to-json-schema: ^3.24.1
     devDependencies:
-      "@types/node": ^22.0.0
-      "@types/ws": ^8.5.13
+      '@types/node': ^22.0.0
+      '@types/ws': ^8.5.13
     peerDependencies: {}
   additionalPackageJSON: {}
   additionalScripts: {}

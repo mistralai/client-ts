@@ -338,7 +338,6 @@ async function run() {
   const result = await mistral.beta.conversations.append({
     conversationId: "<id>",
     conversationAppendRequest: {
-      inputs: [],
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -371,7 +370,6 @@ async function run() {
   const res = await betaConversationsAppend(mistral, {
     conversationId: "<id>",
     conversationAppendRequest: {
-      inputs: [],
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -576,7 +574,6 @@ async function run() {
   const result = await mistral.beta.conversations.restart({
     conversationId: "<id>",
     conversationRestartRequest: {
-      inputs: "<value>",
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -610,7 +607,6 @@ async function run() {
   const res = await betaConversationsRestart(mistral, {
     conversationId: "<id>",
     conversationRestartRequest: {
-      inputs: "<value>",
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -774,7 +770,6 @@ async function run() {
   const result = await mistral.beta.conversations.appendStream({
     conversationId: "<id>",
     conversationAppendStreamRequest: {
-      inputs: "<value>",
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -809,7 +804,6 @@ async function run() {
   const res = await betaConversationsAppendStream(mistral, {
     conversationId: "<id>",
     conversationAppendStreamRequest: {
-      inputs: "<value>",
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -868,15 +862,6 @@ async function run() {
   const result = await mistral.beta.conversations.restartStream({
     conversationId: "<id>",
     conversationRestartStreamRequest: {
-      inputs: [
-        {
-          object: "entry",
-          type: "message.input",
-          role: "assistant",
-          content: "<value>",
-          prefix: false,
-        },
-      ],
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -912,15 +897,6 @@ async function run() {
   const res = await betaConversationsRestartStream(mistral, {
     conversationId: "<id>",
     conversationRestartStreamRequest: {
-      inputs: [
-        {
-          object: "entry",
-          type: "message.input",
-          role: "assistant",
-          content: "<value>",
-          prefix: false,
-        },
-      ],
       completionArgs: {
         responseFormat: {
           type: "text",

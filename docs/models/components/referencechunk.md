@@ -12,7 +12,7 @@ let value: ReferenceChunk = {
 
 ## Fields
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `referenceIds`                                                                 | *number*[]                                                                     | :heavy_check_mark:                                                             | N/A                                                                            |
-| `type`                                                                         | [components.ReferenceChunkType](../../models/components/referencechunktype.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"reference"*      | :heavy_minus_sign: | N/A                |
+| `referenceIds`     | *number*[]         | :heavy_check_mark: | N/A                |

@@ -41,31 +41,7 @@ export const ClassifierJobOutStatus = {
  */
 export type ClassifierJobOutStatus = ClosedEnum<typeof ClassifierJobOutStatus>;
 
-/**
- * The object type of the fine-tuning job.
- */
-export const ClassifierJobOutObject = {
-  Job: "job",
-} as const;
-/**
- * The object type of the fine-tuning job.
- */
-export type ClassifierJobOutObject = ClosedEnum<typeof ClassifierJobOutObject>;
-
 export type ClassifierJobOutIntegrations = WandbIntegrationOut;
-
-/**
- * The type of job (`FT` for fine-tuning).
- */
-export const ClassifierJobOutJobType = {
-  Classifier: "classifier",
-} as const;
-/**
- * The type of job (`FT` for fine-tuning).
- */
-export type ClassifierJobOutJobType = ClosedEnum<
-  typeof ClassifierJobOutJobType
->;
 
 export type ClassifierJobOut = {
   /**
@@ -73,9 +49,6 @@ export type ClassifierJobOut = {
    */
   id: string;
   autoStart: boolean;
-  /**
-   * The name of the model to fine-tune.
-   */
   model: string;
   /**
    * The current status of the fine-tuning job.
@@ -100,7 +73,7 @@ export type ClassifierJobOut = {
   /**
    * The object type of the fine-tuning job.
    */
-  object: ClassifierJobOutObject | undefined;
+  object?: "job" | undefined;
   /**
    * The name of the fine-tuned model that is being created. The value will be `null` if the fine-tuning job is still running.
    */
@@ -121,7 +94,7 @@ export type ClassifierJobOut = {
   /**
    * The type of job (`FT` for fine-tuning).
    */
-  jobType: ClassifierJobOutJobType | undefined;
+  jobType?: "classifier" | undefined;
   hyperparameters: ClassifierTrainingParameters;
 };
 
@@ -129,11 +102,6 @@ export type ClassifierJobOut = {
 export const ClassifierJobOutStatus$inboundSchema: z.ZodNativeEnum<
   typeof ClassifierJobOutStatus
 > = z.nativeEnum(ClassifierJobOutStatus);
-
-/** @internal */
-export const ClassifierJobOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof ClassifierJobOutObject
-> = z.nativeEnum(ClassifierJobOutObject);
 
 /** @internal */
 export const ClassifierJobOutIntegrations$inboundSchema: z.ZodType<
@@ -153,11 +121,6 @@ export function classifierJobOutIntegrationsFromJSON(
 }
 
 /** @internal */
-export const ClassifierJobOutJobType$inboundSchema: z.ZodNativeEnum<
-  typeof ClassifierJobOutJobType
-> = z.nativeEnum(ClassifierJobOutJobType);
-
-/** @internal */
 export const ClassifierJobOut$inboundSchema: z.ZodType<
   ClassifierJobOut,
   z.ZodTypeDef,
@@ -171,14 +134,14 @@ export const ClassifierJobOut$inboundSchema: z.ZodType<
   modified_at: z.number().int(),
   training_files: z.array(z.string()),
   validation_files: z.nullable(z.array(z.string())).optional(),
-  object: ClassifierJobOutObject$inboundSchema.default("job"),
+  object: z.literal("job").default("job"),
   fine_tuned_model: z.nullable(z.string()).optional(),
   suffix: z.nullable(z.string()).optional(),
   integrations: z.nullable(z.array(WandbIntegrationOut$inboundSchema))
     .optional(),
   trained_tokens: z.nullable(z.number().int()).optional(),
   metadata: z.nullable(JobMetadataOut$inboundSchema).optional(),
-  job_type: ClassifierJobOutJobType$inboundSchema.default("classifier"),
+  job_type: z.literal("classifier").default("classifier"),
   hyperparameters: ClassifierTrainingParameters$inboundSchema,
 }).transform((v) => {
   return remap$(v, {

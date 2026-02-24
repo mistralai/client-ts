@@ -9,25 +9,30 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const FunctionCallEventType = {
-  FunctionCallDelta: "function.call.delta",
+export const FunctionCallEventConfirmationStatus = {
+  Pending: "pending",
+  Allowed: "allowed",
+  Denied: "denied",
 } as const;
-export type FunctionCallEventType = ClosedEnum<typeof FunctionCallEventType>;
+export type FunctionCallEventConfirmationStatus = ClosedEnum<
+  typeof FunctionCallEventConfirmationStatus
+>;
 
 export type FunctionCallEvent = {
-  type: FunctionCallEventType | undefined;
+  type?: "function.call.delta" | undefined;
   createdAt?: Date | undefined;
   outputIndex: number | undefined;
   id: string;
   name: string;
   toolCallId: string;
   arguments: string;
+  confirmationStatus?: FunctionCallEventConfirmationStatus | null | undefined;
 };
 
 /** @internal */
-export const FunctionCallEventType$inboundSchema: z.ZodNativeEnum<
-  typeof FunctionCallEventType
-> = z.nativeEnum(FunctionCallEventType);
+export const FunctionCallEventConfirmationStatus$inboundSchema: z.ZodNativeEnum<
+  typeof FunctionCallEventConfirmationStatus
+> = z.nativeEnum(FunctionCallEventConfirmationStatus);
 
 /** @internal */
 export const FunctionCallEvent$inboundSchema: z.ZodType<
@@ -35,7 +40,7 @@ export const FunctionCallEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: FunctionCallEventType$inboundSchema.default("function.call.delta"),
+  type: z.literal("function.call.delta").default("function.call.delta"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),
@@ -43,11 +48,15 @@ export const FunctionCallEvent$inboundSchema: z.ZodType<
   name: z.string(),
   tool_call_id: z.string(),
   arguments: z.string(),
+  confirmation_status: z.nullable(
+    FunctionCallEventConfirmationStatus$inboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
     "output_index": "outputIndex",
     "tool_call_id": "toolCallId",
+    "confirmation_status": "confirmationStatus",
   });
 });
 

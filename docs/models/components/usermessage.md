@@ -12,7 +12,7 @@ let value: UserMessage = {
 
 ## Fields
 
-| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `content`                                                                | *components.UserMessageContent*                                          | :heavy_check_mark:                                                       | N/A                                                                      |
-| `role`                                                                   | [components.UserMessageRole](../../models/components/usermessagerole.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
+| Field                           | Type                            | Required                        | Description                     |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `role`                          | *"user"*                        | :heavy_minus_sign:              | N/A                             |
+| `content`                       | *components.UserMessageContent* | :heavy_check_mark:              | N/A                             |

@@ -5,11 +5,11 @@
 ```typescript
 import { Role } from "@mistralai/mistralai/models/components";
 
-let value: Role = "system";
+let value: Role = "assistant";
 ```
 
 ## Values
 
 ```typescript
-"system"
+"assistant" | "user"
 ```

@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -17,23 +16,9 @@ import {
   FTModelCapabilitiesOut$inboundSchema,
 } from "./ftmodelcapabilitiesout.js";
 
-export const ClassifierFTModelOutObject = {
-  Model: "model",
-} as const;
-export type ClassifierFTModelOutObject = ClosedEnum<
-  typeof ClassifierFTModelOutObject
->;
-
-export const ClassifierFTModelOutModelType = {
-  Classifier: "classifier",
-} as const;
-export type ClassifierFTModelOutModelType = ClosedEnum<
-  typeof ClassifierFTModelOutModelType
->;
-
 export type ClassifierFTModelOut = {
   id: string;
-  object: ClassifierFTModelOutObject | undefined;
+  object?: "model" | undefined;
   created: number;
   ownedBy: string;
   workspaceId: string;
@@ -47,18 +32,8 @@ export type ClassifierFTModelOut = {
   aliases?: Array<string> | undefined;
   job: string;
   classifierTargets: Array<ClassifierTargetOut>;
-  modelType: ClassifierFTModelOutModelType | undefined;
+  modelType?: "classifier" | undefined;
 };
-
-/** @internal */
-export const ClassifierFTModelOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof ClassifierFTModelOutObject
-> = z.nativeEnum(ClassifierFTModelOutObject);
-
-/** @internal */
-export const ClassifierFTModelOutModelType$inboundSchema: z.ZodNativeEnum<
-  typeof ClassifierFTModelOutModelType
-> = z.nativeEnum(ClassifierFTModelOutModelType);
 
 /** @internal */
 export const ClassifierFTModelOut$inboundSchema: z.ZodType<
@@ -67,7 +42,7 @@ export const ClassifierFTModelOut$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  object: ClassifierFTModelOutObject$inboundSchema.default("model"),
+  object: z.literal("model").default("model"),
   created: z.number().int(),
   owned_by: z.string(),
   workspace_id: z.string(),
@@ -81,7 +56,7 @@ export const ClassifierFTModelOut$inboundSchema: z.ZodType<
   aliases: z.array(z.string()).optional(),
   job: z.string(),
   classifier_targets: z.array(ClassifierTargetOut$inboundSchema),
-  model_type: ClassifierFTModelOutModelType$inboundSchema.default("classifier"),
+  model_type: z.literal("classifier").default("classifier"),
 }).transform((v) => {
   return remap$(v, {
     "owned_by": "ownedBy",

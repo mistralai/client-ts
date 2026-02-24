@@ -18,6 +18,7 @@ export type RealtimeTranscriptionSession = {
   requestId: string;
   model: string;
   audioFormat: AudioFormat;
+  targetStreamingDelayMs?: number | null | undefined;
 };
 
 /** @internal */
@@ -29,10 +30,12 @@ export const RealtimeTranscriptionSession$inboundSchema: z.ZodType<
   request_id: z.string(),
   model: z.string(),
   audio_format: AudioFormat$inboundSchema,
+  target_streaming_delay_ms: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "request_id": "requestId",
     "audio_format": "audioFormat",
+    "target_streaming_delay_ms": "targetStreamingDelayMs",
   });
 });
 /** @internal */
@@ -40,6 +43,7 @@ export type RealtimeTranscriptionSession$Outbound = {
   request_id: string;
   model: string;
   audio_format: AudioFormat$Outbound;
+  target_streaming_delay_ms?: number | null | undefined;
 };
 
 /** @internal */
@@ -51,10 +55,12 @@ export const RealtimeTranscriptionSession$outboundSchema: z.ZodType<
   requestId: z.string(),
   model: z.string(),
   audioFormat: AudioFormat$outboundSchema,
+  targetStreamingDelayMs: z.nullable(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requestId: "request_id",
     audioFormat: "audio_format",
+    targetStreamingDelayMs: "target_streaming_delay_ms",
   });
 });
 

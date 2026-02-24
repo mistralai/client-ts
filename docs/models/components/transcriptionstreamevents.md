@@ -8,7 +8,6 @@ import { TranscriptionStreamEvents } from "@mistralai/mistralai/models/component
 let value: TranscriptionStreamEvents = {
   event: "transcription.done",
   data: {
-    type: "transcription.language",
     audioLanguage: "<value>",
   },
 };

@@ -76,6 +76,7 @@ export type AgentUpdateRequest = {
   handoffs?: Array<string> | null | undefined;
   deploymentChat?: boolean | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
+  versionMessage?: string | null | undefined;
 };
 
 /** @internal */
@@ -137,6 +138,7 @@ export type AgentUpdateRequest$Outbound = {
   handoffs?: Array<string> | null | undefined;
   deployment_chat?: boolean | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
+  version_message?: string | null | undefined;
 };
 
 /** @internal */
@@ -175,10 +177,12 @@ export const AgentUpdateRequest$outboundSchema: z.ZodType<
   handoffs: z.nullable(z.array(z.string())).optional(),
   deploymentChat: z.nullable(z.boolean()).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
+  versionMessage: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     completionArgs: "completion_args",
     deploymentChat: "deployment_chat",
+    versionMessage: "version_message",
   });
 });
 

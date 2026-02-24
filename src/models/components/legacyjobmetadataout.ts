@@ -5,16 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const LegacyJobMetadataOutObject = {
-  JobMetadata: "job.metadata",
-} as const;
-export type LegacyJobMetadataOutObject = ClosedEnum<
-  typeof LegacyJobMetadataOutObject
->;
 
 export type LegacyJobMetadataOut = {
   /**
@@ -52,13 +44,8 @@ export type LegacyJobMetadataOut = {
    * The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset.
    */
   trainingSteps?: number | null | undefined;
-  object: LegacyJobMetadataOutObject | undefined;
+  object?: "job.metadata" | undefined;
 };
-
-/** @internal */
-export const LegacyJobMetadataOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof LegacyJobMetadataOutObject
-> = z.nativeEnum(LegacyJobMetadataOutObject);
 
 /** @internal */
 export const LegacyJobMetadataOut$inboundSchema: z.ZodType<
@@ -77,7 +64,7 @@ export const LegacyJobMetadataOut$inboundSchema: z.ZodType<
   details: z.string(),
   epochs: z.nullable(z.number()).optional(),
   training_steps: z.nullable(z.number().int()).optional(),
-  object: LegacyJobMetadataOutObject$inboundSchema.default("job.metadata"),
+  object: z.literal("job.metadata").default("job.metadata"),
 }).transform((v) => {
   return remap$(v, {
     "expected_duration_seconds": "expectedDurationSeconds",

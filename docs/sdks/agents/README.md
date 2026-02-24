@@ -27,8 +27,8 @@ async function run() {
   const result = await mistral.agents.complete({
     messages: [
       {
-        content: "Who is the best French painter? Answer in one short sentence.",
         role: "user",
+        content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
     agentId: "<id>",
@@ -58,8 +58,8 @@ async function run() {
   const res = await agentsComplete(mistral, {
     messages: [
       {
-        content: "Who is the best French painter? Answer in one short sentence.",
         role: "user",
+        content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
     agentId: "<id>",
@@ -113,8 +113,8 @@ async function run() {
   const result = await mistral.agents.stream({
     messages: [
       {
-        content: "Who is the best French painter? Answer in one short sentence.",
         role: "user",
+        content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
     responseFormat: {
@@ -149,8 +149,8 @@ async function run() {
   const res = await agentsStream(mistral, {
     messages: [
       {
-        content: "Who is the best French painter? Answer in one short sentence.",
         role: "user",
+        content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
     responseFormat: {

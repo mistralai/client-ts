@@ -15,21 +15,11 @@ import {
   MessageInputContentChunks$outboundSchema,
 } from "./messageinputcontentchunks.js";
 
-export const ObjectT = {
-  Entry: "entry",
-} as const;
-export type ObjectT = ClosedEnum<typeof ObjectT>;
-
-export const MessageInputEntryType = {
-  MessageInput: "message.input",
-} as const;
-export type MessageInputEntryType = ClosedEnum<typeof MessageInputEntryType>;
-
-export const MessageInputEntryRole = {
+export const Role = {
   Assistant: "assistant",
   User: "user",
 } as const;
-export type MessageInputEntryRole = ClosedEnum<typeof MessageInputEntryRole>;
+export type Role = ClosedEnum<typeof Role>;
 
 export type MessageInputEntryContent =
   | string
@@ -39,40 +29,23 @@ export type MessageInputEntryContent =
  * Representation of an input message inside the conversation.
  */
 export type MessageInputEntry = {
-  object?: ObjectT | undefined;
-  type?: MessageInputEntryType | undefined;
+  object?: "entry" | undefined;
+  type?: "message.input" | undefined;
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
-  role: MessageInputEntryRole;
+  role: Role;
   content: string | Array<MessageInputContentChunks>;
   prefix?: boolean | undefined;
 };
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
+  Role,
+);
 /** @internal */
-export const ObjectT$outboundSchema: z.ZodNativeEnum<typeof ObjectT> =
-  ObjectT$inboundSchema;
-
-/** @internal */
-export const MessageInputEntryType$inboundSchema: z.ZodNativeEnum<
-  typeof MessageInputEntryType
-> = z.nativeEnum(MessageInputEntryType);
-/** @internal */
-export const MessageInputEntryType$outboundSchema: z.ZodNativeEnum<
-  typeof MessageInputEntryType
-> = MessageInputEntryType$inboundSchema;
-
-/** @internal */
-export const MessageInputEntryRole$inboundSchema: z.ZodNativeEnum<
-  typeof MessageInputEntryRole
-> = z.nativeEnum(MessageInputEntryRole);
-/** @internal */
-export const MessageInputEntryRole$outboundSchema: z.ZodNativeEnum<
-  typeof MessageInputEntryRole
-> = MessageInputEntryRole$inboundSchema;
+export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
+  Role$inboundSchema;
 
 /** @internal */
 export const MessageInputEntryContent$inboundSchema: z.ZodType<
@@ -115,15 +88,15 @@ export const MessageInputEntry$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: ObjectT$inboundSchema.default("entry"),
-  type: MessageInputEntryType$inboundSchema.default("message.input"),
+  object: z.literal("entry").default("entry"),
+  type: z.literal("message.input").default("message.input"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   id: z.string().optional(),
-  role: MessageInputEntryRole$inboundSchema,
+  role: Role$inboundSchema,
   content: z.union([
     z.string(),
     z.array(MessageInputContentChunks$inboundSchema),
@@ -137,8 +110,8 @@ export const MessageInputEntry$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type MessageInputEntry$Outbound = {
-  object: string;
-  type: string;
+  object: "entry";
+  type: "message.input";
   created_at?: string | undefined;
   completed_at?: string | null | undefined;
   id?: string | undefined;
@@ -153,12 +126,12 @@ export const MessageInputEntry$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessageInputEntry
 > = z.object({
-  object: ObjectT$outboundSchema.default("entry"),
-  type: MessageInputEntryType$outboundSchema.default("message.input"),
+  object: z.literal("entry").default("entry" as const),
+  type: z.literal("message.input").default("message.input" as const),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),
-  role: MessageInputEntryRole$outboundSchema,
+  role: Role$outboundSchema,
   content: z.union([
     z.string(),
     z.array(MessageInputContentChunks$outboundSchema),

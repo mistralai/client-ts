@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,13 +37,6 @@ export type ModelConversationTools =
   | (ImageGenerationTool & { type: "image_generation" })
   | (WebSearchTool & { type: "web_search" })
   | (WebSearchPremiumTool & { type: "web_search_premium" });
-
-export const ModelConversationObject = {
-  Conversation: "conversation",
-} as const;
-export type ModelConversationObject = ClosedEnum<
-  typeof ModelConversationObject
->;
 
 export type ModelConversation = {
   /**
@@ -80,7 +72,7 @@ export type ModelConversation = {
    * Custom metadata for the conversation.
    */
   metadata?: { [k: string]: any } | null | undefined;
-  object: ModelConversationObject | undefined;
+  object?: "conversation" | undefined;
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -120,11 +112,6 @@ export function modelConversationToolsFromJSON(
 }
 
 /** @internal */
-export const ModelConversationObject$inboundSchema: z.ZodNativeEnum<
-  typeof ModelConversationObject
-> = z.nativeEnum(ModelConversationObject);
-
-/** @internal */
 export const ModelConversation$inboundSchema: z.ZodType<
   ModelConversation,
   z.ZodTypeDef,
@@ -155,7 +142,7 @@ export const ModelConversation$inboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
-  object: ModelConversationObject$inboundSchema.default("conversation"),
+  object: z.literal("conversation").default("conversation"),
   id: z.string(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
