@@ -221,6 +221,14 @@ export class RealtimeConnection implements AsyncIterable<RealtimeEvent> {
     await this.sendJson(message);
   }
 
+  async flushAudio(): Promise<void> {
+    if (this.isClosed) {
+      throw new Error("Connection is closed");
+    }
+
+    await this.sendJson({ type: "input_audio.flush" });
+  }
+
   async updateSession(audioFormat: AudioFormat): Promise<void> {
     if (this.isClosed) {
       throw new Error("Connection is closed");

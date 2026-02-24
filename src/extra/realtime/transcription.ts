@@ -100,6 +100,9 @@ export class RealtimeTranscription extends ClientSDK {
           await connection.sendAudio(chunk);
         }
       } finally {
+        if (!connection.isClosed) {
+          await connection.flushAudio();
+        }
         await connection.endAudio();
       }
     })();
