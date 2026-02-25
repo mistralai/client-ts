@@ -5,25 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const AgentHandoffEntryObject = {
-  Entry: "entry",
-} as const;
-export type AgentHandoffEntryObject = ClosedEnum<
-  typeof AgentHandoffEntryObject
->;
-
-export const AgentHandoffEntryType = {
-  AgentHandoff: "agent.handoff",
-} as const;
-export type AgentHandoffEntryType = ClosedEnum<typeof AgentHandoffEntryType>;
-
 export type AgentHandoffEntry = {
-  object?: AgentHandoffEntryObject | undefined;
-  type?: AgentHandoffEntryType | undefined;
+  object?: "entry" | undefined;
+  type?: "agent.handoff" | undefined;
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
@@ -34,31 +21,13 @@ export type AgentHandoffEntry = {
 };
 
 /** @internal */
-export const AgentHandoffEntryObject$inboundSchema: z.ZodNativeEnum<
-  typeof AgentHandoffEntryObject
-> = z.nativeEnum(AgentHandoffEntryObject);
-/** @internal */
-export const AgentHandoffEntryObject$outboundSchema: z.ZodNativeEnum<
-  typeof AgentHandoffEntryObject
-> = AgentHandoffEntryObject$inboundSchema;
-
-/** @internal */
-export const AgentHandoffEntryType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentHandoffEntryType
-> = z.nativeEnum(AgentHandoffEntryType);
-/** @internal */
-export const AgentHandoffEntryType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentHandoffEntryType
-> = AgentHandoffEntryType$inboundSchema;
-
-/** @internal */
 export const AgentHandoffEntry$inboundSchema: z.ZodType<
   AgentHandoffEntry,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: AgentHandoffEntryObject$inboundSchema.default("entry"),
-  type: AgentHandoffEntryType$inboundSchema.default("agent.handoff"),
+  object: z.literal("entry").default("entry"),
+  type: z.literal("agent.handoff").default("agent.handoff"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
@@ -81,8 +50,8 @@ export const AgentHandoffEntry$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AgentHandoffEntry$Outbound = {
-  object: string;
-  type: string;
+  object: "entry";
+  type: "agent.handoff";
   created_at?: string | undefined;
   completed_at?: string | null | undefined;
   id?: string | undefined;
@@ -98,8 +67,8 @@ export const AgentHandoffEntry$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentHandoffEntry
 > = z.object({
-  object: AgentHandoffEntryObject$outboundSchema.default("entry"),
-  type: AgentHandoffEntryType$outboundSchema.default("agent.handoff"),
+  object: z.literal("entry").default("entry" as const),
+  type: z.literal("agent.handoff").default("agent.handoff" as const),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),

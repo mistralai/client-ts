@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,19 +22,14 @@ import {
 
 export type AssistantMessageContent = string | Array<ContentChunk>;
 
-export const AssistantMessageRole = {
-  Assistant: "assistant",
-} as const;
-export type AssistantMessageRole = ClosedEnum<typeof AssistantMessageRole>;
-
 export type AssistantMessage = {
+  role?: "assistant" | undefined;
   content?: string | Array<ContentChunk> | null | undefined;
   toolCalls?: Array<ToolCall> | null | undefined;
   /**
    * Set this to `true` when adding an assistant message as prefix to condition the model response. The role of the prefix message is to force the model to start its answer by the content of the message.
    */
   prefix?: boolean | undefined;
-  role?: AssistantMessageRole | undefined;
 };
 
 /** @internal */
@@ -74,26 +68,17 @@ export function assistantMessageContentFromJSON(
 }
 
 /** @internal */
-export const AssistantMessageRole$inboundSchema: z.ZodNativeEnum<
-  typeof AssistantMessageRole
-> = z.nativeEnum(AssistantMessageRole);
-/** @internal */
-export const AssistantMessageRole$outboundSchema: z.ZodNativeEnum<
-  typeof AssistantMessageRole
-> = AssistantMessageRole$inboundSchema;
-
-/** @internal */
 export const AssistantMessage$inboundSchema: z.ZodType<
   AssistantMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  role: z.literal("assistant").default("assistant"),
   content: z.nullable(
     z.union([z.string(), z.array(ContentChunk$inboundSchema)]),
   ).optional(),
   tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
   prefix: z.boolean().default(false),
-  role: AssistantMessageRole$inboundSchema.default("assistant"),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -101,10 +86,10 @@ export const AssistantMessage$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AssistantMessage$Outbound = {
+  role: "assistant";
   content?: string | Array<ContentChunk$Outbound> | null | undefined;
   tool_calls?: Array<ToolCall$Outbound> | null | undefined;
   prefix: boolean;
-  role: string;
 };
 
 /** @internal */
@@ -113,12 +98,12 @@ export const AssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AssistantMessage
 > = z.object({
+  role: z.literal("assistant").default("assistant" as const),
   content: z.nullable(
     z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
   ).optional(),
   toolCalls: z.nullable(z.array(ToolCall$outboundSchema)).optional(),
   prefix: z.boolean().default(false),
-  role: AssistantMessageRole$outboundSchema.default("assistant"),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",

@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
 import {
   SystemMessageContentChunks,
   SystemMessageContentChunks$Outbound,
@@ -12,14 +11,9 @@ import {
 
 export type SystemMessageContent = string | Array<SystemMessageContentChunks>;
 
-export const Role = {
-  System: "system",
-} as const;
-export type Role = ClosedEnum<typeof Role>;
-
 export type SystemMessage = {
+  role?: "system" | undefined;
   content: string | Array<SystemMessageContentChunks>;
-  role?: Role | undefined;
 };
 
 /** @internal */
@@ -43,14 +37,9 @@ export function systemMessageContentToJSON(
 }
 
 /** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
-
-/** @internal */
 export type SystemMessage$Outbound = {
+  role: "system";
   content: string | Array<SystemMessageContentChunks$Outbound>;
-  role: string;
 };
 
 /** @internal */
@@ -59,11 +48,11 @@ export const SystemMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SystemMessage
 > = z.object({
+  role: z.literal("system").default("system" as const),
   content: z.union([
     z.string(),
     z.array(SystemMessageContentChunks$outboundSchema),
   ]),
-  role: Role$outboundSchema.default("system"),
 });
 
 export function systemMessageToJSON(systemMessage: SystemMessage): string {

@@ -14,12 +14,12 @@ let value: TranscriptionSegmentChunk = {
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `text`                                             | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
-| `start`                                            | *number*                                           | :heavy_check_mark:                                 | N/A                                                |
-| `end`                                              | *number*                                           | :heavy_check_mark:                                 | N/A                                                |
-| `score`                                            | *number*                                           | :heavy_minus_sign:                                 | N/A                                                |
-| `speakerId`                                        | *string*                                           | :heavy_minus_sign:                                 | N/A                                                |
-| `type`                                             | [components.Type](../../models/components/type.md) | :heavy_minus_sign:                                 | N/A                                                |
-| `additionalProperties`                             | Record<string, *any*>                              | :heavy_minus_sign:                                 | N/A                                                |
+| Field                     | Type                      | Required                  | Description               |
+| ------------------------- | ------------------------- | ------------------------- | ------------------------- |
+| `type`                    | *"transcription_segment"* | :heavy_minus_sign:        | N/A                       |
+| `text`                    | *string*                  | :heavy_check_mark:        | N/A                       |
+| `start`                   | *number*                  | :heavy_check_mark:        | N/A                       |
+| `end`                     | *number*                  | :heavy_check_mark:        | N/A                       |
+| `score`                   | *number*                  | :heavy_minus_sign:        | N/A                       |
+| `speakerId`               | *string*                  | :heavy_minus_sign:        | N/A                       |
+| `additionalProperties`    | Record<string, *any*>     | :heavy_minus_sign:        | N/A                       |

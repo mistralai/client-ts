@@ -66,7 +66,7 @@ const value: components.MessageOutputEvent = {
   id: "<id>",
   content: {
     thinking: [],
-    type: "thinking",
+    closed: true,
   },
 };
 ```

@@ -3,19 +3,20 @@
 
 ## Supported Types
 
-### `components.ReferenceChunk`
-
-```typescript
-const value: components.ReferenceChunk = {
-  referenceIds: [],
-};
-```
-
 ### `components.TextChunk`
 
 ```typescript
 const value: components.TextChunk = {
   text: "<value>",
+};
+```
+
+### `components.ToolReferenceChunk`
+
+```typescript
+const value: components.ToolReferenceChunk = {
+  tool: "<value>",
+  title: "<value>",
 };
 ```
 

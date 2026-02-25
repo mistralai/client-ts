@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -15,65 +14,21 @@ import {
   MessageOutputContentChunks$outboundSchema,
 } from "./messageoutputcontentchunks.js";
 
-export const MessageOutputEntryObject = {
-  Entry: "entry",
-} as const;
-export type MessageOutputEntryObject = ClosedEnum<
-  typeof MessageOutputEntryObject
->;
-
-export const MessageOutputEntryType = {
-  MessageOutput: "message.output",
-} as const;
-export type MessageOutputEntryType = ClosedEnum<typeof MessageOutputEntryType>;
-
-export const MessageOutputEntryRole = {
-  Assistant: "assistant",
-} as const;
-export type MessageOutputEntryRole = ClosedEnum<typeof MessageOutputEntryRole>;
-
 export type MessageOutputEntryContent =
   | string
   | Array<MessageOutputContentChunks>;
 
 export type MessageOutputEntry = {
-  object?: MessageOutputEntryObject | undefined;
-  type?: MessageOutputEntryType | undefined;
+  object?: "entry" | undefined;
+  type?: "message.output" | undefined;
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
   agentId?: string | null | undefined;
   model?: string | null | undefined;
-  role?: MessageOutputEntryRole | undefined;
+  role?: "assistant" | undefined;
   content: string | Array<MessageOutputContentChunks>;
 };
-
-/** @internal */
-export const MessageOutputEntryObject$inboundSchema: z.ZodNativeEnum<
-  typeof MessageOutputEntryObject
-> = z.nativeEnum(MessageOutputEntryObject);
-/** @internal */
-export const MessageOutputEntryObject$outboundSchema: z.ZodNativeEnum<
-  typeof MessageOutputEntryObject
-> = MessageOutputEntryObject$inboundSchema;
-
-/** @internal */
-export const MessageOutputEntryType$inboundSchema: z.ZodNativeEnum<
-  typeof MessageOutputEntryType
-> = z.nativeEnum(MessageOutputEntryType);
-/** @internal */
-export const MessageOutputEntryType$outboundSchema: z.ZodNativeEnum<
-  typeof MessageOutputEntryType
-> = MessageOutputEntryType$inboundSchema;
-
-/** @internal */
-export const MessageOutputEntryRole$inboundSchema: z.ZodNativeEnum<
-  typeof MessageOutputEntryRole
-> = z.nativeEnum(MessageOutputEntryRole);
-/** @internal */
-export const MessageOutputEntryRole$outboundSchema: z.ZodNativeEnum<
-  typeof MessageOutputEntryRole
-> = MessageOutputEntryRole$inboundSchema;
 
 /** @internal */
 export const MessageOutputEntryContent$inboundSchema: z.ZodType<
@@ -116,8 +71,8 @@ export const MessageOutputEntry$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: MessageOutputEntryObject$inboundSchema.default("entry"),
-  type: MessageOutputEntryType$inboundSchema.default("message.output"),
+  object: z.literal("entry").default("entry"),
+  type: z.literal("message.output").default("message.output"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
@@ -126,7 +81,7 @@ export const MessageOutputEntry$inboundSchema: z.ZodType<
   id: z.string().optional(),
   agent_id: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
-  role: MessageOutputEntryRole$inboundSchema.default("assistant"),
+  role: z.literal("assistant").default("assistant"),
   content: z.union([
     z.string(),
     z.array(MessageOutputContentChunks$inboundSchema),
@@ -140,14 +95,14 @@ export const MessageOutputEntry$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type MessageOutputEntry$Outbound = {
-  object: string;
-  type: string;
+  object: "entry";
+  type: "message.output";
   created_at?: string | undefined;
   completed_at?: string | null | undefined;
   id?: string | undefined;
   agent_id?: string | null | undefined;
   model?: string | null | undefined;
-  role: string;
+  role: "assistant";
   content: string | Array<MessageOutputContentChunks$Outbound>;
 };
 
@@ -157,14 +112,14 @@ export const MessageOutputEntry$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessageOutputEntry
 > = z.object({
-  object: MessageOutputEntryObject$outboundSchema.default("entry"),
-  type: MessageOutputEntryType$outboundSchema.default("message.output"),
+  object: z.literal("entry").default("entry" as const),
+  type: z.literal("message.output").default("message.output" as const),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),
   agentId: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
-  role: MessageOutputEntryRole$outboundSchema.default("assistant"),
+  role: z.literal("assistant").default("assistant" as const),
   content: z.union([
     z.string(),
     z.array(MessageOutputContentChunks$outboundSchema),

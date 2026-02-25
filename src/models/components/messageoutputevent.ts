@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,39 +12,19 @@ import {
   OutputContentChunks$inboundSchema,
 } from "./outputcontentchunks.js";
 
-export const MessageOutputEventType = {
-  MessageOutputDelta: "message.output.delta",
-} as const;
-export type MessageOutputEventType = ClosedEnum<typeof MessageOutputEventType>;
-
-export const MessageOutputEventRole = {
-  Assistant: "assistant",
-} as const;
-export type MessageOutputEventRole = ClosedEnum<typeof MessageOutputEventRole>;
-
 export type MessageOutputEventContent = string | OutputContentChunks;
 
 export type MessageOutputEvent = {
-  type: MessageOutputEventType | undefined;
+  type?: "message.output.delta" | undefined;
   createdAt?: Date | undefined;
   outputIndex: number | undefined;
   id: string;
   contentIndex: number | undefined;
   model?: string | null | undefined;
   agentId?: string | null | undefined;
-  role: MessageOutputEventRole | undefined;
+  role?: "assistant" | undefined;
   content: string | OutputContentChunks;
 };
-
-/** @internal */
-export const MessageOutputEventType$inboundSchema: z.ZodNativeEnum<
-  typeof MessageOutputEventType
-> = z.nativeEnum(MessageOutputEventType);
-
-/** @internal */
-export const MessageOutputEventRole$inboundSchema: z.ZodNativeEnum<
-  typeof MessageOutputEventRole
-> = z.nativeEnum(MessageOutputEventRole);
 
 /** @internal */
 export const MessageOutputEventContent$inboundSchema: z.ZodType<
@@ -70,7 +49,7 @@ export const MessageOutputEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: MessageOutputEventType$inboundSchema.default("message.output.delta"),
+  type: z.literal("message.output.delta").default("message.output.delta"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),
@@ -78,7 +57,7 @@ export const MessageOutputEvent$inboundSchema: z.ZodType<
   content_index: z.number().int().default(0),
   model: z.nullable(z.string()).optional(),
   agent_id: z.nullable(z.string()).optional(),
-  role: MessageOutputEventRole$inboundSchema.default("assistant"),
+  role: z.literal("assistant").default("assistant"),
   content: z.union([z.string(), OutputContentChunks$inboundSchema]),
 }).transform((v) => {
   return remap$(v, {

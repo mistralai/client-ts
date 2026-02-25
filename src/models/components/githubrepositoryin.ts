@@ -3,15 +3,9 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
-
-export const GithubRepositoryInType = {
-  Github: "github",
-} as const;
-export type GithubRepositoryInType = ClosedEnum<typeof GithubRepositoryInType>;
 
 export type GithubRepositoryIn = {
-  type?: GithubRepositoryInType | undefined;
+  type?: "github" | undefined;
   name: string;
   owner: string;
   ref?: string | null | undefined;
@@ -20,13 +14,8 @@ export type GithubRepositoryIn = {
 };
 
 /** @internal */
-export const GithubRepositoryInType$outboundSchema: z.ZodNativeEnum<
-  typeof GithubRepositoryInType
-> = z.nativeEnum(GithubRepositoryInType);
-
-/** @internal */
 export type GithubRepositoryIn$Outbound = {
-  type: string;
+  type: "github";
   name: string;
   owner: string;
   ref?: string | null | undefined;
@@ -40,7 +29,7 @@ export const GithubRepositoryIn$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GithubRepositoryIn
 > = z.object({
-  type: GithubRepositoryInType$outboundSchema.default("github"),
+  type: z.literal("github").default("github" as const),
   name: z.string(),
   owner: z.string(),
   ref: z.nullable(z.string()).optional(),

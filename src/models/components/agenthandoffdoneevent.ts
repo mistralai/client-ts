@@ -5,19 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const AgentHandoffDoneEventType = {
-  AgentHandoffDone: "agent.handoff.done",
-} as const;
-export type AgentHandoffDoneEventType = ClosedEnum<
-  typeof AgentHandoffDoneEventType
->;
-
 export type AgentHandoffDoneEvent = {
-  type: AgentHandoffDoneEventType | undefined;
+  type?: "agent.handoff.done" | undefined;
   createdAt?: Date | undefined;
   outputIndex: number | undefined;
   id: string;
@@ -26,17 +18,12 @@ export type AgentHandoffDoneEvent = {
 };
 
 /** @internal */
-export const AgentHandoffDoneEventType$inboundSchema: z.ZodNativeEnum<
-  typeof AgentHandoffDoneEventType
-> = z.nativeEnum(AgentHandoffDoneEventType);
-
-/** @internal */
 export const AgentHandoffDoneEvent$inboundSchema: z.ZodType<
   AgentHandoffDoneEvent,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: AgentHandoffDoneEventType$inboundSchema.default("agent.handoff.done"),
+  type: z.literal("agent.handoff.done").default("agent.handoff.done"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

@@ -8,32 +8,18 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Type = {
-  TranscriptionSegment: "transcription_segment",
-} as const;
-export type Type = ClosedEnum<typeof Type>;
-
 export type TranscriptionSegmentChunk = {
+  type?: "transcription_segment" | undefined;
   text: string;
   start: number;
   end: number;
   score?: number | null | undefined;
   speakerId?: string | null | undefined;
-  type?: Type | undefined;
   additionalProperties?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
-/** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
 
 /** @internal */
 export const TranscriptionSegmentChunk$inboundSchema: z.ZodType<
@@ -42,12 +28,12 @@ export const TranscriptionSegmentChunk$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
+    type: z.literal("transcription_segment").default("transcription_segment"),
     text: z.string(),
     start: z.number(),
     end: z.number(),
     score: z.nullable(z.number()).optional(),
     speaker_id: z.nullable(z.string()).optional(),
-    type: Type$inboundSchema.default("transcription_segment"),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -58,12 +44,12 @@ export const TranscriptionSegmentChunk$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type TranscriptionSegmentChunk$Outbound = {
+  type: "transcription_segment";
   text: string;
   start: number;
   end: number;
   score?: number | null | undefined;
   speaker_id?: string | null | undefined;
-  type: string;
   [additionalProperties: string]: unknown;
 };
 
@@ -73,12 +59,14 @@ export const TranscriptionSegmentChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TranscriptionSegmentChunk
 > = z.object({
+  type: z.literal("transcription_segment").default(
+    "transcription_segment" as const,
+  ),
   text: z.string(),
   start: z.number(),
   end: z.number(),
   score: z.nullable(z.number()).optional(),
   speakerId: z.nullable(z.string()).optional(),
-  type: Type$outboundSchema.default("transcription_segment"),
   additionalProperties: z.record(z.any()).optional(),
 }).transform((v) => {
   return {

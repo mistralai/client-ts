@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,28 +12,16 @@ import {
   BuiltInConnectors$inboundSchema,
 } from "./builtinconnectors.js";
 
-export const ToolExecutionDeltaEventType = {
-  ToolExecutionDelta: "tool.execution.delta",
-} as const;
-export type ToolExecutionDeltaEventType = ClosedEnum<
-  typeof ToolExecutionDeltaEventType
->;
-
 export type ToolExecutionDeltaEventName = BuiltInConnectors | string;
 
 export type ToolExecutionDeltaEvent = {
-  type: ToolExecutionDeltaEventType | undefined;
+  type?: "tool.execution.delta" | undefined;
   createdAt?: Date | undefined;
   outputIndex: number | undefined;
   id: string;
   name: BuiltInConnectors | string;
   arguments: string;
 };
-
-/** @internal */
-export const ToolExecutionDeltaEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ToolExecutionDeltaEventType
-> = z.nativeEnum(ToolExecutionDeltaEventType);
 
 /** @internal */
 export const ToolExecutionDeltaEventName$inboundSchema: z.ZodType<
@@ -59,9 +46,7 @@ export const ToolExecutionDeltaEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ToolExecutionDeltaEventType$inboundSchema.default(
-    "tool.execution.delta",
-  ),
+  type: z.literal("tool.execution.delta").default("tool.execution.delta"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

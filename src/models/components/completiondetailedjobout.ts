@@ -43,43 +43,26 @@ export type CompletionDetailedJobOutStatus = ClosedEnum<
   typeof CompletionDetailedJobOutStatus
 >;
 
-export const CompletionDetailedJobOutObject = {
-  Job: "job",
-} as const;
-export type CompletionDetailedJobOutObject = ClosedEnum<
-  typeof CompletionDetailedJobOutObject
->;
-
 export type CompletionDetailedJobOutIntegrations = WandbIntegrationOut;
-
-export const CompletionDetailedJobOutJobType = {
-  Completion: "completion",
-} as const;
-export type CompletionDetailedJobOutJobType = ClosedEnum<
-  typeof CompletionDetailedJobOutJobType
->;
 
 export type CompletionDetailedJobOutRepositories = GithubRepositoryOut;
 
 export type CompletionDetailedJobOut = {
   id: string;
   autoStart: boolean;
-  /**
-   * The name of the model to fine-tune.
-   */
   model: string;
   status: CompletionDetailedJobOutStatus;
   createdAt: number;
   modifiedAt: number;
   trainingFiles: Array<string>;
   validationFiles?: Array<string> | null | undefined;
-  object: CompletionDetailedJobOutObject | undefined;
+  object?: "job" | undefined;
   fineTunedModel?: string | null | undefined;
   suffix?: string | null | undefined;
   integrations?: Array<WandbIntegrationOut> | null | undefined;
   trainedTokens?: number | null | undefined;
   metadata?: JobMetadataOut | null | undefined;
-  jobType: CompletionDetailedJobOutJobType | undefined;
+  jobType?: "completion" | undefined;
   hyperparameters: CompletionTrainingParameters;
   repositories?: Array<GithubRepositoryOut> | undefined;
   /**
@@ -93,11 +76,6 @@ export type CompletionDetailedJobOut = {
 export const CompletionDetailedJobOutStatus$inboundSchema: z.ZodNativeEnum<
   typeof CompletionDetailedJobOutStatus
 > = z.nativeEnum(CompletionDetailedJobOutStatus);
-
-/** @internal */
-export const CompletionDetailedJobOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof CompletionDetailedJobOutObject
-> = z.nativeEnum(CompletionDetailedJobOutObject);
 
 /** @internal */
 export const CompletionDetailedJobOutIntegrations$inboundSchema: z.ZodType<
@@ -116,11 +94,6 @@ export function completionDetailedJobOutIntegrationsFromJSON(
     `Failed to parse 'CompletionDetailedJobOutIntegrations' from JSON`,
   );
 }
-
-/** @internal */
-export const CompletionDetailedJobOutJobType$inboundSchema: z.ZodNativeEnum<
-  typeof CompletionDetailedJobOutJobType
-> = z.nativeEnum(CompletionDetailedJobOutJobType);
 
 /** @internal */
 export const CompletionDetailedJobOutRepositories$inboundSchema: z.ZodType<
@@ -154,14 +127,14 @@ export const CompletionDetailedJobOut$inboundSchema: z.ZodType<
   modified_at: z.number().int(),
   training_files: z.array(z.string()),
   validation_files: z.nullable(z.array(z.string())).optional(),
-  object: CompletionDetailedJobOutObject$inboundSchema.default("job"),
+  object: z.literal("job").default("job"),
   fine_tuned_model: z.nullable(z.string()).optional(),
   suffix: z.nullable(z.string()).optional(),
   integrations: z.nullable(z.array(WandbIntegrationOut$inboundSchema))
     .optional(),
   trained_tokens: z.nullable(z.number().int()).optional(),
   metadata: z.nullable(JobMetadataOut$inboundSchema).optional(),
-  job_type: CompletionDetailedJobOutJobType$inboundSchema.default("completion"),
+  job_type: z.literal("completion").default("completion"),
   hyperparameters: CompletionTrainingParameters$inboundSchema,
   repositories: z.array(GithubRepositoryOut$inboundSchema).optional(),
   events: z.array(EventOut$inboundSchema).optional(),

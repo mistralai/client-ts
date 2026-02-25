@@ -4,15 +4,9 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
-
-export const WandbIntegrationType = {
-  Wandb: "wandb",
-} as const;
-export type WandbIntegrationType = ClosedEnum<typeof WandbIntegrationType>;
 
 export type WandbIntegration = {
-  type?: WandbIntegrationType | undefined;
+  type?: "wandb" | undefined;
   /**
    * The name of the project that the new run will be created under.
    */
@@ -29,13 +23,8 @@ export type WandbIntegration = {
 };
 
 /** @internal */
-export const WandbIntegrationType$outboundSchema: z.ZodNativeEnum<
-  typeof WandbIntegrationType
-> = z.nativeEnum(WandbIntegrationType);
-
-/** @internal */
 export type WandbIntegration$Outbound = {
-  type: string;
+  type: "wandb";
   project: string;
   name?: string | null | undefined;
   api_key: string;
@@ -48,7 +37,7 @@ export const WandbIntegration$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WandbIntegration
 > = z.object({
-  type: WandbIntegrationType$outboundSchema.default("wandb"),
+  type: z.literal("wandb").default("wandb" as const),
   project: z.string(),
   name: z.nullable(z.string()).optional(),
   apiKey: z.string(),

@@ -26,8 +26,8 @@ async function run() {
   const result = await mistral.ocr.process({
     model: "CX-9",
     document: {
-      documentUrl: "https://upset-labourer.net/",
       type: "document_url",
+      documentUrl: "https://upset-labourer.net/",
     },
   });
 
@@ -55,8 +55,8 @@ async function run() {
   const res = await ocrProcess(mistral, {
     model: "CX-9",
     document: {
-      documentUrl: "https://upset-labourer.net/",
       type: "document_url",
+      documentUrl: "https://upset-labourer.net/",
     },
   });
   if (res.ok) {

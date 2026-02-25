@@ -28,8 +28,8 @@ async function run() {
     model: "mistral-large-latest",
     messages: [
       {
-        content: "Who is the best French painter? Answer in one short sentence.",
         role: "user",
+        content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
     responseFormat: {
@@ -62,8 +62,8 @@ async function run() {
     model: "mistral-large-latest",
     messages: [
       {
-        content: "Who is the best French painter? Answer in one short sentence.",
         role: "user",
+        content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
     responseFormat: {
@@ -120,8 +120,8 @@ async function run() {
     model: "mistral-large-latest",
     messages: [
       {
-        content: "Who is the best French painter? Answer in one short sentence.",
         role: "user",
+        content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
     responseFormat: {
@@ -156,8 +156,8 @@ async function run() {
     model: "mistral-large-latest",
     messages: [
       {
-        content: "Who is the best French painter? Answer in one short sentence.",
         role: "user",
+        content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
     responseFormat: {

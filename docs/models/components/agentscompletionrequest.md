@@ -9,7 +9,6 @@ let value: AgentsCompletionRequest = {
   messages: [
     {
       content: "Who is the best French painter? Answer in one short sentence.",
-      role: "user",
     },
   ],
   responseFormat: {

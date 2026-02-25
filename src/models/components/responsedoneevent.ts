@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,21 +12,11 @@ import {
   ConversationUsageInfo$inboundSchema,
 } from "./conversationusageinfo.js";
 
-export const ResponseDoneEventType = {
-  ConversationResponseDone: "conversation.response.done",
-} as const;
-export type ResponseDoneEventType = ClosedEnum<typeof ResponseDoneEventType>;
-
 export type ResponseDoneEvent = {
-  type: ResponseDoneEventType | undefined;
+  type?: "conversation.response.done" | undefined;
   createdAt?: Date | undefined;
   usage: ConversationUsageInfo;
 };
-
-/** @internal */
-export const ResponseDoneEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseDoneEventType
-> = z.nativeEnum(ResponseDoneEventType);
 
 /** @internal */
 export const ResponseDoneEvent$inboundSchema: z.ZodType<
@@ -35,7 +24,7 @@ export const ResponseDoneEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ResponseDoneEventType$inboundSchema.default(
+  type: z.literal("conversation.response.done").default(
     "conversation.response.done",
   ),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))

@@ -48,9 +48,6 @@ export type Hyperparameters =
 export type JobInRepositories = GithubRepositoryIn;
 
 export type JobIn = {
-  /**
-   * The name of the model to fine-tune.
-   */
   model: string;
   trainingFiles?: Array<TrainingFile> | undefined;
   /**

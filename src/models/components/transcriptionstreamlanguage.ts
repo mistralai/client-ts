@@ -8,31 +8,14 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const TranscriptionStreamLanguageType = {
-  TranscriptionLanguage: "transcription.language",
-} as const;
-export type TranscriptionStreamLanguageType = ClosedEnum<
-  typeof TranscriptionStreamLanguageType
->;
-
 export type TranscriptionStreamLanguage = {
-  type?: TranscriptionStreamLanguageType | undefined;
+  type?: "transcription.language" | undefined;
   audioLanguage: string;
   additionalProperties?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const TranscriptionStreamLanguageType$inboundSchema: z.ZodNativeEnum<
-  typeof TranscriptionStreamLanguageType
-> = z.nativeEnum(TranscriptionStreamLanguageType);
-/** @internal */
-export const TranscriptionStreamLanguageType$outboundSchema: z.ZodNativeEnum<
-  typeof TranscriptionStreamLanguageType
-> = TranscriptionStreamLanguageType$inboundSchema;
 
 /** @internal */
 export const TranscriptionStreamLanguage$inboundSchema: z.ZodType<
@@ -41,9 +24,7 @@ export const TranscriptionStreamLanguage$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
-    type: TranscriptionStreamLanguageType$inboundSchema.default(
-      "transcription.language",
-    ),
+    type: z.literal("transcription.language").default("transcription.language"),
     audio_language: z.string(),
   }).catchall(z.any()),
   "additionalProperties",
@@ -55,7 +36,7 @@ export const TranscriptionStreamLanguage$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type TranscriptionStreamLanguage$Outbound = {
-  type: string;
+  type: "transcription.language";
   audio_language: string;
   [additionalProperties: string]: unknown;
 };
@@ -66,8 +47,8 @@ export const TranscriptionStreamLanguage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TranscriptionStreamLanguage
 > = z.object({
-  type: TranscriptionStreamLanguageType$outboundSchema.default(
-    "transcription.language",
+  type: z.literal("transcription.language").default(
+    "transcription.language" as const,
   ),
   audioLanguage: z.string(),
   additionalProperties: z.record(z.any()).optional(),

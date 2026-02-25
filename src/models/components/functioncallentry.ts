@@ -15,46 +15,33 @@ import {
   FunctionCallEntryArguments$outboundSchema,
 } from "./functioncallentryarguments.js";
 
-export const FunctionCallEntryObject = {
-  Entry: "entry",
+export const ConfirmationStatus = {
+  Pending: "pending",
+  Allowed: "allowed",
+  Denied: "denied",
 } as const;
-export type FunctionCallEntryObject = ClosedEnum<
-  typeof FunctionCallEntryObject
->;
-
-export const FunctionCallEntryType = {
-  FunctionCall: "function.call",
-} as const;
-export type FunctionCallEntryType = ClosedEnum<typeof FunctionCallEntryType>;
+export type ConfirmationStatus = ClosedEnum<typeof ConfirmationStatus>;
 
 export type FunctionCallEntry = {
-  object?: FunctionCallEntryObject | undefined;
-  type?: FunctionCallEntryType | undefined;
+  object?: "entry" | undefined;
+  type?: "function.call" | undefined;
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
   toolCallId: string;
   name: string;
   arguments: FunctionCallEntryArguments;
+  confirmationStatus?: ConfirmationStatus | null | undefined;
 };
 
 /** @internal */
-export const FunctionCallEntryObject$inboundSchema: z.ZodNativeEnum<
-  typeof FunctionCallEntryObject
-> = z.nativeEnum(FunctionCallEntryObject);
+export const ConfirmationStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ConfirmationStatus
+> = z.nativeEnum(ConfirmationStatus);
 /** @internal */
-export const FunctionCallEntryObject$outboundSchema: z.ZodNativeEnum<
-  typeof FunctionCallEntryObject
-> = FunctionCallEntryObject$inboundSchema;
-
-/** @internal */
-export const FunctionCallEntryType$inboundSchema: z.ZodNativeEnum<
-  typeof FunctionCallEntryType
-> = z.nativeEnum(FunctionCallEntryType);
-/** @internal */
-export const FunctionCallEntryType$outboundSchema: z.ZodNativeEnum<
-  typeof FunctionCallEntryType
-> = FunctionCallEntryType$inboundSchema;
+export const ConfirmationStatus$outboundSchema: z.ZodNativeEnum<
+  typeof ConfirmationStatus
+> = ConfirmationStatus$inboundSchema;
 
 /** @internal */
 export const FunctionCallEntry$inboundSchema: z.ZodType<
@@ -62,8 +49,8 @@ export const FunctionCallEntry$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: FunctionCallEntryObject$inboundSchema.default("entry"),
-  type: FunctionCallEntryType$inboundSchema.default("function.call"),
+  object: z.literal("entry").default("entry"),
+  type: z.literal("function.call").default("function.call"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
@@ -73,23 +60,26 @@ export const FunctionCallEntry$inboundSchema: z.ZodType<
   tool_call_id: z.string(),
   name: z.string(),
   arguments: FunctionCallEntryArguments$inboundSchema,
+  confirmation_status: z.nullable(ConfirmationStatus$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
     "completed_at": "completedAt",
     "tool_call_id": "toolCallId",
+    "confirmation_status": "confirmationStatus",
   });
 });
 /** @internal */
 export type FunctionCallEntry$Outbound = {
-  object: string;
-  type: string;
+  object: "entry";
+  type: "function.call";
   created_at?: string | undefined;
   completed_at?: string | null | undefined;
   id?: string | undefined;
   tool_call_id: string;
   name: string;
   arguments: FunctionCallEntryArguments$Outbound;
+  confirmation_status?: string | null | undefined;
 };
 
 /** @internal */
@@ -98,19 +88,21 @@ export const FunctionCallEntry$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FunctionCallEntry
 > = z.object({
-  object: FunctionCallEntryObject$outboundSchema.default("entry"),
-  type: FunctionCallEntryType$outboundSchema.default("function.call"),
+  object: z.literal("entry").default("entry" as const),
+  type: z.literal("function.call").default("function.call" as const),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),
   toolCallId: z.string(),
   name: z.string(),
   arguments: FunctionCallEntryArguments$outboundSchema,
+  confirmationStatus: z.nullable(ConfirmationStatus$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
     completedAt: "completed_at",
     toolCallId: "tool_call_id",
+    confirmationStatus: "confirmation_status",
   });
 });
 

@@ -4,7 +4,14 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
+
+export const OrderBy = {
+  Created: "created",
+  MinusCreated: "-created",
+} as const;
+export type OrderBy = ClosedEnum<typeof OrderBy>;
 
 export type JobsApiRoutesBatchGetBatchJobsRequest = {
   page?: number | undefined;
@@ -15,7 +22,12 @@ export type JobsApiRoutesBatchGetBatchJobsRequest = {
   createdAfter?: Date | null | undefined;
   createdByMe?: boolean | undefined;
   status?: Array<components.BatchJobStatus> | null | undefined;
+  orderBy?: OrderBy | undefined;
 };
+
+/** @internal */
+export const OrderBy$outboundSchema: z.ZodNativeEnum<typeof OrderBy> = z
+  .nativeEnum(OrderBy);
 
 /** @internal */
 export type JobsApiRoutesBatchGetBatchJobsRequest$Outbound = {
@@ -27,6 +39,7 @@ export type JobsApiRoutesBatchGetBatchJobsRequest$Outbound = {
   created_after?: string | null | undefined;
   created_by_me: boolean;
   status?: Array<string> | null | undefined;
+  order_by: string;
 };
 
 /** @internal */
@@ -44,12 +57,14 @@ export const JobsApiRoutesBatchGetBatchJobsRequest$outboundSchema: z.ZodType<
   createdByMe: z.boolean().default(false),
   status: z.nullable(z.array(components.BatchJobStatus$outboundSchema))
     .optional(),
+  orderBy: OrderBy$outboundSchema.default("-created"),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
     agentId: "agent_id",
     createdAfter: "created_after",
     createdByMe: "created_by_me",
+    orderBy: "order_by",
   });
 });
 

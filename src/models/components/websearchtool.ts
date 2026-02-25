@@ -3,10 +3,17 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ToolConfiguration,
+  ToolConfiguration$inboundSchema,
+  ToolConfiguration$Outbound,
+  ToolConfiguration$outboundSchema,
+} from "./toolconfiguration.js";
 
 export const WebSearchToolType = {
   WebSearch: "web_search",
@@ -14,6 +21,7 @@ export const WebSearchToolType = {
 export type WebSearchToolType = ClosedEnum<typeof WebSearchToolType>;
 
 export type WebSearchTool = {
+  toolConfiguration?: ToolConfiguration | null | undefined;
   type?: WebSearchToolType | undefined;
 };
 
@@ -32,10 +40,16 @@ export const WebSearchTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
   type: WebSearchToolType$inboundSchema.default("web_search"),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_configuration": "toolConfiguration",
+  });
 });
 /** @internal */
 export type WebSearchTool$Outbound = {
+  tool_configuration?: ToolConfiguration$Outbound | null | undefined;
   type: string;
 };
 
@@ -45,7 +59,12 @@ export const WebSearchTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WebSearchTool
 > = z.object({
+  toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),
   type: WebSearchToolType$outboundSchema.default("web_search"),
+}).transform((v) => {
+  return remap$(v, {
+    toolConfiguration: "tool_configuration",
+  });
 });
 
 export function webSearchToolToJSON(webSearchTool: WebSearchTool): string {

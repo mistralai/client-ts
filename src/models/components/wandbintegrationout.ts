@@ -5,19 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const WandbIntegrationOutType = {
-  Wandb: "wandb",
-} as const;
-export type WandbIntegrationOutType = ClosedEnum<
-  typeof WandbIntegrationOutType
->;
-
 export type WandbIntegrationOut = {
-  type: WandbIntegrationOutType | undefined;
+  type?: "wandb" | undefined;
   /**
    * The name of the project that the new run will be created under.
    */
@@ -31,17 +23,12 @@ export type WandbIntegrationOut = {
 };
 
 /** @internal */
-export const WandbIntegrationOutType$inboundSchema: z.ZodNativeEnum<
-  typeof WandbIntegrationOutType
-> = z.nativeEnum(WandbIntegrationOutType);
-
-/** @internal */
 export const WandbIntegrationOut$inboundSchema: z.ZodType<
   WandbIntegrationOut,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: WandbIntegrationOutType$inboundSchema.default("wandb"),
+  type: z.literal("wandb").default("wandb"),
   project: z.string(),
   name: z.nullable(z.string()).optional(),
   run_name: z.nullable(z.string()).optional(),

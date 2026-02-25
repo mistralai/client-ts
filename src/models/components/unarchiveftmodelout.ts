@@ -4,27 +4,14 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const UnarchiveFTModelOutObject = {
-  Model: "model",
-} as const;
-export type UnarchiveFTModelOutObject = ClosedEnum<
-  typeof UnarchiveFTModelOutObject
->;
-
 export type UnarchiveFTModelOut = {
   id: string;
-  object: UnarchiveFTModelOutObject | undefined;
+  object?: "model" | undefined;
   archived: boolean | undefined;
 };
-
-/** @internal */
-export const UnarchiveFTModelOutObject$inboundSchema: z.ZodNativeEnum<
-  typeof UnarchiveFTModelOutObject
-> = z.nativeEnum(UnarchiveFTModelOutObject);
 
 /** @internal */
 export const UnarchiveFTModelOut$inboundSchema: z.ZodType<
@@ -33,7 +20,7 @@ export const UnarchiveFTModelOut$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  object: UnarchiveFTModelOutObject$inboundSchema.default("model"),
+  object: z.literal("model").default("model"),
   archived: z.boolean().default(false),
 });
 

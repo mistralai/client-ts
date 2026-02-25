@@ -336,6 +336,14 @@ describe("RealtimeTranscription.transcribeStream", () => {
 
     const events = await eventsPromise;
     expect(events.map((event) => event.type)).toContain("transcription.done");
+    const sentMessageTypes = ws.sent.map((message) => {
+      const parsed = JSON.parse(message) as { type?: string };
+      return parsed.type;
+    });
+    const flushIndex = sentMessageTypes.lastIndexOf("input_audio.flush");
+    const endIndex = sentMessageTypes.lastIndexOf("input_audio.end");
+    expect(flushIndex).toBeGreaterThan(-1);
+    expect(endIndex).toBeGreaterThan(flushIndex);
     expect(ws.closeArgs?.code).toBe(1000);
   });
 

@@ -5,16 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const AgentConversationObject = {
-  Conversation: "conversation",
-} as const;
-export type AgentConversationObject = ClosedEnum<
-  typeof AgentConversationObject
->;
 
 export type AgentConversationAgentVersion = string | number;
 
@@ -31,18 +23,13 @@ export type AgentConversation = {
    * Custom metadata for the conversation.
    */
   metadata?: { [k: string]: any } | null | undefined;
-  object: AgentConversationObject | undefined;
+  object?: "conversation" | undefined;
   id: string;
   createdAt: Date;
   updatedAt: Date;
   agentId: string;
   agentVersion?: string | number | null | undefined;
 };
-
-/** @internal */
-export const AgentConversationObject$inboundSchema: z.ZodNativeEnum<
-  typeof AgentConversationObject
-> = z.nativeEnum(AgentConversationObject);
 
 /** @internal */
 export const AgentConversationAgentVersion$inboundSchema: z.ZodType<
@@ -70,7 +57,7 @@ export const AgentConversation$inboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.any())).optional(),
-  object: AgentConversationObject$inboundSchema.default("conversation"),
+  object: z.literal("conversation").default("conversation"),
   id: z.string(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
