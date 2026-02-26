@@ -13,3 +13,4 @@
 /.tshy
 /.tshy-*
 /__tests__
+package-lock.json
