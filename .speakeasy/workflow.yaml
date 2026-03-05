@@ -3,15 +3,15 @@ speakeasyVersion: v1.690.1
 sources:
     mistral-azure-source:
         inputs:
-            - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-azure:main
+            - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-azure:v1
         output: ./packages/mistralai-azure/.speakeasy/azure.out.openapi.yaml
     mistral-google-cloud-source:
         inputs:
-            - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-google-cloud:main
+            - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi-google-cloud:v1
         output: ./packages/mistralai-gcp/.speakeasy/gcp.out.openapi.yaml
     mistral-openapi:
         inputs:
-            - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi:main
+            - location: registry.speakeasyapi.dev/mistral-dev/mistral-dev/mistral-openapi:v1
         output: .speakeasy/main.out.openapi.yaml
 targets:
     mistralai-azure-sdk:
