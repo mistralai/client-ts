@@ -9,7 +9,6 @@ let value: MessageOutputEvent = {
   id: "<id>",
   content: {
     thinking: [],
-    closed: true,
   },
 };
 ```
