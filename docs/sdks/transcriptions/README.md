@@ -15,7 +15,7 @@ Create Transcription
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="audio_api_v1_transcriptions_post" method="post" path="/v1/audio/transcriptions" -->
+<!-- UsageSnippet language="typescript" operationID="audio_api_v1_transcriptions_post" method="post" path="/v1/audio/transcriptions" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -25,7 +25,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.audio.transcriptions.complete({
-    model: "Model X",
+    model: "voxtral-mini-latest",
   });
 
   console.log(result);
@@ -50,7 +50,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await audioTranscriptionsComplete(mistral, {
-    model: "Model X",
+    model: "voxtral-mini-latest",
   });
   if (res.ok) {
     const { value: result } = res;

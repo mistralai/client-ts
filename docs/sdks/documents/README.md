@@ -622,7 +622,7 @@ run();
 
 ### Response
 
-**Promise\<[string](../../models/.md)\>**
+**Promise\<[string](../../models/responselibrariesdocumentsgetsignedurlv1.md)\>**
 
 ### Errors
 
@@ -698,7 +698,7 @@ run();
 
 ### Response
 
-**Promise\<[string](../../models/.md)\>**
+**Promise\<[string](../../models/responselibrariesdocumentsgetextractedtextsignedurlv1.md)\>**
 
 ### Errors
 
