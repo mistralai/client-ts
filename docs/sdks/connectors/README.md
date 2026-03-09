@@ -2,6 +2,8 @@
 
 ## Overview
 
+(beta) Connectors API - manage your connectors
+
 ### Available Operations
 
 * [create](#create) - Create a new connector.
