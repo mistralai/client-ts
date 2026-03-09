@@ -5,10 +5,10 @@ Chat to classify
 
 ## Supported Types
 
-### `components.InstructRequest`
+### `components.InstructRequestInputs`
 
 ```typescript
-const value: components.InstructRequest = {
+const value: components.InstructRequestInputs = {
   messages: [],
 };
 ```
