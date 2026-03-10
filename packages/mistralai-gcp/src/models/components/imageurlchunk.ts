@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -17,17 +16,12 @@ import {
 
 export type ImageURLChunkImageURL = ImageURL | string;
 
-export const ImageURLChunkType = {
-  ImageUrl: "image_url",
-} as const;
-export type ImageURLChunkType = ClosedEnum<typeof ImageURLChunkType>;
-
 /**
  * {"type":"image_url","image_url":{"url":"data:image/png;base64,iVBORw0
  */
 export type ImageURLChunk = {
+  type?: "image_url" | undefined;
   imageUrl: ImageURL | string;
-  type?: ImageURLChunkType | undefined;
 };
 
 /** @internal */
@@ -64,22 +58,13 @@ export function imageURLChunkImageURLFromJSON(
 }
 
 /** @internal */
-export const ImageURLChunkType$inboundSchema: z.ZodNativeEnum<
-  typeof ImageURLChunkType
-> = z.nativeEnum(ImageURLChunkType);
-/** @internal */
-export const ImageURLChunkType$outboundSchema: z.ZodNativeEnum<
-  typeof ImageURLChunkType
-> = ImageURLChunkType$inboundSchema;
-
-/** @internal */
 export const ImageURLChunk$inboundSchema: z.ZodType<
   ImageURLChunk,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  type: z.literal("image_url").default("image_url"),
   image_url: z.union([ImageURL$inboundSchema, z.string()]),
-  type: ImageURLChunkType$inboundSchema.default("image_url"),
 }).transform((v) => {
   return remap$(v, {
     "image_url": "imageUrl",
@@ -87,8 +72,8 @@ export const ImageURLChunk$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ImageURLChunk$Outbound = {
+  type: "image_url";
   image_url: ImageURL$Outbound | string;
-  type: string;
 };
 
 /** @internal */
@@ -97,8 +82,8 @@ export const ImageURLChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ImageURLChunk
 > = z.object({
+  type: z.literal("image_url").default("image_url" as const),
   imageUrl: z.union([ImageURL$outboundSchema, z.string()]),
-  type: ImageURLChunkType$outboundSchema.default("image_url"),
 }).transform((v) => {
   return remap$(v, {
     imageUrl: "image_url",

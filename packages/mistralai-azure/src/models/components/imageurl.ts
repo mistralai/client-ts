@@ -6,10 +6,15 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ImageDetail,
+  ImageDetail$inboundSchema,
+  ImageDetail$outboundSchema,
+} from "./imagedetail.js";
 
 export type ImageURL = {
   url: string;
-  detail?: string | null | undefined;
+  detail?: ImageDetail | null | undefined;
 };
 
 /** @internal */
@@ -19,7 +24,7 @@ export const ImageURL$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   url: z.string(),
-  detail: z.nullable(z.string()).optional(),
+  detail: z.nullable(ImageDetail$inboundSchema).optional(),
 });
 /** @internal */
 export type ImageURL$Outbound = {
@@ -34,7 +39,7 @@ export const ImageURL$outboundSchema: z.ZodType<
   ImageURL
 > = z.object({
   url: z.string(),
-  detail: z.nullable(z.string()).optional(),
+  detail: z.nullable(ImageDetail$outboundSchema).optional(),
 });
 
 export function imageURLToJSON(imageURL: ImageURL): string {

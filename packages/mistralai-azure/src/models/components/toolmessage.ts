@@ -4,7 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
 import {
   ContentChunk,
   ContentChunk$Outbound,
@@ -13,16 +12,11 @@ import {
 
 export type ToolMessageContent = string | Array<ContentChunk>;
 
-export const ToolMessageRole = {
-  Tool: "tool",
-} as const;
-export type ToolMessageRole = ClosedEnum<typeof ToolMessageRole>;
-
 export type ToolMessage = {
+  role?: "tool" | undefined;
   content: string | Array<ContentChunk> | null;
   toolCallId?: string | null | undefined;
   name?: string | null | undefined;
-  role?: ToolMessageRole | undefined;
 };
 
 /** @internal */
@@ -44,16 +38,11 @@ export function toolMessageContentToJSON(
 }
 
 /** @internal */
-export const ToolMessageRole$outboundSchema: z.ZodNativeEnum<
-  typeof ToolMessageRole
-> = z.nativeEnum(ToolMessageRole);
-
-/** @internal */
 export type ToolMessage$Outbound = {
+  role: "tool";
   content: string | Array<ContentChunk$Outbound> | null;
   tool_call_id?: string | null | undefined;
   name?: string | null | undefined;
-  role: string;
 };
 
 /** @internal */
@@ -62,12 +51,12 @@ export const ToolMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolMessage
 > = z.object({
+  role: z.literal("tool").default("tool" as const),
   content: z.nullable(
     z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),
   toolCallId: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
-  role: ToolMessageRole$outboundSchema.default("tool"),
 }).transform((v) => {
   return remap$(v, {
     toolCallId: "tool_call_id",

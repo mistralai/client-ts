@@ -10237,7 +10237,7 @@ components:
         model:
           type: string
           title: Model
-          description: The ID of the model to be used for embedding.
+          description: ID of the model to use.
           example: mistral-embed
         metadata:
           anyOf:
@@ -10252,7 +10252,7 @@ components:
               items:
                 type: string
           title: Input
-          description: The text content to be embedded, can be a string or an array of strings for fast processing in bulk.
+          description: Text to embed.
           example:
             - Embed this sentence.
             - As well as this one.
@@ -11567,6 +11567,28 @@ components:
         - messages
         - agent_id
       additionalProperties: false
+    ChatClassificationRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          title: Model
+        input:
+          $ref: '#/components/schemas/ChatClassificationRequestInputs'
+      title: ChatClassificationRequest
+      required:
+        - input
+        - model
+      additionalProperties: false
+    ChatClassificationRequestInputs:
+      anyOf:
+        - $ref: '#/components/schemas/InstructRequest'
+        - type: array
+          items:
+            $ref: '#/components/schemas/InstructRequest'
+      title: ChatClassificationRequestInputs
+      description: Chat to classify
+      x-speakeasy-name-override: inputs
     ClassificationResponse:
       type: object
       properties:
@@ -11598,6 +11620,28 @@ components:
       title: ClassificationTargetResult
       required:
         - scores
+    ContentChunk:
+      oneOf:
+        - $ref: '#/components/schemas/TextChunk'
+        - $ref: '#/components/schemas/ImageURLChunk'
+        - $ref: '#/components/schemas/DocumentURLChunk'
+        - $ref: '#/components/schemas/ReferenceChunk'
+        - $ref: '#/components/schemas/FileChunk'
+        - $ref: '#/components/schemas/ThinkChunk'
+        - $ref: '#/components/schemas/AudioChunk'
+        - $ref: '#/components/schemas/AudioURLChunk'
+      discriminator:
+        propertyName: type
+        mapping:
+          image_url: '#/components/schemas/ImageURLChunk'
+          document_url: '#/components/schemas/DocumentURLChunk'
+          text: '#/components/schemas/TextChunk'
+          reference: '#/components/schemas/ReferenceChunk'
+          file: '#/components/schemas/FileChunk'
+          thinking: '#/components/schemas/ThinkChunk'
+          input_audio: '#/components/schemas/AudioChunk'
+          audio_url: '#/components/schemas/AudioURLChunk'
+      title: ContentChunk
     ModerationResponse:
       type: object
       properties:
@@ -11629,50 +11673,6 @@ components:
             type: number
           description: Moderation result
       title: ModerationObject
-    ContentChunk:
-      oneOf:
-        - $ref: '#/components/schemas/TextChunk'
-        - $ref: '#/components/schemas/ImageURLChunk'
-        - $ref: '#/components/schemas/DocumentURLChunk'
-        - $ref: '#/components/schemas/ReferenceChunk'
-        - $ref: '#/components/schemas/FileChunk'
-        - $ref: '#/components/schemas/ThinkChunk'
-        - $ref: '#/components/schemas/AudioChunk'
-        - $ref: '#/components/schemas/AudioURLChunk'
-      discriminator:
-        propertyName: type
-        mapping:
-          image_url: '#/components/schemas/ImageURLChunk'
-          document_url: '#/components/schemas/DocumentURLChunk'
-          text: '#/components/schemas/TextChunk'
-          reference: '#/components/schemas/ReferenceChunk'
-          file: '#/components/schemas/FileChunk'
-          thinking: '#/components/schemas/ThinkChunk'
-          input_audio: '#/components/schemas/AudioChunk'
-          audio_url: '#/components/schemas/AudioURLChunk'
-      title: ContentChunk
-    ChatClassificationRequest:
-      type: object
-      properties:
-        model:
-          type: string
-          title: Model
-        input:
-          $ref: '#/components/schemas/ChatClassificationRequestInputs'
-      title: ChatClassificationRequest
-      required:
-        - input
-        - model
-      additionalProperties: false
-    ChatClassificationRequestInputs:
-      anyOf:
-        - $ref: '#/components/schemas/InstructRequest'
-        - type: array
-          items:
-            $ref: '#/components/schemas/InstructRequest'
-      title: ChatClassificationRequestInputs
-      description: Chat to classify
-      x-speakeasy-name-override: inputs
     SystemMessageContentChunks:
       oneOf:
         - $ref: '#/components/schemas/TextChunk'
@@ -14413,6 +14413,12 @@ components:
             - data
             - model
             - usage
+    ToolTypes:
+      type: string
+      enum:
+        - function
+      title: ToolTypes
+      x-speakeasy-unknown-values: allow
     ChatCompletionStreamRequest:
       allOf:
         - $ref: '#/components/schemas/ChatCompletionRequest'
@@ -14437,12 +14443,6 @@ components:
             stream:
               type: boolean
               default: true
-    ToolTypes:
-      type: string
-      enum:
-        - function
-      title: ToolTypes
-      x-speakeasy-unknown-values: allow
   securitySchemes:
     ApiKey:
       type: http

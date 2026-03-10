@@ -38,10 +38,6 @@ export const FunctionCallEntryObject = { FunctionCall: "function.call" } as cons
 export const ToolExecutionEntryObject = { ToolExecution: "tool.execution" } as const;
 export const AgentHandoffEntryObject = { AgentHandoff: "agent.handoff" } as const;
 
-// Entry roles (these changed from enum to const)
-export const MessageOutputEntryRole = { Assistant: "assistant" } as const;
-export const MessageInputEntryRole = { Assistant: "assistant", User: "user" } as const;
-
 // Event types (these changed from enum to const)
 export const MessageOutputEventType = { MessageOutputDelta: "message.output.delta" } as const;
 export const MessageOutputEventRole = { Assistant: "assistant" } as const;
@@ -98,6 +94,15 @@ export const GithubRepositoryOutType = { Github: "github" } as const;
 export const GithubRepositoryInType = { Github: "github" } as const;
 export const WandbIntegrationOutType = { Wandb: "wandb" } as const;
 export const WandbIntegrationType = { Wandb: "wandb" } as const;
+
+// FT model types (these changed from enum to const)
+export const LegacyJobMetadataOutObject = { JobMetadata: "job.metadata" } as const;
+export const ClassifierFTModelOutObject = { Model: "model" } as const;
+export const ClassifierFTModelOutModelType = { Classifier: "classifier" } as const;
+export const CompletionFTModelOutObject = { Model: "model" } as const;
+export const ModelType = { Completion: "completion" } as const;
+export const ArchiveFTModelOutObject = { Model: "model" } as const;
+export const UnarchiveFTModelOutObject = { Model: "model" } as const;
 
 // Tool types (single-value consts, only those not already generated)
 export const FunctionToolType = { Function: "function" } as const;

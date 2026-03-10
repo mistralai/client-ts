@@ -12,7 +12,7 @@ let value: SystemMessage = {
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `content`                                          | *components.SystemMessageContent*                  | :heavy_check_mark:                                 | N/A                                                |
-| `role`                                             | [components.Role](../../models/components/role.md) | :heavy_minus_sign:                                 | N/A                                                |
+| Field                             | Type                              | Required                          | Description                       |
+| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
+| `role`                            | *"system"*                        | :heavy_minus_sign:                | N/A                               |
+| `content`                         | *components.SystemMessageContent* | :heavy_check_mark:                | N/A                               |

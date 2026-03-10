@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
 import {
   ReferenceChunk,
   ReferenceChunk$Outbound,
@@ -14,47 +13,51 @@ import {
   TextChunk$Outbound,
   TextChunk$outboundSchema,
 } from "./textchunk.js";
+import {
+  ToolReferenceChunk,
+  ToolReferenceChunk$Outbound,
+  ToolReferenceChunk$outboundSchema,
+} from "./toolreferencechunk.js";
 
-export type Thinking = ReferenceChunk | TextChunk;
-
-export const ThinkChunkType = {
-  Thinking: "thinking",
-} as const;
-export type ThinkChunkType = ClosedEnum<typeof ThinkChunkType>;
+export type Thinking = ToolReferenceChunk | TextChunk | ReferenceChunk;
 
 export type ThinkChunk = {
-  thinking: Array<ReferenceChunk | TextChunk>;
+  type?: "thinking" | undefined;
+  thinking: Array<ToolReferenceChunk | TextChunk | ReferenceChunk>;
   /**
    * Whether the thinking chunk is closed or not. Currently only used for prefixing.
    */
   closed?: boolean | undefined;
-  type?: ThinkChunkType | undefined;
 };
 
 /** @internal */
-export type Thinking$Outbound = ReferenceChunk$Outbound | TextChunk$Outbound;
+export type Thinking$Outbound =
+  | ToolReferenceChunk$Outbound
+  | TextChunk$Outbound
+  | ReferenceChunk$Outbound;
 
 /** @internal */
 export const Thinking$outboundSchema: z.ZodType<
   Thinking$Outbound,
   z.ZodTypeDef,
   Thinking
-> = z.union([ReferenceChunk$outboundSchema, TextChunk$outboundSchema]);
+> = z.union([
+  ToolReferenceChunk$outboundSchema,
+  TextChunk$outboundSchema,
+  ReferenceChunk$outboundSchema,
+]);
 
 export function thinkingToJSON(thinking: Thinking): string {
   return JSON.stringify(Thinking$outboundSchema.parse(thinking));
 }
 
 /** @internal */
-export const ThinkChunkType$outboundSchema: z.ZodNativeEnum<
-  typeof ThinkChunkType
-> = z.nativeEnum(ThinkChunkType);
-
-/** @internal */
 export type ThinkChunk$Outbound = {
-  thinking: Array<ReferenceChunk$Outbound | TextChunk$Outbound>;
+  type: "thinking";
+  thinking: Array<
+    ToolReferenceChunk$Outbound | TextChunk$Outbound | ReferenceChunk$Outbound
+  >;
   closed?: boolean | undefined;
-  type: string;
 };
 
 /** @internal */
@@ -63,11 +66,15 @@ export const ThinkChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ThinkChunk
 > = z.object({
+  type: z.literal("thinking").default("thinking" as const),
   thinking: z.array(
-    z.union([ReferenceChunk$outboundSchema, TextChunk$outboundSchema]),
+    z.union([
+      ToolReferenceChunk$outboundSchema,
+      TextChunk$outboundSchema,
+      ReferenceChunk$outboundSchema,
+    ]),
   ),
   closed: z.boolean().optional(),
-  type: ThinkChunkType$outboundSchema.default("thinking"),
 });
 
 export function thinkChunkToJSON(thinkChunk: ThinkChunk): string {

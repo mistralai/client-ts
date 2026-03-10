@@ -1,45 +1,45 @@
-speakeasyVersion: 1.690.1
+speakeasyVersion: 1.749.1
 sources:
     mistral-azure-source:
         sourceNamespace: mistral-openapi-azure
-        sourceRevisionDigest: sha256:544a7fd4d099e72a9a12681b326d44201f1b163e4df2f5fd643d831167255d84
-        sourceBlobDigest: sha256:41c72401329a30983907c32a60063da8ccd82137cf79d7f452089b5b83bb9d92
+        sourceRevisionDigest: sha256:eb584bef8819a419b935679527b6838fb3cb16ed3d9ac30ffdbcccd69dd28224
+        sourceBlobDigest: sha256:251eee6f6a9efa782b56bcbf1e12a8205d7118e711043c74cea6630da8b82333
         tags:
             - latest
     mistral-google-cloud-source:
         sourceNamespace: mistral-openapi-google-cloud
-        sourceRevisionDigest: sha256:e3dd3079347edf744151936aaee4ec0ce3eeeb8f46b5c7f31f8e224221e879d4
-        sourceBlobDigest: sha256:7a525230930debff23fec4e92e3ad2a57889ea46de86cc96d519615709ae8a16
+        sourceRevisionDigest: sha256:a26a4e4080caf44f059870fa7a62b6b5dbb83007c2ba8bf45268deefdfdccc51
+        sourceBlobDigest: sha256:b66d30e14ef9f0fe86f9a88fb57d16ef581177625f0061d5f0ff83b4db7a8840
         tags:
             - latest
     mistral-openapi:
         sourceNamespace: mistral-openapi
-        sourceRevisionDigest: sha256:c81de212355d13460a9169a3387e421ab24213c35f408b904c65a5e082ed11c0
-        sourceBlobDigest: sha256:6f892e17ebf9509a5a02ceba5d6e2464041e83fed832491ec8c3639686190967
+        sourceRevisionDigest: sha256:825f4195f6e60160573622a86aa8a339ba1befe1c82c763530b68bb21f1c0fa2
+        sourceBlobDigest: sha256:95b8b374d6434123b6bd7bf79ebf2b6201ba15aa186779ff8780ab4c3589dad9
         tags:
             - latest
 targets:
     mistralai-azure-sdk:
         source: mistral-azure-source
         sourceNamespace: mistral-openapi-azure
-        sourceRevisionDigest: sha256:544a7fd4d099e72a9a12681b326d44201f1b163e4df2f5fd643d831167255d84
-        sourceBlobDigest: sha256:41c72401329a30983907c32a60063da8ccd82137cf79d7f452089b5b83bb9d92
+        sourceRevisionDigest: sha256:eb584bef8819a419b935679527b6838fb3cb16ed3d9ac30ffdbcccd69dd28224
+        sourceBlobDigest: sha256:251eee6f6a9efa782b56bcbf1e12a8205d7118e711043c74cea6630da8b82333
         codeSamplesNamespace: mistral-openapi-azure-code-samples
-        codeSamplesRevisionDigest: sha256:15d50413ef924c8ea6a1e975d42dd70f2041f3740dec00ba963449182383f75c
+        codeSamplesRevisionDigest: sha256:2de7519a86158eb3cf99b91c2c1a21d6aeee782ad19e2574769b08ee0f49adfd
     mistralai-gcp-sdk:
         source: mistral-google-cloud-source
         sourceNamespace: mistral-openapi-google-cloud
-        sourceRevisionDigest: sha256:e3dd3079347edf744151936aaee4ec0ce3eeeb8f46b5c7f31f8e224221e879d4
-        sourceBlobDigest: sha256:7a525230930debff23fec4e92e3ad2a57889ea46de86cc96d519615709ae8a16
+        sourceRevisionDigest: sha256:a26a4e4080caf44f059870fa7a62b6b5dbb83007c2ba8bf45268deefdfdccc51
+        sourceBlobDigest: sha256:b66d30e14ef9f0fe86f9a88fb57d16ef581177625f0061d5f0ff83b4db7a8840
         codeSamplesNamespace: mistral-openapi-google-cloud-code-samples
-        codeSamplesRevisionDigest: sha256:63e197c345c5749f7eb5ed7dae8d66e8329f60f9aab32b884bce830bb0264825
+        codeSamplesRevisionDigest: sha256:421ac6458a30371440d666c67b13fad753eed2fd39a973fbf6cbccae0d17e1f7
     mistralai-sdk:
         source: mistral-openapi
         sourceNamespace: mistral-openapi
-        sourceRevisionDigest: sha256:c81de212355d13460a9169a3387e421ab24213c35f408b904c65a5e082ed11c0
-        sourceBlobDigest: sha256:6f892e17ebf9509a5a02ceba5d6e2464041e83fed832491ec8c3639686190967
+        sourceRevisionDigest: sha256:825f4195f6e60160573622a86aa8a339ba1befe1c82c763530b68bb21f1c0fa2
+        sourceBlobDigest: sha256:95b8b374d6434123b6bd7bf79ebf2b6201ba15aa186779ff8780ab4c3589dad9
         codeSamplesNamespace: mistral-openapi-code-samples
-        codeSamplesRevisionDigest: sha256:18f0c4dc82e1f2279a87b5a1a094f01e9d199147a5ce6fe6ef4f5bd003ab773e
+        codeSamplesRevisionDigest: sha256:fdecbb7c69de9aca9caab415272704bf64356641b80c1ba116c167da28d194ee
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: v1.690.1
