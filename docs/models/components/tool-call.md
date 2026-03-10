@@ -1,0 +1,23 @@
+# ToolCall
+
+## Example Usage
+
+```typescript
+import { ToolCall } from "@mistralai/mistralai-azure/models/components";
+
+let value: ToolCall = {
+  function: {
+    name: "<value>",
+    arguments: {},
+  },
+};
+```
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `id`                                                                | *string*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `type`                                                              | [components.ToolTypes](../../models/components/tool-types.md)       | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `function`                                                          | [components.FunctionCall](../../models/components/function-call.md) | :heavy_check_mark:                                                  | N/A                                                                 |
+| `index`                                                             | *number*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
