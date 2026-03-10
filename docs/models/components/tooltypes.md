@@ -6,11 +6,11 @@
 import { ToolTypes } from "@mistralai/mistralai-azure/models/components";
 
 let value: ToolTypes = "function";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "function" | Unrecognized<string>
