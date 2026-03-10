@@ -14,7 +14,6 @@ generation:
     securityFeb2025: false
     sharedErrorComponentsApr2025: false
     sharedNestedComponentsJan2026: false
-    nameOverrideFeb2026: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
@@ -22,7 +21,6 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
-  versioningStrategy: automatic
   persistentEdits: {}
   tests:
     generateTests: true
@@ -68,7 +66,6 @@ typescript:
   inputModelSuffix: input
   jsonpath: legacy
   laxMode: strict
-  legacyFileNaming: true
   maxMethodParams: 0
   methodArguments: require-security-and-request
   modelPropertyCasing: camel
@@ -84,6 +81,4 @@ typescript:
   unionStrategy: left-to-right
   usageSDKInitImports: []
   useIndexModules: true
-  useOxlint: false
-  useTsgo: false
   zodVersion: v3

@@ -164,11 +164,8 @@ async function $do(
       z.instanceof(ReadableStream<Uint8Array>)
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
-            if (rawEvent.data === "[DONE]") {
-              return { done: true, value: undefined };
-            }
+            if (rawEvent.data === "[DONE]") return { done: true };
             return {
-              done: false,
               value: components.CompletionEvent$inboundSchema.parse(rawEvent),
             };
           });

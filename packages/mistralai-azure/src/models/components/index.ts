@@ -3,7 +3,6 @@
  */
 
 export * from "./assistantmessage.js";
-export * from "./builtinconnectors.js";
 export * from "./chatcompletionchoice.js";
 export * from "./chatcompletionrequest.js";
 export * from "./chatcompletionresponse.js";
@@ -18,7 +17,6 @@ export * from "./filechunk.js";
 export * from "./function.js";
 export * from "./functioncall.js";
 export * from "./functionname.js";
-export * from "./imagedetail.js";
 export * from "./imageurl.js";
 export * from "./imageurlchunk.js";
 export * from "./jsonschema.js";
@@ -44,7 +42,6 @@ export * from "./toolcall.js";
 export * from "./toolchoice.js";
 export * from "./toolchoiceenum.js";
 export * from "./toolmessage.js";
-export * from "./toolreferencechunk.js";
 export * from "./tooltypes.js";
 export * from "./usageinfo.js";
 export * from "./usermessage.js";

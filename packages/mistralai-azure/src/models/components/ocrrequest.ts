@@ -68,10 +68,6 @@ export type OCRRequest = {
    * Structured output class for extracting useful information from the entire document. Only json_schema is valid for this field
    */
   documentAnnotationFormat?: ResponseFormat | null | undefined;
-  /**
-   * Optional prompt to guide the model in extracting structured output from the entire document. A document_annotation_format must be provided.
-   */
-  documentAnnotationPrompt?: string | null | undefined;
   tableFormat?: TableFormat | null | undefined;
   extractHeader?: boolean | undefined;
   extractFooter?: boolean | undefined;
@@ -116,7 +112,6 @@ export type OCRRequest$Outbound = {
   image_min_size?: number | null | undefined;
   bbox_annotation_format?: ResponseFormat$Outbound | null | undefined;
   document_annotation_format?: ResponseFormat$Outbound | null | undefined;
-  document_annotation_prompt?: string | null | undefined;
   table_format?: string | null | undefined;
   extract_header?: boolean | undefined;
   extract_footer?: boolean | undefined;
@@ -142,7 +137,6 @@ export const OCRRequest$outboundSchema: z.ZodType<
   bboxAnnotationFormat: z.nullable(ResponseFormat$outboundSchema).optional(),
   documentAnnotationFormat: z.nullable(ResponseFormat$outboundSchema)
     .optional(),
-  documentAnnotationPrompt: z.nullable(z.string()).optional(),
   tableFormat: z.nullable(TableFormat$outboundSchema).optional(),
   extractHeader: z.boolean().optional(),
   extractFooter: z.boolean().optional(),
@@ -153,7 +147,6 @@ export const OCRRequest$outboundSchema: z.ZodType<
     imageMinSize: "image_min_size",
     bboxAnnotationFormat: "bbox_annotation_format",
     documentAnnotationFormat: "document_annotation_format",
-    documentAnnotationPrompt: "document_annotation_prompt",
     tableFormat: "table_format",
     extractHeader: "extract_header",
     extractFooter: "extract_footer",

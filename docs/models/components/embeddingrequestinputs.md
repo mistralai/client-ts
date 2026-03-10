@@ -1,6 +1,6 @@
 # EmbeddingRequestInputs
 
-Text to embed.
+The text content to be embedded, can be a string or an array of strings for fast processing in bulk.
 
 
 ## Supported Types
@@ -8,7 +8,7 @@ Text to embed.
 ### `string`
 
 ```typescript
-const value: string = "<value>";
+const value: string = "[\"Embed this sentence.\",\"As well as this one.\"]";
 ```
 
 ### `string[]`

@@ -3,49 +3,15 @@
 
 ## Supported Types
 
-### `components.TextContent`
+### `string`
 
 ```typescript
-const value: components.TextContent = {
-  text: "<value>",
-};
+const value: string = "<value>";
 ```
 
-### `components.ImageContent`
+### `components.ContentChunk[]`
 
 ```typescript
-const value: components.ImageContent = {
-  data: "<value>",
-  mimeType: "<value>",
-};
-```
-
-### `components.AudioContent`
-
-```typescript
-const value: components.AudioContent = {
-  data: "<value>",
-  mimeType: "<value>",
-};
-```
-
-### `components.ResourceLink`
-
-```typescript
-const value: components.ResourceLink = {
-  name: "<value>",
-  uri: "https://puzzled-steak.info/",
-};
-```
-
-### `components.EmbeddedResource`
-
-```typescript
-const value: components.EmbeddedResource = {
-  resource: {
-    uri: "https://pointless-contractor.org/",
-    text: "<value>",
-  },
-};
+const value: components.ContentChunk[] = [];
 ```
 

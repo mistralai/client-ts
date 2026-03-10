@@ -244,15 +244,6 @@ We have dedicated SDKs for the following providers:
 * [listVersionAliases](docs/sdks/mistralagents/README.md#listversionaliases) - List all aliases for an agent.
 * [deleteVersionAlias](docs/sdks/mistralagents/README.md#deleteversionalias) - Delete an agent version alias.
 
-### [Beta.Connectors](docs/sdks/connectors/README.md)
-
-* [create](docs/sdks/connectors/README.md#create) - Create a new connector.
-* [list](docs/sdks/connectors/README.md#list) - List all connectors.
-* [callTool](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
-* [get](docs/sdks/connectors/README.md#get) - Get a connector.
-* [update](docs/sdks/connectors/README.md#update) - Update a connector.
-* [delete](docs/sdks/connectors/README.md#delete) - Delete a connector.
-
 ### [Beta.Conversations](docs/sdks/conversations/README.md)
 
 * [start](docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
@@ -293,64 +284,6 @@ We have dedicated SDKs for the following providers:
 * [getSignedUrl](docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
 * [extractedTextSignedUrl](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
 * [reprocess](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
-
-### [Beta.Observability.Campaigns](docs/sdks/campaigns/README.md)
-
-* [create](docs/sdks/campaigns/README.md#create) - Create and start a new campaign
-* [list](docs/sdks/campaigns/README.md#list) - Get all campaigns
-* [fetch](docs/sdks/campaigns/README.md#fetch) - Get campaign by id
-* [delete](docs/sdks/campaigns/README.md#delete) - Delete a campaign
-* [fetchStatus](docs/sdks/campaigns/README.md#fetchstatus) - Get campaign status by campaign id
-* [listEvents](docs/sdks/campaigns/README.md#listevents) - Get event ids that were selected by the given campaign
-
-### [Beta.Observability.ChatCompletionEvents](docs/sdks/chatcompletionevents/README.md)
-
-* [search](docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
-* [searchIds](docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
-* [fetch](docs/sdks/chatcompletionevents/README.md#fetch) - Get Chat Completion Event
-* [fetchSimilarEvents](docs/sdks/chatcompletionevents/README.md#fetchsimilarevents) - Get Similar Chat Completion Events
-* [judge](docs/sdks/chatcompletionevents/README.md#judge) - Run Judge on an event based on the given options
-
-#### [Beta.Observability.ChatCompletionEvents.Fields](docs/sdks/fields/README.md)
-
-* [list](docs/sdks/fields/README.md#list) - Get Chat Completion Fields
-* [fetchOptions](docs/sdks/fields/README.md#fetchoptions) - Get Chat Completion Field Options
-* [fetchOptionCounts](docs/sdks/fields/README.md#fetchoptioncounts) - Get Chat Completion Field Options Counts
-
-### [Beta.Observability.Datasets](docs/sdks/datasets/README.md)
-
-* [create](docs/sdks/datasets/README.md#create) - Create a new empty dataset
-* [list](docs/sdks/datasets/README.md#list) - List existing datasets
-* [fetch](docs/sdks/datasets/README.md#fetch) - Get dataset by id
-* [delete](docs/sdks/datasets/README.md#delete) - Delete a dataset
-* [update](docs/sdks/datasets/README.md#update) - Patch dataset
-* [listRecords](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
-* [createRecord](docs/sdks/datasets/README.md#createrecord) - Add a conversation to the dataset
-* [importFromCampaign](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with a campaign
-* [importFromExplorer](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with samples from the explorer
-* [importFromFile](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with samples from an uploaded file
-* [importFromPlayground](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with samples from the playground
-* [importFromDatasetRecords](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with samples from another dataset
-* [exportToJsonl](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
-* [fetchTask](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
-* [listTasks](docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
-
-#### [Beta.Observability.Datasets.Records](docs/sdks/records/README.md)
-
-* [fetch](docs/sdks/records/README.md#fetch) - Get the content of a given conversation from a dataset
-* [delete](docs/sdks/records/README.md#delete) - Delete a record from a dataset
-* [bulkDelete](docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
-* [judge](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
-* [updatePayload](docs/sdks/records/README.md#updatepayload) - Update a dataset record conversation payload
-* [updateProperties](docs/sdks/records/README.md#updateproperties) - Update conversation properties
-
-### [Beta.Observability.Judges](docs/sdks/judges/README.md)
-
-* [create](docs/sdks/judges/README.md#create) - Create a new judge
-* [list](docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
-* [fetch](docs/sdks/judges/README.md#fetch) - Get judge by id
-* [delete](docs/sdks/judges/README.md#delete) - Delete a judge
-* [update](docs/sdks/judges/README.md#update) - Update a judge
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -506,7 +439,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.models.list(undefined, {
+  const result = await mistral.models.list({
     retries: {
       strategy: "backoff",
       backoff: {
@@ -580,7 +513,9 @@ const mistral = new Mistral({
 
 async function run() {
   try {
-    const result = await mistral.models.list();
+    const result = await mistral.models.retrieve({
+      modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
+    });
 
     console.log(result);
   } catch (error) {
@@ -607,7 +542,7 @@ run();
 **Primary error:**
 * [`MistralError`](./src/models/errors/mistralerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (8)</summary>
+<details><summary>Less common errors (7)</summary>
 
 <br />
 
@@ -620,8 +555,7 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 60 of 121 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 40 of 121 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 53 of 75 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -695,23 +629,19 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to:
-- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
-- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
-- use the `"requestError"` hook to log errors
+The following example shows how to use the `"beforeRequest"` hook to to add a
+custom header and a timeout to requests and how to use the `"requestError"` hook
+to log errors:
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
-import { ProxyAgent } from "undici";
 import { HTTPClient } from "@mistralai/mistralai/lib/http";
 
-const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
-
 const httpClient = new HTTPClient({
-  // 'fetcher' takes a function that has the same signature as native 'fetch'.
-  fetcher: (input, init) =>
-    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
-    fetch(input, { ...init, dispatcher } as RequestInit),
+  // fetcher takes a function that has the same signature as native `fetch`.
+  fetcher: (request) => {
+    return fetch(request);
+  }
 });
 
 httpClient.addHook("beforeRequest", (request) => {
@@ -806,12 +736,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaAgentsListVersions`](docs/sdks/mistralagents/README.md#listversions) - List all versions of an agent.
 - [`betaAgentsUpdate`](docs/sdks/mistralagents/README.md#update) - Update an agent entity.
 - [`betaAgentsUpdateVersion`](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.
-- [`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
-- [`betaConnectorsCreate`](docs/sdks/connectors/README.md#create) - Create a new connector.
-- [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
-- [`betaConnectorsGet`](docs/sdks/connectors/README.md#get) - Get a connector.
-- [`betaConnectorsList`](docs/sdks/connectors/README.md#list) - List all connectors.
-- [`betaConnectorsUpdate`](docs/sdks/connectors/README.md#update) - Update a connector.
 - [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 - [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
 - [`betaConversationsDelete`](docs/sdks/conversations/README.md#delete) - Delete a conversation.
@@ -841,46 +765,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaLibrariesGet`](docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
 - [`betaLibrariesList`](docs/sdks/libraries/README.md#list) - List all libraries you have access to.
 - [`betaLibrariesUpdate`](docs/sdks/libraries/README.md#update) - Update a library.
-- [`betaObservabilityCampaignsCreate`](docs/sdks/campaigns/README.md#create) - Create and start a new campaign
-- [`betaObservabilityCampaignsDelete`](docs/sdks/campaigns/README.md#delete) - Delete a campaign
-- [`betaObservabilityCampaignsFetch`](docs/sdks/campaigns/README.md#fetch) - Get campaign by id
-- [`betaObservabilityCampaignsFetchStatus`](docs/sdks/campaigns/README.md#fetchstatus) - Get campaign status by campaign id
-- [`betaObservabilityCampaignsList`](docs/sdks/campaigns/README.md#list) - Get all campaigns
-- [`betaObservabilityCampaignsListEvents`](docs/sdks/campaigns/README.md#listevents) - Get event ids that were selected by the given campaign
-- [`betaObservabilityChatCompletionEventsFetch`](docs/sdks/chatcompletionevents/README.md#fetch) - Get Chat Completion Event
-- [`betaObservabilityChatCompletionEventsFetchSimilarEvents`](docs/sdks/chatcompletionevents/README.md#fetchsimilarevents) - Get Similar Chat Completion Events
-- [`betaObservabilityChatCompletionEventsFieldsFetchOptionCounts`](docs/sdks/fields/README.md#fetchoptioncounts) - Get Chat Completion Field Options Counts
-- [`betaObservabilityChatCompletionEventsFieldsFetchOptions`](docs/sdks/fields/README.md#fetchoptions) - Get Chat Completion Field Options
-- [`betaObservabilityChatCompletionEventsFieldsList`](docs/sdks/fields/README.md#list) - Get Chat Completion Fields
-- [`betaObservabilityChatCompletionEventsJudge`](docs/sdks/chatcompletionevents/README.md#judge) - Run Judge on an event based on the given options
-- [`betaObservabilityChatCompletionEventsSearch`](docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
-- [`betaObservabilityChatCompletionEventsSearchIds`](docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
-- [`betaObservabilityDatasetsCreate`](docs/sdks/datasets/README.md#create) - Create a new empty dataset
-- [`betaObservabilityDatasetsCreateRecord`](docs/sdks/datasets/README.md#createrecord) - Add a conversation to the dataset
-- [`betaObservabilityDatasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
-- [`betaObservabilityDatasetsExportToJsonl`](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
-- [`betaObservabilityDatasetsFetch`](docs/sdks/datasets/README.md#fetch) - Get dataset by id
-- [`betaObservabilityDatasetsFetchTask`](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
-- [`betaObservabilityDatasetsImportFromCampaign`](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with a campaign
-- [`betaObservabilityDatasetsImportFromDatasetRecords`](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with samples from another dataset
-- [`betaObservabilityDatasetsImportFromExplorer`](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with samples from the explorer
-- [`betaObservabilityDatasetsImportFromFile`](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with samples from an uploaded file
-- [`betaObservabilityDatasetsImportFromPlayground`](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with samples from the playground
-- [`betaObservabilityDatasetsList`](docs/sdks/datasets/README.md#list) - List existing datasets
-- [`betaObservabilityDatasetsListRecords`](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
-- [`betaObservabilityDatasetsListTasks`](docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
-- [`betaObservabilityDatasetsRecordsBulkDelete`](docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
-- [`betaObservabilityDatasetsRecordsDelete`](docs/sdks/records/README.md#delete) - Delete a record from a dataset
-- [`betaObservabilityDatasetsRecordsFetch`](docs/sdks/records/README.md#fetch) - Get the content of a given conversation from a dataset
-- [`betaObservabilityDatasetsRecordsJudge`](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
-- [`betaObservabilityDatasetsRecordsUpdatePayload`](docs/sdks/records/README.md#updatepayload) - Update a dataset record conversation payload
-- [`betaObservabilityDatasetsRecordsUpdateProperties`](docs/sdks/records/README.md#updateproperties) - Update conversation properties
-- [`betaObservabilityDatasetsUpdate`](docs/sdks/datasets/README.md#update) - Patch dataset
-- [`betaObservabilityJudgesCreate`](docs/sdks/judges/README.md#create) - Create a new judge
-- [`betaObservabilityJudgesDelete`](docs/sdks/judges/README.md#delete) - Delete a judge
-- [`betaObservabilityJudgesFetch`](docs/sdks/judges/README.md#fetch) - Get judge by id
-- [`betaObservabilityJudgesList`](docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
-- [`betaObservabilityJudgesUpdate`](docs/sdks/judges/README.md#update) - Update a judge
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications

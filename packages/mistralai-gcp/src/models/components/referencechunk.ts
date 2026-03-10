@@ -5,13 +5,28 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const ReferenceChunkType = {
+  Reference: "reference",
+} as const;
+export type ReferenceChunkType = ClosedEnum<typeof ReferenceChunkType>;
+
 export type ReferenceChunk = {
-  type?: "reference" | undefined;
   referenceIds: Array<number>;
+  type?: ReferenceChunkType | undefined;
 };
+
+/** @internal */
+export const ReferenceChunkType$inboundSchema: z.ZodNativeEnum<
+  typeof ReferenceChunkType
+> = z.nativeEnum(ReferenceChunkType);
+/** @internal */
+export const ReferenceChunkType$outboundSchema: z.ZodNativeEnum<
+  typeof ReferenceChunkType
+> = ReferenceChunkType$inboundSchema;
 
 /** @internal */
 export const ReferenceChunk$inboundSchema: z.ZodType<
@@ -19,8 +34,8 @@ export const ReferenceChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("reference").default("reference"),
   reference_ids: z.array(z.number().int()),
+  type: ReferenceChunkType$inboundSchema.default("reference"),
 }).transform((v) => {
   return remap$(v, {
     "reference_ids": "referenceIds",
@@ -28,8 +43,8 @@ export const ReferenceChunk$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ReferenceChunk$Outbound = {
-  type: "reference";
   reference_ids: Array<number>;
+  type: string;
 };
 
 /** @internal */
@@ -38,8 +53,8 @@ export const ReferenceChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReferenceChunk
 > = z.object({
-  type: z.literal("reference").default("reference" as const),
   referenceIds: z.array(z.number().int()),
+  type: ReferenceChunkType$outboundSchema.default("reference"),
 }).transform((v) => {
   return remap$(v, {
     referenceIds: "reference_ids",

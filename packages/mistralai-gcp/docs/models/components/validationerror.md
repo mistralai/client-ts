@@ -16,10 +16,8 @@ let value: ValidationError = {
 
 ## Fields
 
-| Field                                                    | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `loc`                                                    | *components.Loc*[]                                       | :heavy_check_mark:                                       | N/A                                                      |
-| `msg`                                                    | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `type`                                                   | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `input`                                                  | *any*                                                    | :heavy_minus_sign:                                       | N/A                                                      |
-| `ctx`                                                    | [components.Context](../../models/components/context.md) | :heavy_minus_sign:                                       | N/A                                                      |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `loc`              | *components.Loc*[] | :heavy_check_mark: | N/A                |
+| `msg`              | *string*           | :heavy_check_mark: | N/A                |
+| `type`             | *string*           | :heavy_check_mark: | N/A                |

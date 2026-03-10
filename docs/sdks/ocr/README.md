@@ -14,7 +14,7 @@ OCR
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="ocr_v1_ocr_post" method="post" path="/v1/ocr" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="ocr_v1_ocr_post" method="post" path="/v1/ocr" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -28,12 +28,6 @@ async function run() {
     document: {
       type: "document_url",
       documentUrl: "https://upset-labourer.net/",
-    },
-    bboxAnnotationFormat: {
-      type: "text",
-    },
-    documentAnnotationFormat: {
-      type: "text",
     },
   });
 
@@ -63,12 +57,6 @@ async function run() {
     document: {
       type: "document_url",
       documentUrl: "https://upset-labourer.net/",
-    },
-    bboxAnnotationFormat: {
-      type: "text",
-    },
-    documentAnnotationFormat: {
-      type: "text",
     },
   });
   if (res.ok) {

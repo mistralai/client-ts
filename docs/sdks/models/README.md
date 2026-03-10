@@ -19,7 +19,7 @@ List all models available to the user.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="list_models_v1_models_get" method="get" path="/v1/models" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="list_models_v1_models_get" method="get" path="/v1/models" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -67,7 +67,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListModelsV1ModelsGetRequest](../../models/operations/listmodelsv1modelsgetrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -78,10 +77,9 @@ run();
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
 
 ## retrieve
 
@@ -89,7 +87,7 @@ Retrieve information about a model.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="retrieve_model_v1_models__model_id__get" method="get" path="/v1/models/{model_id}" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="retrieve_model_v1_models__model_id__get" method="get" path="/v1/models/{model_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -163,7 +161,7 @@ Delete a fine-tuned model.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="delete_model_v1_models__model_id__delete" method="delete" path="/v1/models/{model_id}" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="delete_model_v1_models__model_id__delete" method="delete" path="/v1/models/{model_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 

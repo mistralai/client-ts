@@ -32,8 +32,8 @@ async function run() {
   const res = await chatComplete(mistralAzure, {
     messages: [
       {
-        role: "user",
         content: "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
       },
     ],
     responseFormat: {
