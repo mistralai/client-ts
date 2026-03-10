@@ -6,6 +6,7 @@
 import { ToolExecutionDoneEvent } from "@mistralai/mistralai/models/components";
 
 let value: ToolExecutionDoneEvent = {
+  type: "tool.execution.done",
   id: "<id>",
   name: "document_library",
 };
@@ -15,7 +16,7 @@ let value: ToolExecutionDoneEvent = {
 
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `type`                                                                                        | *"tool.execution.done"*                                                                       | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *"tool.execution.done"*                                                                       | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `outputIndex`                                                                                 | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

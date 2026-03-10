@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BatchError = {
   message: string;
-  count: number | undefined;
+  count: number;
 };
 
 /** @internal */

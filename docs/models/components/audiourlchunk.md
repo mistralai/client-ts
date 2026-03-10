@@ -12,13 +12,14 @@ Attributes:
 import { AudioURLChunk } from "@mistralai/mistralai/models/components";
 
 let value: AudioURLChunk = {
+  type: "audio_url",
   audioUrl: "https://unwieldy-farm.com",
 };
 ```
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `type`                             | *"audio_url"*                      | :heavy_minus_sign:                 | N/A                                |
-| `audioUrl`                         | *components.AudioURLChunkAudioURL* | :heavy_check_mark:                 | N/A                                |
+| Field                      | Type                       | Required                   | Description                |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `type`                     | *"audio_url"*              | :heavy_check_mark:         | N/A                        |
+| `audioUrl`                 | *components.AudioUrlUnion* | :heavy_check_mark:         | N/A                        |

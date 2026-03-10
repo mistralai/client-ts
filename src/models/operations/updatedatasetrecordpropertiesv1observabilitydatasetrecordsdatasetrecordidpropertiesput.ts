@@ -10,16 +10,16 @@ import * as components from "../components/index.js";
 export type UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest =
   {
     datasetRecordId: string;
-    putDatasetRecordPropertiesInSchema:
-      components.PutDatasetRecordPropertiesInSchema;
+    updateDatasetRecordPropertiesRequest:
+      components.UpdateDatasetRecordPropertiesRequest;
   };
 
 /** @internal */
 export type UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest$Outbound =
   {
     dataset_record_id: string;
-    PutDatasetRecordPropertiesInSchema:
-      components.PutDatasetRecordPropertiesInSchema$Outbound;
+    UpdateDatasetRecordPropertiesRequest:
+      components.UpdateDatasetRecordPropertiesRequest$Outbound;
   };
 
 /** @internal */
@@ -30,12 +30,13 @@ export const UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRe
     UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest
   > = z.object({
     datasetRecordId: z.string(),
-    putDatasetRecordPropertiesInSchema:
-      components.PutDatasetRecordPropertiesInSchema$outboundSchema,
+    updateDatasetRecordPropertiesRequest:
+      components.UpdateDatasetRecordPropertiesRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetRecordId: "dataset_record_id",
-      putDatasetRecordPropertiesInSchema: "PutDatasetRecordPropertiesInSchema",
+      updateDatasetRecordPropertiesRequest:
+        "UpdateDatasetRecordPropertiesRequest",
     });
   });
 

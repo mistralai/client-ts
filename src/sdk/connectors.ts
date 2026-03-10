@@ -22,7 +22,7 @@ export class Connectors extends ClientSDK {
    * Create a new MCP connector. You can customize its visibility, url and auth type.
    */
   async create(
-    request: components.ConnectorMCPCreate,
+    request: components.CreateConnectorRequest,
     options?: RequestOptions,
   ): Promise<components.Connector> {
     return unwrapAsync(betaConnectorsCreate(
@@ -58,7 +58,7 @@ export class Connectors extends ClientSDK {
   async callTool(
     request: operations.ConnectorCallToolV1Request,
     options?: RequestOptions,
-  ): Promise<components.MCPToolCallResponse> {
+  ): Promise<components.ConnectorToolCallResponse> {
     return unwrapAsync(betaConnectorsCallTool(
       this,
       request,

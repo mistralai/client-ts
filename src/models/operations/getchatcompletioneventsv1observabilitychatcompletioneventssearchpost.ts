@@ -11,7 +11,8 @@ export type GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPost
   {
     pageSize?: number | undefined;
     cursor?: string | null | undefined;
-    getChatCompletionEventsInSchema: components.GetChatCompletionEventsInSchema;
+    searchChatCompletionEventsRequest:
+      components.SearchChatCompletionEventsRequest;
   };
 
 /** @internal */
@@ -19,8 +20,8 @@ export type GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPost
   {
     page_size: number;
     cursor?: string | null | undefined;
-    GetChatCompletionEventsInSchema:
-      components.GetChatCompletionEventsInSchema$Outbound;
+    SearchChatCompletionEventsRequest:
+      components.SearchChatCompletionEventsRequest$Outbound;
   };
 
 /** @internal */
@@ -32,12 +33,12 @@ export const GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPos
   > = z.object({
     pageSize: z.number().int().default(50),
     cursor: z.nullable(z.string()).optional(),
-    getChatCompletionEventsInSchema:
-      components.GetChatCompletionEventsInSchema$outboundSchema,
+    searchChatCompletionEventsRequest:
+      components.SearchChatCompletionEventsRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       pageSize: "page_size",
-      getChatCompletionEventsInSchema: "GetChatCompletionEventsInSchema",
+      searchChatCompletionEventsRequest: "SearchChatCompletionEventsRequest",
     });
   });
 

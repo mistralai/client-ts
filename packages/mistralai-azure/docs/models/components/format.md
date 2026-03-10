@@ -8,10 +8,12 @@ Format of the table
 import { Format } from "@mistralai/mistralai-azure/models/components";
 
 let value: Format = "markdown";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"markdown" | "html"
+"markdown" | "html" | Unrecognized<string>
 ```

@@ -4,10 +4,7 @@
  */
 
 import * as z from "zod/v3";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
+import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,7 +17,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type ExecutionConfig = {
   type: string;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -28,13 +25,9 @@ export const ExecutionConfig$inboundSchema: z.ZodType<
   ExecutionConfig,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
+> = z.object({
+  type: z.string(),
+}).catchall(z.any());
 
 export function executionConfigFromJSON(
   jsonString: string,

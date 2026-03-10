@@ -33,7 +33,7 @@ import {
   ToolExecutionEntry$inboundSchema,
 } from "./toolexecutionentry.js";
 
-export type Entries =
+export type Entry =
   | AgentHandoffEntry
   | FunctionCallEntry
   | MessageInputEntry
@@ -45,7 +45,7 @@ export type Entries =
  * Retrieve all entries in a conversation.
  */
 export type ConversationHistory = {
-  object?: "conversation.history" | undefined;
+  object: "conversation.history";
   conversationId: string;
   entries: Array<
     | AgentHandoffEntry
@@ -58,8 +58,8 @@ export type ConversationHistory = {
 };
 
 /** @internal */
-export const Entries$inboundSchema: z.ZodType<Entries, z.ZodTypeDef, unknown> =
-  z.union([
+export const Entry$inboundSchema: z.ZodType<Entry, z.ZodTypeDef, unknown> = z
+  .union([
     AgentHandoffEntry$inboundSchema,
     FunctionCallEntry$inboundSchema,
     MessageInputEntry$inboundSchema,
@@ -68,13 +68,13 @@ export const Entries$inboundSchema: z.ZodType<Entries, z.ZodTypeDef, unknown> =
     MessageOutputEntry$inboundSchema,
   ]);
 
-export function entriesFromJSON(
+export function entryFromJSON(
   jsonString: string,
-): SafeParseResult<Entries, SDKValidationError> {
+): SafeParseResult<Entry, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Entries$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Entries' from JSON`,
+    (x) => Entry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Entry' from JSON`,
   );
 }
 

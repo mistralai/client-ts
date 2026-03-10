@@ -14,7 +14,7 @@ import {
   BuiltInConnectors$outboundSchema,
 } from "./builtinconnectors.js";
 
-export type Name = BuiltInConnectors | string;
+export type ToolExecutionEntryName = BuiltInConnectors | string;
 
 export type ToolExecutionEntry = {
   object?: "entry" | undefined;
@@ -30,25 +30,35 @@ export type ToolExecutionEntry = {
 };
 
 /** @internal */
-export const Name$inboundSchema: z.ZodType<Name, z.ZodTypeDef, unknown> = z
-  .union([BuiltInConnectors$inboundSchema, z.string()]);
+export const ToolExecutionEntryName$inboundSchema: z.ZodType<
+  ToolExecutionEntryName,
+  z.ZodTypeDef,
+  unknown
+> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
 /** @internal */
-export type Name$Outbound = string | string;
+export type ToolExecutionEntryName$Outbound = string | string;
 
 /** @internal */
-export const Name$outboundSchema: z.ZodType<Name$Outbound, z.ZodTypeDef, Name> =
-  z.union([BuiltInConnectors$outboundSchema, z.string()]);
+export const ToolExecutionEntryName$outboundSchema: z.ZodType<
+  ToolExecutionEntryName$Outbound,
+  z.ZodTypeDef,
+  ToolExecutionEntryName
+> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
 
-export function nameToJSON(name: Name): string {
-  return JSON.stringify(Name$outboundSchema.parse(name));
+export function toolExecutionEntryNameToJSON(
+  toolExecutionEntryName: ToolExecutionEntryName,
+): string {
+  return JSON.stringify(
+    ToolExecutionEntryName$outboundSchema.parse(toolExecutionEntryName),
+  );
 }
-export function nameFromJSON(
+export function toolExecutionEntryNameFromJSON(
   jsonString: string,
-): SafeParseResult<Name, SDKValidationError> {
+): SafeParseResult<ToolExecutionEntryName, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Name$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Name' from JSON`,
+    (x) => ToolExecutionEntryName$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolExecutionEntryName' from JSON`,
   );
 }
 

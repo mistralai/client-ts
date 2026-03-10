@@ -21,7 +21,7 @@ export class Accesses extends ClientSDK {
   async list(
     request: operations.LibrariesShareListV1Request,
     options?: RequestOptions,
-  ): Promise<components.ListSharingOut> {
+  ): Promise<components.ListSharingResponse> {
     return unwrapAsync(betaLibrariesAccessesList(
       this,
       request,
@@ -38,7 +38,7 @@ export class Accesses extends ClientSDK {
   async updateOrCreate(
     request: operations.LibrariesShareCreateV1Request,
     options?: RequestOptions,
-  ): Promise<components.SharingOut> {
+  ): Promise<components.Sharing> {
     return unwrapAsync(betaLibrariesAccessesUpdateOrCreate(
       this,
       request,
@@ -55,7 +55,7 @@ export class Accesses extends ClientSDK {
   async delete(
     request: operations.LibrariesShareDeleteV1Request,
     options?: RequestOptions,
-  ): Promise<components.SharingOut> {
+  ): Promise<components.Sharing> {
     return unwrapAsync(betaLibrariesAccessesDelete(
       this,
       request,

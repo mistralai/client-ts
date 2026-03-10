@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function fineTuningJobsCreate(
   client: MistralCore,
-  request: components.JobIn,
+  request: components.CreateFineTuningJobRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +58,7 @@ export function fineTuningJobsCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.JobIn,
+  request: components.CreateFineTuningJobRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,7 +78,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.JobIn$outboundSchema.parse(value),
+    (value) =>
+      components.CreateFineTuningJobRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

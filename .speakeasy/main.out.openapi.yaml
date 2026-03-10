@@ -5626,6 +5626,7 @@ components:
       required:
         - id
       title: DeleteModelOut
+      x-speakeasy-name-override: DeleteModelResponse
     FTModelCard:
       properties:
         id:
@@ -6062,6 +6063,7 @@ components:
         - model
         - name
       additionalProperties: false
+      x-speakeasy-name-override: CreateAgentRequest
     AgentHandoffEntry:
       type: object
       properties:
@@ -6187,6 +6189,7 @@ components:
           title: Version Message
       title: AgentUpdateRequest
       additionalProperties: false
+      x-speakeasy-name-override: UpdateAgentRequest
     BuiltInConnectors:
       type: string
       title: BuiltInConnectors
@@ -7859,6 +7862,7 @@ components:
           title: Tool Confirmations
       title: ConversationAppendRequest
       additionalProperties: false
+      x-speakeasy-name-override: AppendConversationRequest
     ConversationAppendStreamRequest:
       allOf:
         - $ref: '#/components/schemas/ConversationAppendRequestBase'
@@ -7921,6 +7925,7 @@ components:
         - from_entry_id
       additionalProperties: false
       description: Request to restart a new conversation from a given entry in the conversation.
+      x-speakeasy-name-override: RestartConversationRequest
     ConversationRestartStreamRequest:
       allOf:
         - $ref: '#/components/schemas/ConversationRestartRequestBase'
@@ -8061,6 +8066,7 @@ components:
         - purpose
         - sample_type
         - source
+      x-speakeasy-name-override: CreateFileResponse
     FileSchema:
       type: object
       properties:
@@ -8162,6 +8168,7 @@ components:
       required:
         - data
         - object
+      x-speakeasy-name-override: ListFilesResponse
     RetrieveFileOut:
       type: object
       properties:
@@ -8247,6 +8254,7 @@ components:
         - sample_type
         - source
         - deleted
+      x-speakeasy-name-override: GetFileResponse
     DeleteFileOut:
       type: object
       properties:
@@ -8274,6 +8282,7 @@ components:
         - id
         - object
         - deleted
+      x-speakeasy-name-override: DeleteFileResponse
     FileSignedURL:
       type: object
       properties:
@@ -8283,6 +8292,7 @@ components:
       title: FileSignedURL
       required:
         - url
+      x-speakeasy-name-override: GetSignedUrlResponse
     FineTuneableModelType:
       type: string
       title: FineTuneableModelType
@@ -8402,6 +8412,7 @@ components:
         - modified_at
         - training_files
         - hyperparameters
+      x-speakeasy-name-override: ClassifierFineTuningJob
     ClassifierTrainingParameters:
       type: object
       properties:
@@ -8570,6 +8581,7 @@ components:
         - modified_at
         - training_files
         - hyperparameters
+      x-speakeasy-name-override: CompletionFineTuningJob
     CompletionTrainingParameters:
       type: object
       properties:
@@ -8656,6 +8668,7 @@ components:
         - name
         - owner
         - commit_id
+      x-speakeasy-name-override: GithubRepository
     JobMetadataOut:
       type: object
       properties:
@@ -8695,6 +8708,7 @@ components:
             - type: "null"
           title: Estimated Start Time
       title: JobMetadataOut
+      x-speakeasy-name-override: JobMetadata
     JobsOut:
       type: object
       properties:
@@ -8722,6 +8736,7 @@ components:
       title: JobsOut
       required:
         - total
+      x-speakeasy-name-override: ListFineTuningJobsResponse
     WandbIntegrationOut:
       type: object
       properties:
@@ -8753,6 +8768,7 @@ components:
       title: WandbIntegrationOut
       required:
         - project
+      x-speakeasy-name-override: WandbIntegrationResult
     LegacyJobMetadataOut:
       type: object
       properties:
@@ -8840,6 +8856,7 @@ components:
       title: LegacyJobMetadataOut
       required:
         - details
+      x-speakeasy-name-override: LegacyJobMetadata
     ClassifierTargetIn:
       type: object
       properties:
@@ -8864,6 +8881,7 @@ components:
       required:
         - name
         - labels
+      x-speakeasy-name-override: ClassifierTarget
     ClassifierTrainingParametersIn:
       type: object
       properties:
@@ -8913,6 +8931,7 @@ components:
           title: Seq Len
       title: ClassifierTrainingParametersIn
       description: The fine-tuning hyperparameter settings used in a classifier fine-tune job.
+      x-speakeasy-name-override: ClassifierTrainingParameters
     CompletionTrainingParametersIn:
       type: object
       properties:
@@ -8970,6 +8989,7 @@ components:
           default: 0.9
       title: CompletionTrainingParametersIn
       description: The fine-tuning hyperparameter settings used in a fine-tune job.
+      x-speakeasy-name-override: CompletionTrainingParameters
     FTClassifierLossFunction:
       type: string
       title: FTClassifierLossFunction
@@ -9008,6 +9028,7 @@ components:
         - name
         - owner
         - token
+      x-speakeasy-name-override: CreateGithubRepositoryRequest
     JobIn:
       type: object
       properties:
@@ -9091,6 +9112,7 @@ components:
       required:
         - model
         - hyperparameters
+      x-speakeasy-name-override: CreateFineTuningJobRequest
     TrainingFile:
       type: object
       properties:
@@ -9159,6 +9181,7 @@ components:
         - metrics
         - step_number
         - created_at
+      x-speakeasy-name-override: Checkpoint
     ClassifierDetailedJobOut:
       type: object
       properties:
@@ -9279,6 +9302,7 @@ components:
         - training_files
         - hyperparameters
         - classifier_targets
+      x-speakeasy-name-override: ClassifierFineTuningJobDetails
     ClassifierTargetOut:
       type: object
       properties:
@@ -9301,6 +9325,7 @@ components:
         - labels
         - weight
         - loss_function
+      x-speakeasy-name-override: ClassifierTargetResult
     CompletionDetailedJobOut:
       type: object
       properties:
@@ -9426,6 +9451,7 @@ components:
         - modified_at
         - training_files
         - hyperparameters
+      x-speakeasy-name-override: CompletionFineTuningJobDetails
     EventOut:
       type: object
       properties:
@@ -9447,6 +9473,7 @@ components:
       required:
         - name
         - created_at
+      x-speakeasy-name-override: Event
     MetricOut:
       type: object
       properties:
@@ -9467,6 +9494,7 @@ components:
           title: Valid Mean Token Accuracy
       title: MetricOut
       description: Metrics at the step number during the fine-tuning job. Use these metrics to assess if the training is going smoothly (loss should decrease, token accuracy should increase).
+      x-speakeasy-name-override: Metric
     ClassifierFTModelOut:
       type: object
       properties:
@@ -9544,6 +9572,7 @@ components:
         - capabilities
         - job
         - classifier_targets
+      x-speakeasy-name-override: ClassifierFineTunedModel
     CompletionFTModelOut:
       type: object
       properties:
@@ -9615,6 +9644,7 @@ components:
         - archived
         - capabilities
         - job
+      x-speakeasy-name-override: CompletionFineTunedModel
     FTModelCapabilitiesOut:
       type: object
       properties:
@@ -9639,6 +9669,7 @@ components:
           title: Classification
           default: false
       title: FTModelCapabilitiesOut
+      x-speakeasy-name-override: FineTunedModelCapabilities
     UpdateFTModelIn:
       type: object
       properties:
@@ -9653,6 +9684,7 @@ components:
             - type: "null"
           title: Description
       title: UpdateFTModelIn
+      x-speakeasy-name-override: UpdateModelRequest
     ArchiveFTModelOut:
       type: object
       properties:
@@ -9671,6 +9703,7 @@ components:
       title: ArchiveFTModelOut
       required:
         - id
+      x-speakeasy-name-override: ArchiveModelResponse
     UnarchiveFTModelOut:
       type: object
       properties:
@@ -9689,6 +9722,7 @@ components:
       title: UnarchiveFTModelOut
       required:
         - id
+      x-speakeasy-name-override: UnarchiveModelResponse
     BatchJobStatus:
       type: string
       title: BatchJobStatus
@@ -9813,6 +9847,7 @@ components:
         - completed_requests
         - succeeded_requests
         - failed_requests
+      x-speakeasy-name-override: BatchJob
     BatchJobsOut:
       type: object
       properties:
@@ -9833,6 +9868,7 @@ components:
       title: BatchJobsOut
       required:
         - total
+      x-speakeasy-name-override: ListBatchJobsResponse
     ApiEndpoint:
       type: string
       title: ApiEndpoint
@@ -9911,6 +9947,7 @@ components:
       title: BatchJobIn
       required:
         - endpoint
+      x-speakeasy-name-override: CreateBatchJobRequest
     BatchRequest:
       type: object
       properties:
@@ -11791,6 +11828,7 @@ components:
         - uploaded_by_type
         - processing_status
         - tokens_processing_total
+      x-speakeasy-name-override: Document
     DocumentTextContent:
       type: object
       properties:
@@ -11834,6 +11872,7 @@ components:
             - type: "null"
           title: Attributes
       title: DocumentUpdateIn
+      x-speakeasy-name-override: UpdateDocumentRequest
     FilterCondition:
       type: object
       properties:
@@ -11870,6 +11909,7 @@ components:
         - field
         - op
         - value
+      x-speakeasy-name-override: FilterCondition
     FilterGroup:
       type: object
       properties:
@@ -11892,6 +11932,7 @@ components:
             - type: "null"
           title: Or
       title: FilterGroup
+      x-speakeasy-name-override: FilterGroup
     LibraryIn:
       type: object
       properties:
@@ -11911,6 +11952,7 @@ components:
       title: LibraryIn
       required:
         - name
+      x-speakeasy-name-override: CreateLibraryRequest
     LibraryInUpdate:
       type: object
       properties:
@@ -11925,6 +11967,7 @@ components:
             - type: "null"
           title: Description
       title: LibraryInUpdate
+      x-speakeasy-name-override: UpdateLibraryRequest
     LibraryOut:
       type: object
       properties:
@@ -12007,6 +12050,7 @@ components:
         - total_size
         - nb_documents
         - chunk_size
+      x-speakeasy-name-override: Library
     ListDocumentOut:
       type: object
       properties:
@@ -12021,6 +12065,7 @@ components:
       required:
         - pagination
         - data
+      x-speakeasy-name-override: ListDocumentsResponse
     ListLibraryOut:
       type: object
       properties:
@@ -12032,6 +12077,7 @@ components:
       title: ListLibraryOut
       required:
         - data
+      x-speakeasy-name-override: ListLibrariesResponse
     ListSharingOut:
       type: object
       properties:
@@ -12043,6 +12089,7 @@ components:
       title: ListSharingOut
       required:
         - data
+      x-speakeasy-name-override: ListSharingResponse
     PaginationInfo:
       type: object
       properties:
@@ -12098,6 +12145,7 @@ components:
         - document_id
         - process_status
         - processing_status
+      x-speakeasy-name-override: ProcessingStatus
     ShareEnum:
       type: string
       title: ShareEnum
@@ -12147,6 +12195,7 @@ components:
         - share_with_uuid
         - share_with_type
         - level
+      x-speakeasy-name-override: SharingRequest
     SharingOut:
       type: object
       properties:
@@ -12181,6 +12230,7 @@ components:
         - role
         - share_with_type
         - share_with_uuid
+      x-speakeasy-name-override: Sharing
     EntityType:
       type: string
       title: EntityType
@@ -12247,6 +12297,7 @@ components:
         - label
         - type
         - supported_operators
+      x-speakeasy-name-override: BaseFieldDefinition
     BaseTaskStatus:
       type: string
       title: BaseTaskStatus
@@ -12314,6 +12365,7 @@ components:
         - max_nb_events
         - search_params
         - judge
+      x-speakeasy-name-override: Campaign
     CampaignPreviews:
       type: object
       properties:
@@ -12322,6 +12374,7 @@ components:
       title: CampaignPreviews
       required:
         - campaigns
+      x-speakeasy-name-override: ListCampaignsResponse
     CampaignSelectedEvents:
       type: object
       properties:
@@ -12330,6 +12383,7 @@ components:
       title: CampaignSelectedEvents
       required:
         - completion_events
+      x-speakeasy-name-override: ListCampaignSelectedEventsResponse
     CampaignStatus:
       type: object
       properties:
@@ -12338,6 +12392,7 @@ components:
       title: CampaignStatus
       required:
         - status
+      x-speakeasy-name-override: FetchCampaignStatusResponse
     ChatCompletionEventIds:
       type: object
       properties:
@@ -12349,6 +12404,7 @@ components:
       title: ChatCompletionEventIds
       required:
         - completion_event_ids
+      x-speakeasy-name-override: SearchChatCompletionEventIdsResponse
     ChatCompletionEvent:
       type: object
       properties:
@@ -12422,6 +12478,7 @@ components:
         - response_messages
         - nb_messages
         - chat_transcription_events
+      x-speakeasy-name-override: ChatCompletionEvent
     ChatCompletionEventPreview:
       type: object
       properties:
@@ -12464,6 +12521,7 @@ components:
         - extra_fields
         - nb_input_tokens
         - nb_output_tokens
+      x-speakeasy-name-override: ChatCompletionEventPreview
     ChatCompletionEvents:
       type: object
       properties:
@@ -12472,6 +12530,7 @@ components:
       title: ChatCompletionEvents
       required:
         - completion_events
+      x-speakeasy-name-override: SearchChatCompletionEventsResponse
     ChatCompletionFieldOptions:
       type: object
       properties:
@@ -12486,6 +12545,7 @@ components:
             - type: "null"
           title: Options
       title: ChatCompletionFieldOptions
+      x-speakeasy-name-override: FetchChatCompletionFieldOptionsResponse
     ChatCompletionFields:
       type: object
       properties:
@@ -12503,6 +12563,7 @@ components:
       required:
         - field_definitions
         - field_groups
+      x-speakeasy-name-override: ListChatCompletionFieldsResponse
     ChatTranscriptionEvent:
       type: object
       properties:
@@ -12521,6 +12582,7 @@ components:
         - audio_url
         - model
         - response_message
+      x-speakeasy-name-override: ChatTranscriptionEvent
     ConversationPayload:
       type: object
       properties:
@@ -12535,6 +12597,7 @@ components:
         - messages
       additionalProperties: true
       description: ""
+      x-speakeasy-name-override: ConversationPayload
     ConversationSource:
       type: string
       title: ConversationSource
@@ -12552,6 +12615,7 @@ components:
       title: DatasetExport
       required:
         - file_url
+      x-speakeasy-name-override: ExportDatasetResponse
     DatasetImportTask:
       type: object
       properties:
@@ -12609,6 +12673,7 @@ components:
         - dataset_id
         - workspace_id
         - status
+      x-speakeasy-name-override: DatasetImportTask
     DatasetImportTasks:
       type: object
       properties:
@@ -12617,6 +12682,7 @@ components:
       title: DatasetImportTasks
       required:
         - tasks
+      x-speakeasy-name-override: ListDatasetImportTasksResponse
     Dataset:
       type: object
       properties:
@@ -12662,6 +12728,7 @@ components:
         - description
         - owner_id
         - workspace_id
+      x-speakeasy-name-override: Dataset
     DatasetPreview:
       type: object
       properties:
@@ -12707,6 +12774,7 @@ components:
         - description
         - owner_id
         - workspace_id
+      x-speakeasy-name-override: DatasetPreview
     DatasetPreviews:
       type: object
       properties:
@@ -12715,6 +12783,7 @@ components:
       title: DatasetPreviews
       required:
         - datasets
+      x-speakeasy-name-override: ListDatasetsResponse
     DatasetRecord:
       type: object
       properties:
@@ -12758,6 +12827,7 @@ components:
         - payload
         - properties
         - source
+      x-speakeasy-name-override: DatasetRecord
     DatasetRecords:
       type: object
       properties:
@@ -12766,6 +12836,7 @@ components:
       title: DatasetRecords
       required:
         - records
+      x-speakeasy-name-override: ListDatasetRecordsResponse
     DeleteDatasetRecordsInSchema:
       type: object
       properties:
@@ -12780,6 +12851,7 @@ components:
       title: DeleteDatasetRecordsInSchema
       required:
         - dataset_record_ids
+      x-speakeasy-name-override: DeleteDatasetRecordsRequest
     FeedResult_ChatCompletionEventPreview_:
       type: object
       properties:
@@ -12799,6 +12871,7 @@ components:
             - type: "null"
           title: Cursor
       title: FeedResult[ChatCompletionEventPreview]
+      x-speakeasy-name-override: FeedResultChatCompletionEventPreview
     FieldGroup:
       type: object
       properties:
@@ -12812,6 +12885,7 @@ components:
       required:
         - name
         - label
+      x-speakeasy-name-override: FieldGroup
     FieldOptionCountItem:
       type: object
       properties:
@@ -12825,6 +12899,7 @@ components:
       required:
         - value
         - count
+      x-speakeasy-name-override: FieldOptionCountItem
     FieldOptionCountsInSchema:
       type: object
       properties:
@@ -12833,6 +12908,7 @@ components:
             - $ref: '#/components/schemas/FilterPayload'
             - type: "null"
       title: FieldOptionCountsInSchema
+      x-speakeasy-name-override: FetchFieldOptionCountsRequest
     FieldOptionCounts:
       type: object
       properties:
@@ -12844,6 +12920,7 @@ components:
       title: FieldOptionCounts
       required:
         - counts
+      x-speakeasy-name-override: FetchFieldOptionCountsResponse
     FilterPayload:
       type: object
       properties:
@@ -12856,6 +12933,7 @@ components:
       title: FilterPayload
       required:
         - filters
+      x-speakeasy-name-override: FilterPayload
     GetChatCompletionEventIdsInSchema:
       type: object
       properties:
@@ -12871,6 +12949,7 @@ components:
       title: GetChatCompletionEventIdsInSchema
       required:
         - search_params
+      x-speakeasy-name-override: SearchChatCompletionEventIdsRequest
     GetChatCompletionEventsInSchema:
       type: object
       properties:
@@ -12886,6 +12965,7 @@ components:
       title: GetChatCompletionEventsInSchema
       required:
         - search_params
+      x-speakeasy-name-override: SearchChatCompletionEventsRequest
     JudgeClassificationOutput:
       type: object
       properties:
@@ -12930,6 +13010,7 @@ components:
       required:
         - analysis
         - answer
+      x-speakeasy-name-override: JudgeOutput
     JudgeOutputType:
       type: string
       title: JudgeOutputType
@@ -13024,6 +13105,7 @@ components:
         - output
         - instructions
         - tools
+      x-speakeasy-name-override: Judge
     JudgePreviews:
       type: object
       properties:
@@ -13032,6 +13114,7 @@ components:
       title: JudgePreviews
       required:
         - judges
+      x-speakeasy-name-override: ListJudgesResponse
     JudgeRegressionOutput:
       type: object
       properties:
@@ -13122,6 +13205,7 @@ components:
       required:
         - message
         - error_code
+      x-speakeasy-name-override: ObservabilityErrorDetail
     ObservabilityError:
       type: object
       properties:
@@ -13130,6 +13214,7 @@ components:
       title: ObservabilityError
       required:
         - detail
+      x-speakeasy-name-override: ObservabilityError
     PaginatedResult_CampaignPreview_:
       type: object
       properties:
@@ -13154,6 +13239,7 @@ components:
       title: PaginatedResult[CampaignPreview]
       required:
         - count
+      x-speakeasy-name-override: PaginatedResultCampaignPreview
     PaginatedResult_ChatCompletionEventPreview_:
       type: object
       properties:
@@ -13178,6 +13264,7 @@ components:
       title: PaginatedResult[ChatCompletionEventPreview]
       required:
         - count
+      x-speakeasy-name-override: PaginatedResultChatCompletionEventPreview
     PaginatedResult_DatasetImportTask_:
       type: object
       properties:
@@ -13202,6 +13289,7 @@ components:
       title: PaginatedResult[DatasetImportTask]
       required:
         - count
+      x-speakeasy-name-override: PaginatedResultDatasetImportTask
     PaginatedResult_DatasetPreview_:
       type: object
       properties:
@@ -13226,6 +13314,7 @@ components:
       title: PaginatedResult[DatasetPreview]
       required:
         - count
+      x-speakeasy-name-override: PaginatedResultDatasetPreview
     PaginatedResult_DatasetRecord_:
       type: object
       properties:
@@ -13250,6 +13339,7 @@ components:
       title: PaginatedResult[DatasetRecord]
       required:
         - count
+      x-speakeasy-name-override: PaginatedResultDatasetRecord
     PaginatedResult_JudgePreview_:
       type: object
       properties:
@@ -13274,6 +13364,7 @@ components:
       title: PaginatedResult[JudgePreview]
       required:
         - count
+      x-speakeasy-name-override: PaginatedResultJudgePreview
     PatchDatasetInSchema:
       type: object
       properties:
@@ -13288,6 +13379,7 @@ components:
             - type: "null"
           title: Description
       title: PatchDatasetInSchema
+      x-speakeasy-name-override: UpdateDatasetRequest
     PostCampaignInSchema:
       type: object
       properties:
@@ -13317,6 +13409,7 @@ components:
         - name
         - description
         - max_nb_events
+      x-speakeasy-name-override: CreateCampaignRequest
     PostChatCompletionEventJudgingInSchema:
       type: object
       properties:
@@ -13325,6 +13418,7 @@ components:
       title: PostChatCompletionEventJudgingInSchema
       required:
         - judge_definition
+      x-speakeasy-name-override: JudgeChatCompletionEventRequest
     PostDatasetImportFromCampaignInSchema:
       type: object
       properties:
@@ -13335,6 +13429,7 @@ components:
       title: PostDatasetImportFromCampaignInSchema
       required:
         - campaign_id
+      x-speakeasy-name-override: ImportDatasetFromCampaignRequest
     PostDatasetImportFromDatasetInSchema:
       type: object
       properties:
@@ -13349,6 +13444,7 @@ components:
       title: PostDatasetImportFromDatasetInSchema
       required:
         - dataset_record_ids
+      x-speakeasy-name-override: ImportDatasetFromDatasetRequest
     PostDatasetImportFromExplorerInSchema:
       type: object
       properties:
@@ -13361,6 +13457,7 @@ components:
       title: PostDatasetImportFromExplorerInSchema
       required:
         - completion_event_ids
+      x-speakeasy-name-override: ImportDatasetFromExplorerRequest
     PostDatasetImportFromFileInSchema:
       type: object
       properties:
@@ -13370,6 +13467,7 @@ components:
       title: PostDatasetImportFromFileInSchema
       required:
         - file_id
+      x-speakeasy-name-override: ImportDatasetFromFileRequest
     PostDatasetImportFromPlaygroundInSchema:
       type: object
       properties:
@@ -13381,6 +13479,7 @@ components:
       title: PostDatasetImportFromPlaygroundInSchema
       required:
         - conversation_ids
+      x-speakeasy-name-override: ImportDatasetFromPlaygroundRequest
     PostDatasetInSchema:
       type: object
       properties:
@@ -13397,6 +13496,7 @@ components:
       required:
         - name
         - description
+      x-speakeasy-name-override: CreateDatasetRequest
     PostDatasetRecordInSchema:
       type: object
       properties:
@@ -13410,6 +13510,7 @@ components:
       required:
         - payload
         - properties
+      x-speakeasy-name-override: CreateDatasetRecordRequest
     PostDatasetRecordJudgingInSchema:
       type: object
       properties:
@@ -13418,6 +13519,7 @@ components:
       title: PostDatasetRecordJudgingInSchema
       required:
         - judge_definition
+      x-speakeasy-name-override: JudgeDatasetRecordRequest
     PostJudgeInSchema:
       type: object
       properties:
@@ -13461,6 +13563,7 @@ components:
         - output
         - instructions
         - tools
+      x-speakeasy-name-override: CreateJudgeRequest
     PutDatasetRecordPayloadInSchema:
       type: object
       properties:
@@ -13469,6 +13572,7 @@ components:
       title: PutDatasetRecordPayloadInSchema
       required:
         - payload
+      x-speakeasy-name-override: UpdateDatasetRecordPayloadRequest
     PutDatasetRecordPropertiesInSchema:
       type: object
       properties:
@@ -13479,6 +13583,7 @@ components:
       title: PutDatasetRecordPropertiesInSchema
       required:
         - properties
+      x-speakeasy-name-override: UpdateDatasetRecordPropertiesRequest
     PutJudgeInSchema:
       type: object
       properties:
@@ -13522,6 +13627,7 @@ components:
         - output
         - instructions
         - tools
+      x-speakeasy-name-override: UpdateJudgeRequest
     Annotations:
       type: object
       properties:
@@ -13660,6 +13766,7 @@ components:
         - description
         - created_at
         - modified_at
+      x-speakeasy-name-override: Connector
     ConnectorMCPCreate:
       type: object
       properties:
@@ -13711,6 +13818,7 @@ components:
         - name
         - description
         - server
+      x-speakeasy-name-override: CreateConnectorRequest
     ConnectorMCPUpdate:
       type: object
       properties:
@@ -13774,6 +13882,7 @@ components:
             - type: "null"
           description: New authentication data for your mcp connector.
       title: ConnectorMCPUpdate
+      x-speakeasy-name-override: UpdateConnectorRequest
     ConnectorSupportedLanguage:
       type: string
       title: ConnectorSupportedLanguage
@@ -13900,6 +14009,7 @@ components:
       title: MCPResultMetadata
       additionalProperties: true
       description: MCP-specific result metadata (isError, structuredContent, _meta).
+      x-speakeasy-name-override: ConnectorToolResultMetadata
     MCPToolCallMetadata:
       type: object
       properties:
@@ -13914,6 +14024,7 @@ components:
 
         Nests MCP-specific fields under `mcp_meta` to avoid collisions with other
         metadata keys (e.g. `tool_call_result`) in Harmattan's streaming deltas.
+      x-speakeasy-name-override: ConnectorToolCallMetadata
     MCPToolCallRequest:
       type: object
       properties:
@@ -13923,6 +14034,7 @@ components:
           additionalProperties: true
       title: MCPToolCallRequest
       description: Request body for calling an MCP tool.
+      x-speakeasy-name-override: ConnectorCallToolRequest
     MCPToolCallResponse:
       type: object
       properties:
@@ -13952,6 +14064,7 @@ components:
         - Downstream consumers (le-chat, etc.) need structuredContent/isError/_meta via metadata
 
         SYNC: Keep in sync with Harmattan (orchestrator) for harmonized tool result processing.
+      x-speakeasy-name-override: ConnectorToolCallResponse
     MessageResponse:
       type: object
       properties:
@@ -14154,6 +14267,7 @@ components:
         - visibility
         - created_at
         - modified_at
+      x-speakeasy-name-override: ConnectorTool
     integrations__schemas__turbine__ToolLocale:
       type: object
       properties:
@@ -14183,6 +14297,7 @@ components:
         - name
         - description
         - usage_sentence
+      x-speakeasy-name-override: ConnectorToolLocale
     PaginatedConnectors:
       type: object
       properties:

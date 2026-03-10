@@ -34,11 +34,11 @@ import { Result } from "../types/fp.js";
  */
 export function betaLibrariesCreate(
   client: MistralCore,
-  request: components.LibraryIn,
+  request: components.CreateLibraryRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.LibraryOut,
+    components.Library,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function betaLibrariesCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.LibraryIn,
+  request: components.CreateLibraryRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.LibraryOut,
+      components.Library,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -80,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.LibraryIn$outboundSchema.parse(value),
+    (value) => components.CreateLibraryRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -146,7 +146,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.LibraryOut,
+    components.Library,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -157,7 +157,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, components.LibraryOut$inboundSchema),
+    M.json(201, components.Library$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

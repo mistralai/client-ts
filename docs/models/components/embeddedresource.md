@@ -11,6 +11,7 @@ of the LLM and/or the user.
 import { EmbeddedResource } from "@mistralai/mistralai/models/components";
 
 let value: EmbeddedResource = {
+  type: "resource",
   resource: {
     uri: "https://pointless-contractor.org/",
     text: "<value>",

@@ -31,11 +31,11 @@ import { Result } from "../types/fp.js";
  */
 export function betaObservabilityCampaignsCreate(
   client: MistralCore,
-  request: components.PostCampaignInSchema,
+  request: components.CreateCampaignRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.CampaignPreview,
+    components.Campaign,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -56,12 +56,12 @@ export function betaObservabilityCampaignsCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.PostCampaignInSchema,
+  request: components.CreateCampaignRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.CampaignPreview,
+      components.Campaign,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -77,7 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.PostCampaignInSchema$outboundSchema.parse(value),
+    (value) => components.CreateCampaignRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -143,7 +143,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.CampaignPreview,
+    components.Campaign,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -154,7 +154,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, components.CampaignPreview$inboundSchema),
+    M.json(201, components.Campaign$inboundSchema),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,

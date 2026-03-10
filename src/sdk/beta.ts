@@ -4,10 +4,10 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { BetaAgents } from "./betaagents.js";
 import { Connectors } from "./connectors.js";
 import { Conversations } from "./conversations.js";
 import { Libraries } from "./libraries.js";
-import { MistralAgents } from "./mistralagents.js";
 import { Observability } from "./observability.js";
 
 export class Beta extends ClientSDK {
@@ -16,9 +16,9 @@ export class Beta extends ClientSDK {
     return (this._conversations ??= new Conversations(this._options));
   }
 
-  private _agents?: MistralAgents;
-  get agents(): MistralAgents {
-    return (this._agents ??= new MistralAgents(this._options));
+  private _agents?: BetaAgents;
+  get agents(): BetaAgents {
+    return (this._agents ??= new BetaAgents(this._options));
   }
 
   private _libraries?: Libraries;

@@ -15,7 +15,7 @@ import {
   ImageURL$outboundSchema,
 } from "./imageurl.js";
 
-export type ImageURLChunkImageURL = ImageURL | string;
+export type ImageUrlUnion = ImageURL | string;
 
 /**
  * {"type":"image_url","image_url":{"url":"data:image/png;base64,iVBORw0
@@ -26,35 +26,31 @@ export type ImageURLChunk = {
 };
 
 /** @internal */
-export const ImageURLChunkImageURL$inboundSchema: z.ZodType<
-  ImageURLChunkImageURL,
+export const ImageUrlUnion$inboundSchema: z.ZodType<
+  ImageUrlUnion,
   z.ZodTypeDef,
   unknown
 > = z.union([ImageURL$inboundSchema, z.string()]);
 /** @internal */
-export type ImageURLChunkImageURL$Outbound = ImageURL$Outbound | string;
+export type ImageUrlUnion$Outbound = ImageURL$Outbound | string;
 
 /** @internal */
-export const ImageURLChunkImageURL$outboundSchema: z.ZodType<
-  ImageURLChunkImageURL$Outbound,
+export const ImageUrlUnion$outboundSchema: z.ZodType<
+  ImageUrlUnion$Outbound,
   z.ZodTypeDef,
-  ImageURLChunkImageURL
+  ImageUrlUnion
 > = z.union([ImageURL$outboundSchema, z.string()]);
 
-export function imageURLChunkImageURLToJSON(
-  imageURLChunkImageURL: ImageURLChunkImageURL,
-): string {
-  return JSON.stringify(
-    ImageURLChunkImageURL$outboundSchema.parse(imageURLChunkImageURL),
-  );
+export function imageUrlUnionToJSON(imageUrlUnion: ImageUrlUnion): string {
+  return JSON.stringify(ImageUrlUnion$outboundSchema.parse(imageUrlUnion));
 }
-export function imageURLChunkImageURLFromJSON(
+export function imageUrlUnionFromJSON(
   jsonString: string,
-): SafeParseResult<ImageURLChunkImageURL, SDKValidationError> {
+): SafeParseResult<ImageUrlUnion, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ImageURLChunkImageURL$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ImageURLChunkImageURL' from JSON`,
+    (x) => ImageUrlUnion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ImageUrlUnion' from JSON`,
   );
 }
 

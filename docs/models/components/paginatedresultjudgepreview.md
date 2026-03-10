@@ -12,9 +12,9 @@ let value: PaginatedResultJudgePreview = {
 
 ## Fields
 
-| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `results`                                                            | [components.JudgePreview](../../models/components/judgepreview.md)[] | :heavy_minus_sign:                                                   | N/A                                                                  |
-| `count`                                                              | *number*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
-| `next`                                                               | *string*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
-| `previous`                                                           | *string*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| Field                                                  | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `results`                                              | [components.Judge](../../models/components/judge.md)[] | :heavy_minus_sign:                                     | N/A                                                    |
+| `count`                                                | *number*                                               | :heavy_check_mark:                                     | N/A                                                    |
+| `next`                                                 | *string*                                               | :heavy_minus_sign:                                     | N/A                                                    |
+| `previous`                                             | *string*                                               | :heavy_minus_sign:                                     | N/A                                                    |

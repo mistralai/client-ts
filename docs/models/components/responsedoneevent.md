@@ -6,6 +6,7 @@
 import { ResponseDoneEvent } from "@mistralai/mistralai/models/components";
 
 let value: ResponseDoneEvent = {
+  type: "conversation.response.done",
   usage: {},
 };
 ```
@@ -14,6 +15,6 @@ let value: ResponseDoneEvent = {
 
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `type`                                                                                        | *"conversation.response.done"*                                                                | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *"conversation.response.done"*                                                                | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `usage`                                                                                       | [components.ConversationUsageInfo](../../models/components/conversationusageinfo.md)          | :heavy_check_mark:                                                                            | N/A                                                                                           |

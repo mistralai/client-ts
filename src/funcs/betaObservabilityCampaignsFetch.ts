@@ -37,7 +37,7 @@ export function betaObservabilityCampaignsFetch(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.CampaignPreview,
+    components.Campaign,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.CampaignPreview,
+      components.Campaign,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -158,7 +158,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.CampaignPreview,
+    components.Campaign,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -169,7 +169,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.CampaignPreview$inboundSchema),
+    M.json(200, components.Campaign$inboundSchema),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,

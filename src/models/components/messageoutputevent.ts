@@ -16,14 +16,14 @@ import {
 export type MessageOutputEventContent = string | OutputContentChunks;
 
 export type MessageOutputEvent = {
-  type?: "message.output.delta" | undefined;
+  type: "message.output.delta";
   createdAt?: Date | undefined;
-  outputIndex: number | undefined;
+  outputIndex: number;
   id: string;
-  contentIndex: number | undefined;
+  contentIndex: number;
   model?: string | null | undefined;
   agentId?: string | null | undefined;
-  role?: "assistant" | undefined;
+  role: "assistant";
   content: string | OutputContentChunks;
 };
 
@@ -50,7 +50,7 @@ export const MessageOutputEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("message.output.delta").default("message.output.delta"),
+  type: z.literal("message.output.delta"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

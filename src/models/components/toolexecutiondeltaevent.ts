@@ -16,9 +16,9 @@ import {
 export type ToolExecutionDeltaEventName = BuiltInConnectors | string;
 
 export type ToolExecutionDeltaEvent = {
-  type?: "tool.execution.delta" | undefined;
+  type: "tool.execution.delta";
   createdAt?: Date | undefined;
-  outputIndex: number | undefined;
+  outputIndex: number;
   id: string;
   name: BuiltInConnectors | string;
   arguments: string;
@@ -47,7 +47,7 @@ export const ToolExecutionDeltaEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("tool.execution.delta").default("tool.execution.delta"),
+  type: z.literal("tool.execution.delta"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

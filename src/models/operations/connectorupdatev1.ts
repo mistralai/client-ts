@@ -9,13 +9,13 @@ import * as components from "../components/index.js";
 
 export type ConnectorUpdateV1Request = {
   connectorId: string;
-  connectorMCPUpdate: components.ConnectorMCPUpdate;
+  updateConnectorRequest: components.UpdateConnectorRequest;
 };
 
 /** @internal */
 export type ConnectorUpdateV1Request$Outbound = {
   connector_id: string;
-  ConnectorMCPUpdate: components.ConnectorMCPUpdate$Outbound;
+  UpdateConnectorRequest: components.UpdateConnectorRequest$Outbound;
 };
 
 /** @internal */
@@ -25,11 +25,11 @@ export const ConnectorUpdateV1Request$outboundSchema: z.ZodType<
   ConnectorUpdateV1Request
 > = z.object({
   connectorId: z.string(),
-  connectorMCPUpdate: components.ConnectorMCPUpdate$outboundSchema,
+  updateConnectorRequest: components.UpdateConnectorRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     connectorId: "connector_id",
-    connectorMCPUpdate: "ConnectorMCPUpdate",
+    updateConnectorRequest: "UpdateConnectorRequest",
   });
 });
 

@@ -1,5 +1,10 @@
 # Mistral Typescript Client
 
+> [!IMPORTANT]
+> **Looking for v1 documentation?** If you installed `@mistralai/mistralai` from npm (e.g., `npm install @mistralai/mistralai`), you are using **v1** of the SDK. The documentation on this branch (`main`) is for **v2**, which is not yet released on npm.
+>
+> **➡️ [Go to the v1 branch for v1 documentation](https://github.com/mistralai/client-ts/tree/v1)**
+
 <!-- Start Summary [summary] -->
 ## Summary
 
@@ -162,6 +167,9 @@ async function run() {
           "Who is the best French painter? Answer in one short sentence.",
       },
     ],
+    responseFormat: {
+      type: "text",
+    },
     agentId: "<id>",
   });
 
@@ -223,26 +231,26 @@ We have dedicated SDKs for the following providers:
 * [complete](docs/sdks/transcriptions/README.md#complete) - Create Transcription
 * [stream](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
 
-### [Batch.Jobs](docs/sdks/mistraljobs/README.md)
+### [Batch.Jobs](docs/sdks/batchjobs/README.md)
 
-* [list](docs/sdks/mistraljobs/README.md#list) - Get Batch Jobs
-* [create](docs/sdks/mistraljobs/README.md#create) - Create Batch Job
-* [get](docs/sdks/mistraljobs/README.md#get) - Get Batch Job
-* [cancel](docs/sdks/mistraljobs/README.md#cancel) - Cancel Batch Job
+* [list](docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
+* [create](docs/sdks/batchjobs/README.md#create) - Create Batch Job
+* [get](docs/sdks/batchjobs/README.md#get) - Get Batch Job
+* [cancel](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
 
-### [Beta.Agents](docs/sdks/mistralagents/README.md)
+### [Beta.Agents](docs/sdks/betaagents/README.md)
 
-* [create](docs/sdks/mistralagents/README.md#create) - Create a agent that can be used within a conversation.
-* [list](docs/sdks/mistralagents/README.md#list) - List agent entities.
-* [get](docs/sdks/mistralagents/README.md#get) - Retrieve an agent entity.
-* [update](docs/sdks/mistralagents/README.md#update) - Update an agent entity.
-* [delete](docs/sdks/mistralagents/README.md#delete) - Delete an agent entity.
-* [updateVersion](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.
-* [listVersions](docs/sdks/mistralagents/README.md#listversions) - List all versions of an agent.
-* [getVersion](docs/sdks/mistralagents/README.md#getversion) - Retrieve a specific version of an agent.
-* [createVersionAlias](docs/sdks/mistralagents/README.md#createversionalias) - Create or update an agent version alias.
-* [listVersionAliases](docs/sdks/mistralagents/README.md#listversionaliases) - List all aliases for an agent.
-* [deleteVersionAlias](docs/sdks/mistralagents/README.md#deleteversionalias) - Delete an agent version alias.
+* [create](docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
+* [list](docs/sdks/betaagents/README.md#list) - List agent entities.
+* [get](docs/sdks/betaagents/README.md#get) - Retrieve an agent entity.
+* [update](docs/sdks/betaagents/README.md#update) - Update an agent entity.
+* [delete](docs/sdks/betaagents/README.md#delete) - Delete an agent entity.
+* [updateVersion](docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
+* [listVersions](docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
+* [getVersion](docs/sdks/betaagents/README.md#getversion) - Retrieve a specific version of an agent.
+* [createVersionAlias](docs/sdks/betaagents/README.md#createversionalias) - Create or update an agent version alias.
+* [listVersionAliases](docs/sdks/betaagents/README.md#listversionaliases) - List all aliases for an agent.
+* [deleteVersionAlias](docs/sdks/betaagents/README.md#deleteversionalias) - Delete an agent version alias.
 
 ### [Beta.Connectors](docs/sdks/connectors/README.md)
 
@@ -382,13 +390,13 @@ We have dedicated SDKs for the following providers:
 * [complete](docs/sdks/fim/README.md#complete) - Fim Completion
 * [stream](docs/sdks/fim/README.md#stream) - Stream fim completion
 
-### [FineTuning.Jobs](docs/sdks/jobs/README.md)
+### [FineTuning.Jobs](docs/sdks/finetuningjobs/README.md)
 
-* [list](docs/sdks/jobs/README.md#list) - Get Fine Tuning Jobs
-* [create](docs/sdks/jobs/README.md#create) - Create Fine Tuning Job
-* [get](docs/sdks/jobs/README.md#get) - Get Fine Tuning Job
-* [cancel](docs/sdks/jobs/README.md#cancel) - Cancel Fine Tuning Job
-* [start](docs/sdks/jobs/README.md#start) - Start Fine Tuning Job
+* [list](docs/sdks/finetuningjobs/README.md#list) - Get Fine Tuning Jobs
+* [create](docs/sdks/finetuningjobs/README.md#create) - Create Fine Tuning Job
+* [get](docs/sdks/finetuningjobs/README.md#get) - Get Fine Tuning Job
+* [cancel](docs/sdks/finetuningjobs/README.md#cancel) - Cancel Fine Tuning Job
+* [start](docs/sdks/finetuningjobs/README.md#start) - Start Fine Tuning Job
 
 ### [Models](docs/sdks/models/README.md)
 
@@ -506,7 +514,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.models.list({
+  const result = await mistral.models.list(undefined, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -695,19 +703,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "@mistralai/mistralai/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {
@@ -787,21 +799,21 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream Agents completion
 - [`audioTranscriptionsComplete`](docs/sdks/transcriptions/README.md#complete) - Create Transcription
 - [`audioTranscriptionsStream`](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
-- [`batchJobsCancel`](docs/sdks/mistraljobs/README.md#cancel) - Cancel Batch Job
-- [`batchJobsCreate`](docs/sdks/mistraljobs/README.md#create) - Create Batch Job
-- [`batchJobsGet`](docs/sdks/mistraljobs/README.md#get) - Get Batch Job
-- [`batchJobsList`](docs/sdks/mistraljobs/README.md#list) - Get Batch Jobs
-- [`betaAgentsCreate`](docs/sdks/mistralagents/README.md#create) - Create a agent that can be used within a conversation.
-- [`betaAgentsCreateVersionAlias`](docs/sdks/mistralagents/README.md#createversionalias) - Create or update an agent version alias.
-- [`betaAgentsDelete`](docs/sdks/mistralagents/README.md#delete) - Delete an agent entity.
-- [`betaAgentsDeleteVersionAlias`](docs/sdks/mistralagents/README.md#deleteversionalias) - Delete an agent version alias.
-- [`betaAgentsGet`](docs/sdks/mistralagents/README.md#get) - Retrieve an agent entity.
-- [`betaAgentsGetVersion`](docs/sdks/mistralagents/README.md#getversion) - Retrieve a specific version of an agent.
-- [`betaAgentsList`](docs/sdks/mistralagents/README.md#list) - List agent entities.
-- [`betaAgentsListVersionAliases`](docs/sdks/mistralagents/README.md#listversionaliases) - List all aliases for an agent.
-- [`betaAgentsListVersions`](docs/sdks/mistralagents/README.md#listversions) - List all versions of an agent.
-- [`betaAgentsUpdate`](docs/sdks/mistralagents/README.md#update) - Update an agent entity.
-- [`betaAgentsUpdateVersion`](docs/sdks/mistralagents/README.md#updateversion) - Update an agent version.
+- [`batchJobsCancel`](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
+- [`batchJobsCreate`](docs/sdks/batchjobs/README.md#create) - Create Batch Job
+- [`batchJobsGet`](docs/sdks/batchjobs/README.md#get) - Get Batch Job
+- [`batchJobsList`](docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
+- [`betaAgentsCreate`](docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
+- [`betaAgentsCreateVersionAlias`](docs/sdks/betaagents/README.md#createversionalias) - Create or update an agent version alias.
+- [`betaAgentsDelete`](docs/sdks/betaagents/README.md#delete) - Delete an agent entity.
+- [`betaAgentsDeleteVersionAlias`](docs/sdks/betaagents/README.md#deleteversionalias) - Delete an agent version alias.
+- [`betaAgentsGet`](docs/sdks/betaagents/README.md#get) - Retrieve an agent entity.
+- [`betaAgentsGetVersion`](docs/sdks/betaagents/README.md#getversion) - Retrieve a specific version of an agent.
+- [`betaAgentsList`](docs/sdks/betaagents/README.md#list) - List agent entities.
+- [`betaAgentsListVersionAliases`](docs/sdks/betaagents/README.md#listversionaliases) - List all aliases for an agent.
+- [`betaAgentsListVersions`](docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
+- [`betaAgentsUpdate`](docs/sdks/betaagents/README.md#update) - Update an agent entity.
+- [`betaAgentsUpdateVersion`](docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
 - [`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 - [`betaConnectorsCreate`](docs/sdks/connectors/README.md#create) - Create a new connector.
 - [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
@@ -892,11 +904,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`filesUpload`](docs/sdks/files/README.md#upload) - Upload File
 - [`fimComplete`](docs/sdks/fim/README.md#complete) - Fim Completion
 - [`fimStream`](docs/sdks/fim/README.md#stream) - Stream fim completion
-- [`fineTuningJobsCancel`](docs/sdks/jobs/README.md#cancel) - Cancel Fine Tuning Job
-- [`fineTuningJobsCreate`](docs/sdks/jobs/README.md#create) - Create Fine Tuning Job
-- [`fineTuningJobsGet`](docs/sdks/jobs/README.md#get) - Get Fine Tuning Job
-- [`fineTuningJobsList`](docs/sdks/jobs/README.md#list) - Get Fine Tuning Jobs
-- [`fineTuningJobsStart`](docs/sdks/jobs/README.md#start) - Start Fine Tuning Job
+- [`fineTuningJobsCancel`](docs/sdks/finetuningjobs/README.md#cancel) - Cancel Fine Tuning Job
+- [`fineTuningJobsCreate`](docs/sdks/finetuningjobs/README.md#create) - Create Fine Tuning Job
+- [`fineTuningJobsGet`](docs/sdks/finetuningjobs/README.md#get) - Get Fine Tuning Job
+- [`fineTuningJobsList`](docs/sdks/finetuningjobs/README.md#list) - Get Fine Tuning Jobs
+- [`fineTuningJobsStart`](docs/sdks/finetuningjobs/README.md#start) - Start Fine Tuning Job
 - [`modelsArchive`](docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
 - [`modelsDelete`](docs/sdks/models/README.md#delete) - Delete Model
 - [`modelsList`](docs/sdks/models/README.md#list) - List Models

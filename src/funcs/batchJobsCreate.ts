@@ -33,11 +33,11 @@ import { Result } from "../types/fp.js";
  */
 export function batchJobsCreate(
   client: MistralCore,
-  request: components.BatchJobIn,
+  request: components.CreateBatchJobRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.BatchJobOut,
+    components.BatchJob,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function batchJobsCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.BatchJobIn,
+  request: components.CreateBatchJobRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.BatchJobOut,
+      components.BatchJob,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -77,7 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.BatchJobIn$outboundSchema.parse(value),
+    (value) => components.CreateBatchJobRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -139,7 +139,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.BatchJobOut,
+    components.BatchJob,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -149,7 +149,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.BatchJobOut$inboundSchema),
+    M.json(200, components.BatchJob$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

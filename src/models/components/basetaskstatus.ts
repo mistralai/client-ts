@@ -4,7 +4,8 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const BaseTaskStatus = {
   Running: "RUNNING",
@@ -16,9 +17,11 @@ export const BaseTaskStatus = {
   TimedOut: "TIMED_OUT",
   Unknown: "UNKNOWN",
 } as const;
-export type BaseTaskStatus = ClosedEnum<typeof BaseTaskStatus>;
+export type BaseTaskStatus = OpenEnum<typeof BaseTaskStatus>;
 
 /** @internal */
-export const BaseTaskStatus$inboundSchema: z.ZodNativeEnum<
-  typeof BaseTaskStatus
-> = z.nativeEnum(BaseTaskStatus);
+export const BaseTaskStatus$inboundSchema: z.ZodType<
+  BaseTaskStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BaseTaskStatus);

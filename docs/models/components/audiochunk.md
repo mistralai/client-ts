@@ -6,6 +6,7 @@
 import { AudioChunk } from "@mistralai/mistralai/models/components";
 
 let value: AudioChunk = {
+  type: "input_audio",
   inputAudio: "<value>",
 };
 ```
@@ -14,5 +15,5 @@ let value: AudioChunk = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `type`             | *"input_audio"*    | :heavy_minus_sign: | N/A                |
+| `type`             | *"input_audio"*    | :heavy_check_mark: | N/A                |
 | `inputAudio`       | *string*           | :heavy_check_mark: | N/A                |

@@ -25,47 +25,47 @@ import {
   UserMessage$outboundSchema,
 } from "./usermessage.js";
 
-export type InstructRequestMessages =
+export type InstructRequestMessage =
   | (AssistantMessage & { role: "assistant" })
-  | (SystemMessage & { role: "system" })
-  | (ToolMessage & { role: "tool" })
-  | (UserMessage & { role: "user" });
+  | SystemMessage
+  | ToolMessage
+  | UserMessage;
 
 export type InstructRequest = {
   messages: Array<
     | (AssistantMessage & { role: "assistant" })
-    | (SystemMessage & { role: "system" })
-    | (ToolMessage & { role: "tool" })
-    | (UserMessage & { role: "user" })
+    | SystemMessage
+    | ToolMessage
+    | UserMessage
   >;
 };
 
 /** @internal */
-export type InstructRequestMessages$Outbound =
+export type InstructRequestMessage$Outbound =
   | (AssistantMessage$Outbound & { role: "assistant" })
-  | (SystemMessage$Outbound & { role: "system" })
-  | (ToolMessage$Outbound & { role: "tool" })
-  | (UserMessage$Outbound & { role: "user" });
+  | SystemMessage$Outbound
+  | ToolMessage$Outbound
+  | UserMessage$Outbound;
 
 /** @internal */
-export const InstructRequestMessages$outboundSchema: z.ZodType<
-  InstructRequestMessages$Outbound,
+export const InstructRequestMessage$outboundSchema: z.ZodType<
+  InstructRequestMessage$Outbound,
   z.ZodTypeDef,
-  InstructRequestMessages
+  InstructRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
     z.object({ role: z.literal("assistant") }),
   ),
-  SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-  ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-  UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+  SystemMessage$outboundSchema,
+  ToolMessage$outboundSchema,
+  UserMessage$outboundSchema,
 ]);
 
-export function instructRequestMessagesToJSON(
-  instructRequestMessages: InstructRequestMessages,
+export function instructRequestMessageToJSON(
+  instructRequestMessage: InstructRequestMessage,
 ): string {
   return JSON.stringify(
-    InstructRequestMessages$outboundSchema.parse(instructRequestMessages),
+    InstructRequestMessage$outboundSchema.parse(instructRequestMessage),
   );
 }
 
@@ -73,9 +73,9 @@ export function instructRequestMessagesToJSON(
 export type InstructRequest$Outbound = {
   messages: Array<
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (SystemMessage$Outbound & { role: "system" })
-    | (ToolMessage$Outbound & { role: "tool" })
-    | (UserMessage$Outbound & { role: "user" })
+    | SystemMessage$Outbound
+    | ToolMessage$Outbound
+    | UserMessage$Outbound
   >;
 };
 
@@ -90,9 +90,9 @@ export const InstructRequest$outboundSchema: z.ZodType<
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }),
       ),
-      SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-      ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-      UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+      SystemMessage$outboundSchema,
+      ToolMessage$outboundSchema,
+      UserMessage$outboundSchema,
     ]),
   ),
 });

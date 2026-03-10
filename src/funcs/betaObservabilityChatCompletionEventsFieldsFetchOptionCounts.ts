@@ -37,7 +37,7 @@ export function betaObservabilityChatCompletionEventsFieldsFetchOptionCounts(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.FieldOptionCounts,
+    components.FetchFieldOptionCountsResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.FieldOptionCounts,
+      components.FetchFieldOptionCountsResponse,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -90,7 +90,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.FieldOptionCountsInSchema, {
+  const body = encodeJSON("body", payload.FetchFieldOptionCountsRequest, {
     explode: true,
   });
 
@@ -161,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.FieldOptionCounts,
+    components.FetchFieldOptionCountsResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -172,7 +172,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.FieldOptionCounts$inboundSchema),
+    M.json(200, components.FetchFieldOptionCountsResponse$inboundSchema),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,

@@ -11,7 +11,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Human-readable error message.
  */
-export type Message = string | { [k: string]: any };
+export type RealtimeTranscriptionErrorDetailMessage = string | {
+  [k: string]: any;
+};
 
 export type RealtimeTranscriptionErrorDetail = {
   /**
@@ -25,28 +27,46 @@ export type RealtimeTranscriptionErrorDetail = {
 };
 
 /** @internal */
-export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
-  z.union([z.string(), z.record(z.any())]);
+export const RealtimeTranscriptionErrorDetailMessage$inboundSchema: z.ZodType<
+  RealtimeTranscriptionErrorDetailMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.record(z.any())]);
 /** @internal */
-export type Message$Outbound = string | { [k: string]: any };
+export type RealtimeTranscriptionErrorDetailMessage$Outbound = string | {
+  [k: string]: any;
+};
 
 /** @internal */
-export const Message$outboundSchema: z.ZodType<
-  Message$Outbound,
+export const RealtimeTranscriptionErrorDetailMessage$outboundSchema: z.ZodType<
+  RealtimeTranscriptionErrorDetailMessage$Outbound,
   z.ZodTypeDef,
-  Message
+  RealtimeTranscriptionErrorDetailMessage
 > = z.union([z.string(), z.record(z.any())]);
 
-export function messageToJSON(message: Message): string {
-  return JSON.stringify(Message$outboundSchema.parse(message));
+export function realtimeTranscriptionErrorDetailMessageToJSON(
+  realtimeTranscriptionErrorDetailMessage:
+    RealtimeTranscriptionErrorDetailMessage,
+): string {
+  return JSON.stringify(
+    RealtimeTranscriptionErrorDetailMessage$outboundSchema.parse(
+      realtimeTranscriptionErrorDetailMessage,
+    ),
+  );
 }
-export function messageFromJSON(
+export function realtimeTranscriptionErrorDetailMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Message, SDKValidationError> {
+): SafeParseResult<
+  RealtimeTranscriptionErrorDetailMessage,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => Message$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Message' from JSON`,
+    (x) =>
+      RealtimeTranscriptionErrorDetailMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RealtimeTranscriptionErrorDetailMessage' from JSON`,
   );
 }
 

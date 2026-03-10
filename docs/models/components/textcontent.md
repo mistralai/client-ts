@@ -8,6 +8,7 @@ Text content for a message.
 import { TextContent } from "@mistralai/mistralai/models/components";
 
 let value: TextContent = {
+  type: "text",
   text: "<value>",
 };
 ```

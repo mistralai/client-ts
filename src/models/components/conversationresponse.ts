@@ -29,19 +29,19 @@ import {
   ToolExecutionEntry$inboundSchema,
 } from "./toolexecutionentry.js";
 
-export type Outputs =
+export type ConversationResponseOutput =
   | AgentHandoffEntry
   | FunctionCallEntry
   | ToolExecutionEntry
   | MessageOutputEntry;
 
-export type Guardrails = {};
+export type Guardrail = {};
 
 /**
  * The response after appending new entries to the conversation.
  */
 export type ConversationResponse = {
-  object?: "conversation.response" | undefined;
+  object: "conversation.response";
   conversationId: string;
   outputs: Array<
     | AgentHandoffEntry
@@ -50,42 +50,45 @@ export type ConversationResponse = {
     | MessageOutputEntry
   >;
   usage: ConversationUsageInfo;
-  guardrails?: Array<Guardrails> | null | undefined;
+  guardrails?: Array<Guardrail> | null | undefined;
 };
 
 /** @internal */
-export const Outputs$inboundSchema: z.ZodType<Outputs, z.ZodTypeDef, unknown> =
-  z.union([
-    AgentHandoffEntry$inboundSchema,
-    FunctionCallEntry$inboundSchema,
-    ToolExecutionEntry$inboundSchema,
-    MessageOutputEntry$inboundSchema,
-  ]);
+export const ConversationResponseOutput$inboundSchema: z.ZodType<
+  ConversationResponseOutput,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  AgentHandoffEntry$inboundSchema,
+  FunctionCallEntry$inboundSchema,
+  ToolExecutionEntry$inboundSchema,
+  MessageOutputEntry$inboundSchema,
+]);
 
-export function outputsFromJSON(
+export function conversationResponseOutputFromJSON(
   jsonString: string,
-): SafeParseResult<Outputs, SDKValidationError> {
+): SafeParseResult<ConversationResponseOutput, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Outputs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Outputs' from JSON`,
+    (x) => ConversationResponseOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ConversationResponseOutput' from JSON`,
   );
 }
 
 /** @internal */
-export const Guardrails$inboundSchema: z.ZodType<
-  Guardrails,
+export const Guardrail$inboundSchema: z.ZodType<
+  Guardrail,
   z.ZodTypeDef,
   unknown
 > = z.object({});
 
-export function guardrailsFromJSON(
+export function guardrailFromJSON(
   jsonString: string,
-): SafeParseResult<Guardrails, SDKValidationError> {
+): SafeParseResult<Guardrail, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Guardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Guardrails' from JSON`,
+    (x) => Guardrail$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Guardrail' from JSON`,
   );
 }
 
@@ -106,7 +109,7 @@ export const ConversationResponse$inboundSchema: z.ZodType<
     ]),
   ),
   usage: ConversationUsageInfo$inboundSchema,
-  guardrails: z.nullable(z.array(z.lazy(() => Guardrails$inboundSchema)))
+  guardrails: z.nullable(z.array(z.lazy(() => Guardrail$inboundSchema)))
     .optional(),
 }).transform((v) => {
   return remap$(v, {

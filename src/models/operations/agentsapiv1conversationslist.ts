@@ -16,7 +16,7 @@ export type AgentsApiV1ConversationsListRequest = {
   metadata?: { [k: string]: any } | null | undefined;
 };
 
-export type ResponseBody =
+export type AgentsApiV1ConversationsListResponse =
   | components.ModelConversation
   | components.AgentConversation;
 
@@ -53,8 +53,8 @@ export function agentsApiV1ConversationsListRequestToJSON(
 }
 
 /** @internal */
-export const ResponseBody$inboundSchema: z.ZodType<
-  ResponseBody,
+export const AgentsApiV1ConversationsListResponse$inboundSchema: z.ZodType<
+  AgentsApiV1ConversationsListResponse,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -62,12 +62,13 @@ export const ResponseBody$inboundSchema: z.ZodType<
   components.AgentConversation$inboundSchema,
 ]);
 
-export function responseBodyFromJSON(
+export function agentsApiV1ConversationsListResponseFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBody, SDKValidationError> {
+): SafeParseResult<AgentsApiV1ConversationsListResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody' from JSON`,
+    (x) =>
+      AgentsApiV1ConversationsListResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsApiV1ConversationsListResponse' from JSON`,
   );
 }

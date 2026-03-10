@@ -18,9 +18,9 @@ export class Judges extends ClientSDK {
    * Create a new judge
    */
   async create(
-    request: components.PostJudgeInSchema,
+    request: components.CreateJudgeRequest,
     options?: RequestOptions,
-  ): Promise<components.JudgePreview> {
+  ): Promise<components.Judge> {
     return unwrapAsync(betaObservabilityJudgesCreate(
       this,
       request,
@@ -34,7 +34,7 @@ export class Judges extends ClientSDK {
   async list(
     request?: operations.GetJudgesV1ObservabilityJudgesGetRequest | undefined,
     options?: RequestOptions,
-  ): Promise<components.JudgePreviews> {
+  ): Promise<components.ListJudgesResponse> {
     return unwrapAsync(betaObservabilityJudgesList(
       this,
       request,
@@ -48,7 +48,7 @@ export class Judges extends ClientSDK {
   async fetch(
     request: operations.GetJudgeByIdV1ObservabilityJudgesJudgeIdGetRequest,
     options?: RequestOptions,
-  ): Promise<components.JudgePreview> {
+  ): Promise<components.Judge> {
     return unwrapAsync(betaObservabilityJudgesFetch(
       this,
       request,

@@ -223,7 +223,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.DeleteDatasetRecordsInSchema](../../models/components/deletedatasetrecordsinschema.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.DeleteDatasetRecordsRequest](../../models/components/deletedatasetrecordsrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -256,7 +256,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.datasets.records.judge({
     datasetRecordId: "9de5d7a1-787a-45dd-b668-9f3407e76d8b",
-    postDatasetRecordJudgingInSchema: {
+    judgeDatasetRecordRequest: {
       judgeDefinition: {
         name: "<value>",
         description: "wisely railway deceivingly arcade minion back what yowza outrun service",
@@ -301,7 +301,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsRecordsJudge(mistral, {
     datasetRecordId: "9de5d7a1-787a-45dd-b668-9f3407e76d8b",
-    postDatasetRecordJudgingInSchema: {
+    judgeDatasetRecordRequest: {
       judgeDefinition: {
         name: "<value>",
         description: "wisely railway deceivingly arcade minion back what yowza outrun service",
@@ -370,7 +370,7 @@ const mistral = new Mistral({
 async function run() {
   await mistral.beta.observability.datasets.records.updatePayload({
     datasetRecordId: "17506b15-748e-4e7c-9737-c97c44d04b0f",
-    putDatasetRecordPayloadInSchema: {
+    updateDatasetRecordPayloadRequest: {
       payload: {
         messages: [
           {
@@ -410,7 +410,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsRecordsUpdatePayload(mistral, {
     datasetRecordId: "17506b15-748e-4e7c-9737-c97c44d04b0f",
-    putDatasetRecordPayloadInSchema: {
+    updateDatasetRecordPayloadRequest: {
       payload: {
         messages: [
           {
@@ -474,7 +474,7 @@ const mistral = new Mistral({
 async function run() {
   await mistral.beta.observability.datasets.records.updateProperties({
     datasetRecordId: "a4deefc5-0905-427e-ad15-1090ef9e216d",
-    putDatasetRecordPropertiesInSchema: {
+    updateDatasetRecordPropertiesRequest: {
       properties: {
         "key": "<value>",
         "key1": "<value>",
@@ -506,7 +506,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsRecordsUpdateProperties(mistral, {
     datasetRecordId: "a4deefc5-0905-427e-ad15-1090ef9e216d",
-    putDatasetRecordPropertiesInSchema: {
+    updateDatasetRecordPropertiesRequest: {
       properties: {
         "key": "<value>",
         "key1": "<value>",

@@ -5,10 +5,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
+import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Annotations, Annotations$inboundSchema } from "./annotations.js";
@@ -17,12 +14,12 @@ import { Annotations, Annotations$inboundSchema } from "./annotations.js";
  * Image content for a message.
  */
 export type ImageContent = {
-  type?: "image" | undefined;
+  type: "image";
   data: string;
   mimeType: string;
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -30,17 +27,13 @@ export const ImageContent$inboundSchema: z.ZodType<
   ImageContent,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.literal("image").default("image").optional(),
-    data: z.string(),
-    mimeType: z.string(),
-    annotations: z.nullable(Annotations$inboundSchema).optional(),
-    _meta: z.nullable(z.record(z.any())).optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
+> = z.object({
+  type: z.literal("image"),
+  data: z.string(),
+  mimeType: z.string(),
+  annotations: z.nullable(Annotations$inboundSchema).optional(),
+  _meta: z.nullable(z.record(z.any())).optional(),
+}).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

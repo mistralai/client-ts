@@ -28,7 +28,7 @@ export class Documents extends ClientSDK {
   async list(
     request: operations.LibrariesDocumentsListV1Request,
     options?: RequestOptions,
-  ): Promise<components.ListDocumentOut> {
+  ): Promise<components.ListDocumentsResponse> {
     return unwrapAsync(betaLibrariesDocumentsList(
       this,
       request,
@@ -45,7 +45,7 @@ export class Documents extends ClientSDK {
   async upload(
     request: operations.LibrariesDocumentsUploadV1Request,
     options?: RequestOptions,
-  ): Promise<components.DocumentOut> {
+  ): Promise<components.Document> {
     return unwrapAsync(betaLibrariesDocumentsUpload(
       this,
       request,
@@ -62,7 +62,7 @@ export class Documents extends ClientSDK {
   async get(
     request: operations.LibrariesDocumentsGetV1Request,
     options?: RequestOptions,
-  ): Promise<components.DocumentOut> {
+  ): Promise<components.Document> {
     return unwrapAsync(betaLibrariesDocumentsGet(
       this,
       request,
@@ -79,7 +79,7 @@ export class Documents extends ClientSDK {
   async update(
     request: operations.LibrariesDocumentsUpdateV1Request,
     options?: RequestOptions,
-  ): Promise<components.DocumentOut> {
+  ): Promise<components.Document> {
     return unwrapAsync(betaLibrariesDocumentsUpdate(
       this,
       request,
@@ -130,7 +130,7 @@ export class Documents extends ClientSDK {
   async status(
     request: operations.LibrariesDocumentsGetStatusV1Request,
     options?: RequestOptions,
-  ): Promise<components.ProcessingStatusOut> {
+  ): Promise<components.ProcessingStatus> {
     return unwrapAsync(betaLibrariesDocumentsStatus(
       this,
       request,

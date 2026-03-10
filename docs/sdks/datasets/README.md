@@ -80,7 +80,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.PostDatasetInSchema](../../models/components/postdatasetinschema.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.CreateDatasetRequest](../../models/components/createdatasetrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -157,7 +157,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DatasetPreviews](../../models/components/datasetpreviews.md)\>**
+**Promise\<[components.ListDatasetsResponse](../../models/components/listdatasetsresponse.md)\>**
 
 ### Errors
 
@@ -331,7 +331,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.datasets.update({
     datasetId: "95be9afc-fc05-44a6-af9f-2362de1224f9",
-    patchDatasetInSchema: {},
+    updateDatasetRequest: {},
   });
 
   console.log(result);
@@ -357,7 +357,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsUpdate(mistral, {
     datasetId: "95be9afc-fc05-44a6-af9f-2362de1224f9",
-    patchDatasetInSchema: {},
+    updateDatasetRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -455,7 +455,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DatasetRecords](../../models/components/datasetrecords.md)\>**
+**Promise\<[components.ListDatasetRecordsResponse](../../models/components/listdatasetrecordsresponse.md)\>**
 
 ### Errors
 
@@ -481,7 +481,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.datasets.createRecord({
     datasetId: "4c54ed13-1459-44e1-8696-1a6df06f7177",
-    postDatasetRecordInSchema: {
+    createDatasetRecordRequest: {
       payload: {
         messages: [
           {
@@ -524,7 +524,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsCreateRecord(mistral, {
     datasetId: "4c54ed13-1459-44e1-8696-1a6df06f7177",
-    postDatasetRecordInSchema: {
+    createDatasetRecordRequest: {
       payload: {
         messages: [
           {
@@ -591,7 +591,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.datasets.importFromCampaign({
     datasetId: "306b5f31-e31c-4e06-9220-e3008c61bf1b",
-    postDatasetImportFromCampaignInSchema: {
+    importDatasetFromCampaignRequest: {
       campaignId: "71a2e42d-7414-4fe6-89cb-44a2122b6f6b",
     },
   });
@@ -619,7 +619,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsImportFromCampaign(mistral, {
     datasetId: "306b5f31-e31c-4e06-9220-e3008c61bf1b",
-    postDatasetImportFromCampaignInSchema: {
+    importDatasetFromCampaignRequest: {
       campaignId: "71a2e42d-7414-4fe6-89cb-44a2122b6f6b",
     },
   });
@@ -671,7 +671,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.datasets.importFromExplorer({
     datasetId: "ee1930e9-54f7-4c68-aa8a-40fe5d2a3485",
-    postDatasetImportFromExplorerInSchema: {
+    importDatasetFromExplorerRequest: {
       completionEventIds: [
         "<value 1>",
         "<value 2>",
@@ -703,7 +703,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsImportFromExplorer(mistral, {
     datasetId: "ee1930e9-54f7-4c68-aa8a-40fe5d2a3485",
-    postDatasetImportFromExplorerInSchema: {
+    importDatasetFromExplorerRequest: {
       completionEventIds: [
         "<value 1>",
         "<value 2>",
@@ -759,7 +759,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.datasets.importFromFile({
     datasetId: "1c96c925-cc58-4529-863d-9fe66a6f1924",
-    postDatasetImportFromFileInSchema: {
+    importDatasetFromFileRequest: {
       fileId: "<id>",
     },
   });
@@ -787,7 +787,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsImportFromFile(mistral, {
     datasetId: "1c96c925-cc58-4529-863d-9fe66a6f1924",
-    postDatasetImportFromFileInSchema: {
+    importDatasetFromFileRequest: {
       fileId: "<id>",
     },
   });
@@ -839,7 +839,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.datasets.importFromPlayground({
     datasetId: "5cb42584-5fcf-4837-997a-6a67c5e6900d",
-    postDatasetImportFromPlaygroundInSchema: {
+    importDatasetFromPlaygroundRequest: {
       conversationIds: [],
     },
   });
@@ -867,7 +867,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsImportFromPlayground(mistral, {
     datasetId: "5cb42584-5fcf-4837-997a-6a67c5e6900d",
-    postDatasetImportFromPlaygroundInSchema: {
+    importDatasetFromPlaygroundRequest: {
       conversationIds: [],
     },
   });
@@ -919,7 +919,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.datasets.importFromDatasetRecords({
     datasetId: "ada96a08-d724-4e5c-9111-aaf1bdb7d588",
-    postDatasetImportFromDatasetInSchema: {
+    importDatasetFromDatasetRequest: {
       datasetRecordIds: [
         "58fe798a-537b-4c61-9efc-d1d96d5d264a",
         "cfa1d197-deda-456e-906b-dd84dccfcd17",
@@ -950,7 +950,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityDatasetsImportFromDatasetRecords(mistral, {
     datasetId: "ada96a08-d724-4e5c-9111-aaf1bdb7d588",
-    postDatasetImportFromDatasetInSchema: {
+    importDatasetFromDatasetRequest: {
       datasetRecordIds: [
         "58fe798a-537b-4c61-9efc-d1d96d5d264a",
         "cfa1d197-deda-456e-906b-dd84dccfcd17",
@@ -1053,7 +1053,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DatasetExport](../../models/components/datasetexport.md)\>**
+**Promise\<[components.ExportDatasetResponse](../../models/components/exportdatasetresponse.md)\>**
 
 ### Errors
 
@@ -1203,7 +1203,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DatasetImportTasks](../../models/components/datasetimporttasks.md)\>**
+**Promise\<[components.ListDatasetImportTasksResponse](../../models/components/listdatasetimporttasksresponse.md)\>**
 
 ### Errors
 

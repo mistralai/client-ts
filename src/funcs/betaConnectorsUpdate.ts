@@ -88,7 +88,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.ConnectorMCPUpdate, {
+  const body = encodeJSON("body", payload.UpdateConnectorRequest, {
     explode: true,
   });
 

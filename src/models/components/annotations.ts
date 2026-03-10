@@ -4,11 +4,9 @@
  */
 
 import * as z from "zod/v3";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import { safeParse } from "../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,31 +14,30 @@ export const Audience = {
   User: "user",
   Assistant: "assistant",
 } as const;
-export type Audience = ClosedEnum<typeof Audience>;
+export type Audience = OpenEnum<typeof Audience>;
 
 export type Annotations = {
   audience?: Array<Audience> | null | undefined;
   priority?: number | null | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
-export const Audience$inboundSchema: z.ZodNativeEnum<typeof Audience> = z
-  .nativeEnum(Audience);
+export const Audience$inboundSchema: z.ZodType<
+  Audience,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(Audience);
 
 /** @internal */
 export const Annotations$inboundSchema: z.ZodType<
   Annotations,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    audience: z.nullable(z.array(Audience$inboundSchema)).optional(),
-    priority: z.nullable(z.number()).optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
+> = z.object({
+  audience: z.nullable(z.array(Audience$inboundSchema)).optional(),
+  priority: z.nullable(z.number()).optional(),
+}).catchall(z.any());
 
 export function annotationsFromJSON(
   jsonString: string,

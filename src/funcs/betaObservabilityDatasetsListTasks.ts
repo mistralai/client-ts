@@ -37,7 +37,7 @@ export function betaObservabilityDatasetsListTasks(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.DatasetImportTasks,
+    components.ListDatasetImportTasksResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.DatasetImportTasks,
+      components.ListDatasetImportTasksResponse,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -164,7 +164,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.DatasetImportTasks,
+    components.ListDatasetImportTasksResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -175,7 +175,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.DatasetImportTasks$inboundSchema),
+    M.json(200, components.ListDatasetImportTasksResponse$inboundSchema),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,

@@ -8,6 +8,7 @@ Audio content for a message.
 import { AudioContent } from "@mistralai/mistralai/models/components";
 
 let value: AudioContent = {
+  type: "audio",
   data: "<value>",
   mimeType: "<value>",
 };

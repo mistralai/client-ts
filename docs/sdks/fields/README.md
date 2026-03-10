@@ -68,7 +68,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ChatCompletionFields](../../models/components/chatcompletionfields.md)\>**
+**Promise\<[components.ListChatCompletionFieldsResponse](../../models/components/listchatcompletionfieldsresponse.md)\>**
 
 ### Errors
 
@@ -144,7 +144,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ChatCompletionFieldOptions](../../models/components/chatcompletionfieldoptions.md)\>**
+**Promise\<[components.FetchChatCompletionFieldOptionsResponse](../../models/components/fetchchatcompletionfieldoptionsresponse.md)\>**
 
 ### Errors
 
@@ -170,7 +170,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.chatCompletionEvents.fields.fetchOptionCounts({
     fieldName: "<value>",
-    fieldOptionCountsInSchema: {},
+    fetchFieldOptionCountsRequest: {},
   });
 
   console.log(result);
@@ -196,7 +196,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityChatCompletionEventsFieldsFetchOptionCounts(mistral, {
     fieldName: "<value>",
-    fieldOptionCountsInSchema: {},
+    fetchFieldOptionCountsRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -220,7 +220,7 @@ run();
 
 ### Response
 
-**Promise\<[components.FieldOptionCounts](../../models/components/fieldoptioncounts.md)\>**
+**Promise\<[components.FetchFieldOptionCountsResponse](../../models/components/fetchfieldoptioncountsresponse.md)\>**
 
 ### Errors
 

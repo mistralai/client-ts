@@ -293,8 +293,9 @@ export class RealtimeConnection implements AsyncIterable<RealtimeEvent> {
     }
 
     if ("session" in event) {
-      this.currentSession = event.session;
-      this.currentAudioFormat = event.session.audioFormat;
+      const session = (event as { session: RealtimeTranscriptionSession }).session;
+      this.currentSession = session;
+      this.currentAudioFormat = session.audioFormat;
     }
   }
 }

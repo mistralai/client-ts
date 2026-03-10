@@ -10,14 +10,14 @@ import * as components from "../components/index.js";
 export type CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest =
   {
     datasetId: string;
-    postDatasetRecordInSchema: components.PostDatasetRecordInSchema;
+    createDatasetRecordRequest: components.CreateDatasetRecordRequest;
   };
 
 /** @internal */
 export type CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest$Outbound =
   {
     dataset_id: string;
-    PostDatasetRecordInSchema: components.PostDatasetRecordInSchema$Outbound;
+    CreateDatasetRecordRequest: components.CreateDatasetRecordRequest$Outbound;
   };
 
 /** @internal */
@@ -28,12 +28,12 @@ export const CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostReque
     CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest
   > = z.object({
     datasetId: z.string(),
-    postDatasetRecordInSchema:
-      components.PostDatasetRecordInSchema$outboundSchema,
+    createDatasetRecordRequest:
+      components.CreateDatasetRecordRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetId: "dataset_id",
-      postDatasetRecordInSchema: "PostDatasetRecordInSchema",
+      createDatasetRecordRequest: "CreateDatasetRecordRequest",
     });
   });
 

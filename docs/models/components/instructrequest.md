@@ -12,6 +12,6 @@ let value: InstructRequest = {
 
 ## Fields
 
-| Field                                  | Type                                   | Required                               | Description                            |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| `messages`                             | *components.InstructRequestMessages*[] | :heavy_check_mark:                     | N/A                                    |
+| Field                                 | Type                                  | Required                              | Description                           |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `messages`                            | *components.InstructRequestMessage*[] | :heavy_check_mark:                    | N/A                                   |

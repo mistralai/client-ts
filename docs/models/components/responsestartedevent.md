@@ -6,6 +6,7 @@
 import { ResponseStartedEvent } from "@mistralai/mistralai/models/components";
 
 let value: ResponseStartedEvent = {
+  type: "conversation.response.started",
   conversationId: "<id>",
 };
 ```
@@ -14,6 +15,6 @@ let value: ResponseStartedEvent = {
 
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `type`                                                                                        | *"conversation.response.started"*                                                             | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *"conversation.response.started"*                                                             | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `conversationId`                                                                              | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

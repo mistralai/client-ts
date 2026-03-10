@@ -11,25 +11,20 @@ let value:
   JudgeChatCompletionEventV1ObservabilityChatCompletionEventsEventIdLiveJudgingPostRequest =
     {
       eventId: "ddcba39e-79b7-4634-9101-f125aad225fe",
-      postChatCompletionEventJudgingInSchema: {
+      judgeChatCompletionEventRequest: {
         judgeDefinition: {
           name: "<value>",
-          description: "encode separately rubbery cheerfully",
+          description: "wherever ha than",
           modelName: "<value>",
           output: {
-            options: [
-              {
-                value: "<value>",
-                description: "without indeed because",
-              },
-            ],
+            type: "REGRESSION",
+            min: 0,
+            minDescription: "<value>",
+            max: 1,
+            maxDescription: "<value>",
           },
           instructions: "<value>",
-          tools: [
-            "<value 1>",
-            "<value 2>",
-            "<value 3>",
-          ],
+          tools: [],
         },
       },
     };
@@ -37,7 +32,7 @@ let value:
 
 ## Fields
 
-| Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `eventId`                                                                                                              | *string*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
-| `postChatCompletionEventJudgingInSchema`                                                                               | [components.PostChatCompletionEventJudgingInSchema](../../models/components/postchatcompletioneventjudginginschema.md) | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `eventId`                                                                                                | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `judgeChatCompletionEventRequest`                                                                        | [components.JudgeChatCompletionEventRequest](../../models/components/judgechatcompletioneventrequest.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

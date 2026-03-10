@@ -8,10 +8,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  IntegrationsSchemasApiToolTool,
-  IntegrationsSchemasApiToolTool$inboundSchema,
-} from "./integrationsschemasapitooltool.js";
+import { ConnectorTool, ConnectorTool$inboundSchema } from "./connectortool.js";
 
 export type Connector = {
   id: string;
@@ -21,7 +18,7 @@ export type Connector = {
   modifiedAt: Date;
   server?: string | null | undefined;
   authType?: string | null | undefined;
-  tools?: Array<IntegrationsSchemasApiToolTool> | null | undefined;
+  tools?: Array<ConnectorTool> | null | undefined;
 };
 
 /** @internal */
@@ -39,8 +36,7 @@ export const Connector$inboundSchema: z.ZodType<
   ),
   server: z.nullable(z.string()).optional(),
   auth_type: z.nullable(z.string()).optional(),
-  tools: z.nullable(z.array(IntegrationsSchemasApiToolTool$inboundSchema))
-    .optional(),
+  tools: z.nullable(z.array(ConnectorTool$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

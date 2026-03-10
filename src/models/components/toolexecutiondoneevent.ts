@@ -16,9 +16,9 @@ import {
 export type ToolExecutionDoneEventName = BuiltInConnectors | string;
 
 export type ToolExecutionDoneEvent = {
-  type?: "tool.execution.done" | undefined;
+  type: "tool.execution.done";
   createdAt?: Date | undefined;
-  outputIndex: number | undefined;
+  outputIndex: number;
   id: string;
   name: BuiltInConnectors | string;
   info?: { [k: string]: any } | undefined;
@@ -47,7 +47,7 @@ export const ToolExecutionDoneEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("tool.execution.done").default("tool.execution.done"),
+  type: z.literal("tool.execution.done"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

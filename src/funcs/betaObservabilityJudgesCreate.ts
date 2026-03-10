@@ -31,11 +31,11 @@ import { Result } from "../types/fp.js";
  */
 export function betaObservabilityJudgesCreate(
   client: MistralCore,
-  request: components.PostJudgeInSchema,
+  request: components.CreateJudgeRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.JudgePreview,
+    components.Judge,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -56,12 +56,12 @@ export function betaObservabilityJudgesCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.PostJudgeInSchema,
+  request: components.CreateJudgeRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.JudgePreview,
+      components.Judge,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -77,7 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.PostJudgeInSchema$outboundSchema.parse(value),
+    (value) => components.CreateJudgeRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -143,7 +143,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.JudgePreview,
+    components.Judge,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -154,7 +154,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, components.JudgePreview$inboundSchema),
+    M.json(201, components.Judge$inboundSchema),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,

@@ -11,7 +11,7 @@ let value:
   PostDatasetRecordsFromExplorerV1ObservabilityDatasetsDatasetIdImportsFromExplorerPostRequest =
     {
       datasetId: "2490ecee-c5f9-43c4-aa87-924bad03f873",
-      postDatasetImportFromExplorerInSchema: {
+      importDatasetFromExplorerRequest: {
         completionEventIds: [
           "<value 1>",
           "<value 2>",
@@ -23,7 +23,7 @@ let value:
 
 ## Fields
 
-| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `datasetId`                                                                                                          | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
-| `postDatasetImportFromExplorerInSchema`                                                                              | [components.PostDatasetImportFromExplorerInSchema](../../models/components/postdatasetimportfromexplorerinschema.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `datasetId`                                                                                                | *string*                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `importDatasetFromExplorerRequest`                                                                         | [components.ImportDatasetFromExplorerRequest](../../models/components/importdatasetfromexplorerrequest.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

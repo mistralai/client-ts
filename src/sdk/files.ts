@@ -26,9 +26,9 @@ export class Files extends ClientSDK {
    * Please contact us if you need to increase these storage limits.
    */
   async upload(
-    request: operations.FilesApiRoutesUploadFileMultiPartBodyParams,
+    request: operations.MultiPartBodyParams,
     options?: RequestOptions,
-  ): Promise<components.UploadFileOut> {
+  ): Promise<components.CreateFileResponse> {
     return unwrapAsync(filesUpload(
       this,
       request,
@@ -45,7 +45,7 @@ export class Files extends ClientSDK {
   async list(
     request?: operations.FilesApiRoutesListFilesRequest | undefined,
     options?: RequestOptions,
-  ): Promise<components.ListFilesOut> {
+  ): Promise<components.ListFilesResponse> {
     return unwrapAsync(filesList(
       this,
       request,
@@ -62,7 +62,7 @@ export class Files extends ClientSDK {
   async retrieve(
     request: operations.FilesApiRoutesRetrieveFileRequest,
     options?: RequestOptions,
-  ): Promise<components.RetrieveFileOut> {
+  ): Promise<components.GetFileResponse> {
     return unwrapAsync(filesRetrieve(
       this,
       request,
@@ -79,7 +79,7 @@ export class Files extends ClientSDK {
   async delete(
     request: operations.FilesApiRoutesDeleteFileRequest,
     options?: RequestOptions,
-  ): Promise<components.DeleteFileOut> {
+  ): Promise<components.DeleteFileResponse> {
     return unwrapAsync(filesDelete(
       this,
       request,
@@ -110,7 +110,7 @@ export class Files extends ClientSDK {
   async getSignedUrl(
     request: operations.FilesApiRoutesGetSignedUrlRequest,
     options?: RequestOptions,
-  ): Promise<components.FileSignedURL> {
+  ): Promise<components.GetSignedUrlResponse> {
     return unwrapAsync(filesGetSignedUrl(
       this,
       request,

@@ -14,7 +14,7 @@ import {
 } from "./conversationusageinfo.js";
 
 export type ResponseDoneEvent = {
-  type?: "conversation.response.done" | undefined;
+  type: "conversation.response.done";
   createdAt?: Date | undefined;
   usage: ConversationUsageInfo;
 };
@@ -25,9 +25,7 @@ export const ResponseDoneEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("conversation.response.done").default(
-    "conversation.response.done",
-  ),
+  type: z.literal("conversation.response.done"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   usage: ConversationUsageInfo$inboundSchema,

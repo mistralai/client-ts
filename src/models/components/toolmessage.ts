@@ -14,7 +14,7 @@ import {
 export type ToolMessageContent = string | Array<ContentChunk>;
 
 export type ToolMessage = {
-  role?: "tool" | undefined;
+  role: "tool";
   content: string | Array<ContentChunk> | null;
   toolCallId?: string | null | undefined;
   name?: string | null | undefined;
@@ -52,7 +52,7 @@ export const ToolMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolMessage
 > = z.object({
-  role: z.literal("tool").default("tool" as const),
+  role: z.literal("tool"),
   content: z.nullable(
     z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),

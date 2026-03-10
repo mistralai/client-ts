@@ -10,9 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentHandoffStartedEvent = {
-  type?: "agent.handoff.started" | undefined;
+  type: "agent.handoff.started";
   createdAt?: Date | undefined;
-  outputIndex: number | undefined;
+  outputIndex: number;
   id: string;
   previousAgentId: string;
   previousAgentName: string;
@@ -24,7 +24,7 @@ export const AgentHandoffStartedEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("agent.handoff.started").default("agent.handoff.started"),
+  type: z.literal("agent.handoff.started"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

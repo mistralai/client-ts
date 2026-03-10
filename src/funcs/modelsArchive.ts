@@ -38,7 +38,7 @@ export function modelsArchive(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ArchiveFTModelOut,
+    components.ArchiveModelResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ArchiveFTModelOut,
+      components.ArchiveModelResponse,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -151,7 +151,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.ArchiveFTModelOut,
+    components.ArchiveModelResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -161,7 +161,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ArchiveFTModelOut$inboundSchema),
+    M.json(200, components.ArchiveModelResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

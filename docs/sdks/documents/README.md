@@ -82,7 +82,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ListDocumentOut](../../models/components/listdocumentout.md)\>**
+**Promise\<[components.ListDocumentsResponse](../../models/components/listdocumentsresponse.md)\>**
 
 ### Errors
 
@@ -164,7 +164,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DocumentOut](../../models/components/documentout.md)\>**
+**Promise\<[components.Document](../../models/components/document.md)\>**
 
 ### Errors
 
@@ -240,7 +240,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DocumentOut](../../models/components/documentout.md)\>**
+**Promise\<[components.Document](../../models/components/document.md)\>**
 
 ### Errors
 
@@ -267,7 +267,7 @@ async function run() {
   const result = await mistral.beta.libraries.documents.update({
     libraryId: "3ddd8d93-dca5-4a6d-980d-173226c35742",
     documentId: "2a25e44c-b160-40ca-b5c2-b65fb2fcae34",
-    documentUpdateIn: {},
+    updateDocumentRequest: {},
   });
 
   console.log(result);
@@ -294,7 +294,7 @@ async function run() {
   const res = await betaLibrariesDocumentsUpdate(mistral, {
     libraryId: "3ddd8d93-dca5-4a6d-980d-173226c35742",
     documentId: "2a25e44c-b160-40ca-b5c2-b65fb2fcae34",
-    documentUpdateIn: {},
+    updateDocumentRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -318,7 +318,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DocumentOut](../../models/components/documentout.md)\>**
+**Promise\<[components.Document](../../models/components/document.md)\>**
 
 ### Errors
 
@@ -546,7 +546,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ProcessingStatusOut](../../models/components/processingstatusout.md)\>**
+**Promise\<[components.ProcessingStatus](../../models/components/processingstatus.md)\>**
 
 ### Errors
 
@@ -622,7 +622,7 @@ run();
 
 ### Response
 
-**Promise\<[string](../../models/.md)\>**
+**Promise\<[string](../../models/responselibrariesdocumentsgetsignedurlv1.md)\>**
 
 ### Errors
 
@@ -698,7 +698,7 @@ run();
 
 ### Response
 
-**Promise\<[string](../../models/.md)\>**
+**Promise\<[string](../../models/responselibrariesdocumentsgetextractedtextsignedurlv1.md)\>**
 
 ### Errors
 

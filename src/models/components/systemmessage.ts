@@ -13,7 +13,7 @@ import {
 export type SystemMessageContent = string | Array<SystemMessageContentChunks>;
 
 export type SystemMessage = {
-  role?: "system" | undefined;
+  role: "system";
   content: string | Array<SystemMessageContentChunks>;
 };
 
@@ -49,7 +49,7 @@ export const SystemMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SystemMessage
 > = z.object({
-  role: z.literal("system").default("system" as const),
+  role: z.literal("system"),
   content: z.union([
     z.string(),
     z.array(SystemMessageContentChunks$outboundSchema),

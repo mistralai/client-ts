@@ -35,7 +35,7 @@ export function filesGetSignedUrl(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.FileSignedURL,
+    components.GetSignedUrlResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -60,7 +60,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.FileSignedURL,
+      components.GetSignedUrlResponse,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -149,7 +149,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.FileSignedURL,
+    components.GetSignedUrlResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -159,7 +159,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.FileSignedURL$inboundSchema),
+    M.json(200, components.GetSignedUrlResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

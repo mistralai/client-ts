@@ -6,7 +6,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -20,7 +21,7 @@ export const Role = {
   Assistant: "assistant",
   User: "user",
 } as const;
-export type Role = ClosedEnum<typeof Role>;
+export type Role = OpenEnum<typeof Role>;
 
 export type MessageInputEntryContent =
   | string
@@ -41,12 +42,11 @@ export type MessageInputEntry = {
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
+export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Role);
 /** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
-  Role$inboundSchema;
+export const Role$outboundSchema: z.ZodType<string, z.ZodTypeDef, Role> =
+  openEnums.outboundSchema(Role);
 
 /** @internal */
 export const MessageInputEntryContent$inboundSchema: z.ZodType<

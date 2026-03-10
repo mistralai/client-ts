@@ -6,10 +6,12 @@
 import { ModerationLlmv1Action } from "@mistralai/mistralai/models/components";
 
 let value: ModerationLlmv1Action = "none";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"none" | "block"
+"none" | "block" | Unrecognized<string>
 ```

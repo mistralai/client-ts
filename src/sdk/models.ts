@@ -41,9 +41,7 @@ export class Models extends ClientSDK {
   async retrieve(
     request: operations.RetrieveModelV1ModelsModelIdGetRequest,
     options?: RequestOptions,
-  ): Promise<
-    operations.RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet
-  > {
+  ): Promise<operations.ResponseRetrieveModelV1ModelsModelIdGet> {
     return unwrapAsync(modelsRetrieve(
       this,
       request,
@@ -60,7 +58,7 @@ export class Models extends ClientSDK {
   async delete(
     request: operations.DeleteModelV1ModelsModelIdDeleteRequest,
     options?: RequestOptions,
-  ): Promise<components.DeleteModelOut> {
+  ): Promise<components.DeleteModelResponse> {
     return unwrapAsync(modelsDelete(
       this,
       request,
@@ -94,7 +92,7 @@ export class Models extends ClientSDK {
   async archive(
     request: operations.JobsApiRoutesFineTuningArchiveFineTunedModelRequest,
     options?: RequestOptions,
-  ): Promise<components.ArchiveFTModelOut> {
+  ): Promise<components.ArchiveModelResponse> {
     return unwrapAsync(modelsArchive(
       this,
       request,
@@ -111,7 +109,7 @@ export class Models extends ClientSDK {
   async unarchive(
     request: operations.JobsApiRoutesFineTuningUnarchiveFineTunedModelRequest,
     options?: RequestOptions,
-  ): Promise<components.UnarchiveFTModelOut> {
+  ): Promise<components.UnarchiveModelResponse> {
     return unwrapAsync(modelsUnarchive(
       this,
       request,

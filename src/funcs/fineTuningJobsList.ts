@@ -40,7 +40,7 @@ export function fineTuningJobsList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.JobsOut,
+    components.ListFineTuningJobsResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -67,7 +67,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.JobsOut,
+      components.ListFineTuningJobsResponse,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -159,7 +159,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.JobsOut,
+    components.ListFineTuningJobsResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -169,7 +169,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.JobsOut$inboundSchema),
+    M.json(200, components.ListFineTuningJobsResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

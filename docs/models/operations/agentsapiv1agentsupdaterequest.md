@@ -7,7 +7,7 @@ import { AgentsApiV1AgentsUpdateRequest } from "@mistralai/mistralai/models/oper
 
 let value: AgentsApiV1AgentsUpdateRequest = {
   agentId: "<id>",
-  agentUpdateRequest: {
+  updateAgentRequest: {
     completionArgs: {
       responseFormat: {
         type: "text",
@@ -22,4 +22,4 @@ let value: AgentsApiV1AgentsUpdateRequest = {
 | Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | `agentId`                                                                      | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
-| `agentUpdateRequest`                                                           | [components.AgentUpdateRequest](../../models/components/agentupdaterequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `updateAgentRequest`                                                           | [components.UpdateAgentRequest](../../models/components/updateagentrequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |

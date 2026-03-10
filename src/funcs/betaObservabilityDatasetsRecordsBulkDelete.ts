@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaObservabilityDatasetsRecordsBulkDelete(
   client: MistralCore,
-  request: components.DeleteDatasetRecordsInSchema,
+  request: components.DeleteDatasetRecordsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,7 +57,7 @@ export function betaObservabilityDatasetsRecordsBulkDelete(
 
 async function $do(
   client: MistralCore,
-  request: components.DeleteDatasetRecordsInSchema,
+  request: components.DeleteDatasetRecordsRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -79,7 +79,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      components.DeleteDatasetRecordsInSchema$outboundSchema.parse(value),
+      components.DeleteDatasetRecordsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

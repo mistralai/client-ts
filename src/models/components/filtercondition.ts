@@ -5,7 +5,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,7 +31,7 @@ export const Op = {
   Excludes: "excludes",
   LenEq: "len_eq",
 } as const;
-export type Op = ClosedEnum<typeof Op>;
+export type Op = OpenEnum<typeof Op>;
 
 export type FilterCondition = {
   field: string;
@@ -39,9 +40,11 @@ export type FilterCondition = {
 };
 
 /** @internal */
-export const Op$inboundSchema: z.ZodNativeEnum<typeof Op> = z.nativeEnum(Op);
+export const Op$inboundSchema: z.ZodType<Op, z.ZodTypeDef, unknown> = openEnums
+  .inboundSchema(Op);
 /** @internal */
-export const Op$outboundSchema: z.ZodNativeEnum<typeof Op> = Op$inboundSchema;
+export const Op$outboundSchema: z.ZodType<string, z.ZodTypeDef, Op> = openEnums
+  .outboundSchema(Op);
 
 /** @internal */
 export const FilterCondition$inboundSchema: z.ZodType<

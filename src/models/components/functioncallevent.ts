@@ -6,7 +6,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,14 +16,14 @@ export const FunctionCallEventConfirmationStatus = {
   Allowed: "allowed",
   Denied: "denied",
 } as const;
-export type FunctionCallEventConfirmationStatus = ClosedEnum<
+export type FunctionCallEventConfirmationStatus = OpenEnum<
   typeof FunctionCallEventConfirmationStatus
 >;
 
 export type FunctionCallEvent = {
-  type?: "function.call.delta" | undefined;
+  type: "function.call.delta";
   createdAt?: Date | undefined;
-  outputIndex: number | undefined;
+  outputIndex: number;
   id: string;
   model?: string | null | undefined;
   agentId?: string | null | undefined;
@@ -33,9 +34,11 @@ export type FunctionCallEvent = {
 };
 
 /** @internal */
-export const FunctionCallEventConfirmationStatus$inboundSchema: z.ZodNativeEnum<
-  typeof FunctionCallEventConfirmationStatus
-> = z.nativeEnum(FunctionCallEventConfirmationStatus);
+export const FunctionCallEventConfirmationStatus$inboundSchema: z.ZodType<
+  FunctionCallEventConfirmationStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(FunctionCallEventConfirmationStatus);
 
 /** @internal */
 export const FunctionCallEvent$inboundSchema: z.ZodType<
@@ -43,7 +46,7 @@ export const FunctionCallEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("function.call.delta").default("function.call.delta"),
+  type: z.literal("function.call.delta"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   output_index: z.number().int().default(0),

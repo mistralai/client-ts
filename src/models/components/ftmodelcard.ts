@@ -18,21 +18,21 @@ import {
  */
 export type FTModelCard = {
   id: string;
-  object: string | undefined;
+  object: string;
   created?: number | undefined;
-  ownedBy: string | undefined;
+  ownedBy: string;
   capabilities: ModelCapabilities;
   name?: string | null | undefined;
   description?: string | null | undefined;
-  maxContextLength: number | undefined;
+  maxContextLength: number;
   aliases?: Array<string> | undefined;
   deprecation?: Date | null | undefined;
   deprecationReplacementModel?: string | null | undefined;
   defaultModelTemperature?: number | null | undefined;
-  type?: "fine-tuned" | undefined;
+  type: "fine-tuned";
   job: string;
   root: string;
-  archived: boolean | undefined;
+  archived: boolean;
 };
 
 /** @internal */
@@ -55,7 +55,7 @@ export const FTModelCard$inboundSchema: z.ZodType<
   ).optional(),
   deprecation_replacement_model: z.nullable(z.string()).optional(),
   default_model_temperature: z.nullable(z.number()).optional(),
-  type: z.literal("fine-tuned").default("fine-tuned"),
+  type: z.literal("fine-tuned"),
   job: z.string(),
   root: z.string(),
   archived: z.boolean().default(false),

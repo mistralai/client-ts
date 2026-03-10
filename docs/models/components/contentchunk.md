@@ -55,6 +55,7 @@ const value: components.ThinkChunk = {
 
 ```typescript
 const value: components.AudioChunk = {
+  type: "input_audio",
   inputAudio: "<value>",
 };
 ```
@@ -63,6 +64,7 @@ const value: components.AudioChunk = {
 
 ```typescript
 const value: components.AudioURLChunk = {
+  type: "audio_url",
   audioUrl: "https://unwieldy-farm.com",
 };
 ```

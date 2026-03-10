@@ -24,4 +24,4 @@ let value: ConversationHistory = {
 | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
 | `object`                 | *"conversation.history"* | :heavy_minus_sign:       | N/A                      |
 | `conversationId`         | *string*                 | :heavy_check_mark:       | N/A                      |
-| `entries`                | *components.Entries*[]   | :heavy_check_mark:       | N/A                      |
+| `entries`                | *components.Entry*[]     | :heavy_check_mark:       | N/A                      |

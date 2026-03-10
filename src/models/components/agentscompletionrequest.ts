@@ -55,11 +55,11 @@ import {
  */
 export type AgentsCompletionRequestStop = string | Array<string>;
 
-export type AgentsCompletionRequestMessages =
+export type AgentsCompletionRequestMessage =
   | (AssistantMessage & { role: "assistant" })
-  | (SystemMessage & { role: "system" })
-  | (ToolMessage & { role: "tool" })
-  | (UserMessage & { role: "user" });
+  | SystemMessage
+  | ToolMessage
+  | UserMessage;
 
 export type AgentsCompletionRequestToolChoice = ToolChoice | ToolChoiceEnum;
 
@@ -86,9 +86,9 @@ export type AgentsCompletionRequest = {
    */
   messages: Array<
     | (AssistantMessage & { role: "assistant" })
-    | (SystemMessage & { role: "system" })
-    | (ToolMessage & { role: "tool" })
-    | (UserMessage & { role: "user" })
+    | SystemMessage
+    | ToolMessage
+    | UserMessage
   >;
   /**
    * Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.
@@ -144,32 +144,32 @@ export function agentsCompletionRequestStopToJSON(
 }
 
 /** @internal */
-export type AgentsCompletionRequestMessages$Outbound =
+export type AgentsCompletionRequestMessage$Outbound =
   | (AssistantMessage$Outbound & { role: "assistant" })
-  | (SystemMessage$Outbound & { role: "system" })
-  | (ToolMessage$Outbound & { role: "tool" })
-  | (UserMessage$Outbound & { role: "user" });
+  | SystemMessage$Outbound
+  | ToolMessage$Outbound
+  | UserMessage$Outbound;
 
 /** @internal */
-export const AgentsCompletionRequestMessages$outboundSchema: z.ZodType<
-  AgentsCompletionRequestMessages$Outbound,
+export const AgentsCompletionRequestMessage$outboundSchema: z.ZodType<
+  AgentsCompletionRequestMessage$Outbound,
   z.ZodTypeDef,
-  AgentsCompletionRequestMessages
+  AgentsCompletionRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
     z.object({ role: z.literal("assistant") }),
   ),
-  SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-  ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-  UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+  SystemMessage$outboundSchema,
+  ToolMessage$outboundSchema,
+  UserMessage$outboundSchema,
 ]);
 
-export function agentsCompletionRequestMessagesToJSON(
-  agentsCompletionRequestMessages: AgentsCompletionRequestMessages,
+export function agentsCompletionRequestMessageToJSON(
+  agentsCompletionRequestMessage: AgentsCompletionRequestMessage,
 ): string {
   return JSON.stringify(
-    AgentsCompletionRequestMessages$outboundSchema.parse(
-      agentsCompletionRequestMessages,
+    AgentsCompletionRequestMessage$outboundSchema.parse(
+      agentsCompletionRequestMessage,
     ),
   );
 }
@@ -205,9 +205,9 @@ export type AgentsCompletionRequest$Outbound = {
   metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (SystemMessage$Outbound & { role: "system" })
-    | (ToolMessage$Outbound & { role: "tool" })
-    | (UserMessage$Outbound & { role: "user" })
+    | SystemMessage$Outbound
+    | ToolMessage$Outbound
+    | UserMessage$Outbound
   >;
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
@@ -237,9 +237,9 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }),
       ),
-      SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-      ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-      UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+      SystemMessage$outboundSchema,
+      ToolMessage$outboundSchema,
+      UserMessage$outboundSchema,
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),

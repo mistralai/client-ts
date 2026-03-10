@@ -10,16 +10,16 @@ import * as components from "../components/index.js";
 export type PostDatasetRecordsFromCampaignV1ObservabilityDatasetsDatasetIdImportsFromCampaignPostRequest =
   {
     datasetId: string;
-    postDatasetImportFromCampaignInSchema:
-      components.PostDatasetImportFromCampaignInSchema;
+    importDatasetFromCampaignRequest:
+      components.ImportDatasetFromCampaignRequest;
   };
 
 /** @internal */
 export type PostDatasetRecordsFromCampaignV1ObservabilityDatasetsDatasetIdImportsFromCampaignPostRequest$Outbound =
   {
     dataset_id: string;
-    PostDatasetImportFromCampaignInSchema:
-      components.PostDatasetImportFromCampaignInSchema$Outbound;
+    ImportDatasetFromCampaignRequest:
+      components.ImportDatasetFromCampaignRequest$Outbound;
   };
 
 /** @internal */
@@ -30,13 +30,12 @@ export const PostDatasetRecordsFromCampaignV1ObservabilityDatasetsDatasetIdImpor
     PostDatasetRecordsFromCampaignV1ObservabilityDatasetsDatasetIdImportsFromCampaignPostRequest
   > = z.object({
     datasetId: z.string(),
-    postDatasetImportFromCampaignInSchema:
-      components.PostDatasetImportFromCampaignInSchema$outboundSchema,
+    importDatasetFromCampaignRequest:
+      components.ImportDatasetFromCampaignRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetId: "dataset_id",
-      postDatasetImportFromCampaignInSchema:
-        "PostDatasetImportFromCampaignInSchema",
+      importDatasetFromCampaignRequest: "ImportDatasetFromCampaignRequest",
     });
   });
 

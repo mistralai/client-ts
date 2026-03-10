@@ -10,16 +10,16 @@ import * as components from "../components/index.js";
 export type PostDatasetRecordsFromExplorerV1ObservabilityDatasetsDatasetIdImportsFromExplorerPostRequest =
   {
     datasetId: string;
-    postDatasetImportFromExplorerInSchema:
-      components.PostDatasetImportFromExplorerInSchema;
+    importDatasetFromExplorerRequest:
+      components.ImportDatasetFromExplorerRequest;
   };
 
 /** @internal */
 export type PostDatasetRecordsFromExplorerV1ObservabilityDatasetsDatasetIdImportsFromExplorerPostRequest$Outbound =
   {
     dataset_id: string;
-    PostDatasetImportFromExplorerInSchema:
-      components.PostDatasetImportFromExplorerInSchema$Outbound;
+    ImportDatasetFromExplorerRequest:
+      components.ImportDatasetFromExplorerRequest$Outbound;
   };
 
 /** @internal */
@@ -30,13 +30,12 @@ export const PostDatasetRecordsFromExplorerV1ObservabilityDatasetsDatasetIdImpor
     PostDatasetRecordsFromExplorerV1ObservabilityDatasetsDatasetIdImportsFromExplorerPostRequest
   > = z.object({
     datasetId: z.string(),
-    postDatasetImportFromExplorerInSchema:
-      components.PostDatasetImportFromExplorerInSchema$outboundSchema,
+    importDatasetFromExplorerRequest:
+      components.ImportDatasetFromExplorerRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetId: "dataset_id",
-      postDatasetImportFromExplorerInSchema:
-        "PostDatasetImportFromExplorerInSchema",
+      importDatasetFromExplorerRequest: "ImportDatasetFromExplorerRequest",
     });
   });
 
