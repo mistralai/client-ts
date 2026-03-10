@@ -1,0 +1,23 @@
+{
+  "name": "@mistralai/mistralai-azure",
+  "version": "2.0.0-alpha.1",
+  "author": "Speakeasy",
+  "main": "./index.js",
+  "sideEffects": false,
+  "scripts": {
+    "lint": "oxlint --max-warnings=0 --deny-warnings 'src/**/*.{ts,tsx}'",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    
+  },
+  "devDependencies": {
+    "@typescript/native-preview": "7.0.0-dev.20260302.1",
+    "oxlint": "^1.50.0",
+    "typescript": "~5.8.3"
+  },
+  "dependencies": {
+    "zod": "^3.25.0 || ^4.0.0"
+  }
+}
