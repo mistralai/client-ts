@@ -7,7 +7,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type WandbIntegration = {
-  type?: "wandb" | undefined;
+  type: "wandb";
   /**
    * The name of the project that the new run will be created under.
    */
@@ -38,7 +38,7 @@ export const WandbIntegration$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WandbIntegration
 > = z.object({
-  type: z.literal("wandb").default("wandb" as const),
+  type: z.literal("wandb"),
   project: z.string(),
   name: z.nullable(z.string()).optional(),
   apiKey: z.string(),

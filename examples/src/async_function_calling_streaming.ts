@@ -1,6 +1,6 @@
 import { Mistral } from "@mistralai/mistralai";
 import { ToolCall } from "@mistralai/mistralai/models/components/toolcall.js";
-import { AssisantMessage } from "@mistralai/mistralai/components/assistantmessage.js";
+
 const apiKey = process.env["MISTRAL_API_KEY"];
 if (!apiKey) {
   throw new Error("missing MISTRAL_API_KEY environment variable");

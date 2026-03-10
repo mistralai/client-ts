@@ -44,11 +44,11 @@ import { isReadableStream } from "../types/streams.js";
  */
 export function filesUpload(
   client: MistralCore,
-  request: operations.FilesApiRoutesUploadFileMultiPartBodyParams,
+  request: operations.MultiPartBodyParams,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.UploadFileOut,
+    components.CreateFileResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -68,12 +68,12 @@ export function filesUpload(
 
 async function $do(
   client: MistralCore,
-  request: operations.FilesApiRoutesUploadFileMultiPartBodyParams,
+  request: operations.MultiPartBodyParams,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.UploadFileOut,
+      components.CreateFileResponse,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -88,9 +88,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema
-        .parse(value),
+    (value) => operations.MultiPartBodyParams$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -107,6 +105,17 @@ async function $do(
       || "application/octet-stream";
     const blob = new Blob([buffer], { type: contentType });
     appendForm(body, "file", blob, payload.file.fileName);
+  } else if (payload.file.content instanceof Uint8Array) {
+    const contentType = getContentTypeFromFileName(payload.file.fileName)
+      || "application/octet-stream";
+    appendForm(
+      body,
+      "file",
+      new Blob([new Uint8Array(payload.file.content).buffer], {
+        type: contentType,
+      }),
+      payload.file.fileName,
+    );
   } else {
     const contentType = getContentTypeFromFileName(payload.file.fileName)
       || "application/octet-stream";
@@ -179,7 +188,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.UploadFileOut,
+    components.CreateFileResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -189,7 +198,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.UploadFileOut$inboundSchema),
+    M.json(200, components.CreateFileResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

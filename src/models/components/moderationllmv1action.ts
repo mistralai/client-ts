@@ -4,19 +4,24 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ModerationLlmv1Action = {
   None: "none",
   Block: "block",
 } as const;
-export type ModerationLlmv1Action = ClosedEnum<typeof ModerationLlmv1Action>;
+export type ModerationLlmv1Action = OpenEnum<typeof ModerationLlmv1Action>;
 
 /** @internal */
-export const ModerationLlmv1Action$inboundSchema: z.ZodNativeEnum<
-  typeof ModerationLlmv1Action
-> = z.nativeEnum(ModerationLlmv1Action);
+export const ModerationLlmv1Action$inboundSchema: z.ZodType<
+  ModerationLlmv1Action,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ModerationLlmv1Action);
 /** @internal */
-export const ModerationLlmv1Action$outboundSchema: z.ZodNativeEnum<
-  typeof ModerationLlmv1Action
-> = ModerationLlmv1Action$inboundSchema;
+export const ModerationLlmv1Action$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ModerationLlmv1Action
+> = openEnums.outboundSchema(ModerationLlmv1Action);

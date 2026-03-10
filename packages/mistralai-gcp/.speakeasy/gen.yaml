@@ -23,13 +23,14 @@ generation:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
   versioningStrategy: automatic
-  persistentEdits: {}
+  persistentEdits:
+    enabled: "true"
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 1.7.0
+  version: 2.0.0-alpha.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -53,8 +54,8 @@ typescript:
   flattenGlobalSecurity: true
   flatteningOrder: body-first
   formStringArrayEncodeMode: encoded-string
-  forwardCompatibleEnumsByDefault: false
-  forwardCompatibleUnionsByDefault: "false"
+  forwardCompatibleEnumsByDefault: true
+  forwardCompatibleUnionsByDefault: tagged-only
   generateExamples: true
   imports:
     option: openapi
@@ -68,7 +69,7 @@ typescript:
   inputModelSuffix: input
   jsonpath: legacy
   laxMode: strict
-  legacyFileNaming: true
+  legacyFileNaming: false
   maxMethodParams: 0
   methodArguments: require-security-and-request
   modelPropertyCasing: camel
@@ -84,6 +85,4 @@ typescript:
   unionStrategy: left-to-right
   usageSDKInitImports: []
   useIndexModules: true
-  useOxlint: false
-  useTsgo: false
   zodVersion: v3

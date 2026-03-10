@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AudioChunk = {
-  type?: "input_audio" | undefined;
+  type: "input_audio";
   inputAudio: string;
 };
 
@@ -20,7 +20,7 @@ export const AudioChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("input_audio").default("input_audio"),
+  type: z.literal("input_audio"),
   input_audio: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -39,7 +39,7 @@ export const AudioChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AudioChunk
 > = z.object({
-  type: z.literal("input_audio").default("input_audio" as const),
+  type: z.literal("input_audio"),
   inputAudio: z.string(),
 }).transform((v) => {
   return remap$(v, {

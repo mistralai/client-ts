@@ -6,6 +6,7 @@
 import { FunctionTool } from "@mistralai/mistralai/models/components";
 
 let value: FunctionTool = {
+  type: "function",
   function: {
     name: "<value>",
     parameters: {
@@ -19,5 +20,5 @@ let value: FunctionTool = {
 
 | Field                                                        | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `type`                                                       | [components.Type](../../models/components/type.md)           | :heavy_minus_sign:                                           | N/A                                                          |
+| `type`                                                       | *"function"*                                                 | :heavy_check_mark:                                           | N/A                                                          |
 | `function`                                                   | [components.FunctionT](../../models/components/functiont.md) | :heavy_check_mark:                                           | N/A                                                          |

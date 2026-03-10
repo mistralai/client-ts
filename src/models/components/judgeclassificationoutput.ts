@@ -15,7 +15,7 @@ import {
 } from "./judgeclassificationoutputoption.js";
 
 export type JudgeClassificationOutput = {
-  type?: "CLASSIFICATION" | undefined;
+  type: "CLASSIFICATION";
   options: Array<JudgeClassificationOutputOption>;
 };
 
@@ -25,7 +25,7 @@ export const JudgeClassificationOutput$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("CLASSIFICATION").default("CLASSIFICATION"),
+  type: z.literal("CLASSIFICATION"),
   options: z.array(JudgeClassificationOutputOption$inboundSchema),
 });
 /** @internal */
@@ -40,7 +40,7 @@ export const JudgeClassificationOutput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   JudgeClassificationOutput
 > = z.object({
-  type: z.literal("CLASSIFICATION").default("CLASSIFICATION" as const),
+  type: z.literal("CLASSIFICATION"),
   options: z.array(JudgeClassificationOutputOption$outboundSchema),
 });
 

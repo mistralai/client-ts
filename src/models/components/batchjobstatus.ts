@@ -4,7 +4,8 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const BatchJobStatus = {
   Queued: "QUEUED",
@@ -15,13 +16,17 @@ export const BatchJobStatus = {
   CancellationRequested: "CANCELLATION_REQUESTED",
   Cancelled: "CANCELLED",
 } as const;
-export type BatchJobStatus = ClosedEnum<typeof BatchJobStatus>;
+export type BatchJobStatus = OpenEnum<typeof BatchJobStatus>;
 
 /** @internal */
-export const BatchJobStatus$inboundSchema: z.ZodNativeEnum<
-  typeof BatchJobStatus
-> = z.nativeEnum(BatchJobStatus);
+export const BatchJobStatus$inboundSchema: z.ZodType<
+  BatchJobStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BatchJobStatus);
 /** @internal */
-export const BatchJobStatus$outboundSchema: z.ZodNativeEnum<
-  typeof BatchJobStatus
-> = BatchJobStatus$inboundSchema;
+export const BatchJobStatus$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  BatchJobStatus
+> = openEnums.outboundSchema(BatchJobStatus);

@@ -75,7 +75,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.ConnectorMCPCreate](../../models/components/connectormcpcreate.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.CreateConnectorRequest](../../models/components/createconnectorrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -179,7 +179,7 @@ async function run() {
   const result = await mistral.beta.connectors.callTool({
     toolName: "<value>",
     connectorIdOrName: "<value>",
-    mcpToolCallRequest: {},
+    connectorCallToolRequest: {},
   });
 
   console.log(result);
@@ -206,7 +206,7 @@ async function run() {
   const res = await betaConnectorsCallTool(mistral, {
     toolName: "<value>",
     connectorIdOrName: "<value>",
-    mcpToolCallRequest: {},
+    connectorCallToolRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -230,7 +230,7 @@ run();
 
 ### Response
 
-**Promise\<[components.MCPToolCallResponse](../../models/components/mcptoolcallresponse.md)\>**
+**Promise\<[components.ConnectorToolCallResponse](../../models/components/connectortoolcallresponse.md)\>**
 
 ### Errors
 
@@ -330,7 +330,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.connectors.update({
     connectorId: "81d30634-113f-4dce-a89e-7786be2d8693",
-    connectorMCPUpdate: {},
+    updateConnectorRequest: {},
   });
 
   console.log(result);
@@ -356,7 +356,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaConnectorsUpdate(mistral, {
     connectorId: "81d30634-113f-4dce-a89e-7786be2d8693",
-    connectorMCPUpdate: {},
+    updateConnectorRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;

@@ -4,11 +4,11 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { MistralJobs } from "./mistraljobs.js";
+import { BatchJobs } from "./batchjobs.js";
 
 export class Batch extends ClientSDK {
-  private _jobs?: MistralJobs;
-  get jobs(): MistralJobs {
-    return (this._jobs ??= new MistralJobs(this._options));
+  private _jobs?: BatchJobs;
+  get jobs(): BatchJobs {
+    return (this._jobs ??= new BatchJobs(this._options));
   }
 }

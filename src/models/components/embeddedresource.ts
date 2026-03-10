@@ -5,10 +5,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
+import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Annotations, Annotations$inboundSchema } from "./annotations.js";
@@ -32,11 +29,11 @@ export type Resource = TextResourceContents | BlobResourceContents;
  * of the LLM and/or the user.
  */
 export type EmbeddedResource = {
-  type?: "resource" | undefined;
+  type: "resource";
   resource: TextResourceContents | BlobResourceContents;
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -64,19 +61,15 @@ export const EmbeddedResource$inboundSchema: z.ZodType<
   EmbeddedResource,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.literal("resource").default("resource").optional(),
-    resource: z.union([
-      TextResourceContents$inboundSchema,
-      BlobResourceContents$inboundSchema,
-    ]),
-    annotations: z.nullable(Annotations$inboundSchema).optional(),
-    _meta: z.nullable(z.record(z.any())).optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
+> = z.object({
+  type: z.literal("resource"),
+  resource: z.union([
+    TextResourceContents$inboundSchema,
+    BlobResourceContents$inboundSchema,
+  ]),
+  annotations: z.nullable(Annotations$inboundSchema).optional(),
+  _meta: z.nullable(z.record(z.any())).optional(),
+}).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

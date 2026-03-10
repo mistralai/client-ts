@@ -38,7 +38,7 @@ export function batchJobsList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.BatchJobsOut,
+    components.ListBatchJobsResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.BatchJobsOut,
+      components.ListBatchJobsResponse,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -154,7 +154,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.BatchJobsOut,
+    components.ListBatchJobsResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -164,7 +164,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.BatchJobsOut$inboundSchema),
+    M.json(200, components.ListBatchJobsResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

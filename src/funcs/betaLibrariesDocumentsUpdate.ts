@@ -39,7 +39,7 @@ export function betaLibrariesDocumentsUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.DocumentOut,
+    components.Document,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.DocumentOut,
+      components.Document,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -89,7 +89,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.DocumentUpdateIn, { explode: true });
+  const body = encodeJSON("body", payload.UpdateDocumentRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     document_id: encodeSimple("document_id", payload.document_id, {
@@ -161,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.DocumentOut,
+    components.Document,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -172,7 +174,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.DocumentOut$inboundSchema),
+    M.json(200, components.Document$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

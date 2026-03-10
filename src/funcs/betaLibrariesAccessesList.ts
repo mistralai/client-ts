@@ -39,7 +39,7 @@ export function betaLibrariesAccessesList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ListSharingOut,
+    components.ListSharingResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ListSharingOut,
+      components.ListSharingResponse,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -154,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.ListSharingOut,
+    components.ListSharingResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -165,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ListSharingOut$inboundSchema),
+    M.json(200, components.ListSharingResponse$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

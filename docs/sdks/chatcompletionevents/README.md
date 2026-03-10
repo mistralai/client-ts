@@ -26,7 +26,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.observability.chatCompletionEvents.search({
-    getChatCompletionEventsInSchema: {
+    searchChatCompletionEventsRequest: {
       searchParams: {
         filters: null,
       },
@@ -55,7 +55,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaObservabilityChatCompletionEventsSearch(mistral, {
-    getChatCompletionEventsInSchema: {
+    searchChatCompletionEventsRequest: {
       searchParams: {
         filters: null,
       },
@@ -83,7 +83,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ChatCompletionEvents](../../models/components/chatcompletionevents.md)\>**
+**Promise\<[components.SearchChatCompletionEventsResponse](../../models/components/searchchatcompletioneventsresponse.md)\>**
 
 ### Errors
 
@@ -162,14 +162,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.GetChatCompletionEventIdsInSchema](../../models/components/getchatcompletioneventidsinschema.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.SearchChatCompletionEventIdsRequest](../../models/components/searchchatcompletioneventidsrequest.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.ChatCompletionEventIds](../../models/components/chatcompletioneventids.md)\>**
+**Promise\<[components.SearchChatCompletionEventIdsResponse](../../models/components/searchchatcompletioneventidsresponse.md)\>**
 
 ### Errors
 
@@ -317,7 +317,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ChatCompletionEvents](../../models/components/chatcompletionevents.md)\>**
+**Promise\<[components.SearchChatCompletionEventsResponse](../../models/components/searchchatcompletioneventsresponse.md)\>**
 
 ### Errors
 
@@ -343,7 +343,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.chatCompletionEvents.judge({
     eventId: "dfcd5582-1373-4de5-af51-987464da561c",
-    postChatCompletionEventJudgingInSchema: {
+    judgeChatCompletionEventRequest: {
       judgeDefinition: {
         name: "<value>",
         description: "total plain self-confidence candid hungrily partial astride cruelly brr",
@@ -386,7 +386,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityChatCompletionEventsJudge(mistral, {
     eventId: "dfcd5582-1373-4de5-af51-987464da561c",
-    postChatCompletionEventJudgingInSchema: {
+    judgeChatCompletionEventRequest: {
       judgeDefinition: {
         name: "<value>",
         description: "total plain self-confidence candid hungrily partial astride cruelly brr",

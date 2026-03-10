@@ -12,6 +12,7 @@ import { ResourceLink } from "@mistralai/mistralai/models/components";
 let value: ResourceLink = {
   name: "<value>",
   uri: "https://puzzled-steak.info/",
+  type: "resource_link",
 };
 ```
 

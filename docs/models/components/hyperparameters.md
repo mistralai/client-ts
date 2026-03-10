@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### `components.CompletionTrainingParametersIn`
+### `components.CompletionTrainingParameters`
 
 ```typescript
-const value: components.CompletionTrainingParametersIn = {};
+const value: components.CompletionTrainingParameters = {};
 ```
 
-### `components.ClassifierTrainingParametersIn`
+### `components.ClassifierTrainingParameters`
 
 ```typescript
-const value: components.ClassifierTrainingParametersIn = {};
+const value: components.ClassifierTrainingParameters = {};
 ```
 

@@ -10,16 +10,16 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelCapabilities = {
-  completionChat: boolean | undefined;
-  functionCalling: boolean | undefined;
-  completionFim: boolean | undefined;
-  fineTuning: boolean | undefined;
-  vision: boolean | undefined;
-  ocr: boolean | undefined;
-  classification: boolean | undefined;
-  moderation: boolean | undefined;
-  audio: boolean | undefined;
-  audioTranscription: boolean | undefined;
+  completionChat: boolean;
+  functionCalling: boolean;
+  completionFim: boolean;
+  fineTuning: boolean;
+  vision: boolean;
+  ocr: boolean;
+  classification: boolean;
+  moderation: boolean;
+  audio: boolean;
+  audioTranscription: boolean;
 };
 
 /** @internal */

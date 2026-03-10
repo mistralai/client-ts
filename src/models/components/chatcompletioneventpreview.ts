@@ -9,7 +9,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type ExtraFields =
+export type ChatCompletionEventPreviewExtraFields =
   | boolean
   | number
   | number
@@ -36,8 +36,8 @@ export type ChatCompletionEventPreview = {
 };
 
 /** @internal */
-export const ExtraFields$inboundSchema: z.ZodType<
-  ExtraFields,
+export const ChatCompletionEventPreviewExtraFields$inboundSchema: z.ZodType<
+  ChatCompletionEventPreviewExtraFields,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -49,13 +49,14 @@ export const ExtraFields$inboundSchema: z.ZodType<
   z.array(z.string()),
 ]);
 
-export function extraFieldsFromJSON(
+export function chatCompletionEventPreviewExtraFieldsFromJSON(
   jsonString: string,
-): SafeParseResult<ExtraFields, SDKValidationError> {
+): SafeParseResult<ChatCompletionEventPreviewExtraFields, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ExtraFields$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExtraFields' from JSON`,
+    (x) =>
+      ChatCompletionEventPreviewExtraFields$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionEventPreviewExtraFields' from JSON`,
   );
 }
 

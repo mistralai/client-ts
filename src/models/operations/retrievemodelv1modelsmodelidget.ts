@@ -6,6 +6,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -20,9 +22,10 @@ export type RetrieveModelV1ModelsModelIdGetRequest = {
 /**
  * Successful Response
  */
-export type RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet =
-  | (components.BaseModelCard & { type: "base" })
-  | (components.FTModelCard & { type: "fine-tuned" });
+export type ResponseRetrieveModelV1ModelsModelIdGet =
+  | components.BaseModelCard
+  | components.FTModelCard
+  | discriminatedUnionTypes.Unknown<"type">;
 
 /** @internal */
 export type RetrieveModelV1ModelsModelIdGetRequest$Outbound = {
@@ -54,31 +57,27 @@ export function retrieveModelV1ModelsModelIdGetRequestToJSON(
 }
 
 /** @internal */
-export const RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$inboundSchema:
-  z.ZodType<
-    RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.BaseModelCard$inboundSchema.and(
-      z.object({ type: z.literal("base") }),
-    ),
-    components.FTModelCard$inboundSchema.and(
-      z.object({ type: z.literal("fine-tuned") }),
-    ),
-  ]);
+export const ResponseRetrieveModelV1ModelsModelIdGet$inboundSchema: z.ZodType<
+  ResponseRetrieveModelV1ModelsModelIdGet,
+  z.ZodTypeDef,
+  unknown
+> = discriminatedUnion("type", {
+  base: components.BaseModelCard$inboundSchema,
+  ["fine-tuned"]: components.FTModelCard$inboundSchema,
+});
 
-export function retrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGetFromJSON(
+export function responseRetrieveModelV1ModelsModelIdGetFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet,
+  ResponseRetrieveModelV1ModelsModelIdGet,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet' from JSON`,
+      ResponseRetrieveModelV1ModelsModelIdGet$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ResponseRetrieveModelV1ModelsModelIdGet' from JSON`,
   );
 }

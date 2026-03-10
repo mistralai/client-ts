@@ -5,6 +5,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,18 +31,20 @@ import {
 } from "./transcriptionstreamtextdelta.js";
 
 export type TranscriptionStreamEventsData =
-  | (TranscriptionStreamDone & { type: "transcription.done" })
-  | (TranscriptionStreamLanguage & { type: "transcription.language" })
-  | (TranscriptionStreamSegmentDelta & { type: "transcription.segment" })
-  | (TranscriptionStreamTextDelta & { type: "transcription.text.delta" });
+  | TranscriptionStreamDone
+  | TranscriptionStreamLanguage
+  | TranscriptionStreamSegmentDelta
+  | TranscriptionStreamTextDelta
+  | discriminatedUnionTypes.Unknown<"type">;
 
 export type TranscriptionStreamEvents = {
   event: TranscriptionStreamEventTypes;
   data:
-    | (TranscriptionStreamDone & { type: "transcription.done" })
-    | (TranscriptionStreamLanguage & { type: "transcription.language" })
-    | (TranscriptionStreamSegmentDelta & { type: "transcription.segment" })
-    | (TranscriptionStreamTextDelta & { type: "transcription.text.delta" });
+    | TranscriptionStreamDone
+    | TranscriptionStreamLanguage
+    | TranscriptionStreamSegmentDelta
+    | TranscriptionStreamTextDelta
+    | discriminatedUnionTypes.Unknown<"type">;
 };
 
 /** @internal */
@@ -48,20 +52,12 @@ export const TranscriptionStreamEventsData$inboundSchema: z.ZodType<
   TranscriptionStreamEventsData,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  TranscriptionStreamDone$inboundSchema.and(
-    z.object({ type: z.literal("transcription.done") }),
-  ),
-  TranscriptionStreamLanguage$inboundSchema.and(
-    z.object({ type: z.literal("transcription.language") }),
-  ),
-  TranscriptionStreamSegmentDelta$inboundSchema.and(
-    z.object({ type: z.literal("transcription.segment") }),
-  ),
-  TranscriptionStreamTextDelta$inboundSchema.and(
-    z.object({ type: z.literal("transcription.text.delta") }),
-  ),
-]);
+> = discriminatedUnion("type", {
+  ["transcription.done"]: TranscriptionStreamDone$inboundSchema,
+  ["transcription.language"]: TranscriptionStreamLanguage$inboundSchema,
+  ["transcription.segment"]: TranscriptionStreamSegmentDelta$inboundSchema,
+  ["transcription.text.delta"]: TranscriptionStreamTextDelta$inboundSchema,
+});
 
 export function transcriptionStreamEventsDataFromJSON(
   jsonString: string,
@@ -87,22 +83,12 @@ export const TranscriptionStreamEvents$inboundSchema: z.ZodType<
       ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
       return z.NEVER;
     }
-  }).pipe(
-    z.union([
-      TranscriptionStreamDone$inboundSchema.and(
-        z.object({ type: z.literal("transcription.done") }),
-      ),
-      TranscriptionStreamLanguage$inboundSchema.and(
-        z.object({ type: z.literal("transcription.language") }),
-      ),
-      TranscriptionStreamSegmentDelta$inboundSchema.and(
-        z.object({ type: z.literal("transcription.segment") }),
-      ),
-      TranscriptionStreamTextDelta$inboundSchema.and(
-        z.object({ type: z.literal("transcription.text.delta") }),
-      ),
-    ]),
-  ),
+  }).pipe(discriminatedUnion("type", {
+    ["transcription.done"]: TranscriptionStreamDone$inboundSchema,
+    ["transcription.language"]: TranscriptionStreamLanguage$inboundSchema,
+    ["transcription.segment"]: TranscriptionStreamSegmentDelta$inboundSchema,
+    ["transcription.text.delta"]: TranscriptionStreamTextDelta$inboundSchema,
+  })),
 });
 
 export function transcriptionStreamEventsFromJSON(

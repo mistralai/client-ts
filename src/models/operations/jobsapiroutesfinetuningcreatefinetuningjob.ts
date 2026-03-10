@@ -5,45 +5,43 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type One =
-  | (components.ClassifierJobOut & { jobType: "classifier" })
-  | (components.CompletionJobOut & { jobType: "completion" });
+export type ResponseT =
+  | components.ClassifierFineTuningJob
+  | components.CompletionFineTuningJob
+  | discriminatedUnionTypes.Unknown<"jobType">;
 
 /**
  * OK
  */
 export type JobsApiRoutesFineTuningCreateFineTuningJobResponse =
-  | components.LegacyJobMetadataOut
-  | (components.ClassifierJobOut & { jobType: "classifier" })
-  | (components.CompletionJobOut & { jobType: "completion" });
+  | components.LegacyJobMetadata
+  | components.ClassifierFineTuningJob
+  | components.CompletionFineTuningJob
+  | discriminatedUnionTypes.Unknown<"jobType">;
 
 /** @internal */
-export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z.union(
-  [
-    components.ClassifierJobOut$inboundSchema.and(
-      z.object({ job_type: z.literal("classifier") }).transform((v) => ({
-        jobType: v.job_type,
-      })),
-    ),
-    components.CompletionJobOut$inboundSchema.and(
-      z.object({ job_type: z.literal("completion") }).transform((v) => ({
-        jobType: v.job_type,
-      })),
-    ),
-  ],
-);
+export const ResponseT$inboundSchema: z.ZodType<
+  ResponseT,
+  z.ZodTypeDef,
+  unknown
+> = discriminatedUnion("job_type", {
+  classifier: components.ClassifierFineTuningJob$inboundSchema,
+  completion: components.CompletionFineTuningJob$inboundSchema,
+}, { outputPropertyName: "jobType" });
 
-export function oneFromJSON(
+export function responseFromJSON(
   jsonString: string,
-): SafeParseResult<One, SDKValidationError> {
+): SafeParseResult<ResponseT, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => One$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'One' from JSON`,
+    (x) => ResponseT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseT' from JSON`,
   );
 }
 
@@ -54,19 +52,11 @@ export const JobsApiRoutesFineTuningCreateFineTuningJobResponse$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.LegacyJobMetadataOut$inboundSchema,
-    z.union([
-      components.ClassifierJobOut$inboundSchema.and(
-        z.object({ job_type: z.literal("classifier") }).transform((v) => ({
-          jobType: v.job_type,
-        })),
-      ),
-      components.CompletionJobOut$inboundSchema.and(
-        z.object({ job_type: z.literal("completion") }).transform((v) => ({
-          jobType: v.job_type,
-        })),
-      ),
-    ]),
+    components.LegacyJobMetadata$inboundSchema,
+    discriminatedUnion("job_type", {
+      classifier: components.ClassifierFineTuningJob$inboundSchema,
+      completion: components.CompletionFineTuningJob$inboundSchema,
+    }, { outputPropertyName: "jobType" }),
   ]);
 
 export function jobsApiRoutesFineTuningCreateFineTuningJobResponseFromJSON(

@@ -39,7 +39,7 @@ export function betaLibrariesGet(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.LibraryOut,
+    components.Library,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.LibraryOut,
+      components.Library,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -153,7 +153,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.LibraryOut,
+    components.Library,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -164,7 +164,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.LibraryOut$inboundSchema),
+    M.json(200, components.Library$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

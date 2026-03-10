@@ -9,13 +9,13 @@ import * as components from "../components/index.js";
 
 export type LibrariesShareCreateV1Request = {
   libraryId: string;
-  sharingIn: components.SharingIn;
+  sharingRequest: components.SharingRequest;
 };
 
 /** @internal */
 export type LibrariesShareCreateV1Request$Outbound = {
   library_id: string;
-  SharingIn: components.SharingIn$Outbound;
+  SharingRequest: components.SharingRequest$Outbound;
 };
 
 /** @internal */
@@ -25,11 +25,11 @@ export const LibrariesShareCreateV1Request$outboundSchema: z.ZodType<
   LibrariesShareCreateV1Request
 > = z.object({
   libraryId: z.string(),
-  sharingIn: components.SharingIn$outboundSchema,
+  sharingRequest: components.SharingRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     libraryId: "library_id",
-    sharingIn: "SharingIn",
+    sharingRequest: "SharingRequest",
   });
 });
 

@@ -89,14 +89,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.PostCampaignInSchema](../../models/components/postcampaigninschema.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.CreateCampaignRequest](../../models/components/createcampaignrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.CampaignPreview](../../models/components/campaignpreview.md)\>**
+**Promise\<[components.Campaign](../../models/components/campaign.md)\>**
 
 ### Errors
 
@@ -166,7 +166,7 @@ run();
 
 ### Response
 
-**Promise\<[components.CampaignPreviews](../../models/components/campaignpreviews.md)\>**
+**Promise\<[components.ListCampaignsResponse](../../models/components/listcampaignsresponse.md)\>**
 
 ### Errors
 
@@ -240,7 +240,7 @@ run();
 
 ### Response
 
-**Promise\<[components.CampaignPreview](../../models/components/campaignpreview.md)\>**
+**Promise\<[components.Campaign](../../models/components/campaign.md)\>**
 
 ### Errors
 
@@ -388,7 +388,7 @@ run();
 
 ### Response
 
-**Promise\<[components.CampaignStatus](../../models/components/campaignstatus.md)\>**
+**Promise\<[components.FetchCampaignStatusResponse](../../models/components/fetchcampaignstatusresponse.md)\>**
 
 ### Errors
 
@@ -462,7 +462,7 @@ run();
 
 ### Response
 
-**Promise\<[components.CampaignSelectedEvents](../../models/components/campaignselectedevents.md)\>**
+**Promise\<[components.ListCampaignSelectedEventsResponse](../../models/components/listcampaignselectedeventsresponse.md)\>**
 
 ### Errors
 

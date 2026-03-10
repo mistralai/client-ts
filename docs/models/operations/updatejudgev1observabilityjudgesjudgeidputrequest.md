@@ -7,15 +7,16 @@ import { UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest } from "@mistralai/mi
 
 let value: UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest = {
   judgeId: "380ce33d-4f3c-482f-a8df-8cd9d091f67a",
-  putJudgeInSchema: {
+  updateJudgeRequest: {
     name: "<value>",
     description: "awkwardly always formamide only annually terribly",
     modelName: "<value>",
     output: {
+      type: "CLASSIFICATION",
       options: [
         {
           value: "<value>",
-          description: "without indeed because",
+          description: "chow limp censor though tennis",
         },
       ],
     },
@@ -31,7 +32,7 @@ let value: UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest = {
 
 ## Fields
 
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `judgeId`                                                                  | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
-| `putJudgeInSchema`                                                         | [components.PutJudgeInSchema](../../models/components/putjudgeinschema.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `judgeId`                                                                      | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
+| `updateJudgeRequest`                                                           | [components.UpdateJudgeRequest](../../models/components/updatejudgerequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |

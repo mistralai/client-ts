@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { MistralAzureCore } from "@mistralai/mistralai-azure/core.js";
-import { chatComplete } from "@mistralai/mistralai-azure/funcs/chatComplete.js";
+import { chatComplete } from "@mistralai/mistralai-azure/funcs/chat-complete.js";
 
 // Use `MistralAzureCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

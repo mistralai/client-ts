@@ -11,13 +11,14 @@ generation:
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
-    nameResolutionFeb2025: false
+    nameResolutionFeb2025: true
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
-    securityFeb2025: false
-    sharedErrorComponentsApr2025: false
-    sharedNestedComponentsJan2026: false
-    nameOverrideFeb2026: false
+    securityFeb2025: true
+    sharedErrorComponentsApr2025: true
+    sharedNestedComponentsJan2026: true
+    nameOverrideFeb2026: true
+    methodSignaturesApr2024: true
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
@@ -25,15 +26,15 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  versioningStrategy: automatic
   persistentEdits:
     enabled: "true"
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
-  versioningStrategy: automatic
 typescript:
-  version: 1.15.1
+  version: 2.0.0-alpha.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -49,7 +50,7 @@ typescript:
   author: Speakeasy
   baseErrorName: MistralError
   clientServerStatusCodesAsErrors: true
-  constFieldsAlwaysOptional: true
+  constFieldsAlwaysOptional: false
   defaultErrorName: SDKError
   enableCustomCodeRegions: true
   enableMCPServer: false
@@ -57,12 +58,12 @@ typescript:
   enumFormat: union
   envVarPrefix: MISTRAL
   exportZodModelNamespace: false
-  flatAdditionalProperties: false
+  flatAdditionalProperties: true
   flattenGlobalSecurity: true
   flatteningOrder: body-first
   formStringArrayEncodeMode: encoded-string
-  forwardCompatibleEnumsByDefault: false
-  forwardCompatibleUnionsByDefault: "false"
+  forwardCompatibleEnumsByDefault: true
+  forwardCompatibleUnionsByDefault: tagged-only
   generateExamples: true
   imports:
     option: openapi
@@ -81,10 +82,10 @@ typescript:
   methodArguments: infer-optional-args
   modelPropertyCasing: camel
   moduleFormat: commonjs
-  multipartArrayFormat: legacy
+  multipartArrayFormat: standard
   outputModelSuffix: output
   packageName: '@mistralai/mistralai'
-  preApplyUnionDiscriminators: false
+  preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
   responseFormat: flat
   sseFlatResponse: false
@@ -92,6 +93,6 @@ typescript:
   unionStrategy: left-to-right
   usageSDKInitImports: []
   useIndexModules: true
-  useOxlint: false
-  useTsgo: false
+  useOxlint: true
+  useTsgo: true
   zodVersion: v3

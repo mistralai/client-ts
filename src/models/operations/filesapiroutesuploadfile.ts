@@ -14,7 +14,7 @@ export const FileVisibility = {
 } as const;
 export type FileVisibility = ClosedEnum<typeof FileVisibility>;
 
-export type FilesApiRoutesUploadFileMultiPartBodyParams = {
+export type MultiPartBodyParams = {
   expiry?: number | null | undefined;
   visibility?: FileVisibility | undefined;
   purpose?: components.FilePurpose | undefined;
@@ -40,7 +40,7 @@ export const FileVisibility$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(FileVisibility);
 
 /** @internal */
-export type FilesApiRoutesUploadFileMultiPartBodyParams$Outbound = {
+export type MultiPartBodyParams$Outbound = {
   expiry?: number | null | undefined;
   visibility: string;
   purpose?: string | undefined;
@@ -48,25 +48,21 @@ export type FilesApiRoutesUploadFileMultiPartBodyParams$Outbound = {
 };
 
 /** @internal */
-export const FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema:
-  z.ZodType<
-    FilesApiRoutesUploadFileMultiPartBodyParams$Outbound,
-    z.ZodTypeDef,
-    FilesApiRoutesUploadFileMultiPartBodyParams
-  > = z.object({
-    expiry: z.nullable(z.number().int()).optional(),
-    visibility: FileVisibility$outboundSchema.default("workspace"),
-    purpose: components.FilePurpose$outboundSchema.optional(),
-    file: components.FileT$outboundSchema.or(blobLikeSchema),
-  });
+export const MultiPartBodyParams$outboundSchema: z.ZodType<
+  MultiPartBodyParams$Outbound,
+  z.ZodTypeDef,
+  MultiPartBodyParams
+> = z.object({
+  expiry: z.nullable(z.number().int()).optional(),
+  visibility: FileVisibility$outboundSchema.default("workspace"),
+  purpose: components.FilePurpose$outboundSchema.optional(),
+  file: components.FileT$outboundSchema.or(blobLikeSchema),
+});
 
-export function filesApiRoutesUploadFileMultiPartBodyParamsToJSON(
-  filesApiRoutesUploadFileMultiPartBodyParams:
-    FilesApiRoutesUploadFileMultiPartBodyParams,
+export function multiPartBodyParamsToJSON(
+  multiPartBodyParams: MultiPartBodyParams,
 ): string {
   return JSON.stringify(
-    FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema.parse(
-      filesApiRoutesUploadFileMultiPartBodyParams,
-    ),
+    MultiPartBodyParams$outboundSchema.parse(multiPartBodyParams),
   );
 }

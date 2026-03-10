@@ -55,11 +55,11 @@ import {
  */
 export type AgentsCompletionStreamRequestStop = string | Array<string>;
 
-export type AgentsCompletionStreamRequestMessages =
+export type AgentsCompletionStreamRequestMessage =
   | (AssistantMessage & { role: "assistant" })
-  | (SystemMessage & { role: "system" })
-  | (ToolMessage & { role: "tool" })
-  | (UserMessage & { role: "user" });
+  | SystemMessage
+  | ToolMessage
+  | UserMessage;
 
 export type AgentsCompletionStreamRequestToolChoice =
   | ToolChoice
@@ -85,9 +85,9 @@ export type AgentsCompletionStreamRequest = {
    */
   messages: Array<
     | (AssistantMessage & { role: "assistant" })
-    | (SystemMessage & { role: "system" })
-    | (ToolMessage & { role: "tool" })
-    | (UserMessage & { role: "user" })
+    | SystemMessage
+    | ToolMessage
+    | UserMessage
   >;
   /**
    * Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.
@@ -143,32 +143,32 @@ export function agentsCompletionStreamRequestStopToJSON(
 }
 
 /** @internal */
-export type AgentsCompletionStreamRequestMessages$Outbound =
+export type AgentsCompletionStreamRequestMessage$Outbound =
   | (AssistantMessage$Outbound & { role: "assistant" })
-  | (SystemMessage$Outbound & { role: "system" })
-  | (ToolMessage$Outbound & { role: "tool" })
-  | (UserMessage$Outbound & { role: "user" });
+  | SystemMessage$Outbound
+  | ToolMessage$Outbound
+  | UserMessage$Outbound;
 
 /** @internal */
-export const AgentsCompletionStreamRequestMessages$outboundSchema: z.ZodType<
-  AgentsCompletionStreamRequestMessages$Outbound,
+export const AgentsCompletionStreamRequestMessage$outboundSchema: z.ZodType<
+  AgentsCompletionStreamRequestMessage$Outbound,
   z.ZodTypeDef,
-  AgentsCompletionStreamRequestMessages
+  AgentsCompletionStreamRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
     z.object({ role: z.literal("assistant") }),
   ),
-  SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-  ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-  UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+  SystemMessage$outboundSchema,
+  ToolMessage$outboundSchema,
+  UserMessage$outboundSchema,
 ]);
 
-export function agentsCompletionStreamRequestMessagesToJSON(
-  agentsCompletionStreamRequestMessages: AgentsCompletionStreamRequestMessages,
+export function agentsCompletionStreamRequestMessageToJSON(
+  agentsCompletionStreamRequestMessage: AgentsCompletionStreamRequestMessage,
 ): string {
   return JSON.stringify(
-    AgentsCompletionStreamRequestMessages$outboundSchema.parse(
-      agentsCompletionStreamRequestMessages,
+    AgentsCompletionStreamRequestMessage$outboundSchema.parse(
+      agentsCompletionStreamRequestMessage,
     ),
   );
 }
@@ -205,9 +205,9 @@ export type AgentsCompletionStreamRequest$Outbound = {
   metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (SystemMessage$Outbound & { role: "system" })
-    | (ToolMessage$Outbound & { role: "tool" })
-    | (UserMessage$Outbound & { role: "user" })
+    | SystemMessage$Outbound
+    | ToolMessage$Outbound
+    | UserMessage$Outbound
   >;
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
@@ -237,9 +237,9 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }),
       ),
-      SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-      ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-      UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+      SystemMessage$outboundSchema,
+      ToolMessage$outboundSchema,
+      UserMessage$outboundSchema,
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),

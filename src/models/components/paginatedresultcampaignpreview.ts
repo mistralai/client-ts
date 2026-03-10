@@ -7,13 +7,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  CampaignPreview,
-  CampaignPreview$inboundSchema,
-} from "./campaignpreview.js";
+import { Campaign, Campaign$inboundSchema } from "./campaign.js";
 
 export type PaginatedResultCampaignPreview = {
-  results?: Array<CampaignPreview> | undefined;
+  results?: Array<Campaign> | undefined;
   count: number;
   next?: string | null | undefined;
   previous?: string | null | undefined;
@@ -25,7 +22,7 @@ export const PaginatedResultCampaignPreview$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  results: z.array(CampaignPreview$inboundSchema).optional(),
+  results: z.array(Campaign$inboundSchema).optional(),
   count: z.number().int(),
   next: z.nullable(z.string()).optional(),
   previous: z.nullable(z.string()).optional(),

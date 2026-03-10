@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaConnectorsCreate(
   client: MistralCore,
-  request: components.ConnectorMCPCreate,
+  request: components.CreateConnectorRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -59,7 +59,7 @@ export function betaConnectorsCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.ConnectorMCPCreate,
+  request: components.CreateConnectorRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -80,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.ConnectorMCPCreate$outboundSchema.parse(value),
+    (value) => components.CreateConnectorRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

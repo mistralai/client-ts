@@ -17,7 +17,7 @@ export class Fields extends ClientSDK {
    */
   async list(
     options?: RequestOptions,
-  ): Promise<components.ChatCompletionFields> {
+  ): Promise<components.ListChatCompletionFieldsResponse> {
     return unwrapAsync(betaObservabilityChatCompletionEventsFieldsList(
       this,
       options,
@@ -31,7 +31,7 @@ export class Fields extends ClientSDK {
     request:
       operations.GetChatCompletionFieldOptionsV1ObservabilityChatCompletionFieldsFieldNameOptionsGetRequest,
     options?: RequestOptions,
-  ): Promise<components.ChatCompletionFieldOptions> {
+  ): Promise<components.FetchChatCompletionFieldOptionsResponse> {
     return unwrapAsync(betaObservabilityChatCompletionEventsFieldsFetchOptions(
       this,
       request,
@@ -46,7 +46,7 @@ export class Fields extends ClientSDK {
     request:
       operations.GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest,
     options?: RequestOptions,
-  ): Promise<components.FieldOptionCounts> {
+  ): Promise<components.FetchFieldOptionCountsResponse> {
     return unwrapAsync(
       betaObservabilityChatCompletionEventsFieldsFetchOptionCounts(
         this,

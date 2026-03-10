@@ -47,7 +47,7 @@ export class Conversations extends ClientSDK {
   async list(
     request?: operations.AgentsApiV1ConversationsListRequest | undefined,
     options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody>> {
+  ): Promise<Array<operations.AgentsApiV1ConversationsListResponse>> {
     return unwrapAsync(betaConversationsList(
       this,
       request,
@@ -64,7 +64,7 @@ export class Conversations extends ClientSDK {
   async get(
     request: operations.AgentsApiV1ConversationsGetRequest,
     options?: RequestOptions,
-  ): Promise<operations.AgentsApiV1ConversationsGetResponseV1ConversationsGet> {
+  ): Promise<operations.ResponseV1ConversationsGet> {
     return unwrapAsync(betaConversationsGet(
       this,
       request,

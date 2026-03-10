@@ -10,16 +10,14 @@ import * as components from "../components/index.js";
 export type JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest =
   {
     datasetRecordId: string;
-    postDatasetRecordJudgingInSchema:
-      components.PostDatasetRecordJudgingInSchema;
+    judgeDatasetRecordRequest: components.JudgeDatasetRecordRequest;
   };
 
 /** @internal */
 export type JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest$Outbound =
   {
     dataset_record_id: string;
-    PostDatasetRecordJudgingInSchema:
-      components.PostDatasetRecordJudgingInSchema$Outbound;
+    JudgeDatasetRecordRequest: components.JudgeDatasetRecordRequest$Outbound;
   };
 
 /** @internal */
@@ -30,12 +28,12 @@ export const JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJ
     JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest
   > = z.object({
     datasetRecordId: z.string(),
-    postDatasetRecordJudgingInSchema:
-      components.PostDatasetRecordJudgingInSchema$outboundSchema,
+    judgeDatasetRecordRequest:
+      components.JudgeDatasetRecordRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetRecordId: "dataset_record_id",
-      postDatasetRecordJudgingInSchema: "PostDatasetRecordJudgingInSchema",
+      judgeDatasetRecordRequest: "JudgeDatasetRecordRequest",
     });
   });
 

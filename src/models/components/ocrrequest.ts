@@ -30,7 +30,7 @@ import {
 /**
  * Document to run OCR on
  */
-export type Document = FileChunk | DocumentURLChunk | ImageURLChunk;
+export type DocumentUnion = FileChunk | DocumentURLChunk | ImageURLChunk;
 
 export const TableFormat = {
   Markdown: "markdown",
@@ -79,24 +79,24 @@ export type OCRRequest = {
 };
 
 /** @internal */
-export type Document$Outbound =
+export type DocumentUnion$Outbound =
   | FileChunk$Outbound
   | DocumentURLChunk$Outbound
   | ImageURLChunk$Outbound;
 
 /** @internal */
-export const Document$outboundSchema: z.ZodType<
-  Document$Outbound,
+export const DocumentUnion$outboundSchema: z.ZodType<
+  DocumentUnion$Outbound,
   z.ZodTypeDef,
-  Document
+  DocumentUnion
 > = z.union([
   FileChunk$outboundSchema,
   DocumentURLChunk$outboundSchema,
   ImageURLChunk$outboundSchema,
 ]);
 
-export function documentToJSON(document: Document): string {
-  return JSON.stringify(Document$outboundSchema.parse(document));
+export function documentUnionToJSON(documentUnion: DocumentUnion): string {
+  return JSON.stringify(DocumentUnion$outboundSchema.parse(documentUnion));
 }
 
 /** @internal */

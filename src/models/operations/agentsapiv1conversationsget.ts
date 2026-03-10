@@ -20,7 +20,7 @@ export type AgentsApiV1ConversationsGetRequest = {
 /**
  * Successful Response
  */
-export type AgentsApiV1ConversationsGetResponseV1ConversationsGet =
+export type ResponseV1ConversationsGet =
   | components.ModelConversation
   | components.AgentConversation;
 
@@ -53,28 +53,21 @@ export function agentsApiV1ConversationsGetRequestToJSON(
 }
 
 /** @internal */
-export const AgentsApiV1ConversationsGetResponseV1ConversationsGet$inboundSchema:
-  z.ZodType<
-    AgentsApiV1ConversationsGetResponseV1ConversationsGet,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.ModelConversation$inboundSchema,
-    components.AgentConversation$inboundSchema,
-  ]);
+export const ResponseV1ConversationsGet$inboundSchema: z.ZodType<
+  ResponseV1ConversationsGet,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ModelConversation$inboundSchema,
+  components.AgentConversation$inboundSchema,
+]);
 
-export function agentsApiV1ConversationsGetResponseV1ConversationsGetFromJSON(
+export function responseV1ConversationsGetFromJSON(
   jsonString: string,
-): SafeParseResult<
-  AgentsApiV1ConversationsGetResponseV1ConversationsGet,
-  SDKValidationError
-> {
+): SafeParseResult<ResponseV1ConversationsGet, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      AgentsApiV1ConversationsGetResponseV1ConversationsGet$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AgentsApiV1ConversationsGetResponseV1ConversationsGet' from JSON`,
+    (x) => ResponseV1ConversationsGet$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseV1ConversationsGet' from JSON`,
   );
 }

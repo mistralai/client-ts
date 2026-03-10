@@ -5,12 +5,14 @@
 ```typescript
 import { ImageGenerationTool } from "@mistralai/mistralai/models/components";
 
-let value: ImageGenerationTool = {};
+let value: ImageGenerationTool = {
+  type: "image_generation",
+};
 ```
 
 ## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `toolConfiguration`                                                                      | [components.ToolConfiguration](../../models/components/toolconfiguration.md)             | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `type`                                                                                   | [components.ImageGenerationToolType](../../models/components/imagegenerationtooltype.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `toolConfiguration`                                                          | [components.ToolConfiguration](../../models/components/toolconfiguration.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `type`                                                                       | *"image_generation"*                                                         | :heavy_check_mark:                                                           | N/A                                                                          |

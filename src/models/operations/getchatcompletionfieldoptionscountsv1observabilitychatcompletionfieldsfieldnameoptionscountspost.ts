@@ -10,14 +10,15 @@ import * as components from "../components/index.js";
 export type GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest =
   {
     fieldName: string;
-    fieldOptionCountsInSchema: components.FieldOptionCountsInSchema;
+    fetchFieldOptionCountsRequest: components.FetchFieldOptionCountsRequest;
   };
 
 /** @internal */
 export type GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest$Outbound =
   {
     field_name: string;
-    FieldOptionCountsInSchema: components.FieldOptionCountsInSchema$Outbound;
+    FetchFieldOptionCountsRequest:
+      components.FetchFieldOptionCountsRequest$Outbound;
   };
 
 /** @internal */
@@ -28,12 +29,12 @@ export const GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFie
     GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest
   > = z.object({
     fieldName: z.string(),
-    fieldOptionCountsInSchema:
-      components.FieldOptionCountsInSchema$outboundSchema,
+    fetchFieldOptionCountsRequest:
+      components.FetchFieldOptionCountsRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       fieldName: "field_name",
-      fieldOptionCountsInSchema: "FieldOptionCountsInSchema",
+      fetchFieldOptionCountsRequest: "FetchFieldOptionCountsRequest",
     });
   });
 

@@ -15,7 +15,7 @@ let value: Tool = {
 
 ## Fields
 
-| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `type`                                                       | [components.ToolTypes](../../models/components/tooltypes.md) | :heavy_minus_sign:                                           | N/A                                                          |
-| `function`                                                   | [components.FunctionT](../../models/components/functiont.md) | :heavy_check_mark:                                           | N/A                                                          |
+| Field                                                         | Type                                                          | Required                                                      | Description                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `type`                                                        | [components.ToolTypes](../../models/components/tool-types.md) | :heavy_minus_sign:                                            | N/A                                                           |
+| `function`                                                    | [components.FunctionT](../../models/components/function-t.md) | :heavy_check_mark:                                            | N/A                                                           |

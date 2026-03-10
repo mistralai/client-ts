@@ -38,7 +38,7 @@ export function filesList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ListFilesOut,
+    components.ListFilesResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ListFilesOut,
+      components.ListFilesResponse,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -154,7 +154,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.ListFilesOut,
+    components.ListFilesResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -164,7 +164,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ListFilesOut$inboundSchema),
+    M.json(200, components.ListFilesResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

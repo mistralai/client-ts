@@ -7,11 +7,17 @@ permissions:
 "on":
   push:
     branches:
-      - main
+      - v1
     paths:
       - packages/mistralai-gcp/RELEASES.md
+  workflow_dispatch:
+    inputs:
+      confirm_publish:
+        description: "Type 'publish' to confirm v2 release"
+        required: true
 jobs:
   publish:
+    if: github.event_name == 'push' || github.event.inputs.confirm_publish == 'publish'
     uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@a658ca0a4a9b11bbcd7d3fb4e3063fa843afabff # v15
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}

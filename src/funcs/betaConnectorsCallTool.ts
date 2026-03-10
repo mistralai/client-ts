@@ -39,7 +39,7 @@ export function betaConnectorsCallTool(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.MCPToolCallResponse,
+    components.ConnectorToolCallResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.MCPToolCallResponse,
+      components.ConnectorToolCallResponse,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -89,7 +89,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.MCPToolCallRequest, {
+  const body = encodeJSON("body", payload.ConnectorCallToolRequest, {
     explode: true,
   });
 
@@ -164,7 +164,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.MCPToolCallResponse,
+    components.ConnectorToolCallResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -175,7 +175,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.MCPToolCallResponse$inboundSchema),
+    M.json(200, components.ConnectorToolCallResponse$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

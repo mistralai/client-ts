@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { MistralGoogleCloudCore } from "@mistralai/mistralai-gcp/core.js";
-import { chatComplete } from "@mistralai/mistralai-gcp/funcs/chatComplete.js";
+import { chatComplete } from "@mistralai/mistralai-gcp/funcs/chat-complete.js";
 
 // Use `MistralGoogleCloudCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

@@ -1,0 +1,40 @@
+# ConversationRequest
+
+## Example Usage
+
+```typescript
+import { ConversationRequest } from "@mistralai/mistralai/models/components";
+
+let value: ConversationRequest = {
+  inputs: [
+    {
+      name: "web_search_premium",
+      arguments: "<value>",
+    },
+  ],
+  completionArgs: {
+    responseFormat: {
+      type: "text",
+    },
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `inputs`                                                                                                            | *components.ConversationInputs*                                                                                     | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+| `stream`                                                                                                            | *boolean*                                                                                                           | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `store`                                                                                                             | *boolean*                                                                                                           | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `handoffExecution`                                                                                                  | [components.ConversationRequestHandoffExecution](../../models/components/conversation-request-handoff-execution.md) | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `instructions`                                                                                                      | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `tools`                                                                                                             | *components.ConversationRequestTool*[]                                                                              | :heavy_minus_sign:                                                                                                  | List of tools which are available to the model during the conversation.                                             |
+| `completionArgs`                                                                                                    | [components.CompletionArgs](../../models/components/completion-args.md)                                             | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `guardrails`                                                                                                        | [components.GuardrailConfig](../../models/components/guardrail-config.md)[]                                         | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `name`                                                                                                              | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `description`                                                                                                       | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `metadata`                                                                                                          | Record<string, *any*>                                                                                               | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `agentId`                                                                                                           | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `agentVersion`                                                                                                      | *components.ConversationRequestAgentVersion*                                                                        | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `model`                                                                                                             | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |

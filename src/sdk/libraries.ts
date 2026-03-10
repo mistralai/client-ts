@@ -34,7 +34,7 @@ export class Libraries extends ClientSDK {
    */
   async list(
     options?: RequestOptions,
-  ): Promise<components.ListLibraryOut> {
+  ): Promise<components.ListLibrariesResponse> {
     return unwrapAsync(betaLibrariesList(
       this,
       options,
@@ -48,9 +48,9 @@ export class Libraries extends ClientSDK {
    * Create a new Library, you will be marked as the owner and only you will have the possibility to share it with others. When first created this will only be accessible by you.
    */
   async create(
-    request: components.LibraryIn,
+    request: components.CreateLibraryRequest,
     options?: RequestOptions,
-  ): Promise<components.LibraryOut> {
+  ): Promise<components.Library> {
     return unwrapAsync(betaLibrariesCreate(
       this,
       request,
@@ -67,7 +67,7 @@ export class Libraries extends ClientSDK {
   async get(
     request: operations.LibrariesGetV1Request,
     options?: RequestOptions,
-  ): Promise<components.LibraryOut> {
+  ): Promise<components.Library> {
     return unwrapAsync(betaLibrariesGet(
       this,
       request,
@@ -84,7 +84,7 @@ export class Libraries extends ClientSDK {
   async delete(
     request: operations.LibrariesDeleteV1Request,
     options?: RequestOptions,
-  ): Promise<components.LibraryOut> {
+  ): Promise<components.Library> {
     return unwrapAsync(betaLibrariesDelete(
       this,
       request,
@@ -101,7 +101,7 @@ export class Libraries extends ClientSDK {
   async update(
     request: operations.LibrariesUpdateV1Request,
     options?: RequestOptions,
-  ): Promise<components.LibraryOut> {
+  ): Promise<components.Library> {
     return unwrapAsync(betaLibrariesUpdate(
       this,
       request,

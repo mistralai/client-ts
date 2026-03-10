@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaAgentsCreate(
   client: MistralCore,
-  request: components.AgentCreationRequest,
+  request: components.CreateAgentRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -59,7 +59,7 @@ export function betaAgentsCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.AgentCreationRequest,
+  request: components.CreateAgentRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -80,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.AgentCreationRequest$outboundSchema.parse(value),
+    (value) => components.CreateAgentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

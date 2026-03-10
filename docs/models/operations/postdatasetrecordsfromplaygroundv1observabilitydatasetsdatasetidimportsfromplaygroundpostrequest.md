@@ -11,7 +11,7 @@ let value:
   PostDatasetRecordsFromPlaygroundV1ObservabilityDatasetsDatasetIdImportsFromPlaygroundPostRequest =
     {
       datasetId: "c7bf5806-37f6-42af-b253-85994ffc010f",
-      postDatasetImportFromPlaygroundInSchema: {
+      importDatasetFromPlaygroundRequest: {
         conversationIds: [],
       },
     };
@@ -19,7 +19,7 @@ let value:
 
 ## Fields
 
-| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `datasetId`                                                                                                              | *string*                                                                                                                 | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
-| `postDatasetImportFromPlaygroundInSchema`                                                                                | [components.PostDatasetImportFromPlaygroundInSchema](../../models/components/postdatasetimportfromplaygroundinschema.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `datasetId`                                                                                                    | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `importDatasetFromPlaygroundRequest`                                                                           | [components.ImportDatasetFromPlaygroundRequest](../../models/components/importdatasetfromplaygroundrequest.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

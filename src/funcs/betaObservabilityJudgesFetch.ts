@@ -36,7 +36,7 @@ export function betaObservabilityJudgesFetch(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.JudgePreview,
+    components.Judge,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -62,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.JudgePreview,
+      components.Judge,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -153,7 +153,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.JudgePreview,
+    components.Judge,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -164,7 +164,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.JudgePreview$inboundSchema),
+    M.json(200, components.Judge$inboundSchema),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,

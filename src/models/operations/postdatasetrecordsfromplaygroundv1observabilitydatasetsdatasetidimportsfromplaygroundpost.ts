@@ -10,16 +10,16 @@ import * as components from "../components/index.js";
 export type PostDatasetRecordsFromPlaygroundV1ObservabilityDatasetsDatasetIdImportsFromPlaygroundPostRequest =
   {
     datasetId: string;
-    postDatasetImportFromPlaygroundInSchema:
-      components.PostDatasetImportFromPlaygroundInSchema;
+    importDatasetFromPlaygroundRequest:
+      components.ImportDatasetFromPlaygroundRequest;
   };
 
 /** @internal */
 export type PostDatasetRecordsFromPlaygroundV1ObservabilityDatasetsDatasetIdImportsFromPlaygroundPostRequest$Outbound =
   {
     dataset_id: string;
-    PostDatasetImportFromPlaygroundInSchema:
-      components.PostDatasetImportFromPlaygroundInSchema$Outbound;
+    ImportDatasetFromPlaygroundRequest:
+      components.ImportDatasetFromPlaygroundRequest$Outbound;
   };
 
 /** @internal */
@@ -30,13 +30,12 @@ export const PostDatasetRecordsFromPlaygroundV1ObservabilityDatasetsDatasetIdImp
     PostDatasetRecordsFromPlaygroundV1ObservabilityDatasetsDatasetIdImportsFromPlaygroundPostRequest
   > = z.object({
     datasetId: z.string(),
-    postDatasetImportFromPlaygroundInSchema:
-      components.PostDatasetImportFromPlaygroundInSchema$outboundSchema,
+    importDatasetFromPlaygroundRequest:
+      components.ImportDatasetFromPlaygroundRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetId: "dataset_id",
-      postDatasetImportFromPlaygroundInSchema:
-        "PostDatasetImportFromPlaygroundInSchema",
+      importDatasetFromPlaygroundRequest: "ImportDatasetFromPlaygroundRequest",
     });
   });
 

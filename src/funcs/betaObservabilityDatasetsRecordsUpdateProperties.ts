@@ -90,9 +90,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.PutDatasetRecordPropertiesInSchema, {
-    explode: true,
-  });
+  const body = encodeJSON(
+    "body",
+    payload.UpdateDatasetRecordPropertiesRequest,
+    { explode: true },
+  );
 
   const pathParams = {
     dataset_record_id: encodeSimple(

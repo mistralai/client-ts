@@ -24,7 +24,7 @@ export type AgentConversation = {
    * Custom metadata for the conversation.
    */
   metadata?: { [k: string]: any } | null | undefined;
-  object?: "conversation" | undefined;
+  object: "conversation";
   id: string;
   createdAt: Date;
   updatedAt: Date;

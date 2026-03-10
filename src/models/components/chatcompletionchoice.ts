@@ -15,27 +15,29 @@ import {
   AssistantMessage$inboundSchema,
 } from "./assistantmessage.js";
 
-export const FinishReason = {
+export const ChatCompletionChoiceFinishReason = {
   Stop: "stop",
   Length: "length",
   ModelLength: "model_length",
   Error: "error",
   ToolCalls: "tool_calls",
 } as const;
-export type FinishReason = OpenEnum<typeof FinishReason>;
+export type ChatCompletionChoiceFinishReason = OpenEnum<
+  typeof ChatCompletionChoiceFinishReason
+>;
 
 export type ChatCompletionChoice = {
   index: number;
   message: AssistantMessage;
-  finishReason: FinishReason;
+  finishReason: ChatCompletionChoiceFinishReason;
 };
 
 /** @internal */
-export const FinishReason$inboundSchema: z.ZodType<
-  FinishReason,
+export const ChatCompletionChoiceFinishReason$inboundSchema: z.ZodType<
+  ChatCompletionChoiceFinishReason,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FinishReason);
+> = openEnums.inboundSchema(ChatCompletionChoiceFinishReason);
 
 /** @internal */
 export const ChatCompletionChoice$inboundSchema: z.ZodType<
@@ -45,7 +47,7 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
 > = z.object({
   index: z.number().int(),
   message: AssistantMessage$inboundSchema,
-  finish_reason: FinishReason$inboundSchema,
+  finish_reason: ChatCompletionChoiceFinishReason$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "finish_reason": "finishReason",

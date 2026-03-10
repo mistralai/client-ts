@@ -8,6 +8,7 @@ import { BaseModelCard } from "@mistralai/mistralai/models/components";
 let value: BaseModelCard = {
   id: "<id>",
   capabilities: {},
+  type: "base",
 };
 ```
 
@@ -27,4 +28,4 @@ let value: BaseModelCard = {
 | `deprecation`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `deprecationReplacementModel`                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `defaultModelTemperature`                                                                     | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `type`                                                                                        | *"base"*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *"base"*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

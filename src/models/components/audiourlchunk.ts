@@ -15,7 +15,7 @@ import {
   AudioURL$outboundSchema,
 } from "./audiourl.js";
 
-export type AudioURLChunkAudioURL = AudioURL | string;
+export type AudioUrlUnion = AudioURL | string;
 
 /**
  * Audio URL chunk.
@@ -27,40 +27,36 @@ export type AudioURLChunkAudioURL = AudioURL | string;
  *     audio_url: The URL of the audio file.
  */
 export type AudioURLChunk = {
-  type?: "audio_url" | undefined;
+  type: "audio_url";
   audioUrl: AudioURL | string;
 };
 
 /** @internal */
-export const AudioURLChunkAudioURL$inboundSchema: z.ZodType<
-  AudioURLChunkAudioURL,
+export const AudioUrlUnion$inboundSchema: z.ZodType<
+  AudioUrlUnion,
   z.ZodTypeDef,
   unknown
 > = z.union([AudioURL$inboundSchema, z.string()]);
 /** @internal */
-export type AudioURLChunkAudioURL$Outbound = AudioURL$Outbound | string;
+export type AudioUrlUnion$Outbound = AudioURL$Outbound | string;
 
 /** @internal */
-export const AudioURLChunkAudioURL$outboundSchema: z.ZodType<
-  AudioURLChunkAudioURL$Outbound,
+export const AudioUrlUnion$outboundSchema: z.ZodType<
+  AudioUrlUnion$Outbound,
   z.ZodTypeDef,
-  AudioURLChunkAudioURL
+  AudioUrlUnion
 > = z.union([AudioURL$outboundSchema, z.string()]);
 
-export function audioURLChunkAudioURLToJSON(
-  audioURLChunkAudioURL: AudioURLChunkAudioURL,
-): string {
-  return JSON.stringify(
-    AudioURLChunkAudioURL$outboundSchema.parse(audioURLChunkAudioURL),
-  );
+export function audioUrlUnionToJSON(audioUrlUnion: AudioUrlUnion): string {
+  return JSON.stringify(AudioUrlUnion$outboundSchema.parse(audioUrlUnion));
 }
-export function audioURLChunkAudioURLFromJSON(
+export function audioUrlUnionFromJSON(
   jsonString: string,
-): SafeParseResult<AudioURLChunkAudioURL, SDKValidationError> {
+): SafeParseResult<AudioUrlUnion, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => AudioURLChunkAudioURL$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AudioURLChunkAudioURL' from JSON`,
+    (x) => AudioUrlUnion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AudioUrlUnion' from JSON`,
   );
 }
 
@@ -70,7 +66,7 @@ export const AudioURLChunk$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("audio_url").default("audio_url"),
+  type: z.literal("audio_url"),
   audio_url: z.union([AudioURL$inboundSchema, z.string()]),
 }).transform((v) => {
   return remap$(v, {
@@ -89,7 +85,7 @@ export const AudioURLChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AudioURLChunk
 > = z.object({
-  type: z.literal("audio_url").default("audio_url" as const),
+  type: z.literal("audio_url"),
   audioUrl: z.union([AudioURL$outboundSchema, z.string()]),
 }).transform((v) => {
   return remap$(v, {

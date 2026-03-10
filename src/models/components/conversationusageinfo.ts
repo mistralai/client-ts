@@ -10,9 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ConversationUsageInfo = {
-  promptTokens: number | undefined;
-  completionTokens: number | undefined;
-  totalTokens: number | undefined;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
   connectorTokens?: number | null | undefined;
   connectors?: { [k: string]: number } | null | undefined;
 };

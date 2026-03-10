@@ -38,7 +38,7 @@ export function modelsUnarchive(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.UnarchiveFTModelOut,
+    components.UnarchiveModelResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.UnarchiveFTModelOut,
+      components.UnarchiveModelResponse,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -151,7 +151,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.UnarchiveFTModelOut,
+    components.UnarchiveModelResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -161,7 +161,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.UnarchiveFTModelOut$inboundSchema),
+    M.json(200, components.UnarchiveModelResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

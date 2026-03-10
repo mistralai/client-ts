@@ -23,7 +23,7 @@ Please contact us if you need to increase these storage limits.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_upload_file" method="post" path="/v1/files" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_upload_file" method="post" path="/v1/files" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 import { openAsBlob } from "node:fs";
@@ -77,14 +77,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.FilesApiRoutesUploadFileMultiPartBodyParams](../../models/operations/filesapiroutesuploadfilemultipartbodyparams.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.MultiPartBodyParams](../../models/operations/multipartbodyparams.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.UploadFileOut](../../models/components/uploadfileout.md)\>**
+**Promise\<[components.CreateFileResponse](../../models/components/createfileresponse.md)\>**
 
 ### Errors
 
@@ -98,7 +98,7 @@ Returns a list of files that belong to the user's organization.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_list_files" method="get" path="/v1/files" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_list_files" method="get" path="/v1/files" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -153,7 +153,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ListFilesOut](../../models/components/listfilesout.md)\>**
+**Promise\<[components.ListFilesResponse](../../models/components/listfilesresponse.md)\>**
 
 ### Errors
 
@@ -167,7 +167,7 @@ Returns information about a specific file.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_retrieve_file" method="get" path="/v1/files/{file_id}" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_retrieve_file" method="get" path="/v1/files/{file_id}" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -226,7 +226,7 @@ run();
 
 ### Response
 
-**Promise\<[components.RetrieveFileOut](../../models/components/retrievefileout.md)\>**
+**Promise\<[components.GetFileResponse](../../models/components/getfileresponse.md)\>**
 
 ### Errors
 
@@ -240,7 +240,7 @@ Delete a file.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_delete_file" method="delete" path="/v1/files/{file_id}" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_delete_file" method="delete" path="/v1/files/{file_id}" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -299,7 +299,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DeleteFileOut](../../models/components/deletefileout.md)\>**
+**Promise\<[components.DeleteFileResponse](../../models/components/deletefileresponse.md)\>**
 
 ### Errors
 
@@ -386,7 +386,7 @@ Get Signed Url
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_get_signed_url" method="get" path="/v1/files/{file_id}/url" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_get_signed_url" method="get" path="/v1/files/{file_id}/url" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -445,7 +445,7 @@ run();
 
 ### Response
 
-**Promise\<[components.FileSignedURL](../../models/components/filesignedurl.md)\>**
+**Promise\<[components.GetSignedUrlResponse](../../models/components/getsignedurlresponse.md)\>**
 
 ### Errors
 

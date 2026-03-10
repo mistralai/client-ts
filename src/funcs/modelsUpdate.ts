@@ -87,7 +87,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.UpdateFTModelIn, { explode: true });
+  const body = encodeJSON("body", payload.UpdateModelRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     model_id: encodeSimple("model_id", payload.model_id, {

@@ -4,18 +4,14 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
+import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TranscriptionStreamTextDelta = {
-  type?: "transcription.text.delta" | undefined;
+  type: "transcription.text.delta";
   text: string;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -23,16 +19,10 @@ export const TranscriptionStreamTextDelta$inboundSchema: z.ZodType<
   TranscriptionStreamTextDelta,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.literal("transcription.text.delta").default(
-      "transcription.text.delta",
-    ),
-    text: z.string(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
+> = z.object({
+  type: z.literal("transcription.text.delta"),
+  text: z.string(),
+}).catchall(z.any());
 /** @internal */
 export type TranscriptionStreamTextDelta$Outbound = {
   type: "transcription.text.delta";
@@ -46,19 +36,9 @@ export const TranscriptionStreamTextDelta$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TranscriptionStreamTextDelta
 > = z.object({
-  type: z.literal("transcription.text.delta").default(
-    "transcription.text.delta" as const,
-  ),
+  type: z.literal("transcription.text.delta"),
   text: z.string(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+}).catchall(z.any());
 
 export function transcriptionStreamTextDeltaToJSON(
   transcriptionStreamTextDelta: TranscriptionStreamTextDelta,

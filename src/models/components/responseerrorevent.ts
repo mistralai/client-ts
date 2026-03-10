@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ResponseErrorEvent = {
-  type?: "conversation.response.error" | undefined;
+  type: "conversation.response.error";
   createdAt?: Date | undefined;
   message: string;
   code: number;
@@ -22,9 +22,7 @@ export const ResponseErrorEvent$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("conversation.response.error").default(
-    "conversation.response.error",
-  ),
+  type: z.literal("conversation.response.error"),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   message: z.string(),

@@ -15,18 +15,18 @@ import {
 
 export type BaseModelCard = {
   id: string;
-  object: string | undefined;
+  object: string;
   created?: number | undefined;
-  ownedBy: string | undefined;
+  ownedBy: string;
   capabilities: ModelCapabilities;
   name?: string | null | undefined;
   description?: string | null | undefined;
-  maxContextLength: number | undefined;
+  maxContextLength: number;
   aliases?: Array<string> | undefined;
   deprecation?: Date | null | undefined;
   deprecationReplacementModel?: string | null | undefined;
   defaultModelTemperature?: number | null | undefined;
-  type?: "base" | undefined;
+  type: "base";
 };
 
 /** @internal */
@@ -49,7 +49,7 @@ export const BaseModelCard$inboundSchema: z.ZodType<
   ).optional(),
   deprecation_replacement_model: z.nullable(z.string()).optional(),
   default_model_temperature: z.nullable(z.number()).optional(),
-  type: z.literal("base").default("base"),
+  type: z.literal("base"),
 }).transform((v) => {
   return remap$(v, {
     "owned_by": "ownedBy",

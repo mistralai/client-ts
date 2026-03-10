@@ -49,7 +49,7 @@ export class Records extends ClientSDK {
    * Delete multiple records from datasets
    */
   async bulkDelete(
-    request: components.DeleteDatasetRecordsInSchema,
+    request: components.DeleteDatasetRecordsRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(betaObservabilityDatasetsRecordsBulkDelete(

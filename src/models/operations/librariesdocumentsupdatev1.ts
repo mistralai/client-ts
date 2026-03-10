@@ -10,14 +10,14 @@ import * as components from "../components/index.js";
 export type LibrariesDocumentsUpdateV1Request = {
   libraryId: string;
   documentId: string;
-  documentUpdateIn: components.DocumentUpdateIn;
+  updateDocumentRequest: components.UpdateDocumentRequest;
 };
 
 /** @internal */
 export type LibrariesDocumentsUpdateV1Request$Outbound = {
   library_id: string;
   document_id: string;
-  DocumentUpdateIn: components.DocumentUpdateIn$Outbound;
+  UpdateDocumentRequest: components.UpdateDocumentRequest$Outbound;
 };
 
 /** @internal */
@@ -28,12 +28,12 @@ export const LibrariesDocumentsUpdateV1Request$outboundSchema: z.ZodType<
 > = z.object({
   libraryId: z.string(),
   documentId: z.string(),
-  documentUpdateIn: components.DocumentUpdateIn$outboundSchema,
+  updateDocumentRequest: components.UpdateDocumentRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     libraryId: "library_id",
     documentId: "document_id",
-    documentUpdateIn: "DocumentUpdateIn",
+    updateDocumentRequest: "UpdateDocumentRequest",
   });
 });
 

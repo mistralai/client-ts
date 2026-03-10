@@ -17,7 +17,7 @@ import {
  * Similar to the conversation history but only keep the messages
  */
 export type ConversationMessages = {
-  object?: "conversation.messages" | undefined;
+  object: "conversation.messages";
   conversationId: string;
   messages: Array<MessageEntries>;
 };

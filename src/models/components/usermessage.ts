@@ -13,7 +13,7 @@ import {
 export type UserMessageContent = string | Array<ContentChunk>;
 
 export type UserMessage = {
-  role?: "user" | undefined;
+  role: "user";
   content: string | Array<ContentChunk> | null;
 };
 
@@ -47,7 +47,7 @@ export const UserMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserMessage
 > = z.object({
-  role: z.literal("user").default("user" as const),
+  role: z.literal("user"),
   content: z.nullable(
     z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),

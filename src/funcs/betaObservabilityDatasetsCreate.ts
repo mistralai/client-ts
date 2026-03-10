@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaObservabilityDatasetsCreate(
   client: MistralCore,
-  request: components.PostDatasetInSchema,
+  request: components.CreateDatasetRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -56,7 +56,7 @@ export function betaObservabilityDatasetsCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.PostDatasetInSchema,
+  request: components.CreateDatasetRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -77,7 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.PostDatasetInSchema$outboundSchema.parse(value),
+    (value) => components.CreateDatasetRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

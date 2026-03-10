@@ -4,11 +4,7 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
+import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,9 +25,9 @@ export type TranscriptionStreamDone = {
   text: string;
   segments?: Array<TranscriptionSegmentChunk> | undefined;
   usage: UsageInfo;
-  type?: "transcription.done" | undefined;
+  type: "transcription.done";
   language: string | null;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -39,18 +35,14 @@ export const TranscriptionStreamDone$inboundSchema: z.ZodType<
   TranscriptionStreamDone,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    model: z.string(),
-    text: z.string(),
-    segments: z.array(TranscriptionSegmentChunk$inboundSchema).optional(),
-    usage: UsageInfo$inboundSchema,
-    type: z.literal("transcription.done").default("transcription.done"),
-    language: z.nullable(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
+> = z.object({
+  model: z.string(),
+  text: z.string(),
+  segments: z.array(TranscriptionSegmentChunk$inboundSchema).optional(),
+  usage: UsageInfo$inboundSchema,
+  type: z.literal("transcription.done"),
+  language: z.nullable(z.string()),
+}).catchall(z.any());
 /** @internal */
 export type TranscriptionStreamDone$Outbound = {
   model: string;
@@ -72,17 +64,9 @@ export const TranscriptionStreamDone$outboundSchema: z.ZodType<
   text: z.string(),
   segments: z.array(TranscriptionSegmentChunk$outboundSchema).optional(),
   usage: UsageInfo$outboundSchema,
-  type: z.literal("transcription.done").default("transcription.done" as const),
+  type: z.literal("transcription.done"),
   language: z.nullable(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+}).catchall(z.any());
 
 export function transcriptionStreamDoneToJSON(
   transcriptionStreamDone: TranscriptionStreamDone,

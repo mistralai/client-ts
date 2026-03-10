@@ -31,11 +31,11 @@ import { Result } from "../types/fp.js";
  */
 export function betaObservabilityChatCompletionEventsSearchIds(
   client: MistralCore,
-  request: components.GetChatCompletionEventIdsInSchema,
+  request: components.SearchChatCompletionEventIdsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ChatCompletionEventIds,
+    components.SearchChatCompletionEventIdsResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -56,12 +56,12 @@ export function betaObservabilityChatCompletionEventsSearchIds(
 
 async function $do(
   client: MistralCore,
-  request: components.GetChatCompletionEventIdsInSchema,
+  request: components.SearchChatCompletionEventIdsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.ChatCompletionEventIds,
+      components.SearchChatCompletionEventIdsResponse,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -78,7 +78,9 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      components.GetChatCompletionEventIdsInSchema$outboundSchema.parse(value),
+      components.SearchChatCompletionEventIdsRequest$outboundSchema.parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -147,7 +149,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.ChatCompletionEventIds,
+    components.SearchChatCompletionEventIdsResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -158,7 +160,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ChatCompletionEventIds$inboundSchema),
+    M.json(200, components.SearchChatCompletionEventIdsResponse$inboundSchema),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,
