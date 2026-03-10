@@ -15,7 +15,7 @@ Agents Completion
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="agents_completion_v1_agents_completions_post" method="post" path="/v1/agents/completions" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="agents_completion_v1_agents_completions_post" method="post" path="/v1/agents/completions" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -31,9 +31,6 @@ async function run() {
         content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
-    responseFormat: {
-      type: "text",
-    },
     agentId: "<id>",
   });
 
@@ -65,9 +62,6 @@ async function run() {
         content: "Who is the best French painter? Answer in one short sentence.",
       },
     ],
-    responseFormat: {
-      type: "text",
-    },
     agentId: "<id>",
   });
   if (res.ok) {

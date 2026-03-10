@@ -25,15 +25,15 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
-  versioningStrategy: automatic
   persistentEdits:
     enabled: "true"
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
+  versioningStrategy: automatic
 typescript:
-  version: 1.15.0
+  version: 1.15.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:

@@ -15,7 +15,7 @@ FIM completion.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="fim_completion_v1_fim_completions_post" method="post" path="/v1/fim/completions" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="fim_completion_v1_fim_completions_post" method="post" path="/v1/fim/completions" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -25,7 +25,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.fim.complete({
-    model: "codestral-latest",
+    model: "codestral-2405",
     prompt: "def",
     suffix: "return a+b",
   });
@@ -52,7 +52,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await fimComplete(mistral, {
-    model: "codestral-latest",
+    model: "codestral-2405",
     prompt: "def",
     suffix: "return a+b",
   });

@@ -19,7 +19,7 @@ List all models available to the user.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="list_models_v1_models_get" method="get" path="/v1/models" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="list_models_v1_models_get" method="get" path="/v1/models" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -89,7 +89,7 @@ Retrieve information about a model.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="retrieve_model_v1_models__model_id__get" method="get" path="/v1/models/{model_id}" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="retrieve_model_v1_models__model_id__get" method="get" path="/v1/models/{model_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -163,7 +163,7 @@ Delete a fine-tuned model.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="delete_model_v1_models__model_id__delete" method="delete" path="/v1/models/{model_id}" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="delete_model_v1_models__model_id__delete" method="delete" path="/v1/models/{model_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
