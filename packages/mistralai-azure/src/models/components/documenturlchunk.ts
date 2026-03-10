@@ -4,32 +4,21 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
-
-export const DocumentURLChunkType = {
-  DocumentUrl: "document_url",
-} as const;
-export type DocumentURLChunkType = ClosedEnum<typeof DocumentURLChunkType>;
 
 export type DocumentURLChunk = {
+  type?: "document_url" | undefined;
   documentUrl: string;
   /**
    * The filename of the document
    */
   documentName?: string | null | undefined;
-  type?: DocumentURLChunkType | undefined;
 };
 
 /** @internal */
-export const DocumentURLChunkType$outboundSchema: z.ZodNativeEnum<
-  typeof DocumentURLChunkType
-> = z.nativeEnum(DocumentURLChunkType);
-
-/** @internal */
 export type DocumentURLChunk$Outbound = {
+  type: "document_url";
   document_url: string;
   document_name?: string | null | undefined;
-  type: string;
 };
 
 /** @internal */
@@ -38,9 +27,9 @@ export const DocumentURLChunk$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DocumentURLChunk
 > = z.object({
+  type: z.literal("document_url").default("document_url" as const),
   documentUrl: z.string(),
   documentName: z.nullable(z.string()).optional(),
-  type: DocumentURLChunkType$outboundSchema.default("document_url"),
 }).transform((v) => {
   return remap$(v, {
     documentUrl: "document_url",

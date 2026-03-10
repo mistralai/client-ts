@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
 import {
   ContentChunk,
   ContentChunk$Outbound,
@@ -12,14 +11,9 @@ import {
 
 export type UserMessageContent = string | Array<ContentChunk>;
 
-export const UserMessageRole = {
-  User: "user",
-} as const;
-export type UserMessageRole = ClosedEnum<typeof UserMessageRole>;
-
 export type UserMessage = {
+  role?: "user" | undefined;
   content: string | Array<ContentChunk> | null;
-  role?: UserMessageRole | undefined;
 };
 
 /** @internal */
@@ -41,14 +35,9 @@ export function userMessageContentToJSON(
 }
 
 /** @internal */
-export const UserMessageRole$outboundSchema: z.ZodNativeEnum<
-  typeof UserMessageRole
-> = z.nativeEnum(UserMessageRole);
-
-/** @internal */
 export type UserMessage$Outbound = {
+  role: "user";
   content: string | Array<ContentChunk$Outbound> | null;
-  role: string;
 };
 
 /** @internal */
@@ -57,10 +46,10 @@ export const UserMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserMessage
 > = z.object({
+  role: z.literal("user").default("user" as const),
   content: z.nullable(
     z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),
-  role: UserMessageRole$outboundSchema.default("user"),
 });
 
 export function userMessageToJSON(userMessage: UserMessage): string {

@@ -12,8 +12,8 @@ let value: DocumentURLChunk = {
 
 ## Fields
 
-| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `documentUrl`                                                                      | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
-| `documentName`                                                                     | *string*                                                                           | :heavy_minus_sign:                                                                 | The filename of the document                                                       |
-| `type`                                                                             | [components.DocumentURLChunkType](../../models/components/documenturlchunktype.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| Field                        | Type                         | Required                     | Description                  |
+| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
+| `type`                       | *"document_url"*             | :heavy_minus_sign:           | N/A                          |
+| `documentUrl`                | *string*                     | :heavy_check_mark:           | N/A                          |
+| `documentName`               | *string*                     | :heavy_minus_sign:           | The filename of the document |

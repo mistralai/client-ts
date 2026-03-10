@@ -21,9 +21,9 @@ async function main() {
   const result = await mistralAzure.chat.complete({
     messages: [
       {
+        role: "user",
         content:
           "Who is the best French painter? Answer in one short sentence.",
-        role: "user",
       },
     ],
     responseFormat: {

@@ -14,10 +14,11 @@ let value: DocumentOut = {
   size: 33345,
   name: "<value>",
   createdAt: new Date("2025-05-11T19:53:21.776Z"),
-  uploadedById: "e014de08-6b20-4057-a8a5-3e12d7f66822",
+  processStatus: "in_progress",
+  uploadedById: "014de086-b200-4578-9a53-e12d7f668229",
   uploadedByType: "<value>",
   processingStatus: "<value>",
-  tokensProcessingTotal: 288375,
+  tokensProcessingTotal: 941536,
 };
 ```
 
@@ -36,6 +37,7 @@ let value: DocumentOut = {
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `lastProcessedAt`                                                                             | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `numberOfPages`                                                                               | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `processStatus`                                                                               | [components.ProcessStatus](../../models/components/processstatus.md)                          | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `uploadedById`                                                                                | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `uploadedByType`                                                                              | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `tokensProcessingMainContent`                                                                 | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |

@@ -6,9 +6,23 @@ import * as z from "zod/v3";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
+/**
+ * Available options to the prompt_mode argument on the chat completion endpoint.
+ *
+ * @remarks
+ * Values represent high-level intent. Assignment to actual SPs is handled internally.
+ * System prompt may include knowledge cutoff date, model capabilities, tone to use, safety guidelines, etc.
+ */
 export const MistralPromptMode = {
   Reasoning: "reasoning",
 } as const;
+/**
+ * Available options to the prompt_mode argument on the chat completion endpoint.
+ *
+ * @remarks
+ * Values represent high-level intent. Assignment to actual SPs is handled internally.
+ * System prompt may include knowledge cutoff date, model capabilities, tone to use, safety guidelines, etc.
+ */
 export type MistralPromptMode = OpenEnum<typeof MistralPromptMode>;
 
 /** @internal */

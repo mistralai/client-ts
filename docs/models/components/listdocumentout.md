@@ -23,10 +23,11 @@ let value: ListDocumentOut = {
       size: 290711,
       name: "<value>",
       createdAt: new Date("2026-06-14T03:59:49.681Z"),
-      uploadedById: "380e4c50-4111-4a7d-963c-508462a75c03",
+      processStatus: "missing_content",
+      uploadedById: "80e4c504-111a-47d6-a3c5-08462a75c037",
       uploadedByType: "<value>",
       processingStatus: "<value>",
-      tokensProcessingTotal: 694613,
+      tokensProcessingTotal: 490565,
     },
   ],
 };

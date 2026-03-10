@@ -20,3 +20,11 @@ const value: components.ToolReferenceChunk = {
 };
 ```
 
+### `components.ReferenceChunk`
+
+```typescript
+const value: components.ReferenceChunk = {
+  referenceIds: [],
+};
+```
+
