@@ -1,0 +1,27 @@
+# ConversationHistory
+
+Retrieve all entries in a conversation.
+
+## Example Usage
+
+```typescript
+import { ConversationHistory } from "@mistralai/mistralai/models/components";
+
+let value: ConversationHistory = {
+  conversationId: "<id>",
+  entries: [
+    {
+      toolCallId: "<id>",
+      result: "<value>",
+    },
+  ],
+};
+```
+
+## Fields
+
+| Field                    | Type                     | Required                 | Description              |
+| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| `object`                 | *"conversation.history"* | :heavy_minus_sign:       | N/A                      |
+| `conversationId`         | *string*                 | :heavy_check_mark:       | N/A                      |
+| `entries`                | *components.Entry*[]     | :heavy_check_mark:       | N/A                      |
