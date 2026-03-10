@@ -1,4 +1,4 @@
-# ChatCompletionRequestMessages
+# ChatCompletionRequestMessage
 
 
 ## Supported Types

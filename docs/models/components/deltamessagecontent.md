@@ -1,4 +1,4 @@
-# Content
+# DeltaMessageContent
 
 
 ## Supported Types
