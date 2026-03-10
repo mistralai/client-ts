@@ -1,4 +1,4 @@
-# Messages
+# ChatCompletionStreamRequestMessage
 
 
 ## Supported Types

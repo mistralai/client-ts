@@ -1,4 +1,4 @@
-# ImageURLChunkImageURL
+# ImageUrlUnion
 
 
 ## Supported Types
