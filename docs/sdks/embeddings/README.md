@@ -14,7 +14,7 @@ Embeddings
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="embeddings_v1_embeddings_post" method="post" path="/v1/embeddings" -->
+<!-- UsageSnippet language="typescript" operationID="embeddings_v1_embeddings_post" method="post" path="/v1/embeddings" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
