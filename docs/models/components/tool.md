@@ -1,0 +1,21 @@
+# Tool
+
+## Example Usage
+
+```typescript
+import { Tool } from "@mistralai/mistralai-azure/models/components";
+
+let value: Tool = {
+  function: {
+    name: "<value>",
+    parameters: {},
+  },
+};
+```
+
+## Fields
+
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `type`                                                       | [components.ToolTypes](../../models/components/tooltypes.md) | :heavy_minus_sign:                                           | N/A                                                          |
+| `function`                                                   | [components.FunctionT](../../models/components/functiont.md) | :heavy_check_mark:                                           | N/A                                                          |
