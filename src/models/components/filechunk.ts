@@ -3,7 +3,7 @@
  * @generated-id: 069e54dccc2c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -15,11 +15,7 @@ export type FileChunk = {
 };
 
 /** @internal */
-export const FileChunk$inboundSchema: z.ZodType<
-  FileChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const FileChunk$inboundSchema: z.ZodType<FileChunk, unknown> = z.object({
   type: z.literal("file").default("file"),
   file_id: z.string(),
 }).transform((v) => {
@@ -36,7 +32,6 @@ export type FileChunk$Outbound = {
 /** @internal */
 export const FileChunk$outboundSchema: z.ZodType<
   FileChunk$Outbound,
-  z.ZodTypeDef,
   FileChunk
 > = z.object({
   type: z.literal("file").default("file" as const),

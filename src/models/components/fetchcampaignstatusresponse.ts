@@ -3,7 +3,7 @@
  * @generated-id: ed00e6a6217d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,7 +19,6 @@ export type FetchCampaignStatusResponse = {
 /** @internal */
 export const FetchCampaignStatusResponse$inboundSchema: z.ZodType<
   FetchCampaignStatusResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   status: BaseTaskStatus$inboundSchema,

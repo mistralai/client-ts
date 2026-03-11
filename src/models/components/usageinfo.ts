@@ -3,7 +3,7 @@
  * @generated-id: 87d456fca1b2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,15 +18,11 @@ export type UsageInfo = {
 };
 
 /** @internal */
-export const UsageInfo$inboundSchema: z.ZodType<
-  UsageInfo,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  prompt_tokens: z.number().int().default(0),
-  completion_tokens: z.number().int().default(0),
-  total_tokens: z.number().int().default(0),
-  prompt_audio_seconds: z.nullable(z.number().int()).optional(),
+export const UsageInfo$inboundSchema: z.ZodType<UsageInfo, unknown> = z.object({
+  prompt_tokens: z.int().default(0),
+  completion_tokens: z.int().default(0),
+  total_tokens: z.int().default(0),
+  prompt_audio_seconds: z.nullable(z.int()).optional(),
 }).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "prompt_tokens": "promptTokens",
@@ -47,13 +43,12 @@ export type UsageInfo$Outbound = {
 /** @internal */
 export const UsageInfo$outboundSchema: z.ZodType<
   UsageInfo$Outbound,
-  z.ZodTypeDef,
   UsageInfo
 > = z.object({
-  promptTokens: z.number().int().default(0),
-  completionTokens: z.number().int().default(0),
-  totalTokens: z.number().int().default(0),
-  promptAudioSeconds: z.nullable(z.number().int()).optional(),
+  promptTokens: z.int().default(0),
+  completionTokens: z.int().default(0),
+  totalTokens: z.int().default(0),
+  promptAudioSeconds: z.nullable(z.int()).optional(),
 }).catchall(z.any()).transform((v) => {
   return {
     ...remap$(v, {

@@ -3,7 +3,7 @@
  * @generated-id: 55edfa30408e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import * as components from "../components/index.js";
@@ -38,7 +38,6 @@ export type DocumentUpload$Outbound = {
 /** @internal */
 export const DocumentUpload$outboundSchema: z.ZodType<
   DocumentUpload$Outbound,
-  z.ZodTypeDef,
   DocumentUpload
 > = z.object({
   file: components.FileT$outboundSchema.or(blobLikeSchema),
@@ -57,7 +56,6 @@ export type LibrariesDocumentsUploadV1Request$Outbound = {
 /** @internal */
 export const LibrariesDocumentsUploadV1Request$outboundSchema: z.ZodType<
   LibrariesDocumentsUploadV1Request$Outbound,
-  z.ZodTypeDef,
   LibrariesDocumentsUploadV1Request
 > = z.object({
   libraryId: z.string(),

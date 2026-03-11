@@ -3,7 +3,7 @@
  * @generated-id: afc65d62df41
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -32,7 +32,6 @@ export type ToolExecutionEntry = {
 /** @internal */
 export const ToolExecutionEntryName$inboundSchema: z.ZodType<
   ToolExecutionEntryName,
-  z.ZodTypeDef,
   unknown
 > = z.union([BuiltInConnectors$inboundSchema, z.string()]);
 /** @internal */
@@ -41,7 +40,6 @@ export type ToolExecutionEntryName$Outbound = string | string;
 /** @internal */
 export const ToolExecutionEntryName$outboundSchema: z.ZodType<
   ToolExecutionEntryName$Outbound,
-  z.ZodTypeDef,
   ToolExecutionEntryName
 > = z.union([BuiltInConnectors$outboundSchema, z.string()]);
 
@@ -65,22 +63,21 @@ export function toolExecutionEntryNameFromJSON(
 /** @internal */
 export const ToolExecutionEntry$inboundSchema: z.ZodType<
   ToolExecutionEntry,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("entry").default("entry"),
   type: z.literal("tool.execution").default("tool.execution"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   agent_id: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
   name: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   arguments: z.string(),
-  info: z.record(z.any()).optional(),
+  info: z.record(z.string(), z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -105,7 +102,6 @@ export type ToolExecutionEntry$Outbound = {
 /** @internal */
 export const ToolExecutionEntry$outboundSchema: z.ZodType<
   ToolExecutionEntry$Outbound,
-  z.ZodTypeDef,
   ToolExecutionEntry
 > = z.object({
   object: z.literal("entry").default("entry" as const),
@@ -117,7 +113,7 @@ export const ToolExecutionEntry$outboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.union([BuiltInConnectors$outboundSchema, z.string()]),
   arguments: z.string(),
-  info: z.record(z.any()).optional(),
+  info: z.record(z.string(), z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

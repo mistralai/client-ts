@@ -3,7 +3,7 @@
  * @generated-id: edca5ba151e1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -23,7 +23,6 @@ export type ImageGenerationTool = {
 /** @internal */
 export const ImageGenerationTool$inboundSchema: z.ZodType<
   ImageGenerationTool,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
@@ -42,7 +41,6 @@ export type ImageGenerationTool$Outbound = {
 /** @internal */
 export const ImageGenerationTool$outboundSchema: z.ZodType<
   ImageGenerationTool$Outbound,
-  z.ZodTypeDef,
   ImageGenerationTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),

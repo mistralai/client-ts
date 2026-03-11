@@ -3,7 +3,7 @@
  * @generated-id: 5c4990d05fa2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -26,7 +26,6 @@ export type AgentsApiV1ConversationsRestartStreamRequest$Outbound = {
 export const AgentsApiV1ConversationsRestartStreamRequest$outboundSchema:
   z.ZodType<
     AgentsApiV1ConversationsRestartStreamRequest$Outbound,
-    z.ZodTypeDef,
     AgentsApiV1ConversationsRestartStreamRequest
   > = z.object({
     conversationId: z.string(),

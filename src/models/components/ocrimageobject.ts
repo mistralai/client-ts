@@ -3,7 +3,7 @@
  * @generated-id: 851c92a59244
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -41,28 +41,25 @@ export type OCRImageObject = {
 };
 
 /** @internal */
-export const OCRImageObject$inboundSchema: z.ZodType<
-  OCRImageObject,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  top_left_x: z.nullable(z.number().int()),
-  top_left_y: z.nullable(z.number().int()),
-  bottom_right_x: z.nullable(z.number().int()),
-  bottom_right_y: z.nullable(z.number().int()),
-  image_base64: z.nullable(z.string()).optional(),
-  image_annotation: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_left_x": "topLeftX",
-    "top_left_y": "topLeftY",
-    "bottom_right_x": "bottomRightX",
-    "bottom_right_y": "bottomRightY",
-    "image_base64": "imageBase64",
-    "image_annotation": "imageAnnotation",
+export const OCRImageObject$inboundSchema: z.ZodType<OCRImageObject, unknown> =
+  z.object({
+    id: z.string(),
+    top_left_x: z.nullable(z.int()),
+    top_left_y: z.nullable(z.int()),
+    bottom_right_x: z.nullable(z.int()),
+    bottom_right_y: z.nullable(z.int()),
+    image_base64: z.nullable(z.string()).optional(),
+    image_annotation: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_left_x": "topLeftX",
+      "top_left_y": "topLeftY",
+      "bottom_right_x": "bottomRightX",
+      "bottom_right_y": "bottomRightY",
+      "image_base64": "imageBase64",
+      "image_annotation": "imageAnnotation",
+    });
   });
-});
 
 export function ocrImageObjectFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  * @generated-id: 43114ee20dbf
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetChatCompletionEventV1ObservabilityChatCompletionEventsEventIdGetRequest =
@@ -21,7 +21,6 @@ export type GetChatCompletionEventV1ObservabilityChatCompletionEventsEventIdGetR
 export const GetChatCompletionEventV1ObservabilityChatCompletionEventsEventIdGetRequest$outboundSchema:
   z.ZodType<
     GetChatCompletionEventV1ObservabilityChatCompletionEventsEventIdGetRequest$Outbound,
-    z.ZodTypeDef,
     GetChatCompletionEventV1ObservabilityChatCompletionEventsEventIdGetRequest
   > = z.object({
     eventId: z.string(),

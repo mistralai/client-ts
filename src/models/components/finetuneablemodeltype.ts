@@ -3,7 +3,7 @@
  * @generated-id: d69fad3e5a03
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const FineTuneableModelType = {
@@ -13,6 +13,6 @@ export const FineTuneableModelType = {
 export type FineTuneableModelType = ClosedEnum<typeof FineTuneableModelType>;
 
 /** @internal */
-export const FineTuneableModelType$outboundSchema: z.ZodNativeEnum<
+export const FineTuneableModelType$outboundSchema: z.ZodEnum<
   typeof FineTuneableModelType
-> = z.nativeEnum(FineTuneableModelType);
+> = z.enum(FineTuneableModelType);

@@ -3,7 +3,7 @@
  * @generated-id: c4ce999e6f1f
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
@@ -30,38 +30,34 @@ import {
 
 export type ContentChunk =
   | (ImageURLChunk & { type: "image_url" })
-  | (TextChunk & { type: "text" })
+  | TextChunk
   | (ReferenceChunk & { type: "reference" })
   | discriminatedUnionTypes.Unknown<"type">;
 
 /** @internal */
-export const ContentChunk$inboundSchema: z.ZodType<
-  ContentChunk,
-  z.ZodTypeDef,
-  unknown
-> = discriminatedUnion("type", {
-  image_url: ImageURLChunk$inboundSchema.and(
-    z.object({ type: z.literal("image_url") }),
-  ),
-  text: TextChunk$inboundSchema.and(z.object({ type: z.literal("text") })),
-  reference: ReferenceChunk$inboundSchema.and(
-    z.object({ type: z.literal("reference") }),
-  ),
-});
+export const ContentChunk$inboundSchema: z.ZodType<ContentChunk, unknown> =
+  discriminatedUnion("type", {
+    image_url: ImageURLChunk$inboundSchema.and(
+      z.object({ type: z.literal("image_url") }),
+    ),
+    text: TextChunk$inboundSchema,
+    reference: ReferenceChunk$inboundSchema.and(
+      z.object({ type: z.literal("reference") }),
+    ),
+  });
 /** @internal */
 export type ContentChunk$Outbound =
   | (ImageURLChunk$Outbound & { type: "image_url" })
-  | (TextChunk$Outbound & { type: "text" })
+  | TextChunk$Outbound
   | (ReferenceChunk$Outbound & { type: "reference" });
 
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
   ContentChunk$Outbound,
-  z.ZodTypeDef,
   ContentChunk
 > = z.union([
   ImageURLChunk$outboundSchema.and(z.object({ type: z.literal("image_url") })),
-  TextChunk$outboundSchema.and(z.object({ type: z.literal("text") })),
+  TextChunk$outboundSchema,
   ReferenceChunk$outboundSchema.and(z.object({ type: z.literal("reference") })),
 ]);
 

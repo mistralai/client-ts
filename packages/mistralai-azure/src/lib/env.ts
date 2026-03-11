@@ -3,7 +3,7 @@
  * @generated-id: ff0eaca09663
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { dlv } from "./dlv.js";
 
 export interface Env {
@@ -12,7 +12,7 @@ export interface Env {
   MISTRAL_DEBUG?: boolean | undefined;
 }
 
-export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z.object({
+export const envSchema: z.ZodType<Env, unknown> = z.object({
   MISTRAL_API_KEY: z.string().optional(),
 
   MISTRAL_DEBUG: z.coerce.boolean().optional(),

@@ -3,7 +3,7 @@
  * @generated-id: 52ae3c45b797
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -20,7 +20,6 @@ export type SearchChatCompletionEventsResponse = {
 /** @internal */
 export const SearchChatCompletionEventsResponse$inboundSchema: z.ZodType<
   SearchChatCompletionEventsResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   completion_events: FeedResultChatCompletionEventPreview$inboundSchema,

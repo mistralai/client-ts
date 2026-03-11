@@ -3,7 +3,7 @@
  * @generated-id: 6aa92519e678
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ImportDatasetFromExplorerRequest = {
@@ -18,7 +18,6 @@ export type ImportDatasetFromExplorerRequest$Outbound = {
 /** @internal */
 export const ImportDatasetFromExplorerRequest$outboundSchema: z.ZodType<
   ImportDatasetFromExplorerRequest$Outbound,
-  z.ZodTypeDef,
   ImportDatasetFromExplorerRequest
 > = z.object({
   completionEventIds: z.array(z.string()),

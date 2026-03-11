@@ -3,7 +3,7 @@
  * @generated-id: 2224f41020d5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -102,14 +102,12 @@ export type ClassifierFineTuningJob = {
 /** @internal */
 export const ClassifierFineTuningJobStatus$inboundSchema: z.ZodType<
   ClassifierFineTuningJobStatus,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(ClassifierFineTuningJobStatus);
 
 /** @internal */
 export const ClassifierFineTuningJobIntegration$inboundSchema: z.ZodType<
   ClassifierFineTuningJobIntegration,
-  z.ZodTypeDef,
   unknown
 > = WandbIntegrationResult$inboundSchema;
 
@@ -127,15 +125,14 @@ export function classifierFineTuningJobIntegrationFromJSON(
 /** @internal */
 export const ClassifierFineTuningJob$inboundSchema: z.ZodType<
   ClassifierFineTuningJob,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   auto_start: z.boolean(),
   model: z.string(),
   status: ClassifierFineTuningJobStatus$inboundSchema,
-  created_at: z.number().int(),
-  modified_at: z.number().int(),
+  created_at: z.int(),
+  modified_at: z.int(),
   training_files: z.array(z.string()),
   validation_files: z.nullable(z.array(z.string())).optional(),
   object: z.literal("job").default("job"),
@@ -143,7 +140,7 @@ export const ClassifierFineTuningJob$inboundSchema: z.ZodType<
   suffix: z.nullable(z.string()).optional(),
   integrations: z.nullable(z.array(WandbIntegrationResult$inboundSchema))
     .optional(),
-  trained_tokens: z.nullable(z.number().int()).optional(),
+  trained_tokens: z.nullable(z.int()).optional(),
   metadata: z.nullable(JobMetadata$inboundSchema).optional(),
   job_type: z.literal("classifier"),
   hyperparameters: ClassifierTrainingParameters$inboundSchema,

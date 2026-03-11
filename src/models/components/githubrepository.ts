@@ -3,7 +3,7 @@
  * @generated-id: d83dd8b9a5ac
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -21,7 +21,6 @@ export type GithubRepository = {
 /** @internal */
 export const GithubRepository$inboundSchema: z.ZodType<
   GithubRepository,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("github"),

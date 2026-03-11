@@ -3,7 +3,7 @@
  * @generated-id: ffab2c2bc0eb
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -30,16 +30,15 @@ export type CompletionResponseStreamChoice = {
 
 /** @internal */
 export const CompletionResponseStreamChoiceFinishReason$inboundSchema:
-  z.ZodType<CompletionResponseStreamChoiceFinishReason, z.ZodTypeDef, unknown> =
-    openEnums.inboundSchema(CompletionResponseStreamChoiceFinishReason);
+  z.ZodType<CompletionResponseStreamChoiceFinishReason, unknown> = openEnums
+    .inboundSchema(CompletionResponseStreamChoiceFinishReason);
 
 /** @internal */
 export const CompletionResponseStreamChoice$inboundSchema: z.ZodType<
   CompletionResponseStreamChoice,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  index: z.number().int(),
+  index: z.int(),
   delta: DeltaMessage$inboundSchema,
   finish_reason: z.nullable(
     CompletionResponseStreamChoiceFinishReason$inboundSchema,

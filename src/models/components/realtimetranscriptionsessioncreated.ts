@@ -3,7 +3,7 @@
  * @generated-id: 08cf23186690
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,7 +22,6 @@ export type RealtimeTranscriptionSessionCreated = {
 /** @internal */
 export const RealtimeTranscriptionSessionCreated$inboundSchema: z.ZodType<
   RealtimeTranscriptionSessionCreated,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("session.created").default("session.created"),
@@ -37,7 +36,6 @@ export type RealtimeTranscriptionSessionCreated$Outbound = {
 /** @internal */
 export const RealtimeTranscriptionSessionCreated$outboundSchema: z.ZodType<
   RealtimeTranscriptionSessionCreated$Outbound,
-  z.ZodTypeDef,
   RealtimeTranscriptionSessionCreated
 > = z.object({
   type: z.literal("session.created").default("session.created" as const),

@@ -3,7 +3,7 @@
  * @generated-id: e30294bb59e8
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,15 +16,11 @@ export type FunctionT = {
 };
 
 /** @internal */
-export const FunctionT$inboundSchema: z.ZodType<
-  FunctionT,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const FunctionT$inboundSchema: z.ZodType<FunctionT, unknown> = z.object({
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()),
+  parameters: z.record(z.string(), z.any()),
 });
 /** @internal */
 export type FunctionT$Outbound = {
@@ -37,13 +33,12 @@ export type FunctionT$Outbound = {
 /** @internal */
 export const FunctionT$outboundSchema: z.ZodType<
   FunctionT$Outbound,
-  z.ZodTypeDef,
   FunctionT
 > = z.object({
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()),
+  parameters: z.record(z.string(), z.any()),
 });
 
 export function functionToJSON(functionT: FunctionT): string {

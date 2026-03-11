@@ -8,11 +8,11 @@ The type of entity, used to share a library.
 import { EntityType } from "@mistralai/mistralai/models/components";
 
 let value: EntityType = "User";
-
-// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
+
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "User" | "Workspace" | "Org" | Unrecognized<string>

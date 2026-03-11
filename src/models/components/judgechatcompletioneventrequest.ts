@@ -3,7 +3,7 @@
  * @generated-id: 43b6a2ca0306
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   CreateJudgeRequest,
@@ -23,7 +23,6 @@ export type JudgeChatCompletionEventRequest$Outbound = {
 /** @internal */
 export const JudgeChatCompletionEventRequest$outboundSchema: z.ZodType<
   JudgeChatCompletionEventRequest$Outbound,
-  z.ZodTypeDef,
   JudgeChatCompletionEventRequest
 > = z.object({
   judgeDefinition: CreateJudgeRequest$outboundSchema,

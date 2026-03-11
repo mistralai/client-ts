@@ -3,7 +3,7 @@
  * @generated-id: a8e403a0c342
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,12 +21,13 @@ export type ClassificationResponse = {
 /** @internal */
 export const ClassificationResponse$inboundSchema: z.ZodType<
   ClassificationResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   model: z.string(),
-  results: z.array(z.record(ClassificationTargetResult$inboundSchema)),
+  results: z.array(
+    z.record(z.string(), ClassificationTargetResult$inboundSchema),
+  ),
 });
 
 export function classificationResponseFromJSON(

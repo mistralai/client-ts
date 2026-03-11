@@ -3,7 +3,7 @@
  * @generated-id: 55e2c042837a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -37,30 +37,26 @@ export type BatchJob = {
 };
 
 /** @internal */
-export const BatchJob$inboundSchema: z.ZodType<
-  BatchJob,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const BatchJob$inboundSchema: z.ZodType<BatchJob, unknown> = z.object({
   id: z.string(),
   object: z.literal("batch").default("batch"),
   input_files: z.array(z.string()),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   endpoint: z.string(),
   model: z.nullable(z.string()).optional(),
   agent_id: z.nullable(z.string()).optional(),
   output_file: z.nullable(z.string()).optional(),
   error_file: z.nullable(z.string()).optional(),
   errors: z.array(BatchError$inboundSchema),
-  outputs: z.nullable(z.array(z.record(z.any()))).optional(),
+  outputs: z.nullable(z.array(z.record(z.string(), z.any()))).optional(),
   status: BatchJobStatus$inboundSchema,
-  created_at: z.number().int(),
-  total_requests: z.number().int(),
-  completed_requests: z.number().int(),
-  succeeded_requests: z.number().int(),
-  failed_requests: z.number().int(),
-  started_at: z.nullable(z.number().int()).optional(),
-  completed_at: z.nullable(z.number().int()).optional(),
+  created_at: z.int(),
+  total_requests: z.int(),
+  completed_requests: z.int(),
+  succeeded_requests: z.int(),
+  failed_requests: z.int(),
+  started_at: z.nullable(z.int()).optional(),
+  completed_at: z.nullable(z.int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "input_files": "inputFiles",

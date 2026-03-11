@@ -3,7 +3,7 @@
  * @generated-id: fe23662d87f8
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type AgentsApiV1AgentsDeleteAliasRequest = {
@@ -20,7 +20,6 @@ export type AgentsApiV1AgentsDeleteAliasRequest$Outbound = {
 /** @internal */
 export const AgentsApiV1AgentsDeleteAliasRequest$outboundSchema: z.ZodType<
   AgentsApiV1AgentsDeleteAliasRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1AgentsDeleteAliasRequest
 > = z.object({
   agentId: z.string(),

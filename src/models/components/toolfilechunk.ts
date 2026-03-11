@@ -3,7 +3,7 @@
  * @generated-id: 6b861b147872
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -27,7 +27,6 @@ export type ToolFileChunk = {
 /** @internal */
 export const ToolFileChunkTool$inboundSchema: z.ZodType<
   ToolFileChunkTool,
-  z.ZodTypeDef,
   unknown
 > = z.union([BuiltInConnectors$inboundSchema, z.string()]);
 /** @internal */
@@ -36,7 +35,6 @@ export type ToolFileChunkTool$Outbound = string | string;
 /** @internal */
 export const ToolFileChunkTool$outboundSchema: z.ZodType<
   ToolFileChunkTool$Outbound,
-  z.ZodTypeDef,
   ToolFileChunkTool
 > = z.union([BuiltInConnectors$outboundSchema, z.string()]);
 
@@ -58,23 +56,20 @@ export function toolFileChunkToolFromJSON(
 }
 
 /** @internal */
-export const ToolFileChunk$inboundSchema: z.ZodType<
-  ToolFileChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("tool_file").default("tool_file"),
-  tool: z.union([BuiltInConnectors$inboundSchema, z.string()]),
-  file_id: z.string(),
-  file_name: z.nullable(z.string()).optional(),
-  file_type: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "file_name": "fileName",
-    "file_type": "fileType",
+export const ToolFileChunk$inboundSchema: z.ZodType<ToolFileChunk, unknown> = z
+  .object({
+    type: z.literal("tool_file").default("tool_file"),
+    tool: z.union([BuiltInConnectors$inboundSchema, z.string()]),
+    file_id: z.string(),
+    file_name: z.nullable(z.string()).optional(),
+    file_type: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "file_name": "fileName",
+      "file_type": "fileType",
+    });
   });
-});
 /** @internal */
 export type ToolFileChunk$Outbound = {
   type: "tool_file";
@@ -87,7 +82,6 @@ export type ToolFileChunk$Outbound = {
 /** @internal */
 export const ToolFileChunk$outboundSchema: z.ZodType<
   ToolFileChunk$Outbound,
-  z.ZodTypeDef,
   ToolFileChunk
 > = z.object({
   type: z.literal("tool_file").default("tool_file" as const),

@@ -3,7 +3,7 @@
  * @generated-id: 3a73614fc034
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -38,19 +38,16 @@ export type OCRTableObject = {
 };
 
 /** @internal */
-export const Format$inboundSchema: z.ZodType<Format, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Format);
+export const Format$inboundSchema: z.ZodType<Format, unknown> = openEnums
+  .inboundSchema(Format);
 
 /** @internal */
-export const OCRTableObject$inboundSchema: z.ZodType<
-  OCRTableObject,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  content: z.string(),
-  format: Format$inboundSchema,
-});
+export const OCRTableObject$inboundSchema: z.ZodType<OCRTableObject, unknown> =
+  z.object({
+    id: z.string(),
+    content: z.string(),
+    format: Format$inboundSchema,
+  });
 
 export function ocrTableObjectFromJSON(
   jsonString: string,

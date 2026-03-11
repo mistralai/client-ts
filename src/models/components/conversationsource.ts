@@ -3,7 +3,7 @@
  * @generated-id: 65baa83398a3
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -18,6 +18,5 @@ export type ConversationSource = OpenEnum<typeof ConversationSource>;
 /** @internal */
 export const ConversationSource$inboundSchema: z.ZodType<
   ConversationSource,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(ConversationSource);

@@ -3,7 +3,7 @@
  * @generated-id: 3ab1f5dd8c62
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -15,14 +15,8 @@ export const FilePurpose = {
 export type FilePurpose = OpenEnum<typeof FilePurpose>;
 
 /** @internal */
-export const FilePurpose$inboundSchema: z.ZodType<
-  FilePurpose,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(FilePurpose);
+export const FilePurpose$inboundSchema: z.ZodType<FilePurpose, unknown> =
+  openEnums.inboundSchema(FilePurpose);
 /** @internal */
-export const FilePurpose$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  FilePurpose
-> = openEnums.outboundSchema(FilePurpose);
+export const FilePurpose$outboundSchema: z.ZodType<string, FilePurpose> =
+  openEnums.outboundSchema(FilePurpose);

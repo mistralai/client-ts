@@ -3,7 +3,7 @@
  * @generated-id: da578d9a5ae4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -20,14 +20,11 @@ export type FunctionTool = {
 };
 
 /** @internal */
-export const FunctionTool$inboundSchema: z.ZodType<
-  FunctionTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("function"),
-  function: FunctionT$inboundSchema,
-});
+export const FunctionTool$inboundSchema: z.ZodType<FunctionTool, unknown> = z
+  .object({
+    type: z.literal("function"),
+    function: FunctionT$inboundSchema,
+  });
 /** @internal */
 export type FunctionTool$Outbound = {
   type: "function";
@@ -37,7 +34,6 @@ export type FunctionTool$Outbound = {
 /** @internal */
 export const FunctionTool$outboundSchema: z.ZodType<
   FunctionTool$Outbound,
-  z.ZodTypeDef,
   FunctionTool
 > = z.object({
   type: z.literal("function"),

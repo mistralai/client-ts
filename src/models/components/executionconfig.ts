@@ -3,7 +3,7 @@
  * @generated-id: 9fb55ce3d993
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,7 +23,6 @@ export type ExecutionConfig = {
 /** @internal */
 export const ExecutionConfig$inboundSchema: z.ZodType<
   ExecutionConfig,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.string(),

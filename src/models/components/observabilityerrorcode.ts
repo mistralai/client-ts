@@ -3,7 +3,7 @@
  * @generated-id: 761cefb4bff3
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -59,6 +59,5 @@ export type ObservabilityErrorCode = OpenEnum<typeof ObservabilityErrorCode>;
 /** @internal */
 export const ObservabilityErrorCode$inboundSchema: z.ZodType<
   ObservabilityErrorCode,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(ObservabilityErrorCode);

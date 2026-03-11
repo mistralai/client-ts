@@ -3,7 +3,7 @@
  * @generated-id: 51a941689548
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   FilterPayload,
@@ -25,7 +25,6 @@ export type SearchChatCompletionEventsRequest$Outbound = {
 /** @internal */
 export const SearchChatCompletionEventsRequest$outboundSchema: z.ZodType<
   SearchChatCompletionEventsRequest$Outbound,
-  z.ZodTypeDef,
   SearchChatCompletionEventsRequest
 > = z.object({
   searchParams: FilterPayload$outboundSchema,

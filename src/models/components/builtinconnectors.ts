@@ -3,7 +3,7 @@
  * @generated-id: 6d819dedabe6
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -19,12 +19,10 @@ export type BuiltInConnectors = OpenEnum<typeof BuiltInConnectors>;
 /** @internal */
 export const BuiltInConnectors$inboundSchema: z.ZodType<
   BuiltInConnectors,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(BuiltInConnectors);
 /** @internal */
 export const BuiltInConnectors$outboundSchema: z.ZodType<
   string,
-  z.ZodTypeDef,
   BuiltInConnectors
 > = openEnums.outboundSchema(BuiltInConnectors);

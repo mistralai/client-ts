@@ -3,7 +3,7 @@
  * @generated-id: 908fbd640ca2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -34,33 +34,29 @@ export type Document = {
 };
 
 /** @internal */
-export const Document$inboundSchema: z.ZodType<
-  Document,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const Document$inboundSchema: z.ZodType<Document, unknown> = z.object({
   id: z.string(),
   library_id: z.string(),
   hash: z.nullable(z.string()),
   mime_type: z.nullable(z.string()),
   extension: z.nullable(z.string()),
-  size: z.nullable(z.number().int()),
+  size: z.nullable(z.int()),
   name: z.string(),
   summary: z.nullable(z.string()).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   last_processed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  number_of_pages: z.nullable(z.number().int()).optional(),
+  number_of_pages: z.nullable(z.int()).optional(),
   process_status: ProcessStatus$inboundSchema,
   uploaded_by_id: z.nullable(z.string()),
   uploaded_by_type: z.string(),
-  tokens_processing_main_content: z.nullable(z.number().int()).optional(),
-  tokens_processing_summary: z.nullable(z.number().int()).optional(),
+  tokens_processing_main_content: z.nullable(z.int()).optional(),
+  tokens_processing_summary: z.nullable(z.int()).optional(),
   url: z.nullable(z.string()).optional(),
-  attributes: z.nullable(z.record(z.any())).optional(),
+  attributes: z.nullable(z.record(z.string(), z.any())).optional(),
   processing_status: z.string(),
-  tokens_processing_total: z.number().int(),
+  tokens_processing_total: z.int(),
 }).transform((v) => {
   return remap$(v, {
     "library_id": "libraryId",

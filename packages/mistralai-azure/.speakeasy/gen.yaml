@@ -42,7 +42,7 @@ typescript:
   author: Speakeasy
   baseErrorName: MistralAzureError
   clientServerStatusCodesAsErrors: true
-  constFieldsAlwaysOptional: true
+  constFieldsAlwaysOptional: false
   defaultErrorName: SDKError
   enableCustomCodeRegions: false
   enableMCPServer: false
@@ -50,10 +50,10 @@ typescript:
   enumFormat: union
   envVarPrefix: MISTRAL
   exportZodModelNamespace: false
-  flatAdditionalProperties: false
+  flatAdditionalProperties: true
   flattenGlobalSecurity: true
-  flatteningOrder: body-first
-  formStringArrayEncodeMode: encoded-string
+  flatteningOrder: parameters-first
+  formStringArrayEncodeMode: array
   forwardCompatibleEnumsByDefault: true
   forwardCompatibleUnionsByDefault: tagged-only
   generateExamples: true
@@ -67,17 +67,17 @@ typescript:
       webhooks: models/webhooks
   inferUnionDiscriminators: true
   inputModelSuffix: input
-  jsonpath: legacy
+  jsonpath: rfc9535
   laxMode: strict
   legacyFileNaming: true
   maxMethodParams: 0
-  methodArguments: require-security-and-request
+  methodArguments: infer-optional-args
   modelPropertyCasing: camel
   moduleFormat: commonjs
-  multipartArrayFormat: legacy
+  multipartArrayFormat: standard
   outputModelSuffix: output
   packageName: '@mistralai/mistralai-azure'
-  preApplyUnionDiscriminators: false
+  preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
   responseFormat: flat
   sseFlatResponse: false
@@ -85,6 +85,6 @@ typescript:
   unionStrategy: left-to-right
   usageSDKInitImports: []
   useIndexModules: true
-  useOxlint: false
-  useTsgo: false
-  zodVersion: v3
+  useOxlint: true
+  useTsgo: true
+  zodVersion: v4

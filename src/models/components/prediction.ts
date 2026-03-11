@@ -3,7 +3,7 @@
  * @generated-id: 74bf3ed40b32
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,14 +17,11 @@ export type Prediction = {
 };
 
 /** @internal */
-export const Prediction$inboundSchema: z.ZodType<
-  Prediction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("content").default("content"),
-  content: z.string().default(""),
-});
+export const Prediction$inboundSchema: z.ZodType<Prediction, unknown> = z
+  .object({
+    type: z.literal("content").default("content"),
+    content: z.string().default(""),
+  });
 /** @internal */
 export type Prediction$Outbound = {
   type: "content";
@@ -34,7 +31,6 @@ export type Prediction$Outbound = {
 /** @internal */
 export const Prediction$outboundSchema: z.ZodType<
   Prediction$Outbound,
-  z.ZodTypeDef,
   Prediction
 > = z.object({
   type: z.literal("content").default("content" as const),

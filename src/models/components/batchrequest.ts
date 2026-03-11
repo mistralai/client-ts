@@ -3,7 +3,7 @@
  * @generated-id: a5dff60bd9bf
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type BatchRequest = {
@@ -20,11 +20,10 @@ export type BatchRequest$Outbound = {
 /** @internal */
 export const BatchRequest$outboundSchema: z.ZodType<
   BatchRequest$Outbound,
-  z.ZodTypeDef,
   BatchRequest
 > = z.object({
   customId: z.nullable(z.string()).optional(),
-  body: z.record(z.any()),
+  body: z.record(z.string(), z.any()),
 }).transform((v) => {
   return remap$(v, {
     customId: "custom_id",

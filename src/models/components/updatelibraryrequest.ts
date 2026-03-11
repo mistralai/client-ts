@@ -3,7 +3,7 @@
  * @generated-id: 0320cfdfb195
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type UpdateLibraryRequest = {
   name?: string | null | undefined;
@@ -19,7 +19,6 @@ export type UpdateLibraryRequest$Outbound = {
 /** @internal */
 export const UpdateLibraryRequest$outboundSchema: z.ZodType<
   UpdateLibraryRequest$Outbound,
-  z.ZodTypeDef,
   UpdateLibraryRequest
 > = z.object({
   name: z.nullable(z.string()).optional(),

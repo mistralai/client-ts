@@ -3,7 +3,7 @@
  * @generated-id: d8d1c4bcdd5b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -22,7 +22,6 @@ export type TranscriptionSegmentChunk = {
 /** @internal */
 export const TranscriptionSegmentChunk$inboundSchema: z.ZodType<
   TranscriptionSegmentChunk,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("transcription_segment").default("transcription_segment"),
@@ -50,7 +49,6 @@ export type TranscriptionSegmentChunk$Outbound = {
 /** @internal */
 export const TranscriptionSegmentChunk$outboundSchema: z.ZodType<
   TranscriptionSegmentChunk$Outbound,
-  z.ZodTypeDef,
   TranscriptionSegmentChunk
 > = z.object({
   type: z.literal("transcription_segment").default(

@@ -3,7 +3,7 @@
  * @generated-id: b12796b42720
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ResponseFormats = {
@@ -14,6 +14,5 @@ export const ResponseFormats = {
 export type ResponseFormats = ClosedEnum<typeof ResponseFormats>;
 
 /** @internal */
-export const ResponseFormats$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormats
-> = z.nativeEnum(ResponseFormats);
+export const ResponseFormats$outboundSchema: z.ZodEnum<typeof ResponseFormats> =
+  z.enum(ResponseFormats);

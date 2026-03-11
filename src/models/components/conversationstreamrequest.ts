@@ -3,7 +3,7 @@
  * @generated-id: d59a2fff599b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
@@ -104,8 +104,9 @@ export type ConversationStreamRequest = {
 
 /** @internal */
 export const ConversationStreamRequestHandoffExecution$outboundSchema:
-  z.ZodNativeEnum<typeof ConversationStreamRequestHandoffExecution> = z
-    .nativeEnum(ConversationStreamRequestHandoffExecution);
+  z.ZodEnum<typeof ConversationStreamRequestHandoffExecution> = z.enum(
+    ConversationStreamRequestHandoffExecution,
+  );
 
 /** @internal */
 export type ConversationStreamRequestTool$Outbound =
@@ -119,7 +120,6 @@ export type ConversationStreamRequestTool$Outbound =
 /** @internal */
 export const ConversationStreamRequestTool$outboundSchema: z.ZodType<
   ConversationStreamRequestTool$Outbound,
-  z.ZodTypeDef,
   ConversationStreamRequestTool
 > = z.union([
   CodeInterpreterTool$outboundSchema,
@@ -146,9 +146,8 @@ export type ConversationStreamRequestAgentVersion$Outbound = string | number;
 /** @internal */
 export const ConversationStreamRequestAgentVersion$outboundSchema: z.ZodType<
   ConversationStreamRequestAgentVersion$Outbound,
-  z.ZodTypeDef,
   ConversationStreamRequestAgentVersion
-> = z.union([z.string(), z.number().int()]);
+> = z.union([z.string(), z.int()]);
 
 export function conversationStreamRequestAgentVersionToJSON(
   conversationStreamRequestAgentVersion: ConversationStreamRequestAgentVersion,
@@ -190,7 +189,6 @@ export type ConversationStreamRequest$Outbound = {
 /** @internal */
 export const ConversationStreamRequest$outboundSchema: z.ZodType<
   ConversationStreamRequest$Outbound,
-  z.ZodTypeDef,
   ConversationStreamRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema,
@@ -214,9 +212,9 @@ export const ConversationStreamRequest$outboundSchema: z.ZodType<
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   agentId: z.nullable(z.string()).optional(),
-  agentVersion: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  agentVersion: z.nullable(z.union([z.string(), z.int()])).optional(),
   model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

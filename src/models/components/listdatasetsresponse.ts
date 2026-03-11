@@ -3,7 +3,7 @@
  * @generated-id: a1868165edb8
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,7 +19,6 @@ export type ListDatasetsResponse = {
 /** @internal */
 export const ListDatasetsResponse$inboundSchema: z.ZodType<
   ListDatasetsResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   datasets: PaginatedResultDatasetPreview$inboundSchema,

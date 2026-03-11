@@ -3,7 +3,7 @@
  * @generated-id: 1f03992b6b85
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,12 +18,11 @@ export type ListFilesResponse = {
 /** @internal */
 export const ListFilesResponse$inboundSchema: z.ZodType<
   ListFilesResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.array(FileSchema$inboundSchema),
   object: z.string(),
-  total: z.nullable(z.number().int()).optional(),
+  total: z.nullable(z.int()).optional(),
 });
 
 export function listFilesResponseFromJSON(

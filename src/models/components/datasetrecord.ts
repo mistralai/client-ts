@@ -3,7 +3,7 @@
  * @generated-id: c4fa7fd4b804
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -29,29 +29,26 @@ export type DatasetRecord = {
 };
 
 /** @internal */
-export const DatasetRecord$inboundSchema: z.ZodType<
-  DatasetRecord,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  deleted_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  dataset_id: z.string(),
-  payload: ConversationPayload$inboundSchema,
-  properties: z.record(z.any()),
-  source: ConversationSource$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "deleted_at": "deletedAt",
-    "dataset_id": "datasetId",
+export const DatasetRecord$inboundSchema: z.ZodType<DatasetRecord, unknown> = z
+  .object({
+    id: z.string(),
+    created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+    updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+    deleted_at: z.nullable(
+      z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    dataset_id: z.string(),
+    payload: ConversationPayload$inboundSchema,
+    properties: z.record(z.string(), z.any()),
+    source: ConversationSource$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "deleted_at": "deletedAt",
+      "dataset_id": "datasetId",
+    });
   });
-});
 
 export function datasetRecordFromJSON(
   jsonString: string,

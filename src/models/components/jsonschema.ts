@@ -3,7 +3,7 @@
  * @generated-id: 056fe2c05c86
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -17,20 +17,17 @@ export type JsonSchema = {
 };
 
 /** @internal */
-export const JsonSchema$inboundSchema: z.ZodType<
-  JsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  schema: z.record(z.any()),
-  strict: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "schema": "schemaDefinition",
+export const JsonSchema$inboundSchema: z.ZodType<JsonSchema, unknown> = z
+  .object({
+    name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    schema: z.record(z.string(), z.any()),
+    strict: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "schema": "schemaDefinition",
+    });
   });
-});
 /** @internal */
 export type JsonSchema$Outbound = {
   name: string;
@@ -42,12 +39,11 @@ export type JsonSchema$Outbound = {
 /** @internal */
 export const JsonSchema$outboundSchema: z.ZodType<
   JsonSchema$Outbound,
-  z.ZodTypeDef,
   JsonSchema
 > = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  schemaDefinition: z.record(z.any()),
+  schemaDefinition: z.record(z.string(), z.any()),
   strict: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {

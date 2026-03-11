@@ -3,7 +3,7 @@
  * @generated-id: c9f3ebd2fa9c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   ContentChunk,
   ContentChunk$Outbound,
@@ -13,7 +13,7 @@ import {
 export type UserMessageContent = string | Array<ContentChunk>;
 
 export type UserMessage = {
-  role?: "user" | undefined;
+  role: "user";
   content: string | Array<ContentChunk> | null;
 };
 
@@ -23,7 +23,6 @@ export type UserMessageContent$Outbound = string | Array<ContentChunk$Outbound>;
 /** @internal */
 export const UserMessageContent$outboundSchema: z.ZodType<
   UserMessageContent$Outbound,
-  z.ZodTypeDef,
   UserMessageContent
 > = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
 
@@ -44,10 +43,9 @@ export type UserMessage$Outbound = {
 /** @internal */
 export const UserMessage$outboundSchema: z.ZodType<
   UserMessage$Outbound,
-  z.ZodTypeDef,
   UserMessage
 > = z.object({
-  role: z.literal("user").default("user" as const),
+  role: z.literal("user"),
   content: z.nullable(
     z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),

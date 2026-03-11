@@ -3,7 +3,7 @@
  * @generated-id: acdd588275c9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   AssistantMessage,
@@ -150,7 +150,6 @@ export type ChatCompletionStreamRequestStop$Outbound = string | Array<string>;
 /** @internal */
 export const ChatCompletionStreamRequestStop$outboundSchema: z.ZodType<
   ChatCompletionStreamRequestStop$Outbound,
-  z.ZodTypeDef,
   ChatCompletionStreamRequestStop
 > = z.union([z.string(), z.array(z.string())]);
 
@@ -174,7 +173,6 @@ export type ChatCompletionStreamRequestMessage$Outbound =
 /** @internal */
 export const ChatCompletionStreamRequestMessage$outboundSchema: z.ZodType<
   ChatCompletionStreamRequestMessage$Outbound,
-  z.ZodTypeDef,
   ChatCompletionStreamRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
@@ -203,7 +201,6 @@ export type ChatCompletionStreamRequestToolChoice$Outbound =
 /** @internal */
 export const ChatCompletionStreamRequestToolChoice$outboundSchema: z.ZodType<
   ChatCompletionStreamRequestToolChoice$Outbound,
-  z.ZodTypeDef,
   ChatCompletionStreamRequestToolChoice
 > = z.union([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
 
@@ -248,17 +245,16 @@ export type ChatCompletionStreamRequest$Outbound = {
 /** @internal */
 export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   ChatCompletionStreamRequest$Outbound,
-  z.ZodTypeDef,
   ChatCompletionStreamRequest
 > = z.object({
   model: z.string(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.number().optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
+  maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
-  randomSeed: z.nullable(z.number().int()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  randomSeed: z.nullable(z.int()).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
     z.union([
       AssistantMessage$outboundSchema.and(
@@ -277,7 +273,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   ]).optional(),
   presencePenalty: z.number().optional(),
   frequencyPenalty: z.number().optional(),
-  n: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),

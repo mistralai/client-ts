@@ -3,7 +3,7 @@
  * @generated-id: 1dab54ce95e6
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   FunctionName,
   FunctionName$Outbound,
@@ -31,7 +31,6 @@ export type ToolChoice$Outbound = {
 /** @internal */
 export const ToolChoice$outboundSchema: z.ZodType<
   ToolChoice$Outbound,
-  z.ZodTypeDef,
   ToolChoice
 > = z.object({
   type: ToolTypes$outboundSchema.optional(),

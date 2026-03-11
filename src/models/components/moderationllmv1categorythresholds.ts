@@ -3,7 +3,7 @@
  * @generated-id: a08990f72387
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -24,7 +24,6 @@ export type ModerationLlmv1CategoryThresholds = {
 /** @internal */
 export const ModerationLlmv1CategoryThresholds$inboundSchema: z.ZodType<
   ModerationLlmv1CategoryThresholds,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   sexual: z.nullable(z.number()).optional(),
@@ -59,7 +58,6 @@ export type ModerationLlmv1CategoryThresholds$Outbound = {
 /** @internal */
 export const ModerationLlmv1CategoryThresholds$outboundSchema: z.ZodType<
   ModerationLlmv1CategoryThresholds$Outbound,
-  z.ZodTypeDef,
   ModerationLlmv1CategoryThresholds
 > = z.object({
   sexual: z.nullable(z.number()).optional(),

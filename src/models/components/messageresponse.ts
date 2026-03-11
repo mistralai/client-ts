@@ -3,7 +3,7 @@
  * @generated-id: a7a1ac3ea502
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +15,6 @@ export type MessageResponse = {
 /** @internal */
 export const MessageResponse$inboundSchema: z.ZodType<
   MessageResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   message: z.string(),

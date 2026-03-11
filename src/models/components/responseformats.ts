@@ -3,7 +3,7 @@
  * @generated-id: 8644c3a1bbe0
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -17,12 +17,10 @@ export type ResponseFormats = OpenEnum<typeof ResponseFormats>;
 /** @internal */
 export const ResponseFormats$inboundSchema: z.ZodType<
   ResponseFormats,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(ResponseFormats);
 /** @internal */
 export const ResponseFormats$outboundSchema: z.ZodType<
   string,
-  z.ZodTypeDef,
   ResponseFormats
 > = openEnums.outboundSchema(ResponseFormats);

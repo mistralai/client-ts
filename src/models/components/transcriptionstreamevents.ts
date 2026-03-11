@@ -3,7 +3,7 @@
  * @generated-id: a60397a86def
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
@@ -50,7 +50,6 @@ export type TranscriptionStreamEvents = {
 /** @internal */
 export const TranscriptionStreamEventsData$inboundSchema: z.ZodType<
   TranscriptionStreamEventsData,
-  z.ZodTypeDef,
   unknown
 > = discriminatedUnion("type", {
   ["transcription.done"]: TranscriptionStreamDone$inboundSchema,
@@ -72,7 +71,6 @@ export function transcriptionStreamEventsDataFromJSON(
 /** @internal */
 export const TranscriptionStreamEvents$inboundSchema: z.ZodType<
   TranscriptionStreamEvents,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   event: TranscriptionStreamEventTypes$inboundSchema,
@@ -80,7 +78,11 @@ export const TranscriptionStreamEvents$inboundSchema: z.ZodType<
     try {
       return JSON.parse(v);
     } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+      ctx.addIssue({
+        input: v,
+        code: "custom",
+        message: `malformed json: ${err}`,
+      });
       return z.NEVER;
     }
   }).pipe(discriminatedUnion("type", {

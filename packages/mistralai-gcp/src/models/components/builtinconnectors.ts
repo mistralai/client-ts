@@ -3,7 +3,7 @@
  * @generated-id: d426535f2d54
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const BuiltInConnectors = {
@@ -16,6 +16,6 @@ export const BuiltInConnectors = {
 export type BuiltInConnectors = ClosedEnum<typeof BuiltInConnectors>;
 
 /** @internal */
-export const BuiltInConnectors$outboundSchema: z.ZodNativeEnum<
+export const BuiltInConnectors$outboundSchema: z.ZodEnum<
   typeof BuiltInConnectors
-> = z.nativeEnum(BuiltInConnectors);
+> = z.enum(BuiltInConnectors);

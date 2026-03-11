@@ -3,7 +3,7 @@
  * @generated-id: 1fb007bbcb9c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,20 +16,18 @@ export type FunctionCall = {
 };
 
 /** @internal */
-export const Arguments$inboundSchema: z.ZodType<
-  Arguments,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.record(z.any()), z.string()]);
+export const Arguments$inboundSchema: z.ZodType<Arguments, unknown> = z.union([
+  z.record(z.string(), z.any()),
+  z.string(),
+]);
 /** @internal */
 export type Arguments$Outbound = { [k: string]: any } | string;
 
 /** @internal */
 export const Arguments$outboundSchema: z.ZodType<
   Arguments$Outbound,
-  z.ZodTypeDef,
   Arguments
-> = z.union([z.record(z.any()), z.string()]);
+> = z.union([z.record(z.string(), z.any()), z.string()]);
 
 export function argumentsToJSON(value: Arguments): string {
   return JSON.stringify(Arguments$outboundSchema.parse(value));
@@ -45,14 +43,11 @@ export function argumentsFromJSON(
 }
 
 /** @internal */
-export const FunctionCall$inboundSchema: z.ZodType<
-  FunctionCall,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  arguments: z.union([z.record(z.any()), z.string()]),
-});
+export const FunctionCall$inboundSchema: z.ZodType<FunctionCall, unknown> = z
+  .object({
+    name: z.string(),
+    arguments: z.union([z.record(z.string(), z.any()), z.string()]),
+  });
 /** @internal */
 export type FunctionCall$Outbound = {
   name: string;
@@ -62,11 +57,10 @@ export type FunctionCall$Outbound = {
 /** @internal */
 export const FunctionCall$outboundSchema: z.ZodType<
   FunctionCall$Outbound,
-  z.ZodTypeDef,
   FunctionCall
 > = z.object({
   name: z.string(),
-  arguments: z.union([z.record(z.any()), z.string()]),
+  arguments: z.union([z.record(z.string(), z.any()), z.string()]),
 });
 
 export function functionCallToJSON(functionCall: FunctionCall): string {

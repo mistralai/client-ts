@@ -3,7 +3,7 @@
  * @generated-id: 04b18303ac7f
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -18,12 +18,11 @@ export type ListBatchJobsResponse = {
 /** @internal */
 export const ListBatchJobsResponse$inboundSchema: z.ZodType<
   ListBatchJobsResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.array(BatchJob$inboundSchema).optional(),
   object: z.literal("list").default("list"),
-  total: z.number().int(),
+  total: z.int(),
 });
 
 export function listBatchJobsResponseFromJSON(

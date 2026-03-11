@@ -3,7 +3,7 @@
  * @generated-id: 3fa59bfbd646
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,25 +18,22 @@ export type PaginationInfo = {
 };
 
 /** @internal */
-export const PaginationInfo$inboundSchema: z.ZodType<
-  PaginationInfo,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_items: z.number().int(),
-  total_pages: z.number().int(),
-  current_page: z.number().int(),
-  page_size: z.number().int(),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_items": "totalItems",
-    "total_pages": "totalPages",
-    "current_page": "currentPage",
-    "page_size": "pageSize",
-    "has_more": "hasMore",
+export const PaginationInfo$inboundSchema: z.ZodType<PaginationInfo, unknown> =
+  z.object({
+    total_items: z.int(),
+    total_pages: z.int(),
+    current_page: z.int(),
+    page_size: z.int(),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_items": "totalItems",
+      "total_pages": "totalPages",
+      "current_page": "currentPage",
+      "page_size": "pageSize",
+      "has_more": "hasMore",
+    });
   });
-});
 
 export function paginationInfoFromJSON(
   jsonString: string,

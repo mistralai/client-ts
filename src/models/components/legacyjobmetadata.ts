@@ -3,7 +3,7 @@
  * @generated-id: 5f002d72d43c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,20 +51,19 @@ export type LegacyJobMetadata = {
 /** @internal */
 export const LegacyJobMetadata$inboundSchema: z.ZodType<
   LegacyJobMetadata,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  expected_duration_seconds: z.nullable(z.number().int()).optional(),
+  expected_duration_seconds: z.nullable(z.int()).optional(),
   cost: z.nullable(z.number()).optional(),
   cost_currency: z.nullable(z.string()).optional(),
-  train_tokens_per_step: z.nullable(z.number().int()).optional(),
-  train_tokens: z.nullable(z.number().int()).optional(),
-  data_tokens: z.nullable(z.number().int()).optional(),
-  estimated_start_time: z.nullable(z.number().int()).optional(),
+  train_tokens_per_step: z.nullable(z.int()).optional(),
+  train_tokens: z.nullable(z.int()).optional(),
+  data_tokens: z.nullable(z.int()).optional(),
+  estimated_start_time: z.nullable(z.int()).optional(),
   deprecated: z.boolean().default(true),
   details: z.string(),
   epochs: z.nullable(z.number()).optional(),
-  training_steps: z.nullable(z.number().int()).optional(),
+  training_steps: z.nullable(z.int()).optional(),
   object: z.literal("job.metadata").default("job.metadata"),
 }).transform((v) => {
   return remap$(v, {

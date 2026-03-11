@@ -3,7 +3,7 @@
  * @generated-id: ffede4b56be3
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -14,8 +14,5 @@ export const ShareEnum = {
 export type ShareEnum = OpenEnum<typeof ShareEnum>;
 
 /** @internal */
-export const ShareEnum$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  ShareEnum
-> = openEnums.outboundSchema(ShareEnum);
+export const ShareEnum$outboundSchema: z.ZodType<string, ShareEnum> = openEnums
+  .outboundSchema(ShareEnum);

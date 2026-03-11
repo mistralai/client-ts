@@ -3,7 +3,7 @@
  * @generated-id: 933b5afb37b5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -23,7 +23,6 @@ export type ConnectorCallToolV1Request$Outbound = {
 /** @internal */
 export const ConnectorCallToolV1Request$outboundSchema: z.ZodType<
   ConnectorCallToolV1Request$Outbound,
-  z.ZodTypeDef,
   ConnectorCallToolV1Request
 > = z.object({
   toolName: z.string(),

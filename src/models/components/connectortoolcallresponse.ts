@@ -3,7 +3,7 @@
  * @generated-id: 30a0bf3d72fd
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
@@ -57,7 +57,6 @@ export type ConnectorToolCallResponse = {
 /** @internal */
 export const ConnectorToolCallResponseContent$inboundSchema: z.ZodType<
   ConnectorToolCallResponseContent,
-  z.ZodTypeDef,
   unknown
 > = discriminatedUnion("type", {
   text: TextContent$inboundSchema,
@@ -80,7 +79,6 @@ export function connectorToolCallResponseContentFromJSON(
 /** @internal */
 export const ConnectorToolCallResponse$inboundSchema: z.ZodType<
   ConnectorToolCallResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   content: z.array(discriminatedUnion("type", {

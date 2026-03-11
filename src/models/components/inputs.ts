@@ -3,7 +3,7 @@
  * @generated-id: 72438d323c53
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   InstructRequest,
   InstructRequest$Outbound,
@@ -21,14 +21,11 @@ export type Inputs$Outbound =
   | Array<InstructRequest$Outbound>;
 
 /** @internal */
-export const Inputs$outboundSchema: z.ZodType<
-  Inputs$Outbound,
-  z.ZodTypeDef,
-  Inputs
-> = z.union([
-  InstructRequest$outboundSchema,
-  z.array(InstructRequest$outboundSchema),
-]);
+export const Inputs$outboundSchema: z.ZodType<Inputs$Outbound, Inputs> = z
+  .union([
+    InstructRequest$outboundSchema,
+    z.array(InstructRequest$outboundSchema),
+  ]);
 
 export function inputsToJSON(inputs: Inputs): string {
   return JSON.stringify(Inputs$outboundSchema.parse(inputs));

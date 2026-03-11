@@ -3,7 +3,7 @@
  * @generated-id: 7ef605ec81a5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
@@ -64,8 +64,9 @@ export type ConversationRestartRequest = {
 
 /** @internal */
 export const ConversationRestartRequestHandoffExecution$outboundSchema:
-  z.ZodNativeEnum<typeof ConversationRestartRequestHandoffExecution> = z
-    .nativeEnum(ConversationRestartRequestHandoffExecution);
+  z.ZodEnum<typeof ConversationRestartRequestHandoffExecution> = z.enum(
+    ConversationRestartRequestHandoffExecution,
+  );
 
 /** @internal */
 export type ConversationRestartRequestAgentVersion$Outbound = string | number;
@@ -73,9 +74,8 @@ export type ConversationRestartRequestAgentVersion$Outbound = string | number;
 /** @internal */
 export const ConversationRestartRequestAgentVersion$outboundSchema: z.ZodType<
   ConversationRestartRequestAgentVersion$Outbound,
-  z.ZodTypeDef,
   ConversationRestartRequestAgentVersion
-> = z.union([z.string(), z.number().int()]);
+> = z.union([z.string(), z.int()]);
 
 export function conversationRestartRequestAgentVersionToJSON(
   conversationRestartRequestAgentVersion:
@@ -104,7 +104,6 @@ export type ConversationRestartRequest$Outbound = {
 /** @internal */
 export const ConversationRestartRequest$outboundSchema: z.ZodType<
   ConversationRestartRequest$Outbound,
-  z.ZodTypeDef,
   ConversationRestartRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema.optional(),
@@ -114,9 +113,9 @@ export const ConversationRestartRequest$outboundSchema: z.ZodType<
     .default("server"),
   completionArgs: CompletionArgs$outboundSchema.optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   fromEntryId: z.string(),
-  agentVersion: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  agentVersion: z.nullable(z.union([z.string(), z.int()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",

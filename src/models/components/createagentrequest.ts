@@ -3,7 +3,7 @@
  * @generated-id: ca59b7d3ab77
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   CodeInterpreterTool,
@@ -97,7 +97,6 @@ export type CreateAgentRequestTool$Outbound =
 /** @internal */
 export const CreateAgentRequestTool$outboundSchema: z.ZodType<
   CreateAgentRequestTool$Outbound,
-  z.ZodTypeDef,
   CreateAgentRequestTool
 > = z.union([
   CodeInterpreterTool$outboundSchema,
@@ -142,7 +141,6 @@ export type CreateAgentRequest$Outbound = {
 /** @internal */
 export const CreateAgentRequest$outboundSchema: z.ZodType<
   CreateAgentRequest$Outbound,
-  z.ZodTypeDef,
   CreateAgentRequest
 > = z.object({
   instructions: z.nullable(z.string()).optional(),
@@ -162,7 +160,7 @@ export const CreateAgentRequest$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   versionMessage: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

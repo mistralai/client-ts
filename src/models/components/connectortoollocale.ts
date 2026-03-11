@@ -3,7 +3,7 @@
  * @generated-id: e8e76918ae8f
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,12 +18,11 @@ export type ConnectorToolLocale = {
 /** @internal */
 export const ConnectorToolLocale$inboundSchema: z.ZodType<
   ConnectorToolLocale,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.record(z.string()),
-  description: z.record(z.string()),
-  usage_sentence: z.record(z.string()),
+  name: z.record(z.string(), z.string()),
+  description: z.record(z.string(), z.string()),
+  usage_sentence: z.record(z.string(), z.string()),
 }).transform((v) => {
   return remap$(v, {
     "usage_sentence": "usageSentence",

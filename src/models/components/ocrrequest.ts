@@ -3,7 +3,7 @@
  * @generated-id: 0154047eeec4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
@@ -87,7 +87,6 @@ export type DocumentUnion$Outbound =
 /** @internal */
 export const DocumentUnion$outboundSchema: z.ZodType<
   DocumentUnion$Outbound,
-  z.ZodTypeDef,
   DocumentUnion
 > = z.union([
   FileChunk$outboundSchema,
@@ -100,8 +99,9 @@ export function documentUnionToJSON(documentUnion: DocumentUnion): string {
 }
 
 /** @internal */
-export const TableFormat$outboundSchema: z.ZodNativeEnum<typeof TableFormat> = z
-  .nativeEnum(TableFormat);
+export const TableFormat$outboundSchema: z.ZodEnum<typeof TableFormat> = z.enum(
+  TableFormat,
+);
 
 /** @internal */
 export type OCRRequest$Outbound = {
@@ -126,7 +126,6 @@ export type OCRRequest$Outbound = {
 /** @internal */
 export const OCRRequest$outboundSchema: z.ZodType<
   OCRRequest$Outbound,
-  z.ZodTypeDef,
   OCRRequest
 > = z.object({
   model: z.nullable(z.string()),
@@ -136,10 +135,10 @@ export const OCRRequest$outboundSchema: z.ZodType<
     DocumentURLChunk$outboundSchema,
     ImageURLChunk$outboundSchema,
   ]),
-  pages: z.nullable(z.array(z.number().int())).optional(),
+  pages: z.nullable(z.array(z.int())).optional(),
   includeImageBase64: z.nullable(z.boolean()).optional(),
-  imageLimit: z.nullable(z.number().int()).optional(),
-  imageMinSize: z.nullable(z.number().int()).optional(),
+  imageLimit: z.nullable(z.int()).optional(),
+  imageMinSize: z.nullable(z.int()).optional(),
   bboxAnnotationFormat: z.nullable(ResponseFormat$outboundSchema).optional(),
   documentAnnotationFormat: z.nullable(ResponseFormat$outboundSchema)
     .optional(),

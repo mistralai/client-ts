@@ -3,7 +3,7 @@
  * @generated-id: 70980f9e4212
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -34,12 +34,11 @@ export type CompletionFineTunedModel = {
 /** @internal */
 export const CompletionFineTunedModel$inboundSchema: z.ZodType<
   CompletionFineTunedModel,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   object: z.literal("model").default("model"),
-  created: z.number().int(),
+  created: z.int(),
   owned_by: z.string(),
   workspace_id: z.string(),
   root: z.string(),
@@ -48,7 +47,7 @@ export const CompletionFineTunedModel$inboundSchema: z.ZodType<
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   capabilities: FineTunedModelCapabilities$inboundSchema,
-  max_context_length: z.number().int().default(32768),
+  max_context_length: z.int().default(32768),
   aliases: z.array(z.string()).optional(),
   job: z.string(),
   model_type: z.literal("completion"),

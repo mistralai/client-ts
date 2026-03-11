@@ -3,7 +3,7 @@
  * @generated-id: d915fc1978d1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -33,26 +33,23 @@ export type ResourceLink = {
 };
 
 /** @internal */
-export const ResourceLink$inboundSchema: z.ZodType<
-  ResourceLink,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  title: z.nullable(z.string()).optional(),
-  uri: z.string(),
-  description: z.nullable(z.string()).optional(),
-  mimeType: z.nullable(z.string()).optional(),
-  size: z.nullable(z.number().int()).optional(),
-  icons: z.nullable(z.array(MCPServerIcon$inboundSchema)).optional(),
-  annotations: z.nullable(Annotations$inboundSchema).optional(),
-  _meta: z.nullable(z.record(z.any())).optional(),
-  type: z.literal("resource_link"),
-}).catchall(z.any()).transform((v) => {
-  return remap$(v, {
-    "_meta": "meta",
+export const ResourceLink$inboundSchema: z.ZodType<ResourceLink, unknown> = z
+  .object({
+    name: z.string(),
+    title: z.nullable(z.string()).optional(),
+    uri: z.string(),
+    description: z.nullable(z.string()).optional(),
+    mimeType: z.nullable(z.string()).optional(),
+    size: z.nullable(z.int()).optional(),
+    icons: z.nullable(z.array(MCPServerIcon$inboundSchema)).optional(),
+    annotations: z.nullable(Annotations$inboundSchema).optional(),
+    _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+    type: z.literal("resource_link"),
+  }).catchall(z.any()).transform((v) => {
+    return remap$(v, {
+      "_meta": "meta",
+    });
   });
-});
 
 export function resourceLinkFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  * @generated-id: c88ac13bb48c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   AssistantMessage,
@@ -129,7 +129,6 @@ export type AgentsCompletionRequestStop$Outbound = string | Array<string>;
 /** @internal */
 export const AgentsCompletionRequestStop$outboundSchema: z.ZodType<
   AgentsCompletionRequestStop$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionRequestStop
 > = z.union([z.string(), z.array(z.string())]);
 
@@ -153,7 +152,6 @@ export type AgentsCompletionRequestMessage$Outbound =
 /** @internal */
 export const AgentsCompletionRequestMessage$outboundSchema: z.ZodType<
   AgentsCompletionRequestMessage$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
@@ -182,7 +180,6 @@ export type AgentsCompletionRequestToolChoice$Outbound =
 /** @internal */
 export const AgentsCompletionRequestToolChoice$outboundSchema: z.ZodType<
   AgentsCompletionRequestToolChoice$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionRequestToolChoice
 > = z.union([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
 
@@ -224,14 +221,13 @@ export type AgentsCompletionRequest$Outbound = {
 /** @internal */
 export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   AgentsCompletionRequest$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionRequest
 > = z.object({
-  maxTokens: z.nullable(z.number().int()).optional(),
+  maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(false),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
-  randomSeed: z.nullable(z.number().int()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  randomSeed: z.nullable(z.int()).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
     z.union([
       AssistantMessage$outboundSchema.and(
@@ -250,7 +246,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   ]).optional(),
   presencePenalty: z.number().optional(),
   frequencyPenalty: z.number().optional(),
-  n: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),

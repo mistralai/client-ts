@@ -3,7 +3,7 @@
  * @generated-id: 9a45caf93b40
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,7 +17,6 @@ export type ArchiveModelResponse = {
 /** @internal */
 export const ArchiveModelResponse$inboundSchema: z.ZodType<
   ArchiveModelResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),

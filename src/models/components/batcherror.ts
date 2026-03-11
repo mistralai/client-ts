@@ -3,7 +3,7 @@
  * @generated-id: ffe93fb903c6
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,14 +14,11 @@ export type BatchError = {
 };
 
 /** @internal */
-export const BatchError$inboundSchema: z.ZodType<
-  BatchError,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  message: z.string(),
-  count: z.number().int().default(1),
-});
+export const BatchError$inboundSchema: z.ZodType<BatchError, unknown> = z
+  .object({
+    message: z.string(),
+    count: z.int().default(1),
+  });
 
 export function batchErrorFromJSON(
   jsonString: string,

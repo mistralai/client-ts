@@ -3,7 +3,7 @@
  * @generated-id: 929931dd41e5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +15,6 @@ export type GetSignedUrlResponse = {
 /** @internal */
 export const GetSignedUrlResponse$inboundSchema: z.ZodType<
   GetSignedUrlResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   url: z.string(),

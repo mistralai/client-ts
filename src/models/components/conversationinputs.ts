@@ -3,7 +3,7 @@
  * @generated-id: 1675dd5a2561
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   InputEntries,
   InputEntries$Outbound,
@@ -18,7 +18,6 @@ export type ConversationInputs$Outbound = string | Array<InputEntries$Outbound>;
 /** @internal */
 export const ConversationInputs$outboundSchema: z.ZodType<
   ConversationInputs$Outbound,
-  z.ZodTypeDef,
   ConversationInputs
 > = z.union([z.string(), z.array(InputEntries$outboundSchema)]);
 

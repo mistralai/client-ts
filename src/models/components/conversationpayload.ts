@@ -3,7 +3,7 @@
  * @generated-id: 0f59cbc8426c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,10 +16,9 @@ export type ConversationPayload = {
 /** @internal */
 export const ConversationPayload$inboundSchema: z.ZodType<
   ConversationPayload,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  messages: z.array(z.record(z.any())),
+  messages: z.array(z.record(z.string(), z.any())),
 }).catchall(z.any());
 /** @internal */
 export type ConversationPayload$Outbound = {
@@ -30,10 +29,9 @@ export type ConversationPayload$Outbound = {
 /** @internal */
 export const ConversationPayload$outboundSchema: z.ZodType<
   ConversationPayload$Outbound,
-  z.ZodTypeDef,
   ConversationPayload
 > = z.object({
-  messages: z.array(z.record(z.any())),
+  messages: z.array(z.record(z.string(), z.any())),
 }).catchall(z.any());
 
 export function conversationPayloadToJSON(

@@ -3,7 +3,7 @@
  * @generated-id: 78813af5cee2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type FileChunk = {
@@ -20,7 +20,6 @@ export type FileChunk$Outbound = {
 /** @internal */
 export const FileChunk$outboundSchema: z.ZodType<
   FileChunk$Outbound,
-  z.ZodTypeDef,
   FileChunk
 > = z.object({
   type: z.literal("file").default("file" as const),

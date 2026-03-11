@@ -3,7 +3,7 @@
  * @generated-id: 51eb4edd91c9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ImportDatasetFromCampaignRequest = {
@@ -18,7 +18,6 @@ export type ImportDatasetFromCampaignRequest$Outbound = {
 /** @internal */
 export const ImportDatasetFromCampaignRequest$outboundSchema: z.ZodType<
   ImportDatasetFromCampaignRequest$Outbound,
-  z.ZodTypeDef,
   ImportDatasetFromCampaignRequest
 > = z.object({
   campaignId: z.string(),

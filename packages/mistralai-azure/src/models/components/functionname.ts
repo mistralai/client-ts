@@ -3,7 +3,7 @@
  * @generated-id: 22b5bbd2cfb9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 /**
  * this restriction of `Function` is used to select a specific function to call
@@ -20,7 +20,6 @@ export type FunctionName$Outbound = {
 /** @internal */
 export const FunctionName$outboundSchema: z.ZodType<
   FunctionName$Outbound,
-  z.ZodTypeDef,
   FunctionName
 > = z.object({
   name: z.string(),

@@ -3,7 +3,7 @@
  * @generated-id: 6a03acd8a711
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -23,7 +23,6 @@ export type CodeInterpreterTool = {
 /** @internal */
 export const CodeInterpreterTool$inboundSchema: z.ZodType<
   CodeInterpreterTool,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
@@ -42,7 +41,6 @@ export type CodeInterpreterTool$Outbound = {
 /** @internal */
 export const CodeInterpreterTool$outboundSchema: z.ZodType<
   CodeInterpreterTool$Outbound,
-  z.ZodTypeDef,
   CodeInterpreterTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),

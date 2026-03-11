@@ -3,7 +3,7 @@
  * @generated-id: 36834e0e0bfa
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
@@ -87,18 +87,15 @@ export type Agent = {
 };
 
 /** @internal */
-export const AgentTool$inboundSchema: z.ZodType<
-  AgentTool,
-  z.ZodTypeDef,
-  unknown
-> = discriminatedUnion("type", {
-  code_interpreter: CodeInterpreterTool$inboundSchema,
-  document_library: DocumentLibraryTool$inboundSchema,
-  function: FunctionTool$inboundSchema,
-  image_generation: ImageGenerationTool$inboundSchema,
-  web_search: WebSearchTool$inboundSchema,
-  web_search_premium: WebSearchPremiumTool$inboundSchema,
-});
+export const AgentTool$inboundSchema: z.ZodType<AgentTool, unknown> =
+  discriminatedUnion("type", {
+    code_interpreter: CodeInterpreterTool$inboundSchema,
+    document_library: DocumentLibraryTool$inboundSchema,
+    function: FunctionTool$inboundSchema,
+    image_generation: ImageGenerationTool$inboundSchema,
+    web_search: WebSearchTool$inboundSchema,
+    web_search_premium: WebSearchPremiumTool$inboundSchema,
+  });
 
 export function agentToolFromJSON(
   jsonString: string,
@@ -111,46 +108,41 @@ export function agentToolFromJSON(
 }
 
 /** @internal */
-export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
-  .object({
-    instructions: z.nullable(z.string()).optional(),
-    tools: z.array(discriminatedUnion("type", {
-      code_interpreter: CodeInterpreterTool$inboundSchema,
-      document_library: DocumentLibraryTool$inboundSchema,
-      function: FunctionTool$inboundSchema,
-      image_generation: ImageGenerationTool$inboundSchema,
-      web_search: WebSearchTool$inboundSchema,
-      web_search_premium: WebSearchPremiumTool$inboundSchema,
-    })).optional(),
-    completion_args: CompletionArgs$inboundSchema.optional(),
-    guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),
-    model: z.string(),
-    name: z.string(),
-    description: z.nullable(z.string()).optional(),
-    handoffs: z.nullable(z.array(z.string())).optional(),
-    metadata: z.nullable(z.record(z.any())).optional(),
-    object: z.literal("agent").default("agent"),
-    id: z.string(),
-    version: z.number().int(),
-    versions: z.array(z.number().int()),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    deployment_chat: z.boolean(),
-    source: z.string(),
-    version_message: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "completion_args": "completionArgs",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "deployment_chat": "deploymentChat",
-      "version_message": "versionMessage",
-    });
+export const Agent$inboundSchema: z.ZodType<Agent, unknown> = z.object({
+  instructions: z.nullable(z.string()).optional(),
+  tools: z.array(discriminatedUnion("type", {
+    code_interpreter: CodeInterpreterTool$inboundSchema,
+    document_library: DocumentLibraryTool$inboundSchema,
+    function: FunctionTool$inboundSchema,
+    image_generation: ImageGenerationTool$inboundSchema,
+    web_search: WebSearchTool$inboundSchema,
+    web_search_premium: WebSearchPremiumTool$inboundSchema,
+  })).optional(),
+  completion_args: CompletionArgs$inboundSchema.optional(),
+  guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),
+  model: z.string(),
+  name: z.string(),
+  description: z.nullable(z.string()).optional(),
+  handoffs: z.nullable(z.array(z.string())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
+  object: z.literal("agent").default("agent"),
+  id: z.string(),
+  version: z.int(),
+  versions: z.array(z.int()),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  deployment_chat: z.boolean(),
+  source: z.string(),
+  version_message: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "completion_args": "completionArgs",
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+    "deployment_chat": "deploymentChat",
+    "version_message": "versionMessage",
   });
+});
 
 export function agentFromJSON(
   jsonString: string,

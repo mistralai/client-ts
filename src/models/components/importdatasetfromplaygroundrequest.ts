@@ -3,7 +3,7 @@
  * @generated-id: 7f01842972c6
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ImportDatasetFromPlaygroundRequest = {
@@ -18,7 +18,6 @@ export type ImportDatasetFromPlaygroundRequest$Outbound = {
 /** @internal */
 export const ImportDatasetFromPlaygroundRequest$outboundSchema: z.ZodType<
   ImportDatasetFromPlaygroundRequest$Outbound,
-  z.ZodTypeDef,
   ImportDatasetFromPlaygroundRequest
 > = z.object({
   conversationIds: z.array(z.string()),

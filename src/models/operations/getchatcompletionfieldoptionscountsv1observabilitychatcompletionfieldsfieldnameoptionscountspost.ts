@@ -3,7 +3,7 @@
  * @generated-id: 03e668836217
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -25,7 +25,6 @@ export type GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFiel
 export const GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest$outboundSchema:
   z.ZodType<
     GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest$Outbound,
-    z.ZodTypeDef,
     GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest
   > = z.object({
     fieldName: z.string(),

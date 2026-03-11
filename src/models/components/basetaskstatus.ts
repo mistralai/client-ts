@@ -3,7 +3,7 @@
  * @generated-id: 6f811821efbc
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -20,8 +20,5 @@ export const BaseTaskStatus = {
 export type BaseTaskStatus = OpenEnum<typeof BaseTaskStatus>;
 
 /** @internal */
-export const BaseTaskStatus$inboundSchema: z.ZodType<
-  BaseTaskStatus,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(BaseTaskStatus);
+export const BaseTaskStatus$inboundSchema: z.ZodType<BaseTaskStatus, unknown> =
+  openEnums.inboundSchema(BaseTaskStatus);

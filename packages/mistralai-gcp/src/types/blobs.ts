@@ -3,14 +3,15 @@
  * @generated-id: 443506f44eea
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
-export const blobLikeSchema: z.ZodType<Blob, z.ZodTypeDef, Blob> = z.custom<
-  Blob
->(isBlobLike, {
-  message: "expected a Blob, File or Blob-like object",
-  fatal: true,
-});
+export const blobLikeSchema: z.ZodType<Blob, Blob> = z.custom<Blob>(
+  isBlobLike,
+  {
+    message: "expected a Blob, File or Blob-like object",
+    abort: true,
+  },
+);
 
 export function isBlobLike(val: unknown): val is Blob {
   if (val instanceof Blob) {

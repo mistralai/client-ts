@@ -3,7 +3,7 @@
  * @generated-id: 614511816d9b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -20,6 +20,5 @@ export type TranscriptionStreamEventTypes = OpenEnum<
 /** @internal */
 export const TranscriptionStreamEventTypes$inboundSchema: z.ZodType<
   TranscriptionStreamEventTypes,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(TranscriptionStreamEventTypes);

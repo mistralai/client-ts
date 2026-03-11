@@ -3,7 +3,7 @@
  * @generated-id: 59852ff02bbe
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -13,14 +13,8 @@ export const ToolTypes = {
 export type ToolTypes = OpenEnum<typeof ToolTypes>;
 
 /** @internal */
-export const ToolTypes$inboundSchema: z.ZodType<
-  ToolTypes,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(ToolTypes);
+export const ToolTypes$inboundSchema: z.ZodType<ToolTypes, unknown> = openEnums
+  .inboundSchema(ToolTypes);
 /** @internal */
-export const ToolTypes$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  ToolTypes
-> = openEnums.outboundSchema(ToolTypes);
+export const ToolTypes$outboundSchema: z.ZodType<string, ToolTypes> = openEnums
+  .outboundSchema(ToolTypes);

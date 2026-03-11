@@ -3,7 +3,7 @@
  * @generated-id: 06c32b85d8c1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -58,15 +58,14 @@ export type ConversationHistory = {
 };
 
 /** @internal */
-export const Entry$inboundSchema: z.ZodType<Entry, z.ZodTypeDef, unknown> = z
-  .union([
-    AgentHandoffEntry$inboundSchema,
-    FunctionCallEntry$inboundSchema,
-    MessageInputEntry$inboundSchema,
-    FunctionResultEntry$inboundSchema,
-    ToolExecutionEntry$inboundSchema,
-    MessageOutputEntry$inboundSchema,
-  ]);
+export const Entry$inboundSchema: z.ZodType<Entry, unknown> = z.union([
+  AgentHandoffEntry$inboundSchema,
+  FunctionCallEntry$inboundSchema,
+  MessageInputEntry$inboundSchema,
+  FunctionResultEntry$inboundSchema,
+  ToolExecutionEntry$inboundSchema,
+  MessageOutputEntry$inboundSchema,
+]);
 
 export function entryFromJSON(
   jsonString: string,
@@ -81,7 +80,6 @@ export function entryFromJSON(
 /** @internal */
 export const ConversationHistory$inboundSchema: z.ZodType<
   ConversationHistory,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("conversation.history").default("conversation.history"),

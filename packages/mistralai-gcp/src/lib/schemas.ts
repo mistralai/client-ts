@@ -3,14 +3,7 @@
  * @generated-id: d99fed8ffff5
  */
 
-import {
-  output,
-  ZodEffects,
-  ZodError,
-  ZodObject,
-  ZodRawShape,
-  ZodTypeAny,
-} from "zod/v3";
+import * as z from "zod/v4";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { ERR, OK, Result } from "../types/fp.js";
 
@@ -27,7 +20,7 @@ export function parse<Inp, Out>(
   try {
     return fn(rawValue);
   } catch (err) {
-    if (err instanceof ZodError) {
+    if (err instanceof z.ZodError) {
       throw new SDKValidationError(errorMessage, err, rawValue);
     }
     throw err;
@@ -52,22 +45,29 @@ export function safeParse<Inp, Out>(
 }
 
 export function collectExtraKeys<
-  Shape extends ZodRawShape,
-  Catchall extends ZodTypeAny,
+  Shape extends z.ZodRawShape,
+  Catchall extends z.ZodType,
   K extends string,
+  Optional extends boolean,
 >(
-  obj: ZodObject<Shape, "strip", Catchall>,
+  obj: z.ZodObject<Shape, z.core.$catchall<Catchall>>,
   extrasKey: K,
-  optional: boolean,
-): ZodEffects<
-  typeof obj,
-  & output<ZodObject<Shape, "strict">>
-  & {
-    [k in K]: Record<string, output<Catchall>>;
-  }
+  optional: Optional,
+): z.ZodPipe<
+  z.ZodObject<Shape, z.core.$catchall<Catchall>>,
+  z.ZodTransform<
+    & z.output<z.ZodObject<Shape, z.core.$strip>>
+    & (Optional extends false ? {
+        [k in K]: Record<string, z.output<Catchall>>;
+      }
+      : {
+        [k in K]?: Record<string, z.output<Catchall>> | undefined;
+      }),
+    z.output<z.ZodObject<Shape, z.core.$catchall<Catchall>>>
+  >
 > {
-  return obj.transform((val) => {
-    const extras: Record<string, output<Catchall>> = {};
+  return obj.transform((val: any) => {
+    const extras: Record<string, z.output<Catchall>> = {};
     const { shape } = obj;
     for (const [key] of Object.entries(val)) {
       if (key in shape) {

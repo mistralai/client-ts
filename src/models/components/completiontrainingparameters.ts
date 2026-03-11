@@ -3,7 +3,7 @@
  * @generated-id: 62e15865e018
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -22,15 +22,14 @@ export type CompletionTrainingParameters = {
 /** @internal */
 export const CompletionTrainingParameters$inboundSchema: z.ZodType<
   CompletionTrainingParameters,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  training_steps: z.nullable(z.number().int()).optional(),
+  training_steps: z.nullable(z.int()).optional(),
   learning_rate: z.number().default(0.0001),
   weight_decay: z.nullable(z.number()).optional(),
   warmup_fraction: z.nullable(z.number()).optional(),
   epochs: z.nullable(z.number()).optional(),
-  seq_len: z.nullable(z.number().int()).optional(),
+  seq_len: z.nullable(z.int()).optional(),
   fim_ratio: z.nullable(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -56,15 +55,14 @@ export type CompletionTrainingParameters$Outbound = {
 /** @internal */
 export const CompletionTrainingParameters$outboundSchema: z.ZodType<
   CompletionTrainingParameters$Outbound,
-  z.ZodTypeDef,
   CompletionTrainingParameters
 > = z.object({
-  trainingSteps: z.nullable(z.number().int()).optional(),
+  trainingSteps: z.nullable(z.int()).optional(),
   learningRate: z.number().default(0.0001),
   weightDecay: z.nullable(z.number()).optional(),
   warmupFraction: z.nullable(z.number()).optional(),
   epochs: z.nullable(z.number()).optional(),
-  seqLen: z.nullable(z.number().int()).optional(),
+  seqLen: z.nullable(z.int()).optional(),
   fimRatio: z.nullable(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -3,7 +3,7 @@
  * @generated-id: 755e6d09b372
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -18,12 +18,10 @@ export type ResourceVisibility = OpenEnum<typeof ResourceVisibility>;
 /** @internal */
 export const ResourceVisibility$inboundSchema: z.ZodType<
   ResourceVisibility,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(ResourceVisibility);
 /** @internal */
 export const ResourceVisibility$outboundSchema: z.ZodType<
   string,
-  z.ZodTypeDef,
   ResourceVisibility
 > = openEnums.outboundSchema(ResourceVisibility);

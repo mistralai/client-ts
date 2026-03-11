@@ -3,7 +3,7 @@
  * @generated-id: 31df582c9c7a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,7 +17,6 @@ export type TranscriptionStreamTextDelta = {
 /** @internal */
 export const TranscriptionStreamTextDelta$inboundSchema: z.ZodType<
   TranscriptionStreamTextDelta,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("transcription.text.delta"),
@@ -33,7 +32,6 @@ export type TranscriptionStreamTextDelta$Outbound = {
 /** @internal */
 export const TranscriptionStreamTextDelta$outboundSchema: z.ZodType<
   TranscriptionStreamTextDelta$Outbound,
-  z.ZodTypeDef,
   TranscriptionStreamTextDelta
 > = z.object({
   type: z.literal("transcription.text.delta"),

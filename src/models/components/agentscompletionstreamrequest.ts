@@ -3,7 +3,7 @@
  * @generated-id: 28ea4b4db277
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   AssistantMessage,
@@ -128,7 +128,6 @@ export type AgentsCompletionStreamRequestStop$Outbound = string | Array<string>;
 /** @internal */
 export const AgentsCompletionStreamRequestStop$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequestStop$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionStreamRequestStop
 > = z.union([z.string(), z.array(z.string())]);
 
@@ -152,7 +151,6 @@ export type AgentsCompletionStreamRequestMessage$Outbound =
 /** @internal */
 export const AgentsCompletionStreamRequestMessage$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequestMessage$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionStreamRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
@@ -181,7 +179,6 @@ export type AgentsCompletionStreamRequestToolChoice$Outbound =
 /** @internal */
 export const AgentsCompletionStreamRequestToolChoice$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequestToolChoice$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionStreamRequestToolChoice
 > = z.union([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
 
@@ -224,14 +221,13 @@ export type AgentsCompletionStreamRequest$Outbound = {
 /** @internal */
 export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequest$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionStreamRequest
 > = z.object({
-  maxTokens: z.nullable(z.number().int()).optional(),
+  maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
-  randomSeed: z.nullable(z.number().int()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  randomSeed: z.nullable(z.int()).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
     z.union([
       AssistantMessage$outboundSchema.and(
@@ -250,7 +246,7 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
   ]).optional(),
   presencePenalty: z.number().optional(),
   frequencyPenalty: z.number().optional(),
-  n: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),

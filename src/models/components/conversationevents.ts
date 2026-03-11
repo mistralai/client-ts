@@ -3,7 +3,7 @@
  * @generated-id: e5810d7dbeb9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
@@ -86,7 +86,6 @@ export type ConversationEvents = {
 /** @internal */
 export const ConversationEventsData$inboundSchema: z.ZodType<
   ConversationEventsData,
-  z.ZodTypeDef,
   unknown
 > = discriminatedUnion("type", {
   ["agent.handoff.done"]: AgentHandoffDoneEvent$inboundSchema,
@@ -114,7 +113,6 @@ export function conversationEventsDataFromJSON(
 /** @internal */
 export const ConversationEvents$inboundSchema: z.ZodType<
   ConversationEvents,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   event: SSETypes$inboundSchema,
@@ -122,7 +120,11 @@ export const ConversationEvents$inboundSchema: z.ZodType<
     try {
       return JSON.parse(v);
     } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+      ctx.addIssue({
+        input: v,
+        code: "custom",
+        message: `malformed json: ${err}`,
+      });
       return z.NEVER;
     }
   }).pipe(discriminatedUnion("type", {

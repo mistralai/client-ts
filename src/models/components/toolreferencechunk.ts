@@ -3,7 +3,7 @@
  * @generated-id: 5bf4edba1096
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,7 +27,6 @@ export type ToolReferenceChunk = {
 /** @internal */
 export const ToolReferenceChunkTool$inboundSchema: z.ZodType<
   ToolReferenceChunkTool,
-  z.ZodTypeDef,
   unknown
 > = z.union([BuiltInConnectors$inboundSchema, z.string()]);
 /** @internal */
@@ -36,7 +35,6 @@ export type ToolReferenceChunkTool$Outbound = string | string;
 /** @internal */
 export const ToolReferenceChunkTool$outboundSchema: z.ZodType<
   ToolReferenceChunkTool$Outbound,
-  z.ZodTypeDef,
   ToolReferenceChunkTool
 > = z.union([BuiltInConnectors$outboundSchema, z.string()]);
 
@@ -60,7 +58,6 @@ export function toolReferenceChunkToolFromJSON(
 /** @internal */
 export const ToolReferenceChunk$inboundSchema: z.ZodType<
   ToolReferenceChunk,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("tool_reference").default("tool_reference"),
@@ -83,7 +80,6 @@ export type ToolReferenceChunk$Outbound = {
 /** @internal */
 export const ToolReferenceChunk$outboundSchema: z.ZodType<
   ToolReferenceChunk$Outbound,
-  z.ZodTypeDef,
   ToolReferenceChunk
 > = z.object({
   type: z.literal("tool_reference").default("tool_reference" as const),

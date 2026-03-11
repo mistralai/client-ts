@@ -3,7 +3,7 @@
  * @generated-id: c5cc252be3b5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -54,23 +54,18 @@ export type BaseFieldDefinition = {
 };
 
 /** @internal */
-export const TypeEnum$inboundSchema: z.ZodType<
-  TypeEnum,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(TypeEnum);
+export const TypeEnum$inboundSchema: z.ZodType<TypeEnum, unknown> = openEnums
+  .inboundSchema(TypeEnum);
 
 /** @internal */
 export const SupportedOperator$inboundSchema: z.ZodType<
   SupportedOperator,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(SupportedOperator);
 
 /** @internal */
 export const BaseFieldDefinition$inboundSchema: z.ZodType<
   BaseFieldDefinition,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   name: z.string(),

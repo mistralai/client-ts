@@ -3,7 +3,7 @@
  * @generated-id: 5a55fd83d99e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -14,8 +14,5 @@ export const FileVisibility = {
 export type FileVisibility = OpenEnum<typeof FileVisibility>;
 
 /** @internal */
-export const FileVisibility$inboundSchema: z.ZodType<
-  FileVisibility,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(FileVisibility);
+export const FileVisibility$inboundSchema: z.ZodType<FileVisibility, unknown> =
+  openEnums.inboundSchema(FileVisibility);

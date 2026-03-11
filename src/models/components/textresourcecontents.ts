@@ -3,7 +3,7 @@
  * @generated-id: ccccb09d03b5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -23,12 +23,11 @@ export type TextResourceContents = {
 /** @internal */
 export const TextResourceContents$inboundSchema: z.ZodType<
   TextResourceContents,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   uri: z.string(),
   mimeType: z.nullable(z.string()).optional(),
-  _meta: z.nullable(z.record(z.any())).optional(),
+  _meta: z.nullable(z.record(z.string(), z.any())).optional(),
   text: z.string(),
 }).catchall(z.any()).transform((v) => {
   return remap$(v, {

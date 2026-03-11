@@ -3,7 +3,7 @@
  * @generated-id: 5e2782ba38b8
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -26,22 +26,18 @@ export type Campaign = {
 };
 
 /** @internal */
-export const Campaign$inboundSchema: z.ZodType<
-  Campaign,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const Campaign$inboundSchema: z.ZodType<Campaign, unknown> = z.object({
   id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   deleted_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ),
   name: z.string(),
   owner_id: z.string(),
   workspace_id: z.string(),
   description: z.string(),
-  max_nb_events: z.number().int(),
+  max_nb_events: z.int(),
   search_params: FilterPayload$inboundSchema,
   judge: Judge$inboundSchema,
 }).transform((v) => {

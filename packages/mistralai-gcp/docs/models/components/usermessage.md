@@ -6,6 +6,7 @@
 import { UserMessage } from "@mistralai/mistralai-gcp/models/components";
 
 let value: UserMessage = {
+  role: "user",
   content: "<value>",
 };
 ```
@@ -14,5 +15,5 @@ let value: UserMessage = {
 
 | Field                           | Type                            | Required                        | Description                     |
 | ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
-| `role`                          | *"user"*                        | :heavy_minus_sign:              | N/A                             |
+| `role`                          | *"user"*                        | :heavy_check_mark:              | N/A                             |
 | `content`                       | *components.UserMessageContent* | :heavy_check_mark:              | N/A                             |

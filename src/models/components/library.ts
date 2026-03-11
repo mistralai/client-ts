@@ -3,7 +3,7 @@
  * @generated-id: 6acf9dab04c4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -32,44 +32,39 @@ export type Library = {
 };
 
 /** @internal */
-export const Library$inboundSchema: z.ZodType<Library, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    name: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    owner_id: z.nullable(z.string()),
-    owner_type: z.string(),
-    total_size: z.number().int(),
-    nb_documents: z.number().int(),
-    chunk_size: z.nullable(z.number().int()),
-    emoji: z.nullable(z.string()).optional(),
-    description: z.nullable(z.string()).optional(),
-    generated_description: z.nullable(z.string()).optional(),
-    explicit_user_members_count: z.nullable(z.number().int()).optional(),
-    explicit_workspace_members_count: z.nullable(z.number().int()).optional(),
-    org_sharing_role: z.nullable(z.string()).optional(),
-    generated_name: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "owner_id": "ownerId",
-      "owner_type": "ownerType",
-      "total_size": "totalSize",
-      "nb_documents": "nbDocuments",
-      "chunk_size": "chunkSize",
-      "generated_description": "generatedDescription",
-      "explicit_user_members_count": "explicitUserMembersCount",
-      "explicit_workspace_members_count": "explicitWorkspaceMembersCount",
-      "org_sharing_role": "orgSharingRole",
-      "generated_name": "generatedName",
-    });
+export const Library$inboundSchema: z.ZodType<Library, unknown> = z.object({
+  id: z.string(),
+  name: z.string(),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  owner_id: z.nullable(z.string()),
+  owner_type: z.string(),
+  total_size: z.int(),
+  nb_documents: z.int(),
+  chunk_size: z.nullable(z.int()),
+  emoji: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
+  generated_description: z.nullable(z.string()).optional(),
+  explicit_user_members_count: z.nullable(z.int()).optional(),
+  explicit_workspace_members_count: z.nullable(z.int()).optional(),
+  org_sharing_role: z.nullable(z.string()).optional(),
+  generated_name: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+    "owner_id": "ownerId",
+    "owner_type": "ownerType",
+    "total_size": "totalSize",
+    "nb_documents": "nbDocuments",
+    "chunk_size": "chunkSize",
+    "generated_description": "generatedDescription",
+    "explicit_user_members_count": "explicitUserMembersCount",
+    "explicit_workspace_members_count": "explicitWorkspaceMembersCount",
+    "org_sharing_role": "orgSharingRole",
+    "generated_name": "generatedName",
   });
+});
 
 export function libraryFromJSON(
   jsonString: string,

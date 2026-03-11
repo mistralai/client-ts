@@ -3,7 +3,7 @@
  * @generated-id: c79e401dd049
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -16,12 +16,10 @@ export type ModerationLlmv1Action = OpenEnum<typeof ModerationLlmv1Action>;
 /** @internal */
 export const ModerationLlmv1Action$inboundSchema: z.ZodType<
   ModerationLlmv1Action,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(ModerationLlmv1Action);
 /** @internal */
 export const ModerationLlmv1Action$outboundSchema: z.ZodType<
   string,
-  z.ZodTypeDef,
   ModerationLlmv1Action
 > = openEnums.outboundSchema(ModerationLlmv1Action);

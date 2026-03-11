@@ -3,7 +3,7 @@
  * @generated-id: df1371f4f11e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,15 +27,11 @@ export type ToolCall = {
 };
 
 /** @internal */
-export const ToolCall$inboundSchema: z.ZodType<
-  ToolCall,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ToolCall$inboundSchema: z.ZodType<ToolCall, unknown> = z.object({
   id: z.string().default("null"),
   type: ToolTypes$inboundSchema.optional(),
   function: FunctionCall$inboundSchema,
-  index: z.number().int().default(0),
+  index: z.int().default(0),
 });
 /** @internal */
 export type ToolCall$Outbound = {
@@ -46,16 +42,13 @@ export type ToolCall$Outbound = {
 };
 
 /** @internal */
-export const ToolCall$outboundSchema: z.ZodType<
-  ToolCall$Outbound,
-  z.ZodTypeDef,
-  ToolCall
-> = z.object({
-  id: z.string().default("null"),
-  type: ToolTypes$outboundSchema.optional(),
-  function: FunctionCall$outboundSchema,
-  index: z.number().int().default(0),
-});
+export const ToolCall$outboundSchema: z.ZodType<ToolCall$Outbound, ToolCall> = z
+  .object({
+    id: z.string().default("null"),
+    type: ToolTypes$outboundSchema.optional(),
+    function: FunctionCall$outboundSchema,
+    index: z.int().default(0),
+  });
 
 export function toolCallToJSON(toolCall: ToolCall): string {
   return JSON.stringify(ToolCall$outboundSchema.parse(toolCall));

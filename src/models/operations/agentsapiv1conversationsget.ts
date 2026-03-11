@@ -3,7 +3,7 @@
  * @generated-id: 87846762af20
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -32,7 +32,6 @@ export type AgentsApiV1ConversationsGetRequest$Outbound = {
 /** @internal */
 export const AgentsApiV1ConversationsGetRequest$outboundSchema: z.ZodType<
   AgentsApiV1ConversationsGetRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1ConversationsGetRequest
 > = z.object({
   conversationId: z.string(),
@@ -55,7 +54,6 @@ export function agentsApiV1ConversationsGetRequestToJSON(
 /** @internal */
 export const ResponseV1ConversationsGet$inboundSchema: z.ZodType<
   ResponseV1ConversationsGet,
-  z.ZodTypeDef,
   unknown
 > = z.union([
   components.ModelConversation$inboundSchema,

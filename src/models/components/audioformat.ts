@@ -3,7 +3,7 @@
  * @generated-id: 91222548de47
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -20,18 +20,15 @@ export type AudioFormat = {
 };
 
 /** @internal */
-export const AudioFormat$inboundSchema: z.ZodType<
-  AudioFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  encoding: AudioEncoding$inboundSchema,
-  sample_rate: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
+export const AudioFormat$inboundSchema: z.ZodType<AudioFormat, unknown> = z
+  .object({
+    encoding: AudioEncoding$inboundSchema,
+    sample_rate: z.int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+    });
   });
-});
 /** @internal */
 export type AudioFormat$Outbound = {
   encoding: string;
@@ -41,11 +38,10 @@ export type AudioFormat$Outbound = {
 /** @internal */
 export const AudioFormat$outboundSchema: z.ZodType<
   AudioFormat$Outbound,
-  z.ZodTypeDef,
   AudioFormat
 > = z.object({
   encoding: AudioEncoding$outboundSchema,
-  sampleRate: z.number().int(),
+  sampleRate: z.int(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",

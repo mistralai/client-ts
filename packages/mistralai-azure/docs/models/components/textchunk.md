@@ -6,6 +6,7 @@
 import { TextChunk } from "@mistralai/mistralai-azure/models/components";
 
 let value: TextChunk = {
+  type: "text",
   text: "<value>",
 };
 ```
@@ -14,5 +15,5 @@ let value: TextChunk = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `type`             | *"text"*           | :heavy_minus_sign: | N/A                |
+| `type`             | *"text"*           | :heavy_check_mark: | N/A                |
 | `text`             | *string*           | :heavy_check_mark: | N/A                |

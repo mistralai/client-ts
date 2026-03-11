@@ -3,7 +3,7 @@
  * @generated-id: 847546c98ce5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   AssistantMessage,
@@ -153,7 +153,6 @@ export type ChatCompletionRequestStop$Outbound = string | Array<string>;
 /** @internal */
 export const ChatCompletionRequestStop$outboundSchema: z.ZodType<
   ChatCompletionRequestStop$Outbound,
-  z.ZodTypeDef,
   ChatCompletionRequestStop
 > = z.union([z.string(), z.array(z.string())]);
 
@@ -175,7 +174,6 @@ export type ChatCompletionRequestMessage$Outbound =
 /** @internal */
 export const ChatCompletionRequestMessage$outboundSchema: z.ZodType<
   ChatCompletionRequestMessage$Outbound,
-  z.ZodTypeDef,
   ChatCompletionRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
@@ -204,7 +202,6 @@ export type ChatCompletionRequestToolChoice$Outbound =
 /** @internal */
 export const ChatCompletionRequestToolChoice$outboundSchema: z.ZodType<
   ChatCompletionRequestToolChoice$Outbound,
-  z.ZodTypeDef,
   ChatCompletionRequestToolChoice
 > = z.union([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
 
@@ -249,17 +246,16 @@ export type ChatCompletionRequest$Outbound = {
 /** @internal */
 export const ChatCompletionRequest$outboundSchema: z.ZodType<
   ChatCompletionRequest$Outbound,
-  z.ZodTypeDef,
   ChatCompletionRequest
 > = z.object({
   model: z.string(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.number().optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
+  maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(false),
   stop: z.union([z.string(), z.array(z.string())]).optional(),
-  randomSeed: z.nullable(z.number().int()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  randomSeed: z.nullable(z.int()).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
     z.union([
       AssistantMessage$outboundSchema.and(
@@ -278,7 +274,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   ]).optional(),
   presencePenalty: z.number().optional(),
   frequencyPenalty: z.number().optional(),
-  n: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),

@@ -3,7 +3,7 @@
  * @generated-id: 13621d169943
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   ClassifierTarget,
@@ -82,7 +82,6 @@ export type CreateFineTuningJobRequestIntegration$Outbound =
 /** @internal */
 export const CreateFineTuningJobRequestIntegration$outboundSchema: z.ZodType<
   CreateFineTuningJobRequestIntegration$Outbound,
-  z.ZodTypeDef,
   CreateFineTuningJobRequestIntegration
 > = WandbIntegration$outboundSchema;
 
@@ -104,7 +103,6 @@ export type Hyperparameters$Outbound =
 /** @internal */
 export const Hyperparameters$outboundSchema: z.ZodType<
   Hyperparameters$Outbound,
-  z.ZodTypeDef,
   Hyperparameters
 > = z.union([
   CompletionTrainingParameters$outboundSchema,
@@ -124,7 +122,6 @@ export type CreateFineTuningJobRequestRepository$Outbound =
 /** @internal */
 export const CreateFineTuningJobRequestRepository$outboundSchema: z.ZodType<
   CreateFineTuningJobRequestRepository$Outbound,
-  z.ZodTypeDef,
   CreateFineTuningJobRequestRepository
 > = CreateGithubRepositoryRequest$outboundSchema;
 
@@ -161,7 +158,6 @@ export type CreateFineTuningJobRequest$Outbound = {
 /** @internal */
 export const CreateFineTuningJobRequest$outboundSchema: z.ZodType<
   CreateFineTuningJobRequest$Outbound,
-  z.ZodTypeDef,
   CreateFineTuningJobRequest
 > = z.object({
   model: z.string(),

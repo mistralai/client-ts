@@ -3,7 +3,7 @@
  * @generated-id: 9a7100ad3737
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -30,12 +30,11 @@ export type AgentsApiV1ConversationsListRequest$Outbound = {
 /** @internal */
 export const AgentsApiV1ConversationsListRequest$outboundSchema: z.ZodType<
   AgentsApiV1ConversationsListRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1ConversationsListRequest
 > = z.object({
-  page: z.number().int().default(0),
-  pageSize: z.number().int().default(100),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  page: z.int().default(0),
+  pageSize: z.int().default(100),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
@@ -55,7 +54,6 @@ export function agentsApiV1ConversationsListRequestToJSON(
 /** @internal */
 export const AgentsApiV1ConversationsListResponse$inboundSchema: z.ZodType<
   AgentsApiV1ConversationsListResponse,
-  z.ZodTypeDef,
   unknown
 > = z.union([
   components.ModelConversation$inboundSchema,

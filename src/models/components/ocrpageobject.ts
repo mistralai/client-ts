@@ -3,7 +3,7 @@
  * @generated-id: 9f1e92f79055
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -56,20 +56,17 @@ export type OCRPageObject = {
 };
 
 /** @internal */
-export const OCRPageObject$inboundSchema: z.ZodType<
-  OCRPageObject,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  index: z.number().int(),
-  markdown: z.string(),
-  images: z.array(OCRImageObject$inboundSchema),
-  tables: z.array(OCRTableObject$inboundSchema).optional(),
-  hyperlinks: z.array(z.string()).optional(),
-  header: z.nullable(z.string()).optional(),
-  footer: z.nullable(z.string()).optional(),
-  dimensions: z.nullable(OCRPageDimensions$inboundSchema),
-});
+export const OCRPageObject$inboundSchema: z.ZodType<OCRPageObject, unknown> = z
+  .object({
+    index: z.int(),
+    markdown: z.string(),
+    images: z.array(OCRImageObject$inboundSchema),
+    tables: z.array(OCRTableObject$inboundSchema).optional(),
+    hyperlinks: z.array(z.string()).optional(),
+    header: z.nullable(z.string()).optional(),
+    footer: z.nullable(z.string()).optional(),
+    dimensions: z.nullable(OCRPageDimensions$inboundSchema),
+  });
 
 export function ocrPageObjectFromJSON(
   jsonString: string,

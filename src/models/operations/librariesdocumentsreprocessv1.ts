@@ -3,7 +3,7 @@
  * @generated-id: 7442a8ca8a43
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type LibrariesDocumentsReprocessV1Request = {
@@ -20,7 +20,6 @@ export type LibrariesDocumentsReprocessV1Request$Outbound = {
 /** @internal */
 export const LibrariesDocumentsReprocessV1Request$outboundSchema: z.ZodType<
   LibrariesDocumentsReprocessV1Request$Outbound,
-  z.ZodTypeDef,
   LibrariesDocumentsReprocessV1Request
 > = z.object({
   libraryId: z.string(),

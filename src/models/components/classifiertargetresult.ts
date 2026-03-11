@@ -3,7 +3,7 @@
  * @generated-id: 62867cd7acc7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -23,7 +23,6 @@ export type ClassifierTargetResult = {
 /** @internal */
 export const ClassifierTargetResult$inboundSchema: z.ZodType<
   ClassifierTargetResult,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   name: z.string(),

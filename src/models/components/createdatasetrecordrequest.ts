@@ -3,7 +3,7 @@
  * @generated-id: aa94d49ee354
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   ConversationPayload,
   ConversationPayload$Outbound,
@@ -24,11 +24,10 @@ export type CreateDatasetRecordRequest$Outbound = {
 /** @internal */
 export const CreateDatasetRecordRequest$outboundSchema: z.ZodType<
   CreateDatasetRecordRequest$Outbound,
-  z.ZodTypeDef,
   CreateDatasetRecordRequest
 > = z.object({
   payload: ConversationPayload$outboundSchema,
-  properties: z.record(z.any()),
+  properties: z.record(z.string(), z.any()),
 });
 
 export function createDatasetRecordRequestToJSON(

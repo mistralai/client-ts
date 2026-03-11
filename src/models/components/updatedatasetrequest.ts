@@ -3,7 +3,7 @@
  * @generated-id: fef7035d7679
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type UpdateDatasetRequest = {
   name?: string | null | undefined;
@@ -19,7 +19,6 @@ export type UpdateDatasetRequest$Outbound = {
 /** @internal */
 export const UpdateDatasetRequest$outboundSchema: z.ZodType<
   UpdateDatasetRequest$Outbound,
-  z.ZodTypeDef,
   UpdateDatasetRequest
 > = z.object({
   name: z.nullable(z.string()).optional(),

@@ -3,7 +3,7 @@
  * @generated-id: 197182b170fb
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   FTClassifierLossFunction,
@@ -28,7 +28,6 @@ export type ClassifierTarget$Outbound = {
 /** @internal */
 export const ClassifierTarget$outboundSchema: z.ZodType<
   ClassifierTarget$Outbound,
-  z.ZodTypeDef,
   ClassifierTarget
 > = z.object({
   name: z.string(),

@@ -3,7 +3,7 @@
  * @generated-id: 63279a0de3fc
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ImportDatasetFromFileRequest = {
@@ -18,7 +18,6 @@ export type ImportDatasetFromFileRequest$Outbound = {
 /** @internal */
 export const ImportDatasetFromFileRequest$outboundSchema: z.ZodType<
   ImportDatasetFromFileRequest$Outbound,
-  z.ZodTypeDef,
   ImportDatasetFromFileRequest
 > = z.object({
   fileId: z.string(),

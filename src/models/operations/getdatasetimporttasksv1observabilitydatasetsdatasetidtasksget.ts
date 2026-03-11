@@ -3,7 +3,7 @@
  * @generated-id: 588519903c05
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetDatasetImportTasksV1ObservabilityDatasetsDatasetIdTasksGetRequest =
@@ -25,12 +25,11 @@ export type GetDatasetImportTasksV1ObservabilityDatasetsDatasetIdTasksGetRequest
 export const GetDatasetImportTasksV1ObservabilityDatasetsDatasetIdTasksGetRequest$outboundSchema:
   z.ZodType<
     GetDatasetImportTasksV1ObservabilityDatasetsDatasetIdTasksGetRequest$Outbound,
-    z.ZodTypeDef,
     GetDatasetImportTasksV1ObservabilityDatasetsDatasetIdTasksGetRequest
   > = z.object({
     datasetId: z.string(),
-    pageSize: z.number().int().default(50),
-    page: z.number().int().default(1),
+    pageSize: z.int().default(50),
+    page: z.int().default(1),
   }).transform((v) => {
     return remap$(v, {
       datasetId: "dataset_id",

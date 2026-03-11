@@ -3,7 +3,7 @@
  * @generated-id: c5cbfe3b06d1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { MistralCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";

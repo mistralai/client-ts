@@ -3,7 +3,7 @@
  * @generated-id: 21b6159b9fa6
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -22,12 +22,11 @@ export type ConnectorToolResultMetadata = {
 /** @internal */
 export const ConnectorToolResultMetadata$inboundSchema: z.ZodType<
   ConnectorToolResultMetadata,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   isError: z.boolean().default(false),
-  structuredContent: z.nullable(z.record(z.any())).optional(),
-  _meta: z.nullable(z.record(z.any())).optional(),
+  structuredContent: z.nullable(z.record(z.string(), z.any())).optional(),
+  _meta: z.nullable(z.record(z.string(), z.any())).optional(),
 }).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "_meta": "meta",

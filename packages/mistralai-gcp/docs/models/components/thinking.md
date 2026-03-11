@@ -7,6 +7,7 @@
 
 ```typescript
 const value: components.TextChunk = {
+  type: "text",
   text: "<value>",
 };
 ```

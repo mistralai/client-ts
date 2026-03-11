@@ -3,7 +3,7 @@
  * @generated-id: dc0007c0284f
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,7 +16,6 @@ export type ListSharingResponse = {
 /** @internal */
 export const ListSharingResponse$inboundSchema: z.ZodType<
   ListSharingResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.array(Sharing$inboundSchema),

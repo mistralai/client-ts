@@ -3,7 +3,7 @@
  * @generated-id: b367708043c5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,15 +19,12 @@ export type MCPServerIcon = {
 };
 
 /** @internal */
-export const MCPServerIcon$inboundSchema: z.ZodType<
-  MCPServerIcon,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  src: z.string(),
-  mimeType: z.nullable(z.string()).optional(),
-  sizes: z.nullable(z.array(z.string())).optional(),
-}).catchall(z.any());
+export const MCPServerIcon$inboundSchema: z.ZodType<MCPServerIcon, unknown> = z
+  .object({
+    src: z.string(),
+    mimeType: z.nullable(z.string()).optional(),
+    sizes: z.nullable(z.array(z.string())).optional(),
+  }).catchall(z.any());
 
 export function mcpServerIconFromJSON(
   jsonString: string,

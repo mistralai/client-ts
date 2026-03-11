@@ -3,7 +3,7 @@
  * @generated-id: a10ea80dccd4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   ConversationPayload,
   ConversationPayload$Outbound,
@@ -22,7 +22,6 @@ export type UpdateDatasetRecordPayloadRequest$Outbound = {
 /** @internal */
 export const UpdateDatasetRecordPayloadRequest$outboundSchema: z.ZodType<
   UpdateDatasetRecordPayloadRequest$Outbound,
-  z.ZodTypeDef,
   UpdateDatasetRecordPayloadRequest
 > = z.object({
   payload: ConversationPayload$outboundSchema,

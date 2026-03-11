@@ -3,7 +3,7 @@
  * @generated-id: e3e5ab88e018
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   BuiltInConnectors,
   BuiltInConnectors$outboundSchema,
@@ -26,7 +26,6 @@ export type ToolUnion$Outbound = string | string;
 /** @internal */
 export const ToolUnion$outboundSchema: z.ZodType<
   ToolUnion$Outbound,
-  z.ZodTypeDef,
   ToolUnion
 > = z.union([BuiltInConnectors$outboundSchema, z.string()]);
 
@@ -47,7 +46,6 @@ export type ToolReferenceChunk$Outbound = {
 /** @internal */
 export const ToolReferenceChunk$outboundSchema: z.ZodType<
   ToolReferenceChunk$Outbound,
-  z.ZodTypeDef,
   ToolReferenceChunk
 > = z.object({
   type: z.literal("tool_reference").default("tool_reference" as const),

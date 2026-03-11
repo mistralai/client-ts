@@ -3,7 +3,7 @@
  * @generated-id: b01bcea443f7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -19,18 +19,17 @@ export type Metric = {
 };
 
 /** @internal */
-export const Metric$inboundSchema: z.ZodType<Metric, z.ZodTypeDef, unknown> = z
-  .object({
-    train_loss: z.nullable(z.number()).optional(),
-    valid_loss: z.nullable(z.number()).optional(),
-    valid_mean_token_accuracy: z.nullable(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "train_loss": "trainLoss",
-      "valid_loss": "validLoss",
-      "valid_mean_token_accuracy": "validMeanTokenAccuracy",
-    });
+export const Metric$inboundSchema: z.ZodType<Metric, unknown> = z.object({
+  train_loss: z.nullable(z.number()).optional(),
+  valid_loss: z.nullable(z.number()).optional(),
+  valid_mean_token_accuracy: z.nullable(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "train_loss": "trainLoss",
+    "valid_loss": "validLoss",
+    "valid_mean_token_accuracy": "validMeanTokenAccuracy",
   });
+});
 
 export function metricFromJSON(
   jsonString: string,

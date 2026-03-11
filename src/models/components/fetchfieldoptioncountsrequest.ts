@@ -3,7 +3,7 @@
  * @generated-id: 4cda3995f3b4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   FilterPayload,
@@ -23,7 +23,6 @@ export type FetchFieldOptionCountsRequest$Outbound = {
 /** @internal */
 export const FetchFieldOptionCountsRequest$outboundSchema: z.ZodType<
   FetchFieldOptionCountsRequest$Outbound,
-  z.ZodTypeDef,
   FetchFieldOptionCountsRequest
 > = z.object({
   filterParams: z.nullable(FilterPayload$outboundSchema).optional(),

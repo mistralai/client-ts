@@ -3,7 +3,7 @@
  * @generated-id: 07c04da6648f
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,7 +31,6 @@ export type OutputContentChunks =
 /** @internal */
 export const OutputContentChunks$inboundSchema: z.ZodType<
   OutputContentChunks,
-  z.ZodTypeDef,
   unknown
 > = z.union([
   ToolFileChunk$inboundSchema,

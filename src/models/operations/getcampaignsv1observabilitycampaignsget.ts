@@ -3,7 +3,7 @@
  * @generated-id: 0ee18e593b57
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetCampaignsV1ObservabilityCampaignsGetRequest = {
@@ -23,11 +23,10 @@ export type GetCampaignsV1ObservabilityCampaignsGetRequest$Outbound = {
 export const GetCampaignsV1ObservabilityCampaignsGetRequest$outboundSchema:
   z.ZodType<
     GetCampaignsV1ObservabilityCampaignsGetRequest$Outbound,
-    z.ZodTypeDef,
     GetCampaignsV1ObservabilityCampaignsGetRequest
   > = z.object({
-    pageSize: z.number().int().default(50),
-    page: z.number().int().default(1),
+    pageSize: z.int().default(50),
+    page: z.int().default(1),
     q: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {

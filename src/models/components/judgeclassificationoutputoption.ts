@@ -3,7 +3,7 @@
  * @generated-id: 168adee0925e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,7 +16,6 @@ export type JudgeClassificationOutputOption = {
 /** @internal */
 export const JudgeClassificationOutputOption$inboundSchema: z.ZodType<
   JudgeClassificationOutputOption,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   value: z.string(),
@@ -31,7 +30,6 @@ export type JudgeClassificationOutputOption$Outbound = {
 /** @internal */
 export const JudgeClassificationOutputOption$outboundSchema: z.ZodType<
   JudgeClassificationOutputOption$Outbound,
-  z.ZodTypeDef,
   JudgeClassificationOutputOption
 > = z.object({
   value: z.string(),

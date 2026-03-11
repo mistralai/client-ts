@@ -3,7 +3,7 @@
  * @generated-id: 9fa02c40eb9c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type CreateGithubRepositoryRequest = {
   type: "github";
@@ -27,7 +27,6 @@ export type CreateGithubRepositoryRequest$Outbound = {
 /** @internal */
 export const CreateGithubRepositoryRequest$outboundSchema: z.ZodType<
   CreateGithubRepositoryRequest$Outbound,
-  z.ZodTypeDef,
   CreateGithubRepositoryRequest
 > = z.object({
   type: z.literal("github"),

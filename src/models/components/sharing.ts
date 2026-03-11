@@ -3,7 +3,7 @@
  * @generated-id: 68660dc51411
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -19,23 +19,22 @@ export type Sharing = {
 };
 
 /** @internal */
-export const Sharing$inboundSchema: z.ZodType<Sharing, z.ZodTypeDef, unknown> =
-  z.object({
-    library_id: z.string(),
-    user_id: z.nullable(z.string()).optional(),
-    org_id: z.string(),
-    role: z.string(),
-    share_with_type: z.string(),
-    share_with_uuid: z.nullable(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "library_id": "libraryId",
-      "user_id": "userId",
-      "org_id": "orgId",
-      "share_with_type": "shareWithType",
-      "share_with_uuid": "shareWithUuid",
-    });
+export const Sharing$inboundSchema: z.ZodType<Sharing, unknown> = z.object({
+  library_id: z.string(),
+  user_id: z.nullable(z.string()).optional(),
+  org_id: z.string(),
+  role: z.string(),
+  share_with_type: z.string(),
+  share_with_uuid: z.nullable(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    "library_id": "libraryId",
+    "user_id": "userId",
+    "org_id": "orgId",
+    "share_with_type": "shareWithType",
+    "share_with_uuid": "shareWithUuid",
   });
+});
 
 export function sharingFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  * @generated-id: 5e51bdf5cb00
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -43,28 +43,25 @@ export type FunctionCallEntry = {
 /** @internal */
 export const FunctionCallEntryConfirmationStatus$inboundSchema: z.ZodType<
   FunctionCallEntryConfirmationStatus,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(FunctionCallEntryConfirmationStatus);
 /** @internal */
 export const FunctionCallEntryConfirmationStatus$outboundSchema: z.ZodType<
   string,
-  z.ZodTypeDef,
   FunctionCallEntryConfirmationStatus
 > = openEnums.outboundSchema(FunctionCallEntryConfirmationStatus);
 
 /** @internal */
 export const FunctionCallEntry$inboundSchema: z.ZodType<
   FunctionCallEntry,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("entry").default("entry"),
   type: z.literal("function.call").default("function.call"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   agent_id: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
@@ -102,7 +99,6 @@ export type FunctionCallEntry$Outbound = {
 /** @internal */
 export const FunctionCallEntry$outboundSchema: z.ZodType<
   FunctionCallEntry$Outbound,
-  z.ZodTypeDef,
   FunctionCallEntry
 > = z.object({
   object: z.literal("entry").default("entry" as const),

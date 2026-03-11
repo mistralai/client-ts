@@ -3,7 +3,7 @@
  * @generated-id: 4ce890d71908
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type FilesApiRoutesGetSignedUrlRequest = {
@@ -23,11 +23,10 @@ export type FilesApiRoutesGetSignedUrlRequest$Outbound = {
 /** @internal */
 export const FilesApiRoutesGetSignedUrlRequest$outboundSchema: z.ZodType<
   FilesApiRoutesGetSignedUrlRequest$Outbound,
-  z.ZodTypeDef,
   FilesApiRoutesGetSignedUrlRequest
 > = z.object({
   fileId: z.string(),
-  expiry: z.number().int().default(24),
+  expiry: z.int().default(24),
 }).transform((v) => {
   return remap$(v, {
     fileId: "file_id",

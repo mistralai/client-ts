@@ -3,7 +3,7 @@
  * @generated-id: 0a556e45c2c5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   AssistantMessage,
   AssistantMessage$Outbound,
@@ -50,7 +50,6 @@ export type InstructRequestMessage$Outbound =
 /** @internal */
 export const InstructRequestMessage$outboundSchema: z.ZodType<
   InstructRequestMessage$Outbound,
-  z.ZodTypeDef,
   InstructRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
@@ -82,7 +81,6 @@ export type InstructRequest$Outbound = {
 /** @internal */
 export const InstructRequest$outboundSchema: z.ZodType<
   InstructRequest$Outbound,
-  z.ZodTypeDef,
   InstructRequest
 > = z.object({
   messages: z.array(

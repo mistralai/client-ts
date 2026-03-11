@@ -3,7 +3,7 @@
  * @generated-id: 0a132e059881
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -15,8 +15,8 @@ export const Source = {
 export type Source = OpenEnum<typeof Source>;
 
 /** @internal */
-export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Source);
+export const Source$inboundSchema: z.ZodType<Source, unknown> = openEnums
+  .inboundSchema(Source);
 /** @internal */
-export const Source$outboundSchema: z.ZodType<string, z.ZodTypeDef, Source> =
-  openEnums.outboundSchema(Source);
+export const Source$outboundSchema: z.ZodType<string, Source> = openEnums
+  .outboundSchema(Source);

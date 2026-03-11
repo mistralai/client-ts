@@ -3,7 +3,7 @@
  * @generated-id: 75e9b5ba38c9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -26,7 +26,6 @@ export type UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecord
 export const UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecordIdPayloadPutRequest$outboundSchema:
   z.ZodType<
     UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecordIdPayloadPutRequest$Outbound,
-    z.ZodTypeDef,
     UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecordIdPayloadPutRequest
   > = z.object({
     datasetRecordId: z.string(),

@@ -3,7 +3,7 @@
  * @generated-id: c826758d0005
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -24,7 +24,6 @@ export type AgentsApiV1ConversationsAppendRequest$Outbound = {
 /** @internal */
 export const AgentsApiV1ConversationsAppendRequest$outboundSchema: z.ZodType<
   AgentsApiV1ConversationsAppendRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1ConversationsAppendRequest
 > = z.object({
   conversationId: z.string(),

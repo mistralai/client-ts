@@ -3,7 +3,7 @@
  * @generated-id: 2083e07cf420
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -23,7 +23,6 @@ export type WebSearchPremiumTool = {
 /** @internal */
 export const WebSearchPremiumTool$inboundSchema: z.ZodType<
   WebSearchPremiumTool,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
@@ -42,7 +41,6 @@ export type WebSearchPremiumTool$Outbound = {
 /** @internal */
 export const WebSearchPremiumTool$outboundSchema: z.ZodType<
   WebSearchPremiumTool$Outbound,
-  z.ZodTypeDef,
   WebSearchPremiumTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),

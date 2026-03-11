@@ -3,7 +3,7 @@
  * @generated-id: b37376cb3e12
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -27,7 +27,6 @@ export type ToolExecutionDeltaEvent = {
 /** @internal */
 export const ToolExecutionDeltaEventName$inboundSchema: z.ZodType<
   ToolExecutionDeltaEventName,
-  z.ZodTypeDef,
   unknown
 > = z.union([BuiltInConnectors$inboundSchema, z.string()]);
 
@@ -44,13 +43,12 @@ export function toolExecutionDeltaEventNameFromJSON(
 /** @internal */
 export const ToolExecutionDeltaEvent$inboundSchema: z.ZodType<
   ToolExecutionDeltaEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("tool.execution.delta"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  output_index: z.number().int().default(0),
+  output_index: z.int().default(0),
   id: z.string(),
   name: z.union([BuiltInConnectors$inboundSchema, z.string()]),
   arguments: z.string(),

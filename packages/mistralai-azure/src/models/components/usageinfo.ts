@@ -3,12 +3,9 @@
  * @generated-id: 08465ac4ba80
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
+import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,24 +14,16 @@ export type UsageInfo = {
   completionTokens?: number | undefined;
   totalTokens?: number | undefined;
   promptAudioSeconds?: number | null | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
-export const UsageInfo$inboundSchema: z.ZodType<
-  UsageInfo,
-  z.ZodTypeDef,
-  unknown
-> = collectExtraKeys$(
-  z.object({
-    prompt_tokens: z.number().int().default(0),
-    completion_tokens: z.number().int().default(0),
-    total_tokens: z.number().int().default(0),
-    prompt_audio_seconds: z.nullable(z.number().int()).optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
+export const UsageInfo$inboundSchema: z.ZodType<UsageInfo, unknown> = z.object({
+  prompt_tokens: z.int().default(0),
+  completion_tokens: z.int().default(0),
+  total_tokens: z.int().default(0),
+  prompt_audio_seconds: z.nullable(z.int()).optional(),
+}).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "prompt_tokens": "promptTokens",
     "completion_tokens": "completionTokens",
@@ -54,23 +43,19 @@ export type UsageInfo$Outbound = {
 /** @internal */
 export const UsageInfo$outboundSchema: z.ZodType<
   UsageInfo$Outbound,
-  z.ZodTypeDef,
   UsageInfo
 > = z.object({
-  promptTokens: z.number().int().default(0),
-  completionTokens: z.number().int().default(0),
-  totalTokens: z.number().int().default(0),
-  promptAudioSeconds: z.nullable(z.number().int()).optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
+  promptTokens: z.int().default(0),
+  completionTokens: z.int().default(0),
+  totalTokens: z.int().default(0),
+  promptAudioSeconds: z.nullable(z.int()).optional(),
+}).catchall(z.any()).transform((v) => {
   return {
-    ...v.additionalProperties,
     ...remap$(v, {
       promptTokens: "prompt_tokens",
       completionTokens: "completion_tokens",
       totalTokens: "total_tokens",
       promptAudioSeconds: "prompt_audio_seconds",
-      additionalProperties: null,
     }),
   };
 });

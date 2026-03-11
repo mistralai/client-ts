@@ -3,7 +3,7 @@
  * @generated-id: 5ed846eb1d20
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -22,7 +22,6 @@ export type UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest$Outbound = {
 export const UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest$outboundSchema:
   z.ZodType<
     UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest$Outbound,
-    z.ZodTypeDef,
     UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest
   > = z.object({
     judgeId: z.string(),

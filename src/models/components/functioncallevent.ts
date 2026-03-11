@@ -3,7 +3,7 @@
  * @generated-id: 8b10aa22c48a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -36,20 +36,18 @@ export type FunctionCallEvent = {
 /** @internal */
 export const FunctionCallEventConfirmationStatus$inboundSchema: z.ZodType<
   FunctionCallEventConfirmationStatus,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(FunctionCallEventConfirmationStatus);
 
 /** @internal */
 export const FunctionCallEvent$inboundSchema: z.ZodType<
   FunctionCallEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("function.call.delta"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  output_index: z.number().int().default(0),
+  output_index: z.int().default(0),
   id: z.string(),
   model: z.nullable(z.string()).optional(),
   agent_id: z.nullable(z.string()).optional(),

@@ -3,7 +3,7 @@
  * @generated-id: d8e5a1aae178
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -19,13 +19,12 @@ export type AgentAliasResponse = {
 /** @internal */
 export const AgentAliasResponse$inboundSchema: z.ZodType<
   AgentAliasResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   alias: z.string(),
-  version: z.number().int(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  version: z.int(),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

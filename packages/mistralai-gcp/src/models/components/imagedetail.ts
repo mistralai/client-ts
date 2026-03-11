@@ -3,7 +3,7 @@
  * @generated-id: 617c688d2925
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -15,14 +15,8 @@ export const ImageDetail = {
 export type ImageDetail = OpenEnum<typeof ImageDetail>;
 
 /** @internal */
-export const ImageDetail$inboundSchema: z.ZodType<
-  ImageDetail,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(ImageDetail);
+export const ImageDetail$inboundSchema: z.ZodType<ImageDetail, unknown> =
+  openEnums.inboundSchema(ImageDetail);
 /** @internal */
-export const ImageDetail$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  ImageDetail
-> = openEnums.outboundSchema(ImageDetail);
+export const ImageDetail$outboundSchema: z.ZodType<string, ImageDetail> =
+  openEnums.outboundSchema(ImageDetail);

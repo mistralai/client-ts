@@ -3,7 +3,7 @@
  * @generated-id: 17846eb6ce8d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -28,10 +28,9 @@ export type GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPost
 export const GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPostRequest$outboundSchema:
   z.ZodType<
     GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPostRequest$Outbound,
-    z.ZodTypeDef,
     GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPostRequest
   > = z.object({
-    pageSize: z.number().int().default(50),
+    pageSize: z.int().default(50),
     cursor: z.nullable(z.string()).optional(),
     searchChatCompletionEventsRequest:
       components.SearchChatCompletionEventsRequest$outboundSchema,

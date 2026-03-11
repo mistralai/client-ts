@@ -3,7 +3,7 @@
  * @generated-id: e1eea242b18a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
@@ -26,14 +26,11 @@ export type JobsApiRoutesFineTuningCreateFineTuningJobResponse =
   | discriminatedUnionTypes.Unknown<"jobType">;
 
 /** @internal */
-export const ResponseT$inboundSchema: z.ZodType<
-  ResponseT,
-  z.ZodTypeDef,
-  unknown
-> = discriminatedUnion("job_type", {
-  classifier: components.ClassifierFineTuningJob$inboundSchema,
-  completion: components.CompletionFineTuningJob$inboundSchema,
-}, { outputPropertyName: "jobType" });
+export const ResponseT$inboundSchema: z.ZodType<ResponseT, unknown> =
+  discriminatedUnion("job_type", {
+    classifier: components.ClassifierFineTuningJob$inboundSchema,
+    completion: components.CompletionFineTuningJob$inboundSchema,
+  }, { outputPropertyName: "jobType" });
 
 export function responseFromJSON(
   jsonString: string,
@@ -47,17 +44,14 @@ export function responseFromJSON(
 
 /** @internal */
 export const JobsApiRoutesFineTuningCreateFineTuningJobResponse$inboundSchema:
-  z.ZodType<
-    JobsApiRoutesFineTuningCreateFineTuningJobResponse,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.LegacyJobMetadata$inboundSchema,
-    discriminatedUnion("job_type", {
-      classifier: components.ClassifierFineTuningJob$inboundSchema,
-      completion: components.CompletionFineTuningJob$inboundSchema,
-    }, { outputPropertyName: "jobType" }),
-  ]);
+  z.ZodType<JobsApiRoutesFineTuningCreateFineTuningJobResponse, unknown> = z
+    .union([
+      components.LegacyJobMetadata$inboundSchema,
+      discriminatedUnion("job_type", {
+        classifier: components.ClassifierFineTuningJob$inboundSchema,
+        completion: components.CompletionFineTuningJob$inboundSchema,
+      }, { outputPropertyName: "jobType" }),
+    ]);
 
 export function jobsApiRoutesFineTuningCreateFineTuningJobResponseFromJSON(
   jsonString: string,

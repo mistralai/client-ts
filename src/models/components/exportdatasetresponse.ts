@@ -3,7 +3,7 @@
  * @generated-id: 08b31dee65b1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -16,7 +16,6 @@ export type ExportDatasetResponse = {
 /** @internal */
 export const ExportDatasetResponse$inboundSchema: z.ZodType<
   ExportDatasetResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   file_url: z.string(),

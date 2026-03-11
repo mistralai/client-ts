@@ -3,7 +3,7 @@
  * @generated-id: e4565058b979
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
@@ -23,21 +23,15 @@ export type Annotations = {
 };
 
 /** @internal */
-export const Audience$inboundSchema: z.ZodType<
-  Audience,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(Audience);
+export const Audience$inboundSchema: z.ZodType<Audience, unknown> = openEnums
+  .inboundSchema(Audience);
 
 /** @internal */
-export const Annotations$inboundSchema: z.ZodType<
-  Annotations,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  audience: z.nullable(z.array(Audience$inboundSchema)).optional(),
-  priority: z.nullable(z.number()).optional(),
-}).catchall(z.any());
+export const Annotations$inboundSchema: z.ZodType<Annotations, unknown> = z
+  .object({
+    audience: z.nullable(z.array(Audience$inboundSchema)).optional(),
+    priority: z.nullable(z.number()).optional(),
+  }).catchall(z.any());
 
 export function annotationsFromJSON(
   jsonString: string,

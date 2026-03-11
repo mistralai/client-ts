@@ -3,7 +3,7 @@
  * @generated-id: 4346fb1a3f7c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -29,7 +29,6 @@ export type ToolExecutionStartedEvent = {
 /** @internal */
 export const ToolExecutionStartedEventName$inboundSchema: z.ZodType<
   ToolExecutionStartedEventName,
-  z.ZodTypeDef,
   unknown
 > = z.union([BuiltInConnectors$inboundSchema, z.string()]);
 
@@ -46,13 +45,12 @@ export function toolExecutionStartedEventNameFromJSON(
 /** @internal */
 export const ToolExecutionStartedEvent$inboundSchema: z.ZodType<
   ToolExecutionStartedEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("tool.execution.started"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  output_index: z.number().int().default(0),
+  output_index: z.int().default(0),
   id: z.string(),
   model: z.nullable(z.string()).optional(),
   agent_id: z.nullable(z.string()).optional(),

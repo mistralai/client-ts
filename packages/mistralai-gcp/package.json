@@ -14,9 +14,6 @@
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
-  "peerDependencies": {
-    
-  },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
     "eslint": "^9.26.0",
@@ -26,6 +23,6 @@
   },
   "dependencies": {
     "google-auth-library": "^9.11.0",
-    "zod": "^3.25.0 || ^4.0.0"
+    "zod": "^4.3.6"
   }
 }

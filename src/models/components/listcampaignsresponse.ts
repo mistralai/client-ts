@@ -3,7 +3,7 @@
  * @generated-id: b3b55c0f05f2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,7 +19,6 @@ export type ListCampaignsResponse = {
 /** @internal */
 export const ListCampaignsResponse$inboundSchema: z.ZodType<
   ListCampaignsResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   campaigns: PaginatedResultCampaignPreview$inboundSchema,

@@ -3,7 +3,7 @@
  * @generated-id: d4157cb371b7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -49,32 +49,29 @@ export type CompletionArgs = {
 };
 
 /** @internal */
-export const CompletionArgs$inboundSchema: z.ZodType<
-  CompletionArgs,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  stop: z.nullable(CompletionArgsStop$inboundSchema).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  random_seed: z.nullable(z.number().int()).optional(),
-  prediction: z.nullable(Prediction$inboundSchema).optional(),
-  response_format: z.nullable(ResponseFormat$inboundSchema).optional(),
-  tool_choice: ToolChoiceEnum$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "presence_penalty": "presencePenalty",
-    "frequency_penalty": "frequencyPenalty",
-    "top_p": "topP",
-    "max_tokens": "maxTokens",
-    "random_seed": "randomSeed",
-    "response_format": "responseFormat",
-    "tool_choice": "toolChoice",
+export const CompletionArgs$inboundSchema: z.ZodType<CompletionArgs, unknown> =
+  z.object({
+    stop: z.nullable(CompletionArgsStop$inboundSchema).optional(),
+    presence_penalty: z.nullable(z.number()).optional(),
+    frequency_penalty: z.nullable(z.number()).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+    max_tokens: z.nullable(z.int()).optional(),
+    random_seed: z.nullable(z.int()).optional(),
+    prediction: z.nullable(Prediction$inboundSchema).optional(),
+    response_format: z.nullable(ResponseFormat$inboundSchema).optional(),
+    tool_choice: ToolChoiceEnum$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "presence_penalty": "presencePenalty",
+      "frequency_penalty": "frequencyPenalty",
+      "top_p": "topP",
+      "max_tokens": "maxTokens",
+      "random_seed": "randomSeed",
+      "response_format": "responseFormat",
+      "tool_choice": "toolChoice",
+    });
   });
-});
 /** @internal */
 export type CompletionArgs$Outbound = {
   stop?: CompletionArgsStop$Outbound | null | undefined;
@@ -92,7 +89,6 @@ export type CompletionArgs$Outbound = {
 /** @internal */
 export const CompletionArgs$outboundSchema: z.ZodType<
   CompletionArgs$Outbound,
-  z.ZodTypeDef,
   CompletionArgs
 > = z.object({
   stop: z.nullable(CompletionArgsStop$outboundSchema).optional(),
@@ -100,8 +96,8 @@ export const CompletionArgs$outboundSchema: z.ZodType<
   frequencyPenalty: z.nullable(z.number()).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  randomSeed: z.nullable(z.number().int()).optional(),
+  maxTokens: z.nullable(z.int()).optional(),
+  randomSeed: z.nullable(z.int()).optional(),
   prediction: z.nullable(Prediction$outboundSchema).optional(),
   responseFormat: z.nullable(ResponseFormat$outboundSchema).optional(),
   toolChoice: ToolChoiceEnum$outboundSchema.optional(),

@@ -3,7 +3,7 @@
  * @generated-id: 44cf2d277540
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { startCountingUnrecognized } from "./unrecognized.js";
 
 const UNKNOWN = Symbol("UNKNOWN");
@@ -50,7 +50,6 @@ export function discriminatedUnion<
 ): z.ZodType<
   | z.output<TOptions[keyof TOptions]>
   | Unknown<OutputDiscriminator, UnknownValue>,
-  z.ZodTypeDef,
   unknown
 > {
   const { unknownValue = "UNKNOWN" as UnknownValue, outputPropertyName } = opts;

@@ -3,7 +3,7 @@
  * @generated-id: f70ff8bdb149
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 /**
  * Request body for calling an MCP tool.
@@ -20,10 +20,9 @@ export type ConnectorCallToolRequest$Outbound = {
 /** @internal */
 export const ConnectorCallToolRequest$outboundSchema: z.ZodType<
   ConnectorCallToolRequest$Outbound,
-  z.ZodTypeDef,
   ConnectorCallToolRequest
 > = z.object({
-  arguments: z.record(z.any()).optional(),
+  arguments: z.record(z.string(), z.any()).optional(),
 });
 
 export function connectorCallToolRequestToJSON(

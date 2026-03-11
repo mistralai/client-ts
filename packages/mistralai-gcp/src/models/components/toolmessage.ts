@@ -3,7 +3,7 @@
  * @generated-id: 8902098e5a6d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   ContentChunk,
@@ -14,7 +14,7 @@ import {
 export type ToolMessageContent = string | Array<ContentChunk>;
 
 export type ToolMessage = {
-  role?: "tool" | undefined;
+  role: "tool";
   content: string | Array<ContentChunk> | null;
   toolCallId?: string | null | undefined;
   name?: string | null | undefined;
@@ -26,7 +26,6 @@ export type ToolMessageContent$Outbound = string | Array<ContentChunk$Outbound>;
 /** @internal */
 export const ToolMessageContent$outboundSchema: z.ZodType<
   ToolMessageContent$Outbound,
-  z.ZodTypeDef,
   ToolMessageContent
 > = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
 
@@ -49,10 +48,9 @@ export type ToolMessage$Outbound = {
 /** @internal */
 export const ToolMessage$outboundSchema: z.ZodType<
   ToolMessage$Outbound,
-  z.ZodTypeDef,
   ToolMessage
 > = z.object({
-  role: z.literal("tool").default("tool" as const),
+  role: z.literal("tool"),
   content: z.nullable(
     z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),

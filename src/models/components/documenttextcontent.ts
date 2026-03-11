@@ -3,7 +3,7 @@
  * @generated-id: 7bd854d2b823
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +15,6 @@ export type DocumentTextContent = {
 /** @internal */
 export const DocumentTextContent$inboundSchema: z.ZodType<
   DocumentTextContent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   text: z.string(),

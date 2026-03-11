@@ -3,7 +3,7 @@
  * @generated-id: fb4d94629408
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 /**
@@ -29,7 +29,6 @@ export type ClassificationRequestInputs$Outbound = string | Array<string>;
 /** @internal */
 export const ClassificationRequestInputs$outboundSchema: z.ZodType<
   ClassificationRequestInputs$Outbound,
-  z.ZodTypeDef,
   ClassificationRequestInputs
 > = z.union([z.string(), z.array(z.string())]);
 
@@ -53,11 +52,10 @@ export type ClassificationRequest$Outbound = {
 /** @internal */
 export const ClassificationRequest$outboundSchema: z.ZodType<
   ClassificationRequest$Outbound,
-  z.ZodTypeDef,
   ClassificationRequest
 > = z.object({
   model: z.string(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   inputs: z.union([z.string(), z.array(z.string())]),
 }).transform((v) => {
   return remap$(v, {

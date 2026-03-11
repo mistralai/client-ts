@@ -3,7 +3,7 @@
  * @generated-id: 0bdc7eb8915b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   FilterPayload,
@@ -31,14 +31,13 @@ export type CreateCampaignRequest$Outbound = {
 /** @internal */
 export const CreateCampaignRequest$outboundSchema: z.ZodType<
   CreateCampaignRequest$Outbound,
-  z.ZodTypeDef,
   CreateCampaignRequest
 > = z.object({
   searchParams: FilterPayload$outboundSchema,
   judgeId: z.string(),
   name: z.string(),
   description: z.string(),
-  maxNbEvents: z.number().int(),
+  maxNbEvents: z.int(),
 }).transform((v) => {
   return remap$(v, {
     searchParams: "search_params",

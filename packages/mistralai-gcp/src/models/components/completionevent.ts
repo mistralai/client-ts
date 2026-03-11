@@ -3,7 +3,7 @@
  * @generated-id: 763ce133db7f
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,14 +19,17 @@ export type CompletionEvent = {
 /** @internal */
 export const CompletionEvent$inboundSchema: z.ZodType<
   CompletionEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.string().transform((v, ctx) => {
     try {
       return JSON.parse(v);
     } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+      ctx.addIssue({
+        input: v,
+        code: "custom",
+        message: `malformed json: ${err}`,
+      });
       return z.NEVER;
     }
   }).pipe(CompletionChunk$inboundSchema),

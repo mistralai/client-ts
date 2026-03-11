@@ -3,7 +3,7 @@
  * @generated-id: 151d731eaef9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DocumentURLChunk = {
@@ -25,7 +25,6 @@ export type DocumentURLChunk$Outbound = {
 /** @internal */
 export const DocumentURLChunk$outboundSchema: z.ZodType<
   DocumentURLChunk$Outbound,
-  z.ZodTypeDef,
   DocumentURLChunk
 > = z.object({
   type: z.literal("document_url").default("document_url" as const),

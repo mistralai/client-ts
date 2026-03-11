@@ -3,7 +3,7 @@
  * @generated-id: 300a880b5858
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -32,18 +32,14 @@ export type AudioURLChunk = {
 };
 
 /** @internal */
-export const AudioUrlUnion$inboundSchema: z.ZodType<
-  AudioUrlUnion,
-  z.ZodTypeDef,
-  unknown
-> = z.union([AudioURL$inboundSchema, z.string()]);
+export const AudioUrlUnion$inboundSchema: z.ZodType<AudioUrlUnion, unknown> = z
+  .union([AudioURL$inboundSchema, z.string()]);
 /** @internal */
 export type AudioUrlUnion$Outbound = AudioURL$Outbound | string;
 
 /** @internal */
 export const AudioUrlUnion$outboundSchema: z.ZodType<
   AudioUrlUnion$Outbound,
-  z.ZodTypeDef,
   AudioUrlUnion
 > = z.union([AudioURL$outboundSchema, z.string()]);
 
@@ -61,18 +57,15 @@ export function audioUrlUnionFromJSON(
 }
 
 /** @internal */
-export const AudioURLChunk$inboundSchema: z.ZodType<
-  AudioURLChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("audio_url"),
-  audio_url: z.union([AudioURL$inboundSchema, z.string()]),
-}).transform((v) => {
-  return remap$(v, {
-    "audio_url": "audioUrl",
+export const AudioURLChunk$inboundSchema: z.ZodType<AudioURLChunk, unknown> = z
+  .object({
+    type: z.literal("audio_url"),
+    audio_url: z.union([AudioURL$inboundSchema, z.string()]),
+  }).transform((v) => {
+    return remap$(v, {
+      "audio_url": "audioUrl",
+    });
   });
-});
 /** @internal */
 export type AudioURLChunk$Outbound = {
   type: "audio_url";
@@ -82,7 +75,6 @@ export type AudioURLChunk$Outbound = {
 /** @internal */
 export const AudioURLChunk$outboundSchema: z.ZodType<
   AudioURLChunk$Outbound,
-  z.ZodTypeDef,
   AudioURLChunk
 > = z.object({
   type: z.literal("audio_url"),

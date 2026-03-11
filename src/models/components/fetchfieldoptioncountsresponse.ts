@@ -3,7 +3,7 @@
  * @generated-id: a3757d6a9be0
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,7 +19,6 @@ export type FetchFieldOptionCountsResponse = {
 /** @internal */
 export const FetchFieldOptionCountsResponse$inboundSchema: z.ZodType<
   FetchFieldOptionCountsResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   counts: z.array(FieldOptionCountItem$inboundSchema),

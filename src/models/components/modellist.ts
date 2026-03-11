@@ -3,7 +3,7 @@
  * @generated-id: 6b955609daf1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
@@ -27,14 +27,11 @@ export type ModelList = {
 };
 
 /** @internal */
-export const ModelListData$inboundSchema: z.ZodType<
-  ModelListData,
-  z.ZodTypeDef,
-  unknown
-> = discriminatedUnion("type", {
-  base: BaseModelCard$inboundSchema,
-  ["fine-tuned"]: FTModelCard$inboundSchema,
-});
+export const ModelListData$inboundSchema: z.ZodType<ModelListData, unknown> =
+  discriminatedUnion("type", {
+    base: BaseModelCard$inboundSchema,
+    ["fine-tuned"]: FTModelCard$inboundSchema,
+  });
 
 export function modelListDataFromJSON(
   jsonString: string,
@@ -47,11 +44,7 @@ export function modelListDataFromJSON(
 }
 
 /** @internal */
-export const ModelList$inboundSchema: z.ZodType<
-  ModelList,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ModelList$inboundSchema: z.ZodType<ModelList, unknown> = z.object({
   object: z.string().default("list"),
   data: z.array(
     discriminatedUnion("type", {

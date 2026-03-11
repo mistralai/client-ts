@@ -3,7 +3,7 @@
  * @generated-id: 63ebb118464e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -42,7 +42,6 @@ export type ModerationLlmv1Config = {
 /** @internal */
 export const ModerationLlmv1Config$inboundSchema: z.ZodType<
   ModerationLlmv1Config,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   model_name: z.string().default("mistral-moderation-2411"),
@@ -72,7 +71,6 @@ export type ModerationLlmv1Config$Outbound = {
 /** @internal */
 export const ModerationLlmv1Config$outboundSchema: z.ZodType<
   ModerationLlmv1Config$Outbound,
-  z.ZodTypeDef,
   ModerationLlmv1Config
 > = z.object({
   modelName: z.string().default("mistral-moderation-2411"),

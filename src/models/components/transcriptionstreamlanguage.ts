@@ -3,7 +3,7 @@
  * @generated-id: ab52ad6e0ffc
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,7 +18,6 @@ export type TranscriptionStreamLanguage = {
 /** @internal */
 export const TranscriptionStreamLanguage$inboundSchema: z.ZodType<
   TranscriptionStreamLanguage,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("transcription.language"),
@@ -38,7 +37,6 @@ export type TranscriptionStreamLanguage$Outbound = {
 /** @internal */
 export const TranscriptionStreamLanguage$outboundSchema: z.ZodType<
   TranscriptionStreamLanguage$Outbound,
-  z.ZodTypeDef,
   TranscriptionStreamLanguage
 > = z.object({
   type: z.literal("transcription.language"),

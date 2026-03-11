@@ -3,7 +3,7 @@
  * @generated-id: 870efb4d4ed0
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -24,7 +24,6 @@ export type JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJu
 export const JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest$outboundSchema:
   z.ZodType<
     JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest$Outbound,
-    z.ZodTypeDef,
     JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest
   > = z.object({
     datasetRecordId: z.string(),

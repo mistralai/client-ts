@@ -3,7 +3,7 @@
  * @generated-id: 6e93495032d1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -30,34 +30,31 @@ export type BaseModelCard = {
 };
 
 /** @internal */
-export const BaseModelCard$inboundSchema: z.ZodType<
-  BaseModelCard,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  object: z.string().default("model"),
-  created: z.number().int().optional(),
-  owned_by: z.string().default("mistralai"),
-  capabilities: ModelCapabilities$inboundSchema,
-  name: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  max_context_length: z.number().int().default(32768),
-  aliases: z.array(z.string()).optional(),
-  deprecation: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deprecation_replacement_model: z.nullable(z.string()).optional(),
-  default_model_temperature: z.nullable(z.number()).optional(),
-  type: z.literal("base"),
-}).transform((v) => {
-  return remap$(v, {
-    "owned_by": "ownedBy",
-    "max_context_length": "maxContextLength",
-    "deprecation_replacement_model": "deprecationReplacementModel",
-    "default_model_temperature": "defaultModelTemperature",
+export const BaseModelCard$inboundSchema: z.ZodType<BaseModelCard, unknown> = z
+  .object({
+    id: z.string(),
+    object: z.string().default("model"),
+    created: z.int().optional(),
+    owned_by: z.string().default("mistralai"),
+    capabilities: ModelCapabilities$inboundSchema,
+    name: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    max_context_length: z.int().default(32768),
+    aliases: z.array(z.string()).optional(),
+    deprecation: z.nullable(
+      z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deprecation_replacement_model: z.nullable(z.string()).optional(),
+    default_model_temperature: z.nullable(z.number()).optional(),
+    type: z.literal("base"),
+  }).transform((v) => {
+    return remap$(v, {
+      "owned_by": "ownedBy",
+      "max_context_length": "maxContextLength",
+      "deprecation_replacement_model": "deprecationReplacementModel",
+      "default_model_temperature": "defaultModelTemperature",
+    });
   });
-});
 
 export function baseModelCardFromJSON(
   jsonString: string,

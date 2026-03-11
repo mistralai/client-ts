@@ -8,6 +8,7 @@ import { ChatCompletionRequest } from "@mistralai/mistralai-azure/models/compone
 let value: ChatCompletionRequest = {
   messages: [
     {
+      role: "user",
       content: "Who is the best French painter? Answer in one short sentence.",
     },
   ],

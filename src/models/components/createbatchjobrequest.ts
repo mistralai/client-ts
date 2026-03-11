@@ -3,7 +3,7 @@
  * @generated-id: 5e267642c095
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ApiEndpoint, ApiEndpoint$outboundSchema } from "./apiendpoint.js";
 import {
@@ -51,7 +51,6 @@ export type CreateBatchJobRequest$Outbound = {
 /** @internal */
 export const CreateBatchJobRequest$outboundSchema: z.ZodType<
   CreateBatchJobRequest$Outbound,
-  z.ZodTypeDef,
   CreateBatchJobRequest
 > = z.object({
   inputFiles: z.nullable(z.array(z.string())).optional(),
@@ -59,8 +58,8 @@ export const CreateBatchJobRequest$outboundSchema: z.ZodType<
   endpoint: ApiEndpoint$outboundSchema,
   model: z.nullable(z.string()).optional(),
   agentId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-  timeoutHours: z.number().int().default(24),
+  metadata: z.nullable(z.record(z.string(), z.string())).optional(),
+  timeoutHours: z.int().default(24),
 }).transform((v) => {
   return remap$(v, {
     inputFiles: "input_files",

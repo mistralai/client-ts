@@ -3,7 +3,7 @@
  * @generated-id: 6a858448dfd1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const TimestampGranularity = {
@@ -13,6 +13,6 @@ export const TimestampGranularity = {
 export type TimestampGranularity = ClosedEnum<typeof TimestampGranularity>;
 
 /** @internal */
-export const TimestampGranularity$outboundSchema: z.ZodNativeEnum<
+export const TimestampGranularity$outboundSchema: z.ZodEnum<
   typeof TimestampGranularity
-> = z.nativeEnum(TimestampGranularity);
+> = z.enum(TimestampGranularity);

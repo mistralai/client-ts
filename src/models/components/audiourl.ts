@@ -3,7 +3,7 @@
  * @generated-id: 859d633d23a3
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,11 +21,7 @@ export type AudioURL = {
 };
 
 /** @internal */
-export const AudioURL$inboundSchema: z.ZodType<
-  AudioURL,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const AudioURL$inboundSchema: z.ZodType<AudioURL, unknown> = z.object({
   url: z.string(),
 });
 /** @internal */
@@ -34,13 +30,10 @@ export type AudioURL$Outbound = {
 };
 
 /** @internal */
-export const AudioURL$outboundSchema: z.ZodType<
-  AudioURL$Outbound,
-  z.ZodTypeDef,
-  AudioURL
-> = z.object({
-  url: z.string(),
-});
+export const AudioURL$outboundSchema: z.ZodType<AudioURL$Outbound, AudioURL> = z
+  .object({
+    url: z.string(),
+  });
 
 export function audioURLToJSON(audioURL: AudioURL): string {
   return JSON.stringify(AudioURL$outboundSchema.parse(audioURL));

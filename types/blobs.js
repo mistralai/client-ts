@@ -39,10 +39,10 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.blobLikeSchema = void 0;
 exports.isBlobLike = isBlobLike;
-const z = __importStar(require("zod/v3"));
+const z = __importStar(require("zod/v4"));
 exports.blobLikeSchema = z.custom(isBlobLike, {
     message: "expected a Blob, File or Blob-like object",
-    fatal: true,
+    abort: true,
 });
 function isBlobLike(val) {
     if (val instanceof Blob) {

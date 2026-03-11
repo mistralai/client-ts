@@ -3,7 +3,7 @@
  * @generated-id: 1fc1b0454261
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   SystemMessageContentChunks,
   SystemMessageContentChunks$Outbound,
@@ -25,7 +25,6 @@ export type SystemMessageContent$Outbound =
 /** @internal */
 export const SystemMessageContent$outboundSchema: z.ZodType<
   SystemMessageContent$Outbound,
-  z.ZodTypeDef,
   SystemMessageContent
 > = z.union([z.string(), z.array(SystemMessageContentChunks$outboundSchema)]);
 
@@ -46,7 +45,6 @@ export type SystemMessage$Outbound = {
 /** @internal */
 export const SystemMessage$outboundSchema: z.ZodType<
   SystemMessage$Outbound,
-  z.ZodTypeDef,
   SystemMessage
 > = z.object({
   role: z.literal("system"),

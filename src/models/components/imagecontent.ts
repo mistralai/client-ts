@@ -3,7 +3,7 @@
  * @generated-id: 04f3f3bb74fa
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -23,21 +23,18 @@ export type ImageContent = {
 };
 
 /** @internal */
-export const ImageContent$inboundSchema: z.ZodType<
-  ImageContent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("image"),
-  data: z.string(),
-  mimeType: z.string(),
-  annotations: z.nullable(Annotations$inboundSchema).optional(),
-  _meta: z.nullable(z.record(z.any())).optional(),
-}).catchall(z.any()).transform((v) => {
-  return remap$(v, {
-    "_meta": "meta",
+export const ImageContent$inboundSchema: z.ZodType<ImageContent, unknown> = z
+  .object({
+    type: z.literal("image"),
+    data: z.string(),
+    mimeType: z.string(),
+    annotations: z.nullable(Annotations$inboundSchema).optional(),
+    _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+  }).catchall(z.any()).transform((v) => {
+    return remap$(v, {
+      "_meta": "meta",
+    });
   });
-});
 
 export function imageContentFromJSON(
   jsonString: string,

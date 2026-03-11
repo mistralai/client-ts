@@ -3,7 +3,7 @@
  * @generated-id: 10bfea3d4e74
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -26,7 +26,6 @@ export type GuardrailConfig = {
 /** @internal */
 export const GuardrailConfig$inboundSchema: z.ZodType<
   GuardrailConfig,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   block_on_error: z.boolean().default(false),
@@ -46,7 +45,6 @@ export type GuardrailConfig$Outbound = {
 /** @internal */
 export const GuardrailConfig$outboundSchema: z.ZodType<
   GuardrailConfig$Outbound,
-  z.ZodTypeDef,
   GuardrailConfig
 > = z.object({
   blockOnError: z.boolean().default(false),

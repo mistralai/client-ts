@@ -3,7 +3,7 @@
  * @generated-id: 6c5cbcaf58d4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   FunctionT,
   FunctionT$Outbound,
@@ -23,11 +23,10 @@ export type Tool$Outbound = {
 };
 
 /** @internal */
-export const Tool$outboundSchema: z.ZodType<Tool$Outbound, z.ZodTypeDef, Tool> =
-  z.object({
-    type: ToolTypes$outboundSchema.optional(),
-    function: FunctionT$outboundSchema,
-  });
+export const Tool$outboundSchema: z.ZodType<Tool$Outbound, Tool> = z.object({
+  type: ToolTypes$outboundSchema.optional(),
+  function: FunctionT$outboundSchema,
+});
 
 export function toolToJSON(tool: Tool): string {
   return JSON.stringify(Tool$outboundSchema.parse(tool));

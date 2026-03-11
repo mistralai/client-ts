@@ -3,7 +3,7 @@
  * @generated-id: 2b053ccea202
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -21,31 +21,26 @@ export type Dataset = {
 };
 
 /** @internal */
-export const Dataset$inboundSchema: z.ZodType<Dataset, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    deleted_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    name: z.string(),
-    description: z.string(),
-    owner_id: z.string(),
-    workspace_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "deleted_at": "deletedAt",
-      "owner_id": "ownerId",
-      "workspace_id": "workspaceId",
-    });
+export const Dataset$inboundSchema: z.ZodType<Dataset, unknown> = z.object({
+  id: z.string(),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  deleted_at: z.nullable(
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  ),
+  name: z.string(),
+  description: z.string(),
+  owner_id: z.string(),
+  workspace_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+    "deleted_at": "deletedAt",
+    "owner_id": "ownerId",
+    "workspace_id": "workspaceId",
   });
+});
 
 export function datasetFromJSON(
   jsonString: string,

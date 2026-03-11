@@ -3,7 +3,7 @@
  * @generated-id: 7fdaeed4d2bf
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -25,7 +25,7 @@ export type FilterGroup = {
 export type And = FilterCondition | FilterGroup;
 
 /** @internal */
-export const Or$inboundSchema: z.ZodType<Or, z.ZodTypeDef, unknown> = z.union([
+export const Or$inboundSchema: z.ZodType<Or, unknown> = z.union([
   FilterCondition$inboundSchema,
   z.lazy(() => FilterGroup$inboundSchema),
 ]);
@@ -33,11 +33,10 @@ export const Or$inboundSchema: z.ZodType<Or, z.ZodTypeDef, unknown> = z.union([
 export type Or$Outbound = FilterCondition$Outbound | FilterGroup$Outbound;
 
 /** @internal */
-export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
-  .union([
-    FilterCondition$outboundSchema,
-    z.lazy(() => FilterGroup$outboundSchema),
-  ]);
+export const Or$outboundSchema: z.ZodType<Or$Outbound, Or> = z.union([
+  FilterCondition$outboundSchema,
+  z.lazy(() => FilterGroup$outboundSchema),
+]);
 
 export function orToJSON(or: Or): string {
   return JSON.stringify(Or$outboundSchema.parse(or));
@@ -53,29 +52,26 @@ export function orFromJSON(
 }
 
 /** @internal */
-export const FilterGroup$inboundSchema: z.ZodType<
-  FilterGroup,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  AND: z.nullable(
-    z.array(z.union([
-      FilterCondition$inboundSchema,
-      z.lazy(() => FilterGroup$inboundSchema),
-    ])),
-  ).optional(),
-  OR: z.nullable(
-    z.array(z.union([
-      FilterCondition$inboundSchema,
-      z.lazy(() => FilterGroup$inboundSchema),
-    ])),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "AND": "and",
-    "OR": "or",
+export const FilterGroup$inboundSchema: z.ZodType<FilterGroup, unknown> = z
+  .object({
+    AND: z.nullable(
+      z.array(z.union([
+        FilterCondition$inboundSchema,
+        z.lazy(() => FilterGroup$inboundSchema),
+      ])),
+    ).optional(),
+    OR: z.nullable(
+      z.array(z.union([
+        FilterCondition$inboundSchema,
+        z.lazy(() => FilterGroup$inboundSchema),
+      ])),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "AND": "and",
+      "OR": "or",
+    });
   });
-});
 /** @internal */
 export type FilterGroup$Outbound = {
   AND?:
@@ -91,7 +87,6 @@ export type FilterGroup$Outbound = {
 /** @internal */
 export const FilterGroup$outboundSchema: z.ZodType<
   FilterGroup$Outbound,
-  z.ZodTypeDef,
   FilterGroup
 > = z.object({
   and: z.nullable(
@@ -127,18 +122,18 @@ export function filterGroupFromJSON(
 }
 
 /** @internal */
-export const And$inboundSchema: z.ZodType<And, z.ZodTypeDef, unknown> = z.union(
-  [FilterCondition$inboundSchema, z.lazy(() => FilterGroup$inboundSchema)],
-);
+export const And$inboundSchema: z.ZodType<And, unknown> = z.union([
+  FilterCondition$inboundSchema,
+  z.lazy(() => FilterGroup$inboundSchema),
+]);
 /** @internal */
 export type And$Outbound = FilterCondition$Outbound | FilterGroup$Outbound;
 
 /** @internal */
-export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
-  .union([
-    FilterCondition$outboundSchema,
-    z.lazy(() => FilterGroup$outboundSchema),
-  ]);
+export const And$outboundSchema: z.ZodType<And$Outbound, And> = z.union([
+  FilterCondition$outboundSchema,
+  z.lazy(() => FilterGroup$outboundSchema),
+]);
 
 export function andToJSON(and: And): string {
   return JSON.stringify(And$outboundSchema.parse(and));

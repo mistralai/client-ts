@@ -3,7 +3,7 @@
  * @generated-id: a3c3f908ad8a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -22,18 +22,12 @@ export type Connector = {
 };
 
 /** @internal */
-export const Connector$inboundSchema: z.ZodType<
-  Connector,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  modified_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  modified_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   server: z.nullable(z.string()).optional(),
   auth_type: z.nullable(z.string()).optional(),
   tools: z.nullable(z.array(ConnectorTool$inboundSchema)).optional(),

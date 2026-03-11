@@ -3,7 +3,7 @@
  * @generated-id: 425f140ce230
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,7 +22,6 @@ export type RealtimeTranscriptionError = {
 /** @internal */
 export const RealtimeTranscriptionError$inboundSchema: z.ZodType<
   RealtimeTranscriptionError,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("error").default("error"),
@@ -37,7 +36,6 @@ export type RealtimeTranscriptionError$Outbound = {
 /** @internal */
 export const RealtimeTranscriptionError$outboundSchema: z.ZodType<
   RealtimeTranscriptionError$Outbound,
-  z.ZodTypeDef,
   RealtimeTranscriptionError
 > = z.object({
   type: z.literal("error").default("error" as const),

@@ -3,7 +3,7 @@
  * @generated-id: 43cd30dc4254
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -56,7 +56,6 @@ export type ConversationResponse = {
 /** @internal */
 export const ConversationResponseOutput$inboundSchema: z.ZodType<
   ConversationResponseOutput,
-  z.ZodTypeDef,
   unknown
 > = z.union([
   AgentHandoffEntry$inboundSchema,
@@ -76,11 +75,9 @@ export function conversationResponseOutputFromJSON(
 }
 
 /** @internal */
-export const Guardrail$inboundSchema: z.ZodType<
-  Guardrail,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
+export const Guardrail$inboundSchema: z.ZodType<Guardrail, unknown> = z.object(
+  {},
+);
 
 export function guardrailFromJSON(
   jsonString: string,
@@ -95,7 +92,6 @@ export function guardrailFromJSON(
 /** @internal */
 export const ConversationResponse$inboundSchema: z.ZodType<
   ConversationResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("conversation.response").default("conversation.response"),

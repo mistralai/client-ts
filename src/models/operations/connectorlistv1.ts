@@ -3,7 +3,7 @@
  * @generated-id: 43be3796453a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -23,12 +23,11 @@ export type ConnectorListV1Request$Outbound = {
 /** @internal */
 export const ConnectorListV1Request$outboundSchema: z.ZodType<
   ConnectorListV1Request$Outbound,
-  z.ZodTypeDef,
   ConnectorListV1Request
 > = z.object({
   queryFilters: components.ConnectorsQueryFilters$outboundSchema.optional(),
   cursor: z.nullable(z.string()).optional(),
-  pageSize: z.number().int().default(100),
+  pageSize: z.int().default(100),
 }).transform((v) => {
   return remap$(v, {
     queryFilters: "query_filters",

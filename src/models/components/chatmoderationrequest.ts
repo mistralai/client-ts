@@ -3,7 +3,7 @@
  * @generated-id: 1b4649c18a8c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   AssistantMessage,
@@ -89,7 +89,6 @@ export type ChatModerationRequestInputs2$Outbound =
 /** @internal */
 export const ChatModerationRequestInputs2$outboundSchema: z.ZodType<
   ChatModerationRequestInputs2$Outbound,
-  z.ZodTypeDef,
   ChatModerationRequestInputs2
 > = z.union([
   AssistantMessage$outboundSchema.and(
@@ -120,7 +119,6 @@ export type ChatModerationRequestInputs1$Outbound =
 /** @internal */
 export const ChatModerationRequestInputs1$outboundSchema: z.ZodType<
   ChatModerationRequestInputs1$Outbound,
-  z.ZodTypeDef,
   ChatModerationRequestInputs1
 > = z.union([
   AssistantMessage$outboundSchema.and(
@@ -161,7 +159,6 @@ export type ChatModerationRequestInputs3$Outbound =
 /** @internal */
 export const ChatModerationRequestInputs3$outboundSchema: z.ZodType<
   ChatModerationRequestInputs3$Outbound,
-  z.ZodTypeDef,
   ChatModerationRequestInputs3
 > = z.union([
   z.array(
@@ -221,7 +218,6 @@ export type ChatModerationRequest$Outbound = {
 /** @internal */
 export const ChatModerationRequest$outboundSchema: z.ZodType<
   ChatModerationRequest$Outbound,
-  z.ZodTypeDef,
   ChatModerationRequest
 > = z.object({
   inputs: z.union([

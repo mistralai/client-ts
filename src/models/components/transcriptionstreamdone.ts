@@ -3,7 +3,7 @@
  * @generated-id: 995e63ce114c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,7 +33,6 @@ export type TranscriptionStreamDone = {
 /** @internal */
 export const TranscriptionStreamDone$inboundSchema: z.ZodType<
   TranscriptionStreamDone,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   model: z.string(),
@@ -57,7 +56,6 @@ export type TranscriptionStreamDone$Outbound = {
 /** @internal */
 export const TranscriptionStreamDone$outboundSchema: z.ZodType<
   TranscriptionStreamDone$Outbound,
-  z.ZodTypeDef,
   TranscriptionStreamDone
 > = z.object({
   model: z.string(),

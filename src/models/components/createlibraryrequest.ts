@@ -3,7 +3,7 @@
  * @generated-id: 916342b231d4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type CreateLibraryRequest = {
@@ -22,12 +22,11 @@ export type CreateLibraryRequest$Outbound = {
 /** @internal */
 export const CreateLibraryRequest$outboundSchema: z.ZodType<
   CreateLibraryRequest$Outbound,
-  z.ZodTypeDef,
   CreateLibraryRequest
 > = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  chunkSize: z.nullable(z.number().int()).optional(),
+  chunkSize: z.nullable(z.int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     chunkSize: "chunk_size",

@@ -3,7 +3,7 @@
  * @generated-id: 51417fff99a1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -26,20 +26,17 @@ export type Checkpoint = {
 };
 
 /** @internal */
-export const Checkpoint$inboundSchema: z.ZodType<
-  Checkpoint,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  metrics: Metric$inboundSchema,
-  step_number: z.number().int(),
-  created_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "step_number": "stepNumber",
-    "created_at": "createdAt",
+export const Checkpoint$inboundSchema: z.ZodType<Checkpoint, unknown> = z
+  .object({
+    metrics: Metric$inboundSchema,
+    step_number: z.int(),
+    created_at: z.int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "step_number": "stepNumber",
+      "created_at": "createdAt",
+    });
   });
-});
 
 export function checkpointFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  * @generated-id: 4940aefe2dff
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   CreateJudgeRequest,
@@ -23,7 +23,6 @@ export type JudgeDatasetRecordRequest$Outbound = {
 /** @internal */
 export const JudgeDatasetRecordRequest$outboundSchema: z.ZodType<
   JudgeDatasetRecordRequest$Outbound,
-  z.ZodTypeDef,
   JudgeDatasetRecordRequest
 > = z.object({
   judgeDefinition: CreateJudgeRequest$outboundSchema,

@@ -492,6 +492,10 @@ export function appendForm(
     fd.append(key, value, fileName);
   } else if (value instanceof Blob) {
     fd.append(key, value);
+  } else if (Array.isArray(value)) {
+    value.forEach((v) => {
+      appendForm(fd, key, v);
+    });
   } else {
     fd.append(key, String(value));
   }

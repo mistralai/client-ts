@@ -3,7 +3,7 @@
  * @generated-id: 378b7105180c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,9 +29,8 @@ export type RealtimeTranscriptionErrorDetail = {
 /** @internal */
 export const RealtimeTranscriptionErrorDetailMessage$inboundSchema: z.ZodType<
   RealtimeTranscriptionErrorDetailMessage,
-  z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.record(z.any())]);
+> = z.union([z.string(), z.record(z.string(), z.any())]);
 /** @internal */
 export type RealtimeTranscriptionErrorDetailMessage$Outbound = string | {
   [k: string]: any;
@@ -40,9 +39,8 @@ export type RealtimeTranscriptionErrorDetailMessage$Outbound = string | {
 /** @internal */
 export const RealtimeTranscriptionErrorDetailMessage$outboundSchema: z.ZodType<
   RealtimeTranscriptionErrorDetailMessage$Outbound,
-  z.ZodTypeDef,
   RealtimeTranscriptionErrorDetailMessage
-> = z.union([z.string(), z.record(z.any())]);
+> = z.union([z.string(), z.record(z.string(), z.any())]);
 
 export function realtimeTranscriptionErrorDetailMessageToJSON(
   realtimeTranscriptionErrorDetailMessage:
@@ -73,11 +71,10 @@ export function realtimeTranscriptionErrorDetailMessageFromJSON(
 /** @internal */
 export const RealtimeTranscriptionErrorDetail$inboundSchema: z.ZodType<
   RealtimeTranscriptionErrorDetail,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  message: z.union([z.string(), z.record(z.any())]),
-  code: z.number().int(),
+  message: z.union([z.string(), z.record(z.string(), z.any())]),
+  code: z.int(),
 });
 /** @internal */
 export type RealtimeTranscriptionErrorDetail$Outbound = {
@@ -88,11 +85,10 @@ export type RealtimeTranscriptionErrorDetail$Outbound = {
 /** @internal */
 export const RealtimeTranscriptionErrorDetail$outboundSchema: z.ZodType<
   RealtimeTranscriptionErrorDetail$Outbound,
-  z.ZodTypeDef,
   RealtimeTranscriptionErrorDetail
 > = z.object({
-  message: z.union([z.string(), z.record(z.any())]),
-  code: z.number().int(),
+  message: z.union([z.string(), z.record(z.string(), z.any())]),
+  code: z.int(),
 });
 
 export function realtimeTranscriptionErrorDetailToJSON(

@@ -3,7 +3,7 @@
  * @generated-id: ecc43dadef3c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   AuthData,
@@ -62,7 +62,6 @@ export type CreateConnectorRequest$Outbound = {
 /** @internal */
 export const CreateConnectorRequest$outboundSchema: z.ZodType<
   CreateConnectorRequest$Outbound,
-  z.ZodTypeDef,
   CreateConnectorRequest
 > = z.object({
   name: z.string(),
@@ -70,7 +69,7 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   iconUrl: z.nullable(z.string()).optional(),
   visibility: ResourceVisibility$outboundSchema.optional(),
   server: z.string(),
-  headers: z.nullable(z.record(z.any())).optional(),
+  headers: z.nullable(z.record(z.string(), z.any())).optional(),
   authData: z.nullable(AuthData$outboundSchema).optional(),
   systemPrompt: z.nullable(z.string()).optional(),
 }).transform((v) => {

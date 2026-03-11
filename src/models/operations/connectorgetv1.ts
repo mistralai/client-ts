@@ -3,7 +3,7 @@
  * @generated-id: b0481daa787c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ConnectorGetV1Request = {
@@ -28,7 +28,6 @@ export type ConnectorGetV1Request$Outbound = {
 /** @internal */
 export const ConnectorGetV1Request$outboundSchema: z.ZodType<
   ConnectorGetV1Request$Outbound,
-  z.ZodTypeDef,
   ConnectorGetV1Request
 > = z.object({
   fetchCustomerData: z.boolean().default(false),

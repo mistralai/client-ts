@@ -3,7 +3,7 @@
  * @generated-id: 88ff98a41be9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4/core";
 import { MistralError } from "./mistralerror.js";
 import { formatZodError } from "./sdkvalidationerror.js";
 
@@ -42,7 +42,7 @@ export class ResponseValidationError extends MistralError {
    * default error message.
    */
   public pretty(): string {
-    if (this.cause instanceof z.ZodError) {
+    if (this.cause instanceof z.$ZodError) {
       return `${this.rawMessage}\n${formatZodError(this.cause)}`;
     } else {
       return this.toString();

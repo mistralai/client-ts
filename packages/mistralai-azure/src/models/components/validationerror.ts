@@ -3,7 +3,7 @@
  * @generated-id: ecb7ef0a0ee3
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,9 +21,10 @@ export type ValidationError = {
 };
 
 /** @internal */
-export const Loc$inboundSchema: z.ZodType<Loc, z.ZodTypeDef, unknown> = z.union(
-  [z.string(), z.number().int()],
-);
+export const Loc$inboundSchema: z.ZodType<Loc, unknown> = z.union([
+  z.string(),
+  z.int(),
+]);
 
 export function locFromJSON(
   jsonString: string,
@@ -36,8 +37,7 @@ export function locFromJSON(
 }
 
 /** @internal */
-export const Context$inboundSchema: z.ZodType<Context, z.ZodTypeDef, unknown> =
-  z.object({});
+export const Context$inboundSchema: z.ZodType<Context, unknown> = z.object({});
 
 export function contextFromJSON(
   jsonString: string,
@@ -52,10 +52,9 @@ export function contextFromJSON(
 /** @internal */
 export const ValidationError$inboundSchema: z.ZodType<
   ValidationError,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  loc: z.array(z.union([z.string(), z.number().int()])),
+  loc: z.array(z.union([z.string(), z.int()])),
   msg: z.string(),
   type: z.string(),
   input: z.any().optional(),

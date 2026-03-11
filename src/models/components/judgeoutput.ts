@@ -3,7 +3,7 @@
  * @generated-id: b36c9deaf6ca
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,8 +16,10 @@ export type JudgeOutput = {
 };
 
 /** @internal */
-export const Answer$inboundSchema: z.ZodType<Answer, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number()]);
+export const Answer$inboundSchema: z.ZodType<Answer, unknown> = z.union([
+  z.string(),
+  z.number(),
+]);
 
 export function answerFromJSON(
   jsonString: string,
@@ -30,14 +32,11 @@ export function answerFromJSON(
 }
 
 /** @internal */
-export const JudgeOutput$inboundSchema: z.ZodType<
-  JudgeOutput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  analysis: z.string(),
-  answer: z.union([z.string(), z.number()]),
-});
+export const JudgeOutput$inboundSchema: z.ZodType<JudgeOutput, unknown> = z
+  .object({
+    analysis: z.string(),
+    answer: z.union([z.string(), z.number()]),
+  });
 
 export function judgeOutputFromJSON(
   jsonString: string,

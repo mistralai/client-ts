@@ -3,7 +3,7 @@
  * @generated-id: 7240d8ca01c9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const RequestSource = {
@@ -14,6 +14,5 @@ export const RequestSource = {
 export type RequestSource = ClosedEnum<typeof RequestSource>;
 
 /** @internal */
-export const RequestSource$outboundSchema: z.ZodNativeEnum<
-  typeof RequestSource
-> = z.nativeEnum(RequestSource);
+export const RequestSource$outboundSchema: z.ZodEnum<typeof RequestSource> = z
+  .enum(RequestSource);

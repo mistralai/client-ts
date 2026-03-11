@@ -3,7 +3,7 @@
  * @generated-id: 0b9910001bd2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -16,14 +16,8 @@ export const ToolChoiceEnum = {
 export type ToolChoiceEnum = OpenEnum<typeof ToolChoiceEnum>;
 
 /** @internal */
-export const ToolChoiceEnum$inboundSchema: z.ZodType<
-  ToolChoiceEnum,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(ToolChoiceEnum);
+export const ToolChoiceEnum$inboundSchema: z.ZodType<ToolChoiceEnum, unknown> =
+  openEnums.inboundSchema(ToolChoiceEnum);
 /** @internal */
-export const ToolChoiceEnum$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  ToolChoiceEnum
-> = openEnums.outboundSchema(ToolChoiceEnum);
+export const ToolChoiceEnum$outboundSchema: z.ZodType<string, ToolChoiceEnum> =
+  openEnums.outboundSchema(ToolChoiceEnum);

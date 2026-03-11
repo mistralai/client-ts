@@ -3,7 +3,7 @@
  * @generated-id: ac230a0cf631
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -22,7 +22,6 @@ export type ListChatCompletionFieldsResponse = {
 /** @internal */
 export const ListChatCompletionFieldsResponse$inboundSchema: z.ZodType<
   ListChatCompletionFieldsResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   field_definitions: z.array(BaseFieldDefinition$inboundSchema),

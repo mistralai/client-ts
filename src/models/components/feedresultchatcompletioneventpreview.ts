@@ -3,7 +3,7 @@
  * @generated-id: 1c33cbe2bf8b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,7 +21,6 @@ export type FeedResultChatCompletionEventPreview = {
 /** @internal */
 export const FeedResultChatCompletionEventPreview$inboundSchema: z.ZodType<
   FeedResultChatCompletionEventPreview,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   results: z.array(ChatCompletionEventPreview$inboundSchema).optional(),

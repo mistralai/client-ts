@@ -3,7 +3,7 @@
  * @generated-id: 176e401a7951
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -36,32 +36,27 @@ export type ConnectorTool = {
 };
 
 /** @internal */
-export const ConnectorTool$inboundSchema: z.ZodType<
-  ConnectorTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string(),
-  system_prompt: z.nullable(z.string()).optional(),
-  locale: z.nullable(ConnectorToolLocale$inboundSchema).optional(),
-  jsonschema: z.nullable(z.record(z.any())).optional(),
-  execution_config: z.nullable(ExecutionConfig$inboundSchema),
-  visibility: ResourceVisibility$inboundSchema,
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  modified_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  active: z.nullable(z.boolean()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "system_prompt": "systemPrompt",
-    "execution_config": "executionConfig",
-    "created_at": "createdAt",
-    "modified_at": "modifiedAt",
+export const ConnectorTool$inboundSchema: z.ZodType<ConnectorTool, unknown> = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    description: z.string(),
+    system_prompt: z.nullable(z.string()).optional(),
+    locale: z.nullable(ConnectorToolLocale$inboundSchema).optional(),
+    jsonschema: z.nullable(z.record(z.string(), z.any())).optional(),
+    execution_config: z.nullable(ExecutionConfig$inboundSchema),
+    visibility: ResourceVisibility$inboundSchema,
+    created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+    modified_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+    active: z.nullable(z.boolean()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "system_prompt": "systemPrompt",
+      "execution_config": "executionConfig",
+      "created_at": "createdAt",
+      "modified_at": "modifiedAt",
+    });
   });
-});
 
 export function connectorToolFromJSON(
   jsonString: string,

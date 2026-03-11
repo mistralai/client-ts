@@ -3,7 +3,7 @@
  * @generated-id: 3df94bfaf195
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -19,14 +19,8 @@ export const BatchJobStatus = {
 export type BatchJobStatus = OpenEnum<typeof BatchJobStatus>;
 
 /** @internal */
-export const BatchJobStatus$inboundSchema: z.ZodType<
-  BatchJobStatus,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(BatchJobStatus);
+export const BatchJobStatus$inboundSchema: z.ZodType<BatchJobStatus, unknown> =
+  openEnums.inboundSchema(BatchJobStatus);
 /** @internal */
-export const BatchJobStatus$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  BatchJobStatus
-> = openEnums.outboundSchema(BatchJobStatus);
+export const BatchJobStatus$outboundSchema: z.ZodType<string, BatchJobStatus> =
+  openEnums.outboundSchema(BatchJobStatus);

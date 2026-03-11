@@ -3,7 +3,7 @@
  * @generated-id: 336e7d0f7101
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { MistralCore } from "../core.js";
 import { appendForm } from "../lib/encodings.js";
 import { EventStream } from "../lib/event-streams.js";
@@ -108,17 +108,6 @@ async function $do(
         || "application/octet-stream";
       const blob = new Blob([buffer], { type: contentType });
       appendForm(body, "file", blob, payload.file.fileName);
-    } else if (payload.file.content instanceof Uint8Array) {
-      const contentType = getContentTypeFromFileName(payload.file.fileName)
-        || "application/octet-stream";
-      appendForm(
-        body,
-        "file",
-        new Blob([new Uint8Array(payload.file.content).buffer], {
-          type: contentType,
-        }),
-        payload.file.fileName,
-      );
     } else {
       const contentType = getContentTypeFromFileName(payload.file.fileName)
         || "application/octet-stream";
@@ -217,11 +206,10 @@ async function $do(
   >(
     M.sse(
       200,
-      z.instanceof(ReadableStream<Uint8Array>)
+      z.custom<ReadableStream<Uint8Array>>(x => x instanceof ReadableStream)
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
             return {
-              done: false,
               value: components.TranscriptionStreamEvents$inboundSchema.parse(
                 rawEvent,
               ),

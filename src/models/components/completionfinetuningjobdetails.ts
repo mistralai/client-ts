@@ -3,7 +3,7 @@
  * @generated-id: 0a16fbc0ad16
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -74,14 +74,12 @@ export type CompletionFineTuningJobDetails = {
 /** @internal */
 export const CompletionFineTuningJobDetailsStatus$inboundSchema: z.ZodType<
   CompletionFineTuningJobDetailsStatus,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(CompletionFineTuningJobDetailsStatus);
 
 /** @internal */
 export const CompletionFineTuningJobDetailsIntegration$inboundSchema: z.ZodType<
   CompletionFineTuningJobDetailsIntegration,
-  z.ZodTypeDef,
   unknown
 > = WandbIntegrationResult$inboundSchema;
 
@@ -104,7 +102,6 @@ export function completionFineTuningJobDetailsIntegrationFromJSON(
 /** @internal */
 export const CompletionFineTuningJobDetailsRepository$inboundSchema: z.ZodType<
   CompletionFineTuningJobDetailsRepository,
-  z.ZodTypeDef,
   unknown
 > = GithubRepository$inboundSchema;
 
@@ -127,15 +124,14 @@ export function completionFineTuningJobDetailsRepositoryFromJSON(
 /** @internal */
 export const CompletionFineTuningJobDetails$inboundSchema: z.ZodType<
   CompletionFineTuningJobDetails,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   auto_start: z.boolean(),
   model: z.string(),
   status: CompletionFineTuningJobDetailsStatus$inboundSchema,
-  created_at: z.number().int(),
-  modified_at: z.number().int(),
+  created_at: z.int(),
+  modified_at: z.int(),
   training_files: z.array(z.string()),
   validation_files: z.nullable(z.array(z.string())).optional(),
   object: z.literal("job").default("job"),
@@ -143,7 +139,7 @@ export const CompletionFineTuningJobDetails$inboundSchema: z.ZodType<
   suffix: z.nullable(z.string()).optional(),
   integrations: z.nullable(z.array(WandbIntegrationResult$inboundSchema))
     .optional(),
-  trained_tokens: z.nullable(z.number().int()).optional(),
+  trained_tokens: z.nullable(z.int()).optional(),
   metadata: z.nullable(JobMetadata$inboundSchema).optional(),
   job_type: z.literal("completion"),
   hyperparameters: CompletionTrainingParameters$inboundSchema,

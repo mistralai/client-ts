@@ -3,7 +3,7 @@
  * @generated-id: b862a81bc0c1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,21 +50,20 @@ export type CreateFileResponse = {
 /** @internal */
 export const CreateFileResponse$inboundSchema: z.ZodType<
   CreateFileResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   object: z.string(),
-  bytes: z.number().int(),
-  created_at: z.number().int(),
+  bytes: z.int(),
+  created_at: z.int(),
   filename: z.string(),
   purpose: FilePurpose$inboundSchema,
   sample_type: SampleType$inboundSchema,
-  num_lines: z.nullable(z.number().int()).optional(),
+  num_lines: z.nullable(z.int()).optional(),
   mimetype: z.nullable(z.string()).optional(),
   source: Source$inboundSchema,
   signature: z.nullable(z.string()).optional(),
-  expires_at: z.nullable(z.number().int()).optional(),
+  expires_at: z.nullable(z.int()).optional(),
   visibility: z.nullable(FileVisibility$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

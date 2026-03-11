@@ -3,7 +3,7 @@
  * @generated-id: 7ba185bfa919
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type FileT = {
   fileName: string;
@@ -17,17 +17,13 @@ export type FileT$Outbound = {
 };
 
 /** @internal */
-export const FileT$outboundSchema: z.ZodType<
-  FileT$Outbound,
-  z.ZodTypeDef,
-  FileT
-> = z.object({
+export const FileT$outboundSchema: z.ZodType<FileT$Outbound, FileT> = z.object({
   fileName: z.string(),
   content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
+    z.custom<ReadableStream<Uint8Array>>(x => x instanceof ReadableStream),
+    z.custom<Blob>(x => x instanceof Blob),
+    z.custom<ArrayBuffer>(x => x instanceof ArrayBuffer),
+    z.custom<Uint8Array>(x => x instanceof Uint8Array),
   ]),
 });
 

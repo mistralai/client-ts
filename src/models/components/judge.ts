@@ -3,7 +3,7 @@
  * @generated-id: 73f9c10c8436
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
@@ -48,7 +48,6 @@ export type Judge = {
 /** @internal */
 export const JudgeOutputUnion$inboundSchema: z.ZodType<
   JudgeOutputUnion,
-  z.ZodTypeDef,
   unknown
 > = discriminatedUnion("type", {
   CLASSIFICATION: JudgeClassificationOutput$inboundSchema,
@@ -66,45 +65,40 @@ export function judgeOutputUnionFromJSON(
 }
 
 /** @internal */
-export const Judge$inboundSchema: z.ZodType<Judge, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    deleted_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    owner_id: z.string(),
-    workspace_id: z.string(),
-    name: z.string(),
-    description: z.string(),
-    model_name: z.string(),
-    output: discriminatedUnion("type", {
-      CLASSIFICATION: JudgeClassificationOutput$inboundSchema,
-      REGRESSION: JudgeRegressionOutput$inboundSchema,
-    }),
-    instructions: z.string(),
-    tools: z.array(z.string()),
-    up_revision: z.nullable(z.string()).optional(),
-    down_revision: z.nullable(z.string()).optional(),
-    base_revision: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "deleted_at": "deletedAt",
-      "owner_id": "ownerId",
-      "workspace_id": "workspaceId",
-      "model_name": "modelName",
-      "up_revision": "upRevision",
-      "down_revision": "downRevision",
-      "base_revision": "baseRevision",
-    });
+export const Judge$inboundSchema: z.ZodType<Judge, unknown> = z.object({
+  id: z.string(),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  deleted_at: z.nullable(
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  ),
+  owner_id: z.string(),
+  workspace_id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  model_name: z.string(),
+  output: discriminatedUnion("type", {
+    CLASSIFICATION: JudgeClassificationOutput$inboundSchema,
+    REGRESSION: JudgeRegressionOutput$inboundSchema,
+  }),
+  instructions: z.string(),
+  tools: z.array(z.string()),
+  up_revision: z.nullable(z.string()).optional(),
+  down_revision: z.nullable(z.string()).optional(),
+  base_revision: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+    "deleted_at": "deletedAt",
+    "owner_id": "ownerId",
+    "workspace_id": "workspaceId",
+    "model_name": "modelName",
+    "up_revision": "upRevision",
+    "down_revision": "downRevision",
+    "base_revision": "baseRevision",
   });
+});
 
 export function judgeFromJSON(
   jsonString: string,

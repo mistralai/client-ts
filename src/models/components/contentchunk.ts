@@ -3,7 +3,7 @@
  * @generated-id: 4b4abd9fb606
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
@@ -70,28 +70,25 @@ export type ContentChunk =
   | discriminatedUnionTypes.Unknown<"type">;
 
 /** @internal */
-export const ContentChunk$inboundSchema: z.ZodType<
-  ContentChunk,
-  z.ZodTypeDef,
-  unknown
-> = discriminatedUnion("type", {
-  image_url: ImageURLChunk$inboundSchema.and(
-    z.object({ type: z.literal("image_url") }),
-  ),
-  document_url: DocumentURLChunk$inboundSchema.and(
-    z.object({ type: z.literal("document_url") }),
-  ),
-  text: TextChunk$inboundSchema.and(z.object({ type: z.literal("text") })),
-  reference: ReferenceChunk$inboundSchema.and(
-    z.object({ type: z.literal("reference") }),
-  ),
-  file: FileChunk$inboundSchema.and(z.object({ type: z.literal("file") })),
-  thinking: ThinkChunk$inboundSchema.and(
-    z.object({ type: z.literal("thinking") }),
-  ),
-  input_audio: AudioChunk$inboundSchema,
-  audio_url: AudioURLChunk$inboundSchema,
-});
+export const ContentChunk$inboundSchema: z.ZodType<ContentChunk, unknown> =
+  discriminatedUnion("type", {
+    image_url: ImageURLChunk$inboundSchema.and(
+      z.object({ type: z.literal("image_url") }),
+    ),
+    document_url: DocumentURLChunk$inboundSchema.and(
+      z.object({ type: z.literal("document_url") }),
+    ),
+    text: TextChunk$inboundSchema.and(z.object({ type: z.literal("text") })),
+    reference: ReferenceChunk$inboundSchema.and(
+      z.object({ type: z.literal("reference") }),
+    ),
+    file: FileChunk$inboundSchema.and(z.object({ type: z.literal("file") })),
+    thinking: ThinkChunk$inboundSchema.and(
+      z.object({ type: z.literal("thinking") }),
+    ),
+    input_audio: AudioChunk$inboundSchema,
+    audio_url: AudioURLChunk$inboundSchema,
+  });
 /** @internal */
 export type ContentChunk$Outbound =
   | (ImageURLChunk$Outbound & { type: "image_url" })
@@ -106,7 +103,6 @@ export type ContentChunk$Outbound =
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
   ContentChunk$Outbound,
-  z.ZodTypeDef,
   ContentChunk
 > = z.union([
   ImageURLChunk$outboundSchema.and(z.object({ type: z.literal("image_url") })),

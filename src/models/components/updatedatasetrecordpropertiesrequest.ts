@@ -3,7 +3,7 @@
  * @generated-id: 7b1f38238e28
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type UpdateDatasetRecordPropertiesRequest = {
   properties: { [k: string]: any };
@@ -17,10 +17,9 @@ export type UpdateDatasetRecordPropertiesRequest$Outbound = {
 /** @internal */
 export const UpdateDatasetRecordPropertiesRequest$outboundSchema: z.ZodType<
   UpdateDatasetRecordPropertiesRequest$Outbound,
-  z.ZodTypeDef,
   UpdateDatasetRecordPropertiesRequest
 > = z.object({
-  properties: z.record(z.any()),
+  properties: z.record(z.string(), z.any()),
 });
 
 export function updateDatasetRecordPropertiesRequestToJSON(

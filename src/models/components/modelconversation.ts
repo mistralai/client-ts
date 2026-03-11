@@ -3,7 +3,7 @@
  * @generated-id: e79bc3ad623a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
@@ -92,7 +92,6 @@ export type ModelConversation = {
 /** @internal */
 export const ModelConversationTool$inboundSchema: z.ZodType<
   ModelConversationTool,
-  z.ZodTypeDef,
   unknown
 > = discriminatedUnion("type", {
   code_interpreter: CodeInterpreterTool$inboundSchema,
@@ -116,7 +115,6 @@ export function modelConversationToolFromJSON(
 /** @internal */
 export const ModelConversation$inboundSchema: z.ZodType<
   ModelConversation,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   instructions: z.nullable(z.string()).optional(),
@@ -132,11 +130,11 @@ export const ModelConversation$inboundSchema: z.ZodType<
   guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   object: z.literal("conversation").default("conversation"),
   id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   model: z.string(),
 }).transform((v) => {
   return remap$(v, {

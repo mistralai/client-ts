@@ -3,7 +3,7 @@
  * @generated-id: 3e35d7509f2c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetSimilarChatCompletionEventsV1ObservabilityChatCompletionEventsEventIdSimilarEventsGetRequest =
@@ -21,7 +21,6 @@ export type GetSimilarChatCompletionEventsV1ObservabilityChatCompletionEventsEve
 export const GetSimilarChatCompletionEventsV1ObservabilityChatCompletionEventsEventIdSimilarEventsGetRequest$outboundSchema:
   z.ZodType<
     GetSimilarChatCompletionEventsV1ObservabilityChatCompletionEventsEventIdSimilarEventsGetRequest$Outbound,
-    z.ZodTypeDef,
     GetSimilarChatCompletionEventsV1ObservabilityChatCompletionEventsEventIdSimilarEventsGetRequest
   > = z.object({
     eventId: z.string(),

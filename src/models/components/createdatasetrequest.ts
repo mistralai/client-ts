@@ -3,7 +3,7 @@
  * @generated-id: 3ca5f465e225
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type CreateDatasetRequest = {
   name: string;
@@ -19,7 +19,6 @@ export type CreateDatasetRequest$Outbound = {
 /** @internal */
 export const CreateDatasetRequest$outboundSchema: z.ZodType<
   CreateDatasetRequest$Outbound,
-  z.ZodTypeDef,
   CreateDatasetRequest
 > = z.object({
   name: z.string(),

@@ -3,7 +3,7 @@
  * @generated-id: b8d89a70a401
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,11 +19,10 @@ export type PaginatedResultJudgePreview = {
 /** @internal */
 export const PaginatedResultJudgePreview$inboundSchema: z.ZodType<
   PaginatedResultJudgePreview,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   results: z.array(Judge$inboundSchema).optional(),
-  count: z.number().int(),
+  count: z.int(),
   next: z.nullable(z.string()).optional(),
   previous: z.nullable(z.string()).optional(),
 });

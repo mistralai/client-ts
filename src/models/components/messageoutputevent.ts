@@ -3,7 +3,7 @@
  * @generated-id: 951387040c37
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -30,7 +30,6 @@ export type MessageOutputEvent = {
 /** @internal */
 export const MessageOutputEventContent$inboundSchema: z.ZodType<
   MessageOutputEventContent,
-  z.ZodTypeDef,
   unknown
 > = z.union([z.string(), OutputContentChunks$inboundSchema]);
 
@@ -47,15 +46,14 @@ export function messageOutputEventContentFromJSON(
 /** @internal */
 export const MessageOutputEvent$inboundSchema: z.ZodType<
   MessageOutputEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("message.output.delta"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  output_index: z.number().int().default(0),
+  output_index: z.int().default(0),
   id: z.string(),
-  content_index: z.number().int().default(0),
+  content_index: z.int().default(0),
   model: z.nullable(z.string()).optional(),
   agent_id: z.nullable(z.string()).optional(),
   role: z.literal("assistant").default("assistant"),

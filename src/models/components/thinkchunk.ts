@@ -3,7 +3,7 @@
  * @generated-id: 18d2ae0c1a0c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,11 +38,7 @@ export type ThinkChunk = {
 };
 
 /** @internal */
-export const Thinking$inboundSchema: z.ZodType<
-  Thinking,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const Thinking$inboundSchema: z.ZodType<Thinking, unknown> = z.union([
   ToolReferenceChunk$inboundSchema,
   TextChunk$inboundSchema,
   ReferenceChunk$inboundSchema,
@@ -54,15 +50,12 @@ export type Thinking$Outbound =
   | ReferenceChunk$Outbound;
 
 /** @internal */
-export const Thinking$outboundSchema: z.ZodType<
-  Thinking$Outbound,
-  z.ZodTypeDef,
-  Thinking
-> = z.union([
-  ToolReferenceChunk$outboundSchema,
-  TextChunk$outboundSchema,
-  ReferenceChunk$outboundSchema,
-]);
+export const Thinking$outboundSchema: z.ZodType<Thinking$Outbound, Thinking> = z
+  .union([
+    ToolReferenceChunk$outboundSchema,
+    TextChunk$outboundSchema,
+    ReferenceChunk$outboundSchema,
+  ]);
 
 export function thinkingToJSON(thinking: Thinking): string {
   return JSON.stringify(Thinking$outboundSchema.parse(thinking));
@@ -78,21 +71,18 @@ export function thinkingFromJSON(
 }
 
 /** @internal */
-export const ThinkChunk$inboundSchema: z.ZodType<
-  ThinkChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("thinking").default("thinking"),
-  thinking: z.array(
-    z.union([
-      ToolReferenceChunk$inboundSchema,
-      TextChunk$inboundSchema,
-      ReferenceChunk$inboundSchema,
-    ]),
-  ),
-  closed: z.boolean().optional(),
-});
+export const ThinkChunk$inboundSchema: z.ZodType<ThinkChunk, unknown> = z
+  .object({
+    type: z.literal("thinking").default("thinking"),
+    thinking: z.array(
+      z.union([
+        ToolReferenceChunk$inboundSchema,
+        TextChunk$inboundSchema,
+        ReferenceChunk$inboundSchema,
+      ]),
+    ),
+    closed: z.boolean().optional(),
+  });
 /** @internal */
 export type ThinkChunk$Outbound = {
   type: "thinking";
@@ -105,7 +95,6 @@ export type ThinkChunk$Outbound = {
 /** @internal */
 export const ThinkChunk$outboundSchema: z.ZodType<
   ThinkChunk$Outbound,
-  z.ZodTypeDef,
   ThinkChunk
 > = z.object({
   type: z.literal("thinking").default("thinking" as const),

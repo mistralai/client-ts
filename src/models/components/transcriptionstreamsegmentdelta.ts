@@ -3,7 +3,7 @@
  * @generated-id: e03c9f20f84c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -21,7 +21,6 @@ export type TranscriptionStreamSegmentDelta = {
 /** @internal */
 export const TranscriptionStreamSegmentDelta$inboundSchema: z.ZodType<
   TranscriptionStreamSegmentDelta,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("transcription.segment"),

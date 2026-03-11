@@ -3,7 +3,7 @@
  * @generated-id: 723c6abd4e70
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
@@ -35,7 +35,6 @@ export type RetrieveModelV1ModelsModelIdGetRequest$Outbound = {
 /** @internal */
 export const RetrieveModelV1ModelsModelIdGetRequest$outboundSchema: z.ZodType<
   RetrieveModelV1ModelsModelIdGetRequest$Outbound,
-  z.ZodTypeDef,
   RetrieveModelV1ModelsModelIdGetRequest
 > = z.object({
   modelId: z.string(),
@@ -59,7 +58,6 @@ export function retrieveModelV1ModelsModelIdGetRequestToJSON(
 /** @internal */
 export const ResponseRetrieveModelV1ModelsModelIdGet$inboundSchema: z.ZodType<
   ResponseRetrieveModelV1ModelsModelIdGet,
-  z.ZodTypeDef,
   unknown
 > = discriminatedUnion("type", {
   base: components.BaseModelCard$inboundSchema,

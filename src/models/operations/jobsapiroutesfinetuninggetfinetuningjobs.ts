@@ -3,7 +3,7 @@
  * @generated-id: 06439aebd08c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
@@ -68,8 +68,7 @@ export type JobsApiRoutesFineTuningGetFineTuningJobsRequest = {
 };
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const Status$outboundSchema: z.ZodEnum<typeof Status> = z.enum(Status);
 
 /** @internal */
 export type JobsApiRoutesFineTuningGetFineTuningJobsRequest$Outbound = {
@@ -89,11 +88,10 @@ export type JobsApiRoutesFineTuningGetFineTuningJobsRequest$Outbound = {
 export const JobsApiRoutesFineTuningGetFineTuningJobsRequest$outboundSchema:
   z.ZodType<
     JobsApiRoutesFineTuningGetFineTuningJobsRequest$Outbound,
-    z.ZodTypeDef,
     JobsApiRoutesFineTuningGetFineTuningJobsRequest
   > = z.object({
-    page: z.number().int().default(0),
-    pageSize: z.number().int().default(100),
+    page: z.int().default(0),
+    pageSize: z.int().default(100),
     model: z.nullable(z.string()).optional(),
     createdAfter: z.nullable(z.date().transform(v => v.toISOString()))
       .optional(),

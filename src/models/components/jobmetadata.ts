@@ -3,7 +3,7 @@
  * @generated-id: 879060fa3ae2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -20,28 +20,25 @@ export type JobMetadata = {
 };
 
 /** @internal */
-export const JobMetadata$inboundSchema: z.ZodType<
-  JobMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  expected_duration_seconds: z.nullable(z.number().int()).optional(),
-  cost: z.nullable(z.number()).optional(),
-  cost_currency: z.nullable(z.string()).optional(),
-  train_tokens_per_step: z.nullable(z.number().int()).optional(),
-  train_tokens: z.nullable(z.number().int()).optional(),
-  data_tokens: z.nullable(z.number().int()).optional(),
-  estimated_start_time: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expected_duration_seconds": "expectedDurationSeconds",
-    "cost_currency": "costCurrency",
-    "train_tokens_per_step": "trainTokensPerStep",
-    "train_tokens": "trainTokens",
-    "data_tokens": "dataTokens",
-    "estimated_start_time": "estimatedStartTime",
+export const JobMetadata$inboundSchema: z.ZodType<JobMetadata, unknown> = z
+  .object({
+    expected_duration_seconds: z.nullable(z.int()).optional(),
+    cost: z.nullable(z.number()).optional(),
+    cost_currency: z.nullable(z.string()).optional(),
+    train_tokens_per_step: z.nullable(z.int()).optional(),
+    train_tokens: z.nullable(z.int()).optional(),
+    data_tokens: z.nullable(z.int()).optional(),
+    estimated_start_time: z.nullable(z.int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expected_duration_seconds": "expectedDurationSeconds",
+      "cost_currency": "costCurrency",
+      "train_tokens_per_step": "trainTokensPerStep",
+      "train_tokens": "trainTokens",
+      "data_tokens": "dataTokens",
+      "estimated_start_time": "estimatedStartTime",
+    });
   });
-});
 
 export function jobMetadataFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  * @generated-id: fe7a971e30b0
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -28,21 +28,18 @@ export type OCRResponse = {
 };
 
 /** @internal */
-export const OCRResponse$inboundSchema: z.ZodType<
-  OCRResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pages: z.array(OCRPageObject$inboundSchema),
-  model: z.string(),
-  document_annotation: z.nullable(z.string()).optional(),
-  usage_info: OCRUsageInfo$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "document_annotation": "documentAnnotation",
-    "usage_info": "usageInfo",
+export const OCRResponse$inboundSchema: z.ZodType<OCRResponse, unknown> = z
+  .object({
+    pages: z.array(OCRPageObject$inboundSchema),
+    model: z.string(),
+    document_annotation: z.nullable(z.string()).optional(),
+    usage_info: OCRUsageInfo$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "document_annotation": "documentAnnotation",
+      "usage_info": "usageInfo",
+    });
   });
-});
 
 export function ocrResponseFromJSON(
   jsonString: string,

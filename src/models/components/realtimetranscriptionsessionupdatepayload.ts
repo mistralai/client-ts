@@ -3,7 +3,7 @@
  * @generated-id: c752122222b7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -29,11 +29,10 @@ export type RealtimeTranscriptionSessionUpdatePayload = {
 /** @internal */
 export const RealtimeTranscriptionSessionUpdatePayload$inboundSchema: z.ZodType<
   RealtimeTranscriptionSessionUpdatePayload,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   audio_format: z.nullable(AudioFormat$inboundSchema).optional(),
-  target_streaming_delay_ms: z.nullable(z.number().int()).optional(),
+  target_streaming_delay_ms: z.nullable(z.int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "audio_format": "audioFormat",
@@ -50,11 +49,10 @@ export type RealtimeTranscriptionSessionUpdatePayload$Outbound = {
 export const RealtimeTranscriptionSessionUpdatePayload$outboundSchema:
   z.ZodType<
     RealtimeTranscriptionSessionUpdatePayload$Outbound,
-    z.ZodTypeDef,
     RealtimeTranscriptionSessionUpdatePayload
   > = z.object({
     audioFormat: z.nullable(AudioFormat$outboundSchema).optional(),
-    targetStreamingDelayMs: z.nullable(z.number().int()).optional(),
+    targetStreamingDelayMs: z.nullable(z.int()).optional(),
   }).transform((v) => {
     return remap$(v, {
       audioFormat: "audio_format",

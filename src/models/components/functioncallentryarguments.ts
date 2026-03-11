@@ -3,7 +3,7 @@
  * @generated-id: 5599d0727063
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,18 +13,16 @@ export type FunctionCallEntryArguments = { [k: string]: any } | string;
 /** @internal */
 export const FunctionCallEntryArguments$inboundSchema: z.ZodType<
   FunctionCallEntryArguments,
-  z.ZodTypeDef,
   unknown
-> = z.union([z.record(z.any()), z.string()]);
+> = z.union([z.record(z.string(), z.any()), z.string()]);
 /** @internal */
 export type FunctionCallEntryArguments$Outbound = { [k: string]: any } | string;
 
 /** @internal */
 export const FunctionCallEntryArguments$outboundSchema: z.ZodType<
   FunctionCallEntryArguments$Outbound,
-  z.ZodTypeDef,
   FunctionCallEntryArguments
-> = z.union([z.record(z.any()), z.string()]);
+> = z.union([z.record(z.string(), z.any()), z.string()]);
 
 export function functionCallEntryArgumentsToJSON(
   functionCallEntryArguments: FunctionCallEntryArguments,

@@ -3,7 +3,7 @@
  * @generated-id: c244886b2cd6
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ConnectorsQueryFilters = {
@@ -26,7 +26,6 @@ export type ConnectorsQueryFilters$Outbound = {
 /** @internal */
 export const ConnectorsQueryFilters$outboundSchema: z.ZodType<
   ConnectorsQueryFilters$Outbound,
-  z.ZodTypeDef,
   ConnectorsQueryFilters
 > = z.object({
   active: z.nullable(z.boolean()).optional(),

@@ -3,7 +3,7 @@
  * @generated-id: dc3ebb4751d4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type ListModelsV1ModelsGetRequest = {
   provider?: string | null | undefined;
@@ -19,7 +19,6 @@ export type ListModelsV1ModelsGetRequest$Outbound = {
 /** @internal */
 export const ListModelsV1ModelsGetRequest$outboundSchema: z.ZodType<
   ListModelsV1ModelsGetRequest$Outbound,
-  z.ZodTypeDef,
   ListModelsV1ModelsGetRequest
 > = z.object({
   provider: z.nullable(z.string()).optional(),

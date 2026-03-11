@@ -3,7 +3,7 @@
  * @generated-id: cf396d4e697e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -27,7 +27,6 @@ export type DocumentLibraryTool = {
 /** @internal */
 export const DocumentLibraryTool$inboundSchema: z.ZodType<
   DocumentLibraryTool,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
@@ -49,7 +48,6 @@ export type DocumentLibraryTool$Outbound = {
 /** @internal */
 export const DocumentLibraryTool$outboundSchema: z.ZodType<
   DocumentLibraryTool$Outbound,
-  z.ZodTypeDef,
   DocumentLibraryTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),

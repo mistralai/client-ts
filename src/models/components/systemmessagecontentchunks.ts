@@ -3,7 +3,7 @@
  * @generated-id: 329f0d051bdb
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   TextChunk,
   TextChunk$Outbound,
@@ -27,7 +27,6 @@ export type SystemMessageContentChunks$Outbound =
 /** @internal */
 export const SystemMessageContentChunks$outboundSchema: z.ZodType<
   SystemMessageContentChunks$Outbound,
-  z.ZodTypeDef,
   SystemMessageContentChunks
 > = z.union([
   TextChunk$outboundSchema.and(z.object({ type: z.literal("text") })),

@@ -3,7 +3,7 @@
  * @generated-id: d517eb109b04
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -20,7 +20,6 @@ export type JudgeRegressionOutput = {
 /** @internal */
 export const JudgeRegressionOutput$inboundSchema: z.ZodType<
   JudgeRegressionOutput,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("REGRESSION"),
@@ -46,7 +45,6 @@ export type JudgeRegressionOutput$Outbound = {
 /** @internal */
 export const JudgeRegressionOutput$outboundSchema: z.ZodType<
   JudgeRegressionOutput$Outbound,
-  z.ZodTypeDef,
   JudgeRegressionOutput
 > = z.object({
   type: z.literal("REGRESSION"),

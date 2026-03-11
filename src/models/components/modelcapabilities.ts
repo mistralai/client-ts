@@ -3,7 +3,7 @@
  * @generated-id: 355a0361c549
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -25,7 +25,6 @@ export type ModelCapabilities = {
 /** @internal */
 export const ModelCapabilities$inboundSchema: z.ZodType<
   ModelCapabilities,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   completion_chat: z.boolean().default(false),

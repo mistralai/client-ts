@@ -3,7 +3,7 @@
  * @generated-id: 3ddafcafb9e0
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,7 +24,6 @@ export type EmbeddingResponse = {
 /** @internal */
 export const EmbeddingResponse$inboundSchema: z.ZodType<
   EmbeddingResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),

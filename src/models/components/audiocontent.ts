@@ -3,7 +3,7 @@
  * @generated-id: 905a70dfea53
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -23,21 +23,18 @@ export type AudioContent = {
 };
 
 /** @internal */
-export const AudioContent$inboundSchema: z.ZodType<
-  AudioContent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("audio"),
-  data: z.string(),
-  mimeType: z.string(),
-  annotations: z.nullable(Annotations$inboundSchema).optional(),
-  _meta: z.nullable(z.record(z.any())).optional(),
-}).catchall(z.any()).transform((v) => {
-  return remap$(v, {
-    "_meta": "meta",
+export const AudioContent$inboundSchema: z.ZodType<AudioContent, unknown> = z
+  .object({
+    type: z.literal("audio"),
+    data: z.string(),
+    mimeType: z.string(),
+    annotations: z.nullable(Annotations$inboundSchema).optional(),
+    _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+  }).catchall(z.any()).transform((v) => {
+    return remap$(v, {
+      "_meta": "meta",
+    });
   });
-});
 
 export function audioContentFromJSON(
   jsonString: string,

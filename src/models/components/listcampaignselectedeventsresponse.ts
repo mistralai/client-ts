@@ -3,7 +3,7 @@
  * @generated-id: 5dc9624182b1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -20,7 +20,6 @@ export type ListCampaignSelectedEventsResponse = {
 /** @internal */
 export const ListCampaignSelectedEventsResponse$inboundSchema: z.ZodType<
   ListCampaignSelectedEventsResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   completion_events: PaginatedResultChatCompletionEventPreview$inboundSchema,

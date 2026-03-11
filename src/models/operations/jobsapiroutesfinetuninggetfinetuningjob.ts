@@ -3,7 +3,7 @@
  * @generated-id: fccc29306bf7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
@@ -36,7 +36,6 @@ export type JobsApiRoutesFineTuningGetFineTuningJobRequest$Outbound = {
 export const JobsApiRoutesFineTuningGetFineTuningJobRequest$outboundSchema:
   z.ZodType<
     JobsApiRoutesFineTuningGetFineTuningJobRequest$Outbound,
-    z.ZodTypeDef,
     JobsApiRoutesFineTuningGetFineTuningJobRequest
   > = z.object({
     jobId: z.string(),
@@ -59,14 +58,11 @@ export function jobsApiRoutesFineTuningGetFineTuningJobRequestToJSON(
 
 /** @internal */
 export const JobsApiRoutesFineTuningGetFineTuningJobResponse$inboundSchema:
-  z.ZodType<
-    JobsApiRoutesFineTuningGetFineTuningJobResponse,
-    z.ZodTypeDef,
-    unknown
-  > = discriminatedUnion("job_type", {
-    classifier: components.ClassifierFineTuningJobDetails$inboundSchema,
-    completion: components.CompletionFineTuningJobDetails$inboundSchema,
-  }, { outputPropertyName: "jobType" });
+  z.ZodType<JobsApiRoutesFineTuningGetFineTuningJobResponse, unknown> =
+    discriminatedUnion("job_type", {
+      classifier: components.ClassifierFineTuningJobDetails$inboundSchema,
+      completion: components.CompletionFineTuningJobDetails$inboundSchema,
+    }, { outputPropertyName: "jobType" });
 
 export function jobsApiRoutesFineTuningGetFineTuningJobResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  * @generated-id: 684d4885f374
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -19,7 +19,6 @@ export type ProcessingStatus = {
 /** @internal */
 export const ProcessingStatus$inboundSchema: z.ZodType<
   ProcessingStatus,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   document_id: z.string(),

@@ -3,7 +3,7 @@
  * @generated-id: eae3a2cf29a5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type TrainingFile = {
@@ -20,7 +20,6 @@ export type TrainingFile$Outbound = {
 /** @internal */
 export const TrainingFile$outboundSchema: z.ZodType<
   TrainingFile$Outbound,
-  z.ZodTypeDef,
   TrainingFile
 > = z.object({
   fileId: z.string(),

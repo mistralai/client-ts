@@ -3,7 +3,7 @@
  * @generated-id: 33c48d7d6031
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -25,13 +25,12 @@ export type RealtimeTranscriptionSession = {
 /** @internal */
 export const RealtimeTranscriptionSession$inboundSchema: z.ZodType<
   RealtimeTranscriptionSession,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   request_id: z.string(),
   model: z.string(),
   audio_format: AudioFormat$inboundSchema,
-  target_streaming_delay_ms: z.nullable(z.number().int()).optional(),
+  target_streaming_delay_ms: z.nullable(z.int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "request_id": "requestId",
@@ -50,13 +49,12 @@ export type RealtimeTranscriptionSession$Outbound = {
 /** @internal */
 export const RealtimeTranscriptionSession$outboundSchema: z.ZodType<
   RealtimeTranscriptionSession$Outbound,
-  z.ZodTypeDef,
   RealtimeTranscriptionSession
 > = z.object({
   requestId: z.string(),
   model: z.string(),
   audioFormat: AudioFormat$outboundSchema,
-  targetStreamingDelayMs: z.nullable(z.number().int()).optional(),
+  targetStreamingDelayMs: z.nullable(z.int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requestId: "request_id",

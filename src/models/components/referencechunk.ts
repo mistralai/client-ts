@@ -3,7 +3,7 @@
  * @generated-id: f898c270cc77
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -15,18 +15,15 @@ export type ReferenceChunk = {
 };
 
 /** @internal */
-export const ReferenceChunk$inboundSchema: z.ZodType<
-  ReferenceChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("reference").default("reference"),
-  reference_ids: z.array(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    "reference_ids": "referenceIds",
+export const ReferenceChunk$inboundSchema: z.ZodType<ReferenceChunk, unknown> =
+  z.object({
+    type: z.literal("reference").default("reference"),
+    reference_ids: z.array(z.int()),
+  }).transform((v) => {
+    return remap$(v, {
+      "reference_ids": "referenceIds",
+    });
   });
-});
 /** @internal */
 export type ReferenceChunk$Outbound = {
   type: "reference";
@@ -36,11 +33,10 @@ export type ReferenceChunk$Outbound = {
 /** @internal */
 export const ReferenceChunk$outboundSchema: z.ZodType<
   ReferenceChunk$Outbound,
-  z.ZodTypeDef,
   ReferenceChunk
 > = z.object({
   type: z.literal("reference").default("reference" as const),
-  referenceIds: z.array(z.number().int()),
+  referenceIds: z.array(z.int()),
 }).transform((v) => {
   return remap$(v, {
     referenceIds: "reference_ids",

@@ -3,7 +3,7 @@
  * @generated-id: bfe22ff4db83
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type WandbIntegration = {
@@ -35,7 +35,6 @@ export type WandbIntegration$Outbound = {
 /** @internal */
 export const WandbIntegration$outboundSchema: z.ZodType<
   WandbIntegration$Outbound,
-  z.ZodTypeDef,
   WandbIntegration
 > = z.object({
   type: z.literal("wandb"),

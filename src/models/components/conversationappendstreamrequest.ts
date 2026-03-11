@@ -3,7 +3,7 @@
  * @generated-id: e089da49cde8
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
@@ -49,8 +49,9 @@ export type ConversationAppendStreamRequest = {
 
 /** @internal */
 export const ConversationAppendStreamRequestHandoffExecution$outboundSchema:
-  z.ZodNativeEnum<typeof ConversationAppendStreamRequestHandoffExecution> = z
-    .nativeEnum(ConversationAppendStreamRequestHandoffExecution);
+  z.ZodEnum<typeof ConversationAppendStreamRequestHandoffExecution> = z.enum(
+    ConversationAppendStreamRequestHandoffExecution,
+  );
 
 /** @internal */
 export type ConversationAppendStreamRequest$Outbound = {
@@ -65,7 +66,6 @@ export type ConversationAppendStreamRequest$Outbound = {
 /** @internal */
 export const ConversationAppendStreamRequest$outboundSchema: z.ZodType<
   ConversationAppendStreamRequest$Outbound,
-  z.ZodTypeDef,
   ConversationAppendStreamRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema.optional(),

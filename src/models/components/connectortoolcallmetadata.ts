@@ -3,7 +3,7 @@
  * @generated-id: 0eb9a8a54e39
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -29,7 +29,6 @@ export type ConnectorToolCallMetadata = {
 /** @internal */
 export const ConnectorToolCallMetadata$inboundSchema: z.ZodType<
   ConnectorToolCallMetadata,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   mcp_meta: z.nullable(ConnectorToolResultMetadata$inboundSchema).optional(),

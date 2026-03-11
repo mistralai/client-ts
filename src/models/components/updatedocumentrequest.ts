@@ -3,7 +3,7 @@
  * @generated-id: 56629a04610c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type Attributes =
   | boolean
@@ -50,16 +50,15 @@ export type Attributes$Outbound =
 /** @internal */
 export const Attributes$outboundSchema: z.ZodType<
   Attributes$Outbound,
-  z.ZodTypeDef,
   Attributes
 > = z.union([
   z.boolean(),
   z.string(),
-  z.number().int(),
+  z.int(),
   z.number(),
   z.date().transform(v => v.toISOString()),
   z.array(z.string()),
-  z.array(z.number().int()),
+  z.array(z.int()),
   z.array(z.number()),
   z.array(z.boolean()),
 ]);
@@ -91,20 +90,20 @@ export type UpdateDocumentRequest$Outbound = {
 /** @internal */
 export const UpdateDocumentRequest$outboundSchema: z.ZodType<
   UpdateDocumentRequest$Outbound,
-  z.ZodTypeDef,
   UpdateDocumentRequest
 > = z.object({
   name: z.nullable(z.string()).optional(),
   attributes: z.nullable(
     z.record(
+      z.string(),
       z.union([
         z.boolean(),
         z.string(),
-        z.number().int(),
+        z.int(),
         z.number(),
         z.date().transform(v => v.toISOString()),
         z.array(z.string()),
-        z.array(z.number().int()),
+        z.array(z.int()),
         z.array(z.number()),
         z.array(z.boolean()),
       ]),

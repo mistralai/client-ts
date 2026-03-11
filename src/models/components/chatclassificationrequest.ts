@@ -3,7 +3,7 @@
  * @generated-id: b613231c2e5d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { Inputs, Inputs$Outbound, Inputs$outboundSchema } from "./inputs.js";
 
 export type ChatClassificationRequest = {
@@ -23,7 +23,6 @@ export type ChatClassificationRequest$Outbound = {
 /** @internal */
 export const ChatClassificationRequest$outboundSchema: z.ZodType<
   ChatClassificationRequest$Outbound,
-  z.ZodTypeDef,
   ChatClassificationRequest
 > = z.object({
   model: z.string(),

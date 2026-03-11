@@ -3,7 +3,7 @@
  * @generated-id: 561de42bd77e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -15,18 +15,15 @@ export type AudioChunk = {
 };
 
 /** @internal */
-export const AudioChunk$inboundSchema: z.ZodType<
-  AudioChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("input_audio"),
-  input_audio: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_audio": "inputAudio",
+export const AudioChunk$inboundSchema: z.ZodType<AudioChunk, unknown> = z
+  .object({
+    type: z.literal("input_audio"),
+    input_audio: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_audio": "inputAudio",
+    });
   });
-});
 /** @internal */
 export type AudioChunk$Outbound = {
   type: "input_audio";
@@ -36,7 +33,6 @@ export type AudioChunk$Outbound = {
 /** @internal */
 export const AudioChunk$outboundSchema: z.ZodType<
   AudioChunk$Outbound,
-  z.ZodTypeDef,
   AudioChunk
 > = z.object({
   type: z.literal("input_audio"),

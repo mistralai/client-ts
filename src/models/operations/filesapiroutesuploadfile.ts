@@ -3,7 +3,7 @@
  * @generated-id: 9c4e716e89cb
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
@@ -35,9 +35,8 @@ export type MultiPartBodyParams = {
 };
 
 /** @internal */
-export const FileVisibility$outboundSchema: z.ZodNativeEnum<
-  typeof FileVisibility
-> = z.nativeEnum(FileVisibility);
+export const FileVisibility$outboundSchema: z.ZodEnum<typeof FileVisibility> = z
+  .enum(FileVisibility);
 
 /** @internal */
 export type MultiPartBodyParams$Outbound = {
@@ -50,10 +49,9 @@ export type MultiPartBodyParams$Outbound = {
 /** @internal */
 export const MultiPartBodyParams$outboundSchema: z.ZodType<
   MultiPartBodyParams$Outbound,
-  z.ZodTypeDef,
   MultiPartBodyParams
 > = z.object({
-  expiry: z.nullable(z.number().int()).optional(),
+  expiry: z.nullable(z.int()).optional(),
   visibility: FileVisibility$outboundSchema.default("workspace"),
   purpose: components.FilePurpose$outboundSchema.optional(),
   file: components.FileT$outboundSchema.or(blobLikeSchema),

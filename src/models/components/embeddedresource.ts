@@ -3,7 +3,7 @@
  * @generated-id: 98c38f18d407
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -37,11 +37,7 @@ export type EmbeddedResource = {
 };
 
 /** @internal */
-export const Resource$inboundSchema: z.ZodType<
-  Resource,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
+export const Resource$inboundSchema: z.ZodType<Resource, unknown> = z.union([
   TextResourceContents$inboundSchema,
   BlobResourceContents$inboundSchema,
 ]);
@@ -59,7 +55,6 @@ export function resourceFromJSON(
 /** @internal */
 export const EmbeddedResource$inboundSchema: z.ZodType<
   EmbeddedResource,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("resource"),
@@ -68,7 +63,7 @@ export const EmbeddedResource$inboundSchema: z.ZodType<
     BlobResourceContents$inboundSchema,
   ]),
   annotations: z.nullable(Annotations$inboundSchema).optional(),
-  _meta: z.nullable(z.record(z.any())).optional(),
+  _meta: z.nullable(z.record(z.string(), z.any())).optional(),
 }).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "_meta": "meta",

@@ -3,7 +3,7 @@
  * @generated-id: 904f380447ed
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   JudgeClassificationOutput,
@@ -37,7 +37,6 @@ export type CreateJudgeRequestOutput$Outbound =
 /** @internal */
 export const CreateJudgeRequestOutput$outboundSchema: z.ZodType<
   CreateJudgeRequestOutput$Outbound,
-  z.ZodTypeDef,
   CreateJudgeRequestOutput
 > = z.union([
   JudgeClassificationOutput$outboundSchema,
@@ -65,7 +64,6 @@ export type CreateJudgeRequest$Outbound = {
 /** @internal */
 export const CreateJudgeRequest$outboundSchema: z.ZodType<
   CreateJudgeRequest$Outbound,
-  z.ZodTypeDef,
   CreateJudgeRequest
 > = z.object({
   name: z.string(),

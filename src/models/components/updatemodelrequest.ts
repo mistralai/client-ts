@@ -3,7 +3,7 @@
  * @generated-id: 52c386f38c09
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type UpdateModelRequest = {
   name?: string | null | undefined;
@@ -19,7 +19,6 @@ export type UpdateModelRequest$Outbound = {
 /** @internal */
 export const UpdateModelRequest$outboundSchema: z.ZodType<
   UpdateModelRequest$Outbound,
-  z.ZodTypeDef,
   UpdateModelRequest
 > = z.object({
   name: z.nullable(z.string()).optional(),

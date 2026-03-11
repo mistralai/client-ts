@@ -3,7 +3,7 @@
  * @generated-id: 50f74499a327
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,7 +13,6 @@ export type CompletionArgsStop = string | Array<string>;
 /** @internal */
 export const CompletionArgsStop$inboundSchema: z.ZodType<
   CompletionArgsStop,
-  z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
 /** @internal */
@@ -22,7 +21,6 @@ export type CompletionArgsStop$Outbound = string | Array<string>;
 /** @internal */
 export const CompletionArgsStop$outboundSchema: z.ZodType<
   CompletionArgsStop$Outbound,
-  z.ZodTypeDef,
   CompletionArgsStop
 > = z.union([z.string(), z.array(z.string())]);
 

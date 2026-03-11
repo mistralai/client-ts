@@ -3,7 +3,7 @@
  * @generated-id: fe2953ece048
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
@@ -46,8 +46,9 @@ export type GetChatCompletionFieldOptionsV1ObservabilityChatCompletionFieldsFiel
   };
 
 /** @internal */
-export const Operator$outboundSchema: z.ZodNativeEnum<typeof Operator> = z
-  .nativeEnum(Operator);
+export const Operator$outboundSchema: z.ZodEnum<typeof Operator> = z.enum(
+  Operator,
+);
 
 /** @internal */
 export type GetChatCompletionFieldOptionsV1ObservabilityChatCompletionFieldsFieldNameOptionsGetRequest$Outbound =
@@ -60,7 +61,6 @@ export type GetChatCompletionFieldOptionsV1ObservabilityChatCompletionFieldsFiel
 export const GetChatCompletionFieldOptionsV1ObservabilityChatCompletionFieldsFieldNameOptionsGetRequest$outboundSchema:
   z.ZodType<
     GetChatCompletionFieldOptionsV1ObservabilityChatCompletionFieldsFieldNameOptionsGetRequest$Outbound,
-    z.ZodTypeDef,
     GetChatCompletionFieldOptionsV1ObservabilityChatCompletionFieldsFieldNameOptionsGetRequest
   > = z.object({
     fieldName: z.string(),

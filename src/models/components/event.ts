@@ -3,7 +3,7 @@
  * @generated-id: a27c655f037c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -22,16 +22,15 @@ export type Event = {
 };
 
 /** @internal */
-export const Event$inboundSchema: z.ZodType<Event, z.ZodTypeDef, unknown> = z
-  .object({
-    name: z.string(),
-    data: z.nullable(z.record(z.any())).optional(),
-    created_at: z.number().int(),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-    });
+export const Event$inboundSchema: z.ZodType<Event, unknown> = z.object({
+  name: z.string(),
+  data: z.nullable(z.record(z.string(), z.any())).optional(),
+  created_at: z.int(),
+}).transform((v) => {
+  return remap$(v, {
+    "created_at": "createdAt",
   });
+});
 
 export function eventFromJSON(
   jsonString: string,

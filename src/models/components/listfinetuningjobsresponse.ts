@@ -3,7 +3,7 @@
  * @generated-id: 1c08a382c048
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
@@ -38,7 +38,6 @@ export type ListFineTuningJobsResponse = {
 /** @internal */
 export const ListFineTuningJobsResponseData$inboundSchema: z.ZodType<
   ListFineTuningJobsResponseData,
-  z.ZodTypeDef,
   unknown
 > = discriminatedUnion("job_type", {
   classifier: ClassifierFineTuningJob$inboundSchema,
@@ -58,7 +57,6 @@ export function listFineTuningJobsResponseDataFromJSON(
 /** @internal */
 export const ListFineTuningJobsResponse$inboundSchema: z.ZodType<
   ListFineTuningJobsResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.array(
@@ -68,7 +66,7 @@ export const ListFineTuningJobsResponse$inboundSchema: z.ZodType<
     }, { outputPropertyName: "jobType" }),
   ).optional(),
   object: z.literal("list").default("list"),
-  total: z.number().int(),
+  total: z.int(),
 });
 
 export function listFineTuningJobsResponseFromJSON(

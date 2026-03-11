@@ -3,7 +3,7 @@
  * @generated-id: e19d33d1244c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -19,14 +19,13 @@ export type ResponseErrorEvent = {
 /** @internal */
 export const ResponseErrorEvent$inboundSchema: z.ZodType<
   ResponseErrorEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("conversation.response.error"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   message: z.string(),
-  code: z.number().int(),
+  code: z.int(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

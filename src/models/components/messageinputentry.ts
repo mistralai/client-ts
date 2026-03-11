@@ -3,7 +3,7 @@
  * @generated-id: 023005f82be7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -42,16 +42,15 @@ export type MessageInputEntry = {
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Role);
+export const Role$inboundSchema: z.ZodType<Role, unknown> = openEnums
+  .inboundSchema(Role);
 /** @internal */
-export const Role$outboundSchema: z.ZodType<string, z.ZodTypeDef, Role> =
-  openEnums.outboundSchema(Role);
+export const Role$outboundSchema: z.ZodType<string, Role> = openEnums
+  .outboundSchema(Role);
 
 /** @internal */
 export const MessageInputEntryContent$inboundSchema: z.ZodType<
   MessageInputEntryContent,
-  z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(MessageInputContentChunks$inboundSchema)]);
 /** @internal */
@@ -62,7 +61,6 @@ export type MessageInputEntryContent$Outbound =
 /** @internal */
 export const MessageInputEntryContent$outboundSchema: z.ZodType<
   MessageInputEntryContent$Outbound,
-  z.ZodTypeDef,
   MessageInputEntryContent
 > = z.union([z.string(), z.array(MessageInputContentChunks$outboundSchema)]);
 
@@ -86,15 +84,14 @@ export function messageInputEntryContentFromJSON(
 /** @internal */
 export const MessageInputEntry$inboundSchema: z.ZodType<
   MessageInputEntry,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("entry").default("entry"),
   type: z.literal("message.input").default("message.input"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   id: z.string().optional(),
   role: Role$inboundSchema,
@@ -124,7 +121,6 @@ export type MessageInputEntry$Outbound = {
 /** @internal */
 export const MessageInputEntry$outboundSchema: z.ZodType<
   MessageInputEntry$Outbound,
-  z.ZodTypeDef,
   MessageInputEntry
 > = z.object({
   object: z.literal("entry").default("entry" as const),
