@@ -10,7 +10,7 @@
     "directory": "packages/mistralai-azure"
   },
   "scripts": {
-    "lint": "oxlint --max-warnings=0 --deny-warnings 'src/**/*.{ts,tsx}'",
+    "lint": "eslint --cache --max-warnings=0 src",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
@@ -18,9 +18,11 @@
     
   },
   "devDependencies": {
-    "@typescript/native-preview": "7.0.0-dev.20260302.1",
-    "oxlint": "^1.50.0",
-    "typescript": "~5.8.3"
+    "@eslint/js": "^9.26.0",
+    "eslint": "^9.26.0",
+    "globals": "^15.14.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.26.0"
   },
   "dependencies": {
     "zod": "^3.25.0 || ^4.0.0"
