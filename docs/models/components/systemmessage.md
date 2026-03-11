@@ -6,6 +6,7 @@
 import { SystemMessage } from "@mistralai/mistralai-azure/models/components";
 
 let value: SystemMessage = {
+  role: "system",
   content: "<value>",
 };
 ```
@@ -14,5 +15,5 @@ let value: SystemMessage = {
 
 | Field                             | Type                              | Required                          | Description                       |
 | --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
-| `role`                            | *"system"*                        | :heavy_minus_sign:                | N/A                               |
+| `role`                            | *"system"*                        | :heavy_check_mark:                | N/A                               |
 | `content`                         | *components.SystemMessageContent* | :heavy_check_mark:                | N/A                               |

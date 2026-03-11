@@ -3,7 +3,7 @@
  * @generated-id: 7d8c6b68d130
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   JsonSchema,
@@ -32,7 +32,6 @@ export type ResponseFormat$Outbound = {
 /** @internal */
 export const ResponseFormat$outboundSchema: z.ZodType<
   ResponseFormat$Outbound,
-  z.ZodTypeDef,
   ResponseFormat
 > = z.object({
   type: ResponseFormats$outboundSchema.optional(),

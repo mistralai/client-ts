@@ -3,7 +3,7 @@
  * @generated-id: fb82b9ba551c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -36,7 +36,6 @@ export type AssistantMessage = {
 /** @internal */
 export const AssistantMessageContent$inboundSchema: z.ZodType<
   AssistantMessageContent,
-  z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(ContentChunk$inboundSchema)]);
 /** @internal */
@@ -47,7 +46,6 @@ export type AssistantMessageContent$Outbound =
 /** @internal */
 export const AssistantMessageContent$outboundSchema: z.ZodType<
   AssistantMessageContent$Outbound,
-  z.ZodTypeDef,
   AssistantMessageContent
 > = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
 
@@ -71,7 +69,6 @@ export function assistantMessageContentFromJSON(
 /** @internal */
 export const AssistantMessage$inboundSchema: z.ZodType<
   AssistantMessage,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   role: z.literal("assistant").default("assistant"),
@@ -96,7 +93,6 @@ export type AssistantMessage$Outbound = {
 /** @internal */
 export const AssistantMessage$outboundSchema: z.ZodType<
   AssistantMessage$Outbound,
-  z.ZodTypeDef,
   AssistantMessage
 > = z.object({
   role: z.literal("assistant").default("assistant" as const),

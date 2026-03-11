@@ -3,7 +3,7 @@
  * @generated-id: 85b9b6cf231d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export type FunctionT = {
   name: string;
@@ -23,13 +23,12 @@ export type FunctionT$Outbound = {
 /** @internal */
 export const FunctionT$outboundSchema: z.ZodType<
   FunctionT$Outbound,
-  z.ZodTypeDef,
   FunctionT
 > = z.object({
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.record(z.any()),
+  parameters: z.record(z.string(), z.any()),
 });
 
 export function functionToJSON(functionT: FunctionT): string {

@@ -3,7 +3,7 @@
  * @generated-id: 789d3cf0ff6d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type JsonSchema = {
@@ -24,12 +24,11 @@ export type JsonSchema$Outbound = {
 /** @internal */
 export const JsonSchema$outboundSchema: z.ZodType<
   JsonSchema$Outbound,
-  z.ZodTypeDef,
   JsonSchema
 > = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  schemaDefinition: z.record(z.any()),
+  schemaDefinition: z.record(z.string(), z.any()),
   strict: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {

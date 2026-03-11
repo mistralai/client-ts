@@ -3,11 +3,11 @@
  * @generated-id: 4b4ff7ac7f73
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 
 export function constDateTime(
   val: string,
-): z.ZodType<string, z.ZodTypeDef, unknown> {
+): z.ZodType<string, unknown> {
   return z.custom<string>((v) => {
     return (
       typeof v === "string" && new Date(v).getTime() === new Date(val).getTime()

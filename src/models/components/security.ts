@@ -3,7 +3,7 @@
  * @generated-id: b1045ffb0f73
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type Security = {
@@ -16,17 +16,14 @@ export type Security$Outbound = {
 };
 
 /** @internal */
-export const Security$outboundSchema: z.ZodType<
-  Security$Outbound,
-  z.ZodTypeDef,
-  Security
-> = z.object({
-  apiKey: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKey: "ApiKey",
+export const Security$outboundSchema: z.ZodType<Security$Outbound, Security> = z
+  .object({
+    apiKey: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKey: "ApiKey",
+    });
   });
-});
 
 export function securityToJSON(security: Security): string {
   return JSON.stringify(Security$outboundSchema.parse(security));

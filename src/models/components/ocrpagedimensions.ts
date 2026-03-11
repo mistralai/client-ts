@@ -3,7 +3,7 @@
  * @generated-id: 42fd4a9011ba
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,12 +26,11 @@ export type OCRPageDimensions = {
 /** @internal */
 export const OCRPageDimensions$inboundSchema: z.ZodType<
   OCRPageDimensions,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  dpi: z.number().int(),
-  height: z.number().int(),
-  width: z.number().int(),
+  dpi: z.int(),
+  height: z.int(),
+  width: z.int(),
 });
 
 export function ocrPageDimensionsFromJSON(

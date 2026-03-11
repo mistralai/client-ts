@@ -3,7 +3,7 @@
  * @generated-id: d8f6d61195a7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -29,6 +29,5 @@ export type MistralPromptMode = OpenEnum<typeof MistralPromptMode>;
 /** @internal */
 export const MistralPromptMode$outboundSchema: z.ZodType<
   string,
-  z.ZodTypeDef,
   MistralPromptMode
 > = openEnums.outboundSchema(MistralPromptMode);
