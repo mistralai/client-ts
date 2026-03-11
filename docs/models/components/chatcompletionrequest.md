@@ -9,6 +9,7 @@ let value: ChatCompletionRequest = {
   model: "mistral-large-latest",
   messages: [
     {
+      role: "user",
       content: "Who is the best French painter? Answer in one short sentence.",
     },
   ],

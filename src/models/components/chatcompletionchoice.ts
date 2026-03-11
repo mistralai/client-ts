@@ -3,7 +3,7 @@
  * @generated-id: 3905dab108b1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
@@ -35,17 +35,15 @@ export type ChatCompletionChoice = {
 /** @internal */
 export const ChatCompletionChoiceFinishReason$inboundSchema: z.ZodType<
   ChatCompletionChoiceFinishReason,
-  z.ZodTypeDef,
   unknown
 > = openEnums.inboundSchema(ChatCompletionChoiceFinishReason);
 
 /** @internal */
 export const ChatCompletionChoice$inboundSchema: z.ZodType<
   ChatCompletionChoice,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  index: z.number().int(),
+  index: z.int(),
   message: AssistantMessage$inboundSchema,
   finish_reason: ChatCompletionChoiceFinishReason$inboundSchema,
 }).transform((v) => {

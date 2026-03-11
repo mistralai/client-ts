@@ -7,6 +7,7 @@
 
 ```typescript
 const value: components.ImageURLChunk = {
+  type: "image_url",
   imageUrl: "https://darling-distinction.org",
 };
 ```
@@ -15,6 +16,7 @@ const value: components.ImageURLChunk = {
 
 ```typescript
 const value: components.TextChunk = {
+  type: "text",
   text: "<value>",
 };
 ```

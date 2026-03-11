@@ -3,7 +3,7 @@
  * @generated-id: d54ddc254829
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import {
   ReferenceChunk,
   ReferenceChunk$Outbound,
@@ -20,11 +20,11 @@ import {
   ToolReferenceChunk$outboundSchema,
 } from "./toolreferencechunk.js";
 
-export type Thinking = ToolReferenceChunk | TextChunk | ReferenceChunk;
+export type Thinking = TextChunk | ToolReferenceChunk | ReferenceChunk;
 
 export type ThinkChunk = {
-  type?: "thinking" | undefined;
-  thinking: Array<ToolReferenceChunk | TextChunk | ReferenceChunk>;
+  type: "thinking";
+  thinking: Array<TextChunk | ToolReferenceChunk | ReferenceChunk>;
   /**
    * Whether the thinking chunk is closed or not. Currently only used for prefixing.
    */
@@ -33,20 +33,17 @@ export type ThinkChunk = {
 
 /** @internal */
 export type Thinking$Outbound =
-  | ToolReferenceChunk$Outbound
   | TextChunk$Outbound
+  | ToolReferenceChunk$Outbound
   | ReferenceChunk$Outbound;
 
 /** @internal */
-export const Thinking$outboundSchema: z.ZodType<
-  Thinking$Outbound,
-  z.ZodTypeDef,
-  Thinking
-> = z.union([
-  ToolReferenceChunk$outboundSchema,
-  TextChunk$outboundSchema,
-  ReferenceChunk$outboundSchema,
-]);
+export const Thinking$outboundSchema: z.ZodType<Thinking$Outbound, Thinking> = z
+  .union([
+    TextChunk$outboundSchema,
+    ToolReferenceChunk$outboundSchema,
+    ReferenceChunk$outboundSchema,
+  ]);
 
 export function thinkingToJSON(thinking: Thinking): string {
   return JSON.stringify(Thinking$outboundSchema.parse(thinking));
@@ -56,7 +53,7 @@ export function thinkingToJSON(thinking: Thinking): string {
 export type ThinkChunk$Outbound = {
   type: "thinking";
   thinking: Array<
-    ToolReferenceChunk$Outbound | TextChunk$Outbound | ReferenceChunk$Outbound
+    TextChunk$Outbound | ToolReferenceChunk$Outbound | ReferenceChunk$Outbound
   >;
   closed?: boolean | undefined;
 };
@@ -64,14 +61,13 @@ export type ThinkChunk$Outbound = {
 /** @internal */
 export const ThinkChunk$outboundSchema: z.ZodType<
   ThinkChunk$Outbound,
-  z.ZodTypeDef,
   ThinkChunk
 > = z.object({
-  type: z.literal("thinking").default("thinking" as const),
+  type: z.literal("thinking"),
   thinking: z.array(
     z.union([
-      ToolReferenceChunk$outboundSchema,
       TextChunk$outboundSchema,
+      ToolReferenceChunk$outboundSchema,
       ReferenceChunk$outboundSchema,
     ]),
   ),

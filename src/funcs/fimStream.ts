@@ -3,7 +3,7 @@
  * @generated-id: 0d57644fce59
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { MistralGoogleCloudCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
 import { EventStream } from "../lib/event-streams.js";
@@ -162,14 +162,11 @@ async function $do(
   >(
     M.sse(
       200,
-      z.instanceof(ReadableStream<Uint8Array>)
+      z.custom<ReadableStream<Uint8Array>>(x => x instanceof ReadableStream)
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
-            if (rawEvent.data === "[DONE]") {
-              return { done: true, value: undefined };
-            }
+            if (rawEvent.data === "[DONE]") return { done: true };
             return {
-              done: false,
               value: components.CompletionEvent$inboundSchema.parse(rawEvent),
             };
           });
