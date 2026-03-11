@@ -3,15 +3,6 @@
  * @generated-id: 3f731f808a79
  */
 
-// Ensure ReadableStream always declares [Symbol.asyncIterator] so the
-// override keyword works consistently regardless of installed type
-// definitions (e.g. bun-types omits it from its ReadableStream).
-declare global {
-  interface ReadableStream<R = any> {
-    [Symbol.asyncIterator](): AsyncIterableIterator<R>;
-  }
-}
-
 export type SseMessage<T> = {
   data?: T | undefined;
   event?: string | null | undefined;
@@ -58,7 +49,7 @@ export class EventStream<T extends SseMessage<unknown>>
   }
 
   // Polyfill for older browsers
-  override [Symbol.asyncIterator](): AsyncIterableIterator<T> {
+  [Symbol.asyncIterator](): AsyncIterableIterator<T> {
     const fn = (ReadableStream.prototype as any)[Symbol.asyncIterator];
     if (typeof fn === "function") return fn.call(this);
     const reader = this.getReader();
