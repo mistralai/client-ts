@@ -4,10 +4,10 @@ import {
   responseFormatFromZodObject,
   ParsedChatCompletionRequest,
   ParsedChatCompletionResponse,
-} from "../../extra/structChat";
-import { ResponseFormat } from "../../models/components/responseformat.js";
+} from "../../src/extra/structChat.js";
+import { ResponseFormat } from "../../src/models/components/responseformat.js";
 import { z } from "zod";
-import * as components from "../../models/components/index.js";
+import * as components from "../../src/models/components/index.js";
 
 const Explanation = z.object({
   explanation: z.string(),

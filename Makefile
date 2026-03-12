@@ -34,7 +34,7 @@ build:
 
 # Run tests
 test:
-	cd tests && npx jest
+	cd tests && npm test
 
 # Check gen.yaml configuration against Speakeasy recommended defaults
 check-config:
