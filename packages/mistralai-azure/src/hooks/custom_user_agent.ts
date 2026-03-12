@@ -1,4 +1,4 @@
-import { BeforeRequestContext, BeforeRequestHook, Awaitable } from './types';
+import { BeforeRequestContext, BeforeRequestHook, Awaitable } from './types.js';
 
 
 export class CustomUserAgentHook implements BeforeRequestHook {

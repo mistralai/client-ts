@@ -1,4 +1,4 @@
-import { AfterSuccessContext, AfterSuccessHook, Awaitable } from './types';
+import { AfterSuccessContext, AfterSuccessHook, Awaitable } from './types.js';
 
 
 const HEADER_MODEL_DEPRECATION_TIMESTAMP = "x-model-deprecation-timestamp";

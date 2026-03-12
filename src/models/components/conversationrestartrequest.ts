@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   CompletionArgs,
   CompletionArgs$Outbound,
@@ -40,7 +41,7 @@ export type ConversationRestartRequestAgentVersion = string | number;
  */
 export type ConversationRestartRequest = {
   inputs?: ConversationInputs | undefined;
-  stream?: boolean | undefined;
+  stream?: false | undefined;
   /**
    * Whether to store the results into our servers or not.
    */
@@ -75,7 +76,7 @@ export type ConversationRestartRequestAgentVersion$Outbound = string | number;
 export const ConversationRestartRequestAgentVersion$outboundSchema: z.ZodType<
   ConversationRestartRequestAgentVersion$Outbound,
   ConversationRestartRequestAgentVersion
-> = z.union([z.string(), z.int()]);
+> = smartUnion([z.string(), z.int()]);
 
 export function conversationRestartRequestAgentVersionToJSON(
   conversationRestartRequestAgentVersion:
@@ -91,7 +92,7 @@ export function conversationRestartRequestAgentVersionToJSON(
 /** @internal */
 export type ConversationRestartRequest$Outbound = {
   inputs?: ConversationInputs$Outbound | undefined;
-  stream: boolean;
+  stream: false;
   store: boolean;
   handoff_execution: string;
   completion_args?: CompletionArgs$Outbound | undefined;
@@ -107,7 +108,7 @@ export const ConversationRestartRequest$outboundSchema: z.ZodType<
   ConversationRestartRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema.optional(),
-  stream: z.boolean().default(false),
+  stream: z.literal(false).default(false as const),
   store: z.boolean().default(true),
   handoffExecution: ConversationRestartRequestHandoffExecution$outboundSchema
     .default("server"),
@@ -115,7 +116,7 @@ export const ConversationRestartRequest$outboundSchema: z.ZodType<
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   fromEntryId: z.string(),
-  agentVersion: z.nullable(z.union([z.string(), z.int()])).optional(),
+  agentVersion: z.nullable(smartUnion([z.string(), z.int()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",

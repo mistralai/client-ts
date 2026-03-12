@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AgentHandoffEntry,
@@ -57,7 +58,7 @@ export type ConversationResponse = {
 export const ConversationResponseOutput$inboundSchema: z.ZodType<
   ConversationResponseOutput,
   unknown
-> = z.union([
+> = smartUnion([
   AgentHandoffEntry$inboundSchema,
   FunctionCallEntry$inboundSchema,
   ToolExecutionEntry$inboundSchema,
@@ -97,7 +98,7 @@ export const ConversationResponse$inboundSchema: z.ZodType<
   object: z.literal("conversation.response").default("conversation.response"),
   conversation_id: z.string(),
   outputs: z.array(
-    z.union([
+    smartUnion([
       AgentHandoffEntry$inboundSchema,
       FunctionCallEntry$inboundSchema,
       ToolExecutionEntry$inboundSchema,

@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   InputEntries,
   InputEntries$Outbound,
@@ -19,7 +20,7 @@ export type ConversationInputs$Outbound = string | Array<InputEntries$Outbound>;
 export const ConversationInputs$outboundSchema: z.ZodType<
   ConversationInputs$Outbound,
   ConversationInputs
-> = z.union([z.string(), z.array(InputEntries$outboundSchema)]);
+> = smartUnion([z.string(), z.array(InputEntries$outboundSchema)]);
 
 export function conversationInputsToJSON(
   conversationInputs: ConversationInputs,

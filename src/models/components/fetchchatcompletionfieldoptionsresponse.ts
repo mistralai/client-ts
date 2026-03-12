@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Option = string | boolean;
@@ -15,7 +16,7 @@ export type FetchChatCompletionFieldOptionsResponse = {
 };
 
 /** @internal */
-export const Option$inboundSchema: z.ZodType<Option, unknown> = z.union([
+export const Option$inboundSchema: z.ZodType<Option, unknown> = smartUnion([
   z.string(),
   z.boolean(),
 ]);
@@ -35,8 +36,9 @@ export const FetchChatCompletionFieldOptionsResponse$inboundSchema: z.ZodType<
   FetchChatCompletionFieldOptionsResponse,
   unknown
 > = z.object({
-  options: z.nullable(z.array(z.nullable(z.union([z.string(), z.boolean()]))))
-    .optional(),
+  options: z.nullable(
+    z.array(z.nullable(smartUnion([z.string(), z.boolean()]))),
+  ).optional(),
 });
 
 export function fetchChatCompletionFieldOptionsResponseFromJSON(

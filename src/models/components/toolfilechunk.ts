@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BuiltInConnectors,
@@ -28,7 +29,7 @@ export type ToolFileChunk = {
 export const ToolFileChunkTool$inboundSchema: z.ZodType<
   ToolFileChunkTool,
   unknown
-> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
+> = smartUnion([BuiltInConnectors$inboundSchema, z.string()]);
 /** @internal */
 export type ToolFileChunkTool$Outbound = string | string;
 
@@ -36,7 +37,7 @@ export type ToolFileChunkTool$Outbound = string | string;
 export const ToolFileChunkTool$outboundSchema: z.ZodType<
   ToolFileChunkTool$Outbound,
   ToolFileChunkTool
-> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
+> = smartUnion([BuiltInConnectors$outboundSchema, z.string()]);
 
 export function toolFileChunkToolToJSON(
   toolFileChunkTool: ToolFileChunkTool,
@@ -59,7 +60,7 @@ export function toolFileChunkToolFromJSON(
 export const ToolFileChunk$inboundSchema: z.ZodType<ToolFileChunk, unknown> = z
   .object({
     type: z.literal("tool_file").default("tool_file"),
-    tool: z.union([BuiltInConnectors$inboundSchema, z.string()]),
+    tool: smartUnion([BuiltInConnectors$inboundSchema, z.string()]),
     file_id: z.string(),
     file_name: z.nullable(z.string()).optional(),
     file_type: z.nullable(z.string()).optional(),
@@ -85,7 +86,7 @@ export const ToolFileChunk$outboundSchema: z.ZodType<
   ToolFileChunk
 > = z.object({
   type: z.literal("tool_file").default("tool_file" as const),
-  tool: z.union([BuiltInConnectors$outboundSchema, z.string()]),
+  tool: smartUnion([BuiltInConnectors$outboundSchema, z.string()]),
   fileId: z.string(),
   fileName: z.nullable(z.string()).optional(),
   fileType: z.nullable(z.string()).optional(),

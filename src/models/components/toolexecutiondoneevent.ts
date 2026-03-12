@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BuiltInConnectors,
@@ -28,7 +29,7 @@ export type ToolExecutionDoneEvent = {
 export const ToolExecutionDoneEventName$inboundSchema: z.ZodType<
   ToolExecutionDoneEventName,
   unknown
-> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
+> = smartUnion([BuiltInConnectors$inboundSchema, z.string()]);
 
 export function toolExecutionDoneEventNameFromJSON(
   jsonString: string,
@@ -50,7 +51,7 @@ export const ToolExecutionDoneEvent$inboundSchema: z.ZodType<
     .optional(),
   output_index: z.int().default(0),
   id: z.string(),
-  name: z.union([BuiltInConnectors$inboundSchema, z.string()]),
+  name: smartUnion([BuiltInConnectors$inboundSchema, z.string()]),
   info: z.record(z.string(), z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {

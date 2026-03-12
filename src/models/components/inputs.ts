@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   InstructRequest,
   InstructRequest$Outbound,
@@ -21,8 +22,8 @@ export type Inputs$Outbound =
   | Array<InstructRequest$Outbound>;
 
 /** @internal */
-export const Inputs$outboundSchema: z.ZodType<Inputs$Outbound, Inputs> = z
-  .union([
+export const Inputs$outboundSchema: z.ZodType<Inputs$Outbound, Inputs> =
+  smartUnion([
     InstructRequest$outboundSchema,
     z.array(InstructRequest$outboundSchema),
   ]);

@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FilterCondition,
@@ -25,7 +26,7 @@ export type FilterGroup = {
 export type And = FilterCondition | FilterGroup;
 
 /** @internal */
-export const Or$inboundSchema: z.ZodType<Or, unknown> = z.union([
+export const Or$inboundSchema: z.ZodType<Or, unknown> = smartUnion([
   FilterCondition$inboundSchema,
   z.lazy(() => FilterGroup$inboundSchema),
 ]);
@@ -33,7 +34,7 @@ export const Or$inboundSchema: z.ZodType<Or, unknown> = z.union([
 export type Or$Outbound = FilterCondition$Outbound | FilterGroup$Outbound;
 
 /** @internal */
-export const Or$outboundSchema: z.ZodType<Or$Outbound, Or> = z.union([
+export const Or$outboundSchema: z.ZodType<Or$Outbound, Or> = smartUnion([
   FilterCondition$outboundSchema,
   z.lazy(() => FilterGroup$outboundSchema),
 ]);
@@ -55,13 +56,13 @@ export function orFromJSON(
 export const FilterGroup$inboundSchema: z.ZodType<FilterGroup, unknown> = z
   .object({
     AND: z.nullable(
-      z.array(z.union([
+      z.array(smartUnion([
         FilterCondition$inboundSchema,
         z.lazy(() => FilterGroup$inboundSchema),
       ])),
     ).optional(),
     OR: z.nullable(
-      z.array(z.union([
+      z.array(smartUnion([
         FilterCondition$inboundSchema,
         z.lazy(() => FilterGroup$inboundSchema),
       ])),
@@ -90,13 +91,13 @@ export const FilterGroup$outboundSchema: z.ZodType<
   FilterGroup
 > = z.object({
   and: z.nullable(
-    z.array(z.union([
+    z.array(smartUnion([
       FilterCondition$outboundSchema,
       z.lazy(() => FilterGroup$outboundSchema),
     ])),
   ).optional(),
   or: z.nullable(
-    z.array(z.union([
+    z.array(smartUnion([
       FilterCondition$outboundSchema,
       z.lazy(() => FilterGroup$outboundSchema),
     ])),
@@ -122,7 +123,7 @@ export function filterGroupFromJSON(
 }
 
 /** @internal */
-export const And$inboundSchema: z.ZodType<And, unknown> = z.union([
+export const And$inboundSchema: z.ZodType<And, unknown> = smartUnion([
   FilterCondition$inboundSchema,
   z.lazy(() => FilterGroup$inboundSchema),
 ]);
@@ -130,7 +131,7 @@ export const And$inboundSchema: z.ZodType<And, unknown> = z.union([
 export type And$Outbound = FilterCondition$Outbound | FilterGroup$Outbound;
 
 /** @internal */
-export const And$outboundSchema: z.ZodType<And$Outbound, And> = z.union([
+export const And$outboundSchema: z.ZodType<And$Outbound, And> = smartUnion([
   FilterCondition$outboundSchema,
   z.lazy(() => FilterGroup$outboundSchema),
 ]);

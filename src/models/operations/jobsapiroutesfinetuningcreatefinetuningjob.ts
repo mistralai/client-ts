@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,8 +45,8 @@ export function responseFromJSON(
 
 /** @internal */
 export const JobsApiRoutesFineTuningCreateFineTuningJobResponse$inboundSchema:
-  z.ZodType<JobsApiRoutesFineTuningCreateFineTuningJobResponse, unknown> = z
-    .union([
+  z.ZodType<JobsApiRoutesFineTuningCreateFineTuningJobResponse, unknown> =
+    smartUnion([
       components.LegacyJobMetadata$inboundSchema,
       discriminatedUnion("job_type", {
         classifier: components.ClassifierFineTuningJob$inboundSchema,

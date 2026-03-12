@@ -1,5 +1,5 @@
-import { SDK_METADATA } from "../lib/config";
-import { BeforeRequestContext, BeforeRequestHook, Awaitable } from "./types";
+import { SDK_METADATA } from "../lib/config.js";
+import { BeforeRequestContext, BeforeRequestHook, Awaitable } from "./types.js";
 
 export class CustomUserAgentHook implements BeforeRequestHook {
   beforeRequest(_: BeforeRequestContext, request: Request): Awaitable<Request> {

@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Answer = string | number;
@@ -16,7 +17,7 @@ export type JudgeOutput = {
 };
 
 /** @internal */
-export const Answer$inboundSchema: z.ZodType<Answer, unknown> = z.union([
+export const Answer$inboundSchema: z.ZodType<Answer, unknown> = smartUnion([
   z.string(),
   z.number(),
 ]);
@@ -35,7 +36,7 @@ export function answerFromJSON(
 export const JudgeOutput$inboundSchema: z.ZodType<JudgeOutput, unknown> = z
   .object({
     analysis: z.string(),
-    answer: z.union([z.string(), z.number()]),
+    answer: smartUnion([z.string(), z.number()]),
   });
 
 export function judgeOutputFromJSON(

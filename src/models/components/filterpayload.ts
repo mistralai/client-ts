@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FilterCondition,
@@ -27,7 +28,7 @@ export type FilterPayload = {
 };
 
 /** @internal */
-export const Filters$inboundSchema: z.ZodType<Filters, unknown> = z.union([
+export const Filters$inboundSchema: z.ZodType<Filters, unknown> = smartUnion([
   FilterCondition$inboundSchema,
   FilterGroup$inboundSchema,
 ]);
@@ -35,8 +36,8 @@ export const Filters$inboundSchema: z.ZodType<Filters, unknown> = z.union([
 export type Filters$Outbound = FilterCondition$Outbound | FilterGroup$Outbound;
 
 /** @internal */
-export const Filters$outboundSchema: z.ZodType<Filters$Outbound, Filters> = z
-  .union([FilterCondition$outboundSchema, FilterGroup$outboundSchema]);
+export const Filters$outboundSchema: z.ZodType<Filters$Outbound, Filters> =
+  smartUnion([FilterCondition$outboundSchema, FilterGroup$outboundSchema]);
 
 export function filtersToJSON(filters: Filters): string {
   return JSON.stringify(Filters$outboundSchema.parse(filters));
@@ -55,7 +56,7 @@ export function filtersFromJSON(
 export const FilterPayload$inboundSchema: z.ZodType<FilterPayload, unknown> = z
   .object({
     filters: z.nullable(
-      z.union([FilterCondition$inboundSchema, FilterGroup$inboundSchema]),
+      smartUnion([FilterCondition$inboundSchema, FilterGroup$inboundSchema]),
     ),
   });
 /** @internal */
@@ -69,7 +70,7 @@ export const FilterPayload$outboundSchema: z.ZodType<
   FilterPayload
 > = z.object({
   filters: z.nullable(
-    z.union([FilterCondition$outboundSchema, FilterGroup$outboundSchema]),
+    smartUnion([FilterCondition$outboundSchema, FilterGroup$outboundSchema]),
   ),
 });
 

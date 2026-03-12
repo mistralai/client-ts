@@ -19,6 +19,10 @@ import {
   CompletionArgs$inboundSchema,
 } from "./completionargs.js";
 import {
+  CustomConnector,
+  CustomConnector$inboundSchema,
+} from "./customconnector.js";
+import {
   DocumentLibraryTool,
   DocumentLibraryTool$inboundSchema,
 } from "./documentlibrarytool.js";
@@ -39,6 +43,7 @@ import { WebSearchTool, WebSearchTool$inboundSchema } from "./websearchtool.js";
 
 export type AgentTool =
   | CodeInterpreterTool
+  | CustomConnector
   | DocumentLibraryTool
   | FunctionTool
   | ImageGenerationTool
@@ -57,6 +62,7 @@ export type Agent = {
   tools?:
     | Array<
       | CodeInterpreterTool
+      | CustomConnector
       | DocumentLibraryTool
       | FunctionTool
       | ImageGenerationTool
@@ -90,6 +96,7 @@ export type Agent = {
 export const AgentTool$inboundSchema: z.ZodType<AgentTool, unknown> =
   discriminatedUnion("type", {
     code_interpreter: CodeInterpreterTool$inboundSchema,
+    connector: CustomConnector$inboundSchema,
     document_library: DocumentLibraryTool$inboundSchema,
     function: FunctionTool$inboundSchema,
     image_generation: ImageGenerationTool$inboundSchema,
@@ -112,6 +119,7 @@ export const Agent$inboundSchema: z.ZodType<Agent, unknown> = z.object({
   instructions: z.nullable(z.string()).optional(),
   tools: z.array(discriminatedUnion("type", {
     code_interpreter: CodeInterpreterTool$inboundSchema,
+    connector: CustomConnector$inboundSchema,
     document_library: DocumentLibraryTool$inboundSchema,
     function: FunctionTool$inboundSchema,
     image_generation: ImageGenerationTool$inboundSchema,

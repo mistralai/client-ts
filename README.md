@@ -64,6 +64,10 @@ bun add @mistralai/mistralai
 ```bash
 yarn add @mistralai/mistralai
 ```
+
+> [!NOTE]
+> This package is published as an ES Module (ESM) only. For applications using
+> CommonJS, use `await import("@mistralai/mistralai")` to import and use this package.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->

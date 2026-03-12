@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   BuiltInConnectors,
   BuiltInConnectors$outboundSchema,
@@ -27,7 +28,7 @@ export type ToolUnion$Outbound = string | string;
 export const ToolUnion$outboundSchema: z.ZodType<
   ToolUnion$Outbound,
   ToolUnion
-> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
+> = smartUnion([BuiltInConnectors$outboundSchema, z.string()]);
 
 export function toolUnionToJSON(toolUnion: ToolUnion): string {
   return JSON.stringify(ToolUnion$outboundSchema.parse(toolUnion));
@@ -49,7 +50,7 @@ export const ToolReferenceChunk$outboundSchema: z.ZodType<
   ToolReferenceChunk
 > = z.object({
   type: z.literal("tool_reference").default("tool_reference" as const),
-  tool: z.union([BuiltInConnectors$outboundSchema, z.string()]),
+  tool: smartUnion([BuiltInConnectors$outboundSchema, z.string()]),
   title: z.string(),
   url: z.nullable(z.string()).optional(),
   favicon: z.nullable(z.string()).optional(),

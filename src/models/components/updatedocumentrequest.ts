@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { smartUnion } from "../../types/smartUnion.js";
 
 export type Attributes =
   | boolean
@@ -51,7 +52,7 @@ export type Attributes$Outbound =
 export const Attributes$outboundSchema: z.ZodType<
   Attributes$Outbound,
   Attributes
-> = z.union([
+> = smartUnion([
   z.boolean(),
   z.string(),
   z.int(),
@@ -96,7 +97,7 @@ export const UpdateDocumentRequest$outboundSchema: z.ZodType<
   attributes: z.nullable(
     z.record(
       z.string(),
-      z.union([
+      smartUnion([
         z.boolean(),
         z.string(),
         z.int(),

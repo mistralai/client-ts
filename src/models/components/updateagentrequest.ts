@@ -16,6 +16,11 @@ import {
   CompletionArgs$outboundSchema,
 } from "./completionargs.js";
 import {
+  CustomConnector,
+  CustomConnector$Outbound,
+  CustomConnector$outboundSchema,
+} from "./customconnector.js";
+import {
   DocumentLibraryTool,
   DocumentLibraryTool$Outbound,
   DocumentLibraryTool$outboundSchema,
@@ -48,6 +53,7 @@ import {
 
 export type UpdateAgentRequestTool =
   | CodeInterpreterTool
+  | CustomConnector
   | DocumentLibraryTool
   | FunctionTool
   | ImageGenerationTool
@@ -65,6 +71,7 @@ export type UpdateAgentRequest = {
   tools?:
     | Array<
       | CodeInterpreterTool
+      | CustomConnector
       | DocumentLibraryTool
       | FunctionTool
       | ImageGenerationTool
@@ -89,6 +96,7 @@ export type UpdateAgentRequest = {
 /** @internal */
 export type UpdateAgentRequestTool$Outbound =
   | CodeInterpreterTool$Outbound
+  | CustomConnector$Outbound
   | DocumentLibraryTool$Outbound
   | FunctionTool$Outbound
   | ImageGenerationTool$Outbound
@@ -101,6 +109,7 @@ export const UpdateAgentRequestTool$outboundSchema: z.ZodType<
   UpdateAgentRequestTool
 > = z.union([
   CodeInterpreterTool$outboundSchema,
+  CustomConnector$outboundSchema,
   DocumentLibraryTool$outboundSchema,
   FunctionTool$outboundSchema,
   ImageGenerationTool$outboundSchema,
@@ -122,6 +131,7 @@ export type UpdateAgentRequest$Outbound = {
   tools?:
     | Array<
       | CodeInterpreterTool$Outbound
+      | CustomConnector$Outbound
       | DocumentLibraryTool$Outbound
       | FunctionTool$Outbound
       | ImageGenerationTool$Outbound
@@ -149,6 +159,7 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   tools: z.array(
     z.union([
       CodeInterpreterTool$outboundSchema,
+      CustomConnector$outboundSchema,
       DocumentLibraryTool$outboundSchema,
       FunctionTool$outboundSchema,
       ImageGenerationTool$outboundSchema,

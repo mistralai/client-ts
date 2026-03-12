@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Annotations, Annotations$inboundSchema } from "./annotations.js";
 import {
@@ -37,7 +38,7 @@ export type EmbeddedResource = {
 };
 
 /** @internal */
-export const Resource$inboundSchema: z.ZodType<Resource, unknown> = z.union([
+export const Resource$inboundSchema: z.ZodType<Resource, unknown> = smartUnion([
   TextResourceContents$inboundSchema,
   BlobResourceContents$inboundSchema,
 ]);
@@ -58,7 +59,7 @@ export const EmbeddedResource$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("resource"),
-  resource: z.union([
+  resource: smartUnion([
     TextResourceContents$inboundSchema,
     BlobResourceContents$inboundSchema,
   ]),

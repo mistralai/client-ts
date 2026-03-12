@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OutputContentChunks,
@@ -31,7 +32,7 @@ export type MessageOutputEvent = {
 export const MessageOutputEventContent$inboundSchema: z.ZodType<
   MessageOutputEventContent,
   unknown
-> = z.union([z.string(), OutputContentChunks$inboundSchema]);
+> = smartUnion([z.string(), OutputContentChunks$inboundSchema]);
 
 export function messageOutputEventContentFromJSON(
   jsonString: string,
@@ -57,7 +58,7 @@ export const MessageOutputEvent$inboundSchema: z.ZodType<
   model: z.nullable(z.string()).optional(),
   agent_id: z.nullable(z.string()).optional(),
   role: z.literal("assistant").default("assistant"),
-  content: z.union([z.string(), OutputContentChunks$inboundSchema]),
+  content: smartUnion([z.string(), OutputContentChunks$inboundSchema]),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

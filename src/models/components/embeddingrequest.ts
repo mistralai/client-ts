@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   EmbeddingDtype,
   EmbeddingDtype$outboundSchema,
@@ -44,7 +45,7 @@ export type EmbeddingRequestInputs$Outbound = string | Array<string>;
 export const EmbeddingRequestInputs$outboundSchema: z.ZodType<
   EmbeddingRequestInputs$Outbound,
   EmbeddingRequestInputs
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function embeddingRequestInputsToJSON(
   embeddingRequestInputs: EmbeddingRequestInputs,
@@ -71,7 +72,7 @@ export const EmbeddingRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
-  inputs: z.union([z.string(), z.array(z.string())]),
+  inputs: smartUnion([z.string(), z.array(z.string())]),
   outputDimension: z.nullable(z.int()).optional(),
   outputDtype: EmbeddingDtype$outboundSchema.optional(),
   encodingFormat: EncodingFormat$outboundSchema.optional(),

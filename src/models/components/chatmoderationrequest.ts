@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   AssistantMessage,
   AssistantMessage$Outbound,
@@ -160,7 +161,7 @@ export type ChatModerationRequestInputs3$Outbound =
 export const ChatModerationRequestInputs3$outboundSchema: z.ZodType<
   ChatModerationRequestInputs3$Outbound,
   ChatModerationRequestInputs3
-> = z.union([
+> = smartUnion([
   z.array(
     z.union([
       AssistantMessage$outboundSchema.and(
@@ -220,7 +221,7 @@ export const ChatModerationRequest$outboundSchema: z.ZodType<
   ChatModerationRequest$Outbound,
   ChatModerationRequest
 > = z.object({
-  inputs: z.union([
+  inputs: smartUnion([
     z.array(
       z.union([
         AssistantMessage$outboundSchema.and(

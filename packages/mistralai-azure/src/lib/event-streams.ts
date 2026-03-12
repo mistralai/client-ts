@@ -3,6 +3,15 @@
  * @generated-id: cf950a6c2fc7
  */
 
+// Ensure ReadableStream always declares [Symbol.asyncIterator] so the
+// override keyword works consistently regardless of installed type
+// definitions (e.g. bun-types omits it from its ReadableStream).
+declare global {
+  interface ReadableStream<R = any> {
+    [Symbol.asyncIterator](): AsyncIterableIterator<R>;
+  }
+}
+
 export type SseMessage<T> = {
   data?: T | undefined;
   event?: string | null | undefined;
@@ -15,10 +24,12 @@ export class EventStream<T extends SseMessage<unknown>>
   constructor(
     responseBody: ReadableStream<Uint8Array>,
     parse: (x: SseMessage<string>) => IteratorResult<T, undefined>,
+    opts?: { dataRequired?: boolean },
   ) {
     const upstream = responseBody.getReader();
     let buffer: Uint8Array = new Uint8Array();
     const state = { eventId: undefined as string | undefined };
+    const dataRequired = opts?.dataRequired ?? true;
     super({
       async pull(downstream) {
         try {
@@ -32,7 +43,7 @@ export class EventStream<T extends SseMessage<unknown>>
             }
             const message = buffer.slice(0, match.index);
             buffer = buffer.slice(match.index + match.length);
-            const item = parseMessage(message, parse, state);
+            const item = parseMessage(message, parse, state, dataRequired);
             if (item && !item.done) return downstream.enqueue(item.value);
             if (item?.done) {
               await upstream.cancel("done");
@@ -49,7 +60,7 @@ export class EventStream<T extends SseMessage<unknown>>
   }
 
   // Polyfill for older browsers
-  [Symbol.asyncIterator](): AsyncIterableIterator<T> {
+  override [Symbol.asyncIterator](): AsyncIterableIterator<T> {
     const fn = (ReadableStream.prototype as any)[Symbol.asyncIterator];
     if (typeof fn === "function") return fn.call(this);
     const reader = this.getReader();
@@ -123,6 +134,7 @@ function parseMessage<T extends SseMessage<unknown>>(
   chunk: Uint8Array,
   parse: (x: SseMessage<string>) => IteratorResult<T, undefined>,
   state: { eventId: string | undefined },
+  dataRequired: boolean,
 ) {
   const text = new TextDecoder().decode(chunk);
   const lines = text.split(/\r\n|\r|\n/);
@@ -149,5 +161,6 @@ function parseMessage<T extends SseMessage<unknown>>(
   if (ignore) return;
   ret.id = state.eventId;
   if (dataLines.length) ret.data = dataLines.join("\n");
+  else if (dataRequired) return; // skip data-less events when data is required
   return parse(ret);
 }

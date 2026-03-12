@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BuiltInConnectors,
@@ -33,7 +34,7 @@ export type ToolExecutionEntry = {
 export const ToolExecutionEntryName$inboundSchema: z.ZodType<
   ToolExecutionEntryName,
   unknown
-> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
+> = smartUnion([BuiltInConnectors$inboundSchema, z.string()]);
 /** @internal */
 export type ToolExecutionEntryName$Outbound = string | string;
 
@@ -41,7 +42,7 @@ export type ToolExecutionEntryName$Outbound = string | string;
 export const ToolExecutionEntryName$outboundSchema: z.ZodType<
   ToolExecutionEntryName$Outbound,
   ToolExecutionEntryName
-> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
+> = smartUnion([BuiltInConnectors$outboundSchema, z.string()]);
 
 export function toolExecutionEntryNameToJSON(
   toolExecutionEntryName: ToolExecutionEntryName,
@@ -75,7 +76,7 @@ export const ToolExecutionEntry$inboundSchema: z.ZodType<
   agent_id: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
-  name: z.union([BuiltInConnectors$inboundSchema, z.string()]),
+  name: smartUnion([BuiltInConnectors$inboundSchema, z.string()]),
   arguments: z.string(),
   info: z.record(z.string(), z.any()).optional(),
 }).transform((v) => {
@@ -111,7 +112,7 @@ export const ToolExecutionEntry$outboundSchema: z.ZodType<
   agentId: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
-  name: z.union([BuiltInConnectors$outboundSchema, z.string()]),
+  name: smartUnion([BuiltInConnectors$outboundSchema, z.string()]),
   arguments: z.string(),
   info: z.record(z.string(), z.any()).optional(),
 }).transform((v) => {

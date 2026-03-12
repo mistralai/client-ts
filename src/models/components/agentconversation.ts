@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentConversationAgentVersion = string | number;
@@ -36,7 +37,7 @@ export type AgentConversation = {
 export const AgentConversationAgentVersion$inboundSchema: z.ZodType<
   AgentConversationAgentVersion,
   unknown
-> = z.union([z.string(), z.int()]);
+> = smartUnion([z.string(), z.int()]);
 
 export function agentConversationAgentVersionFromJSON(
   jsonString: string,
@@ -61,7 +62,7 @@ export const AgentConversation$inboundSchema: z.ZodType<
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   agent_id: z.string(),
-  agent_version: z.nullable(z.union([z.string(), z.int()])).optional(),
+  agent_version: z.nullable(smartUnion([z.string(), z.int()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

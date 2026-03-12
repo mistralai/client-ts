@@ -179,6 +179,7 @@ async function $do(
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
             return {
+              done: false,
               value: components.ConversationEvents$inboundSchema.parse(
                 rawEvent,
               ),

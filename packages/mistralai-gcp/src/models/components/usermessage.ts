@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   ContentChunk,
   ContentChunk$Outbound,
@@ -24,7 +25,7 @@ export type UserMessageContent$Outbound = string | Array<ContentChunk$Outbound>;
 export const UserMessageContent$outboundSchema: z.ZodType<
   UserMessageContent$Outbound,
   UserMessageContent
-> = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
+> = smartUnion([z.string(), z.array(ContentChunk$outboundSchema)]);
 
 export function userMessageContentToJSON(
   userMessageContent: UserMessageContent,
@@ -47,7 +48,7 @@ export const UserMessage$outboundSchema: z.ZodType<
 > = z.object({
   role: z.literal("user"),
   content: z.nullable(
-    z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+    smartUnion([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),
 });
 
