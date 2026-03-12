@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   DocumentURLChunk,
   DocumentURLChunk$Outbound,
@@ -88,7 +89,7 @@ export type DocumentUnion$Outbound =
 export const DocumentUnion$outboundSchema: z.ZodType<
   DocumentUnion$Outbound,
   DocumentUnion
-> = z.union([
+> = smartUnion([
   FileChunk$outboundSchema,
   DocumentURLChunk$outboundSchema,
   ImageURLChunk$outboundSchema,
@@ -130,7 +131,7 @@ export const OCRRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.nullable(z.string()),
   id: z.string().optional(),
-  document: z.union([
+  document: smartUnion([
     FileChunk$outboundSchema,
     DocumentURLChunk$outboundSchema,
     ImageURLChunk$outboundSchema,

@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MessageOutputContentChunks,
@@ -35,7 +36,7 @@ export type MessageOutputEntry = {
 export const MessageOutputEntryContent$inboundSchema: z.ZodType<
   MessageOutputEntryContent,
   unknown
-> = z.union([z.string(), z.array(MessageOutputContentChunks$inboundSchema)]);
+> = smartUnion([z.string(), z.array(MessageOutputContentChunks$inboundSchema)]);
 /** @internal */
 export type MessageOutputEntryContent$Outbound =
   | string
@@ -45,7 +46,10 @@ export type MessageOutputEntryContent$Outbound =
 export const MessageOutputEntryContent$outboundSchema: z.ZodType<
   MessageOutputEntryContent$Outbound,
   MessageOutputEntryContent
-> = z.union([z.string(), z.array(MessageOutputContentChunks$outboundSchema)]);
+> = smartUnion([
+  z.string(),
+  z.array(MessageOutputContentChunks$outboundSchema),
+]);
 
 export function messageOutputEntryContentToJSON(
   messageOutputEntryContent: MessageOutputEntryContent,
@@ -80,7 +84,7 @@ export const MessageOutputEntry$inboundSchema: z.ZodType<
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
   role: z.literal("assistant").default("assistant"),
-  content: z.union([
+  content: smartUnion([
     z.string(),
     z.array(MessageOutputContentChunks$inboundSchema),
   ]),
@@ -117,7 +121,7 @@ export const MessageOutputEntry$outboundSchema: z.ZodType<
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
   role: z.literal("assistant").default("assistant" as const),
-  content: z.union([
+  content: smartUnion([
     z.string(),
     z.array(MessageOutputContentChunks$outboundSchema),
   ]),

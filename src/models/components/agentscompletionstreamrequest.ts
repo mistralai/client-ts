@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   AssistantMessage,
   AssistantMessage$Outbound,
@@ -129,7 +130,7 @@ export type AgentsCompletionStreamRequestStop$Outbound = string | Array<string>;
 export const AgentsCompletionStreamRequestStop$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequestStop$Outbound,
   AgentsCompletionStreamRequestStop
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function agentsCompletionStreamRequestStopToJSON(
   agentsCompletionStreamRequestStop: AgentsCompletionStreamRequestStop,
@@ -180,7 +181,7 @@ export type AgentsCompletionStreamRequestToolChoice$Outbound =
 export const AgentsCompletionStreamRequestToolChoice$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequestToolChoice$Outbound,
   AgentsCompletionStreamRequestToolChoice
-> = z.union([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
+> = smartUnion([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
 
 export function agentsCompletionStreamRequestToolChoiceToJSON(
   agentsCompletionStreamRequestToolChoice:
@@ -225,7 +226,7 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
 > = z.object({
   maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
+  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.int()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
@@ -240,7 +241,7 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
   tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
-  toolChoice: z.union([
+  toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),

@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   ClassifierTarget,
   ClassifierTarget$Outbound,
@@ -104,7 +105,7 @@ export type Hyperparameters$Outbound =
 export const Hyperparameters$outboundSchema: z.ZodType<
   Hyperparameters$Outbound,
   Hyperparameters
-> = z.union([
+> = smartUnion([
   CompletionTrainingParameters$outboundSchema,
   ClassifierTrainingParameters$outboundSchema,
 ]);
@@ -168,7 +169,7 @@ export const CreateFineTuningJobRequest$outboundSchema: z.ZodType<
   autoStart: z.boolean().optional(),
   invalidSampleSkipPercentage: z.number().default(0),
   jobType: z.nullable(FineTuneableModelType$outboundSchema).optional(),
-  hyperparameters: z.union([
+  hyperparameters: smartUnion([
     CompletionTrainingParameters$outboundSchema,
     ClassifierTrainingParameters$outboundSchema,
   ]),

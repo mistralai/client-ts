@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 
 export type AgentVersion = number | string;
 
@@ -20,7 +21,7 @@ export type AgentVersion$Outbound = number | string;
 export const AgentVersion$outboundSchema: z.ZodType<
   AgentVersion$Outbound,
   AgentVersion
-> = z.union([z.int(), z.string()]);
+> = smartUnion([z.int(), z.string()]);
 
 export function agentVersionToJSON(agentVersion: AgentVersion): string {
   return JSON.stringify(AgentVersion$outboundSchema.parse(agentVersion));
@@ -38,7 +39,7 @@ export const AgentsApiV1AgentsGetRequest$outboundSchema: z.ZodType<
   AgentsApiV1AgentsGetRequest
 > = z.object({
   agentId: z.string(),
-  agentVersion: z.nullable(z.union([z.int(), z.string()])).optional(),
+  agentVersion: z.nullable(smartUnion([z.int(), z.string()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",

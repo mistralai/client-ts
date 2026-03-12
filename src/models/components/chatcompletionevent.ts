@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ChatTranscriptionEvent,
@@ -48,7 +49,7 @@ export type ChatCompletionEvent = {
 export const ChatCompletionEventExtraFields$inboundSchema: z.ZodType<
   ChatCompletionEventExtraFields,
   unknown
-> = z.union([
+> = smartUnion([
   z.boolean(),
   z.int(),
   z.number(),
@@ -78,7 +79,7 @@ export const ChatCompletionEvent$inboundSchema: z.ZodType<
   extra_fields: z.record(
     z.string(),
     z.nullable(
-      z.union([
+      smartUnion([
         z.boolean(),
         z.int(),
         z.number(),

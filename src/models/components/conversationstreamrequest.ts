@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   CodeInterpreterTool,
   CodeInterpreterTool$Outbound,
@@ -21,6 +22,11 @@ import {
   ConversationInputs$Outbound,
   ConversationInputs$outboundSchema,
 } from "./conversationinputs.js";
+import {
+  CustomConnector,
+  CustomConnector$Outbound,
+  CustomConnector$outboundSchema,
+} from "./customconnector.js";
 import {
   DocumentLibraryTool,
   DocumentLibraryTool$Outbound,
@@ -62,6 +68,7 @@ export type ConversationStreamRequestHandoffExecution = ClosedEnum<
 
 export type ConversationStreamRequestTool =
   | CodeInterpreterTool
+  | CustomConnector
   | DocumentLibraryTool
   | FunctionTool
   | ImageGenerationTool
@@ -79,18 +86,17 @@ export type ConversationStreamRequest = {
     | null
     | undefined;
   instructions?: string | null | undefined;
-  /**
-   * List of tools which are available to the model during the conversation.
-   */
   tools?:
     | Array<
       | CodeInterpreterTool
+      | CustomConnector
       | DocumentLibraryTool
       | FunctionTool
       | ImageGenerationTool
       | WebSearchTool
       | WebSearchPremiumTool
     >
+    | null
     | undefined;
   completionArgs?: CompletionArgs | null | undefined;
   guardrails?: Array<GuardrailConfig> | null | undefined;
@@ -111,6 +117,7 @@ export const ConversationStreamRequestHandoffExecution$outboundSchema:
 /** @internal */
 export type ConversationStreamRequestTool$Outbound =
   | CodeInterpreterTool$Outbound
+  | CustomConnector$Outbound
   | DocumentLibraryTool$Outbound
   | FunctionTool$Outbound
   | ImageGenerationTool$Outbound
@@ -123,6 +130,7 @@ export const ConversationStreamRequestTool$outboundSchema: z.ZodType<
   ConversationStreamRequestTool
 > = z.union([
   CodeInterpreterTool$outboundSchema,
+  CustomConnector$outboundSchema,
   DocumentLibraryTool$outboundSchema,
   FunctionTool$outboundSchema,
   ImageGenerationTool$outboundSchema,
@@ -147,7 +155,7 @@ export type ConversationStreamRequestAgentVersion$Outbound = string | number;
 export const ConversationStreamRequestAgentVersion$outboundSchema: z.ZodType<
   ConversationStreamRequestAgentVersion$Outbound,
   ConversationStreamRequestAgentVersion
-> = z.union([z.string(), z.int()]);
+> = smartUnion([z.string(), z.int()]);
 
 export function conversationStreamRequestAgentVersionToJSON(
   conversationStreamRequestAgentVersion: ConversationStreamRequestAgentVersion,
@@ -169,12 +177,14 @@ export type ConversationStreamRequest$Outbound = {
   tools?:
     | Array<
       | CodeInterpreterTool$Outbound
+      | CustomConnector$Outbound
       | DocumentLibraryTool$Outbound
       | FunctionTool$Outbound
       | ImageGenerationTool$Outbound
       | WebSearchTool$Outbound
       | WebSearchPremiumTool$Outbound
     >
+    | null
     | undefined;
   completion_args?: CompletionArgs$Outbound | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
@@ -198,15 +208,18 @@ export const ConversationStreamRequest$outboundSchema: z.ZodType<
     ConversationStreamRequestHandoffExecution$outboundSchema,
   ).optional(),
   instructions: z.nullable(z.string()).optional(),
-  tools: z.array(
-    z.union([
-      CodeInterpreterTool$outboundSchema,
-      DocumentLibraryTool$outboundSchema,
-      FunctionTool$outboundSchema,
-      ImageGenerationTool$outboundSchema,
-      WebSearchTool$outboundSchema,
-      WebSearchPremiumTool$outboundSchema,
-    ]),
+  tools: z.nullable(
+    z.array(
+      z.union([
+        CodeInterpreterTool$outboundSchema,
+        CustomConnector$outboundSchema,
+        DocumentLibraryTool$outboundSchema,
+        FunctionTool$outboundSchema,
+        ImageGenerationTool$outboundSchema,
+        WebSearchTool$outboundSchema,
+        WebSearchPremiumTool$outboundSchema,
+      ]),
+    ),
   ).optional(),
   completionArgs: z.nullable(CompletionArgs$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
@@ -214,7 +227,7 @@ export const ConversationStreamRequest$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   agentId: z.nullable(z.string()).optional(),
-  agentVersion: z.nullable(z.union([z.string(), z.int()])).optional(),
+  agentVersion: z.nullable(smartUnion([z.string(), z.int()])).optional(),
   model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

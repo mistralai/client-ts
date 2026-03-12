@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -55,7 +56,7 @@ export function agentsApiV1ConversationsListRequestToJSON(
 export const AgentsApiV1ConversationsListResponse$inboundSchema: z.ZodType<
   AgentsApiV1ConversationsListResponse,
   unknown
-> = z.union([
+> = smartUnion([
   components.ModelConversation$inboundSchema,
   components.AgentConversation$inboundSchema,
 ]);

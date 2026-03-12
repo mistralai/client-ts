@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MessageInputEntry,
@@ -20,7 +21,10 @@ export type MessageEntries = MessageInputEntry | MessageOutputEntry;
 
 /** @internal */
 export const MessageEntries$inboundSchema: z.ZodType<MessageEntries, unknown> =
-  z.union([MessageInputEntry$inboundSchema, MessageOutputEntry$inboundSchema]);
+  smartUnion([
+    MessageInputEntry$inboundSchema,
+    MessageOutputEntry$inboundSchema,
+  ]);
 
 export function messageEntriesFromJSON(
   jsonString: string,

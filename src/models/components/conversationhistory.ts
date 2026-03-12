@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AgentHandoffEntry,
@@ -58,7 +59,7 @@ export type ConversationHistory = {
 };
 
 /** @internal */
-export const Entry$inboundSchema: z.ZodType<Entry, unknown> = z.union([
+export const Entry$inboundSchema: z.ZodType<Entry, unknown> = smartUnion([
   AgentHandoffEntry$inboundSchema,
   FunctionCallEntry$inboundSchema,
   MessageInputEntry$inboundSchema,
@@ -85,7 +86,7 @@ export const ConversationHistory$inboundSchema: z.ZodType<
   object: z.literal("conversation.history").default("conversation.history"),
   conversation_id: z.string(),
   entries: z.array(
-    z.union([
+    smartUnion([
       AgentHandoffEntry$inboundSchema,
       FunctionCallEntry$inboundSchema,
       MessageInputEntry$inboundSchema,

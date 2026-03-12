@@ -9,6 +9,7 @@ import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MessageInputContentChunks,
@@ -52,7 +53,7 @@ export const Role$outboundSchema: z.ZodType<string, Role> = openEnums
 export const MessageInputEntryContent$inboundSchema: z.ZodType<
   MessageInputEntryContent,
   unknown
-> = z.union([z.string(), z.array(MessageInputContentChunks$inboundSchema)]);
+> = smartUnion([z.string(), z.array(MessageInputContentChunks$inboundSchema)]);
 /** @internal */
 export type MessageInputEntryContent$Outbound =
   | string
@@ -62,7 +63,7 @@ export type MessageInputEntryContent$Outbound =
 export const MessageInputEntryContent$outboundSchema: z.ZodType<
   MessageInputEntryContent$Outbound,
   MessageInputEntryContent
-> = z.union([z.string(), z.array(MessageInputContentChunks$outboundSchema)]);
+> = smartUnion([z.string(), z.array(MessageInputContentChunks$outboundSchema)]);
 
 export function messageInputEntryContentToJSON(
   messageInputEntryContent: MessageInputEntryContent,
@@ -95,7 +96,7 @@ export const MessageInputEntry$inboundSchema: z.ZodType<
   ).optional(),
   id: z.string().optional(),
   role: Role$inboundSchema,
-  content: z.union([
+  content: smartUnion([
     z.string(),
     z.array(MessageInputContentChunks$inboundSchema),
   ]),
@@ -129,7 +130,7 @@ export const MessageInputEntry$outboundSchema: z.ZodType<
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),
   role: Role$outboundSchema,
-  content: z.union([
+  content: smartUnion([
     z.string(),
     z.array(MessageInputContentChunks$outboundSchema),
   ]),

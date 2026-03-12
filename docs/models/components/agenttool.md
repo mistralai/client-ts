@@ -11,6 +11,15 @@ const value: components.CodeInterpreterTool = {
 };
 ```
 
+### `components.CustomConnector`
+
+```typescript
+const value: components.CustomConnector = {
+  type: "connector",
+  connectorId: "<id>",
+};
+```
+
 ### `components.DocumentLibraryTool`
 
 ```typescript

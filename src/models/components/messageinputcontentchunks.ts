@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   DocumentURLChunk,
@@ -49,7 +50,7 @@ export type MessageInputContentChunks =
 export const MessageInputContentChunks$inboundSchema: z.ZodType<
   MessageInputContentChunks,
   unknown
-> = z.union([
+> = smartUnion([
   ToolFileChunk$inboundSchema,
   TextChunk$inboundSchema,
   ImageURLChunk$inboundSchema,
@@ -68,7 +69,7 @@ export type MessageInputContentChunks$Outbound =
 export const MessageInputContentChunks$outboundSchema: z.ZodType<
   MessageInputContentChunks$Outbound,
   MessageInputContentChunks
-> = z.union([
+> = smartUnion([
   ToolFileChunk$outboundSchema,
   TextChunk$outboundSchema,
   ImageURLChunk$outboundSchema,

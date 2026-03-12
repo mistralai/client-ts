@@ -60,12 +60,3 @@ const value: components.AudioChunk = {
 };
 ```
 
-### `components.AudioURLChunk`
-
-```typescript
-const value: components.AudioURLChunk = {
-  type: "audio_url",
-  audioUrl: "https://unwieldy-farm.com",
-};
-```
-

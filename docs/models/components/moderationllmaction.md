@@ -1,11 +1,11 @@
-# ModerationLlmv1Action
+# ModerationLLMAction
 
 ## Example Usage
 
 ```typescript
-import { ModerationLlmv1Action } from "@mistralai/mistralai/models/components";
+import { ModerationLLMAction } from "@mistralai/mistralai/models/components";
 
-let value: ModerationLlmv1Action = "none";
+let value: ModerationLLMAction = "block";
 ```
 
 ## Values

@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FunctionCallEntryArguments = { [k: string]: any } | string;
@@ -14,7 +15,7 @@ export type FunctionCallEntryArguments = { [k: string]: any } | string;
 export const FunctionCallEntryArguments$inboundSchema: z.ZodType<
   FunctionCallEntryArguments,
   unknown
-> = z.union([z.record(z.string(), z.any()), z.string()]);
+> = smartUnion([z.record(z.string(), z.any()), z.string()]);
 /** @internal */
 export type FunctionCallEntryArguments$Outbound = { [k: string]: any } | string;
 
@@ -22,7 +23,7 @@ export type FunctionCallEntryArguments$Outbound = { [k: string]: any } | string;
 export const FunctionCallEntryArguments$outboundSchema: z.ZodType<
   FunctionCallEntryArguments$Outbound,
   FunctionCallEntryArguments
-> = z.union([z.record(z.string(), z.any()), z.string()]);
+> = smartUnion([z.record(z.string(), z.any()), z.string()]);
 
 export function functionCallEntryArgumentsToJSON(
   functionCallEntryArguments: FunctionCallEntryArguments,

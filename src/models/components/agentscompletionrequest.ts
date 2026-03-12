@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   AssistantMessage,
   AssistantMessage$Outbound,
@@ -130,7 +131,7 @@ export type AgentsCompletionRequestStop$Outbound = string | Array<string>;
 export const AgentsCompletionRequestStop$outboundSchema: z.ZodType<
   AgentsCompletionRequestStop$Outbound,
   AgentsCompletionRequestStop
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function agentsCompletionRequestStopToJSON(
   agentsCompletionRequestStop: AgentsCompletionRequestStop,
@@ -181,7 +182,7 @@ export type AgentsCompletionRequestToolChoice$Outbound =
 export const AgentsCompletionRequestToolChoice$outboundSchema: z.ZodType<
   AgentsCompletionRequestToolChoice$Outbound,
   AgentsCompletionRequestToolChoice
-> = z.union([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
+> = smartUnion([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
 
 export function agentsCompletionRequestToolChoiceToJSON(
   agentsCompletionRequestToolChoice: AgentsCompletionRequestToolChoice,
@@ -225,7 +226,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
 > = z.object({
   maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(false),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
+  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.int()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
@@ -240,7 +241,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
   tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
-  toolChoice: z.union([
+  toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),

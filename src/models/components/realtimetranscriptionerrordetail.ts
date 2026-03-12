@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -30,7 +31,7 @@ export type RealtimeTranscriptionErrorDetail = {
 export const RealtimeTranscriptionErrorDetailMessage$inboundSchema: z.ZodType<
   RealtimeTranscriptionErrorDetailMessage,
   unknown
-> = z.union([z.string(), z.record(z.string(), z.any())]);
+> = smartUnion([z.string(), z.record(z.string(), z.any())]);
 /** @internal */
 export type RealtimeTranscriptionErrorDetailMessage$Outbound = string | {
   [k: string]: any;
@@ -40,7 +41,7 @@ export type RealtimeTranscriptionErrorDetailMessage$Outbound = string | {
 export const RealtimeTranscriptionErrorDetailMessage$outboundSchema: z.ZodType<
   RealtimeTranscriptionErrorDetailMessage$Outbound,
   RealtimeTranscriptionErrorDetailMessage
-> = z.union([z.string(), z.record(z.string(), z.any())]);
+> = smartUnion([z.string(), z.record(z.string(), z.any())]);
 
 export function realtimeTranscriptionErrorDetailMessageToJSON(
   realtimeTranscriptionErrorDetailMessage:
@@ -73,7 +74,7 @@ export const RealtimeTranscriptionErrorDetail$inboundSchema: z.ZodType<
   RealtimeTranscriptionErrorDetail,
   unknown
 > = z.object({
-  message: z.union([z.string(), z.record(z.string(), z.any())]),
+  message: smartUnion([z.string(), z.record(z.string(), z.any())]),
   code: z.int(),
 });
 /** @internal */
@@ -87,7 +88,7 @@ export const RealtimeTranscriptionErrorDetail$outboundSchema: z.ZodType<
   RealtimeTranscriptionErrorDetail$Outbound,
   RealtimeTranscriptionErrorDetail
 > = z.object({
-  message: z.union([z.string(), z.record(z.string(), z.any())]),
+  message: smartUnion([z.string(), z.record(z.string(), z.any())]),
   code: z.int(),
 });
 

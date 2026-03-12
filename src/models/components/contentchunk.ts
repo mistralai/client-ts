@@ -16,12 +16,6 @@ import {
   AudioChunk$outboundSchema,
 } from "./audiochunk.js";
 import {
-  AudioURLChunk,
-  AudioURLChunk$inboundSchema,
-  AudioURLChunk$Outbound,
-  AudioURLChunk$outboundSchema,
-} from "./audiourlchunk.js";
-import {
   DocumentURLChunk,
   DocumentURLChunk$inboundSchema,
   DocumentURLChunk$Outbound,
@@ -66,7 +60,6 @@ export type ContentChunk =
   | (FileChunk & { type: "file" })
   | (ThinkChunk & { type: "thinking" })
   | AudioChunk
-  | AudioURLChunk
   | discriminatedUnionTypes.Unknown<"type">;
 
 /** @internal */
@@ -87,7 +80,6 @@ export const ContentChunk$inboundSchema: z.ZodType<ContentChunk, unknown> =
       z.object({ type: z.literal("thinking") }),
     ),
     input_audio: AudioChunk$inboundSchema,
-    audio_url: AudioURLChunk$inboundSchema,
   });
 /** @internal */
 export type ContentChunk$Outbound =
@@ -97,8 +89,7 @@ export type ContentChunk$Outbound =
   | (ReferenceChunk$Outbound & { type: "reference" })
   | (FileChunk$Outbound & { type: "file" })
   | (ThinkChunk$Outbound & { type: "thinking" })
-  | AudioChunk$Outbound
-  | AudioURLChunk$Outbound;
+  | AudioChunk$Outbound;
 
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
@@ -114,7 +105,6 @@ export const ContentChunk$outboundSchema: z.ZodType<
   FileChunk$outboundSchema.and(z.object({ type: z.literal("file") })),
   ThinkChunk$outboundSchema.and(z.object({ type: z.literal("thinking") })),
   AudioChunk$outboundSchema,
-  AudioURLChunk$outboundSchema,
 ]);
 
 export function contentChunkToJSON(contentChunk: ContentChunk): string {

@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 
 /**
  * Text to classify.
@@ -30,7 +31,7 @@ export type ClassificationRequestInputs$Outbound = string | Array<string>;
 export const ClassificationRequestInputs$outboundSchema: z.ZodType<
   ClassificationRequestInputs$Outbound,
   ClassificationRequestInputs
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function classificationRequestInputsToJSON(
   classificationRequestInputs: ClassificationRequestInputs,
@@ -56,7 +57,7 @@ export const ClassificationRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
-  inputs: z.union([z.string(), z.array(z.string())]),
+  inputs: smartUnion([z.string(), z.array(z.string())]),
 }).transform((v) => {
   return remap$(v, {
     inputs: "input",

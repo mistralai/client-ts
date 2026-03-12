@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ReferenceChunk,
@@ -38,7 +39,7 @@ export type ThinkChunk = {
 };
 
 /** @internal */
-export const Thinking$inboundSchema: z.ZodType<Thinking, unknown> = z.union([
+export const Thinking$inboundSchema: z.ZodType<Thinking, unknown> = smartUnion([
   ToolReferenceChunk$inboundSchema,
   TextChunk$inboundSchema,
   ReferenceChunk$inboundSchema,
@@ -50,8 +51,8 @@ export type Thinking$Outbound =
   | ReferenceChunk$Outbound;
 
 /** @internal */
-export const Thinking$outboundSchema: z.ZodType<Thinking$Outbound, Thinking> = z
-  .union([
+export const Thinking$outboundSchema: z.ZodType<Thinking$Outbound, Thinking> =
+  smartUnion([
     ToolReferenceChunk$outboundSchema,
     TextChunk$outboundSchema,
     ReferenceChunk$outboundSchema,
@@ -75,7 +76,7 @@ export const ThinkChunk$inboundSchema: z.ZodType<ThinkChunk, unknown> = z
   .object({
     type: z.literal("thinking").default("thinking"),
     thinking: z.array(
-      z.union([
+      smartUnion([
         ToolReferenceChunk$inboundSchema,
         TextChunk$inboundSchema,
         ReferenceChunk$inboundSchema,
@@ -99,7 +100,7 @@ export const ThinkChunk$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("thinking").default("thinking" as const),
   thinking: z.array(
-    z.union([
+    smartUnion([
       ToolReferenceChunk$outboundSchema,
       TextChunk$outboundSchema,
       ReferenceChunk$outboundSchema,

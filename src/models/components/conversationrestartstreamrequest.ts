@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   CompletionArgs,
   CompletionArgs$Outbound,
@@ -80,7 +81,7 @@ export const ConversationRestartStreamRequestAgentVersion$outboundSchema:
   z.ZodType<
     ConversationRestartStreamRequestAgentVersion$Outbound,
     ConversationRestartStreamRequestAgentVersion
-  > = z.union([z.string(), z.int()]);
+  > = smartUnion([z.string(), z.int()]);
 
 export function conversationRestartStreamRequestAgentVersionToJSON(
   conversationRestartStreamRequestAgentVersion:
@@ -122,7 +123,7 @@ export const ConversationRestartStreamRequest$outboundSchema: z.ZodType<
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   fromEntryId: z.string(),
-  agentVersion: z.nullable(z.union([z.string(), z.int()])).optional(),
+  agentVersion: z.nullable(smartUnion([z.string(), z.int()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",
