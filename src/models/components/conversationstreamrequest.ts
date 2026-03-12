@@ -79,7 +79,7 @@ export type ConversationStreamRequestAgentVersion = string | number;
 
 export type ConversationStreamRequest = {
   inputs: ConversationInputs;
-  stream?: boolean | undefined;
+  stream?: true | undefined;
   store?: boolean | null | undefined;
   handoffExecution?:
     | ConversationStreamRequestHandoffExecution
@@ -170,7 +170,7 @@ export function conversationStreamRequestAgentVersionToJSON(
 /** @internal */
 export type ConversationStreamRequest$Outbound = {
   inputs: ConversationInputs$Outbound;
-  stream: boolean;
+  stream: true;
   store?: boolean | null | undefined;
   handoff_execution?: string | null | undefined;
   instructions?: string | null | undefined;
@@ -202,7 +202,7 @@ export const ConversationStreamRequest$outboundSchema: z.ZodType<
   ConversationStreamRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema,
-  stream: z.boolean().default(true),
+  stream: z.literal(true).default(true as const),
   store: z.nullable(z.boolean()).optional(),
   handoffExecution: z.nullable(
     ConversationStreamRequestHandoffExecution$outboundSchema,

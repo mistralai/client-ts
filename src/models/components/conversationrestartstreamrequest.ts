@@ -41,7 +41,7 @@ export type ConversationRestartStreamRequestAgentVersion = string | number;
  */
 export type ConversationRestartStreamRequest = {
   inputs?: ConversationInputs | undefined;
-  stream?: boolean | undefined;
+  stream?: true | undefined;
   /**
    * Whether to store the results into our servers or not.
    */
@@ -97,7 +97,7 @@ export function conversationRestartStreamRequestAgentVersionToJSON(
 /** @internal */
 export type ConversationRestartStreamRequest$Outbound = {
   inputs?: ConversationInputs$Outbound | undefined;
-  stream: boolean;
+  stream: true;
   store: boolean;
   handoff_execution: string;
   completion_args?: CompletionArgs$Outbound | undefined;
@@ -113,7 +113,7 @@ export const ConversationRestartStreamRequest$outboundSchema: z.ZodType<
   ConversationRestartStreamRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema.optional(),
-  stream: z.boolean().default(true),
+  stream: z.literal(true).default(true as const),
   store: z.boolean().default(true),
   handoffExecution:
     ConversationRestartStreamRequestHandoffExecution$outboundSchema.default(

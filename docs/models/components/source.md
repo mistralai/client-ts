@@ -6,11 +6,11 @@
 import { Source } from "@mistralai/mistralai/models/components";
 
 let value: Source = "upload";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "upload" | "repository" | "mistral" | Unrecognized<string>

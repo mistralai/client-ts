@@ -44,21 +44,19 @@
   },
   "sideEffects": false,
   "scripts": {
-    "lint": "eslint --cache --max-warnings=0 src",
-    "build": "tsc",
+    "lint": "oxlint --max-warnings=0 --deny-warnings 'src/**/*.{ts,tsx}'",
+    "build": "tsgo",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     
   },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
     "@types/node": "^22.0.0",
     "@types/ws": "^8.5.13",
-    "eslint": "^9.26.0",
-    "globals": "^15.14.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.26.0"
+    "@typescript/native-preview": "7.0.0-dev.20260302.1",
+    "oxlint": "^1.50.0",
+    "typescript": "~5.8.3"
   },
   "dependencies": {
     "ws": "^8.18.0",

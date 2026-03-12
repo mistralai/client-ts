@@ -32,7 +32,7 @@ export type ConversationAppendRequestHandoffExecution = ClosedEnum<
 
 export type ConversationAppendRequest = {
   inputs?: ConversationInputs | undefined;
-  stream?: boolean | undefined;
+  stream?: false | undefined;
   /**
    * Whether to store the results into our servers or not.
    */
@@ -54,7 +54,7 @@ export const ConversationAppendRequestHandoffExecution$outboundSchema:
 /** @internal */
 export type ConversationAppendRequest$Outbound = {
   inputs?: ConversationInputs$Outbound | undefined;
-  stream: boolean;
+  stream: false;
   store: boolean;
   handoff_execution: string;
   completion_args?: CompletionArgs$Outbound | undefined;
@@ -67,7 +67,7 @@ export const ConversationAppendRequest$outboundSchema: z.ZodType<
   ConversationAppendRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema.optional(),
-  stream: z.boolean().default(false),
+  stream: z.literal(false).default(false as const),
   store: z.boolean().default(true),
   handoffExecution: ConversationAppendRequestHandoffExecution$outboundSchema
     .default("server"),
