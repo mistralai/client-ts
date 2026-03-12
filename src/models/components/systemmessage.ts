@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   SystemMessageContentChunks,
   SystemMessageContentChunks$Outbound,
@@ -26,7 +27,10 @@ export type SystemMessageContent$Outbound =
 export const SystemMessageContent$outboundSchema: z.ZodType<
   SystemMessageContent$Outbound,
   SystemMessageContent
-> = z.union([z.string(), z.array(SystemMessageContentChunks$outboundSchema)]);
+> = smartUnion([
+  z.string(),
+  z.array(SystemMessageContentChunks$outboundSchema),
+]);
 
 export function systemMessageContentToJSON(
   systemMessageContent: SystemMessageContent,
@@ -48,7 +52,7 @@ export const SystemMessage$outboundSchema: z.ZodType<
   SystemMessage
 > = z.object({
   role: z.literal("system"),
-  content: z.union([
+  content: smartUnion([
     z.string(),
     z.array(SystemMessageContentChunks$outboundSchema),
   ]),

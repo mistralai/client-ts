@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -59,7 +60,7 @@ export type FIMCompletionStreamRequestStop$Outbound = string | Array<string>;
 export const FIMCompletionStreamRequestStop$outboundSchema: z.ZodType<
   FIMCompletionStreamRequestStop$Outbound,
   FIMCompletionStreamRequestStop
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function fimCompletionStreamRequestStopToJSON(
   fimCompletionStreamRequestStop: FIMCompletionStreamRequestStop,
@@ -96,7 +97,7 @@ export const FIMCompletionStreamRequest$outboundSchema: z.ZodType<
   topP: z.number().default(1),
   maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
+  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.int()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   prompt: z.string(),

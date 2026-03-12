@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   AssistantMessage,
   AssistantMessage$Outbound,
@@ -147,7 +148,7 @@ export type ChatCompletionStreamRequestStop$Outbound = string | Array<string>;
 export const ChatCompletionStreamRequestStop$outboundSchema: z.ZodType<
   ChatCompletionStreamRequestStop$Outbound,
   ChatCompletionStreamRequestStop
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function chatCompletionStreamRequestStopToJSON(
   chatCompletionStreamRequestStop: ChatCompletionStreamRequestStop,
@@ -198,7 +199,7 @@ export type ChatCompletionStreamRequestToolChoice$Outbound =
 export const ChatCompletionStreamRequestToolChoice$outboundSchema: z.ZodType<
   ChatCompletionStreamRequestToolChoice$Outbound,
   ChatCompletionStreamRequestToolChoice
-> = z.union([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
+> = smartUnion([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
 
 export function chatCompletionStreamRequestToolChoiceToJSON(
   chatCompletionStreamRequestToolChoice: ChatCompletionStreamRequestToolChoice,
@@ -247,7 +248,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   topP: z.number().optional(),
   maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
+  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
   randomSeed: z.nullable(z.int()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
@@ -262,7 +263,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
   tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
-  toolChoice: z.union([
+  toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),
