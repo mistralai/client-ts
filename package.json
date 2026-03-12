@@ -31,6 +31,11 @@
       "types": "./esm/models/operations/index.d.ts",
       "default": "./esm/models/operations/index.js"
     },
+    "./extra/realtime": {
+      "source": "./src/extra/realtime/index.ts",
+      "types": "./esm/extra/realtime/index.d.ts",
+      "default": "./esm/extra/realtime/index.js"
+    },
     "./*.js": {
       "source": "./src/*.ts",
       "types": "./esm/*.d.ts",
