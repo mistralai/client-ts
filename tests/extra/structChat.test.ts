@@ -171,9 +171,14 @@ const ccr_response: ParsedChatCompletionResponse<typeof MathDemonstration> = {
 
 describe("transformToChatCompletionRequest", () => {
   it("should return a valid ChatCompletionRequest", () => {
-    expect(transformToChatCompletionRequest(raw_request)).toStrictEqual(
-      ccr_request
-    );
+    const result = transformToChatCompletionRequest(raw_request);
+    const expected = structuredClone(ccr_request);
+    // $schema URL differs between Zod 3 (draft-07) and Zod 4 (draft/2020-12)
+    const resultSchema = (result.responseFormat as any)?.jsonSchema?.schemaDefinition;
+    const expectedSchema = (expected.responseFormat as any)?.jsonSchema?.schemaDefinition;
+    if (resultSchema) delete resultSchema.$schema;
+    if (expectedSchema) delete expectedSchema.$schema;
+    expect(result).toStrictEqual(expected);
   });
 });
 
@@ -187,8 +192,13 @@ describe("convertToParsedChatCompletionResponse", () => {
 
 describe("responseFormatFromZodObject", () => {
   it("should return a valid response format", () => {
-    expect(responseFormatFromZodObject(MathDemonstration)).toStrictEqual(
-      transformedResponseFormat
-    );
+    const result = responseFormatFromZodObject(MathDemonstration);
+    const expected = structuredClone(transformedResponseFormat);
+    // $schema URL differs between Zod 3 (draft-07) and Zod 4 (draft/2020-12)
+    const resultSchema = (result as any)?.jsonSchema?.schemaDefinition;
+    const expectedSchema = (expected as any)?.jsonSchema?.schemaDefinition;
+    if (resultSchema) delete resultSchema.$schema;
+    if (expectedSchema) delete expectedSchema.$schema;
+    expect(result).toStrictEqual(expected);
   });
 });

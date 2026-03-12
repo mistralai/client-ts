@@ -53,9 +53,6 @@
     "build": "tsgo",
     "prepublishOnly": "npm run build"
   },
-  "peerDependencies": {
-    
-  },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/ws": "^8.5.13",
