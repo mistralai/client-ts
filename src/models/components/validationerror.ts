@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Loc = string | number;
@@ -21,7 +22,7 @@ export type ValidationError = {
 };
 
 /** @internal */
-export const Loc$inboundSchema: z.ZodType<Loc, unknown> = z.union([
+export const Loc$inboundSchema: z.ZodType<Loc, unknown> = smartUnion([
   z.string(),
   z.int(),
 ]);
@@ -54,7 +55,7 @@ export const ValidationError$inboundSchema: z.ZodType<
   ValidationError,
   unknown
 > = z.object({
-  loc: z.array(z.union([z.string(), z.int()])),
+  loc: z.array(smartUnion([z.string(), z.int()])),
   msg: z.string(),
   type: z.string(),
   input: z.any().optional(),

@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Arguments = { [k: string]: any } | string;
@@ -16,10 +17,8 @@ export type FunctionCall = {
 };
 
 /** @internal */
-export const Arguments$inboundSchema: z.ZodType<Arguments, unknown> = z.union([
-  z.record(z.string(), z.any()),
-  z.string(),
-]);
+export const Arguments$inboundSchema: z.ZodType<Arguments, unknown> =
+  smartUnion([z.record(z.string(), z.any()), z.string()]);
 /** @internal */
 export type Arguments$Outbound = { [k: string]: any } | string;
 
@@ -27,7 +26,7 @@ export type Arguments$Outbound = { [k: string]: any } | string;
 export const Arguments$outboundSchema: z.ZodType<
   Arguments$Outbound,
   Arguments
-> = z.union([z.record(z.string(), z.any()), z.string()]);
+> = smartUnion([z.record(z.string(), z.any()), z.string()]);
 
 export function argumentsToJSON(value: Arguments): string {
   return JSON.stringify(Arguments$outboundSchema.parse(value));
@@ -46,7 +45,7 @@ export function argumentsFromJSON(
 export const FunctionCall$inboundSchema: z.ZodType<FunctionCall, unknown> = z
   .object({
     name: z.string(),
-    arguments: z.union([z.record(z.string(), z.any()), z.string()]),
+    arguments: smartUnion([z.record(z.string(), z.any()), z.string()]),
   });
 /** @internal */
 export type FunctionCall$Outbound = {
@@ -60,7 +59,7 @@ export const FunctionCall$outboundSchema: z.ZodType<
   FunctionCall
 > = z.object({
   name: z.string(),
-  arguments: z.union([z.record(z.string(), z.any()), z.string()]),
+  arguments: smartUnion([z.record(z.string(), z.any()), z.string()]),
 });
 
 export function functionCallToJSON(functionCall: FunctionCall): string {

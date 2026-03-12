@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   ReferenceChunk,
   ReferenceChunk$Outbound,
@@ -38,8 +39,8 @@ export type Thinking$Outbound =
   | ReferenceChunk$Outbound;
 
 /** @internal */
-export const Thinking$outboundSchema: z.ZodType<Thinking$Outbound, Thinking> = z
-  .union([
+export const Thinking$outboundSchema: z.ZodType<Thinking$Outbound, Thinking> =
+  smartUnion([
     TextChunk$outboundSchema,
     ToolReferenceChunk$outboundSchema,
     ReferenceChunk$outboundSchema,
@@ -65,7 +66,7 @@ export const ThinkChunk$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("thinking"),
   thinking: z.array(
-    z.union([
+    smartUnion([
       TextChunk$outboundSchema,
       ToolReferenceChunk$outboundSchema,
       ReferenceChunk$outboundSchema,

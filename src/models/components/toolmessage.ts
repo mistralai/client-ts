@@ -5,6 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   ContentChunk,
   ContentChunk$Outbound,
@@ -27,7 +28,7 @@ export type ToolMessageContent$Outbound = string | Array<ContentChunk$Outbound>;
 export const ToolMessageContent$outboundSchema: z.ZodType<
   ToolMessageContent$Outbound,
   ToolMessageContent
-> = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
+> = smartUnion([z.string(), z.array(ContentChunk$outboundSchema)]);
 
 export function toolMessageContentToJSON(
   toolMessageContent: ToolMessageContent,
@@ -52,7 +53,7 @@ export const ToolMessage$outboundSchema: z.ZodType<
 > = z.object({
   role: z.literal("tool"),
   content: z.nullable(
-    z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+    smartUnion([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),
   toolCallId: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
