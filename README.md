@@ -1,9 +1,12 @@
 # Mistral Typescript Client
 
 > [!IMPORTANT]
-> **Looking for v1 documentation?** If you installed `@mistralai/mistralai` from npm (e.g., `npm install @mistralai/mistralai`), you are using **v1** of the SDK. The documentation on this branch (`main`) is for **v2**, which is not yet released on npm.
+> **This is v2 of the Mistral TypeScript SDK** (alpha).
 >
-> **➡️ [Go to the v1 branch for v1 documentation](https://github.com/mistralai/client-ts/tree/v1)**
+> Key changes from v1: **ESM-only**, shorter type names, forward-compatible enums/unions, Zod v4.
+> See the **[Migration Guide](MIGRATION.md)** for full details.
+>
+> To pin v1: `npm install @mistralai/mistralai@^1` · **[v1 documentation and source](https://github.com/mistralai/client-ts/tree/v1)**
 
 <!-- Start Summary [summary] -->
 ## Summary
@@ -216,8 +219,8 @@ run();
 
 We have dedicated SDKs for the following providers:
 
-- [GCP](/packages/mistralai-gcp/README.md)
-- [Azure](/packages/mistralai-azure/README.md)
+- [GCP](https://github.com/mistralai/client-ts/tree/main/packages/mistralai-gcp)
+- [Azure](https://github.com/mistralai/client-ts/tree/main/packages/mistralai-azure)
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -777,12 +780,6 @@ run();
 ```
 <!-- End Authentication [security] -->
 
-## Providers Support
-
-We also provide provider specific SDK for:
-
-- [GCP](packages/mistralai-gcp/README.md)
-- [Azure](packages/mistralai-azure/README.md)
 
 <!-- Start Standalone functions [standalone-funcs] -->
 ## Standalone functions
