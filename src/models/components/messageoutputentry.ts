@@ -3,10 +3,11 @@
  * @generated-id: f647a457441c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MessageOutputContentChunks,
@@ -34,9 +35,8 @@ export type MessageOutputEntry = {
 /** @internal */
 export const MessageOutputEntryContent$inboundSchema: z.ZodType<
   MessageOutputEntryContent,
-  z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(MessageOutputContentChunks$inboundSchema)]);
+> = smartUnion([z.string(), z.array(MessageOutputContentChunks$inboundSchema)]);
 /** @internal */
 export type MessageOutputEntryContent$Outbound =
   | string
@@ -45,9 +45,11 @@ export type MessageOutputEntryContent$Outbound =
 /** @internal */
 export const MessageOutputEntryContent$outboundSchema: z.ZodType<
   MessageOutputEntryContent$Outbound,
-  z.ZodTypeDef,
   MessageOutputEntryContent
-> = z.union([z.string(), z.array(MessageOutputContentChunks$outboundSchema)]);
+> = smartUnion([
+  z.string(),
+  z.array(MessageOutputContentChunks$outboundSchema),
+]);
 
 export function messageOutputEntryContentToJSON(
   messageOutputEntryContent: MessageOutputEntryContent,
@@ -69,21 +71,20 @@ export function messageOutputEntryContentFromJSON(
 /** @internal */
 export const MessageOutputEntry$inboundSchema: z.ZodType<
   MessageOutputEntry,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("entry").default("entry"),
   type: z.literal("message.output").default("message.output"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   agent_id: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
   role: z.literal("assistant").default("assistant"),
-  content: z.union([
+  content: smartUnion([
     z.string(),
     z.array(MessageOutputContentChunks$inboundSchema),
   ]),
@@ -110,7 +111,6 @@ export type MessageOutputEntry$Outbound = {
 /** @internal */
 export const MessageOutputEntry$outboundSchema: z.ZodType<
   MessageOutputEntry$Outbound,
-  z.ZodTypeDef,
   MessageOutputEntry
 > = z.object({
   object: z.literal("entry").default("entry" as const),
@@ -121,7 +121,7 @@ export const MessageOutputEntry$outboundSchema: z.ZodType<
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
   role: z.literal("assistant").default("assistant" as const),
-  content: z.union([
+  content: smartUnion([
     z.string(),
     z.array(MessageOutputContentChunks$outboundSchema),
   ]),

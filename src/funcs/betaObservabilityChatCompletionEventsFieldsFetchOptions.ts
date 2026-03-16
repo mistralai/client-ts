@@ -37,7 +37,7 @@ export function betaObservabilityChatCompletionEventsFieldsFetchOptions(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ChatCompletionFieldOptions,
+    components.FetchChatCompletionFieldOptionsResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ChatCompletionFieldOptions,
+      components.FetchChatCompletionFieldOptionsResponse,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -163,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.ChatCompletionFieldOptions,
+    components.FetchChatCompletionFieldOptionsResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -174,7 +174,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ChatCompletionFieldOptions$inboundSchema),
+    M.json(
+      200,
+      components.FetchChatCompletionFieldOptionsResponse$inboundSchema,
+    ),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,

@@ -3,8 +3,9 @@
  * @generated-id: 755e6d09b372
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ResourceVisibility = {
   SharedGlobal: "shared_global",
@@ -12,13 +13,15 @@ export const ResourceVisibility = {
   SharedWorkspace: "shared_workspace",
   Private: "private",
 } as const;
-export type ResourceVisibility = ClosedEnum<typeof ResourceVisibility>;
+export type ResourceVisibility = OpenEnum<typeof ResourceVisibility>;
 
 /** @internal */
-export const ResourceVisibility$inboundSchema: z.ZodNativeEnum<
-  typeof ResourceVisibility
-> = z.nativeEnum(ResourceVisibility);
+export const ResourceVisibility$inboundSchema: z.ZodType<
+  ResourceVisibility,
+  unknown
+> = openEnums.inboundSchema(ResourceVisibility);
 /** @internal */
-export const ResourceVisibility$outboundSchema: z.ZodNativeEnum<
-  typeof ResourceVisibility
-> = ResourceVisibility$inboundSchema;
+export const ResourceVisibility$outboundSchema: z.ZodType<
+  string,
+  ResourceVisibility
+> = openEnums.outboundSchema(ResourceVisibility);

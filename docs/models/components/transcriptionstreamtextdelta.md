@@ -6,6 +6,7 @@
 import { TranscriptionStreamTextDelta } from "@mistralai/mistralai/models/components";
 
 let value: TranscriptionStreamTextDelta = {
+  type: "transcription.text.delta",
   text: "<value>",
 };
 ```
@@ -14,6 +15,6 @@ let value: TranscriptionStreamTextDelta = {
 
 | Field                        | Type                         | Required                     | Description                  |
 | ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `type`                       | *"transcription.text.delta"* | :heavy_minus_sign:           | N/A                          |
+| `type`                       | *"transcription.text.delta"* | :heavy_check_mark:           | N/A                          |
 | `text`                       | *string*                     | :heavy_check_mark:           | N/A                          |
 | `additionalProperties`       | Record<string, *any*>        | :heavy_minus_sign:           | N/A                          |

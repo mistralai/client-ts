@@ -39,7 +39,7 @@ export function betaLibrariesDocumentsStatus(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ProcessingStatusOut,
+    components.ProcessingStatus,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ProcessingStatusOut,
+      components.ProcessingStatus,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -162,7 +162,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.ProcessingStatusOut,
+    components.ProcessingStatus,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -173,7 +173,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ProcessingStatusOut$inboundSchema),
+    M.json(200, components.ProcessingStatus$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

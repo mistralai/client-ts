@@ -3,7 +3,7 @@
  * @generated-id: f52188cbdc86
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type LibrariesDeleteV1Request = {
@@ -18,7 +18,6 @@ export type LibrariesDeleteV1Request$Outbound = {
 /** @internal */
 export const LibrariesDeleteV1Request$outboundSchema: z.ZodType<
   LibrariesDeleteV1Request$Outbound,
-  z.ZodTypeDef,
   LibrariesDeleteV1Request
 > = z.object({
   libraryId: z.string(),

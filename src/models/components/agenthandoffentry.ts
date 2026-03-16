@@ -3,7 +3,7 @@
  * @generated-id: e94063d48620
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -24,15 +24,14 @@ export type AgentHandoffEntry = {
 /** @internal */
 export const AgentHandoffEntry$inboundSchema: z.ZodType<
   AgentHandoffEntry,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("entry").default("entry"),
   type: z.literal("agent.handoff").default("agent.handoff"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   id: z.string().optional(),
   previous_agent_id: z.string(),
@@ -65,7 +64,6 @@ export type AgentHandoffEntry$Outbound = {
 /** @internal */
 export const AgentHandoffEntry$outboundSchema: z.ZodType<
   AgentHandoffEntry$Outbound,
-  z.ZodTypeDef,
   AgentHandoffEntry
 > = z.object({
   object: z.literal("entry").default("entry" as const),

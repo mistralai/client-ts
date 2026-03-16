@@ -7,6 +7,7 @@
 
 ```typescript
 const value: components.TextChunk = {
+  type: "text",
   text: "<value>",
 };
 ```
@@ -15,6 +16,7 @@ const value: components.TextChunk = {
 
 ```typescript
 const value: components.ThinkChunk = {
+  type: "thinking",
   thinking: [],
 };
 ```

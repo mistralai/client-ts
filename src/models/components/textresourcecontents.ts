@@ -3,12 +3,9 @@
  * @generated-id: ccccb09d03b5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
+import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,24 +17,19 @@ export type TextResourceContents = {
   mimeType?: string | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
   text: string;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
 export const TextResourceContents$inboundSchema: z.ZodType<
   TextResourceContents,
-  z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    uri: z.string(),
-    mimeType: z.nullable(z.string()).optional(),
-    _meta: z.nullable(z.record(z.any())).optional(),
-    text: z.string(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
+> = z.object({
+  uri: z.string(),
+  mimeType: z.nullable(z.string()).optional(),
+  _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+  text: z.string(),
+}).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

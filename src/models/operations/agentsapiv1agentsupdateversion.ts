@@ -3,7 +3,7 @@
  * @generated-id: 58fabf7c39f9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type AgentsApiV1AgentsUpdateVersionRequest = {
@@ -20,11 +20,10 @@ export type AgentsApiV1AgentsUpdateVersionRequest$Outbound = {
 /** @internal */
 export const AgentsApiV1AgentsUpdateVersionRequest$outboundSchema: z.ZodType<
   AgentsApiV1AgentsUpdateVersionRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1AgentsUpdateVersionRequest
 > = z.object({
   agentId: z.string(),
-  version: z.number().int(),
+  version: z.int(),
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",

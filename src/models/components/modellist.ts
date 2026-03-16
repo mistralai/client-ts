@@ -3,58 +3,54 @@
  * @generated-id: 6b955609daf1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { BaseModelCard, BaseModelCard$inboundSchema } from "./basemodelcard.js";
 import { FTModelCard, FTModelCard$inboundSchema } from "./ftmodelcard.js";
 
-export type Data =
-  | (BaseModelCard & { type: "base" })
-  | (FTModelCard & { type: "fine-tuned" });
+export type ModelListData =
+  | BaseModelCard
+  | FTModelCard
+  | discriminatedUnionTypes.Unknown<"type">;
 
 export type ModelList = {
-  object: string | undefined;
+  object: string;
   data?:
     | Array<
-      | (BaseModelCard & { type: "base" })
-      | (FTModelCard & { type: "fine-tuned" })
+      BaseModelCard | FTModelCard | discriminatedUnionTypes.Unknown<"type">
     >
     | undefined;
 };
 
 /** @internal */
-export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
-  .union([
-    BaseModelCard$inboundSchema.and(z.object({ type: z.literal("base") })),
-    FTModelCard$inboundSchema.and(z.object({ type: z.literal("fine-tuned") })),
-  ]);
+export const ModelListData$inboundSchema: z.ZodType<ModelListData, unknown> =
+  discriminatedUnion("type", {
+    base: BaseModelCard$inboundSchema,
+    ["fine-tuned"]: FTModelCard$inboundSchema,
+  });
 
-export function dataFromJSON(
+export function modelListDataFromJSON(
   jsonString: string,
-): SafeParseResult<Data, SDKValidationError> {
+): SafeParseResult<ModelListData, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Data$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data' from JSON`,
+    (x) => ModelListData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelListData' from JSON`,
   );
 }
 
 /** @internal */
-export const ModelList$inboundSchema: z.ZodType<
-  ModelList,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const ModelList$inboundSchema: z.ZodType<ModelList, unknown> = z.object({
   object: z.string().default("list"),
   data: z.array(
-    z.union([
-      BaseModelCard$inboundSchema.and(z.object({ type: z.literal("base") })),
-      FTModelCard$inboundSchema.and(
-        z.object({ type: z.literal("fine-tuned") }),
-      ),
-    ]),
+    discriminatedUnion("type", {
+      base: BaseModelCard$inboundSchema,
+      ["fine-tuned"]: FTModelCard$inboundSchema,
+    }),
   ).optional(),
 });
 

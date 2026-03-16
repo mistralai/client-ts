@@ -3,9 +3,10 @@
  * @generated-id: b92587fa9adf
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   DocumentURLChunk,
@@ -48,9 +49,8 @@ export type MessageInputContentChunks =
 /** @internal */
 export const MessageInputContentChunks$inboundSchema: z.ZodType<
   MessageInputContentChunks,
-  z.ZodTypeDef,
   unknown
-> = z.union([
+> = smartUnion([
   ToolFileChunk$inboundSchema,
   TextChunk$inboundSchema,
   ImageURLChunk$inboundSchema,
@@ -68,9 +68,8 @@ export type MessageInputContentChunks$Outbound =
 /** @internal */
 export const MessageInputContentChunks$outboundSchema: z.ZodType<
   MessageInputContentChunks$Outbound,
-  z.ZodTypeDef,
   MessageInputContentChunks
-> = z.union([
+> = smartUnion([
   ToolFileChunk$outboundSchema,
   TextChunk$outboundSchema,
   ImageURLChunk$outboundSchema,

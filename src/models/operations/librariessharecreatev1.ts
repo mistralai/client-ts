@@ -3,33 +3,32 @@
  * @generated-id: 1b1a27f77b04
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type LibrariesShareCreateV1Request = {
   libraryId: string;
-  sharingIn: components.SharingIn;
+  sharingRequest: components.SharingRequest;
 };
 
 /** @internal */
 export type LibrariesShareCreateV1Request$Outbound = {
   library_id: string;
-  SharingIn: components.SharingIn$Outbound;
+  SharingRequest: components.SharingRequest$Outbound;
 };
 
 /** @internal */
 export const LibrariesShareCreateV1Request$outboundSchema: z.ZodType<
   LibrariesShareCreateV1Request$Outbound,
-  z.ZodTypeDef,
   LibrariesShareCreateV1Request
 > = z.object({
   libraryId: z.string(),
-  sharingIn: components.SharingIn$outboundSchema,
+  sharingRequest: components.SharingRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     libraryId: "library_id",
-    sharingIn: "SharingIn",
+    sharingRequest: "SharingRequest",
   });
 });
 

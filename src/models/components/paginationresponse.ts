@@ -3,7 +3,7 @@
  * @generated-id: ebbab5b35e69
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -17,11 +17,10 @@ export type PaginationResponse = {
 /** @internal */
 export const PaginationResponse$inboundSchema: z.ZodType<
   PaginationResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   next_cursor: z.nullable(z.string()).optional(),
-  page_size: z.number().int(),
+  page_size: z.int(),
 }).transform((v) => {
   return remap$(v, {
     "next_cursor": "nextCursor",

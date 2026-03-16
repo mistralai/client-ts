@@ -3,6 +3,7 @@
 .DS_Store
 **/.speakeasy/temp/
 **/.speakeasy/logs/
+**/.speakeasy/*.out.openapi.yaml
 .DS_Store
 .env.*.local
 /mcp-server

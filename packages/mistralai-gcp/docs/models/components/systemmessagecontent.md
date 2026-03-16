@@ -14,6 +14,7 @@ const value: string = "<value>";
 ```typescript
 const value: components.SystemMessageContentChunks[] = [
   {
+    type: "thinking",
     thinking: [],
   },
 ];

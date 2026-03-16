@@ -3,10 +3,11 @@
  * @generated-id: 06c32b85d8c1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AgentHandoffEntry,
@@ -33,7 +34,7 @@ import {
   ToolExecutionEntry$inboundSchema,
 } from "./toolexecutionentry.js";
 
-export type Entries =
+export type Entry =
   | AgentHandoffEntry
   | FunctionCallEntry
   | MessageInputEntry
@@ -45,7 +46,7 @@ export type Entries =
  * Retrieve all entries in a conversation.
  */
 export type ConversationHistory = {
-  object?: "conversation.history" | undefined;
+  object: "conversation.history";
   conversationId: string;
   entries: Array<
     | AgentHandoffEntry
@@ -58,36 +59,34 @@ export type ConversationHistory = {
 };
 
 /** @internal */
-export const Entries$inboundSchema: z.ZodType<Entries, z.ZodTypeDef, unknown> =
-  z.union([
-    AgentHandoffEntry$inboundSchema,
-    FunctionCallEntry$inboundSchema,
-    MessageInputEntry$inboundSchema,
-    FunctionResultEntry$inboundSchema,
-    ToolExecutionEntry$inboundSchema,
-    MessageOutputEntry$inboundSchema,
-  ]);
+export const Entry$inboundSchema: z.ZodType<Entry, unknown> = smartUnion([
+  AgentHandoffEntry$inboundSchema,
+  FunctionCallEntry$inboundSchema,
+  MessageInputEntry$inboundSchema,
+  FunctionResultEntry$inboundSchema,
+  ToolExecutionEntry$inboundSchema,
+  MessageOutputEntry$inboundSchema,
+]);
 
-export function entriesFromJSON(
+export function entryFromJSON(
   jsonString: string,
-): SafeParseResult<Entries, SDKValidationError> {
+): SafeParseResult<Entry, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Entries$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Entries' from JSON`,
+    (x) => Entry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Entry' from JSON`,
   );
 }
 
 /** @internal */
 export const ConversationHistory$inboundSchema: z.ZodType<
   ConversationHistory,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("conversation.history").default("conversation.history"),
   conversation_id: z.string(),
   entries: z.array(
-    z.union([
+    smartUnion([
       AgentHandoffEntry$inboundSchema,
       FunctionCallEntry$inboundSchema,
       MessageInputEntry$inboundSchema,

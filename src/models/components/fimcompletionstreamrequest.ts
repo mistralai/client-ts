@@ -3,8 +3,9 @@
  * @generated-id: d5ff1097f390
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -58,9 +59,8 @@ export type FIMCompletionStreamRequestStop$Outbound = string | Array<string>;
 /** @internal */
 export const FIMCompletionStreamRequestStop$outboundSchema: z.ZodType<
   FIMCompletionStreamRequestStop$Outbound,
-  z.ZodTypeDef,
   FIMCompletionStreamRequestStop
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function fimCompletionStreamRequestStopToJSON(
   fimCompletionStreamRequestStop: FIMCompletionStreamRequestStop,
@@ -90,20 +90,19 @@ export type FIMCompletionStreamRequest$Outbound = {
 /** @internal */
 export const FIMCompletionStreamRequest$outboundSchema: z.ZodType<
   FIMCompletionStreamRequest$Outbound,
-  z.ZodTypeDef,
   FIMCompletionStreamRequest
 > = z.object({
   model: z.string(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.number().default(1),
-  maxTokens: z.nullable(z.number().int()).optional(),
+  maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
-  randomSeed: z.nullable(z.number().int()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
+  randomSeed: z.nullable(z.int()).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   prompt: z.string(),
   suffix: z.nullable(z.string()).optional(),
-  minTokens: z.nullable(z.number().int()).optional(),
+  minTokens: z.nullable(z.int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     topP: "top_p",

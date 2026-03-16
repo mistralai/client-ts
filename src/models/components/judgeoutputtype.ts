@@ -3,7 +3,7 @@
  * @generated-id: 83484e592c0b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const JudgeOutputType = {
@@ -13,6 +13,5 @@ export const JudgeOutputType = {
 export type JudgeOutputType = ClosedEnum<typeof JudgeOutputType>;
 
 /** @internal */
-export const JudgeOutputType$outboundSchema: z.ZodNativeEnum<
-  typeof JudgeOutputType
-> = z.nativeEnum(JudgeOutputType);
+export const JudgeOutputType$outboundSchema: z.ZodEnum<typeof JudgeOutputType> =
+  z.enum(JudgeOutputType);

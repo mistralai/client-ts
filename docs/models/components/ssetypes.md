@@ -8,10 +8,12 @@ Server side events sent when streaming a conversation response.
 import { SSETypes } from "@mistralai/mistralai/models/components";
 
 let value: SSETypes = "message.output.delta";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"conversation.response.started" | "conversation.response.done" | "conversation.response.error" | "message.output.delta" | "tool.execution.started" | "tool.execution.delta" | "tool.execution.done" | "agent.handoff.started" | "agent.handoff.done" | "function.call.delta"
+"conversation.response.started" | "conversation.response.done" | "conversation.response.error" | "message.output.delta" | "tool.execution.started" | "tool.execution.delta" | "tool.execution.done" | "agent.handoff.started" | "agent.handoff.done" | "function.call.delta" | Unrecognized<string>
 ```

@@ -19,9 +19,9 @@ export class Campaigns extends ClientSDK {
    * Create and start a new campaign
    */
   async create(
-    request: components.PostCampaignInSchema,
+    request: components.CreateCampaignRequest,
     options?: RequestOptions,
-  ): Promise<components.CampaignPreview> {
+  ): Promise<components.Campaign> {
     return unwrapAsync(betaObservabilityCampaignsCreate(
       this,
       request,
@@ -37,7 +37,7 @@ export class Campaigns extends ClientSDK {
       | operations.GetCampaignsV1ObservabilityCampaignsGetRequest
       | undefined,
     options?: RequestOptions,
-  ): Promise<components.CampaignPreviews> {
+  ): Promise<components.ListCampaignsResponse> {
     return unwrapAsync(betaObservabilityCampaignsList(
       this,
       request,
@@ -52,7 +52,7 @@ export class Campaigns extends ClientSDK {
     request:
       operations.GetCampaignByIdV1ObservabilityCampaignsCampaignIdGetRequest,
     options?: RequestOptions,
-  ): Promise<components.CampaignPreview> {
+  ): Promise<components.Campaign> {
     return unwrapAsync(betaObservabilityCampaignsFetch(
       this,
       request,
@@ -82,7 +82,7 @@ export class Campaigns extends ClientSDK {
     request:
       operations.GetCampaignStatusByIdV1ObservabilityCampaignsCampaignIdStatusGetRequest,
     options?: RequestOptions,
-  ): Promise<components.CampaignStatus> {
+  ): Promise<components.FetchCampaignStatusResponse> {
     return unwrapAsync(betaObservabilityCampaignsFetchStatus(
       this,
       request,
@@ -97,7 +97,7 @@ export class Campaigns extends ClientSDK {
     request:
       operations.GetCampaignSelectedEventsV1ObservabilityCampaignsCampaignIdSelectedEventsGetRequest,
     options?: RequestOptions,
-  ): Promise<components.CampaignSelectedEvents> {
+  ): Promise<components.ListCampaignSelectedEventsResponse> {
     return unwrapAsync(betaObservabilityCampaignsListEvents(
       this,
       request,

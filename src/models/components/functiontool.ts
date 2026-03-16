@@ -3,9 +3,8 @@
  * @generated-id: da578d9a5ae4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -15,46 +14,29 @@ import {
   FunctionT$outboundSchema,
 } from "./function.js";
 
-export const Type = {
-  Function: "function",
-} as const;
-export type Type = ClosedEnum<typeof Type>;
-
 export type FunctionTool = {
-  type?: Type | undefined;
+  type: "function";
   function: FunctionT;
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
-/** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
-
-/** @internal */
-export const FunctionTool$inboundSchema: z.ZodType<
-  FunctionTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: Type$inboundSchema.default("function"),
-  function: FunctionT$inboundSchema,
-});
+export const FunctionTool$inboundSchema: z.ZodType<FunctionTool, unknown> = z
+  .object({
+    type: z.literal("function"),
+    function: FunctionT$inboundSchema,
+  });
 /** @internal */
 export type FunctionTool$Outbound = {
-  type: string;
+  type: "function";
   function: FunctionT$Outbound;
 };
 
 /** @internal */
 export const FunctionTool$outboundSchema: z.ZodType<
   FunctionTool$Outbound,
-  z.ZodTypeDef,
   FunctionTool
 > = z.object({
-  type: Type$outboundSchema.default("function"),
+  type: z.literal("function"),
   function: FunctionT$outboundSchema,
 });
 

@@ -55,15 +55,8 @@ const value: components.ThinkChunk = {
 
 ```typescript
 const value: components.AudioChunk = {
+  type: "input_audio",
   inputAudio: "<value>",
-};
-```
-
-### `components.AudioURLChunk`
-
-```typescript
-const value: components.AudioURLChunk = {
-  audioUrl: "https://unwieldy-farm.com",
 };
 ```
 

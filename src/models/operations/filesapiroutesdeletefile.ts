@@ -3,7 +3,7 @@
  * @generated-id: 8aeffd9e129e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type FilesApiRoutesDeleteFileRequest = {
@@ -18,7 +18,6 @@ export type FilesApiRoutesDeleteFileRequest$Outbound = {
 /** @internal */
 export const FilesApiRoutesDeleteFileRequest$outboundSchema: z.ZodType<
   FilesApiRoutesDeleteFileRequest$Outbound,
-  z.ZodTypeDef,
   FilesApiRoutesDeleteFileRequest
 > = z.object({
   fileId: z.string(),

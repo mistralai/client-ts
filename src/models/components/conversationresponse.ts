@@ -3,10 +3,11 @@
  * @generated-id: 43cd30dc4254
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AgentHandoffEntry,
@@ -29,19 +30,19 @@ import {
   ToolExecutionEntry$inboundSchema,
 } from "./toolexecutionentry.js";
 
-export type Outputs =
+export type ConversationResponseOutput =
   | AgentHandoffEntry
   | FunctionCallEntry
   | ToolExecutionEntry
   | MessageOutputEntry;
 
-export type Guardrails = {};
+export type Guardrail = {};
 
 /**
  * The response after appending new entries to the conversation.
  */
 export type ConversationResponse = {
-  object?: "conversation.response" | undefined;
+  object: "conversation.response";
   conversationId: string;
   outputs: Array<
     | AgentHandoffEntry
@@ -50,55 +51,54 @@ export type ConversationResponse = {
     | MessageOutputEntry
   >;
   usage: ConversationUsageInfo;
-  guardrails?: Array<Guardrails> | null | undefined;
+  guardrails?: Array<Guardrail> | null | undefined;
 };
 
 /** @internal */
-export const Outputs$inboundSchema: z.ZodType<Outputs, z.ZodTypeDef, unknown> =
-  z.union([
-    AgentHandoffEntry$inboundSchema,
-    FunctionCallEntry$inboundSchema,
-    ToolExecutionEntry$inboundSchema,
-    MessageOutputEntry$inboundSchema,
-  ]);
+export const ConversationResponseOutput$inboundSchema: z.ZodType<
+  ConversationResponseOutput,
+  unknown
+> = smartUnion([
+  AgentHandoffEntry$inboundSchema,
+  FunctionCallEntry$inboundSchema,
+  ToolExecutionEntry$inboundSchema,
+  MessageOutputEntry$inboundSchema,
+]);
 
-export function outputsFromJSON(
+export function conversationResponseOutputFromJSON(
   jsonString: string,
-): SafeParseResult<Outputs, SDKValidationError> {
+): SafeParseResult<ConversationResponseOutput, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Outputs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Outputs' from JSON`,
+    (x) => ConversationResponseOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ConversationResponseOutput' from JSON`,
   );
 }
 
 /** @internal */
-export const Guardrails$inboundSchema: z.ZodType<
-  Guardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
+export const Guardrail$inboundSchema: z.ZodType<Guardrail, unknown> = z.object(
+  {},
+);
 
-export function guardrailsFromJSON(
+export function guardrailFromJSON(
   jsonString: string,
-): SafeParseResult<Guardrails, SDKValidationError> {
+): SafeParseResult<Guardrail, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Guardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Guardrails' from JSON`,
+    (x) => Guardrail$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Guardrail' from JSON`,
   );
 }
 
 /** @internal */
 export const ConversationResponse$inboundSchema: z.ZodType<
   ConversationResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("conversation.response").default("conversation.response"),
   conversation_id: z.string(),
   outputs: z.array(
-    z.union([
+    smartUnion([
       AgentHandoffEntry$inboundSchema,
       FunctionCallEntry$inboundSchema,
       ToolExecutionEntry$inboundSchema,
@@ -106,7 +106,7 @@ export const ConversationResponse$inboundSchema: z.ZodType<
     ]),
   ),
   usage: ConversationUsageInfo$inboundSchema,
-  guardrails: z.nullable(z.array(z.lazy(() => Guardrails$inboundSchema)))
+  guardrails: z.nullable(z.array(z.lazy(() => Guardrail$inboundSchema)))
     .optional(),
 }).transform((v) => {
   return remap$(v, {

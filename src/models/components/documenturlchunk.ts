@@ -3,7 +3,7 @@
  * @generated-id: c2d3d68158f7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -21,7 +21,6 @@ export type DocumentURLChunk = {
 /** @internal */
 export const DocumentURLChunk$inboundSchema: z.ZodType<
   DocumentURLChunk,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("document_url").default("document_url"),
@@ -43,7 +42,6 @@ export type DocumentURLChunk$Outbound = {
 /** @internal */
 export const DocumentURLChunk$outboundSchema: z.ZodType<
   DocumentURLChunk$Outbound,
-  z.ZodTypeDef,
   DocumentURLChunk
 > = z.object({
   type: z.literal("document_url").default("document_url" as const),

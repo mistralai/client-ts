@@ -3,8 +3,9 @@
  * @generated-id: 5d322ff91b16
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   ContentChunk,
   ContentChunk$Outbound,
@@ -14,7 +15,7 @@ import {
 export type ToolMessageContent = string | Array<ContentChunk>;
 
 export type ToolMessage = {
-  role?: "tool" | undefined;
+  role: "tool";
   content: string | Array<ContentChunk> | null;
   toolCallId?: string | null | undefined;
   name?: string | null | undefined;
@@ -26,9 +27,8 @@ export type ToolMessageContent$Outbound = string | Array<ContentChunk$Outbound>;
 /** @internal */
 export const ToolMessageContent$outboundSchema: z.ZodType<
   ToolMessageContent$Outbound,
-  z.ZodTypeDef,
   ToolMessageContent
-> = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
+> = smartUnion([z.string(), z.array(ContentChunk$outboundSchema)]);
 
 export function toolMessageContentToJSON(
   toolMessageContent: ToolMessageContent,
@@ -49,12 +49,11 @@ export type ToolMessage$Outbound = {
 /** @internal */
 export const ToolMessage$outboundSchema: z.ZodType<
   ToolMessage$Outbound,
-  z.ZodTypeDef,
   ToolMessage
 > = z.object({
-  role: z.literal("tool").default("tool" as const),
+  role: z.literal("tool"),
   content: z.nullable(
-    z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+    smartUnion([z.string(), z.array(ContentChunk$outboundSchema)]),
   ),
   toolCallId: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),

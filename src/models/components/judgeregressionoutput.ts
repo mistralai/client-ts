@@ -3,14 +3,14 @@
  * @generated-id: d517eb109b04
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JudgeRegressionOutput = {
-  type?: "REGRESSION" | undefined;
+  type: "REGRESSION";
   min?: number | undefined;
   minDescription: string;
   max?: number | undefined;
@@ -20,10 +20,9 @@ export type JudgeRegressionOutput = {
 /** @internal */
 export const JudgeRegressionOutput$inboundSchema: z.ZodType<
   JudgeRegressionOutput,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("REGRESSION").default("REGRESSION"),
+  type: z.literal("REGRESSION"),
   min: z.number().default(0),
   min_description: z.string(),
   max: z.number().default(1),
@@ -46,10 +45,9 @@ export type JudgeRegressionOutput$Outbound = {
 /** @internal */
 export const JudgeRegressionOutput$outboundSchema: z.ZodType<
   JudgeRegressionOutput$Outbound,
-  z.ZodTypeDef,
   JudgeRegressionOutput
 > = z.object({
-  type: z.literal("REGRESSION").default("REGRESSION" as const),
+  type: z.literal("REGRESSION"),
   min: z.number().default(0),
   minDescription: z.string(),
   max: z.number().default(1),

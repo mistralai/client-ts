@@ -3,7 +3,7 @@
  * @generated-id: 9e30c8d35c7a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -33,14 +33,13 @@ export type GetJudgesV1ObservabilityJudgesGetRequest$Outbound = {
 /** @internal */
 export const GetJudgesV1ObservabilityJudgesGetRequest$outboundSchema: z.ZodType<
   GetJudgesV1ObservabilityJudgesGetRequest$Outbound,
-  z.ZodTypeDef,
   GetJudgesV1ObservabilityJudgesGetRequest
 > = z.object({
   typeFilter: z.nullable(z.array(components.JudgeOutputType$outboundSchema))
     .optional(),
   modelFilter: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().default(50),
-  page: z.number().int().default(1),
+  pageSize: z.int().default(50),
+  page: z.int().default(1),
   q: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

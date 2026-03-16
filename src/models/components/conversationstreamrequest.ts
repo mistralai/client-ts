@@ -3,9 +3,10 @@
  * @generated-id: d59a2fff599b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   CodeInterpreterTool,
   CodeInterpreterTool$Outbound,
@@ -21,6 +22,11 @@ import {
   ConversationInputs$Outbound,
   ConversationInputs$outboundSchema,
 } from "./conversationinputs.js";
+import {
+  CustomConnector,
+  CustomConnector$Outbound,
+  CustomConnector$outboundSchema,
+} from "./customconnector.js";
 import {
   DocumentLibraryTool,
   DocumentLibraryTool$Outbound,
@@ -60,37 +66,37 @@ export type ConversationStreamRequestHandoffExecution = ClosedEnum<
   typeof ConversationStreamRequestHandoffExecution
 >;
 
-export type ConversationStreamRequestTools =
-  | (CodeInterpreterTool & { type: "code_interpreter" })
-  | (DocumentLibraryTool & { type: "document_library" })
-  | (FunctionTool & { type: "function" })
-  | (ImageGenerationTool & { type: "image_generation" })
-  | (WebSearchTool & { type: "web_search" })
-  | (WebSearchPremiumTool & { type: "web_search_premium" });
+export type ConversationStreamRequestTool =
+  | CodeInterpreterTool
+  | CustomConnector
+  | DocumentLibraryTool
+  | FunctionTool
+  | ImageGenerationTool
+  | WebSearchTool
+  | WebSearchPremiumTool;
 
 export type ConversationStreamRequestAgentVersion = string | number;
 
 export type ConversationStreamRequest = {
   inputs: ConversationInputs;
-  stream?: boolean | undefined;
+  stream?: true | undefined;
   store?: boolean | null | undefined;
   handoffExecution?:
     | ConversationStreamRequestHandoffExecution
     | null
     | undefined;
   instructions?: string | null | undefined;
-  /**
-   * List of tools which are available to the model during the conversation.
-   */
   tools?:
     | Array<
-      | (CodeInterpreterTool & { type: "code_interpreter" })
-      | (DocumentLibraryTool & { type: "document_library" })
-      | (FunctionTool & { type: "function" })
-      | (ImageGenerationTool & { type: "image_generation" })
-      | (WebSearchTool & { type: "web_search" })
-      | (WebSearchPremiumTool & { type: "web_search_premium" })
+      | CodeInterpreterTool
+      | CustomConnector
+      | DocumentLibraryTool
+      | FunctionTool
+      | ImageGenerationTool
+      | WebSearchTool
+      | WebSearchPremiumTool
     >
+    | null
     | undefined;
   completionArgs?: CompletionArgs | null | undefined;
   guardrails?: Array<GuardrailConfig> | null | undefined;
@@ -104,46 +110,40 @@ export type ConversationStreamRequest = {
 
 /** @internal */
 export const ConversationStreamRequestHandoffExecution$outboundSchema:
-  z.ZodNativeEnum<typeof ConversationStreamRequestHandoffExecution> = z
-    .nativeEnum(ConversationStreamRequestHandoffExecution);
+  z.ZodEnum<typeof ConversationStreamRequestHandoffExecution> = z.enum(
+    ConversationStreamRequestHandoffExecution,
+  );
 
 /** @internal */
-export type ConversationStreamRequestTools$Outbound =
-  | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
-  | (DocumentLibraryTool$Outbound & { type: "document_library" })
-  | (FunctionTool$Outbound & { type: "function" })
-  | (ImageGenerationTool$Outbound & { type: "image_generation" })
-  | (WebSearchTool$Outbound & { type: "web_search" })
-  | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" });
+export type ConversationStreamRequestTool$Outbound =
+  | CodeInterpreterTool$Outbound
+  | CustomConnector$Outbound
+  | DocumentLibraryTool$Outbound
+  | FunctionTool$Outbound
+  | ImageGenerationTool$Outbound
+  | WebSearchTool$Outbound
+  | WebSearchPremiumTool$Outbound;
 
 /** @internal */
-export const ConversationStreamRequestTools$outboundSchema: z.ZodType<
-  ConversationStreamRequestTools$Outbound,
-  z.ZodTypeDef,
-  ConversationStreamRequestTools
+export const ConversationStreamRequestTool$outboundSchema: z.ZodType<
+  ConversationStreamRequestTool$Outbound,
+  ConversationStreamRequestTool
 > = z.union([
-  CodeInterpreterTool$outboundSchema.and(
-    z.object({ type: z.literal("code_interpreter") }),
-  ),
-  DocumentLibraryTool$outboundSchema.and(
-    z.object({ type: z.literal("document_library") }),
-  ),
-  FunctionTool$outboundSchema.and(z.object({ type: z.literal("function") })),
-  ImageGenerationTool$outboundSchema.and(
-    z.object({ type: z.literal("image_generation") }),
-  ),
-  WebSearchTool$outboundSchema.and(z.object({ type: z.literal("web_search") })),
-  WebSearchPremiumTool$outboundSchema.and(
-    z.object({ type: z.literal("web_search_premium") }),
-  ),
+  CodeInterpreterTool$outboundSchema,
+  CustomConnector$outboundSchema,
+  DocumentLibraryTool$outboundSchema,
+  FunctionTool$outboundSchema,
+  ImageGenerationTool$outboundSchema,
+  WebSearchTool$outboundSchema,
+  WebSearchPremiumTool$outboundSchema,
 ]);
 
-export function conversationStreamRequestToolsToJSON(
-  conversationStreamRequestTools: ConversationStreamRequestTools,
+export function conversationStreamRequestToolToJSON(
+  conversationStreamRequestTool: ConversationStreamRequestTool,
 ): string {
   return JSON.stringify(
-    ConversationStreamRequestTools$outboundSchema.parse(
-      conversationStreamRequestTools,
+    ConversationStreamRequestTool$outboundSchema.parse(
+      conversationStreamRequestTool,
     ),
   );
 }
@@ -154,9 +154,8 @@ export type ConversationStreamRequestAgentVersion$Outbound = string | number;
 /** @internal */
 export const ConversationStreamRequestAgentVersion$outboundSchema: z.ZodType<
   ConversationStreamRequestAgentVersion$Outbound,
-  z.ZodTypeDef,
   ConversationStreamRequestAgentVersion
-> = z.union([z.string(), z.number().int()]);
+> = smartUnion([z.string(), z.int()]);
 
 export function conversationStreamRequestAgentVersionToJSON(
   conversationStreamRequestAgentVersion: ConversationStreamRequestAgentVersion,
@@ -171,19 +170,21 @@ export function conversationStreamRequestAgentVersionToJSON(
 /** @internal */
 export type ConversationStreamRequest$Outbound = {
   inputs: ConversationInputs$Outbound;
-  stream: boolean;
+  stream: true;
   store?: boolean | null | undefined;
   handoff_execution?: string | null | undefined;
   instructions?: string | null | undefined;
   tools?:
     | Array<
-      | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
-      | (DocumentLibraryTool$Outbound & { type: "document_library" })
-      | (FunctionTool$Outbound & { type: "function" })
-      | (ImageGenerationTool$Outbound & { type: "image_generation" })
-      | (WebSearchTool$Outbound & { type: "web_search" })
-      | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" })
+      | CodeInterpreterTool$Outbound
+      | CustomConnector$Outbound
+      | DocumentLibraryTool$Outbound
+      | FunctionTool$Outbound
+      | ImageGenerationTool$Outbound
+      | WebSearchTool$Outbound
+      | WebSearchPremiumTool$Outbound
     >
+    | null
     | undefined;
   completion_args?: CompletionArgs$Outbound | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
@@ -198,45 +199,35 @@ export type ConversationStreamRequest$Outbound = {
 /** @internal */
 export const ConversationStreamRequest$outboundSchema: z.ZodType<
   ConversationStreamRequest$Outbound,
-  z.ZodTypeDef,
   ConversationStreamRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema,
-  stream: z.boolean().default(true),
+  stream: z.literal(true).default(true as const),
   store: z.nullable(z.boolean()).optional(),
   handoffExecution: z.nullable(
     ConversationStreamRequestHandoffExecution$outboundSchema,
   ).optional(),
   instructions: z.nullable(z.string()).optional(),
-  tools: z.array(
-    z.union([
-      CodeInterpreterTool$outboundSchema.and(
-        z.object({ type: z.literal("code_interpreter") }),
-      ),
-      DocumentLibraryTool$outboundSchema.and(
-        z.object({ type: z.literal("document_library") }),
-      ),
-      FunctionTool$outboundSchema.and(
-        z.object({ type: z.literal("function") }),
-      ),
-      ImageGenerationTool$outboundSchema.and(
-        z.object({ type: z.literal("image_generation") }),
-      ),
-      WebSearchTool$outboundSchema.and(
-        z.object({ type: z.literal("web_search") }),
-      ),
-      WebSearchPremiumTool$outboundSchema.and(
-        z.object({ type: z.literal("web_search_premium") }),
-      ),
-    ]),
+  tools: z.nullable(
+    z.array(
+      z.union([
+        CodeInterpreterTool$outboundSchema,
+        CustomConnector$outboundSchema,
+        DocumentLibraryTool$outboundSchema,
+        FunctionTool$outboundSchema,
+        ImageGenerationTool$outboundSchema,
+        WebSearchTool$outboundSchema,
+        WebSearchPremiumTool$outboundSchema,
+      ]),
+    ),
   ).optional(),
   completionArgs: z.nullable(CompletionArgs$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   agentId: z.nullable(z.string()).optional(),
-  agentVersion: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  agentVersion: z.nullable(smartUnion([z.string(), z.int()])).optional(),
   model: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

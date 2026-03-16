@@ -1,8 +1,9 @@
 import type WebSocket from "ws";
-import type { RealtimeTranscriptionSession } from "../../extra/realtime";
-import { RealtimeTranscriptionWSError } from "../../extra/realtime/errors";
+import type { RealtimeTranscriptionSession } from "../../src/extra/realtime/index.js";
+import { RealtimeTranscriptionWSError } from "../../src/extra/realtime/errors.js";
+import * as wsMock from "ws";
 
-jest.mock("ws", () => {
+vi.mock("ws", () => {
   class MockWebSocket {
     readyState = 1;
     sent: string[] = [];
@@ -45,13 +46,12 @@ jest.mock("ws", () => {
 
   let lastSocket: MockWebSocket | undefined;
 
-  const WebSocket = jest.fn(() => {
+  const WebSocket = vi.fn(() => {
     lastSocket = new MockWebSocket();
     return lastSocket;
   });
 
   return {
-    __esModule: true,
     default: WebSocket,
     MockWebSocket,
     getLastSocket: () => lastSocket,
@@ -70,12 +70,12 @@ type MockWebSocketInstance = {
   emitMessage(payload: unknown): void;
 };
 
-let AudioEncoding: typeof import("../../extra/realtime").AudioEncoding;
-let RealtimeConnection: typeof import("../../extra/realtime").RealtimeConnection;
-let RealtimeTranscription: typeof import("../../extra/realtime").RealtimeTranscription;
+let AudioEncoding: typeof import("../../src/extra/realtime/index.js").AudioEncoding;
+let RealtimeConnection: typeof import("../../src/extra/realtime/index.js").RealtimeConnection;
+let RealtimeTranscription: typeof import("../../src/extra/realtime/index.js").RealtimeTranscription;
 
 beforeAll(async () => {
-  const realtime = await import("../../extra/realtime");
+  const realtime = await import("../../src/extra/realtime/index.js");
   AudioEncoding = realtime.AudioEncoding;
   RealtimeConnection = realtime.RealtimeConnection;
   RealtimeTranscription = realtime.RealtimeTranscription;
@@ -85,7 +85,7 @@ function getMockModule(): {
   MockWebSocket: new () => MockWebSocketInstance;
   getLastSocket: () => MockWebSocketInstance | undefined;
 } {
-  return jest.requireMock("ws") as unknown as {
+  return wsMock as unknown as {
     MockWebSocket: new () => MockWebSocketInstance;
     getLastSocket: () => MockWebSocketInstance | undefined;
   };
@@ -244,7 +244,7 @@ describe("RealtimeTranscription handshake", () => {
 
     const error = await connectPromise.then(
       () => new Error("Expected connection to fail"),
-      (err) => err as Error,
+      (err: unknown) => err as Error,
     );
     expect(error).toBeInstanceOf(RealtimeTranscriptionWSError);
     expect(error).toMatchObject({
@@ -280,7 +280,7 @@ describe("RealtimeTranscription handshake", () => {
 
     const error = await connectPromise.then(
       () => new Error("Expected connection to fail"),
-      (err) => err as Error,
+      (err: unknown) => err as Error,
     );
     expect(error).toBeInstanceOf(RealtimeTranscriptionWSError);
     expect(error).toMatchObject({ rawPayload });

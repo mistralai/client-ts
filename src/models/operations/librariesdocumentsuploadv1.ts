@@ -3,12 +3,12 @@
  * @generated-id: 55edfa30408e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import * as components from "../components/index.js";
 
-export type LibrariesDocumentsUploadV1DocumentUpload = {
+export type DocumentUpload = {
   /**
    * The File object (not file name) to be uploaded.
    *
@@ -27,50 +27,39 @@ export type LibrariesDocumentsUploadV1DocumentUpload = {
 
 export type LibrariesDocumentsUploadV1Request = {
   libraryId: string;
-  requestBody: LibrariesDocumentsUploadV1DocumentUpload;
+  requestBody: DocumentUpload;
 };
 
 /** @internal */
-export type LibrariesDocumentsUploadV1DocumentUpload$Outbound = {
+export type DocumentUpload$Outbound = {
   file: components.FileT$Outbound | Blob;
 };
 
 /** @internal */
-export const LibrariesDocumentsUploadV1DocumentUpload$outboundSchema: z.ZodType<
-  LibrariesDocumentsUploadV1DocumentUpload$Outbound,
-  z.ZodTypeDef,
-  LibrariesDocumentsUploadV1DocumentUpload
+export const DocumentUpload$outboundSchema: z.ZodType<
+  DocumentUpload$Outbound,
+  DocumentUpload
 > = z.object({
   file: components.FileT$outboundSchema.or(blobLikeSchema),
 });
 
-export function librariesDocumentsUploadV1DocumentUploadToJSON(
-  librariesDocumentsUploadV1DocumentUpload:
-    LibrariesDocumentsUploadV1DocumentUpload,
-): string {
-  return JSON.stringify(
-    LibrariesDocumentsUploadV1DocumentUpload$outboundSchema.parse(
-      librariesDocumentsUploadV1DocumentUpload,
-    ),
-  );
+export function documentUploadToJSON(documentUpload: DocumentUpload): string {
+  return JSON.stringify(DocumentUpload$outboundSchema.parse(documentUpload));
 }
 
 /** @internal */
 export type LibrariesDocumentsUploadV1Request$Outbound = {
   library_id: string;
-  RequestBody: LibrariesDocumentsUploadV1DocumentUpload$Outbound;
+  RequestBody: DocumentUpload$Outbound;
 };
 
 /** @internal */
 export const LibrariesDocumentsUploadV1Request$outboundSchema: z.ZodType<
   LibrariesDocumentsUploadV1Request$Outbound,
-  z.ZodTypeDef,
   LibrariesDocumentsUploadV1Request
 > = z.object({
   libraryId: z.string(),
-  requestBody: z.lazy(() =>
-    LibrariesDocumentsUploadV1DocumentUpload$outboundSchema
-  ),
+  requestBody: z.lazy(() => DocumentUpload$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     libraryId: "library_id",

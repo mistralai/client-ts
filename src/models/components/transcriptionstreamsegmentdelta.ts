@@ -3,40 +3,32 @@
  * @generated-id: e03c9f20f84c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
+import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TranscriptionStreamSegmentDelta = {
-  type?: "transcription.segment" | undefined;
+  type: "transcription.segment";
   text: string;
   start: number;
   end: number;
   speakerId?: string | null | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
+  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
 export const TranscriptionStreamSegmentDelta$inboundSchema: z.ZodType<
   TranscriptionStreamSegmentDelta,
-  z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.literal("transcription.segment").default("transcription.segment"),
-    text: z.string(),
-    start: z.number(),
-    end: z.number(),
-    speaker_id: z.nullable(z.string()).optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
+> = z.object({
+  type: z.literal("transcription.segment"),
+  text: z.string(),
+  start: z.number(),
+  end: z.number(),
+  speaker_id: z.nullable(z.string()).optional(),
+}).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "speaker_id": "speakerId",
   });

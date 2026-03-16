@@ -3,7 +3,7 @@
  * @generated-id: dca31d3454a5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { MistralCore } from "../core.js";
 import {
   encodeFormQuery,

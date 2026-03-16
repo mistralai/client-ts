@@ -3,9 +3,11 @@
  * @generated-id: 36834e0e0bfa
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -16,6 +18,10 @@ import {
   CompletionArgs,
   CompletionArgs$inboundSchema,
 } from "./completionargs.js";
+import {
+  CustomConnector,
+  CustomConnector$inboundSchema,
+} from "./customconnector.js";
 import {
   DocumentLibraryTool,
   DocumentLibraryTool$inboundSchema,
@@ -35,13 +41,15 @@ import {
 } from "./websearchpremiumtool.js";
 import { WebSearchTool, WebSearchTool$inboundSchema } from "./websearchtool.js";
 
-export type AgentTools =
-  | (CodeInterpreterTool & { type: "code_interpreter" })
-  | (DocumentLibraryTool & { type: "document_library" })
-  | (FunctionTool & { type: "function" })
-  | (ImageGenerationTool & { type: "image_generation" })
-  | (WebSearchTool & { type: "web_search" })
-  | (WebSearchPremiumTool & { type: "web_search_premium" });
+export type AgentTool =
+  | CodeInterpreterTool
+  | CustomConnector
+  | DocumentLibraryTool
+  | FunctionTool
+  | ImageGenerationTool
+  | WebSearchTool
+  | WebSearchPremiumTool
+  | discriminatedUnionTypes.Unknown<"type">;
 
 export type Agent = {
   /**
@@ -53,12 +61,14 @@ export type Agent = {
    */
   tools?:
     | Array<
-      | (CodeInterpreterTool & { type: "code_interpreter" })
-      | (DocumentLibraryTool & { type: "document_library" })
-      | (FunctionTool & { type: "function" })
-      | (ImageGenerationTool & { type: "image_generation" })
-      | (WebSearchTool & { type: "web_search" })
-      | (WebSearchPremiumTool & { type: "web_search_premium" })
+      | CodeInterpreterTool
+      | CustomConnector
+      | DocumentLibraryTool
+      | FunctionTool
+      | ImageGenerationTool
+      | WebSearchTool
+      | WebSearchPremiumTool
+      | discriminatedUnionTypes.Unknown<"type">
     >
     | undefined;
   /**
@@ -71,7 +81,7 @@ export type Agent = {
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
-  object?: "agent" | undefined;
+  object: "agent";
   id: string;
   version: number;
   versions: Array<number>;
@@ -83,92 +93,64 @@ export type Agent = {
 };
 
 /** @internal */
-export const AgentTools$inboundSchema: z.ZodType<
-  AgentTools,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  CodeInterpreterTool$inboundSchema.and(
-    z.object({ type: z.literal("code_interpreter") }),
-  ),
-  DocumentLibraryTool$inboundSchema.and(
-    z.object({ type: z.literal("document_library") }),
-  ),
-  FunctionTool$inboundSchema.and(z.object({ type: z.literal("function") })),
-  ImageGenerationTool$inboundSchema.and(
-    z.object({ type: z.literal("image_generation") }),
-  ),
-  WebSearchTool$inboundSchema.and(z.object({ type: z.literal("web_search") })),
-  WebSearchPremiumTool$inboundSchema.and(
-    z.object({ type: z.literal("web_search_premium") }),
-  ),
-]);
+export const AgentTool$inboundSchema: z.ZodType<AgentTool, unknown> =
+  discriminatedUnion("type", {
+    code_interpreter: CodeInterpreterTool$inboundSchema,
+    connector: CustomConnector$inboundSchema,
+    document_library: DocumentLibraryTool$inboundSchema,
+    function: FunctionTool$inboundSchema,
+    image_generation: ImageGenerationTool$inboundSchema,
+    web_search: WebSearchTool$inboundSchema,
+    web_search_premium: WebSearchPremiumTool$inboundSchema,
+  });
 
-export function agentToolsFromJSON(
+export function agentToolFromJSON(
   jsonString: string,
-): SafeParseResult<AgentTools, SDKValidationError> {
+): SafeParseResult<AgentTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => AgentTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentTools' from JSON`,
+    (x) => AgentTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentTool' from JSON`,
   );
 }
 
 /** @internal */
-export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
-  .object({
-    instructions: z.nullable(z.string()).optional(),
-    tools: z.array(
-      z.union([
-        CodeInterpreterTool$inboundSchema.and(
-          z.object({ type: z.literal("code_interpreter") }),
-        ),
-        DocumentLibraryTool$inboundSchema.and(
-          z.object({ type: z.literal("document_library") }),
-        ),
-        FunctionTool$inboundSchema.and(
-          z.object({ type: z.literal("function") }),
-        ),
-        ImageGenerationTool$inboundSchema.and(
-          z.object({ type: z.literal("image_generation") }),
-        ),
-        WebSearchTool$inboundSchema.and(
-          z.object({ type: z.literal("web_search") }),
-        ),
-        WebSearchPremiumTool$inboundSchema.and(
-          z.object({ type: z.literal("web_search_premium") }),
-        ),
-      ]),
-    ).optional(),
-    completion_args: CompletionArgs$inboundSchema.optional(),
-    guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),
-    model: z.string(),
-    name: z.string(),
-    description: z.nullable(z.string()).optional(),
-    handoffs: z.nullable(z.array(z.string())).optional(),
-    metadata: z.nullable(z.record(z.any())).optional(),
-    object: z.literal("agent").default("agent"),
-    id: z.string(),
-    version: z.number().int(),
-    versions: z.array(z.number().int()),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    deployment_chat: z.boolean(),
-    source: z.string(),
-    version_message: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "completion_args": "completionArgs",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "deployment_chat": "deploymentChat",
-      "version_message": "versionMessage",
-    });
+export const Agent$inboundSchema: z.ZodType<Agent, unknown> = z.object({
+  instructions: z.nullable(z.string()).optional(),
+  tools: z.array(discriminatedUnion("type", {
+    code_interpreter: CodeInterpreterTool$inboundSchema,
+    connector: CustomConnector$inboundSchema,
+    document_library: DocumentLibraryTool$inboundSchema,
+    function: FunctionTool$inboundSchema,
+    image_generation: ImageGenerationTool$inboundSchema,
+    web_search: WebSearchTool$inboundSchema,
+    web_search_premium: WebSearchPremiumTool$inboundSchema,
+  })).optional(),
+  completion_args: CompletionArgs$inboundSchema.optional(),
+  guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),
+  model: z.string(),
+  name: z.string(),
+  description: z.nullable(z.string()).optional(),
+  handoffs: z.nullable(z.array(z.string())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
+  object: z.literal("agent").default("agent"),
+  id: z.string(),
+  version: z.int(),
+  versions: z.array(z.int()),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  deployment_chat: z.boolean(),
+  source: z.string(),
+  version_message: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "completion_args": "completionArgs",
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+    "deployment_chat": "deploymentChat",
+    "version_message": "versionMessage",
   });
+});
 
 export function agentFromJSON(
   jsonString: string,

@@ -3,14 +3,14 @@
  * @generated-id: 7a37a91c46ec
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ResponseStartedEvent = {
-  type?: "conversation.response.started" | undefined;
+  type: "conversation.response.started";
   createdAt?: Date | undefined;
   conversationId: string;
 };
@@ -18,13 +18,10 @@ export type ResponseStartedEvent = {
 /** @internal */
 export const ResponseStartedEvent$inboundSchema: z.ZodType<
   ResponseStartedEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("conversation.response.started").default(
-    "conversation.response.started",
-  ),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  type: z.literal("conversation.response.started"),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   conversation_id: z.string(),
 }).transform((v) => {

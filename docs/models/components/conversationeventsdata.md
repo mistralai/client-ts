@@ -7,6 +7,7 @@
 
 ```typescript
 const value: components.AgentHandoffDoneEvent = {
+  type: "agent.handoff.done",
   id: "<id>",
   nextAgentId: "<id>",
   nextAgentName: "<value>",
@@ -17,6 +18,7 @@ const value: components.AgentHandoffDoneEvent = {
 
 ```typescript
 const value: components.AgentHandoffStartedEvent = {
+  type: "agent.handoff.started",
   id: "<id>",
   previousAgentId: "<id>",
   previousAgentName: "<value>",
@@ -27,6 +29,7 @@ const value: components.AgentHandoffStartedEvent = {
 
 ```typescript
 const value: components.ResponseDoneEvent = {
+  type: "conversation.response.done",
   usage: {},
 };
 ```
@@ -35,6 +38,7 @@ const value: components.ResponseDoneEvent = {
 
 ```typescript
 const value: components.ResponseErrorEvent = {
+  type: "conversation.response.error",
   message: "<value>",
   code: 451589,
 };
@@ -44,6 +48,7 @@ const value: components.ResponseErrorEvent = {
 
 ```typescript
 const value: components.ResponseStartedEvent = {
+  type: "conversation.response.started",
   conversationId: "<id>",
 };
 ```
@@ -52,6 +57,7 @@ const value: components.ResponseStartedEvent = {
 
 ```typescript
 const value: components.FunctionCallEvent = {
+  type: "function.call.delta",
   id: "<id>",
   name: "<value>",
   toolCallId: "<id>",
@@ -63,6 +69,7 @@ const value: components.FunctionCallEvent = {
 
 ```typescript
 const value: components.MessageOutputEvent = {
+  type: "message.output.delta",
   id: "<id>",
   content: {
     thinking: [],
@@ -74,6 +81,7 @@ const value: components.MessageOutputEvent = {
 
 ```typescript
 const value: components.ToolExecutionDeltaEvent = {
+  type: "tool.execution.delta",
   id: "<id>",
   name: "web_search_premium",
   arguments: "<value>",
@@ -84,6 +92,7 @@ const value: components.ToolExecutionDeltaEvent = {
 
 ```typescript
 const value: components.ToolExecutionDoneEvent = {
+  type: "tool.execution.done",
   id: "<id>",
   name: "document_library",
 };
@@ -93,6 +102,7 @@ const value: components.ToolExecutionDoneEvent = {
 
 ```typescript
 const value: components.ToolExecutionStartedEvent = {
+  type: "tool.execution.started",
   id: "<id>",
   name: "image_generation",
   arguments: "<value>",

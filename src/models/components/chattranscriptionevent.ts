@@ -3,7 +3,7 @@
  * @generated-id: a0b34988d72d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,12 +18,11 @@ export type ChatTranscriptionEvent = {
 /** @internal */
 export const ChatTranscriptionEvent$inboundSchema: z.ZodType<
   ChatTranscriptionEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   audio_url: z.string(),
   model: z.string(),
-  response_message: z.record(z.any()),
+  response_message: z.record(z.string(), z.any()),
 }).transform((v) => {
   return remap$(v, {
     "audio_url": "audioUrl",

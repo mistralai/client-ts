@@ -3,7 +3,7 @@
  * @generated-id: c7e214f868cb
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ClassifierTrainingParameters = {
   trainingSteps?: number | null | undefined;
-  learningRate: number | undefined;
+  learningRate?: number | undefined;
   weightDecay?: number | null | undefined;
   warmupFraction?: number | null | undefined;
   epochs?: number | null | undefined;
@@ -21,15 +21,14 @@ export type ClassifierTrainingParameters = {
 /** @internal */
 export const ClassifierTrainingParameters$inboundSchema: z.ZodType<
   ClassifierTrainingParameters,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  training_steps: z.nullable(z.number().int()).optional(),
+  training_steps: z.nullable(z.int()).optional(),
   learning_rate: z.number().default(0.0001),
   weight_decay: z.nullable(z.number()).optional(),
   warmup_fraction: z.nullable(z.number()).optional(),
   epochs: z.nullable(z.number()).optional(),
-  seq_len: z.nullable(z.number().int()).optional(),
+  seq_len: z.nullable(z.int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "training_steps": "trainingSteps",
@@ -39,7 +38,46 @@ export const ClassifierTrainingParameters$inboundSchema: z.ZodType<
     "seq_len": "seqLen",
   });
 });
+/** @internal */
+export type ClassifierTrainingParameters$Outbound = {
+  training_steps?: number | null | undefined;
+  learning_rate: number;
+  weight_decay?: number | null | undefined;
+  warmup_fraction?: number | null | undefined;
+  epochs?: number | null | undefined;
+  seq_len?: number | null | undefined;
+};
 
+/** @internal */
+export const ClassifierTrainingParameters$outboundSchema: z.ZodType<
+  ClassifierTrainingParameters$Outbound,
+  ClassifierTrainingParameters
+> = z.object({
+  trainingSteps: z.nullable(z.int()).optional(),
+  learningRate: z.number().default(0.0001),
+  weightDecay: z.nullable(z.number()).optional(),
+  warmupFraction: z.nullable(z.number()).optional(),
+  epochs: z.nullable(z.number()).optional(),
+  seqLen: z.nullable(z.int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    trainingSteps: "training_steps",
+    learningRate: "learning_rate",
+    weightDecay: "weight_decay",
+    warmupFraction: "warmup_fraction",
+    seqLen: "seq_len",
+  });
+});
+
+export function classifierTrainingParametersToJSON(
+  classifierTrainingParameters: ClassifierTrainingParameters,
+): string {
+  return JSON.stringify(
+    ClassifierTrainingParameters$outboundSchema.parse(
+      classifierTrainingParameters,
+    ),
+  );
+}
 export function classifierTrainingParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<ClassifierTrainingParameters, SDKValidationError> {

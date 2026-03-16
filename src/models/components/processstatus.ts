@@ -3,8 +3,9 @@
  * @generated-id: 4ba94ed3a931
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ProcessStatus = {
   SelfManaged: "self_managed",
@@ -16,9 +17,8 @@ export const ProcessStatus = {
   Error: "error",
   WaitingForCapacity: "waiting_for_capacity",
 } as const;
-export type ProcessStatus = ClosedEnum<typeof ProcessStatus>;
+export type ProcessStatus = OpenEnum<typeof ProcessStatus>;
 
 /** @internal */
-export const ProcessStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ProcessStatus
-> = z.nativeEnum(ProcessStatus);
+export const ProcessStatus$inboundSchema: z.ZodType<ProcessStatus, unknown> =
+  openEnums.inboundSchema(ProcessStatus);

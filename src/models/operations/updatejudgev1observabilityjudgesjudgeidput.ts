@@ -3,34 +3,33 @@
  * @generated-id: 5ed846eb1d20
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest = {
   judgeId: string;
-  putJudgeInSchema: components.PutJudgeInSchema;
+  updateJudgeRequest: components.UpdateJudgeRequest;
 };
 
 /** @internal */
 export type UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest$Outbound = {
   judge_id: string;
-  PutJudgeInSchema: components.PutJudgeInSchema$Outbound;
+  UpdateJudgeRequest: components.UpdateJudgeRequest$Outbound;
 };
 
 /** @internal */
 export const UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest$outboundSchema:
   z.ZodType<
     UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest$Outbound,
-    z.ZodTypeDef,
     UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest
   > = z.object({
     judgeId: z.string(),
-    putJudgeInSchema: components.PutJudgeInSchema$outboundSchema,
+    updateJudgeRequest: components.UpdateJudgeRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       judgeId: "judge_id",
-      putJudgeInSchema: "PutJudgeInSchema",
+      updateJudgeRequest: "UpdateJudgeRequest",
     });
   });
 

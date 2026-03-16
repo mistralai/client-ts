@@ -3,10 +3,11 @@
  * @generated-id: b782f07bc1ff
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ContentChunk, ContentChunk$inboundSchema } from "./contentchunk.js";
 import { ToolCall, ToolCall$inboundSchema } from "./toolcall.js";
@@ -22,9 +23,8 @@ export type DeltaMessage = {
 /** @internal */
 export const DeltaMessageContent$inboundSchema: z.ZodType<
   DeltaMessageContent,
-  z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(ContentChunk$inboundSchema)]);
+> = smartUnion([z.string(), z.array(ContentChunk$inboundSchema)]);
 
 export function deltaMessageContentFromJSON(
   jsonString: string,
@@ -37,21 +37,18 @@ export function deltaMessageContentFromJSON(
 }
 
 /** @internal */
-export const DeltaMessage$inboundSchema: z.ZodType<
-  DeltaMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.nullable(z.string()).optional(),
-  content: z.nullable(
-    z.union([z.string(), z.array(ContentChunk$inboundSchema)]),
-  ).optional(),
-  tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
+export const DeltaMessage$inboundSchema: z.ZodType<DeltaMessage, unknown> = z
+  .object({
+    role: z.nullable(z.string()).optional(),
+    content: z.nullable(
+      smartUnion([z.string(), z.array(ContentChunk$inboundSchema)]),
+    ).optional(),
+    tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+    });
   });
-});
 
 export function deltaMessageFromJSON(
   jsonString: string,

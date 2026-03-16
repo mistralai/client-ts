@@ -1,8 +1,42 @@
 {
   "name": "@mistralai/mistralai-gcp",
-  "version": "1.7.0",
+  "version": "2.0.0-alpha.1",
   "author": "Speakeasy",
-  "main": "./index.js",
+  "type": "module",
+  "main": "./esm/index.js",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./esm/index.d.ts",
+      "default": "./esm/index.js"
+    },
+    "./package.json": "./package.json",
+    "./types": {
+      "source": "./src/types/index.ts",
+      "types": "./esm/types/index.d.ts",
+      "default": "./esm/types/index.js"
+    },
+    "./models/errors": {
+      "source": "./src/models/errors/index.ts",
+      "types": "./esm/models/errors/index.d.ts",
+      "default": "./esm/models/errors/index.js"
+    },
+    "./models/components": {
+      "source": "./src/models/components/index.ts",
+      "types": "./esm/models/components/index.d.ts",
+      "default": "./esm/models/components/index.js"
+    },
+    "./*.js": {
+      "source": "./src/*.ts",
+      "types": "./esm/*.d.ts",
+      "default": "./esm/*.js"
+    },
+    "./*": {
+      "source": "./src/*.ts",
+      "types": "./esm/*.d.ts",
+      "default": "./esm/*.js"
+    }
+  },
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -10,22 +44,17 @@
     "directory": "packages/mistralai-gcp"
   },
   "scripts": {
-    "lint": "eslint --cache --max-warnings=0 src",
-    "build": "tsc",
+    "lint": "oxlint --max-warnings=0 --deny-warnings 'src/**/*.{ts,tsx}'",
+    "build": "tsgo",
     "prepublishOnly": "npm run build"
   },
-  "peerDependencies": {
-    
-  },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
-    "eslint": "^9.26.0",
-    "globals": "^15.14.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.26.0"
+    "@typescript/native-preview": "7.0.0-dev.20260302.1",
+    "oxlint": "^1.50.0",
+    "typescript": "~5.8.3"
   },
   "dependencies": {
     "google-auth-library": "^9.11.0",
-    "zod": "^3.25.0 || ^4.0.0"
+    "zod": "^4.3.6"
   }
 }

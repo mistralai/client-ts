@@ -3,13 +3,14 @@
  * @generated-id: 49d94b5646c9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type ExtraFields =
+export type ChatCompletionEventPreviewExtraFields =
   | boolean
   | number
   | number
@@ -36,52 +37,52 @@ export type ChatCompletionEventPreview = {
 };
 
 /** @internal */
-export const ExtraFields$inboundSchema: z.ZodType<
-  ExtraFields,
-  z.ZodTypeDef,
+export const ChatCompletionEventPreviewExtraFields$inboundSchema: z.ZodType<
+  ChatCompletionEventPreviewExtraFields,
   unknown
-> = z.union([
+> = smartUnion([
   z.boolean(),
-  z.number().int(),
+  z.int(),
   z.number(),
   z.string(),
-  z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   z.array(z.string()),
 ]);
 
-export function extraFieldsFromJSON(
+export function chatCompletionEventPreviewExtraFieldsFromJSON(
   jsonString: string,
-): SafeParseResult<ExtraFields, SDKValidationError> {
+): SafeParseResult<ChatCompletionEventPreviewExtraFields, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ExtraFields$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExtraFields' from JSON`,
+    (x) =>
+      ChatCompletionEventPreviewExtraFields$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ChatCompletionEventPreviewExtraFields' from JSON`,
   );
 }
 
 /** @internal */
 export const ChatCompletionEventPreview$inboundSchema: z.ZodType<
   ChatCompletionEventPreview,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   event_id: z.string(),
   correlation_id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   extra_fields: z.record(
+    z.string(),
     z.nullable(
-      z.union([
+      smartUnion([
         z.boolean(),
-        z.number().int(),
+        z.int(),
         z.number(),
         z.string(),
-        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+        z.iso.datetime({ offset: true }).transform(v => new Date(v)),
         z.array(z.string()),
       ]),
     ),
   ),
-  nb_input_tokens: z.number().int(),
-  nb_output_tokens: z.number().int(),
+  nb_input_tokens: z.int(),
+  nb_output_tokens: z.int(),
 }).transform((v) => {
   return remap$(v, {
     "event_id": "eventId",

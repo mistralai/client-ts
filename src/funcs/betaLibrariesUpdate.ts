@@ -39,7 +39,7 @@ export function betaLibrariesUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.LibraryOut,
+    components.Library,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.LibraryOut,
+      components.Library,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -88,7 +88,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.LibraryInUpdate, { explode: true });
+  const body = encodeJSON("body", payload.UpdateLibraryRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     library_id: encodeSimple("library_id", payload.library_id, {
@@ -154,7 +156,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.LibraryOut,
+    components.Library,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -165,7 +167,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.LibraryOut$inboundSchema),
+    M.json(200, components.Library$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

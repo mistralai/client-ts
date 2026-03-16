@@ -3,9 +3,11 @@
  * @generated-id: 252d6c0d8fdf
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,8 +23,9 @@ export type JobsApiRoutesFineTuningCancelFineTuningJobRequest = {
  * OK
  */
 export type JobsApiRoutesFineTuningCancelFineTuningJobResponse =
-  | (components.ClassifierDetailedJobOut & { jobType: "classifier" })
-  | (components.CompletionDetailedJobOut & { jobType: "completion" });
+  | components.ClassifierFineTuningJobDetails
+  | components.CompletionFineTuningJobDetails
+  | discriminatedUnionTypes.Unknown<"jobType">;
 
 /** @internal */
 export type JobsApiRoutesFineTuningCancelFineTuningJobRequest$Outbound = {
@@ -33,7 +36,6 @@ export type JobsApiRoutesFineTuningCancelFineTuningJobRequest$Outbound = {
 export const JobsApiRoutesFineTuningCancelFineTuningJobRequest$outboundSchema:
   z.ZodType<
     JobsApiRoutesFineTuningCancelFineTuningJobRequest$Outbound,
-    z.ZodTypeDef,
     JobsApiRoutesFineTuningCancelFineTuningJobRequest
   > = z.object({
     jobId: z.string(),
@@ -56,22 +58,11 @@ export function jobsApiRoutesFineTuningCancelFineTuningJobRequestToJSON(
 
 /** @internal */
 export const JobsApiRoutesFineTuningCancelFineTuningJobResponse$inboundSchema:
-  z.ZodType<
-    JobsApiRoutesFineTuningCancelFineTuningJobResponse,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.ClassifierDetailedJobOut$inboundSchema.and(
-      z.object({ job_type: z.literal("classifier") }).transform((v) => ({
-        jobType: v.job_type,
-      })),
-    ),
-    components.CompletionDetailedJobOut$inboundSchema.and(
-      z.object({ job_type: z.literal("completion") }).transform((v) => ({
-        jobType: v.job_type,
-      })),
-    ),
-  ]);
+  z.ZodType<JobsApiRoutesFineTuningCancelFineTuningJobResponse, unknown> =
+    discriminatedUnion("job_type", {
+      classifier: components.ClassifierFineTuningJobDetails$inboundSchema,
+      completion: components.CompletionFineTuningJobDetails$inboundSchema,
+    }, { outputPropertyName: "jobType" });
 
 export function jobsApiRoutesFineTuningCancelFineTuningJobResponseFromJSON(
   jsonString: string,

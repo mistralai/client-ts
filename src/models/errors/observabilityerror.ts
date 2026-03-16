@@ -3,7 +3,7 @@
  * @generated-id: 638baed27456
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as components from "../components/index.js";
 import { MistralError } from "./mistralerror.js";
 
@@ -34,12 +34,11 @@ export class ObservabilityError extends MistralError {
 /** @internal */
 export const ObservabilityError$inboundSchema: z.ZodType<
   ObservabilityError,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   detail: components.ObservabilityErrorDetail$inboundSchema,
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
+  request$: z.custom<Request>(x => x instanceof Request),
+  response$: z.custom<Response>(x => x instanceof Response),
   body$: z.string(),
 })
   .transform((v) => {

@@ -3,10 +3,11 @@
  * @generated-id: 3512371b613d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ImageURL,
@@ -15,7 +16,7 @@ import {
   ImageURL$outboundSchema,
 } from "./imageurl.js";
 
-export type ImageURLChunkImageURL = ImageURL | string;
+export type ImageUrlUnion = ImageURL | string;
 
 /**
  * {"type":"image_url","image_url":{"url":"data:image/png;base64,iVBORw0
@@ -26,51 +27,40 @@ export type ImageURLChunk = {
 };
 
 /** @internal */
-export const ImageURLChunkImageURL$inboundSchema: z.ZodType<
-  ImageURLChunkImageURL,
-  z.ZodTypeDef,
-  unknown
-> = z.union([ImageURL$inboundSchema, z.string()]);
+export const ImageUrlUnion$inboundSchema: z.ZodType<ImageUrlUnion, unknown> =
+  smartUnion([ImageURL$inboundSchema, z.string()]);
 /** @internal */
-export type ImageURLChunkImageURL$Outbound = ImageURL$Outbound | string;
+export type ImageUrlUnion$Outbound = ImageURL$Outbound | string;
 
 /** @internal */
-export const ImageURLChunkImageURL$outboundSchema: z.ZodType<
-  ImageURLChunkImageURL$Outbound,
-  z.ZodTypeDef,
-  ImageURLChunkImageURL
-> = z.union([ImageURL$outboundSchema, z.string()]);
+export const ImageUrlUnion$outboundSchema: z.ZodType<
+  ImageUrlUnion$Outbound,
+  ImageUrlUnion
+> = smartUnion([ImageURL$outboundSchema, z.string()]);
 
-export function imageURLChunkImageURLToJSON(
-  imageURLChunkImageURL: ImageURLChunkImageURL,
-): string {
-  return JSON.stringify(
-    ImageURLChunkImageURL$outboundSchema.parse(imageURLChunkImageURL),
-  );
+export function imageUrlUnionToJSON(imageUrlUnion: ImageUrlUnion): string {
+  return JSON.stringify(ImageUrlUnion$outboundSchema.parse(imageUrlUnion));
 }
-export function imageURLChunkImageURLFromJSON(
+export function imageUrlUnionFromJSON(
   jsonString: string,
-): SafeParseResult<ImageURLChunkImageURL, SDKValidationError> {
+): SafeParseResult<ImageUrlUnion, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ImageURLChunkImageURL$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ImageURLChunkImageURL' from JSON`,
+    (x) => ImageUrlUnion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ImageUrlUnion' from JSON`,
   );
 }
 
 /** @internal */
-export const ImageURLChunk$inboundSchema: z.ZodType<
-  ImageURLChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("image_url").default("image_url"),
-  image_url: z.union([ImageURL$inboundSchema, z.string()]),
-}).transform((v) => {
-  return remap$(v, {
-    "image_url": "imageUrl",
+export const ImageURLChunk$inboundSchema: z.ZodType<ImageURLChunk, unknown> = z
+  .object({
+    type: z.literal("image_url").default("image_url"),
+    image_url: smartUnion([ImageURL$inboundSchema, z.string()]),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_url": "imageUrl",
+    });
   });
-});
 /** @internal */
 export type ImageURLChunk$Outbound = {
   type: "image_url";
@@ -80,11 +70,10 @@ export type ImageURLChunk$Outbound = {
 /** @internal */
 export const ImageURLChunk$outboundSchema: z.ZodType<
   ImageURLChunk$Outbound,
-  z.ZodTypeDef,
   ImageURLChunk
 > = z.object({
   type: z.literal("image_url").default("image_url" as const),
-  imageUrl: z.union([ImageURL$outboundSchema, z.string()]),
+  imageUrl: smartUnion([ImageURL$outboundSchema, z.string()]),
 }).transform((v) => {
   return remap$(v, {
     imageUrl: "image_url",

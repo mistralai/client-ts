@@ -10,6 +10,7 @@ import { FTModelCard } from "@mistralai/mistralai/models/components";
 let value: FTModelCard = {
   id: "<id>",
   capabilities: {},
+  type: "fine-tuned",
   job: "Global Interactions Strategist",
   root: "<value>",
 };
@@ -31,7 +32,7 @@ let value: FTModelCard = {
 | `deprecation`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `deprecationReplacementModel`                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `defaultModelTemperature`                                                                     | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `type`                                                                                        | *"fine-tuned"*                                                                                | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *"fine-tuned"*                                                                                | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `job`                                                                                         | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `root`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `archived`                                                                                    | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |

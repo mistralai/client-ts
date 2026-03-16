@@ -3,7 +3,7 @@
  * @generated-id: f679f0a49aaf
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetCampaignByIdV1ObservabilityCampaignsCampaignIdGetRequest = {
@@ -20,7 +20,6 @@ export type GetCampaignByIdV1ObservabilityCampaignsCampaignIdGetRequest$Outbound
 export const GetCampaignByIdV1ObservabilityCampaignsCampaignIdGetRequest$outboundSchema:
   z.ZodType<
     GetCampaignByIdV1ObservabilityCampaignsCampaignIdGetRequest$Outbound,
-    z.ZodTypeDef,
     GetCampaignByIdV1ObservabilityCampaignsCampaignIdGetRequest
   > = z.object({
     campaignId: z.string(),

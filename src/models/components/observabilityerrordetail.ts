@@ -3,7 +3,7 @@
  * @generated-id: 00cc829a764b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -21,7 +21,6 @@ export type ObservabilityErrorDetail = {
 /** @internal */
 export const ObservabilityErrorDetail$inboundSchema: z.ZodType<
   ObservabilityErrorDetail,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   message: z.string(),

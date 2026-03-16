@@ -3,8 +3,10 @@
  * @generated-id: 4b4abd9fb606
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,12 +15,6 @@ import {
   AudioChunk$Outbound,
   AudioChunk$outboundSchema,
 } from "./audiochunk.js";
-import {
-  AudioURLChunk,
-  AudioURLChunk$inboundSchema,
-  AudioURLChunk$Outbound,
-  AudioURLChunk$outboundSchema,
-} from "./audiourlchunk.js";
 import {
   DocumentURLChunk,
   DocumentURLChunk$inboundSchema,
@@ -63,26 +59,28 @@ export type ContentChunk =
   | (ReferenceChunk & { type: "reference" })
   | (FileChunk & { type: "file" })
   | (ThinkChunk & { type: "thinking" })
-  | (AudioChunk & { type: "input_audio" })
-  | (AudioURLChunk & { type: "audio_url" });
+  | AudioChunk
+  | discriminatedUnionTypes.Unknown<"type">;
 
 /** @internal */
-export const ContentChunk$inboundSchema: z.ZodType<
-  ContentChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  ImageURLChunk$inboundSchema.and(z.object({ type: z.literal("image_url") })),
-  DocumentURLChunk$inboundSchema.and(
-    z.object({ type: z.literal("document_url") }),
-  ),
-  TextChunk$inboundSchema.and(z.object({ type: z.literal("text") })),
-  ReferenceChunk$inboundSchema.and(z.object({ type: z.literal("reference") })),
-  FileChunk$inboundSchema.and(z.object({ type: z.literal("file") })),
-  ThinkChunk$inboundSchema.and(z.object({ type: z.literal("thinking") })),
-  AudioChunk$inboundSchema.and(z.object({ type: z.literal("input_audio") })),
-  AudioURLChunk$inboundSchema.and(z.object({ type: z.literal("audio_url") })),
-]);
+export const ContentChunk$inboundSchema: z.ZodType<ContentChunk, unknown> =
+  discriminatedUnion("type", {
+    image_url: ImageURLChunk$inboundSchema.and(
+      z.object({ type: z.literal("image_url") }),
+    ),
+    document_url: DocumentURLChunk$inboundSchema.and(
+      z.object({ type: z.literal("document_url") }),
+    ),
+    text: TextChunk$inboundSchema.and(z.object({ type: z.literal("text") })),
+    reference: ReferenceChunk$inboundSchema.and(
+      z.object({ type: z.literal("reference") }),
+    ),
+    file: FileChunk$inboundSchema.and(z.object({ type: z.literal("file") })),
+    thinking: ThinkChunk$inboundSchema.and(
+      z.object({ type: z.literal("thinking") }),
+    ),
+    input_audio: AudioChunk$inboundSchema,
+  });
 /** @internal */
 export type ContentChunk$Outbound =
   | (ImageURLChunk$Outbound & { type: "image_url" })
@@ -91,13 +89,11 @@ export type ContentChunk$Outbound =
   | (ReferenceChunk$Outbound & { type: "reference" })
   | (FileChunk$Outbound & { type: "file" })
   | (ThinkChunk$Outbound & { type: "thinking" })
-  | (AudioChunk$Outbound & { type: "input_audio" })
-  | (AudioURLChunk$Outbound & { type: "audio_url" });
+  | AudioChunk$Outbound;
 
 /** @internal */
 export const ContentChunk$outboundSchema: z.ZodType<
   ContentChunk$Outbound,
-  z.ZodTypeDef,
   ContentChunk
 > = z.union([
   ImageURLChunk$outboundSchema.and(z.object({ type: z.literal("image_url") })),
@@ -108,8 +104,7 @@ export const ContentChunk$outboundSchema: z.ZodType<
   ReferenceChunk$outboundSchema.and(z.object({ type: z.literal("reference") })),
   FileChunk$outboundSchema.and(z.object({ type: z.literal("file") })),
   ThinkChunk$outboundSchema.and(z.object({ type: z.literal("thinking") })),
-  AudioChunk$outboundSchema.and(z.object({ type: z.literal("input_audio") })),
-  AudioURLChunk$outboundSchema.and(z.object({ type: z.literal("audio_url") })),
+  AudioChunk$outboundSchema,
 ]);
 
 export function contentChunkToJSON(contentChunk: ContentChunk): string {

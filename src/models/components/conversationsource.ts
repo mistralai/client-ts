@@ -3,8 +3,9 @@
  * @generated-id: 65baa83398a3
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ConversationSource = {
   Explorer: "EXPLORER",
@@ -12,9 +13,10 @@ export const ConversationSource = {
   DirectInput: "DIRECT_INPUT",
   Playground: "PLAYGROUND",
 } as const;
-export type ConversationSource = ClosedEnum<typeof ConversationSource>;
+export type ConversationSource = OpenEnum<typeof ConversationSource>;
 
 /** @internal */
-export const ConversationSource$inboundSchema: z.ZodNativeEnum<
-  typeof ConversationSource
-> = z.nativeEnum(ConversationSource);
+export const ConversationSource$inboundSchema: z.ZodType<
+  ConversationSource,
+  unknown
+> = openEnums.inboundSchema(ConversationSource);

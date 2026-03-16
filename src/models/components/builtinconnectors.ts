@@ -3,8 +3,9 @@
  * @generated-id: 6d819dedabe6
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const BuiltInConnectors = {
   WebSearch: "web_search",
@@ -13,13 +14,15 @@ export const BuiltInConnectors = {
   ImageGeneration: "image_generation",
   DocumentLibrary: "document_library",
 } as const;
-export type BuiltInConnectors = ClosedEnum<typeof BuiltInConnectors>;
+export type BuiltInConnectors = OpenEnum<typeof BuiltInConnectors>;
 
 /** @internal */
-export const BuiltInConnectors$inboundSchema: z.ZodNativeEnum<
-  typeof BuiltInConnectors
-> = z.nativeEnum(BuiltInConnectors);
+export const BuiltInConnectors$inboundSchema: z.ZodType<
+  BuiltInConnectors,
+  unknown
+> = openEnums.inboundSchema(BuiltInConnectors);
 /** @internal */
-export const BuiltInConnectors$outboundSchema: z.ZodNativeEnum<
-  typeof BuiltInConnectors
-> = BuiltInConnectors$inboundSchema;
+export const BuiltInConnectors$outboundSchema: z.ZodType<
+  string,
+  BuiltInConnectors
+> = openEnums.outboundSchema(BuiltInConnectors);

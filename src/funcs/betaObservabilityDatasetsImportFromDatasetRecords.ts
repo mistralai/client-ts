@@ -90,11 +90,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON(
-    "body",
-    payload.PostDatasetImportFromDatasetInSchema,
-    { explode: true },
-  );
+  const body = encodeJSON("body", payload.ImportDatasetFromDatasetRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     dataset_id: encodeSimple("dataset_id", payload.dataset_id, {

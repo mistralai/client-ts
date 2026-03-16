@@ -3,9 +3,10 @@
  * @generated-id: 4374f7f8136c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,45 +31,46 @@ export const Op = {
   Excludes: "excludes",
   LenEq: "len_eq",
 } as const;
-export type Op = ClosedEnum<typeof Op>;
+export type Op = OpenEnum<typeof Op>;
 
 export type FilterCondition = {
   field: string;
   op: Op;
-  value?: any | undefined;
+  value: any;
 };
 
 /** @internal */
-export const Op$inboundSchema: z.ZodNativeEnum<typeof Op> = z.nativeEnum(Op);
+export const Op$inboundSchema: z.ZodType<Op, unknown> = openEnums.inboundSchema(
+  Op,
+);
 /** @internal */
-export const Op$outboundSchema: z.ZodNativeEnum<typeof Op> = Op$inboundSchema;
+export const Op$outboundSchema: z.ZodType<string, Op> = openEnums
+  .outboundSchema(Op);
 
 /** @internal */
 export const FilterCondition$inboundSchema: z.ZodType<
   FilterCondition,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   field: z.string(),
   op: Op$inboundSchema,
-  value: z.any().optional(),
+  value: z.any(),
 });
 /** @internal */
 export type FilterCondition$Outbound = {
   field: string;
   op: string;
-  value?: any | undefined;
+  value: any;
 };
 
 /** @internal */
 export const FilterCondition$outboundSchema: z.ZodType<
   FilterCondition$Outbound,
-  z.ZodTypeDef,
   FilterCondition
 > = z.object({
   field: z.string(),
   op: Op$outboundSchema,
-  value: z.any().optional(),
+  value: z.any(),
 });
 
 export function filterConditionToJSON(

@@ -90,11 +90,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON(
-    "body",
-    payload.PostChatCompletionEventJudgingInSchema,
-    { explode: true },
-  );
+  const body = encodeJSON("body", payload.JudgeChatCompletionEventRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     event_id: encodeSimple("event_id", payload.event_id, {

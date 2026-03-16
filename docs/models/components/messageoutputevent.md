@@ -6,6 +6,7 @@
 import { MessageOutputEvent } from "@mistralai/mistralai/models/components";
 
 let value: MessageOutputEvent = {
+  type: "message.output.delta",
   id: "<id>",
   content: {
     thinking: [],
@@ -17,7 +18,7 @@ let value: MessageOutputEvent = {
 
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `type`                                                                                        | *"message.output.delta"*                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *"message.output.delta"*                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `outputIndex`                                                                                 | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

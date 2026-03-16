@@ -3,7 +3,7 @@
  * @generated-id: 10bfea3d4e74
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -14,47 +14,57 @@ import {
   ModerationLlmv1Config$Outbound,
   ModerationLlmv1Config$outboundSchema,
 } from "./moderationllmv1config.js";
+import {
+  ModerationLlmv2Config,
+  ModerationLlmv2Config$inboundSchema,
+  ModerationLlmv2Config$Outbound,
+  ModerationLlmv2Config$outboundSchema,
+} from "./moderationllmv2config.js";
 
 export type GuardrailConfig = {
   /**
    * If true, return HTTP 403 and block request in the event of a server-side error
    */
   blockOnError?: boolean | undefined;
-  moderationLlmV1: ModerationLlmv1Config | null;
+  moderationLlmV1?: ModerationLlmv1Config | null | undefined;
+  moderationLlmV2?: ModerationLlmv2Config | null | undefined;
 };
 
 /** @internal */
 export const GuardrailConfig$inboundSchema: z.ZodType<
   GuardrailConfig,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   block_on_error: z.boolean().default(false),
-  moderation_llm_v1: z.nullable(ModerationLlmv1Config$inboundSchema),
+  moderation_llm_v1: z.nullable(ModerationLlmv1Config$inboundSchema).optional(),
+  moderation_llm_v2: z.nullable(ModerationLlmv2Config$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "block_on_error": "blockOnError",
     "moderation_llm_v1": "moderationLlmV1",
+    "moderation_llm_v2": "moderationLlmV2",
   });
 });
 /** @internal */
 export type GuardrailConfig$Outbound = {
   block_on_error: boolean;
-  moderation_llm_v1: ModerationLlmv1Config$Outbound | null;
+  moderation_llm_v1?: ModerationLlmv1Config$Outbound | null | undefined;
+  moderation_llm_v2?: ModerationLlmv2Config$Outbound | null | undefined;
 };
 
 /** @internal */
 export const GuardrailConfig$outboundSchema: z.ZodType<
   GuardrailConfig$Outbound,
-  z.ZodTypeDef,
   GuardrailConfig
 > = z.object({
   blockOnError: z.boolean().default(false),
-  moderationLlmV1: z.nullable(ModerationLlmv1Config$outboundSchema),
+  moderationLlmV1: z.nullable(ModerationLlmv1Config$outboundSchema).optional(),
+  moderationLlmV2: z.nullable(ModerationLlmv2Config$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     blockOnError: "block_on_error",
     moderationLlmV1: "moderation_llm_v1",
+    moderationLlmV2: "moderation_llm_v2",
   });
 });
 

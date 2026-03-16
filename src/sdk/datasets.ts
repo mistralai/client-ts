@@ -34,7 +34,7 @@ export class Datasets extends ClientSDK {
    * Create a new empty dataset
    */
   async create(
-    request: components.PostDatasetInSchema,
+    request: components.CreateDatasetRequest,
     options?: RequestOptions,
   ): Promise<components.Dataset> {
     return unwrapAsync(betaObservabilityDatasetsCreate(
@@ -52,7 +52,7 @@ export class Datasets extends ClientSDK {
       | operations.GetDatasetsV1ObservabilityDatasetsGetRequest
       | undefined,
     options?: RequestOptions,
-  ): Promise<components.DatasetPreviews> {
+  ): Promise<components.ListDatasetsResponse> {
     return unwrapAsync(betaObservabilityDatasetsList(
       this,
       request,
@@ -112,7 +112,7 @@ export class Datasets extends ClientSDK {
     request:
       operations.GetDatasetRecordsV1ObservabilityDatasetsDatasetIdRecordsGetRequest,
     options?: RequestOptions,
-  ): Promise<components.DatasetRecords> {
+  ): Promise<components.ListDatasetRecordsResponse> {
     return unwrapAsync(betaObservabilityDatasetsListRecords(
       this,
       request,
@@ -217,7 +217,7 @@ export class Datasets extends ClientSDK {
     request:
       operations.ExportDatasetToJsonlV1ObservabilityDatasetsDatasetIdExportsToJsonlGetRequest,
     options?: RequestOptions,
-  ): Promise<components.DatasetExport> {
+  ): Promise<components.ExportDatasetResponse> {
     return unwrapAsync(betaObservabilityDatasetsExportToJsonl(
       this,
       request,
@@ -247,7 +247,7 @@ export class Datasets extends ClientSDK {
     request:
       operations.GetDatasetImportTasksV1ObservabilityDatasetsDatasetIdTasksGetRequest,
     options?: RequestOptions,
-  ): Promise<components.DatasetImportTasks> {
+  ): Promise<components.ListDatasetImportTasksResponse> {
     return unwrapAsync(betaObservabilityDatasetsListTasks(
       this,
       request,

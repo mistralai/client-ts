@@ -3,8 +3,9 @@
  * @generated-id: 59212893ffef
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 /**
  * Server side events sent when streaming a conversation response.
@@ -24,8 +25,8 @@ export const SSETypes = {
 /**
  * Server side events sent when streaming a conversation response.
  */
-export type SSETypes = ClosedEnum<typeof SSETypes>;
+export type SSETypes = OpenEnum<typeof SSETypes>;
 
 /** @internal */
-export const SSETypes$inboundSchema: z.ZodNativeEnum<typeof SSETypes> = z
-  .nativeEnum(SSETypes);
+export const SSETypes$inboundSchema: z.ZodType<SSETypes, unknown> = openEnums
+  .inboundSchema(SSETypes);

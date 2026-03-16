@@ -3,38 +3,38 @@
  * @generated-id: 75e9b5ba38c9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecordIdPayloadPutRequest =
   {
     datasetRecordId: string;
-    putDatasetRecordPayloadInSchema: components.PutDatasetRecordPayloadInSchema;
+    updateDatasetRecordPayloadRequest:
+      components.UpdateDatasetRecordPayloadRequest;
   };
 
 /** @internal */
 export type UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecordIdPayloadPutRequest$Outbound =
   {
     dataset_record_id: string;
-    PutDatasetRecordPayloadInSchema:
-      components.PutDatasetRecordPayloadInSchema$Outbound;
+    UpdateDatasetRecordPayloadRequest:
+      components.UpdateDatasetRecordPayloadRequest$Outbound;
   };
 
 /** @internal */
 export const UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecordIdPayloadPutRequest$outboundSchema:
   z.ZodType<
     UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecordIdPayloadPutRequest$Outbound,
-    z.ZodTypeDef,
     UpdateDatasetRecordPayloadV1ObservabilityDatasetRecordsDatasetRecordIdPayloadPutRequest
   > = z.object({
     datasetRecordId: z.string(),
-    putDatasetRecordPayloadInSchema:
-      components.PutDatasetRecordPayloadInSchema$outboundSchema,
+    updateDatasetRecordPayloadRequest:
+      components.UpdateDatasetRecordPayloadRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetRecordId: "dataset_record_id",
-      putDatasetRecordPayloadInSchema: "PutDatasetRecordPayloadInSchema",
+      updateDatasetRecordPayloadRequest: "UpdateDatasetRecordPayloadRequest",
     });
   });
 

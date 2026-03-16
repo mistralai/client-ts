@@ -3,7 +3,7 @@
  * @generated-id: 353481879c3a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -21,19 +21,16 @@ export type OCRUsageInfo = {
 };
 
 /** @internal */
-export const OCRUsageInfo$inboundSchema: z.ZodType<
-  OCRUsageInfo,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pages_processed: z.number().int(),
-  doc_size_bytes: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "pages_processed": "pagesProcessed",
-    "doc_size_bytes": "docSizeBytes",
+export const OCRUsageInfo$inboundSchema: z.ZodType<OCRUsageInfo, unknown> = z
+  .object({
+    pages_processed: z.int(),
+    doc_size_bytes: z.nullable(z.int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "pages_processed": "pagesProcessed",
+      "doc_size_bytes": "docSizeBytes",
+    });
   });
-});
 
 export function ocrUsageInfoFromJSON(
   jsonString: string,

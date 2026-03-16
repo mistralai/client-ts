@@ -3,7 +3,7 @@
  * @generated-id: 20da8e33491e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -29,18 +29,15 @@ export type ResponseFormat = {
 };
 
 /** @internal */
-export const ResponseFormat$inboundSchema: z.ZodType<
-  ResponseFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: ResponseFormats$inboundSchema.optional(),
-  json_schema: z.nullable(JsonSchema$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
+export const ResponseFormat$inboundSchema: z.ZodType<ResponseFormat, unknown> =
+  z.object({
+    type: ResponseFormats$inboundSchema.optional(),
+    json_schema: z.nullable(JsonSchema$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
   });
-});
 /** @internal */
 export type ResponseFormat$Outbound = {
   type?: string | undefined;
@@ -50,7 +47,6 @@ export type ResponseFormat$Outbound = {
 /** @internal */
 export const ResponseFormat$outboundSchema: z.ZodType<
   ResponseFormat$Outbound,
-  z.ZodTypeDef,
   ResponseFormat
 > = z.object({
   type: ResponseFormats$outboundSchema.optional(),

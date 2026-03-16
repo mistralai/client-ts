@@ -3,7 +3,7 @@
  * @generated-id: c87977aa89c7
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -33,11 +33,10 @@ export type FilesApiRoutesListFilesRequest$Outbound = {
 /** @internal */
 export const FilesApiRoutesListFilesRequest$outboundSchema: z.ZodType<
   FilesApiRoutesListFilesRequest$Outbound,
-  z.ZodTypeDef,
   FilesApiRoutesListFilesRequest
 > = z.object({
-  page: z.number().int().default(0),
-  pageSize: z.number().int().default(100),
+  page: z.int().default(0),
+  pageSize: z.int().default(100),
   includeTotal: z.boolean().default(true),
   sampleType: z.nullable(z.array(components.SampleType$outboundSchema))
     .optional(),

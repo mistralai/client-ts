@@ -27,7 +27,7 @@ export class ChatCompletionEvents extends ClientSDK {
     request:
       operations.GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPostRequest,
     options?: RequestOptions,
-  ): Promise<components.ChatCompletionEvents> {
+  ): Promise<components.SearchChatCompletionEventsResponse> {
     return unwrapAsync(betaObservabilityChatCompletionEventsSearch(
       this,
       request,
@@ -39,9 +39,9 @@ export class ChatCompletionEvents extends ClientSDK {
    * Alternative to /search that returns only the IDs and that can return many IDs at once
    */
   async searchIds(
-    request: components.GetChatCompletionEventIdsInSchema,
+    request: components.SearchChatCompletionEventIdsRequest,
     options?: RequestOptions,
-  ): Promise<components.ChatCompletionEventIds> {
+  ): Promise<components.SearchChatCompletionEventIdsResponse> {
     return unwrapAsync(betaObservabilityChatCompletionEventsSearchIds(
       this,
       request,
@@ -71,7 +71,7 @@ export class ChatCompletionEvents extends ClientSDK {
     request:
       operations.GetSimilarChatCompletionEventsV1ObservabilityChatCompletionEventsEventIdSimilarEventsGetRequest,
     options?: RequestOptions,
-  ): Promise<components.ChatCompletionEvents> {
+  ): Promise<components.SearchChatCompletionEventsResponse> {
     return unwrapAsync(betaObservabilityChatCompletionEventsFetchSimilarEvents(
       this,
       request,

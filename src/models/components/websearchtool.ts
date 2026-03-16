@@ -3,10 +3,9 @@
  * @generated-id: 3b81da54d1b2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -16,52 +15,34 @@ import {
   ToolConfiguration$outboundSchema,
 } from "./toolconfiguration.js";
 
-export const WebSearchToolType = {
-  WebSearch: "web_search",
-} as const;
-export type WebSearchToolType = ClosedEnum<typeof WebSearchToolType>;
-
 export type WebSearchTool = {
   toolConfiguration?: ToolConfiguration | null | undefined;
-  type?: WebSearchToolType | undefined;
+  type: "web_search";
 };
 
 /** @internal */
-export const WebSearchToolType$inboundSchema: z.ZodNativeEnum<
-  typeof WebSearchToolType
-> = z.nativeEnum(WebSearchToolType);
-/** @internal */
-export const WebSearchToolType$outboundSchema: z.ZodNativeEnum<
-  typeof WebSearchToolType
-> = WebSearchToolType$inboundSchema;
-
-/** @internal */
-export const WebSearchTool$inboundSchema: z.ZodType<
-  WebSearchTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
-  type: WebSearchToolType$inboundSchema.default("web_search"),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_configuration": "toolConfiguration",
+export const WebSearchTool$inboundSchema: z.ZodType<WebSearchTool, unknown> = z
+  .object({
+    tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
+    type: z.literal("web_search"),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_configuration": "toolConfiguration",
+    });
   });
-});
 /** @internal */
 export type WebSearchTool$Outbound = {
   tool_configuration?: ToolConfiguration$Outbound | null | undefined;
-  type: string;
+  type: "web_search";
 };
 
 /** @internal */
 export const WebSearchTool$outboundSchema: z.ZodType<
   WebSearchTool$Outbound,
-  z.ZodTypeDef,
   WebSearchTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),
-  type: WebSearchToolType$outboundSchema.default("web_search"),
+  type: z.literal("web_search"),
 }).transform((v) => {
   return remap$(v, {
     toolConfiguration: "tool_configuration",

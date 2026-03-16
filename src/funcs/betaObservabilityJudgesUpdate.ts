@@ -3,7 +3,7 @@
  * @generated-id: 0bc391487544
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { MistralCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
@@ -89,7 +89,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.PutJudgeInSchema, { explode: true });
+  const body = encodeJSON("body", payload.UpdateJudgeRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     judge_id: encodeSimple("judge_id", payload.judge_id, {

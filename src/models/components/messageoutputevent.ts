@@ -3,10 +3,11 @@
  * @generated-id: 951387040c37
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OutputContentChunks,
@@ -16,23 +17,22 @@ import {
 export type MessageOutputEventContent = string | OutputContentChunks;
 
 export type MessageOutputEvent = {
-  type?: "message.output.delta" | undefined;
+  type: "message.output.delta";
   createdAt?: Date | undefined;
-  outputIndex: number | undefined;
+  outputIndex: number;
   id: string;
-  contentIndex: number | undefined;
+  contentIndex: number;
   model?: string | null | undefined;
   agentId?: string | null | undefined;
-  role?: "assistant" | undefined;
+  role: "assistant";
   content: string | OutputContentChunks;
 };
 
 /** @internal */
 export const MessageOutputEventContent$inboundSchema: z.ZodType<
   MessageOutputEventContent,
-  z.ZodTypeDef,
   unknown
-> = z.union([z.string(), OutputContentChunks$inboundSchema]);
+> = smartUnion([z.string(), OutputContentChunks$inboundSchema]);
 
 export function messageOutputEventContentFromJSON(
   jsonString: string,
@@ -47,19 +47,18 @@ export function messageOutputEventContentFromJSON(
 /** @internal */
 export const MessageOutputEvent$inboundSchema: z.ZodType<
   MessageOutputEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("message.output.delta").default("message.output.delta"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  type: z.literal("message.output.delta"),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  output_index: z.number().int().default(0),
+  output_index: z.int().default(0),
   id: z.string(),
-  content_index: z.number().int().default(0),
+  content_index: z.int().default(0),
   model: z.nullable(z.string()).optional(),
   agent_id: z.nullable(z.string()).optional(),
   role: z.literal("assistant").default("assistant"),
-  content: z.union([z.string(), OutputContentChunks$inboundSchema]),
+  content: smartUnion([z.string(), OutputContentChunks$inboundSchema]),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

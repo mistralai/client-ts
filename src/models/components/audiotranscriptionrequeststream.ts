@@ -3,7 +3,7 @@
  * @generated-id: d436d38ecd10
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { FileT, FileT$Outbound, FileT$outboundSchema } from "./file.js";
@@ -54,7 +54,6 @@ export type AudioTranscriptionRequestStream$Outbound = {
 /** @internal */
 export const AudioTranscriptionRequestStream$outboundSchema: z.ZodType<
   AudioTranscriptionRequestStream$Outbound,
-  z.ZodTypeDef,
   AudioTranscriptionRequestStream
 > = z.object({
   model: z.string(),

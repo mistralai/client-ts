@@ -3,9 +3,10 @@
  * @generated-id: 0154047eeec4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   DocumentURLChunk,
   DocumentURLChunk$Outbound,
@@ -30,7 +31,7 @@ import {
 /**
  * Document to run OCR on
  */
-export type Document = FileChunk | DocumentURLChunk | ImageURLChunk;
+export type DocumentUnion = FileChunk | DocumentURLChunk | ImageURLChunk;
 
 export const TableFormat = {
   Markdown: "markdown",
@@ -79,29 +80,29 @@ export type OCRRequest = {
 };
 
 /** @internal */
-export type Document$Outbound =
+export type DocumentUnion$Outbound =
   | FileChunk$Outbound
   | DocumentURLChunk$Outbound
   | ImageURLChunk$Outbound;
 
 /** @internal */
-export const Document$outboundSchema: z.ZodType<
-  Document$Outbound,
-  z.ZodTypeDef,
-  Document
-> = z.union([
+export const DocumentUnion$outboundSchema: z.ZodType<
+  DocumentUnion$Outbound,
+  DocumentUnion
+> = smartUnion([
   FileChunk$outboundSchema,
   DocumentURLChunk$outboundSchema,
   ImageURLChunk$outboundSchema,
 ]);
 
-export function documentToJSON(document: Document): string {
-  return JSON.stringify(Document$outboundSchema.parse(document));
+export function documentUnionToJSON(documentUnion: DocumentUnion): string {
+  return JSON.stringify(DocumentUnion$outboundSchema.parse(documentUnion));
 }
 
 /** @internal */
-export const TableFormat$outboundSchema: z.ZodNativeEnum<typeof TableFormat> = z
-  .nativeEnum(TableFormat);
+export const TableFormat$outboundSchema: z.ZodEnum<typeof TableFormat> = z.enum(
+  TableFormat,
+);
 
 /** @internal */
 export type OCRRequest$Outbound = {
@@ -126,20 +127,19 @@ export type OCRRequest$Outbound = {
 /** @internal */
 export const OCRRequest$outboundSchema: z.ZodType<
   OCRRequest$Outbound,
-  z.ZodTypeDef,
   OCRRequest
 > = z.object({
   model: z.nullable(z.string()),
   id: z.string().optional(),
-  document: z.union([
+  document: smartUnion([
     FileChunk$outboundSchema,
     DocumentURLChunk$outboundSchema,
     ImageURLChunk$outboundSchema,
   ]),
-  pages: z.nullable(z.array(z.number().int())).optional(),
+  pages: z.nullable(z.array(z.int())).optional(),
   includeImageBase64: z.nullable(z.boolean()).optional(),
-  imageLimit: z.nullable(z.number().int()).optional(),
-  imageMinSize: z.nullable(z.number().int()).optional(),
+  imageLimit: z.nullable(z.int()).optional(),
+  imageMinSize: z.nullable(z.int()).optional(),
   bboxAnnotationFormat: z.nullable(ResponseFormat$outboundSchema).optional(),
   documentAnnotationFormat: z.nullable(ResponseFormat$outboundSchema)
     .optional(),

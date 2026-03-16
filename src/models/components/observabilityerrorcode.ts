@@ -3,8 +3,9 @@
  * @generated-id: 761cefb4bff3
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ObservabilityErrorCode = {
   UnknownError: "UNKNOWN_ERROR",
@@ -53,9 +54,10 @@ export const ObservabilityErrorCode = {
   EvaluationRunTransitionError: "EVALUATION_RUN_TRANSITION_ERROR",
   TemplateSyntaxError: "TEMPLATE_SYNTAX_ERROR",
 } as const;
-export type ObservabilityErrorCode = ClosedEnum<typeof ObservabilityErrorCode>;
+export type ObservabilityErrorCode = OpenEnum<typeof ObservabilityErrorCode>;
 
 /** @internal */
-export const ObservabilityErrorCode$inboundSchema: z.ZodNativeEnum<
-  typeof ObservabilityErrorCode
-> = z.nativeEnum(ObservabilityErrorCode);
+export const ObservabilityErrorCode$inboundSchema: z.ZodType<
+  ObservabilityErrorCode,
+  unknown
+> = openEnums.inboundSchema(ObservabilityErrorCode);

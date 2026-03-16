@@ -3,7 +3,7 @@
  * @generated-id: 5b70e6a35393
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,14 +25,13 @@ export type FIMCompletionResponse = {
 /** @internal */
 export const FIMCompletionResponse$inboundSchema: z.ZodType<
   FIMCompletionResponse,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   object: z.string(),
   model: z.string(),
   usage: UsageInfo$inboundSchema,
-  created: z.number().int(),
+  created: z.int(),
   choices: z.array(ChatCompletionChoice$inboundSchema),
 });
 

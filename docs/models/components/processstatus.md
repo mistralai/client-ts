@@ -6,10 +6,12 @@
 import { ProcessStatus } from "@mistralai/mistralai/models/components";
 
 let value: ProcessStatus = "self_managed";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"self_managed" | "missing_content" | "noop" | "done" | "todo" | "in_progress" | "error" | "waiting_for_capacity"
+"self_managed" | "missing_content" | "noop" | "done" | "todo" | "in_progress" | "error" | "waiting_for_capacity" | Unrecognized<string>
 ```

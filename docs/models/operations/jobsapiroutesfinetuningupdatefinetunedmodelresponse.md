@@ -5,36 +5,48 @@ OK
 
 ## Supported Types
 
-### `components.ClassifierFTModelOut`
+### `components.ClassifierFineTunedModel`
 
 ```typescript
-const value: components.ClassifierFTModelOut = {
+const value: components.ClassifierFineTunedModel = {
   id: "<id>",
-  created: 111228,
+  created: 385092,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
   archived: true,
   capabilities: {},
-  job: "b1e6e408-c7c5-4c7c-9c65-efca1702bf4b",
-  classifierTargets: [],
+  job: "14ce4667-ac22-41ac-8d5e-01ba39f72659",
+  classifierTargets: [
+    {
+      name: "<value>",
+      labels: [
+        "<value 1>",
+        "<value 2>",
+      ],
+      weight: 6616.25,
+      lossFunction: "single_class",
+    },
+  ],
+  modelType: "classifier",
 };
 ```
 
-### `components.CompletionFTModelOut`
+### `components.CompletionFineTunedModel`
 
 ```typescript
-const value: components.CompletionFTModelOut = {
+const value: components.CompletionFineTunedModel = {
   id: "<id>",
-  created: 787475,
+  created: 647324,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
-  archived: false,
+  archived: true,
   capabilities: {},
-  job: "0f147667-0d54-46fd-934d-6a88bd2ec484",
+  job: "4f0133a4-a8c2-4af2-b920-a6498990f2a3",
+  modelType: "completion",
 };
 ```
 

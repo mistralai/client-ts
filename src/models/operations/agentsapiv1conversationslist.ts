@@ -3,10 +3,11 @@
  * @generated-id: 9a7100ad3737
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,7 +17,7 @@ export type AgentsApiV1ConversationsListRequest = {
   metadata?: { [k: string]: any } | null | undefined;
 };
 
-export type ResponseBody =
+export type AgentsApiV1ConversationsListResponse =
   | components.ModelConversation
   | components.AgentConversation;
 
@@ -30,12 +31,11 @@ export type AgentsApiV1ConversationsListRequest$Outbound = {
 /** @internal */
 export const AgentsApiV1ConversationsListRequest$outboundSchema: z.ZodType<
   AgentsApiV1ConversationsListRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1ConversationsListRequest
 > = z.object({
-  page: z.number().int().default(0),
-  pageSize: z.number().int().default(100),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  page: z.int().default(0),
+  pageSize: z.int().default(100),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
@@ -53,21 +53,21 @@ export function agentsApiV1ConversationsListRequestToJSON(
 }
 
 /** @internal */
-export const ResponseBody$inboundSchema: z.ZodType<
-  ResponseBody,
-  z.ZodTypeDef,
+export const AgentsApiV1ConversationsListResponse$inboundSchema: z.ZodType<
+  AgentsApiV1ConversationsListResponse,
   unknown
-> = z.union([
+> = smartUnion([
   components.ModelConversation$inboundSchema,
   components.AgentConversation$inboundSchema,
 ]);
 
-export function responseBodyFromJSON(
+export function agentsApiV1ConversationsListResponseFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBody, SDKValidationError> {
+): SafeParseResult<AgentsApiV1ConversationsListResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody' from JSON`,
+    (x) =>
+      AgentsApiV1ConversationsListResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentsApiV1ConversationsListResponse' from JSON`,
   );
 }

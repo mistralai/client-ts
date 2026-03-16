@@ -11,7 +11,7 @@ let value:
   UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest =
     {
       datasetRecordId: "120ff658-061e-454d-aacb-5f77e39fdfea",
-      putDatasetRecordPropertiesInSchema: {
+      updateDatasetRecordPropertiesRequest: {
         properties: {
           "key": "<value>",
           "key1": "<value>",
@@ -22,7 +22,7 @@ let value:
 
 ## Fields
 
-| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `datasetRecordId`                                                                                              | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
-| `putDatasetRecordPropertiesInSchema`                                                                           | [components.PutDatasetRecordPropertiesInSchema](../../models/components/putdatasetrecordpropertiesinschema.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `datasetRecordId`                                                                                                  | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `updateDatasetRecordPropertiesRequest`                                                                             | [components.UpdateDatasetRecordPropertiesRequest](../../models/components/updatedatasetrecordpropertiesrequest.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |

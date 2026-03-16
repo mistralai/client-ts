@@ -3,7 +3,7 @@
  * @generated-id: 8e814fd1bc54
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type JobsApiRoutesBatchCancelBatchJobRequest = {
@@ -18,7 +18,6 @@ export type JobsApiRoutesBatchCancelBatchJobRequest$Outbound = {
 /** @internal */
 export const JobsApiRoutesBatchCancelBatchJobRequest$outboundSchema: z.ZodType<
   JobsApiRoutesBatchCancelBatchJobRequest$Outbound,
-  z.ZodTypeDef,
   JobsApiRoutesBatchCancelBatchJobRequest
 > = z.object({
   jobId: z.string(),

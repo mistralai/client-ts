@@ -3,16 +3,16 @@
  * @generated-id: 63ebb118464e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ModerationLlmv1Action,
-  ModerationLlmv1Action$inboundSchema,
-  ModerationLlmv1Action$outboundSchema,
-} from "./moderationllmv1action.js";
+  ModerationLLMAction,
+  ModerationLLMAction$inboundSchema,
+  ModerationLLMAction$outboundSchema,
+} from "./moderationllmaction.js";
 import {
   ModerationLlmv1CategoryThresholds,
   ModerationLlmv1CategoryThresholds$inboundSchema,
@@ -25,9 +25,6 @@ export type ModerationLlmv1Config = {
    * Override model name. Should be omitted in general.
    */
   modelName?: string | undefined;
-  /**
-   * Override default thresholds for specific categories.
-   */
   customCategoryThresholds?:
     | ModerationLlmv1CategoryThresholds
     | null
@@ -36,13 +33,12 @@ export type ModerationLlmv1Config = {
    * If true, only evaluate categories in custom_category_thresholds; others are ignored.
    */
   ignoreOtherCategories?: boolean | undefined;
-  action?: ModerationLlmv1Action | undefined;
+  action?: ModerationLLMAction | undefined;
 };
 
 /** @internal */
 export const ModerationLlmv1Config$inboundSchema: z.ZodType<
   ModerationLlmv1Config,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   model_name: z.string().default("mistral-moderation-2411"),
@@ -50,7 +46,7 @@ export const ModerationLlmv1Config$inboundSchema: z.ZodType<
     ModerationLlmv1CategoryThresholds$inboundSchema,
   ).optional(),
   ignore_other_categories: z.boolean().default(false),
-  action: ModerationLlmv1Action$inboundSchema.optional(),
+  action: ModerationLLMAction$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "model_name": "modelName",
@@ -72,7 +68,6 @@ export type ModerationLlmv1Config$Outbound = {
 /** @internal */
 export const ModerationLlmv1Config$outboundSchema: z.ZodType<
   ModerationLlmv1Config$Outbound,
-  z.ZodTypeDef,
   ModerationLlmv1Config
 > = z.object({
   modelName: z.string().default("mistral-moderation-2411"),
@@ -80,7 +75,7 @@ export const ModerationLlmv1Config$outboundSchema: z.ZodType<
     ModerationLlmv1CategoryThresholds$outboundSchema,
   ).optional(),
   ignoreOtherCategories: z.boolean().default(false),
-  action: ModerationLlmv1Action$outboundSchema.optional(),
+  action: ModerationLLMAction$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     modelName: "model_name",

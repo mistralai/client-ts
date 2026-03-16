@@ -3,7 +3,7 @@
  * @generated-id: 36bed7e7e83b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const EmbeddingDtype = {
@@ -16,6 +16,5 @@ export const EmbeddingDtype = {
 export type EmbeddingDtype = ClosedEnum<typeof EmbeddingDtype>;
 
 /** @internal */
-export const EmbeddingDtype$outboundSchema: z.ZodNativeEnum<
-  typeof EmbeddingDtype
-> = z.nativeEnum(EmbeddingDtype);
+export const EmbeddingDtype$outboundSchema: z.ZodEnum<typeof EmbeddingDtype> = z
+  .enum(EmbeddingDtype);

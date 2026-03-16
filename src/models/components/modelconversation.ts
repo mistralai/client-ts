@@ -3,9 +3,11 @@
  * @generated-id: e79bc3ad623a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -16,6 +18,10 @@ import {
   CompletionArgs,
   CompletionArgs$inboundSchema,
 } from "./completionargs.js";
+import {
+  CustomConnector,
+  CustomConnector$inboundSchema,
+} from "./customconnector.js";
 import {
   DocumentLibraryTool,
   DocumentLibraryTool$inboundSchema,
@@ -35,13 +41,15 @@ import {
 } from "./websearchpremiumtool.js";
 import { WebSearchTool, WebSearchTool$inboundSchema } from "./websearchtool.js";
 
-export type ModelConversationTools =
-  | (CodeInterpreterTool & { type: "code_interpreter" })
-  | (DocumentLibraryTool & { type: "document_library" })
-  | (FunctionTool & { type: "function" })
-  | (ImageGenerationTool & { type: "image_generation" })
-  | (WebSearchTool & { type: "web_search" })
-  | (WebSearchPremiumTool & { type: "web_search_premium" });
+export type ModelConversationTool =
+  | CodeInterpreterTool
+  | CustomConnector
+  | DocumentLibraryTool
+  | FunctionTool
+  | ImageGenerationTool
+  | WebSearchTool
+  | WebSearchPremiumTool
+  | discriminatedUnionTypes.Unknown<"type">;
 
 export type ModelConversation = {
   /**
@@ -53,12 +61,14 @@ export type ModelConversation = {
    */
   tools?:
     | Array<
-      | (CodeInterpreterTool & { type: "code_interpreter" })
-      | (DocumentLibraryTool & { type: "document_library" })
-      | (FunctionTool & { type: "function" })
-      | (ImageGenerationTool & { type: "image_generation" })
-      | (WebSearchTool & { type: "web_search" })
-      | (WebSearchPremiumTool & { type: "web_search_premium" })
+      | CodeInterpreterTool
+      | CustomConnector
+      | DocumentLibraryTool
+      | FunctionTool
+      | ImageGenerationTool
+      | WebSearchTool
+      | WebSearchPremiumTool
+      | discriminatedUnionTypes.Unknown<"type">
     >
     | undefined;
   /**
@@ -78,7 +88,7 @@ export type ModelConversation = {
    * Custom metadata for the conversation.
    */
   metadata?: { [k: string]: any } | null | undefined;
-  object?: "conversation" | undefined;
+  object: "conversation";
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -86,73 +96,53 @@ export type ModelConversation = {
 };
 
 /** @internal */
-export const ModelConversationTools$inboundSchema: z.ZodType<
-  ModelConversationTools,
-  z.ZodTypeDef,
+export const ModelConversationTool$inboundSchema: z.ZodType<
+  ModelConversationTool,
   unknown
-> = z.union([
-  CodeInterpreterTool$inboundSchema.and(
-    z.object({ type: z.literal("code_interpreter") }),
-  ),
-  DocumentLibraryTool$inboundSchema.and(
-    z.object({ type: z.literal("document_library") }),
-  ),
-  FunctionTool$inboundSchema.and(z.object({ type: z.literal("function") })),
-  ImageGenerationTool$inboundSchema.and(
-    z.object({ type: z.literal("image_generation") }),
-  ),
-  WebSearchTool$inboundSchema.and(z.object({ type: z.literal("web_search") })),
-  WebSearchPremiumTool$inboundSchema.and(
-    z.object({ type: z.literal("web_search_premium") }),
-  ),
-]);
+> = discriminatedUnion("type", {
+  code_interpreter: CodeInterpreterTool$inboundSchema,
+  connector: CustomConnector$inboundSchema,
+  document_library: DocumentLibraryTool$inboundSchema,
+  function: FunctionTool$inboundSchema,
+  image_generation: ImageGenerationTool$inboundSchema,
+  web_search: WebSearchTool$inboundSchema,
+  web_search_premium: WebSearchPremiumTool$inboundSchema,
+});
 
-export function modelConversationToolsFromJSON(
+export function modelConversationToolFromJSON(
   jsonString: string,
-): SafeParseResult<ModelConversationTools, SDKValidationError> {
+): SafeParseResult<ModelConversationTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ModelConversationTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelConversationTools' from JSON`,
+    (x) => ModelConversationTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelConversationTool' from JSON`,
   );
 }
 
 /** @internal */
 export const ModelConversation$inboundSchema: z.ZodType<
   ModelConversation,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   instructions: z.nullable(z.string()).optional(),
-  tools: z.array(
-    z.union([
-      CodeInterpreterTool$inboundSchema.and(
-        z.object({ type: z.literal("code_interpreter") }),
-      ),
-      DocumentLibraryTool$inboundSchema.and(
-        z.object({ type: z.literal("document_library") }),
-      ),
-      FunctionTool$inboundSchema.and(z.object({ type: z.literal("function") })),
-      ImageGenerationTool$inboundSchema.and(
-        z.object({ type: z.literal("image_generation") }),
-      ),
-      WebSearchTool$inboundSchema.and(
-        z.object({ type: z.literal("web_search") }),
-      ),
-      WebSearchPremiumTool$inboundSchema.and(
-        z.object({ type: z.literal("web_search_premium") }),
-      ),
-    ]),
-  ).optional(),
+  tools: z.array(discriminatedUnion("type", {
+    code_interpreter: CodeInterpreterTool$inboundSchema,
+    connector: CustomConnector$inboundSchema,
+    document_library: DocumentLibraryTool$inboundSchema,
+    function: FunctionTool$inboundSchema,
+    image_generation: ImageGenerationTool$inboundSchema,
+    web_search: WebSearchTool$inboundSchema,
+    web_search_premium: WebSearchPremiumTool$inboundSchema,
+  })).optional(),
   completion_args: CompletionArgs$inboundSchema.optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   object: z.literal("conversation").default("conversation"),
   id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   model: z.string(),
 }).transform((v) => {
   return remap$(v, {

@@ -5,25 +5,23 @@ OK
 
 ## Supported Types
 
-### `components.ClassifierDetailedJobOut`
+### `components.ClassifierFineTuningJobDetails`
 
 ```typescript
-const value: components.ClassifierDetailedJobOut = {
-  id: "9324efc1-74d2-4cfb-aacc-8c936806a157",
-  autoStart: true,
-  model: "Land Cruiser",
-  status: "CANCELLATION_REQUESTED",
-  createdAt: 306183,
-  modifiedAt: 163064,
-  trainingFiles: [
-    "4aadd7e9-6b01-477f-86b6-3ada38b71e42",
-    "689691d3-0952-4741-a8e0-c05d353daf37",
-  ],
+const value: components.ClassifierFineTuningJobDetails = {
+  id: "77b38766-ec3a-4d75-be79-625072841729",
+  autoStart: false,
+  model: "Mustang",
+  status: "CANCELLED",
+  createdAt: 19399,
+  modifiedAt: 106659,
+  trainingFiles: [],
+  jobType: "classifier",
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 738998,
+      stepNumber: 141445,
       createdAt: 1716963433,
     },
   ],
@@ -31,24 +29,26 @@ const value: components.ClassifierDetailedJobOut = {
 };
 ```
 
-### `components.CompletionDetailedJobOut`
+### `components.CompletionFineTuningJobDetails`
 
 ```typescript
-const value: components.CompletionDetailedJobOut = {
-  id: "456fe44d-6df9-48f2-930f-131af06a7b94",
-  autoStart: false,
-  model: "Taurus",
-  status: "VALIDATED",
-  createdAt: 45490,
-  modifiedAt: 318849,
+const value: components.CompletionFineTuningJobDetails = {
+  id: "40f503f8-72c6-499d-81fe-6d6107f5ac80",
+  autoStart: true,
+  model: "Camry",
+  status: "FAILED",
+  createdAt: 414431,
+  modifiedAt: 292743,
   trainingFiles: [
-    "c6396397-fb35-4d61-8f27-af5626373d30",
+    "cb7f6c61-045b-4834-925d-fd27e46b7490",
+    "99bb4e64-e5b5-4989-80a2-b41f94fac451",
   ],
+  jobType: "completion",
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 738998,
+      stepNumber: 141445,
       createdAt: 1716963433,
     },
   ],

@@ -3,7 +3,7 @@
  * @generated-id: f85fc1ec404d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type LibrariesDocumentsListV1Request = {
@@ -30,13 +30,12 @@ export type LibrariesDocumentsListV1Request$Outbound = {
 /** @internal */
 export const LibrariesDocumentsListV1Request$outboundSchema: z.ZodType<
   LibrariesDocumentsListV1Request$Outbound,
-  z.ZodTypeDef,
   LibrariesDocumentsListV1Request
 > = z.object({
   libraryId: z.string(),
   search: z.nullable(z.string()).optional(),
-  pageSize: z.number().int().default(100),
-  page: z.number().int().default(0),
+  pageSize: z.int().default(100),
+  page: z.int().default(0),
   filtersAttributes: z.nullable(z.string()).optional(),
   sortBy: z.string().default("created_at"),
   sortOrder: z.string().default("desc"),

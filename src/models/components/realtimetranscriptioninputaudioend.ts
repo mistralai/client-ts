@@ -3,7 +3,7 @@
  * @generated-id: 4708359ef5cc
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,7 +15,6 @@ export type RealtimeTranscriptionInputAudioEnd = {
 /** @internal */
 export const RealtimeTranscriptionInputAudioEnd$inboundSchema: z.ZodType<
   RealtimeTranscriptionInputAudioEnd,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("input_audio.end").default("input_audio.end"),
@@ -28,7 +27,6 @@ export type RealtimeTranscriptionInputAudioEnd$Outbound = {
 /** @internal */
 export const RealtimeTranscriptionInputAudioEnd$outboundSchema: z.ZodType<
   RealtimeTranscriptionInputAudioEnd$Outbound,
-  z.ZodTypeDef,
   RealtimeTranscriptionInputAudioEnd
 > = z.object({
   type: z.literal("input_audio.end").default("input_audio.end" as const),

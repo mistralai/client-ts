@@ -3,7 +3,7 @@
  * @generated-id: 9c4e716e89cb
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
@@ -14,7 +14,7 @@ export const FileVisibility = {
 } as const;
 export type FileVisibility = ClosedEnum<typeof FileVisibility>;
 
-export type FilesApiRoutesUploadFileMultiPartBodyParams = {
+export type MultiPartBodyParams = {
   expiry?: number | null | undefined;
   visibility?: FileVisibility | undefined;
   purpose?: components.FilePurpose | undefined;
@@ -35,12 +35,11 @@ export type FilesApiRoutesUploadFileMultiPartBodyParams = {
 };
 
 /** @internal */
-export const FileVisibility$outboundSchema: z.ZodNativeEnum<
-  typeof FileVisibility
-> = z.nativeEnum(FileVisibility);
+export const FileVisibility$outboundSchema: z.ZodEnum<typeof FileVisibility> = z
+  .enum(FileVisibility);
 
 /** @internal */
-export type FilesApiRoutesUploadFileMultiPartBodyParams$Outbound = {
+export type MultiPartBodyParams$Outbound = {
   expiry?: number | null | undefined;
   visibility: string;
   purpose?: string | undefined;
@@ -48,25 +47,20 @@ export type FilesApiRoutesUploadFileMultiPartBodyParams$Outbound = {
 };
 
 /** @internal */
-export const FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema:
-  z.ZodType<
-    FilesApiRoutesUploadFileMultiPartBodyParams$Outbound,
-    z.ZodTypeDef,
-    FilesApiRoutesUploadFileMultiPartBodyParams
-  > = z.object({
-    expiry: z.nullable(z.number().int()).optional(),
-    visibility: FileVisibility$outboundSchema.default("workspace"),
-    purpose: components.FilePurpose$outboundSchema.optional(),
-    file: components.FileT$outboundSchema.or(blobLikeSchema),
-  });
+export const MultiPartBodyParams$outboundSchema: z.ZodType<
+  MultiPartBodyParams$Outbound,
+  MultiPartBodyParams
+> = z.object({
+  expiry: z.nullable(z.int()).optional(),
+  visibility: FileVisibility$outboundSchema.default("workspace"),
+  purpose: components.FilePurpose$outboundSchema.optional(),
+  file: components.FileT$outboundSchema.or(blobLikeSchema),
+});
 
-export function filesApiRoutesUploadFileMultiPartBodyParamsToJSON(
-  filesApiRoutesUploadFileMultiPartBodyParams:
-    FilesApiRoutesUploadFileMultiPartBodyParams,
+export function multiPartBodyParamsToJSON(
+  multiPartBodyParams: MultiPartBodyParams,
 ): string {
   return JSON.stringify(
-    FilesApiRoutesUploadFileMultiPartBodyParams$outboundSchema.parse(
-      filesApiRoutesUploadFileMultiPartBodyParams,
-    ),
+    MultiPartBodyParams$outboundSchema.parse(multiPartBodyParams),
   );
 }

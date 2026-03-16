@@ -3,7 +3,7 @@
  * @generated-id: 417647f39e0b
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
@@ -45,18 +45,17 @@ export type AgentsApiV1AgentsListRequest$Outbound = {
 /** @internal */
 export const AgentsApiV1AgentsListRequest$outboundSchema: z.ZodType<
   AgentsApiV1AgentsListRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1AgentsListRequest
 > = z.object({
-  page: z.number().int().default(0),
-  pageSize: z.number().int().default(20),
+  page: z.int().default(0),
+  pageSize: z.int().default(20),
   deploymentChat: z.nullable(z.boolean()).optional(),
   sources: z.nullable(z.array(components.RequestSource$outboundSchema))
     .optional(),
   name: z.nullable(z.string()).optional(),
   search: z.nullable(z.string()).optional(),
   id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",

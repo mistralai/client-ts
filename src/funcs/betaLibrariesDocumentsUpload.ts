@@ -45,7 +45,7 @@ export function betaLibrariesDocumentsUpload(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.DocumentOut,
+    components.Document,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -71,7 +71,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.DocumentOut,
+      components.Document,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -108,6 +108,18 @@ async function $do(
       || "application/octet-stream";
     const blob = new Blob([buffer], { type: contentType });
     appendForm(body, "file", blob, payload.RequestBody.file.fileName);
+  } else if (payload.RequestBody.file.content instanceof Uint8Array) {
+    const contentType =
+      getContentTypeFromFileName(payload.RequestBody.file.fileName)
+      || "application/octet-stream";
+    appendForm(
+      body,
+      "file",
+      new Blob([new Uint8Array(payload.RequestBody.file.content).buffer], {
+        type: contentType,
+      }),
+      payload.RequestBody.file.fileName,
+    );
   } else {
     const contentType =
       getContentTypeFromFileName(payload.RequestBody.file.fileName)
@@ -183,7 +195,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.DocumentOut,
+    components.Document,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -194,7 +206,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json([200, 201], components.DocumentOut$inboundSchema),
+    M.json([200, 201], components.Document$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

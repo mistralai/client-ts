@@ -3,6 +3,13 @@ import { zodToJsonSchema } from "zod-to-json-schema";
 import { ResponseFormat } from "../models/components/responseformat.js";
 import * as components from "../models/components/index.js";
 
+function toJsonSchema(schema: z.ZodTypeAny): Record<string, unknown> {
+  if ('toJSONSchema' in z && typeof z.toJSONSchema === 'function') {
+    return z.toJSONSchema(schema) as Record<string, unknown>;
+  }
+  return zodToJsonSchema(schema) as Record<string, unknown>;
+}
+
 export function transformToChatCompletionRequest<T extends z.ZodTypeAny>(
   parsedRequest: ParsedChatCompletionRequest<T>
 ): components.ChatCompletionRequest {
@@ -66,7 +73,7 @@ export function convertToParsedChatCompletionResponse<T extends z.ZodTypeAny>(re
 
   // Function to convert Zod schema to strict JSON schema
 export function responseFormatFromZodObject<T extends z.ZodTypeAny>(responseFormat: T): ResponseFormat {
-  const responseJsonSchema = zodToJsonSchema(responseFormat as z.ZodType<any, z.ZodTypeDef, any>);
+  const responseJsonSchema = toJsonSchema(responseFormat);
   // It is not possible to get the variable name of a Zod object at runtime in TypeScript so we're using a placeholder name.
   // This has not impact on the parsing as the initial Zod object is used to parse the response.
   const placeholderName = "placeholderName"

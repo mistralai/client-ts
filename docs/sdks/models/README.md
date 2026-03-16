@@ -19,7 +19,7 @@ List all models available to the user.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="list_models_v1_models_get" method="get" path="/v1/models" -->
+<!-- UsageSnippet language="typescript" operationID="list_models_v1_models_get" method="get" path="/v1/models" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -89,7 +89,7 @@ Retrieve information about a model.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="retrieve_model_v1_models__model_id__get" method="get" path="/v1/models/{model_id}" -->
+<!-- UsageSnippet language="typescript" operationID="retrieve_model_v1_models__model_id__get" method="get" path="/v1/models/{model_id}" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -148,7 +148,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet](../../models/operations/retrievemodelv1modelsmodelidgetresponseretrievemodelv1modelsmodelidget.md)\>**
+**Promise\<[operations.ResponseRetrieveModelV1ModelsModelIdGet](../../models/operations/responseretrievemodelv1modelsmodelidget.md)\>**
 
 ### Errors
 
@@ -163,7 +163,7 @@ Delete a fine-tuned model.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="delete_model_v1_models__model_id__delete" method="delete" path="/v1/models/{model_id}" -->
+<!-- UsageSnippet language="typescript" operationID="delete_model_v1_models__model_id__delete" method="delete" path="/v1/models/{model_id}" example="userExample" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -222,7 +222,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DeleteModelOut](../../models/components/deletemodelout.md)\>**
+**Promise\<[components.DeleteModelResponse](../../models/components/deletemodelresponse.md)\>**
 
 ### Errors
 
@@ -248,7 +248,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.models.update({
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
-    updateFTModelIn: {},
+    updateModelRequest: {},
   });
 
   console.log(result);
@@ -274,7 +274,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await modelsUpdate(mistral, {
     modelId: "ft:open-mistral-7b:587a6b29:20240514:7e773925",
-    updateFTModelIn: {},
+    updateModelRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -371,7 +371,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ArchiveFTModelOut](../../models/components/archiveftmodelout.md)\>**
+**Promise\<[components.ArchiveModelResponse](../../models/components/archivemodelresponse.md)\>**
 
 ### Errors
 
@@ -444,7 +444,7 @@ run();
 
 ### Response
 
-**Promise\<[components.UnarchiveFTModelOut](../../models/components/unarchiveftmodelout.md)\>**
+**Promise\<[components.UnarchiveModelResponse](../../models/components/unarchivemodelresponse.md)\>**
 
 ### Errors
 

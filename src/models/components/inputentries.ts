@@ -3,7 +3,8 @@
  * @generated-id: 1dad3849e6f3
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   AgentHandoffEntry,
   AgentHandoffEntry$Outbound,
@@ -55,9 +56,8 @@ export type InputEntries$Outbound =
 /** @internal */
 export const InputEntries$outboundSchema: z.ZodType<
   InputEntries$Outbound,
-  z.ZodTypeDef,
   InputEntries
-> = z.union([
+> = smartUnion([
   AgentHandoffEntry$outboundSchema,
   FunctionCallEntry$outboundSchema,
   MessageInputEntry$outboundSchema,

@@ -3,7 +3,7 @@
  * @generated-id: 9862679000aa
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { MistralCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
@@ -157,7 +157,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.stream(200, z.instanceof(ReadableStream<Uint8Array>)),
+    M.stream(
+      200,
+      z.custom<ReadableStream<Uint8Array>>(x => x instanceof ReadableStream),
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

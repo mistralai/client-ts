@@ -38,7 +38,7 @@ export function betaConversationsGet(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.AgentsApiV1ConversationsGetResponseV1ConversationsGet,
+    operations.ResponseV1ConversationsGet,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.AgentsApiV1ConversationsGetResponseV1ConversationsGet,
+      operations.ResponseV1ConversationsGet,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -153,7 +153,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.AgentsApiV1ConversationsGetResponseV1ConversationsGet,
+    operations.ResponseV1ConversationsGet,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -164,11 +164,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      operations
-        .AgentsApiV1ConversationsGetResponseV1ConversationsGet$inboundSchema,
-    ),
+    M.json(200, operations.ResponseV1ConversationsGet$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

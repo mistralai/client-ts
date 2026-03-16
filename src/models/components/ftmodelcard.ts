@@ -3,7 +3,7 @@
  * @generated-id: 521014394505
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,55 +18,52 @@ import {
  */
 export type FTModelCard = {
   id: string;
-  object: string | undefined;
+  object: string;
   created?: number | undefined;
-  ownedBy: string | undefined;
+  ownedBy: string;
   capabilities: ModelCapabilities;
   name?: string | null | undefined;
   description?: string | null | undefined;
-  maxContextLength: number | undefined;
+  maxContextLength: number;
   aliases?: Array<string> | undefined;
   deprecation?: Date | null | undefined;
   deprecationReplacementModel?: string | null | undefined;
   defaultModelTemperature?: number | null | undefined;
-  type?: "fine-tuned" | undefined;
+  type: "fine-tuned";
   job: string;
   root: string;
-  archived: boolean | undefined;
+  archived: boolean;
 };
 
 /** @internal */
-export const FTModelCard$inboundSchema: z.ZodType<
-  FTModelCard,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  object: z.string().default("model"),
-  created: z.number().int().optional(),
-  owned_by: z.string().default("mistralai"),
-  capabilities: ModelCapabilities$inboundSchema,
-  name: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  max_context_length: z.number().int().default(32768),
-  aliases: z.array(z.string()).optional(),
-  deprecation: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deprecation_replacement_model: z.nullable(z.string()).optional(),
-  default_model_temperature: z.nullable(z.number()).optional(),
-  type: z.literal("fine-tuned").default("fine-tuned"),
-  job: z.string(),
-  root: z.string(),
-  archived: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "owned_by": "ownedBy",
-    "max_context_length": "maxContextLength",
-    "deprecation_replacement_model": "deprecationReplacementModel",
-    "default_model_temperature": "defaultModelTemperature",
+export const FTModelCard$inboundSchema: z.ZodType<FTModelCard, unknown> = z
+  .object({
+    id: z.string(),
+    object: z.string().default("model"),
+    created: z.int().optional(),
+    owned_by: z.string().default("mistralai"),
+    capabilities: ModelCapabilities$inboundSchema,
+    name: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    max_context_length: z.int().default(32768),
+    aliases: z.array(z.string()).optional(),
+    deprecation: z.nullable(
+      z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deprecation_replacement_model: z.nullable(z.string()).optional(),
+    default_model_temperature: z.nullable(z.number()).optional(),
+    type: z.literal("fine-tuned"),
+    job: z.string(),
+    root: z.string(),
+    archived: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "owned_by": "ownedBy",
+      "max_context_length": "maxContextLength",
+      "deprecation_replacement_model": "deprecationReplacementModel",
+      "default_model_temperature": "defaultModelTemperature",
+    });
   });
-});
 
 export function ftModelCardFromJSON(
   jsonString: string,

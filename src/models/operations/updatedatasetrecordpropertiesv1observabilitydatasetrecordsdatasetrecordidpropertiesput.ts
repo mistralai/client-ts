@@ -3,39 +3,39 @@
  * @generated-id: 7d8e48408893
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest =
   {
     datasetRecordId: string;
-    putDatasetRecordPropertiesInSchema:
-      components.PutDatasetRecordPropertiesInSchema;
+    updateDatasetRecordPropertiesRequest:
+      components.UpdateDatasetRecordPropertiesRequest;
   };
 
 /** @internal */
 export type UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest$Outbound =
   {
     dataset_record_id: string;
-    PutDatasetRecordPropertiesInSchema:
-      components.PutDatasetRecordPropertiesInSchema$Outbound;
+    UpdateDatasetRecordPropertiesRequest:
+      components.UpdateDatasetRecordPropertiesRequest$Outbound;
   };
 
 /** @internal */
 export const UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest$outboundSchema:
   z.ZodType<
     UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest$Outbound,
-    z.ZodTypeDef,
     UpdateDatasetRecordPropertiesV1ObservabilityDatasetRecordsDatasetRecordIdPropertiesPutRequest
   > = z.object({
     datasetRecordId: z.string(),
-    putDatasetRecordPropertiesInSchema:
-      components.PutDatasetRecordPropertiesInSchema$outboundSchema,
+    updateDatasetRecordPropertiesRequest:
+      components.UpdateDatasetRecordPropertiesRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetRecordId: "dataset_record_id",
-      putDatasetRecordPropertiesInSchema: "PutDatasetRecordPropertiesInSchema",
+      updateDatasetRecordPropertiesRequest:
+        "UpdateDatasetRecordPropertiesRequest",
     });
   });
 

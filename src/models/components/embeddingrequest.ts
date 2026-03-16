@@ -3,8 +3,9 @@
  * @generated-id: 1f5a1e8c8aa9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   EmbeddingDtype,
   EmbeddingDtype$outboundSchema,
@@ -43,9 +44,8 @@ export type EmbeddingRequestInputs$Outbound = string | Array<string>;
 /** @internal */
 export const EmbeddingRequestInputs$outboundSchema: z.ZodType<
   EmbeddingRequestInputs$Outbound,
-  z.ZodTypeDef,
   EmbeddingRequestInputs
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function embeddingRequestInputsToJSON(
   embeddingRequestInputs: EmbeddingRequestInputs,
@@ -68,13 +68,12 @@ export type EmbeddingRequest$Outbound = {
 /** @internal */
 export const EmbeddingRequest$outboundSchema: z.ZodType<
   EmbeddingRequest$Outbound,
-  z.ZodTypeDef,
   EmbeddingRequest
 > = z.object({
   model: z.string(),
-  metadata: z.nullable(z.record(z.any())).optional(),
-  inputs: z.union([z.string(), z.array(z.string())]),
-  outputDimension: z.nullable(z.number().int()).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
+  inputs: smartUnion([z.string(), z.array(z.string())]),
+  outputDimension: z.nullable(z.int()).optional(),
   outputDtype: EmbeddingDtype$outboundSchema.optional(),
   encodingFormat: EncodingFormat$outboundSchema.optional(),
 }).transform((v) => {

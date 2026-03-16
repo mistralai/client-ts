@@ -3,7 +3,7 @@
  * @generated-id: d94cffcddaa4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { MistralCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import { EventStream } from "../lib/event-streams.js";
@@ -175,10 +175,11 @@ async function $do(
   >(
     M.sse(
       200,
-      z.instanceof(ReadableStream<Uint8Array>)
+      z.custom<ReadableStream<Uint8Array>>(x => x instanceof ReadableStream)
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
             return {
+              done: false,
               value: components.ConversationEvents$inboundSchema.parse(
                 rawEvent,
               ),

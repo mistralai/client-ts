@@ -3,8 +3,10 @@
  * @generated-id: e5810d7dbeb9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -50,16 +52,17 @@ import {
 } from "./toolexecutionstartedevent.js";
 
 export type ConversationEventsData =
-  | (AgentHandoffDoneEvent & { type: "agent.handoff.done" })
-  | (AgentHandoffStartedEvent & { type: "agent.handoff.started" })
-  | (ResponseDoneEvent & { type: "conversation.response.done" })
-  | (ResponseErrorEvent & { type: "conversation.response.error" })
-  | (ResponseStartedEvent & { type: "conversation.response.started" })
-  | (FunctionCallEvent & { type: "function.call.delta" })
-  | (MessageOutputEvent & { type: "message.output.delta" })
-  | (ToolExecutionDeltaEvent & { type: "tool.execution.delta" })
-  | (ToolExecutionDoneEvent & { type: "tool.execution.done" })
-  | (ToolExecutionStartedEvent & { type: "tool.execution.started" });
+  | AgentHandoffDoneEvent
+  | AgentHandoffStartedEvent
+  | ResponseDoneEvent
+  | ResponseErrorEvent
+  | ResponseStartedEvent
+  | FunctionCallEvent
+  | MessageOutputEvent
+  | ToolExecutionDeltaEvent
+  | ToolExecutionDoneEvent
+  | ToolExecutionStartedEvent
+  | discriminatedUnionTypes.Unknown<"type">;
 
 export type ConversationEvents = {
   /**
@@ -67,55 +70,35 @@ export type ConversationEvents = {
    */
   event: SSETypes;
   data:
-    | (AgentHandoffDoneEvent & { type: "agent.handoff.done" })
-    | (AgentHandoffStartedEvent & { type: "agent.handoff.started" })
-    | (ResponseDoneEvent & { type: "conversation.response.done" })
-    | (ResponseErrorEvent & { type: "conversation.response.error" })
-    | (ResponseStartedEvent & { type: "conversation.response.started" })
-    | (FunctionCallEvent & { type: "function.call.delta" })
-    | (MessageOutputEvent & { type: "message.output.delta" })
-    | (ToolExecutionDeltaEvent & { type: "tool.execution.delta" })
-    | (ToolExecutionDoneEvent & { type: "tool.execution.done" })
-    | (ToolExecutionStartedEvent & { type: "tool.execution.started" });
+    | AgentHandoffDoneEvent
+    | AgentHandoffStartedEvent
+    | ResponseDoneEvent
+    | ResponseErrorEvent
+    | ResponseStartedEvent
+    | FunctionCallEvent
+    | MessageOutputEvent
+    | ToolExecutionDeltaEvent
+    | ToolExecutionDoneEvent
+    | ToolExecutionStartedEvent
+    | discriminatedUnionTypes.Unknown<"type">;
 };
 
 /** @internal */
 export const ConversationEventsData$inboundSchema: z.ZodType<
   ConversationEventsData,
-  z.ZodTypeDef,
   unknown
-> = z.union([
-  AgentHandoffDoneEvent$inboundSchema.and(
-    z.object({ type: z.literal("agent.handoff.done") }),
-  ),
-  AgentHandoffStartedEvent$inboundSchema.and(
-    z.object({ type: z.literal("agent.handoff.started") }),
-  ),
-  ResponseDoneEvent$inboundSchema.and(
-    z.object({ type: z.literal("conversation.response.done") }),
-  ),
-  ResponseErrorEvent$inboundSchema.and(
-    z.object({ type: z.literal("conversation.response.error") }),
-  ),
-  ResponseStartedEvent$inboundSchema.and(
-    z.object({ type: z.literal("conversation.response.started") }),
-  ),
-  FunctionCallEvent$inboundSchema.and(
-    z.object({ type: z.literal("function.call.delta") }),
-  ),
-  MessageOutputEvent$inboundSchema.and(
-    z.object({ type: z.literal("message.output.delta") }),
-  ),
-  ToolExecutionDeltaEvent$inboundSchema.and(
-    z.object({ type: z.literal("tool.execution.delta") }),
-  ),
-  ToolExecutionDoneEvent$inboundSchema.and(
-    z.object({ type: z.literal("tool.execution.done") }),
-  ),
-  ToolExecutionStartedEvent$inboundSchema.and(
-    z.object({ type: z.literal("tool.execution.started") }),
-  ),
-]);
+> = discriminatedUnion("type", {
+  ["agent.handoff.done"]: AgentHandoffDoneEvent$inboundSchema,
+  ["agent.handoff.started"]: AgentHandoffStartedEvent$inboundSchema,
+  ["conversation.response.done"]: ResponseDoneEvent$inboundSchema,
+  ["conversation.response.error"]: ResponseErrorEvent$inboundSchema,
+  ["conversation.response.started"]: ResponseStartedEvent$inboundSchema,
+  ["function.call.delta"]: FunctionCallEvent$inboundSchema,
+  ["message.output.delta"]: MessageOutputEvent$inboundSchema,
+  ["tool.execution.delta"]: ToolExecutionDeltaEvent$inboundSchema,
+  ["tool.execution.done"]: ToolExecutionDoneEvent$inboundSchema,
+  ["tool.execution.started"]: ToolExecutionStartedEvent$inboundSchema,
+});
 
 export function conversationEventsDataFromJSON(
   jsonString: string,
@@ -130,7 +113,6 @@ export function conversationEventsDataFromJSON(
 /** @internal */
 export const ConversationEvents$inboundSchema: z.ZodType<
   ConversationEvents,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   event: SSETypes$inboundSchema,
@@ -138,43 +120,25 @@ export const ConversationEvents$inboundSchema: z.ZodType<
     try {
       return JSON.parse(v);
     } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+      ctx.addIssue({
+        input: v,
+        code: "custom",
+        message: `malformed json: ${err}`,
+      });
       return z.NEVER;
     }
-  }).pipe(
-    z.union([
-      AgentHandoffDoneEvent$inboundSchema.and(
-        z.object({ type: z.literal("agent.handoff.done") }),
-      ),
-      AgentHandoffStartedEvent$inboundSchema.and(
-        z.object({ type: z.literal("agent.handoff.started") }),
-      ),
-      ResponseDoneEvent$inboundSchema.and(
-        z.object({ type: z.literal("conversation.response.done") }),
-      ),
-      ResponseErrorEvent$inboundSchema.and(
-        z.object({ type: z.literal("conversation.response.error") }),
-      ),
-      ResponseStartedEvent$inboundSchema.and(
-        z.object({ type: z.literal("conversation.response.started") }),
-      ),
-      FunctionCallEvent$inboundSchema.and(
-        z.object({ type: z.literal("function.call.delta") }),
-      ),
-      MessageOutputEvent$inboundSchema.and(
-        z.object({ type: z.literal("message.output.delta") }),
-      ),
-      ToolExecutionDeltaEvent$inboundSchema.and(
-        z.object({ type: z.literal("tool.execution.delta") }),
-      ),
-      ToolExecutionDoneEvent$inboundSchema.and(
-        z.object({ type: z.literal("tool.execution.done") }),
-      ),
-      ToolExecutionStartedEvent$inboundSchema.and(
-        z.object({ type: z.literal("tool.execution.started") }),
-      ),
-    ]),
-  ),
+  }).pipe(discriminatedUnion("type", {
+    ["agent.handoff.done"]: AgentHandoffDoneEvent$inboundSchema,
+    ["agent.handoff.started"]: AgentHandoffStartedEvent$inboundSchema,
+    ["conversation.response.done"]: ResponseDoneEvent$inboundSchema,
+    ["conversation.response.error"]: ResponseErrorEvent$inboundSchema,
+    ["conversation.response.started"]: ResponseStartedEvent$inboundSchema,
+    ["function.call.delta"]: FunctionCallEvent$inboundSchema,
+    ["message.output.delta"]: MessageOutputEvent$inboundSchema,
+    ["tool.execution.delta"]: ToolExecutionDeltaEvent$inboundSchema,
+    ["tool.execution.done"]: ToolExecutionDoneEvent$inboundSchema,
+    ["tool.execution.started"]: ToolExecutionStartedEvent$inboundSchema,
+  })),
 });
 
 export function conversationEventsFromJSON(

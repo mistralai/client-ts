@@ -1,9 +1,9 @@
 import { GoogleAuth } from "google-auth-library";
 import { SDKOptions } from "../lib/config.js";
 import { ClientSDK } from "../lib/sdks.js";
-import { Chat } from "./chat";
-import { Fim } from "./fim";
-import { SDKHooks } from "../hooks";
+import { Chat } from "./chat.js";
+import { Fim } from "./fim.js";
+import { SDKHooks } from "../hooks/index.js";
 
 export type GoogleCloudOptions = {
   /** The region of the Google Cloud AI Platform endpoint */

@@ -3,7 +3,7 @@
  * @generated-id: 4c2f628fdb8e
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -23,11 +23,10 @@ export type ModerationObject = {
 /** @internal */
 export const ModerationObject$inboundSchema: z.ZodType<
   ModerationObject,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  categories: z.record(z.boolean()).optional(),
-  category_scores: z.record(z.number()).optional(),
+  categories: z.record(z.string(), z.boolean()).optional(),
+  category_scores: z.record(z.string(), z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "category_scores": "categoryScores",

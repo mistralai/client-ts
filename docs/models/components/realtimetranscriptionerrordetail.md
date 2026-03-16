@@ -13,7 +13,7 @@ let value: RealtimeTranscriptionErrorDetail = {
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `message`                          | *components.Message*               | :heavy_check_mark:                 | Human-readable error message.      |
-| `code`                             | *number*                           | :heavy_check_mark:                 | Internal error code for debugging. |
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `message`                                            | *components.RealtimeTranscriptionErrorDetailMessage* | :heavy_check_mark:                                   | Human-readable error message.                        |
+| `code`                                               | *number*                                             | :heavy_check_mark:                                   | Internal error code for debugging.                   |

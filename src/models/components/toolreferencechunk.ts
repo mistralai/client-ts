@@ -3,9 +3,10 @@
  * @generated-id: 5bf4edba1096
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BuiltInConnectors,
@@ -27,18 +28,16 @@ export type ToolReferenceChunk = {
 /** @internal */
 export const ToolReferenceChunkTool$inboundSchema: z.ZodType<
   ToolReferenceChunkTool,
-  z.ZodTypeDef,
   unknown
-> = z.union([BuiltInConnectors$inboundSchema, z.string()]);
+> = smartUnion([BuiltInConnectors$inboundSchema, z.string()]);
 /** @internal */
 export type ToolReferenceChunkTool$Outbound = string | string;
 
 /** @internal */
 export const ToolReferenceChunkTool$outboundSchema: z.ZodType<
   ToolReferenceChunkTool$Outbound,
-  z.ZodTypeDef,
   ToolReferenceChunkTool
-> = z.union([BuiltInConnectors$outboundSchema, z.string()]);
+> = smartUnion([BuiltInConnectors$outboundSchema, z.string()]);
 
 export function toolReferenceChunkToolToJSON(
   toolReferenceChunkTool: ToolReferenceChunkTool,
@@ -60,11 +59,10 @@ export function toolReferenceChunkToolFromJSON(
 /** @internal */
 export const ToolReferenceChunk$inboundSchema: z.ZodType<
   ToolReferenceChunk,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("tool_reference").default("tool_reference"),
-  tool: z.union([BuiltInConnectors$inboundSchema, z.string()]),
+  tool: smartUnion([BuiltInConnectors$inboundSchema, z.string()]),
   title: z.string(),
   url: z.nullable(z.string()).optional(),
   favicon: z.nullable(z.string()).optional(),
@@ -83,11 +81,10 @@ export type ToolReferenceChunk$Outbound = {
 /** @internal */
 export const ToolReferenceChunk$outboundSchema: z.ZodType<
   ToolReferenceChunk$Outbound,
-  z.ZodTypeDef,
   ToolReferenceChunk
 > = z.object({
   type: z.literal("tool_reference").default("tool_reference" as const),
-  tool: z.union([BuiltInConnectors$outboundSchema, z.string()]),
+  tool: smartUnion([BuiltInConnectors$outboundSchema, z.string()]),
   title: z.string(),
   url: z.nullable(z.string()).optional(),
   favicon: z.nullable(z.string()).optional(),

@@ -3,7 +3,7 @@
  * @generated-id: 527f1331002d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -22,8 +22,5 @@ export const ApiEndpoint = {
 export type ApiEndpoint = OpenEnum<typeof ApiEndpoint>;
 
 /** @internal */
-export const ApiEndpoint$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  ApiEndpoint
-> = openEnums.outboundSchema(ApiEndpoint);
+export const ApiEndpoint$outboundSchema: z.ZodType<string, ApiEndpoint> =
+  openEnums.outboundSchema(ApiEndpoint);

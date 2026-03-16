@@ -3,10 +3,11 @@
  * @generated-id: 5696bade13cc
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ChatTranscriptionEvent,
@@ -47,14 +48,13 @@ export type ChatCompletionEvent = {
 /** @internal */
 export const ChatCompletionEventExtraFields$inboundSchema: z.ZodType<
   ChatCompletionEventExtraFields,
-  z.ZodTypeDef,
   unknown
-> = z.union([
+> = smartUnion([
   z.boolean(),
-  z.number().int(),
+  z.int(),
   z.number(),
   z.string(),
-  z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   z.array(z.string()),
 ]);
 
@@ -71,30 +71,30 @@ export function chatCompletionEventExtraFieldsFromJSON(
 /** @internal */
 export const ChatCompletionEvent$inboundSchema: z.ZodType<
   ChatCompletionEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   event_id: z.string(),
   correlation_id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   extra_fields: z.record(
+    z.string(),
     z.nullable(
-      z.union([
+      smartUnion([
         z.boolean(),
-        z.number().int(),
+        z.int(),
         z.number(),
         z.string(),
-        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+        z.iso.datetime({ offset: true }).transform(v => new Date(v)),
         z.array(z.string()),
       ]),
     ),
   ),
-  nb_input_tokens: z.number().int(),
-  nb_output_tokens: z.number().int(),
-  enabled_tools: z.array(z.record(z.any())),
-  request_messages: z.array(z.record(z.any())),
-  response_messages: z.array(z.record(z.any())),
-  nb_messages: z.number().int(),
+  nb_input_tokens: z.int(),
+  nb_output_tokens: z.int(),
+  enabled_tools: z.array(z.record(z.string(), z.any())),
+  request_messages: z.array(z.record(z.string(), z.any())),
+  response_messages: z.array(z.record(z.string(), z.any())),
+  nb_messages: z.int(),
   chat_transcription_events: z.array(ChatTranscriptionEvent$inboundSchema),
 }).transform((v) => {
   return remap$(v, {

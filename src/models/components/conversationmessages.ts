@@ -3,7 +3,7 @@
  * @generated-id: 328cab4f7342
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -17,7 +17,7 @@ import {
  * Similar to the conversation history but only keep the messages
  */
 export type ConversationMessages = {
-  object?: "conversation.messages" | undefined;
+  object: "conversation.messages";
   conversationId: string;
   messages: Array<MessageEntries>;
 };
@@ -25,7 +25,6 @@ export type ConversationMessages = {
 /** @internal */
 export const ConversationMessages$inboundSchema: z.ZodType<
   ConversationMessages,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("conversation.messages").default("conversation.messages"),

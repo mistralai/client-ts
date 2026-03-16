@@ -37,7 +37,7 @@ export function betaObservabilityChatCompletionEventsSearch(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ChatCompletionEvents,
+    components.SearchChatCompletionEventsResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ChatCompletionEvents,
+      components.SearchChatCompletionEventsResponse,
       | errors.ObservabilityError
       | MistralError
       | ResponseValidationError
@@ -90,7 +90,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.GetChatCompletionEventsInSchema, {
+  const body = encodeJSON("body", payload.SearchChatCompletionEventsRequest, {
     explode: true,
   });
 
@@ -158,7 +158,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.ChatCompletionEvents,
+    components.SearchChatCompletionEventsResponse,
     | errors.ObservabilityError
     | MistralError
     | ResponseValidationError
@@ -169,7 +169,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ChatCompletionEvents$inboundSchema),
+    M.json(200, components.SearchChatCompletionEventsResponse$inboundSchema),
     M.jsonErr(
       [400, 404, 408, 409, 422],
       errors.ObservabilityError$inboundSchema,

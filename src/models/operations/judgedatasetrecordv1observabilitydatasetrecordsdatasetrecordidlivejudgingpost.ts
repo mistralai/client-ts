@@ -3,39 +3,36 @@
  * @generated-id: 870efb4d4ed0
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest =
   {
     datasetRecordId: string;
-    postDatasetRecordJudgingInSchema:
-      components.PostDatasetRecordJudgingInSchema;
+    judgeDatasetRecordRequest: components.JudgeDatasetRecordRequest;
   };
 
 /** @internal */
 export type JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest$Outbound =
   {
     dataset_record_id: string;
-    PostDatasetRecordJudgingInSchema:
-      components.PostDatasetRecordJudgingInSchema$Outbound;
+    JudgeDatasetRecordRequest: components.JudgeDatasetRecordRequest$Outbound;
   };
 
 /** @internal */
 export const JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest$outboundSchema:
   z.ZodType<
     JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest$Outbound,
-    z.ZodTypeDef,
     JudgeDatasetRecordV1ObservabilityDatasetRecordsDatasetRecordIdLiveJudgingPostRequest
   > = z.object({
     datasetRecordId: z.string(),
-    postDatasetRecordJudgingInSchema:
-      components.PostDatasetRecordJudgingInSchema$outboundSchema,
+    judgeDatasetRecordRequest:
+      components.JudgeDatasetRecordRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetRecordId: "dataset_record_id",
-      postDatasetRecordJudgingInSchema: "PostDatasetRecordJudgingInSchema",
+      judgeDatasetRecordRequest: "JudgeDatasetRecordRequest",
     });
   });
 

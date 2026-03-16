@@ -3,39 +3,37 @@
  * @generated-id: 15f51e83b2d1
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type PostDatasetRecordsFromFileV1ObservabilityDatasetsDatasetIdImportsFromFilePostRequest =
   {
     datasetId: string;
-    postDatasetImportFromFileInSchema:
-      components.PostDatasetImportFromFileInSchema;
+    importDatasetFromFileRequest: components.ImportDatasetFromFileRequest;
   };
 
 /** @internal */
 export type PostDatasetRecordsFromFileV1ObservabilityDatasetsDatasetIdImportsFromFilePostRequest$Outbound =
   {
     dataset_id: string;
-    PostDatasetImportFromFileInSchema:
-      components.PostDatasetImportFromFileInSchema$Outbound;
+    ImportDatasetFromFileRequest:
+      components.ImportDatasetFromFileRequest$Outbound;
   };
 
 /** @internal */
 export const PostDatasetRecordsFromFileV1ObservabilityDatasetsDatasetIdImportsFromFilePostRequest$outboundSchema:
   z.ZodType<
     PostDatasetRecordsFromFileV1ObservabilityDatasetsDatasetIdImportsFromFilePostRequest$Outbound,
-    z.ZodTypeDef,
     PostDatasetRecordsFromFileV1ObservabilityDatasetsDatasetIdImportsFromFilePostRequest
   > = z.object({
     datasetId: z.string(),
-    postDatasetImportFromFileInSchema:
-      components.PostDatasetImportFromFileInSchema$outboundSchema,
+    importDatasetFromFileRequest:
+      components.ImportDatasetFromFileRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetId: "dataset_id",
-      postDatasetImportFromFileInSchema: "PostDatasetImportFromFileInSchema",
+      importDatasetFromFileRequest: "ImportDatasetFromFileRequest",
     });
   });
 

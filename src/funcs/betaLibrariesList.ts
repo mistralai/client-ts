@@ -34,7 +34,7 @@ export function betaLibrariesList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ListLibraryOut,
+    components.ListLibrariesResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -57,7 +57,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ListLibraryOut,
+      components.ListLibrariesResponse,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -121,7 +121,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.ListLibraryOut,
+    components.ListLibrariesResponse,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -131,7 +131,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ListLibraryOut$inboundSchema),
+    M.json(200, components.ListLibrariesResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

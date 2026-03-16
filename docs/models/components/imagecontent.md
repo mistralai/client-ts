@@ -8,6 +8,7 @@ Image content for a message.
 import { ImageContent } from "@mistralai/mistralai/models/components";
 
 let value: ImageContent = {
+  type: "image",
   data: "<value>",
   mimeType: "<value>",
 };

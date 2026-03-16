@@ -8,13 +8,13 @@ generation:
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
-    nameResolutionFeb2025: false
+    nameResolutionFeb2025: true
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
-    securityFeb2025: false
-    sharedErrorComponentsApr2025: false
-    sharedNestedComponentsJan2026: false
-    nameOverrideFeb2026: false
+    securityFeb2025: true
+    sharedErrorComponentsApr2025: true
+    sharedNestedComponentsJan2026: true
+    nameOverrideFeb2026: true
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: false
@@ -23,13 +23,14 @@ generation:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
   versioningStrategy: automatic
-  persistentEdits: {}
+  persistentEdits:
+    enabled: "true"
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 1.7.0
+  version: 2.0.0-alpha.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -49,12 +50,12 @@ typescript:
   enableReactQuery: false
   enumFormat: union
   exportZodModelNamespace: false
-  flatAdditionalProperties: false
+  flatAdditionalProperties: true
   flattenGlobalSecurity: true
-  flatteningOrder: body-first
-  formStringArrayEncodeMode: encoded-string
-  forwardCompatibleEnumsByDefault: false
-  forwardCompatibleUnionsByDefault: "false"
+  flatteningOrder: parameters-first
+  formStringArrayEncodeMode: array
+  forwardCompatibleEnumsByDefault: true
+  forwardCompatibleUnionsByDefault: tagged-only
   generateExamples: true
   imports:
     option: openapi
@@ -66,24 +67,24 @@ typescript:
       webhooks: models/webhooks
   inferUnionDiscriminators: true
   inputModelSuffix: input
-  jsonpath: legacy
+  jsonpath: rfc9535
   laxMode: strict
   legacyFileNaming: true
   maxMethodParams: 0
-  methodArguments: require-security-and-request
+  methodArguments: infer-optional-args
   modelPropertyCasing: camel
-  moduleFormat: commonjs
-  multipartArrayFormat: legacy
+  moduleFormat: esm
+  multipartArrayFormat: standard
   outputModelSuffix: output
   packageName: '@mistralai/mistralai-gcp'
-  preApplyUnionDiscriminators: false
+  preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2
-  unionStrategy: left-to-right
+  unionStrategy: populated-fields
   usageSDKInitImports: []
   useIndexModules: true
-  useOxlint: false
-  useTsgo: false
-  zodVersion: v3
+  useOxlint: true
+  useTsgo: true
+  zodVersion: v4

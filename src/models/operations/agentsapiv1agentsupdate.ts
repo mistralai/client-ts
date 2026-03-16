@@ -3,33 +3,32 @@
  * @generated-id: 5a8d3c9b3503
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type AgentsApiV1AgentsUpdateRequest = {
   agentId: string;
-  agentUpdateRequest: components.AgentUpdateRequest;
+  updateAgentRequest: components.UpdateAgentRequest;
 };
 
 /** @internal */
 export type AgentsApiV1AgentsUpdateRequest$Outbound = {
   agent_id: string;
-  AgentUpdateRequest: components.AgentUpdateRequest$Outbound;
+  UpdateAgentRequest: components.UpdateAgentRequest$Outbound;
 };
 
 /** @internal */
 export const AgentsApiV1AgentsUpdateRequest$outboundSchema: z.ZodType<
   AgentsApiV1AgentsUpdateRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1AgentsUpdateRequest
 > = z.object({
   agentId: z.string(),
-  agentUpdateRequest: components.AgentUpdateRequest$outboundSchema,
+  updateAgentRequest: components.UpdateAgentRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     agentId: "agent_id",
-    agentUpdateRequest: "AgentUpdateRequest",
+    updateAgentRequest: "UpdateAgentRequest",
   });
 });
 

@@ -9,6 +9,7 @@ let value: TranscriptionStreamDone = {
   model: "Charger",
   text: "<value>",
   usage: {},
+  type: "transcription.done",
   language: "<value>",
 };
 ```
@@ -21,6 +22,6 @@ let value: TranscriptionStreamDone = {
 | `text`                                                                                         | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `segments`                                                                                     | [components.TranscriptionSegmentChunk](../../models/components/transcriptionsegmentchunk.md)[] | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `usage`                                                                                        | [components.UsageInfo](../../models/components/usageinfo.md)                                   | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `type`                                                                                         | *"transcription.done"*                                                                         | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `type`                                                                                         | *"transcription.done"*                                                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `language`                                                                                     | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `additionalProperties`                                                                         | Record<string, *any*>                                                                          | :heavy_minus_sign:                                                                             | N/A                                                                                            |

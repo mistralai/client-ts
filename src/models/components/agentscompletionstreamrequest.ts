@@ -3,8 +3,9 @@
  * @generated-id: 28ea4b4db277
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   AssistantMessage,
   AssistantMessage$Outbound,
@@ -55,11 +56,11 @@ import {
  */
 export type AgentsCompletionStreamRequestStop = string | Array<string>;
 
-export type AgentsCompletionStreamRequestMessages =
+export type AgentsCompletionStreamRequestMessage =
   | (AssistantMessage & { role: "assistant" })
-  | (SystemMessage & { role: "system" })
-  | (ToolMessage & { role: "tool" })
-  | (UserMessage & { role: "user" });
+  | SystemMessage
+  | ToolMessage
+  | UserMessage;
 
 export type AgentsCompletionStreamRequestToolChoice =
   | ToolChoice
@@ -85,9 +86,9 @@ export type AgentsCompletionStreamRequest = {
    */
   messages: Array<
     | (AssistantMessage & { role: "assistant" })
-    | (SystemMessage & { role: "system" })
-    | (ToolMessage & { role: "tool" })
-    | (UserMessage & { role: "user" })
+    | SystemMessage
+    | ToolMessage
+    | UserMessage
   >;
   /**
    * Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.
@@ -128,9 +129,8 @@ export type AgentsCompletionStreamRequestStop$Outbound = string | Array<string>;
 /** @internal */
 export const AgentsCompletionStreamRequestStop$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequestStop$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionStreamRequestStop
-> = z.union([z.string(), z.array(z.string())]);
+> = smartUnion([z.string(), z.array(z.string())]);
 
 export function agentsCompletionStreamRequestStopToJSON(
   agentsCompletionStreamRequestStop: AgentsCompletionStreamRequestStop,
@@ -143,32 +143,31 @@ export function agentsCompletionStreamRequestStopToJSON(
 }
 
 /** @internal */
-export type AgentsCompletionStreamRequestMessages$Outbound =
+export type AgentsCompletionStreamRequestMessage$Outbound =
   | (AssistantMessage$Outbound & { role: "assistant" })
-  | (SystemMessage$Outbound & { role: "system" })
-  | (ToolMessage$Outbound & { role: "tool" })
-  | (UserMessage$Outbound & { role: "user" });
+  | SystemMessage$Outbound
+  | ToolMessage$Outbound
+  | UserMessage$Outbound;
 
 /** @internal */
-export const AgentsCompletionStreamRequestMessages$outboundSchema: z.ZodType<
-  AgentsCompletionStreamRequestMessages$Outbound,
-  z.ZodTypeDef,
-  AgentsCompletionStreamRequestMessages
+export const AgentsCompletionStreamRequestMessage$outboundSchema: z.ZodType<
+  AgentsCompletionStreamRequestMessage$Outbound,
+  AgentsCompletionStreamRequestMessage
 > = z.union([
   AssistantMessage$outboundSchema.and(
     z.object({ role: z.literal("assistant") }),
   ),
-  SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-  ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-  UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+  SystemMessage$outboundSchema,
+  ToolMessage$outboundSchema,
+  UserMessage$outboundSchema,
 ]);
 
-export function agentsCompletionStreamRequestMessagesToJSON(
-  agentsCompletionStreamRequestMessages: AgentsCompletionStreamRequestMessages,
+export function agentsCompletionStreamRequestMessageToJSON(
+  agentsCompletionStreamRequestMessage: AgentsCompletionStreamRequestMessage,
 ): string {
   return JSON.stringify(
-    AgentsCompletionStreamRequestMessages$outboundSchema.parse(
-      agentsCompletionStreamRequestMessages,
+    AgentsCompletionStreamRequestMessage$outboundSchema.parse(
+      agentsCompletionStreamRequestMessage,
     ),
   );
 }
@@ -181,9 +180,8 @@ export type AgentsCompletionStreamRequestToolChoice$Outbound =
 /** @internal */
 export const AgentsCompletionStreamRequestToolChoice$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequestToolChoice$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionStreamRequestToolChoice
-> = z.union([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
+> = smartUnion([ToolChoice$outboundSchema, ToolChoiceEnum$outboundSchema]);
 
 export function agentsCompletionStreamRequestToolChoiceToJSON(
   agentsCompletionStreamRequestToolChoice:
@@ -205,9 +203,9 @@ export type AgentsCompletionStreamRequest$Outbound = {
   metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (SystemMessage$Outbound & { role: "system" })
-    | (ToolMessage$Outbound & { role: "tool" })
-    | (UserMessage$Outbound & { role: "user" })
+    | SystemMessage$Outbound
+    | ToolMessage$Outbound
+    | UserMessage$Outbound
   >;
   response_format?: ResponseFormat$Outbound | undefined;
   tools?: Array<Tool$Outbound> | null | undefined;
@@ -224,33 +222,32 @@ export type AgentsCompletionStreamRequest$Outbound = {
 /** @internal */
 export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequest$Outbound,
-  z.ZodTypeDef,
   AgentsCompletionStreamRequest
 > = z.object({
-  maxTokens: z.nullable(z.number().int()).optional(),
+  maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
-  randomSeed: z.nullable(z.number().int()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
+  randomSeed: z.nullable(z.int()).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
     z.union([
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }),
       ),
-      SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-      ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-      UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+      SystemMessage$outboundSchema,
+      ToolMessage$outboundSchema,
+      UserMessage$outboundSchema,
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
   tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
-  toolChoice: z.union([
+  toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),
   presencePenalty: z.number().optional(),
   frequencyPenalty: z.number().optional(),
-  n: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),

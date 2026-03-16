@@ -3,35 +3,34 @@
  * @generated-id: 64eca0424b63
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type UpdateDatasetV1ObservabilityDatasetsDatasetIdPatchRequest = {
   datasetId: string;
-  patchDatasetInSchema: components.PatchDatasetInSchema;
+  updateDatasetRequest: components.UpdateDatasetRequest;
 };
 
 /** @internal */
 export type UpdateDatasetV1ObservabilityDatasetsDatasetIdPatchRequest$Outbound =
   {
     dataset_id: string;
-    PatchDatasetInSchema: components.PatchDatasetInSchema$Outbound;
+    UpdateDatasetRequest: components.UpdateDatasetRequest$Outbound;
   };
 
 /** @internal */
 export const UpdateDatasetV1ObservabilityDatasetsDatasetIdPatchRequest$outboundSchema:
   z.ZodType<
     UpdateDatasetV1ObservabilityDatasetsDatasetIdPatchRequest$Outbound,
-    z.ZodTypeDef,
     UpdateDatasetV1ObservabilityDatasetsDatasetIdPatchRequest
   > = z.object({
     datasetId: z.string(),
-    patchDatasetInSchema: components.PatchDatasetInSchema$outboundSchema,
+    updateDatasetRequest: components.UpdateDatasetRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetId: "dataset_id",
-      patchDatasetInSchema: "PatchDatasetInSchema",
+      updateDatasetRequest: "UpdateDatasetRequest",
     });
   });
 

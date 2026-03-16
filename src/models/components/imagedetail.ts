@@ -3,19 +3,20 @@
  * @generated-id: 84c9b69c7ae7
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ImageDetail = {
   Low: "low",
   Auto: "auto",
   High: "high",
 } as const;
-export type ImageDetail = ClosedEnum<typeof ImageDetail>;
+export type ImageDetail = OpenEnum<typeof ImageDetail>;
 
 /** @internal */
-export const ImageDetail$inboundSchema: z.ZodNativeEnum<typeof ImageDetail> = z
-  .nativeEnum(ImageDetail);
+export const ImageDetail$inboundSchema: z.ZodType<ImageDetail, unknown> =
+  openEnums.inboundSchema(ImageDetail);
 /** @internal */
-export const ImageDetail$outboundSchema: z.ZodNativeEnum<typeof ImageDetail> =
-  ImageDetail$inboundSchema;
+export const ImageDetail$outboundSchema: z.ZodType<string, ImageDetail> =
+  openEnums.outboundSchema(ImageDetail);

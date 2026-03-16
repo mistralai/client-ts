@@ -3,7 +3,7 @@
  * @generated-id: 01bbaa5c28ea
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type JobsApiRoutesFineTuningArchiveFineTunedModelRequest = {
@@ -22,7 +22,6 @@ export type JobsApiRoutesFineTuningArchiveFineTunedModelRequest$Outbound = {
 export const JobsApiRoutesFineTuningArchiveFineTunedModelRequest$outboundSchema:
   z.ZodType<
     JobsApiRoutesFineTuningArchiveFineTunedModelRequest$Outbound,
-    z.ZodTypeDef,
     JobsApiRoutesFineTuningArchiveFineTunedModelRequest
   > = z.object({
     modelId: z.string(),

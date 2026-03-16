@@ -3,10 +3,11 @@
  * @generated-id: afc65d62df41
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   BuiltInConnectors,
@@ -14,7 +15,7 @@ import {
   BuiltInConnectors$outboundSchema,
 } from "./builtinconnectors.js";
 
-export type Name = BuiltInConnectors | string;
+export type ToolExecutionEntryName = BuiltInConnectors | string;
 
 export type ToolExecutionEntry = {
   object?: "entry" | undefined;
@@ -30,47 +31,54 @@ export type ToolExecutionEntry = {
 };
 
 /** @internal */
-export const Name$inboundSchema: z.ZodType<Name, z.ZodTypeDef, unknown> = z
-  .union([BuiltInConnectors$inboundSchema, z.string()]);
+export const ToolExecutionEntryName$inboundSchema: z.ZodType<
+  ToolExecutionEntryName,
+  unknown
+> = smartUnion([BuiltInConnectors$inboundSchema, z.string()]);
 /** @internal */
-export type Name$Outbound = string | string;
+export type ToolExecutionEntryName$Outbound = string | string;
 
 /** @internal */
-export const Name$outboundSchema: z.ZodType<Name$Outbound, z.ZodTypeDef, Name> =
-  z.union([BuiltInConnectors$outboundSchema, z.string()]);
+export const ToolExecutionEntryName$outboundSchema: z.ZodType<
+  ToolExecutionEntryName$Outbound,
+  ToolExecutionEntryName
+> = smartUnion([BuiltInConnectors$outboundSchema, z.string()]);
 
-export function nameToJSON(name: Name): string {
-  return JSON.stringify(Name$outboundSchema.parse(name));
+export function toolExecutionEntryNameToJSON(
+  toolExecutionEntryName: ToolExecutionEntryName,
+): string {
+  return JSON.stringify(
+    ToolExecutionEntryName$outboundSchema.parse(toolExecutionEntryName),
+  );
 }
-export function nameFromJSON(
+export function toolExecutionEntryNameFromJSON(
   jsonString: string,
-): SafeParseResult<Name, SDKValidationError> {
+): SafeParseResult<ToolExecutionEntryName, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Name$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Name' from JSON`,
+    (x) => ToolExecutionEntryName$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolExecutionEntryName' from JSON`,
   );
 }
 
 /** @internal */
 export const ToolExecutionEntry$inboundSchema: z.ZodType<
   ToolExecutionEntry,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("entry").default("entry"),
   type: z.literal("tool.execution").default("tool.execution"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   agent_id: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
-  name: z.union([BuiltInConnectors$inboundSchema, z.string()]),
+  name: smartUnion([BuiltInConnectors$inboundSchema, z.string()]),
   arguments: z.string(),
-  info: z.record(z.any()).optional(),
+  info: z.record(z.string(), z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -95,7 +103,6 @@ export type ToolExecutionEntry$Outbound = {
 /** @internal */
 export const ToolExecutionEntry$outboundSchema: z.ZodType<
   ToolExecutionEntry$Outbound,
-  z.ZodTypeDef,
   ToolExecutionEntry
 > = z.object({
   object: z.literal("entry").default("entry" as const),
@@ -105,9 +112,9 @@ export const ToolExecutionEntry$outboundSchema: z.ZodType<
   agentId: z.nullable(z.string()).optional(),
   model: z.nullable(z.string()).optional(),
   id: z.string().optional(),
-  name: z.union([BuiltInConnectors$outboundSchema, z.string()]),
+  name: smartUnion([BuiltInConnectors$outboundSchema, z.string()]),
   arguments: z.string(),
-  info: z.record(z.any()).optional(),
+  info: z.record(z.string(), z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

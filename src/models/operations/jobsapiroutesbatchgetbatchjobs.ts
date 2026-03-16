@@ -3,7 +3,7 @@
  * @generated-id: 5f4c1681ccd8
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
@@ -27,8 +27,9 @@ export type JobsApiRoutesBatchGetBatchJobsRequest = {
 };
 
 /** @internal */
-export const OrderBy$outboundSchema: z.ZodNativeEnum<typeof OrderBy> = z
-  .nativeEnum(OrderBy);
+export const OrderBy$outboundSchema: z.ZodEnum<typeof OrderBy> = z.enum(
+  OrderBy,
+);
 
 /** @internal */
 export type JobsApiRoutesBatchGetBatchJobsRequest$Outbound = {
@@ -46,14 +47,13 @@ export type JobsApiRoutesBatchGetBatchJobsRequest$Outbound = {
 /** @internal */
 export const JobsApiRoutesBatchGetBatchJobsRequest$outboundSchema: z.ZodType<
   JobsApiRoutesBatchGetBatchJobsRequest$Outbound,
-  z.ZodTypeDef,
   JobsApiRoutesBatchGetBatchJobsRequest
 > = z.object({
-  page: z.number().int().default(0),
-  pageSize: z.number().int().default(100),
+  page: z.int().default(0),
+  pageSize: z.int().default(100),
   model: z.nullable(z.string()).optional(),
   agentId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   createdByMe: z.boolean().default(false),
   status: z.nullable(z.array(components.BatchJobStatus$outboundSchema))

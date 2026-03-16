@@ -8,14 +8,14 @@ import { ConnectorCallToolV1Request } from "@mistralai/mistralai/models/operatio
 let value: ConnectorCallToolV1Request = {
   toolName: "<value>",
   connectorIdOrName: "<value>",
-  mcpToolCallRequest: {},
+  connectorCallToolRequest: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `toolName`                                                                     | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
-| `connectorIdOrName`                                                            | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
-| `mcpToolCallRequest`                                                           | [components.MCPToolCallRequest](../../models/components/mcptoolcallrequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `toolName`                                                                                 | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `connectorIdOrName`                                                                        | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `connectorCallToolRequest`                                                                 | [components.ConnectorCallToolRequest](../../models/components/connectorcalltoolrequest.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |

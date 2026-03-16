@@ -3,16 +3,16 @@
  * @generated-id: 5a55fd83d99e
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const FileVisibility = {
   Workspace: "workspace",
   User: "user",
 } as const;
-export type FileVisibility = ClosedEnum<typeof FileVisibility>;
+export type FileVisibility = OpenEnum<typeof FileVisibility>;
 
 /** @internal */
-export const FileVisibility$inboundSchema: z.ZodNativeEnum<
-  typeof FileVisibility
-> = z.nativeEnum(FileVisibility);
+export const FileVisibility$inboundSchema: z.ZodType<FileVisibility, unknown> =
+  openEnums.inboundSchema(FileVisibility);

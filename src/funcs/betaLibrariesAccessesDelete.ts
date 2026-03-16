@@ -39,7 +39,7 @@ export function betaLibrariesAccessesDelete(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.SharingOut,
+    components.Sharing,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.SharingOut,
+      components.Sharing,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -155,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.SharingOut,
+    components.Sharing,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -166,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.SharingOut$inboundSchema),
+    M.json(200, components.Sharing$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

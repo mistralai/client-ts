@@ -3,7 +3,7 @@
  * @generated-id: b991635a0630
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -29,20 +29,19 @@ export type DatasetImportTask = {
 /** @internal */
 export const DatasetImportTask$inboundSchema: z.ZodType<
   DatasetImportTask,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   deleted_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ),
   creator_id: z.string(),
   dataset_id: z.string(),
   workspace_id: z.string(),
   status: BaseTaskStatus$inboundSchema,
-  progress: z.nullable(z.number().int()).optional(),
+  progress: z.nullable(z.int()).optional(),
   message: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

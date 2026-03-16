@@ -3,8 +3,9 @@
  * @generated-id: 614511816d9b
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const TranscriptionStreamEventTypes = {
   TranscriptionLanguage: "transcription.language",
@@ -12,11 +13,12 @@ export const TranscriptionStreamEventTypes = {
   TranscriptionTextDelta: "transcription.text.delta",
   TranscriptionDone: "transcription.done",
 } as const;
-export type TranscriptionStreamEventTypes = ClosedEnum<
+export type TranscriptionStreamEventTypes = OpenEnum<
   typeof TranscriptionStreamEventTypes
 >;
 
 /** @internal */
-export const TranscriptionStreamEventTypes$inboundSchema: z.ZodNativeEnum<
-  typeof TranscriptionStreamEventTypes
-> = z.nativeEnum(TranscriptionStreamEventTypes);
+export const TranscriptionStreamEventTypes$inboundSchema: z.ZodType<
+  TranscriptionStreamEventTypes,
+  unknown
+> = openEnums.inboundSchema(TranscriptionStreamEventTypes);

@@ -3,15 +3,12 @@
  * @generated-id: a3c3f908ad8a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  IntegrationsSchemasApiToolTool,
-  IntegrationsSchemasApiToolTool$inboundSchema,
-} from "./integrationsschemasapitooltool.js";
+import { ConnectorTool, ConnectorTool$inboundSchema } from "./connectortool.js";
 
 export type Connector = {
   id: string;
@@ -21,26 +18,19 @@ export type Connector = {
   modifiedAt: Date;
   server?: string | null | undefined;
   authType?: string | null | undefined;
-  tools?: Array<IntegrationsSchemasApiToolTool> | null | undefined;
+  tools?: Array<ConnectorTool> | null | undefined;
 };
 
 /** @internal */
-export const Connector$inboundSchema: z.ZodType<
-  Connector,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  modified_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  modified_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   server: z.nullable(z.string()).optional(),
   auth_type: z.nullable(z.string()).optional(),
-  tools: z.nullable(z.array(IntegrationsSchemasApiToolTool$inboundSchema))
-    .optional(),
+  tools: z.nullable(z.array(ConnectorTool$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

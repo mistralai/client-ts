@@ -3,7 +3,7 @@
  * @generated-id: a363c0ce4ccf
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -16,11 +16,10 @@ export type FieldOptionCountItem = {
 /** @internal */
 export const FieldOptionCountItem$inboundSchema: z.ZodType<
   FieldOptionCountItem,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   value: z.string(),
-  count: z.number().int(),
+  count: z.int(),
 });
 
 export function fieldOptionCountItemFromJSON(

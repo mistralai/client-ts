@@ -3,7 +3,7 @@
  * @generated-id: a0f6baefc6e2
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,17 +15,16 @@ import {
 } from "./judgeclassificationoutputoption.js";
 
 export type JudgeClassificationOutput = {
-  type?: "CLASSIFICATION" | undefined;
+  type: "CLASSIFICATION";
   options: Array<JudgeClassificationOutputOption>;
 };
 
 /** @internal */
 export const JudgeClassificationOutput$inboundSchema: z.ZodType<
   JudgeClassificationOutput,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("CLASSIFICATION").default("CLASSIFICATION"),
+  type: z.literal("CLASSIFICATION"),
   options: z.array(JudgeClassificationOutputOption$inboundSchema),
 });
 /** @internal */
@@ -37,10 +36,9 @@ export type JudgeClassificationOutput$Outbound = {
 /** @internal */
 export const JudgeClassificationOutput$outboundSchema: z.ZodType<
   JudgeClassificationOutput$Outbound,
-  z.ZodTypeDef,
   JudgeClassificationOutput
 > = z.object({
-  type: z.literal("CLASSIFICATION").default("CLASSIFICATION" as const),
+  type: z.literal("CLASSIFICATION"),
   options: z.array(JudgeClassificationOutputOption$outboundSchema),
 });
 

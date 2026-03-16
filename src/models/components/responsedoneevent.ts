@@ -3,7 +3,7 @@
  * @generated-id: 5745af9832c9
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -14,7 +14,7 @@ import {
 } from "./conversationusageinfo.js";
 
 export type ResponseDoneEvent = {
-  type?: "conversation.response.done" | undefined;
+  type: "conversation.response.done";
   createdAt?: Date | undefined;
   usage: ConversationUsageInfo;
 };
@@ -22,13 +22,10 @@ export type ResponseDoneEvent = {
 /** @internal */
 export const ResponseDoneEvent$inboundSchema: z.ZodType<
   ResponseDoneEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("conversation.response.done").default(
-    "conversation.response.done",
-  ),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  type: z.literal("conversation.response.done"),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   usage: ConversationUsageInfo$inboundSchema,
 }).transform((v) => {

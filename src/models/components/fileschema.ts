@@ -3,7 +3,7 @@
  * @generated-id: f175ee99db95
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -48,33 +48,30 @@ export type FileSchema = {
 };
 
 /** @internal */
-export const FileSchema$inboundSchema: z.ZodType<
-  FileSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  object: z.string(),
-  bytes: z.number().int(),
-  created_at: z.number().int(),
-  filename: z.string(),
-  purpose: FilePurpose$inboundSchema,
-  sample_type: SampleType$inboundSchema,
-  num_lines: z.nullable(z.number().int()).optional(),
-  mimetype: z.nullable(z.string()).optional(),
-  source: Source$inboundSchema,
-  signature: z.nullable(z.string()).optional(),
-  expires_at: z.nullable(z.number().int()).optional(),
-  visibility: z.nullable(FileVisibility$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "bytes": "sizeBytes",
-    "created_at": "createdAt",
-    "sample_type": "sampleType",
-    "num_lines": "numLines",
-    "expires_at": "expiresAt",
+export const FileSchema$inboundSchema: z.ZodType<FileSchema, unknown> = z
+  .object({
+    id: z.string(),
+    object: z.string(),
+    bytes: z.int(),
+    created_at: z.int(),
+    filename: z.string(),
+    purpose: FilePurpose$inboundSchema,
+    sample_type: SampleType$inboundSchema,
+    num_lines: z.nullable(z.int()).optional(),
+    mimetype: z.nullable(z.string()).optional(),
+    source: Source$inboundSchema,
+    signature: z.nullable(z.string()).optional(),
+    expires_at: z.nullable(z.int()).optional(),
+    visibility: z.nullable(FileVisibility$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "bytes": "sizeBytes",
+      "created_at": "createdAt",
+      "sample_type": "sampleType",
+      "num_lines": "numLines",
+      "expires_at": "expiresAt",
+    });
   });
-});
 
 export function fileSchemaFromJSON(
   jsonString: string,

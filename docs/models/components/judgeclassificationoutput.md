@@ -6,10 +6,11 @@
 import { JudgeClassificationOutput } from "@mistralai/mistralai/models/components";
 
 let value: JudgeClassificationOutput = {
+  type: "CLASSIFICATION",
   options: [
     {
       value: "<value>",
-      description: "without indeed because",
+      description: "chow limp censor though tennis",
     },
   ],
 };
@@ -19,5 +20,5 @@ let value: JudgeClassificationOutput = {
 
 | Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                     | *"CLASSIFICATION"*                                                                                         | :heavy_minus_sign:                                                                                         | N/A                                                                                                        |
+| `type`                                                                                                     | *"CLASSIFICATION"*                                                                                         | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
 | `options`                                                                                                  | [components.JudgeClassificationOutputOption](../../models/components/judgeclassificationoutputoption.md)[] | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

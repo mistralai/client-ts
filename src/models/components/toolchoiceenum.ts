@@ -3,8 +3,9 @@
  * @generated-id: 0b9910001bd2
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ToolChoiceEnum = {
   Auto: "auto",
@@ -12,13 +13,11 @@ export const ToolChoiceEnum = {
   Any: "any",
   Required: "required",
 } as const;
-export type ToolChoiceEnum = ClosedEnum<typeof ToolChoiceEnum>;
+export type ToolChoiceEnum = OpenEnum<typeof ToolChoiceEnum>;
 
 /** @internal */
-export const ToolChoiceEnum$inboundSchema: z.ZodNativeEnum<
-  typeof ToolChoiceEnum
-> = z.nativeEnum(ToolChoiceEnum);
+export const ToolChoiceEnum$inboundSchema: z.ZodType<ToolChoiceEnum, unknown> =
+  openEnums.inboundSchema(ToolChoiceEnum);
 /** @internal */
-export const ToolChoiceEnum$outboundSchema: z.ZodNativeEnum<
-  typeof ToolChoiceEnum
-> = ToolChoiceEnum$inboundSchema;
+export const ToolChoiceEnum$outboundSchema: z.ZodType<string, ToolChoiceEnum> =
+  openEnums.outboundSchema(ToolChoiceEnum);

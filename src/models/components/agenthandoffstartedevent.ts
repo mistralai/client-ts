@@ -3,16 +3,16 @@
  * @generated-id: 058b44bbb04f
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentHandoffStartedEvent = {
-  type?: "agent.handoff.started" | undefined;
+  type: "agent.handoff.started";
   createdAt?: Date | undefined;
-  outputIndex: number | undefined;
+  outputIndex: number;
   id: string;
   previousAgentId: string;
   previousAgentName: string;
@@ -21,13 +21,12 @@ export type AgentHandoffStartedEvent = {
 /** @internal */
 export const AgentHandoffStartedEvent$inboundSchema: z.ZodType<
   AgentHandoffStartedEvent,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  type: z.literal("agent.handoff.started").default("agent.handoff.started"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  type: z.literal("agent.handoff.started"),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  output_index: z.number().int().default(0),
+  output_index: z.int().default(0),
   id: z.string(),
   previous_agent_id: z.string(),
   previous_agent_name: z.string(),

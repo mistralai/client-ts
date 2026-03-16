@@ -3,37 +3,36 @@
  * @generated-id: 125f23693280
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest =
   {
     datasetId: string;
-    postDatasetRecordInSchema: components.PostDatasetRecordInSchema;
+    createDatasetRecordRequest: components.CreateDatasetRecordRequest;
   };
 
 /** @internal */
 export type CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest$Outbound =
   {
     dataset_id: string;
-    PostDatasetRecordInSchema: components.PostDatasetRecordInSchema$Outbound;
+    CreateDatasetRecordRequest: components.CreateDatasetRecordRequest$Outbound;
   };
 
 /** @internal */
 export const CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest$outboundSchema:
   z.ZodType<
     CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest$Outbound,
-    z.ZodTypeDef,
     CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest
   > = z.object({
     datasetId: z.string(),
-    postDatasetRecordInSchema:
-      components.PostDatasetRecordInSchema$outboundSchema,
+    createDatasetRecordRequest:
+      components.CreateDatasetRecordRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       datasetId: "dataset_id",
-      postDatasetRecordInSchema: "PostDatasetRecordInSchema",
+      createDatasetRecordRequest: "CreateDatasetRecordRequest",
     });
   });
 

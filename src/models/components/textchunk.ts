@@ -3,7 +3,7 @@
  * @generated-id: b6143be31167
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,11 +14,7 @@ export type TextChunk = {
 };
 
 /** @internal */
-export const TextChunk$inboundSchema: z.ZodType<
-  TextChunk,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
+export const TextChunk$inboundSchema: z.ZodType<TextChunk, unknown> = z.object({
   type: z.literal("text").default("text"),
   text: z.string(),
 });
@@ -31,7 +27,6 @@ export type TextChunk$Outbound = {
 /** @internal */
 export const TextChunk$outboundSchema: z.ZodType<
   TextChunk$Outbound,
-  z.ZodTypeDef,
   TextChunk
 > = z.object({
   type: z.literal("text").default("text" as const),

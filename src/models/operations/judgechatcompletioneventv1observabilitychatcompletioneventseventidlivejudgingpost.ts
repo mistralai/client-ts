@@ -3,40 +3,37 @@
  * @generated-id: f300ce548d32
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type JudgeChatCompletionEventV1ObservabilityChatCompletionEventsEventIdLiveJudgingPostRequest =
   {
     eventId: string;
-    postChatCompletionEventJudgingInSchema:
-      components.PostChatCompletionEventJudgingInSchema;
+    judgeChatCompletionEventRequest: components.JudgeChatCompletionEventRequest;
   };
 
 /** @internal */
 export type JudgeChatCompletionEventV1ObservabilityChatCompletionEventsEventIdLiveJudgingPostRequest$Outbound =
   {
     event_id: string;
-    PostChatCompletionEventJudgingInSchema:
-      components.PostChatCompletionEventJudgingInSchema$Outbound;
+    JudgeChatCompletionEventRequest:
+      components.JudgeChatCompletionEventRequest$Outbound;
   };
 
 /** @internal */
 export const JudgeChatCompletionEventV1ObservabilityChatCompletionEventsEventIdLiveJudgingPostRequest$outboundSchema:
   z.ZodType<
     JudgeChatCompletionEventV1ObservabilityChatCompletionEventsEventIdLiveJudgingPostRequest$Outbound,
-    z.ZodTypeDef,
     JudgeChatCompletionEventV1ObservabilityChatCompletionEventsEventIdLiveJudgingPostRequest
   > = z.object({
     eventId: z.string(),
-    postChatCompletionEventJudgingInSchema:
-      components.PostChatCompletionEventJudgingInSchema$outboundSchema,
+    judgeChatCompletionEventRequest:
+      components.JudgeChatCompletionEventRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       eventId: "event_id",
-      postChatCompletionEventJudgingInSchema:
-        "PostChatCompletionEventJudgingInSchema",
+      judgeChatCompletionEventRequest: "JudgeChatCompletionEventRequest",
     });
   });
 

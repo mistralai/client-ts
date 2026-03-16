@@ -96,14 +96,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.PostJudgeInSchema](../../models/components/postjudgeinschema.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.CreateJudgeRequest](../../models/components/createjudgerequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.JudgePreview](../../models/components/judgepreview.md)\>**
+**Promise\<[components.Judge](../../models/components/judge.md)\>**
 
 ### Errors
 
@@ -173,7 +173,7 @@ run();
 
 ### Response
 
-**Promise\<[components.JudgePreviews](../../models/components/judgepreviews.md)\>**
+**Promise\<[components.ListJudgesResponse](../../models/components/listjudgesresponse.md)\>**
 
 ### Errors
 
@@ -247,7 +247,7 @@ run();
 
 ### Response
 
-**Promise\<[components.JudgePreview](../../models/components/judgepreview.md)\>**
+**Promise\<[components.Judge](../../models/components/judge.md)\>**
 
 ### Errors
 
@@ -347,7 +347,7 @@ const mistral = new Mistral({
 async function run() {
   await mistral.beta.observability.judges.update({
     judgeId: "9f28c7db-1fb7-4e1c-b137-d7039561ddb7",
-    putJudgeInSchema: {
+    updateJudgeRequest: {
       name: "<value>",
       description: "noteworthy and unless",
       modelName: "<value>",
@@ -386,7 +386,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityJudgesUpdate(mistral, {
     judgeId: "9f28c7db-1fb7-4e1c-b137-d7039561ddb7",
-    putJudgeInSchema: {
+    updateJudgeRequest: {
       name: "<value>",
       description: "noteworthy and unless",
       modelName: "<value>",

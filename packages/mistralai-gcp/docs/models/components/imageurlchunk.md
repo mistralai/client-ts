@@ -8,13 +8,14 @@
 import { ImageURLChunk } from "@mistralai/mistralai-gcp/models/components";
 
 let value: ImageURLChunk = {
+  type: "image_url",
   imageUrl: "https://darling-distinction.org",
 };
 ```
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `type`                             | *"image_url"*                      | :heavy_minus_sign:                 | N/A                                |
-| `imageUrl`                         | *components.ImageURLChunkImageURL* | :heavy_check_mark:                 | N/A                                |
+| Field                      | Type                       | Required                   | Description                |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `type`                     | *"image_url"*              | :heavy_check_mark:         | N/A                        |
+| `imageUrl`                 | *components.ImageUrlUnion* | :heavy_check_mark:         | N/A                        |

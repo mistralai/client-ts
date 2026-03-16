@@ -1,5 +1,5 @@
 import { Mistral } from "@mistralai/mistralai";
-import { SDKError } from "../../models/errors/index.js";
+import { SDKError } from "@mistralai/mistralai/models/errors";
 
 const apiKey = process.env["MISTRAL_API_KEY"];
 if (!apiKey) {

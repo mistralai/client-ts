@@ -3,10 +3,11 @@
  * @generated-id: 87846762af20
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,7 +21,7 @@ export type AgentsApiV1ConversationsGetRequest = {
 /**
  * Successful Response
  */
-export type AgentsApiV1ConversationsGetResponseV1ConversationsGet =
+export type ResponseV1ConversationsGet =
   | components.ModelConversation
   | components.AgentConversation;
 
@@ -32,7 +33,6 @@ export type AgentsApiV1ConversationsGetRequest$Outbound = {
 /** @internal */
 export const AgentsApiV1ConversationsGetRequest$outboundSchema: z.ZodType<
   AgentsApiV1ConversationsGetRequest$Outbound,
-  z.ZodTypeDef,
   AgentsApiV1ConversationsGetRequest
 > = z.object({
   conversationId: z.string(),
@@ -53,28 +53,20 @@ export function agentsApiV1ConversationsGetRequestToJSON(
 }
 
 /** @internal */
-export const AgentsApiV1ConversationsGetResponseV1ConversationsGet$inboundSchema:
-  z.ZodType<
-    AgentsApiV1ConversationsGetResponseV1ConversationsGet,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.ModelConversation$inboundSchema,
-    components.AgentConversation$inboundSchema,
-  ]);
+export const ResponseV1ConversationsGet$inboundSchema: z.ZodType<
+  ResponseV1ConversationsGet,
+  unknown
+> = smartUnion([
+  components.ModelConversation$inboundSchema,
+  components.AgentConversation$inboundSchema,
+]);
 
-export function agentsApiV1ConversationsGetResponseV1ConversationsGetFromJSON(
+export function responseV1ConversationsGetFromJSON(
   jsonString: string,
-): SafeParseResult<
-  AgentsApiV1ConversationsGetResponseV1ConversationsGet,
-  SDKValidationError
-> {
+): SafeParseResult<ResponseV1ConversationsGet, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      AgentsApiV1ConversationsGetResponseV1ConversationsGet$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'AgentsApiV1ConversationsGetResponseV1ConversationsGet' from JSON`,
+    (x) => ResponseV1ConversationsGet$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseV1ConversationsGet' from JSON`,
   );
 }

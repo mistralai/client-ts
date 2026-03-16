@@ -3,22 +3,25 @@
  * @generated-id: df076a7eb39a
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const FTClassifierLossFunction = {
   SingleClass: "single_class",
   MultiClass: "multi_class",
 } as const;
-export type FTClassifierLossFunction = ClosedEnum<
+export type FTClassifierLossFunction = OpenEnum<
   typeof FTClassifierLossFunction
 >;
 
 /** @internal */
-export const FTClassifierLossFunction$inboundSchema: z.ZodNativeEnum<
-  typeof FTClassifierLossFunction
-> = z.nativeEnum(FTClassifierLossFunction);
+export const FTClassifierLossFunction$inboundSchema: z.ZodType<
+  FTClassifierLossFunction,
+  unknown
+> = openEnums.inboundSchema(FTClassifierLossFunction);
 /** @internal */
-export const FTClassifierLossFunction$outboundSchema: z.ZodNativeEnum<
-  typeof FTClassifierLossFunction
-> = FTClassifierLossFunction$inboundSchema;
+export const FTClassifierLossFunction$outboundSchema: z.ZodType<
+  string,
+  FTClassifierLossFunction
+> = openEnums.outboundSchema(FTClassifierLossFunction);

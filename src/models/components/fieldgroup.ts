@@ -3,7 +3,7 @@
  * @generated-id: 7f1aa4b5086d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,14 +14,11 @@ export type FieldGroup = {
 };
 
 /** @internal */
-export const FieldGroup$inboundSchema: z.ZodType<
-  FieldGroup,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  label: z.string(),
-});
+export const FieldGroup$inboundSchema: z.ZodType<FieldGroup, unknown> = z
+  .object({
+    name: z.string(),
+    label: z.string(),
+  });
 
 export function fieldGroupFromJSON(
   jsonString: string,

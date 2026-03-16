@@ -163,7 +163,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.AgentsApiV1ConversationsListResponse[]](../../models/.md)\>**
 
 ### Errors
 
@@ -237,7 +237,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.AgentsApiV1ConversationsGetResponseV1ConversationsGet](../../models/operations/agentsapiv1conversationsgetresponsev1conversationsget.md)\>**
+**Promise\<[operations.ResponseV1ConversationsGet](../../models/operations/responsev1conversationsget.md)\>**
 
 ### Errors
 

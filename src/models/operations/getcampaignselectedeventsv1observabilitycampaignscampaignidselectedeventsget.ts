@@ -3,7 +3,7 @@
  * @generated-id: 085071c949a4
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetCampaignSelectedEventsV1ObservabilityCampaignsCampaignIdSelectedEventsGetRequest =
@@ -25,12 +25,11 @@ export type GetCampaignSelectedEventsV1ObservabilityCampaignsCampaignIdSelectedE
 export const GetCampaignSelectedEventsV1ObservabilityCampaignsCampaignIdSelectedEventsGetRequest$outboundSchema:
   z.ZodType<
     GetCampaignSelectedEventsV1ObservabilityCampaignsCampaignIdSelectedEventsGetRequest$Outbound,
-    z.ZodTypeDef,
     GetCampaignSelectedEventsV1ObservabilityCampaignsCampaignIdSelectedEventsGetRequest
   > = z.object({
     campaignId: z.string(),
-    pageSize: z.number().int().default(50),
-    page: z.number().int().default(1),
+    pageSize: z.int().default(50),
+    page: z.int().default(1),
   }).transform((v) => {
     return remap$(v, {
       campaignId: "campaign_id",

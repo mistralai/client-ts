@@ -3,7 +3,7 @@
  * @generated-id: 67db7c9b1d99
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type AuthData = {
@@ -18,19 +18,16 @@ export type AuthData$Outbound = {
 };
 
 /** @internal */
-export const AuthData$outboundSchema: z.ZodType<
-  AuthData$Outbound,
-  z.ZodTypeDef,
-  AuthData
-> = z.object({
-  clientId: z.string(),
-  clientSecret: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    clientId: "client_id",
-    clientSecret: "client_secret",
+export const AuthData$outboundSchema: z.ZodType<AuthData$Outbound, AuthData> = z
+  .object({
+    clientId: z.string(),
+    clientSecret: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      clientId: "client_id",
+      clientSecret: "client_secret",
+    });
   });
-});
 
 export function authDataToJSON(authData: AuthData): string {
   return JSON.stringify(AuthData$outboundSchema.parse(authData));

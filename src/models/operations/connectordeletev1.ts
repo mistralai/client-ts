@@ -3,7 +3,7 @@
  * @generated-id: 005ba50298d5
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ConnectorDeleteV1Request = {
@@ -18,7 +18,6 @@ export type ConnectorDeleteV1Request$Outbound = {
 /** @internal */
 export const ConnectorDeleteV1Request$outboundSchema: z.ZodType<
   ConnectorDeleteV1Request$Outbound,
-  z.ZodTypeDef,
   ConnectorDeleteV1Request
 > = z.object({
   connectorId: z.string(),

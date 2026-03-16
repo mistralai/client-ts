@@ -3,7 +3,7 @@
  * @generated-id: a61605b53401
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,12 +17,11 @@ export type EmbeddingResponseData = {
 /** @internal */
 export const EmbeddingResponseData$inboundSchema: z.ZodType<
   EmbeddingResponseData,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.string().optional(),
   embedding: z.array(z.number()).optional(),
-  index: z.number().int().optional(),
+  index: z.int().optional(),
 });
 
 export function embeddingResponseDataFromJSON(

@@ -3,7 +3,7 @@
  * @generated-id: 44e25f2b96fb
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
@@ -19,8 +19,8 @@ export type ToolCallConfirmation = {
 };
 
 /** @internal */
-export const Confirmation$outboundSchema: z.ZodNativeEnum<typeof Confirmation> =
-  z.nativeEnum(Confirmation);
+export const Confirmation$outboundSchema: z.ZodEnum<typeof Confirmation> = z
+  .enum(Confirmation);
 
 /** @internal */
 export type ToolCallConfirmation$Outbound = {
@@ -31,7 +31,6 @@ export type ToolCallConfirmation$Outbound = {
 /** @internal */
 export const ToolCallConfirmation$outboundSchema: z.ZodType<
   ToolCallConfirmation$Outbound,
-  z.ZodTypeDef,
   ToolCallConfirmation
 > = z.object({
   toolCallId: z.string(),

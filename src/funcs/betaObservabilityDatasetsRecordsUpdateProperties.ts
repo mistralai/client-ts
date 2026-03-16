@@ -3,7 +3,7 @@
  * @generated-id: f6dc41f48f17
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { MistralCore } from "../core.js";
 import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
@@ -90,9 +90,11 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.PutDatasetRecordPropertiesInSchema, {
-    explode: true,
-  });
+  const body = encodeJSON(
+    "body",
+    payload.UpdateDatasetRecordPropertiesRequest,
+    { explode: true },
+  );
 
   const pathParams = {
     dataset_record_id: encodeSimple(

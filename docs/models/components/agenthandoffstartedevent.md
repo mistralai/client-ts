@@ -6,6 +6,7 @@
 import { AgentHandoffStartedEvent } from "@mistralai/mistralai/models/components";
 
 let value: AgentHandoffStartedEvent = {
+  type: "agent.handoff.started",
   id: "<id>",
   previousAgentId: "<id>",
   previousAgentName: "<value>",
@@ -16,7 +17,7 @@ let value: AgentHandoffStartedEvent = {
 
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `type`                                                                                        | *"agent.handoff.started"*                                                                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *"agent.handoff.started"*                                                                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `outputIndex`                                                                                 | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

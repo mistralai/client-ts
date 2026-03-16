@@ -3,10 +3,11 @@
  * @generated-id: bec82e897296
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ContentChunk,
@@ -36,9 +37,8 @@ export type AssistantMessage = {
 /** @internal */
 export const AssistantMessageContent$inboundSchema: z.ZodType<
   AssistantMessageContent,
-  z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(ContentChunk$inboundSchema)]);
+> = smartUnion([z.string(), z.array(ContentChunk$inboundSchema)]);
 /** @internal */
 export type AssistantMessageContent$Outbound =
   | string
@@ -47,9 +47,8 @@ export type AssistantMessageContent$Outbound =
 /** @internal */
 export const AssistantMessageContent$outboundSchema: z.ZodType<
   AssistantMessageContent$Outbound,
-  z.ZodTypeDef,
   AssistantMessageContent
-> = z.union([z.string(), z.array(ContentChunk$outboundSchema)]);
+> = smartUnion([z.string(), z.array(ContentChunk$outboundSchema)]);
 
 export function assistantMessageContentToJSON(
   assistantMessageContent: AssistantMessageContent,
@@ -71,12 +70,11 @@ export function assistantMessageContentFromJSON(
 /** @internal */
 export const AssistantMessage$inboundSchema: z.ZodType<
   AssistantMessage,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   role: z.literal("assistant").default("assistant"),
   content: z.nullable(
-    z.union([z.string(), z.array(ContentChunk$inboundSchema)]),
+    smartUnion([z.string(), z.array(ContentChunk$inboundSchema)]),
   ).optional(),
   tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
   prefix: z.boolean().default(false),
@@ -96,12 +94,11 @@ export type AssistantMessage$Outbound = {
 /** @internal */
 export const AssistantMessage$outboundSchema: z.ZodType<
   AssistantMessage$Outbound,
-  z.ZodTypeDef,
   AssistantMessage
 > = z.object({
   role: z.literal("assistant").default("assistant" as const),
   content: z.nullable(
-    z.union([z.string(), z.array(ContentChunk$outboundSchema)]),
+    smartUnion([z.string(), z.array(ContentChunk$outboundSchema)]),
   ).optional(),
   toolCalls: z.nullable(z.array(ToolCall$outboundSchema)).optional(),
   prefix: z.boolean().default(false),

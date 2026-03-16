@@ -3,21 +3,24 @@
  * @generated-id: 8644c3a1bbe0
  */
 
-import * as z from "zod/v3";
-import { ClosedEnum } from "../../types/enums.js";
+import * as z from "zod/v4";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ResponseFormats = {
   Text: "text",
   JsonObject: "json_object",
   JsonSchema: "json_schema",
 } as const;
-export type ResponseFormats = ClosedEnum<typeof ResponseFormats>;
+export type ResponseFormats = OpenEnum<typeof ResponseFormats>;
 
 /** @internal */
-export const ResponseFormats$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormats
-> = z.nativeEnum(ResponseFormats);
+export const ResponseFormats$inboundSchema: z.ZodType<
+  ResponseFormats,
+  unknown
+> = openEnums.inboundSchema(ResponseFormats);
 /** @internal */
-export const ResponseFormats$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormats
-> = ResponseFormats$inboundSchema;
+export const ResponseFormats$outboundSchema: z.ZodType<
+  string,
+  ResponseFormats
+> = openEnums.outboundSchema(ResponseFormats);

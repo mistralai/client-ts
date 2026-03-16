@@ -3,7 +3,7 @@
  * @generated-id: ce909efc8e7c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -22,15 +22,14 @@ export type FunctionResultEntry = {
 /** @internal */
 export const FunctionResultEntry$inboundSchema: z.ZodType<
   FunctionResultEntry,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   object: z.literal("entry").default("entry"),
   type: z.literal("function.result").default("function.result"),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   id: z.string().optional(),
   tool_call_id: z.string(),
@@ -56,7 +55,6 @@ export type FunctionResultEntry$Outbound = {
 /** @internal */
 export const FunctionResultEntry$outboundSchema: z.ZodType<
   FunctionResultEntry$Outbound,
-  z.ZodTypeDef,
   FunctionResultEntry
 > = z.object({
   object: z.literal("entry").default("entry" as const),

@@ -5,29 +5,28 @@ OK
 
 ## Supported Types
 
-### `operations.One`
+### `operations.ResponseT`
 
 ```typescript
-const value: operations.One = {
-  id: "d6818f5f-200d-4efe-9e7c-d20456efe43b",
-  autoStart: true,
-  model: "Prius",
-  status: "CANCELLATION_REQUESTED",
-  createdAt: 263852,
-  modifiedAt: 463777,
-  trainingFiles: [
-    "9f003c6f-9c82-4b28-9533-cb5576df3462",
-  ],
+const value: operations.ResponseT = {
+  id: "193d948b-d7d0-47b1-8a07-1df7b6f7b521",
+  autoStart: false,
+  model: "Ranchero",
+  status: "STARTED",
+  createdAt: 38884,
+  modifiedAt: 400180,
+  trainingFiles: [],
+  jobType: "completion",
   hyperparameters: {
     learningRate: 0.0001,
   },
 };
 ```
 
-### `components.LegacyJobMetadataOut`
+### `components.LegacyJobMetadata`
 
 ```typescript
-const value: components.LegacyJobMetadataOut = {
+const value: components.LegacyJobMetadata = {
   expectedDurationSeconds: 220,
   cost: 10,
   costCurrency: "EUR",

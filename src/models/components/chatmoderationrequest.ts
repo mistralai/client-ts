@@ -3,8 +3,9 @@
  * @generated-id: 1b4649c18a8c
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   AssistantMessage,
   AssistantMessage$Outbound,
@@ -26,34 +27,34 @@ import {
   UserMessage$outboundSchema,
 } from "./usermessage.js";
 
-export type Two =
+export type ChatModerationRequestInputs2 =
   | (AssistantMessage & { role: "assistant" })
-  | (SystemMessage & { role: "system" })
-  | (ToolMessage & { role: "tool" })
-  | (UserMessage & { role: "user" });
+  | SystemMessage
+  | ToolMessage
+  | UserMessage;
 
-export type One =
+export type ChatModerationRequestInputs1 =
   | (AssistantMessage & { role: "assistant" })
-  | (SystemMessage & { role: "system" })
-  | (ToolMessage & { role: "tool" })
-  | (UserMessage & { role: "user" });
+  | SystemMessage
+  | ToolMessage
+  | UserMessage;
 
 /**
  * Chat to classify
  */
-export type ChatModerationRequestInputs =
+export type ChatModerationRequestInputs3 =
   | Array<
     | (AssistantMessage & { role: "assistant" })
-    | (SystemMessage & { role: "system" })
-    | (ToolMessage & { role: "tool" })
-    | (UserMessage & { role: "user" })
+    | SystemMessage
+    | ToolMessage
+    | UserMessage
   >
   | Array<
     Array<
       | (AssistantMessage & { role: "assistant" })
-      | (SystemMessage & { role: "system" })
-      | (ToolMessage & { role: "tool" })
-      | (UserMessage & { role: "user" })
+      | SystemMessage
+      | ToolMessage
+      | UserMessage
     >
   >;
 
@@ -64,96 +65,111 @@ export type ChatModerationRequest = {
   inputs:
     | Array<
       | (AssistantMessage & { role: "assistant" })
-      | (SystemMessage & { role: "system" })
-      | (ToolMessage & { role: "tool" })
-      | (UserMessage & { role: "user" })
+      | SystemMessage
+      | ToolMessage
+      | UserMessage
     >
     | Array<
       Array<
         | (AssistantMessage & { role: "assistant" })
-        | (SystemMessage & { role: "system" })
-        | (ToolMessage & { role: "tool" })
-        | (UserMessage & { role: "user" })
+        | SystemMessage
+        | ToolMessage
+        | UserMessage
       >
     >;
   model: string;
 };
 
 /** @internal */
-export type Two$Outbound =
+export type ChatModerationRequestInputs2$Outbound =
   | (AssistantMessage$Outbound & { role: "assistant" })
-  | (SystemMessage$Outbound & { role: "system" })
-  | (ToolMessage$Outbound & { role: "tool" })
-  | (UserMessage$Outbound & { role: "user" });
+  | SystemMessage$Outbound
+  | ToolMessage$Outbound
+  | UserMessage$Outbound;
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .union([
-    AssistantMessage$outboundSchema.and(
-      z.object({ role: z.literal("assistant") }),
-    ),
-    SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-    ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-    UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
-  ]);
+export const ChatModerationRequestInputs2$outboundSchema: z.ZodType<
+  ChatModerationRequestInputs2$Outbound,
+  ChatModerationRequestInputs2
+> = z.union([
+  AssistantMessage$outboundSchema.and(
+    z.object({ role: z.literal("assistant") }),
+  ),
+  SystemMessage$outboundSchema,
+  ToolMessage$outboundSchema,
+  UserMessage$outboundSchema,
+]);
 
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
+export function chatModerationRequestInputs2ToJSON(
+  chatModerationRequestInputs2: ChatModerationRequestInputs2,
+): string {
+  return JSON.stringify(
+    ChatModerationRequestInputs2$outboundSchema.parse(
+      chatModerationRequestInputs2,
+    ),
+  );
 }
 
 /** @internal */
-export type One$Outbound =
+export type ChatModerationRequestInputs1$Outbound =
   | (AssistantMessage$Outbound & { role: "assistant" })
-  | (SystemMessage$Outbound & { role: "system" })
-  | (ToolMessage$Outbound & { role: "tool" })
-  | (UserMessage$Outbound & { role: "user" });
+  | SystemMessage$Outbound
+  | ToolMessage$Outbound
+  | UserMessage$Outbound;
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .union([
-    AssistantMessage$outboundSchema.and(
-      z.object({ role: z.literal("assistant") }),
-    ),
-    SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-    ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-    UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
-  ]);
+export const ChatModerationRequestInputs1$outboundSchema: z.ZodType<
+  ChatModerationRequestInputs1$Outbound,
+  ChatModerationRequestInputs1
+> = z.union([
+  AssistantMessage$outboundSchema.and(
+    z.object({ role: z.literal("assistant") }),
+  ),
+  SystemMessage$outboundSchema,
+  ToolMessage$outboundSchema,
+  UserMessage$outboundSchema,
+]);
 
-export function oneToJSON(one: One): string {
-  return JSON.stringify(One$outboundSchema.parse(one));
+export function chatModerationRequestInputs1ToJSON(
+  chatModerationRequestInputs1: ChatModerationRequestInputs1,
+): string {
+  return JSON.stringify(
+    ChatModerationRequestInputs1$outboundSchema.parse(
+      chatModerationRequestInputs1,
+    ),
+  );
 }
 
 /** @internal */
-export type ChatModerationRequestInputs$Outbound =
+export type ChatModerationRequestInputs3$Outbound =
   | Array<
     | (AssistantMessage$Outbound & { role: "assistant" })
-    | (SystemMessage$Outbound & { role: "system" })
-    | (ToolMessage$Outbound & { role: "tool" })
-    | (UserMessage$Outbound & { role: "user" })
+    | SystemMessage$Outbound
+    | ToolMessage$Outbound
+    | UserMessage$Outbound
   >
   | Array<
     Array<
       | (AssistantMessage$Outbound & { role: "assistant" })
-      | (SystemMessage$Outbound & { role: "system" })
-      | (ToolMessage$Outbound & { role: "tool" })
-      | (UserMessage$Outbound & { role: "user" })
+      | SystemMessage$Outbound
+      | ToolMessage$Outbound
+      | UserMessage$Outbound
     >
   >;
 
 /** @internal */
-export const ChatModerationRequestInputs$outboundSchema: z.ZodType<
-  ChatModerationRequestInputs$Outbound,
-  z.ZodTypeDef,
-  ChatModerationRequestInputs
-> = z.union([
+export const ChatModerationRequestInputs3$outboundSchema: z.ZodType<
+  ChatModerationRequestInputs3$Outbound,
+  ChatModerationRequestInputs3
+> = smartUnion([
   z.array(
     z.union([
       AssistantMessage$outboundSchema.and(
         z.object({ role: z.literal("assistant") }),
       ),
-      SystemMessage$outboundSchema.and(z.object({ role: z.literal("system") })),
-      ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-      UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+      SystemMessage$outboundSchema,
+      ToolMessage$outboundSchema,
+      UserMessage$outboundSchema,
     ]),
   ),
   z.array(
@@ -162,22 +178,20 @@ export const ChatModerationRequestInputs$outboundSchema: z.ZodType<
         AssistantMessage$outboundSchema.and(
           z.object({ role: z.literal("assistant") }),
         ),
-        SystemMessage$outboundSchema.and(
-          z.object({ role: z.literal("system") }),
-        ),
-        ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-        UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+        SystemMessage$outboundSchema,
+        ToolMessage$outboundSchema,
+        UserMessage$outboundSchema,
       ]),
     ),
   ),
 ]);
 
-export function chatModerationRequestInputsToJSON(
-  chatModerationRequestInputs: ChatModerationRequestInputs,
+export function chatModerationRequestInputs3ToJSON(
+  chatModerationRequestInputs3: ChatModerationRequestInputs3,
 ): string {
   return JSON.stringify(
-    ChatModerationRequestInputs$outboundSchema.parse(
-      chatModerationRequestInputs,
+    ChatModerationRequestInputs3$outboundSchema.parse(
+      chatModerationRequestInputs3,
     ),
   );
 }
@@ -187,16 +201,16 @@ export type ChatModerationRequest$Outbound = {
   input:
     | Array<
       | (AssistantMessage$Outbound & { role: "assistant" })
-      | (SystemMessage$Outbound & { role: "system" })
-      | (ToolMessage$Outbound & { role: "tool" })
-      | (UserMessage$Outbound & { role: "user" })
+      | SystemMessage$Outbound
+      | ToolMessage$Outbound
+      | UserMessage$Outbound
     >
     | Array<
       Array<
         | (AssistantMessage$Outbound & { role: "assistant" })
-        | (SystemMessage$Outbound & { role: "system" })
-        | (ToolMessage$Outbound & { role: "tool" })
-        | (UserMessage$Outbound & { role: "user" })
+        | SystemMessage$Outbound
+        | ToolMessage$Outbound
+        | UserMessage$Outbound
       >
     >;
   model: string;
@@ -205,20 +219,17 @@ export type ChatModerationRequest$Outbound = {
 /** @internal */
 export const ChatModerationRequest$outboundSchema: z.ZodType<
   ChatModerationRequest$Outbound,
-  z.ZodTypeDef,
   ChatModerationRequest
 > = z.object({
-  inputs: z.union([
+  inputs: smartUnion([
     z.array(
       z.union([
         AssistantMessage$outboundSchema.and(
           z.object({ role: z.literal("assistant") }),
         ),
-        SystemMessage$outboundSchema.and(
-          z.object({ role: z.literal("system") }),
-        ),
-        ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-        UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+        SystemMessage$outboundSchema,
+        ToolMessage$outboundSchema,
+        UserMessage$outboundSchema,
       ]),
     ),
     z.array(
@@ -227,11 +238,9 @@ export const ChatModerationRequest$outboundSchema: z.ZodType<
           AssistantMessage$outboundSchema.and(
             z.object({ role: z.literal("assistant") }),
           ),
-          SystemMessage$outboundSchema.and(
-            z.object({ role: z.literal("system") }),
-          ),
-          ToolMessage$outboundSchema.and(z.object({ role: z.literal("tool") })),
-          UserMessage$outboundSchema.and(z.object({ role: z.literal("user") })),
+          SystemMessage$outboundSchema,
+          ToolMessage$outboundSchema,
+          UserMessage$outboundSchema,
         ]),
       ),
     ),

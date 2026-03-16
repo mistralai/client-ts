@@ -6,6 +6,7 @@
 import { ToolExecutionStartedEvent } from "@mistralai/mistralai/models/components";
 
 let value: ToolExecutionStartedEvent = {
+  type: "tool.execution.started",
   id: "<id>",
   name: "image_generation",
   arguments: "<value>",
@@ -16,7 +17,7 @@ let value: ToolExecutionStartedEvent = {
 
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `type`                                                                                        | *"tool.execution.started"*                                                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | *"tool.execution.started"*                                                                    | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `outputIndex`                                                                                 | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

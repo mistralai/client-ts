@@ -3,10 +3,11 @@
  * @generated-id: c68813abe092
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AgentConversationAgentVersion = string | number;
@@ -24,7 +25,7 @@ export type AgentConversation = {
    * Custom metadata for the conversation.
    */
   metadata?: { [k: string]: any } | null | undefined;
-  object?: "conversation" | undefined;
+  object: "conversation";
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -35,9 +36,8 @@ export type AgentConversation = {
 /** @internal */
 export const AgentConversationAgentVersion$inboundSchema: z.ZodType<
   AgentConversationAgentVersion,
-  z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = smartUnion([z.string(), z.int()]);
 
 export function agentConversationAgentVersionFromJSON(
   jsonString: string,
@@ -52,18 +52,17 @@ export function agentConversationAgentVersionFromJSON(
 /** @internal */
 export const AgentConversation$inboundSchema: z.ZodType<
   AgentConversation,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   object: z.literal("conversation").default("conversation"),
   id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   agent_id: z.string(),
-  agent_version: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  agent_version: z.nullable(smartUnion([z.string(), z.int()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

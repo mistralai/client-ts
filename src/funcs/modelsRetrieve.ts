@@ -38,7 +38,7 @@ export function modelsRetrieve(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet,
+    operations.ResponseRetrieveModelV1ModelsModelIdGet,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet,
+      operations.ResponseRetrieveModelV1ModelsModelIdGet,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -155,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet,
+    operations.ResponseRetrieveModelV1ModelsModelIdGet,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -168,8 +168,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations
-        .RetrieveModelV1ModelsModelIdGetResponseRetrieveModelV1ModelsModelIdGet$inboundSchema,
+      operations.ResponseRetrieveModelV1ModelsModelIdGet$inboundSchema,
     ),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),

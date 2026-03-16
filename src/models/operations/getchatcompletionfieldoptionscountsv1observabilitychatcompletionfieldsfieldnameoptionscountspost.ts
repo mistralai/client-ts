@@ -3,37 +3,37 @@
  * @generated-id: 03e668836217
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest =
   {
     fieldName: string;
-    fieldOptionCountsInSchema: components.FieldOptionCountsInSchema;
+    fetchFieldOptionCountsRequest: components.FetchFieldOptionCountsRequest;
   };
 
 /** @internal */
 export type GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest$Outbound =
   {
     field_name: string;
-    FieldOptionCountsInSchema: components.FieldOptionCountsInSchema$Outbound;
+    FetchFieldOptionCountsRequest:
+      components.FetchFieldOptionCountsRequest$Outbound;
   };
 
 /** @internal */
 export const GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest$outboundSchema:
   z.ZodType<
     GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest$Outbound,
-    z.ZodTypeDef,
     GetChatCompletionFieldOptionsCountsV1ObservabilityChatCompletionFieldsFieldNameOptionsCountsPostRequest
   > = z.object({
     fieldName: z.string(),
-    fieldOptionCountsInSchema:
-      components.FieldOptionCountsInSchema$outboundSchema,
+    fetchFieldOptionCountsRequest:
+      components.FetchFieldOptionCountsRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       fieldName: "field_name",
-      fieldOptionCountsInSchema: "FieldOptionCountsInSchema",
+      fetchFieldOptionCountsRequest: "FetchFieldOptionCountsRequest",
     });
   });
 

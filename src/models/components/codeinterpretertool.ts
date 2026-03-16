@@ -3,10 +3,9 @@
  * @generated-id: 6a03acd8a711
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -16,35 +15,18 @@ import {
   ToolConfiguration$outboundSchema,
 } from "./toolconfiguration.js";
 
-export const CodeInterpreterToolType = {
-  CodeInterpreter: "code_interpreter",
-} as const;
-export type CodeInterpreterToolType = ClosedEnum<
-  typeof CodeInterpreterToolType
->;
-
 export type CodeInterpreterTool = {
   toolConfiguration?: ToolConfiguration | null | undefined;
-  type?: CodeInterpreterToolType | undefined;
+  type: "code_interpreter";
 };
-
-/** @internal */
-export const CodeInterpreterToolType$inboundSchema: z.ZodNativeEnum<
-  typeof CodeInterpreterToolType
-> = z.nativeEnum(CodeInterpreterToolType);
-/** @internal */
-export const CodeInterpreterToolType$outboundSchema: z.ZodNativeEnum<
-  typeof CodeInterpreterToolType
-> = CodeInterpreterToolType$inboundSchema;
 
 /** @internal */
 export const CodeInterpreterTool$inboundSchema: z.ZodType<
   CodeInterpreterTool,
-  z.ZodTypeDef,
   unknown
 > = z.object({
   tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
-  type: CodeInterpreterToolType$inboundSchema.default("code_interpreter"),
+  type: z.literal("code_interpreter"),
 }).transform((v) => {
   return remap$(v, {
     "tool_configuration": "toolConfiguration",
@@ -53,17 +35,16 @@ export const CodeInterpreterTool$inboundSchema: z.ZodType<
 /** @internal */
 export type CodeInterpreterTool$Outbound = {
   tool_configuration?: ToolConfiguration$Outbound | null | undefined;
-  type: string;
+  type: "code_interpreter";
 };
 
 /** @internal */
 export const CodeInterpreterTool$outboundSchema: z.ZodType<
   CodeInterpreterTool$Outbound,
-  z.ZodTypeDef,
   CodeInterpreterTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),
-  type: CodeInterpreterToolType$outboundSchema.default("code_interpreter"),
+  type: z.literal("code_interpreter"),
 }).transform((v) => {
   return remap$(v, {
     toolConfiguration: "tool_configuration",

@@ -75,7 +75,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ListSharingOut](../../models/components/listsharingout.md)\>**
+**Promise\<[components.ListSharingResponse](../../models/components/listsharingresponse.md)\>**
 
 ### Errors
 
@@ -100,10 +100,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.accesses.updateOrCreate({
-    libraryId: "36de3a24-5b1c-4c8f-9d84-d5642205a976",
-    sharingIn: {
-      level: "Viewer",
-      shareWithUuid: "0ae92ecb-21ed-47c5-9f7e-0b2cbe325a20",
+    libraryId: "ae92ecb2-1ed7-4c5f-97e0-b2cbe325a206",
+    sharingRequest: {
+      level: "Editor",
+      shareWithUuid: "add9ae1f-2854-4378-84a0-91c77efa6fd2",
       shareWithType: "User",
     },
   });
@@ -130,10 +130,10 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesAccessesUpdateOrCreate(mistral, {
-    libraryId: "36de3a24-5b1c-4c8f-9d84-d5642205a976",
-    sharingIn: {
-      level: "Viewer",
-      shareWithUuid: "0ae92ecb-21ed-47c5-9f7e-0b2cbe325a20",
+    libraryId: "ae92ecb2-1ed7-4c5f-97e0-b2cbe325a206",
+    sharingRequest: {
+      level: "Editor",
+      shareWithUuid: "add9ae1f-2854-4378-84a0-91c77efa6fd2",
       shareWithType: "User",
     },
   });
@@ -159,7 +159,7 @@ run();
 
 ### Response
 
-**Promise\<[components.SharingOut](../../models/components/sharingout.md)\>**
+**Promise\<[components.Sharing](../../models/components/sharing.md)\>**
 
 ### Errors
 
@@ -184,10 +184,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.accesses.delete({
-    libraryId: "709e3cad-9fb2-4f4e-bf88-143cf1808107",
+    libraryId: "843cc47c-e8f3-454c-9fc5-fcd7fb2865b0",
     sharingDelete: {
-      shareWithUuid: "b843cc47-ce8f-4354-8cfc-5fcd7fb2865b",
-      shareWithType: "User",
+      shareWithUuid: "0814a235-c2d0-4814-875a-4b85f93d3dc7",
+      shareWithType: "Org",
     },
   });
 
@@ -213,10 +213,10 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesAccessesDelete(mistral, {
-    libraryId: "709e3cad-9fb2-4f4e-bf88-143cf1808107",
+    libraryId: "843cc47c-e8f3-454c-9fc5-fcd7fb2865b0",
     sharingDelete: {
-      shareWithUuid: "b843cc47-ce8f-4354-8cfc-5fcd7fb2865b",
-      shareWithType: "User",
+      shareWithUuid: "0814a235-c2d0-4814-875a-4b85f93d3dc7",
+      shareWithType: "Org",
     },
   });
   if (res.ok) {
@@ -241,7 +241,7 @@ run();
 
 ### Response
 
-**Promise\<[components.SharingOut](../../models/components/sharingout.md)\>**
+**Promise\<[components.Sharing](../../models/components/sharing.md)\>**
 
 ### Errors
 

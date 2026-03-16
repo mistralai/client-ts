@@ -3,9 +3,10 @@
  * @generated-id: b6490fc32db0
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import {
   CompletionArgs,
   CompletionArgs$Outbound,
@@ -40,7 +41,7 @@ export type ConversationRestartStreamRequestAgentVersion = string | number;
  */
 export type ConversationRestartStreamRequest = {
   inputs?: ConversationInputs | undefined;
-  stream?: boolean | undefined;
+  stream?: true | undefined;
   /**
    * Whether to store the results into our servers or not.
    */
@@ -66,8 +67,9 @@ export type ConversationRestartStreamRequest = {
 
 /** @internal */
 export const ConversationRestartStreamRequestHandoffExecution$outboundSchema:
-  z.ZodNativeEnum<typeof ConversationRestartStreamRequestHandoffExecution> = z
-    .nativeEnum(ConversationRestartStreamRequestHandoffExecution);
+  z.ZodEnum<typeof ConversationRestartStreamRequestHandoffExecution> = z.enum(
+    ConversationRestartStreamRequestHandoffExecution,
+  );
 
 /** @internal */
 export type ConversationRestartStreamRequestAgentVersion$Outbound =
@@ -78,9 +80,8 @@ export type ConversationRestartStreamRequestAgentVersion$Outbound =
 export const ConversationRestartStreamRequestAgentVersion$outboundSchema:
   z.ZodType<
     ConversationRestartStreamRequestAgentVersion$Outbound,
-    z.ZodTypeDef,
     ConversationRestartStreamRequestAgentVersion
-  > = z.union([z.string(), z.number().int()]);
+  > = smartUnion([z.string(), z.int()]);
 
 export function conversationRestartStreamRequestAgentVersionToJSON(
   conversationRestartStreamRequestAgentVersion:
@@ -96,7 +97,7 @@ export function conversationRestartStreamRequestAgentVersionToJSON(
 /** @internal */
 export type ConversationRestartStreamRequest$Outbound = {
   inputs?: ConversationInputs$Outbound | undefined;
-  stream: boolean;
+  stream: true;
   store: boolean;
   handoff_execution: string;
   completion_args?: CompletionArgs$Outbound | undefined;
@@ -109,11 +110,10 @@ export type ConversationRestartStreamRequest$Outbound = {
 /** @internal */
 export const ConversationRestartStreamRequest$outboundSchema: z.ZodType<
   ConversationRestartStreamRequest$Outbound,
-  z.ZodTypeDef,
   ConversationRestartStreamRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema.optional(),
-  stream: z.boolean().default(true),
+  stream: z.literal(true).default(true as const),
   store: z.boolean().default(true),
   handoffExecution:
     ConversationRestartStreamRequestHandoffExecution$outboundSchema.default(
@@ -121,9 +121,9 @@ export const ConversationRestartStreamRequest$outboundSchema: z.ZodType<
     ),
   completionArgs: CompletionArgs$outboundSchema.optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   fromEntryId: z.string(),
-  agentVersion: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  agentVersion: z.nullable(smartUnion([z.string(), z.int()])).optional(),
 }).transform((v) => {
   return remap$(v, {
     handoffExecution: "handoff_execution",

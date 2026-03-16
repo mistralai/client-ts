@@ -3,33 +3,32 @@
  * @generated-id: b5c728d0a8ec
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type LibrariesUpdateV1Request = {
   libraryId: string;
-  libraryInUpdate: components.LibraryInUpdate;
+  updateLibraryRequest: components.UpdateLibraryRequest;
 };
 
 /** @internal */
 export type LibrariesUpdateV1Request$Outbound = {
   library_id: string;
-  LibraryInUpdate: components.LibraryInUpdate$Outbound;
+  UpdateLibraryRequest: components.UpdateLibraryRequest$Outbound;
 };
 
 /** @internal */
 export const LibrariesUpdateV1Request$outboundSchema: z.ZodType<
   LibrariesUpdateV1Request$Outbound,
-  z.ZodTypeDef,
   LibrariesUpdateV1Request
 > = z.object({
   libraryId: z.string(),
-  libraryInUpdate: components.LibraryInUpdate$outboundSchema,
+  updateLibraryRequest: components.UpdateLibraryRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     libraryId: "library_id",
-    libraryInUpdate: "LibraryInUpdate",
+    updateLibraryRequest: "UpdateLibraryRequest",
   });
 });
 

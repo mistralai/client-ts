@@ -3,16 +3,16 @@
  * @generated-id: 3582209cd89d
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ConversationUsageInfo = {
-  promptTokens: number | undefined;
-  completionTokens: number | undefined;
-  totalTokens: number | undefined;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
   connectorTokens?: number | null | undefined;
   connectors?: { [k: string]: number } | null | undefined;
 };
@@ -20,14 +20,13 @@ export type ConversationUsageInfo = {
 /** @internal */
 export const ConversationUsageInfo$inboundSchema: z.ZodType<
   ConversationUsageInfo,
-  z.ZodTypeDef,
   unknown
 > = z.object({
-  prompt_tokens: z.number().int().default(0),
-  completion_tokens: z.number().int().default(0),
-  total_tokens: z.number().int().default(0),
-  connector_tokens: z.nullable(z.number().int()).optional(),
-  connectors: z.nullable(z.record(z.number().int())).optional(),
+  prompt_tokens: z.int().default(0),
+  completion_tokens: z.int().default(0),
+  total_tokens: z.int().default(0),
+  connector_tokens: z.nullable(z.int()).optional(),
+  connectors: z.nullable(z.record(z.string(), z.int())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "prompt_tokens": "promptTokens",

@@ -3,7 +3,7 @@
  * @generated-id: e089da49cde8
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
@@ -32,7 +32,7 @@ export type ConversationAppendStreamRequestHandoffExecution = ClosedEnum<
 
 export type ConversationAppendStreamRequest = {
   inputs?: ConversationInputs | undefined;
-  stream?: boolean | undefined;
+  stream?: true | undefined;
   /**
    * Whether to store the results into our servers or not.
    */
@@ -49,13 +49,14 @@ export type ConversationAppendStreamRequest = {
 
 /** @internal */
 export const ConversationAppendStreamRequestHandoffExecution$outboundSchema:
-  z.ZodNativeEnum<typeof ConversationAppendStreamRequestHandoffExecution> = z
-    .nativeEnum(ConversationAppendStreamRequestHandoffExecution);
+  z.ZodEnum<typeof ConversationAppendStreamRequestHandoffExecution> = z.enum(
+    ConversationAppendStreamRequestHandoffExecution,
+  );
 
 /** @internal */
 export type ConversationAppendStreamRequest$Outbound = {
   inputs?: ConversationInputs$Outbound | undefined;
-  stream: boolean;
+  stream: true;
   store: boolean;
   handoff_execution: string;
   completion_args?: CompletionArgs$Outbound | undefined;
@@ -65,11 +66,10 @@ export type ConversationAppendStreamRequest$Outbound = {
 /** @internal */
 export const ConversationAppendStreamRequest$outboundSchema: z.ZodType<
   ConversationAppendStreamRequest$Outbound,
-  z.ZodTypeDef,
   ConversationAppendStreamRequest
 > = z.object({
   inputs: ConversationInputs$outboundSchema.optional(),
-  stream: z.boolean().default(true),
+  stream: z.literal(true).default(true as const),
   store: z.boolean().default(true),
   handoffExecution:
     ConversationAppendStreamRequestHandoffExecution$outboundSchema.default(

@@ -3,7 +3,7 @@
  * @generated-id: 159b727e2b13
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -18,14 +18,8 @@ export const AudioEncoding = {
 export type AudioEncoding = OpenEnum<typeof AudioEncoding>;
 
 /** @internal */
-export const AudioEncoding$inboundSchema: z.ZodType<
-  AudioEncoding,
-  z.ZodTypeDef,
-  unknown
-> = openEnums.inboundSchema(AudioEncoding);
+export const AudioEncoding$inboundSchema: z.ZodType<AudioEncoding, unknown> =
+  openEnums.inboundSchema(AudioEncoding);
 /** @internal */
-export const AudioEncoding$outboundSchema: z.ZodType<
-  string,
-  z.ZodTypeDef,
-  AudioEncoding
-> = openEnums.outboundSchema(AudioEncoding);
+export const AudioEncoding$outboundSchema: z.ZodType<string, AudioEncoding> =
+  openEnums.outboundSchema(AudioEncoding);

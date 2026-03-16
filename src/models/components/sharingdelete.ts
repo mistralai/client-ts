@@ -3,7 +3,7 @@
  * @generated-id: 91ba42dc7a6a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { EntityType, EntityType$outboundSchema } from "./entitytype.js";
 
@@ -29,7 +29,6 @@ export type SharingDelete$Outbound = {
 /** @internal */
 export const SharingDelete$outboundSchema: z.ZodType<
   SharingDelete$Outbound,
-  z.ZodTypeDef,
   SharingDelete
 > = z.object({
   orgId: z.nullable(z.string()).optional(),

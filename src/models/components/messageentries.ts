@@ -3,9 +3,10 @@
  * @generated-id: 4be8139b7d7a
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   MessageInputEntry,
@@ -19,14 +20,11 @@ import {
 export type MessageEntries = MessageInputEntry | MessageOutputEntry;
 
 /** @internal */
-export const MessageEntries$inboundSchema: z.ZodType<
-  MessageEntries,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  MessageInputEntry$inboundSchema,
-  MessageOutputEntry$inboundSchema,
-]);
+export const MessageEntries$inboundSchema: z.ZodType<MessageEntries, unknown> =
+  smartUnion([
+    MessageInputEntry$inboundSchema,
+    MessageOutputEntry$inboundSchema,
+  ]);
 
 export function messageEntriesFromJSON(
   jsonString: string,

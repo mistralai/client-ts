@@ -76,6 +76,9 @@ async function run() {
           "Who is the best French painter? Answer in one short sentence.",
       },
     ],
+    responseFormat: {
+      type: "text",
+    },
     agentId: "<id>",
   });
 

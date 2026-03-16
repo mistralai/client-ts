@@ -3,9 +3,11 @@
  * @generated-id: 6e2e46e83894
  */
 
-import * as z from "zod/v3";
+import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,35 +17,35 @@ export type JobsApiRoutesFineTuningUpdateFineTunedModelRequest = {
    * The ID of the model to update.
    */
   modelId: string;
-  updateFTModelIn: components.UpdateFTModelIn;
+  updateModelRequest: components.UpdateModelRequest;
 };
 
 /**
  * OK
  */
 export type JobsApiRoutesFineTuningUpdateFineTunedModelResponse =
-  | (components.ClassifierFTModelOut & { modelType: "classifier" })
-  | (components.CompletionFTModelOut & { modelType: "completion" });
+  | components.ClassifierFineTunedModel
+  | components.CompletionFineTunedModel
+  | discriminatedUnionTypes.Unknown<"modelType">;
 
 /** @internal */
 export type JobsApiRoutesFineTuningUpdateFineTunedModelRequest$Outbound = {
   model_id: string;
-  UpdateFTModelIn: components.UpdateFTModelIn$Outbound;
+  UpdateModelRequest: components.UpdateModelRequest$Outbound;
 };
 
 /** @internal */
 export const JobsApiRoutesFineTuningUpdateFineTunedModelRequest$outboundSchema:
   z.ZodType<
     JobsApiRoutesFineTuningUpdateFineTunedModelRequest$Outbound,
-    z.ZodTypeDef,
     JobsApiRoutesFineTuningUpdateFineTunedModelRequest
   > = z.object({
     modelId: z.string(),
-    updateFTModelIn: components.UpdateFTModelIn$outboundSchema,
+    updateModelRequest: components.UpdateModelRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       modelId: "model_id",
-      updateFTModelIn: "UpdateFTModelIn",
+      updateModelRequest: "UpdateModelRequest",
     });
   });
 
@@ -60,22 +62,11 @@ export function jobsApiRoutesFineTuningUpdateFineTunedModelRequestToJSON(
 
 /** @internal */
 export const JobsApiRoutesFineTuningUpdateFineTunedModelResponse$inboundSchema:
-  z.ZodType<
-    JobsApiRoutesFineTuningUpdateFineTunedModelResponse,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.ClassifierFTModelOut$inboundSchema.and(
-      z.object({ model_type: z.literal("classifier") }).transform((v) => ({
-        modelType: v.model_type,
-      })),
-    ),
-    components.CompletionFTModelOut$inboundSchema.and(
-      z.object({ model_type: z.literal("completion") }).transform((v) => ({
-        modelType: v.model_type,
-      })),
-    ),
-  ]);
+  z.ZodType<JobsApiRoutesFineTuningUpdateFineTunedModelResponse, unknown> =
+    discriminatedUnion("model_type", {
+      classifier: components.ClassifierFineTunedModel$inboundSchema,
+      completion: components.CompletionFineTunedModel$inboundSchema,
+    }, { outputPropertyName: "modelType" });
 
 export function jobsApiRoutesFineTuningUpdateFineTunedModelResponseFromJSON(
   jsonString: string,

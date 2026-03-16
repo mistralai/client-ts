@@ -11,7 +11,7 @@ let value:
   PostDatasetRecordsFromFileV1ObservabilityDatasetsDatasetIdImportsFromFilePostRequest =
     {
       datasetId: "24e4af93-f75e-4625-beff-1f845457cc55",
-      postDatasetImportFromFileInSchema: {
+      importDatasetFromFileRequest: {
         fileId: "<id>",
       },
     };
@@ -19,7 +19,7 @@ let value:
 
 ## Fields
 
-| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `datasetId`                                                                                                  | *string*                                                                                                     | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
-| `postDatasetImportFromFileInSchema`                                                                          | [components.PostDatasetImportFromFileInSchema](../../models/components/postdatasetimportfromfileinschema.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `datasetId`                                                                                        | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `importDatasetFromFileRequest`                                                                     | [components.ImportDatasetFromFileRequest](../../models/components/importdatasetfromfilerequest.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
