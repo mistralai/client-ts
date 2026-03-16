@@ -143,13 +143,6 @@ response.usage.additionalProperties?.["cached_tokens"];
 
 The SDK now uses Zod v4 internally. If you import Zod schemas from the SDK (e.g., `ChatCompletionResponse$inboundSchema`), note that Zod v4 has some API differences from v3. See the [Zod v4 migration guide](https://zod.dev/v4/changelog) for details.
 
-## What Stays the Same
-
-- The `Mistral` client class and all method signatures
-- Import path: `@mistralai/mistralai`
-- Authentication (API key, OAuth)
-- Streaming, retries, error handling patterns
-
 ## Version Support
 
 | Branch | Version | npm Tag | Publishing |
