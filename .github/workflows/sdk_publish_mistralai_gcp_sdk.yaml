@@ -7,7 +7,7 @@ permissions:
 "on":
   push:
     branches:
-      - main
+      - v1
     paths:
       - packages/mistralai-gcp/RELEASES.md
 jobs:
