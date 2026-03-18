@@ -1,6 +1,6 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Mistral AI",
   "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
@@ -45,6 +45,10 @@
     }
   },
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mistralai/client-ts.git"
+  },
   "scripts": {
     "lint": "oxlint --max-warnings=0 --deny-warnings 'src/**/*.{ts,tsx}'",
     "build": "tsgo",
