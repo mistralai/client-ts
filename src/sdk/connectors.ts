@@ -7,6 +7,7 @@ import { betaConnectorsCallTool } from "../funcs/betaConnectorsCallTool.js";
 import { betaConnectorsCreate } from "../funcs/betaConnectorsCreate.js";
 import { betaConnectorsDelete } from "../funcs/betaConnectorsDelete.js";
 import { betaConnectorsGet } from "../funcs/betaConnectorsGet.js";
+import { betaConnectorsGetAuthUrl } from "../funcs/betaConnectorsGetAuthUrl.js";
 import { betaConnectorsList } from "../funcs/betaConnectorsList.js";
 import { betaConnectorsUpdate } from "../funcs/betaConnectorsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -43,6 +44,23 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.PaginatedConnectors> {
     return unwrapAsync(betaConnectorsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get the auth URL for a connector.
+   *
+   * @remarks
+   * Get the OAuth2 authorization URL for a connector to initiate user authentication.
+   */
+  async getAuthUrl(
+    request: operations.ConnectorGetAuthUrlV1Request,
+    options?: RequestOptions,
+  ): Promise<components.AuthUrlResponse> {
+    return unwrapAsync(betaConnectorsGetAuthUrl(
       this,
       request,
       options,
@@ -101,10 +119,7 @@ export class Connectors extends ClientSDK {
   }
 
   /**
-   * Delete a connector.
-   *
-   * @remarks
-   * Delete a connector by its ID.
+   * Delete a judge
    */
   async delete(
     request: operations.ConnectorDeleteV1Request,
