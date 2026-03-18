@@ -1,7 +1,8 @@
 {
   "name": "@mistralai/mistralai-gcp",
-  "version": "2.0.0-alpha.1",
-  "author": "Speakeasy",
+  "version": "2.0.0",
+  "author": "Mistral AI",
+  "license": "Apache-2.0",
   "type": "module",
   "main": "./esm/index.js",
   "exports": {
@@ -57,7 +58,7 @@
     "typescript": "~5.8.3"
   },
   "dependencies": {
-    "google-auth-library": "^9.11.0",
+    "google-auth-library": "^10.6.2",
     "zod": "^3.25.0 || ^4.0.0"
   }
 }
