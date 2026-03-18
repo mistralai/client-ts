@@ -74,7 +74,7 @@ yarn add @mistralai/mistralai
 <!-- Start Requirements [requirements] -->
 ## Requirements
 
-For supported JavaScript runtimes, please consult [RUNTIMES.md](https://github.com/mistralai/client-ts/blob/main/RUNTIMES.md).
+For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
 ## API Key Setup
@@ -226,195 +226,197 @@ We have dedicated SDKs for the following providers:
 <details open>
 <summary>Available methods</summary>
 
-### [Agents](https://github.com/mistralai/client-ts/blob/main/docs/sdks/agents/README.md)
+### [Agents](docs/sdks/agents/README.md)
 
-* [complete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/agents/README.md#complete) - Agents Completion
-* [stream](https://github.com/mistralai/client-ts/blob/main/docs/sdks/agents/README.md#stream) - Stream Agents completion
+* [complete](docs/sdks/agents/README.md#complete) - Agents Completion
+* [stream](docs/sdks/agents/README.md#stream) - Stream Agents completion
 
-### [Audio.Transcriptions](https://github.com/mistralai/client-ts/blob/main/docs/sdks/transcriptions/README.md)
+### [Audio.Transcriptions](docs/sdks/transcriptions/README.md)
 
-* [complete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/transcriptions/README.md#complete) - Create Transcription
-* [stream](https://github.com/mistralai/client-ts/blob/main/docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
+* [complete](docs/sdks/transcriptions/README.md#complete) - Create Transcription
+* [stream](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
 
-### [Batch.Jobs](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md)
+### [Batch.Jobs](docs/sdks/batchjobs/README.md)
 
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md#create) - Create Batch Job
-* [get](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md#get) - Get Batch Job
-* [cancel](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
+* [list](docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
+* [create](docs/sdks/batchjobs/README.md#create) - Create Batch Job
+* [get](docs/sdks/batchjobs/README.md#get) - Get Batch Job
+* [cancel](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
 
-### [Beta.Agents](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md)
+### [Beta.Agents](docs/sdks/betaagents/README.md)
 
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#list) - List agent entities.
-* [get](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#get) - Retrieve an agent entity.
-* [update](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#update) - Update an agent entity.
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#delete) - Delete an agent entity.
-* [updateVersion](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
-* [listVersions](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
-* [getVersion](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#getversion) - Retrieve a specific version of an agent.
-* [createVersionAlias](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#createversionalias) - Create or update an agent version alias.
-* [listVersionAliases](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#listversionaliases) - List all aliases for an agent.
-* [deleteVersionAlias](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#deleteversionalias) - Delete an agent version alias.
+* [create](docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
+* [list](docs/sdks/betaagents/README.md#list) - List agent entities.
+* [get](docs/sdks/betaagents/README.md#get) - Retrieve an agent entity.
+* [update](docs/sdks/betaagents/README.md#update) - Update an agent entity.
+* [delete](docs/sdks/betaagents/README.md#delete) - Delete an agent entity.
+* [updateVersion](docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
+* [listVersions](docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
+* [getVersion](docs/sdks/betaagents/README.md#getversion) - Retrieve a specific version of an agent.
+* [createVersionAlias](docs/sdks/betaagents/README.md#createversionalias) - Create or update an agent version alias.
+* [listVersionAliases](docs/sdks/betaagents/README.md#listversionaliases) - List all aliases for an agent.
+* [deleteVersionAlias](docs/sdks/betaagents/README.md#deleteversionalias) - Delete an agent version alias.
 
-### [Beta.Connectors](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md)
+### [Beta.Connectors](docs/sdks/connectors/README.md)
 
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#create) - Create a new connector.
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#list) - List all connectors.
-* [callTool](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#calltool) - Call Connector Tool
-* [get](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#get) - Get a connector.
-* [update](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#update) - Update a connector.
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#delete) - Delete a connector.
+* [create](docs/sdks/connectors/README.md#create) - Create a new connector.
+* [list](docs/sdks/connectors/README.md#list) - List all connectors.
+* [getAuthUrl](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
+* [callTool](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
+* [get](docs/sdks/connectors/README.md#get) - Get a connector.
+* [update](docs/sdks/connectors/README.md#update) - Update a connector.
+* [delete](docs/sdks/connectors/README.md#delete) - Delete a connector.
 
-### [Beta.Conversations](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md)
+### [Beta.Conversations](docs/sdks/conversations/README.md)
 
-* [start](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#list) - List all created conversations.
-* [get](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#get) - Retrieve a conversation information.
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#delete) - Delete a conversation.
-* [append](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
-* [getHistory](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#gethistory) - Retrieve all entries in a conversation.
-* [getMessages](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#getmessages) - Retrieve all messages in a conversation.
-* [restart](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#restart) - Restart a conversation starting from a given entry.
-* [startStream](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#startstream) - Create a conversation and append entries to it.
-* [appendStream](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
-* [restartStream](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#restartstream) - Restart a conversation starting from a given entry.
+* [start](docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
+* [list](docs/sdks/conversations/README.md#list) - List all created conversations.
+* [get](docs/sdks/conversations/README.md#get) - Retrieve a conversation information.
+* [delete](docs/sdks/conversations/README.md#delete) - Delete a conversation.
+* [append](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
+* [getHistory](docs/sdks/conversations/README.md#gethistory) - Retrieve all entries in a conversation.
+* [getMessages](docs/sdks/conversations/README.md#getmessages) - Retrieve all messages in a conversation.
+* [restart](docs/sdks/conversations/README.md#restart) - Restart a conversation starting from a given entry.
+* [startStream](docs/sdks/conversations/README.md#startstream) - Create a conversation and append entries to it.
+* [appendStream](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
+* [restartStream](docs/sdks/conversations/README.md#restartstream) - Restart a conversation starting from a given entry.
 
-### [Beta.Libraries](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md)
+### [Beta.Libraries](docs/sdks/libraries/README.md)
 
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#list) - List all libraries you have access to.
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#create) - Create a new Library.
-* [get](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#delete) - Delete a library and all of it's document.
-* [update](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#update) - Update a library.
+* [list](docs/sdks/libraries/README.md#list) - List all libraries you have access to.
+* [create](docs/sdks/libraries/README.md#create) - Create a new Library.
+* [get](docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
+* [delete](docs/sdks/libraries/README.md#delete) - Delete a library and all of it's document.
+* [update](docs/sdks/libraries/README.md#update) - Update a library.
 
-#### [Beta.Libraries.Accesses](https://github.com/mistralai/client-ts/blob/main/docs/sdks/accesses/README.md)
+#### [Beta.Libraries.Accesses](docs/sdks/accesses/README.md)
 
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/accesses/README.md#list) - List all of the access to this library.
-* [updateOrCreate](https://github.com/mistralai/client-ts/blob/main/docs/sdks/accesses/README.md#updateorcreate) - Create or update an access level.
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/accesses/README.md#delete) - Delete an access level.
+* [list](docs/sdks/accesses/README.md#list) - List all of the access to this library.
+* [updateOrCreate](docs/sdks/accesses/README.md#updateorcreate) - Create or update an access level.
+* [delete](docs/sdks/accesses/README.md#delete) - Delete an access level.
 
-#### [Beta.Libraries.Documents](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md)
+#### [Beta.Libraries.Documents](docs/sdks/documents/README.md)
 
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#list) - List documents in a given library.
-* [upload](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#upload) - Upload a new document.
-* [get](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
-* [update](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#delete) - Delete a document.
-* [textContent](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#textcontent) - Retrieve the text content of a specific document.
-* [status](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
-* [getSignedUrl](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
-* [extractedTextSignedUrl](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
-* [reprocess](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#reprocess) - Reprocess a document.
+* [list](docs/sdks/documents/README.md#list) - List documents in a given library.
+* [upload](docs/sdks/documents/README.md#upload) - Upload a new document.
+* [get](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
+* [update](docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
+* [delete](docs/sdks/documents/README.md#delete) - Delete a document.
+* [textContent](docs/sdks/documents/README.md#textcontent) - Retrieve the text content of a specific document.
+* [status](docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
+* [getSignedUrl](docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
+* [extractedTextSignedUrl](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
+* [reprocess](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
 
-### [Beta.Observability.Campaigns](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md)
+### [Beta.Observability.Campaigns](docs/sdks/campaigns/README.md)
 
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#create) - Create and start a new campaign
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#list) - Get all campaigns
-* [fetch](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#fetch) - Get campaign by id
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#delete) - Delete a campaign
-* [fetchStatus](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#fetchstatus) - Get campaign status by campaign id
-* [listEvents](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#listevents) - Get event ids that were selected by the given campaign
+* [create](docs/sdks/campaigns/README.md#create) - Create and start a new campaign
+* [list](docs/sdks/campaigns/README.md#list) - Get all campaigns
+* [fetch](docs/sdks/campaigns/README.md#fetch) - Get campaign by id
+* [delete](docs/sdks/campaigns/README.md#delete) - Delete a campaign
+* [fetchStatus](docs/sdks/campaigns/README.md#fetchstatus) - Get campaign status by campaign id
+* [listEvents](docs/sdks/campaigns/README.md#listevents) - Get event ids that were selected by the given campaign
 
-### [Beta.Observability.ChatCompletionEvents](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md)
+### [Beta.Observability.ChatCompletionEvents](docs/sdks/chatcompletionevents/README.md)
 
-* [search](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
-* [searchIds](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
-* [fetch](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#fetch) - Get Chat Completion Event
-* [fetchSimilarEvents](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#fetchsimilarevents) - Get Similar Chat Completion Events
-* [judge](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#judge) - Run Judge on an event based on the given options
+* [search](docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
+* [searchIds](docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
+* [fetch](docs/sdks/chatcompletionevents/README.md#fetch) - Get Chat Completion Event
+* [fetchSimilarEvents](docs/sdks/chatcompletionevents/README.md#fetchsimilarevents) - Get Similar Chat Completion Events
+* [judge](docs/sdks/chatcompletionevents/README.md#judge) - Run Judge on an event based on the given options
 
-#### [Beta.Observability.ChatCompletionEvents.Fields](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fields/README.md)
+#### [Beta.Observability.ChatCompletionEvents.Fields](docs/sdks/fields/README.md)
 
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fields/README.md#list) - Get Chat Completion Fields
-* [fetchOptions](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fields/README.md#fetchoptions) - Get Chat Completion Field Options
-* [fetchOptionCounts](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fields/README.md#fetchoptioncounts) - Get Chat Completion Field Options Counts
+* [list](docs/sdks/fields/README.md#list) - Get Chat Completion Fields
+* [fetchOptions](docs/sdks/fields/README.md#fetchoptions) - Get Chat Completion Field Options
+* [fetchOptionCounts](docs/sdks/fields/README.md#fetchoptioncounts) - Get Chat Completion Field Options Counts
 
-### [Beta.Observability.Datasets](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md)
+### [Beta.Observability.Datasets](docs/sdks/datasets/README.md)
 
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#create) - Create a new empty dataset
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#list) - List existing datasets
-* [fetch](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#fetch) - Get dataset by id
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#delete) - Delete a dataset
-* [update](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#update) - Patch dataset
-* [listRecords](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
-* [createRecord](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#createrecord) - Add a conversation to the dataset
-* [importFromCampaign](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with a campaign
-* [importFromExplorer](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with samples from the explorer
-* [importFromFile](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with samples from an uploaded file
-* [importFromPlayground](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with samples from the playground
-* [importFromDatasetRecords](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with samples from another dataset
-* [exportToJsonl](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
-* [fetchTask](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
-* [listTasks](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
+* [create](docs/sdks/datasets/README.md#create) - Create a new empty dataset
+* [list](docs/sdks/datasets/README.md#list) - List existing datasets
+* [fetch](docs/sdks/datasets/README.md#fetch) - Get dataset by id
+* [delete](docs/sdks/datasets/README.md#delete) - Delete a dataset
+* [update](docs/sdks/datasets/README.md#update) - Patch dataset
+* [listRecords](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
+* [createRecord](docs/sdks/datasets/README.md#createrecord) - Add a conversation to the dataset
+* [importFromCampaign](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with a campaign
+* [importFromExplorer](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with samples from the explorer
+* [importFromFile](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with samples from an uploaded file
+* [importFromPlayground](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with samples from the playground
+* [importFromDatasetRecords](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with samples from another dataset
+* [exportToJsonl](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
+* [fetchTask](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
+* [listTasks](docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
 
-#### [Beta.Observability.Datasets.Records](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md)
+#### [Beta.Observability.Datasets.Records](docs/sdks/records/README.md)
 
-* [fetch](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#fetch) - Get the content of a given conversation from a dataset
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#delete) - Delete a record from a dataset
-* [bulkDelete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
-* [judge](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
-* [updatePayload](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#updatepayload) - Update a dataset record conversation payload
-* [updateProperties](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#updateproperties) - Update conversation properties
+* [fetch](docs/sdks/records/README.md#fetch) - Get the content of a given conversation from a dataset
+* [delete](docs/sdks/records/README.md#delete) - Delete a record from a dataset
+* [bulkDelete](docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
+* [judge](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
+* [updatePayload](docs/sdks/records/README.md#updatepayload) - Update a dataset record conversation payload
+* [updateProperties](docs/sdks/records/README.md#updateproperties) - Update conversation properties
 
-### [Beta.Observability.Judges](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md)
+### [Beta.Observability.Judges](docs/sdks/judges/README.md)
 
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#create) - Create a new judge
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
-* [fetch](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#fetch) - Get judge by id
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#delete) - Delete a judge
-* [update](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#update) - Update a judge
+* [create](docs/sdks/judges/README.md#create) - Create a new judge
+* [list](docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
+* [fetch](docs/sdks/judges/README.md#fetch) - Get judge by id
+* [delete](docs/sdks/judges/README.md#delete) - Delete a judge
+* [update](docs/sdks/judges/README.md#update) - Update a judge
+* [judgeConversation](docs/sdks/judges/README.md#judgeconversation) - Run a saved judge on a conversation
 
-### [Chat](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chat/README.md)
+### [Chat](docs/sdks/chat/README.md)
 
-* [complete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chat/README.md#complete) - Chat Completion
-* [stream](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chat/README.md#stream) - Stream chat completion
+* [complete](docs/sdks/chat/README.md#complete) - Chat Completion
+* [stream](docs/sdks/chat/README.md#stream) - Stream chat completion
 
-### [Classifiers](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md)
+### [Classifiers](docs/sdks/classifiers/README.md)
 
-* [moderate](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md#moderate) - Moderations
-* [moderateChat](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md#moderatechat) - Chat Moderations
-* [classify](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md#classify) - Classifications
-* [classifyChat](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md#classifychat) - Chat Classifications
+* [moderate](docs/sdks/classifiers/README.md#moderate) - Moderations
+* [moderateChat](docs/sdks/classifiers/README.md#moderatechat) - Chat Moderations
+* [classify](docs/sdks/classifiers/README.md#classify) - Classifications
+* [classifyChat](docs/sdks/classifiers/README.md#classifychat) - Chat Classifications
 
-### [Embeddings](https://github.com/mistralai/client-ts/blob/main/docs/sdks/embeddings/README.md)
+### [Embeddings](docs/sdks/embeddings/README.md)
 
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/embeddings/README.md#create) - Embeddings
+* [create](docs/sdks/embeddings/README.md#create) - Embeddings
 
-### [Files](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md)
+### [Files](docs/sdks/files/README.md)
 
-* [upload](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#upload) - Upload File
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#list) - List Files
-* [retrieve](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#retrieve) - Retrieve File
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#delete) - Delete File
-* [download](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#download) - Download File
-* [getSignedUrl](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#getsignedurl) - Get Signed Url
+* [upload](docs/sdks/files/README.md#upload) - Upload File
+* [list](docs/sdks/files/README.md#list) - List Files
+* [retrieve](docs/sdks/files/README.md#retrieve) - Retrieve File
+* [delete](docs/sdks/files/README.md#delete) - Delete File
+* [download](docs/sdks/files/README.md#download) - Download File
+* [getSignedUrl](docs/sdks/files/README.md#getsignedurl) - Get Signed Url
 
-### [Fim](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fim/README.md)
+### [Fim](docs/sdks/fim/README.md)
 
-* [complete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fim/README.md#complete) - Fim Completion
-* [stream](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fim/README.md#stream) - Stream fim completion
+* [complete](docs/sdks/fim/README.md#complete) - Fim Completion
+* [stream](docs/sdks/fim/README.md#stream) - Stream fim completion
 
-### [FineTuning.Jobs](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md)
+### [FineTuning.Jobs](docs/sdks/finetuningjobs/README.md)
 
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#list) - Get Fine Tuning Jobs
-* [create](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#create) - Create Fine Tuning Job
-* [get](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#get) - Get Fine Tuning Job
-* [cancel](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#cancel) - Cancel Fine Tuning Job
-* [start](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#start) - Start Fine Tuning Job
+* [list](docs/sdks/finetuningjobs/README.md#list) - Get Fine Tuning Jobs
+* [create](docs/sdks/finetuningjobs/README.md#create) - Create Fine Tuning Job
+* [get](docs/sdks/finetuningjobs/README.md#get) - Get Fine Tuning Job
+* [cancel](docs/sdks/finetuningjobs/README.md#cancel) - Cancel Fine Tuning Job
+* [start](docs/sdks/finetuningjobs/README.md#start) - Start Fine Tuning Job
 
-### [Models](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md)
+### [Models](docs/sdks/models/README.md)
 
-* [list](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#list) - List Models
-* [retrieve](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#retrieve) - Retrieve Model
-* [delete](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#delete) - Delete Model
-* [update](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#update) - Update Fine Tuned Model
-* [archive](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
-* [unarchive](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
+* [list](docs/sdks/models/README.md#list) - List Models
+* [retrieve](docs/sdks/models/README.md#retrieve) - Retrieve Model
+* [delete](docs/sdks/models/README.md#delete) - Delete Model
+* [update](docs/sdks/models/README.md#update) - Update Fine Tuned Model
+* [archive](docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
+* [unarchive](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
 
-### [Ocr](https://github.com/mistralai/client-ts/blob/main/docs/sdks/ocr/README.md)
+### [Ocr](docs/sdks/ocr/README.md)
 
-* [process](https://github.com/mistralai/client-ts/blob/main/docs/sdks/ocr/README.md#process) - OCR
+* [process](docs/sdks/ocr/README.md#process) - OCR
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -571,7 +573,7 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`MistralError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/mistralerror.ts) is the base class for all HTTP error responses. It has the following properties:
+[`MistralError`](./src/models/errors/mistralerror.ts) is the base class for all HTTP error responses. It has the following properties:
 
 | Property            | Type       | Description                                                                             |
 | ------------------- | ---------- | --------------------------------------------------------------------------------------- |
@@ -618,24 +620,24 @@ run();
 
 ### Error Classes
 **Primary error:**
-* [`MistralError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/mistralerror.ts): The base class for HTTP error responses.
+* [`MistralError`](./src/models/errors/mistralerror.ts): The base class for HTTP error responses.
 
 <details><summary>Less common errors (8)</summary>
 
 <br />
 
 **Network errors:**
-* [`ConnectionError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/httpclienterrors.ts): HTTP client was unable to make a request to a server.
-* [`RequestTimeoutError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/httpclienterrors.ts): HTTP request timed out due to an AbortSignal signal.
-* [`RequestAbortedError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/httpclienterrors.ts): HTTP request was aborted by the client.
-* [`InvalidRequestError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/httpclienterrors.ts): Any input used to create a request is invalid.
-* [`UnexpectedClientError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
+* [`ConnectionError`](./src/models/errors/httpclienterrors.ts): HTTP client was unable to make a request to a server.
+* [`RequestTimeoutError`](./src/models/errors/httpclienterrors.ts): HTTP request timed out due to an AbortSignal signal.
+* [`RequestAbortedError`](./src/models/errors/httpclienterrors.ts): HTTP request was aborted by the client.
+* [`InvalidRequestError`](./src/models/errors/httpclienterrors.ts): Any input used to create a request is invalid.
+* [`UnexpectedClientError`](./src/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
 
 
-**Inherit from [`MistralError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 60 of 121 methods.*
-* [`ObservabilityError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 40 of 121 methods.*
-* [`ResponseValidationError`](https://github.com/mistralai/client-ts/blob/main/src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
+**Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 61 of 123 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 123 methods.*
+* [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
 
@@ -788,133 +790,135 @@ runtimes or other environments where application bundle size is a primary
 concern. When using a bundler to build your application, all unused
 functionality will be either excluded from the final bundle or tree-shaken away.
 
-To read more about standalone functions, check [FUNCTIONS.md](https://github.com/mistralai/client-ts/blob/main/FUNCTIONS.md).
+To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <details>
 
 <summary>Available standalone functions</summary>
 
-- [`agentsComplete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/agents/README.md#complete) - Agents Completion
-- [`agentsStream`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/agents/README.md#stream) - Stream Agents completion
-- [`audioTranscriptionsComplete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/transcriptions/README.md#complete) - Create Transcription
-- [`audioTranscriptionsStream`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
-- [`batchJobsCancel`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
-- [`batchJobsCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md#create) - Create Batch Job
-- [`batchJobsGet`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md#get) - Get Batch Job
-- [`batchJobsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
-- [`betaAgentsCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
-- [`betaAgentsCreateVersionAlias`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#createversionalias) - Create or update an agent version alias.
-- [`betaAgentsDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#delete) - Delete an agent entity.
-- [`betaAgentsDeleteVersionAlias`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#deleteversionalias) - Delete an agent version alias.
-- [`betaAgentsGet`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#get) - Retrieve an agent entity.
-- [`betaAgentsGetVersion`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#getversion) - Retrieve a specific version of an agent.
-- [`betaAgentsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#list) - List agent entities.
-- [`betaAgentsListVersionAliases`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#listversionaliases) - List all aliases for an agent.
-- [`betaAgentsListVersions`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
-- [`betaAgentsUpdate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#update) - Update an agent entity.
-- [`betaAgentsUpdateVersion`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
-- [`betaConnectorsCallTool`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#calltool) - Call Connector Tool
-- [`betaConnectorsCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#create) - Create a new connector.
-- [`betaConnectorsDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#delete) - Delete a connector.
-- [`betaConnectorsGet`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#get) - Get a connector.
-- [`betaConnectorsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#list) - List all connectors.
-- [`betaConnectorsUpdate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/connectors/README.md#update) - Update a connector.
-- [`betaConversationsAppend`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
-- [`betaConversationsAppendStream`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
-- [`betaConversationsDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#delete) - Delete a conversation.
-- [`betaConversationsGet`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#get) - Retrieve a conversation information.
-- [`betaConversationsGetHistory`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#gethistory) - Retrieve all entries in a conversation.
-- [`betaConversationsGetMessages`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#getmessages) - Retrieve all messages in a conversation.
-- [`betaConversationsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#list) - List all created conversations.
-- [`betaConversationsRestart`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#restart) - Restart a conversation starting from a given entry.
-- [`betaConversationsRestartStream`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#restartstream) - Restart a conversation starting from a given entry.
-- [`betaConversationsStart`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
-- [`betaConversationsStartStream`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/conversations/README.md#startstream) - Create a conversation and append entries to it.
-- [`betaLibrariesAccessesDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/accesses/README.md#delete) - Delete an access level.
-- [`betaLibrariesAccessesList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/accesses/README.md#list) - List all of the access to this library.
-- [`betaLibrariesAccessesUpdateOrCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/accesses/README.md#updateorcreate) - Create or update an access level.
-- [`betaLibrariesCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#create) - Create a new Library.
-- [`betaLibrariesDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#delete) - Delete a library and all of it's document.
-- [`betaLibrariesDocumentsDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#delete) - Delete a document.
-- [`betaLibrariesDocumentsExtractedTextSignedUrl`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
-- [`betaLibrariesDocumentsGet`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
-- [`betaLibrariesDocumentsGetSignedUrl`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
-- [`betaLibrariesDocumentsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#list) - List documents in a given library.
-- [`betaLibrariesDocumentsReprocess`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#reprocess) - Reprocess a document.
-- [`betaLibrariesDocumentsStatus`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
-- [`betaLibrariesDocumentsTextContent`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#textcontent) - Retrieve the text content of a specific document.
-- [`betaLibrariesDocumentsUpdate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
-- [`betaLibrariesDocumentsUpload`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/documents/README.md#upload) - Upload a new document.
-- [`betaLibrariesGet`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
-- [`betaLibrariesList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#list) - List all libraries you have access to.
-- [`betaLibrariesUpdate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/libraries/README.md#update) - Update a library.
-- [`betaObservabilityCampaignsCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#create) - Create and start a new campaign
-- [`betaObservabilityCampaignsDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#delete) - Delete a campaign
-- [`betaObservabilityCampaignsFetch`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#fetch) - Get campaign by id
-- [`betaObservabilityCampaignsFetchStatus`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#fetchstatus) - Get campaign status by campaign id
-- [`betaObservabilityCampaignsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#list) - Get all campaigns
-- [`betaObservabilityCampaignsListEvents`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/campaigns/README.md#listevents) - Get event ids that were selected by the given campaign
-- [`betaObservabilityChatCompletionEventsFetch`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#fetch) - Get Chat Completion Event
-- [`betaObservabilityChatCompletionEventsFetchSimilarEvents`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#fetchsimilarevents) - Get Similar Chat Completion Events
-- [`betaObservabilityChatCompletionEventsFieldsFetchOptionCounts`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fields/README.md#fetchoptioncounts) - Get Chat Completion Field Options Counts
-- [`betaObservabilityChatCompletionEventsFieldsFetchOptions`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fields/README.md#fetchoptions) - Get Chat Completion Field Options
-- [`betaObservabilityChatCompletionEventsFieldsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fields/README.md#list) - Get Chat Completion Fields
-- [`betaObservabilityChatCompletionEventsJudge`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#judge) - Run Judge on an event based on the given options
-- [`betaObservabilityChatCompletionEventsSearch`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
-- [`betaObservabilityChatCompletionEventsSearchIds`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
-- [`betaObservabilityDatasetsCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#create) - Create a new empty dataset
-- [`betaObservabilityDatasetsCreateRecord`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#createrecord) - Add a conversation to the dataset
-- [`betaObservabilityDatasetsDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#delete) - Delete a dataset
-- [`betaObservabilityDatasetsExportToJsonl`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
-- [`betaObservabilityDatasetsFetch`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#fetch) - Get dataset by id
-- [`betaObservabilityDatasetsFetchTask`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
-- [`betaObservabilityDatasetsImportFromCampaign`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with a campaign
-- [`betaObservabilityDatasetsImportFromDatasetRecords`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with samples from another dataset
-- [`betaObservabilityDatasetsImportFromExplorer`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with samples from the explorer
-- [`betaObservabilityDatasetsImportFromFile`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with samples from an uploaded file
-- [`betaObservabilityDatasetsImportFromPlayground`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with samples from the playground
-- [`betaObservabilityDatasetsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#list) - List existing datasets
-- [`betaObservabilityDatasetsListRecords`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
-- [`betaObservabilityDatasetsListTasks`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
-- [`betaObservabilityDatasetsRecordsBulkDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
-- [`betaObservabilityDatasetsRecordsDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#delete) - Delete a record from a dataset
-- [`betaObservabilityDatasetsRecordsFetch`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#fetch) - Get the content of a given conversation from a dataset
-- [`betaObservabilityDatasetsRecordsJudge`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
-- [`betaObservabilityDatasetsRecordsUpdatePayload`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#updatepayload) - Update a dataset record conversation payload
-- [`betaObservabilityDatasetsRecordsUpdateProperties`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/records/README.md#updateproperties) - Update conversation properties
-- [`betaObservabilityDatasetsUpdate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/datasets/README.md#update) - Patch dataset
-- [`betaObservabilityJudgesCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#create) - Create a new judge
-- [`betaObservabilityJudgesDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#delete) - Delete a judge
-- [`betaObservabilityJudgesFetch`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#fetch) - Get judge by id
-- [`betaObservabilityJudgesList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
-- [`betaObservabilityJudgesUpdate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/judges/README.md#update) - Update a judge
-- [`chatComplete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chat/README.md#complete) - Chat Completion
-- [`chatStream`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/chat/README.md#stream) - Stream chat completion
-- [`classifiersClassify`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md#classify) - Classifications
-- [`classifiersClassifyChat`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md#classifychat) - Chat Classifications
-- [`classifiersModerate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md#moderate) - Moderations
-- [`classifiersModerateChat`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/classifiers/README.md#moderatechat) - Chat Moderations
-- [`embeddingsCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/embeddings/README.md#create) - Embeddings
-- [`filesDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#delete) - Delete File
-- [`filesDownload`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#download) - Download File
-- [`filesGetSignedUrl`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#getsignedurl) - Get Signed Url
-- [`filesList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#list) - List Files
-- [`filesRetrieve`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#retrieve) - Retrieve File
-- [`filesUpload`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/files/README.md#upload) - Upload File
-- [`fimComplete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fim/README.md#complete) - Fim Completion
-- [`fimStream`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/fim/README.md#stream) - Stream fim completion
-- [`fineTuningJobsCancel`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#cancel) - Cancel Fine Tuning Job
-- [`fineTuningJobsCreate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#create) - Create Fine Tuning Job
-- [`fineTuningJobsGet`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#get) - Get Fine Tuning Job
-- [`fineTuningJobsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#list) - Get Fine Tuning Jobs
-- [`fineTuningJobsStart`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/finetuningjobs/README.md#start) - Start Fine Tuning Job
-- [`modelsArchive`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
-- [`modelsDelete`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#delete) - Delete Model
-- [`modelsList`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#list) - List Models
-- [`modelsRetrieve`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#retrieve) - Retrieve Model
-- [`modelsUnarchive`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
-- [`modelsUpdate`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/models/README.md#update) - Update Fine Tuned Model
-- [`ocrProcess`](https://github.com/mistralai/client-ts/blob/main/docs/sdks/ocr/README.md#process) - OCR
+- [`agentsComplete`](docs/sdks/agents/README.md#complete) - Agents Completion
+- [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream Agents completion
+- [`audioTranscriptionsComplete`](docs/sdks/transcriptions/README.md#complete) - Create Transcription
+- [`audioTranscriptionsStream`](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
+- [`batchJobsCancel`](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
+- [`batchJobsCreate`](docs/sdks/batchjobs/README.md#create) - Create Batch Job
+- [`batchJobsGet`](docs/sdks/batchjobs/README.md#get) - Get Batch Job
+- [`batchJobsList`](docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
+- [`betaAgentsCreate`](docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
+- [`betaAgentsCreateVersionAlias`](docs/sdks/betaagents/README.md#createversionalias) - Create or update an agent version alias.
+- [`betaAgentsDelete`](docs/sdks/betaagents/README.md#delete) - Delete an agent entity.
+- [`betaAgentsDeleteVersionAlias`](docs/sdks/betaagents/README.md#deleteversionalias) - Delete an agent version alias.
+- [`betaAgentsGet`](docs/sdks/betaagents/README.md#get) - Retrieve an agent entity.
+- [`betaAgentsGetVersion`](docs/sdks/betaagents/README.md#getversion) - Retrieve a specific version of an agent.
+- [`betaAgentsList`](docs/sdks/betaagents/README.md#list) - List agent entities.
+- [`betaAgentsListVersionAliases`](docs/sdks/betaagents/README.md#listversionaliases) - List all aliases for an agent.
+- [`betaAgentsListVersions`](docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
+- [`betaAgentsUpdate`](docs/sdks/betaagents/README.md#update) - Update an agent entity.
+- [`betaAgentsUpdateVersion`](docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
+- [`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
+- [`betaConnectorsCreate`](docs/sdks/connectors/README.md#create) - Create a new connector.
+- [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
+- [`betaConnectorsGet`](docs/sdks/connectors/README.md#get) - Get a connector.
+- [`betaConnectorsGetAuthUrl`](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
+- [`betaConnectorsList`](docs/sdks/connectors/README.md#list) - List all connectors.
+- [`betaConnectorsUpdate`](docs/sdks/connectors/README.md#update) - Update a connector.
+- [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
+- [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
+- [`betaConversationsDelete`](docs/sdks/conversations/README.md#delete) - Delete a conversation.
+- [`betaConversationsGet`](docs/sdks/conversations/README.md#get) - Retrieve a conversation information.
+- [`betaConversationsGetHistory`](docs/sdks/conversations/README.md#gethistory) - Retrieve all entries in a conversation.
+- [`betaConversationsGetMessages`](docs/sdks/conversations/README.md#getmessages) - Retrieve all messages in a conversation.
+- [`betaConversationsList`](docs/sdks/conversations/README.md#list) - List all created conversations.
+- [`betaConversationsRestart`](docs/sdks/conversations/README.md#restart) - Restart a conversation starting from a given entry.
+- [`betaConversationsRestartStream`](docs/sdks/conversations/README.md#restartstream) - Restart a conversation starting from a given entry.
+- [`betaConversationsStart`](docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
+- [`betaConversationsStartStream`](docs/sdks/conversations/README.md#startstream) - Create a conversation and append entries to it.
+- [`betaLibrariesAccessesDelete`](docs/sdks/accesses/README.md#delete) - Delete an access level.
+- [`betaLibrariesAccessesList`](docs/sdks/accesses/README.md#list) - List all of the access to this library.
+- [`betaLibrariesAccessesUpdateOrCreate`](docs/sdks/accesses/README.md#updateorcreate) - Create or update an access level.
+- [`betaLibrariesCreate`](docs/sdks/libraries/README.md#create) - Create a new Library.
+- [`betaLibrariesDelete`](docs/sdks/libraries/README.md#delete) - Delete a library and all of it's document.
+- [`betaLibrariesDocumentsDelete`](docs/sdks/documents/README.md#delete) - Delete a document.
+- [`betaLibrariesDocumentsExtractedTextSignedUrl`](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
+- [`betaLibrariesDocumentsGet`](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
+- [`betaLibrariesDocumentsGetSignedUrl`](docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
+- [`betaLibrariesDocumentsList`](docs/sdks/documents/README.md#list) - List documents in a given library.
+- [`betaLibrariesDocumentsReprocess`](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
+- [`betaLibrariesDocumentsStatus`](docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
+- [`betaLibrariesDocumentsTextContent`](docs/sdks/documents/README.md#textcontent) - Retrieve the text content of a specific document.
+- [`betaLibrariesDocumentsUpdate`](docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
+- [`betaLibrariesDocumentsUpload`](docs/sdks/documents/README.md#upload) - Upload a new document.
+- [`betaLibrariesGet`](docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
+- [`betaLibrariesList`](docs/sdks/libraries/README.md#list) - List all libraries you have access to.
+- [`betaLibrariesUpdate`](docs/sdks/libraries/README.md#update) - Update a library.
+- [`betaObservabilityCampaignsCreate`](docs/sdks/campaigns/README.md#create) - Create and start a new campaign
+- [`betaObservabilityCampaignsDelete`](docs/sdks/campaigns/README.md#delete) - Delete a campaign
+- [`betaObservabilityCampaignsFetch`](docs/sdks/campaigns/README.md#fetch) - Get campaign by id
+- [`betaObservabilityCampaignsFetchStatus`](docs/sdks/campaigns/README.md#fetchstatus) - Get campaign status by campaign id
+- [`betaObservabilityCampaignsList`](docs/sdks/campaigns/README.md#list) - Get all campaigns
+- [`betaObservabilityCampaignsListEvents`](docs/sdks/campaigns/README.md#listevents) - Get event ids that were selected by the given campaign
+- [`betaObservabilityChatCompletionEventsFetch`](docs/sdks/chatcompletionevents/README.md#fetch) - Get Chat Completion Event
+- [`betaObservabilityChatCompletionEventsFetchSimilarEvents`](docs/sdks/chatcompletionevents/README.md#fetchsimilarevents) - Get Similar Chat Completion Events
+- [`betaObservabilityChatCompletionEventsFieldsFetchOptionCounts`](docs/sdks/fields/README.md#fetchoptioncounts) - Get Chat Completion Field Options Counts
+- [`betaObservabilityChatCompletionEventsFieldsFetchOptions`](docs/sdks/fields/README.md#fetchoptions) - Get Chat Completion Field Options
+- [`betaObservabilityChatCompletionEventsFieldsList`](docs/sdks/fields/README.md#list) - Get Chat Completion Fields
+- [`betaObservabilityChatCompletionEventsJudge`](docs/sdks/chatcompletionevents/README.md#judge) - Run Judge on an event based on the given options
+- [`betaObservabilityChatCompletionEventsSearch`](docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
+- [`betaObservabilityChatCompletionEventsSearchIds`](docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
+- [`betaObservabilityDatasetsCreate`](docs/sdks/datasets/README.md#create) - Create a new empty dataset
+- [`betaObservabilityDatasetsCreateRecord`](docs/sdks/datasets/README.md#createrecord) - Add a conversation to the dataset
+- [`betaObservabilityDatasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
+- [`betaObservabilityDatasetsExportToJsonl`](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
+- [`betaObservabilityDatasetsFetch`](docs/sdks/datasets/README.md#fetch) - Get dataset by id
+- [`betaObservabilityDatasetsFetchTask`](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
+- [`betaObservabilityDatasetsImportFromCampaign`](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with a campaign
+- [`betaObservabilityDatasetsImportFromDatasetRecords`](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with samples from another dataset
+- [`betaObservabilityDatasetsImportFromExplorer`](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with samples from the explorer
+- [`betaObservabilityDatasetsImportFromFile`](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with samples from an uploaded file
+- [`betaObservabilityDatasetsImportFromPlayground`](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with samples from the playground
+- [`betaObservabilityDatasetsList`](docs/sdks/datasets/README.md#list) - List existing datasets
+- [`betaObservabilityDatasetsListRecords`](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
+- [`betaObservabilityDatasetsListTasks`](docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
+- [`betaObservabilityDatasetsRecordsBulkDelete`](docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
+- [`betaObservabilityDatasetsRecordsDelete`](docs/sdks/records/README.md#delete) - Delete a record from a dataset
+- [`betaObservabilityDatasetsRecordsFetch`](docs/sdks/records/README.md#fetch) - Get the content of a given conversation from a dataset
+- [`betaObservabilityDatasetsRecordsJudge`](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
+- [`betaObservabilityDatasetsRecordsUpdatePayload`](docs/sdks/records/README.md#updatepayload) - Update a dataset record conversation payload
+- [`betaObservabilityDatasetsRecordsUpdateProperties`](docs/sdks/records/README.md#updateproperties) - Update conversation properties
+- [`betaObservabilityDatasetsUpdate`](docs/sdks/datasets/README.md#update) - Patch dataset
+- [`betaObservabilityJudgesCreate`](docs/sdks/judges/README.md#create) - Create a new judge
+- [`betaObservabilityJudgesDelete`](docs/sdks/judges/README.md#delete) - Delete a judge
+- [`betaObservabilityJudgesFetch`](docs/sdks/judges/README.md#fetch) - Get judge by id
+- [`betaObservabilityJudgesJudgeConversation`](docs/sdks/judges/README.md#judgeconversation) - Run a saved judge on a conversation
+- [`betaObservabilityJudgesList`](docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
+- [`betaObservabilityJudgesUpdate`](docs/sdks/judges/README.md#update) - Update a judge
+- [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
+- [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
+- [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications
+- [`classifiersClassifyChat`](docs/sdks/classifiers/README.md#classifychat) - Chat Classifications
+- [`classifiersModerate`](docs/sdks/classifiers/README.md#moderate) - Moderations
+- [`classifiersModerateChat`](docs/sdks/classifiers/README.md#moderatechat) - Chat Moderations
+- [`embeddingsCreate`](docs/sdks/embeddings/README.md#create) - Embeddings
+- [`filesDelete`](docs/sdks/files/README.md#delete) - Delete File
+- [`filesDownload`](docs/sdks/files/README.md#download) - Download File
+- [`filesGetSignedUrl`](docs/sdks/files/README.md#getsignedurl) - Get Signed Url
+- [`filesList`](docs/sdks/files/README.md#list) - List Files
+- [`filesRetrieve`](docs/sdks/files/README.md#retrieve) - Retrieve File
+- [`filesUpload`](docs/sdks/files/README.md#upload) - Upload File
+- [`fimComplete`](docs/sdks/fim/README.md#complete) - Fim Completion
+- [`fimStream`](docs/sdks/fim/README.md#stream) - Stream fim completion
+- [`fineTuningJobsCancel`](docs/sdks/finetuningjobs/README.md#cancel) - Cancel Fine Tuning Job
+- [`fineTuningJobsCreate`](docs/sdks/finetuningjobs/README.md#create) - Create Fine Tuning Job
+- [`fineTuningJobsGet`](docs/sdks/finetuningjobs/README.md#get) - Get Fine Tuning Job
+- [`fineTuningJobsList`](docs/sdks/finetuningjobs/README.md#list) - Get Fine Tuning Jobs
+- [`fineTuningJobsStart`](docs/sdks/finetuningjobs/README.md#start) - Start Fine Tuning Job
+- [`modelsArchive`](docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
+- [`modelsDelete`](docs/sdks/models/README.md#delete) - Delete Model
+- [`modelsList`](docs/sdks/models/README.md#list) - List Models
+- [`modelsRetrieve`](docs/sdks/models/README.md#retrieve) - Retrieve Model
+- [`modelsUnarchive`](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
+- [`modelsUpdate`](docs/sdks/models/README.md#update) - Update Fine Tuned Model
+- [`ocrProcess`](docs/sdks/ocr/README.md#process) - OCR
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->

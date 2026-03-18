@@ -31,6 +31,9 @@ export type InstructRequestMessage =
   | ToolMessage
   | UserMessage;
 
+/**
+ * A valid request to be tokenized
+ */
 export type InstructRequest = {
   messages: Array<
     | (AssistantMessage & { role: "assistant" })
