@@ -12,6 +12,11 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  GuardrailConfig,
+  GuardrailConfig$Outbound,
+  GuardrailConfig$outboundSchema,
+} from "./guardrailconfig.js";
+import {
   MistralPromptMode,
   MistralPromptMode$outboundSchema,
 } from "./mistralpromptmode.js";
@@ -20,6 +25,10 @@ import {
   Prediction$Outbound,
   Prediction$outboundSchema,
 } from "./prediction.js";
+import {
+  ReasoningEffort,
+  ReasoningEffort$outboundSchema,
+} from "./reasoningeffort.js";
 import {
   ResponseFormat,
   ResponseFormat$Outbound,
@@ -114,10 +123,12 @@ export type AgentsCompletionRequest = {
    */
   prediction?: Prediction | undefined;
   parallelToolCalls?: boolean | undefined;
+  reasoningEffort?: ReasoningEffort | null | undefined;
   /**
    * Allows toggling between the reasoning mode and no system prompt. When set to `reasoning` the system prompt for reasoning models will be used.
    */
   promptMode?: MistralPromptMode | null | undefined;
+  guardrails?: Array<GuardrailConfig> | null | undefined;
   /**
    * The ID of the agent to use for this completion.
    */
@@ -215,7 +226,9 @@ export type AgentsCompletionRequest$Outbound = {
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
   parallel_tool_calls?: boolean | undefined;
+  reasoning_effort?: string | null | undefined;
   prompt_mode?: string | null | undefined;
+  guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
   agent_id: string;
 };
 
@@ -250,7 +263,9 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
+  reasoningEffort: z.nullable(ReasoningEffort$outboundSchema).optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
+  guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   agentId: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -261,6 +276,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
     presencePenalty: "presence_penalty",
     frequencyPenalty: "frequency_penalty",
     parallelToolCalls: "parallel_tool_calls",
+    reasoningEffort: "reasoning_effort",
     promptMode: "prompt_mode",
     agentId: "agent_id",
   });
