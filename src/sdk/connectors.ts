@@ -119,10 +119,7 @@ export class Connectors extends ClientSDK {
   }
 
   /**
-   * Delete a connector.
-   *
-   * @remarks
-   * Delete a connector by its ID.
+   * Delete a judge
    */
   async delete(
     request: operations.ConnectorDeleteV1Request,
