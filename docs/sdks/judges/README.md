@@ -9,6 +9,7 @@
 * [fetch](#fetch) - Get judge by id
 * [delete](#delete) - Delete a judge
 * [update](#update) - Update a judge
+* [judgeConversation](#judgeconversation) - Run a saved judge on a conversation
 
 ## create
 
@@ -424,6 +425,86 @@ run();
 ### Response
 
 **Promise\<void\>**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| errors.ObservabilityError | 400, 404, 408, 409, 422   | application/json          |
+| errors.SDKError           | 4XX, 5XX                  | \*/\*                     |
+
+## judgeConversation
+
+Run a saved judge on a conversation
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="judge_conversation_v1_observability_judges__judge_id__live_judging_post" method="post" path="/v1/observability/judges/{judge_id}/live-judging" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.observability.judges.judgeConversation({
+    judgeId: "7fb9f06a-22fb-45db-ad58-6a5715280755",
+    judgeConversationRequest: {
+      messages: [],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaObservabilityJudgesJudgeConversation } from "@mistralai/mistralai/funcs/betaObservabilityJudgesJudgeConversation.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaObservabilityJudgesJudgeConversation(mistral, {
+    judgeId: "7fb9f06a-22fb-45db-ad58-6a5715280755",
+    judgeConversationRequest: {
+      messages: [],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaObservabilityJudgesJudgeConversation failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                        | Type                                                                                                                                                                             | Required                                                                                                                                                                         | Description                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                        | [operations.JudgeConversationV1ObservabilityJudgesJudgeIdLiveJudgingPostRequest](../../models/operations/judgeconversationv1observabilityjudgesjudgeidlivejudgingpostrequest.md) | :heavy_check_mark:                                                                                                                                                               | The request object to use for the request.                                                                                                                                       |
+| `options`                                                                                                                                                                        | RequestOptions                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                               | Used to set various options for making HTTP requests.                                                                                                                            |
+| `options.fetchOptions`                                                                                                                                                           | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                          | :heavy_minus_sign:                                                                                                                                                               | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.   |
+| `options.retries`                                                                                                                                                                | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                               | Enables retrying HTTP requests under certain failure conditions.                                                                                                                 |
+
+### Response
+
+**Promise\<[components.JudgeOutput](../../models/components/judgeoutput.md)\>**
 
 ### Errors
 

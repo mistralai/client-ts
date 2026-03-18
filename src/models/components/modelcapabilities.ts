@@ -9,6 +9,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * This is populated by Harmattan, but some fields have a name
+ *
+ * @remarks
+ * that we don't want to expose in the API.
+ */
 export type ModelCapabilities = {
   completionChat: boolean;
   functionCalling: boolean;
@@ -20,6 +26,8 @@ export type ModelCapabilities = {
   moderation: boolean;
   audio: boolean;
   audioTranscription: boolean;
+  audioTranscriptionRealtime: boolean;
+  audioSpeech: boolean;
 };
 
 /** @internal */
@@ -37,6 +45,8 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
   moderation: z.boolean().default(false),
   audio: z.boolean().default(false),
   audio_transcription: z.boolean().default(false),
+  audio_transcription_realtime: z.boolean().default(false),
+  audio_speech: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "completion_chat": "completionChat",
@@ -44,6 +54,8 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
     "completion_fim": "completionFim",
     "fine_tuning": "fineTuning",
     "audio_transcription": "audioTranscription",
+    "audio_transcription_realtime": "audioTranscriptionRealtime",
+    "audio_speech": "audioSpeech",
   });
 });
 

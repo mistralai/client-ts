@@ -1,7 +1,7 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "2.0.0-alpha.1",
-  "author": "Speakeasy",
+  "version": "2.0.0",
+  "author": "Mistral AI",
   "type": "module",
   "main": "./esm/index.js",
   "exports": {
@@ -43,6 +43,10 @@
     }
   },
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mistralai/client-ts.git"
+  },
   "scripts": {
     "lint": "oxlint --max-warnings=0 --deny-warnings 'src/**/*.{ts,tsx}'",
     "build": "tsgo",
@@ -61,6 +65,6 @@
   "dependencies": {
     "ws": "^8.18.0",
     "zod": "^3.25.0 || ^4.0.0",
-    "zod-to-json-schema": "^3.24.1"
+    "zod-to-json-schema": "^3.25.0"
   }
 }
