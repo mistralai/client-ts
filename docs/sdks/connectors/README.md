@@ -8,6 +8,7 @@
 
 * [create](#create) - Create a new connector.
 * [list](#list) - List all connectors.
+* [getAuthUrl](#getauthurl) - Get the auth URL for a connector.
 * [callTool](#calltool) - Call Connector Tool
 * [get](#get) - Get a connector.
 * [update](#update) - Update a connector.
@@ -153,6 +154,80 @@ run();
 ### Response
 
 **Promise\<[components.PaginatedConnectors](../../models/components/paginatedconnectors.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## getAuthUrl
+
+Get the OAuth2 authorization URL for a connector to initiate user authentication.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="connector_get_auth_url_v1" method="get" path="/v1/connectors/{connector_id_or_name}/auth_url" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.connectors.getAuthUrl({
+    connectorIdOrName: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaConnectorsGetAuthUrl } from "@mistralai/mistralai/funcs/betaConnectorsGetAuthUrl.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaConnectorsGetAuthUrl(mistral, {
+    connectorIdOrName: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConnectorsGetAuthUrl failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ConnectorGetAuthUrlV1Request](../../models/operations/connectorgetauthurlv1request.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.AuthUrlResponse](../../models/components/authurlresponse.md)\>**
 
 ### Errors
 

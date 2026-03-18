@@ -36,8 +36,6 @@ export type ConversationResponseOutput =
   | ToolExecutionEntry
   | MessageOutputEntry;
 
-export type Guardrail = {};
-
 /**
  * The response after appending new entries to the conversation.
  */
@@ -51,7 +49,7 @@ export type ConversationResponse = {
     | MessageOutputEntry
   >;
   usage: ConversationUsageInfo;
-  guardrails?: Array<Guardrail> | null | undefined;
+  guardrails?: Array<{ [k: string]: any }> | null | undefined;
 };
 
 /** @internal */
@@ -76,21 +74,6 @@ export function conversationResponseOutputFromJSON(
 }
 
 /** @internal */
-export const Guardrail$inboundSchema: z.ZodType<Guardrail, unknown> = z.object(
-  {},
-);
-
-export function guardrailFromJSON(
-  jsonString: string,
-): SafeParseResult<Guardrail, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Guardrail$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Guardrail' from JSON`,
-  );
-}
-
-/** @internal */
 export const ConversationResponse$inboundSchema: z.ZodType<
   ConversationResponse,
   unknown
@@ -106,8 +89,7 @@ export const ConversationResponse$inboundSchema: z.ZodType<
     ]),
   ),
   usage: ConversationUsageInfo$inboundSchema,
-  guardrails: z.nullable(z.array(z.lazy(() => Guardrail$inboundSchema)))
-    .optional(),
+  guardrails: z.nullable(z.array(z.record(z.string(), z.any()))).optional(),
 }).transform((v) => {
   return remap$(v, {
     "conversation_id": "conversationId",

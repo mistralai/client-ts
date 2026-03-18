@@ -18,6 +18,12 @@ export type BaseModelCard = {
   object: string;
   created?: number | undefined;
   ownedBy: string;
+  /**
+   * This is populated by Harmattan, but some fields have a name
+   *
+   * @remarks
+   * that we don't want to expose in the API.
+   */
   capabilities: ModelCapabilities;
   name?: string | null | undefined;
   description?: string | null | undefined;

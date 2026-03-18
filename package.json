@@ -1,7 +1,8 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "2.0.0-alpha.1",
-  "author": "Speakeasy",
+  "version": "2.0.0",
+  "author": "Mistral AI",
+  "license": "Apache-2.0",
   "type": "module",
   "main": "./esm/index.js",
   "exports": {
@@ -61,6 +62,6 @@
   "dependencies": {
     "ws": "^8.18.0",
     "zod": "^3.25.0 || ^4.0.0",
-    "zod-to-json-schema": "^3.24.1"
+    "zod-to-json-schema": "^3.25.0"
   }
 }
