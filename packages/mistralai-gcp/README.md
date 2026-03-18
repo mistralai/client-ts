@@ -1,6 +1,6 @@
 # Mistral on GCP Typescript Client
 
-
+> **v2 Breaking Change:** The SDK class has been renamed from `MistralGoogleCloud` to `MistralGCP` (and `MistralGoogleCloudError` to `MistralGCPError`) to align with the Python SDK.
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
@@ -36,7 +36,7 @@ yarn add @mistralai/mistralai-gcp zod
 <!-- Start Requirements [requirements] -->
 ## Requirements
 
-For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
+For supported JavaScript runtimes, please consult [RUNTIMES.md](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-gcp/RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -47,16 +47,16 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 This example shows how to create chat completions.
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
 
-const sdk = new MistralGoogleCloud({
+const sdk = new MistralGCP({
   region: "europe-west4",
   projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-    const result = await MistralGoogleCloud.chat.complete({
+    const result = await sdk.chat.complete({
         model: "mistral-small-latest",
         messages: [
             {
@@ -78,14 +78,14 @@ run();
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
-### [chat](docs/sdks/chat/README.md)
+### [chat](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-gcp/docs/sdks/chat/README.md)
 
-* [stream](docs/sdks/chat/README.md#stream) - Stream chat completion
-* [create](docs/sdks/chat/README.md#create) - Chat Completion
+* [stream](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-gcp/docs/sdks/chat/README.md#stream) - Stream chat completion
+* [create](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-gcp/docs/sdks/chat/README.md#create) - Chat Completion
 
-### [fim](docs/sdks/fim/README.md)
+### [fim](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-gcp/docs/sdks/fim/README.md)
 
-* [create](docs/sdks/fim/README.md#create) - Fim Completion
+* [create](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-gcp/docs/sdks/fim/README.md#create) - Fim Completion
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Server-sent event streaming [eventstream] -->
@@ -98,15 +98,15 @@ terminate when the server no longer has any events to send and closes the
 underlying connection.
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const sdk = new MistralGoogleCloud({
+const sdk = new MistralGCP({
   region: "europe-west4",
   projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-    const result = await MistralGoogleCloud.chat.stream({
+    const result = await sdk.chat.stream({
         model: "mistral-small-latest",
         messages: [
             {
@@ -136,15 +136,15 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const sdk = new MistralGoogleCloud({
+const sdk = new MistralGCP({
   region: "europe-west4",
   projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-    const result = await MistralGoogleCloud.chat.stream(
+    const result = await sdk.chat.stream(
         {
             model: "mistral-small-latest",
             messages: [
@@ -179,9 +179,9 @@ run();
 
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const MistralGoogleCloud = new MistralGoogleCloud({
+const sdk = new MistralGCP({
     retryConfig: {
         strategy: "backoff",
         backoff: {
@@ -197,7 +197,7 @@ const MistralGoogleCloud = new MistralGoogleCloud({
 });
 
 async function run() {
-    const result = await MistralGoogleCloud.chat.stream({
+    const result = await sdk.chat.stream({
         model: "mistral-small-latest",
         messages: [
             {
@@ -231,10 +231,10 @@ Validation errors can also occur when either method arguments or data returned f
 
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 import { SDKValidationError } from "@mistralai/mistralai-gcp/models/errors";
 
-const MistralGoogleCloud = new MistralGoogleCloud({
+const sdk = new MistralGCP({
     region: "europe-west4",
     projectId: process.env["GOOGLE_PROJECT_ID"],
 });
@@ -242,7 +242,7 @@ const MistralGoogleCloud = new MistralGoogleCloud({
 async function run() {
     let result;
     try {
-        result = await MistralGoogleCloud.chat.complete({
+        result = await sdk.chat.complete({
             model: "mistral-small-latest",
             messages: [
                 {
@@ -291,16 +291,16 @@ You can override the default server globally by passing a server name to the `se
 | `prod` | `https://api.mistral.ai` | None      |
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const MistralGoogleCloud = new MistralGoogleCloud({
+const sdk = new MistralGCP({
     server: "prod",
     region: "europe-west4",
     projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-    const result = await MistralGoogleCloud.chat.stream({
+    const result = await sdk.chat.stream({
         model: "mistral-small-latest",
         messages: [
             {
@@ -325,16 +325,16 @@ run();
 The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const MistralGoogleCloud = new MistralGoogleCloud({
+const sdk = new MistralGCP({
     serverURL: "https://api.mistral.ai",
     region: "europe-west4",
     projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-    const result = await MistralGoogleCloud.chat.stream({
+    const result = await sdk.chat.stream({
         model: "mistral-small-latest",
         messages: [
             {
@@ -372,7 +372,7 @@ custom header and a timeout to requests and how to use the `"requestError"` hook
 to log errors:
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 import { HTTPClient } from "@mistralai/mistralai-gcp/lib/http";
 
 const httpClient = new HTTPClient({
@@ -399,7 +399,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new MistralGoogleCloud({ httpClient });
+const sdk = new MistralGCP({ httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
@@ -416,15 +416,15 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const MistralGoogleCloud = new MistralGoogleCloud({
+const sdk = new MistralGCP({
     region: "europe-west4",
     projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-    const result = await MistralGoogleCloud.chat.stream({
+    const result = await sdk.chat.stream({
         model: "mistral-small-latest",
         messages: [
             {

@@ -4,7 +4,7 @@
  */
 
 /** The base class for all HTTP error responses */
-export class MistralGoogleCloudError extends Error {
+export class MistralGCPError extends Error {
   /** HTTP status code */
   public readonly statusCode: number;
   /** HTTP body */
@@ -31,6 +31,6 @@ export class MistralGoogleCloudError extends Error {
     this.contentType = httpMeta.response.headers.get("content-type") || "";
     this.rawResponse = httpMeta.response;
 
-    this.name = "MistralGoogleCloudError";
+    this.name = "MistralGCPError";
   }
 }

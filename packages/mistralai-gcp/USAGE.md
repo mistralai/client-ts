@@ -4,15 +4,15 @@
 This example shows how to create chat completions.
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const mistralGoogleCloud = new MistralGoogleCloud({
+const mistralGCP = new MistralGCP({
     region: "europe-west4",
     projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-    const result = await mistralGoogleCloud.chat.complete({
+    const result = await mistralGCP.chat.complete({
         model: "mistral-small-latest",
         messages: [
             {

@@ -34,7 +34,7 @@ yarn add @mistralai/mistralai-azure zod
 <!-- Start Requirements [requirements] -->
 ## Requirements
 
-For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
+For supported JavaScript runtimes, please consult [RUNTIMES.md](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -48,8 +48,8 @@ This example shows how to create chat completions.
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
@@ -75,10 +75,10 @@ run();
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
-### [chat](docs/sdks/chat/README.md)
+### [chat](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/docs/sdks/chat/README.md)
 
-* [stream](docs/sdks/chat/README.md#stream) - Stream chat completion
-* [create](docs/sdks/chat/README.md#create) - Chat Completion
+* [stream](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/docs/sdks/chat/README.md#stream) - Stream chat completion
+* [create](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/docs/sdks/chat/README.md#create) - Chat Completion
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Server-sent event streaming [eventstream] -->
@@ -94,8 +94,8 @@ underlying connection.
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
@@ -132,8 +132,8 @@ To change the default retry strategy for a single API call, simply provide a ret
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
@@ -185,8 +185,8 @@ const mistralAzure = new MistralAzure({
         },
         retryConnectionErrors: false,
     },
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
@@ -228,8 +228,8 @@ import { MistralAzure } from "@mistralai/mistralai-azure";
 import { SDKValidationError } from "@mistralai/mistralai-azure/models/errors";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
@@ -288,8 +288,8 @@ import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
     server: "prod",
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
@@ -322,8 +322,8 @@ import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
     serverURL: "https://api.mistral.ai",
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
@@ -412,8 +412,8 @@ To authenticate with the API the `apiKey` parameter must be set when initializin
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {

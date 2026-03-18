@@ -17,15 +17,15 @@ Mistral AI provides the ability to stream responses back to a client in order to
 ### Example Usage
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const MistralGoogleCloud = new MistralGoogleCloud({
+const MistralGCP = new MistralGCP({
   region: "europe-west4",
   projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-  const result = await MistralGoogleCloud.chat.stream({
+  const result = await MistralGCP.chat.stream({
     model: "mistral-small-latest",
     messages: [
         {
@@ -69,15 +69,15 @@ Chat Completion
 ### Example Usage
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const MistralGoogleCloud = new MistralGoogleCloud({
+const MistralGCP = new MistralGCP({
   region: "europe-west4",
   projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-  const result = await MistralGoogleCloud.chat.complete({
+  const result = await MistralGCP.chat.complete({
     model: "mistral-small-latest",
     messages: [
         {

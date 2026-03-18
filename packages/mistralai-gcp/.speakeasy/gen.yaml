@@ -1,6 +1,6 @@
 configVersion: 2.0.0
 generation:
-  sdkClassName: MistralGoogleCloud
+  sdkClassName: MistralGCP
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
@@ -30,18 +30,18 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.0.0-alpha.1
+  version: 2.0.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
-      google-auth-library: ^9.11.0
+      google-auth-library: ^10.6.2
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
-  author: Speakeasy
-  baseErrorName: MistralGoogleCloudError
+  author: Mistral AI
+  baseErrorName: MistralGCPError
   clientServerStatusCodesAsErrors: true
   constFieldsAlwaysOptional: false
   defaultErrorName: SDKError

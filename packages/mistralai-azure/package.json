@@ -1,7 +1,8 @@
 {
   "name": "@mistralai/mistralai-azure",
-  "version": "2.0.0-alpha.1",
-  "author": "Speakeasy",
+  "version": "2.0.0",
+  "description": "TypeScript client library for Mistral AI on Azure",
+  "author": "Mistral AI",
   "type": "module",
   "main": "./esm/index.js",
   "exports": {

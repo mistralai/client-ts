@@ -1,4 +1,4 @@
-# MistralGoogleCloud SDK
+# MistralGCP SDK
 
 
 ## Overview

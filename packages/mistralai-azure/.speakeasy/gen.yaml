@@ -30,7 +30,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.0.0-alpha.1
+  version: 2.0.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -39,7 +39,7 @@ typescript:
   additionalPackageJSON: {}
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
-  author: Speakeasy
+  author: Mistral AI
   baseErrorName: MistralAzureError
   clientServerStatusCodesAsErrors: true
   constFieldsAlwaysOptional: false

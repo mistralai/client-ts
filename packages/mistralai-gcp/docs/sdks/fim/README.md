@@ -16,15 +16,15 @@ FIM completion.
 ### Example Usage
 
 ```typescript
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const MistralGoogleCloud = new MistralGoogleCloud({
+const MistralGCP = new MistralGCP({
   region: "europe-west4",
   projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-  const result = await MistralGoogleCloud.fim.complete({
+  const result = await MistralGCP.fim.complete({
     model: "codestral-2405",
     prompt: "def",
     suffix: "return a+b",

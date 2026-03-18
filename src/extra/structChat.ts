@@ -1,13 +1,79 @@
 import { z } from 'zod';
+import { z as zv4 } from 'zod/v4';
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { ResponseFormat } from "../models/components/responseformat.js";
 import * as components from "../models/components/index.js";
 
-function toJsonSchema(schema: z.ZodTypeAny): Record<string, unknown> {
-  if ('toJSONSchema' in z && typeof z.toJSONSchema === 'function') {
-    return z.toJSONSchema(schema) as Record<string, unknown>;
+/**
+ * Recursively makes a JSON schema strict-mode compatible:
+ * - Sets additionalProperties: false on all objects
+ * - Makes optional properties required with nullable type
+ * Mirrors Python SDK's rec_strict_json_schema + optional handling.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- operating on raw JSON schema objects
+function makeStrictJsonSchema(node: any): any {
+  if (typeof node !== 'object' || node === null) return node;
+  const result = { ...node };
+
+  if (result.type === 'object' && result.properties && typeof result.properties === 'object') {
+    const required = new Set<string>(Array.isArray(result.required) ? result.required : []);
+    const props: Record<string, any> = {};
+
+    for (const [key, value] of Object.entries(result.properties)) {
+      const processed = makeStrictJsonSchema(value);
+      if (!required.has(key)) {
+        required.add(key);
+        if (Array.isArray(processed.type)) {
+          if (!processed.type.includes('null')) props[key] = { ...processed, type: [...processed.type, 'null'] };
+          else props[key] = processed;
+        } else if (Array.isArray(processed.anyOf)) {
+          if (!processed.anyOf.some((s: any) => s.type === 'null'))
+            props[key] = { ...processed, anyOf: [...processed.anyOf, { type: 'null' }] };
+          else props[key] = processed;
+        } else if (processed.type) {
+          props[key] = { ...processed, type: [processed.type, 'null'] };
+        } else {
+          props[key] = processed;
+        }
+      } else {
+        props[key] = processed;
+      }
+    }
+
+    result.properties = props;
+    result.required = [...required];
+    result.additionalProperties = false;
   }
-  return zodToJsonSchema(schema) as Record<string, unknown>;
+
+  if (result.items) result.items = makeStrictJsonSchema(result.items);
+  for (const key of ['anyOf', 'oneOf', 'allOf']) {
+    if (Array.isArray(result[key]))
+      result[key] = result[key].map(makeStrictJsonSchema);
+  }
+  for (const key of ['$defs', 'definitions']) {
+    if (result[key] && typeof result[key] === 'object') {
+      const defs: Record<string, any> = {};
+      for (const [k, v] of Object.entries(result[key]))
+        defs[k] = makeStrictJsonSchema(v);
+      result[key] = defs;
+    }
+  }
+
+  return result;
+}
+
+function toJsonSchema(schema: z.ZodTypeAny): Record<string, unknown> {
+  let jsonSchema: Record<string, unknown>;
+
+  // Detect Zod v4 schemas by checking for _zod property (v3 schemas have _def only)
+  if ('_zod' in schema) {
+    jsonSchema = zv4.toJSONSchema(schema as any) as Record<string, unknown>;
+  } else {
+    jsonSchema = zodToJsonSchema(schema, { target: "openAi" }) as Record<string, unknown>;
+  }
+
+  delete jsonSchema['$schema'];
+  return makeStrictJsonSchema(jsonSchema);
 }
 
 export function transformToChatCompletionRequest<T extends z.ZodTypeAny>(
