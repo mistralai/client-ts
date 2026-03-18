@@ -33,12 +33,12 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.0.0-alpha.1
+  version: 2.0.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
       ws: ^8.18.0
-      zod-to-json-schema: ^3.24.1
+      zod-to-json-schema: ^3.25.0
     devDependencies:
       '@types/node': ^22.0.0
       '@types/ws': ^8.5.13
@@ -47,7 +47,7 @@ typescript:
     license: Apache-2.0
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
-  author: Speakeasy
+  author: Mistral AI
   baseErrorName: MistralError
   clientServerStatusCodesAsErrors: true
   constFieldsAlwaysOptional: false

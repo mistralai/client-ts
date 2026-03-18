@@ -21,6 +21,10 @@ const { Mistral } = await import("@mistralai/mistralai");
 
 Make sure your `tsconfig.json` uses `"module": "node16"` (or `"nodenext"`) and your `package.json` has `"type": "module"`.
 
+## GCP SDK Rename
+
+The GCP package class has been renamed to align with the Python SDK: `MistralGoogleCloud` → `MistralGCP`, `MistralGoogleCloudError` → `MistralGCPError`.
+
 ## Type Renames
 
 Many types have been renamed for consistency. The v2 OpenAPI spec uses shorter, more intuitive names.
@@ -141,14 +145,14 @@ response.usage.additionalProperties?.["cached_tokens"];
 
 ## Zod v4
 
-The SDK now uses Zod v4 internally. If you import Zod schemas from the SDK (e.g., `ChatCompletionResponse$inboundSchema`), note that Zod v4 has some API differences from v3. See the [Zod v4 migration guide](https://zod.dev/v4/changelog) for details.
+The SDK now uses Zod v4. If you import Zod schemas from the SDK (e.g., `ChatCompletionResponse$inboundSchema`) or use `chat.parse()` with Zod objects, you are working with Zod v4 schemas. See the [Zod v4 migration guide](https://zod.dev/v4/changelog) for API differences from v3.
 
 ## Version Support
 
-| Branch | Version | npm Tag | Publishing |
-|--------|---------|---------|-----------|
-| `v1` | 1.x (maintenance) | `latest` (until v2 GA) | Auto-publish on Speakeasy regen |
-| `main` | 2.x (alpha) | `alpha` | Manual dispatch |
+| Branch | Version | npm Tag |
+|--------|---------|---------|
+| `main` | 2.x | `latest` |
+| `v1` | 1.x (maintenance) | `v1` |
 
 To pin to v1:
 ```bash

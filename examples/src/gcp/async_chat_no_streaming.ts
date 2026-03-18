@@ -1,11 +1,11 @@
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
 const projectId = process.env["GOOGLE_PROJECT_ID"];
 if (!projectId) {
   throw new Error("missing GOOGLE_PROJECT_ID environment variable");
 }
 
-const sdk = new MistralGoogleCloud({
+const sdk = new MistralGCP({
   region: "europe-west4",
   projectId: projectId,
 });

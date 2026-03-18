@@ -31,7 +31,7 @@ function getModelInfo(model: string): [string, string] {
   return [model, modelId];
 }
 
-export class MistralGoogleCloud extends ClientSDK {
+export class MistralGCP extends ClientSDK {
   constructor(options: SDKOptions & GoogleCloudOptions = {}) {
     let projectId = options.projectId ?? "";
     options.region = options.region ?? "europe-west4";
@@ -47,18 +47,19 @@ export class MistralGoogleCloud extends ClientSDK {
       options.apiKey = async () => {
         const authClient = await auth.getClient();
         const authHeaders = await authClient.getRequestHeaders();
-        const token = authHeaders["Authorization"];
+        const token = authHeaders.get("Authorization");
         if (!token) {
           throw new Error("failed to get Google Cloud API key from the default authorization provider, check you are authenticated");
         }
 
         if (!options.projectId) {
-          if (!authHeaders["x-goog-user-project"]) {
+          const userProject = authHeaders.get("x-goog-user-project");
+          if (!userProject) {
             throw new Error(
-              "no project id available in default google credentials. Please provide a project id in the input arguments to MistralGoogleCloud."
+              "no project id available in default google credentials. Please provide a project id in the input arguments to MistralGCP."
             );
           }
-          projectId = authHeaders["x-goog-user-project"];
+          projectId = userProject;
         }
         return token;
       }

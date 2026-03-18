@@ -4,7 +4,7 @@
  */
 
 import * as z from "zod/v4";
-import { MistralGoogleCloudCore } from "../core.js";
+import { MistralGCPCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
 import { EventStream } from "../lib/event-streams.js";
 import * as M from "../lib/matchers.js";
@@ -22,7 +22,7 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
-import { MistralGoogleCloudError } from "../models/errors/mistralgoogleclouderror.js";
+import { MistralGCPError } from "../models/errors/mistralgoogleclouderror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -35,14 +35,14 @@ import { Result } from "../types/fp.js";
  * Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
  */
 export function chatStream(
-  client: MistralGoogleCloudCore,
+  client: MistralGCPCore,
   request: components.ChatCompletionStreamRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     EventStream<components.CompletionEvent>,
     | errors.HTTPValidationError
-    | MistralGoogleCloudError
+    | MistralGCPError
     | ResponseValidationError
     | ConnectionError
     | RequestAbortedError
@@ -60,7 +60,7 @@ export function chatStream(
 }
 
 async function $do(
-  client: MistralGoogleCloudCore,
+  client: MistralGCPCore,
   request: components.ChatCompletionStreamRequest,
   options?: RequestOptions,
 ): Promise<
@@ -68,7 +68,7 @@ async function $do(
     Result<
       EventStream<components.CompletionEvent>,
       | errors.HTTPValidationError
-      | MistralGoogleCloudError
+      | MistralGCPError
       | ResponseValidationError
       | ConnectionError
       | RequestAbortedError
@@ -151,7 +151,7 @@ async function $do(
   const [result] = await M.match<
     EventStream<components.CompletionEvent>,
     | errors.HTTPValidationError
-    | MistralGoogleCloudError
+    | MistralGCPError
     | ResponseValidationError
     | ConnectionError
     | RequestAbortedError
