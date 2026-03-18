@@ -6,12 +6,12 @@ management:
   speakeasyVersion: 1.751.1
   generationVersion: 2.859.0
   releaseVersion: 2.0.0
-  configChecksum: b365e6a01a4b08e2b532e1b57ca5ecaa
+  configChecksum: 0b65a2dcd85dcaea46b5bcc879081fed
   published: true
 persistentEdits:
-  generation_id: e7ad7422-2330-49ae-9eed-68ec643d0897
-  pristine_commit_hash: 80649968d4ceaaf5db16c1296a2ef7c0ee1c788e
-  pristine_tree_hash: ff2b562bd0489451afa92101c533ce589163a999
+  generation_id: abb0ad86-490c-4b2a-82bc-43062bd898ab
+  pristine_commit_hash: fcd42e8c3edaa0ce9a096f8ec567a87068e188ba
+  pristine_tree_hash: fdc581207e1d03fe63a3ed351da69dff9761bab7
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -2294,8 +2294,8 @@ trackedFiles:
     pristine_git_object: a9acff2e8e85a81c0d2bd2a9fc078f77876dded4
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b0fe3560899e17f6137f54569944a77d8b32045e
-    pristine_git_object: 3728ca42fa0be5608418bf17059103d20a33a35d
+    last_write_checksum: sha1:1d3bf973c5783122d93c647955b8c3db999d800e
+    pristine_git_object: f639f7c479b2de1ee89f337ce0f1b5a5303b4d98
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:b4abcb50399300aee0484bb5f76c6718e97c981d
@@ -4594,8 +4594,8 @@ trackedFiles:
     pristine_git_object: 5408a956ed13c024b1edca87a27de72d6daa7c74
   src/sdk/connectors.ts:
     id: 2dda252d574b
-    last_write_checksum: sha1:d27128c963efad20ecdd82ea83cfd1c0084ba3e8
-    pristine_git_object: 78f49eae77125b2dff3590578c24b662ad253993
+    last_write_checksum: sha1:f7c910b9d41b9cd6c803587b9564f95390292aa5
+    pristine_git_object: 0f59ba68d5b126680d42b228e4e94d7324bfb0bb
   src/sdk/conversations.ts:
     id: 10c775d37e01
     last_write_checksum: sha1:a6c5cb3da4da9c20713e4ed9c96255d91659e018
