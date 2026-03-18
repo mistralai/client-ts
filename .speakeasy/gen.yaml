@@ -43,8 +43,7 @@ typescript:
       '@types/node': ^22.0.0
       '@types/ws': ^8.5.13
     peerDependencies: {}
-  additionalPackageJSON:
-    license: Apache-2.0
+  additionalPackageJSON: {}
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   author: Mistral AI

@@ -37,8 +37,7 @@ typescript:
       google-auth-library: ^10.6.2
     devDependencies: {}
     peerDependencies: {}
-  additionalPackageJSON:
-    license: Apache-2.0
+  additionalPackageJSON: {}
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   author: Mistral AI
