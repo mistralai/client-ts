@@ -2,6 +2,7 @@
   "name": "@mistralai/mistralai",
   "version": "2.0.0",
   "author": "Mistral AI",
+  "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
   "type": "module",
   "main": "./esm/index.js",
