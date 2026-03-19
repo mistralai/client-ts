@@ -7,7 +7,7 @@ permissions:
 "on":
   push:
     branches:
-      - v1
+      - main
     paths:
       - RELEASES.md
       - '*/RELEASES.md'
