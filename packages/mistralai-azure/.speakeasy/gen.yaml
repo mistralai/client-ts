@@ -36,7 +36,9 @@ typescript:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
-  additionalPackageJSON: {}
+  additionalPackageJSON:
+    description: TypeScript client library for Mistral AI on Azure
+    license: Apache-2.0
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   author: Mistral AI
