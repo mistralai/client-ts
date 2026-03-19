@@ -1,7 +1,7 @@
 {
   "name": "@mistralai/mistralai-azure",
-  "version": "2.0.0-alpha.1",
-  "author": "Speakeasy",
+  "version": "2.0.0",
+  "author": "Mistral AI",
   "type": "module",
   "main": "./esm/index.js",
   "exports": {
