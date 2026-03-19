@@ -4,7 +4,7 @@ Below is a guide how to run the examples if you have cloned this repo.
 
 ## Prerequisites
 
-- Node.js v18+
+- Node.js v20+
 
 ## How to run the examples locally
 
@@ -40,7 +40,7 @@ npm run test --prefix examples
 If you just want to run one example file, you can do so with:
 
 ```properties
-npm run test --prefix examples -- --files src/stag_async_moderation.ts
+npm run test --prefix examples -- --files src/async_chat_streaming.ts
 ```
 
 ### Realtime transcription from a file
