@@ -18,13 +18,13 @@ FIM completion.
 ```typescript
 import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const MistralGCP = new MistralGCP({
+const mistralGCP = new MistralGCP({
   region: "europe-west4",
   projectId: process.env["GOOGLE_PROJECT_ID"],
 });
 
 async function run() {
-  const result = await MistralGCP.fim.complete({
+  const result = await mistralGCP.fim.complete({
     model: "codestral-2405",
     prompt: "def",
     suffix: "return a+b",

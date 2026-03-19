@@ -20,8 +20,8 @@ Mistral AI provides the ability to stream responses back to a client in order to
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env.["AZURE_API_KEY"],
-    endpoint: process.env.["AZURE_ENDPOINT"],
+    apiKey: process.env["AZURE_API_KEY"],
+    endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
