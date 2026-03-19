@@ -1,17 +1,19 @@
 lockVersion: ""
 id: ""
 management:
-  docChecksum: 935dfa929e1e1ce9ce95e8113516b4d6
+  docChecksum: a9300bb15f1502486d8652842b44e197
   docVersion: 1.0.0
   speakeasyVersion: 1.751.1
   generationVersion: 2.859.0
-  releaseVersion: 2.0.0
-  configChecksum: 0b65a2dcd85dcaea46b5bcc879081fed
+  releaseVersion: 2.0.1
+  configChecksum: 6aa427d81d41b1b736560bd1adaac017
+  repoURL: https://github.com/mistralai/client-ts.git
+  installationURL: https://github.com/mistralai/client-ts
   published: true
 persistentEdits:
-  generation_id: abb0ad86-490c-4b2a-82bc-43062bd898ab
-  pristine_commit_hash: fcd42e8c3edaa0ce9a096f8ec567a87068e188ba
-  pristine_tree_hash: fdc581207e1d03fe63a3ed351da69dff9761bab7
+  generation_id: fea06b6d-4e12-4051-a0b6-2a49a239a62c
+  pristine_commit_hash: 98d25e1b380bf1907274a55b3326ff92079ed62f
+  pristine_tree_hash: 387f17f7f53d69e26cc68afe954f7b574c0d5695
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -46,8 +48,8 @@ features:
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
-    last_write_checksum: sha1:f4d52d2df7825ea2ab4f05c09307ed0f1c08f1d2
-    pristine_git_object: aabeeea44997f0df6e8f727507395ed60ac8b6fa
+    last_write_checksum: sha1:494a2523eea37fa8a3dc9804d2622c193baa51a9
+    pristine_git_object: 9832db9d1452b3fb64b21f2135cb912a71fae71e
   .devcontainer/devcontainer.json:
     id: b34062a34eb1
     last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
@@ -418,8 +420,8 @@ trackedFiles:
     pristine_git_object: 0437450bf188cf9f0e72f0601b30ca699f1657ec
   docs/models/components/completionargs.md:
     id: d375c7e7f65d
-    last_write_checksum: sha1:584e25d0a8159e7230110f9141e068373d8d2673
-    pristine_git_object: f9b58841aa97d462ed099e6eb6d8ec5bfb8b8910
+    last_write_checksum: sha1:fb5a9dc1204158e1b7c704cf059407722f7626dc
+    pristine_git_object: af41f4ed7775a8f7828bda81c5246ba1304baa3f
   docs/models/components/completionargsstop.md:
     id: f5617610d750
     last_write_checksum: sha1:d5bf9f48c862cfcbe8074b701381701959ae2d9b
@@ -1202,8 +1204,8 @@ trackedFiles:
     pristine_git_object: 543c5586364c0d7a98afae1fa1e1fed13f7c2425
   docs/models/components/modelcapabilities.md:
     id: ce514490b717
-    last_write_checksum: sha1:5dfced1301197132c5c719b6a4e3e323026811b6
-    pristine_git_object: e622c9be04c4d488ea08a44508bea66b48fb1437
+    last_write_checksum: sha1:bac92e7f3b5007d84d681dff65932ed3cc19f43c
+    pristine_git_object: a637cd6a1cb66807d307319c89d03b14b838b233
   docs/models/components/modelconversation.md:
     id: 238e25efc08c
     last_write_checksum: sha1:e197f91af1160a36d9717a501da9a6f76236c606
@@ -1398,8 +1400,8 @@ trackedFiles:
     pristine_git_object: 2a0ed424db33e7e0325f0696ef4e40d79c97d78b
   docs/models/components/reasoningeffort.md:
     id: d0749e80416e
-    last_write_checksum: sha1:12c82c8756f25ff4c12ac92e92b38d8a0cd7f145
-    pristine_git_object: 27d2f90d8cc0992acebc4d19d10f7ea1c2aace7c
+    last_write_checksum: sha1:b2e996a9e906f33c9cf005fc378783f6cecefa26
+    pristine_git_object: b0fe82f36c8d3077c9627947a5115785ac262657
   docs/models/components/referencechunk.md:
     id: 029a78502312
     last_write_checksum: sha1:26c260b5df1e583995ee9777ce7935230ddcd9ca
@@ -2290,12 +2292,12 @@ trackedFiles:
     pristine_git_object: 169f527410b93ad9d70fd908eadb051ab8ac0472
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:4bedfa004ab724d05b9e33bf4be6b06c602c3d1a
-    pristine_git_object: a9acff2e8e85a81c0d2bd2a9fc078f77876dded4
+    last_write_checksum: sha1:f79f9c5641679f441a36a9ac838e7000ffdddf5e
+    pristine_git_object: a83d6f1b2a59f9d4d6111ce44ddb5478e4cbc9aa
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:1d3bf973c5783122d93c647955b8c3db999d800e
-    pristine_git_object: f639f7c479b2de1ee89f337ce0f1b5a5303b4d98
+    last_write_checksum: sha1:0c422e245c1be197aa3e10c0d514a32b2a049c2a
+    pristine_git_object: 21c7d3e182ebd2a2dbf4324dcefad3e4f5b761ba
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:b4abcb50399300aee0484bb5f76c6718e97c981d
@@ -2814,8 +2816,8 @@ trackedFiles:
     pristine_git_object: a187e58707bdb726ca2aff74941efe7493422d4e
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:8445d02083efaf04d87338e775664078f1376350
-    pristine_git_object: 2a79f3f34c0c1a79ab82c80788ba420866bec0b6
+    last_write_checksum: sha1:c9fb94f67147d57074f52e11c2574ac82527d494
+    pristine_git_object: d6c6462d5064bdbf2ffbcaef459c89c9c507f235
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:eaac763b22717206a6199104e0403ed17a4e2711
@@ -3082,8 +3084,8 @@ trackedFiles:
     pristine_git_object: c1bbc0cd4f505c5d2654c97e973e124c660812dc
   src/models/components/completionargs.ts:
     id: d4157cb371b7
-    last_write_checksum: sha1:448def4fc80baacf6d5d64d6ec9c7606b699e64d
-    pristine_git_object: 1961c81a6dddea41b3be6d4738419abebf236c79
+    last_write_checksum: sha1:f73200301246a615fbffbf4064ee34eab565460e
+    pristine_git_object: 43f11feaebee12bc005ee79f64e169dd9f3b64fe
   src/models/components/completionargsstop.ts:
     id: 50f74499a327
     last_write_checksum: sha1:7b1796d5ec59f78d18d92e37011bf41b38f6a5a8
@@ -3682,8 +3684,8 @@ trackedFiles:
     pristine_git_object: 8d3d0f395a09bfe3fb12ee981f96be4dd4b4703e
   src/models/components/modelcapabilities.ts:
     id: 355a0361c549
-    last_write_checksum: sha1:b792d219b28ea9ea3323785204af059fabfe8b36
-    pristine_git_object: 4506436e16678014b8787faf7f3ea00c6cddf982
+    last_write_checksum: sha1:38f1c7db959ecdfab2af6db9147bacd7a698f944
+    pristine_git_object: 434e5bcdbc054c49cbc9fc986bb157cfb4bbe3fa
   src/models/components/modelconversation.ts:
     id: e79bc3ad623a
     last_write_checksum: sha1:a85ded1165f109540bb4a2ccbe944c13255f0be7
@@ -3854,8 +3856,8 @@ trackedFiles:
     pristine_git_object: ac5310488e828eb4115af13e22e2b7f7b04f3bb2
   src/models/components/reasoningeffort.ts:
     id: 5cfdc909f234
-    last_write_checksum: sha1:3806e2a1b673caa35aaf121ed0d25993034eda56
-    pristine_git_object: 153c8f6d60c7b7baebb3fd4975a01345b4becdda
+    last_write_checksum: sha1:b9d1e3b0fb443bfa7b081e3a1113091e0498e138
+    pristine_git_object: dce3c2de414085685b3048634dd47c5f2ab5dade
   src/models/components/referencechunk.ts:
     id: f898c270cc77
     last_write_checksum: sha1:708644f6d9f1ca96e10e268191fe3a879f25855c
@@ -4733,7 +4735,7 @@ examples:
           model_id: "ft:open-mistral-7b:587a6b29:20240514:7e773925"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "model", "owned_by": "mistralai", "capabilities": {"completion_chat": false, "function_calling": false, "completion_fim": false, "fine_tuning": false, "vision": false, "ocr": false, "classification": false, "moderation": false, "audio": false, "audio_transcription": false, "audio_transcription_realtime": false, "audio_speech": false}, "max_context_length": 32768, "type": "fine-tuned", "job": "Product Markets Facilitator", "root": "<value>", "archived": false}
+          application/json: {"id": "<id>", "object": "model", "owned_by": "mistralai", "capabilities": {"completion_chat": false, "function_calling": false, "reasoning": false, "completion_fim": false, "fine_tuning": false, "vision": false, "ocr": false, "classification": false, "moderation": false, "audio": false, "audio_transcription": false, "audio_transcription_realtime": false, "audio_speech": false}, "max_context_length": 32768, "type": "fine-tuned", "job": "Product Markets Facilitator", "root": "<value>", "archived": false}
         "422":
           application/json: {}
     userExample:
@@ -4742,7 +4744,7 @@ examples:
           model_id: "ft:open-mistral-7b:587a6b29:20240514:7e773925"
       responses:
         "200":
-          application/json: {"id": "<id>", "object": "model", "owned_by": "mistralai", "capabilities": {"completion_chat": false, "function_calling": false, "completion_fim": false, "fine_tuning": false, "vision": false, "ocr": false, "classification": false, "moderation": false, "audio": false, "audio_transcription": false, "audio_transcription_realtime": false, "audio_speech": false}, "max_context_length": 32768, "type": "fine-tuned", "job": "Future Data Representative", "root": "<value>", "archived": false}
+          application/json: {"id": "<id>", "object": "model", "owned_by": "mistralai", "capabilities": {"completion_chat": false, "function_calling": false, "reasoning": false, "completion_fim": false, "fine_tuning": false, "vision": false, "ocr": false, "classification": false, "moderation": false, "audio": false, "audio_transcription": false, "audio_transcription_realtime": false, "audio_speech": false}, "max_context_length": 32768, "type": "fine-tuned", "job": "Future Data Representative", "root": "<value>", "archived": false}
   delete_model_v1_models__model_id__delete:
     speakeasy-default-delete-model-v1-models-model-id-delete:
       parameters:
@@ -5944,3 +5946,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes:\n* `mistral.models.list()`:  `response.data[].union(base).capabilities.reasoning` **Added**\n* `mistral.models.retrieve()`:  `response.union(base).capabilities.reasoning` **Added**\n* `mistral.beta.conversations.start()`: \n  *  `request.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.conversations.list()`:  `response.[].union(ModelConversation).completionArgs.reasoningEffort` **Added**\n* `mistral.beta.conversations.get()`:  `response.union(ModelConversation).completionArgs.reasoningEffort` **Added**\n* `mistral.beta.conversations.append()`: \n  *  `request.conversationAppendRequest.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.conversations.restart()`: \n  *  `request.conversationRestartRequest.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.conversations.startStream()`: \n  *  `request.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.conversations.appendStream()`: \n  *  `request.conversationAppendStreamRequest.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.conversations.restartStream()`: \n  *  `request.conversationRestartStreamRequest.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.agents.create()`: \n  *  `request.completionArgs.reasoningEffort` **Added**\n  *  `response.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.agents.list()`:  `response.[].completionArgs.reasoningEffort` **Added**\n* `mistral.beta.agents.get()`:  `response.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.agents.update()`: \n  *  `request.updateAgentRequest.completionArgs.reasoningEffort` **Added**\n  *  `response.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.agents.updateVersion()`:  `response.completionArgs.reasoningEffort` **Added**\n* `mistral.beta.agents.listVersions()`:  `response.[].completionArgs.reasoningEffort` **Added**\n* `mistral.beta.agents.getVersion()`:  `response.completionArgs.reasoningEffort` **Added**\n"
