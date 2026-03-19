@@ -37,7 +37,9 @@ typescript:
       google-auth-library: ^10.6.2
     devDependencies: {}
     peerDependencies: {}
-  additionalPackageJSON: {}
+  additionalPackageJSON:
+    description: TypeScript client library for Mistral AI on Google Cloud
+    license: Apache-2.0
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   author: Mistral AI
