@@ -1,7 +1,6 @@
 {
   "name": "@mistralai/mistralai-gcp",
   "version": "2.0.0",
-  "description": "TypeScript client library for Mistral AI on Google Cloud",
   "author": "Mistral AI",
   "type": "module",
   "main": "./esm/index.js",
