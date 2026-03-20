@@ -48,6 +48,11 @@ import {
   ImageGenerationTool$outboundSchema,
 } from "./imagegenerationtool.js";
 import {
+  MetadataDict,
+  MetadataDict$Outbound,
+  MetadataDict$outboundSchema,
+} from "./metadatadict.js";
+import {
   WebSearchPremiumTool,
   WebSearchPremiumTool$Outbound,
   WebSearchPremiumTool$outboundSchema,
@@ -67,13 +72,13 @@ export type ConversationRequestHandoffExecution = ClosedEnum<
 >;
 
 export type ConversationRequestTool =
-  | CodeInterpreterTool
-  | CustomConnector
-  | DocumentLibraryTool
+  | (CodeInterpreterTool & { type: "code_interpreter" })
+  | (CustomConnector & { type: "connector" })
+  | (DocumentLibraryTool & { type: "document_library" })
   | FunctionTool
-  | ImageGenerationTool
-  | WebSearchTool
-  | WebSearchPremiumTool;
+  | (ImageGenerationTool & { type: "image_generation" })
+  | (WebSearchTool & { type: "web_search" })
+  | (WebSearchPremiumTool & { type: "web_search_premium" });
 
 export type ConversationRequestAgentVersion = string | number;
 
@@ -85,13 +90,13 @@ export type ConversationRequest = {
   instructions?: string | null | undefined;
   tools?:
     | Array<
-      | CodeInterpreterTool
-      | CustomConnector
-      | DocumentLibraryTool
+      | (CodeInterpreterTool & { type: "code_interpreter" })
+      | (CustomConnector & { type: "connector" })
+      | (DocumentLibraryTool & { type: "document_library" })
       | FunctionTool
-      | ImageGenerationTool
-      | WebSearchTool
-      | WebSearchPremiumTool
+      | (ImageGenerationTool & { type: "image_generation" })
+      | (WebSearchTool & { type: "web_search" })
+      | (WebSearchPremiumTool & { type: "web_search_premium" })
     >
     | null
     | undefined;
@@ -99,7 +104,7 @@ export type ConversationRequest = {
   guardrails?: Array<GuardrailConfig> | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
-  metadata?: { [k: string]: any } | null | undefined;
+  metadata?: MetadataDict | null | undefined;
   agentId?: string | null | undefined;
   agentVersion?: string | number | null | undefined;
   model?: string | null | undefined;
@@ -112,26 +117,36 @@ export const ConversationRequestHandoffExecution$outboundSchema: z.ZodEnum<
 
 /** @internal */
 export type ConversationRequestTool$Outbound =
-  | CodeInterpreterTool$Outbound
-  | CustomConnector$Outbound
-  | DocumentLibraryTool$Outbound
+  | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
+  | (CustomConnector$Outbound & { type: "connector" })
+  | (DocumentLibraryTool$Outbound & { type: "document_library" })
   | FunctionTool$Outbound
-  | ImageGenerationTool$Outbound
-  | WebSearchTool$Outbound
-  | WebSearchPremiumTool$Outbound;
+  | (ImageGenerationTool$Outbound & { type: "image_generation" })
+  | (WebSearchTool$Outbound & { type: "web_search" })
+  | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" });
 
 /** @internal */
 export const ConversationRequestTool$outboundSchema: z.ZodType<
   ConversationRequestTool$Outbound,
   ConversationRequestTool
 > = z.union([
-  CodeInterpreterTool$outboundSchema,
-  CustomConnector$outboundSchema,
-  DocumentLibraryTool$outboundSchema,
+  CodeInterpreterTool$outboundSchema.and(
+    z.object({ type: z.literal("code_interpreter") }),
+  ),
+  CustomConnector$outboundSchema.and(
+    z.object({ type: z.literal("connector") }),
+  ),
+  DocumentLibraryTool$outboundSchema.and(
+    z.object({ type: z.literal("document_library") }),
+  ),
   FunctionTool$outboundSchema,
-  ImageGenerationTool$outboundSchema,
-  WebSearchTool$outboundSchema,
-  WebSearchPremiumTool$outboundSchema,
+  ImageGenerationTool$outboundSchema.and(
+    z.object({ type: z.literal("image_generation") }),
+  ),
+  WebSearchTool$outboundSchema.and(z.object({ type: z.literal("web_search") })),
+  WebSearchPremiumTool$outboundSchema.and(
+    z.object({ type: z.literal("web_search_premium") }),
+  ),
 ]);
 
 export function conversationRequestToolToJSON(
@@ -170,13 +185,13 @@ export type ConversationRequest$Outbound = {
   instructions?: string | null | undefined;
   tools?:
     | Array<
-      | CodeInterpreterTool$Outbound
-      | CustomConnector$Outbound
-      | DocumentLibraryTool$Outbound
+      | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
+      | (CustomConnector$Outbound & { type: "connector" })
+      | (DocumentLibraryTool$Outbound & { type: "document_library" })
       | FunctionTool$Outbound
-      | ImageGenerationTool$Outbound
-      | WebSearchTool$Outbound
-      | WebSearchPremiumTool$Outbound
+      | (ImageGenerationTool$Outbound & { type: "image_generation" })
+      | (WebSearchTool$Outbound & { type: "web_search" })
+      | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" })
     >
     | null
     | undefined;
@@ -184,7 +199,7 @@ export type ConversationRequest$Outbound = {
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
-  metadata?: { [k: string]: any } | null | undefined;
+  metadata?: MetadataDict$Outbound | null | undefined;
   agent_id?: string | null | undefined;
   agent_version?: string | number | null | undefined;
   model?: string | null | undefined;
@@ -205,13 +220,25 @@ export const ConversationRequest$outboundSchema: z.ZodType<
   tools: z.nullable(
     z.array(
       z.union([
-        CodeInterpreterTool$outboundSchema,
-        CustomConnector$outboundSchema,
-        DocumentLibraryTool$outboundSchema,
+        CodeInterpreterTool$outboundSchema.and(
+          z.object({ type: z.literal("code_interpreter") }),
+        ),
+        CustomConnector$outboundSchema.and(
+          z.object({ type: z.literal("connector") }),
+        ),
+        DocumentLibraryTool$outboundSchema.and(
+          z.object({ type: z.literal("document_library") }),
+        ),
         FunctionTool$outboundSchema,
-        ImageGenerationTool$outboundSchema,
-        WebSearchTool$outboundSchema,
-        WebSearchPremiumTool$outboundSchema,
+        ImageGenerationTool$outboundSchema.and(
+          z.object({ type: z.literal("image_generation") }),
+        ),
+        WebSearchTool$outboundSchema.and(
+          z.object({ type: z.literal("web_search") }),
+        ),
+        WebSearchPremiumTool$outboundSchema.and(
+          z.object({ type: z.literal("web_search_premium") }),
+        ),
       ]),
     ),
   ).optional(),
@@ -219,7 +246,7 @@ export const ConversationRequest$outboundSchema: z.ZodType<
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
+  metadata: z.nullable(MetadataDict$outboundSchema).optional(),
   agentId: z.nullable(z.string()).optional(),
   agentVersion: z.nullable(smartUnion([z.string(), z.int()])).optional(),
   model: z.nullable(z.string()).optional(),

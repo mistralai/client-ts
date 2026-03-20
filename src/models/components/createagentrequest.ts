@@ -41,6 +41,11 @@ import {
   ImageGenerationTool$outboundSchema,
 } from "./imagegenerationtool.js";
 import {
+  MetadataDict,
+  MetadataDict$Outbound,
+  MetadataDict$outboundSchema,
+} from "./metadatadict.js";
+import {
   WebSearchPremiumTool,
   WebSearchPremiumTool$Outbound,
   WebSearchPremiumTool$outboundSchema,
@@ -52,13 +57,13 @@ import {
 } from "./websearchtool.js";
 
 export type CreateAgentRequestTool =
-  | CodeInterpreterTool
-  | CustomConnector
-  | DocumentLibraryTool
+  | (CodeInterpreterTool & { type: "code_interpreter" })
+  | (CustomConnector & { type: "connector" })
+  | (DocumentLibraryTool & { type: "document_library" })
   | FunctionTool
-  | ImageGenerationTool
-  | WebSearchTool
-  | WebSearchPremiumTool;
+  | (ImageGenerationTool & { type: "image_generation" })
+  | (WebSearchTool & { type: "web_search" })
+  | (WebSearchPremiumTool & { type: "web_search_premium" });
 
 export type CreateAgentRequest = {
   /**
@@ -70,13 +75,13 @@ export type CreateAgentRequest = {
    */
   tools?:
     | Array<
-      | CodeInterpreterTool
-      | CustomConnector
-      | DocumentLibraryTool
+      | (CodeInterpreterTool & { type: "code_interpreter" })
+      | (CustomConnector & { type: "connector" })
+      | (DocumentLibraryTool & { type: "document_library" })
       | FunctionTool
-      | ImageGenerationTool
-      | WebSearchTool
-      | WebSearchPremiumTool
+      | (ImageGenerationTool & { type: "image_generation" })
+      | (WebSearchTool & { type: "web_search" })
+      | (WebSearchPremiumTool & { type: "web_search_premium" })
     >
     | undefined;
   /**
@@ -88,32 +93,42 @@ export type CreateAgentRequest = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
-  metadata?: { [k: string]: any } | null | undefined;
+  metadata?: MetadataDict | null | undefined;
   versionMessage?: string | null | undefined;
 };
 
 /** @internal */
 export type CreateAgentRequestTool$Outbound =
-  | CodeInterpreterTool$Outbound
-  | CustomConnector$Outbound
-  | DocumentLibraryTool$Outbound
+  | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
+  | (CustomConnector$Outbound & { type: "connector" })
+  | (DocumentLibraryTool$Outbound & { type: "document_library" })
   | FunctionTool$Outbound
-  | ImageGenerationTool$Outbound
-  | WebSearchTool$Outbound
-  | WebSearchPremiumTool$Outbound;
+  | (ImageGenerationTool$Outbound & { type: "image_generation" })
+  | (WebSearchTool$Outbound & { type: "web_search" })
+  | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" });
 
 /** @internal */
 export const CreateAgentRequestTool$outboundSchema: z.ZodType<
   CreateAgentRequestTool$Outbound,
   CreateAgentRequestTool
 > = z.union([
-  CodeInterpreterTool$outboundSchema,
-  CustomConnector$outboundSchema,
-  DocumentLibraryTool$outboundSchema,
+  CodeInterpreterTool$outboundSchema.and(
+    z.object({ type: z.literal("code_interpreter") }),
+  ),
+  CustomConnector$outboundSchema.and(
+    z.object({ type: z.literal("connector") }),
+  ),
+  DocumentLibraryTool$outboundSchema.and(
+    z.object({ type: z.literal("document_library") }),
+  ),
   FunctionTool$outboundSchema,
-  ImageGenerationTool$outboundSchema,
-  WebSearchTool$outboundSchema,
-  WebSearchPremiumTool$outboundSchema,
+  ImageGenerationTool$outboundSchema.and(
+    z.object({ type: z.literal("image_generation") }),
+  ),
+  WebSearchTool$outboundSchema.and(z.object({ type: z.literal("web_search") })),
+  WebSearchPremiumTool$outboundSchema.and(
+    z.object({ type: z.literal("web_search_premium") }),
+  ),
 ]);
 
 export function createAgentRequestToolToJSON(
@@ -129,13 +144,13 @@ export type CreateAgentRequest$Outbound = {
   instructions?: string | null | undefined;
   tools?:
     | Array<
-      | CodeInterpreterTool$Outbound
-      | CustomConnector$Outbound
-      | DocumentLibraryTool$Outbound
+      | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
+      | (CustomConnector$Outbound & { type: "connector" })
+      | (DocumentLibraryTool$Outbound & { type: "document_library" })
       | FunctionTool$Outbound
-      | ImageGenerationTool$Outbound
-      | WebSearchTool$Outbound
-      | WebSearchPremiumTool$Outbound
+      | (ImageGenerationTool$Outbound & { type: "image_generation" })
+      | (WebSearchTool$Outbound & { type: "web_search" })
+      | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" })
     >
     | undefined;
   completion_args?: CompletionArgs$Outbound | undefined;
@@ -144,7 +159,7 @@ export type CreateAgentRequest$Outbound = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
-  metadata?: { [k: string]: any } | null | undefined;
+  metadata?: MetadataDict$Outbound | null | undefined;
   version_message?: string | null | undefined;
 };
 
@@ -156,13 +171,25 @@ export const CreateAgentRequest$outboundSchema: z.ZodType<
   instructions: z.nullable(z.string()).optional(),
   tools: z.array(
     z.union([
-      CodeInterpreterTool$outboundSchema,
-      CustomConnector$outboundSchema,
-      DocumentLibraryTool$outboundSchema,
+      CodeInterpreterTool$outboundSchema.and(
+        z.object({ type: z.literal("code_interpreter") }),
+      ),
+      CustomConnector$outboundSchema.and(
+        z.object({ type: z.literal("connector") }),
+      ),
+      DocumentLibraryTool$outboundSchema.and(
+        z.object({ type: z.literal("document_library") }),
+      ),
       FunctionTool$outboundSchema,
-      ImageGenerationTool$outboundSchema,
-      WebSearchTool$outboundSchema,
-      WebSearchPremiumTool$outboundSchema,
+      ImageGenerationTool$outboundSchema.and(
+        z.object({ type: z.literal("image_generation") }),
+      ),
+      WebSearchTool$outboundSchema.and(
+        z.object({ type: z.literal("web_search") }),
+      ),
+      WebSearchPremiumTool$outboundSchema.and(
+        z.object({ type: z.literal("web_search_premium") }),
+      ),
     ]),
   ).optional(),
   completionArgs: CompletionArgs$outboundSchema.optional(),
@@ -171,7 +198,7 @@ export const CreateAgentRequest$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
-  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
+  metadata: z.nullable(MetadataDict$outboundSchema).optional(),
   versionMessage: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

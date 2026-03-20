@@ -10,7 +10,8 @@ let value: JudgeClassificationOutput = {
   options: [
     {
       value: "<value>",
-      description: "chow limp censor though tennis",
+      description:
+        "round whether like yet midst than inquisitively resource cafe",
     },
   ],
 };

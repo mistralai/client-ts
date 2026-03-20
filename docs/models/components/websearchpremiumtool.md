@@ -5,14 +5,12 @@
 ```typescript
 import { WebSearchPremiumTool } from "@mistralai/mistralai/models/components";
 
-let value: WebSearchPremiumTool = {
-  type: "web_search_premium",
-};
+let value: WebSearchPremiumTool = {};
 ```
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `toolConfiguration`                                                          | [components.ToolConfiguration](../../models/components/toolconfiguration.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
-| `type`                                                                       | *"web_search_premium"*                                                       | :heavy_check_mark:                                                           | N/A                                                                          |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `toolConfiguration`                                                                        | [components.ToolConfiguration](../../models/components/toolconfiguration.md)               | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `type`                                                                                     | [components.WebSearchPremiumToolType](../../models/components/websearchpremiumtooltype.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

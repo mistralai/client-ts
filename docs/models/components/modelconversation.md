@@ -12,9 +12,9 @@ let value: ModelConversation = {
     },
   },
   id: "<id>",
-  createdAt: new Date("2025-06-14T04:21:29.555Z"),
-  updatedAt: new Date("2026-10-08T03:17:09.039Z"),
-  model: "Escalade",
+  createdAt: new Date("2024-10-24T08:41:46.904Z"),
+  updatedAt: new Date("2024-07-31T21:14:27.441Z"),
+  model: "Model T",
 };
 ```
 
@@ -28,7 +28,7 @@ let value: ModelConversation = {
 | `guardrails`                                                                                  | [components.GuardrailConfig](../../models/components/guardrailconfig.md)[]                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `name`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | Name given to the conversation.                                                               |
 | `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | Description of the what the conversation is about.                                            |
-| `metadata`                                                                                    | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | Custom metadata for the conversation.                                                         |
+| `metadata`                                                                                    | [components.MetadataDict](../../models/components/metadatadict.md)                            | :heavy_minus_sign:                                                                            | Custom metadata for the conversation.                                                         |
 | `object`                                                                                      | *"conversation"*                                                                              | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
