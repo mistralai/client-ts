@@ -86,8 +86,8 @@ export function transformToChatCompletionRequest<T extends z.ZodTypeAny>(
 
   return {
     ...rest,
-    responseFormat: transformedResponseFormat,
-  };
+    ...(transformedResponseFormat ? { responseFormat: transformedResponseFormat } : {}),
+  } as components.ChatCompletionRequest;
 }
 
 export type ParsedChatCompletionRequest<T extends z.ZodTypeAny> = Omit<components.ChatCompletionRequest, 'responseFormat'> & {
