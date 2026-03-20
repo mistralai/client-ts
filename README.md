@@ -231,10 +231,23 @@ We have dedicated SDKs for the following providers:
 * [complete](docs/sdks/agents/README.md#complete) - Agents Completion
 * [stream](docs/sdks/agents/README.md#stream) - Stream Agents completion
 
+### [Audio.Speech](docs/sdks/speech/README.md)
+
+* [complete](docs/sdks/speech/README.md#complete) - Speech
+
 ### [Audio.Transcriptions](docs/sdks/transcriptions/README.md)
 
 * [complete](docs/sdks/transcriptions/README.md#complete) - Create Transcription
 * [stream](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
+
+### [Audio.Voices](docs/sdks/voices/README.md)
+
+* [list](docs/sdks/voices/README.md#list) - List all voices
+* [create](docs/sdks/voices/README.md#create) - Create a new voice
+* [delete](docs/sdks/voices/README.md#delete) - Delete a custom voice
+* [update](docs/sdks/voices/README.md#update) - Update voice metadata
+* [get](docs/sdks/voices/README.md#get) - Get voice details
+* [getSampleAudio](docs/sdks/voices/README.md#getsampleaudio) - Get voice sample audio
 
 ### [Batch.Jobs](docs/sdks/batchjobs/README.md)
 
@@ -438,27 +451,11 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.conversations.startStream({
-    inputs: [
-      {
-        object: "entry",
-        type: "agent.handoff",
-        previousAgentId: "<id>",
-        previousAgentName: "<value>",
-        nextAgentId: "<id>",
-        nextAgentName: "<value>",
-      },
-    ],
-    completionArgs: {
-      responseFormat: {
-        type: "text",
-      },
-    },
+  const result = await mistral.audio.speech.complete({
+    input: "<value>",
   });
 
-  for await (const event of result) {
-    console.log(event);
-  }
+  console.log(result);
 }
 
 run();
@@ -481,22 +478,18 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 > - **Node.js v20+:** Since v20, Node.js comes with a native `openAsBlob` function in [`node:fs`](https://nodejs.org/docs/latest-v20.x/api/fs.html#fsopenasblobpath-options).
 > - **Bun:** The native [`Bun.file`](https://bun.sh/docs/api/file-io#reading-files-bun-file) function produces a file handle that can be used for streaming file uploads.
 > - **Browsers:** All supported browsers return an instance to a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) when reading the value from an `<input type="file">` element.
-
+> - **Node.js v18:** A file stream can be created using the `fileFrom` helper from [`fetch-blob/from.js`](https://www.npmjs.com/package/fetch-blob).
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
-import { openAsBlob } from "node:fs";
 
 const mistral = new Mistral({
   apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-  const result = await mistral.beta.libraries.documents.upload({
-    libraryId: "a02150d9-5ee0-4877-b62c-28b1fcdf3b76",
-    requestBody: {
-      file: await openAsBlob("example.file"),
-    },
+  const result = await mistral.audio.transcriptions.complete({
+    model: "voxtral-mini-latest",
   });
 
   console.log(result);
@@ -521,7 +514,9 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.models.list(undefined, {
+  const result = await mistral.audio.speech.complete({
+    input: "<value>",
+  }, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -560,7 +555,9 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.models.list();
+  const result = await mistral.audio.speech.complete({
+    input: "<value>",
+  });
 
   console.log(result);
 }
@@ -595,7 +592,9 @@ const mistral = new Mistral({
 
 async function run() {
   try {
-    const result = await mistral.models.list();
+    const result = await mistral.audio.speech.complete({
+      input: "<value>",
+    });
 
     console.log(result);
   } catch (error) {
@@ -635,8 +634,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 61 of 123 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 123 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 68 of 130 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 130 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -666,7 +665,9 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.models.list();
+  const result = await mistral.audio.speech.complete({
+    input: "<value>",
+  });
 
   console.log(result);
 }
@@ -687,7 +688,9 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.models.list();
+  const result = await mistral.audio.speech.complete({
+    input: "<value>",
+  });
 
   console.log(result);
 }
@@ -770,7 +773,9 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.models.list();
+  const result = await mistral.audio.speech.complete({
+    input: "<value>",
+  });
 
   console.log(result);
 }
@@ -798,8 +803,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 - [`agentsComplete`](docs/sdks/agents/README.md#complete) - Agents Completion
 - [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream Agents completion
+- [`audioSpeechComplete`](docs/sdks/speech/README.md#complete) - Speech
 - [`audioTranscriptionsComplete`](docs/sdks/transcriptions/README.md#complete) - Create Transcription
 - [`audioTranscriptionsStream`](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
+- [`audioVoicesCreate`](docs/sdks/voices/README.md#create) - Create a new voice
+- [`audioVoicesDelete`](docs/sdks/voices/README.md#delete) - Delete a custom voice
+- [`audioVoicesGet`](docs/sdks/voices/README.md#get) - Get voice details
+- [`audioVoicesGetSampleAudio`](docs/sdks/voices/README.md#getsampleaudio) - Get voice sample audio
+- [`audioVoicesList`](docs/sdks/voices/README.md#list) - List all voices
+- [`audioVoicesUpdate`](docs/sdks/voices/README.md#update) - Update voice metadata
 - [`batchJobsCancel`](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
 - [`batchJobsCreate`](docs/sdks/batchjobs/README.md#create) - Create Batch Job
 - [`batchJobsGet`](docs/sdks/batchjobs/README.md#get) - Get Batch Job

@@ -13,9 +13,9 @@ const value: components.ModelConversation = {
     },
   },
   id: "<id>",
-  createdAt: new Date("2025-06-14T04:21:29.555Z"),
-  updatedAt: new Date("2026-10-08T03:17:09.039Z"),
-  model: "Escalade",
+  createdAt: new Date("2024-10-24T08:41:46.904Z"),
+  updatedAt: new Date("2024-07-31T21:14:27.441Z"),
+  model: "Model T",
 };
 ```
 
@@ -24,8 +24,8 @@ const value: components.ModelConversation = {
 ```typescript
 const value: components.AgentConversation = {
   id: "<id>",
-  createdAt: new Date("2024-02-26T11:27:08.647Z"),
-  updatedAt: new Date("2024-04-02T21:29:31.420Z"),
+  createdAt: new Date("2024-10-27T20:06:14.728Z"),
+  updatedAt: new Date("2025-03-20T15:21:06.324Z"),
   agentId: "<id>",
 };
 ```

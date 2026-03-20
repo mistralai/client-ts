@@ -7,7 +7,11 @@ import { CreateCampaignRequest } from "@mistralai/mistralai/models/components";
 
 let value: CreateCampaignRequest = {
   searchParams: {
-    filters: {},
+    filters: {
+      field: "<value>",
+      op: "len_eq",
+      value: "<value>",
+    },
   },
   judgeId: "d606cfbb-a2e2-4aa8-b780-a226dc17f675",
   name: "<value>",

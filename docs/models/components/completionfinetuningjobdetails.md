@@ -6,22 +6,22 @@
 import { CompletionFineTuningJobDetails } from "@mistralai/mistralai/models/components";
 
 let value: CompletionFineTuningJobDetails = {
-  id: "40f503f8-72c6-499d-81fe-6d6107f5ac80",
+  id: "00931eba-91c1-431f-ab53-f13af37caca7",
   autoStart: true,
-  model: "Camry",
-  status: "FAILED",
-  createdAt: 414431,
-  modifiedAt: 292743,
+  model: "Grand Cherokee",
+  status: "FAILED_VALIDATION",
+  createdAt: 630040,
+  modifiedAt: 969645,
   trainingFiles: [
-    "cb7f6c61-045b-4834-925d-fd27e46b7490",
-    "99bb4e64-e5b5-4989-80a2-b41f94fac451",
+    "6702bef1-52df-4fbf-96ab-92899ff42ec5",
+    "aed4c13c-d618-4e15-8f99-7f7b4f24d947",
   ],
   jobType: "completion",
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 141445,
+      stepNumber: 364125,
       createdAt: 1716963433,
     },
   ],

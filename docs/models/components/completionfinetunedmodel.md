@@ -7,14 +7,14 @@ import { CompletionFineTunedModel } from "@mistralai/mistralai/models/components
 
 let value: CompletionFineTunedModel = {
   id: "<id>",
-  created: 647324,
+  created: 986465,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
   archived: true,
   capabilities: {},
-  job: "4f0133a4-a8c2-4af2-b920-a6498990f2a3",
+  job: "588e2680-7ab9-4c19-adff-6fea248f5c4c",
   modelType: "completion",
 };
 ```

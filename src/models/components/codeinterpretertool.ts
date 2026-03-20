@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -15,10 +16,26 @@ import {
   ToolConfiguration$outboundSchema,
 } from "./toolconfiguration.js";
 
+export const CodeInterpreterToolType = {
+  CodeInterpreter: "code_interpreter",
+} as const;
+export type CodeInterpreterToolType = ClosedEnum<
+  typeof CodeInterpreterToolType
+>;
+
 export type CodeInterpreterTool = {
   toolConfiguration?: ToolConfiguration | null | undefined;
-  type: "code_interpreter";
+  type?: CodeInterpreterToolType | undefined;
 };
+
+/** @internal */
+export const CodeInterpreterToolType$inboundSchema: z.ZodEnum<
+  typeof CodeInterpreterToolType
+> = z.enum(CodeInterpreterToolType);
+/** @internal */
+export const CodeInterpreterToolType$outboundSchema: z.ZodEnum<
+  typeof CodeInterpreterToolType
+> = CodeInterpreterToolType$inboundSchema;
 
 /** @internal */
 export const CodeInterpreterTool$inboundSchema: z.ZodType<
@@ -26,7 +43,7 @@ export const CodeInterpreterTool$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
-  type: z.literal("code_interpreter"),
+  type: CodeInterpreterToolType$inboundSchema.default("code_interpreter"),
 }).transform((v) => {
   return remap$(v, {
     "tool_configuration": "toolConfiguration",
@@ -35,7 +52,7 @@ export const CodeInterpreterTool$inboundSchema: z.ZodType<
 /** @internal */
 export type CodeInterpreterTool$Outbound = {
   tool_configuration?: ToolConfiguration$Outbound | null | undefined;
-  type: "code_interpreter";
+  type: string;
 };
 
 /** @internal */
@@ -44,7 +61,7 @@ export const CodeInterpreterTool$outboundSchema: z.ZodType<
   CodeInterpreterTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),
-  type: z.literal("code_interpreter"),
+  type: CodeInterpreterToolType$outboundSchema.default("code_interpreter"),
 }).transform((v) => {
   return remap$(v, {
     toolConfiguration: "tool_configuration",

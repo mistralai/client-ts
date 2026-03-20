@@ -21,6 +21,11 @@ import {
   Prediction$outboundSchema,
 } from "./prediction.js";
 import {
+  ReasoningEffort,
+  ReasoningEffort$inboundSchema,
+  ReasoningEffort$outboundSchema,
+} from "./reasoningeffort.js";
+import {
   ResponseFormat,
   ResponseFormat$inboundSchema,
   ResponseFormat$Outbound,
@@ -46,6 +51,7 @@ export type CompletionArgs = {
   prediction?: Prediction | null | undefined;
   responseFormat?: ResponseFormat | null | undefined;
   toolChoice?: ToolChoiceEnum | undefined;
+  reasoningEffort?: ReasoningEffort | null | undefined;
 };
 
 /** @internal */
@@ -61,6 +67,7 @@ export const CompletionArgs$inboundSchema: z.ZodType<CompletionArgs, unknown> =
     prediction: z.nullable(Prediction$inboundSchema).optional(),
     response_format: z.nullable(ResponseFormat$inboundSchema).optional(),
     tool_choice: ToolChoiceEnum$inboundSchema.optional(),
+    reasoning_effort: z.nullable(ReasoningEffort$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "presence_penalty": "presencePenalty",
@@ -70,6 +77,7 @@ export const CompletionArgs$inboundSchema: z.ZodType<CompletionArgs, unknown> =
       "random_seed": "randomSeed",
       "response_format": "responseFormat",
       "tool_choice": "toolChoice",
+      "reasoning_effort": "reasoningEffort",
     });
   });
 /** @internal */
@@ -84,6 +92,7 @@ export type CompletionArgs$Outbound = {
   prediction?: Prediction$Outbound | null | undefined;
   response_format?: ResponseFormat$Outbound | null | undefined;
   tool_choice?: string | undefined;
+  reasoning_effort?: string | null | undefined;
 };
 
 /** @internal */
@@ -101,6 +110,7 @@ export const CompletionArgs$outboundSchema: z.ZodType<
   prediction: z.nullable(Prediction$outboundSchema).optional(),
   responseFormat: z.nullable(ResponseFormat$outboundSchema).optional(),
   toolChoice: ToolChoiceEnum$outboundSchema.optional(),
+  reasoningEffort: z.nullable(ReasoningEffort$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     presencePenalty: "presence_penalty",
@@ -110,6 +120,7 @@ export const CompletionArgs$outboundSchema: z.ZodType<
     randomSeed: "random_seed",
     responseFormat: "response_format",
     toolChoice: "tool_choice",
+    reasoningEffort: "reasoning_effort",
   });
 });
 
