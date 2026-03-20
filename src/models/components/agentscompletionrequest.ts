@@ -12,30 +12,10 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
-  CodeInterpreterTool,
-  CodeInterpreterTool$Outbound,
-  CodeInterpreterTool$outboundSchema,
-} from "./codeinterpretertool.js";
-import {
-  CustomConnector,
-  CustomConnector$Outbound,
-  CustomConnector$outboundSchema,
-} from "./customconnector.js";
-import {
-  DocumentLibraryTool,
-  DocumentLibraryTool$Outbound,
-  DocumentLibraryTool$outboundSchema,
-} from "./documentlibrarytool.js";
-import {
   GuardrailConfig,
   GuardrailConfig$Outbound,
   GuardrailConfig$outboundSchema,
 } from "./guardrailconfig.js";
-import {
-  ImageGenerationTool,
-  ImageGenerationTool$Outbound,
-  ImageGenerationTool$outboundSchema,
-} from "./imagegenerationtool.js";
 import {
   MistralPromptMode,
   MistralPromptMode$outboundSchema,
@@ -79,16 +59,6 @@ import {
   UserMessage$Outbound,
   UserMessage$outboundSchema,
 } from "./usermessage.js";
-import {
-  WebSearchPremiumTool,
-  WebSearchPremiumTool$Outbound,
-  WebSearchPremiumTool$outboundSchema,
-} from "./websearchpremiumtool.js";
-import {
-  WebSearchTool,
-  WebSearchTool$Outbound,
-  WebSearchTool$outboundSchema,
-} from "./websearchtool.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -100,27 +70,6 @@ export type AgentsCompletionRequestMessage =
   | SystemMessage
   | ToolMessage
   | UserMessage;
-
-export type AgentsCompletionRequestTools1 =
-  | DocumentLibraryTool
-  | CustomConnector
-  | Tool
-  | WebSearchTool
-  | WebSearchPremiumTool
-  | CodeInterpreterTool
-  | ImageGenerationTool;
-
-export type AgentsCompletionRequestTools2 =
-  | Array<
-    | DocumentLibraryTool
-    | CustomConnector
-    | Tool
-    | WebSearchTool
-    | WebSearchPremiumTool
-    | CodeInterpreterTool
-    | ImageGenerationTool
-  >
-  | Array<string>;
 
 export type AgentsCompletionRequestToolChoice = ToolChoice | ToolChoiceEnum;
 
@@ -155,19 +104,7 @@ export type AgentsCompletionRequest = {
    * Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.
    */
   responseFormat?: ResponseFormat | undefined;
-  tools?:
-    | Array<
-      | DocumentLibraryTool
-      | CustomConnector
-      | Tool
-      | WebSearchTool
-      | WebSearchPremiumTool
-      | CodeInterpreterTool
-      | ImageGenerationTool
-    >
-    | Array<string>
-    | null
-    | undefined;
+  tools?: Array<Tool> | null | undefined;
   toolChoice?: ToolChoice | ToolChoiceEnum | undefined;
   /**
    * The `presence_penalty` determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
@@ -196,7 +133,6 @@ export type AgentsCompletionRequest = {
    * The ID of the agent to use for this completion.
    */
   agentId: string;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -249,82 +185,6 @@ export function agentsCompletionRequestMessageToJSON(
 }
 
 /** @internal */
-export type AgentsCompletionRequestTools1$Outbound =
-  | DocumentLibraryTool$Outbound
-  | CustomConnector$Outbound
-  | Tool$Outbound
-  | WebSearchTool$Outbound
-  | WebSearchPremiumTool$Outbound
-  | CodeInterpreterTool$Outbound
-  | ImageGenerationTool$Outbound;
-
-/** @internal */
-export const AgentsCompletionRequestTools1$outboundSchema: z.ZodType<
-  AgentsCompletionRequestTools1$Outbound,
-  AgentsCompletionRequestTools1
-> = smartUnion([
-  DocumentLibraryTool$outboundSchema,
-  CustomConnector$outboundSchema,
-  Tool$outboundSchema,
-  WebSearchTool$outboundSchema,
-  WebSearchPremiumTool$outboundSchema,
-  CodeInterpreterTool$outboundSchema,
-  ImageGenerationTool$outboundSchema,
-]);
-
-export function agentsCompletionRequestTools1ToJSON(
-  agentsCompletionRequestTools1: AgentsCompletionRequestTools1,
-): string {
-  return JSON.stringify(
-    AgentsCompletionRequestTools1$outboundSchema.parse(
-      agentsCompletionRequestTools1,
-    ),
-  );
-}
-
-/** @internal */
-export type AgentsCompletionRequestTools2$Outbound =
-  | Array<
-    | DocumentLibraryTool$Outbound
-    | CustomConnector$Outbound
-    | Tool$Outbound
-    | WebSearchTool$Outbound
-    | WebSearchPremiumTool$Outbound
-    | CodeInterpreterTool$Outbound
-    | ImageGenerationTool$Outbound
-  >
-  | Array<string>;
-
-/** @internal */
-export const AgentsCompletionRequestTools2$outboundSchema: z.ZodType<
-  AgentsCompletionRequestTools2$Outbound,
-  AgentsCompletionRequestTools2
-> = smartUnion([
-  z.array(
-    smartUnion([
-      DocumentLibraryTool$outboundSchema,
-      CustomConnector$outboundSchema,
-      Tool$outboundSchema,
-      WebSearchTool$outboundSchema,
-      WebSearchPremiumTool$outboundSchema,
-      CodeInterpreterTool$outboundSchema,
-      ImageGenerationTool$outboundSchema,
-    ]),
-  ),
-  z.array(z.string()),
-]);
-
-export function agentsCompletionRequestTools2ToJSON(
-  agentsCompletionRequestTools2: AgentsCompletionRequestTools2,
-): string {
-  return JSON.stringify(
-    AgentsCompletionRequestTools2$outboundSchema.parse(
-      agentsCompletionRequestTools2,
-    ),
-  );
-}
-
-/** @internal */
 export type AgentsCompletionRequestToolChoice$Outbound =
   | ToolChoice$Outbound
   | string;
@@ -359,19 +219,7 @@ export type AgentsCompletionRequest$Outbound = {
     | UserMessage$Outbound
   >;
   response_format?: ResponseFormat$Outbound | undefined;
-  tools?:
-    | Array<
-      | DocumentLibraryTool$Outbound
-      | CustomConnector$Outbound
-      | Tool$Outbound
-      | WebSearchTool$Outbound
-      | WebSearchPremiumTool$Outbound
-      | CodeInterpreterTool$Outbound
-      | ImageGenerationTool$Outbound
-    >
-    | Array<string>
-    | null
-    | undefined;
+  tools?: Array<Tool$Outbound> | null | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
   presence_penalty?: number | undefined;
   frequency_penalty?: number | undefined;
@@ -382,7 +230,6 @@ export type AgentsCompletionRequest$Outbound = {
   prompt_mode?: string | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
   agent_id: string;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -406,22 +253,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
-  tools: z.nullable(
-    smartUnion([
-      z.array(
-        smartUnion([
-          DocumentLibraryTool$outboundSchema,
-          CustomConnector$outboundSchema,
-          Tool$outboundSchema,
-          WebSearchTool$outboundSchema,
-          WebSearchPremiumTool$outboundSchema,
-          CodeInterpreterTool$outboundSchema,
-          ImageGenerationTool$outboundSchema,
-        ]),
-      ),
-      z.array(z.string()),
-    ]),
-  ).optional(),
+  tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
   toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
@@ -435,21 +267,19 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   agentId: z.string(),
-}).catchall(z.any()).transform((v) => {
-  return {
-    ...remap$(v, {
-      maxTokens: "max_tokens",
-      randomSeed: "random_seed",
-      responseFormat: "response_format",
-      toolChoice: "tool_choice",
-      presencePenalty: "presence_penalty",
-      frequencyPenalty: "frequency_penalty",
-      parallelToolCalls: "parallel_tool_calls",
-      reasoningEffort: "reasoning_effort",
-      promptMode: "prompt_mode",
-      agentId: "agent_id",
-    }),
-  };
+}).transform((v) => {
+  return remap$(v, {
+    maxTokens: "max_tokens",
+    randomSeed: "random_seed",
+    responseFormat: "response_format",
+    toolChoice: "tool_choice",
+    presencePenalty: "presence_penalty",
+    frequencyPenalty: "frequency_penalty",
+    parallelToolCalls: "parallel_tool_calls",
+    reasoningEffort: "reasoning_effort",
+    promptMode: "prompt_mode",
+    agentId: "agent_id",
+  });
 });
 
 export function agentsCompletionRequestToJSON(

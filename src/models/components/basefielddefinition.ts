@@ -11,7 +11,7 @@ import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const BaseFieldDefinitionType = {
+export const TypeEnum = {
   Enum: "ENUM",
   Text: "TEXT",
   Int: "INT",
@@ -20,7 +20,7 @@ export const BaseFieldDefinitionType = {
   Timestamp: "TIMESTAMP",
   Array: "ARRAY",
 } as const;
-export type BaseFieldDefinitionType = OpenEnum<typeof BaseFieldDefinitionType>;
+export type TypeEnum = OpenEnum<typeof TypeEnum>;
 
 export const SupportedOperator = {
   Lt: "lt",
@@ -48,16 +48,14 @@ export type SupportedOperator = OpenEnum<typeof SupportedOperator>;
 export type BaseFieldDefinition = {
   name: string;
   label: string;
-  type: BaseFieldDefinitionType;
+  type: TypeEnum;
   group?: string | null | undefined;
   supportedOperators: Array<SupportedOperator>;
 };
 
 /** @internal */
-export const BaseFieldDefinitionType$inboundSchema: z.ZodType<
-  BaseFieldDefinitionType,
-  unknown
-> = openEnums.inboundSchema(BaseFieldDefinitionType);
+export const TypeEnum$inboundSchema: z.ZodType<TypeEnum, unknown> = openEnums
+  .inboundSchema(TypeEnum);
 
 /** @internal */
 export const SupportedOperator$inboundSchema: z.ZodType<
@@ -72,7 +70,7 @@ export const BaseFieldDefinition$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   label: z.string(),
-  type: BaseFieldDefinitionType$inboundSchema,
+  type: TypeEnum$inboundSchema,
   group: z.nullable(z.string()).optional(),
   supported_operators: z.array(SupportedOperator$inboundSchema),
 }).transform((v) => {

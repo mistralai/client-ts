@@ -8,7 +8,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,18 +29,13 @@ import {
   ToolConfiguration$outboundSchema,
 } from "./toolconfiguration.js";
 
-export const CustomConnectorType = {
-  Connector: "connector",
-} as const;
-export type CustomConnectorType = ClosedEnum<typeof CustomConnectorType>;
-
 export type Authorization =
   | APIKeyAuth
   | OAuth2TokenAuth
   | discriminatedUnionTypes.Unknown<"type">;
 
 export type CustomConnector = {
-  type?: CustomConnectorType | undefined;
+  type: "connector";
   connectorId: string;
   authorization?:
     | APIKeyAuth
@@ -51,15 +45,6 @@ export type CustomConnector = {
     | undefined;
   toolConfiguration?: ToolConfiguration | null | undefined;
 };
-
-/** @internal */
-export const CustomConnectorType$inboundSchema: z.ZodEnum<
-  typeof CustomConnectorType
-> = z.enum(CustomConnectorType);
-/** @internal */
-export const CustomConnectorType$outboundSchema: z.ZodEnum<
-  typeof CustomConnectorType
-> = CustomConnectorType$inboundSchema;
 
 /** @internal */
 export const Authorization$inboundSchema: z.ZodType<Authorization, unknown> =
@@ -96,7 +81,7 @@ export const CustomConnector$inboundSchema: z.ZodType<
   CustomConnector,
   unknown
 > = z.object({
-  type: CustomConnectorType$inboundSchema.default("connector"),
+  type: z.literal("connector"),
   connector_id: z.string(),
   authorization: z.nullable(
     discriminatedUnion("type", {
@@ -113,7 +98,7 @@ export const CustomConnector$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CustomConnector$Outbound = {
-  type: string;
+  type: "connector";
   connector_id: string;
   authorization?:
     | APIKeyAuth$Outbound
@@ -128,7 +113,7 @@ export const CustomConnector$outboundSchema: z.ZodType<
   CustomConnector$Outbound,
   CustomConnector
 > = z.object({
-  type: CustomConnectorType$outboundSchema.default("connector"),
+  type: z.literal("connector"),
   connectorId: z.string(),
   authorization: z.nullable(
     z.union([APIKeyAuth$outboundSchema, OAuth2TokenAuth$outboundSchema]),
