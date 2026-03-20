@@ -6,19 +6,22 @@
 import { ClassifierFineTuningJobDetails } from "@mistralai/mistralai/models/components";
 
 let value: ClassifierFineTuningJobDetails = {
-  id: "77b38766-ec3a-4d75-be79-625072841729",
-  autoStart: false,
-  model: "Mustang",
-  status: "CANCELLED",
-  createdAt: 19399,
-  modifiedAt: 106659,
-  trainingFiles: [],
+  id: "de2c6670-f1e8-4614-b13c-9ab77822704e",
+  autoStart: true,
+  model: "Beetle",
+  status: "FAILED",
+  createdAt: 147136,
+  modifiedAt: 910870,
+  trainingFiles: [
+    "0ad9ab3d-acef-4066-8671-f76471059ca9",
+    "abc46acb-3b23-4abb-a314-dffc7708bf1a",
+  ],
   jobType: "classifier",
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 141445,
+      stepNumber: 364125,
       createdAt: 1716963433,
     },
   ],

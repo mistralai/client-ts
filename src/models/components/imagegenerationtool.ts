@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -15,10 +16,26 @@ import {
   ToolConfiguration$outboundSchema,
 } from "./toolconfiguration.js";
 
+export const ImageGenerationToolType = {
+  ImageGeneration: "image_generation",
+} as const;
+export type ImageGenerationToolType = ClosedEnum<
+  typeof ImageGenerationToolType
+>;
+
 export type ImageGenerationTool = {
   toolConfiguration?: ToolConfiguration | null | undefined;
-  type: "image_generation";
+  type?: ImageGenerationToolType | undefined;
 };
+
+/** @internal */
+export const ImageGenerationToolType$inboundSchema: z.ZodEnum<
+  typeof ImageGenerationToolType
+> = z.enum(ImageGenerationToolType);
+/** @internal */
+export const ImageGenerationToolType$outboundSchema: z.ZodEnum<
+  typeof ImageGenerationToolType
+> = ImageGenerationToolType$inboundSchema;
 
 /** @internal */
 export const ImageGenerationTool$inboundSchema: z.ZodType<
@@ -26,7 +43,7 @@ export const ImageGenerationTool$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
-  type: z.literal("image_generation"),
+  type: ImageGenerationToolType$inboundSchema.default("image_generation"),
 }).transform((v) => {
   return remap$(v, {
     "tool_configuration": "toolConfiguration",
@@ -35,7 +52,7 @@ export const ImageGenerationTool$inboundSchema: z.ZodType<
 /** @internal */
 export type ImageGenerationTool$Outbound = {
   tool_configuration?: ToolConfiguration$Outbound | null | undefined;
-  type: "image_generation";
+  type: string;
 };
 
 /** @internal */
@@ -44,7 +61,7 @@ export const ImageGenerationTool$outboundSchema: z.ZodType<
   ImageGenerationTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),
-  type: z.literal("image_generation"),
+  type: ImageGenerationToolType$outboundSchema.default("image_generation"),
 }).transform((v) => {
   return remap$(v, {
     toolConfiguration: "tool_configuration",

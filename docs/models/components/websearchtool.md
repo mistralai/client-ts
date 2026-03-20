@@ -5,9 +5,7 @@
 ```typescript
 import { WebSearchTool } from "@mistralai/mistralai/models/components";
 
-let value: WebSearchTool = {
-  type: "web_search",
-};
+let value: WebSearchTool = {};
 ```
 
 ## Fields
@@ -15,4 +13,4 @@ let value: WebSearchTool = {
 | Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `toolConfiguration`                                                          | [components.ToolConfiguration](../../models/components/toolconfiguration.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
-| `type`                                                                       | *"web_search"*                                                               | :heavy_check_mark:                                                           | N/A                                                                          |
+| `type`                                                                       | [components.WebSearchToolType](../../models/components/websearchtooltype.md) | :heavy_minus_sign:                                                           | N/A                                                                          |

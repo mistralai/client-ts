@@ -9,19 +9,22 @@ OK
 
 ```typescript
 const value: components.ClassifierFineTuningJobDetails = {
-  id: "77b38766-ec3a-4d75-be79-625072841729",
-  autoStart: false,
-  model: "Mustang",
-  status: "CANCELLED",
-  createdAt: 19399,
-  modifiedAt: 106659,
-  trainingFiles: [],
+  id: "de2c6670-f1e8-4614-b13c-9ab77822704e",
+  autoStart: true,
+  model: "Beetle",
+  status: "FAILED",
+  createdAt: 147136,
+  modifiedAt: 910870,
+  trainingFiles: [
+    "0ad9ab3d-acef-4066-8671-f76471059ca9",
+    "abc46acb-3b23-4abb-a314-dffc7708bf1a",
+  ],
   jobType: "classifier",
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 141445,
+      stepNumber: 364125,
       createdAt: 1716963433,
     },
   ],
@@ -33,22 +36,22 @@ const value: components.ClassifierFineTuningJobDetails = {
 
 ```typescript
 const value: components.CompletionFineTuningJobDetails = {
-  id: "40f503f8-72c6-499d-81fe-6d6107f5ac80",
+  id: "00931eba-91c1-431f-ab53-f13af37caca7",
   autoStart: true,
-  model: "Camry",
-  status: "FAILED",
-  createdAt: 414431,
-  modifiedAt: 292743,
+  model: "Grand Cherokee",
+  status: "FAILED_VALIDATION",
+  createdAt: 630040,
+  modifiedAt: 969645,
   trainingFiles: [
-    "cb7f6c61-045b-4834-925d-fd27e46b7490",
-    "99bb4e64-e5b5-4989-80a2-b41f94fac451",
+    "6702bef1-52df-4fbf-96ab-92899ff42ec5",
+    "aed4c13c-d618-4e15-8f99-7f7b4f24d947",
   ],
   jobType: "completion",
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 141445,
+      stepNumber: 364125,
       createdAt: 1716963433,
     },
   ],

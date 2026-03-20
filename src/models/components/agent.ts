@@ -35,6 +35,7 @@ import {
   ImageGenerationTool,
   ImageGenerationTool$inboundSchema,
 } from "./imagegenerationtool.js";
+import { MetadataDict, MetadataDict$inboundSchema } from "./metadatadict.js";
 import {
   WebSearchPremiumTool,
   WebSearchPremiumTool$inboundSchema,
@@ -42,13 +43,13 @@ import {
 import { WebSearchTool, WebSearchTool$inboundSchema } from "./websearchtool.js";
 
 export type AgentTool =
-  | CodeInterpreterTool
-  | CustomConnector
-  | DocumentLibraryTool
+  | (CodeInterpreterTool & { type: "code_interpreter" })
+  | (CustomConnector & { type: "connector" })
+  | (DocumentLibraryTool & { type: "document_library" })
   | FunctionTool
-  | ImageGenerationTool
-  | WebSearchTool
-  | WebSearchPremiumTool
+  | (ImageGenerationTool & { type: "image_generation" })
+  | (WebSearchTool & { type: "web_search" })
+  | (WebSearchPremiumTool & { type: "web_search_premium" })
   | discriminatedUnionTypes.Unknown<"type">;
 
 export type Agent = {
@@ -61,13 +62,13 @@ export type Agent = {
    */
   tools?:
     | Array<
-      | CodeInterpreterTool
-      | CustomConnector
-      | DocumentLibraryTool
+      | (CodeInterpreterTool & { type: "code_interpreter" })
+      | (CustomConnector & { type: "connector" })
+      | (DocumentLibraryTool & { type: "document_library" })
       | FunctionTool
-      | ImageGenerationTool
-      | WebSearchTool
-      | WebSearchPremiumTool
+      | (ImageGenerationTool & { type: "image_generation" })
+      | (WebSearchTool & { type: "web_search" })
+      | (WebSearchPremiumTool & { type: "web_search_premium" })
       | discriminatedUnionTypes.Unknown<"type">
     >
     | undefined;
@@ -80,7 +81,7 @@ export type Agent = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
-  metadata?: { [k: string]: any } | null | undefined;
+  metadata?: MetadataDict | null | undefined;
   object: "agent";
   id: string;
   version: number;
@@ -95,13 +96,25 @@ export type Agent = {
 /** @internal */
 export const AgentTool$inboundSchema: z.ZodType<AgentTool, unknown> =
   discriminatedUnion("type", {
-    code_interpreter: CodeInterpreterTool$inboundSchema,
-    connector: CustomConnector$inboundSchema,
-    document_library: DocumentLibraryTool$inboundSchema,
+    code_interpreter: CodeInterpreterTool$inboundSchema.and(
+      z.object({ type: z.literal("code_interpreter") }),
+    ),
+    connector: CustomConnector$inboundSchema.and(
+      z.object({ type: z.literal("connector") }),
+    ),
+    document_library: DocumentLibraryTool$inboundSchema.and(
+      z.object({ type: z.literal("document_library") }),
+    ),
     function: FunctionTool$inboundSchema,
-    image_generation: ImageGenerationTool$inboundSchema,
-    web_search: WebSearchTool$inboundSchema,
-    web_search_premium: WebSearchPremiumTool$inboundSchema,
+    image_generation: ImageGenerationTool$inboundSchema.and(
+      z.object({ type: z.literal("image_generation") }),
+    ),
+    web_search: WebSearchTool$inboundSchema.and(
+      z.object({ type: z.literal("web_search") }),
+    ),
+    web_search_premium: WebSearchPremiumTool$inboundSchema.and(
+      z.object({ type: z.literal("web_search_premium") }),
+    ),
   });
 
 export function agentToolFromJSON(
@@ -118,13 +131,25 @@ export function agentToolFromJSON(
 export const Agent$inboundSchema: z.ZodType<Agent, unknown> = z.object({
   instructions: z.nullable(z.string()).optional(),
   tools: z.array(discriminatedUnion("type", {
-    code_interpreter: CodeInterpreterTool$inboundSchema,
-    connector: CustomConnector$inboundSchema,
-    document_library: DocumentLibraryTool$inboundSchema,
+    code_interpreter: CodeInterpreterTool$inboundSchema.and(
+      z.object({ type: z.literal("code_interpreter") }),
+    ),
+    connector: CustomConnector$inboundSchema.and(
+      z.object({ type: z.literal("connector") }),
+    ),
+    document_library: DocumentLibraryTool$inboundSchema.and(
+      z.object({ type: z.literal("document_library") }),
+    ),
     function: FunctionTool$inboundSchema,
-    image_generation: ImageGenerationTool$inboundSchema,
-    web_search: WebSearchTool$inboundSchema,
-    web_search_premium: WebSearchPremiumTool$inboundSchema,
+    image_generation: ImageGenerationTool$inboundSchema.and(
+      z.object({ type: z.literal("image_generation") }),
+    ),
+    web_search: WebSearchTool$inboundSchema.and(
+      z.object({ type: z.literal("web_search") }),
+    ),
+    web_search_premium: WebSearchPremiumTool$inboundSchema.and(
+      z.object({ type: z.literal("web_search_premium") }),
+    ),
   })).optional(),
   completion_args: CompletionArgs$inboundSchema.optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),
@@ -132,7 +157,7 @@ export const Agent$inboundSchema: z.ZodType<Agent, unknown> = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
-  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
+  metadata: z.nullable(MetadataDict$inboundSchema).optional(),
   object: z.literal("agent").default("agent"),
   id: z.string(),
   version: z.int(),

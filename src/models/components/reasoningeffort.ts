@@ -4,14 +4,22 @@
  */
 
 import * as z from "zod/v4";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const ReasoningEffort = {
   None: "none",
   High: "high",
 } as const;
-export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
+export type ReasoningEffort = OpenEnum<typeof ReasoningEffort>;
 
 /** @internal */
-export const ReasoningEffort$outboundSchema: z.ZodEnum<typeof ReasoningEffort> =
-  z.enum(ReasoningEffort);
+export const ReasoningEffort$inboundSchema: z.ZodType<
+  ReasoningEffort,
+  unknown
+> = openEnums.inboundSchema(ReasoningEffort);
+/** @internal */
+export const ReasoningEffort$outboundSchema: z.ZodType<
+  string,
+  ReasoningEffort
+> = openEnums.outboundSchema(ReasoningEffort);

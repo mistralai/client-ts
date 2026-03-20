@@ -18,6 +18,11 @@ import { Models } from "./models.js";
 import { Ocr } from "./ocr.js";
 
 export class Mistral extends ClientSDK {
+  private _audio?: Audio;
+  get audio(): Audio {
+    return (this._audio ??= new Audio(this._options));
+  }
+
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
@@ -71,10 +76,5 @@ export class Mistral extends ClientSDK {
   private _ocr?: Ocr;
   get ocr(): Ocr {
     return (this._ocr ??= new Ocr(this._options));
-  }
-
-  private _audio?: Audio;
-  get audio(): Audio {
-    return (this._audio ??= new Audio(this._options));
   }
 }

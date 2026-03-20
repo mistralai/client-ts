@@ -13,6 +13,10 @@ let value: UpdateDatasetRecordPayloadRequest = {
         "key1": "<value>",
         "key2": "<value>",
       },
+      {
+        "key": "<value>",
+      },
+      {},
     ],
   },
 };
