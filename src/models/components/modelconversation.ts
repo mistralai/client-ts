@@ -43,13 +43,13 @@ import {
 import { WebSearchTool, WebSearchTool$inboundSchema } from "./websearchtool.js";
 
 export type ModelConversationTool =
-  | (CodeInterpreterTool & { type: "code_interpreter" })
-  | (CustomConnector & { type: "connector" })
-  | (DocumentLibraryTool & { type: "document_library" })
+  | CodeInterpreterTool
+  | CustomConnector
+  | DocumentLibraryTool
   | FunctionTool
-  | (ImageGenerationTool & { type: "image_generation" })
-  | (WebSearchTool & { type: "web_search" })
-  | (WebSearchPremiumTool & { type: "web_search_premium" })
+  | ImageGenerationTool
+  | WebSearchTool
+  | WebSearchPremiumTool
   | discriminatedUnionTypes.Unknown<"type">;
 
 export type ModelConversation = {
@@ -62,13 +62,13 @@ export type ModelConversation = {
    */
   tools?:
     | Array<
-      | (CodeInterpreterTool & { type: "code_interpreter" })
-      | (CustomConnector & { type: "connector" })
-      | (DocumentLibraryTool & { type: "document_library" })
+      | CodeInterpreterTool
+      | CustomConnector
+      | DocumentLibraryTool
       | FunctionTool
-      | (ImageGenerationTool & { type: "image_generation" })
-      | (WebSearchTool & { type: "web_search" })
-      | (WebSearchPremiumTool & { type: "web_search_premium" })
+      | ImageGenerationTool
+      | WebSearchTool
+      | WebSearchPremiumTool
       | discriminatedUnionTypes.Unknown<"type">
     >
     | undefined;
@@ -101,25 +101,13 @@ export const ModelConversationTool$inboundSchema: z.ZodType<
   ModelConversationTool,
   unknown
 > = discriminatedUnion("type", {
-  code_interpreter: CodeInterpreterTool$inboundSchema.and(
-    z.object({ type: z.literal("code_interpreter") }),
-  ),
-  connector: CustomConnector$inboundSchema.and(
-    z.object({ type: z.literal("connector") }),
-  ),
-  document_library: DocumentLibraryTool$inboundSchema.and(
-    z.object({ type: z.literal("document_library") }),
-  ),
+  code_interpreter: CodeInterpreterTool$inboundSchema,
+  connector: CustomConnector$inboundSchema,
+  document_library: DocumentLibraryTool$inboundSchema,
   function: FunctionTool$inboundSchema,
-  image_generation: ImageGenerationTool$inboundSchema.and(
-    z.object({ type: z.literal("image_generation") }),
-  ),
-  web_search: WebSearchTool$inboundSchema.and(
-    z.object({ type: z.literal("web_search") }),
-  ),
-  web_search_premium: WebSearchPremiumTool$inboundSchema.and(
-    z.object({ type: z.literal("web_search_premium") }),
-  ),
+  image_generation: ImageGenerationTool$inboundSchema,
+  web_search: WebSearchTool$inboundSchema,
+  web_search_premium: WebSearchPremiumTool$inboundSchema,
 });
 
 export function modelConversationToolFromJSON(
@@ -139,25 +127,13 @@ export const ModelConversation$inboundSchema: z.ZodType<
 > = z.object({
   instructions: z.nullable(z.string()).optional(),
   tools: z.array(discriminatedUnion("type", {
-    code_interpreter: CodeInterpreterTool$inboundSchema.and(
-      z.object({ type: z.literal("code_interpreter") }),
-    ),
-    connector: CustomConnector$inboundSchema.and(
-      z.object({ type: z.literal("connector") }),
-    ),
-    document_library: DocumentLibraryTool$inboundSchema.and(
-      z.object({ type: z.literal("document_library") }),
-    ),
+    code_interpreter: CodeInterpreterTool$inboundSchema,
+    connector: CustomConnector$inboundSchema,
+    document_library: DocumentLibraryTool$inboundSchema,
     function: FunctionTool$inboundSchema,
-    image_generation: ImageGenerationTool$inboundSchema.and(
-      z.object({ type: z.literal("image_generation") }),
-    ),
-    web_search: WebSearchTool$inboundSchema.and(
-      z.object({ type: z.literal("web_search") }),
-    ),
-    web_search_premium: WebSearchPremiumTool$inboundSchema.and(
-      z.object({ type: z.literal("web_search_premium") }),
-    ),
+    image_generation: ImageGenerationTool$inboundSchema,
+    web_search: WebSearchTool$inboundSchema,
+    web_search_premium: WebSearchPremiumTool$inboundSchema,
   })).optional(),
   completion_args: CompletionArgs$inboundSchema.optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),

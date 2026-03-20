@@ -57,13 +57,13 @@ import {
 } from "./websearchtool.js";
 
 export type UpdateAgentRequestTool =
-  | (CodeInterpreterTool & { type: "code_interpreter" })
-  | (CustomConnector & { type: "connector" })
-  | (DocumentLibraryTool & { type: "document_library" })
+  | CodeInterpreterTool
+  | CustomConnector
+  | DocumentLibraryTool
   | FunctionTool
-  | (ImageGenerationTool & { type: "image_generation" })
-  | (WebSearchTool & { type: "web_search" })
-  | (WebSearchPremiumTool & { type: "web_search_premium" });
+  | ImageGenerationTool
+  | WebSearchTool
+  | WebSearchPremiumTool;
 
 export type UpdateAgentRequest = {
   /**
@@ -75,13 +75,13 @@ export type UpdateAgentRequest = {
    */
   tools?:
     | Array<
-      | (CodeInterpreterTool & { type: "code_interpreter" })
-      | (CustomConnector & { type: "connector" })
-      | (DocumentLibraryTool & { type: "document_library" })
+      | CodeInterpreterTool
+      | CustomConnector
+      | DocumentLibraryTool
       | FunctionTool
-      | (ImageGenerationTool & { type: "image_generation" })
-      | (WebSearchTool & { type: "web_search" })
-      | (WebSearchPremiumTool & { type: "web_search_premium" })
+      | ImageGenerationTool
+      | WebSearchTool
+      | WebSearchPremiumTool
     >
     | undefined;
   /**
@@ -100,36 +100,26 @@ export type UpdateAgentRequest = {
 
 /** @internal */
 export type UpdateAgentRequestTool$Outbound =
-  | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
-  | (CustomConnector$Outbound & { type: "connector" })
-  | (DocumentLibraryTool$Outbound & { type: "document_library" })
+  | CodeInterpreterTool$Outbound
+  | CustomConnector$Outbound
+  | DocumentLibraryTool$Outbound
   | FunctionTool$Outbound
-  | (ImageGenerationTool$Outbound & { type: "image_generation" })
-  | (WebSearchTool$Outbound & { type: "web_search" })
-  | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" });
+  | ImageGenerationTool$Outbound
+  | WebSearchTool$Outbound
+  | WebSearchPremiumTool$Outbound;
 
 /** @internal */
 export const UpdateAgentRequestTool$outboundSchema: z.ZodType<
   UpdateAgentRequestTool$Outbound,
   UpdateAgentRequestTool
 > = z.union([
-  CodeInterpreterTool$outboundSchema.and(
-    z.object({ type: z.literal("code_interpreter") }),
-  ),
-  CustomConnector$outboundSchema.and(
-    z.object({ type: z.literal("connector") }),
-  ),
-  DocumentLibraryTool$outboundSchema.and(
-    z.object({ type: z.literal("document_library") }),
-  ),
+  CodeInterpreterTool$outboundSchema,
+  CustomConnector$outboundSchema,
+  DocumentLibraryTool$outboundSchema,
   FunctionTool$outboundSchema,
-  ImageGenerationTool$outboundSchema.and(
-    z.object({ type: z.literal("image_generation") }),
-  ),
-  WebSearchTool$outboundSchema.and(z.object({ type: z.literal("web_search") })),
-  WebSearchPremiumTool$outboundSchema.and(
-    z.object({ type: z.literal("web_search_premium") }),
-  ),
+  ImageGenerationTool$outboundSchema,
+  WebSearchTool$outboundSchema,
+  WebSearchPremiumTool$outboundSchema,
 ]);
 
 export function updateAgentRequestToolToJSON(
@@ -145,13 +135,13 @@ export type UpdateAgentRequest$Outbound = {
   instructions?: string | null | undefined;
   tools?:
     | Array<
-      | (CodeInterpreterTool$Outbound & { type: "code_interpreter" })
-      | (CustomConnector$Outbound & { type: "connector" })
-      | (DocumentLibraryTool$Outbound & { type: "document_library" })
+      | CodeInterpreterTool$Outbound
+      | CustomConnector$Outbound
+      | DocumentLibraryTool$Outbound
       | FunctionTool$Outbound
-      | (ImageGenerationTool$Outbound & { type: "image_generation" })
-      | (WebSearchTool$Outbound & { type: "web_search" })
-      | (WebSearchPremiumTool$Outbound & { type: "web_search_premium" })
+      | ImageGenerationTool$Outbound
+      | WebSearchTool$Outbound
+      | WebSearchPremiumTool$Outbound
     >
     | undefined;
   completion_args?: CompletionArgs$Outbound | undefined;
@@ -173,25 +163,13 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   instructions: z.nullable(z.string()).optional(),
   tools: z.array(
     z.union([
-      CodeInterpreterTool$outboundSchema.and(
-        z.object({ type: z.literal("code_interpreter") }),
-      ),
-      CustomConnector$outboundSchema.and(
-        z.object({ type: z.literal("connector") }),
-      ),
-      DocumentLibraryTool$outboundSchema.and(
-        z.object({ type: z.literal("document_library") }),
-      ),
+      CodeInterpreterTool$outboundSchema,
+      CustomConnector$outboundSchema,
+      DocumentLibraryTool$outboundSchema,
       FunctionTool$outboundSchema,
-      ImageGenerationTool$outboundSchema.and(
-        z.object({ type: z.literal("image_generation") }),
-      ),
-      WebSearchTool$outboundSchema.and(
-        z.object({ type: z.literal("web_search") }),
-      ),
-      WebSearchPremiumTool$outboundSchema.and(
-        z.object({ type: z.literal("web_search_premium") }),
-      ),
+      ImageGenerationTool$outboundSchema,
+      WebSearchTool$outboundSchema,
+      WebSearchPremiumTool$outboundSchema,
     ]),
   ).optional(),
   completionArgs: CompletionArgs$outboundSchema.optional(),
