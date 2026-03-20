@@ -7,7 +7,11 @@ import { SearchChatCompletionEventsRequest } from "@mistralai/mistralai/models/c
 
 let value: SearchChatCompletionEventsRequest = {
   searchParams: {
-    filters: {},
+    filters: {
+      field: "<value>",
+      op: "len_eq",
+      value: "<value>",
+    },
   },
 };
 ```

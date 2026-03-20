@@ -16,7 +16,11 @@ let value: Campaign = {
   description: "retract waist mid blah",
   maxNbEvents: 178583,
   searchParams: {
-    filters: {},
+    filters: {
+      field: "<value>",
+      op: "len_eq",
+      value: "<value>",
+    },
   },
   judge: {
     id: "2d0da5b2-1786-44fd-9ecd-0faca7f1d9ff",

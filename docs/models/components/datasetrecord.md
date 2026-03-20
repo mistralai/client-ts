@@ -18,12 +18,14 @@ let value: DatasetRecord = {
         "key1": "<value>",
         "key2": "<value>",
       },
+      {
+        "key": "<value>",
+      },
+      {},
     ],
   },
   properties: {
     "key": "<value>",
-    "key1": "<value>",
-    "key2": "<value>",
   },
   source: "PLAYGROUND",
 };

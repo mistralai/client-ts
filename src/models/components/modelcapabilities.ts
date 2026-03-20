@@ -18,6 +18,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type ModelCapabilities = {
   completionChat: boolean;
   functionCalling: boolean;
+  reasoning: boolean;
   completionFim: boolean;
   fineTuning: boolean;
   vision: boolean;
@@ -37,6 +38,7 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
 > = z.object({
   completion_chat: z.boolean().default(false),
   function_calling: z.boolean().default(false),
+  reasoning: z.boolean().default(false),
   completion_fim: z.boolean().default(false),
   fine_tuning: z.boolean().default(false),
   vision: z.boolean().default(false),

@@ -1,11 +1,11 @@
-# TypeEnum
+# BaseFieldDefinitionType
 
 ## Example Usage
 
 ```typescript
-import { TypeEnum } from "@mistralai/mistralai/models/components";
+import { BaseFieldDefinitionType } from "@mistralai/mistralai/models/components";
 
-let value: TypeEnum = "ARRAY";
+let value: BaseFieldDefinitionType = "BOOL";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```

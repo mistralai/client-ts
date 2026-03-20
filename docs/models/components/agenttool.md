@@ -6,16 +6,13 @@
 ### `components.CodeInterpreterTool`
 
 ```typescript
-const value: components.CodeInterpreterTool = {
-  type: "code_interpreter",
-};
+const value: components.CodeInterpreterTool = {};
 ```
 
 ### `components.CustomConnector`
 
 ```typescript
 const value: components.CustomConnector = {
-  type: "connector",
   connectorId: "<id>",
 };
 ```
@@ -24,7 +21,6 @@ const value: components.CustomConnector = {
 
 ```typescript
 const value: components.DocumentLibraryTool = {
-  type: "document_library",
   libraryIds: [
     "<value 1>",
     "<value 2>",
@@ -50,24 +46,18 @@ const value: components.FunctionTool = {
 ### `components.ImageGenerationTool`
 
 ```typescript
-const value: components.ImageGenerationTool = {
-  type: "image_generation",
-};
+const value: components.ImageGenerationTool = {};
 ```
 
 ### `components.WebSearchTool`
 
 ```typescript
-const value: components.WebSearchTool = {
-  type: "web_search",
-};
+const value: components.WebSearchTool = {};
 ```
 
 ### `components.WebSearchPremiumTool`
 
 ```typescript
-const value: components.WebSearchPremiumTool = {
-  type: "web_search_premium",
-};
+const value: components.WebSearchPremiumTool = {};
 ```
 

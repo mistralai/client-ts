@@ -14,17 +14,23 @@ let value:
       judgeDatasetRecordRequest: {
         judgeDefinition: {
           name: "<value>",
-          description: "wherever ha than",
+          description:
+            "while runny briefly kaleidoscopic zowie yahoo nor nor above neglect",
           modelName: "<value>",
           output: {
-            type: "REGRESSION",
-            min: 0,
-            minDescription: "<value>",
-            max: 1,
-            maxDescription: "<value>",
+            type: "CLASSIFICATION",
+            options: [
+              {
+                value: "<value>",
+                description:
+                  "round whether like yet midst than inquisitively resource cafe",
+              },
+            ],
           },
           instructions: "<value>",
-          tools: [],
+          tools: [
+            "<value 1>",
+          ],
         },
       },
     };

@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -15,9 +16,16 @@ import {
   ToolConfiguration$outboundSchema,
 } from "./toolconfiguration.js";
 
+export const DocumentLibraryToolType = {
+  DocumentLibrary: "document_library",
+} as const;
+export type DocumentLibraryToolType = ClosedEnum<
+  typeof DocumentLibraryToolType
+>;
+
 export type DocumentLibraryTool = {
   toolConfiguration?: ToolConfiguration | null | undefined;
-  type: "document_library";
+  type?: DocumentLibraryToolType | undefined;
   /**
    * Ids of the library in which to search.
    */
@@ -25,12 +33,21 @@ export type DocumentLibraryTool = {
 };
 
 /** @internal */
+export const DocumentLibraryToolType$inboundSchema: z.ZodEnum<
+  typeof DocumentLibraryToolType
+> = z.enum(DocumentLibraryToolType);
+/** @internal */
+export const DocumentLibraryToolType$outboundSchema: z.ZodEnum<
+  typeof DocumentLibraryToolType
+> = DocumentLibraryToolType$inboundSchema;
+
+/** @internal */
 export const DocumentLibraryTool$inboundSchema: z.ZodType<
   DocumentLibraryTool,
   unknown
 > = z.object({
   tool_configuration: z.nullable(ToolConfiguration$inboundSchema).optional(),
-  type: z.literal("document_library"),
+  type: DocumentLibraryToolType$inboundSchema.default("document_library"),
   library_ids: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {
@@ -41,7 +58,7 @@ export const DocumentLibraryTool$inboundSchema: z.ZodType<
 /** @internal */
 export type DocumentLibraryTool$Outbound = {
   tool_configuration?: ToolConfiguration$Outbound | null | undefined;
-  type: "document_library";
+  type: string;
   library_ids: Array<string>;
 };
 
@@ -51,7 +68,7 @@ export const DocumentLibraryTool$outboundSchema: z.ZodType<
   DocumentLibraryTool
 > = z.object({
   toolConfiguration: z.nullable(ToolConfiguration$outboundSchema).optional(),
-  type: z.literal("document_library"),
+  type: DocumentLibraryToolType$outboundSchema.default("document_library"),
   libraryIds: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {

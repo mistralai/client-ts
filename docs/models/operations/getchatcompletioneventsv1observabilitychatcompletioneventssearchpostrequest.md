@@ -10,7 +10,11 @@ let value:
     {
       searchChatCompletionEventsRequest: {
         searchParams: {
-          filters: {},
+          filters: {
+            field: "<value>",
+            op: "len_eq",
+            value: "<value>",
+          },
         },
       },
     };
