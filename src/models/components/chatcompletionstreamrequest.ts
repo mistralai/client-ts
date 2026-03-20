@@ -12,30 +12,10 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
-  CodeInterpreterTool,
-  CodeInterpreterTool$Outbound,
-  CodeInterpreterTool$outboundSchema,
-} from "./codeinterpretertool.js";
-import {
-  CustomConnector,
-  CustomConnector$Outbound,
-  CustomConnector$outboundSchema,
-} from "./customconnector.js";
-import {
-  DocumentLibraryTool,
-  DocumentLibraryTool$Outbound,
-  DocumentLibraryTool$outboundSchema,
-} from "./documentlibrarytool.js";
-import {
   GuardrailConfig,
   GuardrailConfig$Outbound,
   GuardrailConfig$outboundSchema,
 } from "./guardrailconfig.js";
-import {
-  ImageGenerationTool,
-  ImageGenerationTool$Outbound,
-  ImageGenerationTool$outboundSchema,
-} from "./imagegenerationtool.js";
 import {
   MistralPromptMode,
   MistralPromptMode$outboundSchema,
@@ -79,16 +59,6 @@ import {
   UserMessage$Outbound,
   UserMessage$outboundSchema,
 } from "./usermessage.js";
-import {
-  WebSearchPremiumTool,
-  WebSearchPremiumTool$Outbound,
-  WebSearchPremiumTool$outboundSchema,
-} from "./websearchpremiumtool.js";
-import {
-  WebSearchTool,
-  WebSearchTool$Outbound,
-  WebSearchTool$outboundSchema,
-} from "./websearchtool.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -100,30 +70,6 @@ export type ChatCompletionStreamRequestMessage =
   | SystemMessage
   | ToolMessage
   | UserMessage;
-
-export type ChatCompletionStreamRequestTools1 =
-  | DocumentLibraryTool
-  | CustomConnector
-  | Tool
-  | WebSearchTool
-  | WebSearchPremiumTool
-  | CodeInterpreterTool
-  | ImageGenerationTool;
-
-/**
- * A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.
- */
-export type ChatCompletionStreamRequestTools2 =
-  | Array<
-    | DocumentLibraryTool
-    | CustomConnector
-    | Tool
-    | WebSearchTool
-    | WebSearchPremiumTool
-    | CodeInterpreterTool
-    | ImageGenerationTool
-  >
-  | Array<string>;
 
 /**
  * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
@@ -173,19 +119,7 @@ export type ChatCompletionStreamRequest = {
   /**
    * A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.
    */
-  tools?:
-    | Array<
-      | DocumentLibraryTool
-      | CustomConnector
-      | Tool
-      | WebSearchTool
-      | WebSearchPremiumTool
-      | CodeInterpreterTool
-      | ImageGenerationTool
-    >
-    | Array<string>
-    | null
-    | undefined;
+  tools?: Array<Tool> | null | undefined;
   /**
    * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
    */
@@ -220,7 +154,6 @@ export type ChatCompletionStreamRequest = {
    * Whether to inject a safety prompt before all conversations.
    */
   safePrompt?: boolean | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -273,82 +206,6 @@ export function chatCompletionStreamRequestMessageToJSON(
 }
 
 /** @internal */
-export type ChatCompletionStreamRequestTools1$Outbound =
-  | DocumentLibraryTool$Outbound
-  | CustomConnector$Outbound
-  | Tool$Outbound
-  | WebSearchTool$Outbound
-  | WebSearchPremiumTool$Outbound
-  | CodeInterpreterTool$Outbound
-  | ImageGenerationTool$Outbound;
-
-/** @internal */
-export const ChatCompletionStreamRequestTools1$outboundSchema: z.ZodType<
-  ChatCompletionStreamRequestTools1$Outbound,
-  ChatCompletionStreamRequestTools1
-> = smartUnion([
-  DocumentLibraryTool$outboundSchema,
-  CustomConnector$outboundSchema,
-  Tool$outboundSchema,
-  WebSearchTool$outboundSchema,
-  WebSearchPremiumTool$outboundSchema,
-  CodeInterpreterTool$outboundSchema,
-  ImageGenerationTool$outboundSchema,
-]);
-
-export function chatCompletionStreamRequestTools1ToJSON(
-  chatCompletionStreamRequestTools1: ChatCompletionStreamRequestTools1,
-): string {
-  return JSON.stringify(
-    ChatCompletionStreamRequestTools1$outboundSchema.parse(
-      chatCompletionStreamRequestTools1,
-    ),
-  );
-}
-
-/** @internal */
-export type ChatCompletionStreamRequestTools2$Outbound =
-  | Array<
-    | DocumentLibraryTool$Outbound
-    | CustomConnector$Outbound
-    | Tool$Outbound
-    | WebSearchTool$Outbound
-    | WebSearchPremiumTool$Outbound
-    | CodeInterpreterTool$Outbound
-    | ImageGenerationTool$Outbound
-  >
-  | Array<string>;
-
-/** @internal */
-export const ChatCompletionStreamRequestTools2$outboundSchema: z.ZodType<
-  ChatCompletionStreamRequestTools2$Outbound,
-  ChatCompletionStreamRequestTools2
-> = smartUnion([
-  z.array(
-    smartUnion([
-      DocumentLibraryTool$outboundSchema,
-      CustomConnector$outboundSchema,
-      Tool$outboundSchema,
-      WebSearchTool$outboundSchema,
-      WebSearchPremiumTool$outboundSchema,
-      CodeInterpreterTool$outboundSchema,
-      ImageGenerationTool$outboundSchema,
-    ]),
-  ),
-  z.array(z.string()),
-]);
-
-export function chatCompletionStreamRequestTools2ToJSON(
-  chatCompletionStreamRequestTools2: ChatCompletionStreamRequestTools2,
-): string {
-  return JSON.stringify(
-    ChatCompletionStreamRequestTools2$outboundSchema.parse(
-      chatCompletionStreamRequestTools2,
-    ),
-  );
-}
-
-/** @internal */
 export type ChatCompletionStreamRequestToolChoice$Outbound =
   | ToolChoice$Outbound
   | string;
@@ -386,19 +243,7 @@ export type ChatCompletionStreamRequest$Outbound = {
     | UserMessage$Outbound
   >;
   response_format?: ResponseFormat$Outbound | undefined;
-  tools?:
-    | Array<
-      | DocumentLibraryTool$Outbound
-      | CustomConnector$Outbound
-      | Tool$Outbound
-      | WebSearchTool$Outbound
-      | WebSearchPremiumTool$Outbound
-      | CodeInterpreterTool$Outbound
-      | ImageGenerationTool$Outbound
-    >
-    | Array<string>
-    | null
-    | undefined;
+  tools?: Array<Tool$Outbound> | null | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
   presence_penalty?: number | undefined;
   frequency_penalty?: number | undefined;
@@ -409,7 +254,6 @@ export type ChatCompletionStreamRequest$Outbound = {
   prompt_mode?: string | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
   safe_prompt?: boolean | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -436,22 +280,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
-  tools: z.nullable(
-    smartUnion([
-      z.array(
-        smartUnion([
-          DocumentLibraryTool$outboundSchema,
-          CustomConnector$outboundSchema,
-          Tool$outboundSchema,
-          WebSearchTool$outboundSchema,
-          WebSearchPremiumTool$outboundSchema,
-          CodeInterpreterTool$outboundSchema,
-          ImageGenerationTool$outboundSchema,
-        ]),
-      ),
-      z.array(z.string()),
-    ]),
-  ).optional(),
+  tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
   toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
@@ -465,22 +294,20 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   safePrompt: z.boolean().optional(),
-}).catchall(z.any()).transform((v) => {
-  return {
-    ...remap$(v, {
-      topP: "top_p",
-      maxTokens: "max_tokens",
-      randomSeed: "random_seed",
-      responseFormat: "response_format",
-      toolChoice: "tool_choice",
-      presencePenalty: "presence_penalty",
-      frequencyPenalty: "frequency_penalty",
-      parallelToolCalls: "parallel_tool_calls",
-      reasoningEffort: "reasoning_effort",
-      promptMode: "prompt_mode",
-      safePrompt: "safe_prompt",
-    }),
-  };
+}).transform((v) => {
+  return remap$(v, {
+    topP: "top_p",
+    maxTokens: "max_tokens",
+    randomSeed: "random_seed",
+    responseFormat: "response_format",
+    toolChoice: "tool_choice",
+    presencePenalty: "presence_penalty",
+    frequencyPenalty: "frequency_penalty",
+    parallelToolCalls: "parallel_tool_calls",
+    reasoningEffort: "reasoning_effort",
+    promptMode: "prompt_mode",
+    safePrompt: "safe_prompt",
+  });
 });
 
 export function chatCompletionStreamRequestToJSON(

@@ -1,6 +1,6 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Mistral AI",
   "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
