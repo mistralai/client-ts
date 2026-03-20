@@ -3,7 +3,7 @@
  * @generated-id: d9b14c7344f1
  */
 
-import { MistralGoogleCloudCore } from "../core.js";
+import { MistralGCPCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -20,7 +20,7 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
-import { MistralGoogleCloudError } from "../models/errors/mistralgoogleclouderror.js";
+import { MistralGCPError } from "../models/errors/mistralgcperror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -33,14 +33,14 @@ import { Result } from "../types/fp.js";
  * FIM completion.
  */
 export function fimComplete(
-  client: MistralGoogleCloudCore,
+  client: MistralGCPCore,
   request: components.FIMCompletionRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     components.FIMCompletionResponse,
     | errors.HTTPValidationError
-    | MistralGoogleCloudError
+    | MistralGCPError
     | ResponseValidationError
     | ConnectionError
     | RequestAbortedError
@@ -58,7 +58,7 @@ export function fimComplete(
 }
 
 async function $do(
-  client: MistralGoogleCloudCore,
+  client: MistralGCPCore,
   request: components.FIMCompletionRequest,
   options?: RequestOptions,
 ): Promise<
@@ -66,7 +66,7 @@ async function $do(
     Result<
       components.FIMCompletionResponse,
       | errors.HTTPValidationError
-      | MistralGoogleCloudError
+      | MistralGCPError
       | ResponseValidationError
       | ConnectionError
       | RequestAbortedError
@@ -148,7 +148,7 @@ async function $do(
   const [result] = await M.match<
     components.FIMCompletionResponse,
     | errors.HTTPValidationError
-    | MistralGoogleCloudError
+    | MistralGCPError
     | ResponseValidationError
     | ConnectionError
     | RequestAbortedError

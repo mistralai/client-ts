@@ -4,10 +4,10 @@
  */
 
 import * as z from "zod/v4/core";
-import { MistralGoogleCloudError } from "./mistralgoogleclouderror.js";
+import { MistralGCPError } from "./mistralgcperror.js";
 import { formatZodError } from "./sdkvalidationerror.js";
 
-export class ResponseValidationError extends MistralGoogleCloudError {
+export class ResponseValidationError extends MistralGCPError {
   /**
    * The raw value that failed validation.
    */

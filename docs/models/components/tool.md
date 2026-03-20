@@ -8,7 +8,10 @@ import { Tool } from "@mistralai/mistralai-gcp/models/components";
 let value: Tool = {
   function: {
     name: "<value>",
-    parameters: {},
+    parameters: {
+      "key": "<value>",
+      "key1": "<value>",
+    },
   },
 };
 ```
