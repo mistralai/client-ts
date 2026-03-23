@@ -99,7 +99,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/audio/voices/{voice_id}")(pathParams);
 
   const headers = new Headers(compactMap({

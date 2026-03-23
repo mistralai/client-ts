@@ -6,6 +6,7 @@
 import { MistralCore } from "../core.js";
 import { appendForm, encodeSimple } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -106,18 +107,10 @@ async function $do(
     const contentType =
       getContentTypeFromFileName(payload.RequestBody.file.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body, "file", blob, payload.RequestBody.file.fileName);
-  } else if (payload.RequestBody.file.content instanceof Uint8Array) {
-    const contentType =
-      getContentTypeFromFileName(payload.RequestBody.file.fileName)
-      || "application/octet-stream";
     appendForm(
       body,
       "file",
-      new Blob([new Uint8Array(payload.RequestBody.file.content).buffer], {
-        type: contentType,
-      }),
+      bytesToBlob(buffer, contentType),
       payload.RequestBody.file.fileName,
     );
   } else {
@@ -127,7 +120,7 @@ async function $do(
     appendForm(
       body,
       "file",
-      new Blob([payload.RequestBody.file.content], { type: contentType }),
+      bytesToBlob(payload.RequestBody.file.content, contentType),
       payload.RequestBody.file.fileName,
     );
   }
@@ -138,7 +131,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/libraries/{library_id}/documents")(pathParams);
 
   const headers = new Headers(compactMap({

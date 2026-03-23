@@ -99,7 +99,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/observability/dataset-records/{dataset_record_id}",
   )(pathParams);

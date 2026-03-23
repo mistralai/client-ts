@@ -5,6 +5,7 @@
 
 import { MistralCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { EventStream } from "../lib/event-streams.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -35,6 +36,60 @@ export enum CompleteAcceptEnum {
 /**
  * Speech
  */
+export function audioSpeechComplete(
+  client: MistralCore,
+  request: components.SpeechRequest & { stream?: false },
+  options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
+): APIPromise<
+  Result<
+    operations.SpeechResponse,
+    | errors.HTTPValidationError
+    | MistralError
+    | ResponseValidationError
+    | ConnectionError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
+  >
+>;
+export function audioSpeechComplete(
+  client: MistralCore,
+  request: components.SpeechRequest & { stream: true },
+  options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
+): APIPromise<
+  Result<
+    EventStream<operations.SpeechStreamEvents>,
+    | errors.HTTPValidationError
+    | MistralError
+    | ResponseValidationError
+    | ConnectionError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
+  >
+>;
+export function audioSpeechComplete(
+  client: MistralCore,
+  request: components.SpeechRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
+): APIPromise<
+  Result<
+    operations.SpeechV1AudioSpeechPostResponse,
+    | errors.HTTPValidationError
+    | MistralError
+    | ResponseValidationError
+    | ConnectionError
+    | RequestAbortedError
+    | RequestTimeoutError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
+  >
+>;
 export function audioSpeechComplete(
   client: MistralCore,
   request: components.SpeechRequest,

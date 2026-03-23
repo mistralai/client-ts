@@ -103,7 +103,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/libraries/{library_id}/documents/{document_id}/extracted-text-signed-url",
   )(pathParams);

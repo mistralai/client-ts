@@ -97,7 +97,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/fine_tuning/models/{model_id}")(pathParams);
 
   const headers = new Headers(compactMap({

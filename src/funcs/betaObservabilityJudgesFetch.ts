@@ -96,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/observability/judges/{judge_id}")(pathParams);
 
   const headers = new Headers(compactMap({

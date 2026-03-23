@@ -96,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/batch/jobs/{job_id}/cancel")(pathParams);
 
   const headers = new Headers(compactMap({
