@@ -9,6 +9,7 @@ import { betaConnectorsDelete } from "../funcs/betaConnectorsDelete.js";
 import { betaConnectorsGet } from "../funcs/betaConnectorsGet.js";
 import { betaConnectorsGetAuthUrl } from "../funcs/betaConnectorsGetAuthUrl.js";
 import { betaConnectorsList } from "../funcs/betaConnectorsList.js";
+import { betaConnectorsListTools } from "../funcs/betaConnectorsListTools.js";
 import { betaConnectorsUpdate } from "../funcs/betaConnectorsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -78,6 +79,23 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.ConnectorToolCallResponse> {
     return unwrapAsync(betaConnectorsCallTool(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List tools for a connector.
+   *
+   * @remarks
+   * List all tools available for an MCP connector.
+   */
+  async listTools(
+    request: operations.ConnectorListToolsV1Request,
+    options?: RequestOptions,
+  ): Promise<operations.ResponseConnectorListToolsV12> {
+    return unwrapAsync(betaConnectorsListTools(
       this,
       request,
       options,
