@@ -276,6 +276,7 @@ We have dedicated SDKs for the following providers:
 * [list](docs/sdks/connectors/README.md#list) - List all connectors.
 * [getAuthUrl](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
 * [callTool](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
+* [listTools](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
 * [get](docs/sdks/connectors/README.md#get) - Get a connector.
 * [update](docs/sdks/connectors/README.md#update) - Update a connector.
 * [delete](docs/sdks/connectors/README.md#delete) - Delete a connector.
@@ -634,8 +635,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 68 of 130 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 130 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 69 of 131 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 131 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -833,6 +834,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaConnectorsGet`](docs/sdks/connectors/README.md#get) - Get a connector.
 - [`betaConnectorsGetAuthUrl`](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
 - [`betaConnectorsList`](docs/sdks/connectors/README.md#list) - List all connectors.
+- [`betaConnectorsListTools`](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
 - [`betaConnectorsUpdate`](docs/sdks/connectors/README.md#update) - Update a connector.
 - [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 - [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
