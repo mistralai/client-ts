@@ -98,11 +98,21 @@ async function $do(
   const body = new FormData();
 
   if (isBlobLike(payload.file)) {
+    // In bundled environments (e.g. Next.js), File objects from request.formData()
+    // fail instanceof Blob checks due to cross-realm class identity, causing
+    // appendForm to stringify the value instead of appending a binary part.
+    // Convert to a native Blob first to guarantee FormData.append gets a real instance.
+    const nativeBlob = payload.file instanceof Blob
+      ? payload.file
+      : new Blob([await (payload.file as Blob).arrayBuffer()], {
+        type: (payload.file as Blob).type,
+      });
     const fileName = "name" in payload.file
         && typeof (payload.file as { name: unknown }).name === "string"
+        && (payload.file as { name: string }).name !== ""
       ? (payload.file as { name: string }).name
       : undefined;
-    appendForm(body, "file", payload.file, fileName);
+    appendForm(body, "file", nativeBlob, fileName);
   } else if (isReadableStream(payload.file.content)) {
     const buffer = await readableStreamToArrayBuffer(payload.file.content);
     const contentType = getContentTypeFromFileName(payload.file.fileName)
