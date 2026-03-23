@@ -26,6 +26,7 @@ export * from "./connectorcalltoolv1.js";
 export * from "./connectordeletev1.js";
 export * from "./connectorgetauthurlv1.js";
 export * from "./connectorgetv1.js";
+export * from "./connectorlisttoolsv1.js";
 export * from "./connectorlistv1.js";
 export * from "./connectorupdatev1.js";
 export * from "./createdatasetrecordv1observabilitydatasetsdatasetidrecordspost.js";
