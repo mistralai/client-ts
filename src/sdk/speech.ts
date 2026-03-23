@@ -7,6 +7,7 @@ import {
   audioSpeechComplete,
   CompleteAcceptEnum,
 } from "../funcs/audioSpeechComplete.js";
+import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -18,6 +19,18 @@ export class Speech extends ClientSDK {
   /**
    * Speech
    */
+  async complete(
+    request: components.SpeechRequest & { stream?: false | undefined },
+    options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
+  ): Promise<operations.SpeechResponse>;
+  async complete(
+    request: components.SpeechRequest & { stream: true },
+    options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
+  ): Promise<EventStream<operations.SpeechStreamEvents>>;
+  async complete(
+    request: components.SpeechRequest,
+    options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
+  ): Promise<operations.SpeechV1AudioSpeechPostResponse>;
   async complete(
     request: components.SpeechRequest,
     options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
