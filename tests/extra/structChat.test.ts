@@ -188,6 +188,137 @@ describe("convertToParsedChatCompletionResponse", () => {
       convertToParsedChatCompletionResponse(raw_response, MathDemonstration)
     ).toStrictEqual(ccr_response);
   });
+
+  it("should set parsed to undefined when content is malformed JSON", () => {
+    const truncatedResponse: components.ChatCompletionResponse = {
+      id: "test-malformed",
+      object: "chat.completion",
+      model: "mistral-tiny-latest",
+      usage: { promptTokens: 10, completionTokens: 5, totalTokens: 15 },
+      created: 1700000000,
+      choices: [
+        {
+          index: 0,
+          message: {
+            content: '{"steps": [{"explanation": "truncated',
+            toolCalls: null,
+            prefix: false,
+            role: "assistant",
+          },
+          finishReason: "length",
+        },
+      ],
+    };
+
+    const result = convertToParsedChatCompletionResponse(
+      truncatedResponse,
+      MathDemonstration,
+    );
+
+    expect(result.choices).toHaveLength(1);
+    expect(result.choices![0].message).toBeDefined();
+    expect(result.choices![0].message!.parsed).toBeUndefined();
+    expect(result.choices![0].message!.content).toBe(
+      '{"steps": [{"explanation": "truncated',
+    );
+  });
+
+  it("should set parsed to undefined when content is valid JSON but fails schema validation", () => {
+    const wrongShapeResponse: components.ChatCompletionResponse = {
+      id: "test-wrong-shape",
+      object: "chat.completion",
+      model: "mistral-tiny-latest",
+      usage: { promptTokens: 10, completionTokens: 5, totalTokens: 15 },
+      created: 1700000000,
+      choices: [
+        {
+          index: 0,
+          message: {
+            content: '{"wrong_field": "not matching schema"}',
+            toolCalls: null,
+            prefix: false,
+            role: "assistant",
+          },
+          finishReason: "stop",
+        },
+      ],
+    };
+
+    const result = convertToParsedChatCompletionResponse(
+      wrongShapeResponse,
+      MathDemonstration,
+    );
+
+    expect(result.choices).toHaveLength(1);
+    expect(result.choices![0].message).toBeDefined();
+    expect(result.choices![0].message!.parsed).toBeUndefined();
+  });
+
+  it("should preserve choices when content is null", () => {
+    const nullContentResponse: components.ChatCompletionResponse = {
+      id: "test-null-content",
+      object: "chat.completion",
+      model: "mistral-tiny-latest",
+      usage: { promptTokens: 10, completionTokens: 5, totalTokens: 15 },
+      created: 1700000000,
+      choices: [
+        {
+          index: 0,
+          message: {
+            content: null,
+            toolCalls: null,
+            prefix: false,
+            role: "assistant",
+          },
+          finishReason: "stop",
+        },
+      ],
+    };
+
+    const result = convertToParsedChatCompletionResponse(
+      nullContentResponse,
+      MathDemonstration,
+    );
+
+    expect(result.choices).toHaveLength(1);
+    expect(result.choices![0].message).toBeDefined();
+    expect(result.choices![0].message!.parsed).toBeUndefined();
+  });
+
+  it("should return empty choices array for empty choices", () => {
+    const emptyChoicesResponse: components.ChatCompletionResponse = {
+      id: "test-empty",
+      object: "chat.completion",
+      model: "mistral-tiny-latest",
+      usage: { promptTokens: 10, completionTokens: 0, totalTokens: 10 },
+      created: 1700000000,
+      choices: [],
+    };
+
+    const result = convertToParsedChatCompletionResponse(
+      emptyChoicesResponse,
+      MathDemonstration,
+    );
+
+    expect(result.choices).toEqual([]);
+  });
+
+  it("should return undefined choices when choices is undefined", () => {
+    const noChoicesResponse: components.ChatCompletionResponse = {
+      id: "test-undefined",
+      object: "chat.completion",
+      model: "mistral-tiny-latest",
+      usage: { promptTokens: 10, completionTokens: 0, totalTokens: 10 },
+      created: 1700000000,
+    };
+
+    const result = convertToParsedChatCompletionResponse(
+      noChoicesResponse,
+      MathDemonstration,
+    );
+
+    expect(result.choices).toBeUndefined();
+  });
 });
 
 describe("responseFormatFromZodObject", () => {
