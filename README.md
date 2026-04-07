@@ -24,6 +24,7 @@ Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create yo
   * [Providers' SDKs](#providers-sdks)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Server-sent event streaming](#server-sent-event-streaming)
+  * [Pagination](#pagination)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -254,6 +255,7 @@ We have dedicated SDKs for the following providers:
 * [list](docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
 * [create](docs/sdks/batchjobs/README.md#create) - Create Batch Job
 * [get](docs/sdks/batchjobs/README.md#get) - Get Batch Job
+* [delete](docs/sdks/batchjobs/README.md#delete) - Delete Batch Job
 * [cancel](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
 
 ### [Beta.Agents](docs/sdks/betaagents/README.md)
@@ -397,6 +399,13 @@ We have dedicated SDKs for the following providers:
 
 * [create](docs/sdks/embeddings/README.md#create) - Embeddings
 
+### [Events](docs/sdks/events/README.md)
+
+* [sendEvent](docs/sdks/events/README.md#sendevent) - Receive Workflow Event
+* [sendEventsBatch](docs/sdks/events/README.md#sendeventsbatch) - Receive Workflow Events Batch
+* [getStreamEvents](docs/sdks/events/README.md#getstreamevents) - Get Stream Events
+* [getWorkflowEvents](docs/sdks/events/README.md#getworkflowevents) - Get Workflow Events
+
 ### [Files](docs/sdks/files/README.md)
 
 * [upload](docs/sdks/files/README.md#upload) - Upload File
@@ -432,6 +441,67 @@ We have dedicated SDKs for the following providers:
 
 * [process](docs/sdks/ocr/README.md#process) - OCR
 
+### [Workflows](docs/sdks/workflows/README.md)
+
+* [getWorkflows](docs/sdks/workflows/README.md#getworkflows) - Get Workflows
+* [getWorkflowRegistrations](docs/sdks/workflows/README.md#getworkflowregistrations) - Get Workflow Registrations
+* [executeWorkflow](docs/sdks/workflows/README.md#executeworkflow) - Execute Workflow
+* [~~executeWorkflowRegistration~~](docs/sdks/workflows/README.md#executeworkflowregistration) - Execute Workflow Registration :warning: **Deprecated**
+* [getWorkflow](docs/sdks/workflows/README.md#getworkflow) - Get Workflow
+* [updateWorkflow](docs/sdks/workflows/README.md#updateworkflow) - Update Workflow
+* [getWorkflowRegistration](docs/sdks/workflows/README.md#getworkflowregistration) - Get Workflow Registration
+* [archiveWorkflow](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
+* [unarchiveWorkflow](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow
+
+#### [Workflows.Deployments](docs/sdks/deployments/README.md)
+
+* [listDeployments](docs/sdks/deployments/README.md#listdeployments) - List Deployments
+* [getDeployment](docs/sdks/deployments/README.md#getdeployment) - Get Deployment
+
+#### [Workflows.Events](docs/sdks/workflowsevents/README.md)
+
+* [sendEvent](docs/sdks/workflowsevents/README.md#sendevent) - Receive Workflow Event
+* [sendEventsBatch](docs/sdks/workflowsevents/README.md#sendeventsbatch) - Receive Workflow Events Batch
+* [getStreamEvents](docs/sdks/workflowsevents/README.md#getstreamevents) - Get Stream Events
+* [getWorkflowEvents](docs/sdks/workflowsevents/README.md#getworkflowevents) - Get Workflow Events
+
+#### [Workflows.Executions](docs/sdks/executions/README.md)
+
+* [getWorkflowExecution](docs/sdks/executions/README.md#getworkflowexecution) - Get Workflow Execution
+* [getWorkflowExecutionHistory](docs/sdks/executions/README.md#getworkflowexecutionhistory) - Get Workflow Execution History
+* [signalWorkflowExecution](docs/sdks/executions/README.md#signalworkflowexecution) - Signal Workflow Execution
+* [queryWorkflowExecution](docs/sdks/executions/README.md#queryworkflowexecution) - Query Workflow Execution
+* [terminateWorkflowExecution](docs/sdks/executions/README.md#terminateworkflowexecution) - Terminate Workflow Execution
+* [batchTerminateWorkflowExecutions](docs/sdks/executions/README.md#batchterminateworkflowexecutions) - Batch Terminate Workflow Executions
+* [cancelWorkflowExecution](docs/sdks/executions/README.md#cancelworkflowexecution) - Cancel Workflow Execution
+* [batchCancelWorkflowExecutions](docs/sdks/executions/README.md#batchcancelworkflowexecutions) - Batch Cancel Workflow Executions
+* [resetWorkflow](docs/sdks/executions/README.md#resetworkflow) - Reset Workflow
+* [updateWorkflowExecution](docs/sdks/executions/README.md#updateworkflowexecution) - Update Workflow Execution
+* [getWorkflowExecutionTraceOtel](docs/sdks/executions/README.md#getworkflowexecutiontraceotel) - Get Workflow Execution Trace Otel
+* [getWorkflowExecutionTraceSummary](docs/sdks/executions/README.md#getworkflowexecutiontracesummary) - Get Workflow Execution Trace Summary
+* [getWorkflowExecutionTraceEvents](docs/sdks/executions/README.md#getworkflowexecutiontraceevents) - Get Workflow Execution Trace Events
+* [stream](docs/sdks/executions/README.md#stream) - Stream
+
+#### [Workflows.Metrics](docs/sdks/metrics/README.md)
+
+* [getWorkflowMetrics](docs/sdks/metrics/README.md#getworkflowmetrics) - Get Workflow Metrics
+
+#### [Workflows.Runs](docs/sdks/runs/README.md)
+
+* [listRuns](docs/sdks/runs/README.md#listruns) - List Runs
+* [getRun](docs/sdks/runs/README.md#getrun) - Get Run
+* [getRunHistory](docs/sdks/runs/README.md#getrunhistory) - Get Run History
+
+#### [Workflows.Schedules](docs/sdks/schedules/README.md)
+
+* [getSchedules](docs/sdks/schedules/README.md#getschedules) - Get Schedules
+* [scheduleWorkflow](docs/sdks/schedules/README.md#scheduleworkflow) - Schedule Workflow
+* [unscheduleWorkflow](docs/sdks/schedules/README.md#unscheduleworkflow) - Unschedule Workflow
+
+#### [Workflows.Workers](docs/sdks/workers/README.md)
+
+* [whoami](docs/sdks/workers/README.md#whoami) - Get Worker Info
+
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
@@ -466,6 +536,38 @@ run();
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
 <!-- End Server-sent event streaming [eventstream] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you
+make your SDK calls as usual, but the returned response object will also be an
+async iterable that can be consumed using the [`for await...of`][for-await-of]
+syntax.
+
+[for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
+
+Here's an example of one such pagination call:
+
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.workflows.getWorkflows({});
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -635,8 +737,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 69 of 131 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 131 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 105 of 173 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 173 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -815,6 +917,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`audioVoicesUpdate`](docs/sdks/voices/README.md#update) - Update voice metadata
 - [`batchJobsCancel`](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
 - [`batchJobsCreate`](docs/sdks/batchjobs/README.md#create) - Create Batch Job
+- [`batchJobsDelete`](docs/sdks/batchjobs/README.md#delete) - Delete Batch Job
 - [`batchJobsGet`](docs/sdks/batchjobs/README.md#get) - Get Batch Job
 - [`batchJobsList`](docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
 - [`betaAgentsCreate`](docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
@@ -913,6 +1016,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`classifiersModerate`](docs/sdks/classifiers/README.md#moderate) - Moderations
 - [`classifiersModerateChat`](docs/sdks/classifiers/README.md#moderatechat) - Chat Moderations
 - [`embeddingsCreate`](docs/sdks/embeddings/README.md#create) - Embeddings
+- [`eventsGetStreamEvents`](docs/sdks/events/README.md#getstreamevents) - Get Stream Events
+- [`eventsGetStreamEvents`](docs/sdks/workflowsevents/README.md#getstreamevents) - Get Stream Events
+- [`eventsGetWorkflowEvents`](docs/sdks/events/README.md#getworkflowevents) - Get Workflow Events
+- [`eventsGetWorkflowEvents`](docs/sdks/workflowsevents/README.md#getworkflowevents) - Get Workflow Events
+- [`eventsSendEvent`](docs/sdks/events/README.md#sendevent) - Receive Workflow Event
+- [`eventsSendEvent`](docs/sdks/workflowsevents/README.md#sendevent) - Receive Workflow Event
+- [`eventsSendEventsBatch`](docs/sdks/events/README.md#sendeventsbatch) - Receive Workflow Events Batch
+- [`eventsSendEventsBatch`](docs/sdks/workflowsevents/README.md#sendeventsbatch) - Receive Workflow Events Batch
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete File
 - [`filesDownload`](docs/sdks/files/README.md#download) - Download File
 - [`filesGetSignedUrl`](docs/sdks/files/README.md#getsignedurl) - Get Signed Url
@@ -933,6 +1044,39 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`modelsUnarchive`](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
 - [`modelsUpdate`](docs/sdks/models/README.md#update) - Update Fine Tuned Model
 - [`ocrProcess`](docs/sdks/ocr/README.md#process) - OCR
+- [`workflowsArchiveWorkflow`](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
+- [`workflowsDeploymentsGetDeployment`](docs/sdks/deployments/README.md#getdeployment) - Get Deployment
+- [`workflowsDeploymentsListDeployments`](docs/sdks/deployments/README.md#listdeployments) - List Deployments
+- [`workflowsExecuteWorkflow`](docs/sdks/workflows/README.md#executeworkflow) - Execute Workflow
+- [`workflowsExecutionsBatchCancelWorkflowExecutions`](docs/sdks/executions/README.md#batchcancelworkflowexecutions) - Batch Cancel Workflow Executions
+- [`workflowsExecutionsBatchTerminateWorkflowExecutions`](docs/sdks/executions/README.md#batchterminateworkflowexecutions) - Batch Terminate Workflow Executions
+- [`workflowsExecutionsCancelWorkflowExecution`](docs/sdks/executions/README.md#cancelworkflowexecution) - Cancel Workflow Execution
+- [`workflowsExecutionsGetWorkflowExecution`](docs/sdks/executions/README.md#getworkflowexecution) - Get Workflow Execution
+- [`workflowsExecutionsGetWorkflowExecutionHistory`](docs/sdks/executions/README.md#getworkflowexecutionhistory) - Get Workflow Execution History
+- [`workflowsExecutionsGetWorkflowExecutionTraceEvents`](docs/sdks/executions/README.md#getworkflowexecutiontraceevents) - Get Workflow Execution Trace Events
+- [`workflowsExecutionsGetWorkflowExecutionTraceOtel`](docs/sdks/executions/README.md#getworkflowexecutiontraceotel) - Get Workflow Execution Trace Otel
+- [`workflowsExecutionsGetWorkflowExecutionTraceSummary`](docs/sdks/executions/README.md#getworkflowexecutiontracesummary) - Get Workflow Execution Trace Summary
+- [`workflowsExecutionsQueryWorkflowExecution`](docs/sdks/executions/README.md#queryworkflowexecution) - Query Workflow Execution
+- [`workflowsExecutionsResetWorkflow`](docs/sdks/executions/README.md#resetworkflow) - Reset Workflow
+- [`workflowsExecutionsSignalWorkflowExecution`](docs/sdks/executions/README.md#signalworkflowexecution) - Signal Workflow Execution
+- [`workflowsExecutionsStream`](docs/sdks/executions/README.md#stream) - Stream
+- [`workflowsExecutionsTerminateWorkflowExecution`](docs/sdks/executions/README.md#terminateworkflowexecution) - Terminate Workflow Execution
+- [`workflowsExecutionsUpdateWorkflowExecution`](docs/sdks/executions/README.md#updateworkflowexecution) - Update Workflow Execution
+- [`workflowsGetWorkflow`](docs/sdks/workflows/README.md#getworkflow) - Get Workflow
+- [`workflowsGetWorkflowRegistration`](docs/sdks/workflows/README.md#getworkflowregistration) - Get Workflow Registration
+- [`workflowsGetWorkflowRegistrations`](docs/sdks/workflows/README.md#getworkflowregistrations) - Get Workflow Registrations
+- [`workflowsGetWorkflows`](docs/sdks/workflows/README.md#getworkflows) - Get Workflows
+- [`workflowsMetricsGetWorkflowMetrics`](docs/sdks/metrics/README.md#getworkflowmetrics) - Get Workflow Metrics
+- [`workflowsRunsGetRun`](docs/sdks/runs/README.md#getrun) - Get Run
+- [`workflowsRunsGetRunHistory`](docs/sdks/runs/README.md#getrunhistory) - Get Run History
+- [`workflowsRunsListRuns`](docs/sdks/runs/README.md#listruns) - List Runs
+- [`workflowsSchedulesGetSchedules`](docs/sdks/schedules/README.md#getschedules) - Get Schedules
+- [`workflowsSchedulesScheduleWorkflow`](docs/sdks/schedules/README.md#scheduleworkflow) - Schedule Workflow
+- [`workflowsSchedulesUnscheduleWorkflow`](docs/sdks/schedules/README.md#unscheduleworkflow) - Unschedule Workflow
+- [`workflowsUnarchiveWorkflow`](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow
+- [`workflowsUpdateWorkflow`](docs/sdks/workflows/README.md#updateworkflow) - Update Workflow
+- [`workflowsWorkersWhoami`](docs/sdks/workers/README.md#whoami) - Get Worker Info
+- ~~[`workflowsExecuteWorkflowRegistration`](docs/sdks/workflows/README.md#executeworkflowregistration)~~ - Execute Workflow Registration :warning: **Deprecated**
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->

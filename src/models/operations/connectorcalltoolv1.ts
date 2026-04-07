@@ -9,6 +9,7 @@ import * as components from "../components/index.js";
 
 export type ConnectorCallToolV1Request = {
   toolName: string;
+  credentialsName?: string | null | undefined;
   connectorIdOrName: string;
   connectorCallToolRequest: components.ConnectorCallToolRequest;
 };
@@ -16,6 +17,7 @@ export type ConnectorCallToolV1Request = {
 /** @internal */
 export type ConnectorCallToolV1Request$Outbound = {
   tool_name: string;
+  credentials_name?: string | null | undefined;
   connector_id_or_name: string;
   ConnectorCallToolRequest: components.ConnectorCallToolRequest$Outbound;
 };
@@ -26,11 +28,13 @@ export const ConnectorCallToolV1Request$outboundSchema: z.ZodType<
   ConnectorCallToolV1Request
 > = z.object({
   toolName: z.string(),
+  credentialsName: z.nullable(z.string()).optional(),
   connectorIdOrName: z.string(),
   connectorCallToolRequest: components.ConnectorCallToolRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     toolName: "tool_name",
+    credentialsName: "credentials_name",
     connectorIdOrName: "connector_id_or_name",
     connectorCallToolRequest: "ConnectorCallToolRequest",
   });

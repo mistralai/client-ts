@@ -94,7 +94,7 @@ export class Connectors extends ClientSDK {
   async listTools(
     request: operations.ConnectorListToolsV1Request,
     options?: RequestOptions,
-  ): Promise<operations.ResponseConnectorListToolsV12> {
+  ): Promise<operations.ResponseConnectorListToolsV1> {
     return unwrapAsync(betaConnectorsListTools(
       this,
       request,
