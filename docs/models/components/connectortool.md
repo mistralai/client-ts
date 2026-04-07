@@ -8,13 +8,14 @@ import { ConnectorTool } from "@mistralai/mistralai/models/components";
 let value: ConnectorTool = {
   id: "<id>",
   name: "<value>",
-  description: "who acidic since now lazily",
+  description:
+    "naturally usher immaculate deck yet wicked dampen gadzooks yuck stay",
   executionConfig: {
     type: "<value>",
   },
   visibility: "shared_org",
-  createdAt: new Date("2025-09-16T20:43:35.562Z"),
-  modifiedAt: new Date("2026-10-28T04:35:49.624Z"),
+  createdAt: new Date("2026-01-04T16:47:49.652Z"),
+  modifiedAt: new Date("2026-10-23T13:08:04.213Z"),
 };
 ```
 

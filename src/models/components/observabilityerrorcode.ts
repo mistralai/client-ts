@@ -52,7 +52,10 @@ export const ObservabilityErrorCode = {
   EvaluationRunTransitionIsRunningAlready:
     "EVALUATION_RUN_TRANSITION_IS_RUNNING_ALREADY",
   EvaluationRunTransitionError: "EVALUATION_RUN_TRANSITION_ERROR",
+  TemplateError: "TEMPLATE_ERROR",
   TemplateSyntaxError: "TEMPLATE_SYNTAX_ERROR",
+  ProjectNameAlreadyExists: "PROJECT_NAME_ALREADY_EXISTS",
+  EvaluationNameAlreadyExists: "EVALUATION_NAME_ALREADY_EXISTS",
 } as const;
 export type ObservabilityErrorCode = OpenEnum<typeof ObservabilityErrorCode>;
 

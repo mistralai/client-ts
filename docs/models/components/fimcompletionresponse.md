@@ -14,7 +14,6 @@ let value: FIMCompletionResponse = {
   choices: [
     {
       index: 0,
-      message: {},
       finishReason: "stop",
     },
   ],

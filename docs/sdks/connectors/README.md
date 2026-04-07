@@ -380,7 +380,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.ResponseConnectorListToolsV12](../../models/operations/responseconnectorlisttoolsv12.md)\>**
+**Promise\<[operations.ResponseConnectorListToolsV1](../../models/operations/responseconnectorlisttoolsv1.md)\>**
 
 ### Errors
 
