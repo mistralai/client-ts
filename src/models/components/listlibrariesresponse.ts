@@ -8,8 +8,13 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Library, Library$inboundSchema } from "./library.js";
+import {
+  PaginationInfo,
+  PaginationInfo$inboundSchema,
+} from "./paginationinfo.js";
 
 export type ListLibrariesResponse = {
+  pagination: PaginationInfo;
   data: Array<Library>;
 };
 
@@ -18,6 +23,7 @@ export const ListLibrariesResponse$inboundSchema: z.ZodType<
   ListLibrariesResponse,
   unknown
 > = z.object({
+  pagination: PaginationInfo$inboundSchema,
   data: z.array(Library$inboundSchema),
 });
 
