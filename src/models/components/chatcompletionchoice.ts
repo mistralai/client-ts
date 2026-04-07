@@ -28,7 +28,8 @@ export type ChatCompletionChoiceFinishReason = OpenEnum<
 
 export type ChatCompletionChoice = {
   index: number;
-  message: AssistantMessage;
+  message?: AssistantMessage | undefined;
+  messages?: Array<AssistantMessage> | undefined;
   finishReason: ChatCompletionChoiceFinishReason;
 };
 
@@ -44,7 +45,8 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   index: z.int(),
-  message: AssistantMessage$inboundSchema,
+  message: AssistantMessage$inboundSchema.optional(),
+  messages: z.array(AssistantMessage$inboundSchema).optional(),
   finish_reason: ChatCompletionChoiceFinishReason$inboundSchema,
 }).transform((v) => {
   return remap$(v, {

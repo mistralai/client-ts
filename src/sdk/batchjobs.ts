@@ -5,6 +5,7 @@
 
 import { batchJobsCancel } from "../funcs/batchJobsCancel.js";
 import { batchJobsCreate } from "../funcs/batchJobsCreate.js";
+import { batchJobsDelete } from "../funcs/batchJobsDelete.js";
 import { batchJobsGet } from "../funcs/batchJobsGet.js";
 import { batchJobsList } from "../funcs/batchJobsList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -61,6 +62,23 @@ export class BatchJobs extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.BatchJob> {
     return unwrapAsync(batchJobsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete Batch Job
+   *
+   * @remarks
+   * Request the deletion of a batch job.
+   */
+  async delete(
+    request: operations.JobsApiRoutesBatchDeleteBatchJobRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeleteBatchJobResponse> {
+    return unwrapAsync(batchJobsDelete(
       this,
       request,
       options,

@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/libraries/{library_id}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -133,7 +132,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 30000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

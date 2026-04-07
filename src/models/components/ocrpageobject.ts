@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -11,6 +12,10 @@ import {
   OCRImageObject,
   OCRImageObject$inboundSchema,
 } from "./ocrimageobject.js";
+import {
+  OCRPageConfidenceScores,
+  OCRPageConfidenceScores$inboundSchema,
+} from "./ocrpageconfidencescores.js";
 import {
   OCRPageDimensions,
   OCRPageDimensions$inboundSchema,
@@ -53,6 +58,10 @@ export type OCRPageObject = {
    * The dimensions of the PDF Page's screenshot image
    */
   dimensions: OCRPageDimensions | null;
+  /**
+   * Confidence scores for the OCR page (populated when confidence_scores_granularity is set)
+   */
+  confidenceScores?: OCRPageConfidenceScores | null | undefined;
 };
 
 /** @internal */
@@ -66,6 +75,12 @@ export const OCRPageObject$inboundSchema: z.ZodType<OCRPageObject, unknown> = z
     header: z.nullable(z.string()).optional(),
     footer: z.nullable(z.string()).optional(),
     dimensions: z.nullable(OCRPageDimensions$inboundSchema),
+    confidence_scores: z.nullable(OCRPageConfidenceScores$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "confidence_scores": "confidenceScores",
+    });
   });
 
 export function ocrPageObjectFromJSON(

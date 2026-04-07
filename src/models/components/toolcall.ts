@@ -13,15 +13,10 @@ import {
   FunctionCall$Outbound,
   FunctionCall$outboundSchema,
 } from "./functioncall.js";
-import {
-  ToolTypes,
-  ToolTypes$inboundSchema,
-  ToolTypes$outboundSchema,
-} from "./tooltypes.js";
 
 export type ToolCall = {
   id?: string | undefined;
-  type?: ToolTypes | undefined;
+  type?: string | undefined;
   function: FunctionCall;
   index?: number | undefined;
 };
@@ -29,7 +24,7 @@ export type ToolCall = {
 /** @internal */
 export const ToolCall$inboundSchema: z.ZodType<ToolCall, unknown> = z.object({
   id: z.string().default("null"),
-  type: ToolTypes$inboundSchema.optional(),
+  type: z.string().optional(),
   function: FunctionCall$inboundSchema,
   index: z.int().default(0),
 });
@@ -45,7 +40,7 @@ export type ToolCall$Outbound = {
 export const ToolCall$outboundSchema: z.ZodType<ToolCall$Outbound, ToolCall> = z
   .object({
     id: z.string().default("null"),
-    type: ToolTypes$outboundSchema.optional(),
+    type: z.string().optional(),
     function: FunctionCall$outboundSchema,
     index: z.int().default(0),
   });

@@ -8,6 +8,7 @@ import { MistralCore } from "../core.js";
 import { appendForm } from "../lib/encodings.js";
 import { EventStream } from "../lib/event-streams.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -101,22 +102,17 @@ async function $do(
   }
   if (payload.file !== undefined) {
     if (isBlobLike(payload.file)) {
-      appendForm(body, "file", payload.file);
+      const blob = payload.file;
+      const name = "name" in blob ? (blob.name as string) : undefined;
+      appendForm(body, "file", blob, name);
     } else if (isReadableStream(payload.file.content)) {
       const buffer = await readableStreamToArrayBuffer(payload.file.content);
-      const contentType = getContentTypeFromFileName(payload.file.fileName)
-        || "application/octet-stream";
-      const blob = new Blob([buffer], { type: contentType });
-      appendForm(body, "file", blob, payload.file.fileName);
-    } else if (payload.file.content instanceof Uint8Array) {
       const contentType = getContentTypeFromFileName(payload.file.fileName)
         || "application/octet-stream";
       appendForm(
         body,
         "file",
-        new Blob([new Uint8Array(payload.file.content).buffer], {
-          type: contentType,
-        }),
+        bytesToBlob(buffer, contentType),
         payload.file.fileName,
       );
     } else {
@@ -125,7 +121,7 @@ async function $do(
       appendForm(
         body,
         "file",
-        new Blob([payload.file.content], { type: contentType }),
+        bytesToBlob(payload.file.content, contentType),
         payload.file.fileName,
       );
     }
@@ -186,7 +182,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 30000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
