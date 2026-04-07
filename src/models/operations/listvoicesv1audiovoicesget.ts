@@ -4,6 +4,20 @@
  */
 
 import * as z from "zod/v4";
+import { ClosedEnum } from "../../types/enums.js";
+
+/**
+ * Filter the voices between customs and presets
+ */
+export const Type = {
+  All: "all",
+  Custom: "custom",
+  Preset: "preset",
+} as const;
+/**
+ * Filter the voices between customs and presets
+ */
+export type Type = ClosedEnum<typeof Type>;
 
 export type ListVoicesV1AudioVoicesGetRequest = {
   /**
@@ -14,12 +28,20 @@ export type ListVoicesV1AudioVoicesGetRequest = {
    * Offset for pagination
    */
   offset?: number | undefined;
+  /**
+   * Filter the voices between customs and presets
+   */
+  type?: Type | undefined;
 };
+
+/** @internal */
+export const Type$outboundSchema: z.ZodEnum<typeof Type> = z.enum(Type);
 
 /** @internal */
 export type ListVoicesV1AudioVoicesGetRequest$Outbound = {
   limit: number;
   offset: number;
+  type: string;
 };
 
 /** @internal */
@@ -29,6 +51,7 @@ export const ListVoicesV1AudioVoicesGetRequest$outboundSchema: z.ZodType<
 > = z.object({
   limit: z.int().default(10),
   offset: z.int().default(0),
+  type: Type$outboundSchema.default("all"),
 });
 
 export function listVoicesV1AudioVoicesGetRequestToJSON(

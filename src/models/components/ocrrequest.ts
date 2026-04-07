@@ -33,11 +33,24 @@ import {
  */
 export type DocumentUnion = FileChunk | DocumentURLChunk | ImageURLChunk;
 
+/**
+ * Specific pages to process. Accepts a list of integers or a string of comma-separated numbers and ranges (e.g. '0,1,2' or '0-5' or '0,2-4'). Page numbers start from 0.
+ */
+export type Pages = string | Array<number>;
+
 export const TableFormat = {
   Markdown: "markdown",
   Html: "html",
 } as const;
 export type TableFormat = ClosedEnum<typeof TableFormat>;
+
+export const ConfidenceScoresGranularity = {
+  Word: "word",
+  Page: "page",
+} as const;
+export type ConfidenceScoresGranularity = ClosedEnum<
+  typeof ConfidenceScoresGranularity
+>;
 
 export type OCRRequest = {
   model: string | null;
@@ -47,9 +60,9 @@ export type OCRRequest = {
    */
   document: FileChunk | DocumentURLChunk | ImageURLChunk;
   /**
-   * Specific pages user wants to process in various formats: single number, range, or list of both. Starts from 0
+   * Specific pages to process. Accepts a list of integers or a string of comma-separated numbers and ranges (e.g. '0,1,2' or '0-5' or '0,2-4'). Page numbers start from 0.
    */
-  pages?: Array<number> | null | undefined;
+  pages?: string | Array<number> | null | undefined;
   /**
    * Include image URLs in response
    */
@@ -77,6 +90,10 @@ export type OCRRequest = {
   tableFormat?: TableFormat | null | undefined;
   extractHeader?: boolean | undefined;
   extractFooter?: boolean | undefined;
+  /**
+   * Granularity for confidence scores: 'word' (per-word scores) or 'page' (aggregate only). Defaults to None (no confidence scores) to keep response payload small.
+   */
+  confidenceScoresGranularity?: ConfidenceScoresGranularity | null | undefined;
 };
 
 /** @internal */
@@ -100,9 +117,25 @@ export function documentUnionToJSON(documentUnion: DocumentUnion): string {
 }
 
 /** @internal */
+export type Pages$Outbound = string | Array<number>;
+
+/** @internal */
+export const Pages$outboundSchema: z.ZodType<Pages$Outbound, Pages> =
+  smartUnion([z.string(), z.array(z.int())]);
+
+export function pagesToJSON(pages: Pages): string {
+  return JSON.stringify(Pages$outboundSchema.parse(pages));
+}
+
+/** @internal */
 export const TableFormat$outboundSchema: z.ZodEnum<typeof TableFormat> = z.enum(
   TableFormat,
 );
+
+/** @internal */
+export const ConfidenceScoresGranularity$outboundSchema: z.ZodEnum<
+  typeof ConfidenceScoresGranularity
+> = z.enum(ConfidenceScoresGranularity);
 
 /** @internal */
 export type OCRRequest$Outbound = {
@@ -112,7 +145,7 @@ export type OCRRequest$Outbound = {
     | FileChunk$Outbound
     | DocumentURLChunk$Outbound
     | ImageURLChunk$Outbound;
-  pages?: Array<number> | null | undefined;
+  pages?: string | Array<number> | null | undefined;
   include_image_base64?: boolean | null | undefined;
   image_limit?: number | null | undefined;
   image_min_size?: number | null | undefined;
@@ -122,6 +155,7 @@ export type OCRRequest$Outbound = {
   table_format?: string | null | undefined;
   extract_header?: boolean | undefined;
   extract_footer?: boolean | undefined;
+  confidence_scores_granularity?: string | null | undefined;
 };
 
 /** @internal */
@@ -136,7 +170,7 @@ export const OCRRequest$outboundSchema: z.ZodType<
     DocumentURLChunk$outboundSchema,
     ImageURLChunk$outboundSchema,
   ]),
-  pages: z.nullable(z.array(z.int())).optional(),
+  pages: z.nullable(smartUnion([z.string(), z.array(z.int())])).optional(),
   includeImageBase64: z.nullable(z.boolean()).optional(),
   imageLimit: z.nullable(z.int()).optional(),
   imageMinSize: z.nullable(z.int()).optional(),
@@ -147,6 +181,9 @@ export const OCRRequest$outboundSchema: z.ZodType<
   tableFormat: z.nullable(TableFormat$outboundSchema).optional(),
   extractHeader: z.boolean().optional(),
   extractFooter: z.boolean().optional(),
+  confidenceScoresGranularity: z.nullable(
+    ConfidenceScoresGranularity$outboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     includeImageBase64: "include_image_base64",
@@ -158,6 +195,7 @@ export const OCRRequest$outboundSchema: z.ZodType<
     tableFormat: "table_format",
     extractHeader: "extract_header",
     extractFooter: "extract_footer",
+    confidenceScoresGranularity: "confidence_scores_granularity",
   });
 });
 

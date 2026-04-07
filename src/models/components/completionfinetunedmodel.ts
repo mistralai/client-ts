@@ -27,7 +27,7 @@ export type CompletionFineTunedModel = {
   capabilities: FineTunedModelCapabilities;
   maxContextLength: number;
   aliases?: Array<string> | undefined;
-  job: string;
+  job?: string | null | undefined;
   modelType: "completion";
 };
 
@@ -49,7 +49,7 @@ export const CompletionFineTunedModel$inboundSchema: z.ZodType<
   capabilities: FineTunedModelCapabilities$inboundSchema,
   max_context_length: z.int().default(32768),
   aliases: z.array(z.string()).optional(),
-  job: z.string(),
+  job: z.nullable(z.string()).optional(),
   model_type: z.literal("completion"),
 }).transform((v) => {
   return remap$(v, {

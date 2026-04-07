@@ -12,10 +12,30 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  CodeInterpreterTool,
+  CodeInterpreterTool$Outbound,
+  CodeInterpreterTool$outboundSchema,
+} from "./codeinterpretertool.js";
+import {
+  CustomConnector,
+  CustomConnector$Outbound,
+  CustomConnector$outboundSchema,
+} from "./customconnector.js";
+import {
+  DocumentLibraryTool,
+  DocumentLibraryTool$Outbound,
+  DocumentLibraryTool$outboundSchema,
+} from "./documentlibrarytool.js";
+import {
   GuardrailConfig,
   GuardrailConfig$Outbound,
   GuardrailConfig$outboundSchema,
 } from "./guardrailconfig.js";
+import {
+  ImageGenerationTool,
+  ImageGenerationTool$Outbound,
+  ImageGenerationTool$outboundSchema,
+} from "./imagegenerationtool.js";
 import {
   MistralPromptMode,
   MistralPromptMode$outboundSchema,
@@ -59,6 +79,16 @@ import {
   UserMessage$Outbound,
   UserMessage$outboundSchema,
 } from "./usermessage.js";
+import {
+  WebSearchPremiumTool,
+  WebSearchPremiumTool$Outbound,
+  WebSearchPremiumTool$outboundSchema,
+} from "./websearchpremiumtool.js";
+import {
+  WebSearchTool,
+  WebSearchTool$Outbound,
+  WebSearchTool$outboundSchema,
+} from "./websearchtool.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -70,6 +100,15 @@ export type AgentsCompletionStreamRequestMessage =
   | SystemMessage
   | ToolMessage
   | UserMessage;
+
+export type AgentsCompletionStreamRequestTool =
+  | Tool
+  | WebSearchTool
+  | WebSearchPremiumTool
+  | CodeInterpreterTool
+  | ImageGenerationTool
+  | DocumentLibraryTool
+  | CustomConnector;
 
 export type AgentsCompletionStreamRequestToolChoice =
   | ToolChoice
@@ -103,7 +142,18 @@ export type AgentsCompletionStreamRequest = {
    * Specify the format that the model must output. By default it will use `{ "type": "text" }`. Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is in JSON. When using JSON mode you MUST also instruct the model to produce JSON yourself with a system or a user message. Setting to `{ "type": "json_schema" }` enables JSON schema mode, which guarantees the message the model generates is in JSON and follows the schema you provide.
    */
   responseFormat?: ResponseFormat | undefined;
-  tools?: Array<Tool> | null | undefined;
+  tools?:
+    | Array<
+      | Tool
+      | WebSearchTool
+      | WebSearchPremiumTool
+      | CodeInterpreterTool
+      | ImageGenerationTool
+      | DocumentLibraryTool
+      | CustomConnector
+    >
+    | null
+    | undefined;
   toolChoice?: ToolChoice | ToolChoiceEnum | undefined;
   /**
    * The `presence_penalty` determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
@@ -184,6 +234,40 @@ export function agentsCompletionStreamRequestMessageToJSON(
 }
 
 /** @internal */
+export type AgentsCompletionStreamRequestTool$Outbound =
+  | Tool$Outbound
+  | WebSearchTool$Outbound
+  | WebSearchPremiumTool$Outbound
+  | CodeInterpreterTool$Outbound
+  | ImageGenerationTool$Outbound
+  | DocumentLibraryTool$Outbound
+  | CustomConnector$Outbound;
+
+/** @internal */
+export const AgentsCompletionStreamRequestTool$outboundSchema: z.ZodType<
+  AgentsCompletionStreamRequestTool$Outbound,
+  AgentsCompletionStreamRequestTool
+> = z.union([
+  Tool$outboundSchema,
+  WebSearchTool$outboundSchema,
+  WebSearchPremiumTool$outboundSchema,
+  CodeInterpreterTool$outboundSchema,
+  ImageGenerationTool$outboundSchema,
+  DocumentLibraryTool$outboundSchema,
+  CustomConnector$outboundSchema,
+]);
+
+export function agentsCompletionStreamRequestToolToJSON(
+  agentsCompletionStreamRequestTool: AgentsCompletionStreamRequestTool,
+): string {
+  return JSON.stringify(
+    AgentsCompletionStreamRequestTool$outboundSchema.parse(
+      agentsCompletionStreamRequestTool,
+    ),
+  );
+}
+
+/** @internal */
 export type AgentsCompletionStreamRequestToolChoice$Outbound =
   | ToolChoice$Outbound
   | string;
@@ -219,7 +303,18 @@ export type AgentsCompletionStreamRequest$Outbound = {
     | UserMessage$Outbound
   >;
   response_format?: ResponseFormat$Outbound | undefined;
-  tools?: Array<Tool$Outbound> | null | undefined;
+  tools?:
+    | Array<
+      | Tool$Outbound
+      | WebSearchTool$Outbound
+      | WebSearchPremiumTool$Outbound
+      | CodeInterpreterTool$Outbound
+      | ImageGenerationTool$Outbound
+      | DocumentLibraryTool$Outbound
+      | CustomConnector$Outbound
+    >
+    | null
+    | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
   presence_penalty?: number | undefined;
   frequency_penalty?: number | undefined;
@@ -253,7 +348,19 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
-  tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
+  tools: z.nullable(
+    z.array(
+      z.union([
+        Tool$outboundSchema,
+        WebSearchTool$outboundSchema,
+        WebSearchPremiumTool$outboundSchema,
+        CodeInterpreterTool$outboundSchema,
+        ImageGenerationTool$outboundSchema,
+        DocumentLibraryTool$outboundSchema,
+        CustomConnector$outboundSchema,
+      ]),
+    ),
+  ).optional(),
   toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,

@@ -11,11 +11,13 @@ import { Beta } from "./beta.js";
 import { Chat } from "./chat.js";
 import { Classifiers } from "./classifiers.js";
 import { Embeddings } from "./embeddings.js";
+import { Events } from "./events.js";
 import { Files } from "./files.js";
 import { Fim } from "./fim.js";
 import { FineTuning } from "./finetuning.js";
 import { Models } from "./models.js";
 import { Ocr } from "./ocr.js";
+import { Workflows } from "./workflows.js";
 
 export class Mistral extends ClientSDK {
   private _audio?: Audio;
@@ -76,5 +78,15 @@ export class Mistral extends ClientSDK {
   private _ocr?: Ocr;
   get ocr(): Ocr {
     return (this._ocr ??= new Ocr(this._options));
+  }
+
+  private _workflows?: Workflows;
+  get workflows(): Workflows {
+    return (this._workflows ??= new Workflows(this._options));
+  }
+
+  private _events?: Events;
+  get events(): Events {
+    return (this._events ??= new Events(this._options));
   }
 }
