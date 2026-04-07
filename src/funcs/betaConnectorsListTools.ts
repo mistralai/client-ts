@@ -38,7 +38,7 @@ export function betaConnectorsListTools(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ResponseConnectorListToolsV12,
+    operations.ResponseConnectorListToolsV1,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.ResponseConnectorListToolsV12,
+      operations.ResponseConnectorListToolsV1,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -97,7 +97,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/connectors/{connector_id_or_name}/tools")(
     pathParams,
   );
@@ -141,7 +140,7 @@ async function $do(
     query: query,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 30000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
@@ -164,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.ResponseConnectorListToolsV12,
+    operations.ResponseConnectorListToolsV1,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -175,7 +174,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ResponseConnectorListToolsV12$inboundSchema),
+    M.json(200, operations.ResponseConnectorListToolsV1$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

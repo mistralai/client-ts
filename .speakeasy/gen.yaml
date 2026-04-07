@@ -34,7 +34,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.1.2
+  version: 2.2.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -60,6 +60,7 @@ typescript:
   enumFormat: union
   envVarPrefix: MISTRAL
   exportZodModelNamespace: false
+  fixEnumNameSanitization: false
   flatAdditionalProperties: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first

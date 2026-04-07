@@ -9,13 +9,12 @@ import {
   FunctionName$Outbound,
   FunctionName$outboundSchema,
 } from "./functionname.js";
-import { ToolTypes, ToolTypes$outboundSchema } from "./tooltypes.js";
 
 /**
  * ToolChoice is either a ToolChoiceEnum or a ToolChoice
  */
 export type ToolChoice = {
-  type?: ToolTypes | undefined;
+  type?: string | undefined;
   /**
    * this restriction of `Function` is used to select a specific function to call
    */
@@ -33,7 +32,7 @@ export const ToolChoice$outboundSchema: z.ZodType<
   ToolChoice$Outbound,
   ToolChoice
 > = z.object({
-  type: ToolTypes$outboundSchema.optional(),
+  type: z.string().optional(),
   function: FunctionName$outboundSchema,
 });
 
