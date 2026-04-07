@@ -1,5 +1,5 @@
 workflowVersion: 1.0.0
-speakeasyVersion: v1.751.1
+speakeasyVersion: v1.761.1
 sources:
     mistral-azure-source:
         inputs:
