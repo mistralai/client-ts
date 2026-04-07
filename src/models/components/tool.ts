@@ -9,22 +9,21 @@ import {
   FunctionT$Outbound,
   FunctionT$outboundSchema,
 } from "./function.js";
-import { ToolTypes, ToolTypes$outboundSchema } from "./tooltypes.js";
 
 export type Tool = {
-  type?: ToolTypes | undefined;
+  type: "function";
   function: FunctionT;
 };
 
 /** @internal */
 export type Tool$Outbound = {
-  type?: string | undefined;
+  type: "function";
   function: FunctionT$Outbound;
 };
 
 /** @internal */
 export const Tool$outboundSchema: z.ZodType<Tool$Outbound, Tool> = z.object({
-  type: ToolTypes$outboundSchema.optional(),
+  type: z.literal("function"),
   function: FunctionT$outboundSchema,
 });
 

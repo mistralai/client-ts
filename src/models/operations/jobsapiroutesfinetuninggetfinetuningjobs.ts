@@ -10,7 +10,7 @@ import { ClosedEnum } from "../../types/enums.js";
 /**
  * The current job state to filter on. When set, the other results are not displayed.
  */
-export const Status = {
+export const JobsApiRoutesFineTuningGetFineTuningJobsStatus = {
   Queued: "QUEUED",
   Started: "STARTED",
   Validating: "VALIDATING",
@@ -25,7 +25,9 @@ export const Status = {
 /**
  * The current job state to filter on. When set, the other results are not displayed.
  */
-export type Status = ClosedEnum<typeof Status>;
+export type JobsApiRoutesFineTuningGetFineTuningJobsStatus = ClosedEnum<
+  typeof JobsApiRoutesFineTuningGetFineTuningJobsStatus
+>;
 
 export type JobsApiRoutesFineTuningGetFineTuningJobsRequest = {
   /**
@@ -52,7 +54,7 @@ export type JobsApiRoutesFineTuningGetFineTuningJobsRequest = {
   /**
    * The current job state to filter on. When set, the other results are not displayed.
    */
-  status?: Status | null | undefined;
+  status?: JobsApiRoutesFineTuningGetFineTuningJobsStatus | null | undefined;
   /**
    * The Weights and Biases project to filter on. When set, the other results are not displayed.
    */
@@ -68,7 +70,10 @@ export type JobsApiRoutesFineTuningGetFineTuningJobsRequest = {
 };
 
 /** @internal */
-export const Status$outboundSchema: z.ZodEnum<typeof Status> = z.enum(Status);
+export const JobsApiRoutesFineTuningGetFineTuningJobsStatus$outboundSchema:
+  z.ZodEnum<typeof JobsApiRoutesFineTuningGetFineTuningJobsStatus> = z.enum(
+    JobsApiRoutesFineTuningGetFineTuningJobsStatus,
+  );
 
 /** @internal */
 export type JobsApiRoutesFineTuningGetFineTuningJobsRequest$Outbound = {
@@ -98,7 +103,9 @@ export const JobsApiRoutesFineTuningGetFineTuningJobsRequest$outboundSchema:
     createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
       .optional(),
     createdByMe: z.boolean().default(false),
-    status: z.nullable(Status$outboundSchema).optional(),
+    status: z.nullable(
+      JobsApiRoutesFineTuningGetFineTuningJobsStatus$outboundSchema,
+    ).optional(),
     wandbProject: z.nullable(z.string()).optional(),
     wandbName: z.nullable(z.string()).optional(),
     suffix: z.nullable(z.string()).optional(),
