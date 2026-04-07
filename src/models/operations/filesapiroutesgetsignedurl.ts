@@ -9,7 +9,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type FilesApiRoutesGetSignedUrlRequest = {
   fileId: string;
   /**
-   * Number of hours before the url becomes invalid. Defaults to 24h
+   * Number of hours before the URL becomes invalid. Defaults to 24h. Must be between 1h and 168h.
    */
   expiry?: number | undefined;
 };

@@ -12,10 +12,30 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  CodeInterpreterTool,
+  CodeInterpreterTool$Outbound,
+  CodeInterpreterTool$outboundSchema,
+} from "./codeinterpretertool.js";
+import {
+  CustomConnector,
+  CustomConnector$Outbound,
+  CustomConnector$outboundSchema,
+} from "./customconnector.js";
+import {
+  DocumentLibraryTool,
+  DocumentLibraryTool$Outbound,
+  DocumentLibraryTool$outboundSchema,
+} from "./documentlibrarytool.js";
+import {
   GuardrailConfig,
   GuardrailConfig$Outbound,
   GuardrailConfig$outboundSchema,
 } from "./guardrailconfig.js";
+import {
+  ImageGenerationTool,
+  ImageGenerationTool$Outbound,
+  ImageGenerationTool$outboundSchema,
+} from "./imagegenerationtool.js";
 import {
   MistralPromptMode,
   MistralPromptMode$outboundSchema,
@@ -59,6 +79,16 @@ import {
   UserMessage$Outbound,
   UserMessage$outboundSchema,
 } from "./usermessage.js";
+import {
+  WebSearchPremiumTool,
+  WebSearchPremiumTool$Outbound,
+  WebSearchPremiumTool$outboundSchema,
+} from "./websearchpremiumtool.js";
+import {
+  WebSearchTool,
+  WebSearchTool$Outbound,
+  WebSearchTool$outboundSchema,
+} from "./websearchtool.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -70,6 +100,15 @@ export type ChatCompletionRequestMessage =
   | SystemMessage
   | ToolMessage
   | UserMessage;
+
+export type ChatCompletionRequestTool =
+  | Tool
+  | WebSearchTool
+  | WebSearchPremiumTool
+  | CodeInterpreterTool
+  | ImageGenerationTool
+  | DocumentLibraryTool
+  | CustomConnector;
 
 /**
  * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
@@ -122,7 +161,18 @@ export type ChatCompletionRequest = {
   /**
    * A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.
    */
-  tools?: Array<Tool> | null | undefined;
+  tools?:
+    | Array<
+      | Tool
+      | WebSearchTool
+      | WebSearchPremiumTool
+      | CodeInterpreterTool
+      | ImageGenerationTool
+      | DocumentLibraryTool
+      | CustomConnector
+    >
+    | null
+    | undefined;
   /**
    * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
    */
@@ -207,6 +257,38 @@ export function chatCompletionRequestMessageToJSON(
 }
 
 /** @internal */
+export type ChatCompletionRequestTool$Outbound =
+  | Tool$Outbound
+  | WebSearchTool$Outbound
+  | WebSearchPremiumTool$Outbound
+  | CodeInterpreterTool$Outbound
+  | ImageGenerationTool$Outbound
+  | DocumentLibraryTool$Outbound
+  | CustomConnector$Outbound;
+
+/** @internal */
+export const ChatCompletionRequestTool$outboundSchema: z.ZodType<
+  ChatCompletionRequestTool$Outbound,
+  ChatCompletionRequestTool
+> = z.union([
+  Tool$outboundSchema,
+  WebSearchTool$outboundSchema,
+  WebSearchPremiumTool$outboundSchema,
+  CodeInterpreterTool$outboundSchema,
+  ImageGenerationTool$outboundSchema,
+  DocumentLibraryTool$outboundSchema,
+  CustomConnector$outboundSchema,
+]);
+
+export function chatCompletionRequestToolToJSON(
+  chatCompletionRequestTool: ChatCompletionRequestTool,
+): string {
+  return JSON.stringify(
+    ChatCompletionRequestTool$outboundSchema.parse(chatCompletionRequestTool),
+  );
+}
+
+/** @internal */
 export type ChatCompletionRequestToolChoice$Outbound =
   | ToolChoice$Outbound
   | string;
@@ -244,7 +326,18 @@ export type ChatCompletionRequest$Outbound = {
     | UserMessage$Outbound
   >;
   response_format?: ResponseFormat$Outbound | undefined;
-  tools?: Array<Tool$Outbound> | null | undefined;
+  tools?:
+    | Array<
+      | Tool$Outbound
+      | WebSearchTool$Outbound
+      | WebSearchPremiumTool$Outbound
+      | CodeInterpreterTool$Outbound
+      | ImageGenerationTool$Outbound
+      | DocumentLibraryTool$Outbound
+      | CustomConnector$Outbound
+    >
+    | null
+    | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
   presence_penalty?: number | undefined;
   frequency_penalty?: number | undefined;
@@ -281,7 +374,19 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
-  tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
+  tools: z.nullable(
+    z.array(
+      z.union([
+        Tool$outboundSchema,
+        WebSearchTool$outboundSchema,
+        WebSearchPremiumTool$outboundSchema,
+        CodeInterpreterTool$outboundSchema,
+        ImageGenerationTool$outboundSchema,
+        DocumentLibraryTool$outboundSchema,
+        CustomConnector$outboundSchema,
+      ]),
+    ),
+  ).optional(),
   toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,

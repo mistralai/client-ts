@@ -98,7 +98,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/connectors/{connector_id_or_name}/auth_url")(
     pathParams,
   );
@@ -139,7 +138,7 @@ async function $do(
     query: query,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 30000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

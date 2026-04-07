@@ -22,15 +22,12 @@ export type ConnectorListToolsV1Request = {
   connectorIdOrName: string;
 };
 
-export type ResponseConnectorListToolsV11 =
-  | components.ConnectorTool
-  | components.MCPTool;
-
 /**
  * Successful Response
  */
-export type ResponseConnectorListToolsV12 =
-  | Array<components.ConnectorTool | components.MCPTool>
+export type ResponseConnectorListToolsV1 =
+  | Array<components.ConnectorTool>
+  | Array<components.MCPTool>
   | Array<{ [k: string]: any }>;
 
 /** @internal */
@@ -70,44 +67,21 @@ export function connectorListToolsV1RequestToJSON(
 }
 
 /** @internal */
-export const ResponseConnectorListToolsV11$inboundSchema: z.ZodType<
-  ResponseConnectorListToolsV11,
+export const ResponseConnectorListToolsV1$inboundSchema: z.ZodType<
+  ResponseConnectorListToolsV1,
   unknown
 > = smartUnion([
-  components.ConnectorTool$inboundSchema,
-  components.MCPTool$inboundSchema,
-]);
-
-export function responseConnectorListToolsV11FromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseConnectorListToolsV11, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseConnectorListToolsV11$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseConnectorListToolsV11' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseConnectorListToolsV12$inboundSchema: z.ZodType<
-  ResponseConnectorListToolsV12,
-  unknown
-> = smartUnion([
-  z.array(
-    smartUnion([
-      components.ConnectorTool$inboundSchema,
-      components.MCPTool$inboundSchema,
-    ]),
-  ),
+  z.array(components.ConnectorTool$inboundSchema),
+  z.array(components.MCPTool$inboundSchema),
   z.array(z.record(z.string(), z.any())),
 ]);
 
-export function responseConnectorListToolsV12FromJSON(
+export function responseConnectorListToolsV1FromJSON(
   jsonString: string,
-): SafeParseResult<ResponseConnectorListToolsV12, SDKValidationError> {
+): SafeParseResult<ResponseConnectorListToolsV1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseConnectorListToolsV12$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseConnectorListToolsV12' from JSON`,
+    (x) => ResponseConnectorListToolsV1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseConnectorListToolsV1' from JSON`,
   );
 }

@@ -33,10 +33,12 @@ export class Libraries extends ClientSDK {
    * List all libraries that you have created or have been shared with you.
    */
   async list(
+    request?: operations.LibrariesListV1Request | undefined,
     options?: RequestOptions,
   ): Promise<components.ListLibrariesResponse> {
     return unwrapAsync(betaLibrariesList(
       this,
+      request,
       options,
     ));
   }
