@@ -11,8 +11,7 @@ export class DeprecationWarningHook implements AfterSuccessHook {
                 console.warn(
                     `WARNING: The model ${model} is deprecated and will be removed on ${response.headers.get(HEADER_MODEL_DEPRECATION_TIMESTAMP)}. Please refer to https://docs.mistral.ai/getting-started/models/#api-versioning for more information.`
                 );
-            });
-
+            }).catch(() => {});
         }
         return response;
     }
