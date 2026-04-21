@@ -13,12 +13,19 @@ export type WorkflowExecutionTraceSummaryAttributesValues =
   | string
   | number
   | number
-  | boolean;
+  | boolean
+  | Array<any>;
 
 /** @internal */
 export const WorkflowExecutionTraceSummaryAttributesValues$inboundSchema:
   z.ZodType<WorkflowExecutionTraceSummaryAttributesValues, unknown> =
-    smartUnion([z.string(), z.int(), z.number(), z.boolean()]);
+    smartUnion([
+      z.string(),
+      z.int(),
+      z.number(),
+      z.boolean(),
+      z.array(z.any()),
+    ]);
 
 export function workflowExecutionTraceSummaryAttributesValuesFromJSON(
   jsonString: string,

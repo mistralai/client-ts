@@ -127,7 +127,7 @@ export type ChatCompletionRequest = {
   /**
    * Nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
    */
-  topP?: number | undefined;
+  topP?: number | null | undefined;
   /**
    * The maximum number of tokens to generate in the completion. The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
    */
@@ -139,7 +139,7 @@ export type ChatCompletionRequest = {
   /**
    * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
    */
-  stop?: string | Array<string> | undefined;
+  stop?: string | Array<string> | null | undefined;
   /**
    * The seed to use for random sampling. If set, different calls will generate deterministic results.
    */
@@ -180,11 +180,11 @@ export type ChatCompletionRequest = {
   /**
    * The `presence_penalty` determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
    */
-  presencePenalty?: number | undefined;
+  presencePenalty?: number | null | undefined;
   /**
    * The `frequency_penalty` penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
    */
-  frequencyPenalty?: number | undefined;
+  frequencyPenalty?: number | null | undefined;
   /**
    * Number of completions to return for each request, input tokens are only billed once.
    */
@@ -313,10 +313,10 @@ export function chatCompletionRequestToolChoiceToJSON(
 export type ChatCompletionRequest$Outbound = {
   model: string;
   temperature?: number | null | undefined;
-  top_p?: number | undefined;
+  top_p?: number | null | undefined;
   max_tokens?: number | null | undefined;
   stream: boolean;
-  stop?: string | Array<string> | undefined;
+  stop?: string | Array<string> | null | undefined;
   random_seed?: number | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
@@ -339,8 +339,8 @@ export type ChatCompletionRequest$Outbound = {
     | null
     | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
-  presence_penalty?: number | undefined;
-  frequency_penalty?: number | undefined;
+  presence_penalty?: number | null | undefined;
+  frequency_penalty?: number | null | undefined;
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
   parallel_tool_calls?: boolean | undefined;
@@ -357,10 +357,10 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   temperature: z.nullable(z.number()).optional(),
-  topP: z.number().optional(),
+  topP: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(false),
-  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
+  stop: z.nullable(smartUnion([z.string(), z.array(z.string())])).optional(),
   randomSeed: z.nullable(z.int()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
@@ -391,8 +391,8 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
   n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),

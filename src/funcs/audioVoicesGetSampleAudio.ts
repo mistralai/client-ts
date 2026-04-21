@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { MistralCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -39,7 +40,7 @@ export function audioVoicesGetSampleAudio(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    string,
+    ReadableStream<Uint8Array>,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +66,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      string,
+      ReadableStream<Uint8Array>,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -102,7 +103,7 @@ async function $do(
   const path = pathToFunc("/v1/audio/voices/{voice_id}/sample")(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: "application/json",
+    Accept: "audio/wav",
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
@@ -141,7 +142,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -155,7 +157,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    string,
+    ReadableStream<Uint8Array>,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -166,7 +168,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, z.string()),
+    M.stream(
+      200,
+      z.custom<ReadableStream<Uint8Array>>(x => x instanceof ReadableStream),
+      { ctype: "audio/wav" },
+    ),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

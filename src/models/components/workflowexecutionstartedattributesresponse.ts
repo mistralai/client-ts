@@ -26,6 +26,10 @@ export type WorkflowExecutionStartedAttributesResponse = {
    */
   workflowName: string;
   /**
+   * The user-friendly display name of the workflow, if available.
+   */
+  displayName?: string | null | undefined;
+  /**
    * A payload containing arbitrary JSON data.
    *
    * @remarks
@@ -40,11 +44,13 @@ export const WorkflowExecutionStartedAttributesResponse$inboundSchema:
   z.ZodType<WorkflowExecutionStartedAttributesResponse, unknown> = z.object({
     task_id: z.string(),
     workflow_name: z.string(),
+    display_name: z.nullable(z.string()).optional(),
     input: JSONPayloadResponse$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "task_id": "taskId",
       "workflow_name": "workflowName",
+      "display_name": "displayName",
     });
   });
 

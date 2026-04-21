@@ -279,6 +279,16 @@ We have dedicated SDKs for the following providers:
 * [getAuthUrl](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
 * [callTool](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 * [listTools](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
+* [getAuthenticationMethods](docs/sdks/connectors/README.md#getauthenticationmethods) - Get authentication methods for a connector.
+* [listOrganizationCredentials](docs/sdks/connectors/README.md#listorganizationcredentials) - List organization credentials for a connector.
+* [createOrUpdateOrganizationCredentials](docs/sdks/connectors/README.md#createorupdateorganizationcredentials) - Create or update organization credentials for a connector.
+* [listWorkspaceCredentials](docs/sdks/connectors/README.md#listworkspacecredentials) - List workspace credentials for a connector.
+* [createOrUpdateWorkspaceCredentials](docs/sdks/connectors/README.md#createorupdateworkspacecredentials) - Create or update workspace credentials for a connector.
+* [listUserCredentials](docs/sdks/connectors/README.md#listusercredentials) - List user credentials for a connector.
+* [createOrUpdateUserCredentials](docs/sdks/connectors/README.md#createorupdateusercredentials) - Create or update user credentials for a connector.
+* [deleteOrganizationCredentials](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
+* [deleteWorkspaceCredentials](docs/sdks/connectors/README.md#deleteworkspacecredentials) - Delete workspace credentials for a connector.
+* [deleteUserCredentials](docs/sdks/connectors/README.md#deleteusercredentials) - Delete user credentials for a connector.
 * [get](docs/sdks/connectors/README.md#get) - Get a connector.
 * [update](docs/sdks/connectors/README.md#update) - Update a connector.
 * [delete](docs/sdks/connectors/README.md#delete) - Delete a connector.
@@ -382,6 +392,10 @@ We have dedicated SDKs for the following providers:
 * [delete](docs/sdks/judges/README.md#delete) - Delete a judge
 * [update](docs/sdks/judges/README.md#update) - Update a judge
 * [judgeConversation](docs/sdks/judges/README.md#judgeconversation) - Run a saved judge on a conversation
+
+### [Beta.Rag.IngestionPipelineConfigurations](docs/sdks/ingestionpipelineconfigurations/README.md)
+
+* [list](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -729,8 +743,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 103 of 168 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 168 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 112 of 179 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 179 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -925,11 +939,21 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaAgentsUpdateVersion`](docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
 - [`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 - [`betaConnectorsCreate`](docs/sdks/connectors/README.md#create) - Create a new connector.
+- [`betaConnectorsCreateOrUpdateOrganizationCredentials`](docs/sdks/connectors/README.md#createorupdateorganizationcredentials) - Create or update organization credentials for a connector.
+- [`betaConnectorsCreateOrUpdateUserCredentials`](docs/sdks/connectors/README.md#createorupdateusercredentials) - Create or update user credentials for a connector.
+- [`betaConnectorsCreateOrUpdateWorkspaceCredentials`](docs/sdks/connectors/README.md#createorupdateworkspacecredentials) - Create or update workspace credentials for a connector.
 - [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
+- [`betaConnectorsDeleteOrganizationCredentials`](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
+- [`betaConnectorsDeleteUserCredentials`](docs/sdks/connectors/README.md#deleteusercredentials) - Delete user credentials for a connector.
+- [`betaConnectorsDeleteWorkspaceCredentials`](docs/sdks/connectors/README.md#deleteworkspacecredentials) - Delete workspace credentials for a connector.
 - [`betaConnectorsGet`](docs/sdks/connectors/README.md#get) - Get a connector.
+- [`betaConnectorsGetAuthenticationMethods`](docs/sdks/connectors/README.md#getauthenticationmethods) - Get authentication methods for a connector.
 - [`betaConnectorsGetAuthUrl`](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
 - [`betaConnectorsList`](docs/sdks/connectors/README.md#list) - List all connectors.
+- [`betaConnectorsListOrganizationCredentials`](docs/sdks/connectors/README.md#listorganizationcredentials) - List organization credentials for a connector.
 - [`betaConnectorsListTools`](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
+- [`betaConnectorsListUserCredentials`](docs/sdks/connectors/README.md#listusercredentials) - List user credentials for a connector.
+- [`betaConnectorsListWorkspaceCredentials`](docs/sdks/connectors/README.md#listworkspacecredentials) - List workspace credentials for a connector.
 - [`betaConnectorsUpdate`](docs/sdks/connectors/README.md#update) - Update a connector.
 - [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 - [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
@@ -1001,6 +1025,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityJudgesJudgeConversation`](docs/sdks/judges/README.md#judgeconversation) - Run a saved judge on a conversation
 - [`betaObservabilityJudgesList`](docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
 - [`betaObservabilityJudgesUpdate`](docs/sdks/judges/README.md#update) - Update a judge
+- [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications

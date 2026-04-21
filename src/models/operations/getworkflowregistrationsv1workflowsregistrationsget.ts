@@ -36,7 +36,7 @@ export type GetWorkflowRegistrationsV1WorkflowsRegistrationsGetRequest = {
    */
   withWorkflow?: boolean | undefined;
   /**
-   * Whether to only return workflows compatible with chat assistant
+   * Whether to only return workflows available in chat assistant
    */
   availableInChatAssistant?: boolean | null | undefined;
   /**

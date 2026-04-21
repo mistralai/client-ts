@@ -9,6 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  TempoTraceAttributeArrayValue,
+  TempoTraceAttributeArrayValue$inboundSchema,
+} from "./tempotraceattributearrayvalue.js";
+import {
   TempoTraceAttributeBoolValue,
   TempoTraceAttributeBoolValue$inboundSchema,
 } from "./tempotraceattributeboolvalue.js";
@@ -27,7 +31,8 @@ import {
 export type TempoTraceAttributeValue =
   | TempoTraceAttributeStringValue
   | TempoTraceAttributeIntValue
-  | TempoTraceAttributeBoolValue;
+  | TempoTraceAttributeBoolValue
+  | TempoTraceAttributeArrayValue;
 
 export type TempoTraceAttribute = {
   /**
@@ -40,7 +45,8 @@ export type TempoTraceAttribute = {
   value:
     | TempoTraceAttributeStringValue
     | TempoTraceAttributeIntValue
-    | TempoTraceAttributeBoolValue;
+    | TempoTraceAttributeBoolValue
+    | TempoTraceAttributeArrayValue;
 };
 
 /** @internal */
@@ -51,6 +57,7 @@ export const TempoTraceAttributeValue$inboundSchema: z.ZodType<
   TempoTraceAttributeStringValue$inboundSchema,
   TempoTraceAttributeIntValue$inboundSchema,
   TempoTraceAttributeBoolValue$inboundSchema,
+  TempoTraceAttributeArrayValue$inboundSchema,
 ]);
 
 export function tempoTraceAttributeValueFromJSON(
@@ -73,6 +80,7 @@ export const TempoTraceAttribute$inboundSchema: z.ZodType<
     TempoTraceAttributeStringValue$inboundSchema,
     TempoTraceAttributeIntValue$inboundSchema,
     TempoTraceAttributeBoolValue$inboundSchema,
+    TempoTraceAttributeArrayValue$inboundSchema,
   ]),
 });
 

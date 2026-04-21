@@ -50,6 +50,10 @@ export type WorkflowCodeDefinition = {
    * Maximum total execution time including retries and continue-as-new
    */
   executionTimeout?: number | undefined;
+  /**
+   * Plugin-specific metadata (e.g. connector declarations)
+   */
+  pluginMetadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -64,12 +68,14 @@ export const WorkflowCodeDefinition$inboundSchema: z.ZodType<
   updates: z.array(UpdateDefinition$inboundSchema).optional(),
   enforce_determinism: z.boolean().default(false),
   execution_timeout: z.number().optional(),
+  plugin_metadata: z.nullable(z.record(z.string(), z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "input_schema": "inputSchema",
     "output_schema": "outputSchema",
     "enforce_determinism": "enforceDeterminism",
     "execution_timeout": "executionTimeout",
+    "plugin_metadata": "pluginMetadata",
   });
 });
 

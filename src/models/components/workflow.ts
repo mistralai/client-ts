@@ -49,6 +49,10 @@ export type Workflow = {
    */
   isTechnical: boolean;
   /**
+   * Whether the workflow must run associated to a user's identity
+   */
+  onBehalfOf: boolean;
+  /**
    * Whether the workflow is archived
    */
   archived: boolean;
@@ -66,6 +70,7 @@ export const Workflow$inboundSchema: z.ZodType<Workflow, unknown> = z.object({
   shared_namespace: z.nullable(z.string()).optional(),
   available_in_chat_assistant: z.boolean().default(false),
   is_technical: z.boolean().default(false),
+  on_behalf_of: z.boolean().default(false),
   archived: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
@@ -75,6 +80,7 @@ export const Workflow$inboundSchema: z.ZodType<Workflow, unknown> = z.object({
     "shared_namespace": "sharedNamespace",
     "available_in_chat_assistant": "availableInChatAssistant",
     "is_technical": "isTechnical",
+    "on_behalf_of": "onBehalfOf",
   });
 });
 

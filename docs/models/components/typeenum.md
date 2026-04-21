@@ -5,7 +5,7 @@
 ```typescript
 import { TypeEnum } from "@mistralai/mistralai/models/components";
 
-let value: TypeEnum = "ARRAY";
+let value: TypeEnum = "MAP";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: TypeEnum = "ARRAY";
 ## Values
 
 ```typescript
-"ENUM" | "TEXT" | "INT" | "FLOAT" | "BOOL" | "TIMESTAMP" | "ARRAY" | Unrecognized<string>
+"ENUM" | "TEXT" | "INT" | "FLOAT" | "BOOL" | "TIMESTAMP" | "ARRAY" | "MAP" | Unrecognized<string>
 ```
