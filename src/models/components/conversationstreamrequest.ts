@@ -48,11 +48,6 @@ import {
   ImageGenerationTool$outboundSchema,
 } from "./imagegenerationtool.js";
 import {
-  MetadataDict,
-  MetadataDict$Outbound,
-  MetadataDict$outboundSchema,
-} from "./metadatadict.js";
-import {
   WebSearchPremiumTool,
   WebSearchPremiumTool$Outbound,
   WebSearchPremiumTool$outboundSchema,
@@ -107,7 +102,7 @@ export type ConversationStreamRequest = {
   guardrails?: Array<GuardrailConfig> | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
-  metadata?: MetadataDict | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   agentId?: string | null | undefined;
   agentVersion?: string | number | null | undefined;
   model?: string | null | undefined;
@@ -195,7 +190,7 @@ export type ConversationStreamRequest$Outbound = {
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
-  metadata?: MetadataDict$Outbound | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   agent_id?: string | null | undefined;
   agent_version?: string | number | null | undefined;
   model?: string | null | undefined;
@@ -230,7 +225,7 @@ export const ConversationStreamRequest$outboundSchema: z.ZodType<
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(MetadataDict$outboundSchema).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   agentId: z.nullable(z.string()).optional(),
   agentVersion: z.nullable(smartUnion([z.string(), z.int()])).optional(),
   model: z.nullable(z.string()).optional(),

@@ -19,6 +19,7 @@ export type ConnectorListToolsV1Request = {
    * Return a simplified payload with only name, description, annotations, and a compact inputSchema.
    */
   pretty?: boolean | undefined;
+  credentialsName?: string | null | undefined;
   connectorIdOrName: string;
 };
 
@@ -36,6 +37,7 @@ export type ConnectorListToolsV1Request$Outbound = {
   page_size: number;
   refresh: boolean;
   pretty: boolean;
+  credentials_name?: string | null | undefined;
   connector_id_or_name: string;
 };
 
@@ -48,10 +50,12 @@ export const ConnectorListToolsV1Request$outboundSchema: z.ZodType<
   pageSize: z.int().default(100),
   refresh: z.boolean().default(false),
   pretty: z.boolean().default(false),
+  credentialsName: z.nullable(z.string()).optional(),
   connectorIdOrName: z.string(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
+    credentialsName: "credentials_name",
     connectorIdOrName: "connector_id_or_name",
   });
 });

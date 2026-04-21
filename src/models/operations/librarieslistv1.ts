@@ -9,12 +9,22 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type LibrariesListV1Request = {
   pageSize?: number | undefined;
   page?: number | undefined;
+  /**
+   * Case-insensitive search on the library name.
+   */
+  search?: string | null | undefined;
+  /**
+   * Filter libraries by whether they were created by the current authenticated identity. Set to true for created by me, false for only libraries shared with me, or None to disable this filter.
+   */
+  filterOwnedByMe?: boolean | null | undefined;
 };
 
 /** @internal */
 export type LibrariesListV1Request$Outbound = {
   page_size: number;
   page: number;
+  search?: string | null | undefined;
+  filter_owned_by_me?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -24,9 +34,12 @@ export const LibrariesListV1Request$outboundSchema: z.ZodType<
 > = z.object({
   pageSize: z.int().default(100),
   page: z.int().default(0),
+  search: z.nullable(z.string()).optional(),
+  filterOwnedByMe: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",
+    filterOwnedByMe: "filter_owned_by_me",
   });
 });
 

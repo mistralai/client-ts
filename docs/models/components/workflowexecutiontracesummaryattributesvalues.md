@@ -27,3 +27,13 @@ const value: number = 1284.03;
 const value: boolean = true;
 ```
 
+### `any[]`
+
+```typescript
+const value: any[] = [
+  "<value 1>",
+  "<value 2>",
+  "<value 3>",
+];
+```
+

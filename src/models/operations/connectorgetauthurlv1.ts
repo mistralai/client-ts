@@ -8,12 +8,14 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ConnectorGetAuthUrlV1Request = {
   appReturnUrl?: string | null | undefined;
+  credentialsName?: string | null | undefined;
   connectorIdOrName: string;
 };
 
 /** @internal */
 export type ConnectorGetAuthUrlV1Request$Outbound = {
   app_return_url?: string | null | undefined;
+  credentials_name?: string | null | undefined;
   connector_id_or_name: string;
 };
 
@@ -23,10 +25,12 @@ export const ConnectorGetAuthUrlV1Request$outboundSchema: z.ZodType<
   ConnectorGetAuthUrlV1Request
 > = z.object({
   appReturnUrl: z.nullable(z.string()).optional(),
+  credentialsName: z.nullable(z.string()).optional(),
   connectorIdOrName: z.string(),
 }).transform((v) => {
   return remap$(v, {
     appReturnUrl: "app_return_url",
+    credentialsName: "credentials_name",
     connectorIdOrName: "connector_id_or_name",
   });
 });

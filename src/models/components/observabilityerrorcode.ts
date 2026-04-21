@@ -56,6 +56,9 @@ export const ObservabilityErrorCode = {
   TemplateSyntaxError: "TEMPLATE_SYNTAX_ERROR",
   ProjectNameAlreadyExists: "PROJECT_NAME_ALREADY_EXISTS",
   EvaluationNameAlreadyExists: "EVALUATION_NAME_ALREADY_EXISTS",
+  TracesFilterQueryParseError: "TRACES_FILTER_QUERY_PARSE_ERROR",
+  TraceNotFound: "TRACE_NOT_FOUND",
+  SpanNotFound: "SPAN_NOT_FOUND",
 } as const;
 export type ObservabilityErrorCode = OpenEnum<typeof ObservabilityErrorCode>;
 

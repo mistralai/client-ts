@@ -9,6 +9,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  DeploymentLocation,
+  DeploymentLocation$inboundSchema,
+} from "./deploymentlocation.js";
+import {
   DeploymentWorkerResponse,
   DeploymentWorkerResponse$inboundSchema,
 } from "./deploymentworkerresponse.js";
@@ -35,6 +39,10 @@ export type DeploymentDetailResponse = {
    */
   updatedAt: Date;
   /**
+   * Where the deployment is running
+   */
+  location?: DeploymentLocation | null | undefined;
+  /**
    * Workers registered for the deployment
    */
   workers: Array<DeploymentWorkerResponse>;
@@ -50,6 +58,7 @@ export const DeploymentDetailResponse$inboundSchema: z.ZodType<
   is_active: z.boolean(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  location: z.nullable(DeploymentLocation$inboundSchema).optional(),
   workers: z.array(DeploymentWorkerResponse$inboundSchema),
 }).transform((v) => {
   return remap$(v, {

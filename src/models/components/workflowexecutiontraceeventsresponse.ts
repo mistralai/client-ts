@@ -44,6 +44,10 @@ export type WorkflowExecutionTraceEventsResponse = {
    */
   rootExecutionId: string;
   /**
+   * The unique run identifier (database UUID)
+   */
+  runId?: string | null | undefined;
+  /**
    * The status of the workflow execution
    */
   status: WorkflowExecutionStatus | null;
@@ -105,6 +109,7 @@ export const WorkflowExecutionTraceEventsResponse$inboundSchema: z.ZodType<
   execution_id: z.string(),
   parent_execution_id: z.nullable(z.string()).optional(),
   root_execution_id: z.string(),
+  run_id: z.nullable(z.string()).optional(),
   status: z.nullable(WorkflowExecutionStatus$inboundSchema),
   start_time: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   end_time: z.nullable(
@@ -124,6 +129,7 @@ export const WorkflowExecutionTraceEventsResponse$inboundSchema: z.ZodType<
     "execution_id": "executionId",
     "parent_execution_id": "parentExecutionId",
     "root_execution_id": "rootExecutionId",
+    "run_id": "runId",
     "start_time": "startTime",
     "end_time": "endTime",
     "total_duration_ms": "totalDurationMs",

@@ -22,11 +22,6 @@ import {
   GuardrailConfig$Outbound,
   GuardrailConfig$outboundSchema,
 } from "./guardrailconfig.js";
-import {
-  MetadataDict,
-  MetadataDict$Outbound,
-  MetadataDict$outboundSchema,
-} from "./metadatadict.js";
 
 export const ConversationRestartRequestHandoffExecution = {
   Client: "client",
@@ -60,7 +55,7 @@ export type ConversationRestartRequest = {
   /**
    * Custom metadata for the conversation.
    */
-  metadata?: MetadataDict | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   fromEntryId: string;
   /**
    * Specific version of the agent to use when restarting. If not provided, uses the current version.
@@ -102,7 +97,7 @@ export type ConversationRestartRequest$Outbound = {
   handoff_execution: string;
   completion_args?: CompletionArgs$Outbound | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
-  metadata?: MetadataDict$Outbound | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   from_entry_id: string;
   agent_version?: string | number | null | undefined;
 };
@@ -119,7 +114,7 @@ export const ConversationRestartRequest$outboundSchema: z.ZodType<
     .default("server"),
   completionArgs: CompletionArgs$outboundSchema.optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
-  metadata: z.nullable(MetadataDict$outboundSchema).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   fromEntryId: z.string(),
   agentVersion: z.nullable(smartUnion([z.string(), z.int()])).optional(),
 }).transform((v) => {

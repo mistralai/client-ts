@@ -22,6 +22,10 @@ export type DeploymentWorkerResponse = {
    * When the worker last registered
    */
   updatedAt: Date;
+  /**
+   * Whether this worker's liveness key is currently alive
+   */
+  isActive: boolean;
 };
 
 /** @internal */
@@ -32,10 +36,12 @@ export const DeploymentWorkerResponse$inboundSchema: z.ZodType<
   name: z.string(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  is_active: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
     "updated_at": "updatedAt",
+    "is_active": "isActive",
   });
 });
 

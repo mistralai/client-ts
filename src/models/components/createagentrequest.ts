@@ -41,11 +41,6 @@ import {
   ImageGenerationTool$outboundSchema,
 } from "./imagegenerationtool.js";
 import {
-  MetadataDict,
-  MetadataDict$Outbound,
-  MetadataDict$outboundSchema,
-} from "./metadatadict.js";
-import {
   WebSearchPremiumTool,
   WebSearchPremiumTool$Outbound,
   WebSearchPremiumTool$outboundSchema,
@@ -93,7 +88,7 @@ export type CreateAgentRequest = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
-  metadata?: MetadataDict | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   versionMessage?: string | null | undefined;
 };
 
@@ -149,7 +144,7 @@ export type CreateAgentRequest$Outbound = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
-  metadata?: MetadataDict$Outbound | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   version_message?: string | null | undefined;
 };
 
@@ -176,7 +171,7 @@ export const CreateAgentRequest$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
-  metadata: z.nullable(MetadataDict$outboundSchema).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   versionMessage: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
