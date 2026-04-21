@@ -19,6 +19,7 @@ export const TypeEnum = {
   Bool: "BOOL",
   Timestamp: "TIMESTAMP",
   Array: "ARRAY",
+  Map: "MAP",
 } as const;
 export type TypeEnum = OpenEnum<typeof TypeEnum>;
 

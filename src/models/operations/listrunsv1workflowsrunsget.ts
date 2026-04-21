@@ -36,6 +36,10 @@ export type ListRunsV1WorkflowsRunsGetRequest = {
     | null
     | undefined;
   /**
+   * Filter by user id. Use 'current' to filter by the authenticated user
+   */
+  userId?: string | null | undefined;
+  /**
    * Number of items per page
    */
   pageSize?: number | undefined;
@@ -76,6 +80,7 @@ export type ListRunsV1WorkflowsRunsGetRequest$Outbound = {
   workflow_identifier?: string | null | undefined;
   search?: string | null | undefined;
   status?: string | Array<string> | null | undefined;
+  user_id?: string | null | undefined;
   page_size: number;
   next_page_token?: string | null | undefined;
 };
@@ -93,11 +98,13 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
       z.array(components.WorkflowExecutionStatus$outboundSchema),
     ]),
   ).optional(),
+  userId: z.nullable(z.string()).optional(),
   pageSize: z.int().default(50),
   nextPageToken: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     workflowIdentifier: "workflow_identifier",
+    userId: "user_id",
     pageSize: "page_size",
     nextPageToken: "next_page_token",
   });

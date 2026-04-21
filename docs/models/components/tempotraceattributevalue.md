@@ -29,3 +29,11 @@ const value: components.TempoTraceAttributeBoolValue = {
 };
 ```
 
+### `components.TempoTraceAttributeArrayValue`
+
+```typescript
+const value: components.TempoTraceAttributeArrayValue = {
+  arrayValue: {},
+};
+```
+

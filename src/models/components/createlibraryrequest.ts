@@ -5,18 +5,35 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
+
+export const OwnerType = {
+  User: "User",
+  Workspace: "Workspace",
+} as const;
+export type OwnerType = ClosedEnum<typeof OwnerType>;
 
 export type CreateLibraryRequest = {
   name: string;
   description?: string | null | undefined;
   chunkSize?: number | null | undefined;
+  /**
+   * Determines who owns the created library. 'User' creates a private library accessible only to its owner. 'Workspace' creates a library shared with the workspace. Defaults to 'Workspace' for API key sessions. Only API keys with the 'Private and shared connectors' connector access scope can create private, user-owned libraries.
+   */
+  ownerType?: OwnerType | null | undefined;
 };
+
+/** @internal */
+export const OwnerType$outboundSchema: z.ZodEnum<typeof OwnerType> = z.enum(
+  OwnerType,
+);
 
 /** @internal */
 export type CreateLibraryRequest$Outbound = {
   name: string;
   description?: string | null | undefined;
   chunk_size?: number | null | undefined;
+  owner_type?: string | null | undefined;
 };
 
 /** @internal */
@@ -27,9 +44,11 @@ export const CreateLibraryRequest$outboundSchema: z.ZodType<
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   chunkSize: z.nullable(z.int()).optional(),
+  ownerType: z.nullable(OwnerType$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     chunkSize: "chunk_size",
+    ownerType: "owner_type",
   });
 });
 

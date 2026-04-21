@@ -9,6 +9,7 @@ import { Connectors } from "./connectors.js";
 import { Conversations } from "./conversations.js";
 import { Libraries } from "./libraries.js";
 import { Observability } from "./observability.js";
+import { Rag } from "./rag.js";
 
 export class Beta extends ClientSDK {
   private _conversations?: Conversations;
@@ -34,5 +35,10 @@ export class Beta extends ClientSDK {
   private _connectors?: Connectors;
   get connectors(): Connectors {
     return (this._connectors ??= new Connectors(this._options));
+  }
+
+  private _rag?: Rag;
+  get rag(): Rag {
+    return (this._rag ??= new Rag(this._options));
   }
 }

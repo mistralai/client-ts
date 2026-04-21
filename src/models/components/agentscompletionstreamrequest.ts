@@ -123,7 +123,7 @@ export type AgentsCompletionStreamRequest = {
   /**
    * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
    */
-  stop?: string | Array<string> | undefined;
+  stop?: string | Array<string> | null | undefined;
   /**
    * The seed to use for random sampling. If set, different calls will generate deterministic results.
    */
@@ -158,11 +158,11 @@ export type AgentsCompletionStreamRequest = {
   /**
    * The `presence_penalty` determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
    */
-  presencePenalty?: number | undefined;
+  presencePenalty?: number | null | undefined;
   /**
    * The `frequency_penalty` penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
    */
-  frequencyPenalty?: number | undefined;
+  frequencyPenalty?: number | null | undefined;
   /**
    * Number of completions to return for each request, input tokens are only billed once.
    */
@@ -293,7 +293,7 @@ export function agentsCompletionStreamRequestToolChoiceToJSON(
 export type AgentsCompletionStreamRequest$Outbound = {
   max_tokens?: number | null | undefined;
   stream: boolean;
-  stop?: string | Array<string> | undefined;
+  stop?: string | Array<string> | null | undefined;
   random_seed?: number | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
@@ -316,8 +316,8 @@ export type AgentsCompletionStreamRequest$Outbound = {
     | null
     | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
-  presence_penalty?: number | undefined;
-  frequency_penalty?: number | undefined;
+  presence_penalty?: number | null | undefined;
+  frequency_penalty?: number | null | undefined;
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
   parallel_tool_calls?: boolean | undefined;
@@ -334,7 +334,7 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
 > = z.object({
   maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
-  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
+  stop: z.nullable(smartUnion([z.string(), z.array(z.string())])).optional(),
   randomSeed: z.nullable(z.int()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
@@ -365,8 +365,8 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
   n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),

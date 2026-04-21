@@ -13,6 +13,9 @@ import {
   WorkflowExecutionWithoutResultResponse$inboundSchema,
 } from "./workflowexecutionwithoutresultresponse.js";
 
+/**
+ * Deprecated: use WorkflowRunListResponse instead. Will be removed in the next major version.
+ */
 export type WorkflowExecutionListResponse = {
   /**
    * A list of workflow executions

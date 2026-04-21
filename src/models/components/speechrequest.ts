@@ -6,18 +6,13 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  MetadataDict,
-  MetadataDict$Outbound,
-  MetadataDict$outboundSchema,
-} from "./metadatadict.js";
-import {
   SpeechOutputFormat,
   SpeechOutputFormat$outboundSchema,
 } from "./speechoutputformat.js";
 
 export type SpeechRequest = {
   model?: string | null | undefined;
-  metadata?: MetadataDict | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   stream?: boolean | undefined;
   /**
    * The preset or custom voice to use for generating the speech.
@@ -38,7 +33,7 @@ export type SpeechRequest = {
 /** @internal */
 export type SpeechRequest$Outbound = {
   model?: string | null | undefined;
-  metadata?: MetadataDict$Outbound | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   stream: boolean;
   voice_id?: string | null | undefined;
   ref_audio?: string | null | undefined;
@@ -53,7 +48,7 @@ export const SpeechRequest$outboundSchema: z.ZodType<
   SpeechRequest
 > = z.object({
   model: z.nullable(z.string()).optional(),
-  metadata: z.nullable(MetadataDict$outboundSchema).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   stream: z.boolean().default(false),
   voiceId: z.nullable(z.string()).optional(),
   refAudio: z.nullable(z.string()).optional(),

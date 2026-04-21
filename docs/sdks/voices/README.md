@@ -446,7 +446,7 @@ run();
 
 ### Response
 
-**Promise\<[string](../../models/responsegetvoicesampleaudiov1audiovoicesvoiceidsampleget.md)\>**
+**Promise\<[ReadableStream<Uint8Array>](../../models/.md)\>**
 
 ### Errors
 

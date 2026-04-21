@@ -8,6 +8,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  DeploymentLocation,
+  DeploymentLocation$inboundSchema,
+} from "./deploymentlocation.js";
 
 export type DeploymentResponse = {
   /**
@@ -30,6 +34,10 @@ export type DeploymentResponse = {
    * When the deployment was last updated
    */
   updatedAt: Date;
+  /**
+   * Where the deployment is running
+   */
+  location?: DeploymentLocation | null | undefined;
 };
 
 /** @internal */
@@ -42,6 +50,7 @@ export const DeploymentResponse$inboundSchema: z.ZodType<
   is_active: z.boolean(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  location: z.nullable(DeploymentLocation$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "is_active": "isActive",

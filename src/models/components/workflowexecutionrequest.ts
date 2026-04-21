@@ -34,6 +34,10 @@ export type WorkflowExecutionRequest = {
   timeoutSeconds?: number | null | undefined;
   customTracingAttributes?: { [k: string]: string } | null | undefined;
   /**
+   * Plugin-specific data to propagate into WorkflowContext.extensions at execution time.
+   */
+  extensions?: { [k: string]: any } | null | undefined;
+  /**
    * Deprecated. Use deployment_name instead.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -53,6 +57,7 @@ export type WorkflowExecutionRequest$Outbound = {
   wait_for_result: boolean;
   timeout_seconds?: number | null | undefined;
   custom_tracing_attributes?: { [k: string]: string } | null | undefined;
+  extensions?: { [k: string]: any } | null | undefined;
   task_queue?: string | null | undefined;
   deployment_name?: string | null | undefined;
 };
@@ -69,6 +74,7 @@ export const WorkflowExecutionRequest$outboundSchema: z.ZodType<
   timeoutSeconds: z.nullable(z.number()).optional(),
   customTracingAttributes: z.nullable(z.record(z.string(), z.string()))
     .optional(),
+  extensions: z.nullable(z.record(z.string(), z.any())).optional(),
   taskQueue: z.nullable(z.string()).optional(),
   deploymentName: z.nullable(z.string()).optional(),
 }).transform((v) => {

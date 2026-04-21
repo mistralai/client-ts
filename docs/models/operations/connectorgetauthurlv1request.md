@@ -15,4 +15,5 @@ let value: ConnectorGetAuthUrlV1Request = {
 | Field               | Type                | Required            | Description         |
 | ------------------- | ------------------- | ------------------- | ------------------- |
 | `appReturnUrl`      | *string*            | :heavy_minus_sign:  | N/A                 |
+| `credentialsName`   | *string*            | :heavy_minus_sign:  | N/A                 |
 | `connectorIdOrName` | *string*            | :heavy_check_mark:  | N/A                 |
