@@ -20,6 +20,6 @@ jobs:
     if: github.event_name == 'push' || github.event.inputs.confirm_publish == 'publish'
     uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@a658ca0a4a9b11bbcd7d3fb4e3063fa843afabff # v15
     secrets:
-      github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      github_access_token: ${{ secrets.CLIENT_PIPELINE }}
       npm_token: ${{ secrets.NPM_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
