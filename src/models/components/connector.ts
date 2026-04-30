@@ -12,6 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type Connector = {
   id: string;
   name: string;
+  title?: string | null | undefined;
   description: string;
   createdAt: Date;
   modifiedAt: Date;
@@ -23,6 +24,7 @@ export type Connector = {
 export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
   id: z.string(),
   name: z.string(),
+  title: z.nullable(z.string()).optional(),
   description: z.string(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   modified_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),

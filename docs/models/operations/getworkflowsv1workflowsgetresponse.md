@@ -15,7 +15,7 @@ let value: GetWorkflowsV1WorkflowsGetResponse = {
         archived: false,
       },
     ],
-    nextCursor: "681f88c8-9a7e-4aaf-8477-b945c1b8f217",
+    nextCursor: "<value>",
   },
 };
 ```

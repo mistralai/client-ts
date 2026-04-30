@@ -21,6 +21,10 @@ export type CreateConnectorRequest = {
    */
   name: string;
   /**
+   * Optional human-readable title for the connector.
+   */
+  title?: string | null | undefined;
+  /**
    * The description of the connector.
    */
   description: string;
@@ -50,6 +54,7 @@ export type CreateConnectorRequest = {
 /** @internal */
 export type CreateConnectorRequest$Outbound = {
   name: string;
+  title?: string | null | undefined;
   description: string;
   icon_url?: string | null | undefined;
   visibility?: string | undefined;
@@ -65,6 +70,7 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   CreateConnectorRequest
 > = z.object({
   name: z.string(),
+  title: z.nullable(z.string()).optional(),
   description: z.string(),
   iconUrl: z.nullable(z.string()).optional(),
   visibility: ResourceVisibility$outboundSchema.optional(),

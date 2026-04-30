@@ -10,30 +10,16 @@ let value: ChatCompletionEvent = {
   correlationId: "<id>",
   createdAt: new Date("2025-02-22T08:39:37.302Z"),
   extraFields: {
-    "key": "<value>",
+    "key": "2024-04-12T06:49:23.373Z",
   },
-  nbInputTokens: 93325,
-  nbOutputTokens: 849060,
-  enabledTools: [
-    {},
-    {},
-    {
-      "key": "<value>",
-    },
-  ],
+  nbInputTokens: 849060,
+  nbOutputTokens: 840468,
+  enabledTools: [],
   requestMessages: [],
   responseMessages: [
-    {
-      "key": "<value>",
-    },
     {},
-    {
-      "key": "<value>",
-      "key1": "<value>",
-      "key2": "<value>",
-    },
   ],
-  nbMessages: 578308,
+  nbMessages: 771148,
   chatTranscriptionEvents: [],
 };
 ```

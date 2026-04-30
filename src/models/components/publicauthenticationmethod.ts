@@ -9,19 +9,19 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  AuthenticationType,
-  AuthenticationType$inboundSchema,
-} from "./authenticationtype.js";
-import {
   ConnectorAuthenticationHeader,
   ConnectorAuthenticationHeader$inboundSchema,
 } from "./connectorauthenticationheader.js";
+import {
+  OutboundAuthenticationType,
+  OutboundAuthenticationType$inboundSchema,
+} from "./outboundauthenticationtype.js";
 
 /**
  * Public view of an authentication method, without secrets.
  */
 export type PublicAuthenticationMethod = {
-  methodType: AuthenticationType;
+  methodType: OutboundAuthenticationType;
   headers?: Array<ConnectorAuthenticationHeader> | null | undefined;
 };
 
@@ -30,7 +30,7 @@ export const PublicAuthenticationMethod$inboundSchema: z.ZodType<
   PublicAuthenticationMethod,
   unknown
 > = z.object({
-  method_type: AuthenticationType$inboundSchema,
+  method_type: OutboundAuthenticationType$inboundSchema,
   headers: z.nullable(z.array(ConnectorAuthenticationHeader$inboundSchema))
     .optional(),
 }).transform((v) => {

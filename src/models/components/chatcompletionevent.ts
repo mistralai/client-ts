@@ -20,21 +20,17 @@ export type ChatCompletionEventExtraFields =
   | number
   | string
   | Date
-  | Array<string>;
+  | Array<string>
+  | { [k: string]: string };
 
 export type ChatCompletionEvent = {
   eventId: string;
   correlationId: string;
   createdAt: Date;
   extraFields: {
-    [k: string]:
-      | boolean
-      | number
-      | number
-      | string
-      | Date
-      | Array<string>
-      | null;
+    [k: string]: boolean | number | number | string | Date | Array<string> | {
+      [k: string]: string;
+    } | null;
   };
   nbInputTokens: number;
   nbOutputTokens: number;
@@ -56,6 +52,7 @@ export const ChatCompletionEventExtraFields$inboundSchema: z.ZodType<
   z.string(),
   z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   z.array(z.string()),
+  z.record(z.string(), z.string()),
 ]);
 
 export function chatCompletionEventExtraFieldsFromJSON(
@@ -86,6 +83,7 @@ export const ChatCompletionEvent$inboundSchema: z.ZodType<
         z.string(),
         z.iso.datetime({ offset: true }).transform(v => new Date(v)),
         z.array(z.string()),
+        z.record(z.string(), z.string()),
       ]),
     ),
   ),

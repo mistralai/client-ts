@@ -396,6 +396,7 @@ We have dedicated SDKs for the following providers:
 ### [Beta.Rag.IngestionPipelineConfigurations](docs/sdks/ingestionpipelineconfigurations/README.md)
 
 * [list](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
+* [register](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -743,8 +744,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 112 of 179 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 179 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 113 of 180 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 180 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1026,6 +1027,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityJudgesList`](docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
 - [`betaObservabilityJudgesUpdate`](docs/sdks/judges/README.md#update) - Update a judge
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
+- [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications

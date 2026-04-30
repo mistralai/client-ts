@@ -14,7 +14,14 @@ import {
 
 export type CreateBatchJobRequest = {
   /**
-   * The list of input files to be used for batch inference, these files should be `jsonl` files, containing the input data corresponding to the bory request for the batch inference in a "body" field. An example of such file is the following: ```json {"custom_id": "0", "body": {"max_tokens": 100, "messages": [{"role": "user", "content": "What is the best French cheese?"}]}} {"custom_id": "1", "body": {"max_tokens": 100, "messages": [{"role": "user", "content": "What is the best French wine?"}]}} ```
+   * A list of `.jsonl` files for batch inference.
+   *
+   * @remarks
+   * Each line must be a JSON object with a `body` field containing the request payload:
+   * ```json
+   * {"custom_id": "0", "body": {"max_tokens": 100, "messages": [{"role": "user", "content": "What is the best French cheese?"}]}}
+   * {"custom_id": "1", "body": {"max_tokens": 100, "messages": [{"role": "user", "content": "What is the best French wine?"}]}}
+   * ```
    */
   inputFiles?: Array<string> | null | undefined;
   requests?: Array<BatchRequest> | null | undefined;

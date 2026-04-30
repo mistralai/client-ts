@@ -8,7 +8,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type ConnectorListWorkspaceCredentialsV1Request = {
-  authType?: components.AuthenticationType | null | undefined;
+  authType?: components.OutboundAuthenticationType | null | undefined;
   fetchDefault?: boolean | undefined;
   connectorIdOrName: string;
 };
@@ -26,7 +26,7 @@ export const ConnectorListWorkspaceCredentialsV1Request$outboundSchema:
     ConnectorListWorkspaceCredentialsV1Request$Outbound,
     ConnectorListWorkspaceCredentialsV1Request
   > = z.object({
-    authType: z.nullable(components.AuthenticationType$outboundSchema)
+    authType: z.nullable(components.OutboundAuthenticationType$outboundSchema)
       .optional(),
     fetchDefault: z.boolean().default(false),
     connectorIdOrName: z.string(),

@@ -200,6 +200,7 @@ export type ChatCompletionStreamRequest = {
    */
   promptMode?: MistralPromptMode | null | undefined;
   guardrails?: Array<GuardrailConfig> | null | undefined;
+  promptCacheKey?: string | null | undefined;
   /**
    * Whether to inject a safety prompt before all conversations.
    */
@@ -348,6 +349,7 @@ export type ChatCompletionStreamRequest$Outbound = {
   reasoning_effort?: string | null | undefined;
   prompt_mode?: string | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
+  prompt_cache_key?: string | null | undefined;
   safe_prompt?: boolean | undefined;
 };
 
@@ -400,6 +402,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
   reasoningEffort: z.nullable(ReasoningEffort$outboundSchema).optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
+  promptCacheKey: z.nullable(z.string()).optional(),
   safePrompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -413,6 +416,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
     parallelToolCalls: "parallel_tool_calls",
     reasoningEffort: "reasoning_effort",
     promptMode: "prompt_mode",
+    promptCacheKey: "prompt_cache_key",
     safePrompt: "safe_prompt",
   });
 });

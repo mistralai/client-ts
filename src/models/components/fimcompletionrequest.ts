@@ -54,6 +54,7 @@ export type FIMCompletionRequest = {
    * The minimum number of tokens to generate in the completion.
    */
   minTokens?: number | null | undefined;
+  promptCacheKey?: string | null | undefined;
 };
 
 /** @internal */
@@ -86,6 +87,7 @@ export type FIMCompletionRequest$Outbound = {
   prompt: string;
   suffix?: string | null | undefined;
   min_tokens?: number | null | undefined;
+  prompt_cache_key?: string | null | undefined;
 };
 
 /** @internal */
@@ -104,12 +106,14 @@ export const FIMCompletionRequest$outboundSchema: z.ZodType<
   prompt: z.string(),
   suffix: z.nullable(z.string()).optional(),
   minTokens: z.nullable(z.int()).optional(),
+  promptCacheKey: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     topP: "top_p",
     maxTokens: "max_tokens",
     randomSeed: "random_seed",
     minTokens: "min_tokens",
+    promptCacheKey: "prompt_cache_key",
   });
 });
 
