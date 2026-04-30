@@ -7,7 +7,7 @@ import { WorkflowRegistrationListResponse } from "@mistralai/mistralai/models/co
 
 let value: WorkflowRegistrationListResponse = {
   workflowRegistrations: [],
-  nextCursor: "43bef43d-2094-4a32-a7ba-f356a57cc431",
+  nextCursor: "<value>",
   workflowVersions: [],
 };
 ```

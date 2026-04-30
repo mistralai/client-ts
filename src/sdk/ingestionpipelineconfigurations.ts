@@ -4,6 +4,7 @@
  */
 
 import { betaRagIngestionPipelineConfigurationsList } from "../funcs/betaRagIngestionPipelineConfigurationsList.js";
+import { betaRagIngestionPipelineConfigurationsRegister } from "../funcs/betaRagIngestionPipelineConfigurationsRegister.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -20,6 +21,23 @@ export class IngestionPipelineConfigurations extends ClientSDK {
   ): Promise<Array<components.IngestionPipelineConfiguration>> {
     return unwrapAsync(betaRagIngestionPipelineConfigurationsList(
       this,
+      options,
+    ));
+  }
+
+  /**
+   * Register Config
+   *
+   * @remarks
+   * Register an ingestion configuration.
+   */
+  async register(
+    request: components.CreateIngestionPipelineConfigurationRequest,
+    options?: RequestOptions,
+  ): Promise<components.IngestionPipelineConfiguration> {
+    return unwrapAsync(betaRagIngestionPipelineConfigurationsRegister(
+      this,
+      request,
       options,
     ));
   }

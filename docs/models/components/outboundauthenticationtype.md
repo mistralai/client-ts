@@ -1,11 +1,11 @@
-# AuthenticationType
+# OutboundAuthenticationType
 
 ## Example Usage
 
 ```typescript
-import { AuthenticationType } from "@mistralai/mistralai/models/components";
+import { OutboundAuthenticationType } from "@mistralai/mistralai/models/components";
 
-let value: AuthenticationType = "oauth2";
+let value: OutboundAuthenticationType = "none";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```

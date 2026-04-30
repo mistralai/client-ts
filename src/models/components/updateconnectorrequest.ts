@@ -13,6 +13,10 @@ import {
 
 export type UpdateConnectorRequest = {
   /**
+   * Optional human-readable title for the connector.
+   */
+  title?: string | null | undefined;
+  /**
    * The name of the connector.
    */
   name?: string | null | undefined;
@@ -52,6 +56,7 @@ export type UpdateConnectorRequest = {
 
 /** @internal */
 export type UpdateConnectorRequest$Outbound = {
+  title?: string | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
   icon_url?: string | null | undefined;
@@ -68,6 +73,7 @@ export const UpdateConnectorRequest$outboundSchema: z.ZodType<
   UpdateConnectorRequest$Outbound,
   UpdateConnectorRequest
 > = z.object({
+  title: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   iconUrl: z.nullable(z.string()).optional(),

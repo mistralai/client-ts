@@ -54,7 +54,6 @@ export type ConfidenceScoresGranularity = ClosedEnum<
 
 export type OCRRequest = {
   model: string | null;
-  id?: string | undefined;
   /**
    * Document to run OCR on
    */
@@ -140,7 +139,6 @@ export const ConfidenceScoresGranularity$outboundSchema: z.ZodEnum<
 /** @internal */
 export type OCRRequest$Outbound = {
   model: string | null;
-  id?: string | undefined;
   document:
     | FileChunk$Outbound
     | DocumentURLChunk$Outbound
@@ -164,7 +162,6 @@ export const OCRRequest$outboundSchema: z.ZodType<
   OCRRequest
 > = z.object({
   model: z.nullable(z.string()),
-  id: z.string().optional(),
   document: smartUnion([
     FileChunk$outboundSchema,
     DocumentURLChunk$outboundSchema,
