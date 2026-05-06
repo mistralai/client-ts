@@ -26,3 +26,71 @@ jobs:
     secrets:
       github_access_token: ${{ secrets.CLIENT_PIPELINE }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+
+  align-version:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve generated branch
+        id: generated-branch
+        env:
+          SPEAKEASY_BRANCH: ${{ needs.generate.outputs.branch_name }}
+        run: |
+          set -euo pipefail
+          BRANCH="$SPEAKEASY_BRANCH"
+          if [ -z "$BRANCH" ]; then
+            echo "Speakeasy generation did not report a branch name; skipping version alignment."
+          else
+            echo "Using Speakeasy generated branch: $BRANCH"
+          fi
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout PR branch
+        if: steps.generated-branch.outputs.branch != ''
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ steps.generated-branch.outputs.branch }}
+          token: ${{ secrets.CLIENT_PIPELINE }}
+
+      - name: Set up Node.js
+        if: steps.generated-branch.outputs.branch != ''
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: "22"
+
+      - name: Align package version
+        if: steps.generated-branch.outputs.branch != ''
+        run: |
+          set -euo pipefail
+
+          VERSION=$(awk '/releaseVersion:/{print $2; exit}' .speakeasy/gen.lock | tr -d '"')
+          if [ -z "$VERSION" ]; then
+            echo "No releaseVersion found in gen.lock"
+            exit 0
+          fi
+          echo "Found version: $VERSION"
+
+          npm version "$VERSION" --no-git-tag-version --allow-same-version
+          VERSION="$VERSION" node - <<'NODE'
+          const fs = require("fs");
+          const file = "jsr.json";
+          const json = JSON.parse(fs.readFileSync(file, "utf8"));
+          if (json.version !== process.env.VERSION) {
+            json.version = process.env.VERSION;
+            fs.writeFileSync(file, `${JSON.stringify(json, null, 2)}\n`);
+          }
+          NODE
+
+      - name: Commit and push
+        if: steps.generated-branch.outputs.branch != ''
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add package.json package-lock.json jsr.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            VERSION=$(node -p "require('./package.json').version")
+            git commit -m "chore: align package version to $VERSION"
+            git push
+          fi
