@@ -16,13 +16,10 @@ permissions:
         type: string
 jobs:
   generate:
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@a658ca0a4a9b11bbcd7d3fb4e3063fa843afabff # v15
+    uses: ./.github/workflows/_speakeasy_workflow_executor.yaml
     with:
       force: ${{ github.event.inputs.force }}
       mode: pr
       set_version: ${{ github.event.inputs.set_version }}
       speakeasy_version: latest
       target: mistralai-azure-sdk
-    secrets:
-      github_access_token: ${{ secrets.CLIENT_PIPELINE }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
