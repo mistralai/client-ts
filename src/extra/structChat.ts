@@ -118,23 +118,43 @@ export function convertToParsedChatCompletionResponse<T extends z.ZodTypeAny>(re
   for (const _choice of response.choices) {
     if (_choice.message === null || typeof _choice.message === 'undefined') {
       parsedChoices.push({..._choice, message: undefined});
-    } else {
-      if (_choice.message.content !== null && typeof _choice.message.content !== 'undefined' && !Array.isArray(_choice.message.content)) {
+    } else if (
+      _choice.message.content !== null
+      && typeof _choice.message.content !== 'undefined'
+      && !Array.isArray(_choice.message.content)
+    ) {
+      let parsed: z.infer<T> | undefined;
+      try {
+        parsed = responseFormat.safeParse(JSON.parse(_choice.message.content)).data;
+      } catch {
+        // JSON.parse can throw if the model returns malformed JSON
+        // (e.g. truncated output when finish_reason is "length").
+        // Leave parsed as undefined so callers can detect the failure.
+        parsed = undefined;
+      }
       parsedChoices.push({
         ..._choice,
         message: {
           ..._choice.message,
-          parsed: responseFormat.safeParse(JSON.parse(_choice.message.content)).data,
-        }
+          parsed,
+        },
       });
-      }
+    } else {
+      // content is null, undefined, or an array of content chunks;
+      // preserve the choice without a parsed field.
+      parsedChoices.push({
+        ..._choice,
+        message: {
+          ..._choice.message,
+          parsed: undefined,
+        },
+      });
     }
   }
   return {
     ...response,
     choices: parsedChoices,
   };
-
 }
 
   // Function to convert Zod schema to strict JSON schema
