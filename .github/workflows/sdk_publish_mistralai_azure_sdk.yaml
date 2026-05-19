@@ -1,9 +1,7 @@
 name: Publish MISTRALAI-AZURE-SDK
 permissions:
-  checks: write
-  contents: write
-  pull-requests: write
-  statuses: write
+  contents: read
+  id-token: write
 "on":
   push:
     branches:
@@ -18,8 +16,39 @@ permissions:
 jobs:
   publish:
     if: github.event_name == 'push' || github.event.inputs.confirm_publish == 'publish'
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@a658ca0a4a9b11bbcd7d3fb4e3063fa843afabff # v15
-    secrets:
-      github_access_token: ${{ secrets.CLIENT_PIPELINE }}
-      npm_token: ${{ secrets.NPM_TOKEN }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+    runs-on: ubuntu-24.04
+    environment:
+      name: publish
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        working-directory: packages/mistralai-azure
+        run: npx -y -p npm@11.14.0 npm install --ignore-scripts --min-release-age=7
+
+      - name: Build package
+        working-directory: packages/mistralai-azure
+        run: npm run build
+
+      - name: Publish package to npm
+        working-directory: packages/mistralai-azure
+        run: |
+          VERSION=$(npm pkg get version | tr -d '"')
+          echo "Detected version: $VERSION"
+
+          if [[ "$VERSION" == *"-"* ]]; then
+            PRERELEASE=${VERSION#*-}
+            TAG=${PRERELEASE%%.*}
+          else
+            TAG="latest"
+          fi
+
+          echo "Publishing under dist-tag: $TAG"
+          npm publish --tag "$TAG" --access public --provenance
