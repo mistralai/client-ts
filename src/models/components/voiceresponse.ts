@@ -8,6 +8,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  VoiceAppearance,
+  VoiceAppearance$inboundSchema,
+} from "./voiceappearance.js";
 
 /**
  * Schema for voice response
@@ -20,6 +24,8 @@ export type VoiceResponse = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   color?: string | null | undefined;
+  description?: string | null | undefined;
+  appearance?: VoiceAppearance | null | undefined;
   retentionNotice: number;
   id: string;
   createdAt: Date;
@@ -36,6 +42,8 @@ export const VoiceResponse$inboundSchema: z.ZodType<VoiceResponse, unknown> = z
     age: z.nullable(z.int()).optional(),
     tags: z.nullable(z.array(z.string())).optional(),
     color: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    appearance: z.nullable(VoiceAppearance$inboundSchema).optional(),
     retention_notice: z.int().default(30),
     id: z.string(),
     created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),

@@ -7,6 +7,7 @@ import { betaLibrariesDocumentsDelete } from "../funcs/betaLibrariesDocumentsDel
 import { betaLibrariesDocumentsExtractedTextSignedUrl } from "../funcs/betaLibrariesDocumentsExtractedTextSignedUrl.js";
 import { betaLibrariesDocumentsGet } from "../funcs/betaLibrariesDocumentsGet.js";
 import { betaLibrariesDocumentsGetSignedUrl } from "../funcs/betaLibrariesDocumentsGetSignedUrl.js";
+import { betaLibrariesDocumentsLibrariesDocumentsUpdateV1 } from "../funcs/betaLibrariesDocumentsLibrariesDocumentsUpdateV1.js";
 import { betaLibrariesDocumentsList } from "../funcs/betaLibrariesDocumentsList.js";
 import { betaLibrariesDocumentsReprocess } from "../funcs/betaLibrariesDocumentsReprocess.js";
 import { betaLibrariesDocumentsStatus } from "../funcs/betaLibrariesDocumentsStatus.js";
@@ -74,13 +75,32 @@ export class Documents extends ClientSDK {
    * Update the metadata of a specific document.
    *
    * @remarks
-   * Given a library and a document in that library, update the name of that document.
+   * Given a library and a document in that library, update the name and/or attributes of that document.
    */
   async update(
-    request: operations.LibrariesDocumentsUpdateV1Request,
+    request: operations.LibrariesDocumentsPatchV1Request,
     options?: RequestOptions,
   ): Promise<components.Document> {
     return unwrapAsync(betaLibrariesDocumentsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update the metadata of a specific document.
+   *
+   * @remarks
+   * Given a library and a document in that library, update the name of that document.
+   *
+   * @deprecated method: Use the PATCH method instead. This PUT endpoint will be removed in a future version..
+   */
+  async librariesDocumentsUpdateV1(
+    request: operations.LibrariesDocumentsUpdateV1Request,
+    options?: RequestOptions,
+  ): Promise<components.Document> {
+    return unwrapAsync(betaLibrariesDocumentsLibrariesDocumentsUpdateV1(
       this,
       request,
       options,
