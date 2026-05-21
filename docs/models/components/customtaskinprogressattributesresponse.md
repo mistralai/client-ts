@@ -12,13 +12,7 @@ let value: CustomTaskInProgressAttributesResponse = {
   customTaskType: "<value>",
   payload: {
     type: "json_patch",
-    value: [
-      {
-        path: "/Network",
-        value: "<value>",
-        op: "replace",
-      },
-    ],
+    value: "<value>",
   },
 };
 ```

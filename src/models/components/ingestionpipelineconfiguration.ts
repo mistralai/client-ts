@@ -11,9 +11,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type IngestionPipelineConfiguration = {
   id: string;
+  authorId: string;
   name: string;
   createdAt: Date;
   modifiedAt: Date;
+  lastRunTime: Date | null;
+  lastRunChunksCount: number;
+  totalChunksCount: number;
+  pipelineComposition: { [k: string]: string } | null;
 };
 
 /** @internal */
@@ -22,13 +27,25 @@ export const IngestionPipelineConfiguration$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
+  author_id: z.string(),
   name: z.string(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   modified_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  last_run_time: z.nullable(
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  ),
+  last_run_chunks_count: z.int(),
+  total_chunks_count: z.int(),
+  pipeline_composition: z.nullable(z.record(z.string(), z.string())),
 }).transform((v) => {
   return remap$(v, {
+    "author_id": "authorId",
     "created_at": "createdAt",
     "modified_at": "modifiedAt",
+    "last_run_time": "lastRunTime",
+    "last_run_chunks_count": "lastRunChunksCount",
+    "total_chunks_count": "totalChunksCount",
+    "pipeline_composition": "pipelineComposition",
   });
 });
 

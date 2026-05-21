@@ -10,8 +10,16 @@ import {
   AuthData$Outbound,
   AuthData$outboundSchema,
 } from "./authdata.js";
+import {
+  ConnectorProtocol,
+  ConnectorProtocol$outboundSchema,
+} from "./connectorprotocol.js";
 
 export type UpdateConnectorRequest = {
+  /**
+   * Optional human-readable title for the connector.
+   */
+  title?: string | null | undefined;
   /**
    * The name of the connector.
    */
@@ -28,6 +36,10 @@ export type UpdateConnectorRequest = {
    * Optional system prompt for the connector.
    */
   systemPrompt?: string | null | undefined;
+  /**
+   * Protocol of the connector.
+   */
+  protocol?: ConnectorProtocol | null | undefined;
   /**
    * Optional new connection config.
    */
@@ -52,10 +64,12 @@ export type UpdateConnectorRequest = {
 
 /** @internal */
 export type UpdateConnectorRequest$Outbound = {
+  title?: string | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
   icon_url?: string | null | undefined;
   system_prompt?: string | null | undefined;
+  protocol?: string | null | undefined;
   connection_config?: { [k: string]: any } | null | undefined;
   connection_secrets?: { [k: string]: any } | null | undefined;
   server?: string | null | undefined;
@@ -68,10 +82,12 @@ export const UpdateConnectorRequest$outboundSchema: z.ZodType<
   UpdateConnectorRequest$Outbound,
   UpdateConnectorRequest
 > = z.object({
+  title: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   iconUrl: z.nullable(z.string()).optional(),
   systemPrompt: z.nullable(z.string()).optional(),
+  protocol: z.nullable(ConnectorProtocol$outboundSchema).optional(),
   connectionConfig: z.nullable(z.record(z.string(), z.any())).optional(),
   connectionSecrets: z.nullable(z.record(z.string(), z.any())).optional(),
   server: z.nullable(z.string()).optional(),
