@@ -35,6 +35,7 @@ typescript:
   additionalDependencies:
     dependencies:
       google-auth-library: ^10.6.2
+      zod: ^4.3.6
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON:
