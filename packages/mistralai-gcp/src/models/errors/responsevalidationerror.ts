@@ -4,7 +4,7 @@
  */
 
 import * as z from "zod/v4/core";
-import { MistralGCPError } from "./mistralgoogleclouderror.js";
+import { MistralGCPError } from "./mistralgcperror.js";
 import { formatZodError } from "./sdkvalidationerror.js";
 
 export class ResponseValidationError extends MistralGCPError {

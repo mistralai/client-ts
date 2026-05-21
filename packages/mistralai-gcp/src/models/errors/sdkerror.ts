@@ -3,7 +3,7 @@
  * @generated-id: 8e644875c472
  */
 
-import { MistralGCPError } from "./mistralgoogleclouderror.js";
+import { MistralGCPError } from "./mistralgcperror.js";
 
 /** The fallback error class if no more specific error class is matched */
 export class SDKError extends MistralGCPError {

@@ -5,7 +5,7 @@
 
 import * as z from "zod/v4";
 import * as components from "../components/index.js";
-import { MistralGCPError } from "./mistralgoogleclouderror.js";
+import { MistralGCPError } from "./mistralgcperror.js";
 
 export type HTTPValidationErrorData = {
   detail?: Array<components.ValidationError> | undefined;
