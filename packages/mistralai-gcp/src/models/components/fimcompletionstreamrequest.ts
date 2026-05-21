@@ -24,7 +24,7 @@ export type FIMCompletionStreamRequest = {
   /**
    * Nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
    */
-  topP?: number | undefined;
+  topP?: number | null | undefined;
   /**
    * The maximum number of tokens to generate in the completion. The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
    */
@@ -33,7 +33,7 @@ export type FIMCompletionStreamRequest = {
   /**
    * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
    */
-  stop?: string | Array<string> | undefined;
+  stop?: string | Array<string> | null | undefined;
   /**
    * The seed to use for random sampling. If set, different calls will generate deterministic results.
    */
@@ -76,10 +76,10 @@ export function fimCompletionStreamRequestStopToJSON(
 export type FIMCompletionStreamRequest$Outbound = {
   model: string;
   temperature?: number | null | undefined;
-  top_p: number;
+  top_p?: number | null | undefined;
   max_tokens?: number | null | undefined;
   stream: boolean;
-  stop?: string | Array<string> | undefined;
+  stop?: string | Array<string> | null | undefined;
   random_seed?: number | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   prompt: string;
@@ -94,10 +94,10 @@ export const FIMCompletionStreamRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   temperature: z.nullable(z.number()).optional(),
-  topP: z.number().default(1),
+  topP: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
-  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
+  stop: z.nullable(smartUnion([z.string(), z.array(z.string())])).optional(),
   randomSeed: z.nullable(z.int()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   prompt: z.string(),
