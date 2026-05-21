@@ -14,7 +14,9 @@ export type LibrariesListV1Request = {
    */
   search?: string | null | undefined;
   /**
-   * Filter libraries by whether they were created by the current authenticated identity. Set to true for created by me, false for only libraries shared with me, or None to disable this filter.
+   * Deprecated: this parameter will be removed in a future version.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   filterOwnedByMe?: boolean | null | undefined;
 };

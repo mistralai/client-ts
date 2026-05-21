@@ -179,6 +179,7 @@ export type AgentsCompletionRequest = {
    */
   promptMode?: MistralPromptMode | null | undefined;
   guardrails?: Array<GuardrailConfig> | null | undefined;
+  promptCacheKey?: string | null | undefined;
   /**
    * The ID of the agent to use for this completion.
    */
@@ -324,6 +325,7 @@ export type AgentsCompletionRequest$Outbound = {
   reasoning_effort?: string | null | undefined;
   prompt_mode?: string | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
+  prompt_cache_key?: string | null | undefined;
   agent_id: string;
 };
 
@@ -373,6 +375,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   reasoningEffort: z.nullable(ReasoningEffort$outboundSchema).optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
+  promptCacheKey: z.nullable(z.string()).optional(),
   agentId: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -385,6 +388,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
     parallelToolCalls: "parallel_tool_calls",
     reasoningEffort: "reasoning_effort",
     promptMode: "prompt_mode",
+    promptCacheKey: "prompt_cache_key",
     agentId: "agent_id",
   });
 });
