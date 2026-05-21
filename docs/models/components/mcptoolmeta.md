@@ -1,21 +1,31 @@
 # MCPToolMeta
 
-Typed _meta for MCP tools.
-
-Only the 'ui' field is typed. Other fields are allowed via extra="allow".
-
 ## Example Usage
 
 ```typescript
 import { MCPToolMeta } from "@mistralai/mistralai/models/components";
 
-let value: MCPToolMeta = {};
+let value: MCPToolMeta = {
+  name: "<value>",
+  inputSchema: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
+};
 ```
 
 ## Fields
 
 | Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ui`                                                                     | [components.MCPUIToolMeta](../../models/components/mcpuitoolmeta.md)     | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `aiMistralTurbine`                                                       | [components.TurbineToolMeta](../../models/components/turbinetoolmeta.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `name`                                                                   | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
+| `title`                                                                  | *string*                                                                 | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `description`                                                            | *string*                                                                 | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `inputSchema`                                                            | Record<string, *any*>                                                    | :heavy_check_mark:                                                       | N/A                                                                      |
+| `outputSchema`                                                           | Record<string, *any*>                                                    | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `icons`                                                                  | [components.MCPServerIcon](../../models/components/mcpservericon.md)[]   | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `annotations`                                                            | [components.ToolAnnotations](../../models/components/toolannotations.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `meta`                                                                   | [components.MCPToolMeta](../../models/components/mcptoolmeta.md)         | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `execution`                                                              | [components.ToolExecution](../../models/components/toolexecution.md)     | :heavy_minus_sign:                                                       | N/A                                                                      |
 | `additionalProperties`                                                   | Record<string, *any*>                                                    | :heavy_minus_sign:                                                       | N/A                                                                      |

@@ -18,13 +18,7 @@ const value: components.JSONPayloadResponse = {
 ```typescript
 const value: components.JSONPatchPayloadResponse = {
   type: "json_patch",
-  value: [
-    {
-      path: "/opt/lib",
-      value: "<value>",
-      op: "replace",
-    },
-  ],
+  value: "<value>",
 };
 ```
 

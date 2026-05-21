@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Delete a library and all of it's document.
  *
  * @remarks
- * Given a library id, deletes it together with all documents that have been uploaded to that library.
+ * Given a library id, deletes it together with all documents that have been uploaded to that library. Warning: the response will change from 200 (returning the deleted library) to 204 No Content in a future version.
  */
 export function betaLibrariesDelete(
   client: MistralCore,
@@ -130,7 +130,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 30000,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

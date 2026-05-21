@@ -13,6 +13,9 @@ import { ProcessStatus, ProcessStatus$inboundSchema } from "./processstatus.js";
 export type Document = {
   id: string;
   libraryId: string;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   hash: string | null;
   mimeType: string | null;
   extension: string | null;
@@ -25,10 +28,23 @@ export type Document = {
   processStatus: ProcessStatus;
   uploadedById: string | null;
   uploadedByType: string;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   tokensProcessingMainContent?: number | null | undefined;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   tokensProcessingSummary?: number | null | undefined;
   url?: string | null | undefined;
   attributes?: { [k: string]: any } | null | undefined;
+  /**
+   * If set, the document will be automatically deleted after this date.
+   */
+  expiresAt?: Date | null | undefined;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   processingStatus: string;
   tokensProcessingTotal: number;
 };
@@ -55,6 +71,9 @@ export const Document$inboundSchema: z.ZodType<Document, unknown> = z.object({
   tokens_processing_summary: z.nullable(z.int()).optional(),
   url: z.nullable(z.string()).optional(),
   attributes: z.nullable(z.record(z.string(), z.any())).optional(),
+  expires_at: z.nullable(
+    z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   processing_status: z.string(),
   tokens_processing_total: z.int(),
 }).transform((v) => {
@@ -69,6 +88,7 @@ export const Document$inboundSchema: z.ZodType<Document, unknown> = z.object({
     "uploaded_by_type": "uploadedByType",
     "tokens_processing_main_content": "tokensProcessingMainContent",
     "tokens_processing_summary": "tokensProcessingSummary",
+    "expires_at": "expiresAt",
     "processing_status": "processingStatus",
     "tokens_processing_total": "tokensProcessingTotal",
   });

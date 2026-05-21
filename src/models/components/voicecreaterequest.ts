@@ -5,6 +5,11 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  VoiceAppearance,
+  VoiceAppearance$Outbound,
+  VoiceAppearance$outboundSchema,
+} from "./voiceappearance.js";
 
 /**
  * Request model for creating a new voice with base64 audio.
@@ -17,6 +22,8 @@ export type VoiceCreateRequest = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   color?: string | null | undefined;
+  description?: string | null | undefined;
+  appearance?: VoiceAppearance | null | undefined;
   retentionNotice?: number | undefined;
   /**
    * Base64-encoded audio file
@@ -37,6 +44,8 @@ export type VoiceCreateRequest$Outbound = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   color?: string | null | undefined;
+  description?: string | null | undefined;
+  appearance?: VoiceAppearance$Outbound | null | undefined;
   retention_notice: number;
   sample_audio: string;
   sample_filename?: string | null | undefined;
@@ -54,6 +63,8 @@ export const VoiceCreateRequest$outboundSchema: z.ZodType<
   age: z.nullable(z.int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   color: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
+  appearance: z.nullable(VoiceAppearance$outboundSchema).optional(),
   retentionNotice: z.int().default(30),
   sampleAudio: z.string(),
   sampleFilename: z.nullable(z.string()).optional(),

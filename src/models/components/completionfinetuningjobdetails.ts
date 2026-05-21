@@ -26,6 +26,9 @@ import {
   WandbIntegrationResult$inboundSchema,
 } from "./wandbintegrationresult.js";
 
+/**
+ * The current status of the fine-tuning job.
+ */
 export const CompletionFineTuningJobDetailsStatus = {
   Queued: "QUEUED",
   Started: "STARTED",
@@ -38,6 +41,9 @@ export const CompletionFineTuningJobDetailsStatus = {
   Cancelled: "CANCELLED",
   CancellationRequested: "CANCELLATION_REQUESTED",
 } as const;
+/**
+ * The current status of the fine-tuning job.
+ */
 export type CompletionFineTuningJobDetailsStatus = OpenEnum<
   typeof CompletionFineTuningJobDetailsStatus
 >;
@@ -47,20 +53,56 @@ export type CompletionFineTuningJobDetailsIntegration = WandbIntegrationResult;
 export type CompletionFineTuningJobDetailsRepository = GithubRepository;
 
 export type CompletionFineTuningJobDetails = {
+  /**
+   * The ID of the job.
+   */
   id: string;
   autoStart: boolean;
   model: string;
+  /**
+   * The current status of the fine-tuning job.
+   */
   status: CompletionFineTuningJobDetailsStatus;
+  /**
+   * The UNIX timestamp (in seconds) for when the fine-tuning job was created.
+   */
   createdAt: number;
+  /**
+   * The UNIX timestamp (in seconds) for when the fine-tuning job was last modified.
+   */
   modifiedAt: number;
+  /**
+   * A list containing the IDs of uploaded files that contain training data.
+   */
   trainingFiles: Array<string>;
+  /**
+   * A list containing the IDs of uploaded files that contain validation data.
+   */
   validationFiles?: Array<string> | null | undefined;
+  /**
+   * The object type of the fine-tuning job.
+   */
   object: "job";
+  /**
+   * The name of the fine-tuned model that is being created. The value will be `null` if the fine-tuning job is still running.
+   */
   fineTunedModel?: string | null | undefined;
+  /**
+   * Optional user-provided string inserted into the fine-tuned model name to help identify it. For example, a suffix of `"my-great-model"` produces a name like `ft:open-mistral-7b:abcd1234:20260101:my-great-model:efgh5678`.
+   */
   suffix?: string | null | undefined;
+  /**
+   * A list of integrations enabled for your fine-tuning job.
+   */
   integrations?: Array<WandbIntegrationResult> | null | undefined;
+  /**
+   * Total number of tokens trained.
+   */
   trainedTokens?: number | null | undefined;
   metadata?: JobMetadata | null | undefined;
+  /**
+   * The type of job (`FT` for fine-tuning).
+   */
   jobType: "completion";
   hyperparameters: CompletionTrainingParameters;
   repositories?: Array<GithubRepository> | undefined;

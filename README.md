@@ -277,6 +277,12 @@ We have dedicated SDKs for the following providers:
 * [create](docs/sdks/connectors/README.md#create) - Create a new connector.
 * [list](docs/sdks/connectors/README.md#list) - List all connectors.
 * [getAuthUrl](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
+* [activateForOrganization](docs/sdks/connectors/README.md#activatefororganization) - Activate a connector for an organization.
+* [deactivateForOrganization](docs/sdks/connectors/README.md#deactivatefororganization) - Deactivate a connector for an organization.
+* [activateForWorkspace](docs/sdks/connectors/README.md#activateforworkspace) - Activate a connector for a workspace.
+* [deactivateForWorkspace](docs/sdks/connectors/README.md#deactivateforworkspace) - Deactivate a connector for a workspace.
+* [activateForUser](docs/sdks/connectors/README.md#activateforuser) - Activate a connector for the current user.
+* [deactivateForUser](docs/sdks/connectors/README.md#deactivateforuser) - Deactivate a connector for the current user.
 * [callTool](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 * [listTools](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
 * [getAuthenticationMethods](docs/sdks/connectors/README.md#getauthenticationmethods) - Get authentication methods for a connector.
@@ -314,6 +320,7 @@ We have dedicated SDKs for the following providers:
 * [get](docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
 * [delete](docs/sdks/libraries/README.md#delete) - Delete a library and all of it's document.
 * [update](docs/sdks/libraries/README.md#update) - Update a library.
+* [~~librariesUpdateV1~~](docs/sdks/libraries/README.md#librariesupdatev1) - Update a library. :warning: **Deprecated**
 
 #### [Beta.Libraries.Accesses](docs/sdks/accesses/README.md)
 
@@ -327,6 +334,7 @@ We have dedicated SDKs for the following providers:
 * [upload](docs/sdks/documents/README.md#upload) - Upload a new document.
 * [get](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
 * [update](docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
+* [~~librariesDocumentsUpdateV1~~](docs/sdks/documents/README.md#librariesdocumentsupdatev1) - Update the metadata of a specific document. :warning: **Deprecated**
 * [delete](docs/sdks/documents/README.md#delete) - Delete a document.
 * [textContent](docs/sdks/documents/README.md#textcontent) - Retrieve the text content of a specific document.
 * [status](docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
@@ -396,6 +404,13 @@ We have dedicated SDKs for the following providers:
 ### [Beta.Rag.IngestionPipelineConfigurations](docs/sdks/ingestionpipelineconfigurations/README.md)
 
 * [list](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
+* [register](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
+* [updateRunInfo](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
+
+### [Beta.Rag.SearchIndexes](docs/sdks/searchindexes/README.md)
+
+* [list](docs/sdks/searchindexes/README.md#list) - Get Search Indexes
+* [register](docs/sdks/searchindexes/README.md#register) - Register Search Index
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -462,6 +477,8 @@ We have dedicated SDKs for the following providers:
 * [getWorkflow](docs/sdks/workflows/README.md#getworkflow) - Get Workflow
 * [updateWorkflow](docs/sdks/workflows/README.md#updateworkflow) - Update Workflow
 * [getWorkflowRegistration](docs/sdks/workflows/README.md#getworkflowregistration) - Get Workflow Registration
+* [bulkArchiveWorkflows](docs/sdks/workflows/README.md#bulkarchiveworkflows) - Bulk Archive Workflows
+* [bulkUnarchiveWorkflows](docs/sdks/workflows/README.md#bulkunarchiveworkflows) - Bulk Unarchive Workflows
 * [archiveWorkflow](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
 * [unarchiveWorkflow](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow
 
@@ -506,7 +523,11 @@ We have dedicated SDKs for the following providers:
 
 * [getSchedules](docs/sdks/schedules/README.md#getschedules) - Get Schedules
 * [scheduleWorkflow](docs/sdks/schedules/README.md#scheduleworkflow) - Schedule Workflow
+* [getSchedule](docs/sdks/schedules/README.md#getschedule) - Get Schedule
 * [unscheduleWorkflow](docs/sdks/schedules/README.md#unscheduleworkflow) - Unschedule Workflow
+* [updateSchedule](docs/sdks/schedules/README.md#updateschedule) - Update Schedule
+* [pauseSchedule](docs/sdks/schedules/README.md#pauseschedule) - Pause Schedule
+* [resumeSchedule](docs/sdks/schedules/README.md#resumeschedule) - Resume Schedule
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -743,8 +764,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 112 of 179 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 179 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 130 of 197 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 197 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -937,11 +958,17 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaAgentsListVersions`](docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
 - [`betaAgentsUpdate`](docs/sdks/betaagents/README.md#update) - Update an agent entity.
 - [`betaAgentsUpdateVersion`](docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
+- [`betaConnectorsActivateForOrganization`](docs/sdks/connectors/README.md#activatefororganization) - Activate a connector for an organization.
+- [`betaConnectorsActivateForUser`](docs/sdks/connectors/README.md#activateforuser) - Activate a connector for the current user.
+- [`betaConnectorsActivateForWorkspace`](docs/sdks/connectors/README.md#activateforworkspace) - Activate a connector for a workspace.
 - [`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 - [`betaConnectorsCreate`](docs/sdks/connectors/README.md#create) - Create a new connector.
 - [`betaConnectorsCreateOrUpdateOrganizationCredentials`](docs/sdks/connectors/README.md#createorupdateorganizationcredentials) - Create or update organization credentials for a connector.
 - [`betaConnectorsCreateOrUpdateUserCredentials`](docs/sdks/connectors/README.md#createorupdateusercredentials) - Create or update user credentials for a connector.
 - [`betaConnectorsCreateOrUpdateWorkspaceCredentials`](docs/sdks/connectors/README.md#createorupdateworkspacecredentials) - Create or update workspace credentials for a connector.
+- [`betaConnectorsDeactivateForOrganization`](docs/sdks/connectors/README.md#deactivatefororganization) - Deactivate a connector for an organization.
+- [`betaConnectorsDeactivateForUser`](docs/sdks/connectors/README.md#deactivateforuser) - Deactivate a connector for the current user.
+- [`betaConnectorsDeactivateForWorkspace`](docs/sdks/connectors/README.md#deactivateforworkspace) - Deactivate a connector for a workspace.
 - [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
 - [`betaConnectorsDeleteOrganizationCredentials`](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
 - [`betaConnectorsDeleteUserCredentials`](docs/sdks/connectors/README.md#deleteusercredentials) - Delete user credentials for a connector.
@@ -1026,6 +1053,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityJudgesList`](docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
 - [`betaObservabilityJudgesUpdate`](docs/sdks/judges/README.md#update) - Update a judge
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
+- [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
+- [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
+- [`betaRagSearchIndexesList`](docs/sdks/searchindexes/README.md#list) - Get Search Indexes
+- [`betaRagSearchIndexesRegister`](docs/sdks/searchindexes/README.md#register) - Register Search Index
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications
@@ -1058,6 +1089,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`modelsUpdate`](docs/sdks/models/README.md#update) - Update Fine Tuned Model
 - [`ocrProcess`](docs/sdks/ocr/README.md#process) - OCR
 - [`workflowsArchiveWorkflow`](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
+- [`workflowsBulkArchiveWorkflows`](docs/sdks/workflows/README.md#bulkarchiveworkflows) - Bulk Archive Workflows
+- [`workflowsBulkUnarchiveWorkflows`](docs/sdks/workflows/README.md#bulkunarchiveworkflows) - Bulk Unarchive Workflows
 - [`workflowsDeploymentsGetDeployment`](docs/sdks/deployments/README.md#getdeployment) - Get Deployment
 - [`workflowsDeploymentsListDeployments`](docs/sdks/deployments/README.md#listdeployments) - List Deployments
 - [`workflowsExecuteWorkflow`](docs/sdks/workflows/README.md#executeworkflow) - Execute Workflow
@@ -1083,11 +1116,17 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsRunsGetRun`](docs/sdks/runs/README.md#getrun) - Get Run
 - [`workflowsRunsGetRunHistory`](docs/sdks/runs/README.md#getrunhistory) - Get Run History
 - [`workflowsRunsListRuns`](docs/sdks/runs/README.md#listruns) - List Runs
+- [`workflowsSchedulesGetSchedule`](docs/sdks/schedules/README.md#getschedule) - Get Schedule
 - [`workflowsSchedulesGetSchedules`](docs/sdks/schedules/README.md#getschedules) - Get Schedules
+- [`workflowsSchedulesPauseSchedule`](docs/sdks/schedules/README.md#pauseschedule) - Pause Schedule
+- [`workflowsSchedulesResumeSchedule`](docs/sdks/schedules/README.md#resumeschedule) - Resume Schedule
 - [`workflowsSchedulesScheduleWorkflow`](docs/sdks/schedules/README.md#scheduleworkflow) - Schedule Workflow
 - [`workflowsSchedulesUnscheduleWorkflow`](docs/sdks/schedules/README.md#unscheduleworkflow) - Unschedule Workflow
+- [`workflowsSchedulesUpdateSchedule`](docs/sdks/schedules/README.md#updateschedule) - Update Schedule
 - [`workflowsUnarchiveWorkflow`](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow
 - [`workflowsUpdateWorkflow`](docs/sdks/workflows/README.md#updateworkflow) - Update Workflow
+- ~~[`betaLibrariesDocumentsLibrariesDocumentsUpdateV1`](docs/sdks/documents/README.md#librariesdocumentsupdatev1)~~ - Update the metadata of a specific document. :warning: **Deprecated**
+- ~~[`betaLibrariesLibrariesUpdateV1`](docs/sdks/libraries/README.md#librariesupdatev1)~~ - Update a library. :warning: **Deprecated**
 - ~~[`workflowsExecuteWorkflowRegistration`](docs/sdks/workflows/README.md#executeworkflowregistration)~~ - Execute Workflow Registration :warning: **Deprecated**
 
 </details>
