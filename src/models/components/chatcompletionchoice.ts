@@ -14,6 +14,7 @@ import {
   AssistantMessage,
   AssistantMessage$inboundSchema,
 } from "./assistantmessage.js";
+import { DeltaMessage, DeltaMessage$inboundSchema } from "./deltamessage.js";
 
 export const ChatCompletionChoiceFinishReason = {
   Stop: "stop",
@@ -28,7 +29,8 @@ export type ChatCompletionChoiceFinishReason = OpenEnum<
 
 export type ChatCompletionChoice = {
   index: number;
-  message: AssistantMessage;
+  message?: AssistantMessage | undefined;
+  messages?: Array<DeltaMessage> | undefined;
   finishReason: ChatCompletionChoiceFinishReason;
 };
 
@@ -44,7 +46,8 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   index: z.int(),
-  message: AssistantMessage$inboundSchema,
+  message: AssistantMessage$inboundSchema.optional(),
+  messages: z.array(DeltaMessage$inboundSchema).optional(),
   finish_reason: ChatCompletionChoiceFinishReason$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
