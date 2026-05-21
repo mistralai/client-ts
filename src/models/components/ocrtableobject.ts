@@ -4,11 +4,16 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  OCRConfidenceScore,
+  OCRConfidenceScore$inboundSchema,
+} from "./ocrconfidencescore.js";
 
 /**
  * Format of the table
@@ -35,6 +40,10 @@ export type OCRTableObject = {
    * Format of the table
    */
   format: Format;
+  /**
+   * Per-word confidence scores for the table content. Returned when confidence_scores_granularity is set to 'word'.
+   */
+  wordConfidenceScores?: Array<OCRConfidenceScore> | null | undefined;
 };
 
 /** @internal */
@@ -47,6 +56,13 @@ export const OCRTableObject$inboundSchema: z.ZodType<OCRTableObject, unknown> =
     id: z.string(),
     content: z.string(),
     format: Format$inboundSchema,
+    word_confidence_scores: z.nullable(
+      z.array(OCRConfidenceScore$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "word_confidence_scores": "wordConfidenceScores",
+    });
   });
 
 export function ocrTableObjectFromJSON(

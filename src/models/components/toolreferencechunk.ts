@@ -10,7 +10,7 @@ import {
   BuiltInConnectors$outboundSchema,
 } from "./builtinconnectors.js";
 
-export type ToolUnion = BuiltInConnectors | string;
+export type ToolReferenceChunkTool = BuiltInConnectors | string;
 
 export type ToolReferenceChunk = {
   type?: "tool_reference" | undefined;
@@ -22,16 +22,20 @@ export type ToolReferenceChunk = {
 };
 
 /** @internal */
-export type ToolUnion$Outbound = string | string;
+export type ToolReferenceChunkTool$Outbound = string | string;
 
 /** @internal */
-export const ToolUnion$outboundSchema: z.ZodType<
-  ToolUnion$Outbound,
-  ToolUnion
+export const ToolReferenceChunkTool$outboundSchema: z.ZodType<
+  ToolReferenceChunkTool$Outbound,
+  ToolReferenceChunkTool
 > = smartUnion([BuiltInConnectors$outboundSchema, z.string()]);
 
-export function toolUnionToJSON(toolUnion: ToolUnion): string {
-  return JSON.stringify(ToolUnion$outboundSchema.parse(toolUnion));
+export function toolReferenceChunkToolToJSON(
+  toolReferenceChunkTool: ToolReferenceChunkTool,
+): string {
+  return JSON.stringify(
+    ToolReferenceChunkTool$outboundSchema.parse(toolReferenceChunkTool),
+  );
 }
 
 /** @internal */
