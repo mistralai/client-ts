@@ -12,14 +12,14 @@ dotenv.config();
  * npm run build && npx tsx chatComplete.example.ts
  */
 
-import { MistralGoogleCloud } from "@mistralai/mistralai-gcp";
+import { MistralGCP } from "@mistralai/mistralai-gcp";
 
-const mistralGoogleCloud = new MistralGoogleCloud({
+const mistralGCP = new MistralGCP({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 async function main() {
-  const result = await mistralGoogleCloud.chat.complete({
+  const result = await mistralGCP.chat.complete({
     model: "mistral-large-latest",
     messages: [
       {
