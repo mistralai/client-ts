@@ -4,9 +4,10 @@
  */
 
 import * as z from "zod/v4";
-import { MistralGoogleCloudCore } from "../core.js";
+import { MistralGCPCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
 import { EventStream } from "../lib/event-streams.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -22,7 +23,7 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
-import { MistralGoogleCloudError } from "../models/errors/mistralgoogleclouderror.js";
+import { MistralGCPError } from "../models/errors/mistralgcperror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -35,14 +36,14 @@ import { Result } from "../types/fp.js";
  * Mistral AI provides the ability to stream responses back to a client in order to allow partial results for certain requests. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message. Otherwise, the server will hold the request open until the timeout or until completion, with the response containing the full result as JSON.
  */
 export function fimStream(
-  client: MistralGoogleCloudCore,
+  client: MistralGCPCore,
   request: components.FIMCompletionStreamRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     EventStream<components.CompletionEvent>,
     | errors.HTTPValidationError
-    | MistralGoogleCloudError
+    | MistralGCPError
     | ResponseValidationError
     | ConnectionError
     | RequestAbortedError
@@ -60,7 +61,7 @@ export function fimStream(
 }
 
 async function $do(
-  client: MistralGoogleCloudCore,
+  client: MistralGCPCore,
   request: components.FIMCompletionStreamRequest,
   options?: RequestOptions,
 ): Promise<
@@ -68,7 +69,7 @@ async function $do(
     Result<
       EventStream<components.CompletionEvent>,
       | errors.HTTPValidationError
-      | MistralGoogleCloudError
+      | MistralGCPError
       | ResponseValidationError
       | ConnectionError
       | RequestAbortedError
@@ -126,7 +127,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
@@ -135,7 +136,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["422", "4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -151,7 +153,7 @@ async function $do(
   const [result] = await M.match<
     EventStream<components.CompletionEvent>,
     | errors.HTTPValidationError
-    | MistralGoogleCloudError
+    | MistralGCPError
     | ResponseValidationError
     | ConnectionError
     | RequestAbortedError
