@@ -42,3 +42,11 @@ const value: string[] = [
 ];
 ```
 
+### `{ [k: string]: string }`
+
+```typescript
+const value: { [k: string]: string } = {
+  "key": "<value>",
+};
+```
+

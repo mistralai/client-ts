@@ -5,11 +5,6 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  NetworkEncodedInput,
-  NetworkEncodedInput$Outbound,
-  NetworkEncodedInput$outboundSchema,
-} from "./networkencodedinput.js";
 
 export type WorkflowExecutionRequest = {
   /**
@@ -20,10 +15,6 @@ export type WorkflowExecutionRequest = {
    * The input to the workflow. This should be a dictionary or a BaseModel that matches the workflow's input schema.
    */
   input?: any | null | undefined;
-  /**
-   * Encoded input to the workflow, used when payload encoding is enabled.
-   */
-  encodedInput?: NetworkEncodedInput | null | undefined;
   /**
    * If true, wait for the workflow to complete and return the result directly.
    */
@@ -53,7 +44,6 @@ export type WorkflowExecutionRequest = {
 export type WorkflowExecutionRequest$Outbound = {
   execution_id?: string | null | undefined;
   input?: any | null | undefined;
-  encoded_input?: NetworkEncodedInput$Outbound | null | undefined;
   wait_for_result: boolean;
   timeout_seconds?: number | null | undefined;
   custom_tracing_attributes?: { [k: string]: string } | null | undefined;
@@ -69,7 +59,6 @@ export const WorkflowExecutionRequest$outboundSchema: z.ZodType<
 > = z.object({
   executionId: z.nullable(z.string()).optional(),
   input: z.nullable(z.any()).optional(),
-  encodedInput: z.nullable(NetworkEncodedInput$outboundSchema).optional(),
   waitForResult: z.boolean().default(false),
   timeoutSeconds: z.nullable(z.number()).optional(),
   customTracingAttributes: z.nullable(z.record(z.string(), z.string()))
@@ -80,7 +69,6 @@ export const WorkflowExecutionRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     executionId: "execution_id",
-    encodedInput: "encoded_input",
     waitForResult: "wait_for_result",
     timeoutSeconds: "timeout_seconds",
     customTracingAttributes: "custom_tracing_attributes",

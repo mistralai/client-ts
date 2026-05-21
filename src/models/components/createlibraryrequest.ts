@@ -16,6 +16,11 @@ export type OwnerType = ClosedEnum<typeof OwnerType>;
 export type CreateLibraryRequest = {
   name: string;
   description?: string | null | undefined;
+  /**
+   * The size of the chunks (in characters) to split document text into. Must be between 256 and 32768.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   chunkSize?: number | null | undefined;
   /**
    * Determines who owns the created library. 'User' creates a private library accessible only to its owner. 'Workspace' creates a library shared with the workspace. Defaults to 'Workspace' for API key sessions. Only API keys with the 'Private and shared connectors' connector access scope can create private, user-owned libraries.

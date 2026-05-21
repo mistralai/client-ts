@@ -75,6 +75,10 @@ export type ScheduleDefinition = {
   timeZoneName?: string | null | undefined;
   policy?: SchedulePolicy | undefined;
   /**
+   * Maximum number of times this schedule will trigger a workflow execution. Once this limit is reached, no further executions are triggered automatically. null means unlimited.
+   */
+  maxExecutions?: number | null | undefined;
+  /**
    * Unique identifier for the schedule.
    */
   scheduleId?: string | null | undefined;
@@ -92,6 +96,7 @@ export type ScheduleDefinition$Outbound = {
   jitter?: string | null | undefined;
   time_zone_name?: string | null | undefined;
   policy?: SchedulePolicy$Outbound | undefined;
+  max_executions?: number | null | undefined;
   schedule_id?: string | null | undefined;
 };
 
@@ -110,6 +115,7 @@ export const ScheduleDefinition$outboundSchema: z.ZodType<
   jitter: z.nullable(z.string()).optional(),
   timeZoneName: z.nullable(z.string()).optional(),
   policy: SchedulePolicy$outboundSchema.optional(),
+  maxExecutions: z.nullable(z.int()).optional(),
   scheduleId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -117,6 +123,7 @@ export const ScheduleDefinition$outboundSchema: z.ZodType<
     startAt: "start_at",
     endAt: "end_at",
     timeZoneName: "time_zone_name",
+    maxExecutions: "max_executions",
     scheduleId: "schedule_id",
   });
 });
