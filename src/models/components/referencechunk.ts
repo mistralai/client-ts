@@ -10,24 +10,24 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type ReferenceId = string | number;
+export type ReferenceId = number | string;
 
 export type ReferenceChunk = {
   type?: "reference" | undefined;
-  referenceIds: Array<string | number>;
+  referenceIds: Array<number | string>;
 };
 
 /** @internal */
 export const ReferenceId$inboundSchema: z.ZodType<ReferenceId, unknown> =
-  smartUnion([z.string(), z.int()]);
+  smartUnion([z.int(), z.string()]);
 /** @internal */
-export type ReferenceId$Outbound = string | number;
+export type ReferenceId$Outbound = number | string;
 
 /** @internal */
 export const ReferenceId$outboundSchema: z.ZodType<
   ReferenceId$Outbound,
   ReferenceId
-> = smartUnion([z.string(), z.int()]);
+> = smartUnion([z.int(), z.string()]);
 
 export function referenceIdToJSON(referenceId: ReferenceId): string {
   return JSON.stringify(ReferenceId$outboundSchema.parse(referenceId));
@@ -46,7 +46,7 @@ export function referenceIdFromJSON(
 export const ReferenceChunk$inboundSchema: z.ZodType<ReferenceChunk, unknown> =
   z.object({
     type: z.literal("reference").default("reference"),
-    reference_ids: z.array(smartUnion([z.string(), z.int()])),
+    reference_ids: z.array(smartUnion([z.int(), z.string()])),
   }).transform((v) => {
     return remap$(v, {
       "reference_ids": "referenceIds",
@@ -55,7 +55,7 @@ export const ReferenceChunk$inboundSchema: z.ZodType<ReferenceChunk, unknown> =
 /** @internal */
 export type ReferenceChunk$Outbound = {
   type: "reference";
-  reference_ids: Array<string | number>;
+  reference_ids: Array<number | string>;
 };
 
 /** @internal */
@@ -64,7 +64,7 @@ export const ReferenceChunk$outboundSchema: z.ZodType<
   ReferenceChunk
 > = z.object({
   type: z.literal("reference").default("reference" as const),
-  referenceIds: z.array(smartUnion([z.string(), z.int()])),
+  referenceIds: z.array(smartUnion([z.int(), z.string()])),
 }).transform((v) => {
   return remap$(v, {
     referenceIds: "reference_ids",

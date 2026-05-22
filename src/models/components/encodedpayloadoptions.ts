@@ -4,16 +4,23 @@
  */
 
 import * as z from "zod/v4";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const EncodedPayloadOptions = {
   Offloaded: "offloaded",
   Encrypted: "encrypted",
   EncryptedPartial: "encrypted-partial",
 } as const;
-export type EncodedPayloadOptions = ClosedEnum<typeof EncodedPayloadOptions>;
+export type EncodedPayloadOptions = OpenEnum<typeof EncodedPayloadOptions>;
 
 /** @internal */
-export const EncodedPayloadOptions$outboundSchema: z.ZodEnum<
-  typeof EncodedPayloadOptions
-> = z.enum(EncodedPayloadOptions);
+export const EncodedPayloadOptions$inboundSchema: z.ZodType<
+  EncodedPayloadOptions,
+  unknown
+> = openEnums.inboundSchema(EncodedPayloadOptions);
+/** @internal */
+export const EncodedPayloadOptions$outboundSchema: z.ZodType<
+  string,
+  EncodedPayloadOptions
+> = openEnums.outboundSchema(EncodedPayloadOptions);

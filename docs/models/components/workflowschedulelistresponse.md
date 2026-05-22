@@ -10,6 +10,8 @@ let value: WorkflowScheduleListResponse = {
     {
       input: "<value>",
       scheduleId: "<id>",
+      workflowName: "<value>",
+      paused: true,
     },
   ],
 };
@@ -20,3 +22,4 @@ let value: WorkflowScheduleListResponse = {
 | Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
 | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `schedules`                                                                                  | [components.ScheduleDefinitionOutput](../../models/components/scheduledefinitionoutput.md)[] | :heavy_check_mark:                                                                           | A list of workflow schedules                                                                 |
+| `nextPageToken`                                                                              | *string*                                                                                     | :heavy_minus_sign:                                                                           | Token for the next page of results                                                           |

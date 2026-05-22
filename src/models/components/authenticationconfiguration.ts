@@ -8,14 +8,16 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { ConsumerType, ConsumerType$inboundSchema } from "./consumertype.js";
 import {
-  AuthenticationType,
-  AuthenticationType$inboundSchema,
-} from "./authenticationtype.js";
+  OutboundAuthenticationType,
+  OutboundAuthenticationType$inboundSchema,
+} from "./outboundauthenticationtype.js";
 
 export type AuthenticationConfiguration = {
   name: string;
-  authenticationType: AuthenticationType;
+  authenticationType: OutboundAuthenticationType;
+  scope: ConsumerType;
   isDefault: boolean;
 };
 
@@ -25,7 +27,8 @@ export const AuthenticationConfiguration$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  authentication_type: AuthenticationType$inboundSchema,
+  authentication_type: OutboundAuthenticationType$inboundSchema,
+  scope: ConsumerType$inboundSchema,
   is_default: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {

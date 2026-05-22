@@ -16,10 +16,15 @@ import {
 } from "./resourcevisibility.js";
 
 export type CreateConnectorRequest = {
+  protocol?: "mcp" | undefined;
   /**
    * The name of the connector. Should be 64 char length maximum, alphanumeric, only underscores/dashes.
    */
   name: string;
+  /**
+   * Optional human-readable title for the connector.
+   */
+  title?: string | null | undefined;
   /**
    * The description of the connector.
    */
@@ -49,7 +54,9 @@ export type CreateConnectorRequest = {
 
 /** @internal */
 export type CreateConnectorRequest$Outbound = {
+  protocol: "mcp";
   name: string;
+  title?: string | null | undefined;
   description: string;
   icon_url?: string | null | undefined;
   visibility?: string | undefined;
@@ -64,7 +71,9 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   CreateConnectorRequest$Outbound,
   CreateConnectorRequest
 > = z.object({
+  protocol: z.literal("mcp").default("mcp" as const),
   name: z.string(),
+  title: z.nullable(z.string()).optional(),
   description: z.string(),
   iconUrl: z.nullable(z.string()).optional(),
   visibility: ResourceVisibility$outboundSchema.optional(),
