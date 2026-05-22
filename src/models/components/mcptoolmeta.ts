@@ -8,33 +8,41 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { MCPUIToolMeta, MCPUIToolMeta$inboundSchema } from "./mcpuitoolmeta.js";
+import { MCPServerIcon, MCPServerIcon$inboundSchema } from "./mcpservericon.js";
 import {
-  TurbineToolMeta,
-  TurbineToolMeta$inboundSchema,
-} from "./turbinetoolmeta.js";
+  ToolAnnotations,
+  ToolAnnotations$inboundSchema,
+} from "./toolannotations.js";
+import { ToolExecution, ToolExecution$inboundSchema } from "./toolexecution.js";
 
-/**
- * Typed _meta for MCP tools.
- *
- * @remarks
- *
- * Only the 'ui' field is typed. Other fields are allowed via extra="allow".
- */
 export type MCPToolMeta = {
-  ui?: MCPUIToolMeta | null | undefined;
-  aiMistralTurbine?: TurbineToolMeta | null | undefined;
+  name: string;
+  title?: string | null | undefined;
+  description?: string | null | undefined;
+  inputSchema: { [k: string]: any };
+  outputSchema?: { [k: string]: any } | null | undefined;
+  icons?: Array<MCPServerIcon> | null | undefined;
+  annotations?: ToolAnnotations | null | undefined;
+  meta?: MCPToolMeta | null | undefined;
+  execution?: ToolExecution | null | undefined;
   [additionalProperties: string]: unknown;
 };
 
 /** @internal */
 export const MCPToolMeta$inboundSchema: z.ZodType<MCPToolMeta, unknown> = z
   .object({
-    ui: z.nullable(MCPUIToolMeta$inboundSchema).optional(),
-    "ai.mistral/turbine": z.nullable(TurbineToolMeta$inboundSchema).optional(),
+    name: z.string(),
+    title: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    inputSchema: z.record(z.string(), z.any()),
+    outputSchema: z.nullable(z.record(z.string(), z.any())).optional(),
+    icons: z.nullable(z.array(MCPServerIcon$inboundSchema)).optional(),
+    annotations: z.nullable(ToolAnnotations$inboundSchema).optional(),
+    _meta: z.nullable(z.lazy(() => MCPToolMeta$inboundSchema)).optional(),
+    execution: z.nullable(ToolExecution$inboundSchema).optional(),
   }).catchall(z.any()).transform((v) => {
     return remap$(v, {
-      "ai.mistral/turbine": "aiMistralTurbine",
+      "_meta": "meta",
     });
   });
 

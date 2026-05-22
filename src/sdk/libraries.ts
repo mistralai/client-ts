@@ -6,6 +6,7 @@
 import { betaLibrariesCreate } from "../funcs/betaLibrariesCreate.js";
 import { betaLibrariesDelete } from "../funcs/betaLibrariesDelete.js";
 import { betaLibrariesGet } from "../funcs/betaLibrariesGet.js";
+import { betaLibrariesLibrariesUpdateV1 } from "../funcs/betaLibrariesLibrariesUpdateV1.js";
 import { betaLibrariesList } from "../funcs/betaLibrariesList.js";
 import { betaLibrariesUpdate } from "../funcs/betaLibrariesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -81,7 +82,7 @@ export class Libraries extends ClientSDK {
    * Delete a library and all of it's document.
    *
    * @remarks
-   * Given a library id, deletes it together with all documents that have been uploaded to that library.
+   * Given a library id, deletes it together with all documents that have been uploaded to that library. Warning: the response will change from 200 (returning the deleted library) to 204 No Content in a future version.
    */
   async delete(
     request: operations.LibrariesDeleteV1Request,
@@ -101,10 +102,29 @@ export class Libraries extends ClientSDK {
    * Given a library id, you can update the name and description.
    */
   async update(
-    request: operations.LibrariesUpdateV1Request,
+    request: operations.LibrariesPatchV1Request,
     options?: RequestOptions,
   ): Promise<components.Library> {
     return unwrapAsync(betaLibrariesUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a library.
+   *
+   * @remarks
+   * Given a library id, you can update the name and description.
+   *
+   * @deprecated method: Use the PATCH method instead. This PUT endpoint will be removed in a future version..
+   */
+  async librariesUpdateV1(
+    request: operations.LibrariesUpdateV1Request,
+    options?: RequestOptions,
+  ): Promise<components.Library> {
+    return unwrapAsync(betaLibrariesLibrariesUpdateV1(
       this,
       request,
       options,
