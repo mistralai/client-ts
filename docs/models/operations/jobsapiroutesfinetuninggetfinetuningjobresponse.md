@@ -19,12 +19,20 @@ const value: components.ClassifierFineTuningJobDetails = {
     "0ad9ab3d-acef-4066-8671-f76471059ca9",
     "abc46acb-3b23-4abb-a314-dffc7708bf1a",
   ],
+  metadata: {
+    expectedDurationSeconds: 220,
+    cost: 10,
+    costCurrency: "EUR",
+    trainTokensPerStep: 131072,
+    trainTokens: 1310720,
+    dataTokens: 305375,
+  },
   jobType: "classifier",
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 364125,
+      stepNumber: 124866,
       createdAt: 1716963433,
     },
   ],
@@ -46,12 +54,20 @@ const value: components.CompletionFineTuningJobDetails = {
     "6702bef1-52df-4fbf-96ab-92899ff42ec5",
     "aed4c13c-d618-4e15-8f99-7f7b4f24d947",
   ],
+  metadata: {
+    expectedDurationSeconds: 220,
+    cost: 10,
+    costCurrency: "EUR",
+    trainTokensPerStep: 131072,
+    trainTokens: 1310720,
+    dataTokens: 305375,
+  },
   jobType: "completion",
   hyperparameters: {},
   checkpoints: [
     {
       metrics: {},
-      stepNumber: 364125,
+      stepNumber: 124866,
       createdAt: 1716963433,
     },
   ],

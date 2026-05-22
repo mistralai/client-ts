@@ -86,7 +86,7 @@ export type CompletionFineTuningJob = {
    */
   fineTunedModel?: string | null | undefined;
   /**
-   * Optional text/code that adds more context for the model. When given a `prompt` and a `suffix` the model will fill what is between them. When `suffix` is not provided, the model will simply execute completion starting with `prompt`.
+   * Optional user-provided string inserted into the fine-tuned model name to help identify it. For example, a suffix of `"my-great-model"` produces a name like `ft:open-mistral-7b:abcd1234:20260101:my-great-model:efgh5678`.
    */
   suffix?: string | null | undefined;
   /**

@@ -6,7 +6,22 @@
 import { ListFineTuningJobsResponse } from "@mistralai/mistralai/models/components";
 
 let value: ListFineTuningJobsResponse = {
-  total: 773595,
+  data: [
+    {
+      id: "9b7b7e0d-5ce9-4b38-844b-dac005dea291",
+      autoStart: false,
+      model: "Accord",
+      status: "CANCELLATION_REQUESTED",
+      createdAt: 492349,
+      modifiedAt: 432376,
+      trainingFiles: [],
+      jobType: "completion",
+      hyperparameters: {
+        learningRate: 0.0001,
+      },
+    },
+  ],
+  total: 555783,
 };
 ```
 

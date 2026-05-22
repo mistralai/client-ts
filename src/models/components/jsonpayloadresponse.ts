@@ -4,9 +4,14 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  EncodedPayloadOptions,
+  EncodedPayloadOptions$inboundSchema,
+} from "./encodedpayloadoptions.js";
 
 /**
  * A payload containing arbitrary JSON data.
@@ -14,6 +19,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * @remarks
  *
  * Used for complete state snapshots or final results.
+ * When encrypted, the value field contains base64-encoded encrypted data
+ * and encoding_options indicates the type of encryption applied.
  */
 export type JSONPayloadResponse = {
   /**
@@ -21,9 +28,13 @@ export type JSONPayloadResponse = {
    */
   type: "json";
   /**
-   * The JSON-serializable payload value.
+   * The JSON-serializable payload value. When encrypted, contains base64-encoded data.
    */
   value: any;
+  /**
+   * Encoding options applied to the payload.
+   */
+  encodingOptions?: Array<EncodedPayloadOptions> | null | undefined;
 };
 
 /** @internal */
@@ -33,6 +44,12 @@ export const JSONPayloadResponse$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("json").default("json"),
   value: z.any(),
+  encoding_options: z.nullable(z.array(EncodedPayloadOptions$inboundSchema))
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "encoding_options": "encodingOptions",
+  });
 });
 
 export function jsonPayloadResponseFromJSON(
