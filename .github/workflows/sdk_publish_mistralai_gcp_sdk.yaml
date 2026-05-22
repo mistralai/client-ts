@@ -31,7 +31,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: packages/mistralai-gcp
-        run: npx -y -p npm@11.14.0 npm install --ignore-scripts --min-release-age=7
+        run: npx -y -p npm@11.15.0 npm install --ignore-scripts --min-release-age=7
 
       - name: Build package
         working-directory: packages/mistralai-gcp
@@ -50,5 +50,5 @@ jobs:
             TAG="latest"
           fi
 
-          echo "Publishing under dist-tag: $TAG"
-          npm publish --tag "$TAG" --access public --provenance
+          echo "Staging under dist-tag: $TAG"
+          npm stage publish --tag "$TAG" --access public --provenance
