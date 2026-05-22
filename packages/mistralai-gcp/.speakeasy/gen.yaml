@@ -53,6 +53,7 @@ typescript:
   enableReactQuery: false
   enumFormat: union
   exportZodModelNamespace: false
+  fixEnumNameSanitization: false
   flatAdditionalProperties: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first

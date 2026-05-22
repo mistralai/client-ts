@@ -18,6 +18,12 @@ export type DeltaMessage = {
   role?: string | null | undefined;
   content?: string | Array<ContentChunk> | null | undefined;
   toolCalls?: Array<ToolCall> | null | undefined;
+  toolCallId?: string | null | undefined;
+  /**
+   * If the completion returns multiple messages, this is to specify which message this delta is for.
+   */
+  index?: number | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -44,9 +50,13 @@ export const DeltaMessage$inboundSchema: z.ZodType<DeltaMessage, unknown> = z
       smartUnion([z.string(), z.array(ContentChunk$inboundSchema)]),
     ).optional(),
     tool_calls: z.nullable(z.array(ToolCall$inboundSchema)).optional(),
+    tool_call_id: z.nullable(z.string()).optional(),
+    index: z.nullable(z.int()).optional(),
+    metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   }).transform((v) => {
     return remap$(v, {
       "tool_calls": "toolCalls",
+      "tool_call_id": "toolCallId",
     });
   });
 
