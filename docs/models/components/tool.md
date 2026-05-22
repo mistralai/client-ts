@@ -6,9 +6,13 @@
 import { Tool } from "@mistralai/mistralai-azure/models/components";
 
 let value: Tool = {
+  type: "function",
   function: {
     name: "<value>",
-    parameters: {},
+    parameters: {
+      "key": "<value>",
+      "key1": "<value>",
+    },
   },
 };
 ```
@@ -17,5 +21,5 @@ let value: Tool = {
 
 | Field                                                        | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `type`                                                       | [components.ToolTypes](../../models/components/tooltypes.md) | :heavy_minus_sign:                                           | N/A                                                          |
+| `type`                                                       | *"function"*                                                 | :heavy_check_mark:                                           | N/A                                                          |
 | `function`                                                   | [components.FunctionT](../../models/components/functiont.md) | :heavy_check_mark:                                           | N/A                                                          |

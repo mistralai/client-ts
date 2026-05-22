@@ -241,8 +241,9 @@ function applyBearer(
 
 export function resolveGlobalSecurity(
   security: Partial<components.Security> | null | undefined,
+  allowedFields?: number[],
 ): SecurityState | null {
-  return resolveSecurity(
+  let inputs: SecurityInput[][] = [
     [
       {
         fieldName: "Authorization",
@@ -250,7 +251,18 @@ export function resolveGlobalSecurity(
         value: security?.apiKey ?? env().MISTRAL_API_KEY,
       },
     ],
-  );
+  ];
+
+  if (allowedFields) {
+    inputs = allowedFields.map((i) => {
+      if (i < 0 || i >= inputs.length) {
+        throw new RangeError(`invalid allowedFields index ${i}`);
+      }
+      return inputs[i]!;
+    });
+  }
+
+  return resolveSecurity(...inputs);
 }
 
 export async function extractSecurity<
