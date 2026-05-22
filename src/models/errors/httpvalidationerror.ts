@@ -5,13 +5,13 @@
 
 import * as z from "zod/v4";
 import * as components from "../components/index.js";
-import { MistralGoogleCloudError } from "./mistralgoogleclouderror.js";
+import { MistralGCPError } from "./mistralgcperror.js";
 
 export type HTTPValidationErrorData = {
   detail?: Array<components.ValidationError> | undefined;
 };
 
-export class HTTPValidationError extends MistralGoogleCloudError {
+export class HTTPValidationError extends MistralGCPError {
   detail?: Array<components.ValidationError> | undefined;
 
   /** The original data that was passed to this error instance. */
