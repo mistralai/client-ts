@@ -13,13 +13,15 @@ import {
   AuthenticationConfiguration$inboundSchema,
 } from "./authenticationconfiguration.js";
 import {
-  AuthenticationType,
-  AuthenticationType$inboundSchema,
-} from "./authenticationtype.js";
+  OutboundAuthenticationType,
+  OutboundAuthenticationType$inboundSchema,
+} from "./outboundauthenticationtype.js";
 
 export type CredentialsResponse = {
   credentials: Array<AuthenticationConfiguration>;
-  connectorPresetCredentialsForAuth?: Array<AuthenticationType> | undefined;
+  connectorPresetCredentialsForAuth?:
+    | Array<OutboundAuthenticationType>
+    | undefined;
 };
 
 /** @internal */
@@ -29,7 +31,7 @@ export const CredentialsResponse$inboundSchema: z.ZodType<
 > = z.object({
   credentials: z.array(AuthenticationConfiguration$inboundSchema),
   connector_preset_credentials_for_auth: z.array(
-    AuthenticationType$inboundSchema,
+    OutboundAuthenticationType$inboundSchema,
   ).optional(),
 }).transform((v) => {
   return remap$(v, {

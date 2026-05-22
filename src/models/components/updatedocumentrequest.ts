@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { smartUnion } from "../../types/smartUnion.js";
 
 export type Attributes =
@@ -18,7 +19,7 @@ export type Attributes =
   | Array<boolean>;
 
 export type UpdateDocumentRequest = {
-  name?: string | null | undefined;
+  name?: string | undefined;
   attributes?:
     | {
       [k: string]:
@@ -34,6 +35,10 @@ export type UpdateDocumentRequest = {
     }
     | null
     | undefined;
+  /**
+   * If set, the document will be automatically deleted after this date.
+   */
+  expiresAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -70,7 +75,7 @@ export function attributesToJSON(attributes: Attributes): string {
 
 /** @internal */
 export type UpdateDocumentRequest$Outbound = {
-  name?: string | null | undefined;
+  name?: string | undefined;
   attributes?:
     | {
       [k: string]:
@@ -86,6 +91,7 @@ export type UpdateDocumentRequest$Outbound = {
     }
     | null
     | undefined;
+  expires_at?: string | null | undefined;
 };
 
 /** @internal */
@@ -93,7 +99,7 @@ export const UpdateDocumentRequest$outboundSchema: z.ZodType<
   UpdateDocumentRequest$Outbound,
   UpdateDocumentRequest
 > = z.object({
-  name: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
   attributes: z.nullable(
     z.record(
       z.string(),
@@ -110,6 +116,11 @@ export const UpdateDocumentRequest$outboundSchema: z.ZodType<
       ]),
     ),
   ).optional(),
+  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    expiresAt: "expires_at",
+  });
 });
 
 export function updateDocumentRequestToJSON(

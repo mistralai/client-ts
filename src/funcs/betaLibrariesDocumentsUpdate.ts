@@ -32,11 +32,11 @@ import { Result } from "../types/fp.js";
  * Update the metadata of a specific document.
  *
  * @remarks
- * Given a library and a document in that library, update the name of that document.
+ * Given a library and a document in that library, update the name and/or attributes of that document.
  */
 export function betaLibrariesDocumentsUpdate(
   client: MistralCore,
-  request: operations.LibrariesDocumentsUpdateV1Request,
+  request: operations.LibrariesDocumentsPatchV1Request,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -61,7 +61,7 @@ export function betaLibrariesDocumentsUpdate(
 
 async function $do(
   client: MistralCore,
-  request: operations.LibrariesDocumentsUpdateV1Request,
+  request: operations.LibrariesDocumentsPatchV1Request,
   options?: RequestOptions,
 ): Promise<
   [
@@ -83,7 +83,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.LibrariesDocumentsUpdateV1Request$outboundSchema.parse(value),
+      operations.LibrariesDocumentsPatchV1Request$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -120,7 +120,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "libraries_documents_update_v1",
+    operationID: "libraries_documents_patch_v1",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -134,13 +134,13 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PUT",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 30000,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
