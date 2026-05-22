@@ -51,4 +51,4 @@ jobs:
           fi
 
           echo "Staging under dist-tag: $TAG"
-          npm stage publish --tag "$TAG" --access public --provenance
+          npx -y -p npm@11.15.0 npm stage publish --tag "$TAG" --access public --provenance
