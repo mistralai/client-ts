@@ -5,11 +5,17 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { IngestionPipelineConfigurations } from "./ingestionpipelineconfigurations.js";
+import { SearchIndexes } from "./searchindexes.js";
 
 export class Rag extends ClientSDK {
   private _ingestionPipelineConfigurations?: IngestionPipelineConfigurations;
   get ingestionPipelineConfigurations(): IngestionPipelineConfigurations {
     return (this._ingestionPipelineConfigurations ??=
       new IngestionPipelineConfigurations(this._options));
+  }
+
+  private _searchIndexes?: SearchIndexes;
+  get searchIndexes(): SearchIndexes {
+    return (this._searchIndexes ??= new SearchIndexes(this._options));
   }
 }

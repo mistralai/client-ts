@@ -9,6 +9,7 @@ import { PublicAuthenticationMethod } from "@mistralai/mistralai/models/componen
 
 let value: PublicAuthenticationMethod = {
   methodType: "bearer",
+  hasDefaultCredentials: true,
 };
 ```
 
@@ -16,5 +17,6 @@ let value: PublicAuthenticationMethod = {
 
 | Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `methodType`                                                                                           | [components.AuthenticationType](../../models/components/authenticationtype.md)                         | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `methodType`                                                                                           | [components.OutboundAuthenticationType](../../models/components/outboundauthenticationtype.md)         | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
 | `headers`                                                                                              | [components.ConnectorAuthenticationHeader](../../models/components/connectorauthenticationheader.md)[] | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `hasDefaultCredentials`                                                                                | *boolean*                                                                                              | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

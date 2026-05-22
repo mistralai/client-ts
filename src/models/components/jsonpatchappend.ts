@@ -6,7 +6,17 @@
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  EncryptedPatchValue,
+  EncryptedPatchValue$inboundSchema,
+} from "./encryptedpatchvalue.js";
+
+/**
+ * The value to use for the operation. A string to append to the existing value, or an EncryptedPatchValue wrapper when encryption is applied.
+ */
+export type JSONPatchAppendValue = EncryptedPatchValue | string;
 
 export type JSONPatchAppend = {
   /**
@@ -14,9 +24,9 @@ export type JSONPatchAppend = {
    */
   path: string;
   /**
-   * The value to use for the operation. A string to append to the existing value
+   * The value to use for the operation. A string to append to the existing value, or an EncryptedPatchValue wrapper when encryption is applied.
    */
-  value: string;
+  value: EncryptedPatchValue | string;
   /**
    * 'append' is an extension for efficient string concatenation in streaming scenarios.
    */
@@ -24,12 +34,28 @@ export type JSONPatchAppend = {
 };
 
 /** @internal */
+export const JSONPatchAppendValue$inboundSchema: z.ZodType<
+  JSONPatchAppendValue,
+  unknown
+> = smartUnion([EncryptedPatchValue$inboundSchema, z.string()]);
+
+export function jsonPatchAppendValueFromJSON(
+  jsonString: string,
+): SafeParseResult<JSONPatchAppendValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => JSONPatchAppendValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JSONPatchAppendValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const JSONPatchAppend$inboundSchema: z.ZodType<
   JSONPatchAppend,
   unknown
 > = z.object({
   path: z.string(),
-  value: z.string(),
+  value: smartUnion([EncryptedPatchValue$inboundSchema, z.string()]),
   op: z.literal("append"),
 });
 

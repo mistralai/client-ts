@@ -13,6 +13,10 @@ import {
   ScheduleCalendar$inboundSchema,
 } from "./schedulecalendar.js";
 import {
+  ScheduleFutureExecution,
+  ScheduleFutureExecution$inboundSchema,
+} from "./schedulefutureexecution.js";
+import {
   ScheduleInterval,
   ScheduleInterval$inboundSchema,
 } from "./scheduleinterval.js";
@@ -20,6 +24,10 @@ import {
   SchedulePolicy,
   SchedulePolicy$inboundSchema,
 } from "./schedulepolicy.js";
+import {
+  ScheduleRecentExecution,
+  ScheduleRecentExecution$inboundSchema,
+} from "./schedulerecentexecution.js";
 
 /**
  * Output representation of a schedule with required schedule_id.
@@ -75,6 +83,30 @@ export type ScheduleDefinitionOutput = {
    * Unique identifier for the schedule.
    */
   scheduleId: string;
+  /**
+   * Remaining workflow executions before this schedule stops triggering automatically. null means unlimited; 0 means the limit has been reached and the schedule is exhausted.
+   */
+  remainingExecutions?: number | null | undefined;
+  /**
+   * Name of the workflow this schedule triggers.
+   */
+  workflowName: string;
+  /**
+   * Whether the schedule is currently paused.
+   */
+  paused: boolean;
+  /**
+   * Human-readable note associated with the current pause or resume state.
+   */
+  note?: string | null | undefined;
+  /**
+   * Upcoming scheduled executions (10 next executions, earliest first).
+   */
+  futureExecutions?: Array<ScheduleFutureExecution> | undefined;
+  /**
+   * Most recent scheduled executions (10 most recent, newest last).
+   */
+  recentExecutions?: Array<ScheduleRecentExecution> | undefined;
 };
 
 /** @internal */
@@ -97,6 +129,12 @@ export const ScheduleDefinitionOutput$inboundSchema: z.ZodType<
   time_zone_name: z.nullable(z.string()).optional(),
   policy: SchedulePolicy$inboundSchema.optional(),
   schedule_id: z.string(),
+  remaining_executions: z.nullable(z.int()).optional(),
+  workflow_name: z.string(),
+  paused: z.boolean(),
+  note: z.nullable(z.string()).optional(),
+  future_executions: z.array(ScheduleFutureExecution$inboundSchema).optional(),
+  recent_executions: z.array(ScheduleRecentExecution$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "cron_expressions": "cronExpressions",
@@ -104,6 +142,10 @@ export const ScheduleDefinitionOutput$inboundSchema: z.ZodType<
     "end_at": "endAt",
     "time_zone_name": "timeZoneName",
     "schedule_id": "scheduleId",
+    "remaining_executions": "remainingExecutions",
+    "workflow_name": "workflowName",
+    "future_executions": "futureExecutions",
+    "recent_executions": "recentExecutions",
   });
 });
 

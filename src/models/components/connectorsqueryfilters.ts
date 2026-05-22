@@ -4,23 +4,17 @@
  */
 
 import * as z from "zod/v4";
-import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ConnectorsQueryFilters = {
   /**
    * Filter for active connectors for a given user, workspace and organization.
    */
   active?: boolean | null | undefined;
-  /**
-   * Fetch connection secrets.
-   */
-  fetchConnectionSecrets?: boolean | undefined;
 };
 
 /** @internal */
 export type ConnectorsQueryFilters$Outbound = {
   active?: boolean | null | undefined;
-  fetch_connection_secrets: boolean;
 };
 
 /** @internal */
@@ -29,11 +23,6 @@ export const ConnectorsQueryFilters$outboundSchema: z.ZodType<
   ConnectorsQueryFilters
 > = z.object({
   active: z.nullable(z.boolean()).optional(),
-  fetchConnectionSecrets: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    fetchConnectionSecrets: "fetch_connection_secrets",
-  });
 });
 
 export function connectorsQueryFiltersToJSON(

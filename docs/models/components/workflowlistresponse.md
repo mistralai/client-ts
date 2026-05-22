@@ -14,7 +14,7 @@ let value: WorkflowListResponse = {
       archived: false,
     },
   ],
-  nextCursor: "1cc21cc0-f73d-4058-9569-70d8cdcf2c76",
+  nextCursor: "<value>",
 };
 ```
 

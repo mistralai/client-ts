@@ -13,6 +13,9 @@ import { ProcessStatus, ProcessStatus$inboundSchema } from "./processstatus.js";
 export type ProcessingStatus = {
   documentId: string;
   processStatus: ProcessStatus;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   processingStatus: string;
 };
 
