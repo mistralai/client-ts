@@ -3,11 +3,17 @@
  * @generated-id: 2dda252d574b
  */
 
+import { betaConnectorsActivateForOrganization } from "../funcs/betaConnectorsActivateForOrganization.js";
+import { betaConnectorsActivateForUser } from "../funcs/betaConnectorsActivateForUser.js";
+import { betaConnectorsActivateForWorkspace } from "../funcs/betaConnectorsActivateForWorkspace.js";
 import { betaConnectorsCallTool } from "../funcs/betaConnectorsCallTool.js";
 import { betaConnectorsCreate } from "../funcs/betaConnectorsCreate.js";
 import { betaConnectorsCreateOrUpdateOrganizationCredentials } from "../funcs/betaConnectorsCreateOrUpdateOrganizationCredentials.js";
 import { betaConnectorsCreateOrUpdateUserCredentials } from "../funcs/betaConnectorsCreateOrUpdateUserCredentials.js";
 import { betaConnectorsCreateOrUpdateWorkspaceCredentials } from "../funcs/betaConnectorsCreateOrUpdateWorkspaceCredentials.js";
+import { betaConnectorsDeactivateForOrganization } from "../funcs/betaConnectorsDeactivateForOrganization.js";
+import { betaConnectorsDeactivateForUser } from "../funcs/betaConnectorsDeactivateForUser.js";
+import { betaConnectorsDeactivateForWorkspace } from "../funcs/betaConnectorsDeactivateForWorkspace.js";
 import { betaConnectorsDelete } from "../funcs/betaConnectorsDelete.js";
 import { betaConnectorsDeleteOrganizationCredentials } from "../funcs/betaConnectorsDeleteOrganizationCredentials.js";
 import { betaConnectorsDeleteUserCredentials } from "../funcs/betaConnectorsDeleteUserCredentials.js";
@@ -72,6 +78,108 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.AuthUrlResponse> {
     return unwrapAsync(betaConnectorsGetAuthUrl(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Activate a connector for an organization.
+   *
+   * @remarks
+   * Enable a connector at the organization level so all members can use it.
+   */
+  async activateForOrganization(
+    request: operations.ConnectorActivateForOrganizationV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsActivateForOrganization(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Deactivate a connector for an organization.
+   *
+   * @remarks
+   * Disable a connector at the organization level.
+   */
+  async deactivateForOrganization(
+    request: operations.ConnectorDeactivateForOrganizationV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeactivateForOrganization(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Activate a connector for a workspace.
+   *
+   * @remarks
+   * Enable a connector at the workspace level so all members of the workspace can use it.
+   */
+  async activateForWorkspace(
+    request: operations.ConnectorActivateForWorkspaceV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsActivateForWorkspace(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Deactivate a connector for a workspace.
+   *
+   * @remarks
+   * Disable a connector at the workspace level.
+   */
+  async deactivateForWorkspace(
+    request: operations.ConnectorDeactivateForWorkspaceV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeactivateForWorkspace(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Activate a connector for the current user.
+   *
+   * @remarks
+   * Enable a connector for the calling user only.
+   */
+  async activateForUser(
+    request: operations.ConnectorActivateForUserV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsActivateForUser(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Deactivate a connector for the current user.
+   *
+   * @remarks
+   * Disable a connector for the calling user only.
+   */
+  async deactivateForUser(
+    request: operations.ConnectorDeactivateForUserV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeactivateForUser(
       this,
       request,
       options,

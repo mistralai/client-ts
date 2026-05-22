@@ -11,6 +11,11 @@ export type LibrariesDocumentsListV1Request = {
   search?: string | null | undefined;
   pageSize?: number | undefined;
   page?: number | undefined;
+  /**
+   * Deprecated: this parameter will be removed in a future version.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   filtersAttributes?: string | null | undefined;
   sortBy?: string | undefined;
   sortOrder?: string | undefined;

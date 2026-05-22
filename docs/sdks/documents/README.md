@@ -10,6 +10,7 @@
 * [upload](#upload) - Upload a new document.
 * [get](#get) - Retrieve the metadata of a specific document.
 * [update](#update) - Update the metadata of a specific document.
+* [~~librariesDocumentsUpdateV1~~](#librariesdocumentsupdatev1) - Update the metadata of a specific document. :warning: **Deprecated**
 * [delete](#delete) - Delete a document.
 * [textContent](#textcontent) - Retrieve the text content of a specific document.
 * [status](#status) - Retrieve the processing status of a specific document.
@@ -251,11 +252,11 @@ run();
 
 ## update
 
-Given a library and a document in that library, update the name of that document.
+Given a library and a document in that library, update the name and/or attributes of that document.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="libraries_documents_update_v1" method="put" path="/v1/libraries/{library_id}/documents/{document_id}" -->
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_patch_v1" method="patch" path="/v1/libraries/{library_id}/documents/{document_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -265,8 +266,8 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.documents.update({
-    libraryId: "3ddd8d93-dca5-4a6d-980d-173226c35742",
-    documentId: "2a25e44c-b160-40ca-b5c2-b65fb2fcae34",
+    libraryId: "2a41249e-52ca-4436-b755-25ce3a9bfb53",
+    documentId: "bc26fa54-e5d9-4269-bedf-86bed5471c7d",
     updateDocumentRequest: {},
   });
 
@@ -292,6 +293,86 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesDocumentsUpdate(mistral, {
+    libraryId: "2a41249e-52ca-4436-b755-25ce3a9bfb53",
+    documentId: "bc26fa54-e5d9-4269-bedf-86bed5471c7d",
+    updateDocumentRequest: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesDocumentsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.LibrariesDocumentsPatchV1Request](../../models/operations/librariesdocumentspatchv1request.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.Document](../../models/components/document.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## ~~librariesDocumentsUpdateV1~~
+
+Given a library and a document in that library, update the name of that document.
+
+> :warning: **DEPRECATED**: Use the PATCH method instead. This PUT endpoint will be removed in a future version..
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="libraries_documents_update_v1" method="put" path="/v1/libraries/{library_id}/documents/{document_id}" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.libraries.documents.librariesDocumentsUpdateV1({
+    libraryId: "3ddd8d93-dca5-4a6d-980d-173226c35742",
+    documentId: "2a25e44c-b160-40ca-b5c2-b65fb2fcae34",
+    updateDocumentRequest: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaLibrariesDocumentsLibrariesDocumentsUpdateV1 } from "@mistralai/mistralai/funcs/betaLibrariesDocumentsLibrariesDocumentsUpdateV1.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaLibrariesDocumentsLibrariesDocumentsUpdateV1(mistral, {
     libraryId: "3ddd8d93-dca5-4a6d-980d-173226c35742",
     documentId: "2a25e44c-b160-40ca-b5c2-b65fb2fcae34",
     updateDocumentRequest: {},
@@ -300,7 +381,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("betaLibrariesDocumentsUpdate failed:", res.error);
+    console.log("betaLibrariesDocumentsLibrariesDocumentsUpdateV1 failed:", res.error);
   }
 }
 

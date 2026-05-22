@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,6 +18,10 @@ export type WorkflowScheduleListResponse = {
    * A list of workflow schedules
    */
   schedules: Array<ScheduleDefinitionOutput>;
+  /**
+   * Token for the next page of results
+   */
+  nextPageToken?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,6 +30,11 @@ export const WorkflowScheduleListResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   schedules: z.array(ScheduleDefinitionOutput$inboundSchema),
+  next_page_token: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "next_page_token": "nextPageToken",
+  });
 });
 
 export function workflowScheduleListResponseFromJSON(

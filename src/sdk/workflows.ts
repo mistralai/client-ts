@@ -4,6 +4,8 @@
  */
 
 import { workflowsArchiveWorkflow } from "../funcs/workflowsArchiveWorkflow.js";
+import { workflowsBulkArchiveWorkflows } from "../funcs/workflowsBulkArchiveWorkflows.js";
+import { workflowsBulkUnarchiveWorkflows } from "../funcs/workflowsBulkUnarchiveWorkflows.js";
 import { workflowsExecuteWorkflow } from "../funcs/workflowsExecuteWorkflow.js";
 import { workflowsExecuteWorkflowRegistration } from "../funcs/workflowsExecuteWorkflowRegistration.js";
 import { workflowsGetWorkflow } from "../funcs/workflowsGetWorkflow.js";
@@ -163,6 +165,34 @@ export class Workflows extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.WorkflowRegistrationGetResponse> {
     return unwrapAsync(workflowsGetWorkflowRegistration(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Bulk Archive Workflows
+   */
+  async bulkArchiveWorkflows(
+    request: components.WorkflowBulkArchiveRequest,
+    options?: RequestOptions,
+  ): Promise<components.WorkflowBulkArchiveResponse> {
+    return unwrapAsync(workflowsBulkArchiveWorkflows(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Bulk Unarchive Workflows
+   */
+  async bulkUnarchiveWorkflows(
+    request: components.WorkflowBulkUnarchiveRequest,
+    options?: RequestOptions,
+  ): Promise<components.WorkflowBulkUnarchiveResponse> {
+    return unwrapAsync(workflowsBulkUnarchiveWorkflows(
       this,
       request,
       options,

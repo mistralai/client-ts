@@ -11,7 +11,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Sharing = {
   libraryId: string;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   userId?: string | null | undefined;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   orgId: string;
   role: string;
   shareWithType: string;
