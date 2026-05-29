@@ -24,4 +24,5 @@ export function initHooks(hooks: Hooks) {
     hooks.registerBeforeRequestHook(tracingHook)
     hooks.registerAfterSuccessHook(tracingHook)
     hooks.registerAfterErrorHook(tracingHook)
+    hooks.registerSDKInitHook(tracingHook)
 }

@@ -2,15 +2,74 @@
  * Tests for OTEL span enrichment helpers.
  */
 
-import { SpanStatusCode } from "@opentelemetry/api";
+import {
+  context as contextApi,
+  ROOT_CONTEXT,
+  SpanStatusCode,
+  trace,
+  type Context,
+  type ContextManager,
+  type Span,
+  type Tracer,
+  type TracerProvider,
+} from "@opentelemetry/api";
+import { HTTPClient, Mistral } from "../../../src/index.js";
 import { TracingHook, TracingContext, TRACING_SPAN_KEY, TRACING_TRACER_KEY } from "../../../src/hooks/tracing.js";
 import {
   enrichSpanFromRequest,
   enrichSpanFromResponse,
   MistralAIAttributes,
+  registerTracerProvider,
   semConvAttributes,
 } from "../../../src/extra/observability/otel.js";
 import { createMockSpan, createMockTracer } from "./helpers.js";
+
+class TestContextManager implements ContextManager {
+  #activeContext: Context = ROOT_CONTEXT;
+
+  active(): Context {
+    return this.#activeContext;
+  }
+
+  with<A extends unknown[], F extends (...args: A) => ReturnType<F>>(
+    context: Context,
+    fn: F,
+    thisArg?: ThisParameterType<F>,
+    ...args: A
+  ): ReturnType<F> {
+    const previousContext = this.#activeContext;
+    this.#activeContext = context;
+
+    const restore = () => {
+      this.#activeContext = previousContext;
+    };
+
+    try {
+      const result = fn.call(thisArg, ...args);
+      if (result instanceof Promise) {
+        return result.finally(restore) as ReturnType<F>;
+      }
+      restore();
+      return result;
+    } catch (error) {
+      restore();
+      throw error;
+    }
+  }
+
+  bind<T>(_: Context, target: T): T {
+    return target;
+  }
+
+  enable(): this {
+    return this;
+  }
+
+  disable(): this {
+    this.#activeContext = ROOT_CONTEXT;
+    return this;
+  }
+}
 
 describe("enrichSpanFromRequest", () => {
   test("chat completion with model and messages", () => {
@@ -157,6 +216,62 @@ describe("TracingHook concurrency", () => {
 
     expect(mockSpanA.attributes[semConvAttributes.ATTR_GEN_AI_RESPONSE_ID]).toBe("resp-A");
     expect(mockSpanB.attributes[semConvAttributes.ATTR_GEN_AI_RESPONSE_ID]).toBe("resp-B");
+  });
+});
+
+describe("SDK HTTP span parenting", () => {
+  afterEach(() => {
+    contextApi.disable();
+    registerTracerProvider();
+  });
+
+  test("runs the HTTP send with the GenAI span active", async () => {
+    contextApi.disable();
+    contextApi.setGlobalContextManager(new TestContextManager());
+
+    const genAiSpan = createMockSpan("chat");
+    const tracer = {
+      startSpan: () => genAiSpan,
+      startActiveSpan: () => undefined as never,
+    } as Tracer;
+    const tracerProvider: TracerProvider = {
+      getTracer: () => tracer,
+    };
+    registerTracerProvider(tracerProvider);
+
+    let activeSpanDuringFetch: Span | undefined;
+    const httpClient = new HTTPClient({
+      async fetcher() {
+        activeSpanDuringFetch = trace.getSpan(contextApi.active());
+        return new Response(JSON.stringify({
+          id: "chatcmpl-parenting-test",
+          object: "chat.completion",
+          created: 1700000000,
+          model: "mistral-small-latest",
+          choices: [{
+            index: 0,
+            message: { role: "assistant", content: "ok" },
+            finish_reason: "stop",
+          }],
+          usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+        }), {
+          status: 200,
+          headers: { "content-type": "application/json" },
+        });
+      },
+    });
+
+    const client = new Mistral({
+      apiKey: "test-api-key",
+      httpClient,
+    });
+
+    await client.chat.complete({
+      model: "mistral-small-latest",
+      messages: [{ role: "user", content: "hello" }],
+    });
+
+    expect(activeSpanDuringFetch).toBe(genAiSpan);
   });
 });
 

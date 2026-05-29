@@ -1,4 +1,5 @@
-import type { Span, Tracer } from "@opentelemetry/api";
+import type { Context, Span, Tracer } from "@opentelemetry/api";
+import { HTTPClient } from "../lib/http.js";
 import {
   AfterErrorContext,
   AfterErrorHook,
@@ -7,6 +8,8 @@ import {
   BeforeRequestContext,
   BeforeRequestHook,
   HookContext,
+  SDKInitHook,
+  SDKInitOptions,
 } from "./types.js";
 
 type ObservabilityModule = typeof import("../extra/observability/otel.js");
@@ -38,7 +41,55 @@ export type TracingContext = HookContext & {
   [TRACING_TRACER_KEY]?: Tracer;
 };
 
-export class TracingHook implements BeforeRequestHook, AfterSuccessHook, AfterErrorHook {
+// Runs the actual HTTP send inside the GenAI span context so lower-level
+// fetch/http auto-instrumentation parents its spans correctly.
+class TracingHTTPClient extends HTTPClient {
+  constructor(
+    private readonly wrappedClient: HTTPClient,
+    private readonly requestContexts: WeakMap<Request, Context>
+  ) {
+    super();
+  }
+
+  override async request(request: Request): Promise<Response> {
+    const activeContext = this.requestContexts.get(request);
+    if (!activeContext) {
+      return this.wrappedClient.request(request);
+    }
+
+    try {
+      const observability = await getObservabilityModule();
+      if (!observability) {
+        return await this.wrappedClient.request(request);
+      }
+
+      return await observability.runWithContext(
+        activeContext,
+        () => this.wrappedClient.request(request)
+      );
+    } finally {
+      this.requestContexts.delete(request);
+    }
+  }
+
+  override clone(): HTTPClient {
+    return new TracingHTTPClient(
+      this.wrappedClient.clone(),
+      this.requestContexts
+    );
+  }
+}
+
+export class TracingHook implements SDKInitHook, BeforeRequestHook, AfterSuccessHook, AfterErrorHook {
+  readonly #requestContexts = new WeakMap<Request, Context>();
+
+  sdkInit(opts: SDKInitOptions): SDKInitOptions {
+    return {
+      ...opts,
+      client: new TracingHTTPClient(opts.client, this.#requestContexts),
+    };
+  }
+
   async beforeRequest(
     hookCtx: BeforeRequestContext,
     request: Request
@@ -60,6 +111,7 @@ export class TracingHook implements BeforeRequestHook, AfterSuccessHook, AfterEr
     ctx[TRACING_TRACER_KEY] = tracer;
     ctx[TRACING_SPAN_KEY] = span;
     ctx[TRACING_BODY_KEY] = body;
+    this.#requestContexts.set(tracedRequest, observability.getSpanContext(span));
 
     return tracedRequest;
   }

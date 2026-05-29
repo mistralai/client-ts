@@ -9,6 +9,7 @@ import {
   context as contextApi,
   propagation,
   trace,
+  type Context,
   type Span,
   type Tracer,
   type TracerProvider,
@@ -23,7 +24,7 @@ import {
 } from "./formatting.js";
 import { accumulateChunksToResponseDict, parseSseChunks } from "./streaming.js";
 
-export type { Span, Tracer };
+export type { Context, Span, Tracer };
 export { semConvAttributes };
 
 export const OTEL_SERVICE_NAME = "mistralai_sdk";
@@ -424,6 +425,14 @@ export function enrichSpanFromResponse(
 export function getOrCreateOtelTracer(): Tracer {
   const tracerProvider = registeredTracerProvider ?? trace.getTracerProvider();
   return tracerProvider.getTracer(MISTRAL_SDK_OTEL_TRACER_NAME);
+}
+
+export function getSpanContext(span: Span): Context {
+  return trace.setSpan(contextApi.active(), span);
+}
+
+export function runWithContext<T>(context: Context, fn: () => T): T {
+  return contextApi.with(context, fn);
 }
 
 function warn(error: string, details: unknown): void {
