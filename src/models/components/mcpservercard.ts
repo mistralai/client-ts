@@ -19,6 +19,10 @@ import {
   MCPServerCardMeta,
   MCPServerCardMeta$inboundSchema,
 } from "./mcpservercardmeta.js";
+import {
+  MCPServerCardTool,
+  MCPServerCardTool$inboundSchema,
+} from "./mcpservercardtool.js";
 import { MCPServerIcon, MCPServerIcon$inboundSchema } from "./mcpservericon.js";
 import {
   MCPServerRemote,
@@ -28,7 +32,6 @@ import {
   MCPServerRepository,
   MCPServerRepository$inboundSchema,
 } from "./mcpserverrepository.js";
-import { MCPToolMeta, MCPToolMeta$inboundSchema } from "./mcptoolmeta.js";
 import {
   ServerCapabilities,
   ServerCapabilities$inboundSchema,
@@ -36,7 +39,7 @@ import {
 
 export type Resources = string | Array<MCPResource>;
 
-export type Tools = string | Array<MCPToolMeta>;
+export type Tools = string | Array<MCPServerCardTool>;
 
 export type Prompts = string | Array<MCPPrompt>;
 
@@ -65,7 +68,7 @@ export type MCPServerCard = {
   remotes?: Array<MCPServerRemote> | null | undefined;
   requires?: ClientCapabilities | null | undefined;
   resources?: string | Array<MCPResource> | null | undefined;
-  tools?: string | Array<MCPToolMeta> | null | undefined;
+  tools?: string | Array<MCPServerCardTool> | null | undefined;
   prompts?: string | Array<MCPPrompt> | null | undefined;
   meta?: MCPServerCardMeta | null | undefined;
   [additionalProperties: string]: unknown;
@@ -88,7 +91,7 @@ export function resourcesFromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, unknown> = smartUnion([
   z.string(),
-  z.array(MCPToolMeta$inboundSchema),
+  z.array(MCPServerCardTool$inboundSchema),
 ]);
 
 export function toolsFromJSON(
@@ -135,7 +138,7 @@ export const MCPServerCard$inboundSchema: z.ZodType<MCPServerCard, unknown> = z
       smartUnion([z.string(), z.array(MCPResource$inboundSchema)]),
     ).optional(),
     tools: z.nullable(
-      smartUnion([z.string(), z.array(MCPToolMeta$inboundSchema)]),
+      smartUnion([z.string(), z.array(MCPServerCardTool$inboundSchema)]),
     ).optional(),
     prompts: z.nullable(
       smartUnion([z.string(), z.array(MCPPrompt$inboundSchema)]),

@@ -40,7 +40,7 @@ export function betaLibrariesDelete(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.Library,
+    components.Library | undefined,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -66,7 +66,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.Library,
+      components.Library | undefined,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -154,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.Library,
+    components.Library | undefined,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -165,7 +165,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.Library$inboundSchema),
+    M.json(200, components.Library$inboundSchema.optional()),
+    M.nil(204, components.Library$inboundSchema.optional()),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

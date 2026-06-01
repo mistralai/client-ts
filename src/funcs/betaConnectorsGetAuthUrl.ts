@@ -105,7 +105,9 @@ async function $do(
 
   const query = encodeFormQuery({
     "app_return_url": payload.app_return_url,
+    "bind_connection_to": payload.bind_connection_to,
     "credentials_name": payload.credentials_name,
+    "method_type": payload.method_type,
   });
 
   const headers = new Headers(compactMap({

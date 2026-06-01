@@ -16,6 +16,7 @@ import { MessageTokens, MessageTokens$inboundSchema } from "./messagetokens.js";
 export type PromptTokensDetails = {
   messages?: Array<MessageTokens> | undefined;
   cachedTokens: number;
+  audioTokens: number;
 };
 
 /** @internal */
@@ -25,9 +26,11 @@ export const PromptTokensDetails$inboundSchema: z.ZodType<
 > = z.object({
   messages: z.array(MessageTokens$inboundSchema).optional(),
   cached_tokens: z.int().default(0),
+  audio_tokens: z.int().default(0),
 }).transform((v) => {
   return remap$(v, {
     "cached_tokens": "cachedTokens",
+    "audio_tokens": "audioTokens",
   });
 });
 

@@ -9,12 +9,32 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type ListDeploymentsV1WorkflowsDeploymentsGetRequest = {
   activeOnly?: boolean | undefined;
   workflowName?: string | null | undefined;
+  /**
+   * Filter deployments by name or ID prefix
+   */
+  search?: string | null | undefined;
+  /**
+   * Maximum number of deployments to return
+   */
+  limit?: number | null | undefined;
+  /**
+   * Cursor from a previous response for pagination
+   */
+  cursor?: string | null | undefined;
+  /**
+   * Workspace ID to scope the request to. Defaults to the caller's context.
+   */
+  workspaceId?: string | null | undefined;
 };
 
 /** @internal */
 export type ListDeploymentsV1WorkflowsDeploymentsGetRequest$Outbound = {
   active_only: boolean;
   workflow_name?: string | null | undefined;
+  search?: string | null | undefined;
+  limit?: number | null | undefined;
+  cursor?: string | null | undefined;
+  workspace_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,10 +45,15 @@ export const ListDeploymentsV1WorkflowsDeploymentsGetRequest$outboundSchema:
   > = z.object({
     activeOnly: z.boolean().default(true),
     workflowName: z.nullable(z.string()).optional(),
+    search: z.nullable(z.string()).optional(),
+    limit: z.nullable(z.int()).optional(),
+    cursor: z.nullable(z.string()).optional(),
+    workspaceId: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       activeOnly: "active_only",
       workflowName: "workflow_name",
+      workspaceId: "workspace_id",
     });
   });
 

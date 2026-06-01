@@ -8,7 +8,7 @@ Public view of an authentication method, without secrets.
 import { PublicAuthenticationMethod } from "@mistralai/mistralai/models/components";
 
 let value: PublicAuthenticationMethod = {
-  methodType: "bearer",
+  methodType: "github_app",
   hasDefaultCredentials: true,
 };
 ```

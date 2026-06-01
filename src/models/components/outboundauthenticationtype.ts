@@ -11,6 +11,8 @@ export const OutboundAuthenticationType = {
   Oauth2: "oauth2",
   Bearer: "bearer",
   None: "none",
+  GithubApp: "github_app",
+  SlackApp: "slack_app",
 } as const;
 export type OutboundAuthenticationType = OpenEnum<
   typeof OutboundAuthenticationType

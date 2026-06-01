@@ -7,7 +7,7 @@ import { AuthenticationConfiguration } from "@mistralai/mistralai/models/compone
 
 let value: AuthenticationConfiguration = {
   name: "<value>",
-  authenticationType: "bearer",
+  authenticationType: "none",
   scope: "system",
 };
 ```

@@ -28,6 +28,10 @@ export type GetWorkflowsV1WorkflowsGetRequest = {
    */
   archived?: boolean | null | undefined;
   /**
+   * Filter to workflows tagged with all listed tags (AND).
+   */
+  tags?: Array<string> | null | undefined;
+  /**
    * The cursor for pagination
    */
   cursor?: string | null | undefined;
@@ -47,6 +51,7 @@ export type GetWorkflowsV1WorkflowsGetRequest$Outbound = {
   include_shared: boolean;
   available_in_chat_assistant?: boolean | null | undefined;
   archived?: boolean | null | undefined;
+  tags?: Array<string> | null | undefined;
   cursor?: string | null | undefined;
   limit: number;
 };
@@ -60,6 +65,7 @@ export const GetWorkflowsV1WorkflowsGetRequest$outboundSchema: z.ZodType<
   includeShared: z.boolean().default(true),
   availableInChatAssistant: z.nullable(z.boolean()).optional(),
   archived: z.nullable(z.boolean()).optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
   cursor: z.nullable(z.string()).optional(),
   limit: z.int().default(50),
 }).transform((v) => {
