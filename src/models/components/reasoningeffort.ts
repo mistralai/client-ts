@@ -8,7 +8,11 @@ import { ClosedEnum } from "../../types/enums.js";
 
 export const ReasoningEffort = {
   None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
   High: "high",
+  Xhigh: "xhigh",
 } as const;
 export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
 
