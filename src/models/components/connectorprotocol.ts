@@ -19,8 +19,3 @@ export const ConnectorProtocol$inboundSchema: z.ZodType<
   ConnectorProtocol,
   unknown
 > = openEnums.inboundSchema(ConnectorProtocol);
-/** @internal */
-export const ConnectorProtocol$outboundSchema: z.ZodType<
-  string,
-  ConnectorProtocol
-> = openEnums.outboundSchema(ConnectorProtocol);

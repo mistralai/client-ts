@@ -10,10 +10,6 @@ import {
   AuthData$Outbound,
   AuthData$outboundSchema,
 } from "./authdata.js";
-import {
-  ConnectorProtocol,
-  ConnectorProtocol$outboundSchema,
-} from "./connectorprotocol.js";
 
 export type UpdateConnectorRequest = {
   /**
@@ -37,10 +33,6 @@ export type UpdateConnectorRequest = {
    */
   systemPrompt?: string | null | undefined;
   /**
-   * Protocol of the connector.
-   */
-  protocol?: ConnectorProtocol | null | undefined;
-  /**
    * Optional new connection config.
    */
   connectionConfig?: { [k: string]: any } | null | undefined;
@@ -48,6 +40,7 @@ export type UpdateConnectorRequest = {
    * Optional new connection secrets
    */
   connectionSecrets?: { [k: string]: any } | null | undefined;
+  protocol?: "mcp" | undefined;
   /**
    * New server url for your mcp connector.
    */
@@ -69,9 +62,9 @@ export type UpdateConnectorRequest$Outbound = {
   description?: string | null | undefined;
   icon_url?: string | null | undefined;
   system_prompt?: string | null | undefined;
-  protocol?: string | null | undefined;
   connection_config?: { [k: string]: any } | null | undefined;
   connection_secrets?: { [k: string]: any } | null | undefined;
+  protocol: "mcp";
   server?: string | null | undefined;
   headers?: { [k: string]: any } | null | undefined;
   auth_data?: AuthData$Outbound | null | undefined;
@@ -87,9 +80,9 @@ export const UpdateConnectorRequest$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   iconUrl: z.nullable(z.string()).optional(),
   systemPrompt: z.nullable(z.string()).optional(),
-  protocol: z.nullable(ConnectorProtocol$outboundSchema).optional(),
   connectionConfig: z.nullable(z.record(z.string(), z.any())).optional(),
   connectionSecrets: z.nullable(z.record(z.string(), z.any())).optional(),
+  protocol: z.literal("mcp").default("mcp" as const),
   server: z.nullable(z.string()).optional(),
   headers: z.nullable(z.record(z.string(), z.any())).optional(),
   authData: z.nullable(AuthData$outboundSchema).optional(),

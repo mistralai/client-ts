@@ -19,6 +19,10 @@ export type WorkflowUpdateRequest = {
    * Whether to make the workflow available in the chat assistant
    */
   availableInChatAssistant?: boolean | null | undefined;
+  /**
+   * New tags. Replaces the existing tag list.
+   */
+  tags?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -26,6 +30,7 @@ export type WorkflowUpdateRequest$Outbound = {
   display_name?: string | null | undefined;
   description?: string | null | undefined;
   available_in_chat_assistant?: boolean | null | undefined;
+  tags?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -36,6 +41,7 @@ export const WorkflowUpdateRequest$outboundSchema: z.ZodType<
   displayName: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   availableInChatAssistant: z.nullable(z.boolean()).optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
