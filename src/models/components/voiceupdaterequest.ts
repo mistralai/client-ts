@@ -4,11 +4,6 @@
  */
 
 import * as z from "zod/v4";
-import {
-  VoiceAppearance,
-  VoiceAppearance$Outbound,
-  VoiceAppearance$outboundSchema,
-} from "./voiceappearance.js";
 
 /**
  * Request model for partially updating voice metadata.
@@ -20,7 +15,6 @@ export type VoiceUpdateRequest = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   description?: string | null | undefined;
-  appearance?: VoiceAppearance | null | undefined;
 };
 
 /** @internal */
@@ -31,7 +25,6 @@ export type VoiceUpdateRequest$Outbound = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   description?: string | null | undefined;
-  appearance?: VoiceAppearance$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -45,7 +38,6 @@ export const VoiceUpdateRequest$outboundSchema: z.ZodType<
   age: z.nullable(z.int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   description: z.nullable(z.string()).optional(),
-  appearance: z.nullable(VoiceAppearance$outboundSchema).optional(),
 });
 
 export function voiceUpdateRequestToJSON(

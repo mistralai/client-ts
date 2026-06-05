@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -17,6 +18,14 @@ export type DeploymentListResponse = {
    * List of deployments
    */
   deployments: Array<DeploymentResponse>;
+  /**
+   * Cursor for the next page of results
+   */
+  nextCursor: string | null;
+  /**
+   * Workspace ID the results are scoped to
+   */
+  workspaceId: string;
 };
 
 /** @internal */
@@ -25,6 +34,13 @@ export const DeploymentListResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   deployments: z.array(DeploymentResponse$inboundSchema),
+  next_cursor: z.nullable(z.string()),
+  workspace_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "next_cursor": "nextCursor",
+    "workspace_id": "workspaceId",
+  });
 });
 
 export function deploymentListResponseFromJSON(

@@ -15,6 +15,7 @@ export type ConnectionCredentials = {
   oauth?: OAuth2Token | null | undefined;
   headers?: { [k: string]: string } | null | undefined;
   bearerToken?: string | null | undefined;
+  githubInstallationId?: string | null | undefined;
 };
 
 /** @internal */
@@ -22,6 +23,7 @@ export type ConnectionCredentials$Outbound = {
   oauth?: OAuth2Token$Outbound | null | undefined;
   headers?: { [k: string]: string } | null | undefined;
   bearer_token?: string | null | undefined;
+  github_installation_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -32,9 +34,11 @@ export const ConnectionCredentials$outboundSchema: z.ZodType<
   oauth: z.nullable(OAuth2Token$outboundSchema).optional(),
   headers: z.nullable(z.record(z.string(), z.string())).optional(),
   bearerToken: z.nullable(z.string()).optional(),
+  githubInstallationId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     bearerToken: "bearer_token",
+    githubInstallationId: "github_installation_id",
   });
 });
 

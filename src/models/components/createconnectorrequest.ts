@@ -11,6 +11,11 @@ import {
   AuthData$outboundSchema,
 } from "./authdata.js";
 import {
+  ExtendedOAuthServerMetadata,
+  ExtendedOAuthServerMetadata$Outbound,
+  ExtendedOAuthServerMetadata$outboundSchema,
+} from "./extendedoauthservermetadata.js";
+import {
   ResourceVisibility,
   ResourceVisibility$outboundSchema,
 } from "./resourcevisibility.js";
@@ -47,6 +52,14 @@ export type CreateConnectorRequest = {
    */
   authData?: AuthData | null | undefined;
   /**
+   * Optional OAuth2 authorization server metadata (authorization_endpoint, token_endpoint, etc.). When provided, skips .well-known discovery and uses these endpoints directly.
+   */
+  oauth2ServerMetadata?: ExtendedOAuthServerMetadata | null | undefined;
+  /**
+   * Optional URL to fetch OAuth2 authorization server metadata from (RFC 8414). When provided, the metadata is fetched from this URL and used instead of .well-known discovery. Mutually exclusive with oauth2_server_metadata.
+   */
+  oauth2ServerMetadataUrl?: string | null | undefined;
+  /**
    * Optional system prompt for the connector.
    */
   systemPrompt?: string | null | undefined;
@@ -63,6 +76,11 @@ export type CreateConnectorRequest$Outbound = {
   server: string;
   headers?: { [k: string]: any } | null | undefined;
   auth_data?: AuthData$Outbound | null | undefined;
+  oauth2_server_metadata?:
+    | ExtendedOAuthServerMetadata$Outbound
+    | null
+    | undefined;
+  oauth2_server_metadata_url?: string | null | undefined;
   system_prompt?: string | null | undefined;
 };
 
@@ -80,11 +98,16 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   server: z.string(),
   headers: z.nullable(z.record(z.string(), z.any())).optional(),
   authData: z.nullable(AuthData$outboundSchema).optional(),
+  oauth2ServerMetadata: z.nullable(ExtendedOAuthServerMetadata$outboundSchema)
+    .optional(),
+  oauth2ServerMetadataUrl: z.nullable(z.string()).optional(),
   systemPrompt: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     iconUrl: "icon_url",
     authData: "auth_data",
+    oauth2ServerMetadata: "oauth2_server_metadata",
+    oauth2ServerMetadataUrl: "oauth2_server_metadata_url",
     systemPrompt: "system_prompt",
   });
 });

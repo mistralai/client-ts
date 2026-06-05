@@ -10,6 +10,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ConsumerType, ConsumerType$inboundSchema } from "./consumertype.js";
 import {
+  CredentialsStatus,
+  CredentialsStatus$inboundSchema,
+} from "./credentialsstatus.js";
+import {
   OutboundAuthenticationType,
   OutboundAuthenticationType$inboundSchema,
 } from "./outboundauthenticationtype.js";
@@ -18,6 +22,7 @@ export type AuthenticationConfiguration = {
   name: string;
   authenticationType: OutboundAuthenticationType;
   scope: ConsumerType;
+  status?: CredentialsStatus | null | undefined;
   isDefault: boolean;
 };
 
@@ -29,6 +34,7 @@ export const AuthenticationConfiguration$inboundSchema: z.ZodType<
   name: z.string(),
   authentication_type: OutboundAuthenticationType$inboundSchema,
   scope: ConsumerType$inboundSchema,
+  status: z.nullable(CredentialsStatus$inboundSchema).optional(),
   is_default: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {

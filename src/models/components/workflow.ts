@@ -56,6 +56,10 @@ export type Workflow = {
    * Whether the workflow is archived
    */
   archived: boolean;
+  /**
+   * Tags for filtering and discovery
+   */
+  tags?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -72,6 +76,7 @@ export const Workflow$inboundSchema: z.ZodType<Workflow, unknown> = z.object({
   is_technical: z.boolean().default(false),
   on_behalf_of: z.boolean().default(false),
   archived: z.boolean().default(false),
+  tags: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",

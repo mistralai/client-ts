@@ -8,20 +8,20 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type AuthData = {
   clientId: string;
-  clientSecret: string;
+  clientSecret?: string | null | undefined;
 };
 
 /** @internal */
 export type AuthData$Outbound = {
   client_id: string;
-  client_secret: string;
+  client_secret?: string | null | undefined;
 };
 
 /** @internal */
 export const AuthData$outboundSchema: z.ZodType<AuthData$Outbound, AuthData> = z
   .object({
     clientId: z.string(),
-    clientSecret: z.string(),
+    clientSecret: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       clientId: "client_id",

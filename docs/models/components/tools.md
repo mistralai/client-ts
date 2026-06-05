@@ -9,9 +9,9 @@
 const value: string = "<value>";
 ```
 
-### `components.MCPToolMeta[]`
+### `components.MCPServerCardTool[]`
 
 ```typescript
-const value: components.MCPToolMeta[] = [];
+const value: components.MCPServerCardTool[] = [];
 ```
 

@@ -111,6 +111,7 @@ async function $do(
     "cursor": payload?.cursor,
     "include_shared": payload?.include_shared,
     "limit": payload?.limit,
+    "tags": payload?.tags,
   });
 
   const headers = new Headers(compactMap({

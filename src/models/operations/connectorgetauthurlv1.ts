@@ -5,17 +5,37 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
+import * as components from "../components/index.js";
+
+export const BindConnectionTo = {
+  User: "user",
+  Org: "org",
+} as const;
+export type BindConnectionTo = ClosedEnum<typeof BindConnectionTo>;
 
 export type ConnectorGetAuthUrlV1Request = {
   appReturnUrl?: string | null | undefined;
+  /**
+   * Auth method type to use for the authorization URL. Required when the connector supports multiple interactive auth methods; otherwise the sole method is selected automatically. Use this to pick a specific method (e.g. 'oauth2' vs 'github_app').
+   */
+  methodType?: components.OutboundAuthenticationType | undefined;
   credentialsName?: string | null | undefined;
+  bindConnectionTo?: BindConnectionTo | undefined;
   connectorIdOrName: string;
 };
 
 /** @internal */
+export const BindConnectionTo$outboundSchema: z.ZodEnum<
+  typeof BindConnectionTo
+> = z.enum(BindConnectionTo);
+
+/** @internal */
 export type ConnectorGetAuthUrlV1Request$Outbound = {
   app_return_url?: string | null | undefined;
+  method_type?: string | undefined;
   credentials_name?: string | null | undefined;
+  bind_connection_to: string;
   connector_id_or_name: string;
 };
 
@@ -25,12 +45,16 @@ export const ConnectorGetAuthUrlV1Request$outboundSchema: z.ZodType<
   ConnectorGetAuthUrlV1Request
 > = z.object({
   appReturnUrl: z.nullable(z.string()).optional(),
+  methodType: components.OutboundAuthenticationType$outboundSchema.optional(),
   credentialsName: z.nullable(z.string()).optional(),
+  bindConnectionTo: BindConnectionTo$outboundSchema.default("user"),
   connectorIdOrName: z.string(),
 }).transform((v) => {
   return remap$(v, {
     appReturnUrl: "app_return_url",
+    methodType: "method_type",
     credentialsName: "credentials_name",
+    bindConnectionTo: "bind_connection_to",
     connectorIdOrName: "connector_id_or_name",
   });
 });

@@ -57,6 +57,10 @@ export type WorkflowWithWorkerStatus = {
    */
   archived: boolean;
   /**
+   * Tags for filtering and discovery
+   */
+  tags?: Array<string> | undefined;
+  /**
    * Whether the workflow is active
    */
   active: boolean;
@@ -79,6 +83,7 @@ export const WorkflowWithWorkerStatus$inboundSchema: z.ZodType<
   is_technical: z.boolean().default(false),
   on_behalf_of: z.boolean().default(false),
   archived: z.boolean().default(false),
+  tags: z.array(z.string()).optional(),
   active: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
