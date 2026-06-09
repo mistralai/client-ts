@@ -18,6 +18,8 @@ import { TracingHook, TracingContext, TRACING_SPAN_KEY, TRACING_TRACER_KEY } fro
 import {
   enrichSpanFromRequest,
   enrichSpanFromResponse,
+  getTracedRequestAndSpan,
+  getTracedResponse,
   MistralAIAttributes,
   registerTracerProvider,
   semConvAttributes,
@@ -225,6 +227,39 @@ describe("SDK HTTP span parenting", () => {
     registerTracerProvider();
   });
 
+  test("ends the GenAI span when the HTTP client rejects", async () => {
+    const genAiSpan = createMockSpan("chat");
+    const tracer = {
+      startSpan: () => genAiSpan,
+      startActiveSpan: () => undefined as never,
+    } as Tracer;
+    const tracerProvider: TracerProvider = {
+      getTracer: () => tracer,
+    };
+    registerTracerProvider(tracerProvider);
+
+    const httpClient = new HTTPClient({
+      async fetcher() {
+        throw new TypeError("fetch failed");
+      },
+    });
+    const client = new Mistral({
+      apiKey: "test-api-key",
+      httpClient,
+    });
+
+    await expect(client.chat.complete({
+      model: "mistral-small-latest",
+      messages: [{ role: "user", content: "hello" }],
+    })).rejects.toThrow("Unable to make request");
+
+    expect(genAiSpan.status).toEqual({
+      code: SpanStatusCode.ERROR,
+      message: "TypeError: fetch failed",
+    });
+    expect(genAiSpan.ended).toBe(true);
+  });
+
   test("runs the HTTP send with the GenAI span active", async () => {
     contextApi.disable();
     contextApi.setGlobalContextManager(new TestContextManager());
@@ -272,6 +307,108 @@ describe("SDK HTTP span parenting", () => {
     });
 
     expect(activeSpanDuringFetch).toBe(genAiSpan);
+  });
+});
+
+describe("TracingHook body and stream handling", () => {
+  test("does not read non-GenAI request bodies", async () => {
+    const body = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        controller.enqueue(new Uint8Array([1]));
+        controller.close();
+      },
+    });
+    const request = new Request("https://api.mistral.ai/v1/files", {
+      method: "POST",
+      headers: { "content-type": "multipart/form-data; boundary=test" },
+      body,
+      duplex: "half",
+    } as RequestInit & { duplex: "half" });
+    const cloneSpy = vi.spyOn(request, "clone");
+
+    await getTracedRequestAndSpan(
+      createMockTracer(),
+      "files_api_routes_upload_file",
+      request
+    );
+
+    expect(cloneSpy).not.toHaveBeenCalled();
+  });
+
+  test("does not read non-GenAI response bodies", async () => {
+    const body = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        controller.enqueue(new TextEncoder().encode("download bytes"));
+        controller.close();
+      },
+    });
+    const response = new Response(body, {
+      headers: { "content-type": "application/octet-stream" },
+    });
+    const span = createMockSpan();
+    const cloneSpy = vi.spyOn(response, "clone");
+
+    const tracedResponse = await getTracedResponse(
+      createMockTracer(),
+      span,
+      "files_api_routes_download_file",
+      response
+    );
+
+    expect(cloneSpy).not.toHaveBeenCalled();
+    expect(span.ended).toBe(true);
+    await expect(tracedResponse.text()).resolves.toBe("download bytes");
+  });
+
+  test("reads traced SSE responses lazily and cancels upstream", async () => {
+    const encoder = new TextEncoder();
+    let reads = 0;
+    let cancelReason: unknown;
+    const body = new ReadableStream<Uint8Array>({
+      start(controller) {
+        controller.enqueue(encoder.encode(
+          'data: {"id":"id-1","model":"m","choices":[{"index":0,"delta":{"content":"hi"},"finish_reason":null}]}\n\n'
+        ));
+      },
+    });
+    const response = new Response(body, {
+      headers: { "content-type": "text/event-stream" },
+    });
+    const responseBody = response.body!;
+    const upstreamReader = responseBody.getReader();
+    vi.spyOn(responseBody, "getReader").mockReturnValue({
+      read() {
+        reads += 1;
+        return upstreamReader.read();
+      },
+      cancel(reason?: unknown) {
+        cancelReason = reason;
+        return upstreamReader.cancel(reason);
+      },
+      releaseLock() {
+        return upstreamReader.releaseLock();
+      },
+      closed: upstreamReader.closed,
+    } as ReadableStreamDefaultReader<Uint8Array>);
+    const span = createMockSpan();
+
+    const tracedResponse = await getTracedResponse(
+      createMockTracer(),
+      span,
+      "stream_chat",
+      response
+    );
+
+    expect(reads).toBe(0);
+
+    const reader = tracedResponse.body!.getReader();
+    const firstChunk = await reader.read();
+    expect(firstChunk.done).toBe(false);
+    expect(reads).toBe(1);
+
+    await reader.cancel("stop");
+    expect(cancelReason).toBe("stop");
+    expect(span.ended).toBe(true);
   });
 });
 

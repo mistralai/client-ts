@@ -57,8 +57,9 @@ class TracingHTTPClient extends HTTPClient {
       return this.wrappedClient.request(request);
     }
 
+    let observability: ObservabilityModule | null = null;
     try {
-      const observability = await getObservabilityModule();
+      observability = await getObservabilityModule();
       if (!observability) {
         return await this.wrappedClient.request(request);
       }
@@ -67,6 +68,11 @@ class TracingHTTPClient extends HTTPClient {
         activeContext,
         () => this.wrappedClient.request(request)
       );
+    } catch (error) {
+      if (observability) {
+        await observability.recordRequestError(activeContext, error);
+      }
+      throw error;
     } finally {
       this.requestContexts.delete(request);
     }

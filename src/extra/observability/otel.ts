@@ -104,6 +104,17 @@ function inferGenAiOperationName(operationId: string): string | null {
   return null;
 }
 
+function isKnownGenAiOperation(operationId: string): boolean {
+  return inferGenAiOperationName(operationId) !== null;
+}
+
+function isJsonContentType(contentType: string | null): boolean {
+  const mediaType = contentType?.split(";")[0]?.trim().toLowerCase();
+  return mediaType === "application/json" ||
+    mediaType === "text/json" ||
+    mediaType?.endsWith("+json") === true;
+}
+
 function buildGenaiSpanName(
   genAiOp: string,
   body: Record<string, unknown>
@@ -435,6 +446,16 @@ export function runWithContext<T>(context: Context, fn: () => T): T {
   return contextApi.with(context, fn);
 }
 
+export async function recordRequestError(
+  context: Context,
+  error: unknown
+): Promise<void> {
+  const span = trace.getSpan(context);
+  if (span) {
+    await getResponseAndError(span, null, error);
+  }
+}
+
 function warn(error: string, details: unknown): void {
   if (MISTRAL_SDK_DEBUG_TRACING) {
     console.warn(error, details);
@@ -464,9 +485,12 @@ export async function getTracedRequestAndSpan(
       span.setAttribute(semConvAttributes.ATTR_GEN_AI_CONVERSATION_ID, conversationId);
     }
 
-    // Clone and read body BEFORE creating new request (body stream can only be consumed once)
     let body: string | null = null;
-    if (request.body) {
+    if (
+      request.body &&
+      isKnownGenAiOperation(operationId) &&
+      isJsonContentType(request.headers.get("content-type"))
+    ) {
       try {
         const cloned = request.clone();
         body = await cloned.text();
@@ -520,25 +544,34 @@ export async function getTracedResponse(
     span.setStatus({ code: SpanStatusCode.OK });
     span.setAttribute(semConvAttributes.ATTR_HTTP_RESPONSE_STATUS_CODE, response.status);
 
+    const knownGenAiOperation = isKnownGenAiOperation(operationId);
+    const responseContentType = response.headers.get("content-type");
     const isStreamResponse =
+      knownGenAiOperation &&
       !response.bodyUsed &&
-      response.headers.get("content-type")?.includes("text/event-stream");
+      responseContentType?.toLowerCase().includes("text/event-stream") === true;
 
     if (isStreamResponse && response.body) {
       return createTracedStreamResponse(response, span, tracer, operationId);
     }
 
-    const clonedResponse = response.clone();
-    try {
-      const responseData = await clonedResponse.json();
-      enrichSpanFromResponse(
-        tracer,
-        span,
-        operationId,
-        responseData as Record<string, unknown>
-      );
-    } catch {
-      // Ignore parse errors
+    if (
+      knownGenAiOperation &&
+      !response.bodyUsed &&
+      isJsonContentType(responseContentType)
+    ) {
+      const clonedResponse = response.clone();
+      try {
+        const responseData = await clonedResponse.json();
+        enrichSpanFromResponse(
+          tracer,
+          span,
+          operationId,
+          responseData as Record<string, unknown>
+        );
+      } catch {
+        // Ignore parse errors
+      }
     }
     endSpan(span);
 
@@ -559,30 +592,51 @@ function createTracedStreamResponse(
   const originalBody = response.body!;
   const chunks: string[] = [];
   const decoder = new TextDecoder();
+  const reader = originalBody.getReader();
+  let finalized = false;
 
-  const tracedStream = new ReadableStream<Uint8Array>({
-    async start(controller) {
-      const reader = originalBody.getReader();
-      try {
-        while (true) {
+  const finalize = (): void => {
+    if (finalized) {
+      return;
+    }
+    const remaining = decoder.decode();
+    if (remaining) {
+      chunks.push(remaining);
+    }
+    finalized = true;
+    finalizeStreamSpan(chunks, span, tracer, operationId);
+  };
+
+  const tracedStream = new ReadableStream<Uint8Array>(
+    {
+      async pull(controller) {
+        try {
           const { done, value } = await reader.read();
           if (done) {
-            finalizeStreamSpan(chunks, span, tracer, operationId);
+            finalize();
             controller.close();
-            break;
+            return;
           }
+
           chunks.push(decoder.decode(value, { stream: true }));
           controller.enqueue(value);
+        } catch (err) {
+          finalize();
+          controller.error(err);
+          try {
+            await reader.cancel(err);
+          } catch {
+            // Ignore cancellation errors from already-failed streams.
+          }
         }
-      } catch (err) {
-        finalizeStreamSpan(chunks, span, tracer, operationId);
-        controller.error(err);
-      }
+      },
+      async cancel(reason) {
+        finalize();
+        await reader.cancel(reason);
+      },
     },
-    cancel() {
-      finalizeStreamSpan(chunks, span, tracer, operationId);
-    },
-  });
+    { highWaterMark: 0 }
+  );
 
   return new Response(tracedStream, {
     status: response.status,
