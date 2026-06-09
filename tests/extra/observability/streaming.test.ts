@@ -43,6 +43,18 @@ describe("parseSseChunks", () => {
     expect(result[0].choices[0].delta.content).toBe("hello");
   });
 
+  test("normalizes nullable optional fields without dropping first content chunk", () => {
+    const firstChunk = chunk({ role: "assistant", content: "Bonjour" });
+    firstChunk["usage"] = null;
+    firstChunk["object"] = null;
+    const choice = (firstChunk["choices"] as Array<Record<string, unknown>>)[0]!;
+    delete choice["finish_reason"];
+
+    const result = parseSseChunks(toSse([firstChunk, chunk({ content: " monde" })]));
+
+    expect(result.map((c) => c.choices[0].delta.content)).toEqual(["Bonjour", " monde"]);
+  });
+
   test("skips invalid json", () => {
     expect(parseSseChunks("data: {invalid}\n\ndata: [DONE]\n\n")).toEqual([]);
   });

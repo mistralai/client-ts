@@ -35,6 +35,36 @@ type AccumulatedChoice = {
   finish_reason: string;
 };
 
+function normalizeCompletionChunkPayload(payload: string): string {
+  const parsed = JSON.parse(payload) as unknown;
+  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+    return payload;
+  }
+
+  const chunk = parsed as Record<string, unknown>;
+
+  // Python accepts null for these optional fields; the TS schema expects omission.
+  for (const field of ["object", "created", "usage"]) {
+    if (chunk[field] === null) {
+      delete chunk[field];
+    }
+  }
+
+  const choices = chunk["choices"];
+  if (Array.isArray(choices)) {
+    for (const choice of choices) {
+      if (typeof choice === "object" && choice !== null && !Array.isArray(choice)) {
+        const choiceObj = choice as Record<string, unknown>;
+        if (!("finish_reason" in choiceObj)) {
+          choiceObj["finish_reason"] = null;
+        }
+      }
+    }
+  }
+
+  return JSON.stringify(chunk);
+}
+
 /**
  * Parse raw SSE text into a list of typed CompletionChunk models.
  *
@@ -54,7 +84,7 @@ export function parseSseChunks(rawSseText: string): CompletionChunk[] {
       continue;
     }
     try {
-      const result = completionChunkFromJSON(payload);
+      const result = completionChunkFromJSON(normalizeCompletionChunkPayload(payload));
       if (result.ok) {
         chunks.push(result.value);
       }
