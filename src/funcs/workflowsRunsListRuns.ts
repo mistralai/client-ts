@@ -105,9 +105,16 @@ async function $do(
   const path = pathToFunc("/v1/workflows/runs")();
 
   const query = encodeFormQuery({
+    "deployment_name": payload?.deployment_name,
+    "end_time_after": payload?.end_time_after,
+    "end_time_before": payload?.end_time_before,
     "next_page_token": payload?.next_page_token,
+    "order": payload?.order,
     "page_size": payload?.page_size,
     "search": payload?.search,
+    "sort_by": payload?.sort_by,
+    "start_time_after": payload?.start_time_after,
+    "start_time_before": payload?.start_time_before,
     "status": payload?.status,
     "user_id": payload?.user_id,
     "workflow_identifier": payload?.workflow_identifier,

@@ -98,7 +98,12 @@ async function $do(
 
   const query = encodeFormQuery({
     "active_only": payload?.active_only,
+    "cursor": payload?.cursor,
+    "is_hardened": payload?.is_hardened,
+    "limit": payload?.limit,
+    "search": payload?.search,
     "workflow_name": payload?.workflow_name,
+    "workspace_id": payload?.workspace_id,
   });
 
   const headers = new Headers(compactMap({

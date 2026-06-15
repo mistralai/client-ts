@@ -8,6 +8,7 @@ import { workflowsSchedulesGetSchedules } from "../funcs/workflowsSchedulesGetSc
 import { workflowsSchedulesPauseSchedule } from "../funcs/workflowsSchedulesPauseSchedule.js";
 import { workflowsSchedulesResumeSchedule } from "../funcs/workflowsSchedulesResumeSchedule.js";
 import { workflowsSchedulesScheduleWorkflow } from "../funcs/workflowsSchedulesScheduleWorkflow.js";
+import { workflowsSchedulesTriggerSchedule } from "../funcs/workflowsSchedulesTriggerSchedule.js";
 import { workflowsSchedulesUnscheduleWorkflow } from "../funcs/workflowsSchedulesUnscheduleWorkflow.js";
 import { workflowsSchedulesUpdateSchedule } from "../funcs/workflowsSchedulesUpdateSchedule.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -118,6 +119,21 @@ export class Schedules extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(workflowsSchedulesResumeSchedule(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Trigger Schedule
+   */
+  async triggerSchedule(
+    request:
+      operations.TriggerScheduleV1WorkflowsSchedulesScheduleIdTriggerPostRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(workflowsSchedulesTriggerSchedule(
       this,
       request,
       options,

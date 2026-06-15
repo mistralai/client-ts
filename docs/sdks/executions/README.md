@@ -18,6 +18,8 @@
 * [getWorkflowExecutionTraceSummary](#getworkflowexecutiontracesummary) - Get Workflow Execution Trace Summary
 * [getWorkflowExecutionTraceEvents](#getworkflowexecutiontraceevents) - Get Workflow Execution Trace Events
 * [stream](#stream) - Stream
+* [getWorkflowExecutionLogs](#getworkflowexecutionlogs) - Get Workflow Execution Logs
+* [streamWorkflowExecutionLogs](#streamworkflowexecutionlogs) - Stream Workflow Execution Logs
 
 ## getWorkflowExecution
 
@@ -1081,6 +1083,166 @@ run();
 ### Response
 
 **Promise\<[EventStream<operations.StreamV1WorkflowsExecutionsExecutionIdStreamGetResponseBody>](../../models/.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## getWorkflowExecutionLogs
+
+Retrieve logs for a workflow execution from Dora.
+
+First page sets the window via `after`/`before` (default: execution start through now, both
+widened by a margin so the bounds still prune partitions); later pages pass `cursor`, which
+carries both the window and the sort order (so `after`/`before`/`order` are then ignored —
+the order is fixed at the first page so a client can't flip direction mid-pagination).
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get_workflow_execution_logs" method="get" path="/v1/workflows/executions/{execution_id}/logs" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.workflows.executions.getWorkflowExecutionLogs({
+    executionId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { workflowsExecutionsGetWorkflowExecutionLogs } from "@mistralai/mistralai/funcs/workflowsExecutionsGetWorkflowExecutionLogs.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await workflowsExecutionsGetWorkflowExecutionLogs(mistral, {
+    executionId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workflowsExecutionsGetWorkflowExecutionLogs failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetWorkflowExecutionLogsRequest](../../models/operations/getworkflowexecutionlogsrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.ExecutionLogSearchResponse](../../models/components/executionlogsearchresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## streamWorkflowExecutionLogs
+
+Stream logs for a workflow execution via SSE.
+
+If `last_event_id` is set it resumes from that cursor and takes precedence over `after`;
+otherwise `after` sets a fresh stream's start point (omit both to tail from the execution start).
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="stream_workflow_execution_logs" method="get" path="/v1/workflows/executions/{execution_id}/logs/stream" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.workflows.executions.streamWorkflowExecutionLogs({
+    executionId: "<id>",
+  });
+
+  for await (const event of result) {
+    console.log(event);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { workflowsExecutionsStreamWorkflowExecutionLogs } from "@mistralai/mistralai/funcs/workflowsExecutionsStreamWorkflowExecutionLogs.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await workflowsExecutionsStreamWorkflowExecutionLogs(mistral, {
+    executionId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
+    console.log(event);
+  }
+  } else {
+    console.log("workflowsExecutionsStreamWorkflowExecutionLogs failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.StreamWorkflowExecutionLogsRequest](../../models/operations/streamworkflowexecutionlogsrequest.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[EventStream<operations.StreamWorkflowExecutionLogsResponseBody>](../../models/.md)\>**
 
 ### Errors
 

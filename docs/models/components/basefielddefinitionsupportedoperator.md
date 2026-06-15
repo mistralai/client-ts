@@ -1,11 +1,11 @@
-# SupportedOperator
+# BaseFieldDefinitionSupportedOperator
 
 ## Example Usage
 
 ```typescript
-import { SupportedOperator } from "@mistralai/mistralai/models/components";
+import { BaseFieldDefinitionSupportedOperator } from "@mistralai/mistralai/models/components";
 
-let value: SupportedOperator = "eq";
+let value: BaseFieldDefinitionSupportedOperator = "lte";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```

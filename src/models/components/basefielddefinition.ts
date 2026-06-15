@@ -23,7 +23,7 @@ export const BaseFieldDefinitionType = {
 } as const;
 export type BaseFieldDefinitionType = OpenEnum<typeof BaseFieldDefinitionType>;
 
-export const SupportedOperator = {
+export const BaseFieldDefinitionSupportedOperator = {
   Lt: "lt",
   Lte: "lte",
   Gt: "gt",
@@ -44,14 +44,16 @@ export const SupportedOperator = {
   Excludes: "excludes",
   LenEq: "len_eq",
 } as const;
-export type SupportedOperator = OpenEnum<typeof SupportedOperator>;
+export type BaseFieldDefinitionSupportedOperator = OpenEnum<
+  typeof BaseFieldDefinitionSupportedOperator
+>;
 
 export type BaseFieldDefinition = {
   name: string;
   label: string;
   type: BaseFieldDefinitionType;
   group?: string | null | undefined;
-  supportedOperators: Array<SupportedOperator>;
+  supportedOperators: Array<BaseFieldDefinitionSupportedOperator>;
 };
 
 /** @internal */
@@ -61,10 +63,10 @@ export const BaseFieldDefinitionType$inboundSchema: z.ZodType<
 > = openEnums.inboundSchema(BaseFieldDefinitionType);
 
 /** @internal */
-export const SupportedOperator$inboundSchema: z.ZodType<
-  SupportedOperator,
+export const BaseFieldDefinitionSupportedOperator$inboundSchema: z.ZodType<
+  BaseFieldDefinitionSupportedOperator,
   unknown
-> = openEnums.inboundSchema(SupportedOperator);
+> = openEnums.inboundSchema(BaseFieldDefinitionSupportedOperator);
 
 /** @internal */
 export const BaseFieldDefinition$inboundSchema: z.ZodType<
@@ -75,7 +77,9 @@ export const BaseFieldDefinition$inboundSchema: z.ZodType<
   label: z.string(),
   type: BaseFieldDefinitionType$inboundSchema,
   group: z.nullable(z.string()).optional(),
-  supported_operators: z.array(SupportedOperator$inboundSchema),
+  supported_operators: z.array(
+    BaseFieldDefinitionSupportedOperator$inboundSchema,
+  ),
 }).transform((v) => {
   return remap$(v, {
     "supported_operators": "supportedOperators",

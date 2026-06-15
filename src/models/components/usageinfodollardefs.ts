@@ -9,6 +9,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  CompletionTokensDetails,
+  CompletionTokensDetails$inboundSchema,
+} from "./completiontokensdetails.js";
+import {
   PromptTokensDetails,
   PromptTokensDetails$inboundSchema,
 } from "./prompttokensdetails.js";
@@ -20,6 +24,7 @@ export type UsageInfoDollarDefs = {
   completionTokens?: number | null | undefined;
   requestCount?: number | null | undefined;
   promptTokensDetails?: PromptTokensDetails | null | undefined;
+  completionTokensDetails?: CompletionTokensDetails | null | undefined;
   promptTokenDetails?: PromptTokensDetails | null | undefined;
   numCachedTokens?: number | null | undefined;
 };
@@ -36,6 +41,8 @@ export const UsageInfoDollarDefs$inboundSchema: z.ZodType<
   request_count: z.nullable(z.int()).optional(),
   prompt_tokens_details: z.nullable(PromptTokensDetails$inboundSchema)
     .optional(),
+  completion_tokens_details: z.nullable(CompletionTokensDetails$inboundSchema)
+    .optional(),
   prompt_token_details: z.nullable(PromptTokensDetails$inboundSchema)
     .optional(),
   num_cached_tokens: z.nullable(z.int()).optional(),
@@ -47,6 +54,7 @@ export const UsageInfoDollarDefs$inboundSchema: z.ZodType<
     "completion_tokens": "completionTokens",
     "request_count": "requestCount",
     "prompt_tokens_details": "promptTokensDetails",
+    "completion_tokens_details": "completionTokensDetails",
     "prompt_token_details": "promptTokenDetails",
     "num_cached_tokens": "numCachedTokens",
   });

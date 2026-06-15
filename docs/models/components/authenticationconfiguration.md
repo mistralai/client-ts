@@ -7,7 +7,7 @@ import { AuthenticationConfiguration } from "@mistralai/mistralai/models/compone
 
 let value: AuthenticationConfiguration = {
   name: "<value>",
-  authenticationType: "bearer",
+  authenticationType: "none",
   scope: "system",
 };
 ```
@@ -19,4 +19,5 @@ let value: AuthenticationConfiguration = {
 | `name`                                                                                         | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `authenticationType`                                                                           | [components.OutboundAuthenticationType](../../models/components/outboundauthenticationtype.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `scope`                                                                                        | [components.ConsumerType](../../models/components/consumertype.md)                             | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `status`                                                                                       | [components.CredentialsStatus](../../models/components/credentialsstatus.md)                   | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `isDefault`                                                                                    | *boolean*                                                                                      | :heavy_minus_sign:                                                                             | N/A                                                                                            |

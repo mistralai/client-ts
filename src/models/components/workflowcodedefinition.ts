@@ -47,6 +47,10 @@ export type WorkflowCodeDefinition = {
    */
   enforceDeterminism: boolean;
   /**
+   * Whether the workflow must run associated to a user's identity
+   */
+  onBehalfOf: boolean;
+  /**
    * Maximum total execution time including retries and continue-as-new
    */
   executionTimeout?: number | undefined;
@@ -67,6 +71,7 @@ export const WorkflowCodeDefinition$inboundSchema: z.ZodType<
   queries: z.array(QueryDefinition$inboundSchema).optional(),
   updates: z.array(UpdateDefinition$inboundSchema).optional(),
   enforce_determinism: z.boolean().default(false),
+  on_behalf_of: z.boolean().default(false),
   execution_timeout: z.number().optional(),
   plugin_metadata: z.nullable(z.record(z.string(), z.any())).optional(),
 }).transform((v) => {
@@ -74,6 +79,7 @@ export const WorkflowCodeDefinition$inboundSchema: z.ZodType<
     "input_schema": "inputSchema",
     "output_schema": "outputSchema",
     "enforce_determinism": "enforceDeterminism",
+    "on_behalf_of": "onBehalfOf",
     "execution_timeout": "executionTimeout",
     "plugin_metadata": "pluginMetadata",
   });

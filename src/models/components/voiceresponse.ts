@@ -8,10 +8,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  VoiceAppearance,
-  VoiceAppearance$inboundSchema,
-} from "./voiceappearance.js";
 
 /**
  * Schema for voice response
@@ -25,11 +21,11 @@ export type VoiceResponse = {
   tags?: Array<string> | null | undefined;
   color?: string | null | undefined;
   description?: string | null | undefined;
-  appearance?: VoiceAppearance | null | undefined;
   retentionNotice: number;
   id: string;
   createdAt: Date;
   userId: string | null;
+  trimmedSeconds?: number | null | undefined;
 };
 
 /** @internal */
@@ -43,16 +39,17 @@ export const VoiceResponse$inboundSchema: z.ZodType<VoiceResponse, unknown> = z
     tags: z.nullable(z.array(z.string())).optional(),
     color: z.nullable(z.string()).optional(),
     description: z.nullable(z.string()).optional(),
-    appearance: z.nullable(VoiceAppearance$inboundSchema).optional(),
     retention_notice: z.int().default(30),
     id: z.string(),
     created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
     user_id: z.nullable(z.string()),
+    trimmed_seconds: z.nullable(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "retention_notice": "retentionNotice",
       "created_at": "createdAt",
       "user_id": "userId",
+      "trimmed_seconds": "trimmedSeconds",
     });
   });
 
