@@ -11,6 +11,7 @@ export const EncodedPayloadOptions = {
   Offloaded: "offloaded",
   Encrypted: "encrypted",
   EncryptedPartial: "encrypted-partial",
+  Compressed: "compressed",
 } as const;
 export type EncodedPayloadOptions = OpenEnum<typeof EncodedPayloadOptions>;
 

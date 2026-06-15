@@ -8,6 +8,7 @@ import { workflowsExecutionsBatchTerminateWorkflowExecutions } from "../funcs/wo
 import { workflowsExecutionsCancelWorkflowExecution } from "../funcs/workflowsExecutionsCancelWorkflowExecution.js";
 import { workflowsExecutionsGetWorkflowExecution } from "../funcs/workflowsExecutionsGetWorkflowExecution.js";
 import { workflowsExecutionsGetWorkflowExecutionHistory } from "../funcs/workflowsExecutionsGetWorkflowExecutionHistory.js";
+import { workflowsExecutionsGetWorkflowExecutionLogs } from "../funcs/workflowsExecutionsGetWorkflowExecutionLogs.js";
 import { workflowsExecutionsGetWorkflowExecutionTraceEvents } from "../funcs/workflowsExecutionsGetWorkflowExecutionTraceEvents.js";
 import { workflowsExecutionsGetWorkflowExecutionTraceOtel } from "../funcs/workflowsExecutionsGetWorkflowExecutionTraceOtel.js";
 import { workflowsExecutionsGetWorkflowExecutionTraceSummary } from "../funcs/workflowsExecutionsGetWorkflowExecutionTraceSummary.js";
@@ -15,6 +16,7 @@ import { workflowsExecutionsQueryWorkflowExecution } from "../funcs/workflowsExe
 import { workflowsExecutionsResetWorkflow } from "../funcs/workflowsExecutionsResetWorkflow.js";
 import { workflowsExecutionsSignalWorkflowExecution } from "../funcs/workflowsExecutionsSignalWorkflowExecution.js";
 import { workflowsExecutionsStream } from "../funcs/workflowsExecutionsStream.js";
+import { workflowsExecutionsStreamWorkflowExecutionLogs } from "../funcs/workflowsExecutionsStreamWorkflowExecutionLogs.js";
 import { workflowsExecutionsTerminateWorkflowExecution } from "../funcs/workflowsExecutionsTerminateWorkflowExecution.js";
 import { workflowsExecutionsUpdateWorkflowExecution } from "../funcs/workflowsExecutionsUpdateWorkflowExecution.js";
 import { EventStream } from "../lib/event-streams.js";
@@ -226,6 +228,48 @@ export class Executions extends ClientSDK {
     >
   > {
     return unwrapAsync(workflowsExecutionsStream(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Workflow Execution Logs
+   *
+   * @remarks
+   * Retrieve logs for a workflow execution from Dora.
+   *
+   * First page sets the window via `after`/`before` (default: execution start through now, both
+   * widened by a margin so the bounds still prune partitions); later pages pass `cursor`, which
+   * carries both the window and the sort order (so `after`/`before`/`order` are then ignored —
+   * the order is fixed at the first page so a client can't flip direction mid-pagination).
+   */
+  async getWorkflowExecutionLogs(
+    request: operations.GetWorkflowExecutionLogsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ExecutionLogSearchResponse> {
+    return unwrapAsync(workflowsExecutionsGetWorkflowExecutionLogs(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Stream Workflow Execution Logs
+   *
+   * @remarks
+   * Stream logs for a workflow execution via SSE.
+   *
+   * If `last_event_id` is set it resumes from that cursor and takes precedence over `after`;
+   * otherwise `after` sets a fresh stream's start point (omit both to tail from the execution start).
+   */
+  async streamWorkflowExecutionLogs(
+    request: operations.StreamWorkflowExecutionLogsRequest,
+    options?: RequestOptions,
+  ): Promise<EventStream<operations.StreamWorkflowExecutionLogsResponseBody>> {
+    return unwrapAsync(workflowsExecutionsStreamWorkflowExecutionLogs(
       this,
       request,
       options,

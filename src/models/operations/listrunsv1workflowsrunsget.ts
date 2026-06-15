@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
@@ -18,13 +19,39 @@ export type ListRunsV1WorkflowsRunsGetStatus =
   | components.WorkflowExecutionStatus
   | Array<components.WorkflowExecutionStatus>;
 
+/**
+ * Field to sort by
+ */
+export const SortBy = {
+  StartTime: "start_time",
+  EndTime: "end_time",
+} as const;
+/**
+ * Field to sort by
+ */
+export type SortBy = ClosedEnum<typeof SortBy>;
+
+/**
+ * Sort direction
+ */
+export const ListRunsV1WorkflowsRunsGetOrder = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * Sort direction
+ */
+export type ListRunsV1WorkflowsRunsGetOrder = ClosedEnum<
+  typeof ListRunsV1WorkflowsRunsGetOrder
+>;
+
 export type ListRunsV1WorkflowsRunsGetRequest = {
   /**
    * Filter by workflow name or id
    */
   workflowIdentifier?: string | null | undefined;
   /**
-   * Search by workflow name, display name or id
+   * Search by workflow name, display name, or ID
    */
   search?: string | null | undefined;
   /**
@@ -35,6 +62,34 @@ export type ListRunsV1WorkflowsRunsGetRequest = {
     | Array<components.WorkflowExecutionStatus>
     | null
     | undefined;
+  /**
+   * Filter by deployment name
+   */
+  deploymentName?: string | null | undefined;
+  /**
+   * Field to sort by
+   */
+  sortBy?: SortBy | null | undefined;
+  /**
+   * Sort direction
+   */
+  order?: ListRunsV1WorkflowsRunsGetOrder | undefined;
+  /**
+   * Include runs with start_time >= value
+   */
+  startTimeAfter?: Date | null | undefined;
+  /**
+   * Include runs with start_time <= value
+   */
+  startTimeBefore?: Date | null | undefined;
+  /**
+   * Include runs with end_time >= value. Running executions (no end_time) are excluded; use the status filter to include them.
+   */
+  endTimeAfter?: Date | null | undefined;
+  /**
+   * Include runs with end_time <= value. Running executions (no end_time) are excluded; use the status filter to include them.
+   */
+  endTimeBefore?: Date | null | undefined;
   /**
    * Filter by user id. Use 'current' to filter by the authenticated user
    */
@@ -76,10 +131,25 @@ export function listRunsV1WorkflowsRunsGetStatusToJSON(
 }
 
 /** @internal */
+export const SortBy$outboundSchema: z.ZodEnum<typeof SortBy> = z.enum(SortBy);
+
+/** @internal */
+export const ListRunsV1WorkflowsRunsGetOrder$outboundSchema: z.ZodEnum<
+  typeof ListRunsV1WorkflowsRunsGetOrder
+> = z.enum(ListRunsV1WorkflowsRunsGetOrder);
+
+/** @internal */
 export type ListRunsV1WorkflowsRunsGetRequest$Outbound = {
   workflow_identifier?: string | null | undefined;
   search?: string | null | undefined;
   status?: string | Array<string> | null | undefined;
+  deployment_name?: string | null | undefined;
+  sort_by?: string | null | undefined;
+  order: string;
+  start_time_after?: string | null | undefined;
+  start_time_before?: string | null | undefined;
+  end_time_after?: string | null | undefined;
+  end_time_before?: string | null | undefined;
   user_id?: string | null | undefined;
   page_size: number;
   next_page_token?: string | null | undefined;
@@ -98,12 +168,28 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
       z.array(components.WorkflowExecutionStatus$outboundSchema),
     ]),
   ).optional(),
+  deploymentName: z.nullable(z.string()).optional(),
+  sortBy: z.nullable(SortBy$outboundSchema).optional(),
+  order: ListRunsV1WorkflowsRunsGetOrder$outboundSchema.default("desc"),
+  startTimeAfter: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
+  startTimeBefore: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
+  endTimeAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  endTimeBefore: z.nullable(z.date().transform(v => v.toISOString()))
+    .optional(),
   userId: z.nullable(z.string()).optional(),
   pageSize: z.int().default(50),
   nextPageToken: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     workflowIdentifier: "workflow_identifier",
+    deploymentName: "deployment_name",
+    sortBy: "sort_by",
+    startTimeAfter: "start_time_after",
+    startTimeBefore: "start_time_before",
+    endTimeAfter: "end_time_after",
+    endTimeBefore: "end_time_before",
     userId: "user_id",
     pageSize: "page_size",
     nextPageToken: "next_page_token",

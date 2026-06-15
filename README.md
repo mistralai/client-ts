@@ -401,6 +401,31 @@ We have dedicated SDKs for the following providers:
 * [update](docs/sdks/judges/README.md#update) - Update a judge
 * [judgeConversation](docs/sdks/judges/README.md#judgeconversation) - Run a saved judge on a conversation
 
+### [Beta.Observability.Logs](docs/sdks/logs/README.md)
+
+* [search](docs/sdks/logs/README.md#search) - Search logs
+* [list](docs/sdks/logs/README.md#list) - Get log field definitions
+* [fetchOptions](docs/sdks/logs/README.md#fetchoptions) - Get options for a log field
+
+### [Beta.Observability.Spans](docs/sdks/spans/README.md)
+
+* [searchSpans](docs/sdks/spans/README.md#searchspans) - Search spans
+* [searchSpanEvaluations](docs/sdks/spans/README.md#searchspanevaluations) - Search span evaluations
+* [searchLatestSpanEvaluations](docs/sdks/spans/README.md#searchlatestspanevaluations) - Search latest span evaluations
+* [listSpanFields](docs/sdks/spans/README.md#listspanfields) - Get span field definitions
+* [listSpanEvalFields](docs/sdks/spans/README.md#listspanevalfields) - Get span evaluation field definitions
+* [fetchSpanFieldOptions](docs/sdks/spans/README.md#fetchspanfieldoptions) - Get options for a span field
+* [fetchSpanEvalFieldOptions](docs/sdks/spans/README.md#fetchspanevalfieldoptions) - Get options for a span evaluation field
+
+### [Beta.Observability.Traces](docs/sdks/traces/README.md)
+
+* [search](docs/sdks/traces/README.md#search) - Search traces
+* [getTraceFields](docs/sdks/traces/README.md#gettracefields) - Get trace field definitions
+* [getTraceById](docs/sdks/traces/README.md#gettracebyid) - Get trace by id
+* [getTraceSpans](docs/sdks/traces/README.md#gettracespans) - Get trace spans
+* [fetchOptions](docs/sdks/traces/README.md#fetchoptions) - Get options for a trace field
+* [getSpanById](docs/sdks/traces/README.md#getspanbyid) - Get span by id
+
 ### [Beta.Rag.IngestionPipelineConfigurations](docs/sdks/ingestionpipelineconfigurations/README.md)
 
 * [list](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
@@ -508,6 +533,8 @@ We have dedicated SDKs for the following providers:
 * [getWorkflowExecutionTraceSummary](docs/sdks/executions/README.md#getworkflowexecutiontracesummary) - Get Workflow Execution Trace Summary
 * [getWorkflowExecutionTraceEvents](docs/sdks/executions/README.md#getworkflowexecutiontraceevents) - Get Workflow Execution Trace Events
 * [stream](docs/sdks/executions/README.md#stream) - Stream
+* [getWorkflowExecutionLogs](docs/sdks/executions/README.md#getworkflowexecutionlogs) - Get Workflow Execution Logs
+* [streamWorkflowExecutionLogs](docs/sdks/executions/README.md#streamworkflowexecutionlogs) - Stream Workflow Execution Logs
 
 #### [Workflows.Metrics](docs/sdks/metrics/README.md)
 
@@ -528,6 +555,7 @@ We have dedicated SDKs for the following providers:
 * [updateSchedule](docs/sdks/schedules/README.md#updateschedule) - Update Schedule
 * [pauseSchedule](docs/sdks/schedules/README.md#pauseschedule) - Pause Schedule
 * [resumeSchedule](docs/sdks/schedules/README.md#resumeschedule) - Resume Schedule
+* [triggerSchedule](docs/sdks/schedules/README.md#triggerschedule) - Trigger Schedule
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -764,8 +792,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 130 of 197 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 41 of 197 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 133 of 216 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 216 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1052,6 +1080,22 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityJudgesJudgeConversation`](docs/sdks/judges/README.md#judgeconversation) - Run a saved judge on a conversation
 - [`betaObservabilityJudgesList`](docs/sdks/judges/README.md#list) - Get judges with optional filtering and search
 - [`betaObservabilityJudgesUpdate`](docs/sdks/judges/README.md#update) - Update a judge
+- [`betaObservabilityLogsFetchOptions`](docs/sdks/logs/README.md#fetchoptions) - Get options for a log field
+- [`betaObservabilityLogsList`](docs/sdks/logs/README.md#list) - Get log field definitions
+- [`betaObservabilityLogsSearch`](docs/sdks/logs/README.md#search) - Search logs
+- [`betaObservabilitySpansFetchSpanEvalFieldOptions`](docs/sdks/spans/README.md#fetchspanevalfieldoptions) - Get options for a span evaluation field
+- [`betaObservabilitySpansFetchSpanFieldOptions`](docs/sdks/spans/README.md#fetchspanfieldoptions) - Get options for a span field
+- [`betaObservabilitySpansListSpanEvalFields`](docs/sdks/spans/README.md#listspanevalfields) - Get span evaluation field definitions
+- [`betaObservabilitySpansListSpanFields`](docs/sdks/spans/README.md#listspanfields) - Get span field definitions
+- [`betaObservabilitySpansSearchLatestSpanEvaluations`](docs/sdks/spans/README.md#searchlatestspanevaluations) - Search latest span evaluations
+- [`betaObservabilitySpansSearchSpanEvaluations`](docs/sdks/spans/README.md#searchspanevaluations) - Search span evaluations
+- [`betaObservabilitySpansSearchSpans`](docs/sdks/spans/README.md#searchspans) - Search spans
+- [`betaObservabilityTracesFetchOptions`](docs/sdks/traces/README.md#fetchoptions) - Get options for a trace field
+- [`betaObservabilityTracesGetSpanById`](docs/sdks/traces/README.md#getspanbyid) - Get span by id
+- [`betaObservabilityTracesGetTraceById`](docs/sdks/traces/README.md#gettracebyid) - Get trace by id
+- [`betaObservabilityTracesGetTraceFields`](docs/sdks/traces/README.md#gettracefields) - Get trace field definitions
+- [`betaObservabilityTracesGetTraceSpans`](docs/sdks/traces/README.md#gettracespans) - Get trace spans
+- [`betaObservabilityTracesSearch`](docs/sdks/traces/README.md#search) - Search traces
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
@@ -1099,6 +1143,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsExecutionsCancelWorkflowExecution`](docs/sdks/executions/README.md#cancelworkflowexecution) - Cancel Workflow Execution
 - [`workflowsExecutionsGetWorkflowExecution`](docs/sdks/executions/README.md#getworkflowexecution) - Get Workflow Execution
 - [`workflowsExecutionsGetWorkflowExecutionHistory`](docs/sdks/executions/README.md#getworkflowexecutionhistory) - Get Workflow Execution History
+- [`workflowsExecutionsGetWorkflowExecutionLogs`](docs/sdks/executions/README.md#getworkflowexecutionlogs) - Get Workflow Execution Logs
 - [`workflowsExecutionsGetWorkflowExecutionTraceEvents`](docs/sdks/executions/README.md#getworkflowexecutiontraceevents) - Get Workflow Execution Trace Events
 - [`workflowsExecutionsGetWorkflowExecutionTraceOtel`](docs/sdks/executions/README.md#getworkflowexecutiontraceotel) - Get Workflow Execution Trace Otel
 - [`workflowsExecutionsGetWorkflowExecutionTraceSummary`](docs/sdks/executions/README.md#getworkflowexecutiontracesummary) - Get Workflow Execution Trace Summary
@@ -1106,6 +1151,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsExecutionsResetWorkflow`](docs/sdks/executions/README.md#resetworkflow) - Reset Workflow
 - [`workflowsExecutionsSignalWorkflowExecution`](docs/sdks/executions/README.md#signalworkflowexecution) - Signal Workflow Execution
 - [`workflowsExecutionsStream`](docs/sdks/executions/README.md#stream) - Stream
+- [`workflowsExecutionsStreamWorkflowExecutionLogs`](docs/sdks/executions/README.md#streamworkflowexecutionlogs) - Stream Workflow Execution Logs
 - [`workflowsExecutionsTerminateWorkflowExecution`](docs/sdks/executions/README.md#terminateworkflowexecution) - Terminate Workflow Execution
 - [`workflowsExecutionsUpdateWorkflowExecution`](docs/sdks/executions/README.md#updateworkflowexecution) - Update Workflow Execution
 - [`workflowsGetWorkflow`](docs/sdks/workflows/README.md#getworkflow) - Get Workflow
@@ -1121,6 +1167,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsSchedulesPauseSchedule`](docs/sdks/schedules/README.md#pauseschedule) - Pause Schedule
 - [`workflowsSchedulesResumeSchedule`](docs/sdks/schedules/README.md#resumeschedule) - Resume Schedule
 - [`workflowsSchedulesScheduleWorkflow`](docs/sdks/schedules/README.md#scheduleworkflow) - Schedule Workflow
+- [`workflowsSchedulesTriggerSchedule`](docs/sdks/schedules/README.md#triggerschedule) - Trigger Schedule
 - [`workflowsSchedulesUnscheduleWorkflow`](docs/sdks/schedules/README.md#unscheduleworkflow) - Unschedule Workflow
 - [`workflowsSchedulesUpdateSchedule`](docs/sdks/schedules/README.md#updateschedule) - Update Schedule
 - [`workflowsUnarchiveWorkflow`](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow

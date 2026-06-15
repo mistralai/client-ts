@@ -14,7 +14,6 @@ export const ObservabilityErrorCode = {
   AuthForbiddenNotWorkspaceAdmin: "AUTH_FORBIDDEN_NOT_WORKSPACE_ADMIN",
   AuthForbiddenWorkspaceNotFound: "AUTH_FORBIDDEN_WORKSPACE_NOT_FOUND",
   AuthForbiddenRoleNotFound: "AUTH_FORBIDDEN_ROLE_NOT_FOUND",
-  AuthForbiddenOrgNotWhitelisted: "AUTH_FORBIDDEN_ORG_NOT_WHITELISTED",
   AuthUnauthorized: "AUTH_UNAUTHORIZED",
   FeatureNotSupported: "FEATURE_NOT_SUPPORTED",
   FieldsBadRequest: "FIELDS_BAD_REQUEST",
