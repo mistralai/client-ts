@@ -1,6 +1,7 @@
 import { Hooks } from "./types.js";
 import { CustomUserAgentHook } from "./custom_user_agent.js";
 import { DeprecationWarningHook } from "./deprecation_warning.js";
+import { TracingHook } from "./tracing.js";
 
 /*
  * This file is only ever generated once on the first generation and then is free to be modified.
@@ -19,4 +20,9 @@ export function initHooks(hooks: Hooks) {
     const deprecationWarningHook = new DeprecationWarningHook();
     hooks.registerAfterSuccessHook(deprecationWarningHook)
 
+    const tracingHook = new TracingHook();
+    hooks.registerBeforeRequestHook(tracingHook)
+    hooks.registerAfterSuccessHook(tracingHook)
+    hooks.registerAfterErrorHook(tracingHook)
+    hooks.registerSDKInitHook(tracingHook)
 }
