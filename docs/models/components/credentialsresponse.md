@@ -9,7 +9,7 @@ let value: CredentialsResponse = {
   credentials: [
     {
       name: "<value>",
-      authenticationType: "none",
+      authenticationType: "github_app",
       scope: "user",
     },
   ],

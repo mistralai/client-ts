@@ -13,5 +13,5 @@ let value: EncodedPayloadOptions = "encrypted";
 ## Values
 
 ```typescript
-"offloaded" | "encrypted" | "encrypted-partial" | Unrecognized<string>
+"offloaded" | "encrypted" | "encrypted-partial" | "compressed" | Unrecognized<string>
 ```

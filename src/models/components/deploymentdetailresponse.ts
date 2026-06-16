@@ -31,6 +31,10 @@ export type DeploymentDetailResponse = {
    */
   isActive: boolean;
   /**
+   * Whether the deployment has at least one authorized credential
+   */
+  isHardened: boolean;
+  /**
    * When the deployment was first registered
    */
   createdAt: Date;
@@ -56,6 +60,7 @@ export const DeploymentDetailResponse$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   is_active: z.boolean(),
+  is_hardened: z.boolean().default(false),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   location: z.nullable(DeploymentLocation$inboundSchema).optional(),
@@ -63,6 +68,7 @@ export const DeploymentDetailResponse$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "is_active": "isActive",
+    "is_hardened": "isHardened",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
   });

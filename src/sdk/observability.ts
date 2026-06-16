@@ -8,6 +8,9 @@ import { Campaigns } from "./campaigns.js";
 import { ChatCompletionEvents } from "./chatcompletionevents.js";
 import { Datasets } from "./datasets.js";
 import { Judges } from "./judges.js";
+import { Logs } from "./logs.js";
+import { Spans } from "./spans.js";
+import { Traces } from "./traces.js";
 
 export class Observability extends ClientSDK {
   private _chatCompletionEvents?: ChatCompletionEvents;
@@ -30,5 +33,20 @@ export class Observability extends ClientSDK {
   private _datasets?: Datasets;
   get datasets(): Datasets {
     return (this._datasets ??= new Datasets(this._options));
+  }
+
+  private _logs?: Logs;
+  get logs(): Logs {
+    return (this._logs ??= new Logs(this._options));
+  }
+
+  private _traces?: Traces;
+  get traces(): Traces {
+    return (this._traces ??= new Traces(this._options));
+  }
+
+  private _spans?: Spans;
+  get spans(): Spans {
+    return (this._spans ??= new Spans(this._options));
   }
 }

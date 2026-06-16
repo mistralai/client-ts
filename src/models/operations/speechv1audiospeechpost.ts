@@ -14,7 +14,7 @@ import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Data =
+export type SpeechV1AudioSpeechPostData =
   | components.SpeechStreamAudioDelta
   | components.SpeechStreamDone
   | discriminatedUnionTypes.Unknown<"type">;
@@ -45,21 +45,21 @@ export type SpeechV1AudioSpeechPostResponse =
   | EventStream<SpeechStreamEvents>;
 
 /** @internal */
-export const Data$inboundSchema: z.ZodType<Data, unknown> = discriminatedUnion(
-  "type",
-  {
-    ["speech.audio.delta"]: components.SpeechStreamAudioDelta$inboundSchema,
-    ["speech.audio.done"]: components.SpeechStreamDone$inboundSchema,
-  },
-);
+export const SpeechV1AudioSpeechPostData$inboundSchema: z.ZodType<
+  SpeechV1AudioSpeechPostData,
+  unknown
+> = discriminatedUnion("type", {
+  ["speech.audio.delta"]: components.SpeechStreamAudioDelta$inboundSchema,
+  ["speech.audio.done"]: components.SpeechStreamDone$inboundSchema,
+});
 
-export function dataFromJSON(
+export function speechV1AudioSpeechPostDataFromJSON(
   jsonString: string,
-): SafeParseResult<Data, SDKValidationError> {
+): SafeParseResult<SpeechV1AudioSpeechPostData, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Data$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data' from JSON`,
+    (x) => SpeechV1AudioSpeechPostData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SpeechV1AudioSpeechPostData' from JSON`,
   );
 }
 

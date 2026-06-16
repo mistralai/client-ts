@@ -109,8 +109,14 @@ async function $do(
     "archived": payload?.archived,
     "available_in_chat_assistant": payload?.available_in_chat_assistant,
     "cursor": payload?.cursor,
+    "deployment_name": payload?.deployment_name,
+    "deployment_status": payload?.deployment_status,
     "include_shared": payload?.include_shared,
     "limit": payload?.limit,
+    "order": payload?.order,
+    "sort_by": payload?.sort_by,
+    "status": payload?.status,
+    "tags": payload?.tags,
   });
 
   const headers = new Headers(compactMap({

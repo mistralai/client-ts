@@ -5,17 +5,28 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import * as components from "../components/index.js";
 
 export type ConnectorGetAuthUrlV1Request = {
   appReturnUrl?: string | null | undefined;
+  /**
+   * Auth method type to use for the authorization URL. Required when the connector supports multiple interactive auth methods; otherwise the sole method is selected automatically. Use this to pick a specific method (e.g. 'oauth2' vs 'github_app').
+   */
+  methodType?: components.OutboundAuthenticationType | undefined;
   credentialsName?: string | null | undefined;
+  /**
+   * Only valid with method_type=oauth2. When true, returns a GitHub App installation URL (https://github.com/apps/<slug>/installations/new) if the connector has the proper configuration The Github application needs to have 'Request user authorization (OAuth) during installation' enabled to perform the proper auth loop.
+   */
+  githubInstallationLink?: boolean | undefined;
   connectorIdOrName: string;
 };
 
 /** @internal */
 export type ConnectorGetAuthUrlV1Request$Outbound = {
   app_return_url?: string | null | undefined;
+  method_type?: string | undefined;
   credentials_name?: string | null | undefined;
+  github_installation_link: boolean;
   connector_id_or_name: string;
 };
 
@@ -25,12 +36,16 @@ export const ConnectorGetAuthUrlV1Request$outboundSchema: z.ZodType<
   ConnectorGetAuthUrlV1Request
 > = z.object({
   appReturnUrl: z.nullable(z.string()).optional(),
+  methodType: components.OutboundAuthenticationType$outboundSchema.optional(),
   credentialsName: z.nullable(z.string()).optional(),
+  githubInstallationLink: z.boolean().default(false),
   connectorIdOrName: z.string(),
 }).transform((v) => {
   return remap$(v, {
     appReturnUrl: "app_return_url",
+    methodType: "method_type",
     credentialsName: "credentials_name",
+    githubInstallationLink: "github_installation_link",
     connectorIdOrName: "connector_id_or_name",
   });
 });
