@@ -8,34 +8,123 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AuthenticationConfiguration,
+  AuthenticationConfiguration$inboundSchema,
+} from "./authenticationconfiguration.js";
+import {
+  ConnectionPreference,
+  ConnectionPreference$inboundSchema,
+} from "./connectionpreference.js";
+import {
+  ConnectorLocale,
+  ConnectorLocale$inboundSchema,
+} from "./connectorlocale.js";
+import {
+  ConnectorProtocol,
+  ConnectorProtocol$inboundSchema,
+} from "./connectorprotocol.js";
 import { ConnectorTool, ConnectorTool$inboundSchema } from "./connectortool.js";
+import { MCPServerCard, MCPServerCard$inboundSchema } from "./mcpservercard.js";
+import {
+  PublicAuthenticationMethod,
+  PublicAuthenticationMethod$inboundSchema,
+} from "./publicauthenticationmethod.js";
+import {
+  PublicConnectionConfig,
+  PublicConnectionConfig$inboundSchema,
+} from "./publicconnectionconfig.js";
+import {
+  PublicExecutionEnv,
+  PublicExecutionEnv$inboundSchema,
+} from "./publicexecutionenv.js";
+import { ResourceType, ResourceType$inboundSchema } from "./resourcetype.js";
+import {
+  ResourceVisibility,
+  ResourceVisibility$inboundSchema,
+} from "./resourcevisibility.js";
 
 export type Connector = {
   id: string;
   name: string;
+  title?: string | null | undefined;
   description: string;
   createdAt: Date;
   modifiedAt: Date;
   server?: string | null | undefined;
-  authType?: string | null | undefined;
+  protocol?: ConnectorProtocol | undefined;
+  iconUrl?: string | null | undefined;
+  serverCard?: MCPServerCard | null | undefined;
+  ownerId?: string | null | undefined;
+  ownerType: ResourceType;
+  visibility: ResourceVisibility;
+  locale?: ConnectorLocale | null | undefined;
+  systemPrompt?: string | null | undefined;
+  supportedAuthMethods?: Array<PublicAuthenticationMethod> | null | undefined;
+  connectionPreferences?: Array<ConnectionPreference> | null | undefined;
+  connectionCredentials?: Array<AuthenticationConfiguration> | null | undefined;
+  active?: boolean | null | undefined;
+  privateToolExecution: boolean;
+  mistral: boolean;
+  isAuthenticated?: boolean | null | undefined;
   tools?: Array<ConnectorTool> | null | undefined;
+  systemPromptRoute?: string | null | undefined;
+  connectionConfig?: PublicConnectionConfig | null | undefined;
+  executionEnv?: PublicExecutionEnv | null | undefined;
 };
 
 /** @internal */
 export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
   id: z.string(),
   name: z.string(),
+  title: z.nullable(z.string()).optional(),
   description: z.string(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   modified_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   server: z.nullable(z.string()).optional(),
-  auth_type: z.nullable(z.string()).optional(),
+  protocol: ConnectorProtocol$inboundSchema.optional(),
+  icon_url: z.nullable(z.string()).optional(),
+  server_card: z.nullable(MCPServerCard$inboundSchema).optional(),
+  owner_id: z.nullable(z.string()).optional(),
+  owner_type: ResourceType$inboundSchema,
+  visibility: ResourceVisibility$inboundSchema,
+  locale: z.nullable(ConnectorLocale$inboundSchema).optional(),
+  system_prompt: z.nullable(z.string()).optional(),
+  supported_auth_methods: z.nullable(
+    z.array(PublicAuthenticationMethod$inboundSchema),
+  ).optional(),
+  connection_preferences: z.nullable(
+    z.array(ConnectionPreference$inboundSchema),
+  ).optional(),
+  connection_credentials: z.nullable(
+    z.array(AuthenticationConfiguration$inboundSchema),
+  ).optional(),
+  active: z.nullable(z.boolean()).optional(),
+  private_tool_execution: z.boolean(),
+  mistral: z.boolean().default(false),
+  is_authenticated: z.nullable(z.boolean()).optional(),
   tools: z.nullable(z.array(ConnectorTool$inboundSchema)).optional(),
+  system_prompt_route: z.nullable(z.string()).optional(),
+  connection_config: z.nullable(PublicConnectionConfig$inboundSchema)
+    .optional(),
+  execution_env: z.nullable(PublicExecutionEnv$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
     "modified_at": "modifiedAt",
-    "auth_type": "authType",
+    "icon_url": "iconUrl",
+    "server_card": "serverCard",
+    "owner_id": "ownerId",
+    "owner_type": "ownerType",
+    "system_prompt": "systemPrompt",
+    "supported_auth_methods": "supportedAuthMethods",
+    "connection_preferences": "connectionPreferences",
+    "connection_credentials": "connectionCredentials",
+    "private_tool_execution": "privateToolExecution",
+    "is_authenticated": "isAuthenticated",
+    "system_prompt_route": "systemPromptRoute",
+    "connection_config": "connectionConfig",
+    "execution_env": "executionEnv",
   });
 });
 

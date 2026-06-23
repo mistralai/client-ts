@@ -12,10 +12,30 @@ import {
   AssistantMessage$outboundSchema,
 } from "./assistantmessage.js";
 import {
+  CodeInterpreterTool,
+  CodeInterpreterTool$Outbound,
+  CodeInterpreterTool$outboundSchema,
+} from "./codeinterpretertool.js";
+import {
+  CustomConnector,
+  CustomConnector$Outbound,
+  CustomConnector$outboundSchema,
+} from "./customconnector.js";
+import {
+  DocumentLibraryTool,
+  DocumentLibraryTool$Outbound,
+  DocumentLibraryTool$outboundSchema,
+} from "./documentlibrarytool.js";
+import {
   GuardrailConfig,
   GuardrailConfig$Outbound,
   GuardrailConfig$outboundSchema,
 } from "./guardrailconfig.js";
+import {
+  ImageGenerationTool,
+  ImageGenerationTool$Outbound,
+  ImageGenerationTool$outboundSchema,
+} from "./imagegenerationtool.js";
 import {
   MistralPromptMode,
   MistralPromptMode$outboundSchema,
@@ -59,6 +79,16 @@ import {
   UserMessage$Outbound,
   UserMessage$outboundSchema,
 } from "./usermessage.js";
+import {
+  WebSearchPremiumTool,
+  WebSearchPremiumTool$Outbound,
+  WebSearchPremiumTool$outboundSchema,
+} from "./websearchpremiumtool.js";
+import {
+  WebSearchTool,
+  WebSearchTool$Outbound,
+  WebSearchTool$outboundSchema,
+} from "./websearchtool.js";
 
 /**
  * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
@@ -70,6 +100,15 @@ export type ChatCompletionStreamRequestMessage =
   | SystemMessage
   | ToolMessage
   | UserMessage;
+
+export type ChatCompletionStreamRequestTool =
+  | (Tool & { type: "function" })
+  | WebSearchTool
+  | WebSearchPremiumTool
+  | CodeInterpreterTool
+  | ImageGenerationTool
+  | DocumentLibraryTool
+  | CustomConnector;
 
 /**
  * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
@@ -88,7 +127,7 @@ export type ChatCompletionStreamRequest = {
   /**
    * Nucleus sampling, where the model considers the results of the tokens with `top_p` probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or `temperature` but not both.
    */
-  topP?: number | undefined;
+  topP?: number | null | undefined;
   /**
    * The maximum number of tokens to generate in the completion. The token count of your prompt plus `max_tokens` cannot exceed the model's context length.
    */
@@ -97,7 +136,7 @@ export type ChatCompletionStreamRequest = {
   /**
    * Stop generation if this token is detected. Or if one of these tokens is detected when providing an array
    */
-  stop?: string | Array<string> | undefined;
+  stop?: string | Array<string> | null | undefined;
   /**
    * The seed to use for random sampling. If set, different calls will generate deterministic results.
    */
@@ -119,7 +158,18 @@ export type ChatCompletionStreamRequest = {
   /**
    * A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.
    */
-  tools?: Array<Tool> | null | undefined;
+  tools?:
+    | Array<
+      | (Tool & { type: "function" })
+      | WebSearchTool
+      | WebSearchPremiumTool
+      | CodeInterpreterTool
+      | ImageGenerationTool
+      | DocumentLibraryTool
+      | CustomConnector
+    >
+    | null
+    | undefined;
   /**
    * Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `any` or `required` means the model must call one or more tools. Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
    */
@@ -127,11 +177,11 @@ export type ChatCompletionStreamRequest = {
   /**
    * The `presence_penalty` determines how much the model penalizes the repetition of words or phrases. A higher presence penalty encourages the model to use a wider variety of words and phrases, making the output more diverse and creative.
    */
-  presencePenalty?: number | undefined;
+  presencePenalty?: number | null | undefined;
   /**
    * The `frequency_penalty` penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
    */
-  frequencyPenalty?: number | undefined;
+  frequencyPenalty?: number | null | undefined;
   /**
    * Number of completions to return for each request, input tokens are only billed once.
    */
@@ -150,6 +200,7 @@ export type ChatCompletionStreamRequest = {
    */
   promptMode?: MistralPromptMode | null | undefined;
   guardrails?: Array<GuardrailConfig> | null | undefined;
+  promptCacheKey?: string | null | undefined;
   /**
    * Whether to inject a safety prompt before all conversations.
    */
@@ -206,6 +257,40 @@ export function chatCompletionStreamRequestMessageToJSON(
 }
 
 /** @internal */
+export type ChatCompletionStreamRequestTool$Outbound =
+  | (Tool$Outbound & { type: "function" })
+  | WebSearchTool$Outbound
+  | WebSearchPremiumTool$Outbound
+  | CodeInterpreterTool$Outbound
+  | ImageGenerationTool$Outbound
+  | DocumentLibraryTool$Outbound
+  | CustomConnector$Outbound;
+
+/** @internal */
+export const ChatCompletionStreamRequestTool$outboundSchema: z.ZodType<
+  ChatCompletionStreamRequestTool$Outbound,
+  ChatCompletionStreamRequestTool
+> = z.union([
+  Tool$outboundSchema.and(z.object({ type: z.literal("function") })),
+  WebSearchTool$outboundSchema,
+  WebSearchPremiumTool$outboundSchema,
+  CodeInterpreterTool$outboundSchema,
+  ImageGenerationTool$outboundSchema,
+  DocumentLibraryTool$outboundSchema,
+  CustomConnector$outboundSchema,
+]);
+
+export function chatCompletionStreamRequestToolToJSON(
+  chatCompletionStreamRequestTool: ChatCompletionStreamRequestTool,
+): string {
+  return JSON.stringify(
+    ChatCompletionStreamRequestTool$outboundSchema.parse(
+      chatCompletionStreamRequestTool,
+    ),
+  );
+}
+
+/** @internal */
 export type ChatCompletionStreamRequestToolChoice$Outbound =
   | ToolChoice$Outbound
   | string;
@@ -230,10 +315,10 @@ export function chatCompletionStreamRequestToolChoiceToJSON(
 export type ChatCompletionStreamRequest$Outbound = {
   model: string;
   temperature?: number | null | undefined;
-  top_p?: number | undefined;
+  top_p?: number | null | undefined;
   max_tokens?: number | null | undefined;
   stream: boolean;
-  stop?: string | Array<string> | undefined;
+  stop?: string | Array<string> | null | undefined;
   random_seed?: number | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   messages: Array<
@@ -243,16 +328,28 @@ export type ChatCompletionStreamRequest$Outbound = {
     | UserMessage$Outbound
   >;
   response_format?: ResponseFormat$Outbound | undefined;
-  tools?: Array<Tool$Outbound> | null | undefined;
+  tools?:
+    | Array<
+      | (Tool$Outbound & { type: "function" })
+      | WebSearchTool$Outbound
+      | WebSearchPremiumTool$Outbound
+      | CodeInterpreterTool$Outbound
+      | ImageGenerationTool$Outbound
+      | DocumentLibraryTool$Outbound
+      | CustomConnector$Outbound
+    >
+    | null
+    | undefined;
   tool_choice?: ToolChoice$Outbound | string | undefined;
-  presence_penalty?: number | undefined;
-  frequency_penalty?: number | undefined;
+  presence_penalty?: number | null | undefined;
+  frequency_penalty?: number | null | undefined;
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
   parallel_tool_calls?: boolean | undefined;
   reasoning_effort?: string | null | undefined;
   prompt_mode?: string | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
+  prompt_cache_key?: string | null | undefined;
   safe_prompt?: boolean | undefined;
 };
 
@@ -263,10 +360,10 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string(),
   temperature: z.nullable(z.number()).optional(),
-  topP: z.number().optional(),
+  topP: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.int()).optional(),
   stream: z.boolean().default(true),
-  stop: smartUnion([z.string(), z.array(z.string())]).optional(),
+  stop: z.nullable(smartUnion([z.string(), z.array(z.string())])).optional(),
   randomSeed: z.nullable(z.int()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   messages: z.array(
@@ -280,19 +377,32 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
     ]),
   ),
   responseFormat: ResponseFormat$outboundSchema.optional(),
-  tools: z.nullable(z.array(Tool$outboundSchema)).optional(),
+  tools: z.nullable(
+    z.array(
+      z.union([
+        Tool$outboundSchema.and(z.object({ type: z.literal("function") })),
+        WebSearchTool$outboundSchema,
+        WebSearchPremiumTool$outboundSchema,
+        CodeInterpreterTool$outboundSchema,
+        ImageGenerationTool$outboundSchema,
+        DocumentLibraryTool$outboundSchema,
+        CustomConnector$outboundSchema,
+      ]),
+    ),
+  ).optional(),
   toolChoice: smartUnion([
     ToolChoice$outboundSchema,
     ToolChoiceEnum$outboundSchema,
   ]).optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
   n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
   reasoningEffort: z.nullable(ReasoningEffort$outboundSchema).optional(),
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
+  promptCacheKey: z.nullable(z.string()).optional(),
   safePrompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -306,6 +416,7 @@ export const ChatCompletionStreamRequest$outboundSchema: z.ZodType<
     parallelToolCalls: "parallel_tool_calls",
     reasoningEffort: "reasoning_effort",
     promptMode: "prompt_mode",
+    promptCacheKey: "prompt_cache_key",
     safePrompt: "safe_prompt",
   });
 });

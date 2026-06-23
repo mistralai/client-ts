@@ -20,10 +20,12 @@ export type VoiceResponse = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   color?: string | null | undefined;
+  description?: string | null | undefined;
   retentionNotice: number;
   id: string;
   createdAt: Date;
   userId: string | null;
+  trimmedSeconds?: number | null | undefined;
 };
 
 /** @internal */
@@ -36,15 +38,18 @@ export const VoiceResponse$inboundSchema: z.ZodType<VoiceResponse, unknown> = z
     age: z.nullable(z.int()).optional(),
     tags: z.nullable(z.array(z.string())).optional(),
     color: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
     retention_notice: z.int().default(30),
     id: z.string(),
     created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
     user_id: z.nullable(z.string()),
+    trimmed_seconds: z.nullable(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "retention_notice": "retentionNotice",
       "created_at": "createdAt",
       "user_id": "userId",
+      "trimmed_seconds": "trimmedSeconds",
     });
   });
 

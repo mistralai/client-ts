@@ -9,8 +9,21 @@ import { Connectors } from "./connectors.js";
 import { Conversations } from "./conversations.js";
 import { Libraries } from "./libraries.js";
 import { Observability } from "./observability.js";
+import { Prompts } from "./prompts.js";
+import { Rag } from "./rag.js";
+import { Skills } from "./skills.js";
 
 export class Beta extends ClientSDK {
+  private _prompts?: Prompts;
+  get prompts(): Prompts {
+    return (this._prompts ??= new Prompts(this._options));
+  }
+
+  private _skills?: Skills;
+  get skills(): Skills {
+    return (this._skills ??= new Skills(this._options));
+  }
+
   private _conversations?: Conversations;
   get conversations(): Conversations {
     return (this._conversations ??= new Conversations(this._options));
@@ -34,5 +47,10 @@ export class Beta extends ClientSDK {
   private _connectors?: Connectors;
   get connectors(): Connectors {
     return (this._connectors ??= new Connectors(this._options));
+  }
+
+  private _rag?: Rag;
+  get rag(): Rag {
+    return (this._rag ??= new Rag(this._options));
   }
 }

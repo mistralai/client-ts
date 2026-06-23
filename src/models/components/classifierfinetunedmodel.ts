@@ -31,7 +31,7 @@ export type ClassifierFineTunedModel = {
   capabilities: FineTunedModelCapabilities;
   maxContextLength: number;
   aliases?: Array<string> | undefined;
-  job: string;
+  job?: string | null | undefined;
   classifierTargets: Array<ClassifierTargetResult>;
   modelType: "classifier";
 };
@@ -54,7 +54,7 @@ export const ClassifierFineTunedModel$inboundSchema: z.ZodType<
   capabilities: FineTunedModelCapabilities$inboundSchema,
   max_context_length: z.int().default(32768),
   aliases: z.array(z.string()).optional(),
-  job: z.string(),
+  job: z.nullable(z.string()).optional(),
   classifier_targets: z.array(ClassifierTargetResult$inboundSchema),
   model_type: z.literal("classifier"),
 }).transform((v) => {

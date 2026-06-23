@@ -7,11 +7,11 @@ import { ListDocumentsResponse } from "@mistralai/mistralai/models/components";
 
 let value: ListDocumentsResponse = {
   pagination: {
-    totalItems: 18197,
-    totalPages: 44117,
-    currentPage: 500067,
-    pageSize: 656047,
-    hasMore: false,
+    totalItems: 973564,
+    totalPages: 468946,
+    currentPage: 763380,
+    pageSize: 156750,
+    hasMore: true,
   },
   data: [],
 };

@@ -105,6 +105,9 @@ async function $do(
 
   const query = encodeFormQuery({
     "app_return_url": payload.app_return_url,
+    "credentials_name": payload.credentials_name,
+    "github_installation_link": payload.github_installation_link,
+    "method_type": payload.method_type,
   });
 
   const headers = new Headers(compactMap({
@@ -139,7 +142,7 @@ async function $do(
     query: query,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

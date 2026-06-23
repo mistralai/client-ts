@@ -7,22 +7,22 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ConnectorGetV1Request = {
+  connectorIdOrName: string;
+  /**
+   * Fetch the user-level data associated with the connector (e.g. connection credentials).
+   */
+  fetchUserData?: boolean | undefined;
   /**
    * Fetch the customer data associated with the connector (e.g. customer secrets / config).
    */
   fetchCustomerData?: boolean | undefined;
-  /**
-   * Fetch the general connection secrets associated with the connector.
-   */
-  fetchConnectionSecrets?: boolean | undefined;
-  connectorIdOrName: string;
 };
 
 /** @internal */
 export type ConnectorGetV1Request$Outbound = {
-  fetch_customer_data: boolean;
-  fetch_connection_secrets: boolean;
   connector_id_or_name: string;
+  fetch_user_data: boolean;
+  fetch_customer_data: boolean;
 };
 
 /** @internal */
@@ -30,14 +30,14 @@ export const ConnectorGetV1Request$outboundSchema: z.ZodType<
   ConnectorGetV1Request$Outbound,
   ConnectorGetV1Request
 > = z.object({
-  fetchCustomerData: z.boolean().default(false),
-  fetchConnectionSecrets: z.boolean().default(false),
   connectorIdOrName: z.string(),
+  fetchUserData: z.boolean().default(false),
+  fetchCustomerData: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
-    fetchCustomerData: "fetch_customer_data",
-    fetchConnectionSecrets: "fetch_connection_secrets",
     connectorIdOrName: "connector_id_or_name",
+    fetchUserData: "fetch_user_data",
+    fetchCustomerData: "fetch_customer_data",
   });
 });
 

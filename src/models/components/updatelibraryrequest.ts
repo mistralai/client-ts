@@ -6,13 +6,13 @@
 import * as z from "zod/v4";
 
 export type UpdateLibraryRequest = {
-  name?: string | null | undefined;
+  name?: string | undefined;
   description?: string | null | undefined;
 };
 
 /** @internal */
 export type UpdateLibraryRequest$Outbound = {
-  name?: string | null | undefined;
+  name?: string | undefined;
   description?: string | null | undefined;
 };
 
@@ -21,7 +21,7 @@ export const UpdateLibraryRequest$outboundSchema: z.ZodType<
   UpdateLibraryRequest$Outbound,
   UpdateLibraryRequest
 > = z.object({
-  name: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
   description: z.nullable(z.string()).optional(),
 });
 

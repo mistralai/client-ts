@@ -17,6 +17,7 @@ export type VoiceCreateRequest = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   color?: string | null | undefined;
+  description?: string | null | undefined;
   retentionNotice?: number | undefined;
   /**
    * Base64-encoded audio file
@@ -37,6 +38,7 @@ export type VoiceCreateRequest$Outbound = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   color?: string | null | undefined;
+  description?: string | null | undefined;
   retention_notice: number;
   sample_audio: string;
   sample_filename?: string | null | undefined;
@@ -54,6 +56,7 @@ export const VoiceCreateRequest$outboundSchema: z.ZodType<
   age: z.nullable(z.int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   color: z.nullable(z.string()).optional(),
+  description: z.nullable(z.string()).optional(),
   retentionNotice: z.int().default(30),
   sampleAudio: z.string(),
   sampleFilename: z.nullable(z.string()).optional(),

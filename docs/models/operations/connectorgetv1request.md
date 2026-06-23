@@ -6,7 +6,7 @@
 import { ConnectorGetV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: ConnectorGetV1Request = {
-  connectorIdOrName: "<value>",
+  connectorIdOrName: "1f32c738-f3bd-4166-b30b-6be5e8ac0f8d",
 };
 ```
 
@@ -14,6 +14,6 @@ let value: ConnectorGetV1Request = {
 
 | Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `fetchCustomerData`                                                                     | *boolean*                                                                               | :heavy_minus_sign:                                                                      | Fetch the customer data associated with the connector (e.g. customer secrets / config). |
-| `fetchConnectionSecrets`                                                                | *boolean*                                                                               | :heavy_minus_sign:                                                                      | Fetch the general connection secrets associated with the connector.                     |
 | `connectorIdOrName`                                                                     | *string*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `fetchUserData`                                                                         | *boolean*                                                                               | :heavy_minus_sign:                                                                      | Fetch the user-level data associated with the connector (e.g. connection credentials).  |
+| `fetchCustomerData`                                                                     | *boolean*                                                                               | :heavy_minus_sign:                                                                      | Fetch the customer data associated with the connector (e.g. customer secrets / config). |

@@ -35,7 +35,6 @@ import {
   ImageGenerationTool,
   ImageGenerationTool$inboundSchema,
 } from "./imagegenerationtool.js";
-import { MetadataDict, MetadataDict$inboundSchema } from "./metadatadict.js";
 import {
   WebSearchPremiumTool,
   WebSearchPremiumTool$inboundSchema,
@@ -81,7 +80,7 @@ export type Agent = {
   name: string;
   description?: string | null | undefined;
   handoffs?: Array<string> | null | undefined;
-  metadata?: MetadataDict | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   object: "agent";
   id: string;
   version: number;
@@ -133,7 +132,7 @@ export const Agent$inboundSchema: z.ZodType<Agent, unknown> = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
   handoffs: z.nullable(z.array(z.string())).optional(),
-  metadata: z.nullable(MetadataDict$inboundSchema).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   object: z.literal("agent").default("agent"),
   id: z.string(),
   version: z.int(),

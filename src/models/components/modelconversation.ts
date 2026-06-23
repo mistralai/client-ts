@@ -35,7 +35,6 @@ import {
   ImageGenerationTool,
   ImageGenerationTool$inboundSchema,
 } from "./imagegenerationtool.js";
-import { MetadataDict, MetadataDict$inboundSchema } from "./metadatadict.js";
 import {
   WebSearchPremiumTool,
   WebSearchPremiumTool$inboundSchema,
@@ -88,7 +87,7 @@ export type ModelConversation = {
   /**
    * Custom metadata for the conversation.
    */
-  metadata?: MetadataDict | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   object: "conversation";
   id: string;
   createdAt: Date;
@@ -139,7 +138,7 @@ export const ModelConversation$inboundSchema: z.ZodType<
   guardrails: z.nullable(z.array(GuardrailConfig$inboundSchema)).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(MetadataDict$inboundSchema).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   object: z.literal("conversation").default("conversation"),
   id: z.string(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),

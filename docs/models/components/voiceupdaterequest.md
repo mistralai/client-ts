@@ -19,3 +19,4 @@ let value: VoiceUpdateRequest = {};
 | `gender`           | *string*           | :heavy_minus_sign: | N/A                |
 | `age`              | *number*           | :heavy_minus_sign: | N/A                |
 | `tags`             | *string*[]         | :heavy_minus_sign: | N/A                |
+| `description`      | *string*           | :heavy_minus_sign: | N/A                |

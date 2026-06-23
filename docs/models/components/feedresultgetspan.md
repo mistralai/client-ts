@@ -1,0 +1,17 @@
+# FeedResultGetSpan
+
+## Example Usage
+
+```typescript
+import { FeedResultGetSpan } from "@mistralai/mistralai/models/components";
+
+let value: FeedResultGetSpan = {};
+```
+
+## Fields
+
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `results`                                                  | [components.GetSpan](../../models/components/getspan.md)[] | :heavy_minus_sign:                                         | N/A                                                        |
+| `next`                                                     | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
+| `cursor`                                                   | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |

@@ -9,7 +9,6 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { MetadataDict, MetadataDict$inboundSchema } from "./metadatadict.js";
 
 export type AgentConversationAgentVersion = string | number;
 
@@ -25,7 +24,7 @@ export type AgentConversation = {
   /**
    * Custom metadata for the conversation.
    */
-  metadata?: MetadataDict | null | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
   object: "conversation";
   id: string;
   createdAt: Date;
@@ -57,7 +56,7 @@ export const AgentConversation$inboundSchema: z.ZodType<
 > = z.object({
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  metadata: z.nullable(MetadataDict$inboundSchema).optional(),
+  metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   object: z.literal("conversation").default("conversation"),
   id: z.string(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),

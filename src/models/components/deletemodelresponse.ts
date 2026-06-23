@@ -14,11 +14,11 @@ export type DeleteModelResponse = {
    */
   id: string;
   /**
-   * The object type that was deleted
+   * The object type that was deleted.
    */
   object: string;
   /**
-   * The deletion status
+   * The deletion status.
    */
   deleted: boolean;
 };

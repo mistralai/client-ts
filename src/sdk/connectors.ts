@@ -3,12 +3,29 @@
  * @generated-id: 2dda252d574b
  */
 
+import { betaConnectorsActivateForOrganization } from "../funcs/betaConnectorsActivateForOrganization.js";
+import { betaConnectorsActivateForUser } from "../funcs/betaConnectorsActivateForUser.js";
+import { betaConnectorsActivateForWorkspace } from "../funcs/betaConnectorsActivateForWorkspace.js";
 import { betaConnectorsCallTool } from "../funcs/betaConnectorsCallTool.js";
 import { betaConnectorsCreate } from "../funcs/betaConnectorsCreate.js";
+import { betaConnectorsCreateOrUpdateOrganizationCredentials } from "../funcs/betaConnectorsCreateOrUpdateOrganizationCredentials.js";
+import { betaConnectorsCreateOrUpdateUserCredentials } from "../funcs/betaConnectorsCreateOrUpdateUserCredentials.js";
+import { betaConnectorsCreateOrUpdateWorkspaceCredentials } from "../funcs/betaConnectorsCreateOrUpdateWorkspaceCredentials.js";
+import { betaConnectorsDeactivateForOrganization } from "../funcs/betaConnectorsDeactivateForOrganization.js";
+import { betaConnectorsDeactivateForUser } from "../funcs/betaConnectorsDeactivateForUser.js";
+import { betaConnectorsDeactivateForWorkspace } from "../funcs/betaConnectorsDeactivateForWorkspace.js";
 import { betaConnectorsDelete } from "../funcs/betaConnectorsDelete.js";
+import { betaConnectorsDeleteOrganizationCredentials } from "../funcs/betaConnectorsDeleteOrganizationCredentials.js";
+import { betaConnectorsDeleteUserCredentials } from "../funcs/betaConnectorsDeleteUserCredentials.js";
+import { betaConnectorsDeleteWorkspaceCredentials } from "../funcs/betaConnectorsDeleteWorkspaceCredentials.js";
 import { betaConnectorsGet } from "../funcs/betaConnectorsGet.js";
+import { betaConnectorsGetAuthenticationMethods } from "../funcs/betaConnectorsGetAuthenticationMethods.js";
 import { betaConnectorsGetAuthUrl } from "../funcs/betaConnectorsGetAuthUrl.js";
 import { betaConnectorsList } from "../funcs/betaConnectorsList.js";
+import { betaConnectorsListOrganizationCredentials } from "../funcs/betaConnectorsListOrganizationCredentials.js";
+import { betaConnectorsListTools } from "../funcs/betaConnectorsListTools.js";
+import { betaConnectorsListUserCredentials } from "../funcs/betaConnectorsListUserCredentials.js";
+import { betaConnectorsListWorkspaceCredentials } from "../funcs/betaConnectorsListWorkspaceCredentials.js";
 import { betaConnectorsUpdate } from "../funcs/betaConnectorsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -68,6 +85,108 @@ export class Connectors extends ClientSDK {
   }
 
   /**
+   * Activate a connector for an organization.
+   *
+   * @remarks
+   * Enable a connector at the organization level so all members can use it.
+   */
+  async activateForOrganization(
+    request: operations.ConnectorActivateForOrganizationV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsActivateForOrganization(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Deactivate a connector for an organization.
+   *
+   * @remarks
+   * Disable a connector at the organization level.
+   */
+  async deactivateForOrganization(
+    request: operations.ConnectorDeactivateForOrganizationV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeactivateForOrganization(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Activate a connector for a workspace.
+   *
+   * @remarks
+   * Enable a connector at the workspace level so all members of the workspace can use it.
+   */
+  async activateForWorkspace(
+    request: operations.ConnectorActivateForWorkspaceV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsActivateForWorkspace(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Deactivate a connector for a workspace.
+   *
+   * @remarks
+   * Disable a connector at the workspace level.
+   */
+  async deactivateForWorkspace(
+    request: operations.ConnectorDeactivateForWorkspaceV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeactivateForWorkspace(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Activate a connector for the current user.
+   *
+   * @remarks
+   * Enable a connector for the calling user only.
+   */
+  async activateForUser(
+    request: operations.ConnectorActivateForUserV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsActivateForUser(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Deactivate a connector for the current user.
+   *
+   * @remarks
+   * Disable a connector for the calling user only.
+   */
+  async deactivateForUser(
+    request: operations.ConnectorDeactivateForUserV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeactivateForUser(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Call Connector Tool
    *
    * @remarks
@@ -78,6 +197,193 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.ConnectorToolCallResponse> {
     return unwrapAsync(betaConnectorsCallTool(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List tools for a connector.
+   *
+   * @remarks
+   * List all tools available for an MCP connector.
+   */
+  async listTools(
+    request: operations.ConnectorListToolsV1Request,
+    options?: RequestOptions,
+  ): Promise<operations.ResponseConnectorListToolsV1> {
+    return unwrapAsync(betaConnectorsListTools(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get authentication methods for a connector.
+   *
+   * @remarks
+   * Get the authentication schema for a connector. Returns the list of supported authentication methods and their required headers.
+   */
+  async getAuthenticationMethods(
+    request: operations.ConnectorGetAuthenticationMethodsV1Request,
+    options?: RequestOptions,
+  ): Promise<Array<components.PublicAuthenticationMethod>> {
+    return unwrapAsync(betaConnectorsGetAuthenticationMethods(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List organization credentials for a connector.
+   *
+   * @remarks
+   * List all credentials configured at the organization level for a given connector.
+   */
+  async listOrganizationCredentials(
+    request: operations.ConnectorListOrganizationCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.CredentialsResponse> {
+    return unwrapAsync(betaConnectorsListOrganizationCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create or update organization credentials for a connector.
+   *
+   * @remarks
+   * Create or update credentials at the organization level for a given connector.
+   */
+  async createOrUpdateOrganizationCredentials(
+    request: operations.ConnectorCreateOrUpdateOrganizationCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsCreateOrUpdateOrganizationCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List workspace credentials for a connector.
+   *
+   * @remarks
+   * List all credentials configured at the workspace level for a given connector.
+   */
+  async listWorkspaceCredentials(
+    request: operations.ConnectorListWorkspaceCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.CredentialsResponse> {
+    return unwrapAsync(betaConnectorsListWorkspaceCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create or update workspace credentials for a connector.
+   *
+   * @remarks
+   * Create or update credentials at the workspace level for a given connector.
+   */
+  async createOrUpdateWorkspaceCredentials(
+    request: operations.ConnectorCreateOrUpdateWorkspaceCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsCreateOrUpdateWorkspaceCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List user credentials for a connector.
+   *
+   * @remarks
+   * List all credentials configured at the user level for a given connector.
+   */
+  async listUserCredentials(
+    request: operations.ConnectorListUserCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.CredentialsResponse> {
+    return unwrapAsync(betaConnectorsListUserCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create or update user credentials for a connector.
+   *
+   * @remarks
+   * Create or update credentials at the user level for a given connector.
+   */
+  async createOrUpdateUserCredentials(
+    request: operations.ConnectorCreateOrUpdateUserCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsCreateOrUpdateUserCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete organization credentials for a connector.
+   *
+   * @remarks
+   * Delete credentials at the organization level for a given connector.
+   */
+  async deleteOrganizationCredentials(
+    request: operations.ConnectorDeleteOrganizationCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeleteOrganizationCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete workspace credentials for a connector.
+   *
+   * @remarks
+   * Delete credentials at the workspace level for a given connector.
+   */
+  async deleteWorkspaceCredentials(
+    request: operations.ConnectorDeleteWorkspaceCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeleteWorkspaceCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete user credentials for a connector.
+   *
+   * @remarks
+   * Delete credentials at the user level for a given connector.
+   */
+  async deleteUserCredentials(
+    request: operations.ConnectorDeleteUserCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeleteUserCredentials(
       this,
       request,
       options,

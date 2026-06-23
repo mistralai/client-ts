@@ -17,8 +17,14 @@ const value: components.ClassifierFineTunedModel = {
   rootVersion: "<value>",
   archived: true,
   capabilities: {},
-  job: "93fcc6d4-e7f0-4dfb-83e9-852ff99de8fc",
-  classifierTargets: [],
+  classifierTargets: [
+    {
+      name: "<value>",
+      labels: [],
+      weight: 9707.43,
+      lossFunction: "multi_class",
+    },
+  ],
   modelType: "classifier",
 };
 ```
@@ -35,7 +41,6 @@ const value: components.CompletionFineTunedModel = {
   rootVersion: "<value>",
   archived: true,
   capabilities: {},
-  job: "588e2680-7ab9-4c19-adff-6fea248f5c4c",
   modelType: "completion",
 };
 ```

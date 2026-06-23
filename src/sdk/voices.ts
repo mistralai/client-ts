@@ -109,7 +109,7 @@ export class Voices extends ClientSDK {
   async getSampleAudio(
     request: operations.GetVoiceSampleAudioV1AudioVoicesVoiceIdSampleGetRequest,
     options?: RequestOptions,
-  ): Promise<string> {
+  ): Promise<ReadableStream<Uint8Array>> {
     return unwrapAsync(audioVoicesGetSampleAudio(
       this,
       request,

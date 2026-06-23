@@ -11,6 +11,7 @@
 * [get](#get) - Detailed information about a specific Library.
 * [delete](#delete) - Delete a library and all of it's document.
 * [update](#update) - Update a library.
+* [~~librariesUpdateV1~~](#librariesupdatev1) - Update a library. :warning: **Deprecated**
 
 ## list
 
@@ -27,7 +28,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.libraries.list();
+  const result = await mistral.beta.libraries.list({});
 
   console.log(result);
 }
@@ -50,7 +51,7 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaLibrariesList(mistral);
+  const res = await betaLibrariesList(mistral, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -66,6 +67,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.LibrariesListV1Request](../../models/operations/librarieslistv1request.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -76,9 +78,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create
 
@@ -230,7 +233,7 @@ run();
 
 ## delete
 
-Given a library id, deletes it together with all documents that have been uploaded to that library.
+Given a library id, deletes it together with all documents that have been uploaded to that library. Warning: the response will change from 200 (returning the deleted library) to 204 No Content in a future version.
 
 ### Example Usage
 
@@ -308,7 +311,7 @@ Given a library id, you can update the name and description.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="libraries_update_v1" method="put" path="/v1/libraries/{library_id}" -->
+<!-- UsageSnippet language="typescript" operationID="libraries_patch_v1" method="patch" path="/v1/libraries/{library_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -318,7 +321,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.libraries.update({
-    libraryId: "e01880c3-d0b5-4a29-8b1b-abdb8ce917e4",
+    libraryId: "74a30b7a-ba52-49f7-a8a3-7157e1adf565",
     updateLibraryRequest: {},
   });
 
@@ -344,7 +347,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaLibrariesUpdate(mistral, {
-    libraryId: "e01880c3-d0b5-4a29-8b1b-abdb8ce917e4",
+    libraryId: "74a30b7a-ba52-49f7-a8a3-7157e1adf565",
     updateLibraryRequest: {},
   });
   if (res.ok) {
@@ -352,6 +355,84 @@ async function run() {
     console.log(result);
   } else {
     console.log("betaLibrariesUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.LibrariesPatchV1Request](../../models/operations/librariespatchv1request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.Library](../../models/components/library.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## ~~librariesUpdateV1~~
+
+Given a library id, you can update the name and description.
+
+> :warning: **DEPRECATED**: Use the PATCH method instead. This PUT endpoint will be removed in a future version..
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="libraries_update_v1" method="put" path="/v1/libraries/{library_id}" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.libraries.librariesUpdateV1({
+    libraryId: "e01880c3-d0b5-4a29-8b1b-abdb8ce917e4",
+    updateLibraryRequest: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaLibrariesLibrariesUpdateV1 } from "@mistralai/mistralai/funcs/betaLibrariesLibrariesUpdateV1.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaLibrariesLibrariesUpdateV1(mistral, {
+    libraryId: "e01880c3-d0b5-4a29-8b1b-abdb8ce917e4",
+    updateLibraryRequest: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaLibrariesLibrariesUpdateV1 failed:", res.error);
   }
 }
 

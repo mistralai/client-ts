@@ -14,7 +14,6 @@ let value: CompletionFineTunedModel = {
   rootVersion: "<value>",
   archived: true,
   capabilities: {},
-  job: "588e2680-7ab9-4c19-adff-6fea248f5c4c",
   modelType: "completion",
 };
 ```
@@ -36,5 +35,5 @@ let value: CompletionFineTunedModel = {
 | `capabilities`                                                                                 | [components.FineTunedModelCapabilities](../../models/components/finetunedmodelcapabilities.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `maxContextLength`                                                                             | *number*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `aliases`                                                                                      | *string*[]                                                                                     | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `job`                                                                                          | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `job`                                                                                          | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `modelType`                                                                                    | *"completion"*                                                                                 | :heavy_check_mark:                                                                             | N/A                                                                                            |

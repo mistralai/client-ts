@@ -14,6 +14,7 @@ export type VoiceUpdateRequest = {
   gender?: string | null | undefined;
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -23,6 +24,7 @@ export type VoiceUpdateRequest$Outbound = {
   gender?: string | null | undefined;
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -35,6 +37,7 @@ export const VoiceUpdateRequest$outboundSchema: z.ZodType<
   gender: z.nullable(z.string()).optional(),
   age: z.nullable(z.int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
+  description: z.nullable(z.string()).optional(),
 });
 
 export function voiceUpdateRequestToJSON(

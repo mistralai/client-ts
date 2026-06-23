@@ -9,6 +9,9 @@ import { EntityType, EntityType$outboundSchema } from "./entitytype.js";
 import { ShareEnum, ShareEnum$outboundSchema } from "./shareenum.js";
 
 export type SharingRequest = {
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   orgId?: string | null | undefined;
   level: ShareEnum;
   /**

@@ -33,6 +33,10 @@ export type ThinkChunk = {
   type?: "thinking" | undefined;
   thinking: Array<ToolReferenceChunk | TextChunk | ReferenceChunk>;
   /**
+   * Signature to replay some reasoning blocks across turns.
+   */
+  signature?: string | null | undefined;
+  /**
    * Whether the thinking chunk is closed or not. Currently only used for prefixing.
    */
   closed?: boolean | undefined;
@@ -82,6 +86,7 @@ export const ThinkChunk$inboundSchema: z.ZodType<ThinkChunk, unknown> = z
         ReferenceChunk$inboundSchema,
       ]),
     ),
+    signature: z.nullable(z.string()).optional(),
     closed: z.boolean().optional(),
   });
 /** @internal */
@@ -90,6 +95,7 @@ export type ThinkChunk$Outbound = {
   thinking: Array<
     ToolReferenceChunk$Outbound | TextChunk$Outbound | ReferenceChunk$Outbound
   >;
+  signature?: string | null | undefined;
   closed?: boolean | undefined;
 };
 
@@ -106,6 +112,7 @@ export const ThinkChunk$outboundSchema: z.ZodType<
       ReferenceChunk$outboundSchema,
     ]),
   ),
+  signature: z.nullable(z.string()).optional(),
   closed: z.boolean().optional(),
 });
 
