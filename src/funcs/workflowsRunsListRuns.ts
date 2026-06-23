@@ -108,9 +108,11 @@ async function $do(
     "deployment_name": payload?.deployment_name,
     "end_time_after": payload?.end_time_after,
     "end_time_before": payload?.end_time_before,
+    "include_internal": payload?.include_internal,
     "next_page_token": payload?.next_page_token,
     "order": payload?.order,
     "page_size": payload?.page_size,
+    "root_execution_id": payload?.root_execution_id,
     "search": payload?.search,
     "sort_by": payload?.sort_by,
     "start_time_after": payload?.start_time_after,
@@ -152,7 +154,7 @@ async function $do(
     query: query,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [haltIterator(requestRes), { status: "invalid" }];

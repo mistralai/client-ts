@@ -24,6 +24,7 @@ const value: components.ExecutionLogRecord = {
 ```typescript
 const value: components.StreamError = {
   error: "<value>",
+  reason: "<value>",
 };
 ```
 

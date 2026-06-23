@@ -1093,12 +1093,10 @@ run();
 
 ## getWorkflowExecutionLogs
 
-Retrieve logs for a workflow execution from Dora.
+Retrieve logs for a workflow execution.
 
-First page sets the window via `after`/`before` (default: execution start through now, both
-widened by a margin so the bounds still prune partitions); later pages pass `cursor`, which
-carries both the window and the sort order (so `after`/`before`/`order` are then ignored —
-the order is fixed at the first page so a client can't flip direction mid-pagination).
+Use `after`/`before`/`order` on the first request to set the time range and sort order; for
+the next pages pass the `cursor` from the previous response (it remembers the range and order).
 
 ### Example Usage
 
@@ -1174,8 +1172,8 @@ run();
 
 Stream logs for a workflow execution via SSE.
 
-If `last_event_id` is set it resumes from that cursor and takes precedence over `after`;
-otherwise `after` sets a fresh stream's start point (omit both to tail from the execution start).
+Resume cursor comes from the `Last-Event-ID` header or `last_event_id` query param (header wins)
+and takes precedence over `after`; omit all to tail from the execution start.
 
 ### Example Usage
 

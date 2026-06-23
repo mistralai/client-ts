@@ -20,11 +20,13 @@ export type WorkflowRegistration = {
    */
   id: string;
   /**
-   * Deployment ID this registration belongs to
+   * Deprecated. Use deployment_name instead. Will be removed in a future release.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   deploymentId?: string | null | undefined;
   /**
-   * Deprecated. Use deployment_id instead. Will be removed in a future release.
+   * Deprecated. Use deployment_name instead. Will be removed in a future release.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -38,6 +40,10 @@ export type WorkflowRegistration = {
    * Workflow of the workflow registration
    */
   workflow?: Workflow | null | undefined;
+  /**
+   * Name of the deployment this registration belongs to
+   */
+  deploymentName?: string | null | undefined;
   /**
    * Whether the workflow is compatible with chat assistant
    */
@@ -55,12 +61,14 @@ export const WorkflowRegistration$inboundSchema: z.ZodType<
   definition: WorkflowCodeDefinition$inboundSchema,
   workflow_id: z.string(),
   workflow: z.nullable(Workflow$inboundSchema).optional(),
+  deployment_name: z.nullable(z.string()).optional(),
   compatible_with_chat_assistant: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "deployment_id": "deploymentId",
     "task_queue": "taskQueue",
     "workflow_id": "workflowId",
+    "deployment_name": "deploymentName",
     "compatible_with_chat_assistant": "compatibleWithChatAssistant",
   });
 });
