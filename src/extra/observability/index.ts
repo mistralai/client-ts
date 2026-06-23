@@ -4,6 +4,7 @@ export { getRegisteredTracerProvider, registerTracerProvider } from "./provider.
 export {
   configureTelemetry,
   configureTelemetryForHook,
+  getTelemetryTracer,
   MISTRAL_OTLP_TRACES_ENDPOINT_ENV,
   MISTRAL_SDK_TELEMETRY_ENV,
   MISTRAL_TELEMETRY_BASE_URL,
@@ -17,3 +18,5 @@ export {
   type TelemetryProviderMode,
   type TelemetrySetting,
 } from "./telemetry.js";
+
+export type { Tracer, TracerOptions, TracerProvider } from "@opentelemetry/api";
