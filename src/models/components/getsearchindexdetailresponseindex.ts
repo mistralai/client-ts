@@ -6,6 +6,8 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -13,12 +15,31 @@ import {
   GetSearchIndexDetailResponseSchemaModel$inboundSchema,
 } from "./getsearchindexdetailresponseschemamodel.js";
 
+export const GetSearchIndexDetailResponseIndexStatus = {
+  Online: "online",
+  Offline: "offline",
+} as const;
+export type GetSearchIndexDetailResponseIndexStatus = OpenEnum<
+  typeof GetSearchIndexDetailResponseIndexStatus
+>;
+
 export type GetSearchIndexDetailResponseIndex = {
   name: string;
+  creatorId: string;
+  documentCount: number;
+  status: GetSearchIndexDetailResponseIndexStatus;
+  createdAt: Date;
+  modifiedAt: Date;
   vespaVersion: string | null;
   summary: string | null;
   schemas: Array<GetSearchIndexDetailResponseSchemaModel>;
 };
+
+/** @internal */
+export const GetSearchIndexDetailResponseIndexStatus$inboundSchema: z.ZodType<
+  GetSearchIndexDetailResponseIndexStatus,
+  unknown
+> = openEnums.inboundSchema(GetSearchIndexDetailResponseIndexStatus);
 
 /** @internal */
 export const GetSearchIndexDetailResponseIndex$inboundSchema: z.ZodType<
@@ -26,11 +47,20 @@ export const GetSearchIndexDetailResponseIndex$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
+  creator_id: z.string(),
+  document_count: z.int(),
+  status: GetSearchIndexDetailResponseIndexStatus$inboundSchema,
+  created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  modified_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   vespa_version: z.nullable(z.string()),
   summary: z.nullable(z.string()),
   schemas: z.array(GetSearchIndexDetailResponseSchemaModel$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
+    "creator_id": "creatorId",
+    "document_count": "documentCount",
+    "created_at": "createdAt",
+    "modified_at": "modifiedAt",
     "vespa_version": "vespaVersion",
   });
 });

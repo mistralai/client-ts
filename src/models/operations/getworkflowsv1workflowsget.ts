@@ -100,6 +100,10 @@ export type GetWorkflowsV1WorkflowsGetRequest = {
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   activeOnly?: boolean | undefined;
+  /**
+   * Fuzzy search query for workflow name, display name, description, or ID
+   */
+  search?: string | null | undefined;
 };
 
 export type GetWorkflowsV1WorkflowsGetResponse = {
@@ -152,6 +156,7 @@ export type GetWorkflowsV1WorkflowsGetRequest$Outbound = {
   cursor?: string | null | undefined;
   limit: number;
   active_only: boolean;
+  search?: string | null | undefined;
 };
 
 /** @internal */
@@ -176,6 +181,7 @@ export const GetWorkflowsV1WorkflowsGetRequest$outboundSchema: z.ZodType<
   cursor: z.nullable(z.string()).optional(),
   limit: z.int().default(50),
   activeOnly: z.boolean().default(false),
+  search: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     includeShared: "include_shared",

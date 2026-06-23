@@ -114,6 +114,7 @@ async function $do(
     "include_shared": payload?.include_shared,
     "limit": payload?.limit,
     "order": payload?.order,
+    "search": payload?.search,
     "sort_by": payload?.sort_by,
     "status": payload?.status,
     "tags": payload?.tags,

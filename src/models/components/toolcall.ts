@@ -29,14 +29,14 @@ export type ToolCall = {
 /** @internal */
 export const ToolCall$inboundSchema: z.ZodType<ToolCall, unknown> = z.object({
   id: z.string().default("null"),
-  type: ToolTypes$inboundSchema.optional(),
+  type: ToolTypes$inboundSchema.default("function"),
   function: FunctionCall$inboundSchema,
   index: z.int().default(0),
 });
 /** @internal */
 export type ToolCall$Outbound = {
   id: string;
-  type?: string | undefined;
+  type: string;
   function: FunctionCall$Outbound;
   index: number;
 };
@@ -45,7 +45,7 @@ export type ToolCall$Outbound = {
 export const ToolCall$outboundSchema: z.ZodType<ToolCall$Outbound, ToolCall> = z
   .object({
     id: z.string().default("null"),
-    type: ToolTypes$outboundSchema.optional(),
+    type: ToolTypes$outboundSchema.default("function"),
     function: FunctionCall$outboundSchema,
     index: z.int().default(0),
   });

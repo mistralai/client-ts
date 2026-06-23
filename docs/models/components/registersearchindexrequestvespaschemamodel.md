@@ -10,9 +10,11 @@ let value: RegisterSearchIndexRequestVespaSchemaModel = {
   fields: [
     {
       name: "<value>",
-      type: 1,
-      storage: 1,
-      indexType: 1,
+      type: "int",
+      storage: "in_memory",
+      ranking: "timestamp",
+      indexType: "bm25",
+      multidimensional: false,
     },
   ],
   sd: "<value>",

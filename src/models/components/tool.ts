@@ -26,18 +26,18 @@ export type Tool = {
 
 /** @internal */
 export const Tool$inboundSchema: z.ZodType<Tool, unknown> = z.object({
-  type: ToolTypes$inboundSchema.optional(),
+  type: ToolTypes$inboundSchema.default("function"),
   function: FunctionT$inboundSchema,
 });
 /** @internal */
 export type Tool$Outbound = {
-  type?: string | undefined;
+  type: string;
   function: FunctionT$Outbound;
 };
 
 /** @internal */
 export const Tool$outboundSchema: z.ZodType<Tool$Outbound, Tool> = z.object({
-  type: ToolTypes$outboundSchema.optional(),
+  type: ToolTypes$outboundSchema.default("function"),
   function: FunctionT$outboundSchema,
 });
 

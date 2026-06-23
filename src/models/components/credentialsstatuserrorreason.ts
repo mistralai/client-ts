@@ -14,6 +14,10 @@ export const CredentialsStatusErrorReason = {
   UnparsableCredentials: "unparsable credentials",
   YouNeedToReconnect: "you need to reconnect",
   OauthRefreshError: "oauth refresh error",
+  MCPServerUnreachable: "MCP server unreachable",
+  MCPServerTimedOut: "MCP server timed out",
+  MCPServerError: "MCP server error",
+  UnknownError: "unknown error",
 } as const;
 export type CredentialsStatusErrorReason = OpenEnum<
   typeof CredentialsStatusErrorReason

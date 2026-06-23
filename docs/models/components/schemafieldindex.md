@@ -5,13 +5,13 @@
 ```typescript
 import { SchemaFieldIndex } from "@mistralai/mistralai/models/components";
 
-let value: SchemaFieldIndex = 2;
+let value: SchemaFieldIndex = "bm25";
 
-// Open enum: unrecognized values are captured as Unrecognized<number>
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-1 | 2 | 3 | Unrecognized<number>
+"ann" | "bm25" | "attribute" | Unrecognized<string>
 ```
