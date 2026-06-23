@@ -443,6 +443,8 @@ We have dedicated SDKs for the following providers:
 * [getIndexSchemaDetail](docs/sdks/searchindexes/README.md#getindexschemadetail) - Get Index Schema Detail
 * [setSchemaSummary](docs/sdks/searchindexes/README.md#setschemasummary) - Set Schema Summary
 * [getIndexSchemaFile](docs/sdks/searchindexes/README.md#getindexschemafile) - Get Index Schema File
+* [documentLookup](docs/sdks/searchindexes/README.md#documentlookup) - Document Lookup
+* [documentsFetch](docs/sdks/searchindexes/README.md#documentsfetch) - Document Fetch
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -538,6 +540,7 @@ We have dedicated SDKs for the following providers:
 * [batchCancelWorkflowExecutions](docs/sdks/executions/README.md#batchcancelworkflowexecutions) - Batch Cancel Workflow Executions
 * [resetWorkflow](docs/sdks/executions/README.md#resetworkflow) - Reset Workflow
 * [updateWorkflowExecution](docs/sdks/executions/README.md#updateworkflowexecution) - Update Workflow Execution
+* [getWorkflowExecutionTraceInfo](docs/sdks/executions/README.md#getworkflowexecutiontraceinfo) - Get Workflow Execution Trace Info
 * [getWorkflowExecutionTraceOtel](docs/sdks/executions/README.md#getworkflowexecutiontraceotel) - Get Workflow Execution Trace Otel
 * [getWorkflowExecutionTraceSummary](docs/sdks/executions/README.md#getworkflowexecutiontracesummary) - Get Workflow Execution Trace Summary
 * [getWorkflowExecutionTraceEvents](docs/sdks/executions/README.md#getworkflowexecutiontraceevents) - Get Workflow Execution Trace Events
@@ -801,8 +804,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 142 of 225 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 225 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 145 of 228 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 228 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1108,6 +1111,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
+- [`betaRagSearchIndexesDocumentLookup`](docs/sdks/searchindexes/README.md#documentlookup) - Document Lookup
+- [`betaRagSearchIndexesDocumentsFetch`](docs/sdks/searchindexes/README.md#documentsfetch) - Document Fetch
 - [`betaRagSearchIndexesGetIndexDetail`](docs/sdks/searchindexes/README.md#getindexdetail) - Get Index Details
 - [`betaRagSearchIndexesGetIndexSchemaDetail`](docs/sdks/searchindexes/README.md#getindexschemadetail) - Get Index Schema Detail
 - [`betaRagSearchIndexesGetIndexSchemaFile`](docs/sdks/searchindexes/README.md#getindexschemafile) - Get Index Schema File
@@ -1163,6 +1168,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsExecutionsGetWorkflowExecutionHistory`](docs/sdks/executions/README.md#getworkflowexecutionhistory) - Get Workflow Execution History
 - [`workflowsExecutionsGetWorkflowExecutionLogs`](docs/sdks/executions/README.md#getworkflowexecutionlogs) - Get Workflow Execution Logs
 - [`workflowsExecutionsGetWorkflowExecutionTraceEvents`](docs/sdks/executions/README.md#getworkflowexecutiontraceevents) - Get Workflow Execution Trace Events
+- [`workflowsExecutionsGetWorkflowExecutionTraceInfo`](docs/sdks/executions/README.md#getworkflowexecutiontraceinfo) - Get Workflow Execution Trace Info
 - [`workflowsExecutionsGetWorkflowExecutionTraceOtel`](docs/sdks/executions/README.md#getworkflowexecutiontraceotel) - Get Workflow Execution Trace Otel
 - [`workflowsExecutionsGetWorkflowExecutionTraceSummary`](docs/sdks/executions/README.md#getworkflowexecutiontracesummary) - Get Workflow Execution Trace Summary
 - [`workflowsExecutionsQueryWorkflowExecution`](docs/sdks/executions/README.md#queryworkflowexecution) - Query Workflow Execution

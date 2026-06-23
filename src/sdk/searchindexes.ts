@@ -3,6 +3,8 @@
  * @generated-id: 9a1b36425210
  */
 
+import { betaRagSearchIndexesDocumentLookup } from "../funcs/betaRagSearchIndexesDocumentLookup.js";
+import { betaRagSearchIndexesDocumentsFetch } from "../funcs/betaRagSearchIndexesDocumentsFetch.js";
 import { betaRagSearchIndexesGetIndexDetail } from "../funcs/betaRagSearchIndexesGetIndexDetail.js";
 import { betaRagSearchIndexesGetIndexSchemaDetail } from "../funcs/betaRagSearchIndexesGetIndexSchemaDetail.js";
 import { betaRagSearchIndexesGetIndexSchemaFile } from "../funcs/betaRagSearchIndexesGetIndexSchemaFile.js";
@@ -163,6 +165,42 @@ export class SearchIndexes extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GetSearchIndexSchemaSDFileResponseSDFile> {
     return unwrapAsync(betaRagSearchIndexesGetIndexSchemaFile(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Document Lookup
+   *
+   * @remarks
+   * Fetch stored information about a retrievable element stored in an index
+   */
+  async documentLookup(
+    request:
+      operations.DocumentLookupV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdRetrievablesRetrievableDocumentIdGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.VespaGetRetrievableResponseRetrievable> {
+    return unwrapAsync(betaRagSearchIndexesDocumentLookup(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Document Fetch
+   *
+   * @remarks
+   * Fetch a few stored retrievable elements from the index/schema
+   */
+  async documentsFetch(
+    request:
+      operations.DocumentFetchV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdRetrievablesGetRequest,
+    options?: RequestOptions,
+  ): Promise<Array<components.VespaGetRetrievableResponseRetrievable>> {
+    return unwrapAsync(betaRagSearchIndexesDocumentsFetch(
       this,
       request,
       options,

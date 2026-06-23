@@ -6,31 +6,39 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  SchemaFieldDataType,
+  SchemaFieldDataType$outboundSchema,
+} from "./schemafielddatatype.js";
+import {
   SchemaFieldIndex,
   SchemaFieldIndex$outboundSchema,
 } from "./schemafieldindex.js";
 import {
+  SchemaFieldRankingType,
+  SchemaFieldRankingType$outboundSchema,
+} from "./schemafieldrankingtype.js";
+import {
   SchemaFieldStorage,
   SchemaFieldStorage$outboundSchema,
 } from "./schemafieldstorage.js";
-import {
-  SchemaFieldType,
-  SchemaFieldType$outboundSchema,
-} from "./schemafieldtype.js";
 
 export type RegisterSearchIndexRequestVespaSchemaField = {
   name: string;
-  type: SchemaFieldType;
+  type: SchemaFieldDataType;
   storage: SchemaFieldStorage;
+  ranking: SchemaFieldRankingType;
   indexType: SchemaFieldIndex | null;
+  multidimensional: boolean;
 };
 
 /** @internal */
 export type RegisterSearchIndexRequestVespaSchemaField$Outbound = {
   name: string;
-  type: number;
-  storage: number;
-  index_type: number | null;
+  type: string;
+  storage: string;
+  ranking: string;
+  index_type: string | null;
+  multidimensional: boolean;
 };
 
 /** @internal */
@@ -40,9 +48,11 @@ export const RegisterSearchIndexRequestVespaSchemaField$outboundSchema:
     RegisterSearchIndexRequestVespaSchemaField
   > = z.object({
     name: z.string(),
-    type: SchemaFieldType$outboundSchema,
+    type: SchemaFieldDataType$outboundSchema,
     storage: SchemaFieldStorage$outboundSchema,
+    ranking: SchemaFieldRankingType$outboundSchema,
     indexType: z.nullable(SchemaFieldIndex$outboundSchema),
+    multidimensional: z.boolean(),
   }).transform((v) => {
     return remap$(v, {
       indexType: "index_type",
