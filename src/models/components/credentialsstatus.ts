@@ -9,13 +9,17 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AuthStatus, AuthStatus$inboundSchema } from "./authstatus.js";
+import {
+  CredentialsStatusErrorReason,
+  CredentialsStatusErrorReason$inboundSchema,
+} from "./credentialsstatuserrorreason.js";
 import { HTTPStatus, HTTPStatus$inboundSchema } from "./httpstatus.js";
 
 export type CredentialsStatus = {
   statusType: AuthStatus;
   lastCheckedAt?: Date | null | undefined;
   errorHttpCode?: HTTPStatus | null | undefined;
-  errorMessage?: string | null | undefined;
+  errorMessage?: CredentialsStatusErrorReason | null | undefined;
 };
 
 /** @internal */
@@ -28,7 +32,8 @@ export const CredentialsStatus$inboundSchema: z.ZodType<
     z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   error_http_code: z.nullable(HTTPStatus$inboundSchema).optional(),
-  error_message: z.nullable(z.string()).optional(),
+  error_message: z.nullable(CredentialsStatusErrorReason$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "status_type": "statusType",

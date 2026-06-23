@@ -5,7 +5,6 @@
 
 import { MistralCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
-import { EventStream } from "../lib/event-streams.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -43,7 +42,7 @@ export function audioSpeechComplete(
   options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
 ): APIPromise<
   Result<
-    operations.SpeechResponse,
+    operations.SpeechV1AudioSpeechPostResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -61,7 +60,7 @@ export function audioSpeechComplete(
   options?: RequestOptions & { acceptHeaderOverride?: CompleteAcceptEnum },
 ): APIPromise<
   Result<
-    EventStream<operations.SpeechStreamEvents>,
+    operations.SpeechV1AudioSpeechPostResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -153,7 +152,7 @@ async function $do(
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: options?.acceptHeaderOverride
-      || "application/json;q=1, text/event-stream;q=0",
+      || (request?.stream ? "text/event-stream" : "application/json"),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
@@ -183,7 +182,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

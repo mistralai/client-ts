@@ -7,7 +7,7 @@ import { ConnectorDeleteUserCredentialsV1Request } from "@mistralai/mistralai/mo
 
 let value: ConnectorDeleteUserCredentialsV1Request = {
   credentialsName: "<value>",
-  connectorIdOrName: "<value>",
+  connectorIdOrName: "ba32e9ea-2520-421d-a401-9109f4c745d3",
 };
 ```
 
