@@ -87,7 +87,7 @@ export class Libraries extends ClientSDK {
   async delete(
     request: operations.LibrariesDeleteV1Request,
     options?: RequestOptions,
-  ): Promise<components.Library> {
+  ): Promise<components.Library | undefined> {
     return unwrapAsync(betaLibrariesDelete(
       this,
       request,

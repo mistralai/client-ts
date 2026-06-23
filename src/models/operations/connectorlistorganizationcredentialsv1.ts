@@ -8,16 +8,16 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type ConnectorListOrganizationCredentialsV1Request = {
+  connectorIdOrName: string;
   authType?: components.OutboundAuthenticationType | null | undefined;
   fetchDefault?: boolean | undefined;
-  connectorIdOrName: string;
 };
 
 /** @internal */
 export type ConnectorListOrganizationCredentialsV1Request$Outbound = {
+  connector_id_or_name: string;
   auth_type?: string | null | undefined;
   fetch_default: boolean;
-  connector_id_or_name: string;
 };
 
 /** @internal */
@@ -26,15 +26,15 @@ export const ConnectorListOrganizationCredentialsV1Request$outboundSchema:
     ConnectorListOrganizationCredentialsV1Request$Outbound,
     ConnectorListOrganizationCredentialsV1Request
   > = z.object({
+    connectorIdOrName: z.string(),
     authType: z.nullable(components.OutboundAuthenticationType$outboundSchema)
       .optional(),
     fetchDefault: z.boolean().default(false),
-    connectorIdOrName: z.string(),
   }).transform((v) => {
     return remap$(v, {
+      connectorIdOrName: "connector_id_or_name",
       authType: "auth_type",
       fetchDefault: "fetch_default",
-      connectorIdOrName: "connector_id_or_name",
     });
   });
 
