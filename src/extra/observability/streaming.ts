@@ -15,6 +15,7 @@ import {
   CompletionChunk,
   completionChunkFromJSON,
 } from "../../models/components/completionchunk.js";
+import { ContentChunk } from "../../models/components/contentchunk.js";
 import {
   UsageInfo,
   UsageInfo$outboundSchema,
@@ -125,9 +126,7 @@ export function accumulateChunksToResponseDict(
       if (typeof delta.role === "string") {
         msg.role = delta.role;
       }
-      if (typeof delta.content === "string" && delta.content) {
-        msg.content += delta.content;
-      }
+      msg.content += extractOutputText(delta.content);
       if (typeof choice.finishReason === "string") {
         accumulated.finish_reason = choice.finishReason;
       }
@@ -171,4 +170,19 @@ export function accumulateChunksToResponseDict(
     result["usage"] = UsageInfo$outboundSchema.parse(usage);
   }
   return result;
+}
+
+function extractOutputText(
+  content: string | Array<ContentChunk> | null | undefined
+): string {
+  if (typeof content === "string") {
+    return content;
+  }
+  if (!Array.isArray(content)) {
+    return "";
+  }
+  return content
+    .filter((block): block is ContentChunk & { type: "text" } => block.type === "text")
+    .map((block) => block.text)
+    .join("");
 }
