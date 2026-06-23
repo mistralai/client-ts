@@ -40,7 +40,7 @@ export function betaLibrariesAccessesDelete(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.Sharing,
+    components.Sharing | undefined,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -66,7 +66,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.Sharing,
+      components.Sharing | undefined,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -132,7 +132,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
@@ -156,7 +156,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.Sharing,
+    components.Sharing | undefined,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -167,7 +167,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.Sharing$inboundSchema),
+    M.json(200, components.Sharing$inboundSchema.optional()),
+    M.nil(204, components.Sharing$inboundSchema.optional()),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

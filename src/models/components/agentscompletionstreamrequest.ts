@@ -102,7 +102,7 @@ export type AgentsCompletionStreamRequestMessage =
   | UserMessage;
 
 export type AgentsCompletionStreamRequestTool =
-  | Tool
+  | (Tool & { type: "function" })
   | WebSearchTool
   | WebSearchPremiumTool
   | CodeInterpreterTool
@@ -144,7 +144,7 @@ export type AgentsCompletionStreamRequest = {
   responseFormat?: ResponseFormat | undefined;
   tools?:
     | Array<
-      | Tool
+      | (Tool & { type: "function" })
       | WebSearchTool
       | WebSearchPremiumTool
       | CodeInterpreterTool
@@ -236,7 +236,7 @@ export function agentsCompletionStreamRequestMessageToJSON(
 
 /** @internal */
 export type AgentsCompletionStreamRequestTool$Outbound =
-  | Tool$Outbound
+  | (Tool$Outbound & { type: "function" })
   | WebSearchTool$Outbound
   | WebSearchPremiumTool$Outbound
   | CodeInterpreterTool$Outbound
@@ -249,7 +249,7 @@ export const AgentsCompletionStreamRequestTool$outboundSchema: z.ZodType<
   AgentsCompletionStreamRequestTool$Outbound,
   AgentsCompletionStreamRequestTool
 > = z.union([
-  Tool$outboundSchema,
+  Tool$outboundSchema.and(z.object({ type: z.literal("function") })),
   WebSearchTool$outboundSchema,
   WebSearchPremiumTool$outboundSchema,
   CodeInterpreterTool$outboundSchema,
@@ -306,7 +306,7 @@ export type AgentsCompletionStreamRequest$Outbound = {
   response_format?: ResponseFormat$Outbound | undefined;
   tools?:
     | Array<
-      | Tool$Outbound
+      | (Tool$Outbound & { type: "function" })
       | WebSearchTool$Outbound
       | WebSearchPremiumTool$Outbound
       | CodeInterpreterTool$Outbound
@@ -353,7 +353,7 @@ export const AgentsCompletionStreamRequest$outboundSchema: z.ZodType<
   tools: z.nullable(
     z.array(
       z.union([
-        Tool$outboundSchema,
+        Tool$outboundSchema.and(z.object({ type: z.literal("function") })),
         WebSearchTool$outboundSchema,
         WebSearchPremiumTool$outboundSchema,
         CodeInterpreterTool$outboundSchema,

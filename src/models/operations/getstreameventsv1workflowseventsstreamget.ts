@@ -8,6 +8,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,12 +34,22 @@ export type GetStreamEventsV1WorkflowsEventsStreamGetRequest = {
   lastEventId?: string | null | undefined;
 };
 
+export type GetStreamEventsV1WorkflowsEventsStreamGetData =
+  | components.StreamEventSsePayload
+  | components.WorkflowStreamError;
+
 /**
  * Stream of Server-Sent Events (SSE)
  */
 export type GetStreamEventsV1WorkflowsEventsStreamGetResponseBody = {
+  /**
+   * SSE event name. `error` indicates the stream failed after HTTP 200.
+   */
   event?: string | undefined;
-  data?: components.StreamEventSsePayload | undefined;
+  data?:
+    | components.StreamEventSsePayload
+    | components.WorkflowStreamError
+    | undefined;
   id?: string | undefined;
   retry?: number | undefined;
 };
@@ -109,12 +120,37 @@ export function getStreamEventsV1WorkflowsEventsStreamGetRequestToJSON(
 }
 
 /** @internal */
+export const GetStreamEventsV1WorkflowsEventsStreamGetData$inboundSchema:
+  z.ZodType<GetStreamEventsV1WorkflowsEventsStreamGetData, unknown> =
+    smartUnion([
+      components.StreamEventSsePayload$inboundSchema,
+      components.WorkflowStreamError$inboundSchema,
+    ]);
+
+export function getStreamEventsV1WorkflowsEventsStreamGetDataFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetStreamEventsV1WorkflowsEventsStreamGetData,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetStreamEventsV1WorkflowsEventsStreamGetData$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetStreamEventsV1WorkflowsEventsStreamGetData' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetStreamEventsV1WorkflowsEventsStreamGetResponseBody$inboundSchema:
   z.ZodType<GetStreamEventsV1WorkflowsEventsStreamGetResponseBody, unknown> = z
     .object({
       event: z.string().optional(),
-      data: z.string().optional().transform((v, ctx) => {
+      data: z.unknown().optional().transform((v, ctx) => {
         if (v === undefined) return undefined;
+        if (typeof v !== "string") return v;
         try {
           return JSON.parse(v);
         } catch (err) {
@@ -125,7 +161,12 @@ export const GetStreamEventsV1WorkflowsEventsStreamGetResponseBody$inboundSchema
           });
           return z.NEVER;
         }
-      }).pipe(components.StreamEventSsePayload$inboundSchema.optional()),
+      }).pipe(
+        smartUnion([
+          components.StreamEventSsePayload$inboundSchema,
+          components.WorkflowStreamError$inboundSchema,
+        ]).optional(),
+      ),
       id: z.string().optional(),
       retry: z.int().optional(),
     });

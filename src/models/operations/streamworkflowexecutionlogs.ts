@@ -30,14 +30,20 @@ export type StreamWorkflowExecutionLogsRequest = {
   /**
    * Resume from this cursor (a prior response's SSE id)
    */
-  lastEventId?: string | null | undefined;
+  lastEventIdQueryParameter?: string | null | undefined;
+  /**
+   * Resume from this cursor (a prior response's SSE id). Takes precedence over the query parameter.
+   */
+  lastEventID?: string | null | undefined;
 };
 
-export const Event = {
+export const StreamWorkflowExecutionLogsEvent = {
   Log: "log",
   Error: "error",
 } as const;
-export type Event = OpenEnum<typeof Event>;
+export type StreamWorkflowExecutionLogsEvent = OpenEnum<
+  typeof StreamWorkflowExecutionLogsEvent
+>;
 
 export type StreamWorkflowExecutionLogsData =
   | components.ExecutionLogRecord
@@ -47,7 +53,7 @@ export type StreamWorkflowExecutionLogsData =
  * Stream of Server-Sent Events (SSE): `log` events carry an ExecutionLogRecord; `error` events carry a StreamError payload.
  */
 export type StreamWorkflowExecutionLogsResponseBody = {
-  event?: Event | undefined;
+  event?: StreamWorkflowExecutionLogsEvent | undefined;
   id?: string | undefined;
   data?: components.ExecutionLogRecord | components.StreamError | undefined;
 };
@@ -58,7 +64,8 @@ export type StreamWorkflowExecutionLogsRequest$Outbound = {
   run_id?: string | null | undefined;
   activity_id?: string | null | undefined;
   after?: string | null | undefined;
-  last_event_id?: string | null | undefined;
+  last_event_idQueryParameter?: string | null | undefined;
+  "Last-Event-ID"?: string | null | undefined;
 };
 
 /** @internal */
@@ -70,13 +77,15 @@ export const StreamWorkflowExecutionLogsRequest$outboundSchema: z.ZodType<
   runId: z.nullable(z.string()).optional(),
   activityId: z.nullable(z.string()).optional(),
   after: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  lastEventId: z.nullable(z.string()).optional(),
+  lastEventIdQueryParameter: z.nullable(z.string()).optional(),
+  lastEventID: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     executionId: "execution_id",
     runId: "run_id",
     activityId: "activity_id",
-    lastEventId: "last_event_id",
+    lastEventIdQueryParameter: "last_event_idQueryParameter",
+    lastEventID: "Last-Event-ID",
   });
 });
 
@@ -91,8 +100,10 @@ export function streamWorkflowExecutionLogsRequestToJSON(
 }
 
 /** @internal */
-export const Event$inboundSchema: z.ZodType<Event, unknown> = openEnums
-  .inboundSchema(Event);
+export const StreamWorkflowExecutionLogsEvent$inboundSchema: z.ZodType<
+  StreamWorkflowExecutionLogsEvent,
+  unknown
+> = openEnums.inboundSchema(StreamWorkflowExecutionLogsEvent);
 
 /** @internal */
 export const StreamWorkflowExecutionLogsData$inboundSchema: z.ZodType<
@@ -118,10 +129,11 @@ export const StreamWorkflowExecutionLogsResponseBody$inboundSchema: z.ZodType<
   StreamWorkflowExecutionLogsResponseBody,
   unknown
 > = z.object({
-  event: Event$inboundSchema.optional(),
+  event: StreamWorkflowExecutionLogsEvent$inboundSchema.optional(),
   id: z.string().optional(),
-  data: z.string().optional().transform((v, ctx) => {
+  data: z.unknown().optional().transform((v, ctx) => {
     if (v === undefined) return undefined;
+    if (typeof v !== "string") return v;
     try {
       return JSON.parse(v);
     } catch (err) {

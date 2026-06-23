@@ -55,7 +55,7 @@ export class Accesses extends ClientSDK {
   async delete(
     request: operations.LibrariesShareDeleteV1Request,
     options?: RequestOptions,
-  ): Promise<components.Sharing> {
+  ): Promise<components.Sharing | undefined> {
     return unwrapAsync(betaLibrariesAccessesDelete(
       this,
       request,
