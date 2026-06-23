@@ -8,8 +8,8 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
 export const SchemaFieldStorage = {
-  One: 1,
-  Two: 2,
+  InMemory: "in_memory",
+  OnDisk: "on_disk",
 } as const;
 export type SchemaFieldStorage = OpenEnum<typeof SchemaFieldStorage>;
 
@@ -17,9 +17,9 @@ export type SchemaFieldStorage = OpenEnum<typeof SchemaFieldStorage>;
 export const SchemaFieldStorage$inboundSchema: z.ZodType<
   SchemaFieldStorage,
   unknown
-> = openEnums.inboundSchemaInt(SchemaFieldStorage);
+> = openEnums.inboundSchema(SchemaFieldStorage);
 /** @internal */
 export const SchemaFieldStorage$outboundSchema: z.ZodType<
-  number,
+  string,
   SchemaFieldStorage
-> = openEnums.outboundSchemaInt(SchemaFieldStorage);
+> = openEnums.outboundSchema(SchemaFieldStorage);

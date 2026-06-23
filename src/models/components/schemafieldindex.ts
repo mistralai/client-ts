@@ -8,9 +8,9 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
 export const SchemaFieldIndex = {
-  One: 1,
-  Two: 2,
-  Three: 3,
+  Ann: "ann",
+  Bm25: "bm25",
+  Attribute: "attribute",
 } as const;
 export type SchemaFieldIndex = OpenEnum<typeof SchemaFieldIndex>;
 
@@ -18,9 +18,9 @@ export type SchemaFieldIndex = OpenEnum<typeof SchemaFieldIndex>;
 export const SchemaFieldIndex$inboundSchema: z.ZodType<
   SchemaFieldIndex,
   unknown
-> = openEnums.inboundSchemaInt(SchemaFieldIndex);
+> = openEnums.inboundSchema(SchemaFieldIndex);
 /** @internal */
 export const SchemaFieldIndex$outboundSchema: z.ZodType<
-  number,
+  string,
   SchemaFieldIndex
-> = openEnums.outboundSchemaInt(SchemaFieldIndex);
+> = openEnums.outboundSchema(SchemaFieldIndex);

@@ -5,13 +5,13 @@
 ```typescript
 import { SchemaFieldStorage } from "@mistralai/mistralai/models/components";
 
-let value: SchemaFieldStorage = 2;
+let value: SchemaFieldStorage = "on_disk";
 
-// Open enum: unrecognized values are captured as Unrecognized<number>
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-1 | 2 | Unrecognized<number>
+"in_memory" | "on_disk" | Unrecognized<string>
 ```

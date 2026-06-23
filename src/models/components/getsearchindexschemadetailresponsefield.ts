@@ -9,6 +9,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  SchemaFieldDataType,
+  SchemaFieldDataType$inboundSchema,
+} from "./schemafielddatatype.js";
+import {
   SchemaFieldIndex,
   SchemaFieldIndex$inboundSchema,
 } from "./schemafieldindex.js";
@@ -16,14 +20,10 @@ import {
   SchemaFieldStorage,
   SchemaFieldStorage$inboundSchema,
 } from "./schemafieldstorage.js";
-import {
-  SchemaFieldType,
-  SchemaFieldType$inboundSchema,
-} from "./schemafieldtype.js";
 
 export type GetSearchIndexSchemaDetailResponseField = {
   name: string;
-  type: SchemaFieldType;
+  type: SchemaFieldDataType;
   storage: SchemaFieldStorage;
   indexType: SchemaFieldIndex | null;
 };
@@ -34,7 +34,7 @@ export const GetSearchIndexSchemaDetailResponseField$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  type: SchemaFieldType$inboundSchema,
+  type: SchemaFieldDataType$inboundSchema,
   storage: SchemaFieldStorage$inboundSchema,
   index_type: z.nullable(SchemaFieldIndex$inboundSchema),
 }).transform((v) => {

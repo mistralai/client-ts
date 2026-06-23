@@ -13,6 +13,8 @@
 * [getIndexSchemaDetail](#getindexschemadetail) - Get Index Schema Detail
 * [setSchemaSummary](#setschemasummary) - Set Schema Summary
 * [getIndexSchemaFile](#getindexschemafile) - Get Index Schema File
+* [documentLookup](#documentlookup) - Document Lookup
+* [documentsFetch](#documentsfetch) - Document Fetch
 
 ## register
 
@@ -733,6 +735,160 @@ run();
 ### Response
 
 **Promise\<[components.GetSearchIndexSchemaSDFileResponseSDFile](../../models/components/getsearchindexschemasdfileresponsesdfile.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## documentLookup
+
+Fetch stored information about a retrievable element stored in an index
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="document_lookup_v1_rag_indexes_index__index_id__schemas_schema__schema_id__retrievables_retrievable__document_id__get" method="get" path="/v1/rag/indexes/index/{index_id}/schemas/schema/{schema_id}/retrievables/retrievable/{document_id}" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.rag.searchIndexes.documentLookup({
+    indexId: "77308a24-2d8e-4392-9ab4-38770b2bb993",
+    schemaId: "1fe735e7-4ec0-4264-b715-12a944fe2b87",
+    documentId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaRagSearchIndexesDocumentLookup } from "@mistralai/mistralai/funcs/betaRagSearchIndexesDocumentLookup.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaRagSearchIndexesDocumentLookup(mistral, {
+    indexId: "77308a24-2d8e-4392-9ab4-38770b2bb993",
+    schemaId: "1fe735e7-4ec0-4264-b715-12a944fe2b87",
+    documentId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaRagSearchIndexesDocumentLookup failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                                                                                              | [operations.DocumentLookupV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdRetrievablesRetrievableDocumentIdGetRequest](../../models/operations/documentlookupv1ragindexesindexindexidschemasschemaschemaidretrievablesretrievabledocumentidgetrequest.md) | :heavy_check_mark:                                                                                                                                                                                                                                     | The request object to use for the request.                                                                                                                                                                                                             |
+| `options`                                                                                                                                                                                                                                              | RequestOptions                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                     | Used to set various options for making HTTP requests.                                                                                                                                                                                                  |
+| `options.fetchOptions`                                                                                                                                                                                                                                 | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                     | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                                         |
+| `options.retries`                                                                                                                                                                                                                                      | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                     | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                                                       |
+
+### Response
+
+**Promise\<[components.VespaGetRetrievableResponseRetrievable](../../models/components/vespagetretrievableresponseretrievable.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## documentsFetch
+
+Fetch a few stored retrievable elements from the index/schema
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="document_fetch_v1_rag_indexes_index__index_id__schemas_schema__schema_id__retrievables_get" method="get" path="/v1/rag/indexes/index/{index_id}/schemas/schema/{schema_id}/retrievables" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.rag.searchIndexes.documentsFetch({
+    indexId: "7c9f7007-1a54-48fd-b6da-93e91f31f6aa",
+    schemaId: "7eb7703c-1b80-4ecc-8a8b-288b43e1f30e",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaRagSearchIndexesDocumentsFetch } from "@mistralai/mistralai/funcs/betaRagSearchIndexesDocumentsFetch.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaRagSearchIndexesDocumentsFetch(mistral, {
+    indexId: "7c9f7007-1a54-48fd-b6da-93e91f31f6aa",
+    schemaId: "7eb7703c-1b80-4ecc-8a8b-288b43e1f30e",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaRagSearchIndexesDocumentsFetch failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                  | Type                                                                                                                                                                                                       | Required                                                                                                                                                                                                   | Description                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                  | [operations.DocumentFetchV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdRetrievablesGetRequest](../../models/operations/documentfetchv1ragindexesindexindexidschemasschemaschemaidretrievablesgetrequest.md) | :heavy_check_mark:                                                                                                                                                                                         | The request object to use for the request.                                                                                                                                                                 |
+| `options`                                                                                                                                                                                                  | RequestOptions                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                         | Used to set various options for making HTTP requests.                                                                                                                                                      |
+| `options.fetchOptions`                                                                                                                                                                                     | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                         | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                             |
+| `options.retries`                                                                                                                                                                                          | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                         | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                           |
+
+### Response
+
+**Promise\<[components.VespaGetRetrievableResponseRetrievable[]](../../models/.md)\>**
 
 ### Errors
 

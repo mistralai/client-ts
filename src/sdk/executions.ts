@@ -10,6 +10,7 @@ import { workflowsExecutionsGetWorkflowExecution } from "../funcs/workflowsExecu
 import { workflowsExecutionsGetWorkflowExecutionHistory } from "../funcs/workflowsExecutionsGetWorkflowExecutionHistory.js";
 import { workflowsExecutionsGetWorkflowExecutionLogs } from "../funcs/workflowsExecutionsGetWorkflowExecutionLogs.js";
 import { workflowsExecutionsGetWorkflowExecutionTraceEvents } from "../funcs/workflowsExecutionsGetWorkflowExecutionTraceEvents.js";
+import { workflowsExecutionsGetWorkflowExecutionTraceInfo } from "../funcs/workflowsExecutionsGetWorkflowExecutionTraceInfo.js";
 import { workflowsExecutionsGetWorkflowExecutionTraceOtel } from "../funcs/workflowsExecutionsGetWorkflowExecutionTraceOtel.js";
 import { workflowsExecutionsGetWorkflowExecutionTraceSummary } from "../funcs/workflowsExecutionsGetWorkflowExecutionTraceSummary.js";
 import { workflowsExecutionsQueryWorkflowExecution } from "../funcs/workflowsExecutionsQueryWorkflowExecution.js";
@@ -168,6 +169,20 @@ export class Executions extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.UpdateWorkflowResponse> {
     return unwrapAsync(workflowsExecutionsUpdateWorkflowExecution(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Workflow Execution Trace Info
+   */
+  async getWorkflowExecutionTraceInfo(
+    request: operations.GetWorkflowExecutionTraceInfoRequest,
+    options?: RequestOptions,
+  ): Promise<components.ExecutionTraceInfoResponse> {
+    return unwrapAsync(workflowsExecutionsGetWorkflowExecutionTraceInfo(
       this,
       request,
       options,

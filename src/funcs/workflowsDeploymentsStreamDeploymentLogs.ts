@@ -108,17 +108,13 @@ async function $do(
 
   const query = encodeFormQuery({
     "after": payload.after,
-    "last_event_id": payload.last_event_idQueryParameter,
+    "last_event_id": payload.last_event_id,
     "worker_name": payload.worker_name,
     "workflow_name": payload.workflow_name,
   });
 
   const headers = new Headers(compactMap({
     Accept: "text/event-stream",
-    "Last-Event-ID": encodeSimple("Last-Event-ID", payload["Last-Event-ID"], {
-      explode: false,
-      charEncoding: "none",
-    }),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);

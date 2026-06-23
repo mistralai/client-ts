@@ -30,11 +30,7 @@ export type StreamDeploymentLogsRequest = {
   /**
    * Resume from this cursor (a prior response's SSE id)
    */
-  lastEventIdQueryParameter?: string | null | undefined;
-  /**
-   * Resume from this cursor (a prior response's SSE id). Takes precedence over the query parameter.
-   */
-  lastEventID?: string | null | undefined;
+  lastEventId?: string | null | undefined;
 };
 
 export const StreamDeploymentLogsEvent = {
@@ -64,8 +60,7 @@ export type StreamDeploymentLogsRequest$Outbound = {
   worker_name?: string | null | undefined;
   workflow_name?: string | null | undefined;
   after?: string | null | undefined;
-  last_event_idQueryParameter?: string | null | undefined;
-  "Last-Event-ID"?: string | null | undefined;
+  last_event_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -77,14 +72,12 @@ export const StreamDeploymentLogsRequest$outboundSchema: z.ZodType<
   workerName: z.nullable(z.string()).optional(),
   workflowName: z.nullable(z.string()).optional(),
   after: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  lastEventIdQueryParameter: z.nullable(z.string()).optional(),
-  lastEventID: z.nullable(z.string()).optional(),
+  lastEventId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     workerName: "worker_name",
     workflowName: "workflow_name",
-    lastEventIdQueryParameter: "last_event_idQueryParameter",
-    lastEventID: "Last-Event-ID",
+    lastEventId: "last_event_id",
   });
 });
 
