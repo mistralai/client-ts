@@ -1,4 +1,6 @@
-import type { Context, Span, Tracer } from "@opentelemetry/api";
+import type { Context, Span, Tracer, TracerProvider } from "@opentelemetry/api";
+import { getRegisteredTracerProvider } from "../extra/observability/provider.js";
+import type { ManagedTelemetryTracerProvider } from "../extra/observability/telemetry.js";
 import { HTTPClient } from "../lib/http.js";
 import {
   AfterErrorContext,
@@ -13,8 +15,10 @@ import {
 } from "./types.js";
 
 type ObservabilityModule = typeof import("../extra/observability/otel.js");
+type TelemetryModule = typeof import("../extra/observability/telemetry.js");
 
 let observabilityModule: ObservabilityModule | null | undefined;
+let telemetryModule: TelemetryModule | null | undefined;
 
 async function getObservabilityModule(): Promise<ObservabilityModule | null> {
   if (observabilityModule !== undefined) {
@@ -31,6 +35,21 @@ async function getObservabilityModule(): Promise<ObservabilityModule | null> {
   return observabilityModule;
 }
 
+async function getTelemetryModule(): Promise<TelemetryModule | null> {
+  if (telemetryModule !== undefined) {
+    return telemetryModule;
+  }
+
+  try {
+    telemetryModule = await import("../extra/observability/telemetry.js");
+  } catch {
+    // OpenTelemetry is an optional peer; without it, telemetry is a no-op.
+    telemetryModule = null;
+  }
+
+  return telemetryModule;
+}
+
 export const TRACING_SPAN_KEY = "_tracingSpan";
 export const TRACING_BODY_KEY = "_tracingBody";
 export const TRACING_TRACER_KEY = "_tracingTracer";
@@ -40,6 +59,12 @@ export type TracingContext = HookContext & {
   [TRACING_BODY_KEY]?: string | null;
   [TRACING_TRACER_KEY]?: Tracer;
 };
+
+function clearTracingContext(ctx: TracingContext): void {
+  delete ctx[TRACING_TRACER_KEY];
+  delete ctx[TRACING_SPAN_KEY];
+  delete ctx[TRACING_BODY_KEY];
+}
 
 // Runs the actual HTTP send inside the GenAI span context so lower-level
 // fetch/http auto-instrumentation parents its spans correctly.
@@ -88,6 +113,13 @@ class TracingHTTPClient extends HTTPClient {
 
 export class TracingHook implements SDKInitHook, BeforeRequestHook, AfterSuccessHook, AfterErrorHook {
   readonly #requestContexts = new WeakMap<Request, Context>();
+  readonly _mistralTracingHook = true;
+  tracerProvider: TracerProvider | undefined = undefined;
+  _autoTelemetryProvider: ManagedTelemetryTracerProvider | undefined = undefined;
+  _telemetryInitialization: Promise<boolean> | undefined = undefined;
+  _telemetryConfigurationVersion = 0;
+  _telemetryAutoDisabled = false;
+  _telemetryUseGlobalProvider = false;
 
   sdkInit(opts: SDKInitOptions): SDKInitOptions {
     return {
@@ -106,7 +138,23 @@ export class TracingHook implements SDKInitHook, BeforeRequestHook, AfterSuccess
       return request;
     }
 
-    const tracer = observability.getOrCreateOtelTracer();
+    const telemetry = await getTelemetryModule();
+    const telemetryConfigured = telemetry
+      ? await telemetry.configureTelemetryForHook(this, hookCtx)
+      : false;
+    const shouldTrace = telemetryConfigured ||
+      this.tracerProvider !== undefined ||
+      this._telemetryUseGlobalProvider ||
+      getRegisteredTracerProvider() !== undefined;
+
+    if (!shouldTrace) {
+      clearTracingContext(ctx);
+      return request;
+    }
+
+    const tracer = observability.getOrCreateOtelTracer(this.tracerProvider, {
+      useRegisteredProvider: !this._telemetryUseGlobalProvider,
+    });
 
     const { request: tracedRequest, span, body } = await observability.getTracedRequestAndSpan(
       tracer,

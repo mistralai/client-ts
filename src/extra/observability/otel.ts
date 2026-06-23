@@ -22,22 +22,16 @@ import {
   formatOutputMessage,
   formatToolDefinition,
 } from "./formatting.js";
+import { getRegisteredTracerProvider } from "./provider.js";
 import { accumulateChunksToResponseDict, parseSseChunks } from "./streaming.js";
 
 export type { Context, Span, Tracer };
 export { semConvAttributes };
+export { getRegisteredTracerProvider, registerTracerProvider } from "./provider.js";
 
 export const OTEL_SERVICE_NAME = "mistralai_sdk";
 export const MISTRAL_SDK_OTEL_TRACER_NAME = `${OTEL_SERVICE_NAME}_tracer`;
 const MISTRAL_AGENT_TRACE_PUBLIC_ATTRIBUTE = "agent.trace.public";
-let registeredTracerProvider: TracerProvider | undefined;
-
-/**
- * Route SDK tracing spans to a specific OpenTelemetry tracer provider.
- */
-export function registerTracerProvider(tracerProvider?: TracerProvider): void {
-  registeredTracerProvider = tracerProvider;
-}
 
 // Safe check for environment variable in both Node.js and browser
 const getDebugTracing = (): boolean => {
@@ -433,8 +427,13 @@ export function enrichSpanFromResponse(
  * return a NoOp tracer, effectively disabling tracing. Once the application
  * sets up a real TracerProvider, subsequent spans will be recorded.
  */
-export function getOrCreateOtelTracer(): Tracer {
-  const tracerProvider = registeredTracerProvider ?? trace.getTracerProvider();
+export function getOrCreateOtelTracer(
+  provider?: TracerProvider,
+  options: { useRegisteredProvider?: boolean } = {},
+): Tracer {
+  const tracerProvider = provider ??
+    (options.useRegisteredProvider === false ? undefined : getRegisteredTracerProvider()) ??
+    trace.getTracerProvider();
   return tracerProvider.getTracer(MISTRAL_SDK_OTEL_TRACER_NAME);
 }
 
