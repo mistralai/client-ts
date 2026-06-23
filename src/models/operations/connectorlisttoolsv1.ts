@@ -12,6 +12,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ConnectorListToolsV1Request = {
+  connectorIdOrName: string;
   page?: number | undefined;
   pageSize?: number | undefined;
   refresh?: boolean | undefined;
@@ -20,7 +21,6 @@ export type ConnectorListToolsV1Request = {
    */
   pretty?: boolean | undefined;
   credentialsName?: string | null | undefined;
-  connectorIdOrName: string;
 };
 
 /**
@@ -33,12 +33,12 @@ export type ResponseConnectorListToolsV1 =
 
 /** @internal */
 export type ConnectorListToolsV1Request$Outbound = {
+  connector_id_or_name: string;
   page: number;
   page_size: number;
   refresh: boolean;
   pretty: boolean;
   credentials_name?: string | null | undefined;
-  connector_id_or_name: string;
 };
 
 /** @internal */
@@ -46,17 +46,17 @@ export const ConnectorListToolsV1Request$outboundSchema: z.ZodType<
   ConnectorListToolsV1Request$Outbound,
   ConnectorListToolsV1Request
 > = z.object({
+  connectorIdOrName: z.string(),
   page: z.int().default(1),
   pageSize: z.int().default(100),
   refresh: z.boolean().default(false),
   pretty: z.boolean().default(false),
   credentialsName: z.nullable(z.string()).optional(),
-  connectorIdOrName: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    connectorIdOrName: "connector_id_or_name",
     pageSize: "page_size",
     credentialsName: "credentials_name",
-    connectorIdOrName: "connector_id_or_name",
   });
 });
 

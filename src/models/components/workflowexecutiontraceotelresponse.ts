@@ -23,6 +23,14 @@ export type WorkflowExecutionTraceOTelResponse = {
    */
   workflowName: string;
   /**
+   * The ID of the workflow
+   */
+  workflowId?: string | null | undefined;
+  /**
+   * The name of the deployment that ran this execution
+   */
+  deploymentName?: string | null | undefined;
+  /**
    * The ID of the workflow execution
    */
   executionId: string;
@@ -38,6 +46,10 @@ export type WorkflowExecutionTraceOTelResponse = {
    * The unique run identifier (database UUID)
    */
   runId?: string | null | undefined;
+  /**
+   * The ID of the user who triggered the execution
+   */
+  userId?: string | null | undefined;
   /**
    * The status of the workflow execution
    */
@@ -78,10 +90,13 @@ export const WorkflowExecutionTraceOTelResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   workflow_name: z.string(),
+  workflow_id: z.nullable(z.string()).optional(),
+  deployment_name: z.nullable(z.string()).optional(),
   execution_id: z.string(),
   parent_execution_id: z.nullable(z.string()).optional(),
   root_execution_id: z.string(),
   run_id: z.nullable(z.string()).optional(),
+  user_id: z.nullable(z.string()).optional(),
   status: z.nullable(WorkflowExecutionStatus$inboundSchema),
   start_time: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   end_time: z.nullable(
@@ -95,10 +110,13 @@ export const WorkflowExecutionTraceOTelResponse$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "workflow_name": "workflowName",
+    "workflow_id": "workflowId",
+    "deployment_name": "deploymentName",
     "execution_id": "executionId",
     "parent_execution_id": "parentExecutionId",
     "root_execution_id": "rootExecutionId",
     "run_id": "runId",
+    "user_id": "userId",
     "start_time": "startTime",
     "end_time": "endTime",
     "total_duration_ms": "totalDurationMs",

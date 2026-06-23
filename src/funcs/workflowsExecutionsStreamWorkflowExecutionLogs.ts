@@ -35,8 +35,8 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Stream logs for a workflow execution via SSE.
  *
- * If `last_event_id` is set it resumes from that cursor and takes precedence over `after`;
- * otherwise `after` sets a fresh stream's start point (omit both to tail from the execution start).
+ * Resume cursor comes from the `Last-Event-ID` header or `last_event_id` query param (header wins)
+ * and takes precedence over `after`; omit all to tail from the execution start.
  */
 export function workflowsExecutionsStreamWorkflowExecutionLogs(
   client: MistralCore,
@@ -109,12 +109,16 @@ async function $do(
   const query = encodeFormQuery({
     "activity_id": payload.activity_id,
     "after": payload.after,
-    "last_event_id": payload.last_event_id,
+    "last_event_id": payload.last_event_idQueryParameter,
     "run_id": payload.run_id,
   });
 
   const headers = new Headers(compactMap({
     Accept: "text/event-stream",
+    "Last-Event-ID": encodeSimple("Last-Event-ID", payload["Last-Event-ID"], {
+      explode: false,
+      charEncoding: "none",
+    }),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
@@ -145,7 +149,7 @@ async function $do(
     query: query,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

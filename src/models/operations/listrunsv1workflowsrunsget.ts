@@ -51,6 +51,10 @@ export type ListRunsV1WorkflowsRunsGetRequest = {
    */
   workflowIdentifier?: string | null | undefined;
   /**
+   * Filter by root execution id; returns the whole execution tree (the root and all its descendant sub-workflows).
+   */
+  rootExecutionId?: string | null | undefined;
+  /**
    * Search by workflow name, display name, or ID
    */
   search?: string | null | undefined;
@@ -94,6 +98,10 @@ export type ListRunsV1WorkflowsRunsGetRequest = {
    * Filter by user id. Use 'current' to filter by the authenticated user
    */
   userId?: string | null | undefined;
+  /**
+   * Include runs of internal/technical workflows (e.g. parallel-execution)
+   */
+  includeInternal?: boolean | undefined;
   /**
    * Number of items per page
    */
@@ -141,6 +149,7 @@ export const ListRunsV1WorkflowsRunsGetOrder$outboundSchema: z.ZodEnum<
 /** @internal */
 export type ListRunsV1WorkflowsRunsGetRequest$Outbound = {
   workflow_identifier?: string | null | undefined;
+  root_execution_id?: string | null | undefined;
   search?: string | null | undefined;
   status?: string | Array<string> | null | undefined;
   deployment_name?: string | null | undefined;
@@ -151,6 +160,7 @@ export type ListRunsV1WorkflowsRunsGetRequest$Outbound = {
   end_time_after?: string | null | undefined;
   end_time_before?: string | null | undefined;
   user_id?: string | null | undefined;
+  include_internal: boolean;
   page_size: number;
   next_page_token?: string | null | undefined;
 };
@@ -161,6 +171,7 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
   ListRunsV1WorkflowsRunsGetRequest
 > = z.object({
   workflowIdentifier: z.nullable(z.string()).optional(),
+  rootExecutionId: z.nullable(z.string()).optional(),
   search: z.nullable(z.string()).optional(),
   status: z.nullable(
     smartUnion([
@@ -179,11 +190,13 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
   endTimeBefore: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   userId: z.nullable(z.string()).optional(),
+  includeInternal: z.boolean().default(true),
   pageSize: z.int().default(50),
   nextPageToken: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     workflowIdentifier: "workflow_identifier",
+    rootExecutionId: "root_execution_id",
     deploymentName: "deployment_name",
     sortBy: "sort_by",
     startTimeAfter: "start_time_after",
@@ -191,6 +204,7 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
     endTimeAfter: "end_time_after",
     endTimeBefore: "end_time_before",
     userId: "user_id",
+    includeInternal: "include_internal",
     pageSize: "page_size",
     nextPageToken: "next_page_token",
   });

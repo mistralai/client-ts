@@ -28,15 +28,15 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Register Search Index
+ * Register (or re-register) a search index
  */
 export function betaRagSearchIndexesRegister(
   client: MistralCore,
-  request: components.CreateSearchIndexInfoRequest,
+  request: components.RegisterSearchIndexRequestIndex,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.SearchIndexResponse,
+    components.RegisterSearchIndexResponseIndex,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -57,12 +57,12 @@ export function betaRagSearchIndexesRegister(
 
 async function $do(
   client: MistralCore,
-  request: components.CreateSearchIndexInfoRequest,
+  request: components.RegisterSearchIndexRequestIndex,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.SearchIndexResponse,
+      components.RegisterSearchIndexResponseIndex,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -79,7 +79,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      components.CreateSearchIndexInfoRequest$outboundSchema.parse(value),
+      components.RegisterSearchIndexRequestIndex$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -88,7 +88,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v1/rag/search_index")();
+  const path = pathToFunc("/v1/rag/indexes")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -102,7 +102,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "register_search_index_v1_rag_search_index_put",
+    operationID: "register_search_index_v1_rag_indexes_put",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -122,7 +122,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
@@ -146,7 +146,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.SearchIndexResponse,
+    components.RegisterSearchIndexResponseIndex,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -157,10 +157,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.SearchIndexResponse$inboundSchema),
+    M.json(200, components.RegisterSearchIndexResponseIndex$inboundSchema),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
-    M.fail("4XX"),
-    M.fail("5XX"),
+    M.fail([400, 403, 404, "4XX"]),
+    M.fail([500, "5XX"]),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
