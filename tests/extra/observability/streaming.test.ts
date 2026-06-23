@@ -88,6 +88,30 @@ describe("accumulateChunksToResponseDict", () => {
     ]);
   });
 
+  test("accumulates content when delta.content is an array of ContentChunk objects", () => {
+    const arrayContentChunk: Record<string, unknown> = {
+      id: "id-1",
+      model: "m",
+      choices: [{
+        index: 0,
+        delta: {
+          role: "assistant",
+          content: [{ type: "text", text: "Bonjour" }],
+        },
+        finish_reason: null,
+      }],
+    };
+    const chunks = parseSseChunks(toSse([
+      arrayContentChunk,
+      chunk({ content: " monde", finishReason: "stop" }),
+    ]));
+    const result = accumulateChunksToResponseDict(chunks);
+    expect(result.choices).toEqual([{
+      message: { role: "assistant", content: "Bonjour monde" },
+      finish_reason: "stop",
+    }]);
+  });
+
   test("handles empty chunks", () => {
     expect(accumulateChunksToResponseDict([])).toEqual({ id: undefined, model: undefined, choices: [] });
   });
