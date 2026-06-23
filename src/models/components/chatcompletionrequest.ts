@@ -102,7 +102,7 @@ export type ChatCompletionRequestMessage =
   | UserMessage;
 
 export type ChatCompletionRequestTool =
-  | Tool
+  | (Tool & { type: "function" })
   | WebSearchTool
   | WebSearchPremiumTool
   | CodeInterpreterTool
@@ -163,7 +163,7 @@ export type ChatCompletionRequest = {
    */
   tools?:
     | Array<
-      | Tool
+      | (Tool & { type: "function" })
       | WebSearchTool
       | WebSearchPremiumTool
       | CodeInterpreterTool
@@ -259,7 +259,7 @@ export function chatCompletionRequestMessageToJSON(
 
 /** @internal */
 export type ChatCompletionRequestTool$Outbound =
-  | Tool$Outbound
+  | (Tool$Outbound & { type: "function" })
   | WebSearchTool$Outbound
   | WebSearchPremiumTool$Outbound
   | CodeInterpreterTool$Outbound
@@ -272,7 +272,7 @@ export const ChatCompletionRequestTool$outboundSchema: z.ZodType<
   ChatCompletionRequestTool$Outbound,
   ChatCompletionRequestTool
 > = z.union([
-  Tool$outboundSchema,
+  Tool$outboundSchema.and(z.object({ type: z.literal("function") })),
   WebSearchTool$outboundSchema,
   WebSearchPremiumTool$outboundSchema,
   CodeInterpreterTool$outboundSchema,
@@ -329,7 +329,7 @@ export type ChatCompletionRequest$Outbound = {
   response_format?: ResponseFormat$Outbound | undefined;
   tools?:
     | Array<
-      | Tool$Outbound
+      | (Tool$Outbound & { type: "function" })
       | WebSearchTool$Outbound
       | WebSearchPremiumTool$Outbound
       | CodeInterpreterTool$Outbound
@@ -379,7 +379,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   tools: z.nullable(
     z.array(
       z.union([
-        Tool$outboundSchema,
+        Tool$outboundSchema.and(z.object({ type: z.literal("function") })),
         WebSearchTool$outboundSchema,
         WebSearchPremiumTool$outboundSchema,
         CodeInterpreterTool$outboundSchema,

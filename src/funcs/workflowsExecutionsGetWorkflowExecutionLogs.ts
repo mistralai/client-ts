@@ -32,12 +32,10 @@ import { Result } from "../types/fp.js";
  * Get Workflow Execution Logs
  *
  * @remarks
- * Retrieve logs for a workflow execution from Dora.
+ * Retrieve logs for a workflow execution.
  *
- * First page sets the window via `after`/`before` (default: execution start through now, both
- * widened by a margin so the bounds still prune partitions); later pages pass `cursor`, which
- * carries both the window and the sort order (so `after`/`before`/`order` are then ignored —
- * the order is fixed at the first page so a client can't flip direction mid-pagination).
+ * Use `after`/`before`/`order` on the first request to set the time range and sort order; for
+ * the next pages pass the `cursor` from the previous response (it remembers the range and order).
  */
 export function workflowsExecutionsGetWorkflowExecutionLogs(
   client: MistralCore,
@@ -149,7 +147,7 @@ async function $do(
     query: query,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 60000,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

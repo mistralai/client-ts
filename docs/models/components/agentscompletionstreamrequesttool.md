@@ -7,7 +7,6 @@
 
 ```typescript
 const value: components.Tool = {
-  type: "function",
   function: {
     name: "<value>",
     parameters: {

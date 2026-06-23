@@ -34,6 +34,10 @@ import {
   PublicConnectionConfig,
   PublicConnectionConfig$inboundSchema,
 } from "./publicconnectionconfig.js";
+import {
+  PublicExecutionEnv,
+  PublicExecutionEnv$inboundSchema,
+} from "./publicexecutionenv.js";
 import { ResourceType, ResourceType$inboundSchema } from "./resourcetype.js";
 import {
   ResourceVisibility,
@@ -66,6 +70,7 @@ export type Connector = {
   tools?: Array<ConnectorTool> | null | undefined;
   systemPromptRoute?: string | null | undefined;
   connectionConfig?: PublicConnectionConfig | null | undefined;
+  executionEnv?: PublicExecutionEnv | null | undefined;
 };
 
 /** @internal */
@@ -102,6 +107,7 @@ export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
   system_prompt_route: z.nullable(z.string()).optional(),
   connection_config: z.nullable(PublicConnectionConfig$inboundSchema)
     .optional(),
+  execution_env: z.nullable(PublicExecutionEnv$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -118,6 +124,7 @@ export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
     "is_authenticated": "isAuthenticated",
     "system_prompt_route": "systemPromptRoute",
     "connection_config": "connectionConfig",
+    "execution_env": "executionEnv",
   });
 });
 

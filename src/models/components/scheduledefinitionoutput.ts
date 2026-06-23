@@ -92,6 +92,10 @@ export type ScheduleDefinitionOutput = {
    */
   workflowName: string;
   /**
+   * Name of the deployment this schedule targets.
+   */
+  deploymentName?: string | null | undefined;
+  /**
    * Whether the schedule is currently paused.
    */
   paused: boolean;
@@ -131,6 +135,7 @@ export const ScheduleDefinitionOutput$inboundSchema: z.ZodType<
   schedule_id: z.string(),
   remaining_executions: z.nullable(z.int()).optional(),
   workflow_name: z.string(),
+  deployment_name: z.nullable(z.string()).optional(),
   paused: z.boolean(),
   note: z.nullable(z.string()).optional(),
   future_executions: z.array(ScheduleFutureExecution$inboundSchema).optional(),
@@ -144,6 +149,7 @@ export const ScheduleDefinitionOutput$inboundSchema: z.ZodType<
     "schedule_id": "scheduleId",
     "remaining_executions": "remainingExecutions",
     "workflow_name": "workflowName",
+    "deployment_name": "deploymentName",
     "future_executions": "futureExecutions",
     "recent_executions": "recentExecutions",
   });

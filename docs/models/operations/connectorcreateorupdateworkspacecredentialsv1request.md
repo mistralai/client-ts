@@ -6,7 +6,7 @@
 import { ConnectorCreateOrUpdateWorkspaceCredentialsV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: ConnectorCreateOrUpdateWorkspaceCredentialsV1Request = {
-  connectorIdOrName: "<value>",
+  connectorIdOrName: "d5c2e52c-4412-4ef5-8de7-603dafe6b738",
   credentialsCreateOrUpdate: {
     name: "<value>",
   },

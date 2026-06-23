@@ -10,12 +10,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type StreamError = {
   error: string;
+  reason: string;
 };
 
 /** @internal */
 export const StreamError$inboundSchema: z.ZodType<StreamError, unknown> = z
   .object({
     error: z.string(),
+    reason: z.string(),
   });
 
 export function streamErrorFromJSON(
