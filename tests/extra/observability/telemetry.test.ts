@@ -1,6 +1,16 @@
-import { trace, type Span, type TracerProvider } from "@opentelemetry/api";
+import {
+  trace,
+  type Span,
+  type Tracer,
+  type TracerOptions,
+  type TracerProvider,
+} from "@opentelemetry/api";
 
 import { Mistral } from "../../../src/index.js";
+import {
+  getTelemetryTracer,
+  registerTracerProvider,
+} from "../../../src/extra/observability/index.js";
 import {
   configureTelemetry,
   configureTelemetryForHook,
@@ -18,6 +28,8 @@ type FakeProvider = TracerProvider & {
   shutdownCalled: boolean;
   shutdown: () => void;
 };
+
+type NamedTracer = Tracer & { label: string };
 
 function createSpan(): Span {
   const span = {
@@ -48,6 +60,28 @@ function createProvider(): FakeProvider {
     },
   } as FakeProvider;
   return provider;
+}
+
+function createNamedTracer(label: string): NamedTracer {
+  return {
+    label,
+    startSpan: () => createSpan(),
+    startActiveSpan: () => undefined as never,
+  } as NamedTracer;
+}
+
+function createNamedProvider(tracer: Tracer): TracerProvider {
+  return {
+    getTracer: vi.fn((
+      _name: string,
+      _version?: string,
+      _options?: TracerOptions,
+    ) => tracer),
+  } as TracerProvider;
+}
+
+function expectTracerLabel(tracer: Tracer, label: string): void {
+  expect((tracer as NamedTracer).label).toBe(label);
 }
 
 function createTelemetryModuleLoader(exporterInstances: Array<{ config: unknown }>) {
@@ -139,6 +173,11 @@ async function withEnv<T>(
     }
   }
 }
+
+afterEach(() => {
+  registerTracerProvider(undefined);
+  vi.restoreAllMocks();
+});
 
 describe("configureTelemetryForHook", () => {
   test("defaults to disabled when Mistral telemetry env is absent", async () => {
@@ -317,6 +356,104 @@ describe("configureTelemetry", () => {
     await setTracerProvider(client, provider);
 
     expect(hook.tracerProvider).toBe(provider);
+  });
+
+});
+
+describe("getTelemetryTracer", () => {
+  test("uses the provider configured on the client", async () => {
+    const client = createClient();
+    const clientTracer = createNamedTracer("client");
+    const registeredTracer = createNamedTracer("registered");
+    const provider = createNamedProvider(clientTracer);
+    const registeredProvider = createNamedProvider(registeredTracer);
+    const globalProviderSpy = vi.spyOn(trace, "getTracerProvider");
+    registerTracerProvider(registeredProvider);
+
+    await configureTelemetry(client, provider);
+
+    const tracer = getTelemetryTracer(client, "my-agent");
+
+    expectTracerLabel(tracer, "client");
+    expect(provider.getTracer).toHaveBeenCalledWith("my-agent", undefined, undefined);
+    expect(registeredProvider.getTracer).not.toHaveBeenCalled();
+    expect(globalProviderSpy).not.toHaveBeenCalled();
+  });
+
+  test("explicit global provider mode bypasses the registered provider", async () => {
+    const client = createClient();
+    const registeredTracer = createNamedTracer("registered");
+    const globalTracer = createNamedTracer("global");
+    const registeredProvider = createNamedProvider(registeredTracer);
+    const globalProvider = createNamedProvider(globalTracer);
+    registerTracerProvider(registeredProvider);
+    vi.spyOn(trace, "getTracerProvider").mockReturnValue(globalProvider);
+
+    await configureTelemetry(client, "global");
+
+    const tracer = getTelemetryTracer(client, "my-agent");
+
+    expectTracerLabel(tracer, "global");
+    expect(registeredProvider.getTracer).not.toHaveBeenCalled();
+    expect(globalProvider.getTracer).toHaveBeenCalledWith("my-agent", undefined, undefined);
+  });
+
+  test("env global mode bypasses the registered provider before configuration", async () => {
+    await withEnv({ [MISTRAL_SDK_TELEMETRY_ENV]: "global" }, async () => {
+      const client = createClient();
+      const registeredTracer = createNamedTracer("registered");
+      const globalTracer = createNamedTracer("global");
+      const registeredProvider = createNamedProvider(registeredTracer);
+      const globalProvider = createNamedProvider(globalTracer);
+      registerTracerProvider(registeredProvider);
+      vi.spyOn(trace, "getTracerProvider").mockReturnValue(globalProvider);
+
+      const tracer = getTelemetryTracer(client, "my-agent");
+
+      expectTracerLabel(tracer, "global");
+      expect(registeredProvider.getTracer).not.toHaveBeenCalled();
+      expect(globalProvider.getTracer).toHaveBeenCalledWith("my-agent", undefined, undefined);
+    });
+  });
+
+  test("falls back to the registered provider when no client provider is configured", () => {
+    const client = createClient();
+    const registeredTracer = createNamedTracer("registered");
+    const registeredProvider = createNamedProvider(registeredTracer);
+    const globalProviderSpy = vi.spyOn(trace, "getTracerProvider");
+    registerTracerProvider(registeredProvider);
+
+    const tracer = getTelemetryTracer(client, "my-agent");
+
+    expectTracerLabel(tracer, "registered");
+    expect(registeredProvider.getTracer).toHaveBeenCalledWith("my-agent", undefined, undefined);
+    expect(globalProviderSpy).not.toHaveBeenCalled();
+  });
+
+  test("falls back to the global provider when no client or registered provider is configured", () => {
+    const client = createClient();
+    const globalTracer = createNamedTracer("global");
+    const globalProvider = createNamedProvider(globalTracer);
+    vi.spyOn(trace, "getTracerProvider").mockReturnValue(globalProvider);
+
+    const tracer = getTelemetryTracer(client, "my-agent");
+
+    expectTracerLabel(tracer, "global");
+    expect(globalProvider.getTracer).toHaveBeenCalledWith("my-agent", undefined, undefined);
+  });
+
+  test("passes custom tracer name, version, and options to the selected provider", async () => {
+    const client = createClient();
+    const clientTracer = createNamedTracer("client");
+    const provider = createNamedProvider(clientTracer);
+    const options = { schemaUrl: "https://schema.test/v1" };
+
+    await configureTelemetry(client, provider);
+
+    const tracer = getTelemetryTracer(client, "my-agent", "1.2.3", options);
+
+    expectTracerLabel(tracer, "client");
+    expect(provider.getTracer).toHaveBeenCalledWith("my-agent", "1.2.3", options);
   });
 });
 

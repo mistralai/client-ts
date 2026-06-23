@@ -1,4 +1,9 @@
-import type { TracerProvider } from "@opentelemetry/api";
+import {
+  trace,
+  type Tracer,
+  type TracerOptions,
+  type TracerProvider,
+} from "@opentelemetry/api";
 
 import type { SDKOptions } from "../../lib/config.js";
 import type { SecurityState } from "../../lib/security.js";
@@ -108,6 +113,20 @@ export async function setTracerProvider(
   provider: TracerProvider,
 ): Promise<boolean> {
   return configureTelemetry(client, provider);
+}
+
+export function getTelemetryTracer(
+  client: ClientWithHooks,
+  name: string,
+  version?: string,
+  options?: TracerOptions,
+): Tracer {
+  const hook = getTracingHook(client);
+  const providerMode = resolveMistralTelemetryEnv();
+  return getClientTracerProvider(
+    hook,
+    providerMode === TELEMETRY_PROVIDER_GLOBAL,
+  ).getTracer(name, version, options);
 }
 
 export async function configureTelemetryForHook(
@@ -295,6 +314,24 @@ function isTelemetryCapableTracingHook(
       typeof hook === "object" &&
       (hook as { _mistralTracingHook?: unknown })._mistralTracingHook === true,
   );
+}
+
+function getClientTracerProvider(
+  hook: TelemetryCapableTracingHook,
+  usesGlobalProvider: boolean,
+): TracerProvider {
+  if (hook.tracerProvider !== undefined) {
+    return hook.tracerProvider;
+  }
+
+  if (!usesGlobalProvider && !hook._telemetryUseGlobalProvider) {
+    const registeredProvider = getRegisteredTracerProvider();
+    if (registeredProvider !== undefined) {
+      return registeredProvider;
+    }
+  }
+
+  return trace.getTracerProvider();
 }
 
 function resolveTelemetryMode(value: boolean | string): TelemetryProviderMode | null {
