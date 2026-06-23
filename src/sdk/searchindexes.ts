@@ -3,33 +3,166 @@
  * @generated-id: 9a1b36425210
  */
 
-import { betaRagSearchIndexesList } from "../funcs/betaRagSearchIndexesList.js";
+import { betaRagSearchIndexesGetIndexDetail } from "../funcs/betaRagSearchIndexesGetIndexDetail.js";
+import { betaRagSearchIndexesGetIndexSchemaDetail } from "../funcs/betaRagSearchIndexesGetIndexSchemaDetail.js";
+import { betaRagSearchIndexesGetIndexSchemaFile } from "../funcs/betaRagSearchIndexesGetIndexSchemaFile.js";
+import { betaRagSearchIndexesGetIndexSummaries } from "../funcs/betaRagSearchIndexesGetIndexSummaries.js";
 import { betaRagSearchIndexesRegister } from "../funcs/betaRagSearchIndexesRegister.js";
+import { betaRagSearchIndexesSetIndexSummary } from "../funcs/betaRagSearchIndexesSetIndexSummary.js";
+import { betaRagSearchIndexesSetSchemaSummary } from "../funcs/betaRagSearchIndexesSetSchemaSummary.js";
+import { betaRagSearchIndexesUnregister } from "../funcs/betaRagSearchIndexesUnregister.js";
+import { betaRagSearchIndexesUpdateIndexMetrics } from "../funcs/betaRagSearchIndexesUpdateIndexMetrics.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
+import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class SearchIndexes extends ClientSDK {
   /**
-   * Get Search Indexes
+   * Register (or re-register) a search index
    */
-  async list(
+  async register(
+    request: components.RegisterSearchIndexRequestIndex,
     options?: RequestOptions,
-  ): Promise<Array<components.SearchIndexResponse>> {
-    return unwrapAsync(betaRagSearchIndexesList(
+  ): Promise<components.RegisterSearchIndexResponseIndex> {
+    return unwrapAsync(betaRagSearchIndexesRegister(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Index Summaries
+   *
+   * @remarks
+   * Fetch summary view of all indexes available to a user
+   */
+  async getIndexSummaries(
+    options?: RequestOptions,
+  ): Promise<Array<components.GetSearchIndexSummaryResponseIndex>> {
+    return unwrapAsync(betaRagSearchIndexesGetIndexSummaries(
       this,
       options,
     ));
   }
 
   /**
-   * Register Search Index
+   * Unregister Search Index
+   *
+   * @remarks
+   * Delete all information about an index
    */
-  async register(
-    request: components.CreateSearchIndexInfoRequest,
+  async unregister(
+    request:
+      operations.UnregisterSearchIndexV1RagIndexesIndexIndexIdDeleteRequest,
     options?: RequestOptions,
-  ): Promise<components.SearchIndexResponse> {
-    return unwrapAsync(betaRagSearchIndexesRegister(
+  ): Promise<any> {
+    return unwrapAsync(betaRagSearchIndexesUnregister(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update Index Metrics
+   *
+   * @remarks
+   * Update the metrics for a given index
+   */
+  async updateIndexMetrics(
+    request:
+      operations.UpdateIndexMetricsV1RagIndexesIndexIndexIdMetricsPutRequest,
+    options?: RequestOptions,
+  ): Promise<any> {
+    return unwrapAsync(betaRagSearchIndexesUpdateIndexMetrics(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Index Details
+   *
+   * @remarks
+   * Get a detailed view of the stored data for a single index
+   */
+  async getIndexDetail(
+    request: operations.GetIndexDetailsV1RagIndexesIndexIndexIdDetailGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetSearchIndexDetailResponseIndex> {
+    return unwrapAsync(betaRagSearchIndexesGetIndexDetail(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set Index Summary
+   *
+   * @remarks
+   * Update the summary field for an index
+   */
+  async setIndexSummary(
+    request:
+      operations.SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldPutRequest,
+    options?: RequestOptions,
+  ): Promise<any> {
+    return unwrapAsync(betaRagSearchIndexesSetIndexSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Index Schema Detail
+   *
+   * @remarks
+   * Get a detailed view of the stored information for a schema
+   */
+  async getIndexSchemaDetail(
+    request:
+      operations.GetIndexSchemaDetailV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdDetailGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetSearchIndexSchemaDetailResponseSchemaModel> {
+    return unwrapAsync(betaRagSearchIndexesGetIndexSchemaDetail(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set Schema Summary
+   *
+   * @remarks
+   * Update the summary field for an index
+   */
+  async setSchemaSummary(
+    request:
+      operations.SetSchemaSummaryV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdSummaryFieldPutRequest,
+    options?: RequestOptions,
+  ): Promise<any> {
+    return unwrapAsync(betaRagSearchIndexesSetSchemaSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Index Schema File
+   */
+  async getIndexSchemaFile(
+    request:
+      operations.GetIndexSchemaFileV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdFileGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetSearchIndexSchemaSDFileResponseSDFile> {
+    return unwrapAsync(betaRagSearchIndexesGetIndexSchemaFile(
       this,
       request,
       options,

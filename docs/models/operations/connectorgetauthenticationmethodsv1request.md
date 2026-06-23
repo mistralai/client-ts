@@ -6,7 +6,7 @@
 import { ConnectorGetAuthenticationMethodsV1Request } from "@mistralai/mistralai/models/operations";
 
 let value: ConnectorGetAuthenticationMethodsV1Request = {
-  connectorIdOrName: "<value>",
+  connectorIdOrName: "429eaf89-a2b0-4170-ac98-831a5861d953",
 };
 ```
 

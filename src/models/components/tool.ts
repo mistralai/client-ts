@@ -4,29 +4,52 @@
  */
 
 import * as z from "zod/v4";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FunctionT,
+  FunctionT$inboundSchema,
   FunctionT$Outbound,
   FunctionT$outboundSchema,
 } from "./function.js";
+import {
+  ToolTypes,
+  ToolTypes$inboundSchema,
+  ToolTypes$outboundSchema,
+} from "./tooltypes.js";
 
 export type Tool = {
-  type: "function";
+  type?: ToolTypes | undefined;
   function: FunctionT;
 };
 
 /** @internal */
+export const Tool$inboundSchema: z.ZodType<Tool, unknown> = z.object({
+  type: ToolTypes$inboundSchema.optional(),
+  function: FunctionT$inboundSchema,
+});
+/** @internal */
 export type Tool$Outbound = {
-  type: "function";
+  type?: string | undefined;
   function: FunctionT$Outbound;
 };
 
 /** @internal */
 export const Tool$outboundSchema: z.ZodType<Tool$Outbound, Tool> = z.object({
-  type: z.literal("function"),
+  type: ToolTypes$outboundSchema.optional(),
   function: FunctionT$outboundSchema,
 });
 
 export function toolToJSON(tool: Tool): string {
   return JSON.stringify(Tool$outboundSchema.parse(tool));
+}
+export function toolFromJSON(
+  jsonString: string,
+): SafeParseResult<Tool, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Tool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Tool' from JSON`,
+  );
 }

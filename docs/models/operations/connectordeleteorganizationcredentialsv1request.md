@@ -7,7 +7,7 @@ import { ConnectorDeleteOrganizationCredentialsV1Request } from "@mistralai/mist
 
 let value: ConnectorDeleteOrganizationCredentialsV1Request = {
   credentialsName: "<value>",
-  connectorIdOrName: "<value>",
+  connectorIdOrName: "c779ecfc-0e8d-4511-bd53-249de82c6619",
 };
 ```
 

@@ -7,6 +7,7 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ConnectorGetV1Request = {
+  connectorIdOrName: string;
   /**
    * Fetch the user-level data associated with the connector (e.g. connection credentials).
    */
@@ -15,14 +16,13 @@ export type ConnectorGetV1Request = {
    * Fetch the customer data associated with the connector (e.g. customer secrets / config).
    */
   fetchCustomerData?: boolean | undefined;
-  connectorIdOrName: string;
 };
 
 /** @internal */
 export type ConnectorGetV1Request$Outbound = {
+  connector_id_or_name: string;
   fetch_user_data: boolean;
   fetch_customer_data: boolean;
-  connector_id_or_name: string;
 };
 
 /** @internal */
@@ -30,14 +30,14 @@ export const ConnectorGetV1Request$outboundSchema: z.ZodType<
   ConnectorGetV1Request$Outbound,
   ConnectorGetV1Request
 > = z.object({
+  connectorIdOrName: z.string(),
   fetchUserData: z.boolean().default(false),
   fetchCustomerData: z.boolean().default(false),
-  connectorIdOrName: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    connectorIdOrName: "connector_id_or_name",
     fetchUserData: "fetch_user_data",
     fetchCustomerData: "fetch_customer_data",
-    connectorIdOrName: "connector_id_or_name",
   });
 });
 
