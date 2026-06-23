@@ -4,6 +4,11 @@
   "author": "Mistral AI",
   "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
+  "peerDependenciesMeta": {
+    "@opentelemetry/api": {
+      "optional": true
+    }
+  },
   "type": "module",
   "main": "./esm/index.js",
   "exports": {
@@ -69,6 +74,9 @@
     "build": "tsgo",
     "prepublishOnly": "npm run build"
   },
+  "peerDependencies": {
+    "@opentelemetry/api": "^1.9.0"
+  },
   "devDependencies": {
     "@opentelemetry/api": "^1.9.0",
     "@types/node": "^22.0.0",
@@ -82,13 +90,5 @@
     "ws": "^8.18.0",
     "zod": "^3.25.0 || ^4.0.0",
     "zod-to-json-schema": "^3.25.0"
-  },
-  "peerDependencies": {
-    "@opentelemetry/api": "^1.9.0"
-  },
-  "peerDependenciesMeta": {
-    "@opentelemetry/api": {
-      "optional": true
-    }
   }
 }
