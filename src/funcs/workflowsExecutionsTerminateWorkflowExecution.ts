@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/workflows/executions/{execution_id}/terminate")(
     pathParams,
   );

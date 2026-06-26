@@ -96,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/workflows/runs/{run_id}/history")(pathParams);
 
   const query = encodeFormQuery({

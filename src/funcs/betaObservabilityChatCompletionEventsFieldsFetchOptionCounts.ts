@@ -100,7 +100,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/observability/chat-completion-fields/{field_name}/options-counts",
   )(pathParams);

@@ -623,11 +623,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.skills.updateVersionMetadata("<id>", 521507, {
-    aliases: [
-      "<value 1>",
-    ],
-  });
+  const result = await mistral.beta.skills.updateVersionMetadata("<id>", 521507, {});
 
   console.log(result);
 }
@@ -650,11 +646,7 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaSkillsUpdateVersionMetadata(mistral, "<id>", 521507, {
-    aliases: [
-      "<value 1>",
-    ],
-  });
+  const res = await betaSkillsUpdateVersionMetadata(mistral, "<id>", 521507, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);

@@ -99,7 +99,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v1/workflows/{workflow_identifier}/unarchive")(
     pathParams,
   );

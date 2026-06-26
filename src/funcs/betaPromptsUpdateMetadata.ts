@@ -97,7 +97,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/prompts/{prompt_id}")(pathParams);
 
   const headers = new Headers(compactMap({

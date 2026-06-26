@@ -120,7 +120,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/workflows/{workflow_name}/metrics")(pathParams);
 
   const query = encodeFormQuery({

@@ -102,7 +102,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/workflows/registrations/{workflow_registration_id}/execute",
   )(pathParams);

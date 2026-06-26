@@ -102,7 +102,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/observability/traces/{trace_id}/spans/{span_id}",
   )(pathParams);

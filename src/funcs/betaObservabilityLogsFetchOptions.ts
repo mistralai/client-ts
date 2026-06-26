@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/observability/logs/fields/{field_name}/options")(
     pathParams,
   );

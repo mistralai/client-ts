@@ -100,7 +100,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/observability/chat-completion-events/{event_id}/live-judging",
   )(pathParams);

@@ -8,12 +8,7 @@ import { PromptsUpdateVersionMetadataRequest } from "@mistralai/mistralai/models
 let value: PromptsUpdateVersionMetadataRequest = {
   promptId: "<id>",
   version: 43018,
-  requestBody: {
-    aliases: [
-      "<value 1>",
-      "<value 2>",
-    ],
-  },
+  requestBody: {},
 };
 ```
 

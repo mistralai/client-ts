@@ -8,13 +8,7 @@ import { SkillsUpdateVersionMetadataRequest } from "@mistralai/mistralai/models/
 let value: SkillsUpdateVersionMetadataRequest = {
   skillId: "<id>",
   version: 651173,
-  requestBody: {
-    aliases: [
-      "<value 1>",
-      "<value 2>",
-      "<value 3>",
-    ],
-  },
+  requestBody: {},
 };
 ```
 

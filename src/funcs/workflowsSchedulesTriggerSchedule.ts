@@ -100,7 +100,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1/workflows/schedules/{schedule_id}/trigger")(
     pathParams,
   );

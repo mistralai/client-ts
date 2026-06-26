@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/rag/ingestion_pipeline_configurations/{id}/run_info",
   )(pathParams);

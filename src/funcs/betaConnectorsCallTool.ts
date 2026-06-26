@@ -104,7 +104,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc(
     "/v1/connectors/{connector_id_or_name}/tools/{tool_name}/call",
   )(pathParams);

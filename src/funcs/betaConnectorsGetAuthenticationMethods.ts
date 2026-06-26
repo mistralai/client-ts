@@ -100,7 +100,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc(
     "/v1/connectors/{connector_id_or_name}/authentication_methods",
   )(pathParams);

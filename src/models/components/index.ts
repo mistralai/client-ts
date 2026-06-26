@@ -19,6 +19,7 @@ export * from "./agenthandoffentry.js";
 export * from "./agenthandoffstartedevent.js";
 export * from "./agentscompletionrequest.js";
 export * from "./agentscompletionstreamrequest.js";
+export * from "./aliaslist.js";
 export * from "./annotations.js";
 export * from "./apiendpoint.js";
 export * from "./apikeyauth.js";

@@ -17,9 +17,9 @@ export type UpdateSkillVersionRequest = {
    */
   notes?: string | null | undefined;
   /**
-   * Aliases pointing to this version.
+   * Presence wrapper for a set of alias labels on update RPCs. As a message field it carries presence, so callers can distinguish "leave aliases unchanged" (field omitted) from "clear all aliases" (field set, empty ``values``).
    */
-  aliases: Array<string>;
+  aliases?: components.AliasList | undefined;
 };
 
 export type SkillsUpdateVersionMetadataRequest = {
@@ -35,7 +35,7 @@ export type SkillsUpdateVersionMetadataResponse =
 /** @internal */
 export type UpdateSkillVersionRequest$Outbound = {
   notes?: string | null | undefined;
-  aliases: Array<string>;
+  aliases?: components.AliasList$Outbound | undefined;
 };
 
 /** @internal */
@@ -44,7 +44,7 @@ export const UpdateSkillVersionRequest$outboundSchema: z.ZodType<
   UpdateSkillVersionRequest
 > = z.object({
   notes: z.nullable(z.string()).optional(),
-  aliases: z.array(z.string()),
+  aliases: components.AliasList$outboundSchema.optional(),
 });
 
 export function updateSkillVersionRequestToJSON(

@@ -89,7 +89,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/skills/{skill_id}")(pathParams);
 
   const query = encodeFormQuery({
