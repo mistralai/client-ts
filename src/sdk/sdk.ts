@@ -20,6 +20,11 @@ import { Ocr } from "./ocr.js";
 import { Workflows } from "./workflows.js";
 
 export class Mistral extends ClientSDK {
+  private _beta?: Beta;
+  get beta(): Beta {
+    return (this._beta ??= new Beta(this._options));
+  }
+
   private _audio?: Audio;
   get audio(): Audio {
     return (this._audio ??= new Audio(this._options));
@@ -28,11 +33,6 @@ export class Mistral extends ClientSDK {
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
-  }
-
-  private _beta?: Beta;
-  get beta(): Beta {
-    return (this._beta ??= new Beta(this._options));
   }
 
   private _files?: Files;
