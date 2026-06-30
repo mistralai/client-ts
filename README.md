@@ -332,6 +332,8 @@ We have dedicated SDKs for the following providers:
 
 * [list](docs/sdks/documents/README.md#list) - List documents in a given library.
 * [upload](docs/sdks/documents/README.md#upload) - Upload a new document.
+* [getSignedUploadUrl](docs/sdks/documents/README.md#getsigneduploadurl) - Get a signed URL for direct upload to blob storage.
+* [ingestFromBlobStorage](docs/sdks/documents/README.md#ingestfromblobstorage) - Ingest a document from blob storage of the document library.
 * [get](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
 * [update](docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
 * [~~librariesDocumentsUpdateV1~~](docs/sdks/documents/README.md#librariesdocumentsupdatev1) - Update the metadata of a specific document. :warning: **Deprecated**
@@ -426,6 +428,18 @@ We have dedicated SDKs for the following providers:
 * [fetchOptions](docs/sdks/traces/README.md#fetchoptions) - Get options for a trace field
 * [getSpanById](docs/sdks/traces/README.md#getspanbyid) - Get span by id
 
+### [Beta.Prompts](docs/sdks/prompts/README.md)
+
+* [list](docs/sdks/prompts/README.md#list) - ListPrompts
+* [create](docs/sdks/prompts/README.md#create) - CreatePrompt
+* [get](docs/sdks/prompts/README.md#get) - GetPrompt
+* [delete](docs/sdks/prompts/README.md#delete) - DeletePrompt
+* [updateMetadata](docs/sdks/prompts/README.md#updatemetadata) - UpdatePrompt
+* [listVersions](docs/sdks/prompts/README.md#listversions) - ListPromptVersions
+* [createVersion](docs/sdks/prompts/README.md#createversion) - CreatePromptVersion
+* [getVersion](docs/sdks/prompts/README.md#getversion) - GetPromptVersion
+* [updateVersionMetadata](docs/sdks/prompts/README.md#updateversionmetadata) - UpdatePromptVersionMetadata
+
 ### [Beta.Rag.IngestionPipelineConfigurations](docs/sdks/ingestionpipelineconfigurations/README.md)
 
 * [list](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
@@ -445,6 +459,18 @@ We have dedicated SDKs for the following providers:
 * [getIndexSchemaFile](docs/sdks/searchindexes/README.md#getindexschemafile) - Get Index Schema File
 * [documentLookup](docs/sdks/searchindexes/README.md#documentlookup) - Document Lookup
 * [documentsFetch](docs/sdks/searchindexes/README.md#documentsfetch) - Document Fetch
+
+### [Beta.Skills](docs/sdks/skills/README.md)
+
+* [list](docs/sdks/skills/README.md#list) - ListSkills
+* [create](docs/sdks/skills/README.md#create) - CreateSkill
+* [get](docs/sdks/skills/README.md#get) - GetSkill
+* [delete](docs/sdks/skills/README.md#delete) - DeleteSkill
+* [updateMetadata](docs/sdks/skills/README.md#updatemetadata) - UpdateSkill
+* [listVersions](docs/sdks/skills/README.md#listversions) - ListSkillVersions
+* [createVersion](docs/sdks/skills/README.md#createversion) - CreateSkillVersion
+* [getVersion](docs/sdks/skills/README.md#getversion) - GetSkillVersion
+* [updateVersionMetadata](docs/sdks/skills/README.md#updateversionmetadata) - UpdateSkillVersionMetadata
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -589,11 +615,27 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.audio.speech.complete({
-    input: "<value>",
+  const result = await mistral.beta.conversations.startStream({
+    inputs: [
+      {
+        object: "entry",
+        type: "agent.handoff",
+        previousAgentId: "<id>",
+        previousAgentName: "<value>",
+        nextAgentId: "<id>",
+        nextAgentName: "<value>",
+      },
+    ],
+    completionArgs: {
+      responseFormat: {
+        type: "text",
+      },
+    },
   });
 
-  console.log(result);
+  for await (const event of result) {
+    console.log(event);
+  }
 }
 
 run();
@@ -624,7 +666,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.workflows.getWorkflows({});
+  const result = await mistral.beta.prompts.list();
 
   for await (const page of result) {
     console.log(page);
@@ -652,14 +694,18 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
+import { openAsBlob } from "node:fs";
 
 const mistral = new Mistral({
   apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
 async function run() {
-  const result = await mistral.audio.transcriptions.complete({
-    model: "voxtral-mini-latest",
+  const result = await mistral.beta.libraries.documents.upload({
+    libraryId: "a02150d9-5ee0-4877-b62c-28b1fcdf3b76",
+    requestBody: {
+      file: await openAsBlob("example.file"),
+    },
   });
 
   console.log(result);
@@ -684,9 +730,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.audio.speech.complete({
-    input: "<value>",
-  }, {
+  const result = await mistral.beta.prompts.list(undefined, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -699,7 +743,9 @@ async function run() {
     },
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -725,11 +771,11 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.audio.speech.complete({
-    input: "<value>",
-  });
+  const result = await mistral.beta.prompts.list();
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -762,8 +808,13 @@ const mistral = new Mistral({
 
 async function run() {
   try {
-    const result = await mistral.audio.speech.complete({
-      input: "<value>",
+    const result = await mistral.beta.conversations.start({
+      inputs: "<value>",
+      completionArgs: {
+        responseFormat: {
+          type: "text",
+        },
+      },
     });
 
     console.log(result);
@@ -804,8 +855,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 145 of 228 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 228 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 147 of 248 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 248 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -835,11 +886,11 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.audio.speech.complete({
-    input: "<value>",
-  });
+  const result = await mistral.beta.prompts.list();
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -858,11 +909,11 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.audio.speech.complete({
-    input: "<value>",
-  });
+  const result = await mistral.beta.prompts.list();
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -943,11 +994,11 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.audio.speech.complete({
-    input: "<value>",
-  });
+  const result = await mistral.beta.prompts.list();
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -1041,7 +1092,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaLibrariesDocumentsDelete`](docs/sdks/documents/README.md#delete) - Delete a document.
 - [`betaLibrariesDocumentsExtractedTextSignedUrl`](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
 - [`betaLibrariesDocumentsGet`](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
+- [`betaLibrariesDocumentsGetSignedUploadUrl`](docs/sdks/documents/README.md#getsigneduploadurl) - Get a signed URL for direct upload to blob storage.
 - [`betaLibrariesDocumentsGetSignedUrl`](docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
+- [`betaLibrariesDocumentsIngestFromBlobStorage`](docs/sdks/documents/README.md#ingestfromblobstorage) - Ingest a document from blob storage of the document library.
 - [`betaLibrariesDocumentsList`](docs/sdks/documents/README.md#list) - List documents in a given library.
 - [`betaLibrariesDocumentsReprocess`](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
 - [`betaLibrariesDocumentsStatus`](docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
@@ -1108,6 +1161,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityTracesGetTraceFields`](docs/sdks/traces/README.md#gettracefields) - Get trace field definitions
 - [`betaObservabilityTracesGetTraceSpans`](docs/sdks/traces/README.md#gettracespans) - Get trace spans
 - [`betaObservabilityTracesSearch`](docs/sdks/traces/README.md#search) - Search traces
+- [`betaPromptsCreate`](docs/sdks/prompts/README.md#create) - CreatePrompt
+- [`betaPromptsCreateVersion`](docs/sdks/prompts/README.md#createversion) - CreatePromptVersion
+- [`betaPromptsDelete`](docs/sdks/prompts/README.md#delete) - DeletePrompt
+- [`betaPromptsGet`](docs/sdks/prompts/README.md#get) - GetPrompt
+- [`betaPromptsGetVersion`](docs/sdks/prompts/README.md#getversion) - GetPromptVersion
+- [`betaPromptsList`](docs/sdks/prompts/README.md#list) - ListPrompts
+- [`betaPromptsListVersions`](docs/sdks/prompts/README.md#listversions) - ListPromptVersions
+- [`betaPromptsUpdateMetadata`](docs/sdks/prompts/README.md#updatemetadata) - UpdatePrompt
+- [`betaPromptsUpdateVersionMetadata`](docs/sdks/prompts/README.md#updateversionmetadata) - UpdatePromptVersionMetadata
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
@@ -1122,6 +1184,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagSearchIndexesSetSchemaSummary`](docs/sdks/searchindexes/README.md#setschemasummary) - Set Schema Summary
 - [`betaRagSearchIndexesUnregister`](docs/sdks/searchindexes/README.md#unregister) - Unregister Search Index
 - [`betaRagSearchIndexesUpdateIndexMetrics`](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
+- [`betaSkillsCreate`](docs/sdks/skills/README.md#create) - CreateSkill
+- [`betaSkillsCreateVersion`](docs/sdks/skills/README.md#createversion) - CreateSkillVersion
+- [`betaSkillsDelete`](docs/sdks/skills/README.md#delete) - DeleteSkill
+- [`betaSkillsGet`](docs/sdks/skills/README.md#get) - GetSkill
+- [`betaSkillsGetVersion`](docs/sdks/skills/README.md#getversion) - GetSkillVersion
+- [`betaSkillsList`](docs/sdks/skills/README.md#list) - ListSkills
+- [`betaSkillsListVersions`](docs/sdks/skills/README.md#listversions) - ListSkillVersions
+- [`betaSkillsUpdateMetadata`](docs/sdks/skills/README.md#updatemetadata) - UpdateSkill
+- [`betaSkillsUpdateVersionMetadata`](docs/sdks/skills/README.md#updateversionmetadata) - UpdateSkillVersionMetadata
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications

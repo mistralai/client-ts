@@ -6,7 +6,9 @@
 import { betaLibrariesDocumentsDelete } from "../funcs/betaLibrariesDocumentsDelete.js";
 import { betaLibrariesDocumentsExtractedTextSignedUrl } from "../funcs/betaLibrariesDocumentsExtractedTextSignedUrl.js";
 import { betaLibrariesDocumentsGet } from "../funcs/betaLibrariesDocumentsGet.js";
+import { betaLibrariesDocumentsGetSignedUploadUrl } from "../funcs/betaLibrariesDocumentsGetSignedUploadUrl.js";
 import { betaLibrariesDocumentsGetSignedUrl } from "../funcs/betaLibrariesDocumentsGetSignedUrl.js";
+import { betaLibrariesDocumentsIngestFromBlobStorage } from "../funcs/betaLibrariesDocumentsIngestFromBlobStorage.js";
 import { betaLibrariesDocumentsLibrariesDocumentsUpdateV1 } from "../funcs/betaLibrariesDocumentsLibrariesDocumentsUpdateV1.js";
 import { betaLibrariesDocumentsList } from "../funcs/betaLibrariesDocumentsList.js";
 import { betaLibrariesDocumentsReprocess } from "../funcs/betaLibrariesDocumentsReprocess.js";
@@ -48,6 +50,40 @@ export class Documents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Document> {
     return unwrapAsync(betaLibrariesDocumentsUpload(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a signed URL for direct upload to blob storage.
+   *
+   * @remarks
+   * Returns a signed URL that can be used to upload a file directly to Azure Blob Storage. To process the upload call ingest-from-blob-storage.
+   */
+  async getSignedUploadUrl(
+    request: operations.LibrariesDocumentsGetSignedUploadUrlV1Request,
+    options?: RequestOptions,
+  ): Promise<components.RequestUploadUrlResponse> {
+    return unwrapAsync(betaLibrariesDocumentsGetSignedUploadUrl(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Ingest a document from blob storage of the document library.
+   *
+   * @remarks
+   * Ingest a document that was uploaded via a signed URL of the document library from blob storage into the library.
+   */
+  async ingestFromBlobStorage(
+    request: operations.LibrariesDocumentsIngestFromBlobStorageV1Request,
+    options?: RequestOptions,
+  ): Promise<components.Document> {
+    return unwrapAsync(betaLibrariesDocumentsIngestFromBlobStorage(
       this,
       request,
       options,
