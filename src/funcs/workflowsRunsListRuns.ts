@@ -120,6 +120,7 @@ async function $do(
     "status": payload?.status,
     "user_id": payload?.user_id,
     "workflow_identifier": payload?.workflow_identifier,
+    "workflow_tags": payload?.workflow_tags,
   });
 
   const headers = new Headers(compactMap({

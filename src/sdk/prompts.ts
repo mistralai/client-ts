@@ -39,7 +39,7 @@ export class Prompts extends ClientSDK {
   async create(
     request: components.CreatePromptRequest,
     options?: RequestOptions,
-  ): Promise<operations.PromptsCreateResponse> {
+  ): Promise<components.Prompt> {
     return unwrapAsync(betaPromptsCreate(
       this,
       request,
@@ -53,7 +53,7 @@ export class Prompts extends ClientSDK {
   async get(
     request: operations.PromptsGetRequest,
     options?: RequestOptions,
-  ): Promise<operations.PromptsGetResponse> {
+  ): Promise<components.Prompt> {
     return unwrapAsync(betaPromptsGet(
       this,
       request,
@@ -67,7 +67,7 @@ export class Prompts extends ClientSDK {
   async delete(
     request: operations.PromptsDeleteRequest,
     options?: RequestOptions,
-  ): Promise<operations.PromptsDeleteResponse> {
+  ): Promise<components.DeletePromptResponse> {
     return unwrapAsync(betaPromptsDelete(
       this,
       request,
@@ -82,7 +82,7 @@ export class Prompts extends ClientSDK {
     promptId: string,
     requestBody: operations.UpdatePromptRequest,
     options?: RequestOptions,
-  ): Promise<operations.PromptsUpdateResponse> {
+  ): Promise<components.Prompt> {
     return unwrapAsync(betaPromptsUpdateMetadata(
       this,
       promptId,
@@ -97,7 +97,7 @@ export class Prompts extends ClientSDK {
   async listVersions(
     request: operations.PromptsListVersionsRequest,
     options?: RequestOptions,
-  ): Promise<operations.PromptsListVersionsResponse> {
+  ): Promise<components.ListPromptVersionsResponse> {
     return unwrapAsync(betaPromptsListVersions(
       this,
       request,
@@ -112,7 +112,7 @@ export class Prompts extends ClientSDK {
     promptId: string,
     requestBody: operations.CreatePromptVersionRequest,
     options?: RequestOptions,
-  ): Promise<operations.PromptsCreateVersionResponse> {
+  ): Promise<components.CreatePromptVersionResponse> {
     return unwrapAsync(betaPromptsCreateVersion(
       this,
       promptId,
@@ -127,7 +127,7 @@ export class Prompts extends ClientSDK {
   async getVersion(
     request: operations.PromptsGetVersionRequest,
     options?: RequestOptions,
-  ): Promise<operations.PromptsGetVersionResponse> {
+  ): Promise<components.Prompt> {
     return unwrapAsync(betaPromptsGetVersion(
       this,
       request,
@@ -143,7 +143,7 @@ export class Prompts extends ClientSDK {
     version: number,
     requestBody: operations.UpdatePromptVersionRequest,
     options?: RequestOptions,
-  ): Promise<operations.PromptsUpdateVersionMetadataResponse> {
+  ): Promise<components.Prompt> {
     return unwrapAsync(betaPromptsUpdateVersionMetadata(
       this,
       promptId,

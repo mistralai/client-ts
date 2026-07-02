@@ -14,7 +14,6 @@ import { Embeddings } from "./embeddings.js";
 import { Events } from "./events.js";
 import { Files } from "./files.js";
 import { Fim } from "./fim.js";
-import { FineTuning } from "./finetuning.js";
 import { Models } from "./models.js";
 import { Ocr } from "./ocr.js";
 import { Workflows } from "./workflows.js";
@@ -38,11 +37,6 @@ export class Mistral extends ClientSDK {
   private _files?: Files;
   get files(): Files {
     return (this._files ??= new Files(this._options));
-  }
-
-  private _fineTuning?: FineTuning;
-  get fineTuning(): FineTuning {
-    return (this._fineTuning ??= new FineTuning(this._options));
   }
 
   private _batch?: Batch;

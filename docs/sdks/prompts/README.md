@@ -158,7 +158,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.PromptsCreateResponse](../../models/operations/promptscreateresponse.md)\>**
+**Promise\<[components.Prompt](../../models/components/prompt.md)\>**
 
 ### Errors
 
@@ -183,6 +183,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.prompts.get({
     promptId: "<id>",
+    version: 1,
   });
 
   console.log(result);
@@ -208,6 +209,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaPromptsGet(mistral, {
     promptId: "<id>",
+    version: 1,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -231,7 +233,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.PromptsGetResponse](../../models/operations/promptsgetresponse.md)\>**
+**Promise\<[components.Prompt](../../models/components/prompt.md)\>**
 
 ### Errors
 
@@ -304,7 +306,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.PromptsDeleteResponse](../../models/operations/promptsdeleteresponse.md)\>**
+**Promise\<[components.DeletePromptResponse](../../models/components/deletepromptresponse.md)\>**
 
 ### Errors
 
@@ -374,7 +376,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.PromptsUpdateResponse](../../models/operations/promptsupdateresponse.md)\>**
+**Promise\<[components.Prompt](../../models/components/prompt.md)\>**
 
 ### Errors
 
@@ -447,7 +449,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.PromptsListVersionsResponse](../../models/operations/promptslistversionsresponse.md)\>**
+**Promise\<[components.ListPromptVersionsResponse](../../models/components/listpromptversionsresponse.md)\>**
 
 ### Errors
 
@@ -525,7 +527,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.PromptsCreateVersionResponse](../../models/operations/promptscreateversionresponse.md)\>**
+**Promise\<[components.CreatePromptVersionResponse](../../models/components/createpromptversionresponse.md)\>**
 
 ### Errors
 
@@ -550,7 +552,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.prompts.getVersion({
     promptId: "<id>",
-    version: 600480,
+    version: 1,
   });
 
   console.log(result);
@@ -576,7 +578,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaPromptsGetVersion(mistral, {
     promptId: "<id>",
-    version: 600480,
+    version: 1,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -600,7 +602,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.PromptsGetVersionResponse](../../models/operations/promptsgetversionresponse.md)\>**
+**Promise\<[components.Prompt](../../models/components/prompt.md)\>**
 
 ### Errors
 
@@ -623,7 +625,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.prompts.updateVersionMetadata("<id>", 422846, {});
+  const result = await mistral.beta.prompts.updateVersionMetadata("<id>", 1, {});
 
   console.log(result);
 }
@@ -646,7 +648,7 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaPromptsUpdateVersionMetadata(mistral, "<id>", 422846, {});
+  const res = await betaPromptsUpdateVersionMetadata(mistral, "<id>", 1, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -660,18 +662,18 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `promptId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `version`                                                                                                                                                                      | *number*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `requestBody`                                                                                                                                                                  | [operations.UpdatePromptVersionRequest](../../models/operations/updatepromptversionrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `promptId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |                                                                                                                                                                                |
+| `version`                                                                                                                                                                      | *number*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | 1                                                                                                                                                                              |
+| `requestBody`                                                                                                                                                                  | [operations.UpdatePromptVersionRequest](../../models/operations/updatepromptversionrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |                                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |                                                                                                                                                                                |
 
 ### Response
 
-**Promise\<[operations.PromptsUpdateVersionMetadataResponse](../../models/operations/promptsupdateversionmetadataresponse.md)\>**
+**Promise\<[components.Prompt](../../models/components/prompt.md)\>**
 
 ### Errors
 

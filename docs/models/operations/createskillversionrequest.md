@@ -6,9 +6,7 @@
 import { CreateSkillVersionRequest } from "@mistralai/mistralai/models/operations";
 
 let value: CreateSkillVersionRequest = {
-  definition: {
-    body: "<value>",
-  },
+  definition: {},
 };
 ```
 

@@ -7,7 +7,6 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,12 +17,8 @@ export type SkillsListRequest = {
   fields?: Array<string> | undefined;
 };
 
-export type SkillsListResponseResult =
-  | components.ListSkillsResponse
-  | components.ConnectError;
-
 export type SkillsListResponse = {
-  result: components.ListSkillsResponse | components.ConnectError;
+  result: components.ListSkillsResponse;
 };
 
 /** @internal */
@@ -54,33 +49,11 @@ export function skillsListRequestToJSON(
 }
 
 /** @internal */
-export const SkillsListResponseResult$inboundSchema: z.ZodType<
-  SkillsListResponseResult,
-  unknown
-> = smartUnion([
-  components.ListSkillsResponse$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function skillsListResponseResultFromJSON(
-  jsonString: string,
-): SafeParseResult<SkillsListResponseResult, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SkillsListResponseResult$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SkillsListResponseResult' from JSON`,
-  );
-}
-
-/** @internal */
 export const SkillsListResponse$inboundSchema: z.ZodType<
   SkillsListResponse,
   unknown
 > = z.object({
-  Result: smartUnion([
-    components.ListSkillsResponse$inboundSchema,
-    components.ConnectError$inboundSchema,
-  ]),
+  Result: components.ListSkillsResponse$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "Result": "result",

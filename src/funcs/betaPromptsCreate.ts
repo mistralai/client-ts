@@ -23,7 +23,6 @@ import {
 import { MistralError } from "../models/errors/mistralerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -36,7 +35,7 @@ export function betaPromptsCreate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PromptsCreateResponse,
+    components.Prompt,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -61,7 +60,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.PromptsCreateResponse,
+      components.Prompt,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -139,7 +138,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.PromptsCreateResponse,
+    components.Prompt,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -149,10 +148,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.PromptsCreateResponse$inboundSchema),
+    M.json(200, components.Prompt$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-    M.json("default", operations.PromptsCreateResponse$inboundSchema),
   )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

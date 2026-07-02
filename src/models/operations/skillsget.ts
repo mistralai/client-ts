@@ -5,11 +5,6 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SkillsGetRequest = {
   skillId: string;
@@ -17,8 +12,6 @@ export type SkillsGetRequest = {
   alias?: string | undefined;
   fields?: Array<string> | undefined;
 };
-
-export type SkillsGetResponse = components.Skill | components.ConnectError;
 
 /** @internal */
 export type SkillsGetRequest$Outbound = {
@@ -48,24 +41,5 @@ export function skillsGetRequestToJSON(
 ): string {
   return JSON.stringify(
     SkillsGetRequest$outboundSchema.parse(skillsGetRequest),
-  );
-}
-
-/** @internal */
-export const SkillsGetResponse$inboundSchema: z.ZodType<
-  SkillsGetResponse,
-  unknown
-> = smartUnion([
-  components.Skill$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function skillsGetResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<SkillsGetResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SkillsGetResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SkillsGetResponse' from JSON`,
   );
 }

@@ -5,19 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SkillsDeleteRequest = {
   skillId: string;
 };
-
-export type SkillsDeleteResponse =
-  | components.DeleteSkillResponse
-  | components.ConnectError;
 
 /** @internal */
 export type SkillsDeleteRequest$Outbound = {
@@ -41,24 +32,5 @@ export function skillsDeleteRequestToJSON(
 ): string {
   return JSON.stringify(
     SkillsDeleteRequest$outboundSchema.parse(skillsDeleteRequest),
-  );
-}
-
-/** @internal */
-export const SkillsDeleteResponse$inboundSchema: z.ZodType<
-  SkillsDeleteResponse,
-  unknown
-> = smartUnion([
-  components.DeleteSkillResponse$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function skillsDeleteResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<SkillsDeleteResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SkillsDeleteResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SkillsDeleteResponse' from JSON`,
   );
 }

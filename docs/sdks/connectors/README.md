@@ -9,6 +9,7 @@
 * [create](#create) - Create a new connector.
 * [list](#list) - List all connectors.
 * [getAuthUrl](#getauthurl) - Get the auth URL for a connector.
+* [share](#share) - Share a private connector to the current workspace.
 * [activateForOrganization](#activatefororganization) - Activate a connector for an organization.
 * [deactivateForOrganization](#deactivatefororganization) - Deactivate a connector for an organization.
 * [activateForWorkspace](#activateforworkspace) - Activate a connector for a workspace.
@@ -245,6 +246,80 @@ run();
 ### Response
 
 **Promise\<[components.AuthUrlResponse](../../models/components/authurlresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## share
+
+Transfers ownership of a private user-owned connector to the current workspace, making it available to all workspace members. This action is irreversible: once shared, the connector belongs to the workspace and can no longer be used privately across other workspaces. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="connector_share_v1" method="put" path="/v1/connectors/{connector_id}/share" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.connectors.share({
+    connectorId: "cf748b50-632b-46d6-98c3-b015086cb194",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaConnectorsShare } from "@mistralai/mistralai/funcs/betaConnectorsShare.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaConnectorsShare(mistral, {
+    connectorId: "cf748b50-632b-46d6-98c3-b015086cb194",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConnectorsShare failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ConnectorShareV1Request](../../models/operations/connectorsharev1request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
 
 ### Errors
 

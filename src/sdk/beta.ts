@@ -12,6 +12,7 @@ import { Observability } from "./observability.js";
 import { Prompts } from "./prompts.js";
 import { Rag } from "./rag.js";
 import { Skills } from "./skills.js";
+import { Users } from "./users.js";
 
 export class Beta extends ClientSDK {
   private _prompts?: Prompts;
@@ -52,5 +53,10 @@ export class Beta extends ClientSDK {
   private _rag?: Rag;
   get rag(): Rag {
     return (this._rag ??= new Rag(this._options));
+  }
+
+  private _users?: Users;
+  get users(): Users {
+    return (this._users ??= new Users(this._options));
   }
 }

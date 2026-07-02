@@ -5,21 +5,12 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PromptsGetVersionRequest = {
   promptId: string;
   version: number;
   fields?: Array<string> | undefined;
 };
-
-export type PromptsGetVersionResponse =
-  | components.Prompt
-  | components.ConnectError;
 
 /** @internal */
 export type PromptsGetVersionRequest$Outbound = {
@@ -47,24 +38,5 @@ export function promptsGetVersionRequestToJSON(
 ): string {
   return JSON.stringify(
     PromptsGetVersionRequest$outboundSchema.parse(promptsGetVersionRequest),
-  );
-}
-
-/** @internal */
-export const PromptsGetVersionResponse$inboundSchema: z.ZodType<
-  PromptsGetVersionResponse,
-  unknown
-> = smartUnion([
-  components.Prompt$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function promptsGetVersionResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptsGetVersionResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptsGetVersionResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptsGetVersionResponse' from JSON`,
   );
 }

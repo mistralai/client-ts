@@ -104,9 +104,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.skills.create({
     name: "<value>",
-    definition: {
-      body: "<value>",
-    },
+    definition: {},
   });
 
   console.log(result);
@@ -132,9 +130,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaSkillsCreate(mistral, {
     name: "<value>",
-    definition: {
-      body: "<value>",
-    },
+    definition: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -158,7 +154,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.SkillsCreateResponse](../../models/operations/skillscreateresponse.md)\>**
+**Promise\<[components.Skill](../../models/components/skill.md)\>**
 
 ### Errors
 
@@ -183,6 +179,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.skills.get({
     skillId: "<id>",
+    version: 1,
   });
 
   console.log(result);
@@ -208,6 +205,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaSkillsGet(mistral, {
     skillId: "<id>",
+    version: 1,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -231,7 +229,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.SkillsGetResponse](../../models/operations/skillsgetresponse.md)\>**
+**Promise\<[components.Skill](../../models/components/skill.md)\>**
 
 ### Errors
 
@@ -304,7 +302,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.SkillsDeleteResponse](../../models/operations/skillsdeleteresponse.md)\>**
+**Promise\<[components.DeleteSkillResponse](../../models/components/deleteskillresponse.md)\>**
 
 ### Errors
 
@@ -374,7 +372,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.SkillsUpdateResponse](../../models/operations/skillsupdateresponse.md)\>**
+**Promise\<[components.Skill](../../models/components/skill.md)\>**
 
 ### Errors
 
@@ -447,7 +445,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.SkillsListVersionsResponse](../../models/operations/skillslistversionsresponse.md)\>**
+**Promise\<[components.ListSkillVersionsResponse](../../models/components/listskillversionsresponse.md)\>**
 
 ### Errors
 
@@ -471,9 +469,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.skills.createVersion("<id>", {
-    definition: {
-      body: "<value>",
-    },
+    definition: {},
   });
 
   console.log(result);
@@ -498,9 +494,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaSkillsCreateVersion(mistral, "<id>", {
-    definition: {
-      body: "<value>",
-    },
+    definition: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -525,7 +519,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.SkillsCreateVersionResponse](../../models/operations/skillscreateversionresponse.md)\>**
+**Promise\<[components.CreateSkillVersionResponse](../../models/components/createskillversionresponse.md)\>**
 
 ### Errors
 
@@ -550,7 +544,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.skills.getVersion({
     skillId: "<id>",
-    version: 808285,
+    version: 1,
   });
 
   console.log(result);
@@ -576,7 +570,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaSkillsGetVersion(mistral, {
     skillId: "<id>",
-    version: 808285,
+    version: 1,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -600,7 +594,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.SkillsGetVersionResponse](../../models/operations/skillsgetversionresponse.md)\>**
+**Promise\<[components.Skill](../../models/components/skill.md)\>**
 
 ### Errors
 
@@ -623,7 +617,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.skills.updateVersionMetadata("<id>", 326404, {});
+  const result = await mistral.beta.skills.updateVersionMetadata("<id>", 1, {});
 
   console.log(result);
 }
@@ -646,7 +640,7 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaSkillsUpdateVersionMetadata(mistral, "<id>", 326404, {});
+  const res = await betaSkillsUpdateVersionMetadata(mistral, "<id>", 1, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -660,18 +654,18 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `skillId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `version`                                                                                                                                                                      | *number*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `requestBody`                                                                                                                                                                  | [operations.UpdateSkillVersionRequest](../../models/operations/updateskillversionrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    | Example                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `skillId`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |                                                                                                                                                                                |
+| `version`                                                                                                                                                                      | *number*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            | 1                                                                                                                                                                              |
+| `requestBody`                                                                                                                                                                  | [operations.UpdateSkillVersionRequest](../../models/operations/updateskillversionrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |                                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |                                                                                                                                                                                |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |                                                                                                                                                                                |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |                                                                                                                                                                                |
 
 ### Response
 
-**Promise\<[operations.SkillsUpdateVersionMetadataResponse](../../models/operations/skillsupdateversionmetadataresponse.md)\>**
+**Promise\<[components.Skill](../../models/components/skill.md)\>**
 
 ### Errors
 

@@ -5,11 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreatePromptVersionRequest = {
   /**
@@ -30,10 +26,6 @@ export type PromptsCreateVersionRequest = {
   promptId: string;
   requestBody: CreatePromptVersionRequest;
 };
-
-export type PromptsCreateVersionResponse =
-  | components.CreatePromptVersionResponse
-  | components.ConnectError;
 
 /** @internal */
 export type CreatePromptVersionRequest$Outbound = {
@@ -87,24 +79,5 @@ export function promptsCreateVersionRequestToJSON(
     PromptsCreateVersionRequest$outboundSchema.parse(
       promptsCreateVersionRequest,
     ),
-  );
-}
-
-/** @internal */
-export const PromptsCreateVersionResponse$inboundSchema: z.ZodType<
-  PromptsCreateVersionResponse,
-  unknown
-> = smartUnion([
-  components.CreatePromptVersionResponse$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function promptsCreateVersionResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptsCreateVersionResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptsCreateVersionResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptsCreateVersionResponse' from JSON`,
   );
 }

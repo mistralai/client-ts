@@ -5,11 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdatePromptRequest = {
   /**
@@ -27,8 +23,6 @@ export type PromptsUpdateRequest = {
   promptId: string;
   requestBody: UpdatePromptRequest;
 };
-
-export type PromptsUpdateResponse = components.Prompt | components.ConnectError;
 
 /** @internal */
 export type UpdatePromptRequest$Outbound = {
@@ -80,24 +74,5 @@ export function promptsUpdateRequestToJSON(
 ): string {
   return JSON.stringify(
     PromptsUpdateRequest$outboundSchema.parse(promptsUpdateRequest),
-  );
-}
-
-/** @internal */
-export const PromptsUpdateResponse$inboundSchema: z.ZodType<
-  PromptsUpdateResponse,
-  unknown
-> = smartUnion([
-  components.Prompt$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function promptsUpdateResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptsUpdateResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptsUpdateResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptsUpdateResponse' from JSON`,
   );
 }

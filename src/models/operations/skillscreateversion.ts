@@ -5,11 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateSkillVersionRequest = {
   /**
@@ -30,10 +26,6 @@ export type SkillsCreateVersionRequest = {
   skillId: string;
   requestBody: CreateSkillVersionRequest;
 };
-
-export type SkillsCreateVersionResponse =
-  | components.CreateSkillVersionResponse
-  | components.ConnectError;
 
 /** @internal */
 export type CreateSkillVersionRequest$Outbound = {
@@ -85,24 +77,5 @@ export function skillsCreateVersionRequestToJSON(
 ): string {
   return JSON.stringify(
     SkillsCreateVersionRequest$outboundSchema.parse(skillsCreateVersionRequest),
-  );
-}
-
-/** @internal */
-export const SkillsCreateVersionResponse$inboundSchema: z.ZodType<
-  SkillsCreateVersionResponse,
-  unknown
-> = smartUnion([
-  components.CreateSkillVersionResponse$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function skillsCreateVersionResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<SkillsCreateVersionResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SkillsCreateVersionResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SkillsCreateVersionResponse' from JSON`,
   );
 }
