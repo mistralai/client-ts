@@ -6,7 +6,7 @@
 import { ListJudgesResponse } from "@mistralai/mistralai/models/components";
 
 let value: ListJudgesResponse = {
-  judges: {
+  paginatedResultJudgePreview: {
     count: 727378,
   },
 };
@@ -16,4 +16,4 @@ let value: ListJudgesResponse = {
 
 | Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `judges`                                                                                         | [components.PaginatedResultJudgePreview](../../models/components/paginatedresultjudgepreview.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `paginatedResultJudgePreview`                                                                    | [components.PaginatedResultJudgePreview](../../models/components/paginatedresultjudgepreview.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

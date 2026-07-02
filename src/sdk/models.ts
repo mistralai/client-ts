@@ -4,9 +4,6 @@
  */
 
 import { modelsArchive } from "../funcs/modelsArchive.js";
-import { modelsDelete } from "../funcs/modelsDelete.js";
-import { modelsList } from "../funcs/modelsList.js";
-import { modelsRetrieve } from "../funcs/modelsRetrieve.js";
 import { modelsUnarchive } from "../funcs/modelsUnarchive.js";
 import { modelsUpdate } from "../funcs/modelsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -15,57 +12,6 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Models extends ClientSDK {
-  /**
-   * List Models
-   *
-   * @remarks
-   * List all models available to the user.
-   */
-  async list(
-    request?: operations.ListModelsV1ModelsGetRequest | undefined,
-    options?: RequestOptions,
-  ): Promise<components.ModelList> {
-    return unwrapAsync(modelsList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Retrieve Model
-   *
-   * @remarks
-   * Retrieve information about a model.
-   */
-  async retrieve(
-    request: operations.RetrieveModelV1ModelsModelIdGetRequest,
-    options?: RequestOptions,
-  ): Promise<operations.ResponseRetrieveModelV1ModelsModelIdGet> {
-    return unwrapAsync(modelsRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete Model
-   *
-   * @remarks
-   * Delete a fine-tuned model.
-   */
-  async delete(
-    request: operations.DeleteModelV1ModelsModelIdDeleteRequest,
-    options?: RequestOptions,
-  ): Promise<components.DeleteModelResponse> {
-    return unwrapAsync(modelsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
   /**
    * Update Fine Tuned Model
    *

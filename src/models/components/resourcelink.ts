@@ -5,7 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Annotations, Annotations$inboundSchema } from "./annotations.js";
@@ -29,23 +32,27 @@ export type ResourceLink = {
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
   type: "resource_link";
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const ResourceLink$inboundSchema: z.ZodType<ResourceLink, unknown> = z
-  .object({
-    name: z.string(),
-    title: z.nullable(z.string()).optional(),
-    uri: z.string(),
-    description: z.nullable(z.string()).optional(),
-    mimeType: z.nullable(z.string()).optional(),
-    size: z.nullable(z.int()).optional(),
-    icons: z.nullable(z.array(MCPServerIcon$inboundSchema)).optional(),
-    annotations: z.nullable(Annotations$inboundSchema).optional(),
-    _meta: z.nullable(z.record(z.string(), z.any())).optional(),
-    type: z.literal("resource_link"),
-  }).catchall(z.any()).transform((v) => {
+export const ResourceLink$inboundSchema: z.ZodType<ResourceLink, unknown> =
+  collectExtraKeys$(
+    z.object({
+      name: z.string(),
+      title: z.nullable(z.string()).optional(),
+      uri: z.string(),
+      description: z.nullable(z.string()).optional(),
+      mimeType: z.nullable(z.string()).optional(),
+      size: z.nullable(z.int()).optional(),
+      icons: z.nullable(z.array(MCPServerIcon$inboundSchema)).optional(),
+      annotations: z.nullable(Annotations$inboundSchema).optional(),
+      _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+      type: z.literal("resource_link"),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
     return remap$(v, {
       "_meta": "meta",
     });

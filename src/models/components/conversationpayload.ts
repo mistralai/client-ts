@@ -4,22 +4,30 @@
  */
 
 import * as z from "zod/v4";
-import { safeParse } from "../../lib/schemas.js";
+import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ConversationPayload = {
   messages: Array<{ [k: string]: any }>;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export const ConversationPayload$inboundSchema: z.ZodType<
   ConversationPayload,
   unknown
-> = z.object({
-  messages: z.array(z.record(z.string(), z.any())),
-}).catchall(z.any());
+> = collectExtraKeys$(
+  z.object({
+    messages: z.array(z.record(z.string(), z.any())),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
 /** @internal */
 export type ConversationPayload$Outbound = {
   messages: Array<{ [k: string]: any }>;
@@ -32,7 +40,15 @@ export const ConversationPayload$outboundSchema: z.ZodType<
   ConversationPayload
 > = z.object({
   messages: z.array(z.record(z.string(), z.any())),
-}).catchall(z.any());
+  additionalProperties: z.record(z.string(), z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      additionalProperties: null,
+    }),
+  };
+});
 
 export function conversationPayloadToJSON(
   conversationPayload: ConversationPayload,

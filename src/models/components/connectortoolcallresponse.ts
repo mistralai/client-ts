@@ -4,7 +4,10 @@
  */
 
 import * as z from "zod/v4";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,7 +54,7 @@ export type ConnectorToolCallResponse = {
     | discriminatedUnionTypes.Unknown<"type">
   >;
   metadata?: ConnectorToolCallMetadata | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -80,16 +83,20 @@ export function connectorToolCallResponseContentFromJSON(
 export const ConnectorToolCallResponse$inboundSchema: z.ZodType<
   ConnectorToolCallResponse,
   unknown
-> = z.object({
-  content: z.array(discriminatedUnion("type", {
-    text: TextContent$inboundSchema,
-    image: ImageContent$inboundSchema,
-    audio: AudioContent$inboundSchema,
-    resource_link: ResourceLink$inboundSchema,
-    resource: EmbeddedResource$inboundSchema,
-  })),
-  metadata: z.nullable(ConnectorToolCallMetadata$inboundSchema).optional(),
-}).catchall(z.any());
+> = collectExtraKeys$(
+  z.object({
+    content: z.array(discriminatedUnion("type", {
+      text: TextContent$inboundSchema,
+      image: ImageContent$inboundSchema,
+      audio: AudioContent$inboundSchema,
+      resource_link: ResourceLink$inboundSchema,
+      resource: EmbeddedResource$inboundSchema,
+    })),
+    metadata: z.nullable(ConnectorToolCallMetadata$inboundSchema).optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
 
 export function connectorToolCallResponseFromJSON(
   jsonString: string,

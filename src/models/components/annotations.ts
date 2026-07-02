@@ -4,7 +4,10 @@
  */
 
 import * as z from "zod/v4";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -19,7 +22,7 @@ export type Audience = OpenEnum<typeof Audience>;
 export type Annotations = {
   audience?: Array<Audience> | null | undefined;
   priority?: number | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -27,11 +30,15 @@ export const Audience$inboundSchema: z.ZodType<Audience, unknown> = openEnums
   .inboundSchema(Audience);
 
 /** @internal */
-export const Annotations$inboundSchema: z.ZodType<Annotations, unknown> = z
-  .object({
-    audience: z.nullable(z.array(Audience$inboundSchema)).optional(),
-    priority: z.nullable(z.number()).optional(),
-  }).catchall(z.any());
+export const Annotations$inboundSchema: z.ZodType<Annotations, unknown> =
+  collectExtraKeys$(
+    z.object({
+      audience: z.nullable(z.array(Audience$inboundSchema)).optional(),
+      priority: z.nullable(z.number()).optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  );
 
 export function annotationsFromJSON(
   jsonString: string,

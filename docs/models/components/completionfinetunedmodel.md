@@ -7,14 +7,13 @@ import { CompletionFineTunedModel } from "@mistralai/mistralai/models/components
 
 let value: CompletionFineTunedModel = {
   id: "<id>",
-  created: 647324,
+  created: 986465,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
   archived: true,
-  capabilities: {},
-  job: "4f0133a4-a8c2-4af2-b920-a6498990f2a3",
+  fineTunedModelCapabilities: {},
   modelType: "completion",
 };
 ```
@@ -33,8 +32,8 @@ let value: CompletionFineTunedModel = {
 | `archived`                                                                                     | *boolean*                                                                                      | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `name`                                                                                         | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `description`                                                                                  | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `capabilities`                                                                                 | [components.FineTunedModelCapabilities](../../models/components/finetunedmodelcapabilities.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `fineTunedModelCapabilities`                                                                   | [components.FineTunedModelCapabilities](../../models/components/finetunedmodelcapabilities.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `maxContextLength`                                                                             | *number*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `aliases`                                                                                      | *string*[]                                                                                     | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `job`                                                                                          | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `job`                                                                                          | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `modelType`                                                                                    | *"completion"*                                                                                 | :heavy_check_mark:                                                                             | N/A                                                                                            |

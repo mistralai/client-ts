@@ -10,23 +10,19 @@ OK
 ```typescript
 const value: components.ClassifierFineTunedModel = {
   id: "<id>",
-  created: 385092,
+  created: 452679,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
   archived: true,
-  capabilities: {},
-  job: "14ce4667-ac22-41ac-8d5e-01ba39f72659",
+  fineTunedModelCapabilities: {},
   classifierTargets: [
     {
       name: "<value>",
-      labels: [
-        "<value 1>",
-        "<value 2>",
-      ],
-      weight: 6616.25,
-      lossFunction: "single_class",
+      labels: [],
+      weight: 9707.43,
+      lossFunction: "multi_class",
     },
   ],
   modelType: "classifier",
@@ -38,14 +34,13 @@ const value: components.ClassifierFineTunedModel = {
 ```typescript
 const value: components.CompletionFineTunedModel = {
   id: "<id>",
-  created: 647324,
+  created: 986465,
   ownedBy: "<value>",
   workspaceId: "<id>",
   root: "<value>",
   rootVersion: "<value>",
   archived: true,
-  capabilities: {},
-  job: "4f0133a4-a8c2-4af2-b920-a6498990f2a3",
+  fineTunedModelCapabilities: {},
   modelType: "completion",
 };
 ```

@@ -92,7 +92,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.ConversationAppendStreamRequest, {
+  const body = encodeJSON("body", payload.AppendConversationRequest, {
     explode: true,
   });
 
@@ -139,7 +139,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
@@ -179,7 +179,6 @@ async function $do(
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
             return {
-              done: false,
               value: components.ConversationEvents$inboundSchema.parse(
                 rawEvent,
               ),

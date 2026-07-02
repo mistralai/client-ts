@@ -337,7 +337,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.conversations.append({
     conversationId: "<id>",
-    conversationAppendRequest: {
+    appendConversationRequest: {
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -369,7 +369,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaConversationsAppend(mistral, {
     conversationId: "<id>",
-    conversationAppendRequest: {
+    appendConversationRequest: {
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -573,7 +573,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.conversations.restart({
     conversationId: "<id>",
-    conversationRestartRequest: {
+    restartConversationRequest: {
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -606,7 +606,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaConversationsRestart(mistral, {
     conversationId: "<id>",
-    conversationRestartRequest: {
+    restartConversationRequest: {
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -769,7 +769,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.conversations.appendStream({
     conversationId: "<id>",
-    conversationAppendStreamRequest: {
+    appendConversationRequest: {
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -803,7 +803,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaConversationsAppendStream(mistral, {
     conversationId: "<id>",
-    conversationAppendStreamRequest: {
+    appendConversationRequest: {
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -861,7 +861,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.conversations.restartStream({
     conversationId: "<id>",
-    conversationRestartStreamRequest: {
+    restartConversationRequest: {
       completionArgs: {
         responseFormat: {
           type: "text",
@@ -896,7 +896,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaConversationsRestartStream(mistral, {
     conversationId: "<id>",
-    conversationRestartStreamRequest: {
+    restartConversationRequest: {
       completionArgs: {
         responseFormat: {
           type: "text",

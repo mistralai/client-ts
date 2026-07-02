@@ -17,3 +17,5 @@ let value: LibrariesDocumentsGetTextContentV1Request = {
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `libraryId`        | *string*           | :heavy_check_mark: | N/A                |
 | `documentId`       | *string*           | :heavy_check_mark: | N/A                |
+| `pageStart`        | *number*           | :heavy_minus_sign: | N/A                |
+| `pageEnd`          | *number*           | :heavy_minus_sign: | N/A                |

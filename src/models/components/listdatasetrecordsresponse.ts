@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,7 +14,7 @@ import {
 } from "./paginatedresultdatasetrecord.js";
 
 export type ListDatasetRecordsResponse = {
-  records: PaginatedResultDatasetRecord;
+  paginatedResultDatasetRecord: PaginatedResultDatasetRecord;
 };
 
 /** @internal */
@@ -22,6 +23,10 @@ export const ListDatasetRecordsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   records: PaginatedResultDatasetRecord$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "records": "paginatedResultDatasetRecord",
+  });
 });
 
 export function listDatasetRecordsResponseFromJSON(

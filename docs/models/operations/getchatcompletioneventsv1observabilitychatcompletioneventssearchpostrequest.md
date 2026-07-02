@@ -9,8 +9,12 @@ let value:
   GetChatCompletionEventsV1ObservabilityChatCompletionEventsSearchPostRequest =
     {
       searchChatCompletionEventsRequest: {
-        searchParams: {
-          filters: {},
+        filterPayload: {
+          filters: {
+            field: "<value>",
+            op: "len_eq",
+            value: "<value>",
+          },
         },
       },
     };

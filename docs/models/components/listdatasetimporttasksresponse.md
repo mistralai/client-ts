@@ -6,7 +6,7 @@
 import { ListDatasetImportTasksResponse } from "@mistralai/mistralai/models/components";
 
 let value: ListDatasetImportTasksResponse = {
-  tasks: {
+  paginatedResultDatasetImportTask: {
     count: 445725,
   },
 };
@@ -16,4 +16,4 @@ let value: ListDatasetImportTasksResponse = {
 
 | Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `tasks`                                                                                                    | [components.PaginatedResultDatasetImportTask](../../models/components/paginatedresultdatasetimporttask.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `paginatedResultDatasetImportTask`                                                                         | [components.PaginatedResultDatasetImportTask](../../models/components/paginatedresultdatasetimporttask.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

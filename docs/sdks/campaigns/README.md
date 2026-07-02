@@ -27,7 +27,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.observability.campaigns.create({
-    searchParams: {
+    filterPayload: {
       filters: {
         field: "<value>",
         op: "lt",
@@ -62,7 +62,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaObservabilityCampaignsCreate(mistral, {
-    searchParams: {
+    filterPayload: {
       filters: {
         field: "<value>",
         op: "lt",

@@ -12,7 +12,7 @@ import {
 } from "./filterpayload.js";
 
 export type CreateCampaignRequest = {
-  searchParams: FilterPayload;
+  filterPayload: FilterPayload;
   judgeId: string;
   name: string;
   description: string;
@@ -33,14 +33,14 @@ export const CreateCampaignRequest$outboundSchema: z.ZodType<
   CreateCampaignRequest$Outbound,
   CreateCampaignRequest
 > = z.object({
-  searchParams: FilterPayload$outboundSchema,
+  filterPayload: FilterPayload$outboundSchema,
   judgeId: z.string(),
   name: z.string(),
   description: z.string(),
   maxNbEvents: z.int(),
 }).transform((v) => {
   return remap$(v, {
-    searchParams: "search_params",
+    filterPayload: "search_params",
     judgeId: "judge_id",
     maxNbEvents: "max_nb_events",
   });

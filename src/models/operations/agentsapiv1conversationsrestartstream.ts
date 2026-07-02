@@ -12,14 +12,13 @@ export type AgentsApiV1ConversationsRestartStreamRequest = {
    * ID of the original conversation which is being restarted.
    */
   conversationId: string;
-  conversationRestartStreamRequest: components.ConversationRestartStreamRequest;
+  restartConversationRequest: components.RestartConversationRequest;
 };
 
 /** @internal */
 export type AgentsApiV1ConversationsRestartStreamRequest$Outbound = {
   conversation_id: string;
-  ConversationRestartStreamRequest:
-    components.ConversationRestartStreamRequest$Outbound;
+  RestartConversationRequest: components.RestartConversationRequest$Outbound;
 };
 
 /** @internal */
@@ -29,12 +28,12 @@ export const AgentsApiV1ConversationsRestartStreamRequest$outboundSchema:
     AgentsApiV1ConversationsRestartStreamRequest
   > = z.object({
     conversationId: z.string(),
-    conversationRestartStreamRequest:
-      components.ConversationRestartStreamRequest$outboundSchema,
+    restartConversationRequest:
+      components.RestartConversationRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       conversationId: "conversation_id",
-      conversationRestartStreamRequest: "ConversationRestartStreamRequest",
+      restartConversationRequest: "RestartConversationRequest",
     });
   });
 

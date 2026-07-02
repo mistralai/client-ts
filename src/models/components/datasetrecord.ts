@@ -23,7 +23,7 @@ export type DatasetRecord = {
   updatedAt: Date;
   deletedAt: Date | null;
   datasetId: string;
-  payload: ConversationPayload;
+  conversationPayload: ConversationPayload;
   properties: { [k: string]: any };
   source: ConversationSource;
 };
@@ -47,6 +47,7 @@ export const DatasetRecord$inboundSchema: z.ZodType<DatasetRecord, unknown> = z
       "updated_at": "updatedAt",
       "deleted_at": "deletedAt",
       "dataset_id": "datasetId",
+      "payload": "conversationPayload",
     });
   });
 

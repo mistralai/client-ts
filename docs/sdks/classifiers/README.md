@@ -17,7 +17,7 @@ Moderations
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="moderations_v1_moderations_post" method="post" path="/v1/moderations" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="moderations_v1_moderations_post" method="post" path="/v1/moderations" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -93,7 +93,7 @@ Chat Moderations
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="chat_moderations_v1_chat_moderations_post" method="post" path="/v1/chat/moderations" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="chat_moderations_v1_chat_moderations_post" method="post" path="/v1/chat/moderations" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -274,7 +274,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.classifiers.classifyChat({
     model: "Camry",
-    input: [
+    inputs: [
       {
         messages: [
           {
@@ -309,7 +309,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await classifiersClassifyChat(mistral, {
     model: "Camry",
-    input: [
+    inputs: [
       {
         messages: [
           {

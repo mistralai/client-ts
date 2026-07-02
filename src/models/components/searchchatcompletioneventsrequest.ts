@@ -12,7 +12,7 @@ import {
 } from "./filterpayload.js";
 
 export type SearchChatCompletionEventsRequest = {
-  searchParams: FilterPayload;
+  filterPayload: FilterPayload;
   extraFields?: Array<string> | null | undefined;
 };
 
@@ -27,11 +27,11 @@ export const SearchChatCompletionEventsRequest$outboundSchema: z.ZodType<
   SearchChatCompletionEventsRequest$Outbound,
   SearchChatCompletionEventsRequest
 > = z.object({
-  searchParams: FilterPayload$outboundSchema,
+  filterPayload: FilterPayload$outboundSchema,
   extraFields: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
-    searchParams: "search_params",
+    filterPayload: "search_params",
     extraFields: "extra_fields",
   });
 });

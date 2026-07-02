@@ -6,8 +6,12 @@
 import { CreateCampaignRequest } from "@mistralai/mistralai/models/components";
 
 let value: CreateCampaignRequest = {
-  searchParams: {
-    filters: {},
+  filterPayload: {
+    filters: {
+      field: "<value>",
+      op: "len_eq",
+      value: "<value>",
+    },
   },
   judgeId: "d606cfbb-a2e2-4aa8-b780-a226dc17f675",
   name: "<value>",
@@ -20,7 +24,7 @@ let value: CreateCampaignRequest = {
 
 | Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `searchParams`                                                       | [components.FilterPayload](../../models/components/filterpayload.md) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `filterPayload`                                                      | [components.FilterPayload](../../models/components/filterpayload.md) | :heavy_check_mark:                                                   | N/A                                                                  |
 | `judgeId`                                                            | *string*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
 | `name`                                                               | *string*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
 | `description`                                                        | *string*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |

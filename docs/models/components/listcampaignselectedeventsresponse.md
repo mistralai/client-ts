@@ -6,7 +6,7 @@
 import { ListCampaignSelectedEventsResponse } from "@mistralai/mistralai/models/components";
 
 let value: ListCampaignSelectedEventsResponse = {
-  completionEvents: {
+  paginatedResultChatCompletionEventPreview: {
     count: 967960,
   },
 };
@@ -16,4 +16,4 @@ let value: ListCampaignSelectedEventsResponse = {
 
 | Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `completionEvents`                                                                                                           | [components.PaginatedResultChatCompletionEventPreview](../../models/components/paginatedresultchatcompletioneventpreview.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `paginatedResultChatCompletionEventPreview`                                                                                  | [components.PaginatedResultChatCompletionEventPreview](../../models/components/paginatedresultchatcompletioneventpreview.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |

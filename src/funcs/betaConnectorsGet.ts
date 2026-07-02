@@ -103,8 +103,8 @@ async function $do(
   );
 
   const query = encodeFormQuery({
-    "fetch_connection_secrets": payload.fetch_connection_secrets,
     "fetch_customer_data": payload.fetch_customer_data,
+    "fetch_user_data": payload.fetch_user_data,
   });
 
   const headers = new Headers(compactMap({
@@ -139,7 +139,7 @@ async function $do(
     query: query,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

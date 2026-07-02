@@ -5,7 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,21 +19,25 @@ export type TranscriptionSegmentChunk = {
   end: number;
   score?: number | null | undefined;
   speakerId?: string | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export const TranscriptionSegmentChunk$inboundSchema: z.ZodType<
   TranscriptionSegmentChunk,
   unknown
-> = z.object({
-  type: z.literal("transcription_segment").default("transcription_segment"),
-  text: z.string(),
-  start: z.number(),
-  end: z.number(),
-  score: z.nullable(z.number()).optional(),
-  speaker_id: z.nullable(z.string()).optional(),
-}).catchall(z.any()).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    type: z.literal("transcription_segment").default("transcription_segment"),
+    text: z.string(),
+    start: z.number(),
+    end: z.number(),
+    score: z.nullable(z.number()).optional(),
+    speaker_id: z.nullable(z.string()).optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "speaker_id": "speakerId",
   });
@@ -59,10 +66,13 @@ export const TranscriptionSegmentChunk$outboundSchema: z.ZodType<
   end: z.number(),
   score: z.nullable(z.number()).optional(),
   speakerId: z.nullable(z.string()).optional(),
-}).catchall(z.any()).transform((v) => {
+  additionalProperties: z.record(z.string(), z.any()).optional(),
+}).transform((v) => {
   return {
+    ...v.additionalProperties,
     ...remap$(v, {
       speakerId: "speaker_id",
+      additionalProperties: null,
     }),
   };
 });

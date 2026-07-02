@@ -4,15 +4,16 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 import { MistralError } from "./mistralerror.js";
 
 export type ObservabilityErrorData = {
-  detail: components.ObservabilityErrorDetail;
+  observabilityErrorDetail: components.ObservabilityErrorDetail;
 };
 
 export class ObservabilityError extends MistralError {
-  detail: components.ObservabilityErrorDetail;
+  observabilityErrorDetail: components.ObservabilityErrorDetail;
 
   /** The original data that was passed to this error instance. */
   data$: ObservabilityErrorData;
@@ -21,11 +22,11 @@ export class ObservabilityError extends MistralError {
     err: ObservabilityErrorData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
-    const message = err.detail?.message
+    const message = err.observabilityErrorDetail?.message
       || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
-    this.detail = err.detail;
+    this.observabilityErrorDetail = err.observabilityErrorDetail;
 
     this.name = "ObservabilityError";
   }
@@ -42,7 +43,11 @@ export const ObservabilityError$inboundSchema: z.ZodType<
   body$: z.string(),
 })
   .transform((v) => {
-    return new ObservabilityError(v, {
+    const remapped = remap$(v, {
+      "detail": "observabilityErrorDetail",
+    });
+
+    return new ObservabilityError(remapped, {
       request: v.request$,
       response: v.response$,
       body: v.body$,

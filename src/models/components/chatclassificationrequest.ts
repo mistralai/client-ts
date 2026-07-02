@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { Inputs, Inputs$Outbound, Inputs$outboundSchema } from "./inputs.js";
 
 export type ChatClassificationRequest = {
@@ -11,7 +12,7 @@ export type ChatClassificationRequest = {
   /**
    * Chat to classify
    */
-  input: Inputs;
+  inputs: Inputs;
 };
 
 /** @internal */
@@ -26,7 +27,11 @@ export const ChatClassificationRequest$outboundSchema: z.ZodType<
   ChatClassificationRequest
 > = z.object({
   model: z.string(),
-  input: Inputs$outboundSchema,
+  inputs: Inputs$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    inputs: "input",
+  });
 });
 
 export function chatClassificationRequestToJSON(

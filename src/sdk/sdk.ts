@@ -11,18 +11,14 @@ import { Beta } from "./beta.js";
 import { Chat } from "./chat.js";
 import { Classifiers } from "./classifiers.js";
 import { Embeddings } from "./embeddings.js";
+import { Events } from "./events.js";
 import { Files } from "./files.js";
 import { Fim } from "./fim.js";
-import { FineTuning } from "./finetuning.js";
 import { Models } from "./models.js";
 import { Ocr } from "./ocr.js";
+import { Workflows } from "./workflows.js";
 
 export class Mistral extends ClientSDK {
-  private _models?: Models;
-  get models(): Models {
-    return (this._models ??= new Models(this._options));
-  }
-
   private _beta?: Beta;
   get beta(): Beta {
     return (this._beta ??= new Beta(this._options));
@@ -33,9 +29,9 @@ export class Mistral extends ClientSDK {
     return (this._files ??= new Files(this._options));
   }
 
-  private _fineTuning?: FineTuning;
-  get fineTuning(): FineTuning {
-    return (this._fineTuning ??= new FineTuning(this._options));
+  private _models?: Models;
+  get models(): Models {
+    return (this._models ??= new Models(this._options));
   }
 
   private _batch?: Batch;
@@ -76,5 +72,15 @@ export class Mistral extends ClientSDK {
   private _audio?: Audio;
   get audio(): Audio {
     return (this._audio ??= new Audio(this._options));
+  }
+
+  private _workflows?: Workflows;
+  get workflows(): Workflows {
+    return (this._workflows ??= new Workflows(this._options));
+  }
+
+  private _events?: Events;
+  get events(): Events {
+    return (this._events ??= new Events(this._options));
   }
 }

@@ -27,7 +27,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.observability.chatCompletionEvents.search({
     searchChatCompletionEventsRequest: {
-      searchParams: {
+      filterPayload: {
         filters: null,
       },
     },
@@ -56,7 +56,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaObservabilityChatCompletionEventsSearch(mistral, {
     searchChatCompletionEventsRequest: {
-      searchParams: {
+      filterPayload: {
         filters: null,
       },
     },
@@ -108,7 +108,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.observability.chatCompletionEvents.searchIds({
-    searchParams: {
+    filterPayload: {
       filters: {
         field: "<value>",
         op: "lt",
@@ -139,7 +139,7 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaObservabilityChatCompletionEventsSearchIds(mistral, {
-    searchParams: {
+    filterPayload: {
       filters: {
         field: "<value>",
         op: "lt",
@@ -344,7 +344,7 @@ async function run() {
   const result = await mistral.beta.observability.chatCompletionEvents.judge({
     eventId: "dfcd5582-1373-4de5-af51-987464da561c",
     judgeChatCompletionEventRequest: {
-      judgeDefinition: {
+      createJudgeRequest: {
         name: "<value>",
         description: "total plain self-confidence candid hungrily partial astride cruelly brr",
         modelName: "<value>",
@@ -387,7 +387,7 @@ async function run() {
   const res = await betaObservabilityChatCompletionEventsJudge(mistral, {
     eventId: "dfcd5582-1373-4de5-af51-987464da561c",
     judgeChatCompletionEventRequest: {
-      judgeDefinition: {
+      createJudgeRequest: {
         name: "<value>",
         description: "total plain self-confidence candid hungrily partial astride cruelly brr",
         modelName: "<value>",

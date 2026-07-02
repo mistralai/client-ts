@@ -126,7 +126,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
@@ -165,11 +165,8 @@ async function $do(
       z.custom<ReadableStream<Uint8Array>>(x => x instanceof ReadableStream)
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
-            if (rawEvent.data === "[DONE]") {
-              return { done: true, value: undefined };
-            }
+            if (rawEvent.data === "[DONE]") return { done: true };
             return {
-              done: false,
               value: components.CompletionEvent$inboundSchema.parse(rawEvent),
             };
           });

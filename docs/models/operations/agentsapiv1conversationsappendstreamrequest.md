@@ -7,7 +7,7 @@ import { AgentsApiV1ConversationsAppendStreamRequest } from "@mistralai/mistrala
 
 let value: AgentsApiV1ConversationsAppendStreamRequest = {
   conversationId: "<id>",
-  conversationAppendStreamRequest: {
+  appendConversationRequest: {
     completionArgs: {
       responseFormat: {
         type: "text",
@@ -19,7 +19,7 @@ let value: AgentsApiV1ConversationsAppendStreamRequest = {
 
 ## Fields
 
-| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `conversationId`                                                                                         | *string*                                                                                                 | :heavy_check_mark:                                                                                       | ID of the conversation to which we append entries.                                                       |
-| `conversationAppendStreamRequest`                                                                        | [components.ConversationAppendStreamRequest](../../models/components/conversationappendstreamrequest.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `conversationId`                                                                             | *string*                                                                                     | :heavy_check_mark:                                                                           | ID of the conversation to which we append entries.                                           |
+| `appendConversationRequest`                                                                  | [components.AppendConversationRequest](../../models/components/appendconversationrequest.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |

@@ -35,7 +35,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaLibrariesUpdate(
   client: MistralCore,
-  request: operations.LibrariesUpdateV1Request,
+  request: operations.LibrariesPatchV1Request,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -60,7 +60,7 @@ export function betaLibrariesUpdate(
 
 async function $do(
   client: MistralCore,
-  request: operations.LibrariesUpdateV1Request,
+  request: operations.LibrariesPatchV1Request,
   options?: RequestOptions,
 ): Promise<
   [
@@ -81,7 +81,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.LibrariesUpdateV1Request$outboundSchema.parse(value),
+    (value) => operations.LibrariesPatchV1Request$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -113,7 +113,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "libraries_update_v1",
+    operationID: "libraries_patch_v1",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -127,13 +127,13 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PUT",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];

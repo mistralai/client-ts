@@ -6,25 +6,119 @@
 import * as z from "zod/v4";
 import { smartUnion } from "../../types/smartUnion.js";
 import {
+  AssistantMessage,
+  AssistantMessage$Outbound,
+  AssistantMessage$outboundSchema,
+} from "./assistantmessage.js";
+import {
   InstructRequest,
   InstructRequest$Outbound,
   InstructRequest$outboundSchema,
 } from "./instructrequest.js";
+import {
+  SystemMessage,
+  SystemMessage$Outbound,
+  SystemMessage$outboundSchema,
+} from "./systemmessage.js";
+import {
+  ToolMessage,
+  ToolMessage$Outbound,
+  ToolMessage$outboundSchema,
+} from "./toolmessage.js";
+import {
+  UserMessage,
+  UserMessage$Outbound,
+  UserMessage$outboundSchema,
+} from "./usermessage.js";
+
+export type InputsMessage =
+  | (AssistantMessage & { role: "assistant" })
+  | SystemMessage
+  | ToolMessage
+  | UserMessage;
+
+export type InstructRequestInputs = {
+  messages: Array<
+    | (AssistantMessage & { role: "assistant" })
+    | SystemMessage
+    | ToolMessage
+    | UserMessage
+  >;
+};
 
 /**
  * Chat to classify
  */
-export type Inputs = InstructRequest | Array<InstructRequest>;
+export type Inputs = InstructRequestInputs | Array<InstructRequest>;
+
+/** @internal */
+export type InputsMessage$Outbound =
+  | (AssistantMessage$Outbound & { role: "assistant" })
+  | SystemMessage$Outbound
+  | ToolMessage$Outbound
+  | UserMessage$Outbound;
+
+/** @internal */
+export const InputsMessage$outboundSchema: z.ZodType<
+  InputsMessage$Outbound,
+  InputsMessage
+> = z.union([
+  AssistantMessage$outboundSchema.and(
+    z.object({ role: z.literal("assistant") }),
+  ),
+  SystemMessage$outboundSchema,
+  ToolMessage$outboundSchema,
+  UserMessage$outboundSchema,
+]);
+
+export function inputsMessageToJSON(inputsMessage: InputsMessage): string {
+  return JSON.stringify(InputsMessage$outboundSchema.parse(inputsMessage));
+}
+
+/** @internal */
+export type InstructRequestInputs$Outbound = {
+  messages: Array<
+    | (AssistantMessage$Outbound & { role: "assistant" })
+    | SystemMessage$Outbound
+    | ToolMessage$Outbound
+    | UserMessage$Outbound
+  >;
+};
+
+/** @internal */
+export const InstructRequestInputs$outboundSchema: z.ZodType<
+  InstructRequestInputs$Outbound,
+  InstructRequestInputs
+> = z.object({
+  messages: z.array(
+    z.union([
+      AssistantMessage$outboundSchema.and(
+        z.object({ role: z.literal("assistant") }),
+      ),
+      SystemMessage$outboundSchema,
+      ToolMessage$outboundSchema,
+      UserMessage$outboundSchema,
+    ]),
+  ),
+});
+
+export function instructRequestInputsToJSON(
+  instructRequestInputs: InstructRequestInputs,
+): string {
+  return JSON.stringify(
+    InstructRequestInputs$outboundSchema.parse(instructRequestInputs),
+  );
+}
 
 /** @internal */
 export type Inputs$Outbound =
-  | InstructRequest$Outbound
+  | InstructRequestInputs$Outbound
   | Array<InstructRequest$Outbound>;
 
 /** @internal */
 export const Inputs$outboundSchema: z.ZodType<Inputs$Outbound, Inputs> =
   smartUnion([
-    InstructRequest$outboundSchema,
+    z.lazy(() => InstructRequestInputs$outboundSchema),
     z.array(InstructRequest$outboundSchema),
   ]);
 

@@ -5,24 +5,31 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TranscriptionStreamLanguage = {
   type: "transcription.language";
   audioLanguage: string;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export const TranscriptionStreamLanguage$inboundSchema: z.ZodType<
   TranscriptionStreamLanguage,
   unknown
-> = z.object({
-  type: z.literal("transcription.language"),
-  audio_language: z.string(),
-}).catchall(z.any()).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    type: z.literal("transcription.language"),
+    audio_language: z.string(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "audio_language": "audioLanguage",
   });
@@ -41,10 +48,13 @@ export const TranscriptionStreamLanguage$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("transcription.language"),
   audioLanguage: z.string(),
-}).catchall(z.any()).transform((v) => {
+  additionalProperties: z.record(z.string(), z.any()).optional(),
+}).transform((v) => {
   return {
+    ...v.additionalProperties,
     ...remap$(v, {
       audioLanguage: "audio_language",
+      additionalProperties: null,
     }),
   };
 });

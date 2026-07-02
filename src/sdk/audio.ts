@@ -5,10 +5,16 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Transcriptions } from "./transcriptions.js";
+import { Voices } from "./voices.js";
 
 export class Audio extends ClientSDK {
   private _transcriptions?: Transcriptions;
   get transcriptions(): Transcriptions {
     return (this._transcriptions ??= new Transcriptions(this._options));
+  }
+
+  private _voices?: Voices;
+  get voices(): Voices {
+    return (this._voices ??= new Voices(this._options));
   }
 }

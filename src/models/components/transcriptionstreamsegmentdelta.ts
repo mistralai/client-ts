@@ -5,7 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,20 +18,24 @@ export type TranscriptionStreamSegmentDelta = {
   start: number;
   end: number;
   speakerId?: string | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export const TranscriptionStreamSegmentDelta$inboundSchema: z.ZodType<
   TranscriptionStreamSegmentDelta,
   unknown
-> = z.object({
-  type: z.literal("transcription.segment"),
-  text: z.string(),
-  start: z.number(),
-  end: z.number(),
-  speaker_id: z.nullable(z.string()).optional(),
-}).catchall(z.any()).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    type: z.literal("transcription.segment"),
+    text: z.string(),
+    start: z.number(),
+    end: z.number(),
+    speaker_id: z.nullable(z.string()).optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "speaker_id": "speakerId",
   });

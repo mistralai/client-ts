@@ -5,7 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,16 +26,20 @@ import {
  */
 export type ConnectorToolCallMetadata = {
   mcpMeta?: ConnectorToolResultMetadata | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export const ConnectorToolCallMetadata$inboundSchema: z.ZodType<
   ConnectorToolCallMetadata,
   unknown
-> = z.object({
-  mcp_meta: z.nullable(ConnectorToolResultMetadata$inboundSchema).optional(),
-}).catchall(z.any()).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    mcp_meta: z.nullable(ConnectorToolResultMetadata$inboundSchema).optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "mcp_meta": "mcpMeta",
   });

@@ -9,20 +9,20 @@ let value:
   CreateDatasetRecordV1ObservabilityDatasetsDatasetIdRecordsPostRequest = {
     datasetId: "5258dfde-f22c-4567-aa05-b202ef694690",
     createDatasetRecordRequest: {
-      payload: {
+      conversationPayload: {
         messages: [
           {
             "key": "<value>",
             "key1": "<value>",
             "key2": "<value>",
           },
+          {
+            "key": "<value>",
+          },
+          {},
         ],
       },
-      properties: {
-        "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
-      },
+      properties: {},
     },
   };
 ```

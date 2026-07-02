@@ -6,11 +6,11 @@
 import { Role } from "@mistralai/mistralai/models/components";
 
 let value: Role = "assistant";
-
-// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
+
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "assistant" | "user" | Unrecognized<string>

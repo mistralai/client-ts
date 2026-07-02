@@ -6,7 +6,7 @@
 import { SearchChatCompletionEventsResponse } from "@mistralai/mistralai/models/components";
 
 let value: SearchChatCompletionEventsResponse = {
-  completionEvents: {},
+  feedResultChatCompletionEventPreview: {},
 };
 ```
 
@@ -14,4 +14,4 @@ let value: SearchChatCompletionEventsResponse = {
 
 | Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `completionEvents`                                                                                                 | [components.FeedResultChatCompletionEventPreview](../../models/components/feedresultchatcompletioneventpreview.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `feedResultChatCompletionEventPreview`                                                                             | [components.FeedResultChatCompletionEventPreview](../../models/components/feedresultchatcompletioneventpreview.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |

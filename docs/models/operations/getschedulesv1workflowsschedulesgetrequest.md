@@ -1,0 +1,19 @@
+# GetSchedulesV1WorkflowsSchedulesGetRequest
+
+## Example Usage
+
+```typescript
+import { GetSchedulesV1WorkflowsSchedulesGetRequest } from "@mistralai/mistralai/models/operations";
+
+let value: GetSchedulesV1WorkflowsSchedulesGetRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `workflowName`                                                                                                                 | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Filter by workflow name                                                                                                        |
+| `userId`                                                                                                                       | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Filter by user ID. Pass 'current' to resolve to the authenticated user's ID.                                                   |
+| `status`                                                                                                                       | [operations.GetSchedulesV1WorkflowsSchedulesGetStatus](../../models/operations/getschedulesv1workflowsschedulesgetstatus.md)   | :heavy_minus_sign:                                                                                                             | Filter by schedule status: 'active' or 'paused'                                                                                |
+| `pageSize`                                                                                                                     | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Number of items per page. Omitting this parameter fetches all results at once (deprecated — pass page_size to use pagination). |
+| `nextPageToken`                                                                                                                | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Token for the next page of results                                                                                             |

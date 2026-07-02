@@ -14,7 +14,7 @@ import {
 } from "./feedresultchatcompletioneventpreview.js";
 
 export type SearchChatCompletionEventsResponse = {
-  completionEvents: FeedResultChatCompletionEventPreview;
+  feedResultChatCompletionEventPreview: FeedResultChatCompletionEventPreview;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const SearchChatCompletionEventsResponse$inboundSchema: z.ZodType<
   completion_events: FeedResultChatCompletionEventPreview$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    "completion_events": "completionEvents",
+    "completion_events": "feedResultChatCompletionEventPreview",
   });
 });
 

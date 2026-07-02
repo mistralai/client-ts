@@ -4,7 +4,10 @@
  */
 
 import * as z from "zod/v4";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,16 +18,20 @@ export type MCPServerIcon = {
   src: string;
   mimeType?: string | null | undefined;
   sizes?: Array<string> | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const MCPServerIcon$inboundSchema: z.ZodType<MCPServerIcon, unknown> = z
-  .object({
-    src: z.string(),
-    mimeType: z.nullable(z.string()).optional(),
-    sizes: z.nullable(z.array(z.string())).optional(),
-  }).catchall(z.any());
+export const MCPServerIcon$inboundSchema: z.ZodType<MCPServerIcon, unknown> =
+  collectExtraKeys$(
+    z.object({
+      src: z.string(),
+      mimeType: z.nullable(z.string()).optional(),
+      sizes: z.nullable(z.array(z.string())).optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  );
 
 export function mcpServerIconFromJSON(
   jsonString: string,

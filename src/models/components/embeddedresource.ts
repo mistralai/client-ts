@@ -5,7 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,7 +37,7 @@ export type EmbeddedResource = {
   resource: TextResourceContents | BlobResourceContents;
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -57,15 +60,19 @@ export function resourceFromJSON(
 export const EmbeddedResource$inboundSchema: z.ZodType<
   EmbeddedResource,
   unknown
-> = z.object({
-  type: z.literal("resource"),
-  resource: smartUnion([
-    TextResourceContents$inboundSchema,
-    BlobResourceContents$inboundSchema,
-  ]),
-  annotations: z.nullable(Annotations$inboundSchema).optional(),
-  _meta: z.nullable(z.record(z.string(), z.any())).optional(),
-}).catchall(z.any()).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    type: z.literal("resource"),
+    resource: smartUnion([
+      TextResourceContents$inboundSchema,
+      BlobResourceContents$inboundSchema,
+    ]),
+    annotations: z.nullable(Annotations$inboundSchema).optional(),
+    _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

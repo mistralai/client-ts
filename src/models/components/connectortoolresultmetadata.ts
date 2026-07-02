@@ -5,7 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,18 +19,22 @@ export type ConnectorToolResultMetadata = {
   isError: boolean;
   structuredContent?: { [k: string]: any } | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export const ConnectorToolResultMetadata$inboundSchema: z.ZodType<
   ConnectorToolResultMetadata,
   unknown
-> = z.object({
-  isError: z.boolean().default(false),
-  structuredContent: z.nullable(z.record(z.string(), z.any())).optional(),
-  _meta: z.nullable(z.record(z.string(), z.any())).optional(),
-}).catchall(z.any()).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    isError: z.boolean().default(false),
+    structuredContent: z.nullable(z.record(z.string(), z.any())).optional(),
+    _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

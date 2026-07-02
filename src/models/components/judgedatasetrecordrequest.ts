@@ -12,7 +12,7 @@ import {
 } from "./createjudgerequest.js";
 
 export type JudgeDatasetRecordRequest = {
-  judgeDefinition: CreateJudgeRequest;
+  createJudgeRequest: CreateJudgeRequest;
 };
 
 /** @internal */
@@ -25,10 +25,10 @@ export const JudgeDatasetRecordRequest$outboundSchema: z.ZodType<
   JudgeDatasetRecordRequest$Outbound,
   JudgeDatasetRecordRequest
 > = z.object({
-  judgeDefinition: CreateJudgeRequest$outboundSchema,
+  createJudgeRequest: CreateJudgeRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    judgeDefinition: "judge_definition",
+    createJudgeRequest: "judge_definition",
   });
 });
 

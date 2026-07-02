@@ -5,7 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,19 +20,23 @@ export type BlobResourceContents = {
   mimeType?: string | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
   blob: string;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export const BlobResourceContents$inboundSchema: z.ZodType<
   BlobResourceContents,
   unknown
-> = z.object({
-  uri: z.string(),
-  mimeType: z.nullable(z.string()).optional(),
-  _meta: z.nullable(z.record(z.string(), z.any())).optional(),
-  blob: z.string(),
-}).catchall(z.any()).transform((v) => {
+> = collectExtraKeys$(
+  z.object({
+    uri: z.string(),
+    mimeType: z.nullable(z.string()).optional(),
+    _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+    blob: z.string(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

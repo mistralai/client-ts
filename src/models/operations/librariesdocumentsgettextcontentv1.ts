@@ -9,12 +9,16 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type LibrariesDocumentsGetTextContentV1Request = {
   libraryId: string;
   documentId: string;
+  pageStart?: number | null | undefined;
+  pageEnd?: number | null | undefined;
 };
 
 /** @internal */
 export type LibrariesDocumentsGetTextContentV1Request$Outbound = {
   library_id: string;
   document_id: string;
+  page_start?: number | null | undefined;
+  page_end?: number | null | undefined;
 };
 
 /** @internal */
@@ -25,10 +29,14 @@ export const LibrariesDocumentsGetTextContentV1Request$outboundSchema:
   > = z.object({
     libraryId: z.string(),
     documentId: z.string(),
+    pageStart: z.nullable(z.int()).optional(),
+    pageEnd: z.nullable(z.int()).optional(),
   }).transform((v) => {
     return remap$(v, {
       libraryId: "library_id",
       documentId: "document_id",
+      pageStart: "page_start",
+      pageEnd: "page_end",
     });
   });
 

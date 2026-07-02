@@ -15,7 +15,7 @@ Create Transcription
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="audio_api_v1_transcriptions_post" method="post" path="/v1/audio/transcriptions" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="audio_api_v1_transcriptions_post" method="post" path="/v1/audio/transcriptions" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 

@@ -15,7 +15,7 @@ FIM completion.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="fim_completion_v1_fim_completions_post" method="post" path="/v1/fim/completions" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="fim_completion_v1_fim_completions_post" method="post" path="/v1/fim/completions" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 

@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Delete an access level.
  *
  * @remarks
- * Given a library id, you can delete the access level of an entity. An owner cannot delete it's own access. You have to be the owner of the library to delete an acces other than yours.
+ * Given a library id, you can delete the access level of an entity. An owner cannot delete their own access. You have to be the owner of the library to delete an access other than yours. Warning: the response will change from 200 (returning the deleted sharing) to 204 No Content in a future version.
  */
 export function betaLibrariesAccessesDelete(
   client: MistralCore,
@@ -39,7 +39,7 @@ export function betaLibrariesAccessesDelete(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.Sharing,
+    components.Sharing | undefined,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.Sharing,
+      components.Sharing | undefined,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -132,7 +132,7 @@ async function $do(
     headers: headers,
     body: body,
     userAgent: client._options.userAgent,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || 300000,
   }, options);
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
@@ -155,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    components.Sharing,
+    components.Sharing | undefined,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -166,7 +166,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.Sharing$inboundSchema),
+    M.json(200, components.Sharing$inboundSchema.optional()),
+    M.nil(204, components.Sharing$inboundSchema.optional()),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

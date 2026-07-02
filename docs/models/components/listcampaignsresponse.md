@@ -6,7 +6,7 @@
 import { ListCampaignsResponse } from "@mistralai/mistralai/models/components";
 
 let value: ListCampaignsResponse = {
-  campaigns: {
+  paginatedResultCampaignPreview: {
     count: 226909,
   },
 };
@@ -16,4 +16,4 @@ let value: ListCampaignsResponse = {
 
 | Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `campaigns`                                                                                            | [components.PaginatedResultCampaignPreview](../../models/components/paginatedresultcampaignpreview.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `paginatedResultCampaignPreview`                                                                       | [components.PaginatedResultCampaignPreview](../../models/components/paginatedresultcampaignpreview.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

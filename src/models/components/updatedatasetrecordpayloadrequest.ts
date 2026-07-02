@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   ConversationPayload,
   ConversationPayload$Outbound,
@@ -11,7 +12,7 @@ import {
 } from "./conversationpayload.js";
 
 export type UpdateDatasetRecordPayloadRequest = {
-  payload: ConversationPayload;
+  conversationPayload: ConversationPayload;
 };
 
 /** @internal */
@@ -24,7 +25,11 @@ export const UpdateDatasetRecordPayloadRequest$outboundSchema: z.ZodType<
   UpdateDatasetRecordPayloadRequest$Outbound,
   UpdateDatasetRecordPayloadRequest
 > = z.object({
-  payload: ConversationPayload$outboundSchema,
+  conversationPayload: ConversationPayload$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    conversationPayload: "payload",
+  });
 });
 
 export function updateDatasetRecordPayloadRequestToJSON(

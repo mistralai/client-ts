@@ -482,7 +482,7 @@ async function run() {
   const result = await mistral.beta.observability.datasets.createRecord({
     datasetId: "4c54ed13-1459-44e1-8696-1a6df06f7177",
     createDatasetRecordRequest: {
-      payload: {
+      conversationPayload: {
         messages: [
           {
             "key": "<value>",
@@ -525,7 +525,7 @@ async function run() {
   const res = await betaObservabilityDatasetsCreateRecord(mistral, {
     datasetId: "4c54ed13-1459-44e1-8696-1a6df06f7177",
     createDatasetRecordRequest: {
-      payload: {
+      conversationPayload: {
         messages: [
           {
             "key": "<value>",

@@ -7,7 +7,7 @@ import { AgentsApiV1ConversationsRestartRequest } from "@mistralai/mistralai/mod
 
 let value: AgentsApiV1ConversationsRestartRequest = {
   conversationId: "<id>",
-  conversationRestartRequest: {
+  restartConversationRequest: {
     completionArgs: {
       responseFormat: {
         type: "text",
@@ -23,4 +23,4 @@ let value: AgentsApiV1ConversationsRestartRequest = {
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `conversationId`                                                                               | *string*                                                                                       | :heavy_check_mark:                                                                             | ID of the original conversation which is being restarted.                                      |
-| `conversationRestartRequest`                                                                   | [components.ConversationRestartRequest](../../models/components/conversationrestartrequest.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `restartConversationRequest`                                                                   | [components.RestartConversationRequest](../../models/components/restartconversationrequest.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |

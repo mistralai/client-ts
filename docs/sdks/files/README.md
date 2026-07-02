@@ -23,7 +23,7 @@ Please contact us if you need to increase these storage limits.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_upload_file" method="post" path="/v1/files" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_upload_file" method="post" path="/v1/files" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 import { openAsBlob } from "node:fs";
@@ -98,7 +98,7 @@ Returns a list of files that belong to the user's organization.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_list_files" method="get" path="/v1/files" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_list_files" method="get" path="/v1/files" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -167,7 +167,7 @@ Returns information about a specific file.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_retrieve_file" method="get" path="/v1/files/{file_id}" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_retrieve_file" method="get" path="/v1/files/{file_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -240,7 +240,7 @@ Delete a file.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_delete_file" method="delete" path="/v1/files/{file_id}" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_delete_file" method="delete" path="/v1/files/{file_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -386,7 +386,7 @@ Get Signed Url
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="files_api_routes_get_signed_url" method="get" path="/v1/files/{file_id}/url" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="files_api_routes_get_signed_url" method="get" path="/v1/files/{file_id}/url" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 

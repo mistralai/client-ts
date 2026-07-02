@@ -14,7 +14,8 @@ import {
 } from "./paginatedresultchatcompletioneventpreview.js";
 
 export type ListCampaignSelectedEventsResponse = {
-  completionEvents: PaginatedResultChatCompletionEventPreview;
+  paginatedResultChatCompletionEventPreview:
+    PaginatedResultChatCompletionEventPreview;
 };
 
 /** @internal */
@@ -25,7 +26,7 @@ export const ListCampaignSelectedEventsResponse$inboundSchema: z.ZodType<
   completion_events: PaginatedResultChatCompletionEventPreview$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    "completion_events": "completionEvents",
+    "completion_events": "paginatedResultChatCompletionEventPreview",
   });
 });
 

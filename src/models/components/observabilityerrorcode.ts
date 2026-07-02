@@ -14,7 +14,6 @@ export const ObservabilityErrorCode = {
   AuthForbiddenNotWorkspaceAdmin: "AUTH_FORBIDDEN_NOT_WORKSPACE_ADMIN",
   AuthForbiddenWorkspaceNotFound: "AUTH_FORBIDDEN_WORKSPACE_NOT_FOUND",
   AuthForbiddenRoleNotFound: "AUTH_FORBIDDEN_ROLE_NOT_FOUND",
-  AuthForbiddenOrgNotWhitelisted: "AUTH_FORBIDDEN_ORG_NOT_WHITELISTED",
   AuthUnauthorized: "AUTH_UNAUTHORIZED",
   FeatureNotSupported: "FEATURE_NOT_SUPPORTED",
   FieldsBadRequest: "FIELDS_BAD_REQUEST",
@@ -52,7 +51,13 @@ export const ObservabilityErrorCode = {
   EvaluationRunTransitionIsRunningAlready:
     "EVALUATION_RUN_TRANSITION_IS_RUNNING_ALREADY",
   EvaluationRunTransitionError: "EVALUATION_RUN_TRANSITION_ERROR",
+  TemplateError: "TEMPLATE_ERROR",
   TemplateSyntaxError: "TEMPLATE_SYNTAX_ERROR",
+  ProjectNameAlreadyExists: "PROJECT_NAME_ALREADY_EXISTS",
+  EvaluationNameAlreadyExists: "EVALUATION_NAME_ALREADY_EXISTS",
+  TracesFilterQueryParseError: "TRACES_FILTER_QUERY_PARSE_ERROR",
+  TraceNotFound: "TRACE_NOT_FOUND",
+  SpanNotFound: "SPAN_NOT_FOUND",
 } as const;
 export type ObservabilityErrorCode = OpenEnum<typeof ObservabilityErrorCode>;
 

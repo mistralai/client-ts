@@ -6,6 +6,7 @@
 import { betaObservabilityJudgesCreate } from "../funcs/betaObservabilityJudgesCreate.js";
 import { betaObservabilityJudgesDelete } from "../funcs/betaObservabilityJudgesDelete.js";
 import { betaObservabilityJudgesFetch } from "../funcs/betaObservabilityJudgesFetch.js";
+import { betaObservabilityJudgesJudgeConversation } from "../funcs/betaObservabilityJudgesJudgeConversation.js";
 import { betaObservabilityJudgesList } from "../funcs/betaObservabilityJudgesList.js";
 import { betaObservabilityJudgesUpdate } from "../funcs/betaObservabilityJudgesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -78,6 +79,21 @@ export class Judges extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(betaObservabilityJudgesUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Run a saved judge on a conversation
+   */
+  async judgeConversation(
+    request:
+      operations.JudgeConversationV1ObservabilityJudgesJudgeIdLiveJudgingPostRequest,
+    options?: RequestOptions,
+  ): Promise<components.JudgeOutput> {
+    return unwrapAsync(betaObservabilityJudgesJudgeConversation(
       this,
       request,
       options,

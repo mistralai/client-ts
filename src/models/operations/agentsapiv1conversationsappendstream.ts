@@ -12,14 +12,13 @@ export type AgentsApiV1ConversationsAppendStreamRequest = {
    * ID of the conversation to which we append entries.
    */
   conversationId: string;
-  conversationAppendStreamRequest: components.ConversationAppendStreamRequest;
+  appendConversationRequest: components.AppendConversationRequest;
 };
 
 /** @internal */
 export type AgentsApiV1ConversationsAppendStreamRequest$Outbound = {
   conversation_id: string;
-  ConversationAppendStreamRequest:
-    components.ConversationAppendStreamRequest$Outbound;
+  AppendConversationRequest: components.AppendConversationRequest$Outbound;
 };
 
 /** @internal */
@@ -29,12 +28,12 @@ export const AgentsApiV1ConversationsAppendStreamRequest$outboundSchema:
     AgentsApiV1ConversationsAppendStreamRequest
   > = z.object({
     conversationId: z.string(),
-    conversationAppendStreamRequest:
-      components.ConversationAppendStreamRequest$outboundSchema,
+    appendConversationRequest:
+      components.AppendConversationRequest$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       conversationId: "conversation_id",
-      conversationAppendStreamRequest: "ConversationAppendStreamRequest",
+      appendConversationRequest: "AppendConversationRequest",
     });
   });
 

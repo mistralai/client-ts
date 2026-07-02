@@ -6,7 +6,7 @@
 import { ListDatasetsResponse } from "@mistralai/mistralai/models/components";
 
 let value: ListDatasetsResponse = {
-  datasets: {
+  paginatedResultDatasetPreview: {
     count: 149537,
   },
 };
@@ -16,4 +16,4 @@ let value: ListDatasetsResponse = {
 
 | Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `datasets`                                                                                           | [components.PaginatedResultDatasetPreview](../../models/components/paginatedresultdatasetpreview.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `paginatedResultDatasetPreview`                                                                      | [components.PaginatedResultDatasetPreview](../../models/components/paginatedresultdatasetpreview.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

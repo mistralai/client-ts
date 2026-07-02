@@ -5,7 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Annotations, Annotations$inboundSchema } from "./annotations.js";
@@ -19,18 +22,22 @@ export type AudioContent = {
   mimeType: string;
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AudioContent$inboundSchema: z.ZodType<AudioContent, unknown> = z
-  .object({
-    type: z.literal("audio"),
-    data: z.string(),
-    mimeType: z.string(),
-    annotations: z.nullable(Annotations$inboundSchema).optional(),
-    _meta: z.nullable(z.record(z.string(), z.any())).optional(),
-  }).catchall(z.any()).transform((v) => {
+export const AudioContent$inboundSchema: z.ZodType<AudioContent, unknown> =
+  collectExtraKeys$(
+    z.object({
+      type: z.literal("audio"),
+      data: z.string(),
+      mimeType: z.string(),
+      annotations: z.nullable(Annotations$inboundSchema).optional(),
+      _meta: z.nullable(z.record(z.string(), z.any())).optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
     return remap$(v, {
       "_meta": "meta",
     });

@@ -15,8 +15,12 @@ let value: Campaign = {
   workspaceId: "f0dc4754-9118-4b48-8bd2-3fab4de40dc6",
   description: "retract waist mid blah",
   maxNbEvents: 178583,
-  searchParams: {
-    filters: {},
+  filterPayload: {
+    filters: {
+      field: "<value>",
+      op: "len_eq",
+      value: "<value>",
+    },
   },
   judge: {
     id: "2d0da5b2-1786-44fd-9ecd-0faca7f1d9ff",
@@ -58,5 +62,5 @@ let value: Campaign = {
 | `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `description`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `maxNbEvents`                                                                                 | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `searchParams`                                                                                | [components.FilterPayload](../../models/components/filterpayload.md)                          | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `filterPayload`                                                                               | [components.FilterPayload](../../models/components/filterpayload.md)                          | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `judge`                                                                                       | [components.Judge](../../models/components/judge.md)                                          | :heavy_check_mark:                                                                            | N/A                                                                                           |

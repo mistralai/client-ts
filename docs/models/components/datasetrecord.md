@@ -11,19 +11,21 @@ let value: DatasetRecord = {
   updatedAt: new Date("2024-10-19T01:40:46.888Z"),
   deletedAt: new Date("2026-05-31T01:13:09.991Z"),
   datasetId: "036731de-fe18-457c-87fe-750b67881785",
-  payload: {
+  conversationPayload: {
     messages: [
       {
         "key": "<value>",
         "key1": "<value>",
         "key2": "<value>",
       },
+      {
+        "key": "<value>",
+      },
+      {},
     ],
   },
   properties: {
     "key": "<value>",
-    "key1": "<value>",
-    "key2": "<value>",
   },
   source: "PLAYGROUND",
 };
@@ -38,6 +40,6 @@ let value: DatasetRecord = {
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `datasetId`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `payload`                                                                                     | [components.ConversationPayload](../../models/components/conversationpayload.md)              | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `conversationPayload`                                                                         | [components.ConversationPayload](../../models/components/conversationpayload.md)              | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `properties`                                                                                  | Record<string, *any*>                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `source`                                                                                      | [components.ConversationSource](../../models/components/conversationsource.md)                | :heavy_check_mark:                                                                            | N/A                                                                                           |

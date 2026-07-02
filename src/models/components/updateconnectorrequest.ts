@@ -13,6 +13,10 @@ import {
 
 export type UpdateConnectorRequest = {
   /**
+   * Optional human-readable title for the connector.
+   */
+  title?: string | null | undefined;
+  /**
    * The name of the connector.
    */
   name?: string | null | undefined;
@@ -36,6 +40,7 @@ export type UpdateConnectorRequest = {
    * Optional new connection secrets
    */
   connectionSecrets?: { [k: string]: any } | null | undefined;
+  protocol?: "mcp" | undefined;
   /**
    * New server url for your mcp connector.
    */
@@ -52,12 +57,14 @@ export type UpdateConnectorRequest = {
 
 /** @internal */
 export type UpdateConnectorRequest$Outbound = {
+  title?: string | null | undefined;
   name?: string | null | undefined;
   description?: string | null | undefined;
   icon_url?: string | null | undefined;
   system_prompt?: string | null | undefined;
   connection_config?: { [k: string]: any } | null | undefined;
   connection_secrets?: { [k: string]: any } | null | undefined;
+  protocol: "mcp";
   server?: string | null | undefined;
   headers?: { [k: string]: any } | null | undefined;
   auth_data?: AuthData$Outbound | null | undefined;
@@ -68,12 +75,14 @@ export const UpdateConnectorRequest$outboundSchema: z.ZodType<
   UpdateConnectorRequest$Outbound,
   UpdateConnectorRequest
 > = z.object({
+  title: z.nullable(z.string()).optional(),
   name: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   iconUrl: z.nullable(z.string()).optional(),
   systemPrompt: z.nullable(z.string()).optional(),
   connectionConfig: z.nullable(z.record(z.string(), z.any())).optional(),
   connectionSecrets: z.nullable(z.record(z.string(), z.any())).optional(),
+  protocol: z.literal("mcp").default("mcp" as const),
   server: z.nullable(z.string()).optional(),
   headers: z.nullable(z.record(z.string(), z.any())).optional(),
   authData: z.nullable(AuthData$outboundSchema).optional(),

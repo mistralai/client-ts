@@ -257,7 +257,7 @@ async function run() {
   const result = await mistral.beta.observability.datasets.records.judge({
     datasetRecordId: "9de5d7a1-787a-45dd-b668-9f3407e76d8b",
     judgeDatasetRecordRequest: {
-      judgeDefinition: {
+      createJudgeRequest: {
         name: "<value>",
         description: "wisely railway deceivingly arcade minion back what yowza outrun service",
         modelName: "<value>",
@@ -302,7 +302,7 @@ async function run() {
   const res = await betaObservabilityDatasetsRecordsJudge(mistral, {
     datasetRecordId: "9de5d7a1-787a-45dd-b668-9f3407e76d8b",
     judgeDatasetRecordRequest: {
-      judgeDefinition: {
+      createJudgeRequest: {
         name: "<value>",
         description: "wisely railway deceivingly arcade minion back what yowza outrun service",
         modelName: "<value>",
@@ -371,7 +371,7 @@ async function run() {
   await mistral.beta.observability.datasets.records.updatePayload({
     datasetRecordId: "17506b15-748e-4e7c-9737-c97c44d04b0f",
     updateDatasetRecordPayloadRequest: {
-      payload: {
+      conversationPayload: {
         messages: [
           {
             "key": "<value>",
@@ -411,7 +411,7 @@ async function run() {
   const res = await betaObservabilityDatasetsRecordsUpdatePayload(mistral, {
     datasetRecordId: "17506b15-748e-4e7c-9737-c97c44d04b0f",
     updateDatasetRecordPayloadRequest: {
-      payload: {
+      conversationPayload: {
         messages: [
           {
             "key": "<value>",

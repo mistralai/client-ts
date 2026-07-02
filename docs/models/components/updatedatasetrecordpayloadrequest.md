@@ -6,13 +6,17 @@
 import { UpdateDatasetRecordPayloadRequest } from "@mistralai/mistralai/models/components";
 
 let value: UpdateDatasetRecordPayloadRequest = {
-  payload: {
+  conversationPayload: {
     messages: [
       {
         "key": "<value>",
         "key1": "<value>",
         "key2": "<value>",
       },
+      {
+        "key": "<value>",
+      },
+      {},
     ],
   },
 };
@@ -22,4 +26,4 @@ let value: UpdateDatasetRecordPayloadRequest = {
 
 | Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `payload`                                                                        | [components.ConversationPayload](../../models/components/conversationpayload.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `conversationPayload`                                                            | [components.ConversationPayload](../../models/components/conversationpayload.md) | :heavy_check_mark:                                                               | N/A                                                                              |

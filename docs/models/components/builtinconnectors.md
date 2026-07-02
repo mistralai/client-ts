@@ -6,11 +6,11 @@
 import { BuiltInConnectors } from "@mistralai/mistralai/models/components";
 
 let value: BuiltInConnectors = "document_library";
-
-// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
+
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "web_search" | "web_search_premium" | "code_interpreter" | "image_generation" | "document_library" | Unrecognized<string>

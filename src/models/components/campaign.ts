@@ -21,7 +21,7 @@ export type Campaign = {
   workspaceId: string;
   description: string;
   maxNbEvents: number;
-  searchParams: FilterPayload;
+  filterPayload: FilterPayload;
   judge: Judge;
 };
 
@@ -48,7 +48,7 @@ export const Campaign$inboundSchema: z.ZodType<Campaign, unknown> = z.object({
     "owner_id": "ownerId",
     "workspace_id": "workspaceId",
     "max_nb_events": "maxNbEvents",
-    "search_params": "searchParams",
+    "search_params": "filterPayload",
   });
 });
 

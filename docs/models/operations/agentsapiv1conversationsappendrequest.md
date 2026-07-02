@@ -7,7 +7,7 @@ import { AgentsApiV1ConversationsAppendRequest } from "@mistralai/mistralai/mode
 
 let value: AgentsApiV1ConversationsAppendRequest = {
   conversationId: "<id>",
-  conversationAppendRequest: {
+  appendConversationRequest: {
     completionArgs: {
       responseFormat: {
         type: "text",
@@ -22,4 +22,4 @@ let value: AgentsApiV1ConversationsAppendRequest = {
 | Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
 | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `conversationId`                                                                             | *string*                                                                                     | :heavy_check_mark:                                                                           | ID of the conversation to which we append entries.                                           |
-| `conversationAppendRequest`                                                                  | [components.ConversationAppendRequest](../../models/components/conversationappendrequest.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `appendConversationRequest`                                                                  | [components.AppendConversationRequest](../../models/components/appendconversationrequest.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |

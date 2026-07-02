@@ -6,13 +6,17 @@
 import { CreateDatasetRecordRequest } from "@mistralai/mistralai/models/components";
 
 let value: CreateDatasetRecordRequest = {
-  payload: {
+  conversationPayload: {
     messages: [
       {
         "key": "<value>",
         "key1": "<value>",
         "key2": "<value>",
       },
+      {
+        "key": "<value>",
+      },
+      {},
     ],
   },
   properties: {},
@@ -23,5 +27,5 @@ let value: CreateDatasetRecordRequest = {
 
 | Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `payload`                                                                        | [components.ConversationPayload](../../models/components/conversationpayload.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `conversationPayload`                                                            | [components.ConversationPayload](../../models/components/conversationpayload.md) | :heavy_check_mark:                                                               | N/A                                                                              |
 | `properties`                                                                     | Record<string, *any*>                                                            | :heavy_check_mark:                                                               | N/A                                                                              |

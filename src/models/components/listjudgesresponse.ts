@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,7 +14,7 @@ import {
 } from "./paginatedresultjudgepreview.js";
 
 export type ListJudgesResponse = {
-  judges: PaginatedResultJudgePreview;
+  paginatedResultJudgePreview: PaginatedResultJudgePreview;
 };
 
 /** @internal */
@@ -22,6 +23,10 @@ export const ListJudgesResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   judges: PaginatedResultJudgePreview$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "judges": "paginatedResultJudgePreview",
+  });
 });
 
 export function listJudgesResponseFromJSON(

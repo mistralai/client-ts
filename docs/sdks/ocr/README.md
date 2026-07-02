@@ -14,7 +14,7 @@ OCR
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="ocr_v1_ocr_post" method="post" path="/v1/ocr" example="userExample" -->
+<!-- UsageSnippet language="typescript" operationID="ocr_v1_ocr_post" method="post" path="/v1/ocr" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 

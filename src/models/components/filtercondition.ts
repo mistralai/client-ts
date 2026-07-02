@@ -36,7 +36,7 @@ export type Op = OpenEnum<typeof Op>;
 export type FilterCondition = {
   field: string;
   op: Op;
-  value: any;
+  value?: any | undefined;
 };
 
 /** @internal */
@@ -54,13 +54,13 @@ export const FilterCondition$inboundSchema: z.ZodType<
 > = z.object({
   field: z.string(),
   op: Op$inboundSchema,
-  value: z.any(),
+  value: z.any().optional(),
 });
 /** @internal */
 export type FilterCondition$Outbound = {
   field: string;
   op: string;
-  value: any;
+  value?: any | undefined;
 };
 
 /** @internal */
@@ -70,7 +70,7 @@ export const FilterCondition$outboundSchema: z.ZodType<
 > = z.object({
   field: z.string(),
   op: Op$outboundSchema,
-  value: z.any(),
+  value: z.any().optional(),
 });
 
 export function filterConditionToJSON(

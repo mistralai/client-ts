@@ -8,7 +8,7 @@ Text to embed.
 ### `string`
 
 ```typescript
-const value: string = "<value>";
+const value: string = "[\"Embed this sentence.\",\"As well as this one.\"]";
 ```
 
 ### `string[]`

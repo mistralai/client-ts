@@ -12,13 +12,13 @@ export type AgentsApiV1ConversationsAppendRequest = {
    * ID of the conversation to which we append entries.
    */
   conversationId: string;
-  conversationAppendRequest: components.ConversationAppendRequest;
+  appendConversationRequest: components.AppendConversationRequest;
 };
 
 /** @internal */
 export type AgentsApiV1ConversationsAppendRequest$Outbound = {
   conversation_id: string;
-  ConversationAppendRequest: components.ConversationAppendRequest$Outbound;
+  AppendConversationRequest: components.AppendConversationRequest$Outbound;
 };
 
 /** @internal */
@@ -27,12 +27,12 @@ export const AgentsApiV1ConversationsAppendRequest$outboundSchema: z.ZodType<
   AgentsApiV1ConversationsAppendRequest
 > = z.object({
   conversationId: z.string(),
-  conversationAppendRequest:
-    components.ConversationAppendRequest$outboundSchema,
+  appendConversationRequest:
+    components.AppendConversationRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     conversationId: "conversation_id",
-    conversationAppendRequest: "ConversationAppendRequest",
+    appendConversationRequest: "AppendConversationRequest",
   });
 });
 

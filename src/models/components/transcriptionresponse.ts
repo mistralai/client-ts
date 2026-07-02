@@ -4,7 +4,10 @@
  */
 
 import * as z from "zod/v4";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -19,20 +22,24 @@ export type TranscriptionResponse = {
   segments?: Array<TranscriptionSegmentChunk> | undefined;
   usage: UsageInfo;
   language: string | null;
-  [additionalProperties: string]: unknown;
+  additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export const TranscriptionResponse$inboundSchema: z.ZodType<
   TranscriptionResponse,
   unknown
-> = z.object({
-  model: z.string(),
-  text: z.string(),
-  segments: z.array(TranscriptionSegmentChunk$inboundSchema).optional(),
-  usage: UsageInfo$inboundSchema,
-  language: z.nullable(z.string()),
-}).catchall(z.any());
+> = collectExtraKeys$(
+  z.object({
+    model: z.string(),
+    text: z.string(),
+    segments: z.array(TranscriptionSegmentChunk$inboundSchema).optional(),
+    usage: UsageInfo$inboundSchema,
+    language: z.nullable(z.string()),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
 
 export function transcriptionResponseFromJSON(
   jsonString: string,
