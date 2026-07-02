@@ -5,11 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateSkillVersionRequest = {
   /**
@@ -27,10 +23,6 @@ export type SkillsUpdateVersionMetadataRequest = {
   version: number;
   requestBody: UpdateSkillVersionRequest;
 };
-
-export type SkillsUpdateVersionMetadataResponse =
-  | components.Skill
-  | components.ConnectError;
 
 /** @internal */
 export type UpdateSkillVersionRequest$Outbound = {
@@ -84,25 +76,5 @@ export function skillsUpdateVersionMetadataRequestToJSON(
     SkillsUpdateVersionMetadataRequest$outboundSchema.parse(
       skillsUpdateVersionMetadataRequest,
     ),
-  );
-}
-
-/** @internal */
-export const SkillsUpdateVersionMetadataResponse$inboundSchema: z.ZodType<
-  SkillsUpdateVersionMetadataResponse,
-  unknown
-> = smartUnion([
-  components.Skill$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function skillsUpdateVersionMetadataResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<SkillsUpdateVersionMetadataResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      SkillsUpdateVersionMetadataResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SkillsUpdateVersionMetadataResponse' from JSON`,
   );
 }

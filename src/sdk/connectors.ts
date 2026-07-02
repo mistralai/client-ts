@@ -26,6 +26,7 @@ import { betaConnectorsListOrganizationCredentials } from "../funcs/betaConnecto
 import { betaConnectorsListTools } from "../funcs/betaConnectorsListTools.js";
 import { betaConnectorsListUserCredentials } from "../funcs/betaConnectorsListUserCredentials.js";
 import { betaConnectorsListWorkspaceCredentials } from "../funcs/betaConnectorsListWorkspaceCredentials.js";
+import { betaConnectorsShare } from "../funcs/betaConnectorsShare.js";
 import { betaConnectorsUpdate } from "../funcs/betaConnectorsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -78,6 +79,23 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.AuthUrlResponse> {
     return unwrapAsync(betaConnectorsGetAuthUrl(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Share a private connector to the current workspace.
+   *
+   * @remarks
+   * Transfers ownership of a private user-owned connector to the current workspace, making it available to all workspace members. This action is irreversible: once shared, the connector belongs to the workspace and can no longer be used privately across other workspaces. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
+   */
+  async share(
+    request: operations.ConnectorShareV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsShare(
       this,
       request,
       options,

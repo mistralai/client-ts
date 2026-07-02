@@ -12,6 +12,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -35,7 +36,7 @@ export function betaSkillsGetVersion(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.SkillsGetVersionResponse,
+    components.Skill,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -60,7 +61,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.SkillsGetVersionResponse,
+      components.Skill,
       | MistralError
       | ResponseValidationError
       | ConnectionError
@@ -154,7 +155,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.SkillsGetVersionResponse,
+    components.Skill,
     | MistralError
     | ResponseValidationError
     | ConnectionError
@@ -164,10 +165,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.SkillsGetVersionResponse$inboundSchema),
+    M.json(200, components.Skill$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-    M.json("default", operations.SkillsGetVersionResponse$inboundSchema),
   )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

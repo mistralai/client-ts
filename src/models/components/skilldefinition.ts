@@ -25,7 +25,7 @@ export type SkillDefinition = {
   /**
    * Skill body content.
    */
-  body: string;
+  body?: string | undefined;
   /**
    * Additional files available to the skill.
    */
@@ -38,13 +38,13 @@ export const SkillDefinition$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   description: z.string().optional(),
-  body: z.string(),
+  body: z.string().optional(),
   assets: z.record(z.string(), SkillAssetContent$inboundSchema).optional(),
 });
 /** @internal */
 export type SkillDefinition$Outbound = {
   description?: string | undefined;
-  body: string;
+  body?: string | undefined;
   assets?: { [k: string]: SkillAssetContent$Outbound } | undefined;
 };
 
@@ -54,7 +54,7 @@ export const SkillDefinition$outboundSchema: z.ZodType<
   SkillDefinition
 > = z.object({
   description: z.string().optional(),
-  body: z.string(),
+  body: z.string().optional(),
   assets: z.record(z.string(), SkillAssetContent$outboundSchema).optional(),
 });
 

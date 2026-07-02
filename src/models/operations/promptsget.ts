@@ -5,11 +5,6 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PromptsGetRequest = {
   promptId: string;
@@ -17,8 +12,6 @@ export type PromptsGetRequest = {
   alias?: string | undefined;
   fields?: Array<string> | undefined;
 };
-
-export type PromptsGetResponse = components.Prompt | components.ConnectError;
 
 /** @internal */
 export type PromptsGetRequest$Outbound = {
@@ -48,24 +41,5 @@ export function promptsGetRequestToJSON(
 ): string {
   return JSON.stringify(
     PromptsGetRequest$outboundSchema.parse(promptsGetRequest),
-  );
-}
-
-/** @internal */
-export const PromptsGetResponse$inboundSchema: z.ZodType<
-  PromptsGetResponse,
-  unknown
-> = smartUnion([
-  components.Prompt$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function promptsGetResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptsGetResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptsGetResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptsGetResponse' from JSON`,
   );
 }

@@ -5,21 +5,12 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SkillsGetVersionRequest = {
   skillId: string;
   version: number;
   fields?: Array<string> | undefined;
 };
-
-export type SkillsGetVersionResponse =
-  | components.Skill
-  | components.ConnectError;
 
 /** @internal */
 export type SkillsGetVersionRequest$Outbound = {
@@ -47,24 +38,5 @@ export function skillsGetVersionRequestToJSON(
 ): string {
   return JSON.stringify(
     SkillsGetVersionRequest$outboundSchema.parse(skillsGetVersionRequest),
-  );
-}
-
-/** @internal */
-export const SkillsGetVersionResponse$inboundSchema: z.ZodType<
-  SkillsGetVersionResponse,
-  unknown
-> = smartUnion([
-  components.Skill$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function skillsGetVersionResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<SkillsGetVersionResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SkillsGetVersionResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SkillsGetVersionResponse' from JSON`,
   );
 }

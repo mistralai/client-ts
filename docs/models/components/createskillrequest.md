@@ -7,9 +7,7 @@ import { CreateSkillRequest } from "@mistralai/mistralai/models/components";
 
 let value: CreateSkillRequest = {
   name: "<value>",
-  definition: {
-    body: "<value>",
-  },
+  definition: {},
 };
 ```
 

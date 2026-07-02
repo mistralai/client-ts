@@ -8,6 +8,7 @@ import { ListSkillVersionsResponse } from "@mistralai/mistralai/models/component
 let value: ListSkillVersionsResponse = {
   data: [
     {
+      version: 1,
       createdAt: new Date("1s"),
     },
   ],

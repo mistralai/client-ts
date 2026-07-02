@@ -5,11 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdatePromptVersionRequest = {
   /**
@@ -27,10 +23,6 @@ export type PromptsUpdateVersionMetadataRequest = {
   version: number;
   requestBody: UpdatePromptVersionRequest;
 };
-
-export type PromptsUpdateVersionMetadataResponse =
-  | components.Prompt
-  | components.ConnectError;
 
 /** @internal */
 export type UpdatePromptVersionRequest$Outbound = {
@@ -84,25 +76,5 @@ export function promptsUpdateVersionMetadataRequestToJSON(
     PromptsUpdateVersionMetadataRequest$outboundSchema.parse(
       promptsUpdateVersionMetadataRequest,
     ),
-  );
-}
-
-/** @internal */
-export const PromptsUpdateVersionMetadataResponse$inboundSchema: z.ZodType<
-  PromptsUpdateVersionMetadataResponse,
-  unknown
-> = smartUnion([
-  components.Prompt$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function promptsUpdateVersionMetadataResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptsUpdateVersionMetadataResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      PromptsUpdateVersionMetadataResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptsUpdateVersionMetadataResponse' from JSON`,
   );
 }

@@ -250,13 +250,13 @@ We have dedicated SDKs for the following providers:
 * [get](docs/sdks/voices/README.md#get) - Get voice details
 * [getSampleAudio](docs/sdks/voices/README.md#getsampleaudio) - Get voice sample audio
 
-### [Batch.Jobs](docs/sdks/batchjobs/README.md)
+### [Batch.Jobs](docs/sdks/jobs/README.md)
 
-* [list](docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
-* [create](docs/sdks/batchjobs/README.md#create) - Create Batch Job
-* [get](docs/sdks/batchjobs/README.md#get) - Get Batch Job
-* [delete](docs/sdks/batchjobs/README.md#delete) - Delete Batch Job
-* [cancel](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
+* [list](docs/sdks/jobs/README.md#list) - Get Batch Jobs
+* [create](docs/sdks/jobs/README.md#create) - Create Batch Job
+* [get](docs/sdks/jobs/README.md#get) - Get Batch Job
+* [delete](docs/sdks/jobs/README.md#delete) - Delete Batch Job
+* [cancel](docs/sdks/jobs/README.md#cancel) - Cancel Batch Job
 
 ### [Beta.Agents](docs/sdks/betaagents/README.md)
 
@@ -277,6 +277,7 @@ We have dedicated SDKs for the following providers:
 * [create](docs/sdks/connectors/README.md#create) - Create a new connector.
 * [list](docs/sdks/connectors/README.md#list) - List all connectors.
 * [getAuthUrl](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
+* [share](docs/sdks/connectors/README.md#share) - Share a private connector to the current workspace.
 * [activateForOrganization](docs/sdks/connectors/README.md#activatefororganization) - Activate a connector for an organization.
 * [deactivateForOrganization](docs/sdks/connectors/README.md#deactivatefororganization) - Deactivate a connector for an organization.
 * [activateForWorkspace](docs/sdks/connectors/README.md#activateforworkspace) - Activate a connector for a workspace.
@@ -332,8 +333,6 @@ We have dedicated SDKs for the following providers:
 
 * [list](docs/sdks/documents/README.md#list) - List documents in a given library.
 * [upload](docs/sdks/documents/README.md#upload) - Upload a new document.
-* [getSignedUploadUrl](docs/sdks/documents/README.md#getsigneduploadurl) - Get a signed URL for direct upload to blob storage.
-* [ingestFromBlobStorage](docs/sdks/documents/README.md#ingestfromblobstorage) - Ingest a document from blob storage of the document library.
 * [get](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
 * [update](docs/sdks/documents/README.md#update) - Update the metadata of a specific document.
 * [~~librariesDocumentsUpdateV1~~](docs/sdks/documents/README.md#librariesdocumentsupdatev1) - Update the metadata of a specific document. :warning: **Deprecated**
@@ -472,6 +471,10 @@ We have dedicated SDKs for the following providers:
 * [getVersion](docs/sdks/skills/README.md#getversion) - GetSkillVersion
 * [updateVersionMetadata](docs/sdks/skills/README.md#updateversionmetadata) - UpdateSkillVersionMetadata
 
+### [Beta.Users](docs/sdks/users/README.md)
+
+* [getIdentity](docs/sdks/users/README.md#getidentity) - Get Identity
+
 ### [Chat](docs/sdks/chat/README.md)
 
 * [complete](docs/sdks/chat/README.md#complete) - Chat Completion
@@ -506,14 +509,6 @@ We have dedicated SDKs for the following providers:
 
 * [complete](docs/sdks/fim/README.md#complete) - Fim Completion
 * [stream](docs/sdks/fim/README.md#stream) - Stream fim completion
-
-### [FineTuning.Jobs](docs/sdks/finetuningjobs/README.md)
-
-* [list](docs/sdks/finetuningjobs/README.md#list) - Get Fine Tuning Jobs
-* [create](docs/sdks/finetuningjobs/README.md#create) - Create Fine Tuning Job
-* [get](docs/sdks/finetuningjobs/README.md#get) - Get Fine Tuning Job
-* [cancel](docs/sdks/finetuningjobs/README.md#cancel) - Cancel Fine Tuning Job
-* [start](docs/sdks/finetuningjobs/README.md#start) - Start Fine Tuning Job
 
 ### [Models](docs/sdks/models/README.md)
 
@@ -855,8 +850,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 147 of 248 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 248 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 146 of 243 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 243 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1033,11 +1028,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`audioVoicesGetSampleAudio`](docs/sdks/voices/README.md#getsampleaudio) - Get voice sample audio
 - [`audioVoicesList`](docs/sdks/voices/README.md#list) - List all voices
 - [`audioVoicesUpdate`](docs/sdks/voices/README.md#update) - Update voice metadata
-- [`batchJobsCancel`](docs/sdks/batchjobs/README.md#cancel) - Cancel Batch Job
-- [`batchJobsCreate`](docs/sdks/batchjobs/README.md#create) - Create Batch Job
-- [`batchJobsDelete`](docs/sdks/batchjobs/README.md#delete) - Delete Batch Job
-- [`batchJobsGet`](docs/sdks/batchjobs/README.md#get) - Get Batch Job
-- [`batchJobsList`](docs/sdks/batchjobs/README.md#list) - Get Batch Jobs
+- [`batchJobsCancel`](docs/sdks/jobs/README.md#cancel) - Cancel Batch Job
+- [`batchJobsCreate`](docs/sdks/jobs/README.md#create) - Create Batch Job
+- [`batchJobsDelete`](docs/sdks/jobs/README.md#delete) - Delete Batch Job
+- [`batchJobsGet`](docs/sdks/jobs/README.md#get) - Get Batch Job
+- [`batchJobsList`](docs/sdks/jobs/README.md#list) - Get Batch Jobs
 - [`betaAgentsCreate`](docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
 - [`betaAgentsCreateVersionAlias`](docs/sdks/betaagents/README.md#createversionalias) - Create or update an agent version alias.
 - [`betaAgentsDelete`](docs/sdks/betaagents/README.md#delete) - Delete an agent entity.
@@ -1072,6 +1067,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaConnectorsListTools`](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
 - [`betaConnectorsListUserCredentials`](docs/sdks/connectors/README.md#listusercredentials) - List user credentials for a connector.
 - [`betaConnectorsListWorkspaceCredentials`](docs/sdks/connectors/README.md#listworkspacecredentials) - List workspace credentials for a connector.
+- [`betaConnectorsShare`](docs/sdks/connectors/README.md#share) - Share a private connector to the current workspace.
 - [`betaConnectorsUpdate`](docs/sdks/connectors/README.md#update) - Update a connector.
 - [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 - [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
@@ -1092,9 +1088,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaLibrariesDocumentsDelete`](docs/sdks/documents/README.md#delete) - Delete a document.
 - [`betaLibrariesDocumentsExtractedTextSignedUrl`](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
 - [`betaLibrariesDocumentsGet`](docs/sdks/documents/README.md#get) - Retrieve the metadata of a specific document.
-- [`betaLibrariesDocumentsGetSignedUploadUrl`](docs/sdks/documents/README.md#getsigneduploadurl) - Get a signed URL for direct upload to blob storage.
 - [`betaLibrariesDocumentsGetSignedUrl`](docs/sdks/documents/README.md#getsignedurl) - Retrieve the signed URL of a specific document.
-- [`betaLibrariesDocumentsIngestFromBlobStorage`](docs/sdks/documents/README.md#ingestfromblobstorage) - Ingest a document from blob storage of the document library.
 - [`betaLibrariesDocumentsList`](docs/sdks/documents/README.md#list) - List documents in a given library.
 - [`betaLibrariesDocumentsReprocess`](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
 - [`betaLibrariesDocumentsStatus`](docs/sdks/documents/README.md#status) - Retrieve the processing status of a specific document.
@@ -1193,6 +1187,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaSkillsListVersions`](docs/sdks/skills/README.md#listversions) - ListSkillVersions
 - [`betaSkillsUpdateMetadata`](docs/sdks/skills/README.md#updatemetadata) - UpdateSkill
 - [`betaSkillsUpdateVersionMetadata`](docs/sdks/skills/README.md#updateversionmetadata) - UpdateSkillVersionMetadata
+- [`betaUsersGetIdentity`](docs/sdks/users/README.md#getidentity) - Get Identity
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications
@@ -1212,11 +1207,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`filesUpload`](docs/sdks/files/README.md#upload) - Upload File
 - [`fimComplete`](docs/sdks/fim/README.md#complete) - Fim Completion
 - [`fimStream`](docs/sdks/fim/README.md#stream) - Stream fim completion
-- [`fineTuningJobsCancel`](docs/sdks/finetuningjobs/README.md#cancel) - Cancel Fine Tuning Job
-- [`fineTuningJobsCreate`](docs/sdks/finetuningjobs/README.md#create) - Create Fine Tuning Job
-- [`fineTuningJobsGet`](docs/sdks/finetuningjobs/README.md#get) - Get Fine Tuning Job
-- [`fineTuningJobsList`](docs/sdks/finetuningjobs/README.md#list) - Get Fine Tuning Jobs
-- [`fineTuningJobsStart`](docs/sdks/finetuningjobs/README.md#start) - Start Fine Tuning Job
 - [`modelsArchive`](docs/sdks/models/README.md#archive) - Archive Fine Tuned Model
 - [`modelsDelete`](docs/sdks/models/README.md#delete) - Delete Model
 - [`modelsList`](docs/sdks/models/README.md#list) - List Models
