@@ -5,19 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PromptsDeleteRequest = {
   promptId: string;
 };
-
-export type PromptsDeleteResponse =
-  | components.DeletePromptResponse
-  | components.ConnectError;
 
 /** @internal */
 export type PromptsDeleteRequest$Outbound = {
@@ -41,24 +32,5 @@ export function promptsDeleteRequestToJSON(
 ): string {
   return JSON.stringify(
     PromptsDeleteRequest$outboundSchema.parse(promptsDeleteRequest),
-  );
-}
-
-/** @internal */
-export const PromptsDeleteResponse$inboundSchema: z.ZodType<
-  PromptsDeleteResponse,
-  unknown
-> = smartUnion([
-  components.DeletePromptResponse$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function promptsDeleteResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptsDeleteResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptsDeleteResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptsDeleteResponse' from JSON`,
   );
 }

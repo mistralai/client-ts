@@ -5,19 +5,10 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SkillsListVersionsRequest = {
   skillId: string;
 };
-
-export type SkillsListVersionsResponse =
-  | components.ListSkillVersionsResponse
-  | components.ConnectError;
 
 /** @internal */
 export type SkillsListVersionsRequest$Outbound = {
@@ -41,24 +32,5 @@ export function skillsListVersionsRequestToJSON(
 ): string {
   return JSON.stringify(
     SkillsListVersionsRequest$outboundSchema.parse(skillsListVersionsRequest),
-  );
-}
-
-/** @internal */
-export const SkillsListVersionsResponse$inboundSchema: z.ZodType<
-  SkillsListVersionsResponse,
-  unknown
-> = smartUnion([
-  components.ListSkillVersionsResponse$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function skillsListVersionsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<SkillsListVersionsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SkillsListVersionsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SkillsListVersionsResponse' from JSON`,
   );
 }

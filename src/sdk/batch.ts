@@ -4,11 +4,11 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { BatchJobs } from "./batchjobs.js";
+import { Jobs } from "./jobs.js";
 
 export class Batch extends ClientSDK {
-  private _jobs?: BatchJobs;
-  get jobs(): BatchJobs {
-    return (this._jobs ??= new BatchJobs(this._options));
+  private _jobs?: Jobs;
+  get jobs(): Jobs {
+    return (this._jobs ??= new Jobs(this._options));
   }
 }

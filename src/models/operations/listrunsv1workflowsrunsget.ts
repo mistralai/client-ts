@@ -99,6 +99,10 @@ export type ListRunsV1WorkflowsRunsGetRequest = {
    */
   userId?: string | null | undefined;
   /**
+   * Filter to runs of workflows tagged with all listed tags (AND).
+   */
+  workflowTags?: Array<string> | null | undefined;
+  /**
    * Include runs of internal/technical workflows (e.g. parallel-execution)
    */
   includeInternal?: boolean | undefined;
@@ -160,6 +164,7 @@ export type ListRunsV1WorkflowsRunsGetRequest$Outbound = {
   end_time_after?: string | null | undefined;
   end_time_before?: string | null | undefined;
   user_id?: string | null | undefined;
+  workflow_tags?: Array<string> | null | undefined;
   include_internal: boolean;
   page_size: number;
   next_page_token?: string | null | undefined;
@@ -190,6 +195,7 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
   endTimeBefore: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   userId: z.nullable(z.string()).optional(),
+  workflowTags: z.nullable(z.array(z.string())).optional(),
   includeInternal: z.boolean().default(true),
   pageSize: z.int().default(50),
   nextPageToken: z.nullable(z.string()).optional(),
@@ -204,6 +210,7 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
     endTimeAfter: "end_time_after",
     endTimeBefore: "end_time_before",
     userId: "user_id",
+    workflowTags: "workflow_tags",
     includeInternal: "include_internal",
     pageSize: "page_size",
     nextPageToken: "next_page_token",

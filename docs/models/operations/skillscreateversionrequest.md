@@ -8,9 +8,7 @@ import { SkillsCreateVersionRequest } from "@mistralai/mistralai/models/operatio
 let value: SkillsCreateVersionRequest = {
   skillId: "<id>",
   requestBody: {
-    definition: {
-      body: "<value>",
-    },
+    definition: {},
   },
 };
 ```

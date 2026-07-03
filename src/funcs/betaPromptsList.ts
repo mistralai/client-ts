@@ -178,9 +178,6 @@ async function $do(
     }),
     M.fail("4XX"),
     M.fail("5XX"),
-    M.json("default", operations.PromptsListResponse$inboundSchema, {
-      key: "Result",
-    }),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [haltIterator(result), {

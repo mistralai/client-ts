@@ -5,11 +5,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateSkillRequest = {
   sharingScope?: components.RegistrySharingScope | undefined;
@@ -19,8 +15,6 @@ export type SkillsUpdateRequest = {
   skillId: string;
   requestBody: UpdateSkillRequest;
 };
-
-export type SkillsUpdateResponse = components.Skill | components.ConnectError;
 
 /** @internal */
 export type UpdateSkillRequest$Outbound = {
@@ -68,24 +62,5 @@ export function skillsUpdateRequestToJSON(
 ): string {
   return JSON.stringify(
     SkillsUpdateRequest$outboundSchema.parse(skillsUpdateRequest),
-  );
-}
-
-/** @internal */
-export const SkillsUpdateResponse$inboundSchema: z.ZodType<
-  SkillsUpdateResponse,
-  unknown
-> = smartUnion([
-  components.Skill$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function skillsUpdateResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<SkillsUpdateResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SkillsUpdateResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SkillsUpdateResponse' from JSON`,
   );
 }

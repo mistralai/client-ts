@@ -8,6 +8,7 @@ import { ListPromptVersionsResponse } from "@mistralai/mistralai/models/componen
 let value: ListPromptVersionsResponse = {
   data: [
     {
+      version: 1,
       createdAt: new Date("1s"),
     },
   ],

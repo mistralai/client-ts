@@ -20,8 +20,3 @@ export const FTClassifierLossFunction$inboundSchema: z.ZodType<
   FTClassifierLossFunction,
   unknown
 > = openEnums.inboundSchema(FTClassifierLossFunction);
-/** @internal */
-export const FTClassifierLossFunction$outboundSchema: z.ZodType<
-  string,
-  FTClassifierLossFunction
-> = openEnums.outboundSchema(FTClassifierLossFunction);

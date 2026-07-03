@@ -7,7 +7,6 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,12 +17,8 @@ export type PromptsListRequest = {
   fields?: Array<string> | undefined;
 };
 
-export type PromptsListResponseResult =
-  | components.ListPromptsResponse
-  | components.ConnectError;
-
 export type PromptsListResponse = {
-  result: components.ListPromptsResponse | components.ConnectError;
+  result: components.ListPromptsResponse;
 };
 
 /** @internal */
@@ -54,33 +49,11 @@ export function promptsListRequestToJSON(
 }
 
 /** @internal */
-export const PromptsListResponseResult$inboundSchema: z.ZodType<
-  PromptsListResponseResult,
-  unknown
-> = smartUnion([
-  components.ListPromptsResponse$inboundSchema,
-  components.ConnectError$inboundSchema,
-]);
-
-export function promptsListResponseResultFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptsListResponseResult, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptsListResponseResult$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptsListResponseResult' from JSON`,
-  );
-}
-
-/** @internal */
 export const PromptsListResponse$inboundSchema: z.ZodType<
   PromptsListResponse,
   unknown
 > = z.object({
-  Result: smartUnion([
-    components.ListPromptsResponse$inboundSchema,
-    components.ConnectError$inboundSchema,
-  ]),
+  Result: components.ListPromptsResponse$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "Result": "result",

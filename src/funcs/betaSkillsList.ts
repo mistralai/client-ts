@@ -176,9 +176,6 @@ async function $do(
     M.json(200, operations.SkillsListResponse$inboundSchema, { key: "Result" }),
     M.fail("4XX"),
     M.fail("5XX"),
-    M.json("default", operations.SkillsListResponse$inboundSchema, {
-      key: "Result",
-    }),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [haltIterator(result), {

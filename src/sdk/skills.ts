@@ -39,7 +39,7 @@ export class Skills extends ClientSDK {
   async create(
     request: components.CreateSkillRequest,
     options?: RequestOptions,
-  ): Promise<operations.SkillsCreateResponse> {
+  ): Promise<components.Skill> {
     return unwrapAsync(betaSkillsCreate(
       this,
       request,
@@ -53,7 +53,7 @@ export class Skills extends ClientSDK {
   async get(
     request: operations.SkillsGetRequest,
     options?: RequestOptions,
-  ): Promise<operations.SkillsGetResponse> {
+  ): Promise<components.Skill> {
     return unwrapAsync(betaSkillsGet(
       this,
       request,
@@ -67,7 +67,7 @@ export class Skills extends ClientSDK {
   async delete(
     request: operations.SkillsDeleteRequest,
     options?: RequestOptions,
-  ): Promise<operations.SkillsDeleteResponse> {
+  ): Promise<components.DeleteSkillResponse> {
     return unwrapAsync(betaSkillsDelete(
       this,
       request,
@@ -82,7 +82,7 @@ export class Skills extends ClientSDK {
     skillId: string,
     requestBody: operations.UpdateSkillRequest,
     options?: RequestOptions,
-  ): Promise<operations.SkillsUpdateResponse> {
+  ): Promise<components.Skill> {
     return unwrapAsync(betaSkillsUpdateMetadata(
       this,
       skillId,
@@ -97,7 +97,7 @@ export class Skills extends ClientSDK {
   async listVersions(
     request: operations.SkillsListVersionsRequest,
     options?: RequestOptions,
-  ): Promise<operations.SkillsListVersionsResponse> {
+  ): Promise<components.ListSkillVersionsResponse> {
     return unwrapAsync(betaSkillsListVersions(
       this,
       request,
@@ -112,7 +112,7 @@ export class Skills extends ClientSDK {
     skillId: string,
     requestBody: operations.CreateSkillVersionRequest,
     options?: RequestOptions,
-  ): Promise<operations.SkillsCreateVersionResponse> {
+  ): Promise<components.CreateSkillVersionResponse> {
     return unwrapAsync(betaSkillsCreateVersion(
       this,
       skillId,
@@ -127,7 +127,7 @@ export class Skills extends ClientSDK {
   async getVersion(
     request: operations.SkillsGetVersionRequest,
     options?: RequestOptions,
-  ): Promise<operations.SkillsGetVersionResponse> {
+  ): Promise<components.Skill> {
     return unwrapAsync(betaSkillsGetVersion(
       this,
       request,
@@ -143,7 +143,7 @@ export class Skills extends ClientSDK {
     version: number,
     requestBody: operations.UpdateSkillVersionRequest,
     options?: RequestOptions,
-  ): Promise<operations.SkillsUpdateVersionMetadataResponse> {
+  ): Promise<components.Skill> {
     return unwrapAsync(betaSkillsUpdateVersionMetadata(
       this,
       skillId,
