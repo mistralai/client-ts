@@ -37,7 +37,7 @@ import { Result } from "../types/fp.js";
 export function betaRagSearchIndexesSetIndexSummary(
   client: MistralCore,
   request:
-    operations.SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldPutRequest,
+    operations.SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldLanguagePutRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -63,7 +63,7 @@ export function betaRagSearchIndexesSetIndexSummary(
 async function $do(
   client: MistralCore,
   request:
-    operations.SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldPutRequest,
+    operations.SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldLanguagePutRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -86,7 +86,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldPutRequest$outboundSchema
+        .SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldLanguagePutRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -94,7 +94,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.UpdateIndexSummaryRequestSummary, {
+  const body = encodeJSON("body", payload.UpdateSummaryRequestSummary, {
     explode: true,
   });
 
@@ -103,10 +103,14 @@ async function $do(
       explode: false,
       charEncoding: "percent",
     }),
+    language: encodeSimple("language", payload.language, {
+      explode: false,
+      charEncoding: "percent",
+    }),
   };
-  const path = pathToFunc("/v1/rag/indexes/index/{index_id}/summary_field")(
-    pathParams,
-  );
+  const path = pathToFunc(
+    "/v1/rag/indexes/index/{index_id}/summary_field/{language}",
+  )(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -121,7 +125,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
-      "set_index_summary_v1_rag_indexes_index__index_id__summary_field_put",
+      "set_index_summary_v1_rag_indexes_index__index_id__summary_field__language__put",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

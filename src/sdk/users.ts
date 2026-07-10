@@ -6,6 +6,7 @@
 import { betaUsersGetIdentity } from "../funcs/betaUsersGetIdentity.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
+import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Users extends ClientSDK {
@@ -13,10 +14,12 @@ export class Users extends ClientSDK {
    * Get Identity
    */
   async getIdentity(
+    security: operations.UsersApiGetIdentitySecurity,
     options?: RequestOptions,
   ): Promise<components.UserIdentity> {
     return unwrapAsync(betaUsersGetIdentity(
       this,
+      security,
       options,
     ));
   }

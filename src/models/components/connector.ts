@@ -58,6 +58,7 @@ export type Connector = {
   ownerId?: string | null | undefined;
   ownerType: ResourceType;
   visibility: ResourceVisibility;
+  creatorId?: string | null | undefined;
   locale?: ConnectorLocale | null | undefined;
   systemPrompt?: string | null | undefined;
   supportedAuthMethods?: Array<PublicAuthenticationMethod> | null | undefined;
@@ -88,6 +89,7 @@ export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
   owner_id: z.nullable(z.string()).optional(),
   owner_type: ResourceType$inboundSchema,
   visibility: ResourceVisibility$inboundSchema,
+  creator_id: z.nullable(z.string()).optional(),
   locale: z.nullable(ConnectorLocale$inboundSchema).optional(),
   system_prompt: z.nullable(z.string()).optional(),
   supported_auth_methods: z.nullable(
@@ -116,6 +118,7 @@ export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
     "server_card": "serverCard",
     "owner_id": "ownerId",
     "owner_type": "ownerType",
+    "creator_id": "creatorId",
     "system_prompt": "systemPrompt",
     "supported_auth_methods": "supportedAuthMethods",
     "connection_preferences": "connectionPreferences",

@@ -15,6 +15,7 @@ import { betaConnectorsDeactivateForOrganization } from "../funcs/betaConnectors
 import { betaConnectorsDeactivateForUser } from "../funcs/betaConnectorsDeactivateForUser.js";
 import { betaConnectorsDeactivateForWorkspace } from "../funcs/betaConnectorsDeactivateForWorkspace.js";
 import { betaConnectorsDelete } from "../funcs/betaConnectorsDelete.js";
+import { betaConnectorsDeleteAllUserCredentials } from "../funcs/betaConnectorsDeleteAllUserCredentials.js";
 import { betaConnectorsDeleteOrganizationCredentials } from "../funcs/betaConnectorsDeleteOrganizationCredentials.js";
 import { betaConnectorsDeleteUserCredentials } from "../funcs/betaConnectorsDeleteUserCredentials.js";
 import { betaConnectorsDeleteWorkspaceCredentials } from "../funcs/betaConnectorsDeleteWorkspaceCredentials.js";
@@ -351,6 +352,23 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(betaConnectorsCreateOrUpdateUserCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete all user credentials for a connector.
+   *
+   * @remarks
+   * Delete all credentials configured at the user level for a given connector.
+   */
+  async deleteAllUserCredentials(
+    request: operations.ConnectorDeleteAllUserCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsDeleteAllUserCredentials(
       this,
       request,
       options,

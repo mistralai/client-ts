@@ -31,7 +31,6 @@ export type GetSearchIndexDetailResponseIndex = {
   createdAt: Date;
   modifiedAt: Date;
   vespaVersion: string | null;
-  summary: string | null;
   schemas: Array<GetSearchIndexDetailResponseSchemaModel>;
 };
 
@@ -53,7 +52,6 @@ export const GetSearchIndexDetailResponseIndex$inboundSchema: z.ZodType<
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   modified_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   vespa_version: z.nullable(z.string()),
-  summary: z.nullable(z.string()),
   schemas: z.array(GetSearchIndexDetailResponseSchemaModel$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
