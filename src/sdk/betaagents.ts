@@ -10,6 +10,7 @@ import { betaAgentsDeleteVersionAlias } from "../funcs/betaAgentsDeleteVersionAl
 import { betaAgentsGet } from "../funcs/betaAgentsGet.js";
 import { betaAgentsGetVersion } from "../funcs/betaAgentsGetVersion.js";
 import { betaAgentsList } from "../funcs/betaAgentsList.js";
+import { betaAgentsListPages } from "../funcs/betaAgentsListPages.js";
 import { betaAgentsListVersionAliases } from "../funcs/betaAgentsListVersionAliases.js";
 import { betaAgentsListVersions } from "../funcs/betaAgentsListVersions.js";
 import { betaAgentsUpdate } from "../funcs/betaAgentsUpdate.js";
@@ -18,6 +19,7 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class BetaAgents extends ClientSDK {
   /**
@@ -41,13 +43,37 @@ export class BetaAgents extends ClientSDK {
    * List agent entities.
    *
    * @remarks
-   * Retrieve a list of agent entities sorted by creation time.
+   * Retrieve a list of agent entities sorted by creation time. Deprecated: some features such as agent sharing are not supported by this endpoint. Use the cursor-paginated `GET /v1/agents/pages` instead.
+   *
+   * @deprecated method: Some features such as agent sharing are not supported by this endpoint.. Use listPages instead.
    */
   async list(
     request?: operations.AgentsApiV1AgentsListRequest | undefined,
     options?: RequestOptions,
   ): Promise<Array<components.Agent>> {
     return unwrapAsync(betaAgentsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List agent entities, cursor-paginated.
+   *
+   * @remarks
+   * Retrieve a page of agent entities. Unlike the deprecated `GET /v1/agents`, this endpoint paginates by opaque cursor and honors per-agent sharing, returning only agents the caller is authorized to see.
+   */
+  async listPages(
+    request?: operations.AgentsApiV1AgentsListPagesRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<
+    PageIterator<
+      operations.AgentsApiV1AgentsListPagesResponse,
+      { cursor: string }
+    >
+  > {
+    return unwrapResultIterator(betaAgentsListPages(
       this,
       request,
       options,

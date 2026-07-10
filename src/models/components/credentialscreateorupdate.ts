@@ -20,6 +20,10 @@ export type CredentialsCreateOrUpdate = {
    */
   name: string;
   /**
+   * Human-readable title for the credentials.
+   */
+  title?: string | null | undefined;
+  /**
    * Controls whether this credential is the default for its auth method. On creation: if no credential exists yet for this auth method, the credential is automatically set as default when is_default is true or omitted; setting is_default to false is rejected because a default must exist. If other credentials already exist, setting is_default to true promotes this credential (demoting the previous default); false or omitted creates it as non-default. On update: true promotes this credential, false is rejected if it is currently the default (promote another credential first), omitted leaves the default status unchanged.
    */
   isDefault?: boolean | null | undefined;
@@ -32,6 +36,7 @@ export type CredentialsCreateOrUpdate = {
 /** @internal */
 export type CredentialsCreateOrUpdate$Outbound = {
   name: string;
+  title?: string | null | undefined;
   is_default?: boolean | null | undefined;
   credentials?: ConnectionCredentials$Outbound | null | undefined;
 };
@@ -42,6 +47,7 @@ export const CredentialsCreateOrUpdate$outboundSchema: z.ZodType<
   CredentialsCreateOrUpdate
 > = z.object({
   name: z.string(),
+  title: z.nullable(z.string()).optional(),
   isDefault: z.nullable(z.boolean()).optional(),
   credentials: z.nullable(ConnectionCredentials$outboundSchema).optional(),
 }).transform((v) => {

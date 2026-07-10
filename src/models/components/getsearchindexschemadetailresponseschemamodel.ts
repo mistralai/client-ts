@@ -15,7 +15,6 @@ import {
 
 export type GetSearchIndexSchemaDetailResponseSchemaModel = {
   name: string;
-  summary: string | null;
   embeddingDimensions: number | null;
   fields: Array<GetSearchIndexSchemaDetailResponseField>;
 };
@@ -24,7 +23,6 @@ export type GetSearchIndexSchemaDetailResponseSchemaModel = {
 export const GetSearchIndexSchemaDetailResponseSchemaModel$inboundSchema:
   z.ZodType<GetSearchIndexSchemaDetailResponseSchemaModel, unknown> = z.object({
     name: z.string(),
-    summary: z.nullable(z.string()),
     embedding_dimensions: z.nullable(z.int()),
     fields: z.array(GetSearchIndexSchemaDetailResponseField$inboundSchema),
   }).transform((v) => {

@@ -10,6 +10,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const LocationType = {
   Local: "local",
   K8s: "k8s",
+  Managed: "managed",
 } as const;
 export type LocationType = OpenEnum<typeof LocationType>;
 

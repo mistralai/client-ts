@@ -8,7 +8,7 @@ import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
+import { resolveSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
 import {
@@ -21,6 +21,7 @@ import {
 import { MistralError } from "../models/errors/mistralerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -29,6 +30,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaUsersGetIdentity(
   client: MistralCore,
+  security: operations.UsersApiGetIdentitySecurity,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -45,12 +47,14 @@ export function betaUsersGetIdentity(
 > {
   return new APIPromise($do(
     client,
+    security,
     options,
   ));
 }
 
 async function $do(
   client: MistralCore,
+  security: operations.UsersApiGetIdentitySecurity,
   options?: RequestOptions,
 ): Promise<
   [
@@ -74,9 +78,15 @@ async function $do(
     Accept: "application/json",
   }));
 
-  const secConfig = await extractSecurity(client._options.apiKey);
-  const securityInput = secConfig == null ? {} : { apiKey: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveSecurity(
+    [
+      {
+        fieldName: "x-api-key",
+        type: "apiKey:header",
+        value: security?.dashboardUserContextAuth,
+      },
+    ],
+  );
 
   const context = {
     options: client._options,
@@ -86,7 +96,7 @@ async function $do(
 
     resolvedSecurity: requestSecurity,
 
-    securitySource: client._options.apiKey,
+    securitySource: security,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
