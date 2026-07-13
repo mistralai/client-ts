@@ -1,0 +1,147 @@
+name: SDK Breaking Change Gate
+permissions:
+  contents: read
+  pull-requests: write
+"on":
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+      - unlabeled
+concurrency:
+  group: breaking-change-gate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  breaking-change-gate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout pull request head
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Read source spec revisions and release versions
+        id: rev
+        run: |
+          set -euo pipefail
+          digest_of() {
+            awk '/^    mistral-openapi:/{f=1} f&&/sourceRevisionDigest:/{print $2; exit}'
+          }
+          release_of() {
+            awk -F': ' '/releaseVersion:/{print $2; exit}'
+          }
+          NEW_DIGEST="$(digest_of < .speakeasy/workflow.lock)"
+          OLD_DIGEST="$(git show "origin/${{ github.base_ref }}:.speakeasy/workflow.lock" | digest_of)"
+          NEW_VER="$(release_of < .speakeasy/gen.lock)"
+          OLD_VER="$(git show "origin/${{ github.base_ref }}:.speakeasy/gen.lock" | release_of)"
+          echo "new_digest=${NEW_DIGEST}" >> "$GITHUB_OUTPUT"
+          echo "old_digest=${OLD_DIGEST}" >> "$GITHUB_OUTPUT"
+          echo "new_ver=${NEW_VER}" >> "$GITHUB_OUTPUT"
+          echo "old_ver=${OLD_VER}" >> "$GITHUB_OUTPUT"
+          if [ "${NEW_DIGEST}" = "${OLD_DIGEST}" ]; then
+            echo "spec_changed=false" >> "$GITHUB_OUTPUT"
+            echo "Source spec revision is unchanged; nothing for the gate to check."
+          else
+            echo "spec_changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Speakeasy CLI
+        if: steps.rev.outputs.spec_changed == 'true'
+        run: |
+          set -euo pipefail
+          VERSION="$(awk -F': ' '/^speakeasyVersion:/ {print $2}' .speakeasy/workflow.yaml)"
+          VERSION="${VERSION#v}"
+          curl -fsSL https://raw.githubusercontent.com/speakeasy-api/speakeasy/07977787cc394cb30b418a591b3332e40e209be1/install.sh | sh
+          speakeasy --version
+
+      - name: Detect breaking changes with speakeasy openapi diff
+        id: detect
+        if: steps.rev.outputs.spec_changed == 'true'
+        env:
+          SPEAKEASY_API_KEY: ${{ secrets.SPEAKEASY_API_KEY }}
+          NEW_DIGEST: ${{ steps.rev.outputs.new_digest }}
+          OLD_DIGEST: ${{ steps.rev.outputs.old_digest }}
+        run: |
+          set -uo pipefail
+          mkdir -p /tmp/spec-old /tmp/spec-new
+          speakeasy pull --spec mistral-openapi --revision "${OLD_DIGEST}" --output-dir /tmp/spec-old
+          speakeasy pull --spec mistral-openapi --revision "${NEW_DIGEST}" --output-dir /tmp/spec-new
+          OLD_SPEC="$(find /tmp/spec-old -type f \( -name '*.yaml' -o -name '*.yml' -o -name '*.json' \) | head -1)"
+          NEW_SPEC="$(find /tmp/spec-new -type f \( -name '*.yaml' -o -name '*.yml' -o -name '*.json' \) | head -1)"
+          if [ -z "${OLD_SPEC}" ] || [ -z "${NEW_SPEC}" ]; then
+            echo "::error::Breaking-change gate could not resolve the base or head source spec; failing closed."
+            exit 1
+          fi
+          speakeasy openapi diff --old "${OLD_SPEC}" --new "${NEW_SPEC}" --format summary -o /tmp/spec-diff.md
+          if [ ! -s /tmp/spec-diff.md ]; then
+            echo "::error::speakeasy openapi diff produced no output; failing closed."
+            exit 1
+          fi
+          BREAKING_COUNT="$(awk -F'|' '
+            /^\|/ && $0 !~ /Document Element/ && $0 !~ /^\|[- ]+\|/ {
+              v=$(NF-1); gsub(/ /,"",v);
+              if (v ~ /^[0-9]+$/) sum+=v
+            }
+            END { print sum+0 }
+          ' /tmp/spec-diff.md)"
+          if grep -q '❌' /tmp/spec-diff.md || [ "${BREAKING_COUNT}" -gt 0 ]; then
+            echo "breaking=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "breaking=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "breaking_count=${BREAKING_COUNT}" >> "$GITHUB_OUTPUT"
+
+      - name: Enforce a major bump when the regeneration is breaking
+        if: steps.rev.outputs.spec_changed == 'true' && steps.detect.outputs.breaking == 'true'
+        env:
+          OLD_VER: ${{ steps.rev.outputs.old_ver }}
+          NEW_VER: ${{ steps.rev.outputs.new_ver }}
+          ACKNOWLEDGED: ${{ contains(github.event.pull_request.labels.*.name, 'breaking-approved') }}
+          BREAKING_COUNT: ${{ steps.detect.outputs.breaking_count }}
+        run: |
+          set -euo pipefail
+          OLD_MAJOR="${OLD_VER%%.*}"
+          NEW_MAJOR="${NEW_VER%%.*}"
+          {
+            echo "### SDK Breaking Change Gate"
+            echo
+            echo "Speakeasy flagged ${BREAKING_COUNT} breaking change(s) in this regeneration."
+            echo "Version bump: \`${OLD_VER}\` -> \`${NEW_VER}\`."
+            echo
+            echo '```'
+            cat /tmp/spec-diff.md
+            echo '```'
+          } > /tmp/gate-comment.md
+          if [ "${NEW_MAJOR}" -gt "${OLD_MAJOR}" ]; then
+            echo "Breaking changes ship with a major bump (${OLD_VER} -> ${NEW_VER}); gate passes."
+            exit 0
+          fi
+          if [ "${ACKNOWLEDGED}" = "true" ]; then
+            echo "Breaking changes acknowledged via the 'breaking-approved' label; gate passes."
+            exit 0
+          fi
+          {
+            echo
+            echo "This regeneration is **breaking but bumped ${OLD_VER} -> ${NEW_VER}** (not a major)."
+            echo "A breaking change must not ship as a patch or minor. Do one of:"
+            echo "- re-run *Generate MISTRALAI-SDK* with \`set_version\` set to the next major, or run \`speakeasy bump major -t typescript\`, or bump the upstream OpenAPI \`info.version\` so \`versioningStrategy: automatic\` escalates;"
+            echo "- if this is a reviewed, deliberate minor plus deprecation, add the \`breaking-approved\` label after sign-off from @mistralai/engineering-sdk."
+          } >> /tmp/gate-comment.md
+          echo "::error::Breaking changes detected but the version bump ${OLD_VER} -> ${NEW_VER} is not a major."
+          exit 1
+
+      - name: Comment the breaking-change report on the pull request
+        if: always() && steps.rev.outputs.spec_changed == 'true' && steps.detect.outputs.breaking == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -f /tmp/gate-comment.md ]; then
+            gh pr comment "${{ github.event.pull_request.number }}" \
+              --repo "${{ github.repository }}" \
+              --body-file /tmp/gate-comment.md
+          fi
