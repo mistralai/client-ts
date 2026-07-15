@@ -37,7 +37,9 @@ import { Result } from "../types/fp.js";
  * List agent entities.
  *
  * @remarks
- * Retrieve a list of agent entities sorted by creation time.
+ * Retrieve a list of agent entities sorted by creation time. Deprecated: some features such as agent sharing are not supported by this endpoint. Use the cursor-paginated `GET /v1/agents/pages` instead.
+ *
+ * @deprecated method: Some features such as agent sharing are not supported by this endpoint.. Use listPages instead.
  */
 export function betaAgentsList(
   client: MistralCore,

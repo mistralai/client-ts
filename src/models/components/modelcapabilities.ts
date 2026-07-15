@@ -29,6 +29,7 @@ export type ModelCapabilities = {
   audioTranscription: boolean;
   audioTranscriptionRealtime: boolean;
   audioSpeech: boolean;
+  unifiedResources: boolean;
 };
 
 /** @internal */
@@ -49,6 +50,7 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
   audio_transcription: z.boolean().default(false),
   audio_transcription_realtime: z.boolean().default(false),
   audio_speech: z.boolean().default(false),
+  unified_resources: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "completion_chat": "completionChat",
@@ -58,6 +60,7 @@ export const ModelCapabilities$inboundSchema: z.ZodType<
     "audio_transcription": "audioTranscription",
     "audio_transcription_realtime": "audioTranscriptionRealtime",
     "audio_speech": "audioSpeech",
+    "unified_resources": "unifiedResources",
   });
 });
 

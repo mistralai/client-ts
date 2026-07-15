@@ -24,6 +24,7 @@ Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create yo
   * [Providers' SDKs](#providers-sdks)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Server-sent event streaming](#server-sent-event-streaming)
+  * [Json Streaming](#json-streaming)
   * [Pagination](#pagination)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
@@ -261,7 +262,8 @@ We have dedicated SDKs for the following providers:
 ### [Beta.Agents](docs/sdks/betaagents/README.md)
 
 * [create](docs/sdks/betaagents/README.md#create) - Create a agent that can be used within a conversation.
-* [list](docs/sdks/betaagents/README.md#list) - List agent entities.
+* [~~list~~](docs/sdks/betaagents/README.md#list) - List agent entities. :warning: **Deprecated** Use [listPages](docs/sdks/betaagents/README.md#listpages) instead.
+* [listPages](docs/sdks/betaagents/README.md#listpages) - List agent entities, cursor-paginated.
 * [get](docs/sdks/betaagents/README.md#get) - Retrieve an agent entity.
 * [update](docs/sdks/betaagents/README.md#update) - Update an agent entity.
 * [delete](docs/sdks/betaagents/README.md#delete) - Delete an agent entity.
@@ -293,6 +295,7 @@ We have dedicated SDKs for the following providers:
 * [createOrUpdateWorkspaceCredentials](docs/sdks/connectors/README.md#createorupdateworkspacecredentials) - Create or update workspace credentials for a connector.
 * [listUserCredentials](docs/sdks/connectors/README.md#listusercredentials) - List user credentials for a connector.
 * [createOrUpdateUserCredentials](docs/sdks/connectors/README.md#createorupdateusercredentials) - Create or update user credentials for a connector.
+* [deleteAllUserCredentials](docs/sdks/connectors/README.md#deleteallusercredentials) - Delete all user credentials for a connector.
 * [deleteOrganizationCredentials](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
 * [deleteWorkspaceCredentials](docs/sdks/connectors/README.md#deleteworkspacecredentials) - Delete workspace credentials for a connector.
 * [deleteUserCredentials](docs/sdks/connectors/README.md#deleteusercredentials) - Delete user credentials for a connector.
@@ -452,9 +455,13 @@ We have dedicated SDKs for the following providers:
 * [unregister](docs/sdks/searchindexes/README.md#unregister) - Unregister Search Index
 * [updateIndexMetrics](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
 * [getIndexDetail](docs/sdks/searchindexes/README.md#getindexdetail) - Get Index Details
+* [getIndexSummary](docs/sdks/searchindexes/README.md#getindexsummary) - Get Index Summary
+* [generateIndexSummary](docs/sdks/searchindexes/README.md#generateindexsummary) - Generate a summary field for an index
 * [setIndexSummary](docs/sdks/searchindexes/README.md#setindexsummary) - Set Index Summary
-* [getIndexSchemaDetail](docs/sdks/searchindexes/README.md#getindexschemadetail) - Get Index Schema Detail
+* [getSchemaSummary](docs/sdks/searchindexes/README.md#getschemasummary) - Get Schema Summary
+* [generateSchemaSummary](docs/sdks/searchindexes/README.md#generateschemasummary) - Generate a summary field for a schema
 * [setSchemaSummary](docs/sdks/searchindexes/README.md#setschemasummary) - Set Schema Summary
+* [getIndexSchemaDetail](docs/sdks/searchindexes/README.md#getindexschemadetail) - Get Index Schema Detail
 * [getIndexSchemaFile](docs/sdks/searchindexes/README.md#getindexschemafile) - Get Index Schema File
 * [documentLookup](docs/sdks/searchindexes/README.md#documentlookup) - Document Lookup
 * [documentsFetch](docs/sdks/searchindexes/README.md#documentsfetch) - Document Fetch
@@ -640,6 +647,41 @@ run();
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
 <!-- End Server-sent event streaming [eventstream] -->
+
+<!-- Start Json Streaming [jsonl] -->
+## Json Streaming
+
+Json Streaming ([jsonl][jsonl-format] / [x-ndjson][x-ndjson]) content type can be used to stream content from certain operations. These operations expose the stream as an [AsyncGenerator][async-generator] that can be consumed using a `for await...of` loop in TypeScript/JavaScript. The loop will terminate when the server no longer has any events to send and closes the underlying connection.
+
+Here's an example of consuming a JSONL stream:
+
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.rag.searchIndexes.generateIndexSummary({
+    indexId: "b0cfd77c-9cc3-46b6-ad70-1024386259b9",
+    language: "pl",
+  });
+
+  for await (const event of result) {
+    // Handle the event
+    console.log(event);
+  }
+}
+
+run();
+
+```
+
+[jsonl-format]: https://jsonlines.org/
+[x-ndjson]: https://github.com/ndjson/ndjson-spec
+[async-generator]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator
+<!-- End Json Streaming [jsonl] -->
 
 <!-- Start Pagination [pagination] -->
 ## Pagination
@@ -850,8 +892,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 146 of 243 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 243 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 152 of 249 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 249 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -866,9 +908,11 @@ run();
 
 You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name | Server                   | Description          |
-| ---- | ------------------------ | -------------------- |
-| `eu` | `https://api.mistral.ai` | EU Production server |
+| Name     | Server                      | Description              |
+| -------- | --------------------------- | ------------------------ |
+| `global` | `https://api.mistral.ai`    | Global Production server |
+| `eu`     | `https://api.eu.mistral.ai` | EU Production server     |
+| `us`     | `https://api.us.mistral.ai` | US Production server     |
 
 #### Example
 
@@ -876,7 +920,7 @@ You can override the default server globally by passing a server name to the `se
 import { Mistral } from "@mistralai/mistralai";
 
 const mistral = new Mistral({
-  server: "eu",
+  server: "global",
   apiKey: process.env["MISTRAL_API_KEY"] ?? "",
 });
 
@@ -999,6 +1043,27 @@ async function run() {
 run();
 
 ```
+
+### Per-Operation Security Schemes
+
+Some operations in this SDK require the security scheme to be specified at the request level. For example:
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral();
+
+async function run() {
+  const result = await mistral.beta.users.getIdentity({
+    dashboardUserContextAuth: process.env["MISTRAL_DASHBOARD_USER_CONTEXT_AUTH"]
+      ?? "",
+  });
+
+  console.log(result);
+}
+
+run();
+
+```
 <!-- End Authentication [security] -->
 
 
@@ -1039,7 +1104,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaAgentsDeleteVersionAlias`](docs/sdks/betaagents/README.md#deleteversionalias) - Delete an agent version alias.
 - [`betaAgentsGet`](docs/sdks/betaagents/README.md#get) - Retrieve an agent entity.
 - [`betaAgentsGetVersion`](docs/sdks/betaagents/README.md#getversion) - Retrieve a specific version of an agent.
-- [`betaAgentsList`](docs/sdks/betaagents/README.md#list) - List agent entities.
+- [`betaAgentsListPages`](docs/sdks/betaagents/README.md#listpages) - List agent entities, cursor-paginated.
 - [`betaAgentsListVersionAliases`](docs/sdks/betaagents/README.md#listversionaliases) - List all aliases for an agent.
 - [`betaAgentsListVersions`](docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
 - [`betaAgentsUpdate`](docs/sdks/betaagents/README.md#update) - Update an agent entity.
@@ -1056,6 +1121,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaConnectorsDeactivateForUser`](docs/sdks/connectors/README.md#deactivateforuser) - Deactivate a connector for the current user.
 - [`betaConnectorsDeactivateForWorkspace`](docs/sdks/connectors/README.md#deactivateforworkspace) - Deactivate a connector for a workspace.
 - [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
+- [`betaConnectorsDeleteAllUserCredentials`](docs/sdks/connectors/README.md#deleteallusercredentials) - Delete all user credentials for a connector.
 - [`betaConnectorsDeleteOrganizationCredentials`](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
 - [`betaConnectorsDeleteUserCredentials`](docs/sdks/connectors/README.md#deleteusercredentials) - Delete user credentials for a connector.
 - [`betaConnectorsDeleteWorkspaceCredentials`](docs/sdks/connectors/README.md#deleteworkspacecredentials) - Delete workspace credentials for a connector.
@@ -1169,10 +1235,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
 - [`betaRagSearchIndexesDocumentLookup`](docs/sdks/searchindexes/README.md#documentlookup) - Document Lookup
 - [`betaRagSearchIndexesDocumentsFetch`](docs/sdks/searchindexes/README.md#documentsfetch) - Document Fetch
+- [`betaRagSearchIndexesGenerateIndexSummary`](docs/sdks/searchindexes/README.md#generateindexsummary) - Generate a summary field for an index
+- [`betaRagSearchIndexesGenerateSchemaSummary`](docs/sdks/searchindexes/README.md#generateschemasummary) - Generate a summary field for a schema
 - [`betaRagSearchIndexesGetIndexDetail`](docs/sdks/searchindexes/README.md#getindexdetail) - Get Index Details
 - [`betaRagSearchIndexesGetIndexSchemaDetail`](docs/sdks/searchindexes/README.md#getindexschemadetail) - Get Index Schema Detail
 - [`betaRagSearchIndexesGetIndexSchemaFile`](docs/sdks/searchindexes/README.md#getindexschemafile) - Get Index Schema File
 - [`betaRagSearchIndexesGetIndexSummaries`](docs/sdks/searchindexes/README.md#getindexsummaries) - Get Index Summaries
+- [`betaRagSearchIndexesGetIndexSummary`](docs/sdks/searchindexes/README.md#getindexsummary) - Get Index Summary
+- [`betaRagSearchIndexesGetSchemaSummary`](docs/sdks/searchindexes/README.md#getschemasummary) - Get Schema Summary
 - [`betaRagSearchIndexesRegister`](docs/sdks/searchindexes/README.md#register) - Register (or re-register) a search index
 - [`betaRagSearchIndexesSetIndexSummary`](docs/sdks/searchindexes/README.md#setindexsummary) - Set Index Summary
 - [`betaRagSearchIndexesSetSchemaSummary`](docs/sdks/searchindexes/README.md#setschemasummary) - Set Schema Summary
@@ -1257,6 +1327,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsSchedulesUpdateSchedule`](docs/sdks/schedules/README.md#updateschedule) - Update Schedule
 - [`workflowsUnarchiveWorkflow`](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow
 - [`workflowsUpdateWorkflow`](docs/sdks/workflows/README.md#updateworkflow) - Update Workflow
+- ~~[`betaAgentsList`](docs/sdks/betaagents/README.md#list)~~ - List agent entities. :warning: **Deprecated** Use [`betaAgentsListPages`](docs/sdks/betaagents/README.md#listpages) instead.
 - ~~[`betaLibrariesDocumentsLibrariesDocumentsUpdateV1`](docs/sdks/documents/README.md#librariesdocumentsupdatev1)~~ - Update the metadata of a specific document. :warning: **Deprecated**
 - ~~[`betaLibrariesLibrariesUpdateV1`](docs/sdks/libraries/README.md#librariesupdatev1)~~ - Update a library. :warning: **Deprecated**
 - ~~[`workflowsExecuteWorkflowRegistration`](docs/sdks/workflows/README.md#executeworkflowregistration)~~ - Execute Workflow Registration :warning: **Deprecated**

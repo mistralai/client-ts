@@ -6,7 +6,7 @@
 import { DeploymentLocation } from "@mistralai/mistralai/models/components";
 
 let value: DeploymentLocation = {
-  locationType: "k8s",
+  locationType: "managed",
 };
 ```
 

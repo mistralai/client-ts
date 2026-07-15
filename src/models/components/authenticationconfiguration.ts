@@ -20,6 +20,7 @@ import {
 
 export type AuthenticationConfiguration = {
   name: string;
+  title?: string | null | undefined;
   authenticationType: OutboundAuthenticationType;
   scope: ConsumerType;
   status?: CredentialsStatus | null | undefined;
@@ -32,6 +33,7 @@ export const AuthenticationConfiguration$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
+  title: z.nullable(z.string()).optional(),
   authentication_type: OutboundAuthenticationType$inboundSchema,
   scope: ConsumerType$inboundSchema,
   status: z.nullable(CredentialsStatus$inboundSchema).optional(),

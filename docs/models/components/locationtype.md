@@ -13,5 +13,5 @@ let value: LocationType = "local";
 ## Values
 
 ```typescript
-"local" | "k8s" | Unrecognized<string>
+"local" | "k8s" | "managed" | Unrecognized<string>
 ```

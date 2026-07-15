@@ -28,3 +28,4 @@ let value: ModelCapabilities = {};
 | `audioTranscription`         | *boolean*                    | :heavy_minus_sign:           | N/A                          |
 | `audioTranscriptionRealtime` | *boolean*                    | :heavy_minus_sign:           | N/A                          |
 | `audioSpeech`                | *boolean*                    | :heavy_minus_sign:           | N/A                          |
+| `unifiedResources`           | *boolean*                    | :heavy_minus_sign:           | N/A                          |

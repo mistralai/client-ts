@@ -5,15 +5,20 @@
 
 import { betaRagSearchIndexesDocumentLookup } from "../funcs/betaRagSearchIndexesDocumentLookup.js";
 import { betaRagSearchIndexesDocumentsFetch } from "../funcs/betaRagSearchIndexesDocumentsFetch.js";
+import { betaRagSearchIndexesGenerateIndexSummary } from "../funcs/betaRagSearchIndexesGenerateIndexSummary.js";
+import { betaRagSearchIndexesGenerateSchemaSummary } from "../funcs/betaRagSearchIndexesGenerateSchemaSummary.js";
 import { betaRagSearchIndexesGetIndexDetail } from "../funcs/betaRagSearchIndexesGetIndexDetail.js";
 import { betaRagSearchIndexesGetIndexSchemaDetail } from "../funcs/betaRagSearchIndexesGetIndexSchemaDetail.js";
 import { betaRagSearchIndexesGetIndexSchemaFile } from "../funcs/betaRagSearchIndexesGetIndexSchemaFile.js";
 import { betaRagSearchIndexesGetIndexSummaries } from "../funcs/betaRagSearchIndexesGetIndexSummaries.js";
+import { betaRagSearchIndexesGetIndexSummary } from "../funcs/betaRagSearchIndexesGetIndexSummary.js";
+import { betaRagSearchIndexesGetSchemaSummary } from "../funcs/betaRagSearchIndexesGetSchemaSummary.js";
 import { betaRagSearchIndexesRegister } from "../funcs/betaRagSearchIndexesRegister.js";
 import { betaRagSearchIndexesSetIndexSummary } from "../funcs/betaRagSearchIndexesSetIndexSummary.js";
 import { betaRagSearchIndexesSetSchemaSummary } from "../funcs/betaRagSearchIndexesSetSchemaSummary.js";
 import { betaRagSearchIndexesUnregister } from "../funcs/betaRagSearchIndexesUnregister.js";
 import { betaRagSearchIndexesUpdateIndexMetrics } from "../funcs/betaRagSearchIndexesUpdateIndexMetrics.js";
+import { JsonLStream } from "../lib/jsonl.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -103,6 +108,49 @@ export class SearchIndexes extends ClientSDK {
   }
 
   /**
+   * Get Index Summary
+   *
+   * @remarks
+   * Retrieve the summary field for an index if it exists
+   */
+  async getIndexSummary(
+    request:
+      operations.GetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldLanguageGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetSummaryResponseSummary> {
+    return unwrapAsync(betaRagSearchIndexesGetIndexSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Generate a summary field for an index
+   *
+   * @remarks
+   * Streams a summary for the index in chunks of json.
+   *
+   * The first chunk contains metadata for the summary, the following contain
+   * chunks of 'content' that should be joined together to form a full summary.
+   */
+  async generateIndexSummary(
+    request:
+      operations.GenerateIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldLanguagePostRequest,
+    options?: RequestOptions,
+  ): Promise<
+    JsonLStream<
+      operations.GenerateIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldLanguagePostSummaryStreamTypes
+    >
+  > {
+    return unwrapAsync(betaRagSearchIndexesGenerateIndexSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Set Index Summary
    *
    * @remarks
@@ -110,10 +158,71 @@ export class SearchIndexes extends ClientSDK {
    */
   async setIndexSummary(
     request:
-      operations.SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldPutRequest,
+      operations.SetIndexSummaryV1RagIndexesIndexIndexIdSummaryFieldLanguagePutRequest,
     options?: RequestOptions,
   ): Promise<any> {
     return unwrapAsync(betaRagSearchIndexesSetIndexSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Schema Summary
+   *
+   * @remarks
+   * Retrieve the summary field for a schema if it exists
+   */
+  async getSchemaSummary(
+    request:
+      operations.GetSchemaSummaryV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdSummaryFieldLanguageGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetSummaryResponseSummary> {
+    return unwrapAsync(betaRagSearchIndexesGetSchemaSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Generate a summary field for a schema
+   *
+   * @remarks
+   * Streams a summary for the schema in chunks of json.
+   *
+   * The first chunk contains metadata for the summary, the following contain
+   * chunks of 'content' that should be joined together to form a full summary.
+   */
+  async generateSchemaSummary(
+    request:
+      operations.GenerateSchemaSummaryPostV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdSummaryFieldLanguagePostRequest,
+    options?: RequestOptions,
+  ): Promise<
+    JsonLStream<
+      operations.GenerateSchemaSummaryPostV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdSummaryFieldLanguagePostSummaryStreamTypes
+    >
+  > {
+    return unwrapAsync(betaRagSearchIndexesGenerateSchemaSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set Schema Summary
+   *
+   * @remarks
+   * Update the summary field for an index
+   */
+  async setSchemaSummary(
+    request:
+      operations.SetSchemaSummaryV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdSummaryFieldLanguagePutRequest,
+    options?: RequestOptions,
+  ): Promise<any> {
+    return unwrapAsync(betaRagSearchIndexesSetSchemaSummary(
       this,
       request,
       options,
@@ -132,24 +241,6 @@ export class SearchIndexes extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GetSearchIndexSchemaDetailResponseSchemaModel> {
     return unwrapAsync(betaRagSearchIndexesGetIndexSchemaDetail(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Set Schema Summary
-   *
-   * @remarks
-   * Update the summary field for an index
-   */
-  async setSchemaSummary(
-    request:
-      operations.SetSchemaSummaryV1RagIndexesIndexIndexIdSchemasSchemaSchemaIdSummaryFieldPutRequest,
-    options?: RequestOptions,
-  ): Promise<any> {
-    return unwrapAsync(betaRagSearchIndexesSetSchemaSummary(
       this,
       request,
       options,

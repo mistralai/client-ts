@@ -14,6 +14,7 @@ export type SpeechRequest = {
   model?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   stream?: boolean | undefined;
+  promptCacheKey?: string | null | undefined;
   /**
    * The preset or custom voice to use for generating the speech.
    */
@@ -35,6 +36,7 @@ export type SpeechRequest$Outbound = {
   model?: string | null | undefined;
   metadata?: { [k: string]: any } | null | undefined;
   stream: boolean;
+  prompt_cache_key?: string | null | undefined;
   voice_id?: string | null | undefined;
   ref_audio?: string | null | undefined;
   input: string;
@@ -50,6 +52,7 @@ export const SpeechRequest$outboundSchema: z.ZodType<
   model: z.nullable(z.string()).optional(),
   metadata: z.nullable(z.record(z.string(), z.any())).optional(),
   stream: z.boolean().default(false),
+  promptCacheKey: z.nullable(z.string()).optional(),
   voiceId: z.nullable(z.string()).optional(),
   refAudio: z.nullable(z.string()).optional(),
   input: z.string(),
@@ -57,6 +60,7 @@ export const SpeechRequest$outboundSchema: z.ZodType<
 }).catchall(z.any()).transform((v) => {
   return {
     ...remap$(v, {
+      promptCacheKey: "prompt_cache_key",
       voiceId: "voice_id",
       refAudio: "ref_audio",
       responseFormat: "response_format",
