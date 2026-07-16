@@ -9,6 +9,12 @@ import type { SDKOptions } from "../../lib/config.js";
 import type { SecurityState } from "../../lib/security.js";
 import { OTEL_SERVICE_NAME } from "./otel.js";
 import { getRegisteredTracerProvider } from "./provider.js";
+import {
+  RedactingSpanExporter,
+  resolveRedaction,
+  type RedactionSetting,
+  type SpanExporterLike,
+} from "./redaction.js";
 
 export const MISTRAL_SDK_TELEMETRY_ENV = "MISTRAL_SDK_TELEMETRY";
 export const MISTRAL_TELEMETRY_BASE_URL = "https://api.mistral.ai";
@@ -60,6 +66,7 @@ export type CreateTelemetryTracerProviderOptions = {
   apiKey: string | null | undefined;
   baseURL?: string | URL | null | undefined;
   moduleLoader?: ModuleLoader | undefined;
+  redaction?: RedactionSetting | undefined;
 };
 
 type CreateTelemetryTracerProvider = (
@@ -70,6 +77,11 @@ type ConfigureTelemetryForHookOptions = {
   telemetry?: TelemetrySetting;
   replaceExisting?: boolean | undefined;
   createTelemetryTracerProvider?: CreateTelemetryTracerProvider;
+  redaction?: RedactionSetting | undefined;
+};
+
+export type ConfigureTelemetryOptions = {
+  redaction?: RedactionSetting | undefined;
 };
 
 type OtelResource = { merge?: (resource: unknown) => unknown };
@@ -87,25 +99,51 @@ export class TelemetryConfigurationError extends Error {
 export async function configureTelemetry(
   client: ClientWithHooks,
   provider: TelemetryProvider = TELEMETRY_PROVIDER_DEDICATED,
+  options: ConfigureTelemetryOptions = {},
 ): Promise<boolean> {
   const hook = getTracingHook(client);
+  const redaction = options.redaction;
 
   if (typeof provider === "string") {
     const providerMode = resolveProviderMode(provider);
     if (providerMode === TELEMETRY_PROVIDER_GLOBAL) {
+      warnRedactionIgnored(redaction, TELEMETRY_PROVIDER_GLOBAL);
       return useGlobalTracerProvider(hook, { replaceExisting: true });
     }
 
     return configureTelemetryForHook(
       hook,
       { baseURL: client._baseURL, options: client._options },
-      { telemetry: providerMode, replaceExisting: true },
+      { telemetry: providerMode, replaceExisting: true, redaction },
     );
   }
 
+  warnRedactionIgnored(redaction, "custom");
   markTelemetryConfigurationChanged(hook);
   await attachCustomTracerProvider(hook, provider);
   return true;
+}
+
+/**
+ * Redaction is applied only in dedicated provider mode, where the SDK owns the
+ * exporter. In global/custom modes the application owns the export pipeline, so
+ * the argument is ignored. Because redaction is on by default, warn (unless it
+ * was explicitly disabled) so callers know their spans are not redacted here and
+ * that they must wrap their own exporter with `RedactingSpanExporter`.
+ */
+function warnRedactionIgnored(
+  redaction: RedactionSetting | undefined,
+  mode: string,
+): void {
+  if (redaction === false) {
+    return;
+  }
+  warnLog(
+    "Telemetry redaction is only applied in 'dedicated' provider mode, where " +
+      `the Mistral SDK owns the exporter. In '${mode}' mode the application ` +
+      "owns the export pipeline; wrap your exporter with RedactingSpanExporter " +
+      "to redact spans. Ignoring the redaction argument.",
+  );
 }
 
 export async function setTracerProvider(
@@ -113,6 +151,21 @@ export async function setTracerProvider(
   provider: TracerProvider,
 ): Promise<boolean> {
   return configureTelemetry(client, provider);
+}
+
+/**
+ * Flush and shut down the SDK-owned telemetry provider attached to `client`.
+ *
+ * In dedicated mode the SDK owns a BatchSpanProcessor that buffers spans and
+ * only exports them on a timer or on shutdown. Node has no reliable async exit
+ * hook to flush automatically (unlike Python's finalizer), so short-lived
+ * programs must call this before exiting or their buffered spans are dropped.
+ * In global/custom provider modes the application owns the export pipeline, so
+ * this is a no-op.
+ */
+export async function shutdownTelemetry(client: ClientWithHooks): Promise<void> {
+  const hook = getTracingHook(client);
+  await shutdownTelemetryProvider(hook);
 }
 
 export function getTelemetryTracer(
@@ -215,6 +268,7 @@ async function initializeTelemetryProvider(
   const provider = await createProvider({
     apiKey: await resolveApiKey(context),
     baseURL: context.baseURL ?? context.options?.serverURL,
+    redaction: options.redaction,
   });
 
   if (hook._telemetryConfigurationVersion !== configurationVersion) {
@@ -273,7 +327,11 @@ export async function _createTelemetryTracerProvider(
     url: resolveMistralTelemetryEndpoint(options.baseURL),
     headers: { Authorization: asBearerToken(options.apiKey) },
   });
-  const spanProcessor = new BatchSpanProcessor(exporter);
+  const policy = resolveRedaction(options.redaction ?? true);
+  const spanExporter = policy
+    ? new RedactingSpanExporter(exporter as SpanExporterLike, policy)
+    : exporter;
+  const spanProcessor = new BatchSpanProcessor(spanExporter);
   const resource = createResource(resourcesModule, {
     "service.name": OTEL_SERVICE_NAME,
   });
@@ -523,8 +581,23 @@ function readEnv(name: string): string | undefined {
   }
 }
 
+function warnLog(message: string): void {
+  try {
+    (globalThis as { console?: { warn?: (message: string) => void } })
+      .console?.warn?.(message);
+  } catch {
+    // Ignore logging failures.
+  }
+}
+
 async function loadModule(specifier: string): Promise<Record<string, unknown>> {
-  return await import(specifier) as Record<string, unknown>;
+  // Optional OpenTelemetry peer dependencies are loaded lazily at runtime. The
+  // specifier is dynamic, so bundlers cannot (and must not) statically resolve
+  // it — the magic comments keep it as a runtime import for webpack, Turbopack
+  // and Vite instead of failing the build with "Can't resolve <dynamic>".
+  return await import(
+    /* webpackIgnore: true */ /* turbopackIgnore: true */ /* @vite-ignore */ specifier
+  ) as Record<string, unknown>;
 }
 
 function requireExportConstructor(
