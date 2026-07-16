@@ -34,6 +34,7 @@ Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create yo
   * [Authentication](#authentication)
   * [Standalone functions](#standalone-functions)
   * [Debugging](#debugging)
+  * [Telemetry & Observability](#telemetry-observability)
 * [Development](#development)
   * [Contributions](#contributions)
 
@@ -1355,6 +1356,135 @@ You can also enable a default debug logger by setting an environment variable `M
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
+
+## Telemetry & Observability
+
+The SDK can emit [OpenTelemetry](https://opentelemetry.io/) traces for the API calls it makes (chat, agents, embeddings, OCR, …), following the
+[GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/).
+Spans capture the operation, model, token usage, and — unless redacted — the input/output messages and tool calls. Telemetry is **opt-in** and lives in the `@mistralai/mistralai/extra/observability` module.
+
+### Installation
+
+Dedicated mode loads the OpenTelemetry SDK and OTLP exporter on demand. Install them alongside the client:
+
+```bash
+npm install @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-http @opentelemetry/resources
+```
+
+### Enabling telemetry
+
+Either set an environment variable before creating the client:
+
+```bash
+export MISTRAL_SDK_TELEMETRY=dedicated   # dedicated | global | false
+```
+
+or configure it in code:
+
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+import { configureTelemetry } from "@mistralai/mistralai/extra/observability";
+
+const client = new Mistral({ apiKey: process.env["MISTRAL_API_KEY"] });
+
+// Dedicated mode (default): the SDK creates and owns an OTLP exporter that ships
+// spans to the Mistral telemetry endpoint. Spans are redacted before export.
+await configureTelemetry(client);
+
+const response = await client.chat.complete({
+  model: "mistral-small-latest",
+  messages: [{ role: "user", content: "Hello!" }],
+});
+```
+
+### Provider modes
+
+`configureTelemetry(client, provider)` selects where spans go and who owns the export pipeline:
+
+| `provider` | Who owns the exporter | Where spans go | Redaction |
+| ---------- | --------------------- | -------------- | --------- |
+| `"dedicated"` (default) | The SDK | Mistral telemetry endpoint | Applied automatically |
+| `"global"` | Your application | Your global OpenTelemetry provider | **Not** applied — you need to wrap your own exporter |
+| a `TracerProvider` | Your application | The provider you pass | **Not** applied — you need to wrap your own exporter |
+
+In `global`/custom modes your application owns the pipeline, so the `redaction` option is ignored (a warning is logged). Wrap your own exporter with `RedactingSpanExporter` to redact spans there:
+
+```typescript
+import { trace } from "@opentelemetry/api";
+import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { BasicTracerProvider, BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
+import { Mistral } from "@mistralai/mistralai";
+import { configureTelemetry, RedactingSpanExporter } from "@mistralai/mistralai/extra/observability";
+
+const provider = new BasicTracerProvider({
+  spanProcessors: [
+    new BatchSpanProcessor(new RedactingSpanExporter(new OTLPTraceExporter())),
+  ],
+});
+trace.setGlobalTracerProvider(provider);
+
+const client = new Mistral({ apiKey: process.env["MISTRAL_API_KEY"] });
+
+// SDK spans now flow through your global provider (already redacted above).
+await configureTelemetry(client, "global");
+```
+
+### Redaction
+
+In dedicated mode, redaction is on by default. Control it with the `redaction` option, which also accepts any of the reusable policies from `@mistralai/mistralai/extra/observability`:
+
+```typescript
+import { AttributeRedactionPolicy } from "@mistralai/mistralai/extra/observability";
+
+await configureTelemetry(client);                                                            // default policy (regex)
+await configureTelemetry(client, "dedicated", { redaction: new AttributeRedactionPolicy() }); // very conservative key-oriented policy
+await configureTelemetry(client, "dedicated", { redaction: false });                          // disabled - no redaction
+await configureTelemetry(client, "dedicated", {                                               // custom callback to control how attributes get redacted
+  redaction: (key, value) => (key.includes("email") ? undefined : value),
+});
+```
+
+| Policy | Strategy | Trade-off |
+| ------ | -------- | --------- |
+| `RegexRedactionPolicy` (default, `redaction: true`) | Content-oriented: keeps keys and structure, redacts matched substrings (secret tokens plus PII — emails, card-like sequences, IPv4). | Redacts most sensitive data while preserving observability value; may miss free-form PII or secrets not in the pattern set. |
+| `AttributeRedactionPolicy` | Key-oriented: redacts whole values for sensitive keys (explicit set, fragment match, or non-primitive value), then scans kept values for secret token patterns. | Very conservative, but erases most prompt/response content. |
+| `CallbackRedactionPolicy` (`redaction: <callback>`) | Your `(key, value) => value \| undefined` masker per attribute; return `undefined` to drop the attribute. | Full control; you own the logic. |
+
+The built-in defaults are exported as constants, so you can extend them instead of replacing them wholesale:
+
+```typescript
+import {
+  AttributeRedactionPolicy,
+  DEFAULT_PII_SECRET_PATTERNS,
+  DEFAULT_SENSITIVE_ATTRIBUTE_KEYS,
+  RegexRedactionPolicy,
+  configureTelemetry,
+} from "@mistralai/mistralai/extra/observability";
+
+// Content-oriented: add a custom secret pattern to the default set.
+await configureTelemetry(client, "dedicated", {
+  redaction: new RegexRedactionPolicy([...DEFAULT_PII_SECRET_PATTERNS, /\bacme-[a-z0-9]{16}\b/g]),
+});
+
+// Key-oriented: mask an extra application attribute on top of the defaults.
+await configureTelemetry(client, "dedicated", {
+  redaction: new AttributeRedactionPolicy({
+    sensitiveKeys: new Set([...DEFAULT_SENSITIVE_ATTRIBUTE_KEYS, "app.customer.email"]),
+  }),
+});
+```
+
+*Note: the `RedactingSpanExporter` primitive is reusable by any OpenTelemetry application, independent of the Mistral client.*
+
+### Environment variables
+
+| Variable | Description | Default |
+| -------- | ----------- | ------- |
+| `MISTRAL_SDK_TELEMETRY` | Auto-enable telemetry: `dedicated`, `global`, or `false`. | unset (disabled) |
+| `MISTRAL_OTLP_TRACES_ENDPOINT` | Override the OTLP traces endpoint used in dedicated mode. | `https://api.mistral.ai/telemetry/v1/traces` |
+| `MISTRAL_API_KEY` | Used as the bearer token for the dedicated-mode exporter. | — |
+
+Runnable examples live in [`examples/src/observability`](/examples/src/observability).
 
 # Development
 

@@ -9,7 +9,9 @@ import {
 import { Mistral } from "../../../src/index.js";
 import {
   getTelemetryTracer,
+  RedactingSpanExporter,
   registerTracerProvider,
+  RegexRedactionPolicy,
 } from "../../../src/extra/observability/index.js";
 import {
   configureTelemetry,
@@ -18,6 +20,7 @@ import {
   MISTRAL_SDK_TELEMETRY_ENV,
   MISTRAL_TELEMETRY_ENDPOINT,
   setTracerProvider,
+  shutdownTelemetry,
   TelemetryConfigurationError,
   _createTelemetryTracerProvider,
 } from "../../../src/extra/observability/telemetry.js";
@@ -360,6 +363,40 @@ describe("configureTelemetry", () => {
 
 });
 
+describe("shutdownTelemetry", () => {
+  test("flushes and shuts down the SDK-owned dedicated provider", async () => {
+    const client = createClient();
+    const hook = getTestTracingHook(client);
+    const provider = createProvider();
+    hook.tracerProvider = provider;
+    hook._autoTelemetryProvider = provider;
+
+    await shutdownTelemetry(client);
+
+    expect(provider.shutdownCalled).toBe(true);
+    expect(hook._autoTelemetryProvider).toBeUndefined();
+    expect(hook.tracerProvider).toBeUndefined();
+  });
+
+  test("does not shut down an application-owned custom provider", async () => {
+    const client = createClient();
+    const hook = getTestTracingHook(client);
+    const customProvider = createProvider();
+    hook.tracerProvider = customProvider;
+
+    await shutdownTelemetry(client);
+
+    expect(customProvider.shutdownCalled).toBe(false);
+    expect(hook.tracerProvider).toBe(customProvider);
+  });
+
+  test("is a no-op when no provider is configured", async () => {
+    const client = createClient();
+
+    await expect(shutdownTelemetry(client)).resolves.toBeUndefined();
+  });
+});
+
 describe("getTelemetryTracer", () => {
   test("uses the provider configured on the client", async () => {
     const client = createClient();
@@ -511,5 +548,109 @@ describe("_createTelemetryTracerProvider", () => {
         });
       },
     );
+  });
+
+  test("wraps the exporter with redaction by default", async () => {
+    const exporterInstances: Array<{ config: unknown }> = [];
+    const moduleLoader = createTelemetryModuleLoader(exporterInstances);
+
+    const provider = await _createTelemetryTracerProvider({
+      apiKey: "test-key",
+      moduleLoader,
+    });
+
+    const processor = (provider as unknown as {
+      spanProcessors: Array<{ exporter: unknown }>;
+    }).spanProcessors[0];
+    expect(processor?.exporter).toBeInstanceOf(RedactingSpanExporter);
+  });
+
+  test("redaction=false exports without wrapping", async () => {
+    const exporterInstances: Array<{ config: unknown }> = [];
+    const moduleLoader = createTelemetryModuleLoader(exporterInstances);
+
+    const provider = await _createTelemetryTracerProvider({
+      apiKey: "test-key",
+      moduleLoader,
+      redaction: false,
+    });
+
+    const processor = (provider as unknown as {
+      spanProcessors: Array<{ exporter: unknown }>;
+    }).spanProcessors[0];
+    expect(processor?.exporter).toBe(exporterInstances[0]);
+    expect(processor?.exporter).not.toBeInstanceOf(RedactingSpanExporter);
+  });
+
+  test("accepts a custom redaction policy", async () => {
+    const exporterInstances: Array<{ config: unknown }> = [];
+    const moduleLoader = createTelemetryModuleLoader(exporterInstances);
+
+    const provider = await _createTelemetryTracerProvider({
+      apiKey: "test-key",
+      moduleLoader,
+      redaction: new RegexRedactionPolicy(),
+    });
+
+    const processor = (provider as unknown as {
+      spanProcessors: Array<{ exporter: unknown }>;
+    }).spanProcessors[0];
+    expect(processor?.exporter).toBeInstanceOf(RedactingSpanExporter);
+  });
+});
+
+describe("configureTelemetry redaction warnings", () => {
+  test("warns when redaction is passed in global mode", async () => {
+    const client = createClient();
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+
+    await configureTelemetry(client, "global", { redaction: true });
+
+    expect(warnSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("warns when redaction is passed with a custom provider", async () => {
+    const client = createClient();
+    const provider = createProvider();
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+
+    await configureTelemetry(client, provider, {
+      redaction: new RegexRedactionPolicy(),
+    });
+
+    expect(warnSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("does not warn when redaction is disabled in global mode", async () => {
+    const client = createClient();
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+
+    await configureTelemetry(client, "global", { redaction: false });
+
+    expect(warnSpy).not.toHaveBeenCalled();
+  });
+
+  test("warns in global mode when redaction is omitted (on by default)", async () => {
+    const client = createClient();
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+
+    await configureTelemetry(client, "global");
+
+    expect(warnSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("does not warn in env-driven global auto-config", async () => {
+    await withEnv({ [MISTRAL_SDK_TELEMETRY_ENV]: "global" }, async () => {
+      const hook = new TracingHook();
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
+
+      const configured = await configureTelemetryForHook(hook, createContext(), {
+        respectGlobalProvider: true,
+      });
+
+      expect(configured).toBe(true);
+      expect(hook._telemetryUseGlobalProvider).toBe(true);
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
   });
 });
