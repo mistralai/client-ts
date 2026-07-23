@@ -17,7 +17,7 @@ const chatResponse = await client.chat.complete({
         {
           type: "image_url",
           imageUrl:
-            "https://cms.mistral.ai/assets/ce1514ab-62f9-4825-a20b-298f2497c536",
+            "https://raw.githubusercontent.com/mistralai/mistral-common/7edf6f651b3579135f44686e345d51b7e19a536a/docs/assets/logo_favicon.png",
         },
       ],
     },
