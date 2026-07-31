@@ -20,8 +20,3 @@ export const ResourceVisibility$inboundSchema: z.ZodType<
   ResourceVisibility,
   unknown
 > = openEnums.inboundSchema(ResourceVisibility);
-/** @internal */
-export const ResourceVisibility$outboundSchema: z.ZodType<
-  string,
-  ResourceVisibility
-> = openEnums.outboundSchema(ResourceVisibility);

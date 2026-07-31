@@ -10,12 +10,9 @@
 * [list](#list) - List all connectors.
 * [getAuthUrl](#getauthurl) - Get the auth URL for a connector.
 * [share](#share) - Share a private connector to the current workspace.
-* [activateForOrganization](#activatefororganization) - Activate a connector for an organization.
-* [deactivateForOrganization](#deactivatefororganization) - Deactivate a connector for an organization.
-* [activateForWorkspace](#activateforworkspace) - Activate a connector for a workspace.
-* [deactivateForWorkspace](#deactivateforworkspace) - Deactivate a connector for a workspace.
-* [activateForUser](#activateforuser) - Activate a connector for the current user.
-* [deactivateForUser](#deactivateforuser) - Deactivate a connector for the current user.
+* [unshare](#unshare) - Unshare a connector from the current workspace.
+* [activateForConsumer](#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
+* [deactivateForConsumer](#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
 * [callTool](#calltool) - Call Connector Tool
 * [listTools](#listtools) - List tools for a connector.
 * [getAuthenticationMethods](#getauthenticationmethods) - Get authentication methods for a connector.
@@ -257,7 +254,7 @@ run();
 
 ## share
 
-Transfers ownership of a private user-owned connector to the current workspace, making it available to all workspace members. This action is irreversible: once shared, the connector belongs to the workspace and can no longer be used privately across other workspaces. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
+Transfers ownership of a private user-owned connector to the current workspace, making it available to all workspace members. The creator can later revert this via the unshare endpoint. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
 
 ### Example Usage
 
@@ -329,13 +326,13 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## activateForOrganization
+## unshare
 
-Enable a connector at the organization level so all members can use it.
+Reverts a workspace-shared connector back to a private, creator-owned connector. Workspace-scoped connections and other members' connections are removed; the creator's own connection is preserved. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="connector_activate_for_organization_v1" method="post" path="/v1/connectors/{connector_id}/organization/activate" -->
+<!-- UsageSnippet language="typescript" operationID="connector_unshare_v1" method="delete" path="/v1/connectors/{connector_id}/share" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -344,8 +341,8 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.connectors.activateForOrganization({
-    connectorId: "a91bb4ec-caab-4cf2-be03-84b8343f4643",
+  const result = await mistral.beta.connectors.unshare({
+    connectorId: "d5bd99ac-c46d-43bb-835c-cb4833bf101d",
   });
 
   console.log(result);
@@ -360,7 +357,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsActivateForOrganization } from "@mistralai/mistralai/funcs/betaConnectorsActivateForOrganization.js";
+import { betaConnectorsUnshare } from "@mistralai/mistralai/funcs/betaConnectorsUnshare.js";
 
 // Use `MistralCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -369,14 +366,14 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaConnectorsActivateForOrganization(mistral, {
-    connectorId: "a91bb4ec-caab-4cf2-be03-84b8343f4643",
+  const res = await betaConnectorsUnshare(mistral, {
+    connectorId: "d5bd99ac-c46d-43bb-835c-cb4833bf101d",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("betaConnectorsActivateForOrganization failed:", res.error);
+    console.log("betaConnectorsUnshare failed:", res.error);
   }
 }
 
@@ -387,7 +384,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorActivateForOrganizationV1Request](../../models/operations/connectoractivatefororganizationv1request.md)                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ConnectorUnshareV1Request](../../models/operations/connectorunsharev1request.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -403,13 +400,13 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## deactivateForOrganization
+## activateForConsumer
 
-Disable a connector at the organization level.
+Enable a connector for the consumer.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="connector_deactivate_for_organization_v1" method="post" path="/v1/connectors/{connector_id}/organization/deactivate" -->
+<!-- UsageSnippet language="typescript" operationID="connector_activate_for_consumer_v1" method="post" path="/v1/connectors/{connector_id}/{consumer_scope}/activate" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -418,8 +415,9 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.connectors.deactivateForOrganization({
-    connectorId: "8f4c1089-2a37-44b3-a3c4-830ca7a0e439",
+  const result = await mistral.beta.connectors.activateForConsumer({
+    connectorId: "1637d954-8ef0-4080-9228-89d4c05c915f",
+    consumerScope: "workspace",
   });
 
   console.log(result);
@@ -434,7 +432,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsDeactivateForOrganization } from "@mistralai/mistralai/funcs/betaConnectorsDeactivateForOrganization.js";
+import { betaConnectorsActivateForConsumer } from "@mistralai/mistralai/funcs/betaConnectorsActivateForConsumer.js";
 
 // Use `MistralCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -443,14 +441,15 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaConnectorsDeactivateForOrganization(mistral, {
-    connectorId: "8f4c1089-2a37-44b3-a3c4-830ca7a0e439",
+  const res = await betaConnectorsActivateForConsumer(mistral, {
+    connectorId: "1637d954-8ef0-4080-9228-89d4c05c915f",
+    consumerScope: "workspace",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("betaConnectorsDeactivateForOrganization failed:", res.error);
+    console.log("betaConnectorsActivateForConsumer failed:", res.error);
   }
 }
 
@@ -461,7 +460,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorDeactivateForOrganizationV1Request](../../models/operations/connectordeactivatefororganizationv1request.md)                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ConnectorActivateForConsumerV1Request](../../models/operations/connectoractivateforconsumerv1request.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -477,13 +476,13 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## activateForWorkspace
+## deactivateForConsumer
 
-Enable a connector at the workspace level so all members of the workspace can use it.
+Disable a connector for the calling consumer only.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="connector_activate_for_workspace_v1" method="post" path="/v1/connectors/{connector_id}/workspace/activate" -->
+<!-- UsageSnippet language="typescript" operationID="connector_deactivate_for_consumer_v1" method="post" path="/v1/connectors/{connector_id}/{consumer_scope}/deactivate" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -492,8 +491,9 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.connectors.activateForWorkspace({
-    connectorId: "2adfa8af-3618-41a9-8980-e5ea1486e58e",
+  const result = await mistral.beta.connectors.deactivateForConsumer({
+    connectorId: "1266a170-0379-4b3f-9305-d10fd2a83d29",
+    consumerScope: "workspace",
   });
 
   console.log(result);
@@ -508,7 +508,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsActivateForWorkspace } from "@mistralai/mistralai/funcs/betaConnectorsActivateForWorkspace.js";
+import { betaConnectorsDeactivateForConsumer } from "@mistralai/mistralai/funcs/betaConnectorsDeactivateForConsumer.js";
 
 // Use `MistralCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -517,14 +517,15 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaConnectorsActivateForWorkspace(mistral, {
-    connectorId: "2adfa8af-3618-41a9-8980-e5ea1486e58e",
+  const res = await betaConnectorsDeactivateForConsumer(mistral, {
+    connectorId: "1266a170-0379-4b3f-9305-d10fd2a83d29",
+    consumerScope: "workspace",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("betaConnectorsActivateForWorkspace failed:", res.error);
+    console.log("betaConnectorsDeactivateForConsumer failed:", res.error);
   }
 }
 
@@ -535,229 +536,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorActivateForWorkspaceV1Request](../../models/operations/connectoractivateforworkspacev1request.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## deactivateForWorkspace
-
-Disable a connector at the workspace level.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="connector_deactivate_for_workspace_v1" method="post" path="/v1/connectors/{connector_id}/workspace/deactivate" -->
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.connectors.deactivateForWorkspace({
-    connectorId: "15b00e98-a9e7-4582-b0fc-87d28c3dac04",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsDeactivateForWorkspace } from "@mistralai/mistralai/funcs/betaConnectorsDeactivateForWorkspace.js";
-
-// Use `MistralCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const mistral = new MistralCore({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await betaConnectorsDeactivateForWorkspace(mistral, {
-    connectorId: "15b00e98-a9e7-4582-b0fc-87d28c3dac04",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("betaConnectorsDeactivateForWorkspace failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorDeactivateForWorkspaceV1Request](../../models/operations/connectordeactivateforworkspacev1request.md)                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## activateForUser
-
-Enable a connector for the calling user only.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="connector_activate_for_user_v1" method="post" path="/v1/connectors/{connector_id}/user/activate" -->
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.connectors.activateForUser({
-    connectorId: "cd4fb4d2-de68-451f-8f2a-57fe39b33d96",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsActivateForUser } from "@mistralai/mistralai/funcs/betaConnectorsActivateForUser.js";
-
-// Use `MistralCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const mistral = new MistralCore({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await betaConnectorsActivateForUser(mistral, {
-    connectorId: "cd4fb4d2-de68-451f-8f2a-57fe39b33d96",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("betaConnectorsActivateForUser failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorActivateForUserV1Request](../../models/operations/connectoractivateforuserv1request.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## deactivateForUser
-
-Disable a connector for the calling user only.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="connector_deactivate_for_user_v1" method="post" path="/v1/connectors/{connector_id}/user/deactivate" -->
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.connectors.deactivateForUser({
-    connectorId: "99c6ed86-e6bb-40ed-b6ee-d22ba791a68f",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsDeactivateForUser } from "@mistralai/mistralai/funcs/betaConnectorsDeactivateForUser.js";
-
-// Use `MistralCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const mistral = new MistralCore({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await betaConnectorsDeactivateForUser(mistral, {
-    connectorId: "99c6ed86-e6bb-40ed-b6ee-d22ba791a68f",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("betaConnectorsDeactivateForUser failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorDeactivateForUserV1Request](../../models/operations/connectordeactivateforuserv1request.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ConnectorDeactivateForConsumerV1Request](../../models/operations/connectordeactivateforconsumerv1request.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

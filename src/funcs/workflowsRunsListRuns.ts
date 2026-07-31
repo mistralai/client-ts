@@ -114,6 +114,7 @@ async function $do(
     "page_size": payload?.page_size,
     "root_execution_id": payload?.root_execution_id,
     "search": payload?.search,
+    "search_key": payload?.search_key,
     "sort_by": payload?.sort_by,
     "start_time_after": payload?.start_time_after,
     "start_time_before": payload?.start_time_before,

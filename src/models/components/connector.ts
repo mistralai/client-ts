@@ -25,6 +25,7 @@ import {
   ConnectorProtocol$inboundSchema,
 } from "./connectorprotocol.js";
 import { ConnectorTool, ConnectorTool$inboundSchema } from "./connectortool.js";
+import { ConsumerType, ConsumerType$inboundSchema } from "./consumertype.js";
 import { MCPServerCard, MCPServerCard$inboundSchema } from "./mcpservercard.js";
 import {
   PublicAuthenticationMethod,
@@ -38,7 +39,6 @@ import {
   PublicExecutionEnv,
   PublicExecutionEnv$inboundSchema,
 } from "./publicexecutionenv.js";
-import { ResourceType, ResourceType$inboundSchema } from "./resourcetype.js";
 import {
   ResourceVisibility,
   ResourceVisibility$inboundSchema,
@@ -56,7 +56,7 @@ export type Connector = {
   iconUrl?: string | null | undefined;
   serverCard?: MCPServerCard | null | undefined;
   ownerId?: string | null | undefined;
-  ownerType: ResourceType;
+  ownerType: ConsumerType;
   visibility: ResourceVisibility;
   creatorId?: string | null | undefined;
   locale?: ConnectorLocale | null | undefined;
@@ -87,7 +87,7 @@ export const Connector$inboundSchema: z.ZodType<Connector, unknown> = z.object({
   icon_url: z.nullable(z.string()).optional(),
   server_card: z.nullable(MCPServerCard$inboundSchema).optional(),
   owner_id: z.nullable(z.string()).optional(),
-  owner_type: ResourceType$inboundSchema,
+  owner_type: ConsumerType$inboundSchema,
   visibility: ResourceVisibility$inboundSchema,
   creator_id: z.nullable(z.string()).optional(),
   locale: z.nullable(ConnectorLocale$inboundSchema).optional(),

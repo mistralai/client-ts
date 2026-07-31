@@ -105,6 +105,10 @@ async function $do(
     "fields": payload?.fields,
     "pageSize": payload?.pageSize,
     "pageToken": payload?.pageToken,
+    "sort_by": payload?.sort_by,
+    "sort_direction": payload?.sort_directionQueryParameter1,
+    "sort.direction": payload?.["sort.directionQueryParameter"],
+    "sort.field": payload?.["sort.field"],
   });
 
   const headers = new Headers(compactMap({

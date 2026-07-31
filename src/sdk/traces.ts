@@ -3,6 +3,7 @@
  * @generated-id: 4845e9e6a8d1
  */
 
+import { betaObservabilityTracesAggregate } from "../funcs/betaObservabilityTracesAggregate.js";
 import { betaObservabilityTracesFetchOptions } from "../funcs/betaObservabilityTracesFetchOptions.js";
 import { betaObservabilityTracesGetSpanById } from "../funcs/betaObservabilityTracesGetSpanById.js";
 import { betaObservabilityTracesGetTraceById } from "../funcs/betaObservabilityTracesGetTraceById.js";
@@ -23,6 +24,21 @@ export class Traces extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GetTraces> {
     return unwrapAsync(betaObservabilityTracesSearch(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Aggregate traces
+   */
+  async aggregate(
+    request:
+      operations.AggregateTracesV1ObservabilityTracesAggregatePostRequest,
+    options?: RequestOptions,
+  ): Promise<components.Aggregation> {
+    return unwrapAsync(betaObservabilityTracesAggregate(
       this,
       request,
       options,

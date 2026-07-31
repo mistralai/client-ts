@@ -3,10 +3,17 @@
  * @generated-id: 80d6fb28a717
  */
 
+import { workflowsDeploymentsCreateDeployment } from "../funcs/workflowsDeploymentsCreateDeployment.js";
+import { workflowsDeploymentsDeleteDeployment } from "../funcs/workflowsDeploymentsDeleteDeployment.js";
 import { workflowsDeploymentsGetDeployment } from "../funcs/workflowsDeploymentsGetDeployment.js";
 import { workflowsDeploymentsGetDeploymentLogs } from "../funcs/workflowsDeploymentsGetDeploymentLogs.js";
 import { workflowsDeploymentsListDeployments } from "../funcs/workflowsDeploymentsListDeployments.js";
+import { workflowsDeploymentsListDeploymentWorkers } from "../funcs/workflowsDeploymentsListDeploymentWorkers.js";
+import { workflowsDeploymentsRestartDeployment } from "../funcs/workflowsDeploymentsRestartDeployment.js";
+import { workflowsDeploymentsStartDeployment } from "../funcs/workflowsDeploymentsStartDeployment.js";
+import { workflowsDeploymentsStopDeployment } from "../funcs/workflowsDeploymentsStopDeployment.js";
 import { workflowsDeploymentsStreamDeploymentLogs } from "../funcs/workflowsDeploymentsStreamDeploymentLogs.js";
+import { workflowsDeploymentsUpdateDeployment } from "../funcs/workflowsDeploymentsUpdateDeployment.js";
 import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -31,6 +38,48 @@ export class Deployments extends ClientSDK {
   }
 
   /**
+   * Create Deployment
+   */
+  async createDeployment(
+    request: components.CreateDeploymentRequest,
+    options?: RequestOptions,
+  ): Promise<components.ManagedDeploymentResponse> {
+    return unwrapAsync(workflowsDeploymentsCreateDeployment(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update Deployment
+   */
+  async updateDeployment(
+    request: operations.UpdateDeploymentV1WorkflowsDeploymentsNamePatchRequest,
+    options?: RequestOptions,
+  ): Promise<components.ManagedDeploymentResponse> {
+    return unwrapAsync(workflowsDeploymentsUpdateDeployment(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete Deployment
+   */
+  async deleteDeployment(
+    request: operations.DeleteDeploymentV1WorkflowsDeploymentsNameDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<components.ManagedDeploymentResponse> {
+    return unwrapAsync(workflowsDeploymentsDeleteDeployment(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get Deployment
    */
   async getDeployment(
@@ -38,6 +87,65 @@ export class Deployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.DeploymentDetailResponse> {
     return unwrapAsync(workflowsDeploymentsGetDeployment(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Stop Deployment
+   */
+  async stopDeployment(
+    request: operations.StopDeploymentV1WorkflowsDeploymentsNameStopPostRequest,
+    options?: RequestOptions,
+  ): Promise<components.ManagedDeploymentResponse> {
+    return unwrapAsync(workflowsDeploymentsStopDeployment(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Start Deployment
+   */
+  async startDeployment(
+    request:
+      operations.StartDeploymentV1WorkflowsDeploymentsNameStartPostRequest,
+    options?: RequestOptions,
+  ): Promise<components.ManagedDeploymentResponse> {
+    return unwrapAsync(workflowsDeploymentsStartDeployment(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Restart Deployment
+   */
+  async restartDeployment(
+    request:
+      operations.RestartDeploymentV1WorkflowsDeploymentsNameRestartPostRequest,
+    options?: RequestOptions,
+  ): Promise<components.ManagedDeploymentResponse> {
+    return unwrapAsync(workflowsDeploymentsRestartDeployment(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List Deployment Workers
+   */
+  async listDeploymentWorkers(
+    request:
+      operations.ListDeploymentWorkersV1WorkflowsDeploymentsNameWorkersGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeploymentWorkerListResponse> {
+    return unwrapAsync(workflowsDeploymentsListDeploymentWorkers(
       this,
       request,
       options,

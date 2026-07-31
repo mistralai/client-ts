@@ -121,7 +121,7 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Add a conversation to the dataset
+   * Add a record to the dataset
    */
   async createRecord(
     request:
@@ -136,7 +136,7 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Populate the dataset with a campaign
+   * Populate the dataset with records from a campaign
    */
   async importFromCampaign(
     request:
@@ -151,7 +151,7 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Populate the dataset with samples from the explorer
+   * Populate the dataset with records from the explorer
    */
   async importFromExplorer(
     request:
@@ -166,7 +166,7 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Populate the dataset with samples from an uploaded file
+   * Populate the dataset with records from an uploaded file
    */
   async importFromFile(
     request:
@@ -181,7 +181,7 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Populate the dataset with samples from the playground
+   * Populate the dataset with records from playground conversations
    */
   async importFromPlayground(
     request:
@@ -196,7 +196,7 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Populate the dataset with samples from another dataset
+   * Populate the dataset with records from another dataset
    */
   async importFromDatasetRecords(
     request:

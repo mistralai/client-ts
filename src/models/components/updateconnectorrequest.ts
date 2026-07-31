@@ -32,14 +32,6 @@ export type UpdateConnectorRequest = {
    * Optional system prompt for the connector.
    */
   systemPrompt?: string | null | undefined;
-  /**
-   * Optional new connection config.
-   */
-  connectionConfig?: { [k: string]: any } | null | undefined;
-  /**
-   * Optional new connection secrets
-   */
-  connectionSecrets?: { [k: string]: any } | null | undefined;
   protocol?: "mcp" | undefined;
   /**
    * New server url for your mcp connector.
@@ -62,8 +54,6 @@ export type UpdateConnectorRequest$Outbound = {
   description?: string | null | undefined;
   icon_url?: string | null | undefined;
   system_prompt?: string | null | undefined;
-  connection_config?: { [k: string]: any } | null | undefined;
-  connection_secrets?: { [k: string]: any } | null | undefined;
   protocol: "mcp";
   server?: string | null | undefined;
   headers?: { [k: string]: any } | null | undefined;
@@ -80,8 +70,6 @@ export const UpdateConnectorRequest$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   iconUrl: z.nullable(z.string()).optional(),
   systemPrompt: z.nullable(z.string()).optional(),
-  connectionConfig: z.nullable(z.record(z.string(), z.any())).optional(),
-  connectionSecrets: z.nullable(z.record(z.string(), z.any())).optional(),
   protocol: z.literal("mcp").default("mcp" as const),
   server: z.nullable(z.string()).optional(),
   headers: z.nullable(z.record(z.string(), z.any())).optional(),
@@ -90,8 +78,6 @@ export const UpdateConnectorRequest$outboundSchema: z.ZodType<
   return remap$(v, {
     iconUrl: "icon_url",
     systemPrompt: "system_prompt",
-    connectionConfig: "connection_config",
-    connectionSecrets: "connection_secrets",
     authData: "auth_data",
   });
 });

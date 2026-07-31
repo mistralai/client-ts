@@ -47,6 +47,7 @@ export type TableFormat = ClosedEnum<typeof TableFormat>;
 export const ConfidenceScoresGranularity = {
   Word: "word",
   Page: "page",
+  Block: "block",
 } as const;
 export type ConfidenceScoresGranularity = ClosedEnum<
   typeof ConfidenceScoresGranularity
@@ -87,14 +88,20 @@ export type OCRRequest = {
    */
   documentAnnotationPrompt?: string | null | undefined;
   tableFormat?: TableFormat | null | undefined;
+  /**
+   * Extract the page header into the response's `header` field and remove it from the markdown content
+   */
   extractHeader?: boolean | undefined;
+  /**
+   * Extract the page footer into the response's `footer` field and remove it from the markdown content
+   */
   extractFooter?: boolean | undefined;
   /**
    * Return paragraph-level bounding boxes for all content blocks in the response
    */
   includeBlocks?: boolean | undefined;
   /**
-   * Granularity for confidence scores: 'word' (per-word scores) or 'page' (aggregate only). Defaults to None (no confidence scores) to keep response payload small.
+   * Granularity for confidence scores: 'page' (aggregate only), 'word' (per-word scores), or 'block' (per-block scores). Defaults to None (no confidence scores) to keep response payload small.
    */
   confidenceScoresGranularity?: ConfidenceScoresGranularity | null | undefined;
 };
@@ -183,7 +190,7 @@ export const OCRRequest$outboundSchema: z.ZodType<
   tableFormat: z.nullable(TableFormat$outboundSchema).optional(),
   extractHeader: z.boolean().optional(),
   extractFooter: z.boolean().optional(),
-  includeBlocks: z.boolean().default(false),
+  includeBlocks: z.boolean().default(true),
   confidenceScoresGranularity: z.nullable(
     ConfidenceScoresGranularity$outboundSchema,
   ).optional(),

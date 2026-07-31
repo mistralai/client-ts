@@ -5,11 +5,11 @@
 ```typescript
 import { ConfidenceScoresGranularity } from "@mistralai/mistralai/models/components";
 
-let value: ConfidenceScoresGranularity = "page";
+let value: ConfidenceScoresGranularity = "block";
 ```
 
 ## Values
 
 ```typescript
-"word" | "page"
+"word" | "page" | "block"
 ```

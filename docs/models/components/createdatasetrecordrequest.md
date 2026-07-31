@@ -6,26 +6,13 @@
 import { CreateDatasetRecordRequest } from "@mistralai/mistralai/models/components";
 
 let value: CreateDatasetRecordRequest = {
-  payload: {
-    messages: [
-      {
-        "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
-      },
-      {
-        "key": "<value>",
-      },
-      {},
-    ],
-  },
-  properties: {},
+  payload: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `payload`                                                                        | [components.ConversationPayload](../../models/components/conversationpayload.md) | :heavy_check_mark:                                                               | N/A                                                                              |
-| `properties`                                                                     | Record<string, *any*>                                                            | :heavy_check_mark:                                                               | N/A                                                                              |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `payload`                                                | Record<string, *any*>                                    | :heavy_check_mark:                                       | Caller-authored input object stored on a dataset record. |
+| `properties`                                             | Record<string, *any*>                                    | :heavy_minus_sign:                                       | N/A                                                      |

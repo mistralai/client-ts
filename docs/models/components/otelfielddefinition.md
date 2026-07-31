@@ -12,6 +12,9 @@ let value: OtelFieldDefinition = {
   supportedOperators: [
     "ilike",
   ],
+  supportedAggregations: [
+    "avg",
+  ],
 };
 ```
 
@@ -24,3 +27,4 @@ let value: OtelFieldDefinition = {
 | `type`                                                                                                               | [components.OtelFieldDefinitionType](../../models/components/otelfielddefinitiontype.md)                             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
 | `group`                                                                                                              | *string*                                                                                                             | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |
 | `supportedOperators`                                                                                                 | [components.OtelFieldDefinitionSupportedOperator](../../models/components/otelfielddefinitionsupportedoperator.md)[] | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `supportedAggregations`                                                                                              | [components.MetricAggregation](../../models/components/metricaggregation.md)[]                                       | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |

@@ -35,8 +35,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaRagSearchIndexesUpdateIndexMetrics(
   client: MistralCore,
-  request:
-    operations.UpdateIndexMetricsV1RagIndexesIndexIndexIdMetricsPutRequest,
+  request: operations.UpdateIndexMetricsV1RagIndexesIndexIdMetricsPutRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -60,8 +59,7 @@ export function betaRagSearchIndexesUpdateIndexMetrics(
 
 async function $do(
   client: MistralCore,
-  request:
-    operations.UpdateIndexMetricsV1RagIndexesIndexIndexIdMetricsPutRequest,
+  request: operations.UpdateIndexMetricsV1RagIndexesIndexIdMetricsPutRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -83,7 +81,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .UpdateIndexMetricsV1RagIndexesIndexIndexIdMetricsPutRequest$outboundSchema
+        .UpdateIndexMetricsV1RagIndexesIndexIdMetricsPutRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -99,9 +97,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/rag/indexes/index/{index_id}/metrics")(
-    pathParams,
-  );
+  const path = pathToFunc("/v1/rag/indexes/{index_id}/metrics")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -115,8 +111,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID:
-      "update_index_metrics_v1_rag_indexes_index__index_id__metrics_put",
+    operationID: "update_index_metrics_v1_rag_indexes__index_id__metrics_put",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

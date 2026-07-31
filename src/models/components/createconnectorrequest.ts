@@ -16,12 +16,21 @@ import {
   ExtendedOAuthServerMetadata$outboundSchema,
 } from "./extendedoauthservermetadata.js";
 import {
-  ResourceVisibility,
-  ResourceVisibility$outboundSchema,
-} from "./resourcevisibility.js";
+  PublicResourceVisibility,
+  PublicResourceVisibility$outboundSchema,
+} from "./publicresourcevisibility.js";
 
+/**
+ * Public create schema for MCP connectors.
+ *
+ * @remarks
+ *
+ * Standalone model that excludes internal-only fields (``hosted_internally``,
+ * ``mistral_integration``, ``private_tool_execution``, ``auth_scheme``, ``locale``,
+ * ``github_app_data``) and restricts visibility to :class:`PublicResourceVisibility`
+ * (no ``shared_global``).
+ */
 export type CreateConnectorRequest = {
-  protocol?: "mcp" | undefined;
   /**
    * The name of the connector. Should be 64 char length maximum, alphanumeric, only underscores/dashes.
    */
@@ -38,7 +47,14 @@ export type CreateConnectorRequest = {
    * The optional url of the icon you want to associate to the connector.
    */
   iconUrl?: string | null | undefined;
-  visibility?: ResourceVisibility | undefined;
+  /**
+   * Visibility options available to public API callers.
+   *
+   * @remarks
+   *
+   * Excludes ``shared_global`` which is reserved for system-owned connectors.
+   */
+  visibility?: PublicResourceVisibility | undefined;
   /**
    * The url of the MCP server.
    */
@@ -67,7 +83,6 @@ export type CreateConnectorRequest = {
 
 /** @internal */
 export type CreateConnectorRequest$Outbound = {
-  protocol: "mcp";
   name: string;
   title?: string | null | undefined;
   description: string;
@@ -89,12 +104,11 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   CreateConnectorRequest$Outbound,
   CreateConnectorRequest
 > = z.object({
-  protocol: z.literal("mcp").default("mcp" as const),
   name: z.string(),
   title: z.nullable(z.string()).optional(),
   description: z.string(),
   iconUrl: z.nullable(z.string()).optional(),
-  visibility: ResourceVisibility$outboundSchema.optional(),
+  visibility: PublicResourceVisibility$outboundSchema.optional(),
   server: z.string(),
   headers: z.nullable(z.record(z.string(), z.any())).optional(),
   authData: z.nullable(AuthData$outboundSchema).optional(),
