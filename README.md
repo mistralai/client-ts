@@ -24,7 +24,6 @@ Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create yo
   * [Providers' SDKs](#providers-sdks)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Server-sent event streaming](#server-sent-event-streaming)
-  * [Json Streaming](#json-streaming)
   * [Pagination](#pagination)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
@@ -281,12 +280,9 @@ We have dedicated SDKs for the following providers:
 * [list](docs/sdks/connectors/README.md#list) - List all connectors.
 * [getAuthUrl](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
 * [share](docs/sdks/connectors/README.md#share) - Share a private connector to the current workspace.
-* [activateForOrganization](docs/sdks/connectors/README.md#activatefororganization) - Activate a connector for an organization.
-* [deactivateForOrganization](docs/sdks/connectors/README.md#deactivatefororganization) - Deactivate a connector for an organization.
-* [activateForWorkspace](docs/sdks/connectors/README.md#activateforworkspace) - Activate a connector for a workspace.
-* [deactivateForWorkspace](docs/sdks/connectors/README.md#deactivateforworkspace) - Deactivate a connector for a workspace.
-* [activateForUser](docs/sdks/connectors/README.md#activateforuser) - Activate a connector for the current user.
-* [deactivateForUser](docs/sdks/connectors/README.md#deactivateforuser) - Deactivate a connector for the current user.
+* [unshare](docs/sdks/connectors/README.md#unshare) - Unshare a connector from the current workspace.
+* [activateForConsumer](docs/sdks/connectors/README.md#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
+* [deactivateForConsumer](docs/sdks/connectors/README.md#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
 * [callTool](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 * [listTools](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
 * [getAuthenticationMethods](docs/sdks/connectors/README.md#getauthenticationmethods) - Get authentication methods for a connector.
@@ -378,24 +374,24 @@ We have dedicated SDKs for the following providers:
 * [delete](docs/sdks/datasets/README.md#delete) - Delete a dataset
 * [update](docs/sdks/datasets/README.md#update) - Patch dataset
 * [listRecords](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
-* [createRecord](docs/sdks/datasets/README.md#createrecord) - Add a conversation to the dataset
-* [importFromCampaign](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with a campaign
-* [importFromExplorer](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with samples from the explorer
-* [importFromFile](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with samples from an uploaded file
-* [importFromPlayground](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with samples from the playground
-* [importFromDatasetRecords](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with samples from another dataset
+* [createRecord](docs/sdks/datasets/README.md#createrecord) - Add a record to the dataset
+* [importFromCampaign](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with records from a campaign
+* [importFromExplorer](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with records from the explorer
+* [importFromFile](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with records from an uploaded file
+* [importFromPlayground](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with records from playground conversations
+* [importFromDatasetRecords](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with records from another dataset
 * [exportToJsonl](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
 * [fetchTask](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
 * [listTasks](docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
 
 #### [Beta.Observability.Datasets.Records](docs/sdks/records/README.md)
 
-* [fetch](docs/sdks/records/README.md#fetch) - Get the content of a given conversation from a dataset
+* [fetch](docs/sdks/records/README.md#fetch) - Get the content of a given dataset record
 * [delete](docs/sdks/records/README.md#delete) - Delete a record from a dataset
 * [bulkDelete](docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
 * [judge](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
-* [updatePayload](docs/sdks/records/README.md#updatepayload) - Update a dataset record conversation payload
-* [updateProperties](docs/sdks/records/README.md#updateproperties) - Update conversation properties
+* [updatePayload](docs/sdks/records/README.md#updatepayload) - Update a dataset record payload
+* [updateProperties](docs/sdks/records/README.md#updateproperties) - Update dataset record properties
 
 ### [Beta.Observability.Judges](docs/sdks/judges/README.md)
 
@@ -415,6 +411,7 @@ We have dedicated SDKs for the following providers:
 ### [Beta.Observability.Spans](docs/sdks/spans/README.md)
 
 * [searchSpans](docs/sdks/spans/README.md#searchspans) - Search spans
+* [aggregate](docs/sdks/spans/README.md#aggregate) - Aggregate spans
 * [searchSpanEvaluations](docs/sdks/spans/README.md#searchspanevaluations) - Search span evaluations
 * [searchLatestSpanEvaluations](docs/sdks/spans/README.md#searchlatestspanevaluations) - Search latest span evaluations
 * [listSpanFields](docs/sdks/spans/README.md#listspanfields) - Get span field definitions
@@ -425,6 +422,7 @@ We have dedicated SDKs for the following providers:
 ### [Beta.Observability.Traces](docs/sdks/traces/README.md)
 
 * [search](docs/sdks/traces/README.md#search) - Search traces
+* [aggregate](docs/sdks/traces/README.md#aggregate) - Aggregate traces
 * [getTraceFields](docs/sdks/traces/README.md#gettracefields) - Get trace field definitions
 * [getTraceById](docs/sdks/traces/README.md#gettracebyid) - Get trace by id
 * [getTraceSpans](docs/sdks/traces/README.md#gettracespans) - Get trace spans
@@ -451,21 +449,10 @@ We have dedicated SDKs for the following providers:
 
 ### [Beta.Rag.SearchIndexes](docs/sdks/searchindexes/README.md)
 
+* [getIndexes](docs/sdks/searchindexes/README.md#getindexes) - Get Index Summaries
 * [register](docs/sdks/searchindexes/README.md#register) - Register (or re-register) a search index
-* [getIndexSummaries](docs/sdks/searchindexes/README.md#getindexsummaries) - Get Index Summaries
 * [unregister](docs/sdks/searchindexes/README.md#unregister) - Unregister Search Index
 * [updateIndexMetrics](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
-* [getIndexDetail](docs/sdks/searchindexes/README.md#getindexdetail) - Get Index Details
-* [getIndexSummary](docs/sdks/searchindexes/README.md#getindexsummary) - Get Index Summary
-* [generateIndexSummary](docs/sdks/searchindexes/README.md#generateindexsummary) - Generate a summary field for an index
-* [setIndexSummary](docs/sdks/searchindexes/README.md#setindexsummary) - Set Index Summary
-* [getSchemaSummary](docs/sdks/searchindexes/README.md#getschemasummary) - Get Schema Summary
-* [generateSchemaSummary](docs/sdks/searchindexes/README.md#generateschemasummary) - Generate a summary field for a schema
-* [setSchemaSummary](docs/sdks/searchindexes/README.md#setschemasummary) - Set Schema Summary
-* [getIndexSchemaDetail](docs/sdks/searchindexes/README.md#getindexschemadetail) - Get Index Schema Detail
-* [getIndexSchemaFile](docs/sdks/searchindexes/README.md#getindexschemafile) - Get Index Schema File
-* [documentLookup](docs/sdks/searchindexes/README.md#documentlookup) - Document Lookup
-* [documentsFetch](docs/sdks/searchindexes/README.md#documentsfetch) - Document Fetch
 
 ### [Beta.Skills](docs/sdks/skills/README.md)
 
@@ -548,7 +535,14 @@ We have dedicated SDKs for the following providers:
 #### [Workflows.Deployments](docs/sdks/deployments/README.md)
 
 * [listDeployments](docs/sdks/deployments/README.md#listdeployments) - List Deployments
+* [createDeployment](docs/sdks/deployments/README.md#createdeployment) - Create Deployment
+* [updateDeployment](docs/sdks/deployments/README.md#updatedeployment) - Update Deployment
+* [deleteDeployment](docs/sdks/deployments/README.md#deletedeployment) - Delete Deployment
 * [getDeployment](docs/sdks/deployments/README.md#getdeployment) - Get Deployment
+* [stopDeployment](docs/sdks/deployments/README.md#stopdeployment) - Stop Deployment
+* [startDeployment](docs/sdks/deployments/README.md#startdeployment) - Start Deployment
+* [restartDeployment](docs/sdks/deployments/README.md#restartdeployment) - Restart Deployment
+* [listDeploymentWorkers](docs/sdks/deployments/README.md#listdeploymentworkers) - List Deployment Workers
 * [getDeploymentLogs](docs/sdks/deployments/README.md#getdeploymentlogs) - Get Deployment Logs
 * [streamDeploymentLogs](docs/sdks/deployments/README.md#streamdeploymentlogs) - Stream Deployment Logs
 
@@ -648,41 +642,6 @@ run();
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
 <!-- End Server-sent event streaming [eventstream] -->
-
-<!-- Start Json Streaming [jsonl] -->
-## Json Streaming
-
-Json Streaming ([jsonl][jsonl-format] / [x-ndjson][x-ndjson]) content type can be used to stream content from certain operations. These operations expose the stream as an [AsyncGenerator][async-generator] that can be consumed using a `for await...of` loop in TypeScript/JavaScript. The loop will terminate when the server no longer has any events to send and closes the underlying connection.
-
-Here's an example of consuming a JSONL stream:
-
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.rag.searchIndexes.generateIndexSummary({
-    indexId: "b0cfd77c-9cc3-46b6-ad70-1024386259b9",
-    language: "pl",
-  });
-
-  for await (const event of result) {
-    // Handle the event
-    console.log(event);
-  }
-}
-
-run();
-
-```
-
-[jsonl-format]: https://jsonlines.org/
-[x-ndjson]: https://github.com/ndjson/ndjson-spec
-[async-generator]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator
-<!-- End Json Streaming [jsonl] -->
 
 <!-- Start Pagination [pagination] -->
 ## Pagination
@@ -893,8 +852,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 152 of 249 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 57 of 249 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 145 of 244 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 59 of 244 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1110,17 +1069,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaAgentsListVersions`](docs/sdks/betaagents/README.md#listversions) - List all versions of an agent.
 - [`betaAgentsUpdate`](docs/sdks/betaagents/README.md#update) - Update an agent entity.
 - [`betaAgentsUpdateVersion`](docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
-- [`betaConnectorsActivateForOrganization`](docs/sdks/connectors/README.md#activatefororganization) - Activate a connector for an organization.
-- [`betaConnectorsActivateForUser`](docs/sdks/connectors/README.md#activateforuser) - Activate a connector for the current user.
-- [`betaConnectorsActivateForWorkspace`](docs/sdks/connectors/README.md#activateforworkspace) - Activate a connector for a workspace.
+- [`betaConnectorsActivateForConsumer`](docs/sdks/connectors/README.md#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
 - [`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 - [`betaConnectorsCreate`](docs/sdks/connectors/README.md#create) - Create a new connector.
 - [`betaConnectorsCreateOrUpdateOrganizationCredentials`](docs/sdks/connectors/README.md#createorupdateorganizationcredentials) - Create or update organization credentials for a connector.
 - [`betaConnectorsCreateOrUpdateUserCredentials`](docs/sdks/connectors/README.md#createorupdateusercredentials) - Create or update user credentials for a connector.
 - [`betaConnectorsCreateOrUpdateWorkspaceCredentials`](docs/sdks/connectors/README.md#createorupdateworkspacecredentials) - Create or update workspace credentials for a connector.
-- [`betaConnectorsDeactivateForOrganization`](docs/sdks/connectors/README.md#deactivatefororganization) - Deactivate a connector for an organization.
-- [`betaConnectorsDeactivateForUser`](docs/sdks/connectors/README.md#deactivateforuser) - Deactivate a connector for the current user.
-- [`betaConnectorsDeactivateForWorkspace`](docs/sdks/connectors/README.md#deactivateforworkspace) - Deactivate a connector for a workspace.
+- [`betaConnectorsDeactivateForConsumer`](docs/sdks/connectors/README.md#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
 - [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
 - [`betaConnectorsDeleteAllUserCredentials`](docs/sdks/connectors/README.md#deleteallusercredentials) - Delete all user credentials for a connector.
 - [`betaConnectorsDeleteOrganizationCredentials`](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
@@ -1135,6 +1090,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaConnectorsListUserCredentials`](docs/sdks/connectors/README.md#listusercredentials) - List user credentials for a connector.
 - [`betaConnectorsListWorkspaceCredentials`](docs/sdks/connectors/README.md#listworkspacecredentials) - List workspace credentials for a connector.
 - [`betaConnectorsShare`](docs/sdks/connectors/README.md#share) - Share a private connector to the current workspace.
+- [`betaConnectorsUnshare`](docs/sdks/connectors/README.md#unshare) - Unshare a connector from the current workspace.
 - [`betaConnectorsUpdate`](docs/sdks/connectors/README.md#update) - Update a connector.
 - [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 - [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
@@ -1180,25 +1136,25 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityChatCompletionEventsSearch`](docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
 - [`betaObservabilityChatCompletionEventsSearchIds`](docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
 - [`betaObservabilityDatasetsCreate`](docs/sdks/datasets/README.md#create) - Create a new empty dataset
-- [`betaObservabilityDatasetsCreateRecord`](docs/sdks/datasets/README.md#createrecord) - Add a conversation to the dataset
+- [`betaObservabilityDatasetsCreateRecord`](docs/sdks/datasets/README.md#createrecord) - Add a record to the dataset
 - [`betaObservabilityDatasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
 - [`betaObservabilityDatasetsExportToJsonl`](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
 - [`betaObservabilityDatasetsFetch`](docs/sdks/datasets/README.md#fetch) - Get dataset by id
 - [`betaObservabilityDatasetsFetchTask`](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
-- [`betaObservabilityDatasetsImportFromCampaign`](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with a campaign
-- [`betaObservabilityDatasetsImportFromDatasetRecords`](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with samples from another dataset
-- [`betaObservabilityDatasetsImportFromExplorer`](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with samples from the explorer
-- [`betaObservabilityDatasetsImportFromFile`](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with samples from an uploaded file
-- [`betaObservabilityDatasetsImportFromPlayground`](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with samples from the playground
+- [`betaObservabilityDatasetsImportFromCampaign`](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with records from a campaign
+- [`betaObservabilityDatasetsImportFromDatasetRecords`](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with records from another dataset
+- [`betaObservabilityDatasetsImportFromExplorer`](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with records from the explorer
+- [`betaObservabilityDatasetsImportFromFile`](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with records from an uploaded file
+- [`betaObservabilityDatasetsImportFromPlayground`](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with records from playground conversations
 - [`betaObservabilityDatasetsList`](docs/sdks/datasets/README.md#list) - List existing datasets
 - [`betaObservabilityDatasetsListRecords`](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
 - [`betaObservabilityDatasetsListTasks`](docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
 - [`betaObservabilityDatasetsRecordsBulkDelete`](docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
 - [`betaObservabilityDatasetsRecordsDelete`](docs/sdks/records/README.md#delete) - Delete a record from a dataset
-- [`betaObservabilityDatasetsRecordsFetch`](docs/sdks/records/README.md#fetch) - Get the content of a given conversation from a dataset
+- [`betaObservabilityDatasetsRecordsFetch`](docs/sdks/records/README.md#fetch) - Get the content of a given dataset record
 - [`betaObservabilityDatasetsRecordsJudge`](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
-- [`betaObservabilityDatasetsRecordsUpdatePayload`](docs/sdks/records/README.md#updatepayload) - Update a dataset record conversation payload
-- [`betaObservabilityDatasetsRecordsUpdateProperties`](docs/sdks/records/README.md#updateproperties) - Update conversation properties
+- [`betaObservabilityDatasetsRecordsUpdatePayload`](docs/sdks/records/README.md#updatepayload) - Update a dataset record payload
+- [`betaObservabilityDatasetsRecordsUpdateProperties`](docs/sdks/records/README.md#updateproperties) - Update dataset record properties
 - [`betaObservabilityDatasetsUpdate`](docs/sdks/datasets/README.md#update) - Patch dataset
 - [`betaObservabilityJudgesCreate`](docs/sdks/judges/README.md#create) - Create a new judge
 - [`betaObservabilityJudgesDelete`](docs/sdks/judges/README.md#delete) - Delete a judge
@@ -1209,6 +1165,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityLogsFetchOptions`](docs/sdks/logs/README.md#fetchoptions) - Get options for a log field
 - [`betaObservabilityLogsList`](docs/sdks/logs/README.md#list) - Get log field definitions
 - [`betaObservabilityLogsSearch`](docs/sdks/logs/README.md#search) - Search logs
+- [`betaObservabilitySpansAggregate`](docs/sdks/spans/README.md#aggregate) - Aggregate spans
 - [`betaObservabilitySpansFetchSpanEvalFieldOptions`](docs/sdks/spans/README.md#fetchspanevalfieldoptions) - Get options for a span evaluation field
 - [`betaObservabilitySpansFetchSpanFieldOptions`](docs/sdks/spans/README.md#fetchspanfieldoptions) - Get options for a span field
 - [`betaObservabilitySpansListSpanEvalFields`](docs/sdks/spans/README.md#listspanevalfields) - Get span evaluation field definitions
@@ -1216,6 +1173,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilitySpansSearchLatestSpanEvaluations`](docs/sdks/spans/README.md#searchlatestspanevaluations) - Search latest span evaluations
 - [`betaObservabilitySpansSearchSpanEvaluations`](docs/sdks/spans/README.md#searchspanevaluations) - Search span evaluations
 - [`betaObservabilitySpansSearchSpans`](docs/sdks/spans/README.md#searchspans) - Search spans
+- [`betaObservabilityTracesAggregate`](docs/sdks/traces/README.md#aggregate) - Aggregate traces
 - [`betaObservabilityTracesFetchOptions`](docs/sdks/traces/README.md#fetchoptions) - Get options for a trace field
 - [`betaObservabilityTracesGetSpanById`](docs/sdks/traces/README.md#getspanbyid) - Get span by id
 - [`betaObservabilityTracesGetTraceById`](docs/sdks/traces/README.md#gettracebyid) - Get trace by id
@@ -1234,19 +1192,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
-- [`betaRagSearchIndexesDocumentLookup`](docs/sdks/searchindexes/README.md#documentlookup) - Document Lookup
-- [`betaRagSearchIndexesDocumentsFetch`](docs/sdks/searchindexes/README.md#documentsfetch) - Document Fetch
-- [`betaRagSearchIndexesGenerateIndexSummary`](docs/sdks/searchindexes/README.md#generateindexsummary) - Generate a summary field for an index
-- [`betaRagSearchIndexesGenerateSchemaSummary`](docs/sdks/searchindexes/README.md#generateschemasummary) - Generate a summary field for a schema
-- [`betaRagSearchIndexesGetIndexDetail`](docs/sdks/searchindexes/README.md#getindexdetail) - Get Index Details
-- [`betaRagSearchIndexesGetIndexSchemaDetail`](docs/sdks/searchindexes/README.md#getindexschemadetail) - Get Index Schema Detail
-- [`betaRagSearchIndexesGetIndexSchemaFile`](docs/sdks/searchindexes/README.md#getindexschemafile) - Get Index Schema File
-- [`betaRagSearchIndexesGetIndexSummaries`](docs/sdks/searchindexes/README.md#getindexsummaries) - Get Index Summaries
-- [`betaRagSearchIndexesGetIndexSummary`](docs/sdks/searchindexes/README.md#getindexsummary) - Get Index Summary
-- [`betaRagSearchIndexesGetSchemaSummary`](docs/sdks/searchindexes/README.md#getschemasummary) - Get Schema Summary
+- [`betaRagSearchIndexesGetIndexes`](docs/sdks/searchindexes/README.md#getindexes) - Get Index Summaries
 - [`betaRagSearchIndexesRegister`](docs/sdks/searchindexes/README.md#register) - Register (or re-register) a search index
-- [`betaRagSearchIndexesSetIndexSummary`](docs/sdks/searchindexes/README.md#setindexsummary) - Set Index Summary
-- [`betaRagSearchIndexesSetSchemaSummary`](docs/sdks/searchindexes/README.md#setschemasummary) - Set Schema Summary
 - [`betaRagSearchIndexesUnregister`](docs/sdks/searchindexes/README.md#unregister) - Unregister Search Index
 - [`betaRagSearchIndexesUpdateIndexMetrics`](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
 - [`betaSkillsCreate`](docs/sdks/skills/README.md#create) - CreateSkill
@@ -1288,10 +1235,17 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsArchiveWorkflow`](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
 - [`workflowsBulkArchiveWorkflows`](docs/sdks/workflows/README.md#bulkarchiveworkflows) - Bulk Archive Workflows
 - [`workflowsBulkUnarchiveWorkflows`](docs/sdks/workflows/README.md#bulkunarchiveworkflows) - Bulk Unarchive Workflows
+- [`workflowsDeploymentsCreateDeployment`](docs/sdks/deployments/README.md#createdeployment) - Create Deployment
+- [`workflowsDeploymentsDeleteDeployment`](docs/sdks/deployments/README.md#deletedeployment) - Delete Deployment
 - [`workflowsDeploymentsGetDeployment`](docs/sdks/deployments/README.md#getdeployment) - Get Deployment
 - [`workflowsDeploymentsGetDeploymentLogs`](docs/sdks/deployments/README.md#getdeploymentlogs) - Get Deployment Logs
 - [`workflowsDeploymentsListDeployments`](docs/sdks/deployments/README.md#listdeployments) - List Deployments
+- [`workflowsDeploymentsListDeploymentWorkers`](docs/sdks/deployments/README.md#listdeploymentworkers) - List Deployment Workers
+- [`workflowsDeploymentsRestartDeployment`](docs/sdks/deployments/README.md#restartdeployment) - Restart Deployment
+- [`workflowsDeploymentsStartDeployment`](docs/sdks/deployments/README.md#startdeployment) - Start Deployment
+- [`workflowsDeploymentsStopDeployment`](docs/sdks/deployments/README.md#stopdeployment) - Stop Deployment
 - [`workflowsDeploymentsStreamDeploymentLogs`](docs/sdks/deployments/README.md#streamdeploymentlogs) - Stream Deployment Logs
+- [`workflowsDeploymentsUpdateDeployment`](docs/sdks/deployments/README.md#updatedeployment) - Update Deployment
 - [`workflowsExecuteWorkflow`](docs/sdks/workflows/README.md#executeworkflow) - Execute Workflow
 - [`workflowsExecutionsBatchCancelWorkflowExecutions`](docs/sdks/executions/README.md#batchcancelworkflowexecutions) - Batch Cancel Workflow Executions
 - [`workflowsExecutionsBatchTerminateWorkflowExecutions`](docs/sdks/executions/README.md#batchterminateworkflowexecutions) - Batch Terminate Workflow Executions

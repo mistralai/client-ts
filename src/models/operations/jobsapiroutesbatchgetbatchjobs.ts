@@ -8,11 +8,13 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
 
-export const OrderBy = {
+export const JobsApiRoutesBatchGetBatchJobsOrderBy = {
   Created: "created",
   MinusCreated: "-created",
 } as const;
-export type OrderBy = ClosedEnum<typeof OrderBy>;
+export type JobsApiRoutesBatchGetBatchJobsOrderBy = ClosedEnum<
+  typeof JobsApiRoutesBatchGetBatchJobsOrderBy
+>;
 
 export type JobsApiRoutesBatchGetBatchJobsRequest = {
   page?: number | undefined;
@@ -23,13 +25,13 @@ export type JobsApiRoutesBatchGetBatchJobsRequest = {
   createdAfter?: Date | null | undefined;
   createdByMe?: boolean | undefined;
   status?: Array<components.BatchJobStatus> | null | undefined;
-  orderBy?: OrderBy | undefined;
+  orderBy?: JobsApiRoutesBatchGetBatchJobsOrderBy | undefined;
 };
 
 /** @internal */
-export const OrderBy$outboundSchema: z.ZodEnum<typeof OrderBy> = z.enum(
-  OrderBy,
-);
+export const JobsApiRoutesBatchGetBatchJobsOrderBy$outboundSchema: z.ZodEnum<
+  typeof JobsApiRoutesBatchGetBatchJobsOrderBy
+> = z.enum(JobsApiRoutesBatchGetBatchJobsOrderBy);
 
 /** @internal */
 export type JobsApiRoutesBatchGetBatchJobsRequest$Outbound = {
@@ -58,7 +60,9 @@ export const JobsApiRoutesBatchGetBatchJobsRequest$outboundSchema: z.ZodType<
   createdByMe: z.boolean().default(false),
   status: z.nullable(z.array(components.BatchJobStatus$outboundSchema))
     .optional(),
-  orderBy: OrderBy$outboundSchema.default("-created"),
+  orderBy: JobsApiRoutesBatchGetBatchJobsOrderBy$outboundSchema.default(
+    "-created",
+  ),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",

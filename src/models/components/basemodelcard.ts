@@ -32,6 +32,7 @@ export type BaseModelCard = {
   deprecation?: Date | null | undefined;
   deprecationReplacementModel?: string | null | undefined;
   defaultModelTemperature?: number | null | undefined;
+  internal: boolean;
   type: "base";
 };
 
@@ -52,6 +53,7 @@ export const BaseModelCard$inboundSchema: z.ZodType<BaseModelCard, unknown> = z
     ).optional(),
     deprecation_replacement_model: z.nullable(z.string()).optional(),
     default_model_temperature: z.nullable(z.number()).optional(),
+    internal: z.boolean().default(false),
     type: z.literal("base"),
   }).transform((v) => {
     return remap$(v, {

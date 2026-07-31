@@ -5,12 +5,6 @@ Successful Response
 
 ## Supported Types
 
-### `components.ConnectorTool[]`
-
-```typescript
-const value: components.ConnectorTool[] = [];
-```
-
 ### `components.MCPTool[]`
 
 ```typescript

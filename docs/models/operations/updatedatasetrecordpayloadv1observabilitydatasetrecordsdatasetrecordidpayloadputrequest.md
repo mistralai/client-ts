@@ -12,19 +12,7 @@ let value:
     {
       datasetRecordId: "c6665fb1-ffeb-49a2-86b2-2be882e8388b",
       updateDatasetRecordPayloadRequest: {
-        payload: {
-          messages: [
-            {
-              "key": "<value>",
-              "key1": "<value>",
-              "key2": "<value>",
-            },
-            {
-              "key": "<value>",
-            },
-            {},
-          ],
-        },
+        payload: {},
       },
     };
 ```

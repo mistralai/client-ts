@@ -15,6 +15,7 @@ export type ConnectorGetAuthUrlV1Request = {
    */
   methodType?: components.OutboundAuthenticationType | undefined;
   credentialsName?: string | null | undefined;
+  credentialsTitle?: string | null | undefined;
   /**
    * Only valid with method_type=oauth2. When true, returns a GitHub App installation URL (https://github.com/apps/<slug>/installations/new) if the connector has the proper configuration The Github application needs to have 'Request user authorization (OAuth) during installation' enabled to perform the proper auth loop.
    */
@@ -27,6 +28,7 @@ export type ConnectorGetAuthUrlV1Request$Outbound = {
   app_return_url?: string | null | undefined;
   method_type?: string | undefined;
   credentials_name?: string | null | undefined;
+  credentials_title?: string | null | undefined;
   github_installation_link: boolean;
 };
 
@@ -39,6 +41,7 @@ export const ConnectorGetAuthUrlV1Request$outboundSchema: z.ZodType<
   appReturnUrl: z.nullable(z.string()).optional(),
   methodType: components.OutboundAuthenticationType$outboundSchema.optional(),
   credentialsName: z.nullable(z.string()).optional(),
+  credentialsTitle: z.nullable(z.string()).optional(),
   githubInstallationLink: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
@@ -46,6 +49,7 @@ export const ConnectorGetAuthUrlV1Request$outboundSchema: z.ZodType<
     appReturnUrl: "app_return_url",
     methodType: "method_type",
     credentialsName: "credentials_name",
+    credentialsTitle: "credentials_title",
     githubInstallationLink: "github_installation_link",
   });
 });

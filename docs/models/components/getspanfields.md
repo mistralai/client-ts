@@ -14,6 +14,7 @@ let value: GetSpanFields = {
       supportedOperators: [
         "exists",
       ],
+      supportedAggregations: [],
     },
   ],
 };

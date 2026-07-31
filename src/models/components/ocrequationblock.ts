@@ -8,6 +8,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  OCRBlockConfidenceScores,
+  OCRBlockConfidenceScores$inboundSchema,
+} from "./ocrblockconfidencescores.js";
 
 export type OCREquationBlock = {
   topLeftX: number;
@@ -18,6 +22,10 @@ export type OCREquationBlock = {
    * Text/markdown/html content of this block
    */
   content: string;
+  /**
+   * Confidence scores for this block. Populated when confidence_scores_granularity is set to 'block'.
+   */
+  confidenceScores?: OCRBlockConfidenceScores | null | undefined;
   type: "equation";
 };
 
@@ -31,6 +39,8 @@ export const OCREquationBlock$inboundSchema: z.ZodType<
   bottom_right_x: z.int(),
   bottom_right_y: z.int(),
   content: z.string(),
+  confidence_scores: z.nullable(OCRBlockConfidenceScores$inboundSchema)
+    .optional(),
   type: z.literal("equation"),
 }).transform((v) => {
   return remap$(v, {
@@ -38,6 +48,7 @@ export const OCREquationBlock$inboundSchema: z.ZodType<
     "top_left_y": "topLeftY",
     "bottom_right_x": "bottomRightX",
     "bottom_right_y": "bottomRightY",
+    "confidence_scores": "confidenceScores",
   });
 });
 

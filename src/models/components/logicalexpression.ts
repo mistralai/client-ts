@@ -13,8 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ToolProperties,
   ToolProperties$inboundSchema,
-  ToolProperties$Outbound,
-  ToolProperties$outboundSchema,
 } from "./toolproperties.js";
 
 export const LogicalExpressionType = {
@@ -35,11 +33,6 @@ export const LogicalExpressionType$inboundSchema: z.ZodType<
   LogicalExpressionType,
   unknown
 > = openEnums.inboundSchema(LogicalExpressionType);
-/** @internal */
-export const LogicalExpressionType$outboundSchema: z.ZodType<
-  string,
-  LogicalExpressionType
-> = openEnums.outboundSchema(LogicalExpressionType);
 
 /** @internal */
 export const LogicalExpression$inboundSchema: z.ZodType<
@@ -55,36 +48,7 @@ export const LogicalExpression$inboundSchema: z.ZodType<
     ]),
   ),
 });
-/** @internal */
-export type LogicalExpression$Outbound = {
-  type: string;
-  expressions: Array<
-    LogicalExpression$Outbound | ToolProperties$Outbound | Array<string>
-  >;
-};
 
-/** @internal */
-export const LogicalExpression$outboundSchema: z.ZodType<
-  LogicalExpression$Outbound,
-  LogicalExpression
-> = z.object({
-  type: LogicalExpressionType$outboundSchema,
-  expressions: z.array(
-    smartUnion([
-      z.lazy(() => LogicalExpression$outboundSchema),
-      ToolProperties$outboundSchema,
-      z.array(z.string()),
-    ]),
-  ),
-});
-
-export function logicalExpressionToJSON(
-  logicalExpression: LogicalExpression,
-): string {
-  return JSON.stringify(
-    LogicalExpression$outboundSchema.parse(logicalExpression),
-  );
-}
 export function logicalExpressionFromJSON(
   jsonString: string,
 ): SafeParseResult<LogicalExpression, SDKValidationError> {
@@ -102,25 +66,7 @@ export const Expression$inboundSchema: z.ZodType<Expression, unknown> =
     ToolProperties$inboundSchema,
     z.array(z.string()),
   ]);
-/** @internal */
-export type Expression$Outbound =
-  | LogicalExpression$Outbound
-  | ToolProperties$Outbound
-  | Array<string>;
 
-/** @internal */
-export const Expression$outboundSchema: z.ZodType<
-  Expression$Outbound,
-  Expression
-> = smartUnion([
-  z.lazy(() => LogicalExpression$outboundSchema),
-  ToolProperties$outboundSchema,
-  z.array(z.string()),
-]);
-
-export function expressionToJSON(expression: Expression): string {
-  return JSON.stringify(Expression$outboundSchema.parse(expression));
-}
 export function expressionFromJSON(
   jsonString: string,
 ): SafeParseResult<Expression, SDKValidationError> {

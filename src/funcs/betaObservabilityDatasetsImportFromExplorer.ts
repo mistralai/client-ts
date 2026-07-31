@@ -29,7 +29,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Populate the dataset with samples from the explorer
+ * Populate the dataset with records from the explorer
  */
 export function betaObservabilityDatasetsImportFromExplorer(
   client: MistralCore,

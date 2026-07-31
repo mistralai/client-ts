@@ -10,19 +10,10 @@ let value:
     datasetId: "5258dfde-f22c-4567-aa05-b202ef694690",
     createDatasetRecordRequest: {
       payload: {
-        messages: [
-          {
-            "key": "<value>",
-            "key1": "<value>",
-            "key2": "<value>",
-          },
-          {
-            "key": "<value>",
-          },
-          {},
-        ],
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
       },
-      properties: {},
     },
   };
 ```

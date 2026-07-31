@@ -4,21 +4,19 @@
  */
 
 import * as z from "zod/v4";
-import {
-  ConversationPayload,
-  ConversationPayload$Outbound,
-  ConversationPayload$outboundSchema,
-} from "./conversationpayload.js";
 
 export type CreateDatasetRecordRequest = {
-  payload: ConversationPayload;
-  properties: { [k: string]: any };
+  /**
+   * Caller-authored input object stored on a dataset record.
+   */
+  payload: { [k: string]: any };
+  properties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
 export type CreateDatasetRecordRequest$Outbound = {
-  payload: ConversationPayload$Outbound;
-  properties: { [k: string]: any };
+  payload: { [k: string]: any };
+  properties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -26,8 +24,8 @@ export const CreateDatasetRecordRequest$outboundSchema: z.ZodType<
   CreateDatasetRecordRequest$Outbound,
   CreateDatasetRecordRequest
 > = z.object({
-  payload: ConversationPayload$outboundSchema,
-  properties: z.record(z.string(), z.any()),
+  payload: z.record(z.string(), z.any()),
+  properties: z.record(z.string(), z.any()).optional(),
 });
 
 export function createDatasetRecordRequestToJSON(

@@ -27,7 +27,7 @@ export type GetSchedulesV1WorkflowsSchedulesGetStatus = ClosedEnum<
 
 export type GetSchedulesV1WorkflowsSchedulesGetRequest = {
   /**
-   * Filter by workflow name
+   * Filter by exact workflow name
    */
   workflowName?: string | null | undefined;
   /**
@@ -38,6 +38,10 @@ export type GetSchedulesV1WorkflowsSchedulesGetRequest = {
    * Filter by schedule status: 'active' or 'paused'
    */
   status?: GetSchedulesV1WorkflowsSchedulesGetStatus | null | undefined;
+  /**
+   * Prefix search query for workflow name
+   */
+  search?: string | null | undefined;
   /**
    * Number of items per page. Omitting this parameter fetches all results at once (deprecated — pass page_size to use pagination).
    */
@@ -63,6 +67,7 @@ export type GetSchedulesV1WorkflowsSchedulesGetRequest$Outbound = {
   workflow_name?: string | null | undefined;
   user_id?: string | null | undefined;
   status?: string | null | undefined;
+  search?: string | null | undefined;
   page_size?: number | null | undefined;
   next_page_token?: string | null | undefined;
 };
@@ -77,6 +82,7 @@ export const GetSchedulesV1WorkflowsSchedulesGetRequest$outboundSchema:
     userId: z.nullable(z.string()).optional(),
     status: z.nullable(GetSchedulesV1WorkflowsSchedulesGetStatus$outboundSchema)
       .optional(),
+    search: z.nullable(z.string()).optional(),
     pageSize: z.nullable(z.int()).optional(),
     nextPageToken: z.nullable(z.string()).optional(),
   }).transform((v) => {

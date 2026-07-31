@@ -106,6 +106,7 @@ async function $do(
   const query = encodeFormQuery({
     "app_return_url": payload.app_return_url,
     "credentials_name": payload.credentials_name,
+    "credentials_title": payload.credentials_title,
     "github_installation_link": payload.github_installation_link,
     "method_type": payload.method_type,
   });

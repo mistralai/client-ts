@@ -8,12 +8,27 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  UserIdentityApiKey,
+  UserIdentityApiKey$inboundSchema,
+} from "./useridentityapikey.js";
+import {
+  UserIdentityOrganization,
+  UserIdentityOrganization$inboundSchema,
+} from "./useridentityorganization.js";
+import {
+  UserIdentityWorkspace,
+  UserIdentityWorkspace$inboundSchema,
+} from "./useridentityworkspace.js";
 
 export type UserIdentity = {
   id: string;
   email: string | null;
   firstName: string | null;
   lastName: string | null;
+  workspace?: UserIdentityWorkspace | null | undefined;
+  organization?: UserIdentityOrganization | null | undefined;
+  apiKey?: UserIdentityApiKey | null | undefined;
 };
 
 /** @internal */
@@ -23,10 +38,14 @@ export const UserIdentity$inboundSchema: z.ZodType<UserIdentity, unknown> = z
     email: z.nullable(z.string()),
     first_name: z.nullable(z.string()),
     last_name: z.nullable(z.string()),
+    workspace: z.nullable(UserIdentityWorkspace$inboundSchema).optional(),
+    organization: z.nullable(UserIdentityOrganization$inboundSchema).optional(),
+    api_key: z.nullable(UserIdentityApiKey$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "first_name": "firstName",
       "last_name": "lastName",
+      "api_key": "apiKey",
     });
   });
 

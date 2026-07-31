@@ -5,6 +5,35 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
+
+/**
+ * Field to sort by. When omitted, active and managed deployments are grouped first, then sorted by created_at. When set, results are sorted purely by the specified field with no grouping.
+ */
+export const ListDeploymentsV1WorkflowsDeploymentsGetOrderBy = {
+  UpdatedAt: "updated_at",
+  CreatedAt: "created_at",
+} as const;
+/**
+ * Field to sort by. When omitted, active and managed deployments are grouped first, then sorted by created_at. When set, results are sorted purely by the specified field with no grouping.
+ */
+export type ListDeploymentsV1WorkflowsDeploymentsGetOrderBy = ClosedEnum<
+  typeof ListDeploymentsV1WorkflowsDeploymentsGetOrderBy
+>;
+
+/**
+ * Sort direction. Applied to order_by when set, or within each activity group when omitted.
+ */
+export const ListDeploymentsV1WorkflowsDeploymentsGetOrder = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * Sort direction. Applied to order_by when set, or within each activity group when omitted.
+ */
+export type ListDeploymentsV1WorkflowsDeploymentsGetOrder = ClosedEnum<
+  typeof ListDeploymentsV1WorkflowsDeploymentsGetOrder
+>;
 
 export type ListDeploymentsV1WorkflowsDeploymentsGetRequest = {
   activeOnly?: boolean | undefined;
@@ -17,6 +46,14 @@ export type ListDeploymentsV1WorkflowsDeploymentsGetRequest = {
    * Filter deployments by name or ID prefix
    */
   search?: string | null | undefined;
+  /**
+   * Field to sort by. When omitted, active and managed deployments are grouped first, then sorted by created_at. When set, results are sorted purely by the specified field with no grouping.
+   */
+  orderBy?: ListDeploymentsV1WorkflowsDeploymentsGetOrderBy | null | undefined;
+  /**
+   * Sort direction. Applied to order_by when set, or within each activity group when omitted.
+   */
+  order?: ListDeploymentsV1WorkflowsDeploymentsGetOrder | undefined;
   /**
    * Maximum number of deployments to return
    */
@@ -32,11 +69,25 @@ export type ListDeploymentsV1WorkflowsDeploymentsGetRequest = {
 };
 
 /** @internal */
+export const ListDeploymentsV1WorkflowsDeploymentsGetOrderBy$outboundSchema:
+  z.ZodEnum<typeof ListDeploymentsV1WorkflowsDeploymentsGetOrderBy> = z.enum(
+    ListDeploymentsV1WorkflowsDeploymentsGetOrderBy,
+  );
+
+/** @internal */
+export const ListDeploymentsV1WorkflowsDeploymentsGetOrder$outboundSchema:
+  z.ZodEnum<typeof ListDeploymentsV1WorkflowsDeploymentsGetOrder> = z.enum(
+    ListDeploymentsV1WorkflowsDeploymentsGetOrder,
+  );
+
+/** @internal */
 export type ListDeploymentsV1WorkflowsDeploymentsGetRequest$Outbound = {
   active_only: boolean;
   is_hardened?: boolean | null | undefined;
   workflow_name?: string | null | undefined;
   search?: string | null | undefined;
+  order_by?: string | null | undefined;
+  order: string;
   limit?: number | null | undefined;
   cursor?: string | null | undefined;
   workspace_id?: string | null | undefined;
@@ -52,6 +103,12 @@ export const ListDeploymentsV1WorkflowsDeploymentsGetRequest$outboundSchema:
     isHardened: z.nullable(z.boolean()).optional(),
     workflowName: z.nullable(z.string()).optional(),
     search: z.nullable(z.string()).optional(),
+    orderBy: z.nullable(
+      ListDeploymentsV1WorkflowsDeploymentsGetOrderBy$outboundSchema,
+    ).optional(),
+    order: ListDeploymentsV1WorkflowsDeploymentsGetOrder$outboundSchema.default(
+      "desc",
+    ),
     limit: z.nullable(z.int()).optional(),
     cursor: z.nullable(z.string()).optional(),
     workspaceId: z.nullable(z.string()).optional(),
@@ -60,6 +117,7 @@ export const ListDeploymentsV1WorkflowsDeploymentsGetRequest$outboundSchema:
       activeOnly: "active_only",
       isHardened: "is_hardened",
       workflowName: "workflow_name",
+      orderBy: "order_by",
       workspaceId: "workspace_id",
     });
   });

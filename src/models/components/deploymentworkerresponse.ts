@@ -8,6 +8,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  DeploymentLocation,
+  DeploymentLocation$inboundSchema,
+} from "./deploymentlocation.js";
 
 export type DeploymentWorkerResponse = {
   /**
@@ -26,6 +30,10 @@ export type DeploymentWorkerResponse = {
    * Whether this worker's liveness key is currently alive
    */
   isActive: boolean;
+  /**
+   * Where the worker is running; null if the worker did not report a location
+   */
+  location?: DeploymentLocation | null | undefined;
 };
 
 /** @internal */
@@ -37,6 +45,7 @@ export const DeploymentWorkerResponse$inboundSchema: z.ZodType<
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   is_active: z.boolean(),
+  location: z.nullable(DeploymentLocation$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

@@ -1,0 +1,23 @@
+# DeploymentObservedState
+
+## Example Usage
+
+```typescript
+import { DeploymentObservedState } from "@mistralai/mistralai/models/components";
+
+let value: DeploymentObservedState = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `phase`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `availableReplicas`                                                                           | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `readyReplicas`                                                                               | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `endpoint`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `message`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `lastSeen`                                                                                    | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `deployedRevision`                                                                            | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `generation`                                                                                  | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `buildState`                                                                                  | [components.DeploymentBuildState](../../models/components/deploymentbuildstate.md)            | :heavy_minus_sign:                                                                            | N/A                                                                                           |

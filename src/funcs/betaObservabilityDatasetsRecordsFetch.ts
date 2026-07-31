@@ -29,7 +29,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get the content of a given conversation from a dataset
+ * Get the content of a given dataset record
  */
 export function betaObservabilityDatasetsRecordsFetch(
   client: MistralCore,

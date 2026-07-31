@@ -3,6 +3,7 @@
  * @generated-id: c69e203e4392
  */
 
+import { betaObservabilitySpansAggregate } from "../funcs/betaObservabilitySpansAggregate.js";
 import { betaObservabilitySpansFetchSpanEvalFieldOptions } from "../funcs/betaObservabilitySpansFetchSpanEvalFieldOptions.js";
 import { betaObservabilitySpansFetchSpanFieldOptions } from "../funcs/betaObservabilitySpansFetchSpanFieldOptions.js";
 import { betaObservabilitySpansListSpanEvalFields } from "../funcs/betaObservabilitySpansListSpanEvalFields.js";
@@ -24,6 +25,20 @@ export class Spans extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GetSpans> {
     return unwrapAsync(betaObservabilitySpansSearchSpans(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Aggregate spans
+   */
+  async aggregate(
+    request: operations.AggregateSpansV1ObservabilitySpansAggregatePostRequest,
+    options?: RequestOptions,
+  ): Promise<components.Aggregation> {
+    return unwrapAsync(betaObservabilitySpansAggregate(
       this,
       request,
       options,

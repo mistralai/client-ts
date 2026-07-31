@@ -16,6 +16,11 @@ import {
   DeploymentWorkerResponse,
   DeploymentWorkerResponse$inboundSchema,
 } from "./deploymentworkerresponse.js";
+import { LocationType, LocationType$inboundSchema } from "./locationtype.js";
+import {
+  ManagedDeploymentResponse,
+  ManagedDeploymentResponse$inboundSchema,
+} from "./manageddeploymentresponse.js";
 
 export type DeploymentDetailResponse = {
   /**
@@ -47,6 +52,22 @@ export type DeploymentDetailResponse = {
    */
   location?: DeploymentLocation | null | undefined;
   /**
+   * Number of workers registered to the deployment
+   */
+  workerCount: number;
+  /**
+   * Number of workers currently live within the liveness cutoff
+   */
+  activeWorkerCount: number;
+  /**
+   * Distinct location types reported by the deployment's workers
+   */
+  locations?: Array<LocationType> | undefined;
+  /**
+   * Live managed service state for managed deployments; null for self-hosted deployments or when managed services are unavailable
+   */
+  managed?: ManagedDeploymentResponse | null | undefined;
+  /**
    * Workers registered for the deployment
    */
   workers: Array<DeploymentWorkerResponse>;
@@ -64,6 +85,10 @@ export const DeploymentDetailResponse$inboundSchema: z.ZodType<
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   location: z.nullable(DeploymentLocation$inboundSchema).optional(),
+  worker_count: z.int().default(0),
+  active_worker_count: z.int().default(0),
+  locations: z.array(LocationType$inboundSchema).optional(),
+  managed: z.nullable(ManagedDeploymentResponse$inboundSchema).optional(),
   workers: z.array(DeploymentWorkerResponse$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -71,6 +96,8 @@ export const DeploymentDetailResponse$inboundSchema: z.ZodType<
     "is_hardened": "isHardened",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
+    "worker_count": "workerCount",
+    "active_worker_count": "activeWorkerCount",
   });
 });
 
