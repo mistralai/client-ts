@@ -22,26 +22,7 @@ export const ToolProperties$inboundSchema: z.ZodType<ToolProperties, unknown> =
       "read_only": "readOnly",
     });
   });
-/** @internal */
-export type ToolProperties$Outbound = {
-  read_only: boolean | null;
-};
 
-/** @internal */
-export const ToolProperties$outboundSchema: z.ZodType<
-  ToolProperties$Outbound,
-  ToolProperties
-> = z.object({
-  readOnly: z.nullable(z.boolean()),
-}).transform((v) => {
-  return remap$(v, {
-    readOnly: "read_only",
-  });
-});
-
-export function toolPropertiesToJSON(toolProperties: ToolProperties): string {
-  return JSON.stringify(ToolProperties$outboundSchema.parse(toolProperties));
-}
 export function toolPropertiesFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolProperties, SDKValidationError> {

@@ -4,19 +4,17 @@
  */
 
 import * as z from "zod/v4";
-import {
-  ConversationPayload,
-  ConversationPayload$Outbound,
-  ConversationPayload$outboundSchema,
-} from "./conversationpayload.js";
 
 export type UpdateDatasetRecordPayloadRequest = {
-  payload: ConversationPayload;
+  /**
+   * Caller-authored input object stored on a dataset record.
+   */
+  payload: { [k: string]: any };
 };
 
 /** @internal */
 export type UpdateDatasetRecordPayloadRequest$Outbound = {
-  payload: ConversationPayload$Outbound;
+  payload: { [k: string]: any };
 };
 
 /** @internal */
@@ -24,7 +22,7 @@ export const UpdateDatasetRecordPayloadRequest$outboundSchema: z.ZodType<
   UpdateDatasetRecordPayloadRequest$Outbound,
   UpdateDatasetRecordPayloadRequest
 > = z.object({
-  payload: ConversationPayload$outboundSchema,
+  payload: z.record(z.string(), z.any()),
 });
 
 export function updateDatasetRecordPayloadRequestToJSON(

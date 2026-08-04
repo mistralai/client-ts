@@ -101,6 +101,8 @@ async function $do(
     "cursor": payload?.cursor,
     "is_hardened": payload?.is_hardened,
     "limit": payload?.limit,
+    "order": payload?.order,
+    "order_by": payload?.order_by,
     "search": payload?.search,
     "workflow_name": payload?.workflow_name,
     "workspace_id": payload?.workspace_id,

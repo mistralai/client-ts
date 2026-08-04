@@ -107,6 +107,7 @@ async function $do(
   const query = encodeFormQuery({
     "next_page_token": payload?.next_page_token,
     "page_size": payload?.page_size,
+    "search": payload?.search,
     "status": payload?.status,
     "user_id": payload?.user_id,
     "workflow_name": payload?.workflow_name,

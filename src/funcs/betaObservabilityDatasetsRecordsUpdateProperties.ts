@@ -29,7 +29,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update conversation properties
+ * Update dataset record properties
  */
 export function betaObservabilityDatasetsRecordsUpdateProperties(
   client: MistralCore,

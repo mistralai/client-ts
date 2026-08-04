@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Share a private connector to the current workspace.
  *
  * @remarks
- * Transfers ownership of a private user-owned connector to the current workspace, making it available to all workspace members. This action is irreversible: once shared, the connector belongs to the workspace and can no longer be used privately across other workspaces. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
+ * Transfers ownership of a private user-owned connector to the current workspace, making it available to all workspace members. The creator can later revert this via the unshare endpoint. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
  */
 export function betaConnectorsShare(
   client: MistralCore,

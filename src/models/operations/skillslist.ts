@@ -15,6 +15,22 @@ export type SkillsListRequest = {
   pageToken?: string | undefined;
   alias?: string | undefined;
   fields?: Array<string> | undefined;
+  /**
+   * Defaults to created_at when omitted.
+   */
+  sortField?: components.ListSortField | undefined;
+  /**
+   * Defaults to descending for timestamp fields and ascending for text fields.
+   */
+  sortDirectionQueryParameter?: components.ListSortDirection | undefined;
+  /**
+   * REST-friendly alias for sort.field. Supported values: created_at, last_modified_at, name, title.
+   */
+  sortBy?: string | undefined;
+  /**
+   * REST-friendly alias for sort.direction. Supported values: asc, desc.
+   */
+  sortDirectionQueryParameter1?: string | undefined;
 };
 
 export type SkillsListResponse = {
@@ -27,6 +43,10 @@ export type SkillsListRequest$Outbound = {
   pageToken?: string | undefined;
   alias?: string | undefined;
   fields?: Array<string> | undefined;
+  "sort.field"?: string | undefined;
+  "sort.directionQueryParameter"?: string | undefined;
+  sort_by?: string | undefined;
+  sort_directionQueryParameter1?: string | undefined;
 };
 
 /** @internal */
@@ -38,6 +58,18 @@ export const SkillsListRequest$outboundSchema: z.ZodType<
   pageToken: z.string().optional(),
   alias: z.string().optional(),
   fields: z.array(z.string()).optional(),
+  sortField: components.ListSortField$outboundSchema.optional(),
+  sortDirectionQueryParameter: components.ListSortDirection$outboundSchema
+    .optional(),
+  sortBy: z.string().optional(),
+  sortDirectionQueryParameter1: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    sortField: "sort.field",
+    sortDirectionQueryParameter: "sort.directionQueryParameter",
+    sortBy: "sort_by",
+    sortDirectionQueryParameter1: "sort_directionQueryParameter1",
+  });
 });
 
 export function skillsListRequestToJSON(

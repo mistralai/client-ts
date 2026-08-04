@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [fetch](#fetch) - Get the content of a given conversation from a dataset
+* [fetch](#fetch) - Get the content of a given dataset record
 * [delete](#delete) - Delete a record from a dataset
 * [bulkDelete](#bulkdelete) - Delete multiple records from datasets
 * [judge](#judge) - Run Judge on a dataset record based on the given options
-* [updatePayload](#updatepayload) - Update a dataset record conversation payload
-* [updateProperties](#updateproperties) - Update conversation properties
+* [updatePayload](#updatepayload) - Update a dataset record payload
+* [updateProperties](#updateproperties) - Update dataset record properties
 
 ## fetch
 
-Get the content of a given conversation from a dataset
+Get the content of a given dataset record
 
 ### Example Usage
 
@@ -355,7 +355,7 @@ run();
 
 ## updatePayload
 
-Update a dataset record conversation payload
+Update a dataset record payload
 
 ### Example Usage
 
@@ -372,7 +372,7 @@ async function run() {
     datasetRecordId: "17506b15-748e-4e7c-9737-c97c44d04b0f",
     updateDatasetRecordPayloadRequest: {
       payload: {
-        messages: [
+        "messages": [
           {
             "key": "<value>",
           },
@@ -412,7 +412,7 @@ async function run() {
     datasetRecordId: "17506b15-748e-4e7c-9737-c97c44d04b0f",
     updateDatasetRecordPayloadRequest: {
       payload: {
-        messages: [
+        "messages": [
           {
             "key": "<value>",
           },
@@ -459,7 +459,7 @@ run();
 
 ## updateProperties
 
-Update conversation properties
+Update dataset record properties
 
 ### Example Usage
 

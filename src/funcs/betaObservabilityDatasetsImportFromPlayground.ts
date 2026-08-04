@@ -29,7 +29,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Populate the dataset with samples from the playground
+ * Populate the dataset with records from playground conversations
  */
 export function betaObservabilityDatasetsImportFromPlayground(
   client: MistralCore,

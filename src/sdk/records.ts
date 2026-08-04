@@ -16,7 +16,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Records extends ClientSDK {
   /**
-   * Get the content of a given conversation from a dataset
+   * Get the content of a given dataset record
    */
   async fetch(
     request:
@@ -75,7 +75,7 @@ export class Records extends ClientSDK {
   }
 
   /**
-   * Update a dataset record conversation payload
+   * Update a dataset record payload
    */
   async updatePayload(
     request:
@@ -90,7 +90,7 @@ export class Records extends ClientSDK {
   }
 
   /**
-   * Update conversation properties
+   * Update dataset record properties
    */
   async updateProperties(
     request:

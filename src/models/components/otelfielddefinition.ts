@@ -10,6 +10,10 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  MetricAggregation,
+  MetricAggregation$inboundSchema,
+} from "./metricaggregation.js";
 
 export const OtelFieldDefinitionType = {
   Enum: "ENUM",
@@ -59,6 +63,7 @@ export type OtelFieldDefinition = {
   type: OtelFieldDefinitionType;
   group?: string | null | undefined;
   supportedOperators: Array<OtelFieldDefinitionSupportedOperator>;
+  supportedAggregations: Array<MetricAggregation>;
 };
 
 /** @internal */
@@ -85,9 +90,11 @@ export const OtelFieldDefinition$inboundSchema: z.ZodType<
   supported_operators: z.array(
     OtelFieldDefinitionSupportedOperator$inboundSchema,
   ),
+  supported_aggregations: z.array(MetricAggregation$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "supported_operators": "supportedOperators",
+    "supported_aggregations": "supportedAggregations",
   });
 });
 

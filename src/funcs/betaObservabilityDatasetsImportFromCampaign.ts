@@ -29,7 +29,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Populate the dataset with a campaign
+ * Populate the dataset with records from a campaign
  */
 export function betaObservabilityDatasetsImportFromCampaign(
   client: MistralCore,

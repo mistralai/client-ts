@@ -36,8 +36,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaRagSearchIndexesUnregister(
   client: MistralCore,
-  request:
-    operations.UnregisterSearchIndexV1RagIndexesIndexIndexIdDeleteRequest,
+  request: operations.UnregisterSearchIndexV1RagIndexesIndexIdDeleteRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -62,8 +61,7 @@ export function betaRagSearchIndexesUnregister(
 
 async function $do(
   client: MistralCore,
-  request:
-    operations.UnregisterSearchIndexV1RagIndexesIndexIndexIdDeleteRequest,
+  request: operations.UnregisterSearchIndexV1RagIndexesIndexIdDeleteRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -86,7 +84,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .UnregisterSearchIndexV1RagIndexesIndexIndexIdDeleteRequest$outboundSchema
+        .UnregisterSearchIndexV1RagIndexesIndexIdDeleteRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -102,7 +100,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/rag/indexes/index/{index_id}")(pathParams);
+  const path = pathToFunc("/v1/rag/indexes/{index_id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -115,8 +113,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID:
-      "unregister_search_index_v1_rag_indexes_index__index_id__delete",
+    operationID: "unregister_search_index_v1_rag_indexes__index_id__delete",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

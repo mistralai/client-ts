@@ -25,6 +25,10 @@ export type WorkflowExecutionRequest = {
   timeoutSeconds?: number | null | undefined;
   customTracingAttributes?: { [k: string]: string } | null | undefined;
   /**
+   * If true, ignore the caller's trace context and start a new, independent trace for this execution instead of joining the caller's trace.
+   */
+  forceNewTrace?: boolean | undefined;
+  /**
    * Plugin-specific data to propagate into WorkflowContext.extensions at execution time.
    */
   extensions?: { [k: string]: any } | null | undefined;
@@ -47,6 +51,7 @@ export type WorkflowExecutionRequest$Outbound = {
   wait_for_result: boolean;
   timeout_seconds?: number | null | undefined;
   custom_tracing_attributes?: { [k: string]: string } | null | undefined;
+  force_new_trace: boolean;
   extensions?: { [k: string]: any } | null | undefined;
   task_queue?: string | null | undefined;
   deployment_name?: string | null | undefined;
@@ -63,6 +68,7 @@ export const WorkflowExecutionRequest$outboundSchema: z.ZodType<
   timeoutSeconds: z.nullable(z.number()).optional(),
   customTracingAttributes: z.nullable(z.record(z.string(), z.string()))
     .optional(),
+  forceNewTrace: z.boolean().default(false),
   extensions: z.nullable(z.record(z.string(), z.any())).optional(),
   taskQueue: z.nullable(z.string()).optional(),
   deploymentName: z.nullable(z.string()).optional(),
@@ -72,6 +78,7 @@ export const WorkflowExecutionRequest$outboundSchema: z.ZodType<
     waitForResult: "wait_for_result",
     timeoutSeconds: "timeout_seconds",
     customTracingAttributes: "custom_tracing_attributes",
+    forceNewTrace: "force_new_trace",
     taskQueue: "task_queue",
     deploymentName: "deployment_name",
   });

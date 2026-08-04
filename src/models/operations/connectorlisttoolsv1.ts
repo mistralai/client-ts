@@ -27,7 +27,6 @@ export type ConnectorListToolsV1Request = {
  * Successful Response
  */
 export type ResponseConnectorListToolsV1 =
-  | Array<components.ConnectorTool>
   | Array<components.MCPTool>
   | Array<{ [k: string]: any }>;
 
@@ -75,7 +74,6 @@ export const ResponseConnectorListToolsV1$inboundSchema: z.ZodType<
   ResponseConnectorListToolsV1,
   unknown
 > = smartUnion([
-  z.array(components.ConnectorTool$inboundSchema),
   z.array(components.MCPTool$inboundSchema),
   z.array(z.record(z.string(), z.any())),
 ]);

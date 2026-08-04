@@ -114,6 +114,10 @@ export type ListRunsV1WorkflowsRunsGetRequest = {
    * Token for the next page of results
    */
   nextPageToken?: string | null | undefined;
+  /**
+   * Filter executions by search key as repeated 'key:value' entries. Each entry matches an exact key and a similar value; multiple entries are AND'd together (max 3).
+   */
+  searchKey?: Array<string> | null | undefined;
 };
 
 export type ListRunsV1WorkflowsRunsGetResponse = {
@@ -168,6 +172,7 @@ export type ListRunsV1WorkflowsRunsGetRequest$Outbound = {
   include_internal: boolean;
   page_size: number;
   next_page_token?: string | null | undefined;
+  search_key?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -199,6 +204,7 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
   includeInternal: z.boolean().default(true),
   pageSize: z.int().default(50),
   nextPageToken: z.nullable(z.string()).optional(),
+  searchKey: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     workflowIdentifier: "workflow_identifier",
@@ -214,6 +220,7 @@ export const ListRunsV1WorkflowsRunsGetRequest$outboundSchema: z.ZodType<
     includeInternal: "include_internal",
     pageSize: "page_size",
     nextPageToken: "next_page_token",
+    searchKey: "search_key",
   });
 });
 

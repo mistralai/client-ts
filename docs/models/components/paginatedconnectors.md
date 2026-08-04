@@ -14,7 +14,7 @@ let value: PaginatedConnectors = {
         "hmph notwithstanding meaningfully oof ick ramp and humiliating",
       createdAt: new Date("2025-12-15T13:26:33.828Z"),
       modifiedAt: new Date("2025-08-29T02:54:20.865Z"),
-      ownerType: 4,
+      ownerType: "system",
       visibility: "shared_workspace",
       privateToolExecution: true,
     },

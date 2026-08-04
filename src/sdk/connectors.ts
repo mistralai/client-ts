@@ -3,17 +3,13 @@
  * @generated-id: 2dda252d574b
  */
 
-import { betaConnectorsActivateForOrganization } from "../funcs/betaConnectorsActivateForOrganization.js";
-import { betaConnectorsActivateForUser } from "../funcs/betaConnectorsActivateForUser.js";
-import { betaConnectorsActivateForWorkspace } from "../funcs/betaConnectorsActivateForWorkspace.js";
+import { betaConnectorsActivateForConsumer } from "../funcs/betaConnectorsActivateForConsumer.js";
 import { betaConnectorsCallTool } from "../funcs/betaConnectorsCallTool.js";
 import { betaConnectorsCreate } from "../funcs/betaConnectorsCreate.js";
 import { betaConnectorsCreateOrUpdateOrganizationCredentials } from "../funcs/betaConnectorsCreateOrUpdateOrganizationCredentials.js";
 import { betaConnectorsCreateOrUpdateUserCredentials } from "../funcs/betaConnectorsCreateOrUpdateUserCredentials.js";
 import { betaConnectorsCreateOrUpdateWorkspaceCredentials } from "../funcs/betaConnectorsCreateOrUpdateWorkspaceCredentials.js";
-import { betaConnectorsDeactivateForOrganization } from "../funcs/betaConnectorsDeactivateForOrganization.js";
-import { betaConnectorsDeactivateForUser } from "../funcs/betaConnectorsDeactivateForUser.js";
-import { betaConnectorsDeactivateForWorkspace } from "../funcs/betaConnectorsDeactivateForWorkspace.js";
+import { betaConnectorsDeactivateForConsumer } from "../funcs/betaConnectorsDeactivateForConsumer.js";
 import { betaConnectorsDelete } from "../funcs/betaConnectorsDelete.js";
 import { betaConnectorsDeleteAllUserCredentials } from "../funcs/betaConnectorsDeleteAllUserCredentials.js";
 import { betaConnectorsDeleteOrganizationCredentials } from "../funcs/betaConnectorsDeleteOrganizationCredentials.js";
@@ -28,6 +24,7 @@ import { betaConnectorsListTools } from "../funcs/betaConnectorsListTools.js";
 import { betaConnectorsListUserCredentials } from "../funcs/betaConnectorsListUserCredentials.js";
 import { betaConnectorsListWorkspaceCredentials } from "../funcs/betaConnectorsListWorkspaceCredentials.js";
 import { betaConnectorsShare } from "../funcs/betaConnectorsShare.js";
+import { betaConnectorsUnshare } from "../funcs/betaConnectorsUnshare.js";
 import { betaConnectorsUpdate } from "../funcs/betaConnectorsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -90,7 +87,7 @@ export class Connectors extends ClientSDK {
    * Share a private connector to the current workspace.
    *
    * @remarks
-   * Transfers ownership of a private user-owned connector to the current workspace, making it available to all workspace members. This action is irreversible: once shared, the connector belongs to the workspace and can no longer be used privately across other workspaces. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
+   * Transfers ownership of a private user-owned connector to the current workspace, making it available to all workspace members. The creator can later revert this via the unshare endpoint. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
    */
   async share(
     request: operations.ConnectorShareV1Request,
@@ -104,16 +101,16 @@ export class Connectors extends ClientSDK {
   }
 
   /**
-   * Activate a connector for an organization.
+   * Unshare a connector from the current workspace.
    *
    * @remarks
-   * Enable a connector at the organization level so all members can use it.
+   * Reverts a workspace-shared connector back to a private, creator-owned connector. Workspace-scoped connections and other members' connections are removed; the creator's own connection is preserved. Only the connector's creator can call this endpoint. Requires the ShareConnectorToWorkspace workspace permission.
    */
-  async activateForOrganization(
-    request: operations.ConnectorActivateForOrganizationV1Request,
+  async unshare(
+    request: operations.ConnectorUnshareV1Request,
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsActivateForOrganization(
+    return unwrapAsync(betaConnectorsUnshare(
       this,
       request,
       options,
@@ -121,16 +118,16 @@ export class Connectors extends ClientSDK {
   }
 
   /**
-   * Deactivate a connector for an organization.
+   * Activate a connector for the given consumer (organization, workspace, user).
    *
    * @remarks
-   * Disable a connector at the organization level.
+   * Enable a connector for the consumer.
    */
-  async deactivateForOrganization(
-    request: operations.ConnectorDeactivateForOrganizationV1Request,
+  async activateForConsumer(
+    request: operations.ConnectorActivateForConsumerV1Request,
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsDeactivateForOrganization(
+    return unwrapAsync(betaConnectorsActivateForConsumer(
       this,
       request,
       options,
@@ -138,67 +135,16 @@ export class Connectors extends ClientSDK {
   }
 
   /**
-   * Activate a connector for a workspace.
+   * Deactivate a connector for the current consumer (at organization, workspace or user level).
    *
    * @remarks
-   * Enable a connector at the workspace level so all members of the workspace can use it.
+   * Disable a connector for the calling consumer only.
    */
-  async activateForWorkspace(
-    request: operations.ConnectorActivateForWorkspaceV1Request,
+  async deactivateForConsumer(
+    request: operations.ConnectorDeactivateForConsumerV1Request,
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsActivateForWorkspace(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Deactivate a connector for a workspace.
-   *
-   * @remarks
-   * Disable a connector at the workspace level.
-   */
-  async deactivateForWorkspace(
-    request: operations.ConnectorDeactivateForWorkspaceV1Request,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsDeactivateForWorkspace(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Activate a connector for the current user.
-   *
-   * @remarks
-   * Enable a connector for the calling user only.
-   */
-  async activateForUser(
-    request: operations.ConnectorActivateForUserV1Request,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsActivateForUser(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Deactivate a connector for the current user.
-   *
-   * @remarks
-   * Disable a connector for the calling user only.
-   */
-  async deactivateForUser(
-    request: operations.ConnectorDeactivateForUserV1Request,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsDeactivateForUser(
+    return unwrapAsync(betaConnectorsDeactivateForConsumer(
       this,
       request,
       options,

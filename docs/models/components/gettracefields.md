@@ -14,6 +14,7 @@ let value: GetTraceFields = {
       supportedOperators: [
         "exists",
       ],
+      supportedAggregations: [],
     },
   ],
 };

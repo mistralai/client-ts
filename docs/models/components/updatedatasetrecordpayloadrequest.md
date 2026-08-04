@@ -7,23 +7,15 @@ import { UpdateDatasetRecordPayloadRequest } from "@mistralai/mistralai/models/c
 
 let value: UpdateDatasetRecordPayloadRequest = {
   payload: {
-    messages: [
-      {
-        "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
-      },
-      {
-        "key": "<value>",
-      },
-      {},
-    ],
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```
 
 ## Fields
 
-| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `payload`                                                                        | [components.ConversationPayload](../../models/components/conversationpayload.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `payload`                                                | Record<string, *any*>                                    | :heavy_check_mark:                                       | Caller-authored input object stored on a dataset record. |

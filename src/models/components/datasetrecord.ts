@@ -9,13 +9,9 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ConversationPayload,
-  ConversationPayload$inboundSchema,
-} from "./conversationpayload.js";
-import {
-  ConversationSource,
-  ConversationSource$inboundSchema,
-} from "./conversationsource.js";
+  DatasetRecordSource,
+  DatasetRecordSource$inboundSchema,
+} from "./datasetrecordsource.js";
 
 export type DatasetRecord = {
   id: string;
@@ -23,9 +19,12 @@ export type DatasetRecord = {
   updatedAt: Date;
   deletedAt: Date | null;
   datasetId: string;
-  payload: ConversationPayload;
+  /**
+   * Caller-authored input object stored on a dataset record.
+   */
+  payload: { [k: string]: any };
   properties: { [k: string]: any };
-  source: ConversationSource;
+  source: DatasetRecordSource;
 };
 
 /** @internal */
@@ -38,9 +37,9 @@ export const DatasetRecord$inboundSchema: z.ZodType<DatasetRecord, unknown> = z
       z.iso.datetime({ offset: true }).transform(v => new Date(v)),
     ),
     dataset_id: z.string(),
-    payload: ConversationPayload$inboundSchema,
+    payload: z.record(z.string(), z.any()),
     properties: z.record(z.string(), z.any()),
-    source: ConversationSource$inboundSchema,
+    source: DatasetRecordSource$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "created_at": "createdAt",

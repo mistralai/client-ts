@@ -4,23 +4,16 @@
  */
 
 import * as z from "zod/v4";
-import * as openEnums from "../../types/enums.js";
-import { OpenEnum } from "../../types/enums.js";
+import { ClosedEnum } from "../../types/enums.js";
 
 export const SchemaFieldIndex = {
   Ann: "ann",
   Bm25: "bm25",
   Attribute: "attribute",
 } as const;
-export type SchemaFieldIndex = OpenEnum<typeof SchemaFieldIndex>;
+export type SchemaFieldIndex = ClosedEnum<typeof SchemaFieldIndex>;
 
 /** @internal */
-export const SchemaFieldIndex$inboundSchema: z.ZodType<
-  SchemaFieldIndex,
-  unknown
-> = openEnums.inboundSchema(SchemaFieldIndex);
-/** @internal */
-export const SchemaFieldIndex$outboundSchema: z.ZodType<
-  string,
-  SchemaFieldIndex
-> = openEnums.outboundSchema(SchemaFieldIndex);
+export const SchemaFieldIndex$outboundSchema: z.ZodEnum<
+  typeof SchemaFieldIndex
+> = z.enum(SchemaFieldIndex);

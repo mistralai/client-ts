@@ -12,14 +12,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   LogicalExpression,
   LogicalExpression$inboundSchema,
-  LogicalExpression$Outbound,
-  LogicalExpression$outboundSchema,
 } from "./logicalexpression.js";
 import {
   ToolProperties,
   ToolProperties$inboundSchema,
-  ToolProperties$Outbound,
-  ToolProperties$outboundSchema,
 } from "./toolproperties.js";
 
 export type RequiresConfirmation =
@@ -58,29 +54,7 @@ export const RequiresConfirmation$inboundSchema: z.ZodType<
   ToolProperties$inboundSchema,
   z.array(z.string()),
 ]);
-/** @internal */
-export type RequiresConfirmation$Outbound =
-  | LogicalExpression$Outbound
-  | ToolProperties$Outbound
-  | Array<string>;
 
-/** @internal */
-export const RequiresConfirmation$outboundSchema: z.ZodType<
-  RequiresConfirmation$Outbound,
-  RequiresConfirmation
-> = smartUnion([
-  LogicalExpression$outboundSchema,
-  ToolProperties$outboundSchema,
-  z.array(z.string()),
-]);
-
-export function requiresConfirmationToJSON(
-  requiresConfirmation: RequiresConfirmation,
-): string {
-  return JSON.stringify(
-    RequiresConfirmation$outboundSchema.parse(requiresConfirmation),
-  );
-}
 export function requiresConfirmationFromJSON(
   jsonString: string,
 ): SafeParseResult<RequiresConfirmation, SDKValidationError> {
@@ -100,29 +74,7 @@ export const SkipConfirmation$inboundSchema: z.ZodType<
   ToolProperties$inboundSchema,
   z.array(z.string()),
 ]);
-/** @internal */
-export type SkipConfirmation$Outbound =
-  | LogicalExpression$Outbound
-  | ToolProperties$Outbound
-  | Array<string>;
 
-/** @internal */
-export const SkipConfirmation$outboundSchema: z.ZodType<
-  SkipConfirmation$Outbound,
-  SkipConfirmation
-> = smartUnion([
-  LogicalExpression$outboundSchema,
-  ToolProperties$outboundSchema,
-  z.array(z.string()),
-]);
-
-export function skipConfirmationToJSON(
-  skipConfirmation: SkipConfirmation,
-): string {
-  return JSON.stringify(
-    SkipConfirmation$outboundSchema.parse(skipConfirmation),
-  );
-}
 export function skipConfirmationFromJSON(
   jsonString: string,
 ): SafeParseResult<SkipConfirmation, SDKValidationError> {
@@ -160,59 +112,7 @@ export const ToolExecutionConfiguration$inboundSchema: z.ZodType<
     "skip_confirmation": "skipConfirmation",
   });
 });
-/** @internal */
-export type ToolExecutionConfiguration$Outbound = {
-  requires_confirmation?:
-    | LogicalExpression$Outbound
-    | ToolProperties$Outbound
-    | Array<string>
-    | null
-    | undefined;
-  skip_confirmation?:
-    | LogicalExpression$Outbound
-    | ToolProperties$Outbound
-    | Array<string>
-    | null
-    | undefined;
-  include?: Array<string> | null | undefined;
-  exclude?: Array<string> | null | undefined;
-};
 
-/** @internal */
-export const ToolExecutionConfiguration$outboundSchema: z.ZodType<
-  ToolExecutionConfiguration$Outbound,
-  ToolExecutionConfiguration
-> = z.object({
-  requiresConfirmation: z.nullable(
-    smartUnion([
-      LogicalExpression$outboundSchema,
-      ToolProperties$outboundSchema,
-      z.array(z.string()),
-    ]),
-  ).optional(),
-  skipConfirmation: z.nullable(
-    smartUnion([
-      LogicalExpression$outboundSchema,
-      ToolProperties$outboundSchema,
-      z.array(z.string()),
-    ]),
-  ).optional(),
-  include: z.nullable(z.array(z.string())).optional(),
-  exclude: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresConfirmation: "requires_confirmation",
-    skipConfirmation: "skip_confirmation",
-  });
-});
-
-export function toolExecutionConfigurationToJSON(
-  toolExecutionConfiguration: ToolExecutionConfiguration,
-): string {
-  return JSON.stringify(
-    ToolExecutionConfiguration$outboundSchema.parse(toolExecutionConfiguration),
-  );
-}
 export function toolExecutionConfigurationFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolExecutionConfiguration, SDKValidationError> {

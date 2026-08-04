@@ -10,12 +10,12 @@
 * [delete](#delete) - Delete a dataset
 * [update](#update) - Patch dataset
 * [listRecords](#listrecords) - List existing records in the dataset
-* [createRecord](#createrecord) - Add a conversation to the dataset
-* [importFromCampaign](#importfromcampaign) - Populate the dataset with a campaign
-* [importFromExplorer](#importfromexplorer) - Populate the dataset with samples from the explorer
-* [importFromFile](#importfromfile) - Populate the dataset with samples from an uploaded file
-* [importFromPlayground](#importfromplayground) - Populate the dataset with samples from the playground
-* [importFromDatasetRecords](#importfromdatasetrecords) - Populate the dataset with samples from another dataset
+* [createRecord](#createrecord) - Add a record to the dataset
+* [importFromCampaign](#importfromcampaign) - Populate the dataset with records from a campaign
+* [importFromExplorer](#importfromexplorer) - Populate the dataset with records from the explorer
+* [importFromFile](#importfromfile) - Populate the dataset with records from an uploaded file
+* [importFromPlayground](#importfromplayground) - Populate the dataset with records from playground conversations
+* [importFromDatasetRecords](#importfromdatasetrecords) - Populate the dataset with records from another dataset
 * [exportToJsonl](#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
 * [fetchTask](#fetchtask) - Get status of a dataset import task
 * [listTasks](#listtasks) - List import tasks for the given dataset
@@ -466,7 +466,7 @@ run();
 
 ## createRecord
 
-Add a conversation to the dataset
+Add a record to the dataset
 
 ### Example Usage
 
@@ -483,7 +483,7 @@ async function run() {
     datasetId: "4c54ed13-1459-44e1-8696-1a6df06f7177",
     createDatasetRecordRequest: {
       payload: {
-        messages: [
+        "messages": [
           {
             "key": "<value>",
           },
@@ -492,11 +492,6 @@ async function run() {
             "key1": "<value>",
           },
         ],
-      },
-      properties: {
-        "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
       },
     },
   });
@@ -526,7 +521,7 @@ async function run() {
     datasetId: "4c54ed13-1459-44e1-8696-1a6df06f7177",
     createDatasetRecordRequest: {
       payload: {
-        messages: [
+        "messages": [
           {
             "key": "<value>",
           },
@@ -535,11 +530,6 @@ async function run() {
             "key1": "<value>",
           },
         ],
-      },
-      properties: {
-        "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
       },
     },
   });
@@ -576,7 +566,7 @@ run();
 
 ## importFromCampaign
 
-Populate the dataset with a campaign
+Populate the dataset with records from a campaign
 
 ### Example Usage
 
@@ -656,7 +646,7 @@ run();
 
 ## importFromExplorer
 
-Populate the dataset with samples from the explorer
+Populate the dataset with records from the explorer
 
 ### Example Usage
 
@@ -744,7 +734,7 @@ run();
 
 ## importFromFile
 
-Populate the dataset with samples from an uploaded file
+Populate the dataset with records from an uploaded file
 
 ### Example Usage
 
@@ -824,7 +814,7 @@ run();
 
 ## importFromPlayground
 
-Populate the dataset with samples from the playground
+Populate the dataset with records from playground conversations
 
 ### Example Usage
 
@@ -904,7 +894,7 @@ run();
 
 ## importFromDatasetRecords
 
-Populate the dataset with samples from another dataset
+Populate the dataset with records from another dataset
 
 ### Example Usage
 

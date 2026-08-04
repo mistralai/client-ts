@@ -8,6 +8,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  OCRBlockConfidenceScores,
+  OCRBlockConfidenceScores$inboundSchema,
+} from "./ocrblockconfidencescores.js";
 
 export type OCRTextBlock = {
   topLeftX: number;
@@ -18,6 +22,10 @@ export type OCRTextBlock = {
    * Text/markdown/html content of this block
    */
   content: string;
+  /**
+   * Confidence scores for this block. Populated when confidence_scores_granularity is set to 'block'.
+   */
+  confidenceScores?: OCRBlockConfidenceScores | null | undefined;
   type: "text";
 };
 
@@ -29,6 +37,8 @@ export const OCRTextBlock$inboundSchema: z.ZodType<OCRTextBlock, unknown> = z
     bottom_right_x: z.int(),
     bottom_right_y: z.int(),
     content: z.string(),
+    confidence_scores: z.nullable(OCRBlockConfidenceScores$inboundSchema)
+      .optional(),
     type: z.literal("text"),
   }).transform((v) => {
     return remap$(v, {
@@ -36,6 +46,7 @@ export const OCRTextBlock$inboundSchema: z.ZodType<OCRTextBlock, unknown> = z
       "top_left_y": "topLeftY",
       "bottom_right_x": "bottomRightX",
       "bottom_right_y": "bottomRightY",
+      "confidence_scores": "confidenceScores",
     });
   });
 

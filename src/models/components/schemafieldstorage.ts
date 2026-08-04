@@ -4,22 +4,15 @@
  */
 
 import * as z from "zod/v4";
-import * as openEnums from "../../types/enums.js";
-import { OpenEnum } from "../../types/enums.js";
+import { ClosedEnum } from "../../types/enums.js";
 
 export const SchemaFieldStorage = {
   InMemory: "in_memory",
   OnDisk: "on_disk",
 } as const;
-export type SchemaFieldStorage = OpenEnum<typeof SchemaFieldStorage>;
+export type SchemaFieldStorage = ClosedEnum<typeof SchemaFieldStorage>;
 
 /** @internal */
-export const SchemaFieldStorage$inboundSchema: z.ZodType<
-  SchemaFieldStorage,
-  unknown
-> = openEnums.inboundSchema(SchemaFieldStorage);
-/** @internal */
-export const SchemaFieldStorage$outboundSchema: z.ZodType<
-  string,
-  SchemaFieldStorage
-> = openEnums.outboundSchema(SchemaFieldStorage);
+export const SchemaFieldStorage$outboundSchema: z.ZodEnum<
+  typeof SchemaFieldStorage
+> = z.enum(SchemaFieldStorage);

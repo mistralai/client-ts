@@ -12,6 +12,11 @@ import {
   DeploymentLocation,
   DeploymentLocation$inboundSchema,
 } from "./deploymentlocation.js";
+import { LocationType, LocationType$inboundSchema } from "./locationtype.js";
+import {
+  ManagedDeploymentResponse,
+  ManagedDeploymentResponse$inboundSchema,
+} from "./manageddeploymentresponse.js";
 
 export type DeploymentResponse = {
   /**
@@ -42,6 +47,22 @@ export type DeploymentResponse = {
    * Where the deployment is running
    */
   location?: DeploymentLocation | null | undefined;
+  /**
+   * Number of workers registered to the deployment
+   */
+  workerCount: number;
+  /**
+   * Number of workers currently live within the liveness cutoff
+   */
+  activeWorkerCount: number;
+  /**
+   * Distinct location types reported by the deployment's workers
+   */
+  locations?: Array<LocationType> | undefined;
+  /**
+   * Live managed service state for managed deployments; null for self-hosted deployments or when managed services are unavailable
+   */
+  managed?: ManagedDeploymentResponse | null | undefined;
 };
 
 /** @internal */
@@ -56,12 +77,18 @@ export const DeploymentResponse$inboundSchema: z.ZodType<
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   location: z.nullable(DeploymentLocation$inboundSchema).optional(),
+  worker_count: z.int().default(0),
+  active_worker_count: z.int().default(0),
+  locations: z.array(LocationType$inboundSchema).optional(),
+  managed: z.nullable(ManagedDeploymentResponse$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "is_active": "isActive",
     "is_hardened": "isHardened",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
+    "worker_count": "workerCount",
+    "active_worker_count": "activeWorkerCount",
   });
 });
 
