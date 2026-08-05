@@ -449,9 +449,9 @@ We have dedicated SDKs for the following providers:
 
 ### [Beta.Rag.SearchIndexes](docs/sdks/searchindexes/README.md)
 
-* [getIndexes](docs/sdks/searchindexes/README.md#getindexes) - Get Index Summaries
-* [register](docs/sdks/searchindexes/README.md#register) - Register (or re-register) a search index
-* [unregister](docs/sdks/searchindexes/README.md#unregister) - Unregister Search Index
+* [getDeploymentSummaries](docs/sdks/searchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
+* [registerDeployment](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
+* [unregisterDeployment](docs/sdks/searchindexes/README.md#unregisterdeployment) - Unregister Deployment
 * [updateIndexMetrics](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
 
 ### [Beta.Skills](docs/sdks/skills/README.md)
@@ -1192,9 +1192,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
-- [`betaRagSearchIndexesGetIndexes`](docs/sdks/searchindexes/README.md#getindexes) - Get Index Summaries
-- [`betaRagSearchIndexesRegister`](docs/sdks/searchindexes/README.md#register) - Register (or re-register) a search index
-- [`betaRagSearchIndexesUnregister`](docs/sdks/searchindexes/README.md#unregister) - Unregister Search Index
+- [`betaRagSearchIndexesGetDeploymentSummaries`](docs/sdks/searchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
+- [`betaRagSearchIndexesRegisterDeployment`](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
+- [`betaRagSearchIndexesUnregisterDeployment`](docs/sdks/searchindexes/README.md#unregisterdeployment) - Unregister Deployment
 - [`betaRagSearchIndexesUpdateIndexMetrics`](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
 - [`betaSkillsCreate`](docs/sdks/skills/README.md#create) - CreateSkill
 - [`betaSkillsCreateVersion`](docs/sdks/skills/README.md#createversion) - CreateSkillVersion
