@@ -3,20 +3,20 @@
 
 ## Supported Types
 
-### `components.UpdateIndexMetricsRequestIndexMetricsOnline`
+### `components.UpdateMetricsRequestDeploymentMetricsOnline`
 
 ```typescript
-const value: components.UpdateIndexMetricsRequestIndexMetricsOnline = {
+const value: components.UpdateMetricsRequestDeploymentMetricsOnline = {
   status: "online",
-  documentCount: 420119,
-  schemaMetrics: [],
+  documentCount: 19347,
+  indexMetrics: [],
 };
 ```
 
-### `components.UpdateIndexMetricsRequestIndexMetricsOffline`
+### `components.UpdateMetricsRequestDeploymentMetricsOffline`
 
 ```typescript
-const value: components.UpdateIndexMetricsRequestIndexMetricsOffline = {
+const value: components.UpdateMetricsRequestDeploymentMetricsOffline = {
   status: "offline",
 };
 ```
