@@ -3,9 +3,9 @@
  * @generated-id: 9a1b36425210
  */
 
-import { betaRagSearchIndexesGetIndexes } from "../funcs/betaRagSearchIndexesGetIndexes.js";
-import { betaRagSearchIndexesRegister } from "../funcs/betaRagSearchIndexesRegister.js";
-import { betaRagSearchIndexesUnregister } from "../funcs/betaRagSearchIndexesUnregister.js";
+import { betaRagSearchIndexesGetDeploymentSummaries } from "../funcs/betaRagSearchIndexesGetDeploymentSummaries.js";
+import { betaRagSearchIndexesRegisterDeployment } from "../funcs/betaRagSearchIndexesRegisterDeployment.js";
+import { betaRagSearchIndexesUnregisterDeployment } from "../funcs/betaRagSearchIndexesUnregisterDeployment.js";
 import { betaRagSearchIndexesUpdateIndexMetrics } from "../funcs/betaRagSearchIndexesUpdateIndexMetrics.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -14,15 +14,15 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class SearchIndexes extends ClientSDK {
   /**
-   * Get Index Summaries
+   * Get Deployment Summaries
    *
    * @remarks
    * Fetch all indexes available to a user
    */
-  async getIndexes(
+  async getDeploymentSummaries(
     options?: RequestOptions,
-  ): Promise<components.GetSearchIndexSummaryResponse> {
-    return unwrapAsync(betaRagSearchIndexesGetIndexes(
+  ): Promise<components.GetDeploymentSummariesResponse> {
+    return unwrapAsync(betaRagSearchIndexesGetDeploymentSummaries(
       this,
       options,
     ));
@@ -31,11 +31,11 @@ export class SearchIndexes extends ClientSDK {
   /**
    * Register (or re-register) a search index
    */
-  async register(
-    request: components.RegisterSearchIndexRequestIndex,
+  async registerDeployment(
+    request: components.RegisterDeploymentRequestDeployment,
     options?: RequestOptions,
   ): Promise<components.RegisterSearchIndexResponseIndex> {
-    return unwrapAsync(betaRagSearchIndexesRegister(
+    return unwrapAsync(betaRagSearchIndexesRegisterDeployment(
       this,
       request,
       options,
@@ -43,16 +43,17 @@ export class SearchIndexes extends ClientSDK {
   }
 
   /**
-   * Unregister Search Index
+   * Unregister Deployment
    *
    * @remarks
-   * Delete all information about an index
+   * Delete all information about a deployment
    */
-  async unregister(
-    request: operations.UnregisterSearchIndexV1RagIndexesIndexIdDeleteRequest,
+  async unregisterDeployment(
+    request:
+      operations.UnregisterDeploymentV1RagDeploymentsDeploymentIdDeleteRequest,
     options?: RequestOptions,
   ): Promise<any> {
-    return unwrapAsync(betaRagSearchIndexesUnregister(
+    return unwrapAsync(betaRagSearchIndexesUnregisterDeployment(
       this,
       request,
       options,
@@ -66,7 +67,8 @@ export class SearchIndexes extends ClientSDK {
    * Update the metrics for a given index
    */
   async updateIndexMetrics(
-    request: operations.UpdateIndexMetricsV1RagIndexesIndexIdMetricsPutRequest,
+    request:
+      operations.UpdateIndexMetricsV1RagDeploymentsDeploymentIdMetricsPutRequest,
     options?: RequestOptions,
   ): Promise<any> {
     return unwrapAsync(betaRagSearchIndexesUpdateIndexMetrics(

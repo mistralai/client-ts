@@ -4,18 +4,18 @@
 
 ### Available Operations
 
-* [getIndexes](#getindexes) - Get Index Summaries
-* [register](#register) - Register (or re-register) a search index
-* [unregister](#unregister) - Unregister Search Index
+* [getDeploymentSummaries](#getdeploymentsummaries) - Get Deployment Summaries
+* [registerDeployment](#registerdeployment) - Register (or re-register) a search index
+* [unregisterDeployment](#unregisterdeployment) - Unregister Deployment
 * [updateIndexMetrics](#updateindexmetrics) - Update Index Metrics
 
-## getIndexes
+## getDeploymentSummaries
 
 Fetch all indexes available to a user
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get_index_summaries_v1_rag_indexes_get" method="get" path="/v1/rag/indexes" -->
+<!-- UsageSnippet language="typescript" operationID="get_deployment_summaries_v1_rag_deployments_get" method="get" path="/v1/rag/deployments" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -24,7 +24,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.rag.searchIndexes.getIndexes();
+  const result = await mistral.beta.rag.searchIndexes.getDeploymentSummaries();
 
   console.log(result);
 }
@@ -38,7 +38,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaRagSearchIndexesGetIndexes } from "@mistralai/mistralai/funcs/betaRagSearchIndexesGetIndexes.js";
+import { betaRagSearchIndexesGetDeploymentSummaries } from "@mistralai/mistralai/funcs/betaRagSearchIndexesGetDeploymentSummaries.js";
 
 // Use `MistralCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -47,12 +47,12 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaRagSearchIndexesGetIndexes(mistral);
+  const res = await betaRagSearchIndexesGetDeploymentSummaries(mistral);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("betaRagSearchIndexesGetIndexes failed:", res.error);
+    console.log("betaRagSearchIndexesGetDeploymentSummaries failed:", res.error);
   }
 }
 
@@ -69,7 +69,7 @@ run();
 
 ### Response
 
-**Promise\<[components.GetSearchIndexSummaryResponse](../../models/components/getsearchindexsummaryresponse.md)\>**
+**Promise\<[components.GetDeploymentSummariesResponse](../../models/components/getdeploymentsummariesresponse.md)\>**
 
 ### Errors
 
@@ -77,13 +77,13 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
-## register
+## registerDeployment
 
 Register (or re-register) a search index
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="register_search_index_v1_rag_indexes_put" method="put" path="/v1/rag/indexes" -->
+<!-- UsageSnippet language="typescript" operationID="register_deployment_v1_rag_deployments_put" method="put" path="/v1/rag/deployments" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -92,22 +92,13 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.rag.searchIndexes.register({
+  const result = await mistral.beta.rag.searchIndexes.registerDeployment({
     name: "<value>",
-    index: {
+    deployment: {
       type: "vespa",
-      k8sCluster: "<value>",
-      k8sNamespace: "<value>",
-      vespaInstanceName: "<value>",
       vespaVersion: "<value>",
-      schemas: [
-        {
-          name: "<value>",
-          fields: [],
-          sd: "<value>",
-        },
-      ],
-      queryUrl: "https://shiny-range.com/",
+      indexes: [],
+      queryUrl: "https://joyful-granny.info",
     },
   });
 
@@ -123,7 +114,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaRagSearchIndexesRegister } from "@mistralai/mistralai/funcs/betaRagSearchIndexesRegister.js";
+import { betaRagSearchIndexesRegisterDeployment } from "@mistralai/mistralai/funcs/betaRagSearchIndexesRegisterDeployment.js";
 
 // Use `MistralCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -132,29 +123,20 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaRagSearchIndexesRegister(mistral, {
+  const res = await betaRagSearchIndexesRegisterDeployment(mistral, {
     name: "<value>",
-    index: {
+    deployment: {
       type: "vespa",
-      k8sCluster: "<value>",
-      k8sNamespace: "<value>",
-      vespaInstanceName: "<value>",
       vespaVersion: "<value>",
-      schemas: [
-        {
-          name: "<value>",
-          fields: [],
-          sd: "<value>",
-        },
-      ],
-      queryUrl: "https://shiny-range.com/",
+      indexes: [],
+      queryUrl: "https://joyful-granny.info",
     },
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("betaRagSearchIndexesRegister failed:", res.error);
+    console.log("betaRagSearchIndexesRegisterDeployment failed:", res.error);
   }
 }
 
@@ -165,7 +147,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.RegisterSearchIndexRequestIndex](../../models/components/registersearchindexrequestindex.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.RegisterDeploymentRequestDeployment](../../models/components/registerdeploymentrequestdeployment.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -181,13 +163,13 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## unregister
+## unregisterDeployment
 
-Delete all information about an index
+Delete all information about a deployment
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="unregister_search_index_v1_rag_indexes__index_id__delete" method="delete" path="/v1/rag/indexes/{index_id}" -->
+<!-- UsageSnippet language="typescript" operationID="unregister_deployment_v1_rag_deployments__deployment_id__delete" method="delete" path="/v1/rag/deployments/{deployment_id}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -196,8 +178,8 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.rag.searchIndexes.unregister({
-    indexId: "545b10f3-a041-4786-9d25-5a7b7ca281e2",
+  const result = await mistral.beta.rag.searchIndexes.unregisterDeployment({
+    deploymentId: "240a5e63-fd68-4806-8290-04cce22b4c37",
   });
 
   console.log(result);
@@ -212,7 +194,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaRagSearchIndexesUnregister } from "@mistralai/mistralai/funcs/betaRagSearchIndexesUnregister.js";
+import { betaRagSearchIndexesUnregisterDeployment } from "@mistralai/mistralai/funcs/betaRagSearchIndexesUnregisterDeployment.js";
 
 // Use `MistralCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -221,14 +203,14 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaRagSearchIndexesUnregister(mistral, {
-    indexId: "545b10f3-a041-4786-9d25-5a7b7ca281e2",
+  const res = await betaRagSearchIndexesUnregisterDeployment(mistral, {
+    deploymentId: "240a5e63-fd68-4806-8290-04cce22b4c37",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("betaRagSearchIndexesUnregister failed:", res.error);
+    console.log("betaRagSearchIndexesUnregisterDeployment failed:", res.error);
   }
 }
 
@@ -239,7 +221,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UnregisterSearchIndexV1RagIndexesIndexIdDeleteRequest](../../models/operations/unregistersearchindexv1ragindexesindexiddeleterequest.md)                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UnregisterDeploymentV1RagDeploymentsDeploymentIdDeleteRequest](../../models/operations/unregisterdeploymentv1ragdeploymentsdeploymentiddeleterequest.md)           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -261,7 +243,7 @@ Update the metrics for a given index
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update_index_metrics_v1_rag_indexes__index_id__metrics_put" method="put" path="/v1/rag/indexes/{index_id}/metrics" -->
+<!-- UsageSnippet language="typescript" operationID="update_index_metrics_v1_rag_deployments__deployment_id__metrics_put" method="put" path="/v1/rag/deployments/{deployment_id}/metrics" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -271,16 +253,10 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.rag.searchIndexes.updateIndexMetrics({
-    indexId: "8ab7ca9a-64c2-4c00-b9ba-9a6ce4268033",
+    deploymentId: "b0c2f463-8aef-437d-83ac-d4bfae874584",
     requestBody: {
-      status: "online",
-      documentCount: 951726,
-      schemaMetrics: [
-        {
-          name: "<value>",
-          documentCount: 381376,
-        },
-      ],
+      status: "offline",
+      clearMetrics: false,
     },
   });
 
@@ -306,16 +282,10 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaRagSearchIndexesUpdateIndexMetrics(mistral, {
-    indexId: "8ab7ca9a-64c2-4c00-b9ba-9a6ce4268033",
+    deploymentId: "b0c2f463-8aef-437d-83ac-d4bfae874584",
     requestBody: {
-      status: "online",
-      documentCount: 951726,
-      schemaMetrics: [
-        {
-          name: "<value>",
-          documentCount: 381376,
-        },
-      ],
+      status: "offline",
+      clearMetrics: false,
     },
   });
   if (res.ok) {
@@ -333,7 +303,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateIndexMetricsV1RagIndexesIndexIdMetricsPutRequest](../../models/operations/updateindexmetricsv1ragindexesindexidmetricsputrequest.md)                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateIndexMetricsV1RagDeploymentsDeploymentIdMetricsPutRequest](../../models/operations/updateindexmetricsv1ragdeploymentsdeploymentidmetricsputrequest.md)       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
