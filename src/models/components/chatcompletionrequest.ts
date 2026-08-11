@@ -50,6 +50,10 @@ import {
   ReasoningEffort$outboundSchema,
 } from "./reasoningeffort.js";
 import {
+  RequestedServiceTier,
+  RequestedServiceTier$outboundSchema,
+} from "./requestedservicetier.js";
+import {
   ResponseFormat,
   ResponseFormat$Outbound,
   ResponseFormat$outboundSchema,
@@ -205,6 +209,10 @@ export type ChatCompletionRequest = {
   guardrails?: Array<GuardrailConfig> | null | undefined;
   promptCacheKey?: string | null | undefined;
   /**
+   * Determines whether to serve the request using priority or standard capacity.
+   */
+  serviceTier?: RequestedServiceTier | null | undefined;
+  /**
    * Whether to inject a safety prompt before all conversations.
    */
   safePrompt?: boolean | undefined;
@@ -349,6 +357,7 @@ export type ChatCompletionRequest$Outbound = {
   prompt_mode?: string | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
   prompt_cache_key?: string | null | undefined;
+  service_tier?: string | null | undefined;
   safe_prompt?: boolean | undefined;
 };
 
@@ -402,6 +411,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   promptCacheKey: z.nullable(z.string()).optional(),
+  serviceTier: z.nullable(RequestedServiceTier$outboundSchema).optional(),
   safePrompt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -416,6 +426,7 @@ export const ChatCompletionRequest$outboundSchema: z.ZodType<
     reasoningEffort: "reasoning_effort",
     promptMode: "prompt_mode",
     promptCacheKey: "prompt_cache_key",
+    serviceTier: "service_tier",
     safePrompt: "safe_prompt",
   });
 });

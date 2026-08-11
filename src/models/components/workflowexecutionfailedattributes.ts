@@ -22,6 +22,10 @@ export type WorkflowExecutionFailedAttributes = {
    * Represents an error or exception that occurred during execution.
    */
   failure: Failure;
+  /**
+   * Workflow retry attempt number. 1 on first run and CAN; >1 on workflow-level retries.
+   */
+  attempt: number;
 };
 
 /** @internal */
@@ -31,6 +35,7 @@ export const WorkflowExecutionFailedAttributes$inboundSchema: z.ZodType<
 > = z.object({
   task_id: z.string(),
   failure: Failure$inboundSchema,
+  attempt: z.int().default(1),
 }).transform((v) => {
   return remap$(v, {
     "task_id": "taskId",

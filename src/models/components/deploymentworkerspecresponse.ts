@@ -8,6 +8,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  GitCommitMetadata,
+  GitCommitMetadata$inboundSchema,
+} from "./gitcommitmetadata.js";
 
 export type DeploymentWorkerSpecResponse = {
   githubUrl: string;
@@ -16,7 +20,11 @@ export type DeploymentWorkerSpecResponse = {
   entrypoint?: string | null | undefined;
   workingDir?: string | null | undefined;
   restartedAt?: string | null | undefined;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   commitSha?: string | null | undefined;
+  commit?: GitCommitMetadata | null | undefined;
 };
 
 /** @internal */
@@ -31,6 +39,7 @@ export const DeploymentWorkerSpecResponse$inboundSchema: z.ZodType<
   working_dir: z.nullable(z.string()).optional(),
   restarted_at: z.nullable(z.string()).optional(),
   commit_sha: z.nullable(z.string()).optional(),
+  commit: z.nullable(GitCommitMetadata$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "github_url": "githubUrl",

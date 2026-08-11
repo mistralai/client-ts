@@ -44,6 +44,7 @@ export type ExtendedOAuthServerMetadata = {
   codeChallengeMethodsSupported?: Array<string> | null | undefined;
   clientIdMetadataDocumentSupported?: boolean | null | undefined;
   xResourceUrl?: string | null | undefined;
+  xScope?: string | null | undefined;
 };
 
 /** @internal */
@@ -83,6 +84,7 @@ export type ExtendedOAuthServerMetadata$Outbound = {
   code_challenge_methods_supported?: Array<string> | null | undefined;
   client_id_metadata_document_supported?: boolean | null | undefined;
   x_resource_url?: string | null | undefined;
+  x_scope?: string | null | undefined;
 };
 
 /** @internal */
@@ -120,6 +122,7 @@ export const ExtendedOAuthServerMetadata$outboundSchema: z.ZodType<
   codeChallengeMethodsSupported: z.nullable(z.array(z.string())).optional(),
   clientIdMetadataDocumentSupported: z.nullable(z.boolean()).optional(),
   xResourceUrl: z.nullable(z.string()).optional(),
+  xScope: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     authorizationEndpoint: "authorization_endpoint",
@@ -149,6 +152,7 @@ export const ExtendedOAuthServerMetadata$outboundSchema: z.ZodType<
     codeChallengeMethodsSupported: "code_challenge_methods_supported",
     clientIdMetadataDocumentSupported: "client_id_metadata_document_supported",
     xResourceUrl: "x_resource_url",
+    xScope: "x_scope",
   });
 });
 

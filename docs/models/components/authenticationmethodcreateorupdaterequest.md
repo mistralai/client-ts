@@ -1,0 +1,21 @@
+# AuthenticationMethodCreateOrUpdateRequest
+
+## Example Usage
+
+```typescript
+import { AuthenticationMethodCreateOrUpdateRequest } from "@mistralai/mistralai/models/components";
+
+let value: AuthenticationMethodCreateOrUpdateRequest = {
+  methodType: "slack_app",
+};
+```
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `methodType`                                                                                           | *components.MethodType*                                                                                | :heavy_check_mark:                                                                                     | The type of authentication method (e.g. oauth2, bearer, none).                                         |
+| `authDirection`                                                                                        | [components.AuthDirection](../../models/components/authdirection.md)                                   | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `headers`                                                                                              | [components.ConnectorAuthenticationHeader](../../models/components/connectorauthenticationheader.md)[] | :heavy_minus_sign:                                                                                     | Set of headers to connect to the connector                                                             |
+| `oauth2MetadataSecrets`                                                                                | [components.Oauth2MetadataSecrets](../../models/components/oauth2metadatasecrets.md)                   | :heavy_minus_sign:                                                                                     | New OAuth2 client credentials (client_id and client_secret).                                           |
+| `oauth2ServerMetadata`                                                                                 | [components.ExtendedOAuthServerMetadata](../../models/components/extendedoauthservermetadata.md)       | :heavy_minus_sign:                                                                                     | New OAuth2 authorization server metadata.                                                              |

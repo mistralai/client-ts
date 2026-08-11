@@ -39,6 +39,10 @@ export type WorkflowExecutionStartedAttributesResponse = {
    * and encoding_options indicates the type of encryption applied.
    */
   input: JSONPayloadResponse;
+  /**
+   * Workflow retry attempt number. 1 on first run and CAN; >1 on workflow-level retries.
+   */
+  attempt: number;
 };
 
 /** @internal */
@@ -48,6 +52,7 @@ export const WorkflowExecutionStartedAttributesResponse$inboundSchema:
     workflow_name: z.string(),
     display_name: z.nullable(z.string()).optional(),
     input: JSONPayloadResponse$inboundSchema,
+    attempt: z.int().default(1),
   }).transform((v) => {
     return remap$(v, {
       "task_id": "taskId",
