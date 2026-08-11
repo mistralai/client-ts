@@ -21,6 +21,10 @@ export type WorkflowExecutionCanceledAttributes = {
    * Optional reason provided for the cancellation.
    */
   reason?: string | null | undefined;
+  /**
+   * Workflow retry attempt number. 1 on first run and CAN; >1 on workflow-level retries.
+   */
+  attempt: number;
 };
 
 /** @internal */
@@ -30,6 +34,7 @@ export const WorkflowExecutionCanceledAttributes$inboundSchema: z.ZodType<
 > = z.object({
   task_id: z.string(),
   reason: z.nullable(z.string()).optional(),
+  attempt: z.int().default(1),
 }).transform((v) => {
   return remap$(v, {
     "task_id": "taskId",

@@ -12,6 +12,9 @@ let value: StreamEventSsePayload = {
     eventTimestamp: 739782,
     rootWorkflowExecId: "<id>",
     parentWorkflowExecId: "<id>",
+    continuedRunId: "<id>",
+    firstExecutionRunId: "<id>",
+    scheduleId: "<id>",
     workflowExecId: "<id>",
     workflowRunId: "<id>",
     workflowName: "<value>",
@@ -27,7 +30,7 @@ let value: StreamEventSsePayload = {
     workflowName: "<value>",
     workflowExecId: "<id>",
   },
-  brokerSequence: 536602,
+  brokerSequence: 625764,
 };
 ```
 

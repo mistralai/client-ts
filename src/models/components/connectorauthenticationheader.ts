@@ -11,8 +11,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ConnectorAuthenticationHeader = {
   name: string;
-  isRequired: boolean;
-  isSecret: boolean;
+  isRequired?: boolean | undefined;
+  isSecret?: boolean | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,37 @@ export const ConnectorAuthenticationHeader$inboundSchema: z.ZodType<
     "is_secret": "isSecret",
   });
 });
+/** @internal */
+export type ConnectorAuthenticationHeader$Outbound = {
+  name: string;
+  is_required: boolean;
+  is_secret: boolean;
+};
 
+/** @internal */
+export const ConnectorAuthenticationHeader$outboundSchema: z.ZodType<
+  ConnectorAuthenticationHeader$Outbound,
+  ConnectorAuthenticationHeader
+> = z.object({
+  name: z.string(),
+  isRequired: z.boolean().default(true),
+  isSecret: z.boolean().default(true),
+}).transform((v) => {
+  return remap$(v, {
+    isRequired: "is_required",
+    isSecret: "is_secret",
+  });
+});
+
+export function connectorAuthenticationHeaderToJSON(
+  connectorAuthenticationHeader: ConnectorAuthenticationHeader,
+): string {
+  return JSON.stringify(
+    ConnectorAuthenticationHeader$outboundSchema.parse(
+      connectorAuthenticationHeader,
+    ),
+  );
+}
 export function connectorAuthenticationHeaderFromJSON(
   jsonString: string,
 ): SafeParseResult<ConnectorAuthenticationHeader, SDKValidationError> {

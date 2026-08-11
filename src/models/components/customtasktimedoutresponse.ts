@@ -38,6 +38,18 @@ export type CustomTaskTimedOutResponse = {
    */
   parentWorkflowExecId: string | null;
   /**
+   * Run ID of the execution this run continued from. Non-null for continue-as-new runs.
+   */
+  continuedRunId: string | null;
+  /**
+   * Run ID of the first execution in this workflow chain. Equals workflow_run_id on fresh starts and resets (chain anchor resets on reset); differs on CAN and Retry runs where it stays anchored to the original first run.
+   */
+  firstExecutionRunId: string | null;
+  /**
+   * Temporal schedule ID that triggered this execution, if any.
+   */
+  scheduleId: string | null;
+  /**
    * Execution ID of the workflow that emitted this event.
    */
   workflowExecId: string;
@@ -68,6 +80,9 @@ export const CustomTaskTimedOutResponse$inboundSchema: z.ZodType<
   event_timestamp: z.int(),
   root_workflow_exec_id: z.string(),
   parent_workflow_exec_id: z.nullable(z.string()),
+  continued_run_id: z.nullable(z.string()),
+  first_execution_run_id: z.nullable(z.string()),
+  schedule_id: z.nullable(z.string()),
   workflow_exec_id: z.string(),
   workflow_run_id: z.string(),
   workflow_name: z.string(),
@@ -81,6 +96,9 @@ export const CustomTaskTimedOutResponse$inboundSchema: z.ZodType<
     "event_timestamp": "eventTimestamp",
     "root_workflow_exec_id": "rootWorkflowExecId",
     "parent_workflow_exec_id": "parentWorkflowExecId",
+    "continued_run_id": "continuedRunId",
+    "first_execution_run_id": "firstExecutionRunId",
+    "schedule_id": "scheduleId",
     "workflow_exec_id": "workflowExecId",
     "workflow_run_id": "workflowRunId",
     "workflow_name": "workflowName",

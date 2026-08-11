@@ -44,3 +44,4 @@ let value: ExtendedOAuthServerMetadata = {
 | `codeChallengeMethodsSupported`                      | *string*[]                                           | :heavy_minus_sign:                                   | N/A                                                  |
 | `clientIdMetadataDocumentSupported`                  | *boolean*                                            | :heavy_minus_sign:                                   | N/A                                                  |
 | `xResourceUrl`                                       | *string*                                             | :heavy_minus_sign:                                   | N/A                                                  |
+| `xScope`                                             | *string*                                             | :heavy_minus_sign:                                   | N/A                                                  |
