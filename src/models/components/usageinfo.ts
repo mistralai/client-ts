@@ -14,6 +14,10 @@ export type UsageInfo = {
   completionTokens?: number | undefined;
   totalTokens?: number | undefined;
   promptAudioSeconds?: number | null | undefined;
+  /**
+   * The service tier at which the request was processed: standard or priority.
+   */
+  serviceTier?: string | null | undefined;
   [additionalProperties: string]: unknown;
 };
 
@@ -23,12 +27,14 @@ export const UsageInfo$inboundSchema: z.ZodType<UsageInfo, unknown> = z.object({
   completion_tokens: z.int().default(0),
   total_tokens: z.int().default(0),
   prompt_audio_seconds: z.nullable(z.int()).optional(),
+  service_tier: z.nullable(z.string()).optional(),
 }).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "prompt_tokens": "promptTokens",
     "completion_tokens": "completionTokens",
     "total_tokens": "totalTokens",
     "prompt_audio_seconds": "promptAudioSeconds",
+    "service_tier": "serviceTier",
   });
 });
 /** @internal */
@@ -37,6 +43,7 @@ export type UsageInfo$Outbound = {
   completion_tokens: number;
   total_tokens: number;
   prompt_audio_seconds?: number | null | undefined;
+  service_tier?: string | null | undefined;
   [additionalProperties: string]: unknown;
 };
 
@@ -49,6 +56,7 @@ export const UsageInfo$outboundSchema: z.ZodType<
   completionTokens: z.int().default(0),
   totalTokens: z.int().default(0),
   promptAudioSeconds: z.nullable(z.int()).optional(),
+  serviceTier: z.nullable(z.string()).optional(),
 }).catchall(z.any()).transform((v) => {
   return {
     ...remap$(v, {
@@ -56,6 +64,7 @@ export const UsageInfo$outboundSchema: z.ZodType<
       completionTokens: "completion_tokens",
       totalTokens: "total_tokens",
       promptAudioSeconds: "prompt_audio_seconds",
+      serviceTier: "service_tier",
     }),
   };
 });

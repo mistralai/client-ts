@@ -50,6 +50,10 @@ import {
   ReasoningEffort$outboundSchema,
 } from "./reasoningeffort.js";
 import {
+  RequestedServiceTier,
+  RequestedServiceTier$outboundSchema,
+} from "./requestedservicetier.js";
+import {
   ResponseFormat,
   ResponseFormat$Outbound,
   ResponseFormat$outboundSchema,
@@ -180,6 +184,10 @@ export type AgentsCompletionRequest = {
   promptMode?: MistralPromptMode | null | undefined;
   guardrails?: Array<GuardrailConfig> | null | undefined;
   promptCacheKey?: string | null | undefined;
+  /**
+   * Determines whether to serve the request using priority or standard capacity.
+   */
+  serviceTier?: RequestedServiceTier | null | undefined;
   /**
    * The ID of the agent to use for this completion.
    */
@@ -326,6 +334,7 @@ export type AgentsCompletionRequest$Outbound = {
   prompt_mode?: string | null | undefined;
   guardrails?: Array<GuardrailConfig$Outbound> | null | undefined;
   prompt_cache_key?: string | null | undefined;
+  service_tier?: string | null | undefined;
   agent_id: string;
 };
 
@@ -376,6 +385,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   promptMode: z.nullable(MistralPromptMode$outboundSchema).optional(),
   guardrails: z.nullable(z.array(GuardrailConfig$outboundSchema)).optional(),
   promptCacheKey: z.nullable(z.string()).optional(),
+  serviceTier: z.nullable(RequestedServiceTier$outboundSchema).optional(),
   agentId: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -389,6 +399,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
     reasoningEffort: "reasoning_effort",
     promptMode: "prompt_mode",
     promptCacheKey: "prompt_cache_key",
+    serviceTier: "service_tier",
     agentId: "agent_id",
   });
 });

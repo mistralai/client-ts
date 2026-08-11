@@ -6,10 +6,10 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  AuthData,
-  AuthData$Outbound,
-  AuthData$outboundSchema,
-} from "./authdata.js";
+  AuthenticationMethodCreateOrUpdateRequest,
+  AuthenticationMethodCreateOrUpdateRequest$Outbound,
+  AuthenticationMethodCreateOrUpdateRequest$outboundSchema,
+} from "./authenticationmethodcreateorupdaterequest.js";
 
 export type UpdateConnectorRequest = {
   /**
@@ -38,13 +38,12 @@ export type UpdateConnectorRequest = {
    */
   server?: string | null | undefined;
   /**
-   * New headers for your mcp connector.
+   * list of authentication methods to add to the connector or to update
    */
-  headers?: { [k: string]: any } | null | undefined;
-  /**
-   * New authentication data for your mcp connector.
-   */
-  authData?: AuthData | null | undefined;
+  authMethods?:
+    | Array<AuthenticationMethodCreateOrUpdateRequest>
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -56,8 +55,10 @@ export type UpdateConnectorRequest$Outbound = {
   system_prompt?: string | null | undefined;
   protocol: "mcp";
   server?: string | null | undefined;
-  headers?: { [k: string]: any } | null | undefined;
-  auth_data?: AuthData$Outbound | null | undefined;
+  auth_methods?:
+    | Array<AuthenticationMethodCreateOrUpdateRequest$Outbound>
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -72,13 +73,14 @@ export const UpdateConnectorRequest$outboundSchema: z.ZodType<
   systemPrompt: z.nullable(z.string()).optional(),
   protocol: z.literal("mcp").default("mcp" as const),
   server: z.nullable(z.string()).optional(),
-  headers: z.nullable(z.record(z.string(), z.any())).optional(),
-  authData: z.nullable(AuthData$outboundSchema).optional(),
+  authMethods: z.nullable(
+    z.array(AuthenticationMethodCreateOrUpdateRequest$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     iconUrl: "icon_url",
     systemPrompt: "system_prompt",
-    authData: "auth_data",
+    authMethods: "auth_methods",
   });
 });
 
