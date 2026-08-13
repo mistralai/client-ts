@@ -16,6 +16,11 @@ import {
   ExtendedOAuthServerMetadata$outboundSchema,
 } from "./extendedoauthservermetadata.js";
 import {
+  GlobalHeaderValue,
+  GlobalHeaderValue$Outbound,
+  GlobalHeaderValue$outboundSchema,
+} from "./globalheadervalue.js";
+import {
   PublicResourceVisibility,
   PublicResourceVisibility$outboundSchema,
 } from "./publicresourcevisibility.js";
@@ -68,6 +73,10 @@ export type CreateConnectorRequest = {
    */
   headers?: { [k: string]: any } | null | undefined;
   /**
+   * Optional connector-wide headers, keyed by header name, set at creation and applied to every credential. Secret values are encrypted at rest and never returned in clear.
+   */
+  globalHeaders?: { [k: string]: GlobalHeaderValue } | undefined;
+  /**
    * Optional additional authentication data for the connector.
    */
   authData?: AuthData | null | undefined;
@@ -95,6 +104,7 @@ export type CreateConnectorRequest$Outbound = {
   visibility?: string | undefined;
   server: string;
   headers?: { [k: string]: any } | null | undefined;
+  global_headers?: { [k: string]: GlobalHeaderValue$Outbound } | undefined;
   auth_data?: AuthData$Outbound | null | undefined;
   oauth2_server_metadata?:
     | ExtendedOAuthServerMetadata$Outbound
@@ -117,6 +127,8 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   visibility: PublicResourceVisibility$outboundSchema.optional(),
   server: z.string(),
   headers: z.nullable(z.record(z.string(), z.any())).optional(),
+  globalHeaders: z.record(z.string(), GlobalHeaderValue$outboundSchema)
+    .optional(),
   authData: z.nullable(AuthData$outboundSchema).optional(),
   oauth2ServerMetadata: z.nullable(ExtendedOAuthServerMetadata$outboundSchema)
     .optional(),
@@ -125,6 +137,7 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     iconUrl: "icon_url",
+    globalHeaders: "global_headers",
     authData: "auth_data",
     oauth2ServerMetadata: "oauth2_server_metadata",
     oauth2ServerMetadataUrl: "oauth2_server_metadata_url",

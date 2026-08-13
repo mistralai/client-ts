@@ -469,6 +469,8 @@ We have dedicated SDKs for the following providers:
 ### [Beta.Users](docs/sdks/users/README.md)
 
 * [getIdentity](docs/sdks/users/README.md#getidentity) - Get Identity
+* [listOrganizations](docs/sdks/users/README.md#listorganizations) - List Organizations
+* [listWorkspaces](docs/sdks/users/README.md#listworkspaces) - List Workspaces
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -517,6 +519,10 @@ We have dedicated SDKs for the following providers:
 ### [Ocr](docs/sdks/ocr/README.md)
 
 * [process](docs/sdks/ocr/README.md#process) - OCR
+
+### [Realtime.Sessions](docs/sdks/sessions/README.md)
+
+* [create](docs/sdks/sessions/README.md#create) - Create Client Session
 
 ### [Workflows](docs/sdks/workflows/README.md)
 
@@ -852,8 +858,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 145 of 244 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 59 of 244 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 146 of 247 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 59 of 247 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1206,6 +1212,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaSkillsUpdateMetadata`](docs/sdks/skills/README.md#updatemetadata) - UpdateSkill
 - [`betaSkillsUpdateVersionMetadata`](docs/sdks/skills/README.md#updateversionmetadata) - UpdateSkillVersionMetadata
 - [`betaUsersGetIdentity`](docs/sdks/users/README.md#getidentity) - Get Identity
+- [`betaUsersListOrganizations`](docs/sdks/users/README.md#listorganizations) - List Organizations
+- [`betaUsersListWorkspaces`](docs/sdks/users/README.md#listworkspaces) - List Workspaces
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications
@@ -1232,6 +1240,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`modelsUnarchive`](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
 - [`modelsUpdate`](docs/sdks/models/README.md#update) - Update Fine Tuned Model
 - [`ocrProcess`](docs/sdks/ocr/README.md#process) - OCR
+- [`realtimeSessionsCreate`](docs/sdks/sessions/README.md#create) - Create Client Session
 - [`workflowsArchiveWorkflow`](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
 - [`workflowsBulkArchiveWorkflows`](docs/sdks/workflows/README.md#bulkarchiveworkflows) - Bulk Archive Workflows
 - [`workflowsBulkUnarchiveWorkflows`](docs/sdks/workflows/README.md#bulkunarchiveworkflows) - Bulk Unarchive Workflows
