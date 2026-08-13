@@ -49,6 +49,8 @@ export type DeploymentDetailResponse = {
   updatedAt: Date;
   /**
    * Where the deployment is running
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   location?: DeploymentLocation | null | undefined;
   /**

@@ -13,6 +13,14 @@ import {
   ConnectorAuthenticationHeader$inboundSchema,
 } from "./connectorauthenticationheader.js";
 import {
+  ExtendedOAuthServerMetadata,
+  ExtendedOAuthServerMetadata$inboundSchema,
+} from "./extendedoauthservermetadata.js";
+import {
+  GlobalHeaderValue,
+  GlobalHeaderValue$inboundSchema,
+} from "./globalheadervalue.js";
+import {
   OutboundAuthenticationType,
   OutboundAuthenticationType$inboundSchema,
 } from "./outboundauthenticationtype.js";
@@ -23,7 +31,9 @@ import {
 export type PublicAuthenticationMethod = {
   methodType: OutboundAuthenticationType;
   headers?: Array<ConnectorAuthenticationHeader> | null | undefined;
+  globalHeaders?: { [k: string]: GlobalHeaderValue } | undefined;
   hasDefaultCredentials: boolean;
+  oauth2ServerMetadata?: ExtendedOAuthServerMetadata | null | undefined;
 };
 
 /** @internal */
@@ -34,11 +44,17 @@ export const PublicAuthenticationMethod$inboundSchema: z.ZodType<
   method_type: OutboundAuthenticationType$inboundSchema,
   headers: z.nullable(z.array(ConnectorAuthenticationHeader$inboundSchema))
     .optional(),
+  global_headers: z.record(z.string(), GlobalHeaderValue$inboundSchema)
+    .optional(),
   has_default_credentials: z.boolean(),
+  oauth2_server_metadata: z.nullable(ExtendedOAuthServerMetadata$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "method_type": "methodType",
+    "global_headers": "globalHeaders",
     "has_default_credentials": "hasDefaultCredentials",
+    "oauth2_server_metadata": "oauth2ServerMetadata",
   });
 });
 

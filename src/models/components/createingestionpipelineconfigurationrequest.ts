@@ -5,16 +5,26 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  IngestionPipelineTargetIndexRef,
+  IngestionPipelineTargetIndexRef$Outbound,
+  IngestionPipelineTargetIndexRef$outboundSchema,
+} from "./ingestionpipelinetargetindexref.js";
 
 export type CreateIngestionPipelineConfigurationRequest = {
   name: string;
   pipelineComposition?: { [k: string]: string } | null | undefined;
+  targetIndexes?: Array<IngestionPipelineTargetIndexRef> | null | undefined;
 };
 
 /** @internal */
 export type CreateIngestionPipelineConfigurationRequest$Outbound = {
   name: string;
   pipeline_composition?: { [k: string]: string } | null | undefined;
+  target_indexes?:
+    | Array<IngestionPipelineTargetIndexRef$Outbound>
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -26,9 +36,13 @@ export const CreateIngestionPipelineConfigurationRequest$outboundSchema:
     name: z.string(),
     pipelineComposition: z.nullable(z.record(z.string(), z.string()))
       .optional(),
+    targetIndexes: z.nullable(
+      z.array(IngestionPipelineTargetIndexRef$outboundSchema),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       pipelineComposition: "pipeline_composition",
+      targetIndexes: "target_indexes",
     });
   });
 
