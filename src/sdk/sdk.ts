@@ -16,6 +16,7 @@ import { Files } from "./files.js";
 import { Fim } from "./fim.js";
 import { Models } from "./models.js";
 import { Ocr } from "./ocr.js";
+import { Realtime } from "./realtime.js";
 import { Workflows } from "./workflows.js";
 
 export class Mistral extends ClientSDK {
@@ -32,6 +33,11 @@ export class Mistral extends ClientSDK {
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
+  }
+
+  private _realtime?: Realtime;
+  get realtime(): Realtime {
+    return (this._realtime ??= new Realtime(this._options));
   }
 
   private _files?: Files;

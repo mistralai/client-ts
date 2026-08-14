@@ -21,6 +21,11 @@ import {
   ExtendedOAuthServerMetadata$outboundSchema,
 } from "./extendedoauthservermetadata.js";
 import {
+  GlobalHeaderValue,
+  GlobalHeaderValue$Outbound,
+  GlobalHeaderValue$outboundSchema,
+} from "./globalheadervalue.js";
+import {
   InboundAuthenticationType,
   InboundAuthenticationType$outboundSchema,
 } from "./inboundauthenticationtype.js";
@@ -49,6 +54,10 @@ export type AuthenticationMethodCreateOrUpdateRequest = {
    * Set of headers to connect to the connector
    */
   headers?: Array<ConnectorAuthenticationHeader> | null | undefined;
+  /**
+   * Connector-wide headers keyed by header name, applied to every credential. Secret values are encrypted at rest and never returned in clear.
+   */
+  globalHeaders?: { [k: string]: GlobalHeaderValue } | undefined;
   /**
    * New OAuth2 client credentials (client_id and client_secret).
    */
@@ -80,6 +89,7 @@ export type AuthenticationMethodCreateOrUpdateRequest$Outbound = {
   method_type: string | string;
   auth_direction?: string | undefined;
   headers?: Array<ConnectorAuthenticationHeader$Outbound> | null | undefined;
+  global_headers?: { [k: string]: GlobalHeaderValue$Outbound } | undefined;
   oauth2_metadata_secrets?: Oauth2MetadataSecrets$Outbound | null | undefined;
   oauth2_server_metadata?:
     | ExtendedOAuthServerMetadata$Outbound
@@ -100,6 +110,8 @@ export const AuthenticationMethodCreateOrUpdateRequest$outboundSchema:
     authDirection: AuthDirection$outboundSchema.optional(),
     headers: z.nullable(z.array(ConnectorAuthenticationHeader$outboundSchema))
       .optional(),
+    globalHeaders: z.record(z.string(), GlobalHeaderValue$outboundSchema)
+      .optional(),
     oauth2MetadataSecrets: z.nullable(Oauth2MetadataSecrets$outboundSchema)
       .optional(),
     oauth2ServerMetadata: z.nullable(ExtendedOAuthServerMetadata$outboundSchema)
@@ -108,6 +120,7 @@ export const AuthenticationMethodCreateOrUpdateRequest$outboundSchema:
     return remap$(v, {
       methodType: "method_type",
       authDirection: "auth_direction",
+      globalHeaders: "global_headers",
       oauth2MetadataSecrets: "oauth2_metadata_secrets",
       oauth2ServerMetadata: "oauth2_server_metadata",
     });

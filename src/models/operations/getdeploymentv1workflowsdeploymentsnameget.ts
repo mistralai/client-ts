@@ -4,14 +4,20 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetDeploymentV1WorkflowsDeploymentsNameGetRequest = {
   name: string;
+  /**
+   * Scope serving status to this workflow
+   */
+  workflowName?: string | null | undefined;
 };
 
 /** @internal */
 export type GetDeploymentV1WorkflowsDeploymentsNameGetRequest$Outbound = {
   name: string;
+  workflow_name?: string | null | undefined;
 };
 
 /** @internal */
@@ -21,6 +27,11 @@ export const GetDeploymentV1WorkflowsDeploymentsNameGetRequest$outboundSchema:
     GetDeploymentV1WorkflowsDeploymentsNameGetRequest
   > = z.object({
     name: z.string(),
+    workflowName: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workflowName: "workflow_name",
+    });
   });
 
 export function getDeploymentV1WorkflowsDeploymentsNameGetRequestToJSON(

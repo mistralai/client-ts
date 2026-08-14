@@ -5,6 +5,14 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  OAuthMetadataSource,
+  OAuthMetadataSource$inboundSchema,
+  OAuthMetadataSource$outboundSchema,
+} from "./oauthmetadatasource.js";
 
 /**
  * Custom superset of RFC 8414 OAuth 2.0 Authorization Server Metadata.
@@ -43,10 +51,85 @@ export type ExtendedOAuthServerMetadata = {
     | undefined;
   codeChallengeMethodsSupported?: Array<string> | null | undefined;
   clientIdMetadataDocumentSupported?: boolean | null | undefined;
+  xSource?: OAuthMetadataSource | null | undefined;
   xResourceUrl?: string | null | undefined;
   xScope?: string | null | undefined;
 };
 
+/** @internal */
+export const ExtendedOAuthServerMetadata$inboundSchema: z.ZodType<
+  ExtendedOAuthServerMetadata,
+  unknown
+> = z.object({
+  issuer: z.string(),
+  authorization_endpoint: z.string(),
+  token_endpoint: z.string(),
+  registration_endpoint: z.nullable(z.string()).optional(),
+  scopes_supported: z.nullable(z.array(z.string())).optional(),
+  response_types_supported: z.array(z.string()).optional(),
+  response_modes_supported: z.nullable(z.array(z.string())).optional(),
+  grant_types_supported: z.nullable(z.array(z.string())).optional(),
+  token_endpoint_auth_methods_supported: z.nullable(z.array(z.string()))
+    .optional(),
+  token_endpoint_auth_signing_alg_values_supported: z.nullable(
+    z.array(z.string()),
+  ).optional(),
+  service_documentation: z.nullable(z.string()).optional(),
+  ui_locales_supported: z.nullable(z.array(z.string())).optional(),
+  op_policy_uri: z.nullable(z.string()).optional(),
+  op_tos_uri: z.nullable(z.string()).optional(),
+  revocation_endpoint: z.nullable(z.string()).optional(),
+  revocation_endpoint_auth_methods_supported: z.nullable(z.array(z.string()))
+    .optional(),
+  revocation_endpoint_auth_signing_alg_values_supported: z.nullable(
+    z.array(z.string()),
+  ).optional(),
+  introspection_endpoint: z.nullable(z.string()).optional(),
+  introspection_endpoint_auth_methods_supported: z.nullable(z.array(z.string()))
+    .optional(),
+  introspection_endpoint_auth_signing_alg_values_supported: z.nullable(
+    z.array(z.string()),
+  ).optional(),
+  code_challenge_methods_supported: z.nullable(z.array(z.string())).optional(),
+  client_id_metadata_document_supported: z.nullable(z.boolean()).optional(),
+  x_source: z.nullable(OAuthMetadataSource$inboundSchema).optional(),
+  x_resource_url: z.nullable(z.string()).optional(),
+  x_scope: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "authorization_endpoint": "authorizationEndpoint",
+    "token_endpoint": "tokenEndpoint",
+    "registration_endpoint": "registrationEndpoint",
+    "scopes_supported": "scopesSupported",
+    "response_types_supported": "responseTypesSupported",
+    "response_modes_supported": "responseModesSupported",
+    "grant_types_supported": "grantTypesSupported",
+    "token_endpoint_auth_methods_supported":
+      "tokenEndpointAuthMethodsSupported",
+    "token_endpoint_auth_signing_alg_values_supported":
+      "tokenEndpointAuthSigningAlgValuesSupported",
+    "service_documentation": "serviceDocumentation",
+    "ui_locales_supported": "uiLocalesSupported",
+    "op_policy_uri": "opPolicyUri",
+    "op_tos_uri": "opTosUri",
+    "revocation_endpoint": "revocationEndpoint",
+    "revocation_endpoint_auth_methods_supported":
+      "revocationEndpointAuthMethodsSupported",
+    "revocation_endpoint_auth_signing_alg_values_supported":
+      "revocationEndpointAuthSigningAlgValuesSupported",
+    "introspection_endpoint": "introspectionEndpoint",
+    "introspection_endpoint_auth_methods_supported":
+      "introspectionEndpointAuthMethodsSupported",
+    "introspection_endpoint_auth_signing_alg_values_supported":
+      "introspectionEndpointAuthSigningAlgValuesSupported",
+    "code_challenge_methods_supported": "codeChallengeMethodsSupported",
+    "client_id_metadata_document_supported":
+      "clientIdMetadataDocumentSupported",
+    "x_source": "xSource",
+    "x_resource_url": "xResourceUrl",
+    "x_scope": "xScope",
+  });
+});
 /** @internal */
 export type ExtendedOAuthServerMetadata$Outbound = {
   issuer: string;
@@ -83,6 +166,7 @@ export type ExtendedOAuthServerMetadata$Outbound = {
     | undefined;
   code_challenge_methods_supported?: Array<string> | null | undefined;
   client_id_metadata_document_supported?: boolean | null | undefined;
+  x_source?: string | null | undefined;
   x_resource_url?: string | null | undefined;
   x_scope?: string | null | undefined;
 };
@@ -121,6 +205,7 @@ export const ExtendedOAuthServerMetadata$outboundSchema: z.ZodType<
   ).optional(),
   codeChallengeMethodsSupported: z.nullable(z.array(z.string())).optional(),
   clientIdMetadataDocumentSupported: z.nullable(z.boolean()).optional(),
+  xSource: z.nullable(OAuthMetadataSource$outboundSchema).optional(),
   xResourceUrl: z.nullable(z.string()).optional(),
   xScope: z.nullable(z.string()).optional(),
 }).transform((v) => {
@@ -151,6 +236,7 @@ export const ExtendedOAuthServerMetadata$outboundSchema: z.ZodType<
       "introspection_endpoint_auth_signing_alg_values_supported",
     codeChallengeMethodsSupported: "code_challenge_methods_supported",
     clientIdMetadataDocumentSupported: "client_id_metadata_document_supported",
+    xSource: "x_source",
     xResourceUrl: "x_resource_url",
     xScope: "x_scope",
   });
@@ -163,5 +249,14 @@ export function extendedOAuthServerMetadataToJSON(
     ExtendedOAuthServerMetadata$outboundSchema.parse(
       extendedOAuthServerMetadata,
     ),
+  );
+}
+export function extendedOAuthServerMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<ExtendedOAuthServerMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ExtendedOAuthServerMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ExtendedOAuthServerMetadata' from JSON`,
   );
 }

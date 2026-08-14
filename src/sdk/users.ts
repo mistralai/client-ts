@@ -4,10 +4,13 @@
  */
 
 import { betaUsersGetIdentity } from "../funcs/betaUsersGetIdentity.js";
+import { betaUsersListOrganizations } from "../funcs/betaUsersListOrganizations.js";
+import { betaUsersListWorkspaces } from "../funcs/betaUsersListWorkspaces.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Users extends ClientSDK {
   /**
@@ -20,6 +23,55 @@ export class Users extends ClientSDK {
     return unwrapAsync(betaUsersGetIdentity(
       this,
       security,
+      options,
+    ));
+  }
+
+  /**
+   * List Organizations
+   *
+   * @remarks
+   * List every organization the authenticated user is a member of.
+   *
+   * Identity-only: the caller need not have selected an organization, so this
+   * reads only the user and never scopes by the active org.
+   */
+  async listOrganizations(
+    security: operations.UsersApiListOrganizationsSecurity,
+    request?: operations.UsersApiListOrganizationsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<
+    PageIterator<
+      operations.UsersApiListOrganizationsResponse,
+      { offset: number }
+    >
+  > {
+    return unwrapResultIterator(betaUsersListOrganizations(
+      this,
+      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List Workspaces
+   *
+   * @remarks
+   * List every workspace the authenticated user is a member of, across all
+   * their organizations, each tagged with the organization it belongs to.
+   */
+  async listWorkspaces(
+    security: operations.UsersApiListWorkspacesSecurity,
+    request?: operations.UsersApiListWorkspacesRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<
+    PageIterator<operations.UsersApiListWorkspacesResponse, { offset: number }>
+  > {
+    return unwrapResultIterator(betaUsersListWorkspaces(
+      this,
+      security,
+      request,
       options,
     ));
   }
