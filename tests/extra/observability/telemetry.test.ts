@@ -16,6 +16,7 @@ import {
 import {
   configureTelemetry,
   configureTelemetryForHook,
+  flushTelemetry,
   MISTRAL_OTLP_TRACES_ENDPOINT_ENV,
   MISTRAL_SDK_TELEMETRY_ENV,
   MISTRAL_TELEMETRY_ENDPOINT,
@@ -28,7 +29,9 @@ import { TracingHook } from "../../../src/hooks/tracing.js";
 import type { HookContext } from "../../../src/hooks/types.js";
 
 type FakeProvider = TracerProvider & {
+  forceFlushCalled: number;
   shutdownCalled: boolean;
+  forceFlush: () => void | Promise<void>;
   shutdown: () => void;
 };
 
@@ -53,15 +56,53 @@ function createSpan(): Span {
 
 function createProvider(): FakeProvider {
   const provider = {
+    forceFlushCalled: 0,
     shutdownCalled: false,
     getTracer: () => ({
       startSpan: () => createSpan(),
       startActiveSpan: () => undefined as never,
     }),
+    forceFlush() {
+      provider.forceFlushCalled += 1;
+    },
     shutdown() {
       provider.shutdownCalled = true;
     },
   } as FakeProvider;
+  return provider;
+}
+
+function createBatchingProvider(): FakeProvider & { exportedSpans: string[] } {
+  const pendingSpans: string[] = [];
+  const exportedSpans: string[] = [];
+  const tracer = {
+    startSpan(name: string) {
+      const span = createSpan();
+      let ended = false;
+      span.end = () => {
+        if (!ended) {
+          pendingSpans.push(name);
+          ended = true;
+        }
+      };
+      return span;
+    },
+    startActiveSpan: () => undefined as never,
+  } as Tracer;
+
+  const provider = {
+    forceFlushCalled: 0,
+    shutdownCalled: false,
+    exportedSpans,
+    getTracer: () => tracer,
+    forceFlush() {
+      provider.forceFlushCalled += 1;
+      exportedSpans.push(...pendingSpans.splice(0));
+    },
+    shutdown() {
+      provider.shutdownCalled = true;
+    },
+  } as FakeProvider & { exportedSpans: string[] };
   return provider;
 }
 
@@ -394,6 +435,80 @@ describe("shutdownTelemetry", () => {
     const client = createClient();
 
     await expect(shutdownTelemetry(client)).resolves.toBeUndefined();
+  });
+});
+
+describe("flushTelemetry", () => {
+  test("flushes the SDK-owned provider without shutting it down or detaching it", async () => {
+    const client = createClient();
+    const hook = getTestTracingHook(client);
+    const provider = createProvider();
+    hook.tracerProvider = provider;
+    hook._autoTelemetryProvider = provider;
+
+    await flushTelemetry(client);
+
+    expect(provider.forceFlushCalled).toBe(1);
+    expect(provider.shutdownCalled).toBe(false);
+    expect(hook._autoTelemetryProvider).toBe(provider);
+    expect(hook.tracerProvider).toBe(provider);
+  });
+
+  test("exports spans created after an earlier flush", async () => {
+    const client = createClient();
+    const hook = getTestTracingHook(client);
+    const provider = createBatchingProvider();
+    hook.tracerProvider = provider;
+    hook._autoTelemetryProvider = provider;
+    const tracer = getTelemetryTracer(client, "flush-test");
+
+    tracer.startSpan("first").end();
+    await flushTelemetry(client);
+    expect(provider.exportedSpans).toEqual(["first"]);
+
+    tracer.startSpan("second").end();
+    await flushTelemetry(client);
+
+    expect(provider.exportedSpans).toEqual(["first", "second"]);
+    expect(provider.forceFlushCalled).toBe(2);
+    expect(provider.shutdownCalled).toBe(false);
+  });
+
+  test("does not flush an application-owned custom provider", async () => {
+    const client = createClient();
+    const hook = getTestTracingHook(client);
+    const customProvider = createProvider();
+    hook.tracerProvider = customProvider;
+
+    await flushTelemetry(client);
+
+    expect(customProvider.forceFlushCalled).toBe(0);
+    expect(customProvider.shutdownCalled).toBe(false);
+    expect(hook.tracerProvider).toBe(customProvider);
+  });
+
+  test("is a no-op when no provider is configured", async () => {
+    const client = createClient();
+
+    await expect(flushTelemetry(client)).resolves.toBeUndefined();
+  });
+
+  test("propagates forceFlush rejections without detaching the provider", async () => {
+    const client = createClient();
+    const hook = getTestTracingHook(client);
+    const provider = createProvider();
+    const failure = new Error("export failed");
+    provider.forceFlush = async () => {
+      throw failure;
+    };
+    hook.tracerProvider = provider;
+    hook._autoTelemetryProvider = provider;
+
+    await expect(flushTelemetry(client)).rejects.toBe(failure);
+
+    expect(provider.shutdownCalled).toBe(false);
+    expect(hook._autoTelemetryProvider).toBe(provider);
+    expect(hook.tracerProvider).toBe(provider);
   });
 });
 

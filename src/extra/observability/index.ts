@@ -4,6 +4,7 @@ export { getRegisteredTracerProvider, registerTracerProvider } from "./provider.
 export {
   configureTelemetry,
   configureTelemetryForHook,
+  flushTelemetry,
   getTelemetryTracer,
   MISTRAL_OTLP_TRACES_ENDPOINT_ENV,
   MISTRAL_SDK_TELEMETRY_ENV,
