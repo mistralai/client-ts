@@ -154,6 +154,19 @@ export async function setTracerProvider(
 }
 
 /**
+ * Flush the SDK-owned telemetry provider attached to `client` without shutting
+ * it down or detaching it.
+ *
+ * This is a no-op when dedicated telemetry is not configured. In global/custom
+ * provider modes the application owns the provider lifecycle. Rejections from
+ * the SDK-owned provider's `forceFlush()` are propagated to the caller.
+ */
+export async function flushTelemetry(client: ClientWithHooks): Promise<void> {
+  const hook = getTracingHook(client);
+  await hook._autoTelemetryProvider?.forceFlush?.();
+}
+
+/**
  * Flush and shut down the SDK-owned telemetry provider attached to `client`.
  *
  * In dedicated mode the SDK owns a BatchSpanProcessor that buffers spans and
