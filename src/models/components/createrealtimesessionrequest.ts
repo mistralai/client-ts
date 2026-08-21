@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 /**
  * Payload used to create realtime client sessions.
@@ -11,12 +12,14 @@ import * as z from "zod/v4";
 export type CreateRealtimeSessionRequest = {
   purpose: "realtime";
   model: string;
+  ttlSeconds?: number | null | undefined;
 };
 
 /** @internal */
 export type CreateRealtimeSessionRequest$Outbound = {
   purpose: "realtime";
   model: string;
+  ttl_seconds?: number | null | undefined;
 };
 
 /** @internal */
@@ -26,6 +29,11 @@ export const CreateRealtimeSessionRequest$outboundSchema: z.ZodType<
 > = z.object({
   purpose: z.literal("realtime"),
   model: z.string(),
+  ttlSeconds: z.nullable(z.int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    ttlSeconds: "ttl_seconds",
+  });
 });
 
 export function createRealtimeSessionRequestToJSON(

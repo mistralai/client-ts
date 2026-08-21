@@ -13,6 +13,7 @@ let value: PromptsListResponse = {
         createdAt: new Date("1s"),
         updatedAt: new Date("1s"),
         latestVersion: 1,
+        versionCreatedAt: new Date("1s"),
       },
     ],
   },

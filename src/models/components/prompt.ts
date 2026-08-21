@@ -56,6 +56,11 @@ export type Prompt = {
    * Display description.
    */
   description?: string | undefined;
+  createdBy?: string | undefined;
+  /**
+   * RFC 3339 timestamp.
+   */
+  versionCreatedAt?: Date | undefined;
 };
 
 /** @internal */
@@ -74,6 +79,9 @@ export const Prompt$inboundSchema: z.ZodType<Prompt, unknown> = z.object({
   latestVersion: z.int().optional(),
   title: z.string().optional(),
   description: z.string().optional(),
+  createdBy: z.string().optional(),
+  versionCreatedAt: z.iso.datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
 });
 
 export function promptFromJSON(

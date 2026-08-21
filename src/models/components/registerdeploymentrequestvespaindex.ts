@@ -4,6 +4,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   RegisterDeploymentRequestVespaField,
   RegisterDeploymentRequestVespaField$Outbound,
@@ -14,6 +15,7 @@ export type RegisterDeploymentRequestVespaIndex = {
   name: string;
   fields: Array<RegisterDeploymentRequestVespaField>;
   sd: string;
+  embeddingDimensions?: number | null | undefined;
 };
 
 /** @internal */
@@ -21,6 +23,7 @@ export type RegisterDeploymentRequestVespaIndex$Outbound = {
   name: string;
   fields: Array<RegisterDeploymentRequestVespaField$Outbound>;
   sd: string;
+  embedding_dimensions?: number | null | undefined;
 };
 
 /** @internal */
@@ -31,6 +34,11 @@ export const RegisterDeploymentRequestVespaIndex$outboundSchema: z.ZodType<
   name: z.string(),
   fields: z.array(RegisterDeploymentRequestVespaField$outboundSchema),
   sd: z.string(),
+  embeddingDimensions: z.nullable(z.int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    embeddingDimensions: "embedding_dimensions",
+  });
 });
 
 export function registerDeploymentRequestVespaIndexToJSON(

@@ -8,7 +8,7 @@ import { TempoTraceAttribute } from "@mistralai/mistralai/models/components";
 let value: TempoTraceAttribute = {
   key: "<key>",
   value: {
-    stringValue: "<value>",
+    intValue: "<value>",
   },
 };
 ```

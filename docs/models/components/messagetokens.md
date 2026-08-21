@@ -18,5 +18,6 @@ let value: MessageTokens = {
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
 | `role`                                               | [components.Roles](../../models/components/roles.md) | :heavy_check_mark:                                   | N/A                                                  |
 | `totalTokens`                                        | *number*                                             | :heavy_minus_sign:                                   | N/A                                                  |
+| `settingsTokens`                                     | *number*                                             | :heavy_minus_sign:                                   | N/A                                                  |
 | `truncated`                                          | *boolean*                                            | :heavy_minus_sign:                                   | N/A                                                  |
 | `usageCount`                                         | *number*                                             | :heavy_minus_sign:                                   | N/A                                                  |
