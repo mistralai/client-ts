@@ -10,6 +10,7 @@ let value: Prompt = {
   createdAt: new Date("1s"),
   updatedAt: new Date("1s"),
   latestVersion: 1,
+  versionCreatedAt: new Date("1s"),
 };
 ```
 
@@ -29,3 +30,5 @@ let value: Prompt = {
 | `latestVersion`                                                                               | *number*                                                                                      | :heavy_minus_sign:                                                                            | Latest version number.                                                                        | 1                                                                                             |
 | `title`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | Display title.                                                                                |                                                                                               |
 | `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | Display description.                                                                          |                                                                                               |
+| `createdBy`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
+| `versionCreatedAt`                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | RFC 3339 timestamp.                                                                           | **Example 1:** 1s<br/>**Example 2:** 1.000340012s                                             |

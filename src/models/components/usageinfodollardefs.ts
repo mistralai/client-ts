@@ -25,6 +25,7 @@ export type UsageInfoDollarDefs = {
   requestCount?: number | null | undefined;
   promptTokensDetails?: PromptTokensDetails | null | undefined;
   completionTokensDetails?: CompletionTokensDetails | null | undefined;
+  serviceTier?: string | null | undefined;
   promptTokenDetails?: PromptTokensDetails | null | undefined;
   numCachedTokens?: number | null | undefined;
 };
@@ -43,6 +44,7 @@ export const UsageInfoDollarDefs$inboundSchema: z.ZodType<
     .optional(),
   completion_tokens_details: z.nullable(CompletionTokensDetails$inboundSchema)
     .optional(),
+  service_tier: z.nullable(z.string()).optional(),
   prompt_token_details: z.nullable(PromptTokensDetails$inboundSchema)
     .optional(),
   num_cached_tokens: z.nullable(z.int()).optional(),
@@ -55,6 +57,7 @@ export const UsageInfoDollarDefs$inboundSchema: z.ZodType<
     "request_count": "requestCount",
     "prompt_tokens_details": "promptTokensDetails",
     "completion_tokens_details": "completionTokensDetails",
+    "service_tier": "serviceTier",
     "prompt_token_details": "promptTokenDetails",
     "num_cached_tokens": "numCachedTokens",
   });

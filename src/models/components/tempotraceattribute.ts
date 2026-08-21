@@ -17,6 +17,10 @@ import {
   TempoTraceAttributeBoolValue$inboundSchema,
 } from "./tempotraceattributeboolvalue.js";
 import {
+  TempoTraceAttributeDoubleValue,
+  TempoTraceAttributeDoubleValue$inboundSchema,
+} from "./tempotraceattributedoublevalue.js";
+import {
   TempoTraceAttributeIntValue,
   TempoTraceAttributeIntValue$inboundSchema,
 } from "./tempotraceattributeintvalue.js";
@@ -31,6 +35,7 @@ import {
 export type TempoTraceAttributeValue =
   | TempoTraceAttributeStringValue
   | TempoTraceAttributeIntValue
+  | TempoTraceAttributeDoubleValue
   | TempoTraceAttributeBoolValue
   | TempoTraceAttributeArrayValue;
 
@@ -45,6 +50,7 @@ export type TempoTraceAttribute = {
   value:
     | TempoTraceAttributeStringValue
     | TempoTraceAttributeIntValue
+    | TempoTraceAttributeDoubleValue
     | TempoTraceAttributeBoolValue
     | TempoTraceAttributeArrayValue;
 };
@@ -56,6 +62,7 @@ export const TempoTraceAttributeValue$inboundSchema: z.ZodType<
 > = smartUnion([
   TempoTraceAttributeStringValue$inboundSchema,
   TempoTraceAttributeIntValue$inboundSchema,
+  TempoTraceAttributeDoubleValue$inboundSchema,
   TempoTraceAttributeBoolValue$inboundSchema,
   TempoTraceAttributeArrayValue$inboundSchema,
 ]);
@@ -79,6 +86,7 @@ export const TempoTraceAttribute$inboundSchema: z.ZodType<
   value: smartUnion([
     TempoTraceAttributeStringValue$inboundSchema,
     TempoTraceAttributeIntValue$inboundSchema,
+    TempoTraceAttributeDoubleValue$inboundSchema,
     TempoTraceAttributeBoolValue$inboundSchema,
     TempoTraceAttributeArrayValue$inboundSchema,
   ]),

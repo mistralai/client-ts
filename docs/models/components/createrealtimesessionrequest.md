@@ -19,3 +19,4 @@ let value: CreateRealtimeSessionRequest = {
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `purpose`          | *"realtime"*       | :heavy_check_mark: | N/A                |
 | `model`            | *string*           | :heavy_check_mark: | N/A                |
+| `ttlSeconds`       | *number*           | :heavy_minus_sign: | N/A                |

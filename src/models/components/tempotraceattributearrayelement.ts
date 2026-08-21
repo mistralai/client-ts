@@ -18,6 +18,10 @@ export type TempoTraceAttributeArrayElement = {
    */
   intValue?: string | null | undefined;
   /**
+   * A floating point element in the array
+   */
+  doubleValue?: number | null | undefined;
+  /**
    * A boolean element in the array
    */
   boolValue?: boolean | null | undefined;
@@ -30,6 +34,7 @@ export const TempoTraceAttributeArrayElement$inboundSchema: z.ZodType<
 > = z.object({
   stringValue: z.nullable(z.string()).optional(),
   intValue: z.nullable(z.string()).optional(),
+  doubleValue: z.nullable(z.number()).optional(),
   boolValue: z.nullable(z.boolean()).optional(),
 });
 

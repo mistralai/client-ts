@@ -16,6 +16,7 @@ import { Roles, Roles$inboundSchema } from "./roles.js";
 export type MessageTokens = {
   role: Roles;
   totalTokens?: number | null | undefined;
+  settingsTokens?: number | null | undefined;
   truncated: boolean;
   usageCount: number;
 };
@@ -25,11 +26,13 @@ export const MessageTokens$inboundSchema: z.ZodType<MessageTokens, unknown> = z
   .object({
     role: Roles$inboundSchema,
     total_tokens: z.nullable(z.int()).optional(),
+    settings_tokens: z.nullable(z.int()).optional(),
     truncated: z.boolean().default(false),
     usage_count: z.int().default(1),
   }).transform((v) => {
     return remap$(v, {
       "total_tokens": "totalTokens",
+      "settings_tokens": "settingsTokens",
       "usage_count": "usageCount",
     });
   });
