@@ -504,6 +504,7 @@ export * from "./tempotraceattributearraycontainer.js";
 export * from "./tempotraceattributearrayelement.js";
 export * from "./tempotraceattributearrayvalue.js";
 export * from "./tempotraceattributeboolvalue.js";
+export * from "./tempotraceattributedoublevalue.js";
 export * from "./tempotraceattributeintvalue.js";
 export * from "./tempotraceattributestringvalue.js";
 export * from "./tempotracebatch.js";

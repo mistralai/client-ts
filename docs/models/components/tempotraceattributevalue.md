@@ -21,6 +21,14 @@ const value: components.TempoTraceAttributeIntValue = {
 };
 ```
 
+### `components.TempoTraceAttributeDoubleValue`
+
+```typescript
+const value: components.TempoTraceAttributeDoubleValue = {
+  doubleValue: 3941.54,
+};
+```
+
 ### `components.TempoTraceAttributeBoolValue`
 
 ```typescript
