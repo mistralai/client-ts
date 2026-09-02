@@ -9,14 +9,14 @@ import { RetryConfig } from "./retries.js";
 import { Params, pathToFunc } from "./url.js";
 
 /**
- * EU Production server
+ * Global Production server
  */
-export const ServerEu = "eu";
+export const ServerGlobal = "global";
 /**
  * Contains the list of servers available to the SDK
  */
 export const ServerList = {
-  [ServerEu]: "https://api.mistral.ai",
+  [ServerGlobal]: "https://api.mistral.ai",
 } as const;
 
 export type SDKOptions = {
@@ -49,7 +49,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
   const params: Params = {};
 
   if (!serverURL) {
-    const server = options.server ?? ServerEu;
+    const server = options.server ?? ServerGlobal;
     serverURL = ServerList[server] || "";
   }
 
@@ -60,8 +60,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0.0",
-  sdkVersion: "2.0.0",
+  sdkVersion: "2.0.1",
   genVersion: "2.884.13",
   userAgent:
-    "speakeasy-sdk/typescript 2.0.0 2.884.13 1.0.0 @mistralai/mistralai-gcp",
+    "speakeasy-sdk/typescript 2.0.1 2.884.13 1.0.0 @mistralai/mistralai-gcp",
 } as const;
