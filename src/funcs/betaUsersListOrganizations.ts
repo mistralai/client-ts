@@ -4,7 +4,6 @@
  */
 
 import { MistralCore } from "../core.js";
-import { dlv } from "../lib/dlv.js";
 import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
@@ -224,7 +223,7 @@ async function $do(
     if (!responseData) {
       return { next: () => null };
     }
-    const results = dlv(responseData, "organizations");
+    const results = (responseData as { organizations: unknown }).organizations;
     if (!Array.isArray(results) || !results.length) {
       return { next: () => null };
     }

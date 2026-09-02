@@ -74,7 +74,8 @@ export const TranscriptionStreamEvents$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   event: TranscriptionStreamEventTypes$inboundSchema,
-  data: z.string().transform((v, ctx) => {
+  data: z.unknown().transform((v, ctx) => {
+    if (typeof v !== "string") return v;
     try {
       return JSON.parse(v);
     } catch (err) {

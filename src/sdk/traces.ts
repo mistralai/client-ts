@@ -4,18 +4,114 @@
  */
 
 import { betaObservabilityTracesAggregate } from "../funcs/betaObservabilityTracesAggregate.js";
+import { betaObservabilityTracesCreatePipelineConfigV1ObservabilityPipelineConfigsPost } from "../funcs/betaObservabilityTracesCreatePipelineConfigV1ObservabilityPipelineConfigsPost.js";
+import {
+  betaObservabilityTracesDeletePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdDelete,
+} from "../funcs/betaObservabilityTracesDeletePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdDelete.js";
 import { betaObservabilityTracesFetchOptions } from "../funcs/betaObservabilityTracesFetchOptions.js";
+import {
+  betaObservabilityTracesGetPipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdGet,
+} from "../funcs/betaObservabilityTracesGetPipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdGet.js";
 import { betaObservabilityTracesGetSpanById } from "../funcs/betaObservabilityTracesGetSpanById.js";
 import { betaObservabilityTracesGetTraceById } from "../funcs/betaObservabilityTracesGetTraceById.js";
 import { betaObservabilityTracesGetTraceFields } from "../funcs/betaObservabilityTracesGetTraceFields.js";
 import { betaObservabilityTracesGetTraceSpans } from "../funcs/betaObservabilityTracesGetTraceSpans.js";
+import { betaObservabilityTracesListPipelineConfigsV1ObservabilityPipelineConfigsGet } from "../funcs/betaObservabilityTracesListPipelineConfigsV1ObservabilityPipelineConfigsGet.js";
 import { betaObservabilityTracesSearch } from "../funcs/betaObservabilityTracesSearch.js";
+import {
+  betaObservabilityTracesUpdatePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdPut,
+} from "../funcs/betaObservabilityTracesUpdatePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdPut.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Traces extends ClientSDK {
+  /**
+   * Create a worker pipeline configuration
+   */
+  async createPipelineConfigV1ObservabilityPipelineConfigsPost(
+    request: components.CreatePipelineConfigRequest,
+    options?: RequestOptions,
+  ): Promise<components.PipelineConfig> {
+    return unwrapAsync(
+      betaObservabilityTracesCreatePipelineConfigV1ObservabilityPipelineConfigsPost(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * List worker pipeline configurations
+   */
+  async listPipelineConfigsV1ObservabilityPipelineConfigsGet(
+    request?:
+      | operations.ListPipelineConfigsV1ObservabilityPipelineConfigsGetRequest
+      | undefined,
+    options?: RequestOptions,
+  ): Promise<components.PipelineConfigsResponse> {
+    return unwrapAsync(
+      betaObservabilityTracesListPipelineConfigsV1ObservabilityPipelineConfigsGet(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Get a worker pipeline configuration
+   */
+  async getPipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdGet(
+    request:
+      operations.GetPipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.PipelineConfig> {
+    return unwrapAsync(
+      betaObservabilityTracesGetPipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdGet(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Replace a worker pipeline configuration
+   */
+  async updatePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdPut(
+    request:
+      operations.UpdatePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdPutRequest,
+    options?: RequestOptions,
+  ): Promise<components.PipelineConfig> {
+    return unwrapAsync(
+      betaObservabilityTracesUpdatePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdPut(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
+  /**
+   * Delete a worker pipeline configuration
+   */
+  async deletePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdDelete(
+    request:
+      operations.DeletePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(
+      betaObservabilityTracesDeletePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdDelete(
+        this,
+        request,
+        options,
+      ),
+    );
+  }
+
   /**
    * Search traces
    */

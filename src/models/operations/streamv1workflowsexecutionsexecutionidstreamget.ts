@@ -103,8 +103,9 @@ export const StreamV1WorkflowsExecutionsExecutionIdStreamGetResponseBody$inbound
     unknown
   > = z.object({
     event: z.string().optional(),
-    data: z.string().optional().transform((v, ctx) => {
+    data: z.unknown().optional().transform((v, ctx) => {
       if (v === undefined) return undefined;
+      if (typeof v !== "string") return v;
       try {
         return JSON.parse(v);
       } catch (err) {

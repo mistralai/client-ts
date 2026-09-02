@@ -4,7 +4,6 @@
  */
 
 import { MistralCore } from "../core.js";
-import { dlv } from "../lib/dlv.js";
 import {
   encodeFormQuery,
   encodeJSONQuery,
@@ -227,14 +226,15 @@ async function $do(
     >;
     "~next"?: { cursor: string };
   } => {
-    const nextCursor = dlv(responseData, "next_page_token");
+    const nextCursor =
+      (responseData as { next_page_token?: unknown | null }).next_page_token;
     if (typeof nextCursor !== "string") {
       return { next: () => null };
     }
     if (nextCursor.trim() === "") {
       return { next: () => null };
     }
-    const results = dlv(responseData, "data");
+    const results = (responseData as { data: unknown }).data;
     if (!Array.isArray(results) || !results.length) {
       return { next: () => null };
     }

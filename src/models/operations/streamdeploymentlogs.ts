@@ -123,8 +123,9 @@ export const StreamDeploymentLogsResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   event: StreamDeploymentLogsEvent$inboundSchema.optional(),
   id: z.string().optional(),
-  data: z.string().optional().transform((v, ctx) => {
+  data: z.unknown().optional().transform((v, ctx) => {
     if (v === undefined) return undefined;
+    if (typeof v !== "string") return v;
     try {
       return JSON.parse(v);
     } catch (err) {

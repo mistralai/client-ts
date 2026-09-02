@@ -54,6 +54,8 @@ export const ObservabilityErrorCode = {
   TemplateError: "TEMPLATE_ERROR",
   TemplateSyntaxError: "TEMPLATE_SYNTAX_ERROR",
   ProjectNameAlreadyExists: "PROJECT_NAME_ALREADY_EXISTS",
+  PipelineConfigNotFound: "PIPELINE_CONFIG_NOT_FOUND",
+  PipelineConfigAlreadyExists: "PIPELINE_CONFIG_ALREADY_EXISTS",
   EvaluationNameAlreadyExists: "EVALUATION_NAME_ALREADY_EXISTS",
   OptimizationTrialKeyAlreadyExists: "OPTIMIZATION_TRIAL_KEY_ALREADY_EXISTS",
   TracesFilterQueryParseError: "TRACES_FILTER_QUERY_PARSE_ERROR",
