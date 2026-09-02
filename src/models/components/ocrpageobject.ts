@@ -6,12 +6,37 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  OCRAsideTextBlock,
+  OCRAsideTextBlock$inboundSchema,
+} from "./ocrasidetextblock.js";
+import {
+  OCRCaptionBlock,
+  OCRCaptionBlock$inboundSchema,
+} from "./ocrcaptionblock.js";
+import { OCRCodeBlock, OCRCodeBlock$inboundSchema } from "./ocrcodeblock.js";
+import {
+  OCREquationBlock,
+  OCREquationBlock$inboundSchema,
+} from "./ocrequationblock.js";
+import {
+  OCRFooterBlock,
+  OCRFooterBlock$inboundSchema,
+} from "./ocrfooterblock.js";
+import {
+  OCRHeaderBlock,
+  OCRHeaderBlock$inboundSchema,
+} from "./ocrheaderblock.js";
+import { OCRImageBlock, OCRImageBlock$inboundSchema } from "./ocrimageblock.js";
 import {
   OCRImageObject,
   OCRImageObject$inboundSchema,
 } from "./ocrimageobject.js";
+import { OCRListBlock, OCRListBlock$inboundSchema } from "./ocrlistblock.js";
 import {
   OCRPageConfidenceScores,
   OCRPageConfidenceScores$inboundSchema,
@@ -21,9 +46,36 @@ import {
   OCRPageDimensions$inboundSchema,
 } from "./ocrpagedimensions.js";
 import {
+  OCRReferencesBlock,
+  OCRReferencesBlock$inboundSchema,
+} from "./ocrreferencesblock.js";
+import {
+  OCRSignatureBlock,
+  OCRSignatureBlock$inboundSchema,
+} from "./ocrsignatureblock.js";
+import { OCRTableBlock, OCRTableBlock$inboundSchema } from "./ocrtableblock.js";
+import {
   OCRTableObject,
   OCRTableObject$inboundSchema,
 } from "./ocrtableobject.js";
+import { OCRTextBlock, OCRTextBlock$inboundSchema } from "./ocrtextblock.js";
+import { OCRTitleBlock, OCRTitleBlock$inboundSchema } from "./ocrtitleblock.js";
+
+export type Block =
+  | OCRAsideTextBlock
+  | OCRCaptionBlock
+  | OCRCodeBlock
+  | OCREquationBlock
+  | OCRFooterBlock
+  | OCRHeaderBlock
+  | OCRImageBlock
+  | OCRListBlock
+  | OCRReferencesBlock
+  | OCRSignatureBlock
+  | OCRTableBlock
+  | OCRTextBlock
+  | OCRTitleBlock
+  | discriminatedUnionTypes.Unknown<"type">;
 
 export type OCRPageObject = {
   /**
@@ -62,7 +114,57 @@ export type OCRPageObject = {
    * Confidence scores for the OCR page (populated when confidence_scores_granularity is set)
    */
   confidenceScores?: OCRPageConfidenceScores | null | undefined;
+  /**
+   * Paragraph-level bounding boxes for all content blocks in reading order (populated when include_blocks is True)
+   */
+  blocks?:
+    | Array<
+      | OCRAsideTextBlock
+      | OCRCaptionBlock
+      | OCRCodeBlock
+      | OCREquationBlock
+      | OCRFooterBlock
+      | OCRHeaderBlock
+      | OCRImageBlock
+      | OCRListBlock
+      | OCRReferencesBlock
+      | OCRSignatureBlock
+      | OCRTableBlock
+      | OCRTextBlock
+      | OCRTitleBlock
+      | discriminatedUnionTypes.Unknown<"type">
+    >
+    | null
+    | undefined;
 };
+
+/** @internal */
+export const Block$inboundSchema: z.ZodType<Block, unknown> =
+  discriminatedUnion("type", {
+    aside_text: OCRAsideTextBlock$inboundSchema,
+    caption: OCRCaptionBlock$inboundSchema,
+    code: OCRCodeBlock$inboundSchema,
+    equation: OCREquationBlock$inboundSchema,
+    footer: OCRFooterBlock$inboundSchema,
+    header: OCRHeaderBlock$inboundSchema,
+    image: OCRImageBlock$inboundSchema,
+    list: OCRListBlock$inboundSchema,
+    references: OCRReferencesBlock$inboundSchema,
+    signature: OCRSignatureBlock$inboundSchema,
+    table: OCRTableBlock$inboundSchema,
+    text: OCRTextBlock$inboundSchema,
+    title: OCRTitleBlock$inboundSchema,
+  });
+
+export function blockFromJSON(
+  jsonString: string,
+): SafeParseResult<Block, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Block$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Block' from JSON`,
+  );
+}
 
 /** @internal */
 export const OCRPageObject$inboundSchema: z.ZodType<OCRPageObject, unknown> = z
@@ -77,6 +179,21 @@ export const OCRPageObject$inboundSchema: z.ZodType<OCRPageObject, unknown> = z
     dimensions: z.nullable(OCRPageDimensions$inboundSchema),
     confidence_scores: z.nullable(OCRPageConfidenceScores$inboundSchema)
       .optional(),
+    blocks: z.nullable(z.array(discriminatedUnion("type", {
+      aside_text: OCRAsideTextBlock$inboundSchema,
+      caption: OCRCaptionBlock$inboundSchema,
+      code: OCRCodeBlock$inboundSchema,
+      equation: OCREquationBlock$inboundSchema,
+      footer: OCRFooterBlock$inboundSchema,
+      header: OCRHeaderBlock$inboundSchema,
+      image: OCRImageBlock$inboundSchema,
+      list: OCRListBlock$inboundSchema,
+      references: OCRReferencesBlock$inboundSchema,
+      signature: OCRSignatureBlock$inboundSchema,
+      table: OCRTableBlock$inboundSchema,
+      text: OCRTextBlock$inboundSchema,
+      title: OCRTitleBlock$inboundSchema,
+    }))).optional(),
   }).transform((v) => {
     return remap$(v, {
       "confidence_scores": "confidenceScores",
