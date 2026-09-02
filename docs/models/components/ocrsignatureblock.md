@@ -1,0 +1,30 @@
+# OCRSignatureBlock
+
+Signature region. ``content`` is the transcribed name when legible, else ``""``.
+
+## Example Usage
+
+```typescript
+import { OCRSignatureBlock } from "@mistralai/mistralai-azure/models/components";
+
+let value: OCRSignatureBlock = {
+  topLeftX: 857536,
+  topLeftY: 241465,
+  bottomRightX: 411537,
+  bottomRightY: 539511,
+  content: "<value>",
+  type: "signature",
+};
+```
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `topLeftX`                                                                                        | *number*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `topLeftY`                                                                                        | *number*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `bottomRightX`                                                                                    | *number*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `bottomRightY`                                                                                    | *number*                                                                                          | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `content`                                                                                         | *string*                                                                                          | :heavy_check_mark:                                                                                | Text/markdown/html content of this block                                                          |
+| `confidenceScores`                                                                                | [components.OCRBlockConfidenceScores](../../models/components/ocrblockconfidencescores.md)        | :heavy_minus_sign:                                                                                | Confidence scores for this block. Populated when confidence_scores_granularity is set to 'block'. |
+| `type`                                                                                            | *"signature"*                                                                                     | :heavy_check_mark:                                                                                | N/A                                                                                               |
