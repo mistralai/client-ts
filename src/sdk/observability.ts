@@ -35,14 +35,14 @@ export class Observability extends ClientSDK {
     return (this._datasets ??= new Datasets(this._options));
   }
 
-  private _logs?: Logs;
-  get logs(): Logs {
-    return (this._logs ??= new Logs(this._options));
-  }
-
   private _traces?: Traces;
   get traces(): Traces {
     return (this._traces ??= new Traces(this._options));
+  }
+
+  private _logs?: Logs;
+  get logs(): Logs {
+    return (this._logs ??= new Logs(this._options));
   }
 
   private _spans?: Spans;
