@@ -1,6 +1,6 @@
 {
   "name": "@mistralai/mistralai-gcp",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "Mistral AI",
   "description": "TypeScript client library for Mistral AI on Google Cloud",
   "license": "Apache-2.0",
@@ -46,7 +46,7 @@
     "directory": "packages/mistralai-gcp"
   },
   "scripts": {
-    "lint": "oxlint --max-warnings=0 --deny-warnings src/**/*.ts src/**/*.tsx",
+    "lint": "oxlint --max-warnings=0 --deny-warnings --no-error-on-unmatched-pattern src",
     "build": "tsgo",
     "prepublishOnly": "npm run build"
   },

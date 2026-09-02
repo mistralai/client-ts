@@ -23,7 +23,7 @@ export type ToolChoice = {
 
 /** @internal */
 export type ToolChoice$Outbound = {
-  type?: string | undefined;
+  type: string;
   function: FunctionName$Outbound;
 };
 
@@ -32,7 +32,7 @@ export const ToolChoice$outboundSchema: z.ZodType<
   ToolChoice$Outbound,
   ToolChoice
 > = z.object({
-  type: z.string().optional(),
+  type: z.string().default("function"),
   function: FunctionName$outboundSchema,
 });
 
