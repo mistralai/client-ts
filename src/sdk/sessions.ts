@@ -12,6 +12,9 @@ import { unwrapAsync } from "../types/fp.js";
 export class Sessions extends ClientSDK {
   /**
    * Create Client Session
+   *
+   * @remarks
+   * Create a client session. Requires the `create_client_session` permission.
    */
   async create(
     request: operations.Body,

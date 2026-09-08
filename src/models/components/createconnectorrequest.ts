@@ -11,6 +11,11 @@ import {
   AuthData$outboundSchema,
 } from "./authdata.js";
 import {
+  BearerAuthMethod,
+  BearerAuthMethod$Outbound,
+  BearerAuthMethod$outboundSchema,
+} from "./bearerauthmethod.js";
+import {
   ExtendedOAuthServerMetadata,
   ExtendedOAuthServerMetadata$Outbound,
   ExtendedOAuthServerMetadata$outboundSchema,
@@ -21,55 +26,28 @@ import {
   GlobalHeaderValue$outboundSchema,
 } from "./globalheadervalue.js";
 import {
+  NoneAuthMethod,
+  NoneAuthMethod$Outbound,
+  NoneAuthMethod$outboundSchema,
+} from "./noneauthmethod.js";
+import {
+  OAuth2AuthMethod,
+  OAuth2AuthMethod$Outbound,
+  OAuth2AuthMethod$outboundSchema,
+} from "./oauth2authmethod.js";
+import {
   PublicResourceVisibility,
   PublicResourceVisibility$outboundSchema,
 } from "./publicresourcevisibility.js";
 
-/**
- * Public create schema for MCP connectors.
- *
- * @remarks
- *
- * Standalone model that excludes internal-only fields (``hosted_internally``,
- * ``mistral_integration``, ``private_tool_execution``, ``auth_scheme``, ``locale``,
- * ``github_app_data``) and restricts visibility to :class:`PublicResourceVisibility`
- * (no ``shared_global``).
- */
+export type CreateConnectorRequestAuthMethod =
+  | BearerAuthMethod
+  | NoneAuthMethod
+  | (OAuth2AuthMethod & { methodType: "oauth2" });
+
 export type CreateConnectorRequest = {
   /**
-   * Protocol of the connector. Only 'mcp' is supported on the public endpoint; creating HTTP connectors here is explicitly refused.
-   */
-  protocol?: "mcp" | undefined;
-  /**
-   * The name of the connector. Should be 64 char length maximum, alphanumeric, only underscores/dashes.
-   */
-  name: string;
-  /**
-   * Optional human-readable title for the connector.
-   */
-  title?: string | null | undefined;
-  /**
-   * The description of the connector.
-   */
-  description: string;
-  /**
-   * The optional url of the icon you want to associate to the connector.
-   */
-  iconUrl?: string | null | undefined;
-  /**
-   * Visibility options available to public API callers.
-   *
-   * @remarks
-   *
-   * Excludes ``shared_global`` which is reserved for system-owned connectors.
-   */
-  visibility?: PublicResourceVisibility | undefined;
-  /**
-   * The url of the MCP server.
-   */
-  server: string;
-  /**
-   * Optional organization-level headers to be sent with the request to the mcp server.
+   * Optional scoped credentials to be sent with connector requests.
    */
   headers?: { [k: string]: any } | null | undefined;
   /**
@@ -89,20 +67,82 @@ export type CreateConnectorRequest = {
    */
   oauth2ServerMetadataUrl?: string | null | undefined;
   /**
+   * The name of the connector. Should be 64 char length maximum, alphanumeric, only underscores/dashes.
+   */
+  name: string;
+  /**
+   * Optional human-readable title for the connector.
+   */
+  title?: string | null | undefined;
+  /**
+   * The description of the connector.
+   */
+  description: string;
+  /**
+   * The optional url of the icon you want to associate to the connector.
+   */
+  iconUrl?: string | null | undefined;
+  /**
+   * The URL of the connector server.
+   */
+  server: string;
+  /**
+   * Connector visibility options.
+   */
+  visibility?: PublicResourceVisibility | undefined;
+  /**
+   * Authentication methods supported by the connector.
+   */
+  authMethods?:
+    | Array<
+      | BearerAuthMethod
+      | NoneAuthMethod
+      | (OAuth2AuthMethod & { methodType: "oauth2" })
+    >
+    | null
+    | undefined;
+  /**
    * Optional system prompt for the connector.
    */
   systemPrompt?: string | null | undefined;
+  /**
+   * Protocol of the connector. Use 'mcp' for MCP connectors.
+   */
+  protocol: "mcp";
 };
 
 /** @internal */
+export type CreateConnectorRequestAuthMethod$Outbound =
+  | BearerAuthMethod$Outbound
+  | NoneAuthMethod$Outbound
+  | (OAuth2AuthMethod$Outbound & { method_type: "oauth2" });
+
+/** @internal */
+export const CreateConnectorRequestAuthMethod$outboundSchema: z.ZodType<
+  CreateConnectorRequestAuthMethod$Outbound,
+  CreateConnectorRequestAuthMethod
+> = z.union([
+  BearerAuthMethod$outboundSchema,
+  NoneAuthMethod$outboundSchema,
+  OAuth2AuthMethod$outboundSchema.and(
+    z.object({ methodType: z.literal("oauth2") }).transform((v) => ({
+      method_type: v.methodType,
+    })),
+  ),
+]);
+
+export function createConnectorRequestAuthMethodToJSON(
+  createConnectorRequestAuthMethod: CreateConnectorRequestAuthMethod,
+): string {
+  return JSON.stringify(
+    CreateConnectorRequestAuthMethod$outboundSchema.parse(
+      createConnectorRequestAuthMethod,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateConnectorRequest$Outbound = {
-  protocol: "mcp";
-  name: string;
-  title?: string | null | undefined;
-  description: string;
-  icon_url?: string | null | undefined;
-  visibility?: string | undefined;
-  server: string;
   headers?: { [k: string]: any } | null | undefined;
   global_headers?: { [k: string]: GlobalHeaderValue$Outbound } | undefined;
   auth_data?: AuthData$Outbound | null | undefined;
@@ -111,7 +151,22 @@ export type CreateConnectorRequest$Outbound = {
     | null
     | undefined;
   oauth2_server_metadata_url?: string | null | undefined;
+  name: string;
+  title?: string | null | undefined;
+  description: string;
+  icon_url?: string | null | undefined;
+  server: string;
+  visibility?: string | undefined;
+  auth_methods?:
+    | Array<
+      | BearerAuthMethod$Outbound
+      | NoneAuthMethod$Outbound
+      | (OAuth2AuthMethod$Outbound & { method_type: "oauth2" })
+    >
+    | null
+    | undefined;
   system_prompt?: string | null | undefined;
+  protocol: "mcp";
 };
 
 /** @internal */
@@ -119,13 +174,6 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   CreateConnectorRequest$Outbound,
   CreateConnectorRequest
 > = z.object({
-  protocol: z.literal("mcp").default("mcp" as const),
-  name: z.string(),
-  title: z.nullable(z.string()).optional(),
-  description: z.string(),
-  iconUrl: z.nullable(z.string()).optional(),
-  visibility: PublicResourceVisibility$outboundSchema.optional(),
-  server: z.string(),
   headers: z.nullable(z.record(z.string(), z.any())).optional(),
   globalHeaders: z.record(z.string(), GlobalHeaderValue$outboundSchema)
     .optional(),
@@ -133,14 +181,35 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   oauth2ServerMetadata: z.nullable(ExtendedOAuthServerMetadata$outboundSchema)
     .optional(),
   oauth2ServerMetadataUrl: z.nullable(z.string()).optional(),
+  name: z.string(),
+  title: z.nullable(z.string()).optional(),
+  description: z.string(),
+  iconUrl: z.nullable(z.string()).optional(),
+  server: z.string(),
+  visibility: PublicResourceVisibility$outboundSchema.optional(),
+  authMethods: z.nullable(
+    z.array(
+      z.union([
+        BearerAuthMethod$outboundSchema,
+        NoneAuthMethod$outboundSchema,
+        OAuth2AuthMethod$outboundSchema.and(
+          z.object({ methodType: z.literal("oauth2") }).transform((v) => ({
+            method_type: v.methodType,
+          })),
+        ),
+      ]),
+    ),
+  ).optional(),
   systemPrompt: z.nullable(z.string()).optional(),
+  protocol: z.literal("mcp"),
 }).transform((v) => {
   return remap$(v, {
-    iconUrl: "icon_url",
     globalHeaders: "global_headers",
     authData: "auth_data",
     oauth2ServerMetadata: "oauth2_server_metadata",
     oauth2ServerMetadataUrl: "oauth2_server_metadata_url",
+    iconUrl: "icon_url",
+    authMethods: "auth_methods",
     systemPrompt: "system_prompt",
   });
 });

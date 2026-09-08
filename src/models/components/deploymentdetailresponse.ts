@@ -36,7 +36,7 @@ export type DeploymentDetailResponse = {
    */
   isActive: boolean;
   /**
-   * Whether the deployment has at least one authorized credential
+   * Whether the deployment only accepts registrations from authorized principals
    */
   isHardened: boolean;
   /**

@@ -13,5 +13,5 @@ let value: CredentialsStatusErrorReason = "unknown error";
 ## Values
 
 ```typescript
-"oauth expired" | "oauth near expiry" | "empty credentials" | "unparsable credentials" | "you need to reconnect" | "oauth refresh error" | "MCP server unreachable" | "MCP server timed out" | "MCP server error" | "unknown error" | Unrecognized<string>
+"oauth expired" | "oauth near expiry" | "empty credentials" | "blank bearer token" | "unparsable credentials" | "you need to reconnect" | "oauth refresh error" | "MCP server unreachable" | "MCP server timed out" | "MCP server error" | "unknown error" | Unrecognized<string>
 ```

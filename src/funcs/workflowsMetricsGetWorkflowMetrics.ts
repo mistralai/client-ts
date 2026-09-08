@@ -45,7 +45,7 @@ import { Result } from "../types/fp.js";
  *         - success_count: Number of successful executions
  *         - error_count: Number of failed/terminated executions
  *         - average_latency_ms: Average execution duration in milliseconds
- *         - retry_rate: Proportion of workflows with retries
+ *         - retry_rate: Deprecated, always -1. Never measured retries; use error_count instead
  *         - latency_over_time: Time-series data of execution durations
  *
  * Example:

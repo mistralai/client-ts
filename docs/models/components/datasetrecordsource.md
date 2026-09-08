@@ -13,5 +13,5 @@ let value: DatasetRecordSource = "UPLOADED_FILE";
 ## Values
 
 ```typescript
-"EXPLORER" | "UPLOADED_FILE" | "DIRECT_INPUT" | "PLAYGROUND" | Unrecognized<string>
+"EXPLORER" | "UPLOADED_FILE" | "DIRECT_INPUT" | "PLAYGROUND" | "TELEMETRY_SPAN" | Unrecognized<string>
 ```

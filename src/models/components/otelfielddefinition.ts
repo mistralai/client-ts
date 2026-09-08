@@ -27,7 +27,7 @@ export const OtelFieldDefinitionType = {
 } as const;
 export type OtelFieldDefinitionType = OpenEnum<typeof OtelFieldDefinitionType>;
 
-export const OtelFieldDefinitionSupportedOperator = {
+export const SupportedOperator = {
   Eq: "eq",
   Neq: "neq",
   Lt: "lt",
@@ -53,16 +53,14 @@ export const OtelFieldDefinitionSupportedOperator = {
   HasAll: "hasAll",
   HasToken: "hasToken",
 } as const;
-export type OtelFieldDefinitionSupportedOperator = OpenEnum<
-  typeof OtelFieldDefinitionSupportedOperator
->;
+export type SupportedOperator = OpenEnum<typeof SupportedOperator>;
 
 export type OtelFieldDefinition = {
   name: string;
   label: string;
   type: OtelFieldDefinitionType;
   group?: string | null | undefined;
-  supportedOperators: Array<OtelFieldDefinitionSupportedOperator>;
+  supportedOperators: Array<SupportedOperator>;
   supportedAggregations: Array<MetricAggregation>;
 };
 
@@ -73,10 +71,10 @@ export const OtelFieldDefinitionType$inboundSchema: z.ZodType<
 > = openEnums.inboundSchema(OtelFieldDefinitionType);
 
 /** @internal */
-export const OtelFieldDefinitionSupportedOperator$inboundSchema: z.ZodType<
-  OtelFieldDefinitionSupportedOperator,
+export const SupportedOperator$inboundSchema: z.ZodType<
+  SupportedOperator,
   unknown
-> = openEnums.inboundSchema(OtelFieldDefinitionSupportedOperator);
+> = openEnums.inboundSchema(SupportedOperator);
 
 /** @internal */
 export const OtelFieldDefinition$inboundSchema: z.ZodType<
@@ -87,9 +85,7 @@ export const OtelFieldDefinition$inboundSchema: z.ZodType<
   label: z.string(),
   type: OtelFieldDefinitionType$inboundSchema,
   group: z.nullable(z.string()).optional(),
-  supported_operators: z.array(
-    OtelFieldDefinitionSupportedOperator$inboundSchema,
-  ),
+  supported_operators: z.array(SupportedOperator$inboundSchema),
   supported_aggregations: z.array(MetricAggregation$inboundSchema),
 }).transform((v) => {
   return remap$(v, {

@@ -4,35 +4,27 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { Campaigns } from "./campaigns.js";
-import { ChatCompletionEvents } from "./chatcompletionevents.js";
 import { Datasets } from "./datasets.js";
+import { Evaluations } from "./evaluations.js";
 import { Judges } from "./judges.js";
 import { Logs } from "./logs.js";
 import { Spans } from "./spans.js";
 import { Traces } from "./traces.js";
 
 export class Observability extends ClientSDK {
-  private _chatCompletionEvents?: ChatCompletionEvents;
-  get chatCompletionEvents(): ChatCompletionEvents {
-    return (this._chatCompletionEvents ??= new ChatCompletionEvents(
-      this._options,
-    ));
-  }
-
   private _judges?: Judges;
   get judges(): Judges {
     return (this._judges ??= new Judges(this._options));
   }
 
-  private _campaigns?: Campaigns;
-  get campaigns(): Campaigns {
-    return (this._campaigns ??= new Campaigns(this._options));
-  }
-
   private _datasets?: Datasets;
   get datasets(): Datasets {
     return (this._datasets ??= new Datasets(this._options));
+  }
+
+  private _evaluations?: Evaluations;
+  get evaluations(): Evaluations {
+    return (this._evaluations ??= new Evaluations(this._options));
   }
 
   private _logs?: Logs;

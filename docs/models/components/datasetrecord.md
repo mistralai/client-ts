@@ -19,7 +19,7 @@ let value: DatasetRecord = {
     "key1": "<value>",
     "key2": "<value>",
   },
-  source: "PLAYGROUND",
+  source: "TELEMETRY_SPAN",
 };
 ```
 

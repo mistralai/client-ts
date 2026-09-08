@@ -98,9 +98,11 @@ async function $do(
 
   const query = encodeFormQuery({
     "active_only": payload?.active_only,
+    "created_by": payload?.created_by,
     "cursor": payload?.cursor,
     "is_hardened": payload?.is_hardened,
     "limit": payload?.limit,
+    "location_types": payload?.location_types,
     "order": payload?.order,
     "order_by": payload?.order_by,
     "search": payload?.search,

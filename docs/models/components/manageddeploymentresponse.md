@@ -10,11 +10,17 @@ let value: ManagedDeploymentResponse = {
   name: "<value>",
   spec: {
     githubUrl: "https://ignorant-archaeology.com/",
+    backendSpec: {
+      type: "kubernetes",
+    },
+    commitSha: "<value>",
+    entrypoint: "<value>",
+    workingDir: "<value>",
   },
   resources: {},
   status: {},
-  createdAt: new Date("2026-11-02T00:08:28.143Z"),
-  updatedAt: new Date("2024-08-01T19:24:54.169Z"),
+  createdAt: new Date("2024-06-08T11:48:59.961Z"),
+  updatedAt: new Date("2026-08-04T06:35:25.197Z"),
 };
 ```
 

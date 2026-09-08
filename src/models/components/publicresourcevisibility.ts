@@ -7,11 +7,7 @@ import * as z from "zod/v4";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
- * Visibility options available to public API callers.
- *
- * @remarks
- *
- * Excludes ``shared_global`` which is reserved for system-owned connectors.
+ * Connector visibility options.
  */
 export const PublicResourceVisibility = {
   SharedOrg: "shared_org",
@@ -19,11 +15,7 @@ export const PublicResourceVisibility = {
   Private: "private",
 } as const;
 /**
- * Visibility options available to public API callers.
- *
- * @remarks
- *
- * Excludes ``shared_global`` which is reserved for system-owned connectors.
+ * Connector visibility options.
  */
 export type PublicResourceVisibility = ClosedEnum<
   typeof PublicResourceVisibility

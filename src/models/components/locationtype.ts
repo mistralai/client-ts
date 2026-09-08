@@ -17,3 +17,6 @@ export type LocationType = OpenEnum<typeof LocationType>;
 /** @internal */
 export const LocationType$inboundSchema: z.ZodType<LocationType, unknown> =
   openEnums.inboundSchema(LocationType);
+/** @internal */
+export const LocationType$outboundSchema: z.ZodType<string, LocationType> =
+  openEnums.outboundSchema(LocationType);

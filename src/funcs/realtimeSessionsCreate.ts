@@ -30,6 +30,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Create Client Session
+ *
+ * @remarks
+ * Create a client session. Requires the `create_client_session` permission.
  */
 export function realtimeSessionsCreate(
   client: MistralCore,

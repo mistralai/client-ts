@@ -6,9 +6,7 @@
 import { betaConnectorsActivateForConsumer } from "../funcs/betaConnectorsActivateForConsumer.js";
 import { betaConnectorsCallTool } from "../funcs/betaConnectorsCallTool.js";
 import { betaConnectorsCreate } from "../funcs/betaConnectorsCreate.js";
-import { betaConnectorsCreateOrUpdateOrganizationCredentials } from "../funcs/betaConnectorsCreateOrUpdateOrganizationCredentials.js";
-import { betaConnectorsCreateOrUpdateUserCredentials } from "../funcs/betaConnectorsCreateOrUpdateUserCredentials.js";
-import { betaConnectorsCreateOrUpdateWorkspaceCredentials } from "../funcs/betaConnectorsCreateOrUpdateWorkspaceCredentials.js";
+import { betaConnectorsCreateCredentials } from "../funcs/betaConnectorsCreateCredentials.js";
 import { betaConnectorsDeactivateForConsumer } from "../funcs/betaConnectorsDeactivateForConsumer.js";
 import { betaConnectorsDelete } from "../funcs/betaConnectorsDelete.js";
 import { betaConnectorsDeleteAllUserCredentials } from "../funcs/betaConnectorsDeleteAllUserCredentials.js";
@@ -24,8 +22,11 @@ import { betaConnectorsListTools } from "../funcs/betaConnectorsListTools.js";
 import { betaConnectorsListUserCredentials } from "../funcs/betaConnectorsListUserCredentials.js";
 import { betaConnectorsListWorkspaceCredentials } from "../funcs/betaConnectorsListWorkspaceCredentials.js";
 import { betaConnectorsShare } from "../funcs/betaConnectorsShare.js";
+import { betaConnectorsShareToOrganization } from "../funcs/betaConnectorsShareToOrganization.js";
 import { betaConnectorsUnshare } from "../funcs/betaConnectorsUnshare.js";
+import { betaConnectorsUnshareFromOrganization } from "../funcs/betaConnectorsUnshareFromOrganization.js";
 import { betaConnectorsUpdate } from "../funcs/betaConnectorsUpdate.js";
+import { betaConnectorsUpdateCredentials } from "../funcs/betaConnectorsUpdateCredentials.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -36,10 +37,10 @@ export class Connectors extends ClientSDK {
    * Create a new connector.
    *
    * @remarks
-   * Create a new MCP connector. You can customize its visibility, url and auth type.
+   * Create a new MCP or HTTP connector. You can customize its visibility, URL, and auth type.
    */
   async create(
-    request: components.CreateConnectorRequest,
+    request: operations.ConnectorCreateV1Payload,
     options?: RequestOptions,
   ): Promise<components.Connector> {
     return unwrapAsync(betaConnectorsCreate(
@@ -111,6 +112,40 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(betaConnectorsUnshare(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Share a connector to the current organization.
+   *
+   * @remarks
+   * Transfers ownership of a private user-owned connector to the current organization, making it available to all organization members. The creator can later revert this via the unshare endpoint. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Requires the ShareConnectorToOrg organization permission.
+   */
+  async shareToOrganization(
+    request: operations.ConnectorShareToOrganizationV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsShareToOrganization(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Unshare a connector from the current organization.
+   *
+   * @remarks
+   * Reverts an organization-shared connector back to a private, creator-owned connector. Organization-scoped connections and other members' connections are removed; the creator's own connection is preserved. Requires the ShareConnectorToOrg organization permission.
+   */
+  async unshareFromOrganization(
+    request: operations.ConnectorUnshareFromOrganizationV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsUnshareFromOrganization(
       this,
       request,
       options,
@@ -220,23 +255,6 @@ export class Connectors extends ClientSDK {
   }
 
   /**
-   * Create or update organization credentials for a connector.
-   *
-   * @remarks
-   * Create or update credentials at the organization level for a given connector.
-   */
-  async createOrUpdateOrganizationCredentials(
-    request: operations.ConnectorCreateOrUpdateOrganizationCredentialsV1Request,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsCreateOrUpdateOrganizationCredentials(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List workspace credentials for a connector.
    *
    * @remarks
@@ -247,23 +265,6 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.CredentialsResponse> {
     return unwrapAsync(betaConnectorsListWorkspaceCredentials(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create or update workspace credentials for a connector.
-   *
-   * @remarks
-   * Create or update credentials at the workspace level for a given connector.
-   */
-  async createOrUpdateWorkspaceCredentials(
-    request: operations.ConnectorCreateOrUpdateWorkspaceCredentialsV1Request,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsCreateOrUpdateWorkspaceCredentials(
       this,
       request,
       options,
@@ -288,23 +289,6 @@ export class Connectors extends ClientSDK {
   }
 
   /**
-   * Create or update user credentials for a connector.
-   *
-   * @remarks
-   * Create or update credentials at the user level for a given connector.
-   */
-  async createOrUpdateUserCredentials(
-    request: operations.ConnectorCreateOrUpdateUserCredentialsV1Request,
-    options?: RequestOptions,
-  ): Promise<components.MessageResponse> {
-    return unwrapAsync(betaConnectorsCreateOrUpdateUserCredentials(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Delete all user credentials for a connector.
    *
    * @remarks
@@ -315,6 +299,40 @@ export class Connectors extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.MessageResponse> {
     return unwrapAsync(betaConnectorsDeleteAllUserCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create consumer credentials for a connector.
+   *
+   * @remarks
+   * Create consumer credentials for a given connector and consumer scope (organization, workspace, user)
+   */
+  async createCredentials(
+    request: operations.ConnectorCreateCredentialsV1Request,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsCreateCredentials(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create or update consumer credentials for a connector.
+   *
+   * @remarks
+   * Create or update consumer credentials for a given connector.
+   */
+  async updateCredentials(
+    request: operations.ConnectorUpdateCredentialsRequest,
+    options?: RequestOptions,
+  ): Promise<components.MessageResponse> {
+    return unwrapAsync(betaConnectorsUpdateCredentials(
       this,
       request,
       options,
