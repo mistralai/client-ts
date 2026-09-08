@@ -15,7 +15,53 @@ import {
   type TracerProvider,
   SpanStatusCode,
 } from "@opentelemetry/api";
-import * as semConvAttributes from "@opentelemetry/semantic-conventions/incubating";
+import {
+  ATTR_ERROR_TYPE,
+  ATTR_GEN_AI_AGENT_DESCRIPTION,
+  ATTR_GEN_AI_AGENT_ID,
+  ATTR_GEN_AI_AGENT_NAME,
+  ATTR_GEN_AI_CONVERSATION_ID,
+  ATTR_GEN_AI_INPUT_MESSAGES,
+  ATTR_GEN_AI_OPERATION_NAME,
+  ATTR_GEN_AI_OUTPUT_MESSAGES,
+  ATTR_GEN_AI_PROVIDER_NAME,
+  ATTR_GEN_AI_REQUEST_CHOICE_COUNT,
+  ATTR_GEN_AI_REQUEST_ENCODING_FORMATS,
+  ATTR_GEN_AI_REQUEST_FREQUENCY_PENALTY,
+  ATTR_GEN_AI_REQUEST_MAX_TOKENS,
+  ATTR_GEN_AI_REQUEST_MODEL,
+  ATTR_GEN_AI_REQUEST_PRESENCE_PENALTY,
+  ATTR_GEN_AI_REQUEST_SEED,
+  ATTR_GEN_AI_REQUEST_STOP_SEQUENCES,
+  ATTR_GEN_AI_REQUEST_TEMPERATURE,
+  ATTR_GEN_AI_REQUEST_TOP_K,
+  ATTR_GEN_AI_REQUEST_TOP_P,
+  ATTR_GEN_AI_RESPONSE_FINISH_REASONS,
+  ATTR_GEN_AI_RESPONSE_ID,
+  ATTR_GEN_AI_RESPONSE_MODEL,
+  ATTR_GEN_AI_SYSTEM_INSTRUCTIONS,
+  ATTR_GEN_AI_TOOL_CALL_ARGUMENTS,
+  ATTR_GEN_AI_TOOL_CALL_ID,
+  ATTR_GEN_AI_TOOL_CALL_RESULT,
+  ATTR_GEN_AI_TOOL_DEFINITIONS,
+  ATTR_GEN_AI_TOOL_NAME,
+  ATTR_GEN_AI_TOOL_TYPE,
+  ATTR_GEN_AI_USAGE_INPUT_TOKENS,
+  ATTR_GEN_AI_USAGE_OUTPUT_TOKENS,
+  ATTR_HTTP_REQUEST_METHOD,
+  ATTR_HTTP_RESPONSE_STATUS_CODE,
+  ATTR_SERVER_ADDRESS,
+  ATTR_SERVER_PORT,
+  ATTR_URL_FULL,
+  GEN_AI_OPERATION_NAME_VALUE_CHAT,
+  GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT,
+  GEN_AI_OPERATION_NAME_VALUE_EMBEDDINGS,
+  GEN_AI_OPERATION_NAME_VALUE_EXECUTE_TOOL,
+  GEN_AI_OPERATION_NAME_VALUE_GENERATE_CONTENT,
+  GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT,
+  GEN_AI_OPERATION_NAME_VALUE_TEXT_COMPLETION,
+  GEN_AI_PROVIDER_NAME_VALUE_MISTRAL_AI,
+} from "@opentelemetry/semantic-conventions/incubating";
 
 import {
   formatInputMessage,
@@ -26,8 +72,55 @@ import { getRegisteredTracerProvider } from "./provider.js";
 import { accumulateChunksToResponseDict, parseSseChunks } from "./streaming.js";
 
 export type { Context, Span, Tracer };
-export { semConvAttributes };
 export { getRegisteredTracerProvider, registerTracerProvider } from "./provider.js";
+
+export const semConvAttributes = {
+  ATTR_ERROR_TYPE,
+  ATTR_GEN_AI_AGENT_DESCRIPTION,
+  ATTR_GEN_AI_AGENT_ID,
+  ATTR_GEN_AI_AGENT_NAME,
+  ATTR_GEN_AI_CONVERSATION_ID,
+  ATTR_GEN_AI_INPUT_MESSAGES,
+  ATTR_GEN_AI_OPERATION_NAME,
+  ATTR_GEN_AI_OUTPUT_MESSAGES,
+  ATTR_GEN_AI_PROVIDER_NAME,
+  ATTR_GEN_AI_REQUEST_CHOICE_COUNT,
+  ATTR_GEN_AI_REQUEST_ENCODING_FORMATS,
+  ATTR_GEN_AI_REQUEST_FREQUENCY_PENALTY,
+  ATTR_GEN_AI_REQUEST_MAX_TOKENS,
+  ATTR_GEN_AI_REQUEST_MODEL,
+  ATTR_GEN_AI_REQUEST_PRESENCE_PENALTY,
+  ATTR_GEN_AI_REQUEST_SEED,
+  ATTR_GEN_AI_REQUEST_STOP_SEQUENCES,
+  ATTR_GEN_AI_REQUEST_TEMPERATURE,
+  ATTR_GEN_AI_REQUEST_TOP_K,
+  ATTR_GEN_AI_REQUEST_TOP_P,
+  ATTR_GEN_AI_RESPONSE_FINISH_REASONS,
+  ATTR_GEN_AI_RESPONSE_ID,
+  ATTR_GEN_AI_RESPONSE_MODEL,
+  ATTR_GEN_AI_SYSTEM_INSTRUCTIONS,
+  ATTR_GEN_AI_TOOL_CALL_ARGUMENTS,
+  ATTR_GEN_AI_TOOL_CALL_ID,
+  ATTR_GEN_AI_TOOL_CALL_RESULT,
+  ATTR_GEN_AI_TOOL_DEFINITIONS,
+  ATTR_GEN_AI_TOOL_NAME,
+  ATTR_GEN_AI_TOOL_TYPE,
+  ATTR_GEN_AI_USAGE_INPUT_TOKENS,
+  ATTR_GEN_AI_USAGE_OUTPUT_TOKENS,
+  ATTR_HTTP_REQUEST_METHOD,
+  ATTR_HTTP_RESPONSE_STATUS_CODE,
+  ATTR_SERVER_ADDRESS,
+  ATTR_SERVER_PORT,
+  ATTR_URL_FULL,
+  GEN_AI_OPERATION_NAME_VALUE_CHAT,
+  GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT,
+  GEN_AI_OPERATION_NAME_VALUE_EMBEDDINGS,
+  GEN_AI_OPERATION_NAME_VALUE_EXECUTE_TOOL,
+  GEN_AI_OPERATION_NAME_VALUE_GENERATE_CONTENT,
+  GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT,
+  GEN_AI_OPERATION_NAME_VALUE_TEXT_COMPLETION,
+  GEN_AI_PROVIDER_NAME_VALUE_MISTRAL_AI,
+} as const;
 
 export const OTEL_SERVICE_NAME = "mistralai_sdk";
 export const MISTRAL_SDK_OTEL_TRACER_NAME = `${OTEL_SERVICE_NAME}_tracer`;
@@ -67,16 +160,16 @@ function parseTimeToMillis(ts: string): number {
 
 function inferGenAiOperationName(operationId: string): string | null {
   if (operationId.includes("chat_completion") || operationId === "stream_chat") {
-    return semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_CHAT;
+    return GEN_AI_OPERATION_NAME_VALUE_CHAT;
   }
   if (
     (operationId.includes("agents_create") || operationId.includes("agents_update")) &&
     !operationId.includes("alias")
   ) {
-    return semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT;
+    return GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT;
   }
   if (operationId.includes("agents_completion") || operationId === "stream_agents") {
-    return semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT;
+    return GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT;
   }
   if (
     operationId.includes("conversations") &&
@@ -84,16 +177,16 @@ function inferGenAiOperationName(operationId: string): string | null {
       operationId.includes("append") ||
       operationId.includes("restart"))
   ) {
-    return semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT;
+    return GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT;
   }
   if (operationId.includes("fim")) {
-    return semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_TEXT_COMPLETION;
+    return GEN_AI_OPERATION_NAME_VALUE_TEXT_COMPLETION;
   }
   if (operationId.includes("embeddings")) {
-    return semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_EMBEDDINGS;
+    return GEN_AI_OPERATION_NAME_VALUE_EMBEDDINGS;
   }
   if (operationId.includes("ocr_post")) {
-    return semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_GENERATE_CONTENT;
+    return GEN_AI_OPERATION_NAME_VALUE_GENERATE_CONTENT;
   }
   return null;
 }
@@ -114,13 +207,13 @@ function buildGenaiSpanName(
   body: Record<string, unknown>
 ): string {
   if (
-    genAiOp === semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT ||
-    genAiOp === semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT
+    genAiOp === GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT ||
+    genAiOp === GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT
   ) {
     const agentName = body["name"] as string | undefined;
     return agentName ? `${genAiOp} ${agentName}` : genAiOp;
   }
-  if (genAiOp === semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_EXECUTE_TOOL) {
+  if (genAiOp === GEN_AI_OPERATION_NAME_VALUE_EXECUTE_TOOL) {
     const toolName = body["name"] as string | undefined;
     return toolName ? `${genAiOp} ${toolName}` : genAiOp;
   }
@@ -157,10 +250,10 @@ function setHttpAttributes(
   }
 
   span.setAttributes({
-    [semConvAttributes.ATTR_HTTP_REQUEST_METHOD]: method,
-    [semConvAttributes.ATTR_URL_FULL]: url.toString(),
-    [semConvAttributes.ATTR_SERVER_ADDRESS]: host,
-    [semConvAttributes.ATTR_SERVER_PORT]: port,
+    [ATTR_HTTP_REQUEST_METHOD]: method,
+    [ATTR_URL_FULL]: url.toString(),
+    [ATTR_SERVER_ADDRESS]: host,
+    [ATTR_SERVER_PORT]: port,
   });
 }
 
@@ -172,17 +265,17 @@ function enrichRequestGenaiAttrs(
   span.updateName(buildGenaiSpanName(genAiOp, requestBody));
 
   const attributes: Record<string, unknown> = {
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_CHOICE_COUNT]: requestBody["n"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_ENCODING_FORMATS]: requestBody["encoding_formats"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_FREQUENCY_PENALTY]: requestBody["frequency_penalty"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_MAX_TOKENS]: requestBody["max_tokens"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_MODEL]: requestBody["model"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_PRESENCE_PENALTY]: requestBody["presence_penalty"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_SEED]: requestBody["random_seed"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_STOP_SEQUENCES]: requestBody["stop"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_TEMPERATURE]: requestBody["temperature"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_TOP_P]: requestBody["top_p"],
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_TOP_K]: requestBody["top_k"],
+    [ATTR_GEN_AI_REQUEST_CHOICE_COUNT]: requestBody["n"],
+    [ATTR_GEN_AI_REQUEST_ENCODING_FORMATS]: requestBody["encoding_formats"],
+    [ATTR_GEN_AI_REQUEST_FREQUENCY_PENALTY]: requestBody["frequency_penalty"],
+    [ATTR_GEN_AI_REQUEST_MAX_TOKENS]: requestBody["max_tokens"],
+    [ATTR_GEN_AI_REQUEST_MODEL]: requestBody["model"],
+    [ATTR_GEN_AI_REQUEST_PRESENCE_PENALTY]: requestBody["presence_penalty"],
+    [ATTR_GEN_AI_REQUEST_SEED]: requestBody["random_seed"],
+    [ATTR_GEN_AI_REQUEST_STOP_SEQUENCES]: requestBody["stop"],
+    [ATTR_GEN_AI_REQUEST_TEMPERATURE]: requestBody["temperature"],
+    [ATTR_GEN_AI_REQUEST_TOP_P]: requestBody["top_p"],
+    [ATTR_GEN_AI_REQUEST_TOP_K]: requestBody["top_k"],
   };
 
   const inputMessages = (requestBody["messages"] || requestBody["inputs"]) as
@@ -190,11 +283,11 @@ function enrichRequestGenaiAttrs(
     | Array<Record<string, unknown>>
     | undefined;
   if (typeof inputMessages === "string") {
-    attributes[semConvAttributes.ATTR_GEN_AI_INPUT_MESSAGES] = JSON.stringify([
+    attributes[ATTR_GEN_AI_INPUT_MESSAGES] = JSON.stringify([
       formatInputMessage({ role: "user", content: inputMessages }),
     ]);
   } else if (Array.isArray(inputMessages)) {
-    attributes[semConvAttributes.ATTR_GEN_AI_INPUT_MESSAGES] = JSON.stringify(
+    attributes[ATTR_GEN_AI_INPUT_MESSAGES] = JSON.stringify(
       inputMessages.map((msg) => formatInputMessage(msg))
     );
   }
@@ -205,7 +298,7 @@ function enrichRequestGenaiAttrs(
       .map((tool) => formatToolDefinition(tool))
       .filter((t): t is Record<string, unknown> => t !== null);
     if (formattedTools.length > 0) {
-      attributes[semConvAttributes.ATTR_GEN_AI_TOOL_DEFINITIONS] = JSON.stringify(formattedTools);
+      attributes[ATTR_GEN_AI_TOOL_DEFINITIONS] = JSON.stringify(formattedTools);
     }
   }
 
@@ -230,8 +323,8 @@ export function enrichSpanFromRequest(
   }
 
   span.setAttributes({
-    [semConvAttributes.ATTR_GEN_AI_OPERATION_NAME]: genAiOp,
-    [semConvAttributes.ATTR_GEN_AI_PROVIDER_NAME]: semConvAttributes.GEN_AI_PROVIDER_NAME_VALUE_MISTRAL_AI,
+    [ATTR_GEN_AI_OPERATION_NAME]: genAiOp,
+    [ATTR_GEN_AI_PROVIDER_NAME]: GEN_AI_PROVIDER_NAME_VALUE_MISTRAL_AI,
   });
 
   if (body) {
@@ -253,28 +346,28 @@ function enrichResponseGenaiAttrs(
 ): void {
   const attributes: Record<string, unknown> = {};
 
-  if (genAiOp !== semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT) {
-    attributes[semConvAttributes.ATTR_GEN_AI_RESPONSE_ID] = responseData["id"];
+  if (genAiOp !== GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT) {
+    attributes[ATTR_GEN_AI_RESPONSE_ID] = responseData["id"];
   }
-  attributes[semConvAttributes.ATTR_GEN_AI_RESPONSE_MODEL] = responseData["model"];
+  attributes[ATTR_GEN_AI_RESPONSE_MODEL] = responseData["model"];
 
   const choices = (responseData["choices"] || []) as Array<Record<string, unknown>>;
   const finishReasons = choices
     .map((c) => c["finish_reason"] as string | undefined)
     .filter((r): r is string => !!r);
   if (finishReasons.length > 0) {
-    attributes[semConvAttributes.ATTR_GEN_AI_RESPONSE_FINISH_REASONS] = finishReasons;
+    attributes[ATTR_GEN_AI_RESPONSE_FINISH_REASONS] = finishReasons;
   }
   if (choices.length > 0) {
-    attributes[semConvAttributes.ATTR_GEN_AI_OUTPUT_MESSAGES] = JSON.stringify(
+    attributes[ATTR_GEN_AI_OUTPUT_MESSAGES] = JSON.stringify(
       choices.map((choice) => formatOutputMessage(choice))
     );
   }
 
   const usage = responseData["usage"] as Record<string, number> | undefined;
   if (usage) {
-    attributes[semConvAttributes.ATTR_GEN_AI_USAGE_INPUT_TOKENS] = usage["prompt_tokens"] || 0;
-    attributes[semConvAttributes.ATTR_GEN_AI_USAGE_OUTPUT_TOKENS] = usage["completion_tokens"] || 0;
+    attributes[ATTR_GEN_AI_USAGE_INPUT_TOKENS] = usage["prompt_tokens"] || 0;
+    attributes[ATTR_GEN_AI_USAGE_OUTPUT_TOKENS] = usage["completion_tokens"] || 0;
   }
 
   setAvailableAttributes(span, attributes);
@@ -282,12 +375,12 @@ function enrichResponseGenaiAttrs(
 
 function enrichCreateAgent(span: Span, responseData: Record<string, unknown>): void {
   const agentAttributes: Record<string, unknown> = {
-    [semConvAttributes.ATTR_GEN_AI_AGENT_DESCRIPTION]: responseData["description"],
-    [semConvAttributes.ATTR_GEN_AI_AGENT_ID]: responseData["id"],
-    [semConvAttributes.ATTR_GEN_AI_AGENT_NAME]: responseData["name"],
+    [ATTR_GEN_AI_AGENT_DESCRIPTION]: responseData["description"],
+    [ATTR_GEN_AI_AGENT_ID]: responseData["id"],
+    [ATTR_GEN_AI_AGENT_NAME]: responseData["name"],
     "gen_ai.agent.version": String(responseData["version"]),
-    [semConvAttributes.ATTR_GEN_AI_REQUEST_MODEL]: responseData["model"],
-    [semConvAttributes.ATTR_GEN_AI_SYSTEM_INSTRUCTIONS]: responseData["instructions"],
+    [ATTR_GEN_AI_REQUEST_MODEL]: responseData["model"],
+    [ATTR_GEN_AI_SYSTEM_INSTRUCTIONS]: responseData["instructions"],
   };
   setAvailableAttributes(span, agentAttributes);
 }
@@ -309,7 +402,7 @@ function createToolExecutionChildSpan(
 ): void {
   const startMs = parseTimeToMillis(output["created_at"] as string);
   const endMs = parseTimeToMillis(output["completed_at"] as string);
-  const opName = semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_EXECUTE_TOOL;
+  const opName = GEN_AI_OPERATION_NAME_VALUE_EXECUTE_TOOL;
   const spanName = buildGenaiSpanName(opName, output);
   const childSpan = tracer.startSpan(spanName, { startTime: startMs }, parentContext);
   setMistralAgentTraceMarker(childSpan);
@@ -317,13 +410,13 @@ function createToolExecutionChildSpan(
   const toolArguments = output["arguments"];
   const toolResult = output["info"];
   const toolAttributes: Record<string, unknown> = {
-    [semConvAttributes.ATTR_GEN_AI_OPERATION_NAME]: opName,
-    [semConvAttributes.ATTR_GEN_AI_PROVIDER_NAME]: semConvAttributes.GEN_AI_PROVIDER_NAME_VALUE_MISTRAL_AI,
-    [semConvAttributes.ATTR_GEN_AI_TOOL_CALL_ID]: output["id"],
-    [semConvAttributes.ATTR_GEN_AI_TOOL_CALL_ARGUMENTS]: stringifyToolAttribute(toolArguments),
-    [semConvAttributes.ATTR_GEN_AI_TOOL_CALL_RESULT]: stringifyToolAttribute(toolResult),
-    [semConvAttributes.ATTR_GEN_AI_TOOL_NAME]: output["name"],
-    [semConvAttributes.ATTR_GEN_AI_TOOL_TYPE]: "extension",
+    [ATTR_GEN_AI_OPERATION_NAME]: opName,
+    [ATTR_GEN_AI_PROVIDER_NAME]: GEN_AI_PROVIDER_NAME_VALUE_MISTRAL_AI,
+    [ATTR_GEN_AI_TOOL_CALL_ID]: output["id"],
+    [ATTR_GEN_AI_TOOL_CALL_ARGUMENTS]: stringifyToolAttribute(toolArguments),
+    [ATTR_GEN_AI_TOOL_CALL_RESULT]: stringifyToolAttribute(toolResult),
+    [ATTR_GEN_AI_TOOL_NAME]: output["name"],
+    [ATTR_GEN_AI_TOOL_TYPE]: "extension",
   };
   setAvailableAttributes(childSpan, toolAttributes);
   childSpan.end(endMs);
@@ -336,7 +429,7 @@ function createMessageOutputChildSpan(
 ): void {
   const startMs = parseTimeToMillis(output["created_at"] as string);
   const endMs = parseTimeToMillis(output["completed_at"] as string);
-  const opName = semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_CHAT;
+  const opName = GEN_AI_OPERATION_NAME_VALUE_CHAT;
   const spanName = buildGenaiSpanName(opName, output);
   const childSpan = tracer.startSpan(spanName, { startTime: startMs }, parentContext);
   setMistralAgentTraceMarker(childSpan);
@@ -346,12 +439,12 @@ function createMessageOutputChildSpan(
     finish_reason: (output["finish_reason"] as string) || "",
   };
   const messageAttributes: Record<string, unknown> = {
-    [semConvAttributes.ATTR_GEN_AI_OPERATION_NAME]: opName,
-    [semConvAttributes.ATTR_GEN_AI_PROVIDER_NAME]: semConvAttributes.GEN_AI_PROVIDER_NAME_VALUE_MISTRAL_AI,
-    [semConvAttributes.ATTR_GEN_AI_RESPONSE_ID]: output["id"],
-    [semConvAttributes.ATTR_GEN_AI_AGENT_ID]: output["agent_id"],
-    [semConvAttributes.ATTR_GEN_AI_RESPONSE_MODEL]: output["model"],
-    [semConvAttributes.ATTR_GEN_AI_OUTPUT_MESSAGES]: JSON.stringify([formatOutputMessage(choiceWrapper)]),
+    [ATTR_GEN_AI_OPERATION_NAME]: opName,
+    [ATTR_GEN_AI_PROVIDER_NAME]: GEN_AI_PROVIDER_NAME_VALUE_MISTRAL_AI,
+    [ATTR_GEN_AI_RESPONSE_ID]: output["id"],
+    [ATTR_GEN_AI_AGENT_ID]: output["agent_id"],
+    [ATTR_GEN_AI_RESPONSE_MODEL]: output["model"],
+    [ATTR_GEN_AI_OUTPUT_MESSAGES]: JSON.stringify([formatOutputMessage(choiceWrapper)]),
   };
   setAvailableAttributes(childSpan, messageAttributes);
   childSpan.end(endMs);
@@ -363,7 +456,7 @@ function enrichInvokeAgent(
   responseData: Record<string, unknown>
 ): void {
   const conversationAttributes: Record<string, unknown> = {
-    [semConvAttributes.ATTR_GEN_AI_CONVERSATION_ID]: responseData["conversation_id"],
+    [ATTR_GEN_AI_CONVERSATION_ID]: responseData["conversation_id"],
   };
   setAvailableAttributes(span, conversationAttributes);
 
@@ -406,9 +499,9 @@ export function enrichSpanFromResponse(
 
   enrichResponseGenaiAttrs(span, genAiOp, responseData);
 
-  if (genAiOp === semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT) {
+  if (genAiOp === GEN_AI_OPERATION_NAME_VALUE_CREATE_AGENT) {
     enrichCreateAgent(span, responseData);
-  } else if (genAiOp === semConvAttributes.GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT) {
+  } else if (genAiOp === GEN_AI_OPERATION_NAME_VALUE_INVOKE_AGENT) {
     enrichInvokeAgent(tracer, span, responseData);
   }
 
@@ -479,9 +572,9 @@ export async function getTracedRequestAndSpan(
 
     // Propagate gen_ai.conversation.id from OTEL baggage if present
     const baggage = propagation.getBaggage(contextApi.active());
-    const conversationId = baggage?.getEntry(semConvAttributes.ATTR_GEN_AI_CONVERSATION_ID)?.value;
+    const conversationId = baggage?.getEntry(ATTR_GEN_AI_CONVERSATION_ID)?.value;
     if (conversationId) {
-      span.setAttribute(semConvAttributes.ATTR_GEN_AI_CONVERSATION_ID, conversationId);
+      span.setAttribute(ATTR_GEN_AI_CONVERSATION_ID, conversationId);
     }
 
     let body: string | null = null;
@@ -541,7 +634,7 @@ export async function getTracedResponse(
 
   try {
     span.setStatus({ code: SpanStatusCode.OK });
-    span.setAttribute(semConvAttributes.ATTR_HTTP_RESPONSE_STATUS_CODE, response.status);
+    span.setAttribute(ATTR_HTTP_RESPONSE_STATUS_CODE, response.status);
 
     const knownGenAiOperation = isKnownGenAiOperation(operationId);
     const responseContentType = response.headers.get("content-type");
@@ -696,10 +789,10 @@ export async function getResponseAndError(
             "exception.message": errorMsg,
           });
           const attrs: Record<string, unknown> = {
-            [semConvAttributes.ATTR_HTTP_RESPONSE_STATUS_CODE]: response.status,
+            [ATTR_HTTP_RESPONSE_STATUS_CODE]: response.status,
           };
           if (errorType) {
-            attrs[semConvAttributes.ATTR_ERROR_TYPE] = errorType;
+            attrs[ATTR_ERROR_TYPE] = errorType;
           }
           if (body["code"]) {
             attrs[MistralAIAttributes.MISTRAL_AI_ERROR_CODE] = body["code"];
