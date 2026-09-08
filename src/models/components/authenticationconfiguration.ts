@@ -25,6 +25,7 @@ export type AuthenticationConfiguration = {
   scope: ConsumerType;
   status?: CredentialsStatus | null | undefined;
   isDefault: boolean;
+  creatorId?: string | null | undefined;
 };
 
 /** @internal */
@@ -38,10 +39,12 @@ export const AuthenticationConfiguration$inboundSchema: z.ZodType<
   scope: ConsumerType$inboundSchema,
   status: z.nullable(CredentialsStatus$inboundSchema).optional(),
   is_default: z.boolean().default(false),
+  creator_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "authentication_type": "authenticationType",
     "is_default": "isDefault",
+    "creator_id": "creatorId",
   });
 });
 

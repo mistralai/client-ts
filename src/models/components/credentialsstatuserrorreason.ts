@@ -11,6 +11,7 @@ export const CredentialsStatusErrorReason = {
   OauthExpired: "oauth expired",
   OauthNearExpiry: "oauth near expiry",
   EmptyCredentials: "empty credentials",
+  BlankBearerToken: "blank bearer token",
   UnparsableCredentials: "unparsable credentials",
   YouNeedToReconnect: "you need to reconnect",
   OauthRefreshError: "oauth refresh error",

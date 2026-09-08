@@ -9,6 +9,10 @@ import * as components from "../components/index.js";
 
 export type UpdateSkillRequest = {
   sharingScope?: components.RegistrySharingScope | undefined;
+  /**
+   * Relation a subject holds on a shared registry object.
+   */
+  workspaceRelation?: components.ShareRelation | undefined;
 };
 
 export type SkillsUpdateRequest = {
@@ -19,6 +23,7 @@ export type SkillsUpdateRequest = {
 /** @internal */
 export type UpdateSkillRequest$Outbound = {
   sharingScope?: string | undefined;
+  workspaceRelation?: string | undefined;
 };
 
 /** @internal */
@@ -27,6 +32,7 @@ export const UpdateSkillRequest$outboundSchema: z.ZodType<
   UpdateSkillRequest
 > = z.object({
   sharingScope: components.RegistrySharingScope$outboundSchema.optional(),
+  workspaceRelation: components.ShareRelation$outboundSchema.optional(),
 });
 
 export function updateSkillRequestToJSON(

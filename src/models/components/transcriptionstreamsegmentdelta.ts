@@ -12,8 +12,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type TranscriptionStreamSegmentDelta = {
   type: "transcription.segment";
   text: string;
-  start: number;
-  end: number;
+  start: number | null;
+  end: number | null;
   speakerId?: string | null | undefined;
   [additionalProperties: string]: unknown;
 };
@@ -25,8 +25,8 @@ export const TranscriptionStreamSegmentDelta$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("transcription.segment"),
   text: z.string(),
-  start: z.number(),
-  end: z.number(),
+  start: z.nullable(z.number()),
+  end: z.nullable(z.number()),
   speaker_id: z.nullable(z.string()).optional(),
 }).catchall(z.any()).transform((v) => {
   return remap$(v, {

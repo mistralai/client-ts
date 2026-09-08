@@ -12,6 +12,7 @@ let value: GetWorkflowExecutionV1WorkflowsExecutionsExecutionIdGetRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `executionId`      | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                           | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `executionId`                                                   | *string*                                                        | :heavy_check_mark:                                              | N/A                                                             |
+| `includeSearchKeys`                                             | *boolean*                                                       | :heavy_minus_sign:                                              | Include the execution's search keys (metadata) in the response. |

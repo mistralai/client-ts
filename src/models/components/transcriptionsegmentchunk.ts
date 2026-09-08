@@ -12,8 +12,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type TranscriptionSegmentChunk = {
   type?: "transcription_segment" | undefined;
   text: string;
-  start: number;
-  end: number;
+  start: number | null;
+  end: number | null;
   score?: number | null | undefined;
   speakerId?: string | null | undefined;
   [additionalProperties: string]: unknown;
@@ -26,8 +26,8 @@ export const TranscriptionSegmentChunk$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("transcription_segment").default("transcription_segment"),
   text: z.string(),
-  start: z.number(),
-  end: z.number(),
+  start: z.nullable(z.number()),
+  end: z.nullable(z.number()),
   score: z.nullable(z.number()).optional(),
   speaker_id: z.nullable(z.string()).optional(),
 }).catchall(z.any()).transform((v) => {
@@ -39,8 +39,8 @@ export const TranscriptionSegmentChunk$inboundSchema: z.ZodType<
 export type TranscriptionSegmentChunk$Outbound = {
   type: "transcription_segment";
   text: string;
-  start: number;
-  end: number;
+  start: number | null;
+  end: number | null;
   score?: number | null | undefined;
   speaker_id?: string | null | undefined;
   [additionalProperties: string]: unknown;
@@ -55,8 +55,8 @@ export const TranscriptionSegmentChunk$outboundSchema: z.ZodType<
     "transcription_segment" as const,
   ),
   text: z.string(),
-  start: z.number(),
-  end: z.number(),
+  start: z.nullable(z.number()),
+  end: z.nullable(z.number()),
   score: z.nullable(z.number()).optional(),
   speakerId: z.nullable(z.string()).optional(),
 }).catchall(z.any()).transform((v) => {

@@ -11,8 +11,7 @@ const value: components.JudgeClassificationOutput = {
   options: [
     {
       value: "<value>",
-      description:
-        "round whether like yet midst than inquisitively resource cafe",
+      description: "as qua why hepatitis psst tattered till into yum subdued",
     },
   ],
 };

@@ -9,6 +9,10 @@ import {
   RegistrySharingScope$outboundSchema,
 } from "./registrysharingscope.js";
 import {
+  ShareRelation,
+  ShareRelation$outboundSchema,
+} from "./sharerelation.js";
+import {
   SkillDefinition,
   SkillDefinition$Outbound,
   SkillDefinition$outboundSchema,
@@ -32,6 +36,10 @@ export type CreateSkillRequest = {
    * Aliases pointing to this version.
    */
   aliases?: Array<string> | undefined;
+  /**
+   * Relation a subject holds on a shared registry object.
+   */
+  workspaceRelation?: ShareRelation | undefined;
 };
 
 /** @internal */
@@ -41,6 +49,7 @@ export type CreateSkillRequest$Outbound = {
   notes?: string | null | undefined;
   sharingScope?: string | undefined;
   aliases?: Array<string> | undefined;
+  workspaceRelation?: string | undefined;
 };
 
 /** @internal */
@@ -53,6 +62,7 @@ export const CreateSkillRequest$outboundSchema: z.ZodType<
   notes: z.nullable(z.string()).optional(),
   sharingScope: RegistrySharingScope$outboundSchema.optional(),
   aliases: z.array(z.string()).optional(),
+  workspaceRelation: ShareRelation$outboundSchema.optional(),
 });
 
 export function createSkillRequestToJSON(

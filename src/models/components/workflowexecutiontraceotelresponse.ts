@@ -71,6 +71,10 @@ export type WorkflowExecutionTraceOTelResponse = {
    */
   result: any | null;
   /**
+   * The execution's search keys (metadata), if requested via include_search_keys.
+   */
+  searchKeys?: { [k: string]: string } | null | undefined;
+  /**
    * The data source of the trace
    */
   dataSource: string;
@@ -104,6 +108,7 @@ export const WorkflowExecutionTraceOTelResponse$inboundSchema: z.ZodType<
   ),
   total_duration_ms: z.nullable(z.int()).optional(),
   result: z.nullable(z.any()),
+  search_keys: z.nullable(z.record(z.string(), z.string())).optional(),
   data_source: z.string(),
   otel_trace_id: z.nullable(z.string()).optional(),
   otel_trace_data: z.nullable(TempoGetTraceResponse$inboundSchema).optional(),
@@ -120,6 +125,7 @@ export const WorkflowExecutionTraceOTelResponse$inboundSchema: z.ZodType<
     "start_time": "startTime",
     "end_time": "endTime",
     "total_duration_ms": "totalDurationMs",
+    "search_keys": "searchKeys",
     "data_source": "dataSource",
     "otel_trace_id": "otelTraceId",
     "otel_trace_data": "otelTraceData",
