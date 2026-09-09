@@ -89,9 +89,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.UpdateConnectorRequest, {
-    explode: true,
-  });
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
     connector_id: encodeSimple("connector_id", payload.connector_id, {

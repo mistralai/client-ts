@@ -19,7 +19,9 @@ export class Voices extends ClientSDK {
    * List all voices
    *
    * @remarks
-   * List all voices (excluding sample data)
+   * Offset pagination will not be supported anymore. Use GET /v2/audio/voices instead.
+   *
+   * @deprecated method: Offset pagination will not be supported anymore. Use GET /v2/audio/voices instead..
    */
   async list(
     request?: operations.ListVoicesV1AudioVoicesGetRequest | undefined,

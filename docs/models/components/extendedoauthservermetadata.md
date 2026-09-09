@@ -12,8 +12,7 @@ import { ExtendedOAuthServerMetadata } from "@mistralai/mistralai/models/compone
 
 let value: ExtendedOAuthServerMetadata = {
   issuer: "https://frozen-sundae.info",
-  authorizationEndpoint: "https://hospitable-husband.name",
-  tokenEndpoint: "https://inferior-archaeology.info",
+  tokenEndpoint: "https://hospitable-husband.name",
 };
 ```
 
@@ -22,7 +21,7 @@ let value: ExtendedOAuthServerMetadata = {
 | Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `issuer`                                                                         | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
-| `authorizationEndpoint`                                                          | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `authorizationEndpoint`                                                          | *string*                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |
 | `tokenEndpoint`                                                                  | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
 | `registrationEndpoint`                                                           | *string*                                                                         | :heavy_minus_sign:                                                               | N/A                                                                              |
 | `scopesSupported`                                                                | *string*[]                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |

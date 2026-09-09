@@ -6,7 +6,7 @@
 import { AuthenticationMethodCreateOrUpdateRequest } from "@mistralai/mistralai/models/components";
 
 let value: AuthenticationMethodCreateOrUpdateRequest = {
-  methodType: "slack_app",
+  methodType: "github_app",
 };
 ```
 

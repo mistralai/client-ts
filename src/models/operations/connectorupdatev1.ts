@@ -7,15 +7,45 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
+export type ConnectorUpdateV1Payload =
+  | components.ConnectorMCPPublicUpdate
+  | components.UpdateHTTPConnectorRequest;
+
 export type ConnectorUpdateV1Request = {
   connectorId: string;
-  updateConnectorRequest: components.UpdateConnectorRequest;
+  requestBody:
+    | components.ConnectorMCPPublicUpdate
+    | components.UpdateHTTPConnectorRequest;
 };
+
+/** @internal */
+export type ConnectorUpdateV1Payload$Outbound =
+  | components.ConnectorMCPPublicUpdate$Outbound
+  | components.UpdateHTTPConnectorRequest$Outbound;
+
+/** @internal */
+export const ConnectorUpdateV1Payload$outboundSchema: z.ZodType<
+  ConnectorUpdateV1Payload$Outbound,
+  ConnectorUpdateV1Payload
+> = z.union([
+  components.ConnectorMCPPublicUpdate$outboundSchema,
+  components.UpdateHTTPConnectorRequest$outboundSchema,
+]);
+
+export function connectorUpdateV1PayloadToJSON(
+  connectorUpdateV1Payload: ConnectorUpdateV1Payload,
+): string {
+  return JSON.stringify(
+    ConnectorUpdateV1Payload$outboundSchema.parse(connectorUpdateV1Payload),
+  );
+}
 
 /** @internal */
 export type ConnectorUpdateV1Request$Outbound = {
   connector_id: string;
-  UpdateConnectorRequest: components.UpdateConnectorRequest$Outbound;
+  RequestBody:
+    | components.ConnectorMCPPublicUpdate$Outbound
+    | components.UpdateHTTPConnectorRequest$Outbound;
 };
 
 /** @internal */
@@ -24,11 +54,14 @@ export const ConnectorUpdateV1Request$outboundSchema: z.ZodType<
   ConnectorUpdateV1Request
 > = z.object({
   connectorId: z.string(),
-  updateConnectorRequest: components.UpdateConnectorRequest$outboundSchema,
+  requestBody: z.union([
+    components.ConnectorMCPPublicUpdate$outboundSchema,
+    components.UpdateHTTPConnectorRequest$outboundSchema,
+  ]),
 }).transform((v) => {
   return remap$(v, {
     connectorId: "connector_id",
-    updateConnectorRequest: "UpdateConnectorRequest",
+    requestBody: "RequestBody",
   });
 });
 

@@ -9,9 +9,7 @@ import { betaObservabilityDatasetsDelete } from "../funcs/betaObservabilityDatas
 import { betaObservabilityDatasetsExportToJsonl } from "../funcs/betaObservabilityDatasetsExportToJsonl.js";
 import { betaObservabilityDatasetsFetch } from "../funcs/betaObservabilityDatasetsFetch.js";
 import { betaObservabilityDatasetsFetchTask } from "../funcs/betaObservabilityDatasetsFetchTask.js";
-import { betaObservabilityDatasetsImportFromCampaign } from "../funcs/betaObservabilityDatasetsImportFromCampaign.js";
 import { betaObservabilityDatasetsImportFromDatasetRecords } from "../funcs/betaObservabilityDatasetsImportFromDatasetRecords.js";
-import { betaObservabilityDatasetsImportFromExplorer } from "../funcs/betaObservabilityDatasetsImportFromExplorer.js";
 import { betaObservabilityDatasetsImportFromFile } from "../funcs/betaObservabilityDatasetsImportFromFile.js";
 import { betaObservabilityDatasetsImportFromPlayground } from "../funcs/betaObservabilityDatasetsImportFromPlayground.js";
 import { betaObservabilityDatasetsList } from "../funcs/betaObservabilityDatasetsList.js";
@@ -129,36 +127,6 @@ export class Datasets extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.DatasetRecord> {
     return unwrapAsync(betaObservabilityDatasetsCreateRecord(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Populate the dataset with records from a campaign
-   */
-  async importFromCampaign(
-    request:
-      operations.PostDatasetRecordsFromCampaignV1ObservabilityDatasetsDatasetIdImportsFromCampaignPostRequest,
-    options?: RequestOptions,
-  ): Promise<components.DatasetImportTask> {
-    return unwrapAsync(betaObservabilityDatasetsImportFromCampaign(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Populate the dataset with records from the explorer
-   */
-  async importFromExplorer(
-    request:
-      operations.PostDatasetRecordsFromExplorerV1ObservabilityDatasetsDatasetIdImportsFromExplorerPostRequest,
-    options?: RequestOptions,
-  ): Promise<components.DatasetImportTask> {
-    return unwrapAsync(betaObservabilityDatasetsImportFromExplorer(
       this,
       request,
       options,

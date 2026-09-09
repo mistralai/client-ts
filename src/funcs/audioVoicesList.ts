@@ -32,7 +32,9 @@ import { Result } from "../types/fp.js";
  * List all voices
  *
  * @remarks
- * List all voices (excluding sample data)
+ * Offset pagination will not be supported anymore. Use GET /v2/audio/voices instead.
+ *
+ * @deprecated method: Offset pagination will not be supported anymore. Use GET /v2/audio/voices instead..
  */
 export function audioVoicesList(
   client: MistralCore,

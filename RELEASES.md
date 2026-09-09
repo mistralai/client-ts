@@ -509,3 +509,77 @@ Based on:
 - [typescript v2.6.4] .
 ### Releases
 - [NPM v2.6.4] https://www.npmjs.com/package/@mistralai/mistralai/v/2.6.4 - .
+
+## 2026-09-09 10:26:10
+### API changes
+Removed (19):
+- betaConnectorsCreateOrUpdateOrganizationCredentials
+- betaConnectorsCreateOrUpdateUserCredentials
+- betaConnectorsCreateOrUpdateWorkspaceCredentials
+- betaObservabilityCampaignsCreate
+- betaObservabilityCampaignsDelete
+- betaObservabilityCampaignsFetch
+- betaObservabilityCampaignsFetchStatus
+- betaObservabilityCampaignsList
+- betaObservabilityCampaignsListEvents
+- betaObservabilityChatCompletionEventsFetch
+- betaObservabilityChatCompletionEventsFetchSimilarEvents
+- betaObservabilityChatCompletionEventsFieldsFetchOptionCounts
+- betaObservabilityChatCompletionEventsFieldsFetchOptions
+- betaObservabilityChatCompletionEventsFieldsList
+- betaObservabilityChatCompletionEventsJudge
+- betaObservabilityChatCompletionEventsSearch
+- betaObservabilityChatCompletionEventsSearchIds
+- betaObservabilityDatasetsImportFromCampaign
+- betaObservabilityDatasetsImportFromExplorer
+
+Added (17):
+- betaConnectorsCreateCredentials
+- betaConnectorsShareToOrganization
+- betaConnectorsUnshareFromOrganization
+- betaConnectorsUpdateCredentials
+- betaObservabilityEvaluationsCreatePipelineConfig
+- betaObservabilityEvaluationsDeletePipelineConfig
+- betaObservabilityEvaluationsGetPipelineConfig
+- betaObservabilityEvaluationsListPipelineConfigs
+- betaObservabilityEvaluationsUpdatePipelineConfig
+- betaServiceAccountsCreate
+- betaServiceAccountsDelete
+- betaServiceAccountsGet
+- betaServiceAccountsList
+- betaServiceAccountsListAssignableRoles
+- betaServiceAccountsListRoles
+- betaServiceAccountsSetRoles
+- betaServiceAccountsUpdate
+
+### Breaking changes
+
+Connectors
+
+- `connectors.create` now takes a single request object, and `connectors.update`
+  a `request_body`. The named arguments (`name`, `description`, `server`,
+  `title`, ...) are no longer accepted.
+- `Connector` is now a union of `HTTPConnector` and `MCPConnector`, discriminated
+  on `protocol`. Fields that were flat on `Connector` now live on the variant.
+- `protocol` is required on the create payload. In TypeScript it no longer
+  defaults to `"mcp"`, so it must be passed explicitly. Python still defaults it.
+
+Other models
+
+- `ExtendedOAuthServerMetadata.authorization_endpoint` is now optional.
+- `UsageInfoDollarDefs.service_tier` has been removed.
+- Three fields on `DeploymentWorkerSpecResponse` are now required.
+
+### Fixed
+
+- Transcription segment `start` and `end` are now nullable. The API can return
+  null for these, so diarized transcriptions previously failed to parse.
+
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.763.6 (2.884.13) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v2.7.0] .
+### Releases
+- [NPM v2.7.0] https://www.npmjs.com/package/@mistralai/mistralai/v/2.7.0 - .

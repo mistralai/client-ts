@@ -6,26 +6,82 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  DeploymentK8sBackendSpec,
+  DeploymentK8sBackendSpec$inboundSchema,
+} from "./deploymentk8sbackendspec.js";
+import {
+  DeploymentKoyebBackendSpec,
+  DeploymentKoyebBackendSpec$inboundSchema,
+} from "./deploymentkoyebbackendspec.js";
 import {
   GitCommitMetadata,
   GitCommitMetadata$inboundSchema,
 } from "./gitcommitmetadata.js";
 
+/**
+ * Backend-specific configuration. The arm's 'type' says where the worker runs: 'koyeb' or 'kubernetes'.
+ */
+export type DeploymentWorkerSpecResponseBackendSpec =
+  | DeploymentKoyebBackendSpec
+  | DeploymentK8sBackendSpec
+  | discriminatedUnionTypes.Unknown<"type">;
+
 export type DeploymentWorkerSpecResponse = {
   githubUrl: string;
   type: string;
   revision?: string | null | undefined;
-  entrypoint?: string | null | undefined;
-  workingDir?: string | null | undefined;
+  /**
+   * Backend-specific configuration. The arm's 'type' says where the worker runs: 'koyeb' or 'kubernetes'.
+   */
+  backendSpec:
+    | DeploymentKoyebBackendSpec
+    | DeploymentK8sBackendSpec
+    | discriminatedUnionTypes.Unknown<"type">;
   restartedAt?: string | null | undefined;
+  commit?: GitCommitMetadata | null | undefined;
   /**
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  commitSha?: string | null | undefined;
-  commit?: GitCommitMetadata | null | undefined;
+  commitSha: string | null;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  entrypoint: string | null;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  workingDir: string | null;
 };
+
+/** @internal */
+export const DeploymentWorkerSpecResponseBackendSpec$inboundSchema: z.ZodType<
+  DeploymentWorkerSpecResponseBackendSpec,
+  unknown
+> = discriminatedUnion("type", {
+  koyeb: DeploymentKoyebBackendSpec$inboundSchema,
+  kubernetes: DeploymentK8sBackendSpec$inboundSchema,
+});
+
+export function deploymentWorkerSpecResponseBackendSpecFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentWorkerSpecResponseBackendSpec,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentWorkerSpecResponseBackendSpec$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentWorkerSpecResponseBackendSpec' from JSON`,
+  );
+}
 
 /** @internal */
 export const DeploymentWorkerSpecResponse$inboundSchema: z.ZodType<
@@ -35,17 +91,22 @@ export const DeploymentWorkerSpecResponse$inboundSchema: z.ZodType<
   github_url: z.string(),
   type: z.string().default("workflows_worker"),
   revision: z.nullable(z.string()).optional(),
-  entrypoint: z.nullable(z.string()).optional(),
-  working_dir: z.nullable(z.string()).optional(),
+  backend_spec: discriminatedUnion("type", {
+    koyeb: DeploymentKoyebBackendSpec$inboundSchema,
+    kubernetes: DeploymentK8sBackendSpec$inboundSchema,
+  }),
   restarted_at: z.nullable(z.string()).optional(),
-  commit_sha: z.nullable(z.string()).optional(),
   commit: z.nullable(GitCommitMetadata$inboundSchema).optional(),
+  commit_sha: z.nullable(z.string()),
+  entrypoint: z.nullable(z.string()),
+  working_dir: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "github_url": "githubUrl",
-    "working_dir": "workingDir",
+    "backend_spec": "backendSpec",
     "restarted_at": "restartedAt",
     "commit_sha": "commitSha",
+    "working_dir": "workingDir",
   });
 });
 

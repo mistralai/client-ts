@@ -8,12 +8,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetWorkflowExecutionV1WorkflowsExecutionsExecutionIdGetRequest = {
   executionId: string;
+  /**
+   * Include the execution's search keys (metadata) in the response.
+   */
+  includeSearchKeys?: boolean | undefined;
 };
 
 /** @internal */
 export type GetWorkflowExecutionV1WorkflowsExecutionsExecutionIdGetRequest$Outbound =
   {
     execution_id: string;
+    include_search_keys: boolean;
   };
 
 /** @internal */
@@ -23,9 +28,11 @@ export const GetWorkflowExecutionV1WorkflowsExecutionsExecutionIdGetRequest$outb
     GetWorkflowExecutionV1WorkflowsExecutionsExecutionIdGetRequest
   > = z.object({
     executionId: z.string(),
+    includeSearchKeys: z.boolean().default(false),
   }).transform((v) => {
     return remap$(v, {
       executionId: "execution_id",
+      includeSearchKeys: "include_search_keys",
     });
   });
 

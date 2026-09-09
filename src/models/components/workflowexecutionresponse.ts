@@ -66,6 +66,10 @@ export type WorkflowExecutionResponse = {
    * The result of the workflow execution, if available
    */
   result: any | null;
+  /**
+   * The execution's search keys (metadata), if requested via include_search_keys.
+   */
+  searchKeys?: { [k: string]: string } | null | undefined;
 };
 
 /** @internal */
@@ -88,6 +92,7 @@ export const WorkflowExecutionResponse$inboundSchema: z.ZodType<
   ),
   total_duration_ms: z.nullable(z.int()).optional(),
   result: z.nullable(z.any()),
+  search_keys: z.nullable(z.record(z.string(), z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "workflow_name": "workflowName",
@@ -101,6 +106,7 @@ export const WorkflowExecutionResponse$inboundSchema: z.ZodType<
     "start_time": "startTime",
     "end_time": "endTime",
     "total_duration_ms": "totalDurationMs",
+    "search_keys": "searchKeys",
   });
 });
 

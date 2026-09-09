@@ -244,7 +244,7 @@ We have dedicated SDKs for the following providers:
 
 ### [Audio.Voices](docs/sdks/voices/README.md)
 
-* [list](docs/sdks/voices/README.md#list) - List all voices
+* [~~list~~](docs/sdks/voices/README.md#list) - List all voices :warning: **Deprecated**
 * [create](docs/sdks/voices/README.md#create) - Create a new voice
 * [delete](docs/sdks/voices/README.md#delete) - Delete a custom voice
 * [update](docs/sdks/voices/README.md#update) - Update voice metadata
@@ -281,18 +281,19 @@ We have dedicated SDKs for the following providers:
 * [getAuthUrl](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
 * [share](docs/sdks/connectors/README.md#share) - Share a private connector to the current workspace.
 * [unshare](docs/sdks/connectors/README.md#unshare) - Unshare a connector from the current workspace.
+* [shareToOrganization](docs/sdks/connectors/README.md#sharetoorganization) - Share a connector to the current organization.
+* [unshareFromOrganization](docs/sdks/connectors/README.md#unsharefromorganization) - Unshare a connector from the current organization.
 * [activateForConsumer](docs/sdks/connectors/README.md#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
 * [deactivateForConsumer](docs/sdks/connectors/README.md#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
 * [callTool](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 * [listTools](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
 * [getAuthenticationMethods](docs/sdks/connectors/README.md#getauthenticationmethods) - Get authentication methods for a connector.
 * [listOrganizationCredentials](docs/sdks/connectors/README.md#listorganizationcredentials) - List organization credentials for a connector.
-* [createOrUpdateOrganizationCredentials](docs/sdks/connectors/README.md#createorupdateorganizationcredentials) - Create or update organization credentials for a connector.
 * [listWorkspaceCredentials](docs/sdks/connectors/README.md#listworkspacecredentials) - List workspace credentials for a connector.
-* [createOrUpdateWorkspaceCredentials](docs/sdks/connectors/README.md#createorupdateworkspacecredentials) - Create or update workspace credentials for a connector.
 * [listUserCredentials](docs/sdks/connectors/README.md#listusercredentials) - List user credentials for a connector.
-* [createOrUpdateUserCredentials](docs/sdks/connectors/README.md#createorupdateusercredentials) - Create or update user credentials for a connector.
 * [deleteAllUserCredentials](docs/sdks/connectors/README.md#deleteallusercredentials) - Delete all user credentials for a connector.
+* [createCredentials](docs/sdks/connectors/README.md#createcredentials) - Create consumer credentials for a connector.
+* [updateCredentials](docs/sdks/connectors/README.md#updatecredentials) - Create or update consumer credentials for a connector.
 * [deleteOrganizationCredentials](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
 * [deleteWorkspaceCredentials](docs/sdks/connectors/README.md#deleteworkspacecredentials) - Delete workspace credentials for a connector.
 * [deleteUserCredentials](docs/sdks/connectors/README.md#deleteusercredentials) - Delete user credentials for a connector.
@@ -343,29 +344,6 @@ We have dedicated SDKs for the following providers:
 * [extractedTextSignedUrl](docs/sdks/documents/README.md#extractedtextsignedurl) - Retrieve the signed URL of text extracted from a given document.
 * [reprocess](docs/sdks/documents/README.md#reprocess) - Reprocess a document.
 
-### [Beta.Observability.Campaigns](docs/sdks/campaigns/README.md)
-
-* [create](docs/sdks/campaigns/README.md#create) - Create and start a new campaign
-* [list](docs/sdks/campaigns/README.md#list) - Get all campaigns
-* [fetch](docs/sdks/campaigns/README.md#fetch) - Get campaign by id
-* [delete](docs/sdks/campaigns/README.md#delete) - Delete a campaign
-* [fetchStatus](docs/sdks/campaigns/README.md#fetchstatus) - Get campaign status by campaign id
-* [listEvents](docs/sdks/campaigns/README.md#listevents) - Get event ids that were selected by the given campaign
-
-### [Beta.Observability.ChatCompletionEvents](docs/sdks/chatcompletionevents/README.md)
-
-* [search](docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
-* [searchIds](docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
-* [fetch](docs/sdks/chatcompletionevents/README.md#fetch) - Get Chat Completion Event
-* [fetchSimilarEvents](docs/sdks/chatcompletionevents/README.md#fetchsimilarevents) - Get Similar Chat Completion Events
-* [judge](docs/sdks/chatcompletionevents/README.md#judge) - Run Judge on an event based on the given options
-
-#### [Beta.Observability.ChatCompletionEvents.Fields](docs/sdks/fields/README.md)
-
-* [list](docs/sdks/fields/README.md#list) - Get Chat Completion Fields
-* [fetchOptions](docs/sdks/fields/README.md#fetchoptions) - Get Chat Completion Field Options
-* [fetchOptionCounts](docs/sdks/fields/README.md#fetchoptioncounts) - Get Chat Completion Field Options Counts
-
 ### [Beta.Observability.Datasets](docs/sdks/datasets/README.md)
 
 * [create](docs/sdks/datasets/README.md#create) - Create a new empty dataset
@@ -375,8 +353,6 @@ We have dedicated SDKs for the following providers:
 * [update](docs/sdks/datasets/README.md#update) - Patch dataset
 * [listRecords](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
 * [createRecord](docs/sdks/datasets/README.md#createrecord) - Add a record to the dataset
-* [importFromCampaign](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with records from a campaign
-* [importFromExplorer](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with records from the explorer
 * [importFromFile](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with records from an uploaded file
 * [importFromPlayground](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with records from playground conversations
 * [importFromDatasetRecords](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with records from another dataset
@@ -392,6 +368,14 @@ We have dedicated SDKs for the following providers:
 * [judge](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
 * [updatePayload](docs/sdks/records/README.md#updatepayload) - Update a dataset record payload
 * [updateProperties](docs/sdks/records/README.md#updateproperties) - Update dataset record properties
+
+### [Beta.Observability.Evaluations](docs/sdks/evaluations/README.md)
+
+* [createPipelineConfig](docs/sdks/evaluations/README.md#createpipelineconfig) - Create a worker pipeline configuration
+* [listPipelineConfigs](docs/sdks/evaluations/README.md#listpipelineconfigs) - List worker pipeline configurations
+* [getPipelineConfig](docs/sdks/evaluations/README.md#getpipelineconfig) - Get a worker pipeline configuration
+* [updatePipelineConfig](docs/sdks/evaluations/README.md#updatepipelineconfig) - Replace a worker pipeline configuration
+* [deletePipelineConfig](docs/sdks/evaluations/README.md#deletepipelineconfig) - Delete a worker pipeline configuration
 
 ### [Beta.Observability.Judges](docs/sdks/judges/README.md)
 
@@ -453,6 +437,17 @@ We have dedicated SDKs for the following providers:
 * [registerDeployment](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
 * [unregisterDeployment](docs/sdks/searchindexes/README.md#unregisterdeployment) - Unregister Deployment
 * [updateIndexMetrics](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
+
+### [Beta.ServiceAccounts](docs/sdks/serviceaccounts/README.md)
+
+* [create](docs/sdks/serviceaccounts/README.md#create) - Create Service Account
+* [list](docs/sdks/serviceaccounts/README.md#list) - List Service Accounts
+* [listAssignableRoles](docs/sdks/serviceaccounts/README.md#listassignableroles) - List Assignable Service Account Roles
+* [get](docs/sdks/serviceaccounts/README.md#get) - Get Service Account
+* [update](docs/sdks/serviceaccounts/README.md#update) - Update Service Account
+* [delete](docs/sdks/serviceaccounts/README.md#delete) - Delete Service Account
+* [setRoles](docs/sdks/serviceaccounts/README.md#setroles) - Set Service Account Roles
+* [listRoles](docs/sdks/serviceaccounts/README.md#listroles) - List Service Account Roles
 
 ### [Beta.Skills](docs/sdks/skills/README.md)
 
@@ -811,13 +806,9 @@ const mistral = new Mistral({
 
 async function run() {
   try {
-    const result = await mistral.beta.conversations.start({
-      inputs: "<value>",
-      completionArgs: {
-        responseFormat: {
-          type: "text",
-        },
-      },
+    const result = await mistral.beta.serviceAccounts.create({
+      name: "<value>",
+      workspaceId: "cf2146d0-158c-4b19-b8b1-ca0c68f41143",
     });
 
     console.log(result);
@@ -858,8 +849,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 146 of 247 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 59 of 247 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 155 of 245 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 48 of 245 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1057,7 +1048,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`audioVoicesDelete`](docs/sdks/voices/README.md#delete) - Delete a custom voice
 - [`audioVoicesGet`](docs/sdks/voices/README.md#get) - Get voice details
 - [`audioVoicesGetSampleAudio`](docs/sdks/voices/README.md#getsampleaudio) - Get voice sample audio
-- [`audioVoicesList`](docs/sdks/voices/README.md#list) - List all voices
 - [`audioVoicesUpdate`](docs/sdks/voices/README.md#update) - Update voice metadata
 - [`batchJobsCancel`](docs/sdks/jobs/README.md#cancel) - Cancel Batch Job
 - [`batchJobsCreate`](docs/sdks/jobs/README.md#create) - Create Batch Job
@@ -1078,9 +1068,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaConnectorsActivateForConsumer`](docs/sdks/connectors/README.md#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
 - [`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 - [`betaConnectorsCreate`](docs/sdks/connectors/README.md#create) - Create a new connector.
-- [`betaConnectorsCreateOrUpdateOrganizationCredentials`](docs/sdks/connectors/README.md#createorupdateorganizationcredentials) - Create or update organization credentials for a connector.
-- [`betaConnectorsCreateOrUpdateUserCredentials`](docs/sdks/connectors/README.md#createorupdateusercredentials) - Create or update user credentials for a connector.
-- [`betaConnectorsCreateOrUpdateWorkspaceCredentials`](docs/sdks/connectors/README.md#createorupdateworkspacecredentials) - Create or update workspace credentials for a connector.
+- [`betaConnectorsCreateCredentials`](docs/sdks/connectors/README.md#createcredentials) - Create consumer credentials for a connector.
 - [`betaConnectorsDeactivateForConsumer`](docs/sdks/connectors/README.md#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
 - [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
 - [`betaConnectorsDeleteAllUserCredentials`](docs/sdks/connectors/README.md#deleteallusercredentials) - Delete all user credentials for a connector.
@@ -1096,8 +1084,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaConnectorsListUserCredentials`](docs/sdks/connectors/README.md#listusercredentials) - List user credentials for a connector.
 - [`betaConnectorsListWorkspaceCredentials`](docs/sdks/connectors/README.md#listworkspacecredentials) - List workspace credentials for a connector.
 - [`betaConnectorsShare`](docs/sdks/connectors/README.md#share) - Share a private connector to the current workspace.
+- [`betaConnectorsShareToOrganization`](docs/sdks/connectors/README.md#sharetoorganization) - Share a connector to the current organization.
 - [`betaConnectorsUnshare`](docs/sdks/connectors/README.md#unshare) - Unshare a connector from the current workspace.
+- [`betaConnectorsUnshareFromOrganization`](docs/sdks/connectors/README.md#unsharefromorganization) - Unshare a connector from the current organization.
 - [`betaConnectorsUpdate`](docs/sdks/connectors/README.md#update) - Update a connector.
+- [`betaConnectorsUpdateCredentials`](docs/sdks/connectors/README.md#updatecredentials) - Create or update consumer credentials for a connector.
 - [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 - [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
 - [`betaConversationsDelete`](docs/sdks/conversations/README.md#delete) - Delete a conversation.
@@ -1127,29 +1118,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaLibrariesGet`](docs/sdks/libraries/README.md#get) - Detailed information about a specific Library.
 - [`betaLibrariesList`](docs/sdks/libraries/README.md#list) - List all libraries you have access to.
 - [`betaLibrariesUpdate`](docs/sdks/libraries/README.md#update) - Update a library.
-- [`betaObservabilityCampaignsCreate`](docs/sdks/campaigns/README.md#create) - Create and start a new campaign
-- [`betaObservabilityCampaignsDelete`](docs/sdks/campaigns/README.md#delete) - Delete a campaign
-- [`betaObservabilityCampaignsFetch`](docs/sdks/campaigns/README.md#fetch) - Get campaign by id
-- [`betaObservabilityCampaignsFetchStatus`](docs/sdks/campaigns/README.md#fetchstatus) - Get campaign status by campaign id
-- [`betaObservabilityCampaignsList`](docs/sdks/campaigns/README.md#list) - Get all campaigns
-- [`betaObservabilityCampaignsListEvents`](docs/sdks/campaigns/README.md#listevents) - Get event ids that were selected by the given campaign
-- [`betaObservabilityChatCompletionEventsFetch`](docs/sdks/chatcompletionevents/README.md#fetch) - Get Chat Completion Event
-- [`betaObservabilityChatCompletionEventsFetchSimilarEvents`](docs/sdks/chatcompletionevents/README.md#fetchsimilarevents) - Get Similar Chat Completion Events
-- [`betaObservabilityChatCompletionEventsFieldsFetchOptionCounts`](docs/sdks/fields/README.md#fetchoptioncounts) - Get Chat Completion Field Options Counts
-- [`betaObservabilityChatCompletionEventsFieldsFetchOptions`](docs/sdks/fields/README.md#fetchoptions) - Get Chat Completion Field Options
-- [`betaObservabilityChatCompletionEventsFieldsList`](docs/sdks/fields/README.md#list) - Get Chat Completion Fields
-- [`betaObservabilityChatCompletionEventsJudge`](docs/sdks/chatcompletionevents/README.md#judge) - Run Judge on an event based on the given options
-- [`betaObservabilityChatCompletionEventsSearch`](docs/sdks/chatcompletionevents/README.md#search) - Get Chat Completion Events
-- [`betaObservabilityChatCompletionEventsSearchIds`](docs/sdks/chatcompletionevents/README.md#searchids) - Alternative to /search that returns only the IDs and that can return many IDs at once
 - [`betaObservabilityDatasetsCreate`](docs/sdks/datasets/README.md#create) - Create a new empty dataset
 - [`betaObservabilityDatasetsCreateRecord`](docs/sdks/datasets/README.md#createrecord) - Add a record to the dataset
 - [`betaObservabilityDatasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
 - [`betaObservabilityDatasetsExportToJsonl`](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
 - [`betaObservabilityDatasetsFetch`](docs/sdks/datasets/README.md#fetch) - Get dataset by id
 - [`betaObservabilityDatasetsFetchTask`](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
-- [`betaObservabilityDatasetsImportFromCampaign`](docs/sdks/datasets/README.md#importfromcampaign) - Populate the dataset with records from a campaign
 - [`betaObservabilityDatasetsImportFromDatasetRecords`](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with records from another dataset
-- [`betaObservabilityDatasetsImportFromExplorer`](docs/sdks/datasets/README.md#importfromexplorer) - Populate the dataset with records from the explorer
 - [`betaObservabilityDatasetsImportFromFile`](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with records from an uploaded file
 - [`betaObservabilityDatasetsImportFromPlayground`](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with records from playground conversations
 - [`betaObservabilityDatasetsList`](docs/sdks/datasets/README.md#list) - List existing datasets
@@ -1162,6 +1137,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityDatasetsRecordsUpdatePayload`](docs/sdks/records/README.md#updatepayload) - Update a dataset record payload
 - [`betaObservabilityDatasetsRecordsUpdateProperties`](docs/sdks/records/README.md#updateproperties) - Update dataset record properties
 - [`betaObservabilityDatasetsUpdate`](docs/sdks/datasets/README.md#update) - Patch dataset
+- [`betaObservabilityEvaluationsCreatePipelineConfig`](docs/sdks/evaluations/README.md#createpipelineconfig) - Create a worker pipeline configuration
+- [`betaObservabilityEvaluationsDeletePipelineConfig`](docs/sdks/evaluations/README.md#deletepipelineconfig) - Delete a worker pipeline configuration
+- [`betaObservabilityEvaluationsGetPipelineConfig`](docs/sdks/evaluations/README.md#getpipelineconfig) - Get a worker pipeline configuration
+- [`betaObservabilityEvaluationsListPipelineConfigs`](docs/sdks/evaluations/README.md#listpipelineconfigs) - List worker pipeline configurations
+- [`betaObservabilityEvaluationsUpdatePipelineConfig`](docs/sdks/evaluations/README.md#updatepipelineconfig) - Replace a worker pipeline configuration
 - [`betaObservabilityJudgesCreate`](docs/sdks/judges/README.md#create) - Create a new judge
 - [`betaObservabilityJudgesDelete`](docs/sdks/judges/README.md#delete) - Delete a judge
 - [`betaObservabilityJudgesFetch`](docs/sdks/judges/README.md#fetch) - Get judge by id
@@ -1202,6 +1182,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagSearchIndexesRegisterDeployment`](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
 - [`betaRagSearchIndexesUnregisterDeployment`](docs/sdks/searchindexes/README.md#unregisterdeployment) - Unregister Deployment
 - [`betaRagSearchIndexesUpdateIndexMetrics`](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
+- [`betaServiceAccountsCreate`](docs/sdks/serviceaccounts/README.md#create) - Create Service Account
+- [`betaServiceAccountsDelete`](docs/sdks/serviceaccounts/README.md#delete) - Delete Service Account
+- [`betaServiceAccountsGet`](docs/sdks/serviceaccounts/README.md#get) - Get Service Account
+- [`betaServiceAccountsList`](docs/sdks/serviceaccounts/README.md#list) - List Service Accounts
+- [`betaServiceAccountsListAssignableRoles`](docs/sdks/serviceaccounts/README.md#listassignableroles) - List Assignable Service Account Roles
+- [`betaServiceAccountsListRoles`](docs/sdks/serviceaccounts/README.md#listroles) - List Service Account Roles
+- [`betaServiceAccountsSetRoles`](docs/sdks/serviceaccounts/README.md#setroles) - Set Service Account Roles
+- [`betaServiceAccountsUpdate`](docs/sdks/serviceaccounts/README.md#update) - Update Service Account
 - [`betaSkillsCreate`](docs/sdks/skills/README.md#create) - CreateSkill
 - [`betaSkillsCreateVersion`](docs/sdks/skills/README.md#createversion) - CreateSkillVersion
 - [`betaSkillsDelete`](docs/sdks/skills/README.md#delete) - DeleteSkill
@@ -1291,6 +1279,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsSchedulesUpdateSchedule`](docs/sdks/schedules/README.md#updateschedule) - Update Schedule
 - [`workflowsUnarchiveWorkflow`](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow
 - [`workflowsUpdateWorkflow`](docs/sdks/workflows/README.md#updateworkflow) - Update Workflow
+- ~~[`audioVoicesList`](docs/sdks/voices/README.md#list)~~ - List all voices :warning: **Deprecated**
 - ~~[`betaAgentsList`](docs/sdks/betaagents/README.md#list)~~ - List agent entities. :warning: **Deprecated** Use [`betaAgentsListPages`](docs/sdks/betaagents/README.md#listpages) instead.
 - ~~[`betaLibrariesDocumentsLibrariesDocumentsUpdateV1`](docs/sdks/documents/README.md#librariesdocumentsupdatev1)~~ - Update the metadata of a specific document. :warning: **Deprecated**
 - ~~[`betaLibrariesLibrariesUpdateV1`](docs/sdks/libraries/README.md#librariesupdatev1)~~ - Update a library. :warning: **Deprecated**

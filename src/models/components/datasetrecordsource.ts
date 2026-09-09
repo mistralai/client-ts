@@ -12,6 +12,7 @@ export const DatasetRecordSource = {
   UploadedFile: "UPLOADED_FILE",
   DirectInput: "DIRECT_INPUT",
   Playground: "PLAYGROUND",
+  TelemetrySpan: "TELEMETRY_SPAN",
 } as const;
 export type DatasetRecordSource = OpenEnum<typeof DatasetRecordSource>;
 

@@ -6,6 +6,7 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+import * as components from "../components/index.js";
 
 /**
  * Field to sort by. When omitted, active and managed deployments are grouped first, then sorted by created_at. When set, results are sorted purely by the specified field with no grouping.
@@ -42,6 +43,14 @@ export type ListDeploymentsV1WorkflowsDeploymentsGetRequest = {
    */
   isHardened?: boolean | null | undefined;
   workflowName?: string | null | undefined;
+  /**
+   * Filter deployments by creator's user id
+   */
+  createdBy?: string | null | undefined;
+  /**
+   * Filter deployments with at least one worker on any of these location types (OR)
+   */
+  locationTypes?: Array<components.LocationType> | null | undefined;
   /**
    * Filter deployments by name or ID prefix
    */
@@ -85,6 +94,8 @@ export type ListDeploymentsV1WorkflowsDeploymentsGetRequest$Outbound = {
   active_only: boolean;
   is_hardened?: boolean | null | undefined;
   workflow_name?: string | null | undefined;
+  created_by?: string | null | undefined;
+  location_types?: Array<string> | null | undefined;
   search?: string | null | undefined;
   order_by?: string | null | undefined;
   order: string;
@@ -102,6 +113,9 @@ export const ListDeploymentsV1WorkflowsDeploymentsGetRequest$outboundSchema:
     activeOnly: z.boolean().default(true),
     isHardened: z.nullable(z.boolean()).optional(),
     workflowName: z.nullable(z.string()).optional(),
+    createdBy: z.nullable(z.string()).optional(),
+    locationTypes: z.nullable(z.array(components.LocationType$outboundSchema))
+      .optional(),
     search: z.nullable(z.string()).optional(),
     orderBy: z.nullable(
       ListDeploymentsV1WorkflowsDeploymentsGetOrderBy$outboundSchema,
@@ -117,6 +131,8 @@ export const ListDeploymentsV1WorkflowsDeploymentsGetRequest$outboundSchema:
       activeOnly: "active_only",
       isHardened: "is_hardened",
       workflowName: "workflow_name",
+      createdBy: "created_by",
+      locationTypes: "location_types",
       orderBy: "order_by",
       workspaceId: "workspace_id",
     });

@@ -11,6 +11,7 @@ import { Libraries } from "./libraries.js";
 import { Observability } from "./observability.js";
 import { Prompts } from "./prompts.js";
 import { Rag } from "./rag.js";
+import { ServiceAccounts } from "./serviceaccounts.js";
 import { Skills } from "./skills.js";
 import { Users } from "./users.js";
 
@@ -23,6 +24,11 @@ export class Beta extends ClientSDK {
   private _skills?: Skills;
   get skills(): Skills {
     return (this._skills ??= new Skills(this._options));
+  }
+
+  private _serviceAccounts?: ServiceAccounts;
+  get serviceAccounts(): ServiceAccounts {
+    return (this._serviceAccounts ??= new ServiceAccounts(this._options));
   }
 
   private _conversations?: Conversations;

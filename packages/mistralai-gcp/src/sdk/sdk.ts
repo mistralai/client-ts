@@ -1,20 +1,23 @@
 import { GoogleAuth } from "google-auth-library";
+
+import { SDKHooks } from "../hooks/index.js";
 import { SDKOptions } from "../lib/config.js";
 import { ClientSDK } from "../lib/sdks.js";
 import { Chat } from "./chat.js";
 import { Fim } from "./fim.js";
-import { SDKHooks } from "../hooks/index.js";
 
-export type GoogleCloudOptions = {
-  /** The region of the Google Cloud AI Platform endpoint */
-  region?: string;
-  projectId?: string;
-} | {
-  /** The region of the Google Cloud AI Platform endpoint */
-  region?: string;
-  apiKey: () => Promise<string>;
-  projectId: string;
-}
+export type GoogleCloudOptions =
+  | {
+      /** The region of the Google Cloud AI Platform endpoint */
+      region?: string;
+      projectId?: string;
+    }
+  | {
+      /** The region of the Google Cloud AI Platform endpoint */
+      region?: string;
+      apiKey: () => Promise<string>;
+      projectId: string;
+    };
 
 const LEGACY_MODEL_ID_FORMAT: { [key: string]: string } = {
   "codestral-2405": "codestral@2405",
@@ -38,7 +41,9 @@ export class MistralGCP extends ClientSDK {
     options.serverURL = `https://${options.region}-aiplatform.googleapis.com`;
     if (options.apiKey) {
       if (!options.projectId) {
-        throw new Error("if apiKey is provided, projectId must also be provided to be able to use the Google Cloud API");
+        throw new Error(
+          "if apiKey is provided, projectId must also be provided to be able to use the Google Cloud API",
+        );
       }
     } else {
       const auth = new GoogleAuth({
@@ -49,20 +54,22 @@ export class MistralGCP extends ClientSDK {
         const authHeaders = await authClient.getRequestHeaders();
         const token = authHeaders.get("Authorization");
         if (!token) {
-          throw new Error("failed to get Google Cloud API key from the default authorization provider, check you are authenticated");
+          throw new Error(
+            "failed to get Google Cloud API key from the default authorization provider, check you are authenticated",
+          );
         }
 
         if (!options.projectId) {
           const userProject = authHeaders.get("x-goog-user-project");
           if (!userProject) {
             throw new Error(
-              "no project id available in default google credentials. Please provide a project id in the input arguments to MistralGCP."
+              "no project id available in default google credentials. Please provide a project id in the input arguments to MistralGCP.",
             );
           }
           projectId = userProject;
         }
         return token;
-      }
+      };
     }
 
     const hooks = new SDKHooks();
@@ -70,7 +77,7 @@ export class MistralGCP extends ClientSDK {
     const superOptions: SDKOptions & { hooks?: SDKHooks } = options;
     superOptions.hooks = hooks;
 
-    super(options)
+    super(options);
 
     hooks.registerBeforeCreateRequestHook({
       beforeCreateRequest: (_, input) => {
@@ -108,7 +115,7 @@ export class MistralGCP extends ClientSDK {
 
         input.url.pathname = `v1/projects/${projectId}/locations/${options.region}/publishers/mistralai/models/${modelId}:${rawPredictType}`;
 
-        body.model = model
+        body.model = model;
 
         input.options.body = JSON.stringify(body);
 
@@ -121,7 +128,6 @@ export class MistralGCP extends ClientSDK {
   get chat(): Chat {
     return (this._chat ??= new Chat(this._options));
   }
-
 
   private _fim?: Fim;
   get fim(): Fim {

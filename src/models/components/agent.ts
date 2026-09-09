@@ -85,6 +85,7 @@ export type Agent = {
   id: string;
   version: number;
   versions: Array<number>;
+  ownerId?: string | null | undefined;
   createdAt: Date;
   updatedAt: Date;
   deploymentChat: boolean;
@@ -137,6 +138,7 @@ export const Agent$inboundSchema: z.ZodType<Agent, unknown> = z.object({
   id: z.string(),
   version: z.int(),
   versions: z.array(z.int()),
+  owner_id: z.nullable(z.string()).optional(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   deployment_chat: z.boolean(),
@@ -145,6 +147,7 @@ export const Agent$inboundSchema: z.ZodType<Agent, unknown> = z.object({
 }).transform((v) => {
   return remap$(v, {
     "completion_args": "completionArgs",
+    "owner_id": "ownerId",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
     "deployment_chat": "deploymentChat",

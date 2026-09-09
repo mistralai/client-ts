@@ -5,18 +5,79 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  DeploymentK8sBackendSpec,
+  DeploymentK8sBackendSpec$Outbound,
+  DeploymentK8sBackendSpec$outboundSchema,
+} from "./deploymentk8sbackendspec.js";
+import {
+  DeploymentKoyebBackendSpec,
+  DeploymentKoyebBackendSpec$Outbound,
+  DeploymentKoyebBackendSpec$outboundSchema,
+} from "./deploymentkoyebbackendspec.js";
+
+export type DeploymentWorkerSpecInputBackendSpec =
+  | DeploymentKoyebBackendSpec
+  | DeploymentK8sBackendSpec;
 
 export type DeploymentWorkerSpecInput = {
   githubUrl: string;
   revision?: string | null | undefined;
+  /**
+   * Backend-specific configuration. The arm's 'type' picks where the worker runs: 'koyeb' (the default for a new deployment) or 'kubernetes'. Cannot be combined with the deprecated top-level 'entrypoint' and 'working_dir'.
+   */
+  backendSpec?:
+    | DeploymentKoyebBackendSpec
+    | DeploymentK8sBackendSpec
+    | null
+    | undefined;
+  /**
+   * Kubernetes-only. Setting it without 'backend_spec' selects the kubernetes backend, which is not generally available; setting it alongside 'backend_spec' returns 422.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   entrypoint?: string | null | undefined;
+  /**
+   * Kubernetes-only. Setting it without 'backend_spec' selects the kubernetes backend, which is not generally available; setting it alongside 'backend_spec' returns 422.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   workingDir?: string | null | undefined;
 };
+
+/** @internal */
+export type DeploymentWorkerSpecInputBackendSpec$Outbound =
+  | DeploymentKoyebBackendSpec$Outbound
+  | DeploymentK8sBackendSpec$Outbound;
+
+/** @internal */
+export const DeploymentWorkerSpecInputBackendSpec$outboundSchema: z.ZodType<
+  DeploymentWorkerSpecInputBackendSpec$Outbound,
+  DeploymentWorkerSpecInputBackendSpec
+> = z.union([
+  DeploymentKoyebBackendSpec$outboundSchema,
+  DeploymentK8sBackendSpec$outboundSchema,
+]);
+
+export function deploymentWorkerSpecInputBackendSpecToJSON(
+  deploymentWorkerSpecInputBackendSpec: DeploymentWorkerSpecInputBackendSpec,
+): string {
+  return JSON.stringify(
+    DeploymentWorkerSpecInputBackendSpec$outboundSchema.parse(
+      deploymentWorkerSpecInputBackendSpec,
+    ),
+  );
+}
 
 /** @internal */
 export type DeploymentWorkerSpecInput$Outbound = {
   github_url: string;
   revision?: string | null | undefined;
+  backend_spec?:
+    | DeploymentKoyebBackendSpec$Outbound
+    | DeploymentK8sBackendSpec$Outbound
+    | null
+    | undefined;
   entrypoint?: string | null | undefined;
   working_dir?: string | null | undefined;
 };
@@ -28,11 +89,18 @@ export const DeploymentWorkerSpecInput$outboundSchema: z.ZodType<
 > = z.object({
   githubUrl: z.string(),
   revision: z.nullable(z.string()).optional(),
+  backendSpec: z.nullable(
+    z.union([
+      DeploymentKoyebBackendSpec$outboundSchema,
+      DeploymentK8sBackendSpec$outboundSchema,
+    ]),
+  ).optional(),
   entrypoint: z.nullable(z.string()).optional(),
   workingDir: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     githubUrl: "github_url",
+    backendSpec: "backend_spec",
     workingDir: "working_dir",
   });
 });

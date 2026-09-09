@@ -24,7 +24,7 @@ import {
  */
 export type ExtendedOAuthServerMetadata = {
   issuer: string;
-  authorizationEndpoint: string;
+  authorizationEndpoint?: string | null | undefined;
   tokenEndpoint: string;
   registrationEndpoint?: string | null | undefined;
   scopesSupported?: Array<string> | null | undefined;
@@ -62,7 +62,7 @@ export const ExtendedOAuthServerMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   issuer: z.string(),
-  authorization_endpoint: z.string(),
+  authorization_endpoint: z.nullable(z.string()).optional(),
   token_endpoint: z.string(),
   registration_endpoint: z.nullable(z.string()).optional(),
   scopes_supported: z.nullable(z.array(z.string())).optional(),
@@ -133,7 +133,7 @@ export const ExtendedOAuthServerMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type ExtendedOAuthServerMetadata$Outbound = {
   issuer: string;
-  authorization_endpoint: string;
+  authorization_endpoint?: string | null | undefined;
   token_endpoint: string;
   registration_endpoint?: string | null | undefined;
   scopes_supported?: Array<string> | null | undefined;
@@ -177,7 +177,7 @@ export const ExtendedOAuthServerMetadata$outboundSchema: z.ZodType<
   ExtendedOAuthServerMetadata
 > = z.object({
   issuer: z.string(),
-  authorizationEndpoint: z.string(),
+  authorizationEndpoint: z.nullable(z.string()).optional(),
   tokenEndpoint: z.string(),
   registrationEndpoint: z.nullable(z.string()).optional(),
   scopesSupported: z.nullable(z.array(z.string())).optional(),

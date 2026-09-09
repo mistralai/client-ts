@@ -2,6 +2,7 @@ import { Hooks } from "./types.js";
 import { CustomUserAgentHook } from "./custom_user_agent.js";
 import { DeprecationWarningHook } from "./deprecation_warning.js";
 import { TracingHook } from "./tracing.js";
+import { WorkflowStreamErrorHook } from "./workflow_stream_error.js";
 
 /*
  * This file is only ever generated once on the first generation and then is free to be modified.
@@ -19,6 +20,11 @@ export function initHooks(hooks: Hooks) {
 
     const deprecationWarningHook = new DeprecationWarningHook();
     hooks.registerAfterSuccessHook(deprecationWarningHook)
+
+    // Registered before TracingHook so its wrapper stays innermost: TracingHook
+    // may replace the response with its own body-wrapping one.
+    const workflowStreamErrorHook = new WorkflowStreamErrorHook();
+    hooks.registerAfterSuccessHook(workflowStreamErrorHook)
 
     const tracingHook = new TracingHook();
     hooks.registerBeforeRequestHook(tracingHook)

@@ -4,6 +4,21 @@
  */
 
 import * as z from "zod/v4";
+import { ClosedEnum } from "../../types/enums.js";
+
+/**
+ * Caller-declared channel that initiated record creation. This value does not certify that the payload is an unmodified copy of its source.
+ */
+export const CreateDatasetRecordRequestSource = {
+  DirectInput: "DIRECT_INPUT",
+  TelemetrySpan: "TELEMETRY_SPAN",
+} as const;
+/**
+ * Caller-declared channel that initiated record creation. This value does not certify that the payload is an unmodified copy of its source.
+ */
+export type CreateDatasetRecordRequestSource = ClosedEnum<
+  typeof CreateDatasetRecordRequestSource
+>;
 
 export type CreateDatasetRecordRequest = {
   /**
@@ -11,12 +26,22 @@ export type CreateDatasetRecordRequest = {
    */
   payload: { [k: string]: any };
   properties?: { [k: string]: any } | undefined;
+  /**
+   * Caller-declared channel that initiated record creation. This value does not certify that the payload is an unmodified copy of its source.
+   */
+  source?: CreateDatasetRecordRequestSource | undefined;
 };
+
+/** @internal */
+export const CreateDatasetRecordRequestSource$outboundSchema: z.ZodEnum<
+  typeof CreateDatasetRecordRequestSource
+> = z.enum(CreateDatasetRecordRequestSource);
 
 /** @internal */
 export type CreateDatasetRecordRequest$Outbound = {
   payload: { [k: string]: any };
   properties?: { [k: string]: any } | undefined;
+  source: string;
 };
 
 /** @internal */
@@ -26,6 +51,9 @@ export const CreateDatasetRecordRequest$outboundSchema: z.ZodType<
 > = z.object({
   payload: z.record(z.string(), z.any()),
   properties: z.record(z.string(), z.any()).optional(),
+  source: CreateDatasetRecordRequestSource$outboundSchema.default(
+    "DIRECT_INPUT",
+  ),
 });
 
 export function createDatasetRecordRequestToJSON(

@@ -1,6 +1,6 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "2.6.4",
+  "version": "2.7.0",
   "author": "Mistral AI",
   "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
@@ -94,7 +94,7 @@
     "@types/node": "^22.0.0",
     "@types/ws": "^8.5.13",
     "@typescript/native-preview": "7.0.0-dev.20260302.1",
-    "oxlint": "^1.60.0",
+    "oxlint": "1.78.0",
     "typescript": "~5.8.3"
   },
   "dependencies": {
