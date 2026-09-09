@@ -30,78 +30,79 @@ The GCP package class has been renamed to align with the Python SDK: `MistralGoo
 Many types have been renamed for consistency. The v2 OpenAPI spec uses shorter, more intuitive names.
 
 **Pattern:**
+
 - **Requests**: `{Verb}{Entity}Request` (e.g., `CreateAgentRequest`)
 - **Responses**: `{Verb}{Entity}Response` (e.g., `ArchiveModelResponse`)
 - **Entities**: `{Entity}` without suffix (e.g., `BatchJob`)
 
 **Common examples:**
 
-| v1 Name | v2 Name |
-|---------|---------|
-| `AgentCreationRequest` | `CreateAgentRequest` |
-| `AgentUpdateRequest` | `UpdateAgentRequest` |
-| `BatchJobOut` | `BatchJob` |
-| `BatchJobIn` | `CreateBatchJobRequest` |
-| `BatchJobsOut` | `ListBatchJobsResponse` |
-| `ArchiveFTModelOut` | `ArchiveModelResponse` |
-| `UnarchiveFTModelOut` | `UnarchiveModelResponse` |
-| `DeleteModelOut` | `DeleteModelResponse` |
-| `LibraryOut` | `Library` |
-| `LibraryIn` | `CreateLibraryRequest` |
-| `JobIn` | `CreateFineTuningJobRequest` |
-| `JobsOut` | `ListFineTuningJobsResponse` |
+| v1 Name                | v2 Name                      |
+| ---------------------- | ---------------------------- |
+| `AgentCreationRequest` | `CreateAgentRequest`         |
+| `AgentUpdateRequest`   | `UpdateAgentRequest`         |
+| `BatchJobOut`          | `BatchJob`                   |
+| `BatchJobIn`           | `CreateBatchJobRequest`      |
+| `BatchJobsOut`         | `ListBatchJobsResponse`      |
+| `ArchiveFTModelOut`    | `ArchiveModelResponse`       |
+| `UnarchiveFTModelOut`  | `UnarchiveModelResponse`     |
+| `DeleteModelOut`       | `DeleteModelResponse`        |
+| `LibraryOut`           | `Library`                    |
+| `LibraryIn`            | `CreateLibraryRequest`       |
+| `JobIn`                | `CreateFineTuningJobRequest` |
+| `JobsOut`              | `ListFineTuningJobsResponse` |
 
 <details>
 <summary>Full rename table</summary>
 
-| v1 Name | v2 Name |
-|---------|---------|
-| `AgentCreationRequest` | `CreateAgentRequest` |
-| `AgentUpdateRequest` | `UpdateAgentRequest` |
-| `ArchiveFTModelOut` | `ArchiveModelResponse` |
-| `BatchJobIn` | `CreateBatchJobRequest` |
-| `BatchJobOut` | `BatchJob` |
-| `BatchJobsOut` | `ListBatchJobsResponse` |
-| `CheckpointOut` | `Checkpoint` |
-| `ClassifierDetailedJobOut` | `ClassifierFineTuningJobDetails` |
-| `ClassifierFTModelOut` | `ClassifierFineTunedModel` |
-| `ClassifierJobOut` | `ClassifierFineTuningJob` |
-| `ClassifierTargetIn` | `ClassifierTarget` |
-| `ClassifierTargetOut` | `ClassifierTargetResult` |
-| `ClassifierTrainingParametersIn` | `ClassifierTrainingParameters` |
-| `CompletionDetailedJobOut` | `CompletionFineTuningJobDetails` |
-| `CompletionFTModelOut` | `CompletionFineTunedModel` |
-| `CompletionJobOut` | `CompletionFineTuningJob` |
-| `CompletionTrainingParametersIn` | `CompletionTrainingParameters` |
-| `DeleteFileOut` | `DeleteFileResponse` |
-| `DeleteModelOut` | `DeleteModelResponse` |
-| `DocumentOut` | `Document` |
-| `DocumentUpdateIn` | `UpdateDocumentRequest` |
-| `EventOut` | `Event` |
-| `FileSignedURL` | `GetSignedUrlResponse` |
-| `FTModelCapabilitiesOut` | `FineTunedModelCapabilities` |
-| `GithubRepositoryIn` | `CreateGithubRepositoryRequest` |
-| `GithubRepositoryOut` | `GithubRepository` |
-| `JobIn` | `CreateFineTuningJobRequest` |
-| `JobMetadataOut` | `JobMetadata` |
-| `JobsOut` | `ListFineTuningJobsResponse` |
-| `LegacyJobMetadataOut` | `LegacyJobMetadata` |
-| `LibraryIn` | `CreateLibraryRequest` |
-| `LibraryInUpdate` | `UpdateLibraryRequest` |
-| `LibraryOut` | `Library` |
-| `ListDocumentOut` | `ListDocumentsResponse` |
-| `ListFilesOut` | `ListFilesResponse` |
-| `ListLibraryOut` | `ListLibrariesResponse` |
-| `ListSharingOut` | `ListSharingResponse` |
-| `MetricOut` | `Metric` |
-| `ProcessingStatusOut` | `ProcessingStatus` |
-| `RetrieveFileOut` | `GetFileResponse` |
-| `SharingIn` | `SharingRequest` |
-| `SharingOut` | `Sharing` |
-| `UnarchiveFTModelOut` | `UnarchiveModelResponse` |
-| `UpdateFTModelIn` | `UpdateModelRequest` |
-| `UploadFileOut` | `CreateFileResponse` |
-| `WandbIntegrationOut` | `WandbIntegrationResult` |
+| v1 Name                          | v2 Name                          |
+| -------------------------------- | -------------------------------- |
+| `AgentCreationRequest`           | `CreateAgentRequest`             |
+| `AgentUpdateRequest`             | `UpdateAgentRequest`             |
+| `ArchiveFTModelOut`              | `ArchiveModelResponse`           |
+| `BatchJobIn`                     | `CreateBatchJobRequest`          |
+| `BatchJobOut`                    | `BatchJob`                       |
+| `BatchJobsOut`                   | `ListBatchJobsResponse`          |
+| `CheckpointOut`                  | `Checkpoint`                     |
+| `ClassifierDetailedJobOut`       | `ClassifierFineTuningJobDetails` |
+| `ClassifierFTModelOut`           | `ClassifierFineTunedModel`       |
+| `ClassifierJobOut`               | `ClassifierFineTuningJob`        |
+| `ClassifierTargetIn`             | `ClassifierTarget`               |
+| `ClassifierTargetOut`            | `ClassifierTargetResult`         |
+| `ClassifierTrainingParametersIn` | `ClassifierTrainingParameters`   |
+| `CompletionDetailedJobOut`       | `CompletionFineTuningJobDetails` |
+| `CompletionFTModelOut`           | `CompletionFineTunedModel`       |
+| `CompletionJobOut`               | `CompletionFineTuningJob`        |
+| `CompletionTrainingParametersIn` | `CompletionTrainingParameters`   |
+| `DeleteFileOut`                  | `DeleteFileResponse`             |
+| `DeleteModelOut`                 | `DeleteModelResponse`            |
+| `DocumentOut`                    | `Document`                       |
+| `DocumentUpdateIn`               | `UpdateDocumentRequest`          |
+| `EventOut`                       | `Event`                          |
+| `FileSignedURL`                  | `GetSignedUrlResponse`           |
+| `FTModelCapabilitiesOut`         | `FineTunedModelCapabilities`     |
+| `GithubRepositoryIn`             | `CreateGithubRepositoryRequest`  |
+| `GithubRepositoryOut`            | `GithubRepository`               |
+| `JobIn`                          | `CreateFineTuningJobRequest`     |
+| `JobMetadataOut`                 | `JobMetadata`                    |
+| `JobsOut`                        | `ListFineTuningJobsResponse`     |
+| `LegacyJobMetadataOut`           | `LegacyJobMetadata`              |
+| `LibraryIn`                      | `CreateLibraryRequest`           |
+| `LibraryInUpdate`                | `UpdateLibraryRequest`           |
+| `LibraryOut`                     | `Library`                        |
+| `ListDocumentOut`                | `ListDocumentsResponse`          |
+| `ListFilesOut`                   | `ListFilesResponse`              |
+| `ListLibraryOut`                 | `ListLibrariesResponse`          |
+| `ListSharingOut`                 | `ListSharingResponse`            |
+| `MetricOut`                      | `Metric`                         |
+| `ProcessingStatusOut`            | `ProcessingStatus`               |
+| `RetrieveFileOut`                | `GetFileResponse`                |
+| `SharingIn`                      | `SharingRequest`                 |
+| `SharingOut`                     | `Sharing`                        |
+| `UnarchiveFTModelOut`            | `UnarchiveModelResponse`         |
+| `UpdateFTModelIn`                | `UpdateModelRequest`             |
+| `UploadFileOut`                  | `CreateFileResponse`             |
+| `WandbIntegrationOut`            | `WandbIntegrationResult`         |
 
 </details>
 
@@ -149,12 +150,13 @@ The SDK now uses Zod v4. If you import Zod schemas from the SDK (e.g., `ChatComp
 
 ## Version Support
 
-| Branch | Version | npm Tag |
-|--------|---------|---------|
-| `main` | 2.x | `latest` |
-| `v1` | 1.x (maintenance) | `v1` |
+| Branch | Version           | npm Tag  |
+| ------ | ----------------- | -------- |
+| `main` | 2.x               | `latest` |
+| `v1`   | 1.x (maintenance) | `v1`     |
 
 To pin to v1:
+
 ```bash
 npm install @mistralai/mistralai@^1
 ```

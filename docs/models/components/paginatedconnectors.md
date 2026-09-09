@@ -8,19 +8,21 @@ import { PaginatedConnectors } from "@mistralai/mistralai/models/components";
 let value: PaginatedConnectors = {
   items: [
     {
-      id: "5ab7db55-8a6f-479d-bd97-ef60c6415117",
+      id: "ab7db558-a6f7-49dd-a97e-f60c6415117e",
       name: "<value>",
       description:
-        "hmph notwithstanding meaningfully oof ick ramp and humiliating",
-      createdAt: new Date("2025-12-15T13:26:33.828Z"),
-      modifiedAt: new Date("2025-08-29T02:54:20.865Z"),
-      ownerType: "system",
-      visibility: "shared_workspace",
-      privateToolExecution: true,
+        "pity gym syringe underneath junior brood developing opposite",
+      createdAt: new Date("2025-08-29T02:54:20.865Z"),
+      modifiedAt: new Date("2026-09-03T10:45:18.008Z"),
+      ownerType: "workspace",
+      visibility: "shared_global",
+      privateToolExecution: false,
+      mistral: false,
+      protocol: "http",
     },
   ],
   pagination: {
-    pageSize: 804692,
+    pageSize: 123547,
   },
 };
 ```
@@ -29,5 +31,5 @@ let value: PaginatedConnectors = {
 
 | Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `items`                                                                        | [components.Connector](../../models/components/connector.md)[]                 | :heavy_check_mark:                                                             | N/A                                                                            |
+| `items`                                                                        | *components.Connector*[]                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
 | `pagination`                                                                   | [components.PaginationResponse](../../models/components/paginationresponse.md) | :heavy_check_mark:                                                             | N/A                                                                            |

@@ -36,7 +36,7 @@ export type DeploymentDetailResponse = {
    */
   isActive: boolean;
   /**
-   * Whether the deployment has at least one authorized credential
+   * Whether the deployment only accepts registrations from authorized principals
    */
   isHardened: boolean;
   /**
@@ -47,6 +47,10 @@ export type DeploymentDetailResponse = {
    * When the deployment was last updated
    */
   updatedAt: Date;
+  /**
+   * User id that owns the deployment, or null when it is administrator-managed
+   */
+  owner?: string | null | undefined;
   /**
    * Where the deployment is running
    *
@@ -86,6 +90,7 @@ export const DeploymentDetailResponse$inboundSchema: z.ZodType<
   is_hardened: z.boolean().default(false),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  owner: z.nullable(z.string()).optional(),
   location: z.nullable(DeploymentLocation$inboundSchema).optional(),
   worker_count: z.int().default(0),
   active_worker_count: z.int().default(0),

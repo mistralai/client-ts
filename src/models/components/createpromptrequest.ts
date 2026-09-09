@@ -13,6 +13,10 @@ import {
   RegistrySharingScope,
   RegistrySharingScope$outboundSchema,
 } from "./registrysharingscope.js";
+import {
+  ShareRelation,
+  ShareRelation$outboundSchema,
+} from "./sharerelation.js";
 
 export type CreatePromptRequest = {
   /**
@@ -40,6 +44,10 @@ export type CreatePromptRequest = {
    * Aliases pointing to this version.
    */
   aliases?: Array<string> | undefined;
+  /**
+   * Relation a subject holds on a shared registry object.
+   */
+  workspaceRelation?: ShareRelation | undefined;
 };
 
 /** @internal */
@@ -51,6 +59,7 @@ export type CreatePromptRequest$Outbound = {
   notes?: string | null | undefined;
   sharingScope?: string | undefined;
   aliases?: Array<string> | undefined;
+  workspaceRelation?: string | undefined;
 };
 
 /** @internal */
@@ -65,6 +74,7 @@ export const CreatePromptRequest$outboundSchema: z.ZodType<
   notes: z.nullable(z.string()).optional(),
   sharingScope: RegistrySharingScope$outboundSchema.optional(),
   aliases: z.array(z.string()).optional(),
+  workspaceRelation: ShareRelation$outboundSchema.optional(),
 });
 
 export function createPromptRequestToJSON(

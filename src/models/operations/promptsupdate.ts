@@ -17,6 +17,10 @@ export type UpdatePromptRequest = {
    */
   description?: string | null | undefined;
   sharingScope?: components.RegistrySharingScope | undefined;
+  /**
+   * Relation a subject holds on a shared registry object.
+   */
+  workspaceRelation?: components.ShareRelation | undefined;
 };
 
 export type PromptsUpdateRequest = {
@@ -29,6 +33,7 @@ export type UpdatePromptRequest$Outbound = {
   title?: string | null | undefined;
   description?: string | null | undefined;
   sharingScope?: string | undefined;
+  workspaceRelation?: string | undefined;
 };
 
 /** @internal */
@@ -39,6 +44,7 @@ export const UpdatePromptRequest$outboundSchema: z.ZodType<
   title: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   sharingScope: components.RegistrySharingScope$outboundSchema.optional(),
+  workspaceRelation: components.ShareRelation$outboundSchema.optional(),
 });
 
 export function updatePromptRequestToJSON(

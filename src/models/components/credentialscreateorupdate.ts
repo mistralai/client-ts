@@ -6,13 +6,13 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  ConnectionCredentials,
-  ConnectionCredentials$Outbound,
-  ConnectionCredentials$outboundSchema,
-} from "./connectioncredentials.js";
+  ConnectionCredentialsInput,
+  ConnectionCredentialsInput$Outbound,
+  ConnectionCredentialsInput$outboundSchema,
+} from "./connectioncredentialsinput.js";
 
 /**
- * Request to create or update non-OAuth2 credentials for a connector.
+ * Request to create or update credentials for a connector.
  */
 export type CredentialsCreateOrUpdate = {
   /**
@@ -28,9 +28,9 @@ export type CredentialsCreateOrUpdate = {
    */
   isDefault?: boolean | null | undefined;
   /**
-   * The credential data (headers, bearer_token).
+   * The credential data (headers, bearer_token, or OAuth2 client credentials).
    */
-  credentials?: ConnectionCredentials | null | undefined;
+  credentials?: ConnectionCredentialsInput | null | undefined;
 };
 
 /** @internal */
@@ -38,7 +38,7 @@ export type CredentialsCreateOrUpdate$Outbound = {
   name: string;
   title?: string | null | undefined;
   is_default?: boolean | null | undefined;
-  credentials?: ConnectionCredentials$Outbound | null | undefined;
+  credentials?: ConnectionCredentialsInput$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -49,7 +49,7 @@ export const CredentialsCreateOrUpdate$outboundSchema: z.ZodType<
   name: z.string(),
   title: z.nullable(z.string()).optional(),
   isDefault: z.nullable(z.boolean()).optional(),
-  credentials: z.nullable(ConnectionCredentials$outboundSchema).optional(),
+  credentials: z.nullable(ConnectionCredentialsInput$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     isDefault: "is_default",

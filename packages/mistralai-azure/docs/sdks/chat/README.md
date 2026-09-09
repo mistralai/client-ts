@@ -1,5 +1,6 @@
 # Chat
-(*chat*)
+
+(_chat_)
 
 ## Overview
 
@@ -7,8 +8,8 @@ Chat Completion API.
 
 ### Available Operations
 
-* [stream](#stream) - Stream chat completion
-* [create](#create) - Chat Completion
+- [stream](#stream) - Stream chat completion
+- [create](#create) - Chat Completion
 
 ## stream
 
@@ -20,18 +21,19 @@ Mistral AI provides the ability to stream responses back to a client in order to
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
   const result = await mistralAzure.chat.stream({
     model: "azureai",
     messages: [
-        {
-        content: "Who is the best French painter? Answer in one short sentence.",
-          role: "user",
-        },
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
     ],
   });
 
@@ -52,15 +54,15 @@ run();
 | `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)          | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`      | [RetryConfig](../../lib/utils/retryconfig.md)                                                    | :heavy_minus_sign: | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
-
 ### Response
 
 **Promise\<[EventStream<components.ChatCompletionEvent>](../../models/.md)\>**
+
 ### Errors
 
 | Error Object    | Status Code | Content Type |
 | --------------- | ----------- | ------------ |
-| errors.SDKError | 4xx-5xx     | */*          |
+| errors.SDKError | 4xx-5xx     | _/_          |
 
 ## create
 
@@ -79,15 +81,16 @@ async function run() {
   const result = await mistralAzure.chat.complete({
     model: "azureai",
     messages: [
-        {
-        content: "Who is the best French painter? Answer in one short sentence.",
-          role: "user",
-        },
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
     ],
   });
 
   // Handle the result
-  console.log(result)
+  console.log(result);
 }
 
 run();
@@ -102,13 +105,13 @@ run();
 | `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options) | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`      | [RetryConfig](../../lib/utils/retryconfig.md)                                           | :heavy_minus_sign: | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
-
 ### Response
 
 **Promise\<[components.ChatCompletionResponse](../../models/components/chatcompletionresponse.md)\>**
+
 ### Errors
 
 | Error Object               | Status Code | Content Type     |
 | -------------------------- | ----------- | ---------------- |
 | errors.HTTPValidationError | 422         | application/json |
-| errors.SDKError            | 4xx-5xx     | */*              |
+| errors.SDKError            | 4xx-5xx     | _/_              |

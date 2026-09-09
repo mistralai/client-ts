@@ -1,50 +1,37 @@
 # Connector
 
-## Example Usage
+
+## Supported Types
+
+### `components.HTTPConnector`
 
 ```typescript
-import { Connector } from "@mistralai/mistralai/models/components";
-
-let value: Connector = {
-  id: "9ccb7276-cd07-461a-bc1e-8bca704da6ae",
+const value: components.HTTPConnector = {
+  id: "ff2c895f-09fd-46c0-89f7-83c5fcadaed5",
   name: "<value>",
-  description: "than qua thongs replicate interviewer since until fortunately",
-  createdAt: new Date("2026-10-17T04:54:37.964Z"),
-  modifiedAt: new Date("2026-01-15T22:48:57.456Z"),
-  ownerType: "workspace",
+  description: "consequently an perfectly eyeglasses per for thoughtfully ack",
+  createdAt: new Date("2026-02-27T04:57:14.659Z"),
+  modifiedAt: new Date("2024-06-15T19:30:19.554Z"),
+  ownerType: "user",
   visibility: "shared_global",
-  privateToolExecution: false,
+  privateToolExecution: true,
+  protocol: "http",
 };
 ```
 
-## Fields
+### `components.MCPConnector`
 
-| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `id`                                                                                               | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `name`                                                                                             | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `title`                                                                                            | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `description`                                                                                      | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `createdAt`                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)      | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `modifiedAt`                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)      | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `server`                                                                                           | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `protocol`                                                                                         | [components.ConnectorProtocol](../../models/components/connectorprotocol.md)                       | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `iconUrl`                                                                                          | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `serverCard`                                                                                       | [components.MCPServerCard](../../models/components/mcpservercard.md)                               | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `ownerId`                                                                                          | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `ownerType`                                                                                        | [components.ConsumerType](../../models/components/consumertype.md)                                 | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `visibility`                                                                                       | [components.ResourceVisibility](../../models/components/resourcevisibility.md)                     | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `creatorId`                                                                                        | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `locale`                                                                                           | [components.ConnectorLocale](../../models/components/connectorlocale.md)                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `systemPrompt`                                                                                     | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `supportedAuthMethods`                                                                             | [components.PublicAuthenticationMethod](../../models/components/publicauthenticationmethod.md)[]   | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `connectionPreferences`                                                                            | [components.ConnectionPreference](../../models/components/connectionpreference.md)[]               | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `connectionCredentials`                                                                            | [components.AuthenticationConfiguration](../../models/components/authenticationconfiguration.md)[] | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `active`                                                                                           | *boolean*                                                                                          | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `privateToolExecution`                                                                             | *boolean*                                                                                          | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `mistral`                                                                                          | *boolean*                                                                                          | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `isAuthenticated`                                                                                  | *boolean*                                                                                          | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `tools`                                                                                            | [components.ConnectorTool](../../models/components/connectortool.md)[]                             | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `systemPromptRoute`                                                                                | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `connectionConfig`                                                                                 | [components.PublicConnectionConfig](../../models/components/publicconnectionconfig.md)             | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `executionEnv`                                                                                     | [components.PublicExecutionEnv](../../models/components/publicexecutionenv.md)                     | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+```typescript
+const value: components.MCPConnector = {
+  id: "30e387b5-be00-414e-a131-1d198ae3303d",
+  name: "<value>",
+  description: "finally quietly gladly voluntarily instead cheap er beard",
+  createdAt: new Date("2024-12-29T11:45:39.570Z"),
+  modifiedAt: new Date("2025-10-15T13:52:17.480Z"),
+  ownerType: "system",
+  visibility: "shared_org",
+  privateToolExecution: false,
+  protocol: "mcp",
+};
+```
+

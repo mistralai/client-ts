@@ -17,16 +17,12 @@ let value: UpdateJudgeV1ObservabilityJudgesJudgeIdPutRequest = {
         {
           value: "<value>",
           description:
-            "round whether like yet midst than inquisitively resource cafe",
+            "as qua why hepatitis psst tattered till into yum subdued",
         },
       ],
     },
     instructions: "<value>",
-    tools: [
-      "<value 1>",
-      "<value 2>",
-      "<value 3>",
-    ],
+    tools: [],
   },
 };
 ```

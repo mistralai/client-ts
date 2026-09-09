@@ -30,8 +30,8 @@ const value: components.TranscriptionStreamLanguage = {
 const value: components.TranscriptionStreamSegmentDelta = {
   type: "transcription.segment",
   text: "<value>",
-  start: 1796.95,
-  end: 2412.74,
+  start: 2412.74,
+  end: null,
 };
 ```
 

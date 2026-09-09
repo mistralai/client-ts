@@ -7,8 +7,8 @@ import { TranscriptionSegmentChunk } from "@mistralai/mistralai/models/component
 
 let value: TranscriptionSegmentChunk = {
   text: "<value>",
-  start: 7055.7,
-  end: 154.04,
+  start: 154.04,
+  end: 5804.01,
 };
 ```
 

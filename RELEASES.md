@@ -509,3 +509,54 @@ Based on:
 - [typescript v2.6.4] .
 ### Releases
 - [NPM v2.6.4] https://www.npmjs.com/package/@mistralai/mistralai/v/2.6.4 - .
+
+## 2026-09-09 10:26:10
+### API changes
+Removed (19):
+- betaConnectorsCreateOrUpdateOrganizationCredentials
+- betaConnectorsCreateOrUpdateUserCredentials
+- betaConnectorsCreateOrUpdateWorkspaceCredentials
+- betaObservabilityCampaignsCreate
+- betaObservabilityCampaignsDelete
+- betaObservabilityCampaignsFetch
+- betaObservabilityCampaignsFetchStatus
+- betaObservabilityCampaignsList
+- betaObservabilityCampaignsListEvents
+- betaObservabilityChatCompletionEventsFetch
+- betaObservabilityChatCompletionEventsFetchSimilarEvents
+- betaObservabilityChatCompletionEventsFieldsFetchOptionCounts
+- betaObservabilityChatCompletionEventsFieldsFetchOptions
+- betaObservabilityChatCompletionEventsFieldsList
+- betaObservabilityChatCompletionEventsJudge
+- betaObservabilityChatCompletionEventsSearch
+- betaObservabilityChatCompletionEventsSearchIds
+- betaObservabilityDatasetsImportFromCampaign
+- betaObservabilityDatasetsImportFromExplorer
+
+Added (17):
+- betaConnectorsCreateCredentials
+- betaConnectorsShareToOrganization
+- betaConnectorsUnshareFromOrganization
+- betaConnectorsUpdateCredentials
+- betaObservabilityEvaluationsCreatePipelineConfig
+- betaObservabilityEvaluationsDeletePipelineConfig
+- betaObservabilityEvaluationsGetPipelineConfig
+- betaObservabilityEvaluationsListPipelineConfigs
+- betaObservabilityEvaluationsUpdatePipelineConfig
+- betaServiceAccountsCreate
+- betaServiceAccountsDelete
+- betaServiceAccountsGet
+- betaServiceAccountsList
+- betaServiceAccountsListAssignableRoles
+- betaServiceAccountsListRoles
+- betaServiceAccountsSetRoles
+- betaServiceAccountsUpdate
+
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.763.6 (2.884.13) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v2.7.0] .
+### Releases
+- [NPM v2.7.0] https://www.npmjs.com/package/@mistralai/mistralai/v/2.7.0 - .

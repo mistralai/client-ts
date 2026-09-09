@@ -34,7 +34,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.6.4
+  version: 2.7.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -45,6 +45,7 @@ typescript:
       '@opentelemetry/api': ^1.9.0
       '@types/node': ^22.0.0
       '@types/ws': ^8.5.13
+      oxlint: 1.78.0
     peerDependencies:
       '@opentelemetry/api': ^1.9.0
   additionalPackageJSON:

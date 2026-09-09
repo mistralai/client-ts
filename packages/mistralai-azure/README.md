@@ -1,6 +1,7 @@
 # Mistral on Azure Typescript Client
 
 <!-- Start SDK Installation [installation] -->
+
 ## SDK Installation
 
 ### NPM
@@ -29,15 +30,19 @@ yarn add @mistralai/mistralai-azure zod
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
 ```
+
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
+
 ## Requirements
 
 For supported JavaScript runtimes, please consult [RUNTIMES.md](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/RUNTIMES.md).
+
 <!-- End Requirements [requirements] -->
 
 <!-- Start SDK Example Usage [usage] -->
+
 ## SDK Example Usage
 
 ### Create Chat Completions
@@ -48,40 +53,43 @@ This example shows how to create chat completions.
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
-    const result = await mistralAzure.chat.complete({
-        model: "azureai",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistralAzure.chat.complete({
+    model: "azureai",
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+  });
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
-
 ```
+
 <!-- End SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
+
 ## Available Resources and Operations
 
 ### [chat](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/docs/sdks/chat/README.md)
 
-* [stream](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/docs/sdks/chat/README.md#stream) - Stream chat completion
-* [create](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/docs/sdks/chat/README.md#create) - Chat Completion
+- [stream](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/docs/sdks/chat/README.md#stream) - Stream chat completion
+- [create](https://github.com/mistralai/client-ts/blob/main/packages/mistralai-azure/docs/sdks/chat/README.md#create) - Chat Completion
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Server-sent event streaming [eventstream] -->
+
 ## Server-sent event streaming
 
 [Server-sent events][mdn-sse] are used to stream content from certain
@@ -94,123 +102,129 @@ underlying connection.
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
-    const result = await mistralAzure.chat.stream({
-        model: "azureai",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistralAzure.chat.stream({
+    model: "azureai",
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+  });
 
-    for await (const event of result) {
-        // Handle the event
-    }
+  for await (const event of result) {
+    // Handle the event
+  }
 }
 
 run();
-
 ```
 
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
+
 <!-- End Server-sent event streaming [eventstream] -->
 
 <!-- Start Retries [retries] -->
+
 ## Retries
 
-Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
 
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
+
 ```typescript
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
-    const result = await mistralAzure.chat.stream(
+  const result = await mistralAzure.chat.stream(
+    {
+      model: "azureai",
+      messages: [
         {
-            model: "azureai",
-            messages: [
-                {
-                    content: "Who is the best French painter? Answer in one short sentence.",
-                    role: "user",
-                },
-            ],
+          content:
+            "Who is the best French painter? Answer in one short sentence.",
+          role: "user",
         },
-        {
-            retries: {
-                strategy: "backoff",
-                backoff: {
-                    initialInterval: 1,
-                    maxInterval: 50,
-                    exponent: 1.1,
-                    maxElapsedTime: 100,
-                },
-                retryConnectionErrors: false,
-            },
-        }
-    );
+      ],
+    },
+    {
+      retries: {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 1,
+          maxInterval: 50,
+          exponent: 1.1,
+          maxElapsedTime: 100,
+        },
+        retryConnectionErrors: false,
+      },
+    },
+  );
 
-    for await (const event of result) {
-        // Handle the event
-    }
+  for await (const event of result) {
+    // Handle the event
+  }
 }
 
 run();
-
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
+
 ```typescript
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    retryConfig: {
-        strategy: "backoff",
-        backoff: {
-            initialInterval: 1,
-            maxInterval: 50,
-            exponent: 1.1,
-            maxElapsedTime: 100,
-        },
-        retryConnectionErrors: false,
+  retryConfig: {
+    strategy: "backoff",
+    backoff: {
+      initialInterval: 1,
+      maxInterval: 50,
+      exponent: 1.1,
+      maxElapsedTime: 100,
     },
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+    retryConnectionErrors: false,
+  },
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
-    const result = await mistralAzure.chat.stream({
-        model: "azureai",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistralAzure.chat.stream({
+    model: "azureai",
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+  });
 
-    for await (const event of result) {
-        // Handle the event
-    }
+  for await (const event of result) {
+    // Handle the event
+  }
 }
 
 run();
-
 ```
+
 <!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
+
 ## Error Handling
 
 All SDK methods return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
@@ -218,61 +232,62 @@ All SDK methods return a response object or throw an error. If Error objects are
 | Error Object               | Status Code | Content Type     |
 | -------------------------- | ----------- | ---------------- |
 | errors.HTTPValidationError | 422         | application/json |
-| errors.SDKError            | 4xx-5xx     | */*              |
+| errors.SDKError            | 4xx-5xx     | _/_              |
 
-Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging. 
-
+Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging.
 
 ```typescript
 import { MistralAzure } from "@mistralai/mistralai-azure";
 import { SDKValidationError } from "@mistralai/mistralai-azure/models/errors";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
-    let result;
-    try {
-        result = await mistralAzure.chat.complete({
-            model: "azureai",
-            messages: [
-                {
-                    content: "Who is the best French painter? Answer in one short sentence.",
-                    role: "user",
-                },
-            ],
-        });
-    } catch (err) {
-        switch (true) {
-            case err instanceof SDKValidationError: {
-                // Validation errors can be pretty-printed
-                console.error(err.pretty());
-                // Raw value may also be inspected
-                console.error(err.rawValue);
-                return;
-            }
-            case err instanceof errors.HTTPValidationError: {
-                console.error(err); // handle exception
-                return;
-            }
-            default: {
-                throw err;
-            }
-        }
+  let result;
+  try {
+    result = await mistralAzure.chat.complete({
+      model: "azureai",
+      messages: [
+        {
+          content:
+            "Who is the best French painter? Answer in one short sentence.",
+          role: "user",
+        },
+      ],
+    });
+  } catch (err) {
+    switch (true) {
+      case err instanceof SDKValidationError: {
+        // Validation errors can be pretty-printed
+        console.error(err.pretty());
+        // Raw value may also be inspected
+        console.error(err.rawValue);
+        return;
+      }
+      case err instanceof errors.HTTPValidationError: {
+        console.error(err); // handle exception
+        return;
+      }
+      default: {
+        throw err;
+      }
     }
+  }
 
-    // Handle the result
-    console.log(result);
+  // Handle the result
+  console.log(result);
 }
 
 run();
-
 ```
+
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
+
 ## Server Selection
 
 ### Select Server by Name
@@ -287,31 +302,30 @@ You can override the default server globally by passing a server name to the `se
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    server: "prod",
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+  server: "prod",
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
-    const result = await mistralAzure.chat.stream({
-        model: "azureai",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistralAzure.chat.stream({
+    model: "azureai",
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+  });
 
-    for await (const event of result) {
-        // Handle the event
-    }
+  for await (const event of result) {
+    // Handle the event
+  }
 }
 
 run();
-
 ```
-
 
 ### Override Server URL Per-Client
 
@@ -321,33 +335,35 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    serverURL: "https://api.mistral.ai",
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+  serverURL: "https://api.mistral.ai",
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
-    const result = await mistralAzure.chat.stream({
-        model: "azureai",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistralAzure.chat.stream({
+    model: "azureai",
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+  });
 
-    for await (const event of result) {
-        // Handle the event
-    }
+  for await (const event of result) {
+    // Handle the event
+  }
 }
 
 run();
-
 ```
+
 <!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
+
 ## Custom HTTP Client
 
 The TypeScript SDK makes API calls using an `HTTPClient` that wraps the native
@@ -372,12 +388,12 @@ const httpClient = new HTTPClient({
   // fetcher takes a function that has the same signature as native `fetch`.
   fetcher: (request) => {
     return fetch(request);
-  }
+  },
 });
 
 httpClient.addHook("beforeRequest", (request) => {
   const nextRequest = new Request(request, {
-    signal: request.signal || AbortSignal.timeout(5000)
+    signal: request.signal || AbortSignal.timeout(5000),
   });
 
   nextRequest.headers.set("x-custom-header", "custom value");
@@ -394,9 +410,11 @@ httpClient.addHook("requestError", (error, request) => {
 
 const sdk = new MistralAzure({ httpClient });
 ```
+
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Authentication [security] -->
+
 ## Authentication
 
 ### Per-Client Security Schemes
@@ -408,33 +426,35 @@ This SDK supports the following security scheme globally:
 | `apiKey` | http | HTTP Bearer |
 
 To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
+
 ```typescript
 import { MistralAzure } from "@mistralai/mistralai-azure";
 
 const mistralAzure = new MistralAzure({
-    apiKey: process.env["AZURE_API_KEY"],
-    endpoint: process.env["AZURE_ENDPOINT"],
+  apiKey: process.env["AZURE_API_KEY"],
+  endpoint: process.env["AZURE_ENDPOINT"],
 });
 
 async function run() {
-    const result = await mistralAzure.chat.stream({
-        model: "azureai",
-        messages: [
-            {
-                content: "Who is the best French painter? Answer in one short sentence.",
-                role: "user",
-            },
-        ],
-    });
+  const result = await mistralAzure.chat.stream({
+    model: "azureai",
+    messages: [
+      {
+        content:
+          "Who is the best French painter? Answer in one short sentence.",
+        role: "user",
+      },
+    ],
+  });
 
-    for await (const event of result) {
-        // Handle the event
-    }
+  for await (const event of result) {
+    // Handle the event
+  }
 }
 
 run();
-
 ```
+
 <!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
@@ -443,5 +463,5 @@ run();
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.

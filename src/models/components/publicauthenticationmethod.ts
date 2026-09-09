@@ -21,6 +21,10 @@ import {
   GlobalHeaderValue$inboundSchema,
 } from "./globalheadervalue.js";
 import {
+  OAuth2GrantType,
+  OAuth2GrantType$inboundSchema,
+} from "./oauth2granttype.js";
+import {
   OutboundAuthenticationType,
   OutboundAuthenticationType$inboundSchema,
 } from "./outboundauthenticationtype.js";
@@ -33,6 +37,7 @@ export type PublicAuthenticationMethod = {
   headers?: Array<ConnectorAuthenticationHeader> | null | undefined;
   globalHeaders?: { [k: string]: GlobalHeaderValue } | undefined;
   hasDefaultCredentials: boolean;
+  grantType?: OAuth2GrantType | null | undefined;
   oauth2ServerMetadata?: ExtendedOAuthServerMetadata | null | undefined;
 };
 
@@ -47,6 +52,7 @@ export const PublicAuthenticationMethod$inboundSchema: z.ZodType<
   global_headers: z.record(z.string(), GlobalHeaderValue$inboundSchema)
     .optional(),
   has_default_credentials: z.boolean(),
+  grant_type: z.nullable(OAuth2GrantType$inboundSchema).optional(),
   oauth2_server_metadata: z.nullable(ExtendedOAuthServerMetadata$inboundSchema)
     .optional(),
 }).transform((v) => {
@@ -54,6 +60,7 @@ export const PublicAuthenticationMethod$inboundSchema: z.ZodType<
     "method_type": "methodType",
     "global_headers": "globalHeaders",
     "has_default_credentials": "hasDefaultCredentials",
+    "grant_type": "grantType",
     "oauth2_server_metadata": "oauth2ServerMetadata",
   });
 });

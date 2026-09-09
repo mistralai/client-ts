@@ -8,18 +8,11 @@ import { JudgeDatasetRecordRequest } from "@mistralai/mistralai/models/component
 let value: JudgeDatasetRecordRequest = {
   judgeDefinition: {
     name: "<value>",
-    description:
-      "while runny briefly kaleidoscopic zowie yahoo nor nor above neglect",
+    description: "collaboration nor yum loosely beyond glow hover entrench",
     modelName: "<value>",
     output: {
       type: "CLASSIFICATION",
-      options: [
-        {
-          value: "<value>",
-          description:
-            "round whether like yet midst than inquisitively resource cafe",
-        },
-      ],
+      options: [],
     },
     instructions: "<value>",
     tools: [

@@ -24,6 +24,7 @@ import * as errors from "../models/errors/index.js";
 import { MistralError } from "../models/errors/mistralerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -31,11 +32,11 @@ import { Result } from "../types/fp.js";
  * Create a new connector.
  *
  * @remarks
- * Create a new MCP connector. You can customize its visibility, url and auth type.
+ * Create a new MCP or HTTP connector. You can customize its visibility, URL, and auth type.
  */
 export function betaConnectorsCreate(
   client: MistralCore,
-  request: components.CreateConnectorRequest,
+  request: operations.ConnectorCreateV1Payload,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -60,7 +61,7 @@ export function betaConnectorsCreate(
 
 async function $do(
   client: MistralCore,
-  request: components.CreateConnectorRequest,
+  request: operations.ConnectorCreateV1Payload,
   options?: RequestOptions,
 ): Promise<
   [
@@ -81,7 +82,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.CreateConnectorRequest$outboundSchema.parse(value),
+    (value) => operations.ConnectorCreateV1Payload$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

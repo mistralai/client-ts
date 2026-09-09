@@ -33,6 +33,7 @@ export type BaseModelCard = {
   deprecationReplacementModel?: string | null | undefined;
   defaultModelTemperature?: number | null | undefined;
   internal: boolean;
+  billingModelName?: string | null | undefined;
   type: "base";
 };
 
@@ -54,6 +55,7 @@ export const BaseModelCard$inboundSchema: z.ZodType<BaseModelCard, unknown> = z
     deprecation_replacement_model: z.nullable(z.string()).optional(),
     default_model_temperature: z.nullable(z.number()).optional(),
     internal: z.boolean().default(false),
+    billing_model_name: z.nullable(z.string()).optional(),
     type: z.literal("base"),
   }).transform((v) => {
     return remap$(v, {
@@ -61,6 +63,7 @@ export const BaseModelCard$inboundSchema: z.ZodType<BaseModelCard, unknown> = z
       "max_context_length": "maxContextLength",
       "deprecation_replacement_model": "deprecationReplacementModel",
       "default_model_temperature": "defaultModelTemperature",
+      "billing_model_name": "billingModelName",
     });
   });
 

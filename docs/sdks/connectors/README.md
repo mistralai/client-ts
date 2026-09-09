@@ -11,18 +11,19 @@
 * [getAuthUrl](#getauthurl) - Get the auth URL for a connector.
 * [share](#share) - Share a private connector to the current workspace.
 * [unshare](#unshare) - Unshare a connector from the current workspace.
+* [shareToOrganization](#sharetoorganization) - Share a connector to the current organization.
+* [unshareFromOrganization](#unsharefromorganization) - Unshare a connector from the current organization.
 * [activateForConsumer](#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
 * [deactivateForConsumer](#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
 * [callTool](#calltool) - Call Connector Tool
 * [listTools](#listtools) - List tools for a connector.
 * [getAuthenticationMethods](#getauthenticationmethods) - Get authentication methods for a connector.
 * [listOrganizationCredentials](#listorganizationcredentials) - List organization credentials for a connector.
-* [createOrUpdateOrganizationCredentials](#createorupdateorganizationcredentials) - Create or update organization credentials for a connector.
 * [listWorkspaceCredentials](#listworkspacecredentials) - List workspace credentials for a connector.
-* [createOrUpdateWorkspaceCredentials](#createorupdateworkspacecredentials) - Create or update workspace credentials for a connector.
 * [listUserCredentials](#listusercredentials) - List user credentials for a connector.
-* [createOrUpdateUserCredentials](#createorupdateusercredentials) - Create or update user credentials for a connector.
 * [deleteAllUserCredentials](#deleteallusercredentials) - Delete all user credentials for a connector.
+* [createCredentials](#createcredentials) - Create consumer credentials for a connector.
+* [updateCredentials](#updatecredentials) - Create or update consumer credentials for a connector.
 * [deleteOrganizationCredentials](#deleteorganizationcredentials) - Delete organization credentials for a connector.
 * [deleteWorkspaceCredentials](#deleteworkspacecredentials) - Delete workspace credentials for a connector.
 * [deleteUserCredentials](#deleteusercredentials) - Delete user credentials for a connector.
@@ -32,7 +33,7 @@
 
 ## create
 
-Create a new MCP connector. You can customize its visibility, url and auth type.
+Create a new MCP or HTTP connector. You can customize its visibility, URL, and auth type.
 
 ### Example Usage
 
@@ -49,6 +50,7 @@ async function run() {
     name: "<value>",
     description: "unibody usually despite slushy wherever reward stingy from",
     server: "https://royal-majority.net/",
+    protocol: "mcp",
   });
 
   console.log(result);
@@ -76,6 +78,7 @@ async function run() {
     name: "<value>",
     description: "unibody usually despite slushy wherever reward stingy from",
     server: "https://royal-majority.net/",
+    protocol: "mcp",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -92,7 +95,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.CreateConnectorRequest](../../models/components/createconnectorrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ConnectorCreateV1Payload](../../models/operations/connectorcreatev1payload.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -385,6 +388,154 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.ConnectorUnshareV1Request](../../models/operations/connectorunsharev1request.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## shareToOrganization
+
+Transfers ownership of a private user-owned connector to the current organization, making it available to all organization members. The creator can later revert this via the unshare endpoint. Any authentication flows that rely on the original owner's identity (e.g. OAuth on-behalf-of) will be affected and must be reconfigured after sharing. Requires the ShareConnectorToOrg organization permission.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="connector_share_to_organization_v1" method="put" path="/v1/connectors/{connector_id}/organization/share" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.connectors.shareToOrganization({
+    connectorId: "9dc7017e-ae2f-451c-9b03-623aab4aecde",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaConnectorsShareToOrganization } from "@mistralai/mistralai/funcs/betaConnectorsShareToOrganization.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaConnectorsShareToOrganization(mistral, {
+    connectorId: "9dc7017e-ae2f-451c-9b03-623aab4aecde",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConnectorsShareToOrganization failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ConnectorShareToOrganizationV1Request](../../models/operations/connectorsharetoorganizationv1request.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## unshareFromOrganization
+
+Reverts an organization-shared connector back to a private, creator-owned connector. Organization-scoped connections and other members' connections are removed; the creator's own connection is preserved. Requires the ShareConnectorToOrg organization permission.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="connector_unshare_from_organization_v1" method="delete" path="/v1/connectors/{connector_id}/organization/share" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.connectors.unshareFromOrganization({
+    connectorId: "def26f6b-c03a-4deb-9726-3771c1dd3388",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaConnectorsUnshareFromOrganization } from "@mistralai/mistralai/funcs/betaConnectorsUnshareFromOrganization.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaConnectorsUnshareFromOrganization(mistral, {
+    connectorId: "def26f6b-c03a-4deb-9726-3771c1dd3388",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConnectorsUnshareFromOrganization failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ConnectorUnshareFromOrganizationV1Request](../../models/operations/connectorunsharefromorganizationv1request.md)                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -852,86 +1003,6 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## createOrUpdateOrganizationCredentials
-
-Create or update credentials at the organization level for a given connector.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="connector_create_or_update_organization_credentials_v1" method="post" path="/v1/connectors/{connector_id_or_name}/organization/credentials" -->
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.connectors.createOrUpdateOrganizationCredentials({
-    connectorIdOrName: "<value>",
-    credentialsCreateOrUpdate: {
-      name: "<value>",
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsCreateOrUpdateOrganizationCredentials } from "@mistralai/mistralai/funcs/betaConnectorsCreateOrUpdateOrganizationCredentials.js";
-
-// Use `MistralCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const mistral = new MistralCore({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await betaConnectorsCreateOrUpdateOrganizationCredentials(mistral, {
-    connectorIdOrName: "<value>",
-    credentialsCreateOrUpdate: {
-      name: "<value>",
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("betaConnectorsCreateOrUpdateOrganizationCredentials failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorCreateOrUpdateOrganizationCredentialsV1Request](../../models/operations/connectorcreateorupdateorganizationcredentialsv1request.md)                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
 ## listWorkspaceCredentials
 
 List all credentials configured at the workspace level for a given connector.
@@ -998,86 +1069,6 @@ run();
 ### Response
 
 **Promise\<[components.CredentialsResponse](../../models/components/credentialsresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## createOrUpdateWorkspaceCredentials
-
-Create or update credentials at the workspace level for a given connector.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="connector_create_or_update_workspace_credentials_v1" method="post" path="/v1/connectors/{connector_id_or_name}/workspace/credentials" -->
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.connectors.createOrUpdateWorkspaceCredentials({
-    connectorIdOrName: "<value>",
-    credentialsCreateOrUpdate: {
-      name: "<value>",
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsCreateOrUpdateWorkspaceCredentials } from "@mistralai/mistralai/funcs/betaConnectorsCreateOrUpdateWorkspaceCredentials.js";
-
-// Use `MistralCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const mistral = new MistralCore({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await betaConnectorsCreateOrUpdateWorkspaceCredentials(mistral, {
-    connectorIdOrName: "<value>",
-    credentialsCreateOrUpdate: {
-      name: "<value>",
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("betaConnectorsCreateOrUpdateWorkspaceCredentials failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorCreateOrUpdateWorkspaceCredentialsV1Request](../../models/operations/connectorcreateorupdateworkspacecredentialsv1request.md)                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
 
 ### Errors
 
@@ -1160,86 +1151,6 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## createOrUpdateUserCredentials
-
-Create or update credentials at the user level for a given connector.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="connector_create_or_update_user_credentials_v1" method="post" path="/v1/connectors/{connector_id_or_name}/user/credentials" -->
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.connectors.createOrUpdateUserCredentials({
-    connectorIdOrName: "<value>",
-    credentialsCreateOrUpdate: {
-      name: "<value>",
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsCreateOrUpdateUserCredentials } from "@mistralai/mistralai/funcs/betaConnectorsCreateOrUpdateUserCredentials.js";
-
-// Use `MistralCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const mistral = new MistralCore({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await betaConnectorsCreateOrUpdateUserCredentials(mistral, {
-    connectorIdOrName: "<value>",
-    credentialsCreateOrUpdate: {
-      name: "<value>",
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("betaConnectorsCreateOrUpdateUserCredentials failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorCreateOrUpdateUserCredentialsV1Request](../../models/operations/connectorcreateorupdateusercredentialsv1request.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
 ## deleteAllUserCredentials
 
 Delete all credentials configured at the user level for a given connector.
@@ -1299,6 +1210,170 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.ConnectorDeleteAllUserCredentialsV1Request](../../models/operations/connectordeleteallusercredentialsv1request.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## createCredentials
+
+Create consumer credentials for a given connector and consumer scope (organization, workspace, user)
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="connector_create_credentials_v1" method="post" path="/v1/connectors/{connector_id_or_name}/{consumer_scope}/credentials" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.connectors.createCredentials({
+    connectorIdOrName: "b7170011-bca4-40c2-8f3d-4f646a544062",
+    consumerScope: "organization",
+    credentialsCreateOrUpdate: {
+      name: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaConnectorsCreateCredentials } from "@mistralai/mistralai/funcs/betaConnectorsCreateCredentials.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaConnectorsCreateCredentials(mistral, {
+    connectorIdOrName: "b7170011-bca4-40c2-8f3d-4f646a544062",
+    consumerScope: "organization",
+    credentialsCreateOrUpdate: {
+      name: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConnectorsCreateCredentials failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ConnectorCreateCredentialsV1Request](../../models/operations/connectorcreatecredentialsv1request.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## updateCredentials
+
+Create or update consumer credentials for a given connector.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="connector_update_credentials" method="patch" path="/v1/connectors/{connector_id_or_name}/{consumer_scope}/credentials" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.connectors.updateCredentials({
+    connectorIdOrName: "7b7eceb1-b6c5-44e4-8382-f2bba1886c77",
+    consumerScope: "workspace",
+    credentialsCreateOrUpdate: {
+      name: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaConnectorsUpdateCredentials } from "@mistralai/mistralai/funcs/betaConnectorsUpdateCredentials.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaConnectorsUpdateCredentials(mistral, {
+    connectorIdOrName: "7b7eceb1-b6c5-44e4-8382-f2bba1886c77",
+    consumerScope: "workspace",
+    credentialsCreateOrUpdate: {
+      name: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaConnectorsUpdateCredentials failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ConnectorUpdateCredentialsRequest](../../models/operations/connectorupdatecredentialsrequest.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -1633,7 +1708,9 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.connectors.update({
     connectorId: "81d30634-113f-4dce-a89e-7786be2d8693",
-    updateConnectorRequest: {},
+    requestBody: {
+      protocol: "mcp",
+    },
   });
 
   console.log(result);
@@ -1659,7 +1736,9 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaConnectorsUpdate(mistral, {
     connectorId: "81d30634-113f-4dce-a89e-7786be2d8693",
-    updateConnectorRequest: {},
+    requestBody: {
+      protocol: "mcp",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
