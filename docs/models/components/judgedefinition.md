@@ -6,14 +6,13 @@
 import { JudgeDefinition } from "@mistralai/mistralai/models/components";
 
 let value: JudgeDefinition = {
-  model: "Expedition",
-  prompt: "<value>",
+  slug: "<value>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `model`            | *string*           | :heavy_check_mark: | N/A                |
-| `prompt`           | *string*           | :heavy_check_mark: | N/A                |
+| Field                    | Type                     | Required                 | Description              |
+| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| `slug`                   | *string*                 | :heavy_check_mark:       | N/A                      |
+| `mapping`                | Record<string, *string*> | :heavy_minus_sign:       | N/A                      |

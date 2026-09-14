@@ -583,3 +583,24 @@ Based on:
 - [typescript v2.7.0] .
 ### Releases
 - [NPM v2.7.0] https://www.npmjs.com/package/@mistralai/mistralai/v/2.7.0 - .
+
+## 2026-09-14 10:48:43
+### API changes
+Added (8):
+- betaRagManagedIndexesCreate
+- betaRagManagedIndexesDelete
+- betaRagManagedIndexesDeleteDocuments
+- betaRagManagedIndexesGet
+- betaRagManagedIndexesIngestDocuments
+- betaRagManagedIndexesList
+- betaRagManagedIndexesSearch
+- betaRagManagedIndexesUpdate
+
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.796.4 (2.935.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v2.8.0] .
+### Releases
+- [NPM v2.8.0] https://www.npmjs.com/package/@mistralai/mistralai/v/2.8.0 - .

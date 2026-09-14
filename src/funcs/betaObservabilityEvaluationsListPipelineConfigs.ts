@@ -99,7 +99,6 @@ async function $do(
 
   const query = encodeFormQuery({
     "enabled": payload?.enabled,
-    "group": payload?.group,
     "page": payload?.page,
     "page_size": payload?.page_size,
     "pipeline_kind": payload?.pipeline_kind,

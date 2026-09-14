@@ -31,13 +31,10 @@ export type PipelineConfig = {
   workspaceId: string;
   name: string;
   description?: string | null | undefined;
-  slug?: string | null | undefined;
-  group?: string | null | undefined;
   pipelineKind: PipelineKind;
   selectors: Array<PipelineConfigSelector>;
   enabled: boolean;
-  definitionHash: string;
-  definition: PipelineConfigDefinition;
+  definitions: Array<PipelineConfigDefinition>;
 };
 
 /** @internal */
@@ -53,13 +50,10 @@ export const PipelineConfig$inboundSchema: z.ZodType<PipelineConfig, unknown> =
     workspace_id: z.string(),
     name: z.string(),
     description: z.nullable(z.string()).optional(),
-    slug: z.nullable(z.string()).optional(),
-    group: z.nullable(z.string()).optional(),
     pipeline_kind: PipelineKind$inboundSchema,
     selectors: z.array(PipelineConfigSelector$inboundSchema),
     enabled: z.boolean(),
-    definition_hash: z.string(),
-    definition: PipelineConfigDefinition$inboundSchema,
+    definitions: z.array(PipelineConfigDefinition$inboundSchema),
   }).transform((v) => {
     return remap$(v, {
       "created_at": "createdAt",
@@ -67,7 +61,6 @@ export const PipelineConfig$inboundSchema: z.ZodType<PipelineConfig, unknown> =
       "deleted_at": "deletedAt",
       "workspace_id": "workspaceId",
       "pipeline_kind": "pipelineKind",
-      "definition_hash": "definitionHash",
     });
   });
 

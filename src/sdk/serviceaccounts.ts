@@ -22,7 +22,7 @@ export class ServiceAccounts extends ClientSDK {
    * Create Service Account
    *
    * @remarks
-   * Create a service account in a workspace. Requires the `create_service_account` permission.
+   * Create a service account in a workspace. Requires the Workspace admin (`workspace_admin`) role.
    */
   async create(
     request: components.CreateServiceAccountRequest,
@@ -41,9 +41,9 @@ export class ServiceAccounts extends ClientSDK {
    * @remarks
    * List the service accounts in a workspace, or across the organization.
    *
-   * Scoped to a workspace, this requires the `see_all_workspace_service_accounts`
-   * permission on it. Omitting the workspace lists the whole organization and requires
-   * the organization-level `see_all_org_service_accounts` permission instead.
+   * Scoped to a workspace, this requires the Workspace admin (`workspace_admin`) role on
+   * it. Omitting the workspace lists the whole organization and requires the Organization
+   * admin (`organization_admin`) role instead.
    */
   async list(
     request: operations.ListServiceAccountsV1ServiceAccountsGetRequest,
@@ -67,7 +67,7 @@ export class ServiceAccounts extends ClientSDK {
    * @remarks
    * List the workspace roles that can be assigned to a service account.
    *
-   * Requires the `see_all_workspace_service_accounts` permission.
+   * Requires the Workspace admin (`workspace_admin`) role.
    */
   async listAssignableRoles(
     request:
@@ -87,7 +87,7 @@ export class ServiceAccounts extends ClientSDK {
    * @remarks
    * Retrieve a service account.
    *
-   * Requires the `see_all_workspace_service_accounts` permission.
+   * Requires the Workspace admin (`workspace_admin`) role.
    */
   async get(
     request:
@@ -107,7 +107,7 @@ export class ServiceAccounts extends ClientSDK {
    * @remarks
    * Update a service account.
    *
-   * Requires the `manage_any_workspace_service_account` permission.
+   * Requires the Workspace admin (`workspace_admin`) role.
    */
   async update(
     request:
@@ -127,7 +127,7 @@ export class ServiceAccounts extends ClientSDK {
    * @remarks
    * Delete a service account.
    *
-   * Requires the `manage_any_workspace_service_account` permission.
+   * Requires the Workspace admin (`workspace_admin`) role.
    */
   async delete(
     request:
@@ -147,7 +147,7 @@ export class ServiceAccounts extends ClientSDK {
    * @remarks
    * Replace the workspace roles assigned to a service account.
    *
-   * Requires the `manage_any_workspace_service_account` permission.
+   * Requires the Workspace admin (`workspace_admin`) role.
    */
   async setRoles(
     request:
@@ -167,7 +167,7 @@ export class ServiceAccounts extends ClientSDK {
    * @remarks
    * List the workspace roles assigned to a service account.
    *
-   * Requires the `see_all_workspace_service_accounts` permission.
+   * Requires the Workspace admin (`workspace_admin`) role.
    */
   async listRoles(
     request:

@@ -5,6 +5,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { IngestionPipelineConfigurations } from "./ingestionpipelineconfigurations.js";
+import { ManagedIndexes } from "./managedindexes.js";
 import { SearchIndexes } from "./searchindexes.js";
 
 export class Rag extends ClientSDK {
@@ -17,5 +18,10 @@ export class Rag extends ClientSDK {
   private _searchIndexes?: SearchIndexes;
   get searchIndexes(): SearchIndexes {
     return (this._searchIndexes ??= new SearchIndexes(this._options));
+  }
+
+  private _managedIndexes?: ManagedIndexes;
+  get managedIndexes(): ManagedIndexes {
+    return (this._managedIndexes ??= new ManagedIndexes(this._options));
   }
 }

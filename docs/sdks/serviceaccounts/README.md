@@ -15,7 +15,7 @@
 
 ## create
 
-Create a service account in a workspace. Requires the `create_service_account` permission.
+Create a service account in a workspace. Requires the Workspace admin (`workspace_admin`) role.
 
 ### Example Usage
 
@@ -93,9 +93,9 @@ run();
 
 List the service accounts in a workspace, or across the organization.
 
-Scoped to a workspace, this requires the `see_all_workspace_service_accounts`
-permission on it. Omitting the workspace lists the whole organization and requires
-the organization-level `see_all_org_service_accounts` permission instead.
+Scoped to a workspace, this requires the Workspace admin (`workspace_admin`) role on
+it. Omitting the workspace lists the whole organization and requires the Organization
+admin (`organization_admin`) role instead.
 
 ### Example Usage
 
@@ -177,7 +177,7 @@ run();
 
 List the workspace roles that can be assigned to a service account.
 
-Requires the `see_all_workspace_service_accounts` permission.
+Requires the Workspace admin (`workspace_admin`) role.
 
 ### Example Usage
 
@@ -253,7 +253,7 @@ run();
 
 Retrieve a service account.
 
-Requires the `see_all_workspace_service_accounts` permission.
+Requires the Workspace admin (`workspace_admin`) role.
 
 ### Example Usage
 
@@ -329,7 +329,7 @@ run();
 
 Update a service account.
 
-Requires the `manage_any_workspace_service_account` permission.
+Requires the Workspace admin (`workspace_admin`) role.
 
 ### Example Usage
 
@@ -407,7 +407,7 @@ run();
 
 Delete a service account.
 
-Requires the `manage_any_workspace_service_account` permission.
+Requires the Workspace admin (`workspace_admin`) role.
 
 ### Example Usage
 
@@ -483,7 +483,7 @@ run();
 
 Replace the workspace roles assigned to a service account.
 
-Requires the `manage_any_workspace_service_account` permission.
+Requires the Workspace admin (`workspace_admin`) role.
 
 ### Example Usage
 
@@ -561,7 +561,7 @@ run();
 
 List the workspace roles assigned to a service account.
 
-Requires the `see_all_workspace_service_accounts` permission.
+Requires the Workspace admin (`workspace_admin`) role.
 
 ### Example Usage
 

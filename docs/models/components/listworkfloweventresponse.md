@@ -14,6 +14,7 @@ let value: ListWorkflowEventResponse = {
       parentWorkflowExecId: "<id>",
       continuedRunId: "<id>",
       firstExecutionRunId: null,
+      chainRunId: "<id>",
       scheduleId: "<id>",
       workflowExecId: "<id>",
       workflowRunId: "<id>",

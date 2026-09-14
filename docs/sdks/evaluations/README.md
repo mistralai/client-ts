@@ -26,13 +26,14 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.observability.evaluations.createPipelineConfig({
+    name: "<value>",
     pipelineKind: "judge",
     selectors: [],
-    definition: {
-      model: "Golf",
-      prompt: "<value>",
-    },
-    name: "<value>",
+    definitions: [
+      {
+        model: "mistral-moderation-latest",
+      },
+    ],
   });
 
   console.log(result);
@@ -57,13 +58,14 @@ const mistral = new MistralCore({
 
 async function run() {
   const res = await betaObservabilityEvaluationsCreatePipelineConfig(mistral, {
+    name: "<value>",
     pipelineKind: "judge",
     selectors: [],
-    definition: {
-      model: "Golf",
-      prompt: "<value>",
-    },
-    name: "<value>",
+    definitions: [
+      {
+        model: "mistral-moderation-latest",
+      },
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -258,16 +260,10 @@ async function run() {
   const result = await mistral.beta.observability.evaluations.updatePipelineConfig({
     pipelineConfigId: "4ee75abd-cccd-4232-9858-0c535465bfd5",
     updatePipelineConfigRequest: {
+      name: "<value>",
       pipelineKind: "detection",
       selectors: [],
-      definition: {
-        destination: {
-          protocol: "<value>",
-          endpoint: "<value>",
-          insecure: false,
-        },
-      },
-      name: "<value>",
+      definitions: [],
       enabled: true,
     },
   });
@@ -296,16 +292,10 @@ async function run() {
   const res = await betaObservabilityEvaluationsUpdatePipelineConfig(mistral, {
     pipelineConfigId: "4ee75abd-cccd-4232-9858-0c535465bfd5",
     updatePipelineConfigRequest: {
+      name: "<value>",
       pipelineKind: "detection",
       selectors: [],
-      definition: {
-        destination: {
-          protocol: "<value>",
-          endpoint: "<value>",
-          insecure: false,
-        },
-      },
-      name: "<value>",
+      definitions: [],
       enabled: true,
     },
   });

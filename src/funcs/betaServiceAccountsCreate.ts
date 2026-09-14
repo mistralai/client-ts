@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Create Service Account
  *
  * @remarks
- * Create a service account in a workspace. Requires the `create_service_account` permission.
+ * Create a service account in a workspace. Requires the Workspace admin (`workspace_admin`) role.
  */
 export function betaServiceAccountsCreate(
   client: MistralCore,

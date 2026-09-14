@@ -9,7 +9,6 @@ import * as components from "../components/index.js";
 
 export type ListPipelineConfigsV1ObservabilityPipelineConfigsGetRequest = {
   pipelineKind?: components.PipelineKind | null | undefined;
-  group?: string | null | undefined;
   enabled?: boolean | null | undefined;
   pageSize?: number | undefined;
   page?: number | undefined;
@@ -20,7 +19,6 @@ export type ListPipelineConfigsV1ObservabilityPipelineConfigsGetRequest = {
 export type ListPipelineConfigsV1ObservabilityPipelineConfigsGetRequest$Outbound =
   {
     pipeline_kind?: string | null | undefined;
-    group?: string | null | undefined;
     enabled?: boolean | null | undefined;
     page_size: number;
     page: number;
@@ -34,7 +32,6 @@ export const ListPipelineConfigsV1ObservabilityPipelineConfigsGetRequest$outboun
     ListPipelineConfigsV1ObservabilityPipelineConfigsGetRequest
   > = z.object({
     pipelineKind: z.nullable(components.PipelineKind$outboundSchema).optional(),
-    group: z.nullable(z.string()).optional(),
     enabled: z.nullable(z.boolean()).optional(),
     pageSize: z.int().default(50),
     page: z.int().default(1),

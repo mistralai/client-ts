@@ -6,8 +6,16 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+export const VoiceResponseType = {
+  Preset: "preset",
+  Custom: "custom",
+} as const;
+export type VoiceResponseType = OpenEnum<typeof VoiceResponseType>;
 
 /**
  * Schema for voice response
@@ -26,7 +34,14 @@ export type VoiceResponse = {
   createdAt: Date;
   userId: string | null;
   trimmedSeconds?: number | null | undefined;
+  type: VoiceResponseType;
 };
+
+/** @internal */
+export const VoiceResponseType$inboundSchema: z.ZodType<
+  VoiceResponseType,
+  unknown
+> = openEnums.inboundSchema(VoiceResponseType);
 
 /** @internal */
 export const VoiceResponse$inboundSchema: z.ZodType<VoiceResponse, unknown> = z
@@ -44,6 +59,7 @@ export const VoiceResponse$inboundSchema: z.ZodType<VoiceResponse, unknown> = z
     created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
     user_id: z.nullable(z.string()),
     trimmed_seconds: z.nullable(z.number()).optional(),
+    type: VoiceResponseType$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "retention_notice": "retentionNotice",

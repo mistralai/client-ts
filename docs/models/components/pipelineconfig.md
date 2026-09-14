@@ -20,14 +20,15 @@ let value: PipelineConfig = {
     },
   ],
   enabled: true,
-  definitionHash: "<value>",
-  definition: {
-    destination: {
-      protocol: "<value>",
-      endpoint: "<value>",
-      insecure: false,
+  definitions: [
+    {
+      targetAttributes: [
+        "<value 1>",
+        "<value 2>",
+      ],
+      patterns: [],
     },
-  },
+  ],
 };
 ```
 
@@ -43,10 +44,7 @@ let value: PipelineConfig = {
 | `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `slug`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `group`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `pipelineKind`                                                                                | [components.PipelineKind](../../models/components/pipelinekind.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `selectors`                                                                                   | [components.PipelineConfigSelector](../../models/components/pipelineconfigselector.md)[]      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `enabled`                                                                                     | *boolean*                                                                                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `definitionHash`                                                                              | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `definition`                                                                                  | *components.PipelineConfigDefinition*                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `definitions`                                                                                 | *components.PipelineConfigDefinition*[]                                                       | :heavy_check_mark:                                                                            | N/A                                                                                           |

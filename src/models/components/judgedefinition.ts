@@ -9,8 +9,8 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type JudgeDefinition = {
-  model: string;
-  prompt: string;
+  slug: string;
+  mapping?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -18,13 +18,13 @@ export const JudgeDefinition$inboundSchema: z.ZodType<
   JudgeDefinition,
   unknown
 > = z.object({
-  model: z.string(),
-  prompt: z.string(),
+  slug: z.string(),
+  mapping: z.record(z.string(), z.string()).optional(),
 });
 /** @internal */
 export type JudgeDefinition$Outbound = {
-  model: string;
-  prompt: string;
+  slug: string;
+  mapping?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -32,8 +32,8 @@ export const JudgeDefinition$outboundSchema: z.ZodType<
   JudgeDefinition$Outbound,
   JudgeDefinition
 > = z.object({
-  model: z.string(),
-  prompt: z.string(),
+  slug: z.string(),
+  mapping: z.record(z.string(), z.string()).optional(),
 });
 
 export function judgeDefinitionToJSON(

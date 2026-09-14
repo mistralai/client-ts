@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * List the workspace roles assigned to a service account.
  *
- * Requires the `see_all_workspace_service_accounts` permission.
+ * Requires the Workspace admin (`workspace_admin`) role.
  */
 export function betaServiceAccountsListRoles(
   client: MistralCore,

@@ -43,6 +43,7 @@ export const ObservabilityErrorCode = {
   EvaluationRunTransitionIsRunningAlready:
     "EVALUATION_RUN_TRANSITION_IS_RUNNING_ALREADY",
   EvaluationRunTransitionError: "EVALUATION_RUN_TRANSITION_ERROR",
+  EvaluationRunOutputRecordConflict: "EVALUATION_RUN_OUTPUT_RECORD_CONFLICT",
   TemplateError: "TEMPLATE_ERROR",
   TemplateSyntaxError: "TEMPLATE_SYNTAX_ERROR",
   ProjectNameAlreadyExists: "PROJECT_NAME_ALREADY_EXISTS",

@@ -25,6 +25,12 @@ export type DeploymentWorkerResponse = {
   /**
    * When the worker last registered
    */
+  lastHeartbeat: Date;
+  /**
+   * Deprecated alias of last_heartbeat
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   updatedAt: Date;
   /**
    * Whether this worker's liveness key is currently alive
@@ -43,12 +49,14 @@ export const DeploymentWorkerResponse$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  last_heartbeat: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   is_active: z.boolean(),
   location: z.nullable(DeploymentLocation$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
+    "last_heartbeat": "lastHeartbeat",
     "updated_at": "updatedAt",
     "is_active": "isActive",
   });

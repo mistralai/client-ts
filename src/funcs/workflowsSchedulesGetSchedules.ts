@@ -4,7 +4,6 @@
  */
 
 import { MistralCore } from "../core.js";
-import { dlv } from "../lib/dlv.js";
 import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
@@ -216,14 +215,15 @@ async function $do(
     >;
     "~next"?: { cursor: string };
   } => {
-    const nextCursor = dlv(responseData, "next_page_token");
+    const nextCursor =
+      (responseData as { next_page_token?: unknown | null }).next_page_token;
     if (typeof nextCursor !== "string") {
       return { next: () => null };
     }
     if (nextCursor.trim() === "") {
       return { next: () => null };
     }
-    const results = dlv(responseData, "schedules");
+    const results = (responseData as { schedules: unknown }).schedules;
     if (!Array.isArray(results) || !results.length) {
       return { next: () => null };
     }

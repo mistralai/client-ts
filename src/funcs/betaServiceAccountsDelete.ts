@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Delete a service account.
  *
- * Requires the `manage_any_workspace_service_account` permission.
+ * Requires the Workspace admin (`workspace_admin`) role.
  */
 export function betaServiceAccountsDelete(
   client: MistralCore,

@@ -431,6 +431,17 @@ We have dedicated SDKs for the following providers:
 * [register](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 * [updateRunInfo](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
 
+### [Beta.Rag.ManagedIndexes](docs/sdks/managedindexes/README.md)
+
+* [create](docs/sdks/managedindexes/README.md#create) - Create a managed index
+* [list](docs/sdks/managedindexes/README.md#list) - List managed indexes
+* [get](docs/sdks/managedindexes/README.md#get) - Get a managed index
+* [update](docs/sdks/managedindexes/README.md#update) - Update a managed index schema
+* [delete](docs/sdks/managedindexes/README.md#delete) - Delete a managed index
+* [ingestDocuments](docs/sdks/managedindexes/README.md#ingestdocuments) - Ingest documents into a managed index
+* [deleteDocuments](docs/sdks/managedindexes/README.md#deletedocuments) - Delete documents from a managed index
+* [search](docs/sdks/managedindexes/README.md#search) - Search a managed index
+
 ### [Beta.Rag.SearchIndexes](docs/sdks/searchindexes/README.md)
 
 * [getDeploymentSummaries](docs/sdks/searchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
@@ -849,8 +860,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 155 of 245 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 48 of 245 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 162 of 253 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 48 of 253 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1178,6 +1189,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
+- [`betaRagManagedIndexesCreate`](docs/sdks/managedindexes/README.md#create) - Create a managed index
+- [`betaRagManagedIndexesDelete`](docs/sdks/managedindexes/README.md#delete) - Delete a managed index
+- [`betaRagManagedIndexesDeleteDocuments`](docs/sdks/managedindexes/README.md#deletedocuments) - Delete documents from a managed index
+- [`betaRagManagedIndexesGet`](docs/sdks/managedindexes/README.md#get) - Get a managed index
+- [`betaRagManagedIndexesIngestDocuments`](docs/sdks/managedindexes/README.md#ingestdocuments) - Ingest documents into a managed index
+- [`betaRagManagedIndexesList`](docs/sdks/managedindexes/README.md#list) - List managed indexes
+- [`betaRagManagedIndexesSearch`](docs/sdks/managedindexes/README.md#search) - Search a managed index
+- [`betaRagManagedIndexesUpdate`](docs/sdks/managedindexes/README.md#update) - Update a managed index schema
 - [`betaRagSearchIndexesGetDeploymentSummaries`](docs/sdks/searchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
 - [`betaRagSearchIndexesRegisterDeployment`](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
 - [`betaRagSearchIndexesUnregisterDeployment`](docs/sdks/searchindexes/README.md#unregisterdeployment) - Unregister Deployment

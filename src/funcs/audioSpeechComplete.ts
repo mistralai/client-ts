@@ -153,7 +153,7 @@ async function $do(
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: options?.acceptHeaderOverride
-      || "application/json;q=1, text/event-stream;q=0",
+      || (request?.stream ? "text/event-stream" : "application/json"),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);

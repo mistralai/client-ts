@@ -34,7 +34,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.7.0
+  version: 2.8.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -56,6 +56,7 @@ typescript:
         optional: true
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
   author: Mistral AI
   baseErrorName: MistralError
   clientServerStatusCodesAsErrors: true
@@ -66,6 +67,7 @@ typescript:
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: MISTRAL
+  eventStreamClassName: EventStream
   exportZodModelNamespace: false
   fixEnumNameSanitization: false
   flatAdditionalProperties: true
@@ -97,6 +99,8 @@ typescript:
   packageName: '@mistralai/mistralai'
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
+  requestExtras: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2

@@ -4,7 +4,6 @@
  */
 
 import { MistralCore } from "../core.js";
-import { dlv } from "../lib/dlv.js";
 import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
@@ -40,9 +39,9 @@ import {
  * @remarks
  * List the service accounts in a workspace, or across the organization.
  *
- * Scoped to a workspace, this requires the `see_all_workspace_service_accounts`
- * permission on it. Omitting the workspace lists the whole organization and requires
- * the organization-level `see_all_org_service_accounts` permission instead.
+ * Scoped to a workspace, this requires the Workspace admin (`workspace_admin`) role on
+ * it. Omitting the workspace lists the whole organization and requires the Organization
+ * admin (`organization_admin`) role instead.
  */
 export function betaServiceAccountsList(
   client: MistralCore,
@@ -226,7 +225,7 @@ async function $do(
     if (!responseData) {
       return { next: () => null };
     }
-    const results = dlv(responseData, "items");
+    const results = (responseData as { items: unknown }).items;
     if (!Array.isArray(results) || !results.length) {
       return { next: () => null };
     }

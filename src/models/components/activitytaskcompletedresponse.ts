@@ -42,9 +42,13 @@ export type ActivityTaskCompletedResponse = {
    */
   continuedRunId: string | null;
   /**
-   * Run ID of the first execution in this workflow chain. Equals workflow_run_id on fresh starts and resets (chain anchor resets on reset); differs on CAN and Retry runs where it stays anchored to the original first run.
+   * Run ID of the first execution in this workflow chain. Equals workflow_run_id on a fresh start. Continue-as-new, retry and reset runs keep the original value.
    */
   firstExecutionRunId: string | null;
+  /**
+   * Identifies one start of an execution. Shared by its continue-as-new, retry and reset runs, and by every sub-workflow below it. Starting the same execution ID again gives a new value.
+   */
+  chainRunId: string | null;
   /**
    * Temporal schedule ID that triggered this execution, if any.
    */
@@ -82,6 +86,7 @@ export const ActivityTaskCompletedResponse$inboundSchema: z.ZodType<
   parent_workflow_exec_id: z.nullable(z.string()),
   continued_run_id: z.nullable(z.string()),
   first_execution_run_id: z.nullable(z.string()),
+  chain_run_id: z.nullable(z.string()),
   schedule_id: z.nullable(z.string()),
   workflow_exec_id: z.string(),
   workflow_run_id: z.string(),
@@ -98,6 +103,7 @@ export const ActivityTaskCompletedResponse$inboundSchema: z.ZodType<
     "parent_workflow_exec_id": "parentWorkflowExecId",
     "continued_run_id": "continuedRunId",
     "first_execution_run_id": "firstExecutionRunId",
+    "chain_run_id": "chainRunId",
     "schedule_id": "scheduleId",
     "workflow_exec_id": "workflowExecId",
     "workflow_run_id": "workflowRunId",

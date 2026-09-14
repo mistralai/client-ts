@@ -18,25 +18,21 @@ import {
 import { PipelineKind, PipelineKind$outboundSchema } from "./pipelinekind.js";
 
 export type UpdatePipelineConfigRequest = {
+  name: string;
   pipelineKind: PipelineKind;
   description?: string | null | undefined;
   selectors: Array<PipelineConfigSelector>;
-  slug?: string | null | undefined;
-  group?: string | null | undefined;
-  definition: PipelineConfigDefinition;
-  name: string;
+  definitions: Array<PipelineConfigDefinition>;
   enabled: boolean;
 };
 
 /** @internal */
 export type UpdatePipelineConfigRequest$Outbound = {
+  name: string;
   pipeline_kind: string;
   description?: string | null | undefined;
   selectors: Array<PipelineConfigSelector$Outbound>;
-  slug?: string | null | undefined;
-  group?: string | null | undefined;
-  definition: PipelineConfigDefinition$Outbound;
-  name: string;
+  definitions: Array<PipelineConfigDefinition$Outbound>;
   enabled: boolean;
 };
 
@@ -45,13 +41,11 @@ export const UpdatePipelineConfigRequest$outboundSchema: z.ZodType<
   UpdatePipelineConfigRequest$Outbound,
   UpdatePipelineConfigRequest
 > = z.object({
+  name: z.string(),
   pipelineKind: PipelineKind$outboundSchema,
   description: z.nullable(z.string()).optional(),
   selectors: z.array(PipelineConfigSelector$outboundSchema),
-  slug: z.nullable(z.string()).optional(),
-  group: z.nullable(z.string()).optional(),
-  definition: PipelineConfigDefinition$outboundSchema,
-  name: z.string(),
+  definitions: z.array(PipelineConfigDefinition$outboundSchema),
   enabled: z.boolean(),
 }).transform((v) => {
   return remap$(v, {

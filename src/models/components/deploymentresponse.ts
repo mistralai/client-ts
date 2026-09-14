@@ -40,7 +40,13 @@ export type DeploymentResponse = {
    */
   createdAt: Date;
   /**
-   * When the deployment was last updated
+   * When the deployment last saw a worker registration
+   */
+  lastHeartbeat: Date;
+  /**
+   * Deprecated alias of last_heartbeat
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   updatedAt: Date;
   /**
@@ -81,6 +87,7 @@ export const DeploymentResponse$inboundSchema: z.ZodType<
   is_active: z.boolean(),
   is_hardened: z.boolean().default(false),
   created_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
+  last_heartbeat: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   owner: z.nullable(z.string()).optional(),
   location: z.nullable(DeploymentLocation$inboundSchema).optional(),
@@ -93,6 +100,7 @@ export const DeploymentResponse$inboundSchema: z.ZodType<
     "is_active": "isActive",
     "is_hardened": "isHardened",
     "created_at": "createdAt",
+    "last_heartbeat": "lastHeartbeat",
     "updated_at": "updatedAt",
     "worker_count": "workerCount",
     "active_worker_count": "activeWorkerCount",

@@ -1,6 +1,6 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "exports": {
     ".": "./src/index.ts",
     "./models/errors": "./src/models/errors/index.ts",
