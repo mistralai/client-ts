@@ -11,16 +11,13 @@ let value: ManagedDeploymentResponse = {
   spec: {
     githubUrl: "https://ignorant-archaeology.com/",
     backendSpec: {
-      type: "kubernetes",
+      type: "mistral_cloud",
     },
-    commitSha: "<value>",
-    entrypoint: "<value>",
-    workingDir: "<value>",
   },
   resources: {},
   status: {},
-  createdAt: new Date("2024-06-08T11:48:59.961Z"),
-  updatedAt: new Date("2026-08-04T06:35:25.197Z"),
+  createdAt: new Date("2024-08-01T19:24:54.169Z"),
+  updatedAt: new Date("2026-02-28T23:02:00.681Z"),
 };
 ```
 
@@ -42,3 +39,5 @@ let value: ManagedDeploymentResponse = {
 | `deployedBy`                                                                                       | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
 | `deployedAt`                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)      | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
 | `isHardened`                                                                                       | *boolean*                                                                                          | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `runtimeCredentialId`                                                                              | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `runtimePrincipalType`                                                                             | [components.PrincipalType](../../models/components/principaltype.md)                               | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

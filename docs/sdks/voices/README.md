@@ -4,18 +4,19 @@
 
 ### Available Operations
 
-* [~~list~~](#list) - List all voices :warning: **Deprecated**
+* [~~list~~](#list) - List all voices :warning: **Deprecated** Use [search](docs/sdks/voices/README.md#search) instead.
 * [create](#create) - Create a new voice
 * [delete](#delete) - Delete a custom voice
 * [update](#update) - Update voice metadata
 * [get](#get) - Get voice details
 * [getSampleAudio](#getsampleaudio) - Get voice sample audio
+* [search](#search) - List voices, cursor-paginated
 
 ## ~~list~~
 
 Offset pagination will not be supported anymore. Use GET /v2/audio/voices instead.
 
-> :warning: **DEPRECATED**: Offset pagination will not be supported anymore. Use GET /v2/audio/voices instead..
+> :warning: **DEPRECATED**: Offset pagination will not be supported anymore. Use GET /v2/audio/voices instead.. Use `search` instead.
 
 ### Example Usage
 
@@ -449,6 +450,80 @@ run();
 ### Response
 
 **Promise\<[ReadableStream<Uint8Array>](../../models/.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## search
+
+List voices, cursor-paginated
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="audio_v2_voices_list" method="get" path="/v2/audio/voices" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.audio.voices.search({});
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { audioVoicesSearch } from "@mistralai/mistralai/funcs/audioVoicesSearch.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await audioVoicesSearch(mistral, {});
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("audioVoicesSearch failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.AudioV2VoicesListRequest](../../models/operations/audiov2voiceslistrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.AudioV2VoicesListResponse](../../models/operations/audiov2voiceslistresponse.md)\>**
 
 ### Errors
 

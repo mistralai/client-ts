@@ -10,6 +10,7 @@ let value:
     {
       pipelineConfigId: "f47b53d4-c398-4956-be1c-0295ff1de923",
       updatePipelineConfigRequest: {
+        name: "<value>",
         pipelineKind: "moderation",
         selectors: [],
         definition: {
@@ -19,7 +20,6 @@ let value:
             insecure: false,
           },
         },
-        name: "<value>",
         enabled: false,
       },
     };

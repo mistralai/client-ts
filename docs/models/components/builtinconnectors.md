@@ -13,5 +13,5 @@ let value: BuiltInConnectors = "document_library";
 ## Values
 
 ```typescript
-"web_search" | "web_search_premium" | "code_interpreter" | "image_generation" | "document_library" | Unrecognized<string>
+"web_search" | "web_search_premium" | "code_interpreter" | "image_generation" | "document_library" | "mistral_mcp" | Unrecognized<string>
 ```

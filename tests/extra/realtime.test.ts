@@ -46,10 +46,12 @@ vi.mock("ws", () => {
 
   let lastSocket: MockWebSocket | undefined;
 
-  const WebSocket = vi.fn(() => {
-    lastSocket = new MockWebSocket();
-    return lastSocket;
-  });
+  class WebSocket extends MockWebSocket {
+    constructor() {
+      super();
+      lastSocket = this;
+    }
+  }
 
   return {
     default: WebSocket,

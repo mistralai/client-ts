@@ -15,7 +15,7 @@ const value: components.UpdateHTTPConnectorRequestAuthMethod1 = {
 
 ```typescript
 const value: components.AuthenticationMethodCreateOrUpdateRequest = {
-  methodType: "github_app",
+  methodType: "oauth2",
 };
 ```
 

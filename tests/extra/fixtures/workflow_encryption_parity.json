@@ -1,0 +1,1139 @@
+{
+  "keys": {
+    "main": "98e1186171bf8a0dcc5379cbbf23ebb1dd8bc96a9a9adadb8b4f14568a14cb09",
+    "secondary": "7964817d0f3d4ec2eb13f3671edd285fbef0a9d3e5d8f2bf426f4540e5954c1e",
+    "aes128": "7ab7c5cb58f55b31a43922815293ded0",
+    "aes192": "e39820a5848ee7f9c88adbd49fe169812615e3312004dcfb"
+  },
+  "encode_network_input": [
+    {
+      "name": "full/main/object",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [
+        "f0d8e7ef0de57df094a98b4c"
+      ],
+      "expected": {
+        "b64payload": "8Njn7w3lffCUqYtM4yBrGaOkjqh1jfppKxDNO3QB/u7kLV+lMkWGCFFfuSfLR+YblLdcf5Q3oKdfbd2n+qkdHfeGW2AI4yNJxRZRcd3wvlYD0VDSRA==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/nested",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": {
+        "a": {
+          "b": {
+            "c": [
+              1,
+              {
+                "d": null
+              },
+              [],
+              {}
+            ]
+          }
+        },
+        "z": false
+      },
+      "nonces": [
+        "e64eabd40dd74ec2720c638e"
+      ],
+      "expected": {
+        "b64payload": "5k6r1A3XTsJyDGOOPyNX2WLySVWRcLTpgoOkhTvf1Q5vzss30CP4LqfIlzFdldmGelFazQ4qen6vwDLuUYFlnUYjTU6SC42n8MvIXQ==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/unicode",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": {
+        "text": "héllo wörld ✓ 😀  ",
+        "ctrl": "\u0000\u001f\n\t\"\\/"
+      },
+      "nonces": [
+        "3b80549cb80d4cebe1e7eba0"
+      ],
+      "expected": {
+        "b64payload": "O4BUnLgNTOvh5+ugCQlPt08fspHEuDsmG91ZMUaNYqv9usH90D0kEjkUo7FFcoG3qQ/xiGVfRMTqyZurb4SpsWaq/3cc8VRwYpauImjHeSO+5vGEj4/nx45AU+k5AiAhtA==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/numbers",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": {
+        "floats": [
+          0.5,
+          -1.25,
+          0.1,
+          1e-05,
+          1.5e-06,
+          1e-07,
+          123456.789,
+          1e-300
+        ],
+        "ints": [
+          0,
+          -7,
+          9007199254740991,
+          1000000000000000000000
+        ],
+        "tiny": 5e-324
+      },
+      "nonces": [
+        "24beb003a4f1c00d7787aa78"
+      ],
+      "expected": {
+        "b64payload": "JL6wA6TxwA13h6p4fX1jm1VkUUWLBdTIIkdbMRE7yui4Xm1xy5+Q5c6gO19PtOSNeLYC8JanhSqH1fHmbgAFOab+GgDPsgC9c/hrEOcb316cTRTtLkO83mql1LDxRWDXIaL9wUzaM4z7T6X+JAnD/BLhyzI/PGfD2aKS+MHspJ8ZW4ttLWLYsohRMscqFTNc+vlBcdf0p/Fi++sdYOnIKg==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/integer_like_keys",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": {
+        "2": "two",
+        "10": "ten",
+        "b": 1,
+        "a": 2
+      },
+      "nonces": [
+        "f80073cb8fa9ff1d886f3419"
+      ],
+      "expected": {
+        "b64payload": "+ABzy4+p/x2IbzQZcB1426770D+96hb4fo0eG6haTl1kMWfTK2RO5ZKWKi6DbEGHmqu1Qp7243BqjK2aIkQ=",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/string",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": "just a string",
+      "nonces": [
+        "8bd4ee8302a1ed1de2f8fc08"
+      ],
+      "expected": {
+        "b64payload": "i9TugwKh7R3i+PwIb2p+nv7E7OSa9GMh/bMJL9RLCqBFWD9cST4EzgcqQQ==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/list",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": [
+        1,
+        "two",
+        {
+          "three": 3
+        }
+      ],
+      "nonces": [
+        "1f51970892479acb462acd53"
+      ],
+      "expected": {
+        "b64payload": "H1GXCJJHmstGKs1T7mBX43OTW5NlSam7e4bZ2CaszjDgPaunYVGTSyumuwN+GTcUlQ==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/number",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": 42,
+      "nonces": [
+        "b5ca8db0b0dce681b9eeef21"
+      ],
+      "expected": {
+        "b64payload": "tcqNsLDc5oG57u8hr05gG/GnFZwX/1Vj7w4zFHYG",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/empty_object",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": {},
+      "nonces": [
+        "c2cd55beae7247b3842707b8"
+      ],
+      "expected": {
+        "b64payload": "ws1Vvq5yR7OEJwe4vBwmWgcoSgeco8pQ13RUAdm9",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/partial_top_level",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": {
+        "user": "alice",
+        "api_key": {
+          "field_type": "__encrypted_str__",
+          "data": "sk-secret"
+        },
+        "unicode": {
+          "field_type": "__encrypted_str__",
+          "data": "mot de passe: été 😀"
+        }
+      },
+      "nonces": [
+        "af702e057af848d50303f05d"
+      ],
+      "expected": {
+        "b64payload": "r3AuBXr4SNUDA/BdkhMoW7bQFdgsQaGzFcdEzWoNP8UBbUeUOlAvDuk8R3iQykdgC4bNCHKrA5sB3ZF1mzl21J9RMeif2pCgkC1bAi6ExEqSjxd4CUSveVUxPE7SVTLgQVAxkUwt0BC69FWXImnsD6PRjzB/n0mQl1DzRq7BrHAkvGRjMUWrU8QG6DWSmzKsXowK4SWfx9lxhBdklkt0HbrIDoV0yaeDwMb/GJEYNWbn9aRSIVANgERsWQ==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/main/partial_nested",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "input": {
+        "config": {
+          "credentials": [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "first"
+            },
+            {
+              "inner": {
+                "field_type": "__encrypted_str__",
+                "data": "second"
+              },
+              "plain": "visible"
+            }
+          ],
+          "empty": {
+            "field_type": "__encrypted_str__",
+            "data": ""
+          }
+        },
+        "list": [
+          [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "deep"
+            }
+          ]
+        ],
+        "outer": {
+          "field_type": "__encrypted_str__",
+          "data": "outer",
+          "extra": {
+            "field_type": "__encrypted_str__",
+            "data": "not-a-field"
+          }
+        }
+      },
+      "nonces": [
+        "976a0248cce4c3a0af171121"
+      ],
+      "expected": {
+        "b64payload": "l2oCSMzkw6CvFxEhgfYb0RQYYdakyijko30jXtg36d24/hYUbzIXJchAY5eqfCeLrA+tUNAZ4xG734iMZNRuuZJio9Vf2YrNY4S4MsPceNDWt8czVn2sxp2maZhd6zJZhfmtjMkZPjHcXViSUSlkV2si3mk/sOxWuYfXFuSClioszN+SC2DO/YoTwqOxWHuc+XGOZgE+FwBeodJkucALZrIdX6ckYdiIlEMGL9A+5yYy2j2Q9acPlUl74ksg7e6VZfY9c7pRTNWYegx7mjjdGNqBU+jC34ShwDkSkKE2rhrmX0656iwjJhBQ1LKT7sx1EyXZGhCxQFUu3v/9MP4dUOxRa3xXeMGxn09zk9bZTSpFh1rkqAnD9SDG6e5lZ4pcBqRxW3OiadBcwx95fe9bKEdW3CnKHdsFO+N59AW/+oBQzDVU+DIYRgds3TelnwQHCeab/7vxtUHt4rHHtSdbmgdOY2GKCl27yrPxgJBLQr4YyF4v5W5WnHtOT/EMNqv6FmfuruNeh66V5YwcXyWUjUjTn/OGie+1jxpopPjq4wuhk5f5",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/object",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJuYW1lIjogImFsaWNlIiwgImNvdW50IjogMywgImFjdGl2ZSI6IHRydWUsICJ0YWdzIjogWyJhIiwgImIiXX0=",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/nested",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": {
+        "a": {
+          "b": {
+            "c": [
+              1,
+              {
+                "d": null
+              },
+              [],
+              {}
+            ]
+          }
+        },
+        "z": false
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJhIjogeyJiIjogeyJjIjogWzEsIHsiZCI6IG51bGx9LCBbXSwge31dfX0sICJ6IjogZmFsc2V9",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/unicode",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": {
+        "text": "héllo wörld ✓ 😀  ",
+        "ctrl": "\u0000\u001f\n\t\"\\/"
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJ0ZXh0IjogImhcdTAwZTlsbG8gd1x1MDBmNnJsZCBcdTI3MTMgXHVkODNkXHVkZTAwIFx1MjAyOCIsICJjdHJsIjogIlx1MDAwMFx1MDAxZlx1MDA3ZlxuXHRcIlxcLyJ9",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/numbers",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": {
+        "floats": [
+          0.5,
+          -1.25,
+          0.1,
+          1e-05,
+          1.5e-06,
+          1e-07,
+          123456.789,
+          1e-300
+        ],
+        "ints": [
+          0,
+          -7,
+          9007199254740991,
+          1000000000000000000000
+        ],
+        "tiny": 5e-324
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJmbG9hdHMiOiBbMC41LCAtMS4yNSwgMC4xLCAxZS0wNSwgMS41ZS0wNiwgMWUtMDcsIDEyMzQ1Ni43ODksIDFlLTMwMF0sICJpbnRzIjogWzAsIC03LCA5MDA3MTk5MjU0NzQwOTkxLCAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwXSwgInRpbnkiOiA1ZS0zMjR9",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/integer_like_keys",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": {
+        "2": "two",
+        "10": "ten",
+        "b": 1,
+        "a": 2
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyIyIjogInR3byIsICIxMCI6ICJ0ZW4iLCAiYiI6IDEsICJhIjogMn0=",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/string",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": "just a string",
+      "nonces": [],
+      "expected": {
+        "b64payload": "Imp1c3QgYSBzdHJpbmci",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/list",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": [
+        1,
+        "two",
+        {
+          "three": 3
+        }
+      ],
+      "nonces": [],
+      "expected": {
+        "b64payload": "WzEsICJ0d28iLCB7InRocmVlIjogM31d",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/number",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": 42,
+      "nonces": [],
+      "expected": {
+        "b64payload": "NDI=",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/empty_object",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": {},
+      "nonces": [],
+      "expected": {
+        "b64payload": "e30=",
+        "encoding_options": [],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/partial_top_level",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": {
+        "user": "alice",
+        "api_key": {
+          "field_type": "__encrypted_str__",
+          "data": "sk-secret"
+        },
+        "unicode": {
+          "field_type": "__encrypted_str__",
+          "data": "mot de passe: été 😀"
+        }
+      },
+      "nonces": [
+        "2fc6974dce0f8acf19562d24",
+        "0400d58bc39ac3ce5541586c"
+      ],
+      "expected": {
+        "b64payload": "eyJ1c2VyIjogImFsaWNlIiwgImFwaV9rZXkiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJMOGFYVGM0UGlzOFpWaTBrRWplaThtaWFGcWRYajQ0RGpKc1p4dDMzdUdVSGp3ZXd2dz09In0sICJ1bmljb2RlIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAiQkFEVmk4T2F3ODVWUVZoc2pCMCt0QXl0cFlpZUwrWUFDMUp4bUZibnFjK21sR2VGYWpoUHpaVE5MdnF4QjM1UHdmdUJLdz09In19",
+        "encoding_options": [
+          "encrypted-partial"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "partial/main/partial_nested",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "input": {
+        "config": {
+          "credentials": [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "first"
+            },
+            {
+              "inner": {
+                "field_type": "__encrypted_str__",
+                "data": "second"
+              },
+              "plain": "visible"
+            }
+          ],
+          "empty": {
+            "field_type": "__encrypted_str__",
+            "data": ""
+          }
+        },
+        "list": [
+          [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "deep"
+            }
+          ]
+        ],
+        "outer": {
+          "field_type": "__encrypted_str__",
+          "data": "outer",
+          "extra": {
+            "field_type": "__encrypted_str__",
+            "data": "not-a-field"
+          }
+        }
+      },
+      "nonces": [
+        "1437fe019c3cdf9dce51e3e3",
+        "e01614108a5bbf39ec0c1b54",
+        "02d1f71e84a0ae80f267ffd9",
+        "c09bd541b298b212a594f81f",
+        "e884de53a93f5359f8e95835"
+      ],
+      "expected": {
+        "b64payload": "eyJjb25maWciOiB7ImNyZWRlbnRpYWxzIjogW3siZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIkZEZitBWnc4MzUzT1VlUGpEdDRDUlExWU5yRG9OUUw3K2c4Mk42UU5OVElMIn0sIHsiaW5uZXIiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICI0QllVRUlwYnZ6bnNEQnRVZEp0TnA4ZlhxaW84amJFVU1SNURuUWZXL2dFbTVRPT0ifSwgInBsYWluIjogInZpc2libGUifV0sICJlbXB0eSI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIkF0SDNIb1Nncm9EeVovL1p0bmkvc0s4S0JvK3gzc3dDT1phNlRnPT0ifX0sICJsaXN0IjogW1t7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJ3SnZWUWJLWXNoS2xsUGdmMHF2ODl5MGQwWklDZjBPaUVBRngxYVV6QmcwPSJ9XV0sICJvdXRlciI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIjZJVGVVNmsvVTFuNDZWZzFETkN5NW1CUWtKRktuclRJelA5SGdjNVErWTRxIiwgImV4dHJhIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAibm90LWEtZmllbGQifX19",
+        "encoding_options": [
+          "encrypted-partial"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/aes128/object",
+      "config": {
+        "mode": "full",
+        "main_key": "aes128"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [
+        "c5a45ac53def79436f801049"
+      ],
+      "expected": {
+        "b64payload": "xaRaxT3veUNvgBBJjkvwEv62fsxnxEJ7X6VFQM+beIWxJcOk7CMjKC9MI23sg6lzvmkdUF097Cr25M7gLyoTx0Qrf4l9FryaRxOIidmUVxzhNobgOg==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/aes128/partial_top_level",
+      "config": {
+        "mode": "full",
+        "main_key": "aes128"
+      },
+      "input": {
+        "user": "alice",
+        "api_key": {
+          "field_type": "__encrypted_str__",
+          "data": "sk-secret"
+        },
+        "unicode": {
+          "field_type": "__encrypted_str__",
+          "data": "mot de passe: été 😀"
+        }
+      },
+      "nonces": [
+        "2b1dcb276b1b3da85ef83ac3"
+      ],
+      "expected": {
+        "b64payload": "Kx3LJ2sbPahe+DrD1Pu+gdJfOtaT+kjA28Yrat+nIhuK0EdstIaZATzw0Jj09QM1eOTsq92loJkscD6fvrbfMrLhbvCnnfC1eQh+Tp4YbUEbL7lOZBvE/37ozABpDhgseEEkIx4Ytz9KV36LuJAdHQ7mSlNlSHzr//gCu1+i8q+TwYRal5nsjWKEgYMUW+CPNQP/0E1k2NT9tE8afmNVqJTtdb3bhMv9KYBUgammvQW3os00kABPquDnRg==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/aes192/object",
+      "config": {
+        "mode": "full",
+        "main_key": "aes192"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [
+        "a7e7bffd2b506046ab10f6e7"
+      ],
+      "expected": {
+        "b64payload": "p+e//StQYEarEPbnsPSXPbWpucwknY2AYr4aPyL+VN+u+QFoAWT4HDjKY6UpcjcVUrbRdEsZC+xX+1Rqc+614Nm0fozKtIDkXHIcxr8dehG8lCPGxQ==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    },
+    {
+      "name": "full/aes192/partial_top_level",
+      "config": {
+        "mode": "full",
+        "main_key": "aes192"
+      },
+      "input": {
+        "user": "alice",
+        "api_key": {
+          "field_type": "__encrypted_str__",
+          "data": "sk-secret"
+        },
+        "unicode": {
+          "field_type": "__encrypted_str__",
+          "data": "mot de passe: été 😀"
+        }
+      },
+      "nonces": [
+        "2db8f71068a2e751592d6705"
+      ],
+      "expected": {
+        "b64payload": "Lbj3EGii51FZLWcFAstroYvs0dLTJu+LegzpTIcwNxQXZfx542Py3DURFMddDBApJMr6zQA2gCoU7QhfFBKfpDr52worHX9EJHCD2ptnKndbYMZ1HZ+vvyFhwpDAhaP4H1RTcy7oRmlGr0GyiYW6JItJjiCIgdYtK9s+T1BEQkjO8mEDVDNZyxnOB97BoEpstNplUYxR77cPZRHRf6/xgJafT8f4Q8K3N7v5yBoPEfLSejOBuXj1mFtCww==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      }
+    }
+  ],
+  "encode_payload_content": [
+    {
+      "name": "partial/numbers_and_whitespace",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "data_b64": "IHsiYiIgOiAyLjAsICJhIjpbMWU1LCAxRS03LCAtMCwgLTAuMCwgMS41MCwgMTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjMsIDFlNDAwLCBOYU4sIC1JbmZpbml0eV0sICIxMCI6IDEsICIyIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAieCJ9fQo=",
+      "nonces": [
+        "def7bf5b2eac48ff835e6c21"
+      ],
+      "expected": {
+        "data_b64": "eyJiIjogMi4wLCAiYSI6IFsxMDAwMDAuMCwgMWUtMDcsIDAsIC0wLjAsIDEuNSwgMTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjMsIEluZmluaXR5LCBOYU4sIC1JbmZpbml0eV0sICIxMCI6IDEsICIyIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAiM3ZlL1d5NnNTUCtEWG13aDNmMmI5QS9tYUp6cVBCR3NQVXAySldjPSJ9fQ==",
+        "encoding_options": [
+          "encrypted-partial"
+        ]
+      }
+    },
+    {
+      "name": "partial/duplicate_keys",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "data_b64": "eyJrIjogMSwgImoiOiAyLCAiayI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogInYifX0=",
+      "nonces": [
+        "c71e50939c38d7be5aaac38a"
+      ],
+      "expected": {
+        "data_b64": "eyJrIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAieHg1UWs1dzQxNzVhcXNPS25aSE1JWFdRZ2tPcGFLRm5LM252TURvPSJ9LCAiaiI6IDJ9",
+        "encoding_options": [
+          "encrypted-partial"
+        ]
+      }
+    },
+    {
+      "name": "partial/escapes",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "data_b64": "eyJzIjogIsOp8J+YgFwvXGJcZiIsICJlIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAiXHUwMDAwIn19",
+      "nonces": [
+        "3012a7a24ac7ced4d2af82c3"
+      ],
+      "expected": {
+        "data_b64": "eyJzIjogIlx1MDBlOVx1ZDgzZFx1ZGUwMC9cYlxmIiwgImUiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJNQktub2tySHp0VFNyNExEK2ViNEVCZE0wM29ZN2Y0SXFVZ0xtMkE9In19",
+        "encoding_options": [
+          "encrypted-partial"
+        ]
+      }
+    },
+    {
+      "name": "partial/no_encrypted_fields",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "data_b64": "eyJhIjoxLCJiIjpbdHJ1ZSxmYWxzZSxudWxsXX0=",
+      "nonces": [],
+      "expected": {
+        "data_b64": "eyJhIjogMSwgImIiOiBbdHJ1ZSwgZmFsc2UsIG51bGxdfQ==",
+        "encoding_options": []
+      }
+    },
+    {
+      "name": "partial/not_json",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "data_b64": "dGhpcyBpcyBub3QganNvbg==",
+      "nonces": [],
+      "expected": {
+        "data_b64": "dGhpcyBpcyBub3QganNvbg==",
+        "encoding_options": []
+      }
+    },
+    {
+      "name": "full/numbers_and_whitespace",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "data_b64": "IHsiYiIgOiAyLjAsICJhIjpbMWU1LCAxRS03LCAtMCwgLTAuMCwgMS41MCwgMTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjMsIDFlNDAwLCBOYU4sIC1JbmZpbml0eV0sICIxMCI6IDEsICIyIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAieCJ9fQo=",
+      "nonces": [
+        "bb6c7693889c6a4632707085"
+      ],
+      "expected": {
+        "data_b64": "u2x2k4icakYycHCF3gJ4CHVdcFmbMEEBe6hMph7bFMR1rL/dGDOroed/KL8NTnDu9jmqblVX1ifL6F7O42Oo5OBz/9kMQgPs734YpDT1ZdFECbWXK+sbd/n6JC5mr9KdVCd/plyrncYODhJ6PaOqKTC+c4794n6TjcfB/2wfBYtba4rDZeYHKn8jzJGbbpLfjymfxVDV+ExN67QWtndnfyj6JQ9F8pEvV9XQcOJ+1QCy1nOBq4mBezGP",
+        "encoding_options": [
+          "encrypted"
+        ]
+      }
+    },
+    {
+      "name": "full/duplicate_keys",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "data_b64": "eyJrIjogMSwgImoiOiAyLCAiayI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogInYifX0=",
+      "nonces": [
+        "b37884941d7077de2ad2e4ec"
+      ],
+      "expected": {
+        "data_b64": "s3iElB1wd94q0uTsqN3VK8LEoYbfiXYNVEEzncJywyC5tf5bYhiNuO/s8BmJyQ19oU48eADPdVsaVsKJKmMnjb4ZT1KP6GnB7d5OzOT6FzF0yf/pdITOPxw7Sr3lXij+SRR4",
+        "encoding_options": [
+          "encrypted"
+        ]
+      }
+    },
+    {
+      "name": "full/escapes",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "data_b64": "eyJzIjogIsOp8J+YgFwvXGJcZiIsICJlIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAiXHUwMDAwIn19",
+      "nonces": [
+        "4b17fe0636fd6d5cc3d19364"
+      ],
+      "expected": {
+        "data_b64": "Sxf+Bjb9bVzD0ZNkpozAYjtKquyutyXaCGHJ9DzqE9PBPzyFhq7joGav6SOIXMmuiRYgHkhQcZsWE/U7jq+8A9Vki2yg9JD8pKdJw/uBvJ1ot91kLJXgS7uSWvZM+vbdXH5EYUVeCf3jBK4XcQ==",
+        "encoding_options": [
+          "encrypted"
+        ]
+      }
+    },
+    {
+      "name": "full/no_encrypted_fields",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "data_b64": "eyJhIjoxLCJiIjpbdHJ1ZSxmYWxzZSxudWxsXX0=",
+      "nonces": [
+        "8f8cdaf9ae5406d0f8f026ae"
+      ],
+      "expected": {
+        "data_b64": "j4za+a5UBtD48CauxKgDaGHqx1GbF/6pfG94MAnvOWNh+92aJpBvzPHeNXppUsmVag1GvTY9q2vy",
+        "encoding_options": [
+          "encrypted"
+        ]
+      }
+    },
+    {
+      "name": "full/not_json",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "data_b64": "dGhpcyBpcyBub3QganNvbg==",
+      "nonces": [
+        "62889f4c2845362f213a2673"
+      ],
+      "expected": {
+        "data_b64": "YoifTChFNi8hOiZzwCqnhEeJkzLQvcgMsiUki/B+POv5ToLW8uDscmQuQ3U=",
+        "encoding_options": [
+          "encrypted"
+        ]
+      }
+    }
+  ],
+  "decode_network_result": [
+    {
+      "name": "full/rotated/object",
+      "config": {
+        "mode": "full",
+        "main_key": "main",
+        "secondary_key": "secondary"
+      },
+      "encoded": {
+        "b64payload": "D8WNB8uHWzCO4bj+1mFrjBFV53jUOzGvjIKpZpfXpWThcsTVmhV8ouFB5rAenASq9eW1yeNP0xeIh+VYqbK+pJB5MKG0wrqNNM0qCPXsCrSPiboYAA==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "expected": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "name": "full/rotated/unicode",
+      "config": {
+        "mode": "full",
+        "main_key": "main",
+        "secondary_key": "secondary"
+      },
+      "encoded": {
+        "b64payload": "nBfESIyVXahg4G6TroG59QL+yH6sWaqJ9eDfp1PECzFFQWRu/u5on4mJl8Sgiujkkzfjh25G00/ZPPWwQ88eD5AUZ5TFGFxwIOfQzrBlMla4mopGR0wx6Tya9qPHvFQkkw==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "expected": {
+        "text": "héllo wörld ✓ 😀  ",
+        "ctrl": "\u0000\u001f\n\t\"\\/"
+      }
+    },
+    {
+      "name": "full/rotated/partial_nested",
+      "config": {
+        "mode": "full",
+        "main_key": "main",
+        "secondary_key": "secondary"
+      },
+      "encoded": {
+        "b64payload": "sso9ojbpO/Nol8y8Rn9Rl+NlMyTN7d6tVCXVOUrsZY/0GMsjhWEFq6Xk6T2Up+GHZrZzAWq+ctqiQn9iL2wccsIRlj8hykgmp6oD/jhgi57XSYUie2ba9ISCrQyoLdoHmo1ySannJLSNvP8mFlmYWb+NC6lHkirrcCNfmU4VQ+jjKDW1QJrG15yPb7kbZO9t0tRqksBOSSK1Q8n2jtP6oYvXH+4Vf9zGvclhp9EBob5fzCCNB8iphWAGLVP1F5ccAWh/+2JcbuABUxfjXr1KuW+7vzFGyBNm7R2iSICAxjaosJgLiVDtIMcJCfvRaqUNb64OLxYEZAY4lPs9TMB1oHUQIaBJZr8afj/B2Hs5hEZLttr20606DDsQdrWaSjEqfbh9aenCw2X45jQE6f4dKW0Pbi20YtoKBM8e2GbP3H9PFJtCHKlZTkI6ots4nyCMoBK6/Ihn26NnQp+QZ4HdxLTl15Il2pcLDFJ7GOVkGsgzxi+AN/soNDsyneymp3lbj/5OmpxfxVG2iv7fPWqVNAvP7XdSTkbNbtHca8LmmnNrQZ4Y",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "expected": {
+        "config": {
+          "credentials": [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "first"
+            },
+            {
+              "inner": {
+                "field_type": "__encrypted_str__",
+                "data": "second"
+              },
+              "plain": "visible"
+            }
+          ],
+          "empty": {
+            "field_type": "__encrypted_str__",
+            "data": ""
+          }
+        },
+        "list": [
+          [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "deep"
+            }
+          ]
+        ],
+        "outer": {
+          "field_type": "__encrypted_str__",
+          "data": "outer",
+          "extra": {
+            "field_type": "__encrypted_str__",
+            "data": "not-a-field"
+          }
+        }
+      }
+    },
+    {
+      "name": "partial/rotated/object",
+      "config": {
+        "mode": "partial",
+        "main_key": "main",
+        "secondary_key": "secondary"
+      },
+      "encoded": {
+        "b64payload": "eyJuYW1lIjogImFsaWNlIiwgImNvdW50IjogMywgImFjdGl2ZSI6IHRydWUsICJ0YWdzIjogWyJhIiwgImIiXX0=",
+        "encoding_options": [],
+        "empty": false
+      },
+      "expected": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "name": "partial/rotated/unicode",
+      "config": {
+        "mode": "partial",
+        "main_key": "main",
+        "secondary_key": "secondary"
+      },
+      "encoded": {
+        "b64payload": "eyJ0ZXh0IjogImhcdTAwZTlsbG8gd1x1MDBmNnJsZCBcdTI3MTMgXHVkODNkXHVkZTAwIFx1MjAyOCIsICJjdHJsIjogIlx1MDAwMFx1MDAxZlx1MDA3ZlxuXHRcIlxcLyJ9",
+        "encoding_options": [],
+        "empty": false
+      },
+      "expected": {
+        "text": "héllo wörld ✓ 😀  ",
+        "ctrl": "\u0000\u001f\n\t\"\\/"
+      }
+    },
+    {
+      "name": "partial/rotated/partial_nested",
+      "config": {
+        "mode": "partial",
+        "main_key": "main",
+        "secondary_key": "secondary"
+      },
+      "encoded": {
+        "b64payload": "eyJjb25maWciOiB7ImNyZWRlbnRpYWxzIjogW3siZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogInA3SzhoaGxWeDJtVGkyU3Z2VGwyc3lLMlZsQlByTUlnc0U0UzgrSTgzZTg2In0sIHsiaW5uZXIiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJJNkxkSS8rY0dSbXhrUVlyRG5teUlENE5iV0RSNUxzTE82K3h0N1ZwRnF0TlV3PT0ifSwgInBsYWluIjogInZpc2libGUifV0sICJlbXB0eSI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIm5tODlBVms2N2VIRTFnZnVHS3NjalJWa1JTN2VPSitob1lIODhRPT0ifX0sICJsaXN0IjogW1t7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJPUnFzSTlzdktNQVBXUTVUNFFRWERmUmFidnZyTmhyNlNMTThZZFhpb1BBPSJ9XV0sICJvdXRlciI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogImhpbURmaEpwRFIxa1NZL2VOakVsQ2ZsRThaUVNNa3REOGdlSkFrelBsL1ZFIiwgImV4dHJhIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAibm90LWEtZmllbGQifX19",
+        "encoding_options": [
+          "encrypted-partial"
+        ],
+        "empty": false
+      },
+      "expected": {
+        "config": {
+          "credentials": [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "first"
+            },
+            {
+              "inner": {
+                "field_type": "__encrypted_str__",
+                "data": "second"
+              },
+              "plain": "visible"
+            }
+          ],
+          "empty": {
+            "field_type": "__encrypted_str__",
+            "data": ""
+          }
+        },
+        "list": [
+          [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "deep"
+            }
+          ]
+        ],
+        "outer": {
+          "field_type": "__encrypted_str__",
+          "data": "outer",
+          "extra": {
+            "field_type": "__encrypted_str__",
+            "data": "not-a-field"
+          }
+        }
+      }
+    }
+  ],
+  "decode_event_payload": [
+    {
+      "name": "json_full",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "payload": {
+        "type": "json",
+        "value": "soNEdFjJkVOOYQkusRtV6SBub79ioFMaxNhlLR2qYTKyU4/kQkckuoIpntUsqlK/ancHkqglWIxBYOwxqzae9vQ=",
+        "encoding_options": [
+          "encrypted"
+        ]
+      },
+      "expected": {
+        "type": "json",
+        "value": {
+          "state": "running",
+          "progress": 0.5
+        },
+        "encoding_options": []
+      }
+    },
+    {
+      "name": "json_patch_partial",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "payload": {
+        "type": "json_patch",
+        "value": [
+          {
+            "op": "add",
+            "path": "/secret",
+            "value": {
+              "type": "__encrypted__",
+              "value": "m0fgYowLHIr4tfIM1Oxf9EboYoXM8gekap4OIiZhtWRFTx063TXo12rJj0AhdQ=="
+            }
+          },
+          {
+            "op": "replace",
+            "path": "/plain",
+            "value": "visible"
+          },
+          {
+            "op": "append",
+            "path": "/log",
+            "value": {
+              "type": "__encrypted__",
+              "value": "I0/3L09nTHvMliYy6M8GgaTjJFA8/ThbUpyw0+lKiEfWd/VT6aJneEs="
+            }
+          }
+        ],
+        "encoding_options": [
+          "encrypted-partial"
+        ]
+      },
+      "expected": {
+        "type": "json_patch",
+        "value": [
+          {
+            "path": "/secret",
+            "value": {
+              "token": "t0k3n"
+            },
+            "op": "add"
+          },
+          {
+            "path": "/plain",
+            "value": "visible",
+            "op": "replace"
+          },
+          {
+            "path": "/log",
+            "value": "line ✓",
+            "op": "append"
+          }
+        ],
+        "encoding_options": []
+      }
+    },
+    {
+      "name": "not_encoded",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "payload": {
+        "type": "json",
+        "value": {
+          "a": 1
+        },
+        "encoding_options": []
+      },
+      "expected": {
+        "type": "json",
+        "value": {
+          "a": 1
+        },
+        "encoding_options": []
+      }
+    }
+  ]
+}

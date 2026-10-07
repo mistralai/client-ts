@@ -13,7 +13,7 @@ let value: ListFilesResponse = {
       sizeBytes: 13000,
       createdAt: 1716963433,
       filename: "files_upload.jsonl",
-      purpose: "batch",
+      purpose: "ocr",
       sampleType: "batch_request",
       source: "upload",
     },

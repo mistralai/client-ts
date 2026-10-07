@@ -16,3 +16,4 @@ let value: AuthData = {
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `clientId`         | *string*           | :heavy_check_mark: | N/A                |
 | `clientSecret`     | *string*           | :heavy_minus_sign: | N/A                |
+| `clientScopes`     | *string*[]         | :heavy_minus_sign: | N/A                |

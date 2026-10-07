@@ -1,10 +1,28 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "2.7.0",
+  "version": "3.0.0",
   "author": "Mistral AI",
   "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
   "peerDependenciesMeta": {
+    "@aws-sdk/client-s3": {
+      "optional": true
+    },
+    "@azure/identity": {
+      "optional": true
+    },
+    "@azure/storage-blob": {
+      "optional": true
+    },
+    "@google-cloud/storage": {
+      "optional": true
+    },
+    "@hpcc-js/wasm-zstd": {
+      "optional": true
+    },
+    "@msgpack/msgpack": {
+      "optional": true
+    },
     "@opentelemetry/api": {
       "optional": true
     },
@@ -57,6 +75,16 @@
       "types": "./esm/extra/observability/index.d.ts",
       "default": "./esm/extra/observability/index.js"
     },
+    "./extra/connectors": {
+      "source": "./src/extra/connectors.ts",
+      "types": "./esm/extra/connectors.d.ts",
+      "default": "./esm/extra/connectors.js"
+    },
+    "./extra/workflows": {
+      "source": "./src/extra/workflows/index.ts",
+      "types": "./esm/extra/workflows/index.d.ts",
+      "default": "./esm/extra/workflows/index.js"
+    },
     "./hooks/tracing": {
       "source": "./src/hooks/tracing.ts",
       "types": "./esm/hooks/tracing.d.ts",
@@ -79,17 +107,29 @@
     "url": "https://github.com/mistralai/client-ts.git"
   },
   "scripts": {
-    "lint": "oxlint --max-warnings=0 --deny-warnings src/**/*.ts src/**/*.tsx",
+    "lint": "oxlint --max-warnings=0 --deny-warnings --no-error-on-unmatched-pattern src",
     "build": "tsgo",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
+    "@aws-sdk/client-s3": "^3.300.0",
+    "@azure/identity": "^4.0.0",
+    "@azure/storage-blob": "^12.24.0",
+    "@google-cloud/storage": "^7.0.0 || ^8.0.0",
+    "@hpcc-js/wasm-zstd": "^1.16.0",
+    "@msgpack/msgpack": "^3.0.0",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.220.0",
     "@opentelemetry/resources": "^2.9.0",
     "@opentelemetry/sdk-trace-base": "^2.9.0"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1142.0",
+    "@azure/identity": "^4.13.3",
+    "@azure/storage-blob": "^12.34.0",
+    "@google-cloud/storage": "^8.2.0",
+    "@hpcc-js/wasm-zstd": "^1.16.2",
+    "@msgpack/msgpack": "^3.1.3",
     "@opentelemetry/api": "^1.9.0",
     "@types/node": "^22.0.0",
     "@types/ws": "^8.5.13",
@@ -98,6 +138,7 @@
     "typescript": "~5.8.3"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@opentelemetry/semantic-conventions": "^1.40.0",
     "ws": "^8.18.0",
     "zod": "^3.25.0 || ^4.0.0",

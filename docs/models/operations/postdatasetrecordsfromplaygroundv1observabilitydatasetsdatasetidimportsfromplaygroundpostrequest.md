@@ -10,9 +10,13 @@ import {
 let value:
   PostDatasetRecordsFromPlaygroundV1ObservabilityDatasetsDatasetIdImportsFromPlaygroundPostRequest =
     {
-      datasetId: "c7bf5806-37f6-42af-b253-85994ffc010f",
+      datasetId: "<id>",
       importDatasetFromPlaygroundRequest: {
-        conversationIds: [],
+        conversationIds: [
+          "<value 1>",
+          "<value 2>",
+          "<value 3>",
+        ],
       },
     };
 ```
@@ -21,5 +25,5 @@ let value:
 
 | Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `datasetId`                                                                                                    | *string*                                                                                                       | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `datasetId`                                                                                                    | *string*                                                                                                       | :heavy_check_mark:                                                                                             | Dataset UUID or workspace-scoped slug. UUID-shaped values are always interpreted as dataset IDs.               |
 | `importDatasetFromPlaygroundRequest`                                                                           | [components.ImportDatasetFromPlaygroundRequest](../../models/components/importdatasetfromplaygroundrequest.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

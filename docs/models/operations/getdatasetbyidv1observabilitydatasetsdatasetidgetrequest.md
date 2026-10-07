@@ -6,12 +6,12 @@
 import { GetDatasetByIdV1ObservabilityDatasetsDatasetIdGetRequest } from "@mistralai/mistralai/models/operations";
 
 let value: GetDatasetByIdV1ObservabilityDatasetsDatasetIdGetRequest = {
-  datasetId: "f5107ffd-2d5a-41ce-9963-a1aeaa1400c5",
+  datasetId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `datasetId`        | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `datasetId`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | Dataset UUID or workspace-scoped slug. UUID-shaped values are always interpreted as dataset IDs. |

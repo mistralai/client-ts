@@ -11,6 +11,7 @@ let value: DatasetPreview = {
   updatedAt: new Date("2026-07-26T19:06:26.623Z"),
   deletedAt: null,
   name: "<value>",
+  slug: "<value>",
   description: "space consign when",
   ownerId: "bcff914c-f654-4bcf-b494-80816a96d376",
   workspaceId: "da7a9ef0-6628-4499-94f8-d32e7c10a3b0",
@@ -26,6 +27,7 @@ let value: DatasetPreview = {
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `slug`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `description`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `ownerId`                                                                                     | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

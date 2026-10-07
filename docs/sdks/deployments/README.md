@@ -4,6 +4,7 @@
 
 ### Available Operations
 
+* [unhardenDeployment](#unhardendeployment) - Unharden Deployment
 * [listDeployments](#listdeployments) - List Deployments
 * [createDeployment](#createdeployment) - Create Deployment
 * [updateDeployment](#updatedeployment) - Update Deployment
@@ -15,6 +16,79 @@
 * [listDeploymentWorkers](#listdeploymentworkers) - List Deployment Workers
 * [getDeploymentLogs](#getdeploymentlogs) - Get Deployment Logs
 * [streamDeploymentLogs](#streamdeploymentlogs) - Stream Deployment Logs
+
+## unhardenDeployment
+
+Unharden Deployment
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="unharden_deployment_v1_workflows_deployments__deployment_id__unharden_post" method="post" path="/v1/workflows/deployments/{deployment_id}/unharden" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  await mistral.workflows.deployments.unhardenDeployment({
+    deploymentId: "f88c4734-ec6d-4ded-bc49-47a41d4be24b",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { workflowsDeploymentsUnhardenDeployment } from "@mistralai/mistralai/funcs/workflowsDeploymentsUnhardenDeployment.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await workflowsDeploymentsUnhardenDeployment(mistral, {
+    deploymentId: "f88c4734-ec6d-4ded-bc49-47a41d4be24b",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("workflowsDeploymentsUnhardenDeployment failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                | Type                                                                                                                                                                                     | Required                                                                                                                                                                                 | Description                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                | [operations.UnhardenDeploymentV1WorkflowsDeploymentsDeploymentIdUnhardenPostRequest](../../models/operations/unhardendeploymentv1workflowsdeploymentsdeploymentidunhardenpostrequest.md) | :heavy_check_mark:                                                                                                                                                                       | The request object to use for the request.                                                                                                                                               |
+| `options`                                                                                                                                                                                | RequestOptions                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                       | Used to set various options for making HTTP requests.                                                                                                                                    |
+| `options.fetchOptions`                                                                                                                                                                   | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                  | :heavy_minus_sign:                                                                                                                                                                       | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.           |
+| `options.retries`                                                                                                                                                                        | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                       | Enables retrying HTTP requests under certain failure conditions.                                                                                                                         |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
 
 ## listDeployments
 
@@ -692,6 +766,9 @@ Retrieve logs for a deployment (across all of its workers).
 
 Use `after`/`before`/`order` on the first request to set the time range and sort order; for
 the next pages pass the `cursor` from the previous response (it remembers the range and order).
+
+`log_type=build` serves the managed build pipeline's output instead. It pages the same way,
+and a null `next_cursor` means the window is drained.
 
 ### Example Usage
 

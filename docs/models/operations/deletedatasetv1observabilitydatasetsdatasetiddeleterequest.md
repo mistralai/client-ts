@@ -6,12 +6,12 @@
 import { DeleteDatasetV1ObservabilityDatasetsDatasetIdDeleteRequest } from "@mistralai/mistralai/models/operations";
 
 let value: DeleteDatasetV1ObservabilityDatasetsDatasetIdDeleteRequest = {
-  datasetId: "48e02194-a624-4471-acdc-27712191e406",
+  datasetId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `datasetId`        | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `datasetId`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | Dataset UUID or workspace-scoped slug. UUID-shaped values are always interpreted as dataset IDs. |

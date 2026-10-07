@@ -83,7 +83,7 @@ const value: components.MessageOutputEvent = {
 const value: components.ToolExecutionDeltaEvent = {
   type: "tool.execution.delta",
   id: "<id>",
-  name: "web_search_premium",
+  name: "code_interpreter",
   arguments: "<value>",
 };
 ```
@@ -94,7 +94,7 @@ const value: components.ToolExecutionDeltaEvent = {
 const value: components.ToolExecutionDoneEvent = {
   type: "tool.execution.done",
   id: "<id>",
-  name: "document_library",
+  name: "mistral_mcp",
 };
 ```
 
@@ -104,7 +104,7 @@ const value: components.ToolExecutionDoneEvent = {
 const value: components.ToolExecutionStartedEvent = {
   type: "tool.execution.started",
   id: "<id>",
-  name: "image_generation",
+  name: "document_library",
   arguments: "<value>",
 };
 ```

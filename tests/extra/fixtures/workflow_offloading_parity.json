@@ -1,0 +1,1247 @@
+{
+  "keys": {
+    "main": "98e1186171bf8a0dcc5379cbbf23ebb1dd8bc96a9a9adadb8b4f14568a14cb09",
+    "secondary": "7964817d0f3d4ec2eb13f3671edd285fbef0a9d3e5d8f2bf426f4540e5954c1e",
+    "aes128": "7ab7c5cb58f55b31a43922815293ded0",
+    "aes192": "e39820a5848ee7f9c88adbd49fe169812615e3312004dcfb"
+  },
+  "encode_network_input": [
+    {
+      "name": "none/object/object",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1NjoxMDhlOWQ1YmIxNTk5YTdmZGM2MmQyZjZjMjRhNDBmNjVlMTI1ZjE2YWI2Mjg0MGI1NzYzNjc0M2RjMGVkYmRkIn0=",
+        "encoding_options": [
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:108e9d5bb1599a7fdc62d2f6c24a40f65e125f16ab62840b57636743dc0edbdd": "eyJuYW1lIjoiYWxpY2UiLCJjb3VudCI6MywiYWN0aXZlIjp0cnVlLCJ0YWdzIjpbImEiLCJiIl19"
+      }
+    },
+    {
+      "name": "none/unicode/unicode",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "text": "héllo wörld ✓ 😀  ",
+        "ctrl": "\u0000\u001f\n\t\"\\/"
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1NjpmY2RjODkzNmIyMWZhYmU5MGViODE3MTJlMzg2ZTY5YWMzZDkwMzYxM2Y5OTI2MTgyMjkyMmNkYTc2NmNmZTU0In0=",
+        "encoding_options": [
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:fcdc8936b21fabe90eb81712e386e69ac3d903613f99261822922cda766cfe54": "eyJ0ZXh0IjoiaMOpbGxvIHfDtnJsZCDinJMg8J+YgCDigKgiLCJjdHJsIjoiXHUwMDAwXHUwMDFmf1xuXHRcIlxcLyJ9"
+      }
+    },
+    {
+      "name": "none/partial_top_level/partial_top_level",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "user": "alice",
+        "api_key": {
+          "field_type": "__encrypted_str__",
+          "data": "sk-secret"
+        },
+        "unicode": {
+          "field_type": "__encrypted_str__",
+          "data": "mot de passe: été 😀"
+        }
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1NjoxNTQ0OGQwMzcwZjg5MzY3ZmU3Zjk4OGQ1NzcxZGQwMWJmODFjNzZmMjI1YWFlOTg0ZDNiMDhlMWU2MzJkYTkxIn0=",
+        "encoding_options": [
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:15448d0370f89367fe7f988d5771dd01bf81c76f225aae984d3b08e1e632da91": "eyJ1c2VyIjoiYWxpY2UiLCJhcGlfa2V5Ijp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJzay1zZWNyZXQifSwidW5pY29kZSI6eyJmaWVsZF90eXBlIjoiX19lbmNyeXB0ZWRfc3RyX18iLCJkYXRhIjoibW90IGRlIHBhc3NlOiDDqXTDqSDwn5iAIn19"
+      }
+    },
+    {
+      "name": "none/partial_nested/partial_nested",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "config": {
+          "credentials": [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "first"
+            },
+            {
+              "inner": {
+                "field_type": "__encrypted_str__",
+                "data": "second"
+              },
+              "plain": "visible"
+            }
+          ],
+          "empty": {
+            "field_type": "__encrypted_str__",
+            "data": ""
+          }
+        },
+        "list": [
+          [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "deep"
+            }
+          ]
+        ],
+        "outer": {
+          "field_type": "__encrypted_str__",
+          "data": "outer",
+          "extra": {
+            "field_type": "__encrypted_str__",
+            "data": "not-a-field"
+          }
+        }
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1NjoyMGM3YjczMmU0Yjg1YzhlNGJhMjEzNmFjZjA2YWZjYTVjYWQ0NzQ1NDk4ZWIyZDIzY2QzZGFmZTMzODE5YmVkIn0=",
+        "encoding_options": [
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:20c7b732e4b85c8e4ba2136acf06afca5cad4745498eb2d23cd3dafe33819bed": "eyJjb25maWciOnsiY3JlZGVudGlhbHMiOlt7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJmaXJzdCJ9LHsiaW5uZXIiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6InNlY29uZCJ9LCJwbGFpbiI6InZpc2libGUifV0sImVtcHR5Ijp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiIifX0sImxpc3QiOltbeyJmaWVsZF90eXBlIjoiX19lbmNyeXB0ZWRfc3RyX18iLCJkYXRhIjoiZGVlcCJ9XV0sIm91dGVyIjp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJvdXRlciIsImV4dHJhIjp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJub3QtYS1maWVsZCJ9fX0="
+      }
+    },
+    {
+      "name": "none/escaped_context/object",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "team ns/!'()*~é",
+        "execution_id": "exec:1+2&3?#"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3RlYW0lMjBucyUyRiUyMSUyNyUyOCUyOSUyQX4lQzMlQTkvZXhlYyUzQTElMkIyJTI2MyUzRiUyMy9zaGEyNTY6MTA4ZTlkNWJiMTU5OWE3ZmRjNjJkMmY2YzI0YTQwZjY1ZTEyNWYxNmFiNjI4NDBiNTc2MzY3NDNkYzBlZGJkZCJ9",
+        "encoding_options": [
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/team%20ns%2F%21%27%28%29%2A~%C3%A9/exec%3A1%2B2%263%3F%23/sha256:108e9d5bb1599a7fdc62d2f6c24a40f65e125f16ab62840b57636743dc0edbdd": "eyJuYW1lIjoiYWxpY2UiLCJjb3VudCI6MywiYWN0aXZlIjp0cnVlLCJ0YWdzIjpbImEiLCJiIl19"
+      }
+    },
+    {
+      "name": "full/object/object",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [
+        "d8bcc86dabd401fae178a3c8"
+      ],
+      "expected": {
+        "b64payload": "2LzIbavUAfrheKPIgD8VJL7JBIKLBPfeqhUxDtJd4X8yZSXtAXkDFc6Bg9nmrEsVE8yeaJSQrZLRzzclCr6hHaMdmc2tGqm3uZxCYbDl8+QavTLPld5bh4BXQA1cnPomxkBCOZgEZ/TijuSIkNeq1GKgGc6HlO1yj20S92JzVjLncVYWLG1hiCAZM70XZIOUkNXIFjQK",
+        "encoding_options": [
+          "offloaded",
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:108e9d5bb1599a7fdc62d2f6c24a40f65e125f16ab62840b57636743dc0edbdd": "eyJuYW1lIjoiYWxpY2UiLCJjb3VudCI6MywiYWN0aXZlIjp0cnVlLCJ0YWdzIjpbImEiLCJiIl19"
+      }
+    },
+    {
+      "name": "full/unicode/unicode",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "text": "héllo wörld ✓ 😀  ",
+        "ctrl": "\u0000\u001f\n\t\"\\/"
+      },
+      "nonces": [
+        "d0b6f4074163b5a343295506"
+      ],
+      "expected": {
+        "b64payload": "0Lb0B0FjtaNDKVUGZo7v0OBsfvaUh4pSMqMHljIGUQCJ4JRNksZt3+y6tFCS8dMkBG46S2xE4x797YTk0Fd3wvoCzjB4OfrCmkis3giHU7i2/K6pal6Xv4S2dg/xeDv/LJ+Vl187D1QplWuFh351tiRmnvfoxWYG+rJHNbEG/1E6hsiltHC7f0iQXmYXFxv/FFJ/RlqY",
+        "encoding_options": [
+          "offloaded",
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:fcdc8936b21fabe90eb81712e386e69ac3d903613f99261822922cda766cfe54": "eyJ0ZXh0IjoiaMOpbGxvIHfDtnJsZCDinJMg8J+YgCDigKgiLCJjdHJsIjoiXHUwMDAwXHUwMDFmf1xuXHRcIlxcLyJ9"
+      }
+    },
+    {
+      "name": "full/partial_top_level/partial_top_level",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "user": "alice",
+        "api_key": {
+          "field_type": "__encrypted_str__",
+          "data": "sk-secret"
+        },
+        "unicode": {
+          "field_type": "__encrypted_str__",
+          "data": "mot de passe: été 😀"
+        }
+      },
+      "nonces": [
+        "c8403c37109f06d1d1568615"
+      ],
+      "expected": {
+        "b64payload": "yEA8NxCfBtHRVoYVDOWV66PXkDYlcpI2A+maG6m7k6WU+YJG/C/LoB4ov4ZGgEiVA4xCvcFS/afCNJbzbki75hI/cZIEZn4EL2I8CfIal/XtAwUpqdp3ebp5wr37V2VsgsvRuR/zx9dYX5xspyZJem/NJLPD996zIG52u/dpHNmcvmG1fFPFGAd09dw7I7CLoWiHyyxN",
+        "encoding_options": [
+          "offloaded",
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:15448d0370f89367fe7f988d5771dd01bf81c76f225aae984d3b08e1e632da91": "eyJ1c2VyIjoiYWxpY2UiLCJhcGlfa2V5Ijp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJzay1zZWNyZXQifSwidW5pY29kZSI6eyJmaWVsZF90eXBlIjoiX19lbmNyeXB0ZWRfc3RyX18iLCJkYXRhIjoibW90IGRlIHBhc3NlOiDDqXTDqSDwn5iAIn19"
+      }
+    },
+    {
+      "name": "full/partial_nested/partial_nested",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "config": {
+          "credentials": [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "first"
+            },
+            {
+              "inner": {
+                "field_type": "__encrypted_str__",
+                "data": "second"
+              },
+              "plain": "visible"
+            }
+          ],
+          "empty": {
+            "field_type": "__encrypted_str__",
+            "data": ""
+          }
+        },
+        "list": [
+          [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "deep"
+            }
+          ]
+        ],
+        "outer": {
+          "field_type": "__encrypted_str__",
+          "data": "outer",
+          "extra": {
+            "field_type": "__encrypted_str__",
+            "data": "not-a-field"
+          }
+        }
+      },
+      "nonces": [
+        "2d28f98e55702ec80ad4baf9"
+      ],
+      "expected": {
+        "b64payload": "LSj5jlVwLsgK1Lr5UD2CJITannzVEChmhcbbDMxYxBJmrC5T+4Md2QV4zeCnfX2v/79olnRQIW+nXLCxroTCD7Gv+Kpd8vTaLE14BA52vel3afM3vKP3QTa+dX+Wxs8eTrJyKRXzZAzbcZX1yZY97FQj17LM2cryN4nOK8Ip8ZIPxs3bjA5iJf6t1bqu9K8TVDmz3S9n",
+        "encoding_options": [
+          "offloaded",
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:20c7b732e4b85c8e4ba2136acf06afca5cad4745498eb2d23cd3dafe33819bed": "eyJjb25maWciOnsiY3JlZGVudGlhbHMiOlt7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJmaXJzdCJ9LHsiaW5uZXIiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6InNlY29uZCJ9LCJwbGFpbiI6InZpc2libGUifV0sImVtcHR5Ijp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiIifX0sImxpc3QiOltbeyJmaWVsZF90eXBlIjoiX19lbmNyeXB0ZWRfc3RyX18iLCJkYXRhIjoiZGVlcCJ9XV0sIm91dGVyIjp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJvdXRlciIsImV4dHJhIjp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJub3QtYS1maWVsZCJ9fX0="
+      }
+    },
+    {
+      "name": "full/escaped_context/object",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "team ns/!'()*~é",
+        "execution_id": "exec:1+2&3?#"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [
+        "b38af851f4b09002b8ba66f9"
+      ],
+      "expected": {
+        "b64payload": "s4r4UfSwkAK4umb52BFWGz0aF2ZGTM9RSd383gJapEfWhZeWb30F8znpi3fCdpQUMHLAE+wWMsiC7OrzqSBfmfHPK7eYGxClaoE86dgQTQa0NmlxgFT/ICdMcGOOMK1f+KuyHoJhMSkMv02bY002YP6w4aoK/ZjvIWsDjl0seXfETMVCbiOSyvJBU+frPANLXo2pR8KEI1mMzln0MxrwX2DEu2iL4/gb7N6ayKMwXlDOTL7kQROxZA==",
+        "encoding_options": [
+          "offloaded",
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/team%20ns%2F%21%27%28%29%2A~%C3%A9/exec%3A1%2B2%263%3F%23/sha256:108e9d5bb1599a7fdc62d2f6c24a40f65e125f16ab62840b57636743dc0edbdd": "eyJuYW1lIjoiYWxpY2UiLCJjb3VudCI6MywiYWN0aXZlIjp0cnVlLCJ0YWdzIjpbImEiLCJiIl19"
+      }
+    },
+    {
+      "name": "partial/object/object",
+      "config": {
+        "encryption": {
+          "mode": "partial",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1Njo5YTliM2EwYWFjM2E3Mzc0YTkzMTQ5N2Q1MjRmM2QzODdmZjFmMzJiODA4YzE2MWUxMDRiOWI4NWMxMTExMTVmIn0=",
+        "encoding_options": [
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:9a9b3a0aac3a7374a931497d524f3d387ff1f32b808c161e104b9b85c111115f": "eyJuYW1lIjogImFsaWNlIiwgImNvdW50IjogMywgImFjdGl2ZSI6IHRydWUsICJ0YWdzIjogWyJhIiwgImIiXX0="
+      }
+    },
+    {
+      "name": "partial/unicode/unicode",
+      "config": {
+        "encryption": {
+          "mode": "partial",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "text": "héllo wörld ✓ 😀  ",
+        "ctrl": "\u0000\u001f\n\t\"\\/"
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1NjoxOTUyYmRhMGVjNWY5MTNlYmU5Mjc0ZDNiMTM5MTFiM2EyMTgyYjM2ZDBlMGNiODUxMGUyNGZhZjdjMzAwZjAwIn0=",
+        "encoding_options": [
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:1952bda0ec5f913ebe9274d3b13911b3a2182b36d0e0cb8510e24faf7c300f00": "eyJ0ZXh0IjogImhcdTAwZTlsbG8gd1x1MDBmNnJsZCBcdTI3MTMgXHVkODNkXHVkZTAwIFx1MjAyOCIsICJjdHJsIjogIlx1MDAwMFx1MDAxZlx1MDA3ZlxuXHRcIlxcLyJ9"
+      }
+    },
+    {
+      "name": "partial/partial_top_level/partial_top_level",
+      "config": {
+        "encryption": {
+          "mode": "partial",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "user": "alice",
+        "api_key": {
+          "field_type": "__encrypted_str__",
+          "data": "sk-secret"
+        },
+        "unicode": {
+          "field_type": "__encrypted_str__",
+          "data": "mot de passe: été 😀"
+        }
+      },
+      "nonces": [
+        "046309ad858f8920d7c2c435",
+        "2a94896b652388208d64c8d5"
+      ],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1NjpmM2U4NjY3MmQzM2M0Y2RjNWQ3NTliNDRkY2FkNDk0MzQyZTMyMDZmOGVlMTUzZmYwNDlmNDI4NzU1MDk1ZmU1In0=",
+        "encoding_options": [
+          "encrypted-partial",
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:f3e86672d33c4cdc5d759b44dcad494342e3206f8ee153ff049f428755095fe5": "eyJ1c2VyIjogImFsaWNlIiwgImFwaV9rZXkiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJCR01KcllXUGlTRFh3c1ExWVhvWXJNM3pEV1VBZGhXdXBPOEJrdjI4TjYyZHJjWEtpdz09In0sICJ1bmljb2RlIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAiS3BTSmEyVWppQ0NOWk1qVlJlZFhQeG94QVVHYXVaYmd0aUZ3SHYvOWFKbk05ZTBlenBEci9ZRGRHU0p4LzZQNDRPbm1NQT09In19"
+      }
+    },
+    {
+      "name": "partial/partial_nested/partial_nested",
+      "config": {
+        "encryption": {
+          "mode": "partial",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "config": {
+          "credentials": [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "first"
+            },
+            {
+              "inner": {
+                "field_type": "__encrypted_str__",
+                "data": "second"
+              },
+              "plain": "visible"
+            }
+          ],
+          "empty": {
+            "field_type": "__encrypted_str__",
+            "data": ""
+          }
+        },
+        "list": [
+          [
+            {
+              "field_type": "__encrypted_str__",
+              "data": "deep"
+            }
+          ]
+        ],
+        "outer": {
+          "field_type": "__encrypted_str__",
+          "data": "outer",
+          "extra": {
+            "field_type": "__encrypted_str__",
+            "data": "not-a-field"
+          }
+        }
+      },
+      "nonces": [
+        "9776be33e28429bf8aec7c4d",
+        "cedcc8bceb3cc8edb11ea900",
+        "d2c49d7f5a6a6f6c64db882b",
+        "7926fff5067e33709eb1f5fd",
+        "0b40d86043aa919c64cea055"
+      ],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1Njo2ZWNmM2Y0NTFkZmMxOGM0OGNmNjA5ZDRhMGUxNmFiYWE4NWZmYzQwNWM0OGYyYTc2ZDVlNzJlZTRkZWNhODg0In0=",
+        "encoding_options": [
+          "encrypted-partial",
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:6ecf3f451dfc18c48cf609d4a0e16abaa85ffc405c48f2a76d5e72ee4deca884": "eyJjb25maWciOiB7ImNyZWRlbnRpYWxzIjogW3siZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogImwzYStNK0tFS2IrSzdIeE5CSWhvY25wVDl0OEVxdlhFTXNXVE92THNaZ2ExIn0sIHsiaW5uZXIiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJ6dHpJdk9zOHlPMnhIcWtBd0ltTjc0YUZwY0Y3VTJBRmtxRk9RUDN0eTRpTWFnPT0ifSwgInBsYWluIjogInZpc2libGUifV0sICJlbXB0eSI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIjBzU2RmMXBxYjJ4azI0Z3JZU0dhZzd0Zk1wQXpEN1B4Z3owa3dRPT0ifX0sICJsaXN0IjogW1t7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJlU2IvOVFaK00zQ2VzZlg5cFFRc3d5eU43OWxZVFh4M1orRi9zMUhINlhzPSJ9XV0sICJvdXRlciI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIkMwRFlZRU9xa1p4a3pxQlZ0cXBKRXY1ejlXeThtWDZpZ2NSUklGSG1CWHBUIiwgImV4dHJhIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAibm90LWEtZmllbGQifX19"
+      }
+    },
+    {
+      "name": "partial/escaped_context/object",
+      "config": {
+        "encryption": {
+          "mode": "partial",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "team ns/!'()*~é",
+        "execution_id": "exec:1+2&3?#"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [],
+      "expected": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3RlYW0lMjBucyUyRiUyMSUyNyUyOCUyOSUyQX4lQzMlQTkvZXhlYyUzQTElMkIyJTI2MyUzRiUyMy9zaGEyNTY6OWE5YjNhMGFhYzNhNzM3NGE5MzE0OTdkNTI0ZjNkMzg3ZmYxZjMyYjgwOGMxNjFlMTA0YjliODVjMTExMTE1ZiJ9",
+        "encoding_options": [
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/team%20ns%2F%21%27%28%29%2A~%C3%A9/exec%3A1%2B2%263%3F%23/sha256:9a9b3a0aac3a7374a931497d524f3d387ff1f32b808c161e104b9b85c111115f": "eyJuYW1lIjogImFsaWNlIiwgImNvdW50IjogMywgImFjdGl2ZSI6IHRydWUsICJ0YWdzIjogWyJhIiwgImIiXX0="
+      }
+    },
+    {
+      "name": "full/below_threshold/object",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1000000
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "name": "alice",
+        "count": 3,
+        "active": true,
+        "tags": [
+          "a",
+          "b"
+        ]
+      },
+      "nonces": [
+        "9a352e5f370f8688c68d1fce"
+      ],
+      "expected": {
+        "b64payload": "mjUuXzcPhojGjR/OVmelmyVbIJ8OBh2lcdDgKAbqEDSMGhLLQ0KjEyRNtBn8lmKuVP3Bf+9RavRr2KjySOBAzIrwL/IJH+RvNKnJVMNxE3nok448tg==",
+        "encoding_options": [
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "blobs": {}
+    }
+  ],
+  "encode_payload_content": [
+    {
+      "name": "none/force_offload",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1000000
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "options": {
+        "force_offload": true
+      },
+      "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+      "nonces": [],
+      "expected": {
+        "data_b64": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1NjozYjZlZjQ5ZTJjM2Y1YmNmOTExYjc1ZTQxM2EyNGNhYzBiOWQzYjNiMDJhNWU0MTIzMTBhZDFhOWY5NWVhNzI2In0=",
+        "encoding_options": [
+          "offloaded"
+        ]
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:3b6ef49e2c3f5bcf911b75e413a24cac0b9d3b3b02a5e412310ad1a9f95ea726": "eyJ0aW55IjogdHJ1ZX0="
+      }
+    },
+    {
+      "name": "full/force_offload",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1000000
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "options": {
+        "force_offload": true
+      },
+      "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+      "nonces": [
+        "6a982db0e18de73442c6ab60"
+      ],
+      "expected": {
+        "data_b64": "apgtsOGN5zRCxqtgOETMOgvy0bc1YPrSrhOs7YYtfR1bIQMzL28JOx62ardG0nemtImvjZ1iFz8Z3m2RjTjUYoIGCwK4PITiQMzHN5Fgyqw8iUm88TRHaOAY3iu6bEEi1oemCEOGcUIxm/7B7cc8x7xShLU36wh+qGMpY5im3i1BE4FDz3wFJNH3m8UMNSmbE8T3qybu",
+        "encoding_options": [
+          "offloaded",
+          "encrypted"
+        ]
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:3b6ef49e2c3f5bcf911b75e413a24cac0b9d3b3b02a5e412310ad1a9f95ea726": "eyJ0aW55IjogdHJ1ZX0="
+      }
+    },
+    {
+      "name": "none/force_offload_escaped",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1000000
+        }
+      },
+      "context": {
+        "namespace": "team ns/!'()*~é",
+        "execution_id": "exec:1+2&3?#"
+      },
+      "options": {
+        "force_offload": true
+      },
+      "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+      "nonces": [],
+      "expected": {
+        "data_b64": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3RlYW0lMjBucyUyRiUyMSUyNyUyOCUyOSUyQX4lQzMlQTkvZXhlYyUzQTElMkIyJTI2MyUzRiUyMy9zaGEyNTY6M2I2ZWY0OWUyYzNmNWJjZjkxMWI3NWU0MTNhMjRjYWMwYjlkM2IzYjAyYTVlNDEyMzEwYWQxYTlmOTVlYTcyNiJ9",
+        "encoding_options": [
+          "offloaded"
+        ]
+      },
+      "blobs": {
+        "temporal-payload/team%20ns%2F%21%27%28%29%2A~%C3%A9/exec%3A1%2B2%263%3F%23/sha256:3b6ef49e2c3f5bcf911b75e413a24cac0b9d3b3b02a5e412310ad1a9f95ea726": "eyJ0aW55IjogdHJ1ZX0="
+      }
+    },
+    {
+      "name": "full/force_offload_escaped",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1000000
+        }
+      },
+      "context": {
+        "namespace": "team ns/!'()*~é",
+        "execution_id": "exec:1+2&3?#"
+      },
+      "options": {
+        "force_offload": true
+      },
+      "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+      "nonces": [
+        "d5b152e02dc5a9a19dc1b5e8"
+      ],
+      "expected": {
+        "data_b64": "1bFS4C3FqaGdwbXojUaGi7ap1mvE2/nIcdKeAc3GqDMe83LIGCB5cORQ4LybpbRZCD3qd1IE+kDMK4JKVEI4bzXK6+mHZnOkpULWFer7px2tN6iq5SwPJs8pcWk/0fMA2Q/wvDdXsi3t3+7YTIoE0Mo3TclLcGnbjQ61U4NB9+hngDrxm8ktcOaovkeikpsLG0YLZ/Ds7v8uGcJhN342ZyM5cfjhyLNpZKGbAte1hmLKlThyovOUvw==",
+        "encoding_options": [
+          "offloaded",
+          "encrypted"
+        ]
+      },
+      "blobs": {
+        "temporal-payload/team%20ns%2F%21%27%28%29%2A~%C3%A9/exec%3A1%2B2%263%3F%23/sha256:3b6ef49e2c3f5bcf911b75e413a24cac0b9d3b3b02a5e412310ad1a9f95ea726": "eyJ0aW55IjogdHJ1ZX0="
+      }
+    },
+    {
+      "name": "none/offloading_not_allowed",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "options": {
+        "allow_offloading": false
+      },
+      "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+      "nonces": [],
+      "expected": {
+        "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+        "encoding_options": []
+      },
+      "blobs": {}
+    },
+    {
+      "name": "full/offloading_not_allowed",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "options": {
+        "allow_offloading": false
+      },
+      "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+      "nonces": [
+        "b89ae6c5c65d208e0aa6c2dd"
+      ],
+      "expected": {
+        "data_b64": "uJrmxcZdII4KpsLdPhJnbBtC0RCPmtuftO6sk+IXpQ5fwC2ABwBUg5/P",
+        "encoding_options": [
+          "encrypted"
+        ]
+      },
+      "blobs": {}
+    },
+    {
+      "name": "none/no_context",
+      "config": {
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": null,
+      "options": {},
+      "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+      "nonces": [],
+      "expected": {
+        "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+        "encoding_options": []
+      },
+      "blobs": {}
+    },
+    {
+      "name": "full/no_context",
+      "config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": null,
+      "options": {},
+      "data_b64": "eyJ0aW55IjogdHJ1ZX0=",
+      "nonces": [
+        "f1676d5306b4b454527f4a26"
+      ],
+      "expected": {
+        "data_b64": "8WdtUwa0tFRSf0omVOinDHVI0y3EbMdpUR/bddQV1hT+NGVapqH41jb8",
+        "encoding_options": [
+          "encrypted"
+        ]
+      },
+      "blobs": {}
+    }
+  ],
+  "compressed": [
+    {
+      "name": "compressed",
+      "encoder_config": {
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "decoder_config": {
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret": {
+          "field_type": "__encrypted_str__",
+          "data": "secret value"
+        }
+      },
+      "encoded": {
+        "b64payload": "gqtjb21wcmVzc2lvboKpYWxnb3JpdGhtpHpzdGSlbGV2ZWwDp3BheWxvYWTEUSi1L/1gHQc9AgACBA4VsKU5dCyzLbs3urglIa2EsEOJMHUCa/VFOUAwap9ExqdJhxC3a71JaSwfhCpr/pCjjgZqvTysCgMAVQ1QBECiMP+DLg==",
+        "encoding_options": [
+          "compressed"
+        ],
+        "empty": false
+      },
+      "blobs": {}
+    },
+    {
+      "name": "level_22",
+      "encoder_config": {
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 22
+        }
+      },
+      "decoder_config": {
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret": {
+          "field_type": "__encrypted_str__",
+          "data": "secret value"
+        }
+      },
+      "encoded": {
+        "b64payload": "gqtjb21wcmVzc2lvboKpYWxnb3JpdGhtpHpzdGSlbGV2ZWwWp3BheWxvYWTETSi1L/1gHQcdAgACBA0RsOs8SSqzEUJTDSYOBw1h9AQx+uyIBoJV1S4l3/TUQFd1+umtknNTDNN7Nb4c7JwWK4hhAwBVZVAEwKww/4Mu",
+        "encoding_options": [
+          "compressed"
+        ],
+        "empty": false
+      },
+      "blobs": {}
+    },
+    {
+      "name": "not_smaller",
+      "encoder_config": {
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "decoder_config": {
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "d": "x"
+      },
+      "encoded": {
+        "b64payload": "eyJkIjoieCJ9",
+        "encoding_options": [],
+        "empty": false
+      },
+      "blobs": {}
+    },
+    {
+      "name": "below_threshold",
+      "encoder_config": {
+        "compression": {
+          "min_size_bytes": 1000000,
+          "level": 3
+        }
+      },
+      "decoder_config": {
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret": {
+          "field_type": "__encrypted_str__",
+          "data": "secret value"
+        }
+      },
+      "encoded": {
+        "b64payload": "eyJkYXRhIjoieHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHgiLCJzZWNyZXQiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6InNlY3JldCB2YWx1ZSJ9fQ==",
+        "encoding_options": [],
+        "empty": false
+      },
+      "blobs": {}
+    },
+    {
+      "name": "offloaded",
+      "encoder_config": {
+        "offloading": {
+          "min_size_bytes": 1
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "decoder_config": {
+        "offloading": {
+          "min_size_bytes": 1
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret": {
+          "field_type": "__encrypted_str__",
+          "data": "secret value"
+        }
+      },
+      "encoded": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1Njo5MWVjYzAyNGFlMjFiOTFhN2RhMWNiOTc3YjY2OWI2OTUyZDE0YTc5NGFhOTc0MmU5Zjc2N2E2YjY2NjFlNDk5In0=",
+        "encoding_options": [
+          "compressed",
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:91ecc024ae21b91a7da1cb977b669b6952d14a794aa9742e9f767a6b6661e499": "gqtjb21wcmVzc2lvboKpYWxnb3JpdGhtpHpzdGSlbGV2ZWwDp3BheWxvYWTEUSi1L/1gHQc9AgACBA4VsKU5dCyzLbs3urglIa2EsEOJMHUCa/VFOUAwap9ExqdJhxC3a71JaSwfhCpr/pCjjgZqvTysCgMAVQ1QBECiMP+DLg=="
+      }
+    },
+    {
+      "name": "compression_prevents_offloading",
+      "encoder_config": {
+        "offloading": {
+          "min_size_bytes": 1000
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "decoder_config": {
+        "offloading": {
+          "min_size_bytes": 1000
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret": {
+          "field_type": "__encrypted_str__",
+          "data": "secret value"
+        }
+      },
+      "encoded": {
+        "b64payload": "gqtjb21wcmVzc2lvboKpYWxnb3JpdGhtpHpzdGSlbGV2ZWwDp3BheWxvYWTEUSi1L/1gHQc9AgACBA4VsKU5dCyzLbs3urglIa2EsEOJMHUCa/VFOUAwap9ExqdJhxC3a71JaSwfhCpr/pCjjgZqvTysCgMAVQ1QBECiMP+DLg==",
+        "encoding_options": [
+          "compressed"
+        ],
+        "empty": false
+      },
+      "blobs": {}
+    },
+    {
+      "name": "full",
+      "encoder_config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "decoder_config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret": {
+          "field_type": "__encrypted_str__",
+          "data": "secret value"
+        }
+      },
+      "encoded": {
+        "b64payload": "829HibOMWRdpFF/cwJoOtVjbdhG59ulmAssdtZt1WWSjyoyQn0oQ0jghxVceGVMdQp+l0sFr+P0bi4bsItEHopFDCw1drwUpBg+d8uyJL0T8l4x5PrUccTD36fjCrYkpVAbiLmAFM470A/hIMH2sYRUfR4tpQ9z/v03C5lAoCMlJSWKpDAmqCj0ugyWaym6loeIq6jr5",
+        "encoding_options": [
+          "compressed",
+          "offloaded",
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:91ecc024ae21b91a7da1cb977b669b6952d14a794aa9742e9f767a6b6661e499": "gqtjb21wcmVzc2lvboKpYWxnb3JpdGhtpHpzdGSlbGV2ZWwDp3BheWxvYWTEUSi1L/1gHQc9AgACBA4VsKU5dCyzLbs3urglIa2EsEOJMHUCa/VFOUAwap9ExqdJhxC3a71JaSwfhCpr/pCjjgZqvTysCgMAVQ1QBECiMP+DLg=="
+      }
+    },
+    {
+      "name": "partial",
+      "encoder_config": {
+        "encryption": {
+          "mode": "partial",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "decoder_config": {
+        "encryption": {
+          "mode": "partial",
+          "main_key": "main"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret": {
+          "field_type": "__encrypted_str__",
+          "data": "secret value"
+        }
+      },
+      "encoded": {
+        "b64payload": "eyJrZXkiOiJ0ZW1wb3JhbC1wYXlsb2FkL3Bhcml0eS9wYXJpdHktZXhlY3V0aW9uL3NoYTI1Njo3MjYzNWVjNGYzZGUzOThmNDlkYTNmNWQ0MGZkYjMxMjlkODRmOTgxOTA5ZDZkNmE3NDNiYjU2NWI5MDVmMzg4In0=",
+        "encoding_options": [
+          "encrypted-partial",
+          "compressed",
+          "offloaded"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:72635ec4f3de398f49da3f5d40fdb3129d84f981909d6d6a743bb565b905f388": "gqtjb21wcmVzc2lvboKpYWxnb3JpdGhtpHpzdGSlbGV2ZWwDp3BheWxvYWTEhii1L/1gTwflAwAChxoeUI0eaBbqyRU0z+lmjzx6qtK0OKw40AaVv5CNmVnB17XLAmkVbCCgmqCa1gwhAGBEjsBle/+FBSPnwzF40kTRTRtenZTkfHSoGjP1iWP7fPpImrnnO8dIS2gt5tabPj0tU7YucwsdxrUCBAANgARGFSv4czCY/8Ec"
+      }
+    },
+    {
+      "name": "rotated_key",
+      "encoder_config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "secondary"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        },
+        "compression": {
+          "min_size_bytes": 1,
+          "level": 3
+        }
+      },
+      "decoder_config": {
+        "encryption": {
+          "mode": "full",
+          "main_key": "main",
+          "secondary_key": "secondary"
+        },
+        "offloading": {
+          "min_size_bytes": 1
+        }
+      },
+      "context": {
+        "namespace": "parity",
+        "execution_id": "parity-execution"
+      },
+      "input": {
+        "data": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "secret": {
+          "field_type": "__encrypted_str__",
+          "data": "secret value"
+        }
+      },
+      "encoded": {
+        "b64payload": "3tPxYJANAyEUxTKf+7M/9Y0GuebEd1KiKLENDS6WVt5xWZyHxk+/c5AukkSxTz4qI1TmC3pFbnkZN70sByXpEsCokXNFBeDvdSXWYe9/Uki+UwK/QiLvFhwYP+0ih2KkGdwevgZsXeyw/Tbp8KBHVTFDQLu3vrCAn7rcHPldM3+UYVxRTJjf6S7PfML+UQ+Y15ofoPL2",
+        "encoding_options": [
+          "compressed",
+          "offloaded",
+          "encrypted"
+        ],
+        "empty": false
+      },
+      "blobs": {
+        "temporal-payload/parity/parity-execution/sha256:91ecc024ae21b91a7da1cb977b669b6952d14a794aa9742e9f767a6b6661e499": "gqtjb21wcmVzc2lvboKpYWxnb3JpdGhtpHpzdGSlbGV2ZWwDp3BheWxvYWTEUSi1L/1gHQc9AgACBA4VsKU5dCyzLbs3urglIa2EsEOJMHUCa/VFOUAwap9ExqdJhxC3a71JaSwfhCpr/pCjjgZqvTysCgMAVQ1QBECiMP+DLg=="
+      }
+    }
+  ]
+}

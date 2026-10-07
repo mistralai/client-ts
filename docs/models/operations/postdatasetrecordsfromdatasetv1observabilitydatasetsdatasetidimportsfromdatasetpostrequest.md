@@ -10,10 +10,10 @@ import {
 let value:
   PostDatasetRecordsFromDatasetV1ObservabilityDatasetsDatasetIdImportsFromDatasetPostRequest =
     {
-      datasetId: "7eabb2a2-a987-47df-8550-5b5a5bd405c4",
+      datasetId: "<id>",
       importDatasetFromDatasetRequest: {
         datasetRecordIds: [
-          "de0fad5b-1e1b-415b-9d6b-e83b5a9bb8b8",
+          "eabb2a2a-9877-4df5-9505-b5a5bd405c43",
         ],
       },
     };
@@ -23,5 +23,5 @@ let value:
 
 | Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `datasetId`                                                                                              | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `datasetId`                                                                                              | *string*                                                                                                 | :heavy_check_mark:                                                                                       | Dataset UUID or workspace-scoped slug. UUID-shaped values are always interpreted as dataset IDs.         |
 | `importDatasetFromDatasetRequest`                                                                        | [components.ImportDatasetFromDatasetRequest](../../models/components/importdatasetfromdatasetrequest.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

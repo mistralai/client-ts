@@ -23,12 +23,12 @@ const value: components.NoneAuthMethod = {
 
 ```typescript
 const value: components.OAuth2AuthMethod = {
-  oauth2ServerMetadata: {
-    issuer: "https://crooked-section.info/",
-    tokenEndpoint: "https://sparkling-contractor.info",
-  },
   grantType: "client_credentials",
   tokenEndpointAuthMethod: "client_secret_post",
+  oauth2ServerMetadata: {
+    issuer: "https://steel-gymnast.net/",
+    tokenEndpoint: "https://dental-intervention.info",
+  },
 };
 ```
 

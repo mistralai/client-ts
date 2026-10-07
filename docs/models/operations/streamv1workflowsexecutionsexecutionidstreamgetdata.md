@@ -13,9 +13,6 @@ const value: components.StreamEventSsePayload = {
     eventTimestamp: 739782,
     rootWorkflowExecId: "<id>",
     parentWorkflowExecId: "<id>",
-    continuedRunId: "<id>",
-    firstExecutionRunId: "<id>",
-    scheduleId: "<id>",
     workflowExecId: "<id>",
     workflowRunId: "<id>",
     workflowName: "<value>",
@@ -31,7 +28,7 @@ const value: components.StreamEventSsePayload = {
     workflowName: "<value>",
     workflowExecId: "<id>",
   },
-  brokerSequence: 625764,
+  brokerSequence: 536602,
 };
 ```
 

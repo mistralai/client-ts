@@ -8,7 +8,7 @@ import { ToolExecutionDoneEvent } from "@mistralai/mistralai/models/components";
 let value: ToolExecutionDoneEvent = {
   type: "tool.execution.done",
   id: "<id>",
-  name: "document_library",
+  name: "mistral_mcp",
 };
 ```
 

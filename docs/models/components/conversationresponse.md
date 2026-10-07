@@ -11,7 +11,7 @@ let value: ConversationResponse = {
   conversationId: "<id>",
   outputs: [
     {
-      name: "code_interpreter",
+      name: "image_generation",
       arguments: "<value>",
     },
   ],
