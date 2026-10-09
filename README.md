@@ -94,6 +94,17 @@ $ echo 'export MISTRAL_API_KEY=[your_key_here]' >> ~/.zshenv
 $ source ~/.zshenv
 ```
 
+### Service-account token
+
+Node workloads with a mounted service-account token can set `MISTRAL_SA_TOKEN_PATH` instead. The file is re-read on every request, so rotation is picked up. Credentials resolve in this order:
+
+1. an `Authorization` header passed per request via `headers`
+2. `new Mistral({ apiKey })`, which also accepts an async function
+3. the token at `MISTRAL_SA_TOKEN_PATH`
+4. `MISTRAL_API_KEY`
+
+An unreadable or empty token file fails the request with an `UnexpectedClientError` whose `cause` explains why.
+
 <!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
@@ -244,12 +255,13 @@ We have dedicated SDKs for the following providers:
 
 ### [Audio.Voices](docs/sdks/voices/README.md)
 
-* [~~list~~](docs/sdks/voices/README.md#list) - List all voices :warning: **Deprecated**
+* [~~list~~](docs/sdks/voices/README.md#list) - List all voices :warning: **Deprecated** Use [search](docs/sdks/voices/README.md#search) instead.
 * [create](docs/sdks/voices/README.md#create) - Create a new voice
 * [delete](docs/sdks/voices/README.md#delete) - Delete a custom voice
 * [update](docs/sdks/voices/README.md#update) - Update voice metadata
 * [get](docs/sdks/voices/README.md#get) - Get voice details
 * [getSampleAudio](docs/sdks/voices/README.md#getsampleaudio) - Get voice sample audio
+* [search](docs/sdks/voices/README.md#search) - List voices, cursor-paginated
 
 ### [Batch.Jobs](docs/sdks/jobs/README.md)
 
@@ -285,7 +297,7 @@ We have dedicated SDKs for the following providers:
 * [unshareFromOrganization](docs/sdks/connectors/README.md#unsharefromorganization) - Unshare a connector from the current organization.
 * [activateForConsumer](docs/sdks/connectors/README.md#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
 * [deactivateForConsumer](docs/sdks/connectors/README.md#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
-* [callTool](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
+* [~~callTool~~](docs/sdks/connectors/README.md#calltool) - Call Connector Tool :warning: **Deprecated**
 * [listTools](docs/sdks/connectors/README.md#listtools) - List tools for a connector.
 * [getAuthenticationMethods](docs/sdks/connectors/README.md#getauthenticationmethods) - Get authentication methods for a connector.
 * [listOrganizationCredentials](docs/sdks/connectors/README.md#listorganizationcredentials) - List organization credentials for a connector.
@@ -294,9 +306,7 @@ We have dedicated SDKs for the following providers:
 * [deleteAllUserCredentials](docs/sdks/connectors/README.md#deleteallusercredentials) - Delete all user credentials for a connector.
 * [createCredentials](docs/sdks/connectors/README.md#createcredentials) - Create consumer credentials for a connector.
 * [updateCredentials](docs/sdks/connectors/README.md#updatecredentials) - Create or update consumer credentials for a connector.
-* [deleteOrganizationCredentials](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
-* [deleteWorkspaceCredentials](docs/sdks/connectors/README.md#deleteworkspacecredentials) - Delete workspace credentials for a connector.
-* [deleteUserCredentials](docs/sdks/connectors/README.md#deleteusercredentials) - Delete user credentials for a connector.
+* [deleteCredentials](docs/sdks/connectors/README.md#deletecredentials) - Delete credentials for a consumer.
 * [get](docs/sdks/connectors/README.md#get) - Get a connector.
 * [update](docs/sdks/connectors/README.md#update) - Update a connector.
 * [delete](docs/sdks/connectors/README.md#delete) - Delete a connector.
@@ -348,26 +358,27 @@ We have dedicated SDKs for the following providers:
 
 * [create](docs/sdks/datasets/README.md#create) - Create a new empty dataset
 * [list](docs/sdks/datasets/README.md#list) - List existing datasets
-* [fetch](docs/sdks/datasets/README.md#fetch) - Get dataset by id
+* [fetch](docs/sdks/datasets/README.md#fetch) - Get dataset by ID or slug
 * [delete](docs/sdks/datasets/README.md#delete) - Delete a dataset
 * [update](docs/sdks/datasets/README.md#update) - Patch dataset
 * [listRecords](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
 * [createRecord](docs/sdks/datasets/README.md#createrecord) - Add a record to the dataset
 * [importFromFile](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with records from an uploaded file
 * [importFromPlayground](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with records from playground conversations
+* [importFromSpans](docs/sdks/datasets/README.md#importfromspans) - Populate the dataset with records mapped from telemetry spans
 * [importFromDatasetRecords](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with records from another dataset
 * [exportToJsonl](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
 * [fetchTask](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
 * [listTasks](docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
 
-#### [Beta.Observability.Datasets.Records](docs/sdks/records/README.md)
+#### [Beta.Observability.Datasets.Records](docs/sdks/datasetsrecords/README.md)
 
-* [fetch](docs/sdks/records/README.md#fetch) - Get the content of a given dataset record
-* [delete](docs/sdks/records/README.md#delete) - Delete a record from a dataset
-* [bulkDelete](docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
-* [judge](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
-* [updatePayload](docs/sdks/records/README.md#updatepayload) - Update a dataset record payload
-* [updateProperties](docs/sdks/records/README.md#updateproperties) - Update dataset record properties
+* [fetch](docs/sdks/datasetsrecords/README.md#fetch) - Get the content of a given dataset record
+* [delete](docs/sdks/datasetsrecords/README.md#delete) - Delete a record from a dataset
+* [bulkDelete](docs/sdks/datasetsrecords/README.md#bulkdelete) - Delete multiple records from datasets
+* [judge](docs/sdks/datasetsrecords/README.md#judge) - Run Judge on a dataset record based on the given options
+* [updatePayload](docs/sdks/datasetsrecords/README.md#updatepayload) - Update a dataset record payload
+* [updateProperties](docs/sdks/datasetsrecords/README.md#updateproperties) - Update dataset record properties
 
 ### [Beta.Observability.Evaluations](docs/sdks/evaluations/README.md)
 
@@ -376,6 +387,37 @@ We have dedicated SDKs for the following providers:
 * [getPipelineConfig](docs/sdks/evaluations/README.md#getpipelineconfig) - Get a worker pipeline configuration
 * [updatePipelineConfig](docs/sdks/evaluations/README.md#updatepipelineconfig) - Replace a worker pipeline configuration
 * [deletePipelineConfig](docs/sdks/evaluations/README.md#deletepipelineconfig) - Delete a worker pipeline configuration
+* [createPipeline](docs/sdks/evaluations/README.md#createpipeline) - Create a pipeline
+* [listPipelines](docs/sdks/evaluations/README.md#listpipelines) - List pipelines
+* [getPipeline](docs/sdks/evaluations/README.md#getpipeline) - Get a pipeline
+* [updatePipeline](docs/sdks/evaluations/README.md#updatepipeline) - Update a pipeline
+* [deletePipeline](docs/sdks/evaluations/README.md#deletepipeline) - Delete a pipeline
+* [list](docs/sdks/evaluations/README.md#list) - List evaluations for a project
+* [get](docs/sdks/evaluations/README.md#get) - Get evaluation by slug
+
+#### [Beta.Observability.Evaluations.Optimizations](docs/sdks/optimizations/README.md)
+
+* [list](docs/sdks/optimizations/README.md#list) - List optimizations with optional filters
+* [get](docs/sdks/optimizations/README.md#get) - Get an optimization by id (with its anchored evaluation + project)
+* [listTrials](docs/sdks/optimizations/README.md#listtrials) - List an optimization's trials with their observation runs (paginated)
+
+#### [Beta.Observability.Evaluations.Projects](docs/sdks/projects/README.md)
+
+* [list](docs/sdks/projects/README.md#list) - List projects
+* [get](docs/sdks/projects/README.md#get) - Get project by slug
+
+#### [Beta.Observability.Evaluations.Records](docs/sdks/evaluationsrecords/README.md)
+
+* [get](docs/sdks/evaluationsrecords/README.md#get) - Get a specific record from an evaluation run
+* [search](docs/sdks/evaluationsrecords/README.md#search) - Search records for an evaluation run with content filters
+
+#### [Beta.Observability.Evaluations.Runs](docs/sdks/evaluationsruns/README.md)
+
+* [search](docs/sdks/evaluationsruns/README.md#search) - Search evaluation runs with filters
+* [searchAll](docs/sdks/evaluationsruns/README.md#searchall) - Search evaluation runs across all evaluations
+* [get](docs/sdks/evaluationsruns/README.md#get) - Get a specific evaluation run by ID
+* [getStatistics](docs/sdks/evaluationsruns/README.md#getstatistics) - Get statistics for a specific evaluation run
+* [computeStatistics](docs/sdks/evaluationsruns/README.md#computestatistics) - Compute statistics for a specific evaluation run with optional filters
 
 ### [Beta.Observability.Judges](docs/sdks/judges/README.md)
 
@@ -396,6 +438,7 @@ We have dedicated SDKs for the following providers:
 
 * [searchSpans](docs/sdks/spans/README.md#searchspans) - Search spans
 * [aggregate](docs/sdks/spans/README.md#aggregate) - Aggregate spans
+* [aggregateSpanEvaluations](docs/sdks/spans/README.md#aggregatespanevaluations) - Aggregate span evaluations
 * [searchSpanEvaluations](docs/sdks/spans/README.md#searchspanevaluations) - Search span evaluations
 * [searchLatestSpanEvaluations](docs/sdks/spans/README.md#searchlatestspanevaluations) - Search latest span evaluations
 * [listSpanFields](docs/sdks/spans/README.md#listspanfields) - Get span field definitions
@@ -430,6 +473,21 @@ We have dedicated SDKs for the following providers:
 * [list](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 * [register](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 * [updateRunInfo](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
+
+### [Beta.Rag.ManagedIndexes](docs/sdks/managedindexes/README.md)
+
+* [create](docs/sdks/managedindexes/README.md#create) - Create a managed index
+* [list](docs/sdks/managedindexes/README.md#list) - List managed indexes
+* [get](docs/sdks/managedindexes/README.md#get) - Get a managed index
+* [update](docs/sdks/managedindexes/README.md#update) - Update a managed index schema
+* [delete](docs/sdks/managedindexes/README.md#delete) - Delete a managed index
+* [ingestDocuments](docs/sdks/managedindexes/README.md#ingestdocuments) - Ingest documents into a managed index
+* [deleteDocuments](docs/sdks/managedindexes/README.md#deletedocuments) - Delete documents from a managed index
+* [search](docs/sdks/managedindexes/README.md#search) - Search a managed index
+* [navigate](docs/sdks/managedindexes/README.md#navigate) - Navigate to adjacent chunks
+* [read](docs/sdks/managedindexes/README.md#read) - Read chunks within a span
+* [grep](docs/sdks/managedindexes/README.md#grep) - Grep for a pattern within a source
+* [getChunk](docs/sdks/managedindexes/README.md#getchunk) - Get a single chunk by id
 
 ### [Beta.Rag.SearchIndexes](docs/sdks/searchindexes/README.md)
 
@@ -535,6 +593,7 @@ We have dedicated SDKs for the following providers:
 
 #### [Workflows.Deployments](docs/sdks/deployments/README.md)
 
+* [unhardenDeployment](docs/sdks/deployments/README.md#unhardendeployment) - Unharden Deployment
 * [listDeployments](docs/sdks/deployments/README.md#listdeployments) - List Deployments
 * [createDeployment](docs/sdks/deployments/README.md#createdeployment) - Create Deployment
 * [updateDeployment](docs/sdks/deployments/README.md#updatedeployment) - Update Deployment
@@ -576,11 +635,11 @@ We have dedicated SDKs for the following providers:
 
 * [getWorkflowMetrics](docs/sdks/metrics/README.md#getworkflowmetrics) - Get Workflow Metrics
 
-#### [Workflows.Runs](docs/sdks/runs/README.md)
+#### [Workflows.Runs](docs/sdks/workflowsruns/README.md)
 
-* [listRuns](docs/sdks/runs/README.md#listruns) - List Runs
-* [getRun](docs/sdks/runs/README.md#getrun) - Get Run
-* [getRunHistory](docs/sdks/runs/README.md#getrunhistory) - Get Run History
+* [listRuns](docs/sdks/workflowsruns/README.md#listruns) - List Runs
+* [getRun](docs/sdks/workflowsruns/README.md#getrun) - Get Run
+* [getRunHistory](docs/sdks/workflowsruns/README.md#getrunhistory) - Get Run History
 
 #### [Workflows.Schedules](docs/sdks/schedules/README.md)
 
@@ -849,8 +908,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 155 of 245 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 48 of 245 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 165 of 278 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 69 of 278 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1010,10 +1069,7 @@ import { Mistral } from "@mistralai/mistralai";
 const mistral = new Mistral();
 
 async function run() {
-  const result = await mistral.beta.users.getIdentity({
-    dashboardUserContextAuth: process.env["MISTRAL_DASHBOARD_USER_CONTEXT_AUTH"]
-      ?? "",
-  });
+  const result = await mistral.beta.users.getIdentity({});
 
   console.log(result);
 }
@@ -1048,6 +1104,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`audioVoicesDelete`](docs/sdks/voices/README.md#delete) - Delete a custom voice
 - [`audioVoicesGet`](docs/sdks/voices/README.md#get) - Get voice details
 - [`audioVoicesGetSampleAudio`](docs/sdks/voices/README.md#getsampleaudio) - Get voice sample audio
+- [`audioVoicesSearch`](docs/sdks/voices/README.md#search) - List voices, cursor-paginated
 - [`audioVoicesUpdate`](docs/sdks/voices/README.md#update) - Update voice metadata
 - [`batchJobsCancel`](docs/sdks/jobs/README.md#cancel) - Cancel Batch Job
 - [`batchJobsCreate`](docs/sdks/jobs/README.md#create) - Create Batch Job
@@ -1066,15 +1123,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaAgentsUpdate`](docs/sdks/betaagents/README.md#update) - Update an agent entity.
 - [`betaAgentsUpdateVersion`](docs/sdks/betaagents/README.md#updateversion) - Update an agent version.
 - [`betaConnectorsActivateForConsumer`](docs/sdks/connectors/README.md#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
-- [`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool) - Call Connector Tool
 - [`betaConnectorsCreate`](docs/sdks/connectors/README.md#create) - Create a new connector.
 - [`betaConnectorsCreateCredentials`](docs/sdks/connectors/README.md#createcredentials) - Create consumer credentials for a connector.
 - [`betaConnectorsDeactivateForConsumer`](docs/sdks/connectors/README.md#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
 - [`betaConnectorsDelete`](docs/sdks/connectors/README.md#delete) - Delete a connector.
 - [`betaConnectorsDeleteAllUserCredentials`](docs/sdks/connectors/README.md#deleteallusercredentials) - Delete all user credentials for a connector.
-- [`betaConnectorsDeleteOrganizationCredentials`](docs/sdks/connectors/README.md#deleteorganizationcredentials) - Delete organization credentials for a connector.
-- [`betaConnectorsDeleteUserCredentials`](docs/sdks/connectors/README.md#deleteusercredentials) - Delete user credentials for a connector.
-- [`betaConnectorsDeleteWorkspaceCredentials`](docs/sdks/connectors/README.md#deleteworkspacecredentials) - Delete workspace credentials for a connector.
+- [`betaConnectorsDeleteCredentials`](docs/sdks/connectors/README.md#deletecredentials) - Delete credentials for a consumer.
 - [`betaConnectorsGet`](docs/sdks/connectors/README.md#get) - Get a connector.
 - [`betaConnectorsGetAuthenticationMethods`](docs/sdks/connectors/README.md#getauthenticationmethods) - Get authentication methods for a connector.
 - [`betaConnectorsGetAuthUrl`](docs/sdks/connectors/README.md#getauthurl) - Get the auth URL for a connector.
@@ -1122,25 +1176,45 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityDatasetsCreateRecord`](docs/sdks/datasets/README.md#createrecord) - Add a record to the dataset
 - [`betaObservabilityDatasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
 - [`betaObservabilityDatasetsExportToJsonl`](docs/sdks/datasets/README.md#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
-- [`betaObservabilityDatasetsFetch`](docs/sdks/datasets/README.md#fetch) - Get dataset by id
+- [`betaObservabilityDatasetsFetch`](docs/sdks/datasets/README.md#fetch) - Get dataset by ID or slug
 - [`betaObservabilityDatasetsFetchTask`](docs/sdks/datasets/README.md#fetchtask) - Get status of a dataset import task
 - [`betaObservabilityDatasetsImportFromDatasetRecords`](docs/sdks/datasets/README.md#importfromdatasetrecords) - Populate the dataset with records from another dataset
 - [`betaObservabilityDatasetsImportFromFile`](docs/sdks/datasets/README.md#importfromfile) - Populate the dataset with records from an uploaded file
 - [`betaObservabilityDatasetsImportFromPlayground`](docs/sdks/datasets/README.md#importfromplayground) - Populate the dataset with records from playground conversations
+- [`betaObservabilityDatasetsImportFromSpans`](docs/sdks/datasets/README.md#importfromspans) - Populate the dataset with records mapped from telemetry spans
 - [`betaObservabilityDatasetsList`](docs/sdks/datasets/README.md#list) - List existing datasets
 - [`betaObservabilityDatasetsListRecords`](docs/sdks/datasets/README.md#listrecords) - List existing records in the dataset
 - [`betaObservabilityDatasetsListTasks`](docs/sdks/datasets/README.md#listtasks) - List import tasks for the given dataset
-- [`betaObservabilityDatasetsRecordsBulkDelete`](docs/sdks/records/README.md#bulkdelete) - Delete multiple records from datasets
-- [`betaObservabilityDatasetsRecordsDelete`](docs/sdks/records/README.md#delete) - Delete a record from a dataset
-- [`betaObservabilityDatasetsRecordsFetch`](docs/sdks/records/README.md#fetch) - Get the content of a given dataset record
-- [`betaObservabilityDatasetsRecordsJudge`](docs/sdks/records/README.md#judge) - Run Judge on a dataset record based on the given options
-- [`betaObservabilityDatasetsRecordsUpdatePayload`](docs/sdks/records/README.md#updatepayload) - Update a dataset record payload
-- [`betaObservabilityDatasetsRecordsUpdateProperties`](docs/sdks/records/README.md#updateproperties) - Update dataset record properties
+- [`betaObservabilityDatasetsRecordsBulkDelete`](docs/sdks/datasetsrecords/README.md#bulkdelete) - Delete multiple records from datasets
+- [`betaObservabilityDatasetsRecordsDelete`](docs/sdks/datasetsrecords/README.md#delete) - Delete a record from a dataset
+- [`betaObservabilityDatasetsRecordsFetch`](docs/sdks/datasetsrecords/README.md#fetch) - Get the content of a given dataset record
+- [`betaObservabilityDatasetsRecordsJudge`](docs/sdks/datasetsrecords/README.md#judge) - Run Judge on a dataset record based on the given options
+- [`betaObservabilityDatasetsRecordsUpdatePayload`](docs/sdks/datasetsrecords/README.md#updatepayload) - Update a dataset record payload
+- [`betaObservabilityDatasetsRecordsUpdateProperties`](docs/sdks/datasetsrecords/README.md#updateproperties) - Update dataset record properties
 - [`betaObservabilityDatasetsUpdate`](docs/sdks/datasets/README.md#update) - Patch dataset
+- [`betaObservabilityEvaluationsCreatePipeline`](docs/sdks/evaluations/README.md#createpipeline) - Create a pipeline
 - [`betaObservabilityEvaluationsCreatePipelineConfig`](docs/sdks/evaluations/README.md#createpipelineconfig) - Create a worker pipeline configuration
+- [`betaObservabilityEvaluationsDeletePipeline`](docs/sdks/evaluations/README.md#deletepipeline) - Delete a pipeline
 - [`betaObservabilityEvaluationsDeletePipelineConfig`](docs/sdks/evaluations/README.md#deletepipelineconfig) - Delete a worker pipeline configuration
+- [`betaObservabilityEvaluationsGet`](docs/sdks/evaluations/README.md#get) - Get evaluation by slug
+- [`betaObservabilityEvaluationsGetPipeline`](docs/sdks/evaluations/README.md#getpipeline) - Get a pipeline
 - [`betaObservabilityEvaluationsGetPipelineConfig`](docs/sdks/evaluations/README.md#getpipelineconfig) - Get a worker pipeline configuration
+- [`betaObservabilityEvaluationsList`](docs/sdks/evaluations/README.md#list) - List evaluations for a project
 - [`betaObservabilityEvaluationsListPipelineConfigs`](docs/sdks/evaluations/README.md#listpipelineconfigs) - List worker pipeline configurations
+- [`betaObservabilityEvaluationsListPipelines`](docs/sdks/evaluations/README.md#listpipelines) - List pipelines
+- [`betaObservabilityEvaluationsOptimizationsGet`](docs/sdks/optimizations/README.md#get) - Get an optimization by id (with its anchored evaluation + project)
+- [`betaObservabilityEvaluationsOptimizationsList`](docs/sdks/optimizations/README.md#list) - List optimizations with optional filters
+- [`betaObservabilityEvaluationsOptimizationsListTrials`](docs/sdks/optimizations/README.md#listtrials) - List an optimization's trials with their observation runs (paginated)
+- [`betaObservabilityEvaluationsProjectsGet`](docs/sdks/projects/README.md#get) - Get project by slug
+- [`betaObservabilityEvaluationsProjectsList`](docs/sdks/projects/README.md#list) - List projects
+- [`betaObservabilityEvaluationsRecordsGet`](docs/sdks/evaluationsrecords/README.md#get) - Get a specific record from an evaluation run
+- [`betaObservabilityEvaluationsRecordsSearch`](docs/sdks/evaluationsrecords/README.md#search) - Search records for an evaluation run with content filters
+- [`betaObservabilityEvaluationsRunsComputeStatistics`](docs/sdks/evaluationsruns/README.md#computestatistics) - Compute statistics for a specific evaluation run with optional filters
+- [`betaObservabilityEvaluationsRunsGet`](docs/sdks/evaluationsruns/README.md#get) - Get a specific evaluation run by ID
+- [`betaObservabilityEvaluationsRunsGetStatistics`](docs/sdks/evaluationsruns/README.md#getstatistics) - Get statistics for a specific evaluation run
+- [`betaObservabilityEvaluationsRunsSearch`](docs/sdks/evaluationsruns/README.md#search) - Search evaluation runs with filters
+- [`betaObservabilityEvaluationsRunsSearchAll`](docs/sdks/evaluationsruns/README.md#searchall) - Search evaluation runs across all evaluations
+- [`betaObservabilityEvaluationsUpdatePipeline`](docs/sdks/evaluations/README.md#updatepipeline) - Update a pipeline
 - [`betaObservabilityEvaluationsUpdatePipelineConfig`](docs/sdks/evaluations/README.md#updatepipelineconfig) - Replace a worker pipeline configuration
 - [`betaObservabilityJudgesCreate`](docs/sdks/judges/README.md#create) - Create a new judge
 - [`betaObservabilityJudgesDelete`](docs/sdks/judges/README.md#delete) - Delete a judge
@@ -1152,6 +1226,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityLogsList`](docs/sdks/logs/README.md#list) - Get log field definitions
 - [`betaObservabilityLogsSearch`](docs/sdks/logs/README.md#search) - Search logs
 - [`betaObservabilitySpansAggregate`](docs/sdks/spans/README.md#aggregate) - Aggregate spans
+- [`betaObservabilitySpansAggregateSpanEvaluations`](docs/sdks/spans/README.md#aggregatespanevaluations) - Aggregate span evaluations
 - [`betaObservabilitySpansFetchSpanEvalFieldOptions`](docs/sdks/spans/README.md#fetchspanevalfieldoptions) - Get options for a span evaluation field
 - [`betaObservabilitySpansFetchSpanFieldOptions`](docs/sdks/spans/README.md#fetchspanfieldoptions) - Get options for a span field
 - [`betaObservabilitySpansListSpanEvalFields`](docs/sdks/spans/README.md#listspanevalfields) - Get span evaluation field definitions
@@ -1178,6 +1253,18 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
+- [`betaRagManagedIndexesCreate`](docs/sdks/managedindexes/README.md#create) - Create a managed index
+- [`betaRagManagedIndexesDelete`](docs/sdks/managedindexes/README.md#delete) - Delete a managed index
+- [`betaRagManagedIndexesDeleteDocuments`](docs/sdks/managedindexes/README.md#deletedocuments) - Delete documents from a managed index
+- [`betaRagManagedIndexesGet`](docs/sdks/managedindexes/README.md#get) - Get a managed index
+- [`betaRagManagedIndexesGetChunk`](docs/sdks/managedindexes/README.md#getchunk) - Get a single chunk by id
+- [`betaRagManagedIndexesGrep`](docs/sdks/managedindexes/README.md#grep) - Grep for a pattern within a source
+- [`betaRagManagedIndexesIngestDocuments`](docs/sdks/managedindexes/README.md#ingestdocuments) - Ingest documents into a managed index
+- [`betaRagManagedIndexesList`](docs/sdks/managedindexes/README.md#list) - List managed indexes
+- [`betaRagManagedIndexesNavigate`](docs/sdks/managedindexes/README.md#navigate) - Navigate to adjacent chunks
+- [`betaRagManagedIndexesRead`](docs/sdks/managedindexes/README.md#read) - Read chunks within a span
+- [`betaRagManagedIndexesSearch`](docs/sdks/managedindexes/README.md#search) - Search a managed index
+- [`betaRagManagedIndexesUpdate`](docs/sdks/managedindexes/README.md#update) - Update a managed index schema
 - [`betaRagSearchIndexesGetDeploymentSummaries`](docs/sdks/searchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
 - [`betaRagSearchIndexesRegisterDeployment`](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
 - [`betaRagSearchIndexesUnregisterDeployment`](docs/sdks/searchindexes/README.md#unregisterdeployment) - Unregister Deployment
@@ -1242,6 +1329,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsDeploymentsStartDeployment`](docs/sdks/deployments/README.md#startdeployment) - Start Deployment
 - [`workflowsDeploymentsStopDeployment`](docs/sdks/deployments/README.md#stopdeployment) - Stop Deployment
 - [`workflowsDeploymentsStreamDeploymentLogs`](docs/sdks/deployments/README.md#streamdeploymentlogs) - Stream Deployment Logs
+- [`workflowsDeploymentsUnhardenDeployment`](docs/sdks/deployments/README.md#unhardendeployment) - Unharden Deployment
 - [`workflowsDeploymentsUpdateDeployment`](docs/sdks/deployments/README.md#updatedeployment) - Update Deployment
 - [`workflowsExecuteWorkflow`](docs/sdks/workflows/README.md#executeworkflow) - Execute Workflow
 - [`workflowsExecutionsBatchCancelWorkflowExecutions`](docs/sdks/executions/README.md#batchcancelworkflowexecutions) - Batch Cancel Workflow Executions
@@ -1266,9 +1354,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsGetWorkflowRegistrations`](docs/sdks/workflows/README.md#getworkflowregistrations) - Get Workflow Registrations
 - [`workflowsGetWorkflows`](docs/sdks/workflows/README.md#getworkflows) - Get Workflows
 - [`workflowsMetricsGetWorkflowMetrics`](docs/sdks/metrics/README.md#getworkflowmetrics) - Get Workflow Metrics
-- [`workflowsRunsGetRun`](docs/sdks/runs/README.md#getrun) - Get Run
-- [`workflowsRunsGetRunHistory`](docs/sdks/runs/README.md#getrunhistory) - Get Run History
-- [`workflowsRunsListRuns`](docs/sdks/runs/README.md#listruns) - List Runs
+- [`workflowsRunsGetRun`](docs/sdks/workflowsruns/README.md#getrun) - Get Run
+- [`workflowsRunsGetRunHistory`](docs/sdks/workflowsruns/README.md#getrunhistory) - Get Run History
+- [`workflowsRunsListRuns`](docs/sdks/workflowsruns/README.md#listruns) - List Runs
 - [`workflowsSchedulesGetSchedule`](docs/sdks/schedules/README.md#getschedule) - Get Schedule
 - [`workflowsSchedulesGetSchedules`](docs/sdks/schedules/README.md#getschedules) - Get Schedules
 - [`workflowsSchedulesPauseSchedule`](docs/sdks/schedules/README.md#pauseschedule) - Pause Schedule
@@ -1279,8 +1367,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workflowsSchedulesUpdateSchedule`](docs/sdks/schedules/README.md#updateschedule) - Update Schedule
 - [`workflowsUnarchiveWorkflow`](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow
 - [`workflowsUpdateWorkflow`](docs/sdks/workflows/README.md#updateworkflow) - Update Workflow
-- ~~[`audioVoicesList`](docs/sdks/voices/README.md#list)~~ - List all voices :warning: **Deprecated**
+- ~~[`audioVoicesList`](docs/sdks/voices/README.md#list)~~ - List all voices :warning: **Deprecated** Use [`audioVoicesSearch`](docs/sdks/voices/README.md#search) instead.
 - ~~[`betaAgentsList`](docs/sdks/betaagents/README.md#list)~~ - List agent entities. :warning: **Deprecated** Use [`betaAgentsListPages`](docs/sdks/betaagents/README.md#listpages) instead.
+- ~~[`betaConnectorsCallTool`](docs/sdks/connectors/README.md#calltool)~~ - Call Connector Tool :warning: **Deprecated**
 - ~~[`betaLibrariesDocumentsLibrariesDocumentsUpdateV1`](docs/sdks/documents/README.md#librariesdocumentsupdatev1)~~ - Update the metadata of a specific document. :warning: **Deprecated**
 - ~~[`betaLibrariesLibrariesUpdateV1`](docs/sdks/libraries/README.md#librariesupdatev1)~~ - Update a library. :warning: **Deprecated**
 - ~~[`workflowsExecuteWorkflowRegistration`](docs/sdks/workflows/README.md#executeworkflowregistration)~~ - Execute Workflow Registration :warning: **Deprecated**

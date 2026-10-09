@@ -8,7 +8,7 @@ import { ToolExecutionStartedEvent } from "@mistralai/mistralai/models/component
 let value: ToolExecutionStartedEvent = {
   type: "tool.execution.started",
   id: "<id>",
-  name: "image_generation",
+  name: "document_library",
   arguments: "<value>",
 };
 ```

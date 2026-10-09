@@ -1,0 +1,45 @@
+# OptimizationDetail
+
+## Example Usage
+
+```typescript
+import { OptimizationDetail } from "@mistralai/mistralai/models/components";
+
+let value: OptimizationDetail = {
+  id: "b455a120-57da-4b3d-858e-2cd5ff1b6758",
+  createdAt: new Date("2026-04-17T11:07:27.553Z"),
+  updatedAt: new Date("2025-11-20T03:12:43.886Z"),
+  deletedAt: new Date("2024-04-04T13:18:07.951Z"),
+  creatorId: "6e9e32d6-53c9-4835-a78e-1eb3bccee890",
+  projectId: "d3e3fc55-e186-415c-8cf1-7e67984b33ee",
+  name: "<value>",
+  algorithm: "<value>",
+  status: "<value>",
+  source: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `deletedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `creatorId`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `projectId`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `evaluationId`                                                                                | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `steer`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `tags`                                                                                        | *string*[]                                                                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `algorithm`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `status`                                                                                      | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `source`                                                                                      | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `workflowExecutionId`                                                                         | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `workflowRunId`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `objectiveSpec`                                                                               | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `outcome`                                                                                     | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `evaluation`                                                                                  | [components.OptimizationReference](../../models/components/optimizationreference.md)          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `project`                                                                                     | [components.OptimizationReference](../../models/components/optimizationreference.md)          | :heavy_minus_sign:                                                                            | N/A                                                                                           |

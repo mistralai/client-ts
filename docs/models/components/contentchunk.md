@@ -60,3 +60,26 @@ const value: components.AudioChunk = {
 };
 ```
 
+### `components.ResourceChunk`
+
+```typescript
+const value: components.ResourceChunk = {
+  type: "resource",
+  uri: "https://rotten-mechanic.com/",
+  content: {
+    imageUrl: {
+      url: "https://showy-arcade.com",
+    },
+  },
+};
+```
+
+### `components.ResourceLinkChunk`
+
+```typescript
+const value: components.ResourceLinkChunk = {
+  type: "resource_link",
+  uri: "https://runny-comparison.org",
+};
+```
+

@@ -5,13 +5,12 @@
 ```typescript
 import { UsersApiGetIdentitySecurity } from "@mistralai/mistralai/models/operations";
 
-let value: UsersApiGetIdentitySecurity = {
-  dashboardUserContextAuth: "<value>",
-};
+let value: UsersApiGetIdentitySecurity = {};
 ```
 
 ## Fields
 
 | Field                      | Type                       | Required                   | Description                |
 | -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `dashboardUserContextAuth` | *string*                   | :heavy_check_mark:         | N/A                        |
+| `dashboardUserContextAuth` | *string*                   | :heavy_minus_sign:         | N/A                        |
+| `bearerUserContextAuth`    | *string*                   | :heavy_minus_sign:         | N/A                        |

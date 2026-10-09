@@ -7,14 +7,14 @@ import { GetDatasetImportTaskV1ObservabilityDatasetsDatasetIdTasksTaskIdGetReque
 
 let value:
   GetDatasetImportTaskV1ObservabilityDatasetsDatasetIdTasksTaskIdGetRequest = {
-    datasetId: "2577349e-674d-4339-914e-9ff48b5cb9a9",
-    taskId: "10feac6e-10a3-4eae-96d6-8e548c67d6de",
+    datasetId: "<id>",
+    taskId: "2577349e-674d-4339-914e-9ff48b5cb9a9",
   };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `datasetId`        | *string*           | :heavy_check_mark: | N/A                |
-| `taskId`           | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `datasetId`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | Dataset UUID or workspace-scoped slug. UUID-shaped values are always interpreted as dataset IDs. |
+| `taskId`                                                                                         | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |

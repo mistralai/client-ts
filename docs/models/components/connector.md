@@ -15,6 +15,7 @@ const value: components.HTTPConnector = {
   ownerType: "user",
   visibility: "shared_global",
   privateToolExecution: true,
+  supportsMcp: false,
   protocol: "http",
 };
 ```
@@ -31,6 +32,7 @@ const value: components.MCPConnector = {
   ownerType: "system",
   visibility: "shared_org",
   privateToolExecution: false,
+  supportsMcp: false,
   protocol: "mcp",
 };
 ```

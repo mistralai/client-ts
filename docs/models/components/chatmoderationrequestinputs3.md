@@ -13,7 +13,7 @@ const value: components.ChatModerationRequestInputs1[] = [
     role: "user",
     content: [
       {
-        fileId: "58f5a108-520e-4275-b6ba-d3c59521edb7",
+        thinking: [],
       },
     ],
   },

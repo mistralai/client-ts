@@ -6,13 +6,14 @@
 
 * [create](#create) - Create a new empty dataset
 * [list](#list) - List existing datasets
-* [fetch](#fetch) - Get dataset by id
+* [fetch](#fetch) - Get dataset by ID or slug
 * [delete](#delete) - Delete a dataset
 * [update](#update) - Patch dataset
 * [listRecords](#listrecords) - List existing records in the dataset
 * [createRecord](#createrecord) - Add a record to the dataset
 * [importFromFile](#importfromfile) - Populate the dataset with records from an uploaded file
 * [importFromPlayground](#importfromplayground) - Populate the dataset with records from playground conversations
+* [importFromSpans](#importfromspans) - Populate the dataset with records mapped from telemetry spans
 * [importFromDatasetRecords](#importfromdatasetrecords) - Populate the dataset with records from another dataset
 * [exportToJsonl](#exporttojsonl) - Export to the Files API and retrieve presigned URL to download the resulting JSONL file
 * [fetchTask](#fetchtask) - Get status of a dataset import task
@@ -166,7 +167,7 @@ run();
 
 ## fetch
 
-Get dataset by id
+Get dataset by ID or slug
 
 ### Example Usage
 
@@ -710,6 +711,120 @@ run();
 | `options`                                                                                                                                                                                                                                  | RequestOptions                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                         | Used to set various options for making HTTP requests.                                                                                                                                                                                      |
 | `options.fetchOptions`                                                                                                                                                                                                                     | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                         | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                             |
 | `options.retries`                                                                                                                                                                                                                          | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                         | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                                           |
+
+### Response
+
+**Promise\<[components.DatasetImportTask](../../models/components/datasetimporttask.md)\>**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| errors.ObservabilityError | 400, 404, 408, 409, 422   | application/json          |
+| errors.SDKError           | 4XX, 5XX                  | \*/\*                     |
+
+## importFromSpans
+
+Starts an asynchronous import of the requested telemetry spans. References not returned by the tenant-scoped telemetry query are skipped without distinguishing absence from access restrictions.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post_dataset_records_from_spans_v1_observability_datasets__dataset_id__imports_from_spans_post" method="post" path="/v1/observability/datasets/{dataset_id}/imports/from-spans" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.observability.datasets.importFromSpans({
+    datasetId: "<id>",
+    importDatasetFromSpansRequest: {
+      spanReferences: [
+        {
+          traceId: "<id>",
+          spanId: "<id>",
+        },
+      ],
+      mappingContract: {
+        version: 1,
+        mappings: [
+          {
+            targetField: "<value>",
+            sourceField: {
+              namespace: "span_attributes",
+              key: "<key>",
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaObservabilityDatasetsImportFromSpans } from "@mistralai/mistralai/funcs/betaObservabilityDatasetsImportFromSpans.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaObservabilityDatasetsImportFromSpans(mistral, {
+    datasetId: "<id>",
+    importDatasetFromSpansRequest: {
+      spanReferences: [
+        {
+          traceId: "<id>",
+          spanId: "<id>",
+        },
+      ],
+      mappingContract: {
+        version: 1,
+        mappings: [
+          {
+            targetField: "<value>",
+            sourceField: {
+              namespace: "span_attributes",
+              key: "<key>",
+            },
+          },
+        ],
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaObservabilityDatasetsImportFromSpans failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                              | Type                                                                                                                                                                                                                   | Required                                                                                                                                                                                                               | Description                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                              | [operations.PostDatasetRecordsFromSpansV1ObservabilityDatasetsDatasetIdImportsFromSpansPostRequest](../../models/operations/postdatasetrecordsfromspansv1observabilitydatasetsdatasetidimportsfromspanspostrequest.md) | :heavy_check_mark:                                                                                                                                                                                                     | The request object to use for the request.                                                                                                                                                                             |
+| `options`                                                                                                                                                                                                              | RequestOptions                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                     | Used to set various options for making HTTP requests.                                                                                                                                                                  |
+| `options.fetchOptions`                                                                                                                                                                                                 | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                     | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                         |
+| `options.retries`                                                                                                                                                                                                      | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                     | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                       |
 
 ### Response
 

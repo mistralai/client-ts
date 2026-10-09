@@ -15,7 +15,7 @@
 * [unshareFromOrganization](#unsharefromorganization) - Unshare a connector from the current organization.
 * [activateForConsumer](#activateforconsumer) - Activate a connector for the given consumer (organization, workspace, user).
 * [deactivateForConsumer](#deactivateforconsumer) - Deactivate a connector for the current consumer (at organization, workspace or user level).
-* [callTool](#calltool) - Call Connector Tool
+* [~~callTool~~](#calltool) - Call Connector Tool :warning: **Deprecated**
 * [listTools](#listtools) - List tools for a connector.
 * [getAuthenticationMethods](#getauthenticationmethods) - Get authentication methods for a connector.
 * [listOrganizationCredentials](#listorganizationcredentials) - List organization credentials for a connector.
@@ -24,9 +24,7 @@
 * [deleteAllUserCredentials](#deleteallusercredentials) - Delete all user credentials for a connector.
 * [createCredentials](#createcredentials) - Create consumer credentials for a connector.
 * [updateCredentials](#updatecredentials) - Create or update consumer credentials for a connector.
-* [deleteOrganizationCredentials](#deleteorganizationcredentials) - Delete organization credentials for a connector.
-* [deleteWorkspaceCredentials](#deleteworkspacecredentials) - Delete workspace credentials for a connector.
-* [deleteUserCredentials](#deleteusercredentials) - Delete user credentials for a connector.
+* [deleteCredentials](#deletecredentials) - Delete credentials for a consumer.
 * [get](#get) - Get a connector.
 * [update](#update) - Update a connector.
 * [delete](#delete) - Delete a connector.
@@ -703,9 +701,11 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## callTool
+## ~~callTool~~
 
 Call a tool on an MCP connector.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1389,13 +1389,13 @@ run();
 | errors.HTTPValidationError | 422                        | application/json           |
 | errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## deleteOrganizationCredentials
+## deleteCredentials
 
-Delete credentials at the organization level for a given connector.
+Delete connector credentials for a given consumer.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="connector_delete_organization_credentials_v1" method="delete" path="/v1/connectors/{connector_id_or_name}/organization/credentials/{credentials_name}" -->
+<!-- UsageSnippet language="typescript" operationID="connector_delete_credentials" method="delete" path="/v1/connectors/{connector_id_or_name}/{consumer_scope}/credentials/{credentials_name}" -->
 ```typescript
 import { Mistral } from "@mistralai/mistralai";
 
@@ -1404,9 +1404,10 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.connectors.deleteOrganizationCredentials({
+  const result = await mistral.beta.connectors.deleteCredentials({
     credentialsName: "<value>",
-    connectorIdOrName: "<value>",
+    connectorIdOrName: "0f7c9a94-b4f7-44d9-aa77-e9f28f561e03",
+    consumerScope: "user",
   });
 
   console.log(result);
@@ -1421,7 +1422,7 @@ The standalone function version of this method:
 
 ```typescript
 import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsDeleteOrganizationCredentials } from "@mistralai/mistralai/funcs/betaConnectorsDeleteOrganizationCredentials.js";
+import { betaConnectorsDeleteCredentials } from "@mistralai/mistralai/funcs/betaConnectorsDeleteCredentials.js";
 
 // Use `MistralCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1430,15 +1431,16 @@ const mistral = new MistralCore({
 });
 
 async function run() {
-  const res = await betaConnectorsDeleteOrganizationCredentials(mistral, {
+  const res = await betaConnectorsDeleteCredentials(mistral, {
     credentialsName: "<value>",
-    connectorIdOrName: "<value>",
+    connectorIdOrName: "0f7c9a94-b4f7-44d9-aa77-e9f28f561e03",
+    consumerScope: "user",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("betaConnectorsDeleteOrganizationCredentials failed:", res.error);
+    console.log("betaConnectorsDeleteCredentials failed:", res.error);
   }
 }
 
@@ -1449,159 +1451,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorDeleteOrganizationCredentialsV1Request](../../models/operations/connectordeleteorganizationcredentialsv1request.md)                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## deleteWorkspaceCredentials
-
-Delete credentials at the workspace level for a given connector.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="connector_delete_workspace_credentials_v1" method="delete" path="/v1/connectors/{connector_id_or_name}/workspace/credentials/{credentials_name}" -->
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.connectors.deleteWorkspaceCredentials({
-    credentialsName: "<value>",
-    connectorIdOrName: "<value>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsDeleteWorkspaceCredentials } from "@mistralai/mistralai/funcs/betaConnectorsDeleteWorkspaceCredentials.js";
-
-// Use `MistralCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const mistral = new MistralCore({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await betaConnectorsDeleteWorkspaceCredentials(mistral, {
-    credentialsName: "<value>",
-    connectorIdOrName: "<value>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("betaConnectorsDeleteWorkspaceCredentials failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorDeleteWorkspaceCredentialsV1Request](../../models/operations/connectordeleteworkspacecredentialsv1request.md)                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.MessageResponse](../../models/components/messageresponse.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.HTTPValidationError | 422                        | application/json           |
-| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## deleteUserCredentials
-
-Delete credentials at the user level for a given connector.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="connector_delete_user_credentials_v1" method="delete" path="/v1/connectors/{connector_id_or_name}/user/credentials/{credentials_name}" -->
-```typescript
-import { Mistral } from "@mistralai/mistralai";
-
-const mistral = new Mistral({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await mistral.beta.connectors.deleteUserCredentials({
-    credentialsName: "<value>",
-    connectorIdOrName: "<value>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { MistralCore } from "@mistralai/mistralai/core.js";
-import { betaConnectorsDeleteUserCredentials } from "@mistralai/mistralai/funcs/betaConnectorsDeleteUserCredentials.js";
-
-// Use `MistralCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const mistral = new MistralCore({
-  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await betaConnectorsDeleteUserCredentials(mistral, {
-    credentialsName: "<value>",
-    connectorIdOrName: "<value>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("betaConnectorsDeleteUserCredentials failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ConnectorDeleteUserCredentialsV1Request](../../models/operations/connectordeleteusercredentialsv1request.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ConnectorDeleteCredentialsRequest](../../models/operations/connectordeletecredentialsrequest.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

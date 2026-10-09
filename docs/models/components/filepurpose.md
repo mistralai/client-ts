@@ -13,5 +13,5 @@ let value: FilePurpose = "fine-tune";
 ## Values
 
 ```typescript
-"fine-tune" | "batch" | "ocr" | Unrecognized<string>
+"fine-tune" | "batch" | "ocr" | "agentic_safety" | Unrecognized<string>
 ```

@@ -13,9 +13,11 @@ let value: ListServiceAccountsV1ServiceAccountsGetRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `workspaceId`      | *string*           | :heavy_minus_sign: | N/A                |
-| `includeDeleted`   | *boolean*          | :heavy_minus_sign: | N/A                |
-| `offset`           | *number*           | :heavy_check_mark: | N/A                |
-| `limit`            | *number*           | :heavy_check_mark: | N/A                |
+| Field                                                         | Type                                                          | Required                                                      | Description                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `workspaceId`                                                 | *string*                                                      | :heavy_minus_sign:                                            | N/A                                                           |
+| `includeDeleted`                                              | *boolean*                                                     | :heavy_minus_sign:                                            | N/A                                                           |
+| `q`                                                           | *string*                                                      | :heavy_minus_sign:                                            | N/A                                                           |
+| `order`                                                       | [components.SortOrder](../../models/components/sortorder.md)  | :heavy_minus_sign:                                            | Direction to sort a service-account listing by creation time. |
+| `offset`                                                      | *number*                                                      | :heavy_check_mark:                                            | N/A                                                           |
+| `limit`                                                       | *number*                                                      | :heavy_check_mark:                                            | N/A                                                           |

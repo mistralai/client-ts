@@ -7,14 +7,14 @@ import { GetDatasetRecordsV1ObservabilityDatasetsDatasetIdRecordsGetRequest } fr
 
 let value: GetDatasetRecordsV1ObservabilityDatasetsDatasetIdRecordsGetRequest =
   {
-    datasetId: "7131e0ae-18e9-45d2-b4b2-426bd2ee9b5b",
+    datasetId: "<id>",
   };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `datasetId`        | *string*           | :heavy_check_mark: | N/A                |
-| `pageSize`         | *number*           | :heavy_minus_sign: | N/A                |
-| `page`             | *number*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `datasetId`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | Dataset UUID or workspace-scoped slug. UUID-shaped values are always interpreted as dataset IDs. |
+| `pageSize`                                                                                       | *number*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `page`                                                                                           | *number*                                                                                         | :heavy_minus_sign:                                                                               | N/A                                                                                              |

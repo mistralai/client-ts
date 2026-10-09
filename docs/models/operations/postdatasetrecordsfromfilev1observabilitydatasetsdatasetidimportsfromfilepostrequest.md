@@ -10,7 +10,7 @@ import {
 let value:
   PostDatasetRecordsFromFileV1ObservabilityDatasetsDatasetIdImportsFromFilePostRequest =
     {
-      datasetId: "24e4af93-f75e-4625-beff-1f845457cc55",
+      datasetId: "<id>",
       importDatasetFromFileRequest: {
         fileId: "<id>",
       },
@@ -21,5 +21,5 @@ let value:
 
 | Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `datasetId`                                                                                        | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `datasetId`                                                                                        | *string*                                                                                           | :heavy_check_mark:                                                                                 | Dataset UUID or workspace-scoped slug. UUID-shaped values are always interpreted as dataset IDs.   |
 | `importDatasetFromFileRequest`                                                                     | [components.ImportDatasetFromFileRequest](../../models/components/importdatasetfromfilerequest.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

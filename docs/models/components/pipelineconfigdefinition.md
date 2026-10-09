@@ -22,8 +22,7 @@ const value: components.ModerationDefinition = {};
 
 ```typescript
 const value: components.JudgeDefinition = {
-  model: "Expedition",
-  prompt: "<value>",
+  slug: "<value>",
 };
 ```
 

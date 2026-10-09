@@ -17,12 +17,13 @@ let value: PaginatedConnectors = {
       ownerType: "workspace",
       visibility: "shared_global",
       privateToolExecution: false,
+      supportsMcp: true,
       mistral: false,
       protocol: "http",
     },
   ],
   pagination: {
-    pageSize: 123547,
+    pageSize: 163121,
   },
 };
 ```

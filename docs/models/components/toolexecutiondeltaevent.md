@@ -8,7 +8,7 @@ import { ToolExecutionDeltaEvent } from "@mistralai/mistralai/models/components"
 let value: ToolExecutionDeltaEvent = {
   type: "tool.execution.delta",
   id: "<id>",
-  name: "web_search_premium",
+  name: "code_interpreter",
   arguments: "<value>",
 };
 ```

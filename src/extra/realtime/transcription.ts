@@ -2,6 +2,7 @@ import WebSocket from "ws";
 import { SDK_METADATA } from "../../lib/config.js";
 import { ClientSDK } from "../../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../../lib/security.js";
+import { bearerHeader, readServiceAccountToken } from "../../hooks/service_account_auth.js";
 import type { AudioFormat } from "../../models/components/audioformat.js";
 import type {
   RealtimeTranscriptionError,
@@ -42,6 +43,18 @@ export class RealtimeTranscription extends ClientSDK {
 
     if (resolvedSecurity?.headers) {
       Object.assign(headers, resolvedSecurity.headers);
+    }
+
+    // The handshake never runs the SDK's before-request hooks, so the service-account token has
+    // to be applied here too, between the resolved security and the caller's own headers.
+    const callerAuthorization = Object.keys(options.httpHeaders ?? {}).some(
+      (name) => name.toLowerCase() === "authorization",
+    );
+    if (this._options.apiKey == null && !callerAuthorization) {
+      const token = await readServiceAccountToken();
+      if (token !== null) {
+        headers["Authorization"] = bearerHeader(token);
+      }
     }
 
     if (options.httpHeaders) {

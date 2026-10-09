@@ -7,7 +7,7 @@ import { ObservabilityErrorDetail } from "@mistralai/mistralai/models/components
 
 let value: ObservabilityErrorDetail = {
   message: "<value>",
-  errorCode: "AUTH_FORBIDDEN_WORKSPACE_NOT_FOUND",
+  errorCode: "AUTH_FORBIDDEN_ROLE_NOT_FOUND",
 };
 ```
 

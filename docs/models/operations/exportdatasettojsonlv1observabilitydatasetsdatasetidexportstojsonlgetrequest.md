@@ -8,12 +8,12 @@ import { ExportDatasetToJsonlV1ObservabilityDatasetsDatasetIdExportsToJsonlGetRe
 let value:
   ExportDatasetToJsonlV1ObservabilityDatasetsDatasetIdExportsToJsonlGetRequest =
     {
-      datasetId: "d982df7a-068f-49fa-adcc-159e31ed924e",
+      datasetId: "<id>",
     };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `datasetId`        | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `datasetId`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | Dataset UUID or workspace-scoped slug. UUID-shaped values are always interpreted as dataset IDs. |

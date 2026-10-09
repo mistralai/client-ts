@@ -12,6 +12,7 @@ let value: VoiceResponse = {
   id: "091a473e-e680-451e-b7bb-916ad9aab9f9",
   createdAt: new Date("2025-03-09T11:09:23.266Z"),
   userId: "<id>",
+  type: "custom",
 };
 ```
 
@@ -32,3 +33,5 @@ let value: VoiceResponse = {
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `userId`                                                                                      | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `trimmedSeconds`                                                                              | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `kind`                                                                                        | [components.VoiceKind](../../models/components/voicekind.md)                                  | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | [components.VoiceResponseType](../../models/components/voiceresponsetype.md)                  | :heavy_check_mark:                                                                            | N/A                                                                                           |

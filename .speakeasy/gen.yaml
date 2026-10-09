@@ -28,34 +28,69 @@ generation:
   requestBodyFieldName: ""
   versioningStrategy: automatic
   persistentEdits:
-    enabled: "true"
+    enabled: "false"
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.7.0
+  version: 3.0.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
+      '@modelcontextprotocol/sdk': ^1.29.0
       '@opentelemetry/semantic-conventions': ^1.40.0
       ws: ^8.18.0
       zod-to-json-schema: ^3.25.0
     devDependencies:
+      '@aws-sdk/client-s3': ^3.1142.0
+      '@azure/identity': ^4.13.3
+      '@azure/storage-blob': ^12.34.0
+      '@google-cloud/storage': ^8.2.0
+      '@hpcc-js/wasm-zstd': ^1.16.2
+      '@msgpack/msgpack': ^3.1.3
       '@opentelemetry/api': ^1.9.0
       '@types/node': ^22.0.0
       '@types/ws': ^8.5.13
       oxlint: 1.78.0
     peerDependencies:
+      '@aws-sdk/client-s3': ^3.300.0
+      '@azure/identity': ^4.0.0
+      '@azure/storage-blob': ^12.24.0
+      '@google-cloud/storage': ^7.0.0 || ^8.0.0
+      '@hpcc-js/wasm-zstd': ^1.16.0
+      '@msgpack/msgpack': ^3.0.0
       '@opentelemetry/api': ^1.9.0
+      '@opentelemetry/exporter-trace-otlp-http': ^0.220.0
+      '@opentelemetry/resources': ^2.9.0
+      '@opentelemetry/sdk-trace-base': ^2.9.0
   additionalPackageJSON:
     description: TypeScript client library for the Mistral AI API
     license: Apache-2.0
     peerDependenciesMeta:
+      '@aws-sdk/client-s3':
+        optional: true
+      '@azure/identity':
+        optional: true
+      '@azure/storage-blob':
+        optional: true
+      '@google-cloud/storage':
+        optional: true
+      '@hpcc-js/wasm-zstd':
+        optional: true
+      '@msgpack/msgpack':
+        optional: true
       '@opentelemetry/api':
+        optional: true
+      '@opentelemetry/exporter-trace-otlp-http':
+        optional: true
+      '@opentelemetry/resources':
+        optional: true
+      '@opentelemetry/sdk-trace-base':
         optional: true
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
   author: Mistral AI
   baseErrorName: MistralError
   clientServerStatusCodesAsErrors: true
@@ -66,6 +101,7 @@ typescript:
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: MISTRAL
+  eventStreamClassName: EventStream
   exportZodModelNamespace: false
   fixEnumNameSanitization: false
   flatAdditionalProperties: true
@@ -97,6 +133,8 @@ typescript:
   packageName: '@mistralai/mistralai'
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
+  requestExtras: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2
