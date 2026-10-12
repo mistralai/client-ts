@@ -1,6 +1,7 @@
 import { SDKOptions } from "../lib/config.js";
 import { ClientSDK } from "../lib/sdks.js";
 import { Chat } from "./chat.js";
+import { Ocr } from "./ocr.js";
 
 export type AzureOptions = {
     /** Your AzureAI Endpoint for more information see https://docs.mistral.ai/deployment/cloud/azure/ */
@@ -24,5 +25,10 @@ export class MistralAzure extends ClientSDK {
     private _chat?: Chat;
     get chat(): Chat {
         return (this._chat ??= new Chat(this._options));
+    }
+
+    private _ocr?: Ocr;
+    get ocr(): Ocr {
+        return (this._ocr ??= new Ocr(this._options));
     }
 }
