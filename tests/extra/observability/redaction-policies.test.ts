@@ -33,6 +33,16 @@ describe("AttributeRedactionPolicy", () => {
     });
     expect(out["custom.prompt.text"]).toBe(DEFAULT_REDACTED_VALUE);
   });
+  test("workflow arguments and result redacted", () => {
+    const out = new AttributeRedactionPolicy().redactAttributes({
+      "wf.arguments": "x",
+      "wf.result": "x",
+    });
+    expect(out).toEqual({
+      "wf.arguments": DEFAULT_REDACTED_VALUE,
+      "wf.result": DEFAULT_REDACTED_VALUE,
+    });
+  });
 
   test("token pattern applied to kept string", () => {
     const out = new AttributeRedactionPolicy().redactAttributes({

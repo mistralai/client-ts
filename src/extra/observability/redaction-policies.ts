@@ -84,6 +84,7 @@ export const DEFAULT_SENSITIVE_ATTRIBUTE_FRAGMENTS: ReadonlySet<string> =
     "password",
     "payload",
     "prompt",
+    "result",
     "secret",
     "set_cookie",
     "token",
