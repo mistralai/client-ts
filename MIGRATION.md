@@ -1,3 +1,81 @@
+# Migration Guide: v2.x → v3.x
+
+Imports, client construction and the core methods (`chat.complete`, `embeddings.create`, `files.upload`, ...) are unchanged. The breaking changes are in the chat and agents completion tools, and in a handful of beta and workflow APIs.
+
+---
+
+## Installation
+
+- `@modelcontextprotocol/sdk` is now a dependency, installed with the SDK. `beta.connectors.mcpClient()` returns its `Client`.
+- Workflow payload offloading and compression use optional peer dependencies. Install only the ones you use: `@aws-sdk/client-s3`, `@azure/identity`, `@azure/storage-blob`, `@google-cloud/storage`, `@hpcc-js/wasm-zstd`, `@msgpack/msgpack`.
+
+## Chat and Agents Completions
+
+`chat.complete`, `chat.stream`, `agents.complete` and `agents.stream` no longer accept the `web_search`, `web_search_premium` and `code_interpreter` tools. Use them through the Conversations API (`beta.conversations`) or an agent created with `beta.agents.create`, where `WebSearchTool`, `WebSearchPremiumTool` and `CodeInterpreterTool` remain available:
+
+```typescript
+const res = await mistral.beta.conversations.start({
+  model: "mistral-medium-latest",
+  inputs: "Who won the last Champions League?",
+  tools: [{ type: "web_search" }],
+});
+```
+
+## Connectors (beta)
+
+The three credential deletions are one method with a scope:
+
+| v2 | v3 |
+|---|---|
+| `beta.connectors.deleteUserCredentials({ ... })` | `beta.connectors.deleteCredentials({ ..., consumerScope: "user" })` |
+| `beta.connectors.deleteWorkspaceCredentials({ ... })` | `beta.connectors.deleteCredentials({ ..., consumerScope: "workspace" })` |
+| `beta.connectors.deleteOrganizationCredentials({ ... })` | `beta.connectors.deleteCredentials({ ..., consumerScope: "organization" })` |
+
+The `ConnectorDelete{User,Workspace,Organization}CredentialsV1Request` types are replaced by `ConnectorDeleteCredentialsRequest`.
+
+- `beta.connectors.get()`: `fetchCustomerData` removed.
+- `beta.connectors.listTools()`: `page` removed; all tools are returned in one response.
+- `beta.connectors.list()`: `queryFilters.active` removed; `queryFilters.supportsMcp` filters on MCP support instead.
+- `OutboundAuthenticationType` and `InboundAuthenticationType` are replaced by `AuthenticationType` (`oauth2`, `bearer`, `none`, `github_app`, `slack_app`). The inbound `webhook` value is gone, and `AuthenticationMethodCreateOrUpdateRequest.authDirection` (with `AuthDirection`) is removed.
+- `beta.connectors.callTool()` is deprecated. `mcpClient()` and `httpClient()` are new, and open a client to a connector through the Connectors Gateway.
+
+## Observability Pipeline Configs (beta)
+
+- `createPipelineConfig()` and `updatePipelineConfig()`: `slug` and `group` removed from the request.
+- `PipelineConfig`: `slug`, `group` and `definitionHash` removed. `definition` is unchanged; `definitions` is also returned, as an optional array.
+
+## Workflow Deployments
+
+- The `koyeb` backend is now Mistral Cloud: `DeploymentKoyebBackendSpec` is replaced by `DeploymentMistralCloudBackendSpec` (`type: "mistral_cloud"`). Requests accept only this backend; `DeploymentK8sBackendSpec` can no longer be sent. Responses can still report `koyeb` or `kubernetes` for existing deployments.
+- `DeploymentResourceConfig` and `DeploymentResourceConfigUpdate` keep only `replicas`; `cpuRequest`, `cpuLimit`, `memoryRequest` and `memoryLimit` are removed.
+- `entrypoint` and `workingDir` are removed from `DeploymentWorkerSpecInput` and `WorkflowsWorkerSpecUpdate`, and together with `commitSha` from `DeploymentWorkerSpecResponse`.
+
+## Workflow Events
+
+`continuedRunId`, `firstExecutionRunId` and `scheduleId` on the workflow event responses (`ActivityTask*Response`, `CustomTask*Response`, ...) change from `string | null` to `string | null | undefined`. Code that checks only for `null` must handle `undefined` too.
+
+## Renamed SDK Classes
+
+The accessors are unchanged; only code that imports the class types by name is affected.
+
+| Accessor | v2 | v3 |
+|---|---|---|
+| `mistral.workflows.runs` | `Runs` | `WorkflowsRuns` |
+| `mistral.beta.observability.datasets.records` | `Records` | `DatasetsRecords` |
+
+## Deprecations
+
+- `audio.voices.list()` is deprecated in favour of the cursor-paginated `audio.voices.search()`.
+
+## Internals
+
+These only affect code that deep-imports from `lib/`:
+
+- `SecurityErrorCode` is a const object with a matching union type instead of an `enum`. `SecurityErrorCode.Incomplete` and the other members still work.
+- `lib/dlv` and `lib/is-plain-object` are removed, and the `encode*` helpers type `charEncoding` as `CharEncoding`.
+
+---
+
 # Migration Guide: v1.x → v2.x
 
 Version 2.0 of the Mistral TypeScript SDK is a major update that switches to ESM, adopts the v2 OpenAPI specification with shorter type names, and introduces forward-compatible enums and unions.
