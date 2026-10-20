@@ -1,7 +1,6 @@
 name: Publish MISTRALAI-GCP-SDK
 permissions:
-  contents: write
-  id-token: write
+  contents: read
 "on":
   push:
     branches:
@@ -16,7 +15,13 @@ permissions:
 jobs:
   publish:
     if: github.event_name == 'push' || github.event.inputs.confirm_publish == 'publish'
+    # npm trusted publishing requires a GitHub-hosted runner.
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      version: ${{ steps.publish.outputs.version }}
     environment:
       name: publish
     steps:
@@ -56,14 +61,29 @@ jobs:
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      # Creates the GitHub Release immediately after `npm stage publish`,
-      # before the npm 2FA approval. If the staged package is rejected on
-      # npmjs.com, also run:
+  release:
+    needs: publish
+    runs-on: [ciclone, 1x1gi-x86]
+    permissions:
+      contents: write
+    environment:
+      name: publish
+    steps:
+      - name: Checkout release notes
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout: packages/mistralai-gcp/RELEASES.md
+          sparse-checkout-cone-mode: false
+
+      # npm staging defers 2FA approval. If the package is rejected on
+      # npmjs.com, delete the release and tag:
       #   gh release delete <tag> --cleanup-tag --yes --repo mistralai/client-ts
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ steps.publish.outputs.version }}
+          VERSION: ${{ needs.publish.outputs.version }}
         run: |
           set -euo pipefail
 

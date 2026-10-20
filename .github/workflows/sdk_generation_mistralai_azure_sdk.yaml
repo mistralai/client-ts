@@ -24,12 +24,16 @@ permissions:
         type: string
 jobs:
   resolve-speakeasy-version:
-    runs-on: ubuntu-24.04
+    runs-on: [ciclone, 1x1gi-x86]
+    permissions:
+      contents: read
     outputs:
       speakeasy_version: ${{ steps.read-version.outputs.speakeasy_version }}
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+        with:
+          persist-credentials: false
 
       - name: Read Speakeasy version from workflow config
         id: read-version
@@ -46,7 +50,7 @@ jobs:
 
   generate:
     needs: resolve-speakeasy-version
-    runs-on: ubuntu-24.04
+    runs-on: [ciclone, 4x8gi-x86]
     environment: publish
     steps:
       - name: Checkout
