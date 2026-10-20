@@ -1,11 +1,15 @@
 # Mistral Typescript Client
 
-> **This is v2 of the Mistral TypeScript SDK.**
+> **This is v3 of the Mistral TypeScript SDK.**
 >
-> Key changes from v1: **ESM-only**, shorter type names, forward-compatible enums/unions, Zod v4.
+> Key changes from v2: the `web_search`, `web_search_premium` and `code_interpreter` tools moved from chat and agents completions to the Conversations API, and a handful of beta and workflow APIs changed. Imports, client construction and the core methods are unchanged.
 > See the **[Migration Guide](https://github.com/mistralai/client-ts/blob/main/MIGRATION.md)** for full details.
 >
-> To pin v1: `npm install @mistralai/mistralai@^1` · **[v1 documentation and source](https://github.com/mistralai/client-ts/tree/v1)**
+> To pin v2: `npm install @mistralai/mistralai@^2` · **[v2 source](https://github.com/mistralai/client-ts/tree/v2.7.0)**
+
+## New: Voice Agents
+
+Build live voice agents with the SDK. `client.audio.sessions.init()` opens a real-time, bidirectional voice session with speech-to-text, text-to-speech and tool calls, and `client.audio.agents` saves agent configurations to reuse across sessions. Install the transport, `@livekit/rtc-node` for Node or `livekit-client` for the browser, then see [Voice Agents](https://github.com/mistralai/client-ts#voice-agents) and the [runnable example](https://github.com/mistralai/client-ts/tree/main/examples/src/voice_agents).
 
 <!-- Start Summary [summary] -->
 ## Summary
@@ -17,6 +21,7 @@ Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create yo
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [Mistral Typescript Client](#mistral-typescript-client)
+  * [New: Voice Agents](#new-voice-agents)
   * [SDK Installation](#sdk-installation)
   * [Requirements](#requirements)
   * [API Key Setup](#api-key-setup)
