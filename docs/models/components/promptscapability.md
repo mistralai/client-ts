@@ -12,7 +12,6 @@ let value: PromptsCapability = {};
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `listChanged`          | *boolean*              | :heavy_minus_sign:     | N/A                    |
-| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `listChanged`      | *boolean*          | :heavy_minus_sign: | N/A                |

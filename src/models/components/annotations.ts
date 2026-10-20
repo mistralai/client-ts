@@ -15,10 +15,13 @@ export const Audience = {
 } as const;
 export type Audience = OpenEnum<typeof Audience>;
 
+/**
+ * Optional annotations the client can use to inform how objects are used or displayed.
+ */
 export type Annotations = {
   audience?: Array<Audience> | null | undefined;
   priority?: number | null | undefined;
-  [additionalProperties: string]: unknown;
+  lastModified?: string | null | undefined;
 };
 
 /** @internal */
@@ -30,7 +33,8 @@ export const Annotations$inboundSchema: z.ZodType<Annotations, unknown> = z
   .object({
     audience: z.nullable(z.array(Audience$inboundSchema)).optional(),
     priority: z.nullable(z.number()).optional(),
-  }).catchall(z.any());
+    lastModified: z.nullable(z.string()).optional(),
+  });
 
 export function annotationsFromJSON(
   jsonString: string,

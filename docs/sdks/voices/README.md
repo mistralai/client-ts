@@ -101,7 +101,6 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.audio.voices.create({
     name: "<value>",
-    sampleAudio: "<value>",
   });
 
   console.log(result);
@@ -127,7 +126,6 @@ const mistral = new MistralCore({
 async function run() {
   const res = await audioVoicesCreate(mistral, {
     name: "<value>",
-    sampleAudio: "<value>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -236,7 +234,7 @@ run();
 
 ## update
 
-Update voice metadata (name, gender, languages, age, tags).
+Update voice metadata (name, gender, languages, age, tags, retention notice).
 
 ### Example Usage
 

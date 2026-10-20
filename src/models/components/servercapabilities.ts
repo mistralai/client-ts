@@ -7,6 +7,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  CompletionsCapability,
+  CompletionsCapability$inboundSchema,
+} from "./completionscapability.js";
+import {
+  LoggingCapability,
+  LoggingCapability$inboundSchema,
+} from "./loggingcapability.js";
+import {
   PromptsCapability,
   PromptsCapability$inboundSchema,
 } from "./promptscapability.js";
@@ -24,17 +32,17 @@ import {
 } from "./toolscapability.js";
 
 /**
- * Capabilities that a server may support.
+ * Capabilities that a server may support. Not a closed set.
  */
 export type ServerCapabilities = {
   experimental?: { [k: string]: { [k: string]: any } } | null | undefined;
-  logging?: { [k: string]: any } | null | undefined;
+  logging?: LoggingCapability | null | undefined;
   prompts?: PromptsCapability | null | undefined;
   resources?: ResourcesCapability | null | undefined;
   tools?: ToolsCapability | null | undefined;
-  completions?: { [k: string]: any } | null | undefined;
+  completions?: CompletionsCapability | null | undefined;
+  extensions?: { [k: string]: { [k: string]: any } } | null | undefined;
   tasks?: ServerTasksCapability | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -44,13 +52,15 @@ export const ServerCapabilities$inboundSchema: z.ZodType<
 > = z.object({
   experimental: z.nullable(z.record(z.string(), z.record(z.string(), z.any())))
     .optional(),
-  logging: z.nullable(z.record(z.string(), z.any())).optional(),
+  logging: z.nullable(LoggingCapability$inboundSchema).optional(),
   prompts: z.nullable(PromptsCapability$inboundSchema).optional(),
   resources: z.nullable(ResourcesCapability$inboundSchema).optional(),
   tools: z.nullable(ToolsCapability$inboundSchema).optional(),
-  completions: z.nullable(z.record(z.string(), z.any())).optional(),
+  completions: z.nullable(CompletionsCapability$inboundSchema).optional(),
+  extensions: z.nullable(z.record(z.string(), z.record(z.string(), z.any())))
+    .optional(),
   tasks: z.nullable(ServerTasksCapability$inboundSchema).optional(),
-}).catchall(z.any());
+});
 
 export function serverCapabilitiesFromJSON(
   jsonString: string,

@@ -1,10 +1,19 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "Mistral AI",
   "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
   "peerDependenciesMeta": {
+    "@opentelemetry/exporter-trace-otlp-http": {
+      "optional": true
+    },
+    "@opentelemetry/sdk-trace-base": {
+      "optional": true
+    },
+    "livekit-client": {
+      "optional": true
+    },
     "@aws-sdk/client-s3": {
       "optional": true
     },
@@ -14,25 +23,22 @@
     "@azure/storage-blob": {
       "optional": true
     },
-    "@google-cloud/storage": {
-      "optional": true
-    },
     "@hpcc-js/wasm-zstd": {
       "optional": true
     },
     "@msgpack/msgpack": {
       "optional": true
     },
-    "@opentelemetry/api": {
-      "optional": true
-    },
-    "@opentelemetry/exporter-trace-otlp-http": {
-      "optional": true
-    },
     "@opentelemetry/resources": {
       "optional": true
     },
-    "@opentelemetry/sdk-trace-base": {
+    "@google-cloud/storage": {
+      "optional": true
+    },
+    "@livekit/rtc-node": {
+      "optional": true
+    },
+    "@opentelemetry/api": {
       "optional": true
     }
   },
@@ -65,31 +71,6 @@
       "types": "./esm/models/operations/index.d.ts",
       "default": "./esm/models/operations/index.js"
     },
-    "./extra/realtime": {
-      "source": "./src/extra/realtime/index.ts",
-      "types": "./esm/extra/realtime/index.d.ts",
-      "default": "./esm/extra/realtime/index.js"
-    },
-    "./extra/observability": {
-      "source": "./src/extra/observability/index.ts",
-      "types": "./esm/extra/observability/index.d.ts",
-      "default": "./esm/extra/observability/index.js"
-    },
-    "./extra/connectors": {
-      "source": "./src/extra/connectors.ts",
-      "types": "./esm/extra/connectors.d.ts",
-      "default": "./esm/extra/connectors.js"
-    },
-    "./extra/workflows": {
-      "source": "./src/extra/workflows/index.ts",
-      "types": "./esm/extra/workflows/index.d.ts",
-      "default": "./esm/extra/workflows/index.js"
-    },
-    "./hooks/tracing": {
-      "source": "./src/hooks/tracing.ts",
-      "types": "./esm/hooks/tracing.d.ts",
-      "default": "./esm/hooks/tracing.js"
-    },
     "./*.js": {
       "source": "./src/*.ts",
       "types": "./esm/*.d.ts",
@@ -117,11 +98,13 @@
     "@azure/storage-blob": "^12.24.0",
     "@google-cloud/storage": "^7.0.0 || ^8.0.0",
     "@hpcc-js/wasm-zstd": "^1.16.0",
+    "@livekit/rtc-node": "^0.13.28",
     "@msgpack/msgpack": "^3.0.0",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.220.0",
     "@opentelemetry/resources": "^2.9.0",
-    "@opentelemetry/sdk-trace-base": "^2.9.0"
+    "@opentelemetry/sdk-trace-base": "^2.9.0",
+    "livekit-client": "^2.19.0"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1142.0",
@@ -129,11 +112,13 @@
     "@azure/storage-blob": "^12.34.0",
     "@google-cloud/storage": "^8.2.0",
     "@hpcc-js/wasm-zstd": "^1.16.2",
+    "@livekit/rtc-node": "^0.13.28",
     "@msgpack/msgpack": "^3.1.3",
     "@opentelemetry/api": "^1.9.0",
     "@types/node": "^22.0.0",
     "@types/ws": "^8.5.13",
     "@typescript/native-preview": "7.0.0-dev.20260302.1",
+    "livekit-client": "^2.19.0",
     "oxlint": "1.78.0",
     "typescript": "~5.8.3"
   },

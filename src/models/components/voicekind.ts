@@ -15,3 +15,6 @@ export type VoiceKind = OpenEnum<typeof VoiceKind>;
 /** @internal */
 export const VoiceKind$inboundSchema: z.ZodType<VoiceKind, unknown> = openEnums
   .inboundSchema(VoiceKind);
+/** @internal */
+export const VoiceKind$outboundSchema: z.ZodType<string, VoiceKind> = openEnums
+  .outboundSchema(VoiceKind);

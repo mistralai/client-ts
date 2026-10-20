@@ -33,7 +33,6 @@ export type EmbeddedResource = {
   resource: TextResourceContents | BlobResourceContents;
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -64,7 +63,7 @@ export const EmbeddedResource$inboundSchema: z.ZodType<
   ]),
   annotations: z.nullable(Annotations$inboundSchema).optional(),
   _meta: z.nullable(z.record(z.string(), z.any())).optional(),
-}).catchall(z.any()).transform((v) => {
+}).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

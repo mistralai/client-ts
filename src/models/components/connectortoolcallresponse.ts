@@ -22,11 +22,11 @@ import { ResourceLink, ResourceLink$inboundSchema } from "./resourcelink.js";
 import { TextContent, TextContent$inboundSchema } from "./textcontent.js";
 
 export type ConnectorToolCallResponseContent =
-  | TextContent
-  | ImageContent
   | AudioContent
-  | ResourceLink
+  | ImageContent
   | EmbeddedResource
+  | ResourceLink
+  | TextContent
   | discriminatedUnionTypes.Unknown<"type">;
 
 /**
@@ -42,11 +42,11 @@ export type ConnectorToolCallResponseContent =
  */
 export type ConnectorToolCallResponse = {
   content: Array<
-    | TextContent
-    | ImageContent
     | AudioContent
-    | ResourceLink
+    | ImageContent
     | EmbeddedResource
+    | ResourceLink
+    | TextContent
     | discriminatedUnionTypes.Unknown<"type">
   >;
   metadata?: ConnectorToolCallMetadata | null | undefined;
@@ -58,11 +58,11 @@ export const ConnectorToolCallResponseContent$inboundSchema: z.ZodType<
   ConnectorToolCallResponseContent,
   unknown
 > = discriminatedUnion("type", {
-  text: TextContent$inboundSchema,
-  image: ImageContent$inboundSchema,
   audio: AudioContent$inboundSchema,
-  resource_link: ResourceLink$inboundSchema,
+  image: ImageContent$inboundSchema,
   resource: EmbeddedResource$inboundSchema,
+  resource_link: ResourceLink$inboundSchema,
+  text: TextContent$inboundSchema,
 });
 
 export function connectorToolCallResponseContentFromJSON(
@@ -81,11 +81,11 @@ export const ConnectorToolCallResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   content: z.array(discriminatedUnion("type", {
-    text: TextContent$inboundSchema,
-    image: ImageContent$inboundSchema,
     audio: AudioContent$inboundSchema,
-    resource_link: ResourceLink$inboundSchema,
+    image: ImageContent$inboundSchema,
     resource: EmbeddedResource$inboundSchema,
+    resource_link: ResourceLink$inboundSchema,
+    text: TextContent$inboundSchema,
   })),
   metadata: z.nullable(ConnectorToolCallMetadata$inboundSchema).optional(),
 }).catchall(z.any());

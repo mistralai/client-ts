@@ -3,33 +3,39 @@
 
 ## Supported Types
 
-### `components.DetectionDefinition`
+### `components.DetectionDefinitionV1`
 
 ```typescript
-const value: components.DetectionDefinition = {
+const value: components.DetectionDefinitionV1 = {
   targetAttributes: [],
   patterns: [],
 };
 ```
 
-### `components.ModerationDefinition`
+### `components.ModerationDefinitionV1`
 
 ```typescript
-const value: components.ModerationDefinition = {};
+const value: components.ModerationDefinitionV1 = {};
 ```
 
-### `components.JudgeDefinition`
+### `components.JudgeDefinitionV1`
 
 ```typescript
-const value: components.JudgeDefinition = {
-  slug: "<value>",
+const value: components.JudgeDefinitionV1 = {
+  model: "Land Cruiser",
+  prompt: "<value>",
+  resultSpec: {
+    type: "numeric",
+    min: 323.73,
+    max: 2924.57,
+  },
 };
 ```
 
-### `components.ExportDefinition`
+### `components.ExportDefinitionV1`
 
 ```typescript
-const value: components.ExportDefinition = {
+const value: components.ExportDefinitionV1 = {
   destination: {
     protocol: "<value>",
     endpoint: "<value>",

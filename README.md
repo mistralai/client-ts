@@ -24,6 +24,7 @@ Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create yo
   * [Providers' SDKs](#providers-sdks)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Server-sent event streaming](#server-sent-event-streaming)
+  * [Json Streaming](#json-streaming)
   * [Pagination](#pagination)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
@@ -34,6 +35,7 @@ Mistral AI API: Our Chat Completion and Embeddings APIs specification. Create yo
   * [Standalone functions](#standalone-functions)
   * [Debugging](#debugging)
   * [Telemetry & Observability](#telemetry-observability)
+  * [Voice Agents](#voice-agents)
 * [Development](#development)
   * [Contributions](#contributions)
 
@@ -244,6 +246,22 @@ We have dedicated SDKs for the following providers:
 * [complete](docs/sdks/agents/README.md#complete) - Agents Completion
 * [stream](docs/sdks/agents/README.md#stream) - Stream Agents completion
 
+### [Audio.Agents](docs/sdks/audioagents/README.md)
+
+* [list](docs/sdks/audioagents/README.md#list) - List audio agents
+* [create](docs/sdks/audioagents/README.md#create) - Create an audio agent
+* [get](docs/sdks/audioagents/README.md#get) - Get an audio agent
+* [update](docs/sdks/audioagents/README.md#update) - Update an audio agent
+* [delete](docs/sdks/audioagents/README.md#delete) - Delete an audio agent
+* [listVersions](docs/sdks/audioagents/README.md#listversions) - List audio agent versions
+* [listSessions](docs/sdks/audioagents/README.md#listsessions) - List audio agent sessions
+
+### [Audio.Sessions](docs/sdks/audiosessions/README.md)
+
+* [create](docs/sdks/audiosessions/README.md#create) - Create an agent session
+* [get](docs/sdks/audiosessions/README.md#get) - Get session status
+* [close](docs/sdks/audiosessions/README.md#close) - Stop an agent session
+
 ### [Audio.Speech](docs/sdks/speech/README.md)
 
 * [complete](docs/sdks/speech/README.md#complete) - Speech
@@ -382,11 +400,6 @@ We have dedicated SDKs for the following providers:
 
 ### [Beta.Observability.Evaluations](docs/sdks/evaluations/README.md)
 
-* [createPipelineConfig](docs/sdks/evaluations/README.md#createpipelineconfig) - Create a worker pipeline configuration
-* [listPipelineConfigs](docs/sdks/evaluations/README.md#listpipelineconfigs) - List worker pipeline configurations
-* [getPipelineConfig](docs/sdks/evaluations/README.md#getpipelineconfig) - Get a worker pipeline configuration
-* [updatePipelineConfig](docs/sdks/evaluations/README.md#updatepipelineconfig) - Replace a worker pipeline configuration
-* [deletePipelineConfig](docs/sdks/evaluations/README.md#deletepipelineconfig) - Delete a worker pipeline configuration
 * [createPipeline](docs/sdks/evaluations/README.md#createpipeline) - Create a pipeline
 * [listPipelines](docs/sdks/evaluations/README.md#listpipelines) - List pipelines
 * [getPipeline](docs/sdks/evaluations/README.md#getpipeline) - Get a pipeline
@@ -441,6 +454,7 @@ We have dedicated SDKs for the following providers:
 * [aggregateSpanEvaluations](docs/sdks/spans/README.md#aggregatespanevaluations) - Aggregate span evaluations
 * [searchSpanEvaluations](docs/sdks/spans/README.md#searchspanevaluations) - Search span evaluations
 * [searchLatestSpanEvaluations](docs/sdks/spans/README.md#searchlatestspanevaluations) - Search latest span evaluations
+* [searchPipelineResults](docs/sdks/spans/README.md#searchpipelineresults) - Search pipeline results
 * [listSpanFields](docs/sdks/spans/README.md#listspanfields) - Get span field definitions
 * [listSpanEvalFields](docs/sdks/spans/README.md#listspanevalfields) - Get span evaluation field definitions
 * [fetchSpanFieldOptions](docs/sdks/spans/README.md#fetchspanfieldoptions) - Get options for a span field
@@ -488,6 +502,9 @@ We have dedicated SDKs for the following providers:
 * [read](docs/sdks/managedindexes/README.md#read) - Read chunks within a span
 * [grep](docs/sdks/managedindexes/README.md#grep) - Grep for a pattern within a source
 * [getChunk](docs/sdks/managedindexes/README.md#getchunk) - Get a single chunk by id
+* [getIndexSummary](docs/sdks/managedindexes/README.md#getindexsummary) - Get Managed Index Summary
+* [generateIndexSummary](docs/sdks/managedindexes/README.md#generateindexsummary) - Generate a summary field for a managed index
+* [setIndexSummary](docs/sdks/managedindexes/README.md#setindexsummary) - Set Managed Index Summary
 
 ### [Beta.Rag.SearchIndexes](docs/sdks/searchindexes/README.md)
 
@@ -524,6 +541,7 @@ We have dedicated SDKs for the following providers:
 * [getIdentity](docs/sdks/users/README.md#getidentity) - Get Identity
 * [listOrganizations](docs/sdks/users/README.md#listorganizations) - List Organizations
 * [listWorkspaces](docs/sdks/users/README.md#listworkspaces) - List Workspaces
+* [whoami](docs/sdks/users/README.md#whoami) - Whoami
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -573,9 +591,9 @@ We have dedicated SDKs for the following providers:
 
 * [process](docs/sdks/ocr/README.md#process) - OCR
 
-### [Realtime.Sessions](docs/sdks/sessions/README.md)
+### [Realtime.Sessions](docs/sdks/realtimesessions/README.md)
 
-* [create](docs/sdks/sessions/README.md#create) - Create Client Session
+* [create](docs/sdks/realtimesessions/README.md#create) - Create Client Session
 
 ### [Workflows](docs/sdks/workflows/README.md)
 
@@ -702,6 +720,41 @@ run();
 [mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
 [mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
 <!-- End Server-sent event streaming [eventstream] -->
+
+<!-- Start Json Streaming [jsonl] -->
+## Json Streaming
+
+Json Streaming ([jsonl][jsonl-format] / [x-ndjson][x-ndjson]) content type can be used to stream content from certain operations. These operations expose the stream as an [AsyncGenerator][async-generator] that can be consumed using a `for await...of` loop in TypeScript/JavaScript. The loop will terminate when the server no longer has any events to send and closes the underlying connection.
+
+Here's an example of consuming a JSONL stream:
+
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.rag.managedIndexes.generateIndexSummary({
+    language: "es",
+    indexName: "<value>",
+  });
+
+  for await (const event of result) {
+    // Handle the event
+    console.log(event);
+  }
+}
+
+run();
+
+```
+
+[jsonl-format]: https://jsonlines.org/
+[x-ndjson]: https://github.com/ndjson/ndjson-spec
+[async-generator]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator
+<!-- End Json Streaming [jsonl] -->
 
 <!-- Start Pagination [pagination] -->
 ## Pagination
@@ -908,8 +961,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 165 of 278 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 69 of 278 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 178 of 288 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 65 of 288 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1097,6 +1150,16 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 - [`agentsComplete`](docs/sdks/agents/README.md#complete) - Agents Completion
 - [`agentsStream`](docs/sdks/agents/README.md#stream) - Stream Agents completion
+- [`audioAgentsCreate`](docs/sdks/audioagents/README.md#create) - Create an audio agent
+- [`audioAgentsDelete`](docs/sdks/audioagents/README.md#delete) - Delete an audio agent
+- [`audioAgentsGet`](docs/sdks/audioagents/README.md#get) - Get an audio agent
+- [`audioAgentsList`](docs/sdks/audioagents/README.md#list) - List audio agents
+- [`audioAgentsListSessions`](docs/sdks/audioagents/README.md#listsessions) - List audio agent sessions
+- [`audioAgentsListVersions`](docs/sdks/audioagents/README.md#listversions) - List audio agent versions
+- [`audioAgentsUpdate`](docs/sdks/audioagents/README.md#update) - Update an audio agent
+- [`audioSessionsClose`](docs/sdks/audiosessions/README.md#close) - Stop an agent session
+- [`audioSessionsCreate`](docs/sdks/audiosessions/README.md#create) - Create an agent session
+- [`audioSessionsGet`](docs/sdks/audiosessions/README.md#get) - Get session status
 - [`audioSpeechComplete`](docs/sdks/speech/README.md#complete) - Speech
 - [`audioTranscriptionsComplete`](docs/sdks/transcriptions/README.md#complete) - Create Transcription
 - [`audioTranscriptionsStream`](docs/sdks/transcriptions/README.md#stream) - Create Streaming Transcription (SSE)
@@ -1193,14 +1256,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityDatasetsRecordsUpdateProperties`](docs/sdks/datasetsrecords/README.md#updateproperties) - Update dataset record properties
 - [`betaObservabilityDatasetsUpdate`](docs/sdks/datasets/README.md#update) - Patch dataset
 - [`betaObservabilityEvaluationsCreatePipeline`](docs/sdks/evaluations/README.md#createpipeline) - Create a pipeline
-- [`betaObservabilityEvaluationsCreatePipelineConfig`](docs/sdks/evaluations/README.md#createpipelineconfig) - Create a worker pipeline configuration
 - [`betaObservabilityEvaluationsDeletePipeline`](docs/sdks/evaluations/README.md#deletepipeline) - Delete a pipeline
-- [`betaObservabilityEvaluationsDeletePipelineConfig`](docs/sdks/evaluations/README.md#deletepipelineconfig) - Delete a worker pipeline configuration
 - [`betaObservabilityEvaluationsGet`](docs/sdks/evaluations/README.md#get) - Get evaluation by slug
 - [`betaObservabilityEvaluationsGetPipeline`](docs/sdks/evaluations/README.md#getpipeline) - Get a pipeline
-- [`betaObservabilityEvaluationsGetPipelineConfig`](docs/sdks/evaluations/README.md#getpipelineconfig) - Get a worker pipeline configuration
 - [`betaObservabilityEvaluationsList`](docs/sdks/evaluations/README.md#list) - List evaluations for a project
-- [`betaObservabilityEvaluationsListPipelineConfigs`](docs/sdks/evaluations/README.md#listpipelineconfigs) - List worker pipeline configurations
 - [`betaObservabilityEvaluationsListPipelines`](docs/sdks/evaluations/README.md#listpipelines) - List pipelines
 - [`betaObservabilityEvaluationsOptimizationsGet`](docs/sdks/optimizations/README.md#get) - Get an optimization by id (with its anchored evaluation + project)
 - [`betaObservabilityEvaluationsOptimizationsList`](docs/sdks/optimizations/README.md#list) - List optimizations with optional filters
@@ -1215,7 +1274,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilityEvaluationsRunsSearch`](docs/sdks/evaluationsruns/README.md#search) - Search evaluation runs with filters
 - [`betaObservabilityEvaluationsRunsSearchAll`](docs/sdks/evaluationsruns/README.md#searchall) - Search evaluation runs across all evaluations
 - [`betaObservabilityEvaluationsUpdatePipeline`](docs/sdks/evaluations/README.md#updatepipeline) - Update a pipeline
-- [`betaObservabilityEvaluationsUpdatePipelineConfig`](docs/sdks/evaluations/README.md#updatepipelineconfig) - Replace a worker pipeline configuration
 - [`betaObservabilityJudgesCreate`](docs/sdks/judges/README.md#create) - Create a new judge
 - [`betaObservabilityJudgesDelete`](docs/sdks/judges/README.md#delete) - Delete a judge
 - [`betaObservabilityJudgesFetch`](docs/sdks/judges/README.md#fetch) - Get judge by id
@@ -1232,6 +1290,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaObservabilitySpansListSpanEvalFields`](docs/sdks/spans/README.md#listspanevalfields) - Get span evaluation field definitions
 - [`betaObservabilitySpansListSpanFields`](docs/sdks/spans/README.md#listspanfields) - Get span field definitions
 - [`betaObservabilitySpansSearchLatestSpanEvaluations`](docs/sdks/spans/README.md#searchlatestspanevaluations) - Search latest span evaluations
+- [`betaObservabilitySpansSearchPipelineResults`](docs/sdks/spans/README.md#searchpipelineresults) - Search pipeline results
 - [`betaObservabilitySpansSearchSpanEvaluations`](docs/sdks/spans/README.md#searchspanevaluations) - Search span evaluations
 - [`betaObservabilitySpansSearchSpans`](docs/sdks/spans/README.md#searchspans) - Search spans
 - [`betaObservabilityTracesAggregate`](docs/sdks/traces/README.md#aggregate) - Aggregate traces
@@ -1256,14 +1315,17 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagManagedIndexesCreate`](docs/sdks/managedindexes/README.md#create) - Create a managed index
 - [`betaRagManagedIndexesDelete`](docs/sdks/managedindexes/README.md#delete) - Delete a managed index
 - [`betaRagManagedIndexesDeleteDocuments`](docs/sdks/managedindexes/README.md#deletedocuments) - Delete documents from a managed index
+- [`betaRagManagedIndexesGenerateIndexSummary`](docs/sdks/managedindexes/README.md#generateindexsummary) - Generate a summary field for a managed index
 - [`betaRagManagedIndexesGet`](docs/sdks/managedindexes/README.md#get) - Get a managed index
 - [`betaRagManagedIndexesGetChunk`](docs/sdks/managedindexes/README.md#getchunk) - Get a single chunk by id
+- [`betaRagManagedIndexesGetIndexSummary`](docs/sdks/managedindexes/README.md#getindexsummary) - Get Managed Index Summary
 - [`betaRagManagedIndexesGrep`](docs/sdks/managedindexes/README.md#grep) - Grep for a pattern within a source
 - [`betaRagManagedIndexesIngestDocuments`](docs/sdks/managedindexes/README.md#ingestdocuments) - Ingest documents into a managed index
 - [`betaRagManagedIndexesList`](docs/sdks/managedindexes/README.md#list) - List managed indexes
 - [`betaRagManagedIndexesNavigate`](docs/sdks/managedindexes/README.md#navigate) - Navigate to adjacent chunks
 - [`betaRagManagedIndexesRead`](docs/sdks/managedindexes/README.md#read) - Read chunks within a span
 - [`betaRagManagedIndexesSearch`](docs/sdks/managedindexes/README.md#search) - Search a managed index
+- [`betaRagManagedIndexesSetIndexSummary`](docs/sdks/managedindexes/README.md#setindexsummary) - Set Managed Index Summary
 - [`betaRagManagedIndexesUpdate`](docs/sdks/managedindexes/README.md#update) - Update a managed index schema
 - [`betaRagSearchIndexesGetDeploymentSummaries`](docs/sdks/searchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
 - [`betaRagSearchIndexesRegisterDeployment`](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
@@ -1289,6 +1351,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaUsersGetIdentity`](docs/sdks/users/README.md#getidentity) - Get Identity
 - [`betaUsersListOrganizations`](docs/sdks/users/README.md#listorganizations) - List Organizations
 - [`betaUsersListWorkspaces`](docs/sdks/users/README.md#listworkspaces) - List Workspaces
+- [`betaUsersWhoami`](docs/sdks/users/README.md#whoami) - Whoami
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications
@@ -1315,7 +1378,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`modelsUnarchive`](docs/sdks/models/README.md#unarchive) - Unarchive Fine Tuned Model
 - [`modelsUpdate`](docs/sdks/models/README.md#update) - Update Fine Tuned Model
 - [`ocrProcess`](docs/sdks/ocr/README.md#process) - OCR
-- [`realtimeSessionsCreate`](docs/sdks/sessions/README.md#create) - Create Client Session
+- [`realtimeSessionsCreate`](docs/sdks/realtimesessions/README.md#create) - Create Client Session
 - [`workflowsArchiveWorkflow`](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
 - [`workflowsBulkArchiveWorkflows`](docs/sdks/workflows/README.md#bulkarchiveworkflows) - Bulk Archive Workflows
 - [`workflowsBulkUnarchiveWorkflows`](docs/sdks/workflows/README.md#bulkunarchiveworkflows) - Bulk Unarchive Workflows
@@ -1526,6 +1589,52 @@ await configureTelemetry(client, "dedicated", {
 | `MISTRAL_API_KEY` | Used as the bearer token for the dedicated-mode exporter. | — |
 
 Runnable examples live in [`examples/src/observability`](/examples/src/observability).
+
+## Voice Agents
+
+`client.audio.sessions.init()` opens a live, bidirectional voice session on top of the generated `audio.sessions` REST methods, which stay available for plain session CRUD. The transport is an optional peer dependency: `@livekit/rtc-node` for Node, `livekit-client` for the browser.
+
+```bash
+npm install @livekit/rtc-node
+```
+
+```typescript
+import * as z from "zod/v4";
+import { Mistral } from "@mistralai/mistralai";
+import { functionTool } from "@mistralai/mistralai/extra/voice-agents";
+import { DefaultAudioInterface } from "@mistralai/mistralai/extra/voice-agents/audio/node";
+
+const getWeather = functionTool({
+  name: "getWeather",
+  description: "Return the current weather for a city.",
+  parameters: z.object({ city: z.string() }),
+  filler: { text: "Let me look that up." },
+  handler: ({ city }) => ({ city, tempC: 21, conditions: "sunny" }),
+});
+
+const client = new Mistral({ apiKey: process.env["MISTRAL_API_KEY"] });
+
+await using session = await client.audio.sessions.init({
+  stt: { model: "voxtral-mini-transcribe-realtime-3" },
+  tts: { model: "voxtral-mini-tts-3" },
+  instructions: "You are a concise voice assistant.",
+  welcomeMessage: "Hey. Ask me about the weather somewhere.",
+  tools: [getWeather],
+  audioInterface: new DefaultAudioInterface(),
+});
+
+session.on("transcript", (event) => console.log(`${event.role}: ${event.content}`));
+session.on("error", (event) => console.error(`[${event.source}/${event.code}] ${event.message}`));
+
+await session.connect();
+await session.wait();
+```
+
+`init()` creates the remote session and returns it ready to connect; it does not join the room or open audio. Register callbacks, then call `await session.connect()` within the session's join window. `session.close()` gives the session up without connecting, and `await using` calls it for you. A missing microphone or a missing peer dependency fails `init()` before any session is created.
+
+Omit `audioInterface` to drive 48 kHz mono signed 16-bit PCM yourself: register an `audio` callback and call `session.sendAudio()` after `connect()`. For the browser, use `initSession()` from `@mistralai/mistralai/extra/voice-agents/browser`.
+
+The runnable example lives in [`examples/src/voice_agents`](/examples/src/voice_agents); it needs Node 24 or newer for `await using`, and SoX for the default audio interface.
 
 # Development
 

@@ -1,0 +1,26 @@
+# AudioSessionCreateResponse
+
+## Example Usage
+
+```typescript
+import { AudioSessionCreateResponse } from "@mistralai/mistralai/models/components";
+
+let value: AudioSessionCreateResponse = {
+  id: "2dda7759-3599-4625-bebb-ba1ab96dd87c",
+  participantToken: "<value>",
+  serverUrl: "https://lazy-plastic.org/",
+  createdAt: new Date("2024-09-26T18:13:46.855Z"),
+  expiresAt: new Date("2025-05-16T11:40:46.903Z"),
+};
+```
+
+## Fields
+
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                           | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `participantToken`                                                                                                                             | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `serverUrl`                                                                                                                                    | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `createdAt`                                                                                                                                    | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                  | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `expiresAt`                                                                                                                                    | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                  | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `functionTools`                                                                                                                                | [components.VoiceAgentFunctionTool](../../models/components/voiceagentfunctiontool.md)[]                                                       | :heavy_minus_sign:                                                                                                                             | Effective function declarations after saved-agent and session overrides are merged. Connected SDKs can compare them with their local handlers. |

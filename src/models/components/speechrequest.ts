@@ -6,9 +6,21 @@ import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { IPAPhoneme, IPAPhoneme$outboundSchema } from "./ipaphoneme.js";
 import {
+  SpeechAssistantTurn,
+  SpeechAssistantTurn$Outbound,
+  SpeechAssistantTurn$outboundSchema,
+} from "./speechassistantturn.js";
+import {
   SpeechOutputFormat,
   SpeechOutputFormat$outboundSchema,
 } from "./speechoutputformat.js";
+import {
+  SpeechUserTurn,
+  SpeechUserTurn$Outbound,
+  SpeechUserTurn$outboundSchema,
+} from "./speechuserturn.js";
+
+export type ConversationHistoryUnion = SpeechAssistantTurn | SpeechUserTurn;
 
 export type SpeechRequest = {
   model?: string | null | undefined;
@@ -28,12 +40,45 @@ export type SpeechRequest = {
    */
   input: string;
   /**
+   * Speaker flow-matching classifier-free guidance scale. Must be finite and at least 1.0.
+   */
+  expressiveness?: number | null | undefined;
+  /**
    * Optional pronunciation hints mapping a (case-sensitive) word to its ordered list of IPA phones.
    */
   phonemeHints?: { [k: string]: Array<IPAPhoneme> } | null | undefined;
+  /**
+   * Prior turns, oldest first, alternating and ending on a user turn: `input` is the assistant reply to it. Conditions delivery, not speaker: set `voice_id` to choose the speaker. Requires `voice_id` to be a preset voice whose `kind` is `pvc`. Cannot be combined with `ref_audio`.
+   */
+  conversationHistory?:
+    | Array<SpeechAssistantTurn | SpeechUserTurn>
+    | null
+    | undefined;
   responseFormat?: SpeechOutputFormat | undefined;
   [additionalProperties: string]: unknown;
 };
+
+/** @internal */
+export type ConversationHistoryUnion$Outbound =
+  | SpeechAssistantTurn$Outbound
+  | SpeechUserTurn$Outbound;
+
+/** @internal */
+export const ConversationHistoryUnion$outboundSchema: z.ZodType<
+  ConversationHistoryUnion$Outbound,
+  ConversationHistoryUnion
+> = z.union([
+  SpeechAssistantTurn$outboundSchema,
+  SpeechUserTurn$outboundSchema,
+]);
+
+export function conversationHistoryUnionToJSON(
+  conversationHistoryUnion: ConversationHistoryUnion,
+): string {
+  return JSON.stringify(
+    ConversationHistoryUnion$outboundSchema.parse(conversationHistoryUnion),
+  );
+}
 
 /** @internal */
 export type SpeechRequest$Outbound = {
@@ -44,7 +89,12 @@ export type SpeechRequest$Outbound = {
   voice_id?: string | null | undefined;
   ref_audio?: string | null | undefined;
   input: string;
+  expressiveness?: number | null | undefined;
   phoneme_hints?: { [k: string]: Array<string> } | null | undefined;
+  conversation_history?:
+    | Array<SpeechAssistantTurn$Outbound | SpeechUserTurn$Outbound>
+    | null
+    | undefined;
   response_format?: string | undefined;
   [additionalProperties: string]: unknown;
 };
@@ -61,8 +111,17 @@ export const SpeechRequest$outboundSchema: z.ZodType<
   voiceId: z.nullable(z.string()).optional(),
   refAudio: z.nullable(z.string()).optional(),
   input: z.string(),
+  expressiveness: z.nullable(z.number()).optional(),
   phonemeHints: z.nullable(
     z.record(z.string(), z.array(IPAPhoneme$outboundSchema)),
+  ).optional(),
+  conversationHistory: z.nullable(
+    z.array(
+      z.union([
+        SpeechAssistantTurn$outboundSchema,
+        SpeechUserTurn$outboundSchema,
+      ]),
+    ),
   ).optional(),
   responseFormat: SpeechOutputFormat$outboundSchema.optional(),
 }).catchall(z.any()).transform((v) => {
@@ -72,6 +131,7 @@ export const SpeechRequest$outboundSchema: z.ZodType<
       voiceId: "voice_id",
       refAudio: "ref_audio",
       phonemeHints: "phoneme_hints",
+      conversationHistory: "conversation_history",
       responseFormat: "response_format",
     }),
   };

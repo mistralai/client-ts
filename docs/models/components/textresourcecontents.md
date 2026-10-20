@@ -15,10 +15,9 @@ let value: TextResourceContents = {
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `uri`                  | *string*               | :heavy_check_mark:     | N/A                    |
-| `mimeType`             | *string*               | :heavy_minus_sign:     | N/A                    |
-| `meta`                 | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
-| `text`                 | *string*               | :heavy_check_mark:     | N/A                    |
-| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `uri`                 | *string*              | :heavy_check_mark:    | N/A                   |
+| `mimeType`            | *string*              | :heavy_minus_sign:    | N/A                   |
+| `meta`                | Record<string, *any*> | :heavy_minus_sign:    | N/A                   |
+| `text`                | *string*              | :heavy_check_mark:    | N/A                   |

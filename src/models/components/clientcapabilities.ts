@@ -25,14 +25,19 @@ import {
 
 /**
  * Capabilities a client may support.
+ *
+ * @remarks
+ *
+ * Not a closed set: any client can define additional capabilities. Sent once in
+ * `initialize` through 2025-11-25; per-request in `_meta` on 2026-07-28.
  */
 export type ClientCapabilities = {
   experimental?: { [k: string]: { [k: string]: any } } | null | undefined;
   sampling?: SamplingCapability | null | undefined;
   elicitation?: ElicitationCapability | null | undefined;
   roots?: RootsCapability | null | undefined;
+  extensions?: { [k: string]: { [k: string]: any } } | null | undefined;
   tasks?: ClientTasksCapability | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -45,8 +50,10 @@ export const ClientCapabilities$inboundSchema: z.ZodType<
   sampling: z.nullable(SamplingCapability$inboundSchema).optional(),
   elicitation: z.nullable(ElicitationCapability$inboundSchema).optional(),
   roots: z.nullable(RootsCapability$inboundSchema).optional(),
+  extensions: z.nullable(z.record(z.string(), z.record(z.string(), z.any())))
+    .optional(),
   tasks: z.nullable(ClientTasksCapability$inboundSchema).optional(),
-}).catchall(z.any());
+});
 
 export function clientCapabilitiesFromJSON(
   jsonString: string,

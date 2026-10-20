@@ -3,11 +3,11 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { Sessions } from "./sessions.js";
+import { RealtimeSessions } from "./realtimesessions.js";
 
 export class Realtime extends ClientSDK {
-  private _sessions?: Sessions;
-  get sessions(): Sessions {
-    return (this._sessions ??= new Sessions(this._options));
+  private _sessions?: RealtimeSessions;
+  get sessions(): RealtimeSessions {
+    return (this._sessions ??= new RealtimeSessions(this._options));
   }
 }

@@ -28,7 +28,7 @@ import {
   ToolConfiguration$outboundSchema,
 } from "./toolconfiguration.js";
 
-export type Authorization =
+export type CustomConnectorAuthorization =
   | APIKeyAuth
   | OAuth2TokenAuth
   | discriminatedUnionTypes.Unknown<"type">;
@@ -46,32 +46,40 @@ export type CustomConnector = {
 };
 
 /** @internal */
-export const Authorization$inboundSchema: z.ZodType<Authorization, unknown> =
-  discriminatedUnion("type", {
-    ["api-key"]: APIKeyAuth$inboundSchema,
-    ["oauth2-token"]: OAuth2TokenAuth$inboundSchema,
-  });
+export const CustomConnectorAuthorization$inboundSchema: z.ZodType<
+  CustomConnectorAuthorization,
+  unknown
+> = discriminatedUnion("type", {
+  ["api-key"]: APIKeyAuth$inboundSchema,
+  ["oauth2-token"]: OAuth2TokenAuth$inboundSchema,
+});
 /** @internal */
-export type Authorization$Outbound =
+export type CustomConnectorAuthorization$Outbound =
   | APIKeyAuth$Outbound
   | OAuth2TokenAuth$Outbound;
 
 /** @internal */
-export const Authorization$outboundSchema: z.ZodType<
-  Authorization$Outbound,
-  Authorization
+export const CustomConnectorAuthorization$outboundSchema: z.ZodType<
+  CustomConnectorAuthorization$Outbound,
+  CustomConnectorAuthorization
 > = z.union([APIKeyAuth$outboundSchema, OAuth2TokenAuth$outboundSchema]);
 
-export function authorizationToJSON(authorization: Authorization): string {
-  return JSON.stringify(Authorization$outboundSchema.parse(authorization));
+export function customConnectorAuthorizationToJSON(
+  customConnectorAuthorization: CustomConnectorAuthorization,
+): string {
+  return JSON.stringify(
+    CustomConnectorAuthorization$outboundSchema.parse(
+      customConnectorAuthorization,
+    ),
+  );
 }
-export function authorizationFromJSON(
+export function customConnectorAuthorizationFromJSON(
   jsonString: string,
-): SafeParseResult<Authorization, SDKValidationError> {
+): SafeParseResult<CustomConnectorAuthorization, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Authorization$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Authorization' from JSON`,
+    (x) => CustomConnectorAuthorization$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CustomConnectorAuthorization' from JSON`,
   );
 }
 

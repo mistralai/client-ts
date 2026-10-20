@@ -31,6 +31,10 @@ export type AudioTranscriptionRequestStream = {
   diarize?: boolean | undefined;
   contextBias?: Array<string> | undefined;
   /**
+   * Dictionary of speaker names and reference audios for speakers who are known to appear in the audio. When enabled, diarize must be true. Predicted speakers will be matched against reference speakers from this dictionary.
+   */
+  speakerReferences?: { [k: string]: string } | undefined;
+  /**
    * Granularities of timestamps to include in the response.
    */
   timestampGranularities?: Array<TimestampGranularity> | undefined;
@@ -47,6 +51,7 @@ export type AudioTranscriptionRequestStream$Outbound = {
   stream: true;
   diarize: boolean;
   context_bias?: Array<string> | undefined;
+  speaker_references?: { [k: string]: string } | undefined;
   timestamp_granularities?: Array<string> | undefined;
 };
 
@@ -64,6 +69,7 @@ export const AudioTranscriptionRequestStream$outboundSchema: z.ZodType<
   stream: z.literal(true).default(true as const),
   diarize: z.boolean().default(false),
   contextBias: z.array(z.string()).optional(),
+  speakerReferences: z.record(z.string(), z.string()).optional(),
   timestampGranularities: z.array(TimestampGranularity$outboundSchema)
     .optional(),
 }).transform((v) => {
@@ -71,6 +77,7 @@ export const AudioTranscriptionRequestStream$outboundSchema: z.ZodType<
     fileUrl: "file_url",
     fileId: "file_id",
     contextBias: "context_bias",
+    speakerReferences: "speaker_references",
     timestampGranularities: "timestamp_granularities",
   });
 });

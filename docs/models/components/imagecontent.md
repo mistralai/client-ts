@@ -1,6 +1,6 @@
 # ImageContent
 
-Image content for a message.
+An image provided to or from an LLM.
 
 ## Example Usage
 
@@ -23,4 +23,3 @@ let value: ImageContent = {
 | `mimeType`                                                       | *string*                                                         | :heavy_check_mark:                                               | N/A                                                              |
 | `annotations`                                                    | [components.Annotations](../../models/components/annotations.md) | :heavy_minus_sign:                                               | N/A                                                              |
 | `meta`                                                           | Record<string, *any*>                                            | :heavy_minus_sign:                                               | N/A                                                              |
-| `additionalProperties`                                           | Record<string, *any*>                                            | :heavy_minus_sign:                                               | N/A                                                              |

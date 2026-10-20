@@ -1,6 +1,6 @@
 # ServerTasksRequestsCapability
 
-Capability for tasks requests operations.
+Specifies which request types the server can augment with tasks (2025-11-25 only).
 
 ## Example Usage
 
@@ -15,4 +15,3 @@ let value: ServerTasksRequestsCapability = {};
 | Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `tools`                                                                            | [components.TasksToolsCapability](../../models/components/taskstoolscapability.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |
-| `additionalProperties`                                                             | Record<string, *any*>                                                              | :heavy_minus_sign:                                                                 | N/A                                                                                |

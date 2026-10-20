@@ -4,10 +4,10 @@
 
 import * as z from "zod/v4";
 import {
-  JudgeDefinition,
-  JudgeDefinition$Outbound,
-  JudgeDefinition$outboundSchema,
-} from "./judgedefinition.js";
+  LlmJudgeReference,
+  LlmJudgeReference$Outbound,
+  LlmJudgeReference$outboundSchema,
+} from "./llmjudgereference.js";
 import {
   PipelineConfigSelector,
   PipelineConfigSelector$Outbound,
@@ -18,7 +18,7 @@ export type UpdatePipelineRequest = {
   name?: string | undefined;
   description?: string | null | undefined;
   selectors?: Array<PipelineConfigSelector> | undefined;
-  definitions?: Array<JudgeDefinition> | undefined;
+  definitions?: Array<LlmJudgeReference> | undefined;
   enabled?: boolean | undefined;
 };
 
@@ -27,7 +27,7 @@ export type UpdatePipelineRequest$Outbound = {
   name?: string | undefined;
   description?: string | null | undefined;
   selectors?: Array<PipelineConfigSelector$Outbound> | undefined;
-  definitions?: Array<JudgeDefinition$Outbound> | undefined;
+  definitions?: Array<LlmJudgeReference$Outbound> | undefined;
   enabled?: boolean | undefined;
 };
 
@@ -39,7 +39,7 @@ export const UpdatePipelineRequest$outboundSchema: z.ZodType<
   name: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   selectors: z.array(PipelineConfigSelector$outboundSchema).optional(),
-  definitions: z.array(JudgeDefinition$outboundSchema).optional(),
+  definitions: z.array(LlmJudgeReference$outboundSchema).optional(),
   enabled: z.boolean().optional(),
 });
 

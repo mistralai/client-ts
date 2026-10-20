@@ -127,6 +127,7 @@ export const DEFAULT_TOKEN_PATTERNS: readonly RegExp[] = [
   /\bsk-ant-[A-Za-z0-9\-_]{20,}\b/g,
   /\bsk-proj-[A-Za-z0-9\-_]{20,}\b/g,
   /\bhf_[A-Za-z0-9]{30,}\b/g,
+  /\bmstrl_[0-9A-Za-z]{32}_[0-9A-Za-z]{6}\b/g,
   // Dev / infra tokens
   /\bgithub_pat_[A-Za-z0-9_]{22,}\b/g,
   /\bglpat-[A-Za-z0-9\-=_]{20,22}\b/g,

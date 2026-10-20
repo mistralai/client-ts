@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 /**
  * Request model for partially updating voice metadata.
@@ -14,6 +15,7 @@ export type VoiceUpdateRequest = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   description?: string | null | undefined;
+  retentionNotice?: number | null | undefined;
 };
 
 /** @internal */
@@ -24,6 +26,7 @@ export type VoiceUpdateRequest$Outbound = {
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   description?: string | null | undefined;
+  retention_notice?: number | null | undefined;
 };
 
 /** @internal */
@@ -37,6 +40,11 @@ export const VoiceUpdateRequest$outboundSchema: z.ZodType<
   age: z.nullable(z.int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   description: z.nullable(z.string()).optional(),
+  retentionNotice: z.nullable(z.int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    retentionNotice: "retention_notice",
+  });
 });
 
 export function voiceUpdateRequestToJSON(

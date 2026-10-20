@@ -3,12 +3,13 @@
 
 ## Supported Types
 
-### `components.TextContent`
+### `components.AudioContent`
 
 ```typescript
-const value: components.TextContent = {
-  type: "text",
-  text: "<value>",
+const value: components.AudioContent = {
+  type: "audio",
+  data: "<value>",
+  mimeType: "<value>",
 };
 ```
 
@@ -22,13 +23,15 @@ const value: components.ImageContent = {
 };
 ```
 
-### `components.AudioContent`
+### `components.EmbeddedResource`
 
 ```typescript
-const value: components.AudioContent = {
-  type: "audio",
-  data: "<value>",
-  mimeType: "<value>",
+const value: components.EmbeddedResource = {
+  type: "resource",
+  resource: {
+    uri: "https://pointless-contractor.org/",
+    text: "<value>",
+  },
 };
 ```
 
@@ -42,15 +45,12 @@ const value: components.ResourceLink = {
 };
 ```
 
-### `components.EmbeddedResource`
+### `components.TextContent`
 
 ```typescript
-const value: components.EmbeddedResource = {
-  type: "resource",
-  resource: {
-    uri: "https://pointless-contractor.org/",
-    text: "<value>",
-  },
+const value: components.TextContent = {
+  type: "text",
+  text: "<value>",
 };
 ```
 

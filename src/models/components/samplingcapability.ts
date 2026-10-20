@@ -6,14 +6,21 @@ import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  SamplingContextCapability,
+  SamplingContextCapability$inboundSchema,
+} from "./samplingcontextcapability.js";
+import {
+  SamplingToolsCapability,
+  SamplingToolsCapability$inboundSchema,
+} from "./samplingtoolscapability.js";
 
 /**
- * Sampling capability structure, allowing fine-grained capability advertisement.
+ * Sampling capability structure. Deprecated in 2026-07-28 (SEP-2577); shape unchanged.
  */
 export type SamplingCapability = {
-  context?: { [k: string]: any } | null | undefined;
-  tools?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
+  context?: SamplingContextCapability | null | undefined;
+  tools?: SamplingToolsCapability | null | undefined;
 };
 
 /** @internal */
@@ -21,9 +28,9 @@ export const SamplingCapability$inboundSchema: z.ZodType<
   SamplingCapability,
   unknown
 > = z.object({
-  context: z.nullable(z.record(z.string(), z.any())).optional(),
-  tools: z.nullable(z.record(z.string(), z.any())).optional(),
-}).catchall(z.any());
+  context: z.nullable(SamplingContextCapability$inboundSchema).optional(),
+  tools: z.nullable(SamplingToolsCapability$inboundSchema).optional(),
+});
 
 export function samplingCapabilityFromJSON(
   jsonString: string,

@@ -10,15 +10,22 @@ import {
   ServerTasksRequestsCapability,
   ServerTasksRequestsCapability$inboundSchema,
 } from "./servertasksrequestscapability.js";
+import {
+  TasksCancelCapability,
+  TasksCancelCapability$inboundSchema,
+} from "./taskscancelcapability.js";
+import {
+  TasksListCapability,
+  TasksListCapability$inboundSchema,
+} from "./taskslistcapability.js";
 
 /**
- * Capability for server tasks operations.
+ * Capability for server tasks operations (2025-11-25 only).
  */
 export type ServerTasksCapability = {
-  list?: { [k: string]: any } | null | undefined;
-  cancel?: { [k: string]: any } | null | undefined;
+  list?: TasksListCapability | null | undefined;
+  cancel?: TasksCancelCapability | null | undefined;
   requests?: ServerTasksRequestsCapability | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -26,10 +33,10 @@ export const ServerTasksCapability$inboundSchema: z.ZodType<
   ServerTasksCapability,
   unknown
 > = z.object({
-  list: z.nullable(z.record(z.string(), z.any())).optional(),
-  cancel: z.nullable(z.record(z.string(), z.any())).optional(),
+  list: z.nullable(TasksListCapability$inboundSchema).optional(),
+  cancel: z.nullable(TasksCancelCapability$inboundSchema).optional(),
   requests: z.nullable(ServerTasksRequestsCapability$inboundSchema).optional(),
-}).catchall(z.any());
+});
 
 export function serverTasksCapabilityFromJSON(
   jsonString: string,

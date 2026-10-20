@@ -56,7 +56,7 @@ export type MCPServerCard = {
    */
   version: string;
   /**
-   * Capabilities that a server may support.
+   * Capabilities that a server may support. Not a closed set.
    */
   capabilities?: ServerCapabilities | undefined;
   title?: string | null | undefined;

@@ -10,7 +10,7 @@ let value: LibrariesShareCreateV1Request = {
   sharingRequest: {
     level: "Viewer",
     shareWithUuid: "87e33596-b017-4f96-89cf-4387c394ce94",
-    shareWithType: "Org",
+    shareWithType: "Workspace",
   },
 };
 ```

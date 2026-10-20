@@ -1,6 +1,6 @@
 # ClientTasksRequestsCapability
 
-Capability for tasks requests operations.
+Specifies which request types the client can augment with tasks (2025-11-25 only).
 
 ## Example Usage
 
@@ -16,4 +16,3 @@ let value: ClientTasksRequestsCapability = {};
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `sampling`                                                                                     | [components.TasksSamplingCapability](../../models/components/taskssamplingcapability.md)       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `elicitation`                                                                                  | [components.TasksElicitationCapability](../../models/components/taskselicitationcapability.md) | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `additionalProperties`                                                                         | Record<string, *any*>                                                                          | :heavy_minus_sign:                                                                             | N/A                                                                                            |

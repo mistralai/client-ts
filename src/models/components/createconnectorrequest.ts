@@ -5,11 +5,6 @@
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  AuthData,
-  AuthData$Outbound,
-  AuthData$outboundSchema,
-} from "./authdata.js";
-import {
   BearerAuthMethod,
   BearerAuthMethod$Outbound,
   BearerAuthMethod$outboundSchema,
@@ -53,10 +48,6 @@ export type CreateConnectorRequest = {
    * Optional connector-wide headers, keyed by header name, set at creation and applied to every credential. Secret values are encrypted at rest and never returned in clear.
    */
   globalHeaders?: { [k: string]: GlobalHeaderValue } | undefined;
-  /**
-   * Optional additional authentication data for the connector.
-   */
-  authData?: AuthData | null | undefined;
   /**
    * Optional OAuth2 authorization server metadata (authorization_endpoint, token_endpoint, etc.). When provided, skips .well-known discovery and uses these endpoints directly.
    */
@@ -144,7 +135,6 @@ export function createConnectorRequestAuthMethodToJSON(
 export type CreateConnectorRequest$Outbound = {
   headers?: { [k: string]: any } | null | undefined;
   global_headers?: { [k: string]: GlobalHeaderValue$Outbound } | undefined;
-  auth_data?: AuthData$Outbound | null | undefined;
   oauth2_server_metadata?:
     | ExtendedOAuthServerMetadata$Outbound
     | null
@@ -176,7 +166,6 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
   headers: z.nullable(z.record(z.string(), z.any())).optional(),
   globalHeaders: z.record(z.string(), GlobalHeaderValue$outboundSchema)
     .optional(),
-  authData: z.nullable(AuthData$outboundSchema).optional(),
   oauth2ServerMetadata: z.nullable(ExtendedOAuthServerMetadata$outboundSchema)
     .optional(),
   oauth2ServerMetadataUrl: z.nullable(z.string()).optional(),
@@ -204,7 +193,6 @@ export const CreateConnectorRequest$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     globalHeaders: "global_headers",
-    authData: "auth_data",
     oauth2ServerMetadata: "oauth2_server_metadata",
     oauth2ServerMetadataUrl: "oauth2_server_metadata_url",
     iconUrl: "icon_url",

@@ -3,7 +3,7 @@
  */
 
 import { MistralCore } from "../core.js";
-import { appendForm, normalizeBlob } from "../lib/encodings.js";
+import { appendForm, encodeJSON, normalizeBlob } from "../lib/encodings.js";
 import {
   bytesToBlob,
   getContentTypeFromFileName,
@@ -132,6 +132,15 @@ async function $do(
   }
   if (payload.language !== undefined) {
     appendForm(body, "language", payload.language);
+  }
+  if (payload.speaker_references !== undefined) {
+    appendForm(
+      body,
+      "speaker_references",
+      encodeJSON("speaker_references", payload.speaker_references, {
+        explode: true,
+      }),
+    );
   }
   if (payload.stream !== undefined) {
     appendForm(body, "stream", payload.stream);

@@ -1,6 +1,6 @@
 # ServerTasksCapability
 
-Capability for server tasks operations.
+Capability for server tasks operations (2025-11-25 only).
 
 ## Example Usage
 
@@ -14,7 +14,6 @@ let value: ServerTasksCapability = {};
 
 | Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `list`                                                                                               | Record<string, *any*>                                                                                | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
-| `cancel`                                                                                             | Record<string, *any*>                                                                                | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `list`                                                                                               | [components.TasksListCapability](../../models/components/taskslistcapability.md)                     | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `cancel`                                                                                             | [components.TasksCancelCapability](../../models/components/taskscancelcapability.md)                 | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
 | `requests`                                                                                           | [components.ServerTasksRequestsCapability](../../models/components/servertasksrequestscapability.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
-| `additionalProperties`                                                                               | Record<string, *any*>                                                                                | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

@@ -8,71 +8,39 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  DetectionDefinition,
-  DetectionDefinition$inboundSchema,
-  DetectionDefinition$Outbound,
-  DetectionDefinition$outboundSchema,
-} from "./detectiondefinition.js";
+  DetectionDefinitionV1,
+  DetectionDefinitionV1$inboundSchema,
+} from "./detectiondefinitionv1.js";
 import {
-  ExportDefinition,
-  ExportDefinition$inboundSchema,
-  ExportDefinition$Outbound,
-  ExportDefinition$outboundSchema,
-} from "./exportdefinition.js";
+  ExportDefinitionV1,
+  ExportDefinitionV1$inboundSchema,
+} from "./exportdefinitionv1.js";
 import {
-  JudgeDefinition,
-  JudgeDefinition$inboundSchema,
-  JudgeDefinition$Outbound,
-  JudgeDefinition$outboundSchema,
-} from "./judgedefinition.js";
+  JudgeDefinitionV1,
+  JudgeDefinitionV1$inboundSchema,
+} from "./judgedefinitionv1.js";
 import {
-  ModerationDefinition,
-  ModerationDefinition$inboundSchema,
-  ModerationDefinition$Outbound,
-  ModerationDefinition$outboundSchema,
-} from "./moderationdefinition.js";
+  ModerationDefinitionV1,
+  ModerationDefinitionV1$inboundSchema,
+} from "./moderationdefinitionv1.js";
 
 export type PipelineConfigDefinition =
-  | DetectionDefinition
-  | JudgeDefinition
-  | ExportDefinition
-  | ModerationDefinition;
+  | JudgeDefinitionV1
+  | DetectionDefinitionV1
+  | ExportDefinitionV1
+  | ModerationDefinitionV1;
 
 /** @internal */
 export const PipelineConfigDefinition$inboundSchema: z.ZodType<
   PipelineConfigDefinition,
   unknown
 > = smartUnion([
-  DetectionDefinition$inboundSchema,
-  JudgeDefinition$inboundSchema,
-  ExportDefinition$inboundSchema,
-  ModerationDefinition$inboundSchema,
-]);
-/** @internal */
-export type PipelineConfigDefinition$Outbound =
-  | DetectionDefinition$Outbound
-  | JudgeDefinition$Outbound
-  | ExportDefinition$Outbound
-  | ModerationDefinition$Outbound;
-
-/** @internal */
-export const PipelineConfigDefinition$outboundSchema: z.ZodType<
-  PipelineConfigDefinition$Outbound,
-  PipelineConfigDefinition
-> = smartUnion([
-  DetectionDefinition$outboundSchema,
-  JudgeDefinition$outboundSchema,
-  ExportDefinition$outboundSchema,
-  ModerationDefinition$outboundSchema,
+  JudgeDefinitionV1$inboundSchema,
+  DetectionDefinitionV1$inboundSchema,
+  ExportDefinitionV1$inboundSchema,
+  ModerationDefinitionV1$inboundSchema,
 ]);
 
-export function pipelineConfigDefinitionToJSON(
-  pipelineConfigDefinition: PipelineConfigDefinition,
-): string {
-  return JSON.stringify(
-    PipelineConfigDefinition$outboundSchema.parse(pipelineConfigDefinition),
-  );
-}
 export function pipelineConfigDefinitionFromJSON(
   jsonString: string,
 ): SafeParseResult<PipelineConfigDefinition, SDKValidationError> {

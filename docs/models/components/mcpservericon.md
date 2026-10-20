@@ -1,6 +1,6 @@
 # MCPServerIcon
 
-An icon for display in user interfaces.
+An optionally-sized icon for display in a user interface (2025-11-25+).
 
 ## Example Usage
 
@@ -14,9 +14,9 @@ let value: MCPServerIcon = {
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `src`                  | *string*               | :heavy_check_mark:     | N/A                    |
-| `mimeType`             | *string*               | :heavy_minus_sign:     | N/A                    |
-| `sizes`                | *string*[]             | :heavy_minus_sign:     | N/A                    |
-| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `src`                                                | *string*                                             | :heavy_check_mark:                                   | N/A                                                  |
+| `mimeType`                                           | *string*                                             | :heavy_minus_sign:                                   | N/A                                                  |
+| `sizes`                                              | *string*[]                                           | :heavy_minus_sign:                                   | N/A                                                  |
+| `theme`                                              | [components.Theme](../../models/components/theme.md) | :heavy_minus_sign:                                   | N/A                                                  |

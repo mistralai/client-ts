@@ -9,6 +9,7 @@
 * [aggregateSpanEvaluations](#aggregatespanevaluations) - Aggregate span evaluations
 * [searchSpanEvaluations](#searchspanevaluations) - Search span evaluations
 * [searchLatestSpanEvaluations](#searchlatestspanevaluations) - Search latest span evaluations
+* [searchPipelineResults](#searchpipelineresults) - Search pipeline results
 * [listSpanFields](#listspanfields) - Get span field definitions
 * [listSpanEvalFields](#listspanevalfields) - Get span evaluation field definitions
 * [fetchSpanFieldOptions](#fetchspanfieldoptions) - Get options for a span field
@@ -396,6 +397,88 @@ run();
 ### Response
 
 **Promise\<[components.GetSpanEvaluations](../../models/components/getspanevaluations.md)\>**
+
+### Errors
+
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| errors.ObservabilityError | 400, 404, 408, 409, 422   | application/json          |
+| errors.SDKError           | 4XX, 5XX                  | \*/\*                     |
+
+## searchPipelineResults
+
+Search pipeline results
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="search_pipeline_results_v1_observability_pipeline_results_search_post" method="post" path="/v1/observability/pipeline-results/search" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.observability.spans.searchPipelineResults({
+    pipelineResultsRequest: {
+      pipelineConfigSlugs: [
+        "<value 1>",
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaObservabilitySpansSearchPipelineResults } from "@mistralai/mistralai/funcs/betaObservabilitySpansSearchPipelineResults.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaObservabilitySpansSearchPipelineResults(mistral, {
+    pipelineResultsRequest: {
+      pipelineConfigSlugs: [
+        "<value 1>",
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaObservabilitySpansSearchPipelineResults failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                          | Type                                                                                                                                                                               | Required                                                                                                                                                                           | Description                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                          | [operations.SearchPipelineResultsV1ObservabilityPipelineResultsSearchPostRequest](../../models/operations/searchpipelineresultsv1observabilitypipelineresultssearchpostrequest.md) | :heavy_check_mark:                                                                                                                                                                 | The request object to use for the request.                                                                                                                                         |
+| `options`                                                                                                                                                                          | RequestOptions                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                 | Used to set various options for making HTTP requests.                                                                                                                              |
+| `options.fetchOptions`                                                                                                                                                             | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                            | :heavy_minus_sign:                                                                                                                                                                 | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.     |
+| `options.retries`                                                                                                                                                                  | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                 | Enables retrying HTTP requests under certain failure conditions.                                                                                                                   |
+
+### Response
+
+**Promise\<[components.GetPipelineResults](../../models/components/getpipelineresults.md)\>**
 
 ### Errors
 

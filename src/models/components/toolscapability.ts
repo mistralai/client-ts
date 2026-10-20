@@ -12,7 +12,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type ToolsCapability = {
   listChanged?: boolean | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -21,7 +20,7 @@ export const ToolsCapability$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   listChanged: z.nullable(z.boolean()).optional(),
-}).catchall(z.any());
+});
 
 export function toolsCapabilityFromJSON(
   jsonString: string,

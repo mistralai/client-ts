@@ -73,7 +73,7 @@ export class Voices extends ClientSDK {
    * Update voice metadata
    *
    * @remarks
-   * Update voice metadata (name, gender, languages, age, tags).
+   * Update voice metadata (name, gender, languages, age, tags, retention notice).
    */
   async update(
     request: operations.UpdateVoiceV1AudioVoicesVoiceIdPatchRequest,

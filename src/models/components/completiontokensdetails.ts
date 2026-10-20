@@ -10,9 +10,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Token usage details for the completion.
+ *
+ * @remarks
+ *
+ * ``reasoning_tokens`` is ``None`` when the provider did not report a count.
+ * Preserve that distinction instead of inventing a measured zero: ``0`` means
+ * "reasoning off, confirmed by the provider", ``None`` means "unknown".
  */
 export type CompletionTokensDetails = {
-  reasoningTokens: number;
+  reasoningTokens?: number | null | undefined;
 };
 
 /** @internal */
@@ -20,7 +26,7 @@ export const CompletionTokensDetails$inboundSchema: z.ZodType<
   CompletionTokensDetails,
   unknown
 > = z.object({
-  reasoning_tokens: z.int().default(0),
+  reasoning_tokens: z.nullable(z.int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "reasoning_tokens": "reasoningTokens",

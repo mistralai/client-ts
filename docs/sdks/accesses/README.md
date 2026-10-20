@@ -187,7 +187,7 @@ async function run() {
     libraryId: "843cc47c-e8f3-454c-9fc5-fcd7fb2865b0",
     sharingDelete: {
       shareWithUuid: "0814a235-c2d0-4814-875a-4b85f93d3dc7",
-      shareWithType: "Org",
+      shareWithType: "User",
     },
   });
 
@@ -216,7 +216,7 @@ async function run() {
     libraryId: "843cc47c-e8f3-454c-9fc5-fcd7fb2865b0",
     sharingDelete: {
       shareWithUuid: "0814a235-c2d0-4814-875a-4b85f93d3dc7",
-      shareWithType: "Org",
+      shareWithType: "User",
     },
   });
   if (res.ok) {

@@ -28,7 +28,6 @@ export type ResourceLink = {
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
   type: "resource_link";
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -44,7 +43,7 @@ export const ResourceLink$inboundSchema: z.ZodType<ResourceLink, unknown> = z
     annotations: z.nullable(Annotations$inboundSchema).optional(),
     _meta: z.nullable(z.record(z.string(), z.any())).optional(),
     type: z.literal("resource_link"),
-  }).catchall(z.any()).transform((v) => {
+  }).transform((v) => {
     return remap$(v, {
       "_meta": "meta",
     });

@@ -893,3 +893,127 @@ Based on:
 - [typescript v3.0.0] .
 ### Releases
 - [NPM v3.0.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.0.0 - .
+
+## 2026-10-20 15:52:00
+### Generated SDK baseline differences
+The published SDK or generator baseline differs from the baseline used by the OpenAPI changelog.
+
+<details>
+<summary>Generated surface details</summary>
+
+#### Stable compatibility changes
+Removed from the stable API surface (3):
+- `Sessions`
+- `ToolTypes`
+- `Sessions.create`
+#### Stable type changes
+Changed types or signatures on the stable surface (2):
+- `Realtime.sessions: Sessions -> RealtimeSessions`
+- `ToolCall.type: ToolTypes | undefined -> string | undefined`
+#### Beta surface changes
+Removed from the beta surface (125):
+- `ConnectionConfigType`
+- `Role`
+- `authorizationFromJSON`
+- `authorizationToJSON`
+- `betaObservabilityEvaluationsCreatePipelineConfig`
+- `betaObservabilityEvaluationsDeletePipelineConfig`
+- `betaObservabilityEvaluationsGetPipelineConfig`
+- `betaObservabilityEvaluationsListPipelineConfigs`
+- `betaObservabilityEvaluationsUpdatePipelineConfig`
+- `createPipelineConfigRequestToJSON`
+- `deletePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdDeleteRequestToJSON`
+- `detectionDefinitionFromJSON`
+- `detectionDefinitionToJSON`
+- `detectionPatternToJSON`
+- `executionToolFromJSON`
+- `exportDefinitionFromJSON`
+- `exportDefinitionToJSON`
+- `getPipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdGetRequestToJSON`
+- `judgeDefinitionFromJSON`
+- `judgeDefinitionToJSON`
+- `listPipelineConfigsV1ObservabilityPipelineConfigsGetRequestToJSON`
+- `moderationDefinitionFromJSON`
+- `moderationDefinitionToJSON`
+- `otlpDestinationToJSON`
+- `paginatedResultPipelineConfigFromJSON`
+- ...and 100 more
+
+Changed types or signatures in beta (28):
+- `AgentsCompletionRequest.tools: | Array< | (Tool & { type: "function" }) | ImageGenerationTool | DocumentLibraryTool | CustomConnector > | null | undefined -> | Array<Tool | ImageGenerationTool | DocumentLibraryTool | CustomConnector> | null | undefined`
+- `AgentsCompletionStreamRequest.tools: | Array< | (Tool & { type: "function" }) | ImageGenerationTool | DocumentLibraryTool | CustomConnector > | null | undefined -> | Array<Tool | ImageGenerationTool | DocumentLibraryTool | CustomConnector> | null | undefined`
+- `ChatCompletionRequest.tools: | Array< | (Tool & { type: "function" }) | ImageGenerationTool | DocumentLibraryTool | CustomConnector > | null | undefined -> | Array<Tool | ImageGenerationTool | DocumentLibraryTool | CustomConnector> | null | undefined`
+- `ChatCompletionStreamRequest.tools: | Array< | (Tool & { type: "function" }) | ImageGenerationTool | DocumentLibraryTool | CustomConnector > | null | undefined -> | Array<Tool | ImageGenerationTool | DocumentLibraryTool | CustomConnector> | null | undefined`
+- `ClientTasksCapability.cancel: { [k: string]: any } | null | undefined -> TasksCancelCapability | null | undefined`
+- `ClientTasksCapability.list: { [k: string]: any } | null | undefined -> TasksListCapability | null | undefined`
+- `CompletionTokensDetails.reasoningTokens: number -> number | null | undefined`
+- `ConnectorToolCallResponse.content: Array< | TextContent | ImageContent | AudioContent | ResourceLink | EmbeddedResource | discriminatedUnionTypes.Unknown<"type"> > -> Array< | AudioContent | ImageContent | EmbeddedResource | ResourceLink | TextContent | discriminatedUnionTypes.Unknown<"type"> >`
+- `CreatePipelineRequest.definitions: Array<JudgeDefinition> -> Array<LlmJudgeReference>`
+- `ElicitationCapability.form: { [k: string]: any } | null | undefined -> FormElicitationCapability | null | undefined`
+- `ElicitationCapability.url: { [k: string]: any } | null | undefined -> UrlElicitationCapability | null | undefined`
+- `MessageInputEntry.role: Role -> MessageInputEntryRole`
+- `OAuth2ClientCredentialsInput.clientSecret: string -> string | null | undefined`
+- `OTLPDestination.insecure: boolean | undefined -> boolean`
+- `SamplingCapability.context: { [k: string]: any } | null | undefined -> SamplingContextCapability | null | undefined`
+- `SamplingCapability.tools: { [k: string]: any } | null | undefined -> SamplingToolsCapability | null | undefined`
+- `ServerCapabilities.completions: { [k: string]: any } | null | undefined -> CompletionsCapability | null | undefined`
+- `ServerCapabilities.logging: { [k: string]: any } | null | undefined -> LoggingCapability | null | undefined`
+- `ServerTasksCapability.cancel: { [k: string]: any } | null | undefined -> TasksCancelCapability | null | undefined`
+- `ServerTasksCapability.list: { [k: string]: any } | null | undefined -> TasksListCapability | null | undefined`
+- `SetServiceAccountRolesRequest.roleIds: Array<string> | undefined -> Array<string>`
+- `TasksElicitationCapability.create: { [k: string]: any } | null | undefined -> TasksCreateElicitationCapability | null | undefined`
+- `TasksSamplingCapability.createMessage: { [k: string]: any } | null | undefined -> TasksCreateMessageCapability | null | undefined`
+- `TasksToolsCapability.call: { [k: string]: any } | null | undefined -> TasksCallCapability | null | undefined`
+- `Tool.type: ToolTypes | undefined -> "function"`
+- ...and 3 more
+
+Now required on an existing beta model (4):
+- `OTLPDestination.insecure`
+- `PipelineConfig.slug`
+- `SetServiceAccountRolesRequest.roleIds`
+- `Tool.type`
+</details>
+
+### API changes
+#### Breaking changes
+
+- Changed field `type` in `sdk.agents.complete()` and `sdk.chat.complete()`.
+- Changed field `type` in `sdk.agents.complete()` and `sdk.chat.complete()`.
+- Changed field `type` in `sdk.agents.complete()`, `sdk.fim.complete()`, and `sdk.chat.complete()`.
+- Removed fields `expressiveness` and `phonemeHints` from request `body.configuration.tts` in `sdk.audio.agents.update()`.
+- Removed fields `expressiveness` and `phonemeHints` from response `configuration.tts` in `sdk.audio.agents.update()`, `sdk.audio.agents.get()`, and `sdk.audio.agents.create()`.
+- Changed field `tts` in `sdk.audio.agents.update()`.
+- Removed fields `expressiveness` and `phonemeHints` from response `data[].configuration.tts` in `sdk.audio.agents.listVersions()` and `sdk.audio.agents.list()`.
+- Changed field `type` in `sdk.classifiers.classifyChat()`.
+- Changed field `type` in `sdk.classifiers.classifyChat()`.
+- Changed field `type` in `sdk.classifiers.moderateChat()`.
+- Removed fields `expressiveness` and `phonemeHints` from request `configuration.tts` in `sdk.audio.agents.create()`.
+- Removed fields `expressiveness` and `phonemeHints` from request `tts` in `sdk.audio.sessions.create()`.
+
+#### Beta API changes
+
+- Removed fields `connectionConfig` and `executionEnv` from response `items[].union(http)` in `sdk.beta.connectors.list()`.
+- Removed fields `connectionConfig` and `executionEnv` from response `items[].union(mcp)` in `sdk.beta.connectors.list()`.
+- Removed fields `connectionConfig` and `executionEnv` from response `union(http)` in `sdk.beta.connectors.create()`, `sdk.beta.connectors.get()`, and `sdk.beta.connectors.update()`.
+- Removed fields `connectionConfig` and `executionEnv` from response `union(mcp)` in `sdk.beta.connectors.create()`, `sdk.beta.connectors.get()`, and `sdk.beta.connectors.update()`.
+
+#### Added operations
+
+Beta:
+
+- `sdk.beta.rag.managedIndexes.setIndexSummary()`
+- `sdk.beta.rag.managedIndexes.getIndexSummary()`
+
+#### Schema changes
+
+- Added request field `speakerReferences` in `sdk.audio.transcriptions.complete()`.
+- Added response fields `audioSpeechCapabilities` and `audioTranscriptionCapabilities` in `sdk.models.retrieve()` and `sdk.models.list()`.
+
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.796.4 (2.935.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.1.0] .
+### Releases
+- [NPM v3.1.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.1.0 - .

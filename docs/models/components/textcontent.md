@@ -1,6 +1,6 @@
 # TextContent
 
-Text content for a message.
+Text provided to or from an LLM.
 
 ## Example Usage
 
@@ -21,4 +21,3 @@ let value: TextContent = {
 | `text`                                                           | *string*                                                         | :heavy_check_mark:                                               | N/A                                                              |
 | `annotations`                                                    | [components.Annotations](../../models/components/annotations.md) | :heavy_minus_sign:                                               | N/A                                                              |
 | `meta`                                                           | Record<string, *any*>                                            | :heavy_minus_sign:                                               | N/A                                                              |
-| `additionalProperties`                                           | Record<string, *any*>                                            | :heavy_minus_sign:                                               | N/A                                                              |

@@ -20,11 +20,11 @@ export type MCPServerCardTool = {
   title?: string | null | undefined;
   description?: string | null | undefined;
   inputSchema: { [k: string]: any };
+  execution?: ToolExecution | null | undefined;
   outputSchema?: { [k: string]: any } | null | undefined;
   icons?: Array<MCPServerIcon> | null | undefined;
   annotations?: ToolAnnotations | null | undefined;
   meta?: MCPToolMeta | null | undefined;
-  execution?: ToolExecution | null | undefined;
   [additionalProperties: string]: unknown;
 };
 
@@ -37,11 +37,11 @@ export const MCPServerCardTool$inboundSchema: z.ZodType<
   title: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   inputSchema: z.record(z.string(), z.any()),
+  execution: z.nullable(ToolExecution$inboundSchema).optional(),
   outputSchema: z.nullable(z.record(z.string(), z.any())).optional(),
   icons: z.nullable(z.array(MCPServerIcon$inboundSchema)).optional(),
   annotations: z.nullable(ToolAnnotations$inboundSchema).optional(),
   _meta: z.nullable(MCPToolMeta$inboundSchema).optional(),
-  execution: z.nullable(ToolExecution$inboundSchema).optional(),
 }).catchall(z.any()).transform((v) => {
   return remap$(v, {
     "_meta": "meta",

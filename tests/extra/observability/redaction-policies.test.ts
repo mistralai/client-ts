@@ -225,6 +225,7 @@ describe("RegexRedactionPolicy", () => {
     "sk_live_" + "a".repeat(16),
     "sk-ant-" + "a".repeat(24),
     "hf_" + "a".repeat(34),
+    "mstrl_" + "a".repeat(32) + "_" + "a".repeat(6),
     "github_pat_" + "a".repeat(24),
     "glpat-" + "a".repeat(20),
     "shpat_" + "0".repeat(32),

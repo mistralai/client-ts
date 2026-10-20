@@ -16,12 +16,11 @@ import {
 } from "./taskssamplingcapability.js";
 
 /**
- * Capability for tasks requests operations.
+ * Specifies which request types the client can augment with tasks (2025-11-25 only).
  */
 export type ClientTasksRequestsCapability = {
   sampling?: TasksSamplingCapability | null | undefined;
   elicitation?: TasksElicitationCapability | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -31,7 +30,7 @@ export const ClientTasksRequestsCapability$inboundSchema: z.ZodType<
 > = z.object({
   sampling: z.nullable(TasksSamplingCapability$inboundSchema).optional(),
   elicitation: z.nullable(TasksElicitationCapability$inboundSchema).optional(),
-}).catchall(z.any());
+});
 
 export function clientTasksRequestsCapabilityFromJSON(
   jsonString: string,

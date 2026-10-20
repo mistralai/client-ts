@@ -13,12 +13,23 @@ import {
   AudioFormat$Outbound,
   AudioFormat$outboundSchema,
 } from "./audioformat.js";
+import {
+  TurnDetectionConfig,
+  TurnDetectionConfig$inboundSchema,
+  TurnDetectionConfig$Outbound,
+  TurnDetectionConfig$outboundSchema,
+} from "./turndetectionconfig.js";
 
 export type RealtimeTranscriptionSession = {
   requestId: string;
   model: string;
   audioFormat: AudioFormat;
   targetStreamingDelayMs?: number | null | undefined;
+  diarize?: boolean | null | undefined;
+  contextBias?: Array<string> | null | undefined;
+  language?: string | null | undefined;
+  speakerReferences?: Array<string> | null | undefined;
+  turnDetection?: TurnDetectionConfig | null | undefined;
 };
 
 /** @internal */
@@ -30,11 +41,19 @@ export const RealtimeTranscriptionSession$inboundSchema: z.ZodType<
   model: z.string(),
   audio_format: AudioFormat$inboundSchema,
   target_streaming_delay_ms: z.nullable(z.int()).optional(),
+  diarize: z.nullable(z.boolean()).optional(),
+  context_bias: z.nullable(z.array(z.string())).optional(),
+  language: z.nullable(z.string()).optional(),
+  speaker_references: z.nullable(z.array(z.string())).optional(),
+  turn_detection: z.nullable(TurnDetectionConfig$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "request_id": "requestId",
     "audio_format": "audioFormat",
     "target_streaming_delay_ms": "targetStreamingDelayMs",
+    "context_bias": "contextBias",
+    "speaker_references": "speakerReferences",
+    "turn_detection": "turnDetection",
   });
 });
 /** @internal */
@@ -43,6 +62,11 @@ export type RealtimeTranscriptionSession$Outbound = {
   model: string;
   audio_format: AudioFormat$Outbound;
   target_streaming_delay_ms?: number | null | undefined;
+  diarize?: boolean | null | undefined;
+  context_bias?: Array<string> | null | undefined;
+  language?: string | null | undefined;
+  speaker_references?: Array<string> | null | undefined;
+  turn_detection?: TurnDetectionConfig$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -54,11 +78,19 @@ export const RealtimeTranscriptionSession$outboundSchema: z.ZodType<
   model: z.string(),
   audioFormat: AudioFormat$outboundSchema,
   targetStreamingDelayMs: z.nullable(z.int()).optional(),
+  diarize: z.nullable(z.boolean()).optional(),
+  contextBias: z.nullable(z.array(z.string())).optional(),
+  language: z.nullable(z.string()).optional(),
+  speakerReferences: z.nullable(z.array(z.string())).optional(),
+  turnDetection: z.nullable(TurnDetectionConfig$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     requestId: "request_id",
     audioFormat: "audio_format",
     targetStreamingDelayMs: "target_streaming_delay_ms",
+    contextBias: "context_bias",
+    speakerReferences: "speaker_references",
+    turnDetection: "turn_detection",
   });
 });
 

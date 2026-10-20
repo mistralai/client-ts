@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Annotations, Annotations$inboundSchema } from "./annotations.js";
 
 /**
- * Audio content for a message.
+ * Audio provided to or from an LLM.
  */
 export type AudioContent = {
   type: "audio";
@@ -18,7 +18,6 @@ export type AudioContent = {
   mimeType: string;
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -29,7 +28,7 @@ export const AudioContent$inboundSchema: z.ZodType<AudioContent, unknown> = z
     mimeType: z.string(),
     annotations: z.nullable(Annotations$inboundSchema).optional(),
     _meta: z.nullable(z.record(z.string(), z.any())).optional(),
-  }).catchall(z.any()).transform((v) => {
+  }).transform((v) => {
     return remap$(v, {
       "_meta": "meta",
     });

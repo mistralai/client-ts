@@ -48,6 +48,10 @@ export type AudioV2VoicesListRequest = {
    * Case-insensitive match on voice name
    */
   query?: string | null | undefined;
+  /**
+   * Keep voices cloned with this technology
+   */
+  kind?: components.VoiceKind | null | undefined;
 };
 
 export type AudioV2VoicesListResponse = {
@@ -67,6 +71,7 @@ export type AudioV2VoicesListRequest$Outbound = {
   gender?: Array<string> | null | undefined;
   language?: Array<string> | null | undefined;
   query?: string | null | undefined;
+  kind?: string | null | undefined;
 };
 
 /** @internal */
@@ -80,6 +85,7 @@ export const AudioV2VoicesListRequest$outboundSchema: z.ZodType<
   gender: z.nullable(z.array(components.VoiceGender$outboundSchema)).optional(),
   language: z.nullable(z.array(z.string())).optional(),
   query: z.nullable(z.string()).optional(),
+  kind: z.nullable(components.VoiceKind$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page_size",

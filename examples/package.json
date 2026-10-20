@@ -11,12 +11,14 @@
     "azure": "npm run script -- ./src/azure/async_chat_no_streaming.ts",
     "format": "prettier --write .",
     "test": "tsx ./test.ts",
-    "build:examples": "echo 'skipping build examples'"
+    "build:examples": "echo 'skipping build examples'",
+    "voice-agents-quickstart": "npm run script -- ./src/voice_agents/quickstart.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@livekit/rtc-node": "^0.13.28",
     "@mistralai/mistralai": "file:../",
     "@mistralai/mistralai-azure": "file:../packages/mistralai-azure",
     "@mistralai/mistralai-gcp": "file:../packages/mistralai-gcp",

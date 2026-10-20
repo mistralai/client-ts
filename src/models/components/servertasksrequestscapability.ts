@@ -12,11 +12,10 @@ import {
 } from "./taskstoolscapability.js";
 
 /**
- * Capability for tasks requests operations.
+ * Specifies which request types the server can augment with tasks (2025-11-25 only).
  */
 export type ServerTasksRequestsCapability = {
   tools?: TasksToolsCapability | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -25,7 +24,7 @@ export const ServerTasksRequestsCapability$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   tools: z.nullable(TasksToolsCapability$inboundSchema).optional(),
-}).catchall(z.any());
+});
 
 export function serverTasksRequestsCapabilityFromJSON(
   jsonString: string,

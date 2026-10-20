@@ -1,6 +1,6 @@
 # TasksSamplingCapability
 
-Capability for tasks sampling operations.
+Capability for task-augmented sampling operations (2025-11-25 only).
 
 ## Example Usage
 
@@ -12,7 +12,6 @@ let value: TasksSamplingCapability = {};
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `createMessage`        | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
-| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `createMessage`                                                                                    | [components.TasksCreateMessageCapability](../../models/components/taskscreatemessagecapability.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

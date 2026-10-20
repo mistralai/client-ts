@@ -1,5 +1,7 @@
 # Annotations
 
+Optional annotations the client can use to inform how objects are used or displayed.
+
 ## Example Usage
 
 ```typescript
@@ -14,4 +16,4 @@ let value: Annotations = {};
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `audience`                                                   | [components.Audience](../../models/components/audience.md)[] | :heavy_minus_sign:                                           | N/A                                                          |
 | `priority`                                                   | *number*                                                     | :heavy_minus_sign:                                           | N/A                                                          |
-| `additionalProperties`                                       | Record<string, *any*>                                        | :heavy_minus_sign:                                           | N/A                                                          |
+| `lastModified`                                               | *string*                                                     | :heavy_minus_sign:                                           | N/A                                                          |

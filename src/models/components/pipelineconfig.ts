@@ -12,6 +12,10 @@ import {
   PipelineConfigDefinition$inboundSchema,
 } from "./pipelineconfigdefinition.js";
 import {
+  PipelineConfigSampling,
+  PipelineConfigSampling$inboundSchema,
+} from "./pipelineconfigsampling.js";
+import {
   PipelineConfigScope,
   PipelineConfigScope$inboundSchema,
 } from "./pipelineconfigscope.js";
@@ -29,12 +33,14 @@ export type PipelineConfig = {
   scope: PipelineConfigScope;
   workspaceId: string;
   name: string;
+  slug: string;
   pipelineKind: PipelineKind;
-  description?: string | null | undefined;
   selectors: Array<PipelineConfigSelector>;
+  sampling?: PipelineConfigSampling | null | undefined;
   enabled: boolean;
   definition: PipelineConfigDefinition;
-  definitions?: Array<PipelineConfigDefinition> | undefined;
+  scorerSlug?: string | null | undefined;
+  scorerVersion?: number | null | undefined;
 };
 
 /** @internal */
@@ -49,12 +55,14 @@ export const PipelineConfig$inboundSchema: z.ZodType<PipelineConfig, unknown> =
     scope: PipelineConfigScope$inboundSchema,
     workspace_id: z.string(),
     name: z.string(),
+    slug: z.string(),
     pipeline_kind: PipelineKind$inboundSchema,
-    description: z.nullable(z.string()).optional(),
     selectors: z.array(PipelineConfigSelector$inboundSchema),
+    sampling: z.nullable(PipelineConfigSampling$inboundSchema).optional(),
     enabled: z.boolean(),
     definition: PipelineConfigDefinition$inboundSchema,
-    definitions: z.array(PipelineConfigDefinition$inboundSchema).optional(),
+    scorer_slug: z.nullable(z.string()).optional(),
+    scorer_version: z.nullable(z.int()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "created_at": "createdAt",
@@ -62,6 +70,8 @@ export const PipelineConfig$inboundSchema: z.ZodType<PipelineConfig, unknown> =
       "deleted_at": "deletedAt",
       "workspace_id": "workspaceId",
       "pipeline_kind": "pipelineKind",
+      "scorer_slug": "scorerSlug",
+      "scorer_version": "scorerVersion",
     });
   });
 

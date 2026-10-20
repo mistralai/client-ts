@@ -501,7 +501,11 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.beta.serviceAccounts.setRoles({
     serviceAccountId: "d4686916-124a-42f1-966f-9248b120b13c",
-    setServiceAccountRolesRequest: {},
+    setServiceAccountRolesRequest: {
+      roleIds: [
+        "7e69e493-caf6-4671-af60-84951754d9fc",
+      ],
+    },
   });
 
   console.log(result);
@@ -527,7 +531,11 @@ const mistral = new MistralCore({
 async function run() {
   const res = await betaServiceAccountsSetRoles(mistral, {
     serviceAccountId: "d4686916-124a-42f1-966f-9248b120b13c",
-    setServiceAccountRolesRequest: {},
+    setServiceAccountRolesRequest: {
+      roleIds: [
+        "7e69e493-caf6-4671-af60-84951754d9fc",
+      ],
+    },
   });
   if (res.ok) {
     const { value: result } = res;

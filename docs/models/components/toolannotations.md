@@ -19,11 +19,10 @@ let value: ToolAnnotations = {};
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `title`                | *string*               | :heavy_minus_sign:     | N/A                    |
-| `readOnlyHint`         | *boolean*              | :heavy_minus_sign:     | N/A                    |
-| `destructiveHint`      | *boolean*              | :heavy_minus_sign:     | N/A                    |
-| `idempotentHint`       | *boolean*              | :heavy_minus_sign:     | N/A                    |
-| `openWorldHint`        | *boolean*              | :heavy_minus_sign:     | N/A                    |
-| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `title`            | *string*           | :heavy_minus_sign: | N/A                |
+| `readOnlyHint`     | *boolean*          | :heavy_minus_sign: | N/A                |
+| `destructiveHint`  | *boolean*          | :heavy_minus_sign: | N/A                |
+| `idempotentHint`   | *boolean*          | :heavy_minus_sign: | N/A                |
+| `openWorldHint`    | *boolean*          | :heavy_minus_sign: | N/A                |

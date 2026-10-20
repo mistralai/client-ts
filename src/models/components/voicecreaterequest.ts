@@ -21,7 +21,7 @@ export type VoiceCreateRequest = {
   /**
    * Base64-encoded audio file
    */
-  sampleAudio: string;
+  sampleAudio?: string | null | undefined;
   /**
    * Original filename for extension detection
    */
@@ -39,7 +39,7 @@ export type VoiceCreateRequest$Outbound = {
   color?: string | null | undefined;
   description?: string | null | undefined;
   retention_notice: number;
-  sample_audio: string;
+  sample_audio?: string | null | undefined;
   sample_filename?: string | null | undefined;
 };
 
@@ -57,7 +57,7 @@ export const VoiceCreateRequest$outboundSchema: z.ZodType<
   color: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   retentionNotice: z.int().default(30),
-  sampleAudio: z.string(),
+  sampleAudio: z.nullable(z.string()).optional(),
   sampleFilename: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

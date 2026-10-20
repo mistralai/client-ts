@@ -9,10 +9,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Capability for root operations.
+ *
+ * @remarks
+ *
+ * Deprecated in protocol 2026-07-28 (SEP-2577) but still carried there as an
+ * empty object (`list_changed` exists only through 2025-11-25).
  */
 export type RootsCapability = {
   listChanged?: boolean | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -21,7 +25,7 @@ export const RootsCapability$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   listChanged: z.nullable(z.boolean()).optional(),
-}).catchall(z.any());
+});
 
 export function rootsCapabilityFromJSON(
   jsonString: string,

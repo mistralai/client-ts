@@ -13,6 +13,10 @@ import {
   AssistantMessage,
   AssistantMessage$inboundSchema,
 } from "./assistantmessage.js";
+import {
+  ChatCompletionResponseChoiceLogprobs,
+  ChatCompletionResponseChoiceLogprobs$inboundSchema,
+} from "./chatcompletionresponsechoicelogprobs.js";
 import { DeltaMessage, DeltaMessage$inboundSchema } from "./deltamessage.js";
 
 export const ChatCompletionChoiceFinishReason = {
@@ -31,6 +35,8 @@ export type ChatCompletionChoice = {
   message?: AssistantMessage | undefined;
   messages?: Array<DeltaMessage> | undefined;
   finishReason: ChatCompletionChoiceFinishReason;
+  logprobs?: ChatCompletionResponseChoiceLogprobs | null | undefined;
+  promptLogprobs?: ChatCompletionResponseChoiceLogprobs | null | undefined;
 };
 
 /** @internal */
@@ -48,9 +54,15 @@ export const ChatCompletionChoice$inboundSchema: z.ZodType<
   message: AssistantMessage$inboundSchema.optional(),
   messages: z.array(DeltaMessage$inboundSchema).optional(),
   finish_reason: ChatCompletionChoiceFinishReason$inboundSchema,
+  logprobs: z.nullable(ChatCompletionResponseChoiceLogprobs$inboundSchema)
+    .optional(),
+  prompt_logprobs: z.nullable(
+    ChatCompletionResponseChoiceLogprobs$inboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "finish_reason": "finishReason",
+    "prompt_logprobs": "promptLogprobs",
   });
 });
 

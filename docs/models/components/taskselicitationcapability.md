@@ -1,6 +1,6 @@
 # TasksElicitationCapability
 
-Capability for tasks elicitation operations.
+Capability for task-augmented elicitation operations (2025-11-25 only).
 
 ## Example Usage
 
@@ -12,7 +12,6 @@ let value: TasksElicitationCapability = {};
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `create`               | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
-| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `create`                                                                                                   | [components.TasksCreateElicitationCapability](../../models/components/taskscreateelicitationcapability.md) | :heavy_minus_sign:                                                                                         | N/A                                                                                                        |

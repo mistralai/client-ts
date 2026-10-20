@@ -14,8 +14,7 @@ let value: ElicitationCapability = {};
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `form`                 | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
-| `url`                  | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
-| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `form`                                                                                       | [components.FormElicitationCapability](../../models/components/formelicitationcapability.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `url`                                                                                        | [components.UrlElicitationCapability](../../models/components/urlelicitationcapability.md)   | :heavy_minus_sign:                                                                           | N/A                                                                                          |

@@ -5,15 +5,19 @@
 import { betaRagManagedIndexesCreate } from "../funcs/betaRagManagedIndexesCreate.js";
 import { betaRagManagedIndexesDelete } from "../funcs/betaRagManagedIndexesDelete.js";
 import { betaRagManagedIndexesDeleteDocuments } from "../funcs/betaRagManagedIndexesDeleteDocuments.js";
+import { betaRagManagedIndexesGenerateIndexSummary } from "../funcs/betaRagManagedIndexesGenerateIndexSummary.js";
 import { betaRagManagedIndexesGet } from "../funcs/betaRagManagedIndexesGet.js";
 import { betaRagManagedIndexesGetChunk } from "../funcs/betaRagManagedIndexesGetChunk.js";
+import { betaRagManagedIndexesGetIndexSummary } from "../funcs/betaRagManagedIndexesGetIndexSummary.js";
 import { betaRagManagedIndexesGrep } from "../funcs/betaRagManagedIndexesGrep.js";
 import { betaRagManagedIndexesIngestDocuments } from "../funcs/betaRagManagedIndexesIngestDocuments.js";
 import { betaRagManagedIndexesList } from "../funcs/betaRagManagedIndexesList.js";
 import { betaRagManagedIndexesNavigate } from "../funcs/betaRagManagedIndexesNavigate.js";
 import { betaRagManagedIndexesRead } from "../funcs/betaRagManagedIndexesRead.js";
 import { betaRagManagedIndexesSearch } from "../funcs/betaRagManagedIndexesSearch.js";
+import { betaRagManagedIndexesSetIndexSummary } from "../funcs/betaRagManagedIndexesSetIndexSummary.js";
 import { betaRagManagedIndexesUpdate } from "../funcs/betaRagManagedIndexesUpdate.js";
+import { JsonLStream } from "../lib/jsonl.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -229,6 +233,66 @@ export class ManagedIndexes extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.NavigationResponse> {
     return unwrapAsync(betaRagManagedIndexesGetChunk(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Managed Index Summary
+   *
+   * @remarks
+   * Retrieve the summary field for a managed index if it exists
+   */
+  async getIndexSummary(
+    request:
+      operations.GetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetSummaryResponseSummary> {
+    return unwrapAsync(betaRagManagedIndexesGetIndexSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Generate a summary field for a managed index
+   *
+   * @remarks
+   * Streams a summary for the managed index in chunks of json.
+   *
+   * The first chunk contains metadata for the summary, the following contain
+   * chunks of 'content' that should be joined together to form a full summary.
+   *
+   * If force is true, regenerate the requested language even if a summary
+   * already exists.
+   */
+  async generateIndexSummary(
+    request:
+      operations.GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest,
+    options?: RequestOptions,
+  ): Promise<JsonLStream<operations.SummaryStreamTypes>> {
+    return unwrapAsync(betaRagManagedIndexesGenerateIndexSummary(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set Managed Index Summary
+   *
+   * @remarks
+   * Update the summary field for a managed index
+   */
+  async setIndexSummary(
+    request:
+      operations.SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequest,
+    options?: RequestOptions,
+  ): Promise<any> {
+    return unwrapAsync(betaRagManagedIndexesSetIndexSummary(
       this,
       request,
       options,

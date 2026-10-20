@@ -12,7 +12,7 @@ export type SharingDelete = {
    */
   orgId?: string | null | undefined;
   /**
-   * The id of the entity (user, workspace or organization) to share with
+   * The id of the entity to stop sharing with, as returned by the list endpoint
    */
   shareWithUuid: string;
   /**
