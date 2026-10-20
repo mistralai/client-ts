@@ -16,7 +16,6 @@ export type BlobResourceContents = {
   mimeType?: string | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
   blob: string;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -28,7 +27,7 @@ export const BlobResourceContents$inboundSchema: z.ZodType<
   mimeType: z.nullable(z.string()).optional(),
   _meta: z.nullable(z.record(z.string(), z.any())).optional(),
   blob: z.string(),
-}).catchall(z.any()).transform((v) => {
+}).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

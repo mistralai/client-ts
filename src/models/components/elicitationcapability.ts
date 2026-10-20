@@ -6,6 +6,14 @@ import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  FormElicitationCapability,
+  FormElicitationCapability$inboundSchema,
+} from "./formelicitationcapability.js";
+import {
+  UrlElicitationCapability,
+  UrlElicitationCapability$inboundSchema,
+} from "./urlelicitationcapability.js";
 
 /**
  * Capability for elicitation operations.
@@ -15,9 +23,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Clients must support at least one mode (form or url).
  */
 export type ElicitationCapability = {
-  form?: { [k: string]: any } | null | undefined;
-  url?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
+  form?: FormElicitationCapability | null | undefined;
+  url?: UrlElicitationCapability | null | undefined;
 };
 
 /** @internal */
@@ -25,9 +32,9 @@ export const ElicitationCapability$inboundSchema: z.ZodType<
   ElicitationCapability,
   unknown
 > = z.object({
-  form: z.nullable(z.record(z.string(), z.any())).optional(),
-  url: z.nullable(z.record(z.string(), z.any())).optional(),
-}).catchall(z.any());
+  form: z.nullable(FormElicitationCapability$inboundSchema).optional(),
+  url: z.nullable(UrlElicitationCapability$inboundSchema).optional(),
+});
 
 export function elicitationCapabilityFromJSON(
   jsonString: string,

@@ -7,7 +7,7 @@ import { OAuth2ClientCredentialsAuthMethod } from "@mistralai/mistralai/models/c
 
 let value: OAuth2ClientCredentialsAuthMethod = {
   grantType: "client_credentials",
-  tokenEndpointAuthMethod: "client_secret_post",
+  tokenEndpointAuthMethod: "client_secret_basic",
   oauth2ServerMetadata: {
     issuer: "https://steel-gymnast.net/",
     tokenEndpoint: "https://dental-intervention.info",

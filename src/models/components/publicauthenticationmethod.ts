@@ -27,6 +27,10 @@ import {
   OAuth2GrantType,
   OAuth2GrantType$inboundSchema,
 } from "./oauth2granttype.js";
+import {
+  OAuth2TokenEndpointAuthMethod,
+  OAuth2TokenEndpointAuthMethod$inboundSchema,
+} from "./oauth2tokenendpointauthmethod.js";
 
 /**
  * Public view of an authentication method, without secrets.
@@ -37,6 +41,7 @@ export type PublicAuthenticationMethod = {
   globalHeaders?: { [k: string]: GlobalHeaderValue } | undefined;
   hasDefaultCredentials: boolean;
   grantType?: OAuth2GrantType | null | undefined;
+  tokenEndpointAuthMethod?: OAuth2TokenEndpointAuthMethod | null | undefined;
   oauth2ServerMetadata?: ExtendedOAuthServerMetadata | null | undefined;
 };
 
@@ -52,6 +57,9 @@ export const PublicAuthenticationMethod$inboundSchema: z.ZodType<
     .optional(),
   has_default_credentials: z.boolean(),
   grant_type: z.nullable(OAuth2GrantType$inboundSchema).optional(),
+  token_endpoint_auth_method: z.nullable(
+    OAuth2TokenEndpointAuthMethod$inboundSchema,
+  ).optional(),
   oauth2_server_metadata: z.nullable(ExtendedOAuthServerMetadata$inboundSchema)
     .optional(),
 }).transform((v) => {
@@ -60,6 +68,7 @@ export const PublicAuthenticationMethod$inboundSchema: z.ZodType<
     "global_headers": "globalHeaders",
     "has_default_credentials": "hasDefaultCredentials",
     "grant_type": "grantType",
+    "token_endpoint_auth_method": "tokenEndpointAuthMethod",
     "oauth2_server_metadata": "oauth2ServerMetadata",
   });
 });

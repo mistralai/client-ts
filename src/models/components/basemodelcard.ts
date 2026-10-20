@@ -8,6 +8,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AudioSpeechCapabilities,
+  AudioSpeechCapabilities$inboundSchema,
+} from "./audiospeechcapabilities.js";
+import {
+  AudioTranscriptionCapabilities,
+  AudioTranscriptionCapabilities$inboundSchema,
+} from "./audiotranscriptioncapabilities.js";
+import {
   ModelCapabilities,
   ModelCapabilities$inboundSchema,
 } from "./modelcapabilities.js";
@@ -34,6 +42,11 @@ export type BaseModelCard = {
   internal: boolean;
   billingModelName?: string | null | undefined;
   type: "base";
+  audioTranscriptionCapabilities?:
+    | AudioTranscriptionCapabilities
+    | null
+    | undefined;
+  audioSpeechCapabilities?: AudioSpeechCapabilities | null | undefined;
 };
 
 /** @internal */
@@ -56,6 +69,11 @@ export const BaseModelCard$inboundSchema: z.ZodType<BaseModelCard, unknown> = z
     internal: z.boolean().default(false),
     billing_model_name: z.nullable(z.string()).optional(),
     type: z.literal("base"),
+    audio_transcription_capabilities: z.nullable(
+      AudioTranscriptionCapabilities$inboundSchema,
+    ).optional(),
+    audio_speech_capabilities: z.nullable(AudioSpeechCapabilities$inboundSchema)
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "owned_by": "ownedBy",
@@ -63,6 +81,8 @@ export const BaseModelCard$inboundSchema: z.ZodType<BaseModelCard, unknown> = z
       "deprecation_replacement_model": "deprecationReplacementModel",
       "default_model_temperature": "defaultModelTemperature",
       "billing_model_name": "billingModelName",
+      "audio_transcription_capabilities": "audioTranscriptionCapabilities",
+      "audio_speech_capabilities": "audioSpeechCapabilities",
     });
   });
 

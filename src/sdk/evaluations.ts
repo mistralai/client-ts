@@ -3,17 +3,12 @@
  */
 
 import { betaObservabilityEvaluationsCreatePipeline } from "../funcs/betaObservabilityEvaluationsCreatePipeline.js";
-import { betaObservabilityEvaluationsCreatePipelineConfig } from "../funcs/betaObservabilityEvaluationsCreatePipelineConfig.js";
 import { betaObservabilityEvaluationsDeletePipeline } from "../funcs/betaObservabilityEvaluationsDeletePipeline.js";
-import { betaObservabilityEvaluationsDeletePipelineConfig } from "../funcs/betaObservabilityEvaluationsDeletePipelineConfig.js";
 import { betaObservabilityEvaluationsGet } from "../funcs/betaObservabilityEvaluationsGet.js";
 import { betaObservabilityEvaluationsGetPipeline } from "../funcs/betaObservabilityEvaluationsGetPipeline.js";
-import { betaObservabilityEvaluationsGetPipelineConfig } from "../funcs/betaObservabilityEvaluationsGetPipelineConfig.js";
 import { betaObservabilityEvaluationsList } from "../funcs/betaObservabilityEvaluationsList.js";
-import { betaObservabilityEvaluationsListPipelineConfigs } from "../funcs/betaObservabilityEvaluationsListPipelineConfigs.js";
 import { betaObservabilityEvaluationsListPipelines } from "../funcs/betaObservabilityEvaluationsListPipelines.js";
 import { betaObservabilityEvaluationsUpdatePipeline } from "../funcs/betaObservabilityEvaluationsUpdatePipeline.js";
-import { betaObservabilityEvaluationsUpdatePipelineConfig } from "../funcs/betaObservabilityEvaluationsUpdatePipelineConfig.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -42,81 +37,6 @@ export class Evaluations extends ClientSDK {
   private _optimizations?: Optimizations;
   get optimizations(): Optimizations {
     return (this._optimizations ??= new Optimizations(this._options));
-  }
-
-  /**
-   * Create a worker pipeline configuration
-   */
-  async createPipelineConfig(
-    request: components.CreatePipelineConfigRequest,
-    options?: RequestOptions,
-  ): Promise<components.PipelineConfig> {
-    return unwrapAsync(betaObservabilityEvaluationsCreatePipelineConfig(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * List worker pipeline configurations
-   */
-  async listPipelineConfigs(
-    request?:
-      | operations.ListPipelineConfigsV1ObservabilityPipelineConfigsGetRequest
-      | undefined,
-    options?: RequestOptions,
-  ): Promise<components.PipelineConfigsResponse> {
-    return unwrapAsync(betaObservabilityEvaluationsListPipelineConfigs(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get a worker pipeline configuration
-   */
-  async getPipelineConfig(
-    request:
-      operations.GetPipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdGetRequest,
-    options?: RequestOptions,
-  ): Promise<components.PipelineConfig> {
-    return unwrapAsync(betaObservabilityEvaluationsGetPipelineConfig(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Replace a worker pipeline configuration
-   */
-  async updatePipelineConfig(
-    request:
-      operations.UpdatePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdPutRequest,
-    options?: RequestOptions,
-  ): Promise<components.PipelineConfig> {
-    return unwrapAsync(betaObservabilityEvaluationsUpdatePipelineConfig(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a worker pipeline configuration
-   */
-  async deletePipelineConfig(
-    request:
-      operations.DeletePipelineConfigV1ObservabilityPipelineConfigsPipelineConfigIdDeleteRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(betaObservabilityEvaluationsDeletePipelineConfig(
-      this,
-      request,
-      options,
-    ));
   }
 
   /**

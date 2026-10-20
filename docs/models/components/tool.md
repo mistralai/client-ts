@@ -6,6 +6,7 @@
 import { Tool } from "@mistralai/mistralai/models/components";
 
 let value: Tool = {
+  type: "function",
   function: {
     name: "<value>",
     parameters: {
@@ -19,5 +20,5 @@ let value: Tool = {
 
 | Field                                                        | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `type`                                                       | [components.ToolTypes](../../models/components/tooltypes.md) | :heavy_minus_sign:                                           | N/A                                                          |
+| `type`                                                       | *"function"*                                                 | :heavy_check_mark:                                           | N/A                                                          |
 | `function`                                                   | [components.FunctionT](../../models/components/functiont.md) | :heavy_check_mark:                                           | N/A                                                          |

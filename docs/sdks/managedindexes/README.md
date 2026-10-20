@@ -16,6 +16,9 @@
 * [read](#read) - Read chunks within a span
 * [grep](#grep) - Grep for a pattern within a source
 * [getChunk](#getchunk) - Get a single chunk by id
+* [getIndexSummary](#getindexsummary) - Get Managed Index Summary
+* [generateIndexSummary](#generateindexsummary) - Generate a summary field for a managed index
+* [setIndexSummary](#setindexsummary) - Set Managed Index Summary
 
 ## create
 
@@ -986,6 +989,256 @@ run();
 ### Response
 
 **Promise\<[components.NavigationResponse](../../models/components/navigationresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## getIndexSummary
+
+Retrieve the summary field for a managed index if it exists
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get_managed_index_summary_v1_rag_managed_indexes__index_name__summary_field__language__get" method="get" path="/v1/rag/managed_indexes/{index_name}/summary_field/{language}" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.rag.managedIndexes.getIndexSummary({
+    language: "ar",
+    indexName: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaRagManagedIndexesGetIndexSummary } from "@mistralai/mistralai/funcs/betaRagManagedIndexesGetIndexSummary.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaRagManagedIndexesGetIndexSummary(mistral, {
+    language: "ar",
+    indexName: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaRagManagedIndexesGetIndexSummary failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                  | Type                                                                                                                                                                                                       | Required                                                                                                                                                                                                   | Description                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                  | [operations.GetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetRequest](../../models/operations/getmanagedindexsummaryv1ragmanagedindexesindexnamesummaryfieldlanguagegetrequest.md) | :heavy_check_mark:                                                                                                                                                                                         | The request object to use for the request.                                                                                                                                                                 |
+| `options`                                                                                                                                                                                                  | RequestOptions                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                         | Used to set various options for making HTTP requests.                                                                                                                                                      |
+| `options.fetchOptions`                                                                                                                                                                                     | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                         | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                             |
+| `options.retries`                                                                                                                                                                                          | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                         | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                           |
+
+### Response
+
+**Promise\<[components.GetSummaryResponseSummary](../../models/components/getsummaryresponsesummary.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## generateIndexSummary
+
+Streams a summary for the managed index in chunks of json.
+
+The first chunk contains metadata for the summary, the following contain
+chunks of 'content' that should be joined together to form a full summary.
+
+If force is true, regenerate the requested language even if a summary
+already exists.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="generate_managed_index_summary_post_v1_rag_managed_indexes__index_name__summary_field__language__post" method="post" path="/v1/rag/managed_indexes/{index_name}/summary_field/{language}" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.rag.managedIndexes.generateIndexSummary({
+    language: "es",
+    indexName: "<value>",
+  });
+
+  for await (const event of result) {
+    // Handle the event
+    console.log(event);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaRagManagedIndexesGenerateIndexSummary } from "@mistralai/mistralai/funcs/betaRagManagedIndexesGenerateIndexSummary.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaRagManagedIndexesGenerateIndexSummary(mistral, {
+    language: "es",
+    indexName: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
+    // Handle the event
+    console.log(event);
+  }
+  } else {
+    console.log("betaRagManagedIndexesGenerateIndexSummary failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                           | Required                                                                                                                                                                                                                       | Description                                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                                                                      | [operations.GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest](../../models/operations/generatemanagedindexsummarypostv1ragmanagedindexesindexnamesummaryfieldlanguagepostrequest.md) | :heavy_check_mark:                                                                                                                                                                                                             | The request object to use for the request.                                                                                                                                                                                     |
+| `options`                                                                                                                                                                                                                      | RequestOptions                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                 |
+| `options.retries`                                                                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                               |
+
+### Response
+
+**Promise\<[JsonLStream<operations.SummaryStreamTypes>](../../models/.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## setIndexSummary
+
+Update the summary field for a managed index
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="set_managed_index_summary_v1_rag_managed_indexes__index_name__summary_field__language__put" method="put" path="/v1/rag/managed_indexes/{index_name}/summary_field/{language}" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.beta.rag.managedIndexes.setIndexSummary({
+    language: "es",
+    indexName: "<value>",
+    updateSummaryRequestSummary: {
+      content: "<value>",
+      status: "handwritten",
+      translated: true,
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { betaRagManagedIndexesSetIndexSummary } from "@mistralai/mistralai/funcs/betaRagManagedIndexesSetIndexSummary.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await betaRagManagedIndexesSetIndexSummary(mistral, {
+    language: "es",
+    indexName: "<value>",
+    updateSummaryRequestSummary: {
+      content: "<value>",
+      status: "handwritten",
+      translated: true,
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("betaRagManagedIndexesSetIndexSummary failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                  | Type                                                                                                                                                                                                       | Required                                                                                                                                                                                                   | Description                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                                                                                  | [operations.SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequest](../../models/operations/setmanagedindexsummaryv1ragmanagedindexesindexnamesummaryfieldlanguageputrequest.md) | :heavy_check_mark:                                                                                                                                                                                         | The request object to use for the request.                                                                                                                                                                 |
+| `options`                                                                                                                                                                                                  | RequestOptions                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                         | Used to set various options for making HTTP requests.                                                                                                                                                      |
+| `options.fetchOptions`                                                                                                                                                                                     | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                         | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                             |
+| `options.retries`                                                                                                                                                                                          | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                         | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                           |
+
+### Response
+
+**Promise\<[any](../../models/.md)\>**
 
 ### Errors
 

@@ -8,22 +8,23 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * An argument for a prompt template.
+ * Describes an argument that a prompt can accept.
  */
 export type PromptArgument = {
   name: string;
+  title?: string | null | undefined;
   description?: string | null | undefined;
   required?: boolean | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
 export const PromptArgument$inboundSchema: z.ZodType<PromptArgument, unknown> =
   z.object({
     name: z.string(),
+    title: z.nullable(z.string()).optional(),
     description: z.nullable(z.string()).optional(),
     required: z.nullable(z.boolean()).optional(),
-  }).catchall(z.any());
+  });
 
 export function promptArgumentFromJSON(
   jsonString: string,

@@ -4,18 +4,30 @@
 
 import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const Theme = {
+  Light: "light",
+  Dark: "dark",
+} as const;
+export type Theme = OpenEnum<typeof Theme>;
+
 /**
- * An icon for display in user interfaces.
+ * An optionally-sized icon for display in a user interface (2025-11-25+).
  */
 export type MCPServerIcon = {
   src: string;
   mimeType?: string | null | undefined;
   sizes?: Array<string> | null | undefined;
-  [additionalProperties: string]: unknown;
+  theme?: Theme | null | undefined;
 };
+
+/** @internal */
+export const Theme$inboundSchema: z.ZodType<Theme, unknown> = openEnums
+  .inboundSchema(Theme);
 
 /** @internal */
 export const MCPServerIcon$inboundSchema: z.ZodType<MCPServerIcon, unknown> = z
@@ -23,7 +35,8 @@ export const MCPServerIcon$inboundSchema: z.ZodType<MCPServerIcon, unknown> = z
     src: z.string(),
     mimeType: z.nullable(z.string()).optional(),
     sizes: z.nullable(z.array(z.string())).optional(),
-  }).catchall(z.any());
+    theme: z.nullable(Theme$inboundSchema).optional(),
+  });
 
 export function mcpServerIconFromJSON(
   jsonString: string,

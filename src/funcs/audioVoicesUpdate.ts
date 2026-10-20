@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Update voice metadata
  *
  * @remarks
- * Update voice metadata (name, gender, languages, age, tags).
+ * Update voice metadata (name, gender, languages, age, tags, retention notice).
  */
 export function audioVoicesUpdate(
   client: MistralCore,

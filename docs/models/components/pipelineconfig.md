@@ -13,19 +13,16 @@ let value: PipelineConfig = {
   scope: "shared",
   workspaceId: "021c2d11-8cdd-40f5-9a63-91516dbc4716",
   name: "<value>",
-  pipelineKind: "export",
+  slug: "<value>",
+  pipelineKind: "export-v1",
   selectors: [
     {
-      sourceKind: "span",
+      sourceKind: "metric",
     },
   ],
   enabled: true,
   definition: {
-    destination: {
-      protocol: "<value>",
-      endpoint: "<value>",
-      insecure: false,
-    },
+    model: "mistral-moderation-latest",
   },
 };
 ```
@@ -41,9 +38,11 @@ let value: PipelineConfig = {
 | `scope`                                                                                       | [components.PipelineConfigScope](../../models/components/pipelineconfigscope.md)              | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `slug`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `pipelineKind`                                                                                | [components.PipelineKind](../../models/components/pipelinekind.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `selectors`                                                                                   | [components.PipelineConfigSelector](../../models/components/pipelineconfigselector.md)[]      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `sampling`                                                                                    | *components.PipelineConfigSampling*                                                           | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `enabled`                                                                                     | *boolean*                                                                                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `definition`                                                                                  | *components.PipelineConfigDefinition*                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `definitions`                                                                                 | *components.PipelineConfigDefinition*[]                                                       | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `scorerSlug`                                                                                  | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `scorerVersion`                                                                               | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |

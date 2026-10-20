@@ -12,7 +12,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type PromptsCapability = {
   listChanged?: boolean | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -21,7 +20,7 @@ export const PromptsCapability$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   listChanged: z.nullable(z.boolean()).optional(),
-}).catchall(z.any());
+});
 
 export function promptsCapabilityFromJSON(
   jsonString: string,

@@ -90,7 +90,7 @@ export type AgentsCompletionRequestMessage =
   | UserMessage;
 
 export type AgentsCompletionRequestTool =
-  | (Tool & { type: "function" })
+  | Tool
   | ImageGenerationTool
   | DocumentLibraryTool
   | CustomConnector;
@@ -129,12 +129,7 @@ export type AgentsCompletionRequest = {
    */
   responseFormat?: ResponseFormat | undefined;
   tools?:
-    | Array<
-      | (Tool & { type: "function" })
-      | ImageGenerationTool
-      | DocumentLibraryTool
-      | CustomConnector
-    >
+    | Array<Tool | ImageGenerationTool | DocumentLibraryTool | CustomConnector>
     | null
     | undefined;
   toolChoice?: ToolChoice | ToolChoiceEnum | undefined;
@@ -146,6 +141,13 @@ export type AgentsCompletionRequest = {
    * The `frequency_penalty` penalizes the repetition of words based on their frequency in the generated text. A higher frequency penalty discourages the model from repeating words that have already appeared frequently in the output, promoting diversity and reducing repetition.
    */
   frequencyPenalty?: number | null | undefined;
+  minTokens?: number | null | undefined;
+  repetitionPenalty?: number | null | undefined;
+  topK?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  topLogprobs?: number | null | undefined;
+  promptLogprobs?: boolean | null | undefined;
+  topPromptLogprobs?: number | null | undefined;
   /**
    * Number of completions to return for each request, input tokens are only billed once.
    */
@@ -223,7 +225,7 @@ export function agentsCompletionRequestMessageToJSON(
 
 /** @internal */
 export type AgentsCompletionRequestTool$Outbound =
-  | (Tool$Outbound & { type: "function" })
+  | Tool$Outbound
   | ImageGenerationTool$Outbound
   | DocumentLibraryTool$Outbound
   | CustomConnector$Outbound;
@@ -233,7 +235,7 @@ export const AgentsCompletionRequestTool$outboundSchema: z.ZodType<
   AgentsCompletionRequestTool$Outbound,
   AgentsCompletionRequestTool
 > = z.union([
-  Tool$outboundSchema.and(z.object({ type: z.literal("function") })),
+  Tool$outboundSchema,
   ImageGenerationTool$outboundSchema,
   DocumentLibraryTool$outboundSchema,
   CustomConnector$outboundSchema,
@@ -286,7 +288,7 @@ export type AgentsCompletionRequest$Outbound = {
   response_format?: ResponseFormat$Outbound | undefined;
   tools?:
     | Array<
-      | (Tool$Outbound & { type: "function" })
+      | Tool$Outbound
       | ImageGenerationTool$Outbound
       | DocumentLibraryTool$Outbound
       | CustomConnector$Outbound
@@ -296,6 +298,13 @@ export type AgentsCompletionRequest$Outbound = {
   tool_choice?: ToolChoice$Outbound | string | undefined;
   presence_penalty?: number | null | undefined;
   frequency_penalty?: number | null | undefined;
+  min_tokens?: number | null | undefined;
+  repetition_penalty?: number | null | undefined;
+  top_k?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  top_logprobs?: number | null | undefined;
+  prompt_logprobs?: boolean | null | undefined;
+  top_prompt_logprobs?: number | null | undefined;
   n?: number | null | undefined;
   prediction?: Prediction$Outbound | undefined;
   parallel_tool_calls?: boolean | undefined;
@@ -331,7 +340,7 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   tools: z.nullable(
     z.array(
       z.union([
-        Tool$outboundSchema.and(z.object({ type: z.literal("function") })),
+        Tool$outboundSchema,
         ImageGenerationTool$outboundSchema,
         DocumentLibraryTool$outboundSchema,
         CustomConnector$outboundSchema,
@@ -344,6 +353,13 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
   ]).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
+  minTokens: z.nullable(z.int()).optional(),
+  repetitionPenalty: z.nullable(z.number()).optional(),
+  topK: z.nullable(z.int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  topLogprobs: z.nullable(z.int()).optional(),
+  promptLogprobs: z.nullable(z.boolean()).optional(),
+  topPromptLogprobs: z.nullable(z.int()).optional(),
   n: z.nullable(z.int()).optional(),
   prediction: Prediction$outboundSchema.optional(),
   parallelToolCalls: z.boolean().optional(),
@@ -361,6 +377,12 @@ export const AgentsCompletionRequest$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     presencePenalty: "presence_penalty",
     frequencyPenalty: "frequency_penalty",
+    minTokens: "min_tokens",
+    repetitionPenalty: "repetition_penalty",
+    topK: "top_k",
+    topLogprobs: "top_logprobs",
+    promptLogprobs: "prompt_logprobs",
+    topPromptLogprobs: "top_prompt_logprobs",
     parallelToolCalls: "parallel_tool_calls",
     reasoningEffort: "reasoning_effort",
     promptMode: "prompt_mode",

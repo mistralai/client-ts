@@ -32,7 +32,43 @@ export const TranscriptionStreamSegmentDelta$inboundSchema: z.ZodType<
     "speaker_id": "speakerId",
   });
 });
+/** @internal */
+export type TranscriptionStreamSegmentDelta$Outbound = {
+  type: "transcription.segment";
+  text: string;
+  start: number | null;
+  end: number | null;
+  speaker_id?: string | null | undefined;
+  [additionalProperties: string]: unknown;
+};
 
+/** @internal */
+export const TranscriptionStreamSegmentDelta$outboundSchema: z.ZodType<
+  TranscriptionStreamSegmentDelta$Outbound,
+  TranscriptionStreamSegmentDelta
+> = z.object({
+  type: z.literal("transcription.segment"),
+  text: z.string(),
+  start: z.nullable(z.number()),
+  end: z.nullable(z.number()),
+  speakerId: z.nullable(z.string()).optional(),
+}).catchall(z.any()).transform((v) => {
+  return {
+    ...remap$(v, {
+      speakerId: "speaker_id",
+    }),
+  };
+});
+
+export function transcriptionStreamSegmentDeltaToJSON(
+  transcriptionStreamSegmentDelta: TranscriptionStreamSegmentDelta,
+): string {
+  return JSON.stringify(
+    TranscriptionStreamSegmentDelta$outboundSchema.parse(
+      transcriptionStreamSegmentDelta,
+    ),
+  );
+}
 export function transcriptionStreamSegmentDeltaFromJSON(
   jsonString: string,
 ): SafeParseResult<TranscriptionStreamSegmentDelta, SDKValidationError> {

@@ -78,6 +78,14 @@ export type ListDeploymentsV1WorkflowsDeploymentsGetRequest = {
    * Workspace ID to scope the request to. Defaults to the caller's context.
    */
   workspaceId?: string | null | undefined;
+  /**
+   * Filter managed deployments by source repository URL (exact match)
+   */
+  repositoryUrl?: string | null | undefined;
+  /**
+   * Filter managed deployments by Dockerfile path (exact match)
+   */
+  dockerfilePath?: string | null | undefined;
 };
 
 /** @internal */
@@ -106,6 +114,8 @@ export type ListDeploymentsV1WorkflowsDeploymentsGetRequest$Outbound = {
   limit?: number | null | undefined;
   cursor?: string | null | undefined;
   workspace_id?: string | null | undefined;
+  repository_url?: string | null | undefined;
+  dockerfile_path?: string | null | undefined;
 };
 
 /** @internal */
@@ -131,6 +141,8 @@ export const ListDeploymentsV1WorkflowsDeploymentsGetRequest$outboundSchema:
     limit: z.nullable(z.int()).optional(),
     cursor: z.nullable(z.string()).optional(),
     workspaceId: z.nullable(z.string()).optional(),
+    repositoryUrl: z.nullable(z.string()).optional(),
+    dockerfilePath: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       activeOnly: "active_only",
@@ -140,6 +152,8 @@ export const ListDeploymentsV1WorkflowsDeploymentsGetRequest$outboundSchema:
       locationTypes: "location_types",
       orderBy: "order_by",
       workspaceId: "workspace_id",
+      repositoryUrl: "repository_url",
+      dockerfilePath: "dockerfile_path",
     });
   });
 

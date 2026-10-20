@@ -3,17 +3,25 @@
  */
 
 import * as z from "zod/v4";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const OAuth2TokenEndpointAuthMethod = {
   ClientSecretPost: "client_secret_post",
   ClientSecretBasic: "client_secret_basic",
+  PrivateKeyJwt: "private_key_jwt",
 } as const;
-export type OAuth2TokenEndpointAuthMethod = ClosedEnum<
+export type OAuth2TokenEndpointAuthMethod = OpenEnum<
   typeof OAuth2TokenEndpointAuthMethod
 >;
 
 /** @internal */
-export const OAuth2TokenEndpointAuthMethod$outboundSchema: z.ZodEnum<
-  typeof OAuth2TokenEndpointAuthMethod
-> = z.enum(OAuth2TokenEndpointAuthMethod);
+export const OAuth2TokenEndpointAuthMethod$inboundSchema: z.ZodType<
+  OAuth2TokenEndpointAuthMethod,
+  unknown
+> = openEnums.inboundSchema(OAuth2TokenEndpointAuthMethod);
+/** @internal */
+export const OAuth2TokenEndpointAuthMethod$outboundSchema: z.ZodType<
+  string,
+  OAuth2TokenEndpointAuthMethod
+> = openEnums.outboundSchema(OAuth2TokenEndpointAuthMethod);

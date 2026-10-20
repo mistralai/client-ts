@@ -9,14 +9,12 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PipelineConfigHeader,
   PipelineConfigHeader$inboundSchema,
-  PipelineConfigHeader$Outbound,
-  PipelineConfigHeader$outboundSchema,
 } from "./pipelineconfigheader.js";
 
 export type OTLPDestination = {
   protocol: string;
   endpoint: string;
-  insecure?: boolean | undefined;
+  insecure: boolean;
   headers?: { [k: string]: PipelineConfigHeader } | undefined;
 };
 
@@ -30,30 +28,7 @@ export const OTLPDestination$inboundSchema: z.ZodType<
   insecure: z.boolean().default(false),
   headers: z.record(z.string(), PipelineConfigHeader$inboundSchema).optional(),
 });
-/** @internal */
-export type OTLPDestination$Outbound = {
-  protocol: string;
-  endpoint: string;
-  insecure: boolean;
-  headers?: { [k: string]: PipelineConfigHeader$Outbound } | undefined;
-};
 
-/** @internal */
-export const OTLPDestination$outboundSchema: z.ZodType<
-  OTLPDestination$Outbound,
-  OTLPDestination
-> = z.object({
-  protocol: z.string(),
-  endpoint: z.string(),
-  insecure: z.boolean().default(false),
-  headers: z.record(z.string(), PipelineConfigHeader$outboundSchema).optional(),
-});
-
-export function otlpDestinationToJSON(
-  otlpDestination: OTLPDestination,
-): string {
-  return JSON.stringify(OTLPDestination$outboundSchema.parse(otlpDestination));
-}
 export function otlpDestinationFromJSON(
   jsonString: string,
 ): SafeParseResult<OTLPDestination, SDKValidationError> {

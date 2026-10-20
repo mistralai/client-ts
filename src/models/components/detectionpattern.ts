@@ -24,32 +24,7 @@ export const DetectionPattern$inboundSchema: z.ZodType<
   category: z.string(),
   confidence: z.string(),
 });
-/** @internal */
-export type DetectionPattern$Outbound = {
-  name: string;
-  regex: string;
-  category: string;
-  confidence: string;
-};
 
-/** @internal */
-export const DetectionPattern$outboundSchema: z.ZodType<
-  DetectionPattern$Outbound,
-  DetectionPattern
-> = z.object({
-  name: z.string(),
-  regex: z.string(),
-  category: z.string(),
-  confidence: z.string(),
-});
-
-export function detectionPatternToJSON(
-  detectionPattern: DetectionPattern,
-): string {
-  return JSON.stringify(
-    DetectionPattern$outboundSchema.parse(detectionPattern),
-  );
-}
 export function detectionPatternFromJSON(
   jsonString: string,
 ): SafeParseResult<DetectionPattern, SDKValidationError> {

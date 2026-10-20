@@ -5,6 +5,7 @@
 import { betaUsersGetIdentity } from "../funcs/betaUsersGetIdentity.js";
 import { betaUsersListOrganizations } from "../funcs/betaUsersListOrganizations.js";
 import { betaUsersListWorkspaces } from "../funcs/betaUsersListWorkspaces.js";
+import { betaUsersWhoami } from "../funcs/betaUsersWhoami.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -71,6 +72,25 @@ export class Users extends ClientSDK {
       this,
       security,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Whoami
+   *
+   * @remarks
+   * Return the authenticated caller's identity.
+   *
+   * Principal-agnostic: resolves both users and service accounts.
+   */
+  async whoami(
+    security: operations.UsersApiWhoamiSecurity,
+    options?: RequestOptions,
+  ): Promise<components.WhoamiResponse> {
+    return unwrapAsync(betaUsersWhoami(
+      this,
+      security,
       options,
     ));
   }

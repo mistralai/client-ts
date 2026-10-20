@@ -8,7 +8,11 @@ import { SetServiceAccountRolesV1ServiceAccountsServiceAccountIdRolesPutRequest 
 let value:
   SetServiceAccountRolesV1ServiceAccountsServiceAccountIdRolesPutRequest = {
     serviceAccountId: "507da8ba-e05e-4a3f-a0c2-f9502a8850d2",
-    setServiceAccountRolesRequest: {},
+    setServiceAccountRolesRequest: {
+      roleIds: [
+        "7e69e493-caf6-4671-af60-84951754d9fc",
+      ],
+    },
   };
 ```
 

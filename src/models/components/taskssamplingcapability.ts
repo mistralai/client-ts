@@ -6,13 +6,16 @@ import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  TasksCreateMessageCapability,
+  TasksCreateMessageCapability$inboundSchema,
+} from "./taskscreatemessagecapability.js";
 
 /**
- * Capability for tasks sampling operations.
+ * Capability for task-augmented sampling operations (2025-11-25 only).
  */
 export type TasksSamplingCapability = {
-  createMessage?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
+  createMessage?: TasksCreateMessageCapability | null | undefined;
 };
 
 /** @internal */
@@ -20,8 +23,9 @@ export const TasksSamplingCapability$inboundSchema: z.ZodType<
   TasksSamplingCapability,
   unknown
 > = z.object({
-  createMessage: z.nullable(z.record(z.string(), z.any())).optional(),
-}).catchall(z.any());
+  createMessage: z.nullable(TasksCreateMessageCapability$inboundSchema)
+    .optional(),
+});
 
 export function tasksSamplingCapabilityFromJSON(
   jsonString: string,

@@ -25,7 +25,6 @@ export type ToolAnnotations = {
   destructiveHint?: boolean | null | undefined;
   idempotentHint?: boolean | null | undefined;
   openWorldHint?: boolean | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -38,7 +37,7 @@ export const ToolAnnotations$inboundSchema: z.ZodType<
   destructiveHint: z.nullable(z.boolean()).optional(),
   idempotentHint: z.nullable(z.boolean()).optional(),
   openWorldHint: z.nullable(z.boolean()).optional(),
-}).catchall(z.any());
+});
 
 export function toolAnnotationsFromJSON(
   jsonString: string,

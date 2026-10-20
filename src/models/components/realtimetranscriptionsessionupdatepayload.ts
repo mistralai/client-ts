@@ -13,6 +13,12 @@ import {
   AudioFormat$Outbound,
   AudioFormat$outboundSchema,
 } from "./audioformat.js";
+import {
+  TurnDetectionConfig,
+  TurnDetectionConfig$inboundSchema,
+  TurnDetectionConfig$Outbound,
+  TurnDetectionConfig$outboundSchema,
+} from "./turndetectionconfig.js";
 
 export type RealtimeTranscriptionSessionUpdatePayload = {
   /**
@@ -23,6 +29,26 @@ export type RealtimeTranscriptionSessionUpdatePayload = {
    * Set before sending audio. Streaming delay updates are rejected after audio starts.
    */
   targetStreamingDelayMs?: number | null | undefined;
+  /**
+   * Inline speaker tagging. Set before audio starts.
+   */
+  diarize?: boolean | null | undefined;
+  /**
+   * Anticipated phrases or terms to bias transcription towards. Set before audio starts.
+   */
+  contextBias?: Array<string> | null | undefined;
+  /**
+   * ISO-639-1 code of the input audio language. Set before audio starts.
+   */
+  language?: string | null | undefined;
+  /**
+   * Reference audio for known speakers, keyed by speaker name. Predicted speakers are matched against these references. Requires diarize. Set before sending audio.
+   */
+  speakerReferences?: { [k: string]: string } | null | undefined;
+  /**
+   * Emit turn.start, turn.eager_end, turn.resume and turn.end events derived from the model's semantic voice activity detection. Set before sending audio.
+   */
+  turnDetection?: TurnDetectionConfig | null | undefined;
 };
 
 /** @internal */
@@ -32,16 +58,29 @@ export const RealtimeTranscriptionSessionUpdatePayload$inboundSchema: z.ZodType<
 > = z.object({
   audio_format: z.nullable(AudioFormat$inboundSchema).optional(),
   target_streaming_delay_ms: z.nullable(z.int()).optional(),
+  diarize: z.nullable(z.boolean()).optional(),
+  context_bias: z.nullable(z.array(z.string())).optional(),
+  language: z.nullable(z.string()).optional(),
+  speaker_references: z.nullable(z.record(z.string(), z.string())).optional(),
+  turn_detection: z.nullable(TurnDetectionConfig$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "audio_format": "audioFormat",
     "target_streaming_delay_ms": "targetStreamingDelayMs",
+    "context_bias": "contextBias",
+    "speaker_references": "speakerReferences",
+    "turn_detection": "turnDetection",
   });
 });
 /** @internal */
 export type RealtimeTranscriptionSessionUpdatePayload$Outbound = {
   audio_format?: AudioFormat$Outbound | null | undefined;
   target_streaming_delay_ms?: number | null | undefined;
+  diarize?: boolean | null | undefined;
+  context_bias?: Array<string> | null | undefined;
+  language?: string | null | undefined;
+  speaker_references?: { [k: string]: string } | null | undefined;
+  turn_detection?: TurnDetectionConfig$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -52,10 +91,18 @@ export const RealtimeTranscriptionSessionUpdatePayload$outboundSchema:
   > = z.object({
     audioFormat: z.nullable(AudioFormat$outboundSchema).optional(),
     targetStreamingDelayMs: z.nullable(z.int()).optional(),
+    diarize: z.nullable(z.boolean()).optional(),
+    contextBias: z.nullable(z.array(z.string())).optional(),
+    language: z.nullable(z.string()).optional(),
+    speakerReferences: z.nullable(z.record(z.string(), z.string())).optional(),
+    turnDetection: z.nullable(TurnDetectionConfig$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       audioFormat: "audio_format",
       targetStreamingDelayMs: "target_streaming_delay_ms",
+      contextBias: "context_bias",
+      speakerReferences: "speaker_references",
+      turnDetection: "turn_detection",
     });
   });
 

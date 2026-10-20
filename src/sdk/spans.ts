@@ -9,6 +9,7 @@ import { betaObservabilitySpansFetchSpanFieldOptions } from "../funcs/betaObserv
 import { betaObservabilitySpansListSpanEvalFields } from "../funcs/betaObservabilitySpansListSpanEvalFields.js";
 import { betaObservabilitySpansListSpanFields } from "../funcs/betaObservabilitySpansListSpanFields.js";
 import { betaObservabilitySpansSearchLatestSpanEvaluations } from "../funcs/betaObservabilitySpansSearchLatestSpanEvaluations.js";
+import { betaObservabilitySpansSearchPipelineResults } from "../funcs/betaObservabilitySpansSearchPipelineResults.js";
 import { betaObservabilitySpansSearchSpanEvaluations } from "../funcs/betaObservabilitySpansSearchSpanEvaluations.js";
 import { betaObservabilitySpansSearchSpans } from "../funcs/betaObservabilitySpansSearchSpans.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -84,6 +85,21 @@ export class Spans extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GetSpanEvaluations> {
     return unwrapAsync(betaObservabilitySpansSearchLatestSpanEvaluations(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Search pipeline results
+   */
+  async searchPipelineResults(
+    request:
+      operations.SearchPipelineResultsV1ObservabilityPipelineResultsSearchPostRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetPipelineResults> {
+    return unwrapAsync(betaObservabilitySpansSearchPipelineResults(
       this,
       request,
       options,

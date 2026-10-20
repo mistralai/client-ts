@@ -15,5 +15,5 @@ let value: EntityType = "User";
 ## Values
 
 ```typescript
-"User" | "Workspace" | "Org" | Unrecognized<string>
+"User" | "Workspace" | Unrecognized<string>
 ```

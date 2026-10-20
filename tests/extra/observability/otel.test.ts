@@ -134,6 +134,42 @@ describe("enrichSpanFromResponse", () => {
     expect(span.attributes[semConvAttributes.ATTR_GEN_AI_USAGE_INPUT_TOKENS]).toBe(10);
   });
 
+  test("chat completion response with cached tokens", () => {
+    const span = createMockSpan();
+    const response = {
+      id: "cmpl-1",
+      model: "mistral-large",
+      choices: [{ message: { role: "assistant", content: "Hi!" }, finish_reason: "stop" }],
+      usage: {
+        prompt_tokens: 10,
+        completion_tokens: 5,
+        total_tokens: 15,
+        prompt_tokens_details: { cached_tokens: 7 },
+      },
+    };
+    enrichSpanFromResponse(createMockTracer(), span, "chat_completion_v1", response);
+    expect(span.attributes[semConvAttributes.ATTR_GEN_AI_USAGE_CACHE_READ_INPUT_TOKENS]).toBe(7);
+  });
+
+  test.each([
+    ["absent", { prompt_tokens: 10, completion_tokens: 5, total_tokens: 15 }],
+    [
+      "zero",
+      { prompt_tokens: 10, completion_tokens: 5, total_tokens: 15, prompt_tokens_details: { cached_tokens: 0 } },
+    ],
+  ])("chat completion response without cached tokens (%s)", (_label, usage) => {
+    const span = createMockSpan();
+    const response = {
+      id: "cmpl-1",
+      model: "mistral-large",
+      choices: [{ message: { role: "assistant", content: "Hi!" }, finish_reason: "stop" }],
+      usage,
+    };
+    enrichSpanFromResponse(createMockTracer(), span, "chat_completion_v1", response);
+    expect(span.attributes[semConvAttributes.ATTR_GEN_AI_USAGE_INPUT_TOKENS]).toBe(10);
+    expect(span.attributes[semConvAttributes.ATTR_GEN_AI_USAGE_CACHE_READ_INPUT_TOKENS]).toBeUndefined();
+  });
+
   test("create agent response", () => {
     const span = createMockSpan();
     const response = { id: "agent-1", name: "MyAgent", model: "mistral-large", instructions: "Be helpful" };

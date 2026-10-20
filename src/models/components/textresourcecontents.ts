@@ -16,7 +16,6 @@ export type TextResourceContents = {
   mimeType?: string | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
   text: string;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -28,7 +27,7 @@ export const TextResourceContents$inboundSchema: z.ZodType<
   mimeType: z.nullable(z.string()).optional(),
   _meta: z.nullable(z.record(z.string(), z.any())).optional(),
   text: z.string(),
-}).catchall(z.any()).transform((v) => {
+}).transform((v) => {
   return remap$(v, {
     "_meta": "meta",
   });

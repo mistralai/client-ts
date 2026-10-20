@@ -14,7 +14,7 @@ export type SharingRequest = {
   orgId?: string | null | undefined;
   level: ShareEnum;
   /**
-   * The id of the entity (user, workspace or organization) to share with
+   * The id of the user or workspace to share with
    */
   shareWithUuid: string;
   /**

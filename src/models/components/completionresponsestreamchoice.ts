@@ -9,6 +9,10 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ChatCompletionResponseChoiceLogprobs,
+  ChatCompletionResponseChoiceLogprobs$inboundSchema,
+} from "./chatcompletionresponsechoicelogprobs.js";
 import { DeltaMessage, DeltaMessage$inboundSchema } from "./deltamessage.js";
 
 export const CompletionResponseStreamChoiceFinishReason = {
@@ -25,6 +29,8 @@ export type CompletionResponseStreamChoice = {
   index: number;
   delta: DeltaMessage;
   finishReason: CompletionResponseStreamChoiceFinishReason | null;
+  logprobs?: ChatCompletionResponseChoiceLogprobs | null | undefined;
+  promptLogprobs?: ChatCompletionResponseChoiceLogprobs | null | undefined;
 };
 
 /** @internal */
@@ -42,9 +48,15 @@ export const CompletionResponseStreamChoice$inboundSchema: z.ZodType<
   finish_reason: z.nullable(
     CompletionResponseStreamChoiceFinishReason$inboundSchema,
   ),
+  logprobs: z.nullable(ChatCompletionResponseChoiceLogprobs$inboundSchema)
+    .optional(),
+  prompt_logprobs: z.nullable(
+    ChatCompletionResponseChoiceLogprobs$inboundSchema,
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "finish_reason": "finishReason",
+    "prompt_logprobs": "promptLogprobs",
   });
 });
 

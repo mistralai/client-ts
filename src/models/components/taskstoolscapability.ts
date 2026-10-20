@@ -6,13 +6,16 @@ import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  TasksCallCapability,
+  TasksCallCapability$inboundSchema,
+} from "./taskscallcapability.js";
 
 /**
- * Capability for tasks tools operations.
+ * Capability for task-augmented tool operations (2025-11-25 only).
  */
 export type TasksToolsCapability = {
-  call?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
+  call?: TasksCallCapability | null | undefined;
 };
 
 /** @internal */
@@ -20,8 +23,8 @@ export const TasksToolsCapability$inboundSchema: z.ZodType<
   TasksToolsCapability,
   unknown
 > = z.object({
-  call: z.nullable(z.record(z.string(), z.any())).optional(),
-}).catchall(z.any());
+  call: z.nullable(TasksCallCapability$inboundSchema).optional(),
+});
 
 export function tasksToolsCapabilityFromJSON(
   jsonString: string,

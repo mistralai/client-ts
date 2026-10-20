@@ -105,6 +105,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "gender": payload?.gender,
+    "kind": payload?.kind,
     "language": payload?.language,
     "page_size": payload?.page_size,
     "page_token": payload?.page_token,

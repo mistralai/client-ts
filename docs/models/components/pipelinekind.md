@@ -5,7 +5,7 @@
 ```typescript
 import { PipelineKind } from "@mistralai/mistralai/models/components";
 
-let value: PipelineKind = "detection";
+let value: PipelineKind = "detection-v1";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: PipelineKind = "detection";
 ## Values
 
 ```typescript
-"detection" | "moderation" | "judge" | "export" | Unrecognized<string>
+"detection-v1" | "moderation-v1" | "judge-v1" | "export-v1" | Unrecognized<string>
 ```

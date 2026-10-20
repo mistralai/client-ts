@@ -6,13 +6,16 @@ import * as z from "zod/v4";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  TasksCreateElicitationCapability,
+  TasksCreateElicitationCapability$inboundSchema,
+} from "./taskscreateelicitationcapability.js";
 
 /**
- * Capability for tasks elicitation operations.
+ * Capability for task-augmented elicitation operations (2025-11-25 only).
  */
 export type TasksElicitationCapability = {
-  create?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
+  create?: TasksCreateElicitationCapability | null | undefined;
 };
 
 /** @internal */
@@ -20,8 +23,8 @@ export const TasksElicitationCapability$inboundSchema: z.ZodType<
   TasksElicitationCapability,
   unknown
 > = z.object({
-  create: z.nullable(z.record(z.string(), z.any())).optional(),
-}).catchall(z.any());
+  create: z.nullable(TasksCreateElicitationCapability$inboundSchema).optional(),
+});
 
 export function tasksElicitationCapabilityFromJSON(
   jsonString: string,

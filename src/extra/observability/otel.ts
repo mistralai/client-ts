@@ -46,6 +46,7 @@ import {
   ATTR_GEN_AI_TOOL_DEFINITIONS,
   ATTR_GEN_AI_TOOL_NAME,
   ATTR_GEN_AI_TOOL_TYPE,
+  ATTR_GEN_AI_USAGE_CACHE_READ_INPUT_TOKENS,
   ATTR_GEN_AI_USAGE_INPUT_TOKENS,
   ATTR_GEN_AI_USAGE_OUTPUT_TOKENS,
   ATTR_HTTP_REQUEST_METHOD,
@@ -105,6 +106,7 @@ export const semConvAttributes = {
   ATTR_GEN_AI_TOOL_DEFINITIONS,
   ATTR_GEN_AI_TOOL_NAME,
   ATTR_GEN_AI_TOOL_TYPE,
+  ATTR_GEN_AI_USAGE_CACHE_READ_INPUT_TOKENS,
   ATTR_GEN_AI_USAGE_INPUT_TOKENS,
   ATTR_GEN_AI_USAGE_OUTPUT_TOKENS,
   ATTR_HTTP_REQUEST_METHOD,
@@ -364,10 +366,17 @@ function enrichResponseGenaiAttrs(
     );
   }
 
-  const usage = responseData["usage"] as Record<string, number> | undefined;
+  const usage = responseData["usage"] as Record<string, unknown> | undefined;
   if (usage) {
     attributes[ATTR_GEN_AI_USAGE_INPUT_TOKENS] = usage["prompt_tokens"] || 0;
     attributes[ATTR_GEN_AI_USAGE_OUTPUT_TOKENS] = usage["completion_tokens"] || 0;
+    const promptTokensDetails = usage["prompt_tokens_details"] as
+      | Record<string, unknown>
+      | undefined;
+    const cachedTokens = promptTokensDetails?.["cached_tokens"];
+    if (typeof cachedTokens === "number" && cachedTokens > 0) {
+      attributes[ATTR_GEN_AI_USAGE_CACHE_READ_INPUT_TOKENS] = cachedTokens;
+    }
   }
 
   setAvailableAttributes(span, attributes);

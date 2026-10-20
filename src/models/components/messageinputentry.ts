@@ -17,11 +17,11 @@ import {
   MessageInputContentChunks$outboundSchema,
 } from "./messageinputcontentchunks.js";
 
-export const Role = {
+export const MessageInputEntryRole = {
   Assistant: "assistant",
   User: "user",
 } as const;
-export type Role = OpenEnum<typeof Role>;
+export type MessageInputEntryRole = OpenEnum<typeof MessageInputEntryRole>;
 
 export type MessageInputEntryContent =
   | string
@@ -36,17 +36,21 @@ export type MessageInputEntry = {
   createdAt?: Date | undefined;
   completedAt?: Date | null | undefined;
   id?: string | undefined;
-  role: Role;
+  role: MessageInputEntryRole;
   content: string | Array<MessageInputContentChunks>;
   prefix?: boolean | undefined;
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodType<Role, unknown> = openEnums
-  .inboundSchema(Role);
+export const MessageInputEntryRole$inboundSchema: z.ZodType<
+  MessageInputEntryRole,
+  unknown
+> = openEnums.inboundSchema(MessageInputEntryRole);
 /** @internal */
-export const Role$outboundSchema: z.ZodType<string, Role> = openEnums
-  .outboundSchema(Role);
+export const MessageInputEntryRole$outboundSchema: z.ZodType<
+  string,
+  MessageInputEntryRole
+> = openEnums.outboundSchema(MessageInputEntryRole);
 
 /** @internal */
 export const MessageInputEntryContent$inboundSchema: z.ZodType<
@@ -94,7 +98,7 @@ export const MessageInputEntry$inboundSchema: z.ZodType<
     z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   id: z.string().optional(),
-  role: Role$inboundSchema,
+  role: MessageInputEntryRole$inboundSchema,
   content: smartUnion([
     z.string(),
     z.array(MessageInputContentChunks$inboundSchema),
@@ -128,7 +132,7 @@ export const MessageInputEntry$outboundSchema: z.ZodType<
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   id: z.string().optional(),
-  role: Role$outboundSchema,
+  role: MessageInputEntryRole$outboundSchema,
   content: smartUnion([
     z.string(),
     z.array(MessageInputContentChunks$outboundSchema),

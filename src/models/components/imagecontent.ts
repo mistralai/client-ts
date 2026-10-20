@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Annotations, Annotations$inboundSchema } from "./annotations.js";
 
 /**
- * Image content for a message.
+ * An image provided to or from an LLM.
  */
 export type ImageContent = {
   type: "image";
@@ -18,7 +18,6 @@ export type ImageContent = {
   mimeType: string;
   annotations?: Annotations | null | undefined;
   meta?: { [k: string]: any } | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -29,7 +28,7 @@ export const ImageContent$inboundSchema: z.ZodType<ImageContent, unknown> = z
     mimeType: z.string(),
     annotations: z.nullable(Annotations$inboundSchema).optional(),
     _meta: z.nullable(z.record(z.string(), z.any())).optional(),
-  }).catchall(z.any()).transform((v) => {
+  }).transform((v) => {
     return remap$(v, {
       "_meta": "meta",
     });

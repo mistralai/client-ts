@@ -17,11 +17,10 @@ export const TaskSupport = {
 export type TaskSupport = OpenEnum<typeof TaskSupport>;
 
 /**
- * Execution-related properties for a tool.
+ * Execution-related properties for a tool (2025-11-25 only).
  */
 export type ToolExecution = {
   taskSupport?: TaskSupport | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -32,7 +31,7 @@ export const TaskSupport$inboundSchema: z.ZodType<TaskSupport, unknown> =
 export const ToolExecution$inboundSchema: z.ZodType<ToolExecution, unknown> = z
   .object({
     taskSupport: z.nullable(TaskSupport$inboundSchema).optional(),
-  }).catchall(z.any());
+  });
 
 export function toolExecutionFromJSON(
   jsonString: string,

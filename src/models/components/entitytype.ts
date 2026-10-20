@@ -12,7 +12,6 @@ import { OpenEnum } from "../../types/enums.js";
 export const EntityType = {
   User: "User",
   Workspace: "Workspace",
-  Org: "Org",
 } as const;
 /**
  * The type of entity, used to share a library.

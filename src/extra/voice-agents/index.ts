@@ -1,0 +1,56 @@
+export { CHANNELS, SAMPLE_RATE, type AudioInterface } from "./audio/audio.js";
+export { init, type VoiceAgentInitRequest } from "./client.js";
+export {
+  VoiceAgentConfigurationError,
+  VoiceAgentConnectionError,
+  VoiceAgentDependencyError,
+  VoiceAgentError,
+} from "./errors.js";
+export type {
+  AgentState,
+  AudioTrackEvent,
+  BrowserVoiceEventMap,
+  ConnectedEvent,
+  DisconnectReason,
+  DisconnectedEvent,
+  NodeVoiceEventMap,
+  TransportDisconnectReason,
+  UnhandledToolEvent,
+  UnknownVoiceAgentEvent,
+  VoiceAgentErrorEvent,
+  VoiceAgentSessionUpdatedEvent,
+  VoiceAgentStateChangedEvent,
+  VoiceAgentToolCallEndedEvent,
+  VoiceAgentToolCallStartedEvent,
+  VoiceAgentTranscriptEvent,
+  VoiceEventMap,
+  VoiceEventName,
+} from "./events.js";
+export {
+  VoiceAgentSession,
+  type SessionUpdateRequest,
+  type VoiceAgentSessionOptions,
+} from "./session.js";
+export {
+  functionTool,
+  toAudioTool,
+  FunctionHandler,
+  VoiceAgentTool,
+  type AudioTool,
+  type CustomConnector,
+  type DocumentLibraryTool,
+  type FunctionHandlerFn,
+  type FunctionHandlers,
+  type FunctionTool,
+  type FunctionToolDef,
+  type HangUpTool,
+  type PhoneDestination,
+  type SipDestination,
+  type StaticToolFiller,
+  type Tool,
+  type ToolConfiguration,
+  type TransferCallTool,
+  type TransferTarget,
+  type WebSearchTool,
+  type WireTool,
+} from "./tools.js";

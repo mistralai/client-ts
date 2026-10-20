@@ -8,14 +8,24 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type OAuth2ClientCredentialsInput = {
   grantType: "client_credentials";
   clientId: string;
-  clientSecret: string;
+  clientSecret?: string | null | undefined;
+  /**
+   * PEM X.509 certificate registered on the OAuth2 client, for private_key_jwt.
+   */
+  clientCertificate?: string | null | undefined;
+  /**
+   * Unencrypted PEM RSA private key matching client_certificate, for private_key_jwt.
+   */
+  clientPrivateKey?: string | null | undefined;
 };
 
 /** @internal */
 export type OAuth2ClientCredentialsInput$Outbound = {
   grant_type: "client_credentials";
   client_id: string;
-  client_secret: string;
+  client_secret?: string | null | undefined;
+  client_certificate?: string | null | undefined;
+  client_private_key?: string | null | undefined;
 };
 
 /** @internal */
@@ -25,12 +35,16 @@ export const OAuth2ClientCredentialsInput$outboundSchema: z.ZodType<
 > = z.object({
   grantType: z.literal("client_credentials"),
   clientId: z.string(),
-  clientSecret: z.string(),
+  clientSecret: z.nullable(z.string()).optional(),
+  clientCertificate: z.nullable(z.string()).optional(),
+  clientPrivateKey: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     grantType: "grant_type",
     clientId: "client_id",
     clientSecret: "client_secret",
+    clientCertificate: "client_certificate",
+    clientPrivateKey: "client_private_key",
   });
 });
 

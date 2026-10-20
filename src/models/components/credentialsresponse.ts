@@ -18,6 +18,9 @@ import {
 
 export type CredentialsResponse = {
   credentials: Array<AuthenticationConfiguration>;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   connectorPresetCredentialsForAuth?: Array<AuthenticationType> | undefined;
 };
 

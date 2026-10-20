@@ -9,12 +9,15 @@ import { remap as remap$ } from "../../lib/primitives.js";
  * Request body for replacing the workspace roles assigned to a service account.
  */
 export type SetServiceAccountRolesRequest = {
-  roleIds?: Array<string> | undefined;
+  /**
+   * Workspace role UUIDs to assign. Required and non-empty; omitted or empty lists return 422. Select member explicitly for no role-granted permissions; workspace-wide sharing may still grant access.
+   */
+  roleIds: Array<string>;
 };
 
 /** @internal */
 export type SetServiceAccountRolesRequest$Outbound = {
-  role_ids?: Array<string> | undefined;
+  role_ids: Array<string>;
 };
 
 /** @internal */
@@ -22,7 +25,7 @@ export const SetServiceAccountRolesRequest$outboundSchema: z.ZodType<
   SetServiceAccountRolesRequest$Outbound,
   SetServiceAccountRolesRequest
 > = z.object({
-  roleIds: z.array(z.string()).optional(),
+  roleIds: z.array(z.string()),
 }).transform((v) => {
   return remap$(v, {
     roleIds: "role_ids",

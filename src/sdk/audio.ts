@@ -3,6 +3,8 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { AudioAgents } from "./audioagents.js";
+import { AudioSessions } from "./audiosessions.js";
 import { Speech } from "./speech.js";
 import { Transcriptions } from "./transcriptions.js";
 import { Voices } from "./voices.js";
@@ -21,5 +23,15 @@ export class Audio extends ClientSDK {
   private _voices?: Voices;
   get voices(): Voices {
     return (this._voices ??= new Voices(this._options));
+  }
+
+  private _sessions?: AudioSessions;
+  get sessions(): AudioSessions {
+    return (this._sessions ??= new AudioSessions(this._options));
+  }
+
+  private _agents?: AudioAgents;
+  get agents(): AudioAgents {
+    return (this._agents ??= new AudioAgents(this._options));
   }
 }

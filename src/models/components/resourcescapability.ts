@@ -13,7 +13,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type ResourcesCapability = {
   subscribe?: boolean | null | undefined;
   listChanged?: boolean | null | undefined;
-  [additionalProperties: string]: unknown;
 };
 
 /** @internal */
@@ -23,7 +22,7 @@ export const ResourcesCapability$inboundSchema: z.ZodType<
 > = z.object({
   subscribe: z.nullable(z.boolean()).optional(),
   listChanged: z.nullable(z.boolean()).optional(),
-}).catchall(z.any());
+});
 
 export function resourcesCapabilityFromJSON(
   jsonString: string,

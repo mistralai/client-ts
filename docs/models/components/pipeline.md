@@ -17,12 +17,33 @@ let value: Pipeline = {
   description: "fooey lest repentant now which into drat",
   selectors: [
     {
-      sourceKind: "span",
+      sourceKind: "metric",
     },
   ],
-  enabled: false,
-  creatorId: "0db83e0b-c14c-4690-861e-af431fc5b74d",
-  pipelineConfigs: [],
+  enabled: true,
+  creatorId: null,
+  pipelineConfigs: [
+    {
+      id: "b83e0bc1-4c69-4061-9eaf-431fc5b74d16",
+      createdAt: new Date("2024-03-21T09:43:54.801Z"),
+      updatedAt: new Date("2026-06-28T18:06:18.992Z"),
+      deletedAt: new Date("2025-07-12T12:50:10.118Z"),
+      scope: "workspace",
+      workspaceId: "45a19f09-6b5c-4ccb-a867-a68fae670f32",
+      name: "<value>",
+      slug: "<value>",
+      pipelineKind: "moderation-v1",
+      selectors: [],
+      enabled: true,
+      definition: {
+        destination: {
+          protocol: "<value>",
+          endpoint: "<value>",
+          insecure: false,
+        },
+      },
+    },
+  ],
 };
 ```
 

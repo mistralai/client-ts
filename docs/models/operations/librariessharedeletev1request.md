@@ -9,7 +9,7 @@ let value: LibrariesShareDeleteV1Request = {
   libraryId: "60a98302-6f5c-420d-b196-340076197225",
   sharingDelete: {
     shareWithUuid: "62303524-1a55-4463-a880-73404efa3580",
-    shareWithType: "Org",
+    shareWithType: "Workspace",
   },
 };
 ```

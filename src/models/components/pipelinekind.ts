@@ -7,16 +7,13 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
 export const PipelineKind = {
-  Detection: "detection",
-  Moderation: "moderation",
-  Judge: "judge",
-  Export: "export",
+  DetectionV1: "detection-v1",
+  ModerationV1: "moderation-v1",
+  JudgeV1: "judge-v1",
+  ExportV1: "export-v1",
 } as const;
 export type PipelineKind = OpenEnum<typeof PipelineKind>;
 
 /** @internal */
 export const PipelineKind$inboundSchema: z.ZodType<PipelineKind, unknown> =
   openEnums.inboundSchema(PipelineKind);
-/** @internal */
-export const PipelineKind$outboundSchema: z.ZodType<string, PipelineKind> =
-  openEnums.outboundSchema(PipelineKind);

@@ -50,6 +50,8 @@ export type ExtendedOAuthServerMetadata = {
     | undefined;
   codeChallengeMethodsSupported?: Array<string> | null | undefined;
   clientIdMetadataDocumentSupported?: boolean | null | undefined;
+  authorizationResponseIssParameterSupported?: boolean | null | undefined;
+  authorizationGrantProfilesSupported?: Array<string> | null | undefined;
   xSource?: OAuthMetadataSource | null | undefined;
   xResourceUrl?: string | null | undefined;
   xScope?: string | null | undefined;
@@ -91,6 +93,10 @@ export const ExtendedOAuthServerMetadata$inboundSchema: z.ZodType<
   ).optional(),
   code_challenge_methods_supported: z.nullable(z.array(z.string())).optional(),
   client_id_metadata_document_supported: z.nullable(z.boolean()).optional(),
+  authorization_response_iss_parameter_supported: z.nullable(z.boolean())
+    .optional(),
+  authorization_grant_profiles_supported: z.nullable(z.array(z.string()))
+    .optional(),
   x_source: z.nullable(OAuthMetadataSource$inboundSchema).optional(),
   x_resource_url: z.nullable(z.string()).optional(),
   x_scope: z.nullable(z.string()).optional(),
@@ -124,6 +130,10 @@ export const ExtendedOAuthServerMetadata$inboundSchema: z.ZodType<
     "code_challenge_methods_supported": "codeChallengeMethodsSupported",
     "client_id_metadata_document_supported":
       "clientIdMetadataDocumentSupported",
+    "authorization_response_iss_parameter_supported":
+      "authorizationResponseIssParameterSupported",
+    "authorization_grant_profiles_supported":
+      "authorizationGrantProfilesSupported",
     "x_source": "xSource",
     "x_resource_url": "xResourceUrl",
     "x_scope": "xScope",
@@ -165,6 +175,8 @@ export type ExtendedOAuthServerMetadata$Outbound = {
     | undefined;
   code_challenge_methods_supported?: Array<string> | null | undefined;
   client_id_metadata_document_supported?: boolean | null | undefined;
+  authorization_response_iss_parameter_supported?: boolean | null | undefined;
+  authorization_grant_profiles_supported?: Array<string> | null | undefined;
   x_source?: string | null | undefined;
   x_resource_url?: string | null | undefined;
   x_scope?: string | null | undefined;
@@ -204,6 +216,10 @@ export const ExtendedOAuthServerMetadata$outboundSchema: z.ZodType<
   ).optional(),
   codeChallengeMethodsSupported: z.nullable(z.array(z.string())).optional(),
   clientIdMetadataDocumentSupported: z.nullable(z.boolean()).optional(),
+  authorizationResponseIssParameterSupported: z.nullable(z.boolean())
+    .optional(),
+  authorizationGrantProfilesSupported: z.nullable(z.array(z.string()))
+    .optional(),
   xSource: z.nullable(OAuthMetadataSource$outboundSchema).optional(),
   xResourceUrl: z.nullable(z.string()).optional(),
   xScope: z.nullable(z.string()).optional(),
@@ -235,6 +251,10 @@ export const ExtendedOAuthServerMetadata$outboundSchema: z.ZodType<
       "introspection_endpoint_auth_signing_alg_values_supported",
     codeChallengeMethodsSupported: "code_challenge_methods_supported",
     clientIdMetadataDocumentSupported: "client_id_metadata_document_supported",
+    authorizationResponseIssParameterSupported:
+      "authorization_response_iss_parameter_supported",
+    authorizationGrantProfilesSupported:
+      "authorization_grant_profiles_supported",
     xSource: "x_source",
     xResourceUrl: "x_resource_url",
     xScope: "x_scope",

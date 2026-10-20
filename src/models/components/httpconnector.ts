@@ -27,14 +27,6 @@ import {
   PublicAuthenticationMethod$inboundSchema,
 } from "./publicauthenticationmethod.js";
 import {
-  PublicConnectionConfig,
-  PublicConnectionConfig$inboundSchema,
-} from "./publicconnectionconfig.js";
-import {
-  PublicExecutionEnv,
-  PublicExecutionEnv$inboundSchema,
-} from "./publicexecutionenv.js";
-import {
   ResourceVisibility,
   ResourceVisibility$inboundSchema,
 } from "./resourcevisibility.js";
@@ -58,7 +50,6 @@ export type HTTPConnector = {
   supportedAuthMethods?: Array<PublicAuthenticationMethod> | null | undefined;
   connectionPreferences?: Array<ConnectionPreference> | null | undefined;
   connectionCredentials?: Array<AuthenticationConfiguration> | null | undefined;
-  active?: boolean | null | undefined;
   blockedBy?: Array<ConsumerType> | undefined;
   privateToolExecution: boolean;
   /**
@@ -68,8 +59,6 @@ export type HTTPConnector = {
   mistral: boolean;
   isAuthenticated?: boolean | null | undefined;
   tools?: Array<ConnectorTool> | null | undefined;
-  connectionConfig?: PublicConnectionConfig | null | undefined;
-  executionEnv?: PublicExecutionEnv | null | undefined;
   protocol: "http";
 };
 
@@ -100,16 +89,12 @@ export const HTTPConnector$inboundSchema: z.ZodType<HTTPConnector, unknown> = z
     connection_credentials: z.nullable(
       z.array(AuthenticationConfiguration$inboundSchema),
     ).optional(),
-    active: z.nullable(z.boolean()).optional(),
     blocked_by: z.array(ConsumerType$inboundSchema).optional(),
     private_tool_execution: z.boolean(),
     supports_mcp: z.boolean(),
     mistral: z.boolean().default(false),
     is_authenticated: z.nullable(z.boolean()).optional(),
     tools: z.nullable(z.array(ConnectorTool$inboundSchema)).optional(),
-    connection_config: z.nullable(PublicConnectionConfig$inboundSchema)
-      .optional(),
-    execution_env: z.nullable(PublicExecutionEnv$inboundSchema).optional(),
     protocol: z.literal("http"),
   }).transform((v) => {
     return remap$(v, {
@@ -128,8 +113,6 @@ export const HTTPConnector$inboundSchema: z.ZodType<HTTPConnector, unknown> = z
       "private_tool_execution": "privateToolExecution",
       "supports_mcp": "supportsMcp",
       "is_authenticated": "isAuthenticated",
-      "connection_config": "connectionConfig",
-      "execution_env": "executionEnv",
     });
   });
 

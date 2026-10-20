@@ -18,26 +18,7 @@ export const PipelineConfigHeader$inboundSchema: z.ZodType<
 > = z.object({
   value: z.nullable(z.string()).optional(),
 });
-/** @internal */
-export type PipelineConfigHeader$Outbound = {
-  value?: string | null | undefined;
-};
 
-/** @internal */
-export const PipelineConfigHeader$outboundSchema: z.ZodType<
-  PipelineConfigHeader$Outbound,
-  PipelineConfigHeader
-> = z.object({
-  value: z.nullable(z.string()).optional(),
-});
-
-export function pipelineConfigHeaderToJSON(
-  pipelineConfigHeader: PipelineConfigHeader,
-): string {
-  return JSON.stringify(
-    PipelineConfigHeader$outboundSchema.parse(pipelineConfigHeader),
-  );
-}
 export function pipelineConfigHeaderFromJSON(
   jsonString: string,
 ): SafeParseResult<PipelineConfigHeader, SDKValidationError> {

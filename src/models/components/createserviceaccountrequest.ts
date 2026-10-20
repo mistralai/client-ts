@@ -9,6 +9,9 @@ export type CreateServiceAccountRequest = {
   name: string;
   workspaceId: string;
   description?: string | null | undefined;
+  /**
+   * Workspace role UUIDs to assign. Omitted or empty lists default to member, which grants no role permissions. Workspace-wide sharing may still grant access.
+   */
   roleIds?: Array<string> | undefined;
 };
 

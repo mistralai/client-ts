@@ -1,6 +1,6 @@
 # PromptArgument
 
-An argument for a prompt template.
+Describes an argument that a prompt can accept.
 
 ## Example Usage
 
@@ -14,9 +14,9 @@ let value: PromptArgument = {
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `name`                 | *string*               | :heavy_check_mark:     | N/A                    |
-| `description`          | *string*               | :heavy_minus_sign:     | N/A                    |
-| `required`             | *boolean*              | :heavy_minus_sign:     | N/A                    |
-| `additionalProperties` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `name`             | *string*           | :heavy_check_mark: | N/A                |
+| `title`            | *string*           | :heavy_minus_sign: | N/A                |
+| `description`      | *string*           | :heavy_minus_sign: | N/A                |
+| `required`         | *boolean*          | :heavy_minus_sign: | N/A                |

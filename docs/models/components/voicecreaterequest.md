@@ -9,7 +9,6 @@ import { VoiceCreateRequest } from "@mistralai/mistralai/models/components";
 
 let value: VoiceCreateRequest = {
   name: "<value>",
-  sampleAudio: "<value>",
 };
 ```
 
@@ -26,5 +25,5 @@ let value: VoiceCreateRequest = {
 | `color`                                   | *string*                                  | :heavy_minus_sign:                        | N/A                                       |
 | `description`                             | *string*                                  | :heavy_minus_sign:                        | N/A                                       |
 | `retentionNotice`                         | *number*                                  | :heavy_minus_sign:                        | N/A                                       |
-| `sampleAudio`                             | *string*                                  | :heavy_check_mark:                        | Base64-encoded audio file                 |
+| `sampleAudio`                             | *string*                                  | :heavy_minus_sign:                        | Base64-encoded audio file                 |
 | `sampleFilename`                          | *string*                                  | :heavy_minus_sign:                        | Original filename for extension detection |
