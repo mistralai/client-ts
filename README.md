@@ -1,12 +1,5 @@
 # Mistral Typescript Client
 
-> **This is v2 of the Mistral TypeScript SDK.**
->
-> Key changes from v1: **ESM-only**, shorter type names, forward-compatible enums/unions, Zod v4.
-> See the **[Migration Guide](https://github.com/mistralai/client-ts/blob/main/MIGRATION.md)** for full details.
->
-> To pin v1: `npm install @mistralai/mistralai@^1` · **[v1 documentation and source](https://github.com/mistralai/client-ts/tree/v1)**
-
 <!-- Start Summary [summary] -->
 ## Summary
 
@@ -595,6 +588,11 @@ We have dedicated SDKs for the following providers:
 
 * [create](docs/sdks/realtimesessions/README.md#create) - Create Client Session
 
+### [Responses](docs/sdks/responses/README.md)
+
+* [create](docs/sdks/responses/README.md#create) - Create Response
+* [countInputTokens](docs/sdks/responses/README.md#countinputtokens) - Count Input Tokens
+
 ### [Workflows](docs/sdks/workflows/README.md)
 
 * [getWorkflows](docs/sdks/workflows/README.md#getworkflows) - Get Workflows
@@ -737,7 +735,7 @@ const mistral = new Mistral({
 
 async function run() {
   const result = await mistral.beta.rag.managedIndexes.generateIndexSummary({
-    language: "es",
+    language: "en",
     indexName: "<value>",
   });
 
@@ -961,8 +959,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 178 of 288 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 65 of 288 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 178 of 290 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 65 of 290 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1379,6 +1377,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`modelsUpdate`](docs/sdks/models/README.md#update) - Update Fine Tuned Model
 - [`ocrProcess`](docs/sdks/ocr/README.md#process) - OCR
 - [`realtimeSessionsCreate`](docs/sdks/realtimesessions/README.md#create) - Create Client Session
+- [`responsesCountInputTokens`](docs/sdks/responses/README.md#countinputtokens) - Count Input Tokens
+- [`responsesCreate`](docs/sdks/responses/README.md#create) - Create Response
 - [`workflowsArchiveWorkflow`](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
 - [`workflowsBulkArchiveWorkflows`](docs/sdks/workflows/README.md#bulkarchiveworkflows) - Bulk Archive Workflows
 - [`workflowsBulkUnarchiveWorkflows`](docs/sdks/workflows/README.md#bulkunarchiveworkflows) - Bulk Unarchive Workflows

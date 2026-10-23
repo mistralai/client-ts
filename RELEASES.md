@@ -1017,3 +1017,132 @@ Based on:
 - [typescript v3.1.0] .
 ### Releases
 - [NPM v3.1.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.1.0 - .
+
+## 2026-10-23 17:10:54
+### Generated SDK baseline differences
+The published SDK or generator baseline differs from the baseline used by the OpenAPI changelog.
+
+<details>
+<summary>Generated surface details</summary>
+
+#### Stable compatibility changes
+Removed from the stable API surface (1):
+- `Format`
+
+Now required on an existing stable model (1):
+- `AudioAgentCreateRequest.configuration`
+#### Stable type changes
+Changed types or signatures on the stable surface (2):
+- `AudioAgentCreateRequest.configuration: AudioAgentConfigurationRequest | null | undefined -> AudioAgentConfigurationRequest`
+- `OCRTableObject.format: Format -> FormatEnum`
+#### Beta surface changes
+Removed from the beta surface (69):
+- `GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostLanguage`
+- `GetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetLanguage`
+- `SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutLanguage`
+- `createIndexV1RagManagedIndexesPostResponseFromJSON`
+- `deleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequestToJSON`
+- `deleteIndexV1RagManagedIndexesIndexNameDeleteRequestToJSON`
+- `generateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequestToJSON`
+- `getChunkIndexV1RagManagedIndexesIndexNameChunksChunkIdGetRequestToJSON`
+- `getIndexV1RagManagedIndexesIndexNameGetRequestToJSON`
+- `getManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetRequestToJSON`
+- `grepIndexV1RagManagedIndexesIndexNameGrepPostRequestToJSON`
+- `ingestDocumentsV1RagManagedIndexesIndexNameDocumentsPostRequestToJSON`
+- `listIndexesV1RagManagedIndexesGetRequestToJSON`
+- `listIndexesV1RagManagedIndexesGetResponseFromJSON`
+- `navigateIndexV1RagManagedIndexesIndexNameNavigatePostRequestToJSON`
+- `readIndexV1RagManagedIndexesIndexNameReadPostRequestToJSON`
+- `searchIndexV1RagManagedIndexesIndexNameSearchPostRequestToJSON`
+- `setManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequestToJSON`
+- `updateIndexV1RagManagedIndexesIndexNamePutRequestToJSON`
+- `CreateIndexV1RagManagedIndexesPostResponse.headers`
+- `CreateIndexV1RagManagedIndexesPostResponse.result`
+- `DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest.deleteDocumentsRequest`
+- `DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest.indexName`
+- `DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest.indexName`
+- `GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest.force`
+- ...and 44 more
+
+Changed types or signatures in beta (30):
+- `ManagedIndexes.create(): async (request: components.CreateManagedIndexRequest, options?: RequestOptions): Promise<operations.CreateIndexV1RagManagedIndexesPostResponse> -> async (request: components.CreateManagedIndexRequest, options?: RequestOptions): Promise<operations.CreateIndexV1ContextSearchIndexesPostResponse>`
+- `ManagedIndexes.delete(): async (request: operations.DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest, options?: RequestOptions): Promise<components.DeleteManagedIndexResponse> -> async (request: operations.DeleteIndexV1ContextSearchIndexesIndexNameDeleteRequest, options?: RequestOptions): Promise<components.DeleteManagedIndexResponse>`
+- `ManagedIndexes.deleteDocuments(): async (request: operations.DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest, options?: RequestOptions): Promise<components.DeleteDocumentsResponse> -> async (request: operations.DeleteDocumentsV1ContextSearchIndexesIndexNameDocumentsDeleteRequest, options?: RequestOptions): Promise<components.DeleteDocumentsResponse>`
+- `ManagedIndexes.generateIndexSummary(): async (request: operations.GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest, options?: RequestOptions): Promise<JsonLStream<operations.SummaryStreamTypes>> -> async (request: operations.GenerateManagedIndexSummaryPostV1ContextSearchIndexesIndexNameSummaryFieldLanguagePostRequest, options?: RequestOptions): Promise<JsonLStream<operations.SummaryStreamTypes>>`
+- `ManagedIndexes.get(): async (request: operations.GetIndexV1RagManagedIndexesIndexNameGetRequest, options?: RequestOptions): Promise<components.ManagedIndexResponse> -> async (request: operations.GetIndexV1ContextSearchIndexesIndexNameGetRequest, options?: RequestOptions): Promise<components.ManagedIndexResponse>`
+- `ManagedIndexes.getChunk(): async (request: operations.GetChunkIndexV1RagManagedIndexesIndexNameChunksChunkIdGetRequest, options?: RequestOptions): Promise<components.NavigationResponse> -> async (request: operations.GetChunkIndexV1ContextSearchIndexesIndexNameChunksChunkIdGetRequest, options?: RequestOptions): Promise<components.NavigationResponse>`
+- `ManagedIndexes.getIndexSummary(): async (request: operations.GetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetRequest, options?: RequestOptions): Promise<components.GetSummaryResponseSummary> -> async (request: operations.GetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguageGetRequest, options?: RequestOptions): Promise<components.GetSummaryResponseSummary>`
+- `ManagedIndexes.grep(): async (request: operations.GrepIndexV1RagManagedIndexesIndexNameGrepPostRequest, options?: RequestOptions): Promise<components.NavigationResponse> -> async (request: operations.GrepIndexV1ContextSearchIndexesIndexNameGrepPostRequest, options?: RequestOptions): Promise<components.NavigationResponse>`
+- `ManagedIndexes.ingestDocuments(): async (request: operations.IngestDocumentsV1RagManagedIndexesIndexNameDocumentsPostRequest, options?: RequestOptions): Promise<components.IngestDocumentsResponse> -> async (request: operations.IngestDocumentsV1ContextSearchIndexesIndexNameDocumentsPostRequest, options?: RequestOptions): Promise<components.IngestDocumentsResponse>`
+- `ManagedIndexes.list(): async (request?: operations.ListIndexesV1RagManagedIndexesGetRequest | undefined, options?: RequestOptions): Promise< PageIterator< operations.ListIndexesV1RagManagedIndexesGetResponse, { cursor: string } > > -> async (request?: | operations.ListIndexesV1ContextSearchIndexesGetRequest | undefined, options?: RequestOptions): Promise< PageIterator< operations.ListIndexesV1ContextSearchIndexesGetResponse, { cursor: string } > >`
+- `ManagedIndexes.navigate(): async (request: operations.NavigateIndexV1RagManagedIndexesIndexNameNavigatePostRequest, options?: RequestOptions): Promise<components.NavigationResponse> -> async (request: operations.NavigateIndexV1ContextSearchIndexesIndexNameNavigatePostRequest, options?: RequestOptions): Promise<components.NavigationResponse>`
+- `ManagedIndexes.read(): async (request: operations.ReadIndexV1RagManagedIndexesIndexNameReadPostRequest, options?: RequestOptions): Promise<components.NavigationResponse> -> async (request: operations.ReadIndexV1ContextSearchIndexesIndexNameReadPostRequest, options?: RequestOptions): Promise<components.NavigationResponse>`
+- `ManagedIndexes.search(): async (request: operations.SearchIndexV1RagManagedIndexesIndexNameSearchPostRequest, options?: RequestOptions): Promise<components.SearchResponse> -> async (request: operations.SearchIndexV1ContextSearchIndexesIndexNameSearchPostRequest, options?: RequestOptions): Promise<components.SearchResponse>`
+- `ManagedIndexes.setIndexSummary(): async (request: operations.SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequest, options?: RequestOptions): Promise<any> -> async (request: operations.SetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguagePutRequest, options?: RequestOptions): Promise<any>`
+- `ManagedIndexes.update(): async (request: operations.UpdateIndexV1RagManagedIndexesIndexNamePutRequest, options?: RequestOptions): Promise<components.ManagedIndexResponse> -> async (request: operations.UpdateIndexV1ContextSearchIndexesIndexNamePutRequest, options?: RequestOptions): Promise<components.ManagedIndexResponse>`
+- `betaRagManagedIndexesCreate(): (client: MistralCore, request: components.CreateManagedIndexRequest, options?: RequestOptions): APIPromise< Result< operations.CreateIndexV1RagManagedIndexesPostResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: components.CreateManagedIndexRequest, options?: RequestOptions): APIPromise< Result< operations.CreateIndexV1ContextSearchIndexesPostResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesDelete(): (client: MistralCore, request: operations.DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest, options?: RequestOptions): APIPromise< Result< components.DeleteManagedIndexResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.DeleteIndexV1ContextSearchIndexesIndexNameDeleteRequest, options?: RequestOptions): APIPromise< Result< components.DeleteManagedIndexResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesDeleteDocuments(): (client: MistralCore, request: operations.DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest, options?: RequestOptions): APIPromise< Result< components.DeleteDocumentsResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.DeleteDocumentsV1ContextSearchIndexesIndexNameDocumentsDeleteRequest, options?: RequestOptions): APIPromise< Result< components.DeleteDocumentsResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesGenerateIndexSummary(): (client: MistralCore, request: operations.GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest, options?: RequestOptions): APIPromise< Result< JsonLStream<operations.SummaryStreamTypes>, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.GenerateManagedIndexSummaryPostV1ContextSearchIndexesIndexNameSummaryFieldLanguagePostRequest, options?: RequestOptions): APIPromise< Result< JsonLStream<operations.SummaryStreamTypes>, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesGet(): (client: MistralCore, request: operations.GetIndexV1RagManagedIndexesIndexNameGetRequest, options?: RequestOptions): APIPromise< Result< components.ManagedIndexResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.GetIndexV1ContextSearchIndexesIndexNameGetRequest, options?: RequestOptions): APIPromise< Result< components.ManagedIndexResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesGetChunk(): (client: MistralCore, request: operations.GetChunkIndexV1RagManagedIndexesIndexNameChunksChunkIdGetRequest, options?: RequestOptions): APIPromise< Result< components.NavigationResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.GetChunkIndexV1ContextSearchIndexesIndexNameChunksChunkIdGetRequest, options?: RequestOptions): APIPromise< Result< components.NavigationResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesGetIndexSummary(): (client: MistralCore, request: operations.GetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetRequest, options?: RequestOptions): APIPromise< Result< components.GetSummaryResponseSummary, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.GetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguageGetRequest, options?: RequestOptions): APIPromise< Result< components.GetSummaryResponseSummary, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesGrep(): (client: MistralCore, request: operations.GrepIndexV1RagManagedIndexesIndexNameGrepPostRequest, options?: RequestOptions): APIPromise< Result< components.NavigationResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.GrepIndexV1ContextSearchIndexesIndexNameGrepPostRequest, options?: RequestOptions): APIPromise< Result< components.NavigationResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesIngestDocuments(): (client: MistralCore, request: operations.IngestDocumentsV1RagManagedIndexesIndexNameDocumentsPostRequest, options?: RequestOptions): APIPromise< Result< components.IngestDocumentsResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.IngestDocumentsV1ContextSearchIndexesIndexNameDocumentsPostRequest, options?: RequestOptions): APIPromise< Result< components.IngestDocumentsResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesList(): (client: MistralCore, request?: operations.ListIndexesV1RagManagedIndexesGetRequest | undefined, options?: RequestOptions): APIPromise< PageIterator< Result< operations.ListIndexesV1RagManagedIndexesGetResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError >, { cursor: string } > > -> (client: MistralCore, request?: operations.ListIndexesV1ContextSearchIndexesGetRequest | undefined, options?: RequestOptions): APIPromise< PageIterator< Result< operations.ListIndexesV1ContextSearchIndexesGetResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError >, { cursor: string } > >`
+- ...and 5 more
+</details>
+
+### API changes
+#### Breaking changes
+
+- `sdk.audio.agents.create()` now requires `configuration`, a `components.AudioAgentConfigurationRequest`. It can no longer be omitted or passed as `null`.
+- `components.Format`, the type of `OCRTableObject.format`, is renamed to `components.FormatEnum`.
+- The managed index methods (`sdk.beta.rag.managedIndexes.*`) now call `/v1/context/search-indexes/...` instead of `/v1/rag/managed_indexes/...`. Method names are unchanged, but their request and parameter types are renamed (`RagManagedIndexes` becomes `ContextSearchIndexes` in each name), e.g. `operations.SearchIndexV1RagManagedIndexesIndexNameSearchPostRequest` is now `operations.SearchIndexV1ContextSearchIndexesIndexNameSearchPostRequest`.
+
+#### New: Responses API
+
+`sdk.responses.create()` generates a model response from text or image input. The output can contain text, reasoning and function calls. It is stateless: for multi-turn conversations, send the full history in `input`, including earlier output items and function results.
+
+- Required: `model` and `input`, either a string or a list of messages, output messages, function calls, function call outputs and reasoning items.
+- Optional: `instructions`, `tools` (function and namespace tools; only client-executed function tools are supported), `toolChoice` (`"none"`, `"auto"` (default), `"required"` or a specific function), `parallelToolCalls` (default `true`), `reasoning`, `text` (output `format` and `verbosity`), `maxOutputTokens`, `maxToolCalls`, `temperature`, `topP`, `metadata` and `promptCacheKey`.
+- Accepted only at fixed values: `truncation: "disabled"`, `background: false`, `store: false` and `topLogprobs: 0`. `previousResponseId`, `conversation`, `prompt` and `moderation` must be `null`. Responses are not stored.
+- `stream: true` returns an `EventStream<components.ResponsesStreamFrame>` instead of a `components.CreateResponseResponse`.
+- `components.CreateResponseResponse` includes `id`, `status`, `output`, `usage`, `error`, `incompleteDetails`, `serviceTier` (`"auto"`, `"default"`, `"flex"`, `"scale"` or `"priority"`), `truncation` (`"auto"` or `"disabled"`) and `promptCacheRetention` (`"in_memory"` or `"24h"`).
+- Errors, in `error` and in error stream frames, are a `components.ResponsesError` with `message` and `code` (`components.Code`): `server_error`, `rate_limit_exceeded`, `invalid_prompt`, `bio_policy`, `vector_store_timeout`, or one of 14 image errors: `invalid_image`, `invalid_image_format`, `invalid_base64_image`, `invalid_image_url`, `image_too_large`, `image_too_small`, `image_parse_error`, `image_content_policy_violation`, `invalid_image_mode`, `image_file_too_large`, `unsupported_image_media_type`, `empty_image_file`, `failed_to_download_image` and `image_file_not_found`. `status` is `"completed"`, `"failed"`, `"in_progress"`, `"cancelled"`, `"queued"` or `"incomplete"`, and `incompleteDetails.reason` (`components.Reason`) is `"max_output_tokens"` or `"content_filter"`.
+
+`sdk.responses.countInputTokens()` counts the input tokens of a Responses request without generating a response, including the conversation, instructions and tool definitions. It takes the same `model`, `input`, `instructions`, `tools`, `toolChoice`, `parallelToolCalls`, `reasoning` and `text` as `create()`, and returns `components.CountResponseInputTokensResponse` with `inputTokens`.
+
+#### New fields
+
+- Keyword retrievers in `sdk.beta.rag.managedIndexes.search()`, alone or inside an `rrf` retriever, take an `operator` (`components.Operator`). `"or"`, the default, matches chunks containing any of the query's words. `"and"` matches only chunks containing all of them, the previous behaviour.
+- `components.AudioTTSConfig`, the `tts` configuration of `sdk.audio.agents.create()`, `update()` and `sdk.audio.sessions.create()`, takes an optional `expressiveness`, a number from 1 to 5.
+
+#### Deprecated fields
+
+- `hasDefaultCredentials` on connector authentication methods is deprecated and always `false`: connector-level default credentials were removed. It is returned by `sdk.beta.connectors.create()`, `list()`, `get()`, `update()` and `getAuthenticationMethods()`. Responses may now omit it, and the SDK reads a missing value as `false`.
+
+#### Added operations
+
+Stable:
+
+- `sdk.responses.create()`
+- `sdk.responses.countInputTokens()`
+
+
+#### Schema changes
+
+- Added request field `expressiveness` in `sdk.audio.agents.create()`, `sdk.audio.sessions.create()`, and `sdk.audio.agents.update()`.
+- Added response field `expressiveness` across audio agents (5 operations).
+- Changed response field `hasDefaultCredentials` across beta connectors (5 operations).
+- Added request field `operator` in `sdk.beta.rag.managedIndexes.search()`.
+- Added request enum values `ʁ`, `r`, `ɑ̃`, `ʀ`, `x`, `y`, `ɔ̃`, `ɐ`, `œ`, `ɛ̃`, `ʝ`, `ɲ`, `ts`, `ɥ`, `ʏ`, `ø`, `β`, `ɦ`, `pf`, `ʎ`, `ɣ`, `ɳ`, `ɔʏ`, `œ̃`, `ɟʝ`, `ɬ`, and `q` in `sdk.audio.speech.complete()`.
+
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.796.4 (2.935.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.2.0] .
+### Releases
+- [NPM v3.2.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.2.0 - .

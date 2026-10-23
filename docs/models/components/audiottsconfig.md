@@ -14,3 +14,4 @@ let value: AudioTTSConfig = {};
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `model`            | *string*           | :heavy_minus_sign: | N/A                |
 | `voiceId`          | *string*           | :heavy_minus_sign: | N/A                |
+| `expressiveness`   | *number*           | :heavy_minus_sign: | N/A                |

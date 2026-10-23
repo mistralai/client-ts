@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaRagManagedIndexesUpdate(
   client: MistralCore,
-  request: operations.UpdateIndexV1RagManagedIndexesIndexNamePutRequest,
+  request: operations.UpdateIndexV1ContextSearchIndexesIndexNamePutRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +58,7 @@ export function betaRagManagedIndexesUpdate(
 
 async function $do(
   client: MistralCore,
-  request: operations.UpdateIndexV1RagManagedIndexesIndexNamePutRequest,
+  request: operations.UpdateIndexV1ContextSearchIndexesIndexNamePutRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -80,9 +80,8 @@ async function $do(
     request,
     (value) =>
       operations
-        .UpdateIndexV1RagManagedIndexesIndexNamePutRequest$outboundSchema.parse(
-          value,
-        ),
+        .UpdateIndexV1ContextSearchIndexesIndexNamePutRequest$outboundSchema
+        .parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -99,7 +98,9 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/rag/managed_indexes/{index_name}")(pathParams);
+  const path = pathToFunc("/v1/context/search-indexes/{index_name}")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -113,7 +114,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "update_index_v1_rag_managed_indexes__index_name__put",
+    operationID: "update_index_v1_context_search_indexes__index_name__put",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

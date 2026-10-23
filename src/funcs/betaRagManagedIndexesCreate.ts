@@ -39,7 +39,7 @@ export function betaRagManagedIndexesCreate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateIndexV1RagManagedIndexesPostResponse,
+    operations.CreateIndexV1ContextSearchIndexesPostResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -65,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.CreateIndexV1RagManagedIndexesPostResponse,
+      operations.CreateIndexV1ContextSearchIndexesPostResponse,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -90,7 +90,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v1/rag/managed_indexes")();
+  const path = pathToFunc("/v1/context/search-indexes")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -104,7 +104,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "create_index_v1_rag_managed_indexes_post",
+    operationID: "create_index_v1_context_search_indexes_post",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -148,7 +148,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.CreateIndexV1RagManagedIndexesPostResponse,
+    operations.CreateIndexV1ContextSearchIndexesPostResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -161,7 +161,7 @@ async function $do(
   >(
     M.json(
       202,
-      operations.CreateIndexV1RagManagedIndexesPostResponse$inboundSchema,
+      operations.CreateIndexV1ContextSearchIndexesPostResponse$inboundSchema,
       { hdrs: true, key: "Result" },
     ),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),

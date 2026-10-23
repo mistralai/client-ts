@@ -17,14 +17,14 @@ import {
 /**
  * Format of the table
  */
-export const Format = {
+export const FormatEnum = {
   Markdown: "markdown",
   Html: "html",
 } as const;
 /**
  * Format of the table
  */
-export type Format = OpenEnum<typeof Format>;
+export type FormatEnum = OpenEnum<typeof FormatEnum>;
 
 export type OCRTableObject = {
   /**
@@ -38,7 +38,7 @@ export type OCRTableObject = {
   /**
    * Format of the table
    */
-  format: Format;
+  format: FormatEnum;
   /**
    * Per-word confidence scores for the table content. Returned when confidence_scores_granularity is set to 'word'.
    */
@@ -46,15 +46,15 @@ export type OCRTableObject = {
 };
 
 /** @internal */
-export const Format$inboundSchema: z.ZodType<Format, unknown> = openEnums
-  .inboundSchema(Format);
+export const FormatEnum$inboundSchema: z.ZodType<FormatEnum, unknown> =
+  openEnums.inboundSchema(FormatEnum);
 
 /** @internal */
 export const OCRTableObject$inboundSchema: z.ZodType<OCRTableObject, unknown> =
   z.object({
     id: z.string(),
     content: z.string(),
-    format: Format$inboundSchema,
+    format: FormatEnum$inboundSchema,
     word_confidence_scores: z.nullable(
       z.array(OCRConfidenceScore$inboundSchema),
     ).optional(),

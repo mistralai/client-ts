@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
 export function betaRagManagedIndexesGetChunk(
   client: MistralCore,
   request:
-    operations.GetChunkIndexV1RagManagedIndexesIndexNameChunksChunkIdGetRequest,
+    operations.GetChunkIndexV1ContextSearchIndexesIndexNameChunksChunkIdGetRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -62,7 +62,7 @@ export function betaRagManagedIndexesGetChunk(
 async function $do(
   client: MistralCore,
   request:
-    operations.GetChunkIndexV1RagManagedIndexesIndexNameChunksChunkIdGetRequest,
+    operations.GetChunkIndexV1ContextSearchIndexesIndexNameChunksChunkIdGetRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -85,7 +85,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .GetChunkIndexV1RagManagedIndexesIndexNameChunksChunkIdGetRequest$outboundSchema
+        .GetChunkIndexV1ContextSearchIndexesIndexNameChunksChunkIdGetRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -106,7 +106,7 @@ async function $do(
     }),
   };
   const path = pathToFunc(
-    "/v1/rag/managed_indexes/{index_name}/chunks/{chunk_id}",
+    "/v1/context/search-indexes/{index_name}/chunks/{chunk_id}",
   )(pathParams);
 
   const headers = new Headers(compactMap({
@@ -121,7 +121,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
-      "get_chunk_index_v1_rag_managed_indexes__index_name__chunks__chunk_id__get",
+      "get_chunk_index_v1_context_search_indexes__index_name__chunks__chunk_id__get",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

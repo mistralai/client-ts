@@ -1,0 +1,26 @@
+# ResponsesToolFunction
+
+## Example Usage
+
+```typescript
+import { ResponsesToolFunction } from "@mistralai/mistralai/models/components";
+
+let value: ResponsesToolFunction = {
+  name: "<value>",
+  type: "function",
+};
+```
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                           | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `type`                                                                                                           | *"function"*                                                                                                     | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `allowedCallers`                                                                                                 | [components.ResponsesToolFunctionAllowedCaller](../../models/components/responsestoolfunctionallowedcaller.md)[] | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `deferLoading`                                                                                                   | *boolean*                                                                                                        | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `description`                                                                                                    | *string*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `outputSchema`                                                                                                   | Record<string, *any*>                                                                                            | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `parameters`                                                                                                     | *any*                                                                                                            | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `strict`                                                                                                         | *boolean*                                                                                                        | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `additionalProperties`                                                                                           | Record<string, *any*>                                                                                            | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

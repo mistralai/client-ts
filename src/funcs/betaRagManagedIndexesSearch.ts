@@ -35,7 +35,8 @@ import { Result } from "../types/fp.js";
  */
 export function betaRagManagedIndexesSearch(
   client: MistralCore,
-  request: operations.SearchIndexV1RagManagedIndexesIndexNameSearchPostRequest,
+  request:
+    operations.SearchIndexV1ContextSearchIndexesIndexNameSearchPostRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -60,7 +61,8 @@ export function betaRagManagedIndexesSearch(
 
 async function $do(
   client: MistralCore,
-  request: operations.SearchIndexV1RagManagedIndexesIndexNameSearchPostRequest,
+  request:
+    operations.SearchIndexV1ContextSearchIndexesIndexNameSearchPostRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -83,7 +85,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .SearchIndexV1RagManagedIndexesIndexNameSearchPostRequest$outboundSchema
+        .SearchIndexV1ContextSearchIndexesIndexNameSearchPostRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -99,7 +101,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/rag/managed_indexes/{index_name}/search")(
+  const path = pathToFunc("/v1/context/search-indexes/{index_name}/search")(
     pathParams,
   );
 
@@ -115,7 +117,8 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "search_index_v1_rag_managed_indexes__index_name__search_post",
+    operationID:
+      "search_index_v1_context_search_indexes__index_name__search_post",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

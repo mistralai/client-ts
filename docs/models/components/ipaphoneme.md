@@ -12,11 +12,11 @@ reorder or remove entries, only add new phones (e.g. for future languages) at th
 ```typescript
 import { IPAPhoneme } from "@mistralai/mistralai/models/components";
 
-let value: IPAPhoneme = "ɔɪ";
+let value: IPAPhoneme = "ʁ";
 ```
 
 ## Values
 
 ```typescript
-"a" | "aɪ" | "aʊ" | "b" | "d" | "dʒ" | "e" | "eɪ" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "oʊ" | "p" | "s" | "t" | "tʃ" | "u" | "v" | "w" | "z" | "æ" | "ð" | "ŋ" | "ɑ" | "ɔ" | "ɔɪ" | "ɖ" | "ə" | "ɚ" | "ɛ" | "ɜ" | "ɪ" | "ɱ" | "ɹ" | "ɾ" | "ʃ" | "ʈ" | "ʊ" | "ʋ" | "ʌ" | "ʒ" | "ʔ" | "θ"
+"a" | "aɪ" | "aʊ" | "b" | "d" | "dʒ" | "e" | "eɪ" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "oʊ" | "p" | "s" | "t" | "tʃ" | "u" | "v" | "w" | "z" | "æ" | "ð" | "ŋ" | "ɑ" | "ɔ" | "ɔɪ" | "ɖ" | "ə" | "ɚ" | "ɛ" | "ɜ" | "ɪ" | "ɱ" | "ɹ" | "ɾ" | "ʃ" | "ʈ" | "ʊ" | "ʋ" | "ʌ" | "ʒ" | "ʔ" | "θ" | "ʁ" | "r" | "ɑ̃" | "ʀ" | "x" | "y" | "ɔ̃" | "ɐ" | "œ" | "ɛ̃" | "ʝ" | "ɲ" | "ts" | "ɥ" | "ʏ" | "ø" | "β" | "ɦ" | "pf" | "ʎ" | "ɣ" | "ɳ" | "ɔʏ" | "œ̃" | "ɟʝ" | "ɬ" | "q"
 ```

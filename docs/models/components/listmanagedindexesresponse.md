@@ -10,16 +10,16 @@ import { ListManagedIndexesResponse } from "@mistralai/mistralai/models/componen
 let value: ListManagedIndexesResponse = {
   data: [
     {
-      id: "e75d0d0d-7659-4a41-b1c4-52d1e1508385",
+      id: "1e007bef-4200-424d-b6c4-ed57b59212f9",
       name: "<value>",
       creatorId: "<id>",
-      status: "deleting",
+      status: "provisioning",
       schema: {},
       config: {
         embedding: {
-          type: "custom",
+          type: "mistral",
           name: "<value>",
-          dimensions: 172781,
+          dimensions: 382999,
         },
       },
     },

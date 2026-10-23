@@ -15,9 +15,9 @@ let value: ManagedIndexResponse = {
   schema: {},
   config: {
     embedding: {
-      type: "custom",
+      type: "mistral",
       name: "<value>",
-      dimensions: 172781,
+      dimensions: 382999,
     },
   },
 };

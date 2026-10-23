@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
 export function betaRagManagedIndexesNavigate(
   client: MistralCore,
   request:
-    operations.NavigateIndexV1RagManagedIndexesIndexNameNavigatePostRequest,
+    operations.NavigateIndexV1ContextSearchIndexesIndexNameNavigatePostRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -62,7 +62,7 @@ export function betaRagManagedIndexesNavigate(
 async function $do(
   client: MistralCore,
   request:
-    operations.NavigateIndexV1RagManagedIndexesIndexNameNavigatePostRequest,
+    operations.NavigateIndexV1ContextSearchIndexesIndexNameNavigatePostRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -85,7 +85,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .NavigateIndexV1RagManagedIndexesIndexNameNavigatePostRequest$outboundSchema
+        .NavigateIndexV1ContextSearchIndexesIndexNameNavigatePostRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -101,7 +101,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/rag/managed_indexes/{index_name}/navigate")(
+  const path = pathToFunc("/v1/context/search-indexes/{index_name}/navigate")(
     pathParams,
   );
 
@@ -118,7 +118,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
-      "navigate_index_v1_rag_managed_indexes__index_name__navigate_post",
+      "navigate_index_v1_context_search_indexes__index_name__navigate_post",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

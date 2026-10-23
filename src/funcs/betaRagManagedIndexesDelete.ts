@@ -35,7 +35,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaRagManagedIndexesDelete(
   client: MistralCore,
-  request: operations.DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest,
+  request: operations.DeleteIndexV1ContextSearchIndexesIndexNameDeleteRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -60,7 +60,7 @@ export function betaRagManagedIndexesDelete(
 
 async function $do(
   client: MistralCore,
-  request: operations.DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest,
+  request: operations.DeleteIndexV1ContextSearchIndexesIndexNameDeleteRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -83,7 +83,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest$outboundSchema
+        .DeleteIndexV1ContextSearchIndexesIndexNameDeleteRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -99,7 +99,9 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/rag/managed_indexes/{index_name}")(pathParams);
+  const path = pathToFunc("/v1/context/search-indexes/{index_name}")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -112,7 +114,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "delete_index_v1_rag_managed_indexes__index_name__delete",
+    operationID: "delete_index_v1_context_search_indexes__index_name__delete",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

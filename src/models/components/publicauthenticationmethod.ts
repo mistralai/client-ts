@@ -39,6 +39,11 @@ export type PublicAuthenticationMethod = {
   methodType: AuthenticationType;
   headers?: Array<ConnectorAuthenticationHeader> | null | undefined;
   globalHeaders?: { [k: string]: GlobalHeaderValue } | undefined;
+  /**
+   * Deprecated: we removed the concept of connector level default credentials. Always false.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   hasDefaultCredentials: boolean;
   grantType?: OAuth2GrantType | null | undefined;
   tokenEndpointAuthMethod?: OAuth2TokenEndpointAuthMethod | null | undefined;
@@ -55,7 +60,7 @@ export const PublicAuthenticationMethod$inboundSchema: z.ZodType<
     .optional(),
   global_headers: z.record(z.string(), GlobalHeaderValue$inboundSchema)
     .optional(),
-  has_default_credentials: z.boolean(),
+  has_default_credentials: z.boolean().default(false),
   grant_type: z.nullable(OAuth2GrantType$inboundSchema).optional(),
   token_endpoint_auth_method: z.nullable(
     OAuth2TokenEndpointAuthMethod$inboundSchema,

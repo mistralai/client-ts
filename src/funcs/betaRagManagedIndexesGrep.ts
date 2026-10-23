@@ -35,7 +35,7 @@ import { Result } from "../types/fp.js";
  */
 export function betaRagManagedIndexesGrep(
   client: MistralCore,
-  request: operations.GrepIndexV1RagManagedIndexesIndexNameGrepPostRequest,
+  request: operations.GrepIndexV1ContextSearchIndexesIndexNameGrepPostRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -60,7 +60,7 @@ export function betaRagManagedIndexesGrep(
 
 async function $do(
   client: MistralCore,
-  request: operations.GrepIndexV1RagManagedIndexesIndexNameGrepPostRequest,
+  request: operations.GrepIndexV1ContextSearchIndexesIndexNameGrepPostRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -83,7 +83,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .GrepIndexV1RagManagedIndexesIndexNameGrepPostRequest$outboundSchema
+        .GrepIndexV1ContextSearchIndexesIndexNameGrepPostRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -99,7 +99,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/rag/managed_indexes/{index_name}/grep")(
+  const path = pathToFunc("/v1/context/search-indexes/{index_name}/grep")(
     pathParams,
   );
 
@@ -115,7 +115,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "grep_index_v1_rag_managed_indexes__index_name__grep_post",
+    operationID: "grep_index_v1_context_search_indexes__index_name__grep_post",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
