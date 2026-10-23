@@ -1025,9 +1025,18 @@ The published SDK or generator baseline differs from the baseline used by the Op
 <details>
 <summary>Generated surface details</summary>
 
-#### Beta surface changes
-Removed from the beta surface (70):
+#### Stable compatibility changes
+Removed from the stable API surface (1):
 - `Format`
+
+Now required on an existing stable model (1):
+- `AudioAgentCreateRequest.configuration`
+#### Stable type changes
+Changed types or signatures on the stable surface (2):
+- `AudioAgentCreateRequest.configuration: AudioAgentConfigurationRequest | null | undefined -> AudioAgentConfigurationRequest`
+- `OCRTableObject.format: Format -> FormatEnum`
+#### Beta surface changes
+Removed from the beta surface (69):
 - `GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostLanguage`
 - `GetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetLanguage`
 - `SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutLanguage`
@@ -1052,10 +1061,10 @@ Removed from the beta surface (70):
 - `DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest.deleteDocumentsRequest`
 - `DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest.indexName`
 - `DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest.indexName`
-- ...and 45 more
+- `GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest.force`
+- ...and 44 more
 
-Changed types or signatures in beta (32):
-- `AudioAgentCreateRequest.configuration: AudioAgentConfigurationRequest | null | undefined -> AudioAgentConfigurationRequest`
+Changed types or signatures in beta (30):
 - `ManagedIndexes.create(): async (request: components.CreateManagedIndexRequest, options?: RequestOptions): Promise<operations.CreateIndexV1RagManagedIndexesPostResponse> -> async (request: components.CreateManagedIndexRequest, options?: RequestOptions): Promise<operations.CreateIndexV1ContextSearchIndexesPostResponse>`
 - `ManagedIndexes.delete(): async (request: operations.DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest, options?: RequestOptions): Promise<components.DeleteManagedIndexResponse> -> async (request: operations.DeleteIndexV1ContextSearchIndexesIndexNameDeleteRequest, options?: RequestOptions): Promise<components.DeleteManagedIndexResponse>`
 - `ManagedIndexes.deleteDocuments(): async (request: operations.DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest, options?: RequestOptions): Promise<components.DeleteDocumentsResponse> -> async (request: operations.DeleteDocumentsV1ContextSearchIndexesIndexNameDocumentsDeleteRequest, options?: RequestOptions): Promise<components.DeleteDocumentsResponse>`
@@ -1071,7 +1080,6 @@ Changed types or signatures in beta (32):
 - `ManagedIndexes.search(): async (request: operations.SearchIndexV1RagManagedIndexesIndexNameSearchPostRequest, options?: RequestOptions): Promise<components.SearchResponse> -> async (request: operations.SearchIndexV1ContextSearchIndexesIndexNameSearchPostRequest, options?: RequestOptions): Promise<components.SearchResponse>`
 - `ManagedIndexes.setIndexSummary(): async (request: operations.SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequest, options?: RequestOptions): Promise<any> -> async (request: operations.SetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguagePutRequest, options?: RequestOptions): Promise<any>`
 - `ManagedIndexes.update(): async (request: operations.UpdateIndexV1RagManagedIndexesIndexNamePutRequest, options?: RequestOptions): Promise<components.ManagedIndexResponse> -> async (request: operations.UpdateIndexV1ContextSearchIndexesIndexNamePutRequest, options?: RequestOptions): Promise<components.ManagedIndexResponse>`
-- `OCRTableObject.format: Format -> FormatEnum`
 - `betaRagManagedIndexesCreate(): (client: MistralCore, request: components.CreateManagedIndexRequest, options?: RequestOptions): APIPromise< Result< operations.CreateIndexV1RagManagedIndexesPostResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: components.CreateManagedIndexRequest, options?: RequestOptions): APIPromise< Result< operations.CreateIndexV1ContextSearchIndexesPostResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
 - `betaRagManagedIndexesDelete(): (client: MistralCore, request: operations.DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest, options?: RequestOptions): APIPromise< Result< components.DeleteManagedIndexResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.DeleteIndexV1ContextSearchIndexesIndexNameDeleteRequest, options?: RequestOptions): APIPromise< Result< components.DeleteManagedIndexResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
 - `betaRagManagedIndexesDeleteDocuments(): (client: MistralCore, request: operations.DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest, options?: RequestOptions): APIPromise< Result< components.DeleteDocumentsResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.DeleteDocumentsV1ContextSearchIndexesIndexNameDocumentsDeleteRequest, options?: RequestOptions): APIPromise< Result< components.DeleteDocumentsResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
@@ -1080,10 +1088,9 @@ Changed types or signatures in beta (32):
 - `betaRagManagedIndexesGetChunk(): (client: MistralCore, request: operations.GetChunkIndexV1RagManagedIndexesIndexNameChunksChunkIdGetRequest, options?: RequestOptions): APIPromise< Result< components.NavigationResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.GetChunkIndexV1ContextSearchIndexesIndexNameChunksChunkIdGetRequest, options?: RequestOptions): APIPromise< Result< components.NavigationResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
 - `betaRagManagedIndexesGetIndexSummary(): (client: MistralCore, request: operations.GetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetRequest, options?: RequestOptions): APIPromise< Result< components.GetSummaryResponseSummary, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.GetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguageGetRequest, options?: RequestOptions): APIPromise< Result< components.GetSummaryResponseSummary, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
 - `betaRagManagedIndexesGrep(): (client: MistralCore, request: operations.GrepIndexV1RagManagedIndexesIndexNameGrepPostRequest, options?: RequestOptions): APIPromise< Result< components.NavigationResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.GrepIndexV1ContextSearchIndexesIndexNameGrepPostRequest, options?: RequestOptions): APIPromise< Result< components.NavigationResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
-- ...and 7 more
-
-Now required on an existing beta model (1):
-- `AudioAgentCreateRequest.configuration`
+- `betaRagManagedIndexesIngestDocuments(): (client: MistralCore, request: operations.IngestDocumentsV1RagManagedIndexesIndexNameDocumentsPostRequest, options?: RequestOptions): APIPromise< Result< components.IngestDocumentsResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > > -> (client: MistralCore, request: operations.IngestDocumentsV1ContextSearchIndexesIndexNameDocumentsPostRequest, options?: RequestOptions): APIPromise< Result< components.IngestDocumentsResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError > >`
+- `betaRagManagedIndexesList(): (client: MistralCore, request?: operations.ListIndexesV1RagManagedIndexesGetRequest | undefined, options?: RequestOptions): APIPromise< PageIterator< Result< operations.ListIndexesV1RagManagedIndexesGetResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError >, { cursor: string } > > -> (client: MistralCore, request?: operations.ListIndexesV1ContextSearchIndexesGetRequest | undefined, options?: RequestOptions): APIPromise< PageIterator< Result< operations.ListIndexesV1ContextSearchIndexesGetResponse, | errors.HTTPValidationError | MistralError | ResponseValidationError | ConnectionError | RequestAbortedError | RequestTimeoutError | InvalidRequestError | UnexpectedClientError | SDKValidationError >, { cursor: string } > >`
+- ...and 5 more
 </details>
 
 ### API changes

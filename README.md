@@ -1,12 +1,5 @@
 # Mistral Typescript Client
 
-> **This is v2 of the Mistral TypeScript SDK.**
->
-> Key changes from v1: **ESM-only**, shorter type names, forward-compatible enums/unions, Zod v4.
-> See the **[Migration Guide](https://github.com/mistralai/client-ts/blob/main/MIGRATION.md)** for full details.
->
-> To pin v1: `npm install @mistralai/mistralai@^1` · **[v1 documentation and source](https://github.com/mistralai/client-ts/tree/v1)**
-
 <!-- Start Summary [summary] -->
 ## Summary
 
