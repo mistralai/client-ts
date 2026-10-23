@@ -1,13 +1,10 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "author": "Mistral AI",
   "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
   "peerDependenciesMeta": {
-    "@opentelemetry/exporter-trace-otlp-http": {
-      "optional": true
-    },
     "@opentelemetry/sdk-trace-base": {
       "optional": true
     },
@@ -20,16 +17,13 @@
     "@azure/identity": {
       "optional": true
     },
-    "@azure/storage-blob": {
-      "optional": true
-    },
     "@hpcc-js/wasm-zstd": {
       "optional": true
     },
-    "@msgpack/msgpack": {
+    "@opentelemetry/exporter-trace-otlp-http": {
       "optional": true
     },
-    "@opentelemetry/resources": {
+    "@azure/storage-blob": {
       "optional": true
     },
     "@google-cloud/storage": {
@@ -38,7 +32,13 @@
     "@livekit/rtc-node": {
       "optional": true
     },
+    "@msgpack/msgpack": {
+      "optional": true
+    },
     "@opentelemetry/api": {
+      "optional": true
+    },
+    "@opentelemetry/resources": {
       "optional": true
     }
   },

@@ -43,7 +43,7 @@ import { Result } from "../types/fp.js";
 export function betaRagManagedIndexesGenerateIndexSummary(
   client: MistralCore,
   request:
-    operations.GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest,
+    operations.GenerateManagedIndexSummaryPostV1ContextSearchIndexesIndexNameSummaryFieldLanguagePostRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -69,7 +69,7 @@ export function betaRagManagedIndexesGenerateIndexSummary(
 async function $do(
   client: MistralCore,
   request:
-    operations.GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest,
+    operations.GenerateManagedIndexSummaryPostV1ContextSearchIndexesIndexNameSummaryFieldLanguagePostRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -92,7 +92,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest$outboundSchema
+        .GenerateManagedIndexSummaryPostV1ContextSearchIndexesIndexNameSummaryFieldLanguagePostRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -113,7 +113,7 @@ async function $do(
     }),
   };
   const path = pathToFunc(
-    "/v1/rag/managed_indexes/{index_name}/summary_field/{language}",
+    "/v1/context/search-indexes/{index_name}/summary_field/{language}",
   )(pathParams);
 
   const query = encodeFormQuery({
@@ -132,7 +132,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
-      "generate_managed_index_summary_post_v1_rag_managed_indexes__index_name__summary_field__language__post",
+      "generate_managed_index_summary_post_v1_context_search_indexes__index_name__summary_field__language__post",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

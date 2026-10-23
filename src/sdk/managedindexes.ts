@@ -34,7 +34,7 @@ export class ManagedIndexes extends ClientSDK {
   async create(
     request: components.CreateManagedIndexRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateIndexV1RagManagedIndexesPostResponse> {
+  ): Promise<operations.CreateIndexV1ContextSearchIndexesPostResponse> {
     return unwrapAsync(betaRagManagedIndexesCreate(
       this,
       request,
@@ -49,11 +49,13 @@ export class ManagedIndexes extends ClientSDK {
    * Lists all managed search indexes for the current workspace.
    */
   async list(
-    request?: operations.ListIndexesV1RagManagedIndexesGetRequest | undefined,
+    request?:
+      | operations.ListIndexesV1ContextSearchIndexesGetRequest
+      | undefined,
     options?: RequestOptions,
   ): Promise<
     PageIterator<
-      operations.ListIndexesV1RagManagedIndexesGetResponse,
+      operations.ListIndexesV1ContextSearchIndexesGetResponse,
       { cursor: string }
     >
   > {
@@ -71,7 +73,7 @@ export class ManagedIndexes extends ClientSDK {
    * Returns the managed search index with the given name.
    */
   async get(
-    request: operations.GetIndexV1RagManagedIndexesIndexNameGetRequest,
+    request: operations.GetIndexV1ContextSearchIndexesIndexNameGetRequest,
     options?: RequestOptions,
   ): Promise<components.ManagedIndexResponse> {
     return unwrapAsync(betaRagManagedIndexesGet(
@@ -88,7 +90,7 @@ export class ManagedIndexes extends ClientSDK {
    * Records a new schema for the managed search index and applies it asynchronously. The index keeps serving its current schema until the new one is on disk; poll it until status is ready. Additive only: the new schema must keep every field the current one has.
    */
   async update(
-    request: operations.UpdateIndexV1RagManagedIndexesIndexNamePutRequest,
+    request: operations.UpdateIndexV1ContextSearchIndexesIndexNamePutRequest,
     options?: RequestOptions,
   ): Promise<components.ManagedIndexResponse> {
     return unwrapAsync(betaRagManagedIndexesUpdate(
@@ -105,7 +107,7 @@ export class ManagedIndexes extends ClientSDK {
    * Marks the managed search index for deletion and returns it with status deleting. The backing table is dropped asynchronously; poll the index until it returns 404.
    */
   async delete(
-    request: operations.DeleteIndexV1RagManagedIndexesIndexNameDeleteRequest,
+    request: operations.DeleteIndexV1ContextSearchIndexesIndexNameDeleteRequest,
     options?: RequestOptions,
   ): Promise<components.DeleteManagedIndexResponse> {
     return unwrapAsync(betaRagManagedIndexesDelete(
@@ -123,7 +125,7 @@ export class ManagedIndexes extends ClientSDK {
    */
   async ingestDocuments(
     request:
-      operations.IngestDocumentsV1RagManagedIndexesIndexNameDocumentsPostRequest,
+      operations.IngestDocumentsV1ContextSearchIndexesIndexNameDocumentsPostRequest,
     options?: RequestOptions,
   ): Promise<components.IngestDocumentsResponse> {
     return unwrapAsync(betaRagManagedIndexesIngestDocuments(
@@ -141,7 +143,7 @@ export class ManagedIndexes extends ClientSDK {
    */
   async deleteDocuments(
     request:
-      operations.DeleteDocumentsV1RagManagedIndexesIndexNameDocumentsDeleteRequest,
+      operations.DeleteDocumentsV1ContextSearchIndexesIndexNameDocumentsDeleteRequest,
     options?: RequestOptions,
   ): Promise<components.DeleteDocumentsResponse> {
     return unwrapAsync(betaRagManagedIndexesDeleteDocuments(
@@ -159,7 +161,7 @@ export class ManagedIndexes extends ClientSDK {
    */
   async search(
     request:
-      operations.SearchIndexV1RagManagedIndexesIndexNameSearchPostRequest,
+      operations.SearchIndexV1ContextSearchIndexesIndexNameSearchPostRequest,
     options?: RequestOptions,
   ): Promise<components.SearchResponse> {
     return unwrapAsync(betaRagManagedIndexesSearch(
@@ -177,7 +179,7 @@ export class ManagedIndexes extends ClientSDK {
    */
   async navigate(
     request:
-      operations.NavigateIndexV1RagManagedIndexesIndexNameNavigatePostRequest,
+      operations.NavigateIndexV1ContextSearchIndexesIndexNameNavigatePostRequest,
     options?: RequestOptions,
   ): Promise<components.NavigationResponse> {
     return unwrapAsync(betaRagManagedIndexesNavigate(
@@ -194,7 +196,7 @@ export class ManagedIndexes extends ClientSDK {
    * Returns the chunks of a source whose span falls within [start_offset, end_offset). Either bound may be omitted to leave that side open. A 200 with an empty list means the source exists but no chunk falls in the range; a 404 means the source has no chunks at all.
    */
   async read(
-    request: operations.ReadIndexV1RagManagedIndexesIndexNameReadPostRequest,
+    request: operations.ReadIndexV1ContextSearchIndexesIndexNameReadPostRequest,
     options?: RequestOptions,
   ): Promise<components.NavigationResponse> {
     return unwrapAsync(betaRagManagedIndexesRead(
@@ -211,7 +213,7 @@ export class ManagedIndexes extends ClientSDK {
    * Lexical substring match within a single source, in reading order. PHRASE mode matches the pattern literally (whitespace-sensitive, case-insensitive); TERM mode requires every whitespace-split token present in any order. A 200 with an empty list means the source exists but no chunk matched; a 404 means the source has no chunks at all.
    */
   async grep(
-    request: operations.GrepIndexV1RagManagedIndexesIndexNameGrepPostRequest,
+    request: operations.GrepIndexV1ContextSearchIndexesIndexNameGrepPostRequest,
     options?: RequestOptions,
   ): Promise<components.NavigationResponse> {
     return unwrapAsync(betaRagManagedIndexesGrep(
@@ -229,7 +231,7 @@ export class ManagedIndexes extends ClientSDK {
    */
   async getChunk(
     request:
-      operations.GetChunkIndexV1RagManagedIndexesIndexNameChunksChunkIdGetRequest,
+      operations.GetChunkIndexV1ContextSearchIndexesIndexNameChunksChunkIdGetRequest,
     options?: RequestOptions,
   ): Promise<components.NavigationResponse> {
     return unwrapAsync(betaRagManagedIndexesGetChunk(
@@ -247,7 +249,7 @@ export class ManagedIndexes extends ClientSDK {
    */
   async getIndexSummary(
     request:
-      operations.GetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguageGetRequest,
+      operations.GetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguageGetRequest,
     options?: RequestOptions,
   ): Promise<components.GetSummaryResponseSummary> {
     return unwrapAsync(betaRagManagedIndexesGetIndexSummary(
@@ -271,7 +273,7 @@ export class ManagedIndexes extends ClientSDK {
    */
   async generateIndexSummary(
     request:
-      operations.GenerateManagedIndexSummaryPostV1RagManagedIndexesIndexNameSummaryFieldLanguagePostRequest,
+      operations.GenerateManagedIndexSummaryPostV1ContextSearchIndexesIndexNameSummaryFieldLanguagePostRequest,
     options?: RequestOptions,
   ): Promise<JsonLStream<operations.SummaryStreamTypes>> {
     return unwrapAsync(betaRagManagedIndexesGenerateIndexSummary(
@@ -289,7 +291,7 @@ export class ManagedIndexes extends ClientSDK {
    */
   async setIndexSummary(
     request:
-      operations.SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequest,
+      operations.SetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguagePutRequest,
     options?: RequestOptions,
   ): Promise<any> {
     return unwrapAsync(betaRagManagedIndexesSetIndexSummary(

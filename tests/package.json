@@ -9,7 +9,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "vitest": "^4.1.11",
+    "vitest": "^4.1.12",
     "typescript": "^5.7.3"
+  },
+  "overrides": {
+    "vite": "8.3.3"
   }
 }

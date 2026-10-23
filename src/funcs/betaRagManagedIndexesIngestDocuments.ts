@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
 export function betaRagManagedIndexesIngestDocuments(
   client: MistralCore,
   request:
-    operations.IngestDocumentsV1RagManagedIndexesIndexNameDocumentsPostRequest,
+    operations.IngestDocumentsV1ContextSearchIndexesIndexNameDocumentsPostRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -62,7 +62,7 @@ export function betaRagManagedIndexesIngestDocuments(
 async function $do(
   client: MistralCore,
   request:
-    operations.IngestDocumentsV1RagManagedIndexesIndexNameDocumentsPostRequest,
+    operations.IngestDocumentsV1ContextSearchIndexesIndexNameDocumentsPostRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -85,7 +85,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .IngestDocumentsV1RagManagedIndexesIndexNameDocumentsPostRequest$outboundSchema
+        .IngestDocumentsV1ContextSearchIndexesIndexNameDocumentsPostRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -103,7 +103,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/rag/managed_indexes/{index_name}/documents")(
+  const path = pathToFunc("/v1/context/search-indexes/{index_name}/documents")(
     pathParams,
   );
 
@@ -120,7 +120,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
-      "ingest_documents_v1_rag_managed_indexes__index_name__documents_post",
+      "ingest_documents_v1_context_search_indexes__index_name__documents_post",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

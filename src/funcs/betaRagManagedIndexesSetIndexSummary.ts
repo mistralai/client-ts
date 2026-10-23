@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
 export function betaRagManagedIndexesSetIndexSummary(
   client: MistralCore,
   request:
-    operations.SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequest,
+    operations.SetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguagePutRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -62,7 +62,7 @@ export function betaRagManagedIndexesSetIndexSummary(
 async function $do(
   client: MistralCore,
   request:
-    operations.SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequest,
+    operations.SetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguagePutRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -85,7 +85,7 @@ async function $do(
     request,
     (value) =>
       operations
-        .SetManagedIndexSummaryV1RagManagedIndexesIndexNameSummaryFieldLanguagePutRequest$outboundSchema
+        .SetManagedIndexSummaryV1ContextSearchIndexesIndexNameSummaryFieldLanguagePutRequest$outboundSchema
         .parse(value),
     "Input validation failed",
   );
@@ -108,7 +108,7 @@ async function $do(
     }),
   };
   const path = pathToFunc(
-    "/v1/rag/managed_indexes/{index_name}/summary_field/{language}",
+    "/v1/context/search-indexes/{index_name}/summary_field/{language}",
   )(pathParams);
 
   const headers = new Headers(compactMap({
@@ -124,7 +124,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID:
-      "set_managed_index_summary_v1_rag_managed_indexes__index_name__summary_field__language__put",
+      "set_managed_index_summary_v1_context_search_indexes__index_name__summary_field__language__put",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

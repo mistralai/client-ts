@@ -4,6 +4,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { And, And$Outbound, And$outboundSchema } from "./and.js";
 import { Equal, Equal$Outbound, Equal$outboundSchema } from "./equal.js";
 import { In, In$Outbound, In$outboundSchema } from "./in.js";
@@ -11,18 +12,34 @@ import { Not, Not$Outbound, Not$outboundSchema } from "./not.js";
 import { Or, Or$Outbound, Or$outboundSchema } from "./or.js";
 import { Range, Range$Outbound, Range$outboundSchema } from "./range.js";
 
+export const Operator = {
+  Or: "or",
+  And: "and",
+} as const;
+export type Operator = ClosedEnum<typeof Operator>;
+
 export type KeywordRetrieverFilter = And | Equal | In | Not | Or | Range;
 
 /**
  * Retrieve document chunks with similar keywords to the given query.
+ *
+ * @remarks
+ *
+ * Uses the default settings for the index on the field.
  */
 export type KeywordRetriever = {
   topK?: number | undefined;
   type: "keyword";
   query: string;
+  operator?: Operator | undefined;
   filter?: And | Equal | In | Not | Or | Range | null | undefined;
   field?: string | null | undefined;
 };
+
+/** @internal */
+export const Operator$outboundSchema: z.ZodEnum<typeof Operator> = z.enum(
+  Operator,
+);
 
 /** @internal */
 export type KeywordRetrieverFilter$Outbound =
@@ -59,6 +76,7 @@ export type KeywordRetriever$Outbound = {
   top_k: number;
   type: "keyword";
   query: string;
+  operator: string;
   filter?:
     | And$Outbound
     | Equal$Outbound
@@ -79,6 +97,7 @@ export const KeywordRetriever$outboundSchema: z.ZodType<
   topK: z.int().default(20),
   type: z.literal("keyword"),
   query: z.string(),
+  operator: Operator$outboundSchema.default("or"),
   filter: z.nullable(
     z.union([
       And$outboundSchema,

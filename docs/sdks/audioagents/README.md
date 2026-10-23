@@ -103,6 +103,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.audio.agents.create({
     name: "<value>",
+    configuration: {},
   });
 
   console.log(result);
@@ -128,6 +129,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await audioAgentsCreate(mistral, {
     name: "<value>",
+    configuration: {},
   });
   if (res.ok) {
     const { value: result } = res;

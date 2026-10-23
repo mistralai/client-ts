@@ -11,6 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type AudioTTSConfig = {
   model?: string | undefined;
   voiceId?: string | undefined;
+  expressiveness?: number | null | undefined;
 };
 
 /** @internal */
@@ -18,6 +19,7 @@ export const AudioTTSConfig$inboundSchema: z.ZodType<AudioTTSConfig, unknown> =
   z.object({
     model: z.string().optional(),
     voice_id: z.string().optional(),
+    expressiveness: z.nullable(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "voice_id": "voiceId",
@@ -27,6 +29,7 @@ export const AudioTTSConfig$inboundSchema: z.ZodType<AudioTTSConfig, unknown> =
 export type AudioTTSConfig$Outbound = {
   model?: string | undefined;
   voice_id?: string | undefined;
+  expressiveness?: number | null | undefined;
 };
 
 /** @internal */
@@ -36,6 +39,7 @@ export const AudioTTSConfig$outboundSchema: z.ZodType<
 > = z.object({
   model: z.string().optional(),
   voiceId: z.string().optional(),
+  expressiveness: z.nullable(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     voiceId: "voice_id",

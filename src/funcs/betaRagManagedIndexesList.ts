@@ -40,12 +40,12 @@ import {
  */
 export function betaRagManagedIndexesList(
   client: MistralCore,
-  request?: operations.ListIndexesV1RagManagedIndexesGetRequest | undefined,
+  request?: operations.ListIndexesV1ContextSearchIndexesGetRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   PageIterator<
     Result<
-      operations.ListIndexesV1RagManagedIndexesGetResponse,
+      operations.ListIndexesV1ContextSearchIndexesGetResponse,
       | errors.HTTPValidationError
       | MistralError
       | ResponseValidationError
@@ -68,13 +68,13 @@ export function betaRagManagedIndexesList(
 
 async function $do(
   client: MistralCore,
-  request?: operations.ListIndexesV1RagManagedIndexesGetRequest | undefined,
+  request?: operations.ListIndexesV1ContextSearchIndexesGetRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     PageIterator<
       Result<
-        operations.ListIndexesV1RagManagedIndexesGetResponse,
+        operations.ListIndexesV1ContextSearchIndexesGetResponse,
         | errors.HTTPValidationError
         | MistralError
         | ResponseValidationError
@@ -93,7 +93,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.ListIndexesV1RagManagedIndexesGetRequest$outboundSchema
+      operations.ListIndexesV1ContextSearchIndexesGetRequest$outboundSchema
         .optional().parse(value),
     "Input validation failed",
   );
@@ -103,7 +103,7 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v1/rag/managed_indexes")();
+  const path = pathToFunc("/v1/context/search-indexes")();
 
   const query = encodeFormQuery({
     "creator_id": payload?.creator_id,
@@ -124,7 +124,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "list_indexes_v1_rag_managed_indexes_get",
+    operationID: "list_indexes_v1_context_search_indexes_get",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -169,7 +169,7 @@ async function $do(
   };
 
   const [result, raw] = await M.match<
-    operations.ListIndexesV1RagManagedIndexesGetResponse,
+    operations.ListIndexesV1ContextSearchIndexesGetResponse,
     | errors.HTTPValidationError
     | MistralError
     | ResponseValidationError
@@ -182,7 +182,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations.ListIndexesV1RagManagedIndexesGetResponse$inboundSchema,
+      operations.ListIndexesV1ContextSearchIndexesGetResponse$inboundSchema,
       { key: "Result" },
     ),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
@@ -202,7 +202,7 @@ async function $do(
   ): {
     next: Paginator<
       Result<
-        operations.ListIndexesV1RagManagedIndexesGetResponse,
+        operations.ListIndexesV1ContextSearchIndexesGetResponse,
         | errors.HTTPValidationError
         | MistralError
         | ResponseValidationError

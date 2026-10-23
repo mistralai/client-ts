@@ -12,14 +12,14 @@ import {
 export type AudioAgentCreateRequest = {
   name: string;
   description?: string | null | undefined;
-  configuration?: AudioAgentConfigurationRequest | null | undefined;
+  configuration: AudioAgentConfigurationRequest;
 };
 
 /** @internal */
 export type AudioAgentCreateRequest$Outbound = {
   name: string;
   description?: string | null | undefined;
-  configuration?: AudioAgentConfigurationRequest$Outbound | null | undefined;
+  configuration: AudioAgentConfigurationRequest$Outbound;
 };
 
 /** @internal */
@@ -29,8 +29,7 @@ export const AudioAgentCreateRequest$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  configuration: z.nullable(AudioAgentConfigurationRequest$outboundSchema)
-    .optional(),
+  configuration: AudioAgentConfigurationRequest$outboundSchema,
 });
 
 export function audioAgentCreateRequestToJSON(

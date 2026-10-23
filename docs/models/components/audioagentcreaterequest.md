@@ -7,6 +7,7 @@ import { AudioAgentCreateRequest } from "@mistralai/mistralai/models/components"
 
 let value: AudioAgentCreateRequest = {
   name: "<value>",
+  configuration: {},
 };
 ```
 
@@ -16,4 +17,4 @@ let value: AudioAgentCreateRequest = {
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | `name`                                                                                                 | *string*                                                                                               | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
 | `description`                                                                                          | *string*                                                                                               | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
-| `configuration`                                                                                        | [components.AudioAgentConfigurationRequest](../../models/components/audioagentconfigurationrequest.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `configuration`                                                                                        | [components.AudioAgentConfigurationRequest](../../models/components/audioagentconfigurationrequest.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
