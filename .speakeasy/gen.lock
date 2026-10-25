@@ -1,19 +1,19 @@
 lockVersion: ""
 id: ""
 management:
-  docChecksum: e208ec5aa2279ed11a1d6f4265e7baf1
+  docChecksum: 88f8765f297eba24ea252acea6ae0346
   docVersion: 1.0.0
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 3.2.0
-  configChecksum: 0b81e7ebbe40655d07e4cbc5c03fcbd3
+  releaseVersion: 3.3.0
+  configChecksum: 7fafaabd358bcb9499da26571e0bf142
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
 persistentEdits:
-  generation_id: 1353b8ba-9611-4c08-a410-90038d606707
-  pristine_commit_hash: 6141da6b89b5471e3401630794dc5eed9bf33b1a
-  pristine_tree_hash: 5f5f8a51e571ee176c3432ab04cec7e0a834d9ea
+  generation_id: 17712b23-b5e1-447c-b7c5-a8faaca72eed
+  pristine_commit_hash: 8cbf58efd8ccd7882abfa67a46f08a4d3e6ef862
+  pristine_tree_hash: 744cb3a15a6fbd69cb43d9c4de0c30113183ed0d
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -3065,8 +3065,8 @@ trackedFiles:
     pristine_git_object: 7a5ccfe249a8bd3efe46bc07bfeb5fcb0467474f
   docs/models/components/reasoningeffort.md:
     id: d0749e80416e
-    last_write_checksum: sha1:4478808ae68ef72f593e1222883197b19a304ecd
-    pristine_git_object: 201a4d40b73c440e849c16657a6d484eb82dc52d
+    last_write_checksum: sha1:62d773b01159e7a45aff9911c5feb65e217e8f14
+    pristine_git_object: ce8232c658ea1fbb3cb23070edcccf546b4a0377
   docs/models/components/recordsortfield.md:
     id: f239458a3b83
     last_write_checksum: sha1:b3be4a7deb1ff10c48337213cf657f2d5e2b040d
@@ -6430,12 +6430,12 @@ trackedFiles:
     pristine_git_object: 4ce8a353a05b040d6d4e747dbe78bfbe6079d5f1
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:e78e04beda5072faeb6a979e398cdc8ca02fbe3d
-    pristine_git_object: cea55c924bd0229cd95069ef6f0e3dfa6723a79a
+    last_write_checksum: sha1:e1acb9fd579d2ce0159c69b00bbf64ece550ac52
+    pristine_git_object: 5ec0f31c0814b7a38be842f05cb63994493f21b2
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:83d1b86293781f37dcef63b4a46741492027486e
-    pristine_git_object: 73641ddebeb00d2fce41a97524017965c889accd
+    last_write_checksum: sha1:474122e514af2f8471e52fac819a85c25114a7e9
+    pristine_git_object: 391eecdd7292f1e1cd401b4ec43d554e9136de56
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:00cdc7c9289b0791b1ef96305a7e5aafbf463e33
@@ -7614,8 +7614,8 @@ trackedFiles:
     pristine_git_object: 962ea486e17eabe13bcf068493a556110c944df8
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:dfad0216bdb9d6a1773604ac7cffa2e30fe1283f
-    pristine_git_object: 6adfaee00dfcd34f3b6f3537c31bf2f239d5dfd3
+    last_write_checksum: sha1:38d5ab05dcfed8460af4f925129279d39aff9265
+    pristine_git_object: 6bbe5b978cbfcf9a15cc20780b62c44b196ed82b
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:4481b2a380f8a16856ef92c66fb370299f56d135
@@ -9978,8 +9978,8 @@ trackedFiles:
     pristine_git_object: cde2887c8090814d0e1d718bb730849e7754f6fa
   src/models/components/reasoningeffort.ts:
     id: 5cfdc909f234
-    last_write_checksum: sha1:c2a0b79cc44b9c5ff6b6de45b6f0b0caf76bc161
-    pristine_git_object: 54a3a702f57095cc6a5b69730f2086a8c3e39d27
+    last_write_checksum: sha1:d84002b96b574543711cf285db98952e7d7847ac
+    pristine_git_object: 193f20769b57023d034ae81da026a1408b8471a5
   src/models/components/recordsortfield.ts:
     id: e9c2bf011b74
     last_write_checksum: sha1:686e798d0e6acf13608c68845e21987fe3a403c8
@@ -16479,4 +16479,4 @@ examples:
           application/json: {"input_tokens": 363814, "object": "response.input_tokens"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `mistral.audio.agents.create()`: \n  *  `request.configuration` **Changed** (Breaking ⚠️)\n  *  `response.configuration.tts.expressiveness` **Added**\n* `mistral.beta.connectors.getAuthenticationMethods()`:  `response.[].hasDefaultCredentials` **Changed**\n* `mistral.beta.connectors.list()`:  `response.items[].union(mcp).supportedAuthMethods[].hasDefaultCredentials` **Changed**\n* `mistral.responses.countInputTokens()`: **Added**\n* `mistral.beta.connectors.get()`:  `response.union(mcp).supportedAuthMethods[].hasDefaultCredentials` **Changed**\n* `mistral.beta.connectors.update()`:  `response.union(mcp).supportedAuthMethods[].hasDefaultCredentials` **Changed**\n* `mistral.beta.rag.managedIndexes.search()`: \n  *  `request.searchRequest.retriever.union(keyword).operator` **Added**\n* `mistral.audio.sessions.create()`: \n  *  `request.tts.expressiveness` **Added**\n* `mistral.audio.agents.list()`:  `response.data[].configuration.tts.expressiveness` **Added**\n* `mistral.beta.connectors.create()`:  `response.union(http).supportedAuthMethods[].hasDefaultCredentials` **Changed**\n* `mistral.audio.agents.get()`:  `response.configuration.tts.expressiveness` **Added**\n* `mistral.audio.agents.update()`: \n  *  `request.audioAgentUpdateRequest.configuration.tts.expressiveness` **Added**\n  *  `response.configuration.tts.expressiveness` **Added**\n* `mistral.audio.agents.listVersions()`:  `response.data[].configuration.tts.expressiveness` **Added**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `mistral.beta.conversations.start()`: \n  *  `request.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.conversations.list()`:  `response.[].union(ModelConversation).completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.conversations.get()`:  `response.union(ModelConversation).completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.conversations.append()`: \n  *  `request.conversationAppendRequest.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.conversations.restart()`: \n  *  `request.conversationRestartRequest.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.create()`: \n  *  `request.completionArgs.reasoningEffort.enum(max)` **Added**\n  *  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.list()`:  `response.[].completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.listPages()`:  `response.data[].completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.get()`:  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.update()`: \n  *  `request.updateAgentRequest.completionArgs.reasoningEffort.enum(max)` **Added**\n  *  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.updateVersion()`:  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.listVersions()`:  `response.[].completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.getVersion()`:  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.chat.complete()`: \n  *  `request.reasoningEffort.enum(max)` **Added**\n* `mistral.agents.complete()`: \n  *  `request.reasoningEffort.enum(max)` **Added**\n"

@@ -13,6 +13,7 @@ export const ReasoningEffort = {
   Medium: "medium",
   High: "high",
   Xhigh: "xhigh",
+  Max: "max",
 } as const;
 export type ReasoningEffort = OpenEnum<typeof ReasoningEffort>;
 

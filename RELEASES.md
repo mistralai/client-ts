@@ -1146,3 +1146,19 @@ Based on:
 - [typescript v3.2.0] .
 ### Releases
 - [NPM v3.2.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.2.0 - .
+
+## 2026-10-25 19:49:53
+### API changes
+#### Schema changes
+
+- Added response enum value `max` across beta conversations, beta agents (10 operations).
+- Added request enum value `max` across beta conversations, beta agents, chat, agents (7 operations).
+
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.796.4 (2.935.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.3.0] .
+### Releases
+- [NPM v3.3.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.3.0 - .
