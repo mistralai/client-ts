@@ -1207,6 +1207,16 @@ Changed types or signatures in beta (1):
 </details>
 
 ### API changes
+#### Realtime helper (`@mistralai/mistralai/extra/realtime`)
+
+- Added options `targetStreamingDelayMs`, `diarize`, `contextBias`, `language`, `speakerReferences`, and `turnDetection` in `RealtimeTranscription.connect()` and `RealtimeTranscription.transcribeStream()`.
+- Added the same fields in `RealtimeConnection.updateSession()`; `audioFormat` is now optional, and calling it with no fields throws `At least one session field must be provided`.
+- Added response variants `TurnDetectionStartEvent`, `TurnDetectionEagerEndEvent`, `TurnDetectionResumeEvent`, and `TurnDetectionEndEvent` in `RealtimeTranscription.connect()` and `RealtimeTranscription.transcribeStream()`.
+
+#### Breaking changes
+
+- Removed fields `numCachedTokens`, `promptTokensDetails`, `completionTokensDetails`, `promptTokenDetails`, and `requestCount` from response `data.union(speech.audio.done).usage` in `sdk.audio.speech.complete()`.
+
 #### Schema changes
 
 - Added enum value `optimizationTrialObservationAlreadyExists` across beta observability judges, beta observability datasets, beta observability datasets records, beta observability evaluations, beta observability evaluations projects, beta observability evaluations runs, beta observability evaluations records, beta observability evaluations optimizations, beta observability logs, beta observability traces, beta observability spans (65 operations).
