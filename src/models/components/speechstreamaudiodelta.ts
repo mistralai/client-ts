@@ -25,7 +25,32 @@ export const SpeechStreamAudioDelta$inboundSchema: z.ZodType<
     "audio_data": "audioData",
   });
 });
+/** @internal */
+export type SpeechStreamAudioDelta$Outbound = {
+  type: "speech.audio.delta";
+  audio_data: string;
+};
 
+/** @internal */
+export const SpeechStreamAudioDelta$outboundSchema: z.ZodType<
+  SpeechStreamAudioDelta$Outbound,
+  SpeechStreamAudioDelta
+> = z.object({
+  type: z.literal("speech.audio.delta"),
+  audioData: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    audioData: "audio_data",
+  });
+});
+
+export function speechStreamAudioDeltaToJSON(
+  speechStreamAudioDelta: SpeechStreamAudioDelta,
+): string {
+  return JSON.stringify(
+    SpeechStreamAudioDelta$outboundSchema.parse(speechStreamAudioDelta),
+  );
+}
 export function speechStreamAudioDeltaFromJSON(
   jsonString: string,
 ): SafeParseResult<SpeechStreamAudioDelta, SDKValidationError> {

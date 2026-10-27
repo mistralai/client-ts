@@ -1,12 +1,12 @@
 /**
- * Byte-exact ports of the two JSON serializers the Python `PayloadEncoder`
+ * Byte-exact ports of the JSON serializers the Python `PayloadEncoder`
  * uses, so that encoded payloads match the Python client and workers:
  *
  * - `toJsonBytes` mirrors `pydantic_core.to_json`: compact, raw UTF-8. Python
  *   uses it to serialize workflow inputs before encoding them.
  * - `parsePythonJson` + `dumpsPythonJson` mirror `json.loads` +
  *   `json.dumps` with default arguments (", " / ": " separators, ASCII only).
- *   Partial encryption re-serializes the whole payload this way. The parser
+ *   Partial decryption re-serializes the whole payload this way. The parser
  *   keeps key order and the int/float distinction of number tokens, which a
  *   plain `JSON.parse` would lose.
  *
@@ -349,21 +349,47 @@ function formatNumberToken(raw: string): string {
   return formatPythonFloat(Number(raw));
 }
 
-function dumpsText(value: PythonJsonValue): string {
+type DumpsStyle = {
+  quote: (value: string) => string;
+  itemSeparator: string;
+  keySeparator: string;
+};
+
+const DEFAULT_DUMPS_STYLE: DumpsStyle = {
+  quote: escapeAscii,
+  itemSeparator: ", ",
+  keySeparator: ": ",
+};
+
+const COMPACT_DUMPS_STYLE: DumpsStyle = {
+  quote: (value) => JSON.stringify(value),
+  itemSeparator: ",",
+  keySeparator: ":",
+};
+
+function dumpsText(value: PythonJsonValue, style: DumpsStyle): string {
   if (value === null) return "null";
   if (value === true) return "true";
   if (value === false) return "false";
-  if (typeof value === "string") return escapeAscii(value);
+  if (typeof value === "string") return style.quote(value);
   if (value instanceof PythonJsonNumber) return formatNumberToken(value.raw);
-  if (Array.isArray(value)) return `[${value.map(dumpsText).join(", ")}]`;
+  if (Array.isArray(value)) {
+    const items = value.map((item) => dumpsText(item, style));
+    return `[${items.join(style.itemSeparator)}]`;
+  }
   const members = Array.from(
     value,
-    ([key, member]) => `${escapeAscii(key)}: ${dumpsText(member)}`,
+    ([key, member]) =>
+      `${style.quote(key)}${style.keySeparator}${dumpsText(member, style)}`,
   );
-  return `{${members.join(", ")}}`;
+  return `{${members.join(style.itemSeparator)}}`;
 }
 
 /** Serializes a parsed value like Python's `json.dumps(obj).encode()`. */
 export function dumpsPythonJson(value: PythonJsonValue): Uint8Array {
-  return textEncoder.encode(dumpsText(value));
+  return textEncoder.encode(dumpsText(value, DEFAULT_DUMPS_STYLE));
+}
+
+export function dumpsCompactPythonJson(value: PythonJsonValue): Uint8Array {
+  return textEncoder.encode(dumpsText(value, COMPACT_DUMPS_STYLE));
 }

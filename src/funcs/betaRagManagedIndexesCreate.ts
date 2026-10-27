@@ -165,7 +165,7 @@ async function $do(
       { hdrs: true, key: "Result" },
     ),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
-    M.fail([409, "4XX"]),
+    M.fail([403, 409, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

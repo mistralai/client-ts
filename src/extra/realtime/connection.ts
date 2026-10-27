@@ -16,10 +16,7 @@ import {
   TranscriptionStreamTextDelta,
   TranscriptionStreamTextDelta$inboundSchema,
 } from "../../models/components/transcriptionstreamtextdelta.js";
-import {
-  AudioFormat$outboundSchema,
-  type AudioFormat,
-} from "../../models/components/audioformat.js";
+import type { AudioFormat } from "../../models/components/audioformat.js";
 import {
   RealtimeTranscriptionError$inboundSchema,
   type RealtimeTranscriptionError,
@@ -35,6 +32,26 @@ import {
   RealtimeTranscriptionSessionUpdated$inboundSchema,
   type RealtimeTranscriptionSessionUpdated,
 } from "../../models/components/realtimetranscriptionsessionupdated.js";
+import {
+  RealtimeTranscriptionSessionUpdatePayload$outboundSchema,
+} from "../../models/components/realtimetranscriptionsessionupdatepayload.js";
+import type { TurnDetectionConfig } from "../../models/components/turndetectionconfig.js";
+import {
+  TurnDetectionEagerEndEvent$inboundSchema,
+  type TurnDetectionEagerEndEvent,
+} from "../../models/components/turndetectioneagerendevent.js";
+import {
+  TurnDetectionEndEvent$inboundSchema,
+  type TurnDetectionEndEvent,
+} from "../../models/components/turndetectionendevent.js";
+import {
+  TurnDetectionResumeEvent$inboundSchema,
+  type TurnDetectionResumeEvent,
+} from "../../models/components/turndetectionresumeevent.js";
+import {
+  TurnDetectionStartEvent$inboundSchema,
+  type TurnDetectionStartEvent,
+} from "../../models/components/turndetectionstartevent.js";
 
 const WS_CLOSING = 2;
 const WS_CLOSED = 3;
@@ -46,7 +63,20 @@ export type KnownRealtimeEvent =
   | TranscriptionStreamLanguage
   | TranscriptionStreamSegmentDelta
   | TranscriptionStreamTextDelta
-  | TranscriptionStreamDone;
+  | TranscriptionStreamDone
+  | TurnDetectionStartEvent
+  | TurnDetectionEagerEndEvent
+  | TurnDetectionResumeEvent
+  | TurnDetectionEndEvent;
+
+export type RealtimeSessionOptions = {
+  targetStreamingDelayMs?: number | undefined;
+  diarize?: boolean | undefined;
+  contextBias?: ReadonlyArray<string> | undefined;
+  language?: string | undefined;
+  speakerReferences?: Record<string, string> | undefined;
+  turnDetection?: TurnDetectionConfig | undefined;
+};
 
 export type UnknownRealtimeEvent = {
   type: string;
@@ -229,20 +259,33 @@ export class RealtimeConnection implements AsyncIterable<RealtimeEvent> {
     await this.sendJson({ type: "input_audio.flush" });
   }
 
-  async updateSession(audioFormat: AudioFormat): Promise<void> {
+  async updateSession(
+    audioFormat?: AudioFormat | undefined,
+    options: RealtimeSessionOptions = {},
+  ): Promise<void> {
     if (this.isClosed) {
       throw new Error("Connection is closed");
     }
 
-    const message = {
-      type: "session.update",
-      session: {
-        audio_format: AudioFormat$outboundSchema.parse(audioFormat),
-      },
+    const fields = {
+      audioFormat,
+      targetStreamingDelayMs: options.targetStreamingDelayMs,
+      diarize: options.diarize,
+      contextBias: options.contextBias,
+      language: options.language,
+      speakerReferences: options.speakerReferences,
+      turnDetection: options.turnDetection,
     };
+    if (Object.values(fields).every((value) => value == null)) {
+      throw new Error("At least one session field must be provided");
+    }
+    const session = RealtimeTranscriptionSessionUpdatePayload$outboundSchema
+      .parse(fields);
 
-    await this.sendJson(message);
-    this.currentAudioFormat = audioFormat;
+    await this.sendJson({ type: "session.update", session });
+    if (audioFormat) {
+      this.currentAudioFormat = audioFormat;
+    }
   }
 
   async endAudio(): Promise<void> {
@@ -369,6 +412,38 @@ function parseRealtimeEvent(payload: unknown): RealtimeEvent {
   if (msgType === "transcription.done") {
     return parseWithSchema(
       TranscriptionStreamDone$inboundSchema,
+      payload,
+      msgType,
+    );
+  }
+
+  if (msgType === "turn.start") {
+    return parseWithSchema(
+      TurnDetectionStartEvent$inboundSchema,
+      payload,
+      msgType,
+    );
+  }
+
+  if (msgType === "turn.eager_end") {
+    return parseWithSchema(
+      TurnDetectionEagerEndEvent$inboundSchema,
+      payload,
+      msgType,
+    );
+  }
+
+  if (msgType === "turn.resume") {
+    return parseWithSchema(
+      TurnDetectionResumeEvent$inboundSchema,
+      payload,
+      msgType,
+    );
+  }
+
+  if (msgType === "turn.end") {
+    return parseWithSchema(
+      TurnDetectionEndEvent$inboundSchema,
       payload,
       msgType,
     );

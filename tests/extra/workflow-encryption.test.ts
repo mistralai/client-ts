@@ -189,7 +189,7 @@ describe("PayloadEncoder", () => {
     expect(encoded.encoding_options).toEqual([
       EncodedPayloadOptions.PartiallyEncrypted,
     ]);
-    expect(plaintext).toContain("\"user\": \"alice\"");
+    expect(plaintext).toContain("\"user\":\"alice\"");
     expect(plaintext).not.toContain("s3cr3t");
   });
 
@@ -202,7 +202,7 @@ describe("PayloadEncoder", () => {
 
     expect(encoded.encoding_options).toEqual([]);
     expect(Buffer.from(encoded.b64payload, "base64").toString()).toBe(
-      "{\"a\": 1}",
+      "{\"a\":1}",
     );
   });
 

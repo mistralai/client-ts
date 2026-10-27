@@ -38,6 +38,7 @@ import {
   WorkflowContext,
 } from "./models.js";
 import {
+  dumpsCompactPythonJson,
   dumpsPythonJson,
   loadsPythonJson,
   parsePythonJson,
@@ -357,7 +358,7 @@ export class PayloadEncoder {
       const plaintext = textEncoder.encode(PayloadEncoder.#fieldData(field));
       field.set("data", bytesToBase64(await this.#encrypt(plaintext)));
     }
-    return [dumpsPythonJson(obj), encryptedFields.length > 0];
+    return [dumpsCompactPythonJson(obj), encryptedFields.length > 0];
   }
 
   async #partiallyDecryptFields(

@@ -1,5 +1,22 @@
 export { AudioEncoding } from "../../models/components/audioencoding.js";
 export type { AudioFormat } from "../../models/components/audioformat.js";
+export type { RealtimeSpeechError } from "../../models/components/realtimespeecherror.js";
+export type {
+  RealtimeSpeechErrorDetail,
+} from "../../models/components/realtimespeecherrordetail.js";
+export type { RealtimeSpeechSession } from "../../models/components/realtimespeechsession.js";
+export type {
+  RealtimeSpeechSessionCreated,
+} from "../../models/components/realtimespeechsessioncreated.js";
+export type {
+  RealtimeSpeechSessionUpdated,
+} from "../../models/components/realtimespeechsessionupdated.js";
+export {
+  RealtimeSpeechStreamingMode,
+} from "../../models/components/realtimespeechstreamingmode.js";
+export { SpeechOutputFormat } from "../../models/components/speechoutputformat.js";
+export type { SpeechStreamAudioDelta } from "../../models/components/speechstreamaudiodelta.js";
+export type { SpeechStreamDone } from "../../models/components/speechstreamdone.js";
 export type {
   RealtimeTranscriptionError,
 } from "../../models/components/realtimetranscriptionerror.js";
@@ -27,6 +44,30 @@ export type {
 export type {
   TranscriptionStreamTextDelta,
 } from "../../models/components/transcriptionstreamtextdelta.js";
-export type { RealtimeEvent, UnknownRealtimeEvent } from "./connection.js";
+export type { TurnDetectionConfig } from "../../models/components/turndetectionconfig.js";
+export type {
+  TurnDetectionEagerEndEvent,
+} from "../../models/components/turndetectioneagerendevent.js";
+export type { TurnDetectionEndEvent } from "../../models/components/turndetectionendevent.js";
+export { TurnDetectionEndReason } from "../../models/components/turndetectionendreason.js";
+export type {
+  TurnDetectionResumeEvent,
+} from "../../models/components/turndetectionresumeevent.js";
+export type {
+  TurnDetectionStartEvent,
+} from "../../models/components/turndetectionstartevent.js";
+export type {
+  RealtimeEvent,
+  RealtimeSessionOptions,
+  UnknownRealtimeEvent,
+} from "./connection.js";
 export { RealtimeConnection } from "./connection.js";
+export type { RealtimeConnectOptions } from "./transcription.js";
 export { RealtimeTranscription } from "./transcription.js";
+export { RealtimeSpeechException, RealtimeSpeechWSError } from "./errors.js";
+export type {
+  RealtimeSpeechConnectOptions,
+  RealtimeSpeechEvent,
+  RealtimeSpeechSessionOptions,
+} from "./speech.js";
+export { audioBytes, RealtimeSpeech, RealtimeSpeechConnection } from "./speech.js";

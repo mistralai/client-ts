@@ -57,6 +57,8 @@ export const ObservabilityErrorCode = {
   EvaluationNameAlreadyExists: "EVALUATION_NAME_ALREADY_EXISTS",
   OptimizationNotFound: "OPTIMIZATION_NOT_FOUND",
   OptimizationTrialKeyAlreadyExists: "OPTIMIZATION_TRIAL_KEY_ALREADY_EXISTS",
+  OptimizationTrialObservationAlreadyExists:
+    "OPTIMIZATION_TRIAL_OBSERVATION_ALREADY_EXISTS",
   TracesFilterQueryParseError: "TRACES_FILTER_QUERY_PARSE_ERROR",
   TraceNotFound: "TRACE_NOT_FOUND",
   SpanNotFound: "SPAN_NOT_FOUND",
