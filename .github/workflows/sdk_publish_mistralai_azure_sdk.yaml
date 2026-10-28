@@ -31,7 +31,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: packages/mistralai-azure
-        run: npx -y -p npm@11.15.0 npm install --ignore-scripts --min-release-age=7
+        run: npx -y -p npm@11.15.0 npm install --ignore-scripts --min-release-age=2
 
       - name: Build package
         working-directory: packages/mistralai-azure
