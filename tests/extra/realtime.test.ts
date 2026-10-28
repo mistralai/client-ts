@@ -170,6 +170,55 @@ describe("RealtimeConnection async iterator", () => {
     await donePromise;
   });
 
+  it.each([
+    [{ type: "turn.start", time_s: 1.84 }, { type: "turn.start", timeS: 1.84 }],
+    [{ type: "turn.eager_end", time_s: 2.5 }, { type: "turn.eager_end", timeS: 2.5 }],
+    [{ type: "turn.resume", time_s: 2.9 }, { type: "turn.resume", timeS: 2.9 }],
+    [
+      { type: "turn.end", time_s: 4.4, end_reason: "threshold" },
+      { type: "turn.end", timeS: 4.4, endReason: "threshold" },
+    ],
+  ])("parses turn detection event %j", async (payload, expected) => {
+    const { MockWebSocket } = getMockModule();
+    const ws = new MockWebSocket();
+    const connection = new RealtimeConnection(
+      ws as unknown as WebSocket,
+      makeSession(),
+    );
+
+    const iterator = connection[Symbol.asyncIterator]();
+    const result = await collectNext(iterator, ws, payload);
+
+    expect(result.value).toEqual(expected);
+
+    const donePromise = iterator.next();
+    ws.close();
+    await donePromise;
+  });
+
+  it.each([
+    { type: "turn.start" },
+    { type: "turn.end", time_s: 4.4, end_reason: "unexpected" },
+  ])("yields UnknownRealtimeEvent for invalid turn event %j", async (payload) => {
+    const { MockWebSocket } = getMockModule();
+    const ws = new MockWebSocket();
+    const connection = new RealtimeConnection(
+      ws as unknown as WebSocket,
+      makeSession(),
+    );
+
+    const iterator = connection[Symbol.asyncIterator]();
+    const result = await collectNext(iterator, ws, payload);
+
+    expect(result.value.type).toBe(payload.type);
+    expect(result.value.raw).toEqual(payload);
+    expect(result.value.error).toBeInstanceOf(Error);
+
+    const donePromise = iterator.next();
+    ws.close();
+    await donePromise;
+  });
+
   it("yields UnknownRealtimeEvent on schema parse failure", async () => {
     const { MockWebSocket } = getMockModule();
     const ws = new MockWebSocket();
@@ -190,6 +239,105 @@ describe("RealtimeConnection async iterator", () => {
     const donePromise = iterator.next();
     ws.close();
     await donePromise;
+  });
+});
+
+describe("RealtimeConnection.updateSession", () => {
+  it.each<[
+    string,
+    Parameters<InstanceType<typeof RealtimeConnection>["updateSession"]>,
+    Record<string, unknown>,
+  ]>([
+    [
+      "an audio format only",
+      [{ encoding: "pcm_s16le", sampleRate: 24000 }, {}],
+      { audio_format: { encoding: "pcm_s16le", sample_rate: 24000 } },
+    ],
+    [
+      "Voxtral 3 session fields",
+      [
+        undefined,
+        {
+          diarize: true,
+          contextBias: ["Voxtral", "Harmattan"],
+          language: "en",
+          speakerReferences: { alice: "UklGRg==" },
+        },
+      ],
+      {
+        diarize: true,
+        context_bias: ["Voxtral", "Harmattan"],
+        language: "en",
+        speaker_references: { alice: "UklGRg==" },
+      },
+    ],
+    [
+      "turn detection",
+      [undefined, { turnDetection: { startThreshold: 0.8, endThreshold: 0.2 } }],
+      {
+        turn_detection: {
+          start_threshold: 0.8,
+          eager_end_threshold: 0.5,
+          end_threshold: 0.2,
+          min_silence_ms: 500,
+        },
+      },
+    ],
+  ])("sends %s as a snake_case session.update", async (_label, args, expected) => {
+    const { MockWebSocket } = getMockModule();
+    const ws = new MockWebSocket();
+    const connection = new RealtimeConnection(
+      ws as unknown as WebSocket,
+      makeSession(),
+    );
+
+    await connection.updateSession(...args);
+
+    expect(ws.sent.map((message) => JSON.parse(message))).toEqual([
+      { type: "session.update", session: expected },
+    ]);
+  });
+
+  it("only sends known session fields and tracks the audio format argument", async () => {
+    const { MockWebSocket } = getMockModule();
+    const ws = new MockWebSocket();
+    const connection = new RealtimeConnection(
+      ws as unknown as WebSocket,
+      makeSession(),
+    );
+    const options = {
+      language: "en",
+      audioFormat: { encoding: AudioEncoding.PcmS16le, sampleRate: 8000 },
+      timeoutMs: 1000,
+    };
+
+    await connection.updateSession(undefined, options);
+    expect(connection.audioFormat.sampleRate).toBe(16000);
+
+    await connection.updateSession({ encoding: AudioEncoding.PcmS16le, sampleRate: 24000 });
+    expect(connection.audioFormat.sampleRate).toBe(24000);
+
+    expect(ws.sent.map((message) => JSON.parse(message))).toEqual([
+      { type: "session.update", session: { language: "en" } },
+      {
+        type: "session.update",
+        session: { audio_format: { encoding: "pcm_s16le", sample_rate: 24000 } },
+      },
+    ]);
+  });
+
+  it("rejects an empty update", async () => {
+    const { MockWebSocket } = getMockModule();
+    const ws = new MockWebSocket();
+    const connection = new RealtimeConnection(
+      ws as unknown as WebSocket,
+      makeSession(),
+    );
+
+    await expect(connection.updateSession()).rejects.toThrow(
+      "At least one session field must be provided",
+    );
+    expect(ws.sent).toEqual([]);
   });
 });
 
@@ -223,6 +371,67 @@ describe("RealtimeTranscription handshake", () => {
     const donePromise = iterator.next();
     ws.close();
     await donePromise;
+  });
+
+  it("sends session options in one session.update after the handshake", async () => {
+    const client = new RealtimeTranscription({
+      apiKey: "test",
+      serverURL: "wss://example.com",
+    });
+
+    const previousSocket = getMockModule().getLastSocket();
+    const connectPromise = client.connect("voxtral-realtime", {
+      audioFormat: { encoding: AudioEncoding.PcmS16le, sampleRate: 16000 },
+      language: "fr",
+      turnDetection: {},
+      timeoutMs: 5000,
+    });
+    const ws = await waitForSocket(previousSocket);
+    ws.emitMessage(makeSessionCreatedMessage());
+    const connection = await connectPromise;
+    await connection.close();
+
+    expect(ws.sent.map((message) => JSON.parse(message))).toEqual([
+      {
+        type: "session.update",
+        session: {
+          audio_format: { encoding: "pcm_s16le", sample_rate: 16000 },
+          language: "fr",
+          turn_detection: {
+            start_threshold: 0.5,
+            eager_end_threshold: 0.5,
+            end_threshold: 0.33,
+            min_silence_ms: 500,
+          },
+        },
+      },
+    ]);
+  });
+
+  it.each<[string, Record<string, unknown>]>([
+    [
+      "only connection options",
+      {
+        serverUrl: "wss://example.com",
+        timeoutMs: 5000,
+        httpHeaders: { "x-test": "1" },
+      },
+    ],
+    ["unknown options", { timeoutMs: 5000, signal: {}, audio_format: {} }],
+  ])("sends no session.update with %s", async (_label, options) => {
+    const client = new RealtimeTranscription({
+      apiKey: "test",
+      serverURL: "wss://example.com",
+    });
+
+    const previousSocket = getMockModule().getLastSocket();
+    const connectPromise = client.connect("voxtral-realtime", options);
+    const ws = await waitForSocket(previousSocket);
+    ws.emitMessage(makeSessionCreatedMessage());
+    const connection = await connectPromise;
+
+    expect(ws.sent).toEqual([]);
+    await connection.close();
   });
 
   it("throws RealtimeTranscriptionWSError on server error", async () => {
@@ -313,6 +522,7 @@ describe("RealtimeTranscription.transcribeStream", () => {
             encoding: AudioEncoding.PcmS16le,
             sampleRate: 16000,
           },
+          diarize: true,
         },
       )) {
         events.push(event as { type: string });
@@ -338,6 +548,13 @@ describe("RealtimeTranscription.transcribeStream", () => {
 
     const events = await eventsPromise;
     expect(events.map((event) => event.type)).toContain("transcription.done");
+    expect(JSON.parse(ws.sent[0]!)).toEqual({
+      type: "session.update",
+      session: {
+        audio_format: { encoding: "pcm_s16le", sample_rate: 16000 },
+        diarize: true,
+      },
+    });
     const sentMessageTypes = ws.sent.map((message) => {
       const parsed = JSON.parse(message) as { type?: string };
       return parsed.type;

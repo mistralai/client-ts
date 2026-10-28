@@ -1,3 +1,4 @@
+import type { RealtimeSpeechError } from "../../models/components/realtimespeecherror.js";
 import type {
   RealtimeTranscriptionError,
 } from "../../models/components/realtimetranscriptionerror.js";
@@ -28,5 +29,36 @@ export class RealtimeTranscriptionWSError extends RealtimeTranscriptionException
     this.payload = options?.payload;
     this.rawPayload = options?.rawPayload;
     this.code = options?.code ?? options?.payload?.error?.code;
+  }
+}
+
+export class RealtimeSpeechException extends Error {
+  readonly code?: number | undefined;
+
+  constructor(message: string, options?: { cause?: unknown; code?: number }) {
+    super(message, { cause: options?.cause });
+    this.name = "RealtimeSpeechException";
+    this.code = options?.code;
+  }
+}
+
+export class RealtimeSpeechWSError extends RealtimeSpeechException {
+  readonly payload?: RealtimeSpeechError | undefined;
+  readonly rawPayload?: unknown;
+
+  constructor(
+    message: string,
+    options?: {
+      payload?: RealtimeSpeechError;
+      rawPayload?: unknown;
+      code?: number;
+      cause?: unknown;
+    },
+  ) {
+    const code = options?.code ?? options?.payload?.error?.code;
+    super(message, code === undefined ? { cause: options?.cause } : { cause: options?.cause, code });
+    this.name = "RealtimeSpeechWSError";
+    this.payload = options?.payload;
+    this.rawPayload = options?.rawPayload;
   }
 }

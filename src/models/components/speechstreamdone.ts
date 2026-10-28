@@ -7,13 +7,15 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  UsageInfoDollarDefs,
-  UsageInfoDollarDefs$inboundSchema,
-} from "./usageinfodollardefs.js";
+  UsageInfo,
+  UsageInfo$inboundSchema,
+  UsageInfo$Outbound,
+  UsageInfo$outboundSchema,
+} from "./usageinfo.js";
 
 export type SpeechStreamDone = {
   type: "speech.audio.done";
-  usage: UsageInfoDollarDefs;
+  usage: UsageInfo;
 };
 
 /** @internal */
@@ -22,9 +24,30 @@ export const SpeechStreamDone$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("speech.audio.done"),
-  usage: UsageInfoDollarDefs$inboundSchema,
+  usage: UsageInfo$inboundSchema,
+});
+/** @internal */
+export type SpeechStreamDone$Outbound = {
+  type: "speech.audio.done";
+  usage: UsageInfo$Outbound;
+};
+
+/** @internal */
+export const SpeechStreamDone$outboundSchema: z.ZodType<
+  SpeechStreamDone$Outbound,
+  SpeechStreamDone
+> = z.object({
+  type: z.literal("speech.audio.done"),
+  usage: UsageInfo$outboundSchema,
 });
 
+export function speechStreamDoneToJSON(
+  speechStreamDone: SpeechStreamDone,
+): string {
+  return JSON.stringify(
+    SpeechStreamDone$outboundSchema.parse(speechStreamDone),
+  );
+}
 export function speechStreamDoneFromJSON(
   jsonString: string,
 ): SafeParseResult<SpeechStreamDone, SDKValidationError> {

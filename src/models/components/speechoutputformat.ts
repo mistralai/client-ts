@@ -15,6 +15,10 @@ export const SpeechOutputFormat = {
 export type SpeechOutputFormat = ClosedEnum<typeof SpeechOutputFormat>;
 
 /** @internal */
-export const SpeechOutputFormat$outboundSchema: z.ZodEnum<
+export const SpeechOutputFormat$inboundSchema: z.ZodEnum<
   typeof SpeechOutputFormat
 > = z.enum(SpeechOutputFormat);
+/** @internal */
+export const SpeechOutputFormat$outboundSchema: z.ZodEnum<
+  typeof SpeechOutputFormat
+> = SpeechOutputFormat$inboundSchema;

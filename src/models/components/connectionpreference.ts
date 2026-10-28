@@ -14,10 +14,20 @@ import {
 } from "./toolexecutionconfiguration.js";
 
 export type ConnectionPreference = {
-  name: string;
   toolConfiguration: ToolExecutionConfiguration;
-  isDefault?: boolean | null | undefined;
   consumerType?: ConsumerType | null | undefined;
+  /**
+   * Deprecated: always `default`, a connection holds a single preference.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  name: string;
+  /**
+   * Deprecated: always `true`.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  isDefault?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -25,15 +35,15 @@ export const ConnectionPreference$inboundSchema: z.ZodType<
   ConnectionPreference,
   unknown
 > = z.object({
-  name: z.string(),
   tool_configuration: ToolExecutionConfiguration$inboundSchema,
-  is_default: z.nullable(z.boolean()).optional(),
   consumer_type: z.nullable(ConsumerType$inboundSchema).optional(),
+  name: z.string().default("default"),
+  is_default: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_configuration": "toolConfiguration",
-    "is_default": "isDefault",
     "consumer_type": "consumerType",
+    "is_default": "isDefault",
   });
 });
 

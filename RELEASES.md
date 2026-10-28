@@ -1162,3 +1162,77 @@ Based on:
 - [typescript v3.3.0] .
 ### Releases
 - [NPM v3.3.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.3.0 - .
+
+## 2026-10-27 16:54:15
+### Generated SDK baseline differences
+The published SDK or generator baseline differs from the baseline used by the OpenAPI changelog.
+
+<details>
+<summary>Generated surface details</summary>
+
+#### Stable type changes
+Changed types or signatures on the stable surface (1):
+- `RealtimeConnection.updateSession(): async (audioFormat: AudioFormat): Promise<void> -> async (audioFormat?: AudioFormat | undefined, options: RealtimeSessionOptions = {}): Promise<void>`
+#### Beta surface changes
+Removed from the beta surface (28):
+- `Roles`
+- `completionTokensDetailsFromJSON`
+- `messageTokensFromJSON`
+- `promptTokensDetailsFromJSON`
+- `usageInfoDollarDefsFromJSON`
+- `CompletionTokensDetails.reasoningTokens`
+- `MessageTokens.role`
+- `MessageTokens.settingsTokens`
+- `MessageTokens.totalTokens`
+- `MessageTokens.truncated`
+- `MessageTokens.usageCount`
+- `PromptTokensDetails.audioTokens`
+- `PromptTokensDetails.cachedTokens`
+- `PromptTokensDetails.messages`
+- `UsageInfoDollarDefs.completionTokens`
+- `UsageInfoDollarDefs.completionTokensDetails`
+- `UsageInfoDollarDefs.numCachedTokens`
+- `UsageInfoDollarDefs.promptAudioSeconds`
+- `UsageInfoDollarDefs.promptTokenDetails`
+- `UsageInfoDollarDefs.promptTokens`
+- `UsageInfoDollarDefs.promptTokensDetails`
+- `UsageInfoDollarDefs.requestCount`
+- `UsageInfoDollarDefs.serviceTier`
+- `UsageInfoDollarDefs.totalTokens`
+- `CompletionTokensDetails`
+- ...and 3 more
+
+Changed types or signatures in beta (1):
+- `SpeechStreamDone.usage: UsageInfoDollarDefs -> UsageInfo`
+</details>
+
+### API changes
+#### Realtime helper (`@mistralai/mistralai/extra/realtime`)
+
+- Added options `targetStreamingDelayMs`, `diarize`, `contextBias`, `language`, `speakerReferences`, and `turnDetection` in `RealtimeTranscription.connect()` and `RealtimeTranscription.transcribeStream()`.
+- Added the same fields in `RealtimeConnection.updateSession()`; `audioFormat` is now optional, and calling it with no fields throws `At least one session field must be provided`.
+- Added response variants `TurnDetectionStartEvent`, `TurnDetectionEagerEndEvent`, `TurnDetectionResumeEvent`, and `TurnDetectionEndEvent` in `RealtimeTranscription.connect()` and `RealtimeTranscription.transcribeStream()`.
+- Added `RealtimeSpeech`, a realtime text-to-speech helper, with `connect()` (returns a `RealtimeSpeechConnection`) and `speakStream()`.
+
+#### Breaking changes
+
+- Removed fields `numCachedTokens`, `promptTokensDetails`, `completionTokensDetails`, `promptTokenDetails`, and `requestCount` from response `data.union(speech.audio.done).usage` in `sdk.audio.speech.complete()`.
+
+#### Schema changes
+
+- Added enum value `optimizationTrialObservationAlreadyExists` across beta observability judges, beta observability datasets, beta observability datasets records, beta observability evaluations, beta observability evaluations projects, beta observability evaluations runs, beta observability evaluations records, beta observability evaluations optimizations, beta observability logs, beta observability traces, beta observability spans (65 operations).
+- Changed response field `name` in `sdk.beta.connectors.list()`, `sdk.beta.connectors.create()`, `sdk.beta.connectors.get()`, and `sdk.beta.connectors.update()`.
+- Added field `status[403]` in `sdk.beta.rag.managedIndexes.create()`.
+
+#### Fixes
+
+- Partially encrypted workflow payloads are now serialized as compact JSON, matching the Python SDK.
+
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.796.4 (2.935.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.4.0] .
+### Releases
+- [NPM v3.4.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.4.0 - .

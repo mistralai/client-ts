@@ -1,19 +1,19 @@
 lockVersion: ""
 id: ""
 management:
-  docChecksum: 88f8765f297eba24ea252acea6ae0346
+  docChecksum: cfe6944e067faa7851832c66c9b4b340
   docVersion: 1.0.0
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 3.3.0
-  configChecksum: 7fafaabd358bcb9499da26571e0bf142
+  releaseVersion: 3.4.0
+  configChecksum: 0485cfe66bb482b21d9dec774988938d
   repoURL: https://github.com/mistralai/client-ts.git
   installationURL: https://github.com/mistralai/client-ts
   published: true
 persistentEdits:
-  generation_id: 17712b23-b5e1-447c-b7c5-a8faaca72eed
-  pristine_commit_hash: 8cbf58efd8ccd7882abfa67a46f08a4d3e6ef862
-  pristine_tree_hash: 744cb3a15a6fbd69cb43d9c4de0c30113183ed0d
+  generation_id: 248103d9-e22b-46d5-965b-903cd2925313
+  pristine_commit_hash: 74c5bde6b85d11fa54dd57afb0412fd51939cad4
+  pristine_tree_hash: e4135fd250b124f285f6de79553e4716270d5caa
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -711,10 +711,6 @@ trackedFiles:
     id: f202fdc16878
     last_write_checksum: sha1:93c51a2f011702597ea8a8cac46accee6dbdbf68
     pristine_git_object: f68f1faa91957cf5d41bf32f6e36850d0f26ab3a
-  docs/models/components/completiontokensdetails.md:
-    id: c19e8c252f52
-    last_write_checksum: sha1:8a6ca4d32f8c7364cbbfb52956c3f66e9c77bcbb
-    pristine_git_object: 3c626338cab070e30be5f1b55039b2c05ba1ab06
   docs/models/components/confidencescoresgranularity.md:
     id: 943af8afe53f
     last_write_checksum: sha1:bb6064a6f0f5663f840f19d8791057cdcd98f5f5
@@ -733,8 +729,8 @@ trackedFiles:
     pristine_git_object: bcb60ba4a71682092312955dbb22021c409aefe6
   docs/models/components/connectionpreference.md:
     id: 35641eced1ca
-    last_write_checksum: sha1:d94120507fb67b3c0684fdc924e67f7df5d09a54
-    pristine_git_object: 917112ad637abb27313c259f3a0d05e4c4b10f20
+    last_write_checksum: sha1:507c7b0a043ed00da161d93efc82c5ba0c64dd27
+    pristine_git_object: 5d688850ba711708bef44501202530f473df42fe
   docs/models/components/connector.md:
     id: c3e2692bb99b
     last_write_checksum: sha1:049fbd4f834be29f745bbefecebd61aa3da6c028
@@ -2427,10 +2423,6 @@ trackedFiles:
     id: ef7d3fb6b1a2
     last_write_checksum: sha1:0dc2b757a977707b275311650a30b4bfcdcb092c
     pristine_git_object: 361a75e237771a06288aaba068c9c316c2daa7ac
-  docs/models/components/messagetokens.md:
-    id: b42bb1780a98
-    last_write_checksum: sha1:06844fa29672176f76caa3f6a5decde305abfb68
-    pristine_git_object: b6523fc8d647395af1a3b104979ebabf8c1c03ed
   docs/models/components/metadata.md:
     id: 06867fa888c8
     last_write_checksum: sha1:49637b960e8a78875cc5d64c8c900afa198c422c
@@ -2605,8 +2597,8 @@ trackedFiles:
     pristine_git_object: 4572fc214775d9768f9a0854f2e8b5a778583cb6
   docs/models/components/observabilityerrorcode.md:
     id: b3e4cd9b942e
-    last_write_checksum: sha1:cd596ab5da35d1441bd0c3ac55998b013b64c61e
-    pristine_git_object: 895cf661243afe0fd879a397c2416a35a9dbc5e2
+    last_write_checksum: sha1:80c87887a9bf8e91fb94b4ca1b774b660b040de6
+    pristine_git_object: 28e5a967c56113aee60ce60eba0e6b8745c364ed
   docs/models/components/observabilityerrordetail.md:
     id: e4b9fe616acf
     last_write_checksum: sha1:eb99dfcfe8b7fd0641cf3cbf48f8a4b43cc1fd25
@@ -2963,10 +2955,6 @@ trackedFiles:
     id: aca7bd1d6f24
     last_write_checksum: sha1:8b1ab08b98d6dd65096e870e078644a352b57c39
     pristine_git_object: 4fe02f8ca79166ae879a03d6c25856a804002937
-  docs/models/components/prompttokensdetails.md:
-    id: d6124531d751
-    last_write_checksum: sha1:b6b61ddbc79faa9c9a169be69ec39bf6c40dfac3
-    pristine_git_object: 28c619ac28a2953a0301f27b7587e1e831b265da
   docs/models/components/promptvariable.md:
     id: 3c4769b431f8
     last_write_checksum: sha1:0a35276b4feeb321923a9073784c686f18a2aa64
@@ -3015,6 +3003,54 @@ trackedFiles:
     id: 9ea3d0fa18d2
     last_write_checksum: sha1:81ffea93db1433226e7b6c584817eb31dacd5420
     pristine_git_object: 3b13bd1a1bada7aa3c3803c903b1dfe62e220676
+  docs/models/components/realtimespeecherror.md:
+    id: 4542fcb24ae7
+    last_write_checksum: sha1:db15b39dab23391728aae9d1b810fe792b466781
+    pristine_git_object: 7c44975e9ce1489bd8fb1c54ada5f88293dc1554
+  docs/models/components/realtimespeecherrordetail.md:
+    id: 3960b4408ecf
+    last_write_checksum: sha1:61ee30990ccd7c50da72d6d77da636b7008ab44b
+    pristine_git_object: 6b83d7169710b41eab5947d34d3cb3dec7fcc63c
+  docs/models/components/realtimespeecherrordetailmessage.md:
+    id: 60e37ce59011
+    last_write_checksum: sha1:d5d8c405ea8219039168f73c811a3c1b5f9f188c
+    pristine_git_object: a7f1c71ecf250f6916555822b4623a183250e7de
+  docs/models/components/realtimespeechinputtextappend.md:
+    id: aa9e79bc1952
+    last_write_checksum: sha1:9bb760b9ddea5731405a187c9c512b8f0913e817
+    pristine_git_object: 1549010c2f75f8abc5bac3478f31c0c86209bc90
+  docs/models/components/realtimespeechinputtextend.md:
+    id: fc999d218b89
+    last_write_checksum: sha1:1a568a641bf115e01215e66c823caf943022e87d
+    pristine_git_object: a37644b567b386f55e1bf62d9e5ac31587bf62e5
+  docs/models/components/realtimespeechinputtextflush.md:
+    id: 105e6cb00725
+    last_write_checksum: sha1:db6a899ca1609e172ee907cdd54165a42401e890
+    pristine_git_object: 19b6792972d675c3ff70b4eef183b115888afa4b
+  docs/models/components/realtimespeechsession.md:
+    id: 6d839438a6bb
+    last_write_checksum: sha1:ebfa3f286702fb6aa691d04e359fe1cdcbfe32bd
+    pristine_git_object: 47fdf261093af5fcf7184b18ff2961611911618e
+  docs/models/components/realtimespeechsessioncreated.md:
+    id: abed042f1e39
+    last_write_checksum: sha1:5c9628afe5fb435cbbcf0d865172bfd26013cc9a
+    pristine_git_object: 4d4f3150eed687c4382c8555e995ae703f99d139
+  docs/models/components/realtimespeechsessionupdated.md:
+    id: 1ef870ca7749
+    last_write_checksum: sha1:ed916943db343e40aa9e70b0401b774f2b45e1cb
+    pristine_git_object: 7d347514e00b6caf033e61b936c28f1787d99263
+  docs/models/components/realtimespeechsessionupdatemessage.md:
+    id: 89cb3efd60a5
+    last_write_checksum: sha1:517b5c2b023cc1322b81e4f4941d84ffdb08f224
+    pristine_git_object: 91732db1f1a8a6deff3180fb6cb272caadb6d780
+  docs/models/components/realtimespeechsessionupdatepayload.md:
+    id: 76b871b7d68d
+    last_write_checksum: sha1:d9a934a19f8d4ed209a9522aa587d14b51750691
+    pristine_git_object: 1c5470a8c03eadc4da73bb408520ab8924b441a5
+  docs/models/components/realtimespeechstreamingmode.md:
+    id: b5be95c97b20
+    last_write_checksum: sha1:bc9c96a018a03f35c132b85ca76837fd9f70f472
+    pristine_git_object: ce719230deb1f19325bed73942c2ea7a00a1f20e
   docs/models/components/realtimetranscriptionerror.md:
     id: 18ec6b16ce65
     last_write_checksum: sha1:8548d9dd7d9fce43ef977351395b4bf6a45b4db5
@@ -3599,10 +3635,6 @@ trackedFiles:
     id: 8be744b3a927
     last_write_checksum: sha1:acda7cf35c6e548475b89585fc4c45c6d6a06de6
     pristine_git_object: d9edfb18436f29c2e0260c5114f7b675a9ab06ca
-  docs/models/components/roles.md:
-    id: 31df2184e8f2
-    last_write_checksum: sha1:6b17a37dd906cc553edb275a48f3d5f1e300d3b6
-    pristine_git_object: 89faeae97f914059f0c6bb92a903af943d291b62
   docs/models/components/rootscapability.md:
     id: 6172094e8918
     last_write_checksum: sha1:f560e0463ec883f862b16b2ecd661b9abf17d00e
@@ -3937,8 +3969,8 @@ trackedFiles:
     pristine_git_object: 6c37d94a06e2e73fad0ebe21e7df852a90e3feb6
   docs/models/components/speechstreamdone.md:
     id: cd33f0ab3761
-    last_write_checksum: sha1:df765b4ac7c224ed4479dbffc35b2b828a70fd4b
-    pristine_git_object: 49a6534a88178e43050f03549308edb746865a76
+    last_write_checksum: sha1:358ea4c39f8e719db0583be12bee295e9caae941
+    pristine_git_object: a794bf927ee5d7cacac95158fa983df2f8afc508
   docs/models/components/speechstreameventtypes.md:
     id: 1a1d35b398f9
     last_write_checksum: sha1:817232c053d5292b401915dfe8c901dc9e0dcc09
@@ -4555,10 +4587,6 @@ trackedFiles:
     id: c58ac7a88a68
     last_write_checksum: sha1:dade8394f8a5f3eb7c319d2aef46f2d92169c523
     pristine_git_object: 69ae207640d33ca1ac7beb34ec85d79c696c4032
-  docs/models/components/usageinfodollardefs.md:
-    id: 7d6f0aa01821
-    last_write_checksum: sha1:14802ee30c70cb8ff4e40185c4c2de77ca64b30d
-    pristine_git_object: b864410213ee1d321f29ef8cf3011a0c9abdaf96
   docs/models/components/useridentity.md:
     id: 59405b58a97d
     last_write_checksum: sha1:bab2261c8e2f8079b022982083706ee6db3a5338
@@ -6430,12 +6458,12 @@ trackedFiles:
     pristine_git_object: 4ce8a353a05b040d6d4e747dbe78bfbe6079d5f1
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:e1acb9fd579d2ce0159c69b00bbf64ece550ac52
-    pristine_git_object: 5ec0f31c0814b7a38be842f05cb63994493f21b2
+    last_write_checksum: sha1:6faea01b2226d2e56c606d363a7a270c349b54e2
+    pristine_git_object: e412f17802401fe341ec39eefb02758552c8e74f
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:474122e514af2f8471e52fac819a85c25114a7e9
-    pristine_git_object: 391eecdd7292f1e1cd401b4ec43d554e9136de56
+    last_write_checksum: sha1:54063f8d2c1cfcecc7d40f50b56927a32c64f04c
+    pristine_git_object: f8b2780f80f3bccff9c2c3beabab66566a171a4f
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:00cdc7c9289b0791b1ef96305a7e5aafbf463e33
@@ -7118,8 +7146,8 @@ trackedFiles:
     pristine_git_object: accb2262e09008fe1bf75258cc7317bdc2515bc4
   src/funcs/betaRagManagedIndexesCreate.ts:
     id: 968a38ab2c01
-    last_write_checksum: sha1:94297013556ef740cade0bf52182ab10b38531dd
-    pristine_git_object: e30b0ec3bbf702c20645ec64156765c10fabbc8d
+    last_write_checksum: sha1:8d6053d766b934aadf5bb0b61a7d6b5786da628f
+    pristine_git_object: 42619a7fab60564b04b82543025fbab2b68cb9b1
   src/funcs/betaRagManagedIndexesDelete.ts:
     id: 7f9530df3c6c
     last_write_checksum: sha1:57a8045834ff3c1e17359bbe92637a48bd952673
@@ -7614,8 +7642,8 @@ trackedFiles:
     pristine_git_object: 962ea486e17eabe13bcf068493a556110c944df8
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:38d5ab05dcfed8460af4f925129279d39aff9265
-    pristine_git_object: 6bbe5b978cbfcf9a15cc20780b62c44b196ed82b
+    last_write_checksum: sha1:e6c0b5ea0488ddf97aa4006e4a48b246ae8421ab
+    pristine_git_object: 7b548c378d0bf90616be7c8a273f5511c3a05050
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:4481b2a380f8a16856ef92c66fb370299f56d135
@@ -8128,10 +8156,6 @@ trackedFiles:
     id: b805116e1001
     last_write_checksum: sha1:1edb5813733c117f86555a9eafe5f3ec39da6703
     pristine_git_object: 34fe5fa38261bf6b96bfecf5c0bc207da8965564
-  src/models/components/completiontokensdetails.ts:
-    id: 66cb476e3177
-    last_write_checksum: sha1:1a03c513f4622e72a0d64d7b5105ac48f5a9ba90
-    pristine_git_object: aee2ed98c3498f83b927b9bcb4099a175376b56f
   src/models/components/confusionmatrix.ts:
     id: 261aae2e553d
     last_write_checksum: sha1:76c51fdc51a4459638fcfb0d3d7ee0995632b386
@@ -8142,8 +8166,8 @@ trackedFiles:
     pristine_git_object: 8addd2c13777a88c0b671f072941c39185029648
   src/models/components/connectionpreference.ts:
     id: 4b4aede044ad
-    last_write_checksum: sha1:94b7a56c79e14fedf4648f7145584d3981c5717c
-    pristine_git_object: 5ee7b335154126ea4b4069c18b41ea776e841663
+    last_write_checksum: sha1:2e0c1ab52676a3a34b1df2a876f53f99099c2a16
+    pristine_git_object: 71e2dda41a44869d6d644689d60d0e64f720be68
   src/models/components/connector.ts:
     id: a3c3f908ad8a
     last_write_checksum: sha1:e0c3b120478597d19cae332befa84272518299c4
@@ -9070,8 +9094,8 @@ trackedFiles:
     pristine_git_object: 22692d2539b880a8f642ff9d8807cdbe90d09cf2
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:d431998ca20f5985de7a3a27fead16aaa90534e7
-    pristine_git_object: 80230e1aeae8e628aeda0e857c91080d5967be14
+    last_write_checksum: sha1:f97777d7b16cf4d7b2117b8e9998b89024a4456e
+    pristine_git_object: 1c93132ca006e3bf95f1cb32ff297296b9bc8f95
   src/models/components/ingestdocumentsrequest.ts:
     id: 97d144382857
     last_write_checksum: sha1:c0d369d0b56ed5951ae9e6fa3432fcfc1041ba97
@@ -9440,10 +9464,6 @@ trackedFiles:
     id: a7a1ac3ea502
     last_write_checksum: sha1:b637a2a497b671ada6141a7dba707ee6f9ca6b48
     pristine_git_object: d601aa05ba4d202ae25c892cfb7944c3238552f3
-  src/models/components/messagetokens.ts:
-    id: e56d14b1a3f2
-    last_write_checksum: sha1:0363e6d8d6075b2f2abdef9e892a65dfaf6f3daf
-    pristine_git_object: 7e4a61ecee46f26dff52d5a8e3cd1dfcccfcf2c0
   src/models/components/metadatafilter.ts:
     id: 9b704eca4e1f
     last_write_checksum: sha1:94ef7b21940e9742dd1b948d9df3f4c7200c1159
@@ -9590,8 +9610,8 @@ trackedFiles:
     pristine_git_object: f5c65e6bbcde936ddfd3d23d88c899bba8db740f
   src/models/components/observabilityerrorcode.ts:
     id: 761cefb4bff3
-    last_write_checksum: sha1:ec727a58fce4ed80e553a0310878dc968225fc96
-    pristine_git_object: e685551eb28a365cc5ae5102ba31827d4ca691c0
+    last_write_checksum: sha1:04b82da04bc73ff6d66b1cc84bb905783c119805
+    pristine_git_object: ea00f811780ff62fbad55f4d501ca3d20c655725
   src/models/components/observabilityerrordetail.ts:
     id: 00cc829a764b
     last_write_checksum: sha1:df0937947e728e44ca6db5b69cf53c1246019378
@@ -9892,10 +9912,6 @@ trackedFiles:
     id: 815a4c3329bc
     last_write_checksum: sha1:b7d54bdba68ee78a826e6d6a1df98dbe9d45f59d
     pristine_git_object: 407bed8809fbe8df123c9639adb900375cc4a420
-  src/models/components/prompttokensdetails.ts:
-    id: 5d93876e4d19
-    last_write_checksum: sha1:187e4908c6c858e82e207b8420f422e09c5ac63b
-    pristine_git_object: ed4bc31f988dae21f32f306d1e4535db2bf61a2c
   src/models/components/promptvariable.ts:
     id: 8b75b50032cc
     last_write_checksum: sha1:99a748f4101d92976b4dfa3075267e7c92167c9a
@@ -9936,6 +9952,50 @@ trackedFiles:
     id: 841a302537dd
     last_write_checksum: sha1:9ec2bc3e61137170b186c804591abf57681486dd
     pristine_git_object: 36e0fe98c33c621ff95bed7ccc0fcbfad2822133
+  src/models/components/realtimespeecherror.ts:
+    id: 6a609be069d8
+    last_write_checksum: sha1:dba8a8384a468924a0bce1642cbc45d3579658b0
+    pristine_git_object: 485b558496bf4b7965a7868699fdaeebbfc1f3fa
+  src/models/components/realtimespeecherrordetail.ts:
+    id: 1eefbd2d30de
+    last_write_checksum: sha1:feebe0195aa2b8aa7c246572354d7958cb742deb
+    pristine_git_object: 03ad3a3d78bb47e2213cc83560e0da6ab8ec180a
+  src/models/components/realtimespeechinputtextappend.ts:
+    id: 3ec05cc0c68c
+    last_write_checksum: sha1:bb3c565b3b03b0da8d7f7971ed2c19c870df2676
+    pristine_git_object: bd170431c46e666350055a95afc9e8ef170da18f
+  src/models/components/realtimespeechinputtextend.ts:
+    id: fd26bc8f10ed
+    last_write_checksum: sha1:99aa123a7973c5d0e10724d0218f7a37537798b3
+    pristine_git_object: 7c059c7a5d28c5365d5ee393df37f738dff6cd0a
+  src/models/components/realtimespeechinputtextflush.ts:
+    id: 27a4a57ffded
+    last_write_checksum: sha1:e4ad2ae23ed776c63c3b1eadc12619837b3fb30f
+    pristine_git_object: bf35c5469510428208d679204bfaa9ff2bc64396
+  src/models/components/realtimespeechsession.ts:
+    id: f1919512b3dc
+    last_write_checksum: sha1:108ae04801f784ff07ea3027754c059f6c4a0217
+    pristine_git_object: 4170bc97d9efdb069f0d502592cdf6b992df214c
+  src/models/components/realtimespeechsessioncreated.ts:
+    id: e0ac3c6a0eb2
+    last_write_checksum: sha1:09897da6c9c2f95446abd39bf52d3a7737d4a73b
+    pristine_git_object: 55bac077c0150a4872ec0c1a9ff8c207ab58237e
+  src/models/components/realtimespeechsessionupdated.ts:
+    id: f6ff545f09df
+    last_write_checksum: sha1:2fd744cea72bfe089fef636ce6822e34501e62b0
+    pristine_git_object: 2d3c8ec8af3e121e69505b4514a53a3277f68d25
+  src/models/components/realtimespeechsessionupdatemessage.ts:
+    id: be730b1ff82a
+    last_write_checksum: sha1:b828ef1afb2c4cf2e86da70d07808fe4d488bdc3
+    pristine_git_object: 006f5532a4572cd4f7562bf7258b44ecc47c86c0
+  src/models/components/realtimespeechsessionupdatepayload.ts:
+    id: 1fe2aca09748
+    last_write_checksum: sha1:654c3daec2886e5383c49366daba4536c9660dd0
+    pristine_git_object: 61379fefdcf43f5b92c7a57cdcd37d7cbd50eb0e
+  src/models/components/realtimespeechstreamingmode.ts:
+    id: 9f1f135270fc
+    last_write_checksum: sha1:6466decf28909eb4f5534c43f1249a65c2093078
+    pristine_git_object: 83a6a365939822a65e902578f2bdbe3f74886ad3
   src/models/components/realtimetranscriptionerror.ts:
     id: 425f140ce230
     last_write_checksum: sha1:c34d40e745aef7d1d827ecbd08ecf7d6b0abccef
@@ -10280,10 +10340,6 @@ trackedFiles:
     id: 8ba004832879
     last_write_checksum: sha1:1e5ecb814365d73a55a5aed6031cd83514434323
     pristine_git_object: 495678f79de57018f5e41b1e5d1f1263685d2b09
-  src/models/components/roles.ts:
-    id: 14506aa40233
-    last_write_checksum: sha1:04e5d9e5df0b2f73a023a544a076d60649854c47
-    pristine_git_object: 1f1531b6bc9f46cf575c19d08308943b19927542
   src/models/components/rootscapability.ts:
     id: bae9a0fb024d
     last_write_checksum: sha1:ba07e337f39e70ab55373d6127ea817b58d703f3
@@ -10558,20 +10614,20 @@ trackedFiles:
     pristine_git_object: 9b573066f658154de3c34229eca34867fc7cb07c
   src/models/components/speechoutputformat.ts:
     id: 563b60b8536d
-    last_write_checksum: sha1:a08ad728265496d736ecb003b65905291422ebbd
-    pristine_git_object: 542183bcc432d713afc6e9b6b7bda4fcdc8c625c
+    last_write_checksum: sha1:809f7dddf6a3ce7cbd7d7f77f3c7cf11f748ee03
+    pristine_git_object: 4d174623ff3612bea2e627e2af2420d32e5f4024
   src/models/components/speechrequest.ts:
     id: 5d434727e189
     last_write_checksum: sha1:ef33ae52f7e495ef6d4cfc8f12034b1e0ed0ee4c
     pristine_git_object: 517fa83a82b2ce65b314ab46fd802db91d48167c
   src/models/components/speechstreamaudiodelta.ts:
     id: "998442277807"
-    last_write_checksum: sha1:dcedc3444bfd006d248cdf0ece38357eb3882277
-    pristine_git_object: 58399cbf2408ff6f6bb352c77e468dde9a8760e0
+    last_write_checksum: sha1:49c94cf2d93ef6d6891efd52deb7e286fa5403c4
+    pristine_git_object: 1e46e04402413e6742dad20e77804e096395c091
   src/models/components/speechstreamdone.ts:
     id: d3610c601337
-    last_write_checksum: sha1:d5d91c64992b27d6b9225b9b187f6292af6117f3
-    pristine_git_object: 583c75793b82c0bbac7cf4799de5cd615503bd2e
+    last_write_checksum: sha1:2090801d15816ed6c0ea218a7ba6a2a1b765b1ca
+    pristine_git_object: 415d3f5406223c8e0f4a81bc198de55dd3f38da1
   src/models/components/speechstreameventtypes.ts:
     id: fee6fc51269e
     last_write_checksum: sha1:83ad042ebc07afa1b39f17ccdd1bf71569249ee0
@@ -11064,10 +11120,6 @@ trackedFiles:
     id: 87d456fca1b2
     last_write_checksum: sha1:64079d35b9356fa0410873735c5e2a89c2e0ea82
     pristine_git_object: fcdb65d554e73e5e724a33075292761bab16e1c6
-  src/models/components/usageinfodollardefs.ts:
-    id: 1edf56765dba
-    last_write_checksum: sha1:d1d36541dc8b7620778bcf8849fca75a0def2cae
-    pristine_git_object: 1fdbeee1ffa0d47a8a70843056330440b5943a03
   src/models/components/useridentity.ts:
     id: 80e3ee18f008
     last_write_checksum: sha1:c2d3e4ee7e8b76b2b1b4e7148106bc8979a55ca3
@@ -16479,4 +16531,75 @@ examples:
           application/json: {"input_tokens": 363814, "object": "response.input_tokens"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `mistral.beta.conversations.start()`: \n  *  `request.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.conversations.list()`:  `response.[].union(ModelConversation).completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.conversations.get()`:  `response.union(ModelConversation).completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.conversations.append()`: \n  *  `request.conversationAppendRequest.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.conversations.restart()`: \n  *  `request.conversationRestartRequest.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.create()`: \n  *  `request.completionArgs.reasoningEffort.enum(max)` **Added**\n  *  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.list()`:  `response.[].completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.listPages()`:  `response.data[].completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.get()`:  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.update()`: \n  *  `request.updateAgentRequest.completionArgs.reasoningEffort.enum(max)` **Added**\n  *  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.updateVersion()`:  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.listVersions()`:  `response.[].completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.beta.agents.getVersion()`:  `response.completionArgs.reasoningEffort.enum(max)` **Added**\n* `mistral.chat.complete()`: \n  *  `request.reasoningEffort.enum(max)` **Added**\n* `mistral.agents.complete()`: \n  *  `request.reasoningEffort.enum(max)` **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `mistral.beta.observability.judges.create()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.judges.list()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.judges.fetch()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.judges.delete()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.judges.update()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.judges.judgeConversation()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.create()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.list()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.fetch()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.delete()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.update()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.listRecords()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.createRecord()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.importFromFile()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.importFromPlayground()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.importFromSpans()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.importFromDatasetRecords()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.exportToJsonl()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.fetchTask()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.listTasks()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.records.fetch()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.records.delete()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.records.bulkDelete()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.records.judge()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.records.updatePayload()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.datasets.records.updateProperties()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.createPipeline()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.listPipelines()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.getPipeline()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.updatePipeline()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.deletePipeline()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.list()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.get()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.projects.list()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.projects.get()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.runs.search()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.runs.searchAll()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.runs.get()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.runs.getStatistics()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.runs.computeStatistics()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.records.get()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.records.search()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.optimizations.list()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.optimizations.get()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.evaluations.optimizations.listTrials()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.logs.search()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.logs.list()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.logs.fetchOptions()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.traces.search()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.traces.aggregate()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.traces.getTraceFields()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.traces.getTraceById()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.traces.getTraceSpans()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.traces.fetchOptions()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.traces.getSpanById()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.searchSpans()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.aggregate()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.aggregateSpanEvaluations()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.searchSpanEvaluations()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.searchLatestSpanEvaluations()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.searchPipelineResults()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.listSpanFields()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.listSpanEvalFields()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.fetchSpanFieldOptions()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.observability.spans.fetchSpanEvalFieldOptions()`:  `error.detail.errorCode.enum(optimizationTrialObservationAlreadyExists)` **Added**
+  * `mistral.beta.connectors.create()`:  `response.union(mcp).connectionPreferences[].name` **Changed**
+  * `mistral.beta.connectors.list()`:  `response.items[].union(mcp).connectionPreferences[].name` **Changed**
+  * `mistral.beta.connectors.get()`:  `response.union(mcp).connectionPreferences[].name` **Changed**
+  * `mistral.beta.connectors.update()`:  `response.union(mcp).connectionPreferences[].name` **Changed**
+  * `mistral.beta.rag.managedIndexes.create()`:  `error.status[403]` **Added**

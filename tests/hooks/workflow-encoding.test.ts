@@ -195,7 +195,7 @@ describe("WorkflowEncodingHook", () => {
     const sent = await requests[0]!.json();
     expect(sent.input.encoding_options).toEqual(["encrypted-partial"]);
     const plaintext = Buffer.from(sent.input.b64payload, "base64").toString();
-    expect(plaintext).toContain("\"by\": \"bob\"");
+    expect(plaintext).toContain("\"by\":\"bob\"");
     expect(plaintext).not.toContain("t0k3n");
   });
 

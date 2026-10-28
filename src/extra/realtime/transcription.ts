@@ -8,7 +8,7 @@ import type {
   RealtimeTranscriptionError,
 } from "../../models/components/realtimetranscriptionerror.js";
 import type { RealtimeTranscriptionSession } from "../../models/components/realtimetranscriptionsession.js";
-import type { RealtimeEvent } from "./connection.js";
+import type { RealtimeEvent, RealtimeSessionOptions } from "./connection.js";
 import {
   RealtimeConnection,
   isUnknownRealtimeEvent,
@@ -19,12 +19,14 @@ import {
   RealtimeTranscriptionWSError,
 } from "./errors.js";
 
-export type RealtimeConnectOptions = Readonly<{
-  audioFormat?: AudioFormat | undefined;
-  serverUrl?: string | undefined;
-  timeoutMs?: number | undefined;
-  httpHeaders?: Record<string, string> | undefined;
-}>;
+export type RealtimeConnectOptions = Readonly<
+  RealtimeSessionOptions & {
+    audioFormat?: AudioFormat | undefined;
+    serverUrl?: string | undefined;
+    timeoutMs?: number | undefined;
+    httpHeaders?: Record<string, string> | undefined;
+  }
+>;
 
 /** Client for realtime transcription over WebSocket. */
 export class RealtimeTranscription extends ClientSDK {
@@ -75,8 +77,19 @@ export class RealtimeTranscription extends ClientSDK {
       );
       const connection = new RealtimeConnection(websocket, session, initialEvents);
 
-      if (options.audioFormat) {
-        await connection.updateSession(options.audioFormat);
+      const sessionOptions: RealtimeSessionOptions = {
+        targetStreamingDelayMs: options.targetStreamingDelayMs,
+        diarize: options.diarize,
+        contextBias: options.contextBias,
+        language: options.language,
+        speakerReferences: options.speakerReferences,
+        turnDetection: options.turnDetection,
+      };
+      if (
+        options.audioFormat != null
+        || Object.values(sessionOptions).some((value) => value != null)
+      ) {
+        await connection.updateSession(options.audioFormat, sessionOptions);
       }
 
       return connection;

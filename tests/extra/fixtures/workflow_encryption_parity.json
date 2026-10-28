@@ -321,7 +321,7 @@
       },
       "nonces": [],
       "expected": {
-        "b64payload": "eyJuYW1lIjogImFsaWNlIiwgImNvdW50IjogMywgImFjdGl2ZSI6IHRydWUsICJ0YWdzIjogWyJhIiwgImIiXX0=",
+        "b64payload": "eyJuYW1lIjoiYWxpY2UiLCJjb3VudCI6MywiYWN0aXZlIjp0cnVlLCJ0YWdzIjpbImEiLCJiIl19",
         "encoding_options": [],
         "empty": false
       }
@@ -349,7 +349,7 @@
       },
       "nonces": [],
       "expected": {
-        "b64payload": "eyJhIjogeyJiIjogeyJjIjogWzEsIHsiZCI6IG51bGx9LCBbXSwge31dfX0sICJ6IjogZmFsc2V9",
+        "b64payload": "eyJhIjp7ImIiOnsiYyI6WzEseyJkIjpudWxsfSxbXSx7fV19fSwieiI6ZmFsc2V9",
         "encoding_options": [],
         "empty": false
       }
@@ -366,7 +366,7 @@
       },
       "nonces": [],
       "expected": {
-        "b64payload": "eyJ0ZXh0IjogImhcdTAwZTlsbG8gd1x1MDBmNnJsZCBcdTI3MTMgXHVkODNkXHVkZTAwIFx1MjAyOCIsICJjdHJsIjogIlx1MDAwMFx1MDAxZlx1MDA3ZlxuXHRcIlxcLyJ9",
+        "b64payload": "eyJ0ZXh0IjoiaMOpbGxvIHfDtnJsZCDinJMg8J+YgCDigKgiLCJjdHJsIjoiXHUwMDAwXHUwMDFmf1xuXHRcIlxcLyJ9",
         "encoding_options": [],
         "empty": false
       }
@@ -398,7 +398,7 @@
       },
       "nonces": [],
       "expected": {
-        "b64payload": "eyJmbG9hdHMiOiBbMC41LCAtMS4yNSwgMC4xLCAxZS0wNSwgMS41ZS0wNiwgMWUtMDcsIDEyMzQ1Ni43ODksIDFlLTMwMF0sICJpbnRzIjogWzAsIC03LCA5MDA3MTk5MjU0NzQwOTkxLCAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwXSwgInRpbnkiOiA1ZS0zMjR9",
+        "b64payload": "eyJmbG9hdHMiOlswLjUsLTEuMjUsMC4xLDFlLTA1LDEuNWUtMDYsMWUtMDcsMTIzNDU2Ljc4OSwxZS0zMDBdLCJpbnRzIjpbMCwtNyw5MDA3MTk5MjU0NzQwOTkxLDEwMDAwMDAwMDAwMDAwMDAwMDAwMDBdLCJ0aW55Ijo1ZS0zMjR9",
         "encoding_options": [],
         "empty": false
       }
@@ -417,7 +417,7 @@
       },
       "nonces": [],
       "expected": {
-        "b64payload": "eyIyIjogInR3byIsICIxMCI6ICJ0ZW4iLCAiYiI6IDEsICJhIjogMn0=",
+        "b64payload": "eyIyIjoidHdvIiwiMTAiOiJ0ZW4iLCJiIjoxLCJhIjoyfQ==",
         "encoding_options": [],
         "empty": false
       }
@@ -451,7 +451,7 @@
       ],
       "nonces": [],
       "expected": {
-        "b64payload": "WzEsICJ0d28iLCB7InRocmVlIjogM31d",
+        "b64payload": "WzEsInR3byIseyJ0aHJlZSI6M31d",
         "encoding_options": [],
         "empty": false
       }
@@ -506,7 +506,7 @@
         "0400d58bc39ac3ce5541586c"
       ],
       "expected": {
-        "b64payload": "eyJ1c2VyIjogImFsaWNlIiwgImFwaV9rZXkiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJMOGFYVGM0UGlzOFpWaTBrRWplaThtaWFGcWRYajQ0RGpKc1p4dDMzdUdVSGp3ZXd2dz09In0sICJ1bmljb2RlIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAiQkFEVmk4T2F3ODVWUVZoc2pCMCt0QXl0cFlpZUwrWUFDMUp4bUZibnFjK21sR2VGYWpoUHpaVE5MdnF4QjM1UHdmdUJLdz09In19",
+        "b64payload": "eyJ1c2VyIjoiYWxpY2UiLCJhcGlfa2V5Ijp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJMOGFYVGM0UGlzOFpWaTBrRWplaThtaWFGcWRYajQ0RGpKc1p4dDMzdUdVSGp3ZXd2dz09In0sInVuaWNvZGUiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6IkJBRFZpOE9hdzg1VlFWaHNqQjArdEF5dHBZaWVMK1lBQzFKeG1GYm5xYyttbEdlRmFqaFB6WlROTHZxeEIzNVB3ZnVCS3c9PSJ9fQ==",
         "encoding_options": [
           "encrypted-partial"
         ],
@@ -564,7 +564,7 @@
         "e884de53a93f5359f8e95835"
       ],
       "expected": {
-        "b64payload": "eyJjb25maWciOiB7ImNyZWRlbnRpYWxzIjogW3siZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIkZEZitBWnc4MzUzT1VlUGpEdDRDUlExWU5yRG9OUUw3K2c4Mk42UU5OVElMIn0sIHsiaW5uZXIiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICI0QllVRUlwYnZ6bnNEQnRVZEp0TnA4ZlhxaW84amJFVU1SNURuUWZXL2dFbTVRPT0ifSwgInBsYWluIjogInZpc2libGUifV0sICJlbXB0eSI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIkF0SDNIb1Nncm9EeVovL1p0bmkvc0s4S0JvK3gzc3dDT1phNlRnPT0ifX0sICJsaXN0IjogW1t7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJ3SnZWUWJLWXNoS2xsUGdmMHF2ODl5MGQwWklDZjBPaUVBRngxYVV6QmcwPSJ9XV0sICJvdXRlciI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIjZJVGVVNmsvVTFuNDZWZzFETkN5NW1CUWtKRktuclRJelA5SGdjNVErWTRxIiwgImV4dHJhIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAibm90LWEtZmllbGQifX19",
+        "b64payload": "eyJjb25maWciOnsiY3JlZGVudGlhbHMiOlt7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJGRGYrQVp3ODM1M09VZVBqRHQ0Q1JRMVlOckRvTlFMNytnODJONlFOTlRJTCJ9LHsiaW5uZXIiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6IjRCWVVFSXBidnpuc0RCdFVkSnROcDhmWHFpbzhqYkVVTVI1RG5RZlcvZ0VtNVE9PSJ9LCJwbGFpbiI6InZpc2libGUifV0sImVtcHR5Ijp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJBdEgzSG9TZ3JvRHlaLy9adG5pL3NLOEtCbyt4M3N3Q09aYTZUZz09In19LCJsaXN0IjpbW3siZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6IndKdlZRYktZc2hLbGxQZ2YwcXY4OXkwZDBaSUNmME9pRUFGeDFhVXpCZzA9In1dXSwib3V0ZXIiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6IjZJVGVVNmsvVTFuNDZWZzFETkN5NW1CUWtKRktuclRJelA5SGdjNVErWTRxIiwiZXh0cmEiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6Im5vdC1hLWZpZWxkIn19fQ==",
         "encoding_options": [
           "encrypted-partial"
         ],
@@ -692,7 +692,7 @@
         "def7bf5b2eac48ff835e6c21"
       ],
       "expected": {
-        "data_b64": "eyJiIjogMi4wLCAiYSI6IFsxMDAwMDAuMCwgMWUtMDcsIDAsIC0wLjAsIDEuNSwgMTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjMsIEluZmluaXR5LCBOYU4sIC1JbmZpbml0eV0sICIxMCI6IDEsICIyIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAiM3ZlL1d5NnNTUCtEWG13aDNmMmI5QS9tYUp6cVBCR3NQVXAySldjPSJ9fQ==",
+        "data_b64": "eyJiIjoyLjAsImEiOlsxMDAwMDAuMCwxZS0wNywwLC0wLjAsMS41LDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzLEluZmluaXR5LE5hTiwtSW5maW5pdHldLCIxMCI6MSwiMiI6eyJmaWVsZF90eXBlIjoiX19lbmNyeXB0ZWRfc3RyX18iLCJkYXRhIjoiM3ZlL1d5NnNTUCtEWG13aDNmMmI5QS9tYUp6cVBCR3NQVXAySldjPSJ9fQ==",
         "encoding_options": [
           "encrypted-partial"
         ]
@@ -709,7 +709,7 @@
         "c71e50939c38d7be5aaac38a"
       ],
       "expected": {
-        "data_b64": "eyJrIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAieHg1UWs1dzQxNzVhcXNPS25aSE1JWFdRZ2tPcGFLRm5LM252TURvPSJ9LCAiaiI6IDJ9",
+        "data_b64": "eyJrIjp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJ4eDVRazV3NDE3NWFxc09LblpITUlYV1Fna09wYUtGbkszbnZNRG89In0sImoiOjJ9",
         "encoding_options": [
           "encrypted-partial"
         ]
@@ -726,7 +726,24 @@
         "3012a7a24ac7ced4d2af82c3"
       ],
       "expected": {
-        "data_b64": "eyJzIjogIlx1MDBlOVx1ZDgzZFx1ZGUwMC9cYlxmIiwgImUiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJNQktub2tySHp0VFNyNExEK2ViNEVCZE0wM29ZN2Y0SXFVZ0xtMkE9In19",
+        "data_b64": "eyJzIjoiw6nwn5iAL1xiXGYiLCJlIjp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJNQktub2tySHp0VFNyNExEK2ViNEVCZE0wM29ZN2Y0SXFVZ0xtMkE9In19",
+        "encoding_options": [
+          "encrypted-partial"
+        ]
+      }
+    },
+    {
+      "name": "partial/lone_surrogates",
+      "config": {
+        "mode": "partial",
+        "main_key": "main"
+      },
+      "data_b64": "eyJzIjogIlx1ZDgwMCBcdWRjMDAgXHVkODNkXHVkZTAwIiwgImUiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJ4In19",
+      "nonces": [
+        "acef0e34a7fb9e0bc4cb502f"
+      ],
+      "expected": {
+        "data_b64": "eyJzIjoiXHVkODAwIFx1ZGMwMCDwn5iAIiwiZSI6eyJmaWVsZF90eXBlIjoiX19lbmNyeXB0ZWRfc3RyX18iLCJkYXRhIjoick84T05LZjduZ3ZFeTFBdnpXWkdaUmI5bzdHVGtCeUxGc0wzVzBRPSJ9fQ==",
         "encoding_options": [
           "encrypted-partial"
         ]
@@ -741,7 +758,7 @@
       "data_b64": "eyJhIjoxLCJiIjpbdHJ1ZSxmYWxzZSxudWxsXX0=",
       "nonces": [],
       "expected": {
-        "data_b64": "eyJhIjogMSwgImIiOiBbdHJ1ZSwgZmFsc2UsIG51bGxdfQ==",
+        "data_b64": "eyJhIjoxLCJiIjpbdHJ1ZSxmYWxzZSxudWxsXX0=",
         "encoding_options": []
       }
     },
@@ -804,6 +821,23 @@
       ],
       "expected": {
         "data_b64": "Sxf+Bjb9bVzD0ZNkpozAYjtKquyutyXaCGHJ9DzqE9PBPzyFhq7joGav6SOIXMmuiRYgHkhQcZsWE/U7jq+8A9Vki2yg9JD8pKdJw/uBvJ1ot91kLJXgS7uSWvZM+vbdXH5EYUVeCf3jBK4XcQ==",
+        "encoding_options": [
+          "encrypted"
+        ]
+      }
+    },
+    {
+      "name": "full/lone_surrogates",
+      "config": {
+        "mode": "full",
+        "main_key": "main"
+      },
+      "data_b64": "eyJzIjogIlx1ZDgwMCBcdWRjMDAgXHVkODNkXHVkZTAwIiwgImUiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJ4In19",
+      "nonces": [
+        "dee7ec1849c806bdf7490be4"
+      ],
+      "expected": {
+        "data_b64": "3ufsGEnIBr33SQvkJolq+0lp3ddU02wQ8ZfVzRPhqzdwsTbC2CPR35GfSjcr7bDnXhD+0KFlXIqGnl74Phn2hpERYKQV9DMYQWPmBXI6u8ki2gIjNjvTwNreWCxH5MzPaHRlN5g/iCmXMW12YcANCWwJQ5VVeg==",
         "encoding_options": [
           "encrypted"
         ]
@@ -948,7 +982,7 @@
         "secondary_key": "secondary"
       },
       "encoded": {
-        "b64payload": "eyJuYW1lIjogImFsaWNlIiwgImNvdW50IjogMywgImFjdGl2ZSI6IHRydWUsICJ0YWdzIjogWyJhIiwgImIiXX0=",
+        "b64payload": "eyJuYW1lIjoiYWxpY2UiLCJjb3VudCI6MywiYWN0aXZlIjp0cnVlLCJ0YWdzIjpbImEiLCJiIl19",
         "encoding_options": [],
         "empty": false
       },
@@ -970,7 +1004,7 @@
         "secondary_key": "secondary"
       },
       "encoded": {
-        "b64payload": "eyJ0ZXh0IjogImhcdTAwZTlsbG8gd1x1MDBmNnJsZCBcdTI3MTMgXHVkODNkXHVkZTAwIFx1MjAyOCIsICJjdHJsIjogIlx1MDAwMFx1MDAxZlx1MDA3ZlxuXHRcIlxcLyJ9",
+        "b64payload": "eyJ0ZXh0IjoiaMOpbGxvIHfDtnJsZCDinJMg8J+YgCDigKgiLCJjdHJsIjoiXHUwMDAwXHUwMDFmf1xuXHRcIlxcLyJ9",
         "encoding_options": [],
         "empty": false
       },
@@ -987,7 +1021,7 @@
         "secondary_key": "secondary"
       },
       "encoded": {
-        "b64payload": "eyJjb25maWciOiB7ImNyZWRlbnRpYWxzIjogW3siZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogInA3SzhoaGxWeDJtVGkyU3Z2VGwyc3lLMlZsQlByTUlnc0U0UzgrSTgzZTg2In0sIHsiaW5uZXIiOiB7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJJNkxkSS8rY0dSbXhrUVlyRG5teUlENE5iV0RSNUxzTE82K3h0N1ZwRnF0TlV3PT0ifSwgInBsYWluIjogInZpc2libGUifV0sICJlbXB0eSI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogIm5tODlBVms2N2VIRTFnZnVHS3NjalJWa1JTN2VPSitob1lIODhRPT0ifX0sICJsaXN0IjogW1t7ImZpZWxkX3R5cGUiOiAiX19lbmNyeXB0ZWRfc3RyX18iLCAiZGF0YSI6ICJPUnFzSTlzdktNQVBXUTVUNFFRWERmUmFidnZyTmhyNlNMTThZZFhpb1BBPSJ9XV0sICJvdXRlciI6IHsiZmllbGRfdHlwZSI6ICJfX2VuY3J5cHRlZF9zdHJfXyIsICJkYXRhIjogImhpbURmaEpwRFIxa1NZL2VOakVsQ2ZsRThaUVNNa3REOGdlSkFrelBsL1ZFIiwgImV4dHJhIjogeyJmaWVsZF90eXBlIjogIl9fZW5jcnlwdGVkX3N0cl9fIiwgImRhdGEiOiAibm90LWEtZmllbGQifX19",
+        "b64payload": "eyJjb25maWciOnsiY3JlZGVudGlhbHMiOlt7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJwN0s4aGhsVngybVRpMlN2dlRsMnN5SzJWbEJQck1JZ3NFNFM4K0k4M2U4NiJ9LHsiaW5uZXIiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6Ikk2TGRJLytjR1JteGtRWXJEbm15SUQ0TmJXRFI1THNMTzYreHQ3VnBGcXROVXc9PSJ9LCJwbGFpbiI6InZpc2libGUifV0sImVtcHR5Ijp7ImZpZWxkX3R5cGUiOiJfX2VuY3J5cHRlZF9zdHJfXyIsImRhdGEiOiJubTg5QVZrNjdlSEUxZ2Z1R0tzY2pSVmtSUzdlT0oraG9ZSDg4UT09In19LCJsaXN0IjpbW3siZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6Ik9ScXNJOXN2S01BUFdRNVQ0UVFYRGZSYWJ2dnJOaHI2U0xNOFlkWGlvUEE9In1dXSwib3V0ZXIiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6ImhpbURmaEpwRFIxa1NZL2VOakVsQ2ZsRThaUVNNa3REOGdlSkFrelBsL1ZFIiwiZXh0cmEiOnsiZmllbGRfdHlwZSI6Il9fZW5jcnlwdGVkX3N0cl9fIiwiZGF0YSI6Im5vdC1hLWZpZWxkIn19fQ==",
         "encoding_options": [
           "encrypted-partial"
         ],
