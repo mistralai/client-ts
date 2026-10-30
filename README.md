@@ -1501,6 +1501,8 @@ const response = await client.chat.complete({
 });
 ```
 
+In dedicated mode, traces go to `/telemetry/v1/traces` on the client's `serverURL` if one is set (e.g. a self-hosted or other non-default deployment), otherwise to `https://api.mistral.ai`, including for the named `eu`/`us` servers. Set `MISTRAL_OTLP_TRACES_ENDPOINT` to send traces to a separate collector.
+
 ### Provider modes
 
 `configureTelemetry(client, provider)` selects where spans go and who owns the export pipeline:
@@ -1585,7 +1587,7 @@ await configureTelemetry(client, "dedicated", {
 | Variable | Description | Default |
 | -------- | ----------- | ------- |
 | `MISTRAL_SDK_TELEMETRY` | Auto-enable telemetry: `dedicated`, `global`, or `false`. | unset (disabled) |
-| `MISTRAL_OTLP_TRACES_ENDPOINT` | Override the OTLP traces endpoint used in dedicated mode. | `https://api.mistral.ai/telemetry/v1/traces` |
+| `MISTRAL_OTLP_TRACES_ENDPOINT` | Override the OTLP traces endpoint used in dedicated mode. | Client `serverURL` + `/telemetry/v1/traces` if set, otherwise `https://api.mistral.ai/telemetry/v1/traces` |
 | `MISTRAL_API_KEY` | Used as the bearer token for the dedicated-mode exporter. | — |
 
 Runnable examples live in [`examples/src/observability`](/examples/src/observability).

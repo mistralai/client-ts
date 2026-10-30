@@ -5,7 +5,7 @@ import {
   type TracerProvider,
 } from "@opentelemetry/api";
 
-import type { SDKOptions } from "../../lib/config.js";
+import { ServerGlobal, ServerList, type SDKOptions } from "../../lib/config.js";
 import type { SecurityState } from "../../lib/security.js";
 import { OTEL_SERVICE_NAME } from "./otel.js";
 import { getRegisteredTracerProvider } from "./provider.js";
@@ -17,7 +17,7 @@ import {
 } from "./redaction.js";
 
 export const MISTRAL_SDK_TELEMETRY_ENV = "MISTRAL_SDK_TELEMETRY";
-export const MISTRAL_TELEMETRY_BASE_URL = "https://api.mistral.ai";
+export const MISTRAL_TELEMETRY_BASE_URL = ServerList[ServerGlobal];
 export const MISTRAL_TELEMETRY_TRACES_PATH = "/telemetry/v1/traces";
 export const MISTRAL_TELEMETRY_ENDPOINT = createTelemetryEndpoint(MISTRAL_TELEMETRY_BASE_URL);
 export const MISTRAL_OTLP_TRACES_ENDPOINT_ENV = "MISTRAL_OTLP_TRACES_ENDPOINT";
@@ -50,13 +50,11 @@ export type TelemetryCapableTracingHook = {
 };
 
 type TelemetryContext = {
-  baseURL?: string | URL | null | undefined;
   options?: SDKOptions | undefined;
   resolvedSecurity?: SecurityState | null | undefined;
 };
 
 type ClientWithHooks = {
-  _baseURL?: string | URL | null | undefined;
   _options?: (SDKOptions & { hooks?: { beforeRequestHooks?: unknown[] } }) | undefined;
 };
 
@@ -113,7 +111,7 @@ export async function configureTelemetry(
 
     return configureTelemetryForHook(
       hook,
-      { baseURL: client._baseURL, options: client._options },
+      { options: client._options },
       { telemetry: providerMode, replaceExisting: true, redaction },
     );
   }
@@ -280,7 +278,9 @@ async function initializeTelemetryProvider(
   const createProvider = options.createTelemetryTracerProvider ?? _createTelemetryTracerProvider;
   const provider = await createProvider({
     apiKey: await resolveApiKey(context),
-    baseURL: context.baseURL ?? context.options?.serverURL,
+    // Only follow an explicit serverURL (e.g. another deployment); the named
+    // regional servers don't serve the telemetry endpoint.
+    baseURL: context.options?.serverURL,
     redaction: options.redaction,
   });
 
@@ -497,7 +497,7 @@ function resolveMistralTelemetryEndpoint(baseURL?: string | URL | null): string 
 }
 
 function createTelemetryEndpoint(baseURL: string | URL): string {
-  return new URL(MISTRAL_TELEMETRY_TRACES_PATH, baseURL).toString();
+  return `${`${baseURL}`.trim().replace(/\/+$/, "")}${MISTRAL_TELEMETRY_TRACES_PATH}`;
 }
 
 async function attachTelemetryProvider(

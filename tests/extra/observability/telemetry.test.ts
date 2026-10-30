@@ -253,7 +253,7 @@ describe("configureTelemetryForHook", () => {
       expect(configured).toBe(true);
       expect(createTelemetryTracerProvider).toHaveBeenCalledWith({
         apiKey: "test-key",
-        baseURL: "https://api.mistral.ai",
+        baseURL: undefined,
       });
       expect(hook.tracerProvider).toBe(provider);
     });
@@ -626,7 +626,7 @@ describe("_createTelemetryTracerProvider", () => {
     });
   });
 
-  test("uses the configured base URL with the telemetry traces path", async () => {
+  test("appends the telemetry traces path to the configured base URL", async () => {
     const exporterInstances: Array<{ config: unknown }> = [];
     const moduleLoader = createTelemetryModuleLoader(exporterInstances);
 
@@ -638,7 +638,7 @@ describe("_createTelemetryTracerProvider", () => {
 
     expect(exporterInstances).toHaveLength(1);
     expect(exporterInstances[0]?.config).toEqual({
-      url: "http://mistral.test/telemetry/v1/traces",
+      url: "http://mistral.test/api/telemetry/v1/traces",
       headers: { Authorization: "Bearer test-key" },
     });
   });
