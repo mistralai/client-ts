@@ -5,6 +5,7 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { BetaAgents } from "./betaagents.js";
 import { Connectors } from "./connectors.js";
+import { Context } from "./context.js";
 import { Conversations } from "./conversations.js";
 import { Libraries } from "./libraries.js";
 import { Observability } from "./observability.js";
@@ -12,7 +13,9 @@ import { Prompts } from "./prompts.js";
 import { Rag } from "./rag.js";
 import { ServiceAccounts } from "./serviceaccounts.js";
 import { Skills } from "./skills.js";
+import { Triggers } from "./triggers.js";
 import { Users } from "./users.js";
+import { Webhooks } from "./webhooks.js";
 
 export class Beta extends ClientSDK {
   private _prompts?: Prompts;
@@ -58,6 +61,21 @@ export class Beta extends ClientSDK {
   private _rag?: Rag;
   get rag(): Rag {
     return (this._rag ??= new Rag(this._options));
+  }
+
+  private _context?: Context;
+  get context(): Context {
+    return (this._context ??= new Context(this._options));
+  }
+
+  private _triggers?: Triggers;
+  get triggers(): Triggers {
+    return (this._triggers ??= new Triggers(this._options));
+  }
+
+  private _webhooks?: Webhooks;
+  get webhooks(): Webhooks {
+    return (this._webhooks ??= new Webhooks(this._options));
   }
 
   private _users?: Users;

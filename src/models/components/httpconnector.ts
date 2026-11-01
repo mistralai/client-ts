@@ -19,6 +19,10 @@ import {
   ConnectorLocale,
   ConnectorLocale$inboundSchema,
 } from "./connectorlocale.js";
+import {
+  ConnectorOpenApiSpec,
+  ConnectorOpenApiSpec$inboundSchema,
+} from "./connectoropenapispec.js";
 import { ConnectorTool, ConnectorTool$inboundSchema } from "./connectortool.js";
 import { ConsumerType, ConsumerType$inboundSchema } from "./consumertype.js";
 import { MCPServerCard, MCPServerCard$inboundSchema } from "./mcpservercard.js";
@@ -60,6 +64,10 @@ export type HTTPConnector = {
   isAuthenticated?: boolean | null | undefined;
   tools?: Array<ConnectorTool> | null | undefined;
   protocol: "http";
+  /**
+   * The OpenAPI spec the connector tools are converted from. Null when it has none.
+   */
+  openapiSpec?: ConnectorOpenApiSpec | null | undefined;
 };
 
 /** @internal */
@@ -96,6 +104,7 @@ export const HTTPConnector$inboundSchema: z.ZodType<HTTPConnector, unknown> = z
     is_authenticated: z.nullable(z.boolean()).optional(),
     tools: z.nullable(z.array(ConnectorTool$inboundSchema)).optional(),
     protocol: z.literal("http"),
+    openapi_spec: z.nullable(ConnectorOpenApiSpec$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "created_at": "createdAt",
@@ -113,6 +122,7 @@ export const HTTPConnector$inboundSchema: z.ZodType<HTTPConnector, unknown> = z
       "private_tool_execution": "privateToolExecution",
       "supports_mcp": "supportsMcp",
       "is_authenticated": "isAuthenticated",
+      "openapi_spec": "openapiSpec",
     });
   });
 

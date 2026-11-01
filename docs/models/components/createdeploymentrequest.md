@@ -7,9 +7,7 @@ import { CreateDeploymentRequest } from "@mistralai/mistralai/models/components"
 
 let value: CreateDeploymentRequest = {
   name: "<value>",
-  spec: {
-    githubUrl: "https://straight-coal.org",
-  },
+  spec: {},
 };
 ```
 

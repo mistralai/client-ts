@@ -22,6 +22,7 @@ export type GetSpan = {
   organizationId: string;
   workspaceId: string;
   userId: string;
+  serviceAccountId: string;
   traceId: string;
   spanId: string;
   parentSpanId: string;
@@ -91,6 +92,7 @@ export const GetSpan$inboundSchema: z.ZodType<GetSpan, unknown> = z.object({
   organization_id: z.string(),
   workspace_id: z.string(),
   user_id: z.string(),
+  service_account_id: z.string().default(""),
   trace_id: z.string(),
   span_id: z.string(),
   parent_span_id: z.string(),
@@ -152,6 +154,7 @@ export const GetSpan$inboundSchema: z.ZodType<GetSpan, unknown> = z.object({
     "organization_id": "organizationId",
     "workspace_id": "workspaceId",
     "user_id": "userId",
+    "service_account_id": "serviceAccountId",
     "trace_id": "traceId",
     "span_id": "spanId",
     "parent_span_id": "parentSpanId",

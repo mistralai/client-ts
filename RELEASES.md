@@ -1236,3 +1236,121 @@ Based on:
 - [typescript v3.4.0] .
 ### Releases
 - [NPM v3.4.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.4.0 - .
+
+## 2026-11-01 13:02:08
+### Generated SDK baseline differences
+The published SDK or generator baseline differs from the baseline used by the OpenAPI changelog.
+
+<details>
+<summary>Generated surface details</summary>
+
+#### Stable compatibility changes
+Now required on an existing stable model (1):
+- `SystemV2.kind`
+#### Beta surface changes
+Removed from the beta surface (38):
+- `ManagedIndexes`
+- `SearchIndexes`
+- `betaRagManagedIndexesCreate`
+- `betaRagManagedIndexesDelete`
+- `betaRagManagedIndexesDeleteDocuments`
+- `betaRagManagedIndexesGenerateIndexSummary`
+- `betaRagManagedIndexesGet`
+- `betaRagManagedIndexesGetChunk`
+- `betaRagManagedIndexesGetIndexSummary`
+- `betaRagManagedIndexesGrep`
+- `betaRagManagedIndexesIngestDocuments`
+- `betaRagManagedIndexesList`
+- `betaRagManagedIndexesNavigate`
+- `betaRagManagedIndexesRead`
+- `betaRagManagedIndexesSearch`
+- `betaRagManagedIndexesSetIndexSummary`
+- `betaRagManagedIndexesUpdate`
+- `Rag.managedIndexes`
+- `VoiceCreateRequest.slug`
+- `ManagedIndexes.create`
+- `ManagedIndexes.delete`
+- `ManagedIndexes.deleteDocuments`
+- `ManagedIndexes.generateIndexSummary`
+- `ManagedIndexes.get`
+- `ManagedIndexes.getChunk`
+- ...and 13 more
+
+Changed types or signatures in beta (4):
+- `DeploymentWorkerSpecInput.githubUrl: string -> string | null | undefined`
+- `Rag.searchIndexes: SearchIndexes -> RagSearchIndexes`
+- `VoiceCreateRequest.gender: string | null | undefined -> VoiceGender | null | undefined`
+- `VoiceUpdateRequest.gender: string | null | undefined -> VoiceGender | null | undefined`
+
+Now required on an existing beta model (4):
+- `GetLog.serviceAccountId`
+- `GetSpan.serviceAccountId`
+- `GetSpanEvaluation.serviceAccountId`
+- `GetTrace.serviceAccountId`
+</details>
+
+### API changes
+#### Breaking changes
+
+- Changed field `gender` in `sdk.audio.voices.create()`.
+- Removed field `slug` from request in `sdk.audio.voices.create()`.
+- Changed field `gender` in `sdk.audio.voices.update()`.
+- Changed field `gender` in `sdk.audio.voices.update()`.
+
+#### Beta API changes
+
+- Removed beta operations: `sdk.beta.rag.managedIndexes.list()`, `sdk.beta.rag.managedIndexes.create()`, `sdk.beta.rag.managedIndexes.get()`, `sdk.beta.rag.managedIndexes.update()`, `sdk.beta.rag.managedIndexes.delete()`, `sdk.beta.rag.managedIndexes.ingestDocuments()`, `sdk.beta.rag.managedIndexes.deleteDocuments()`, `sdk.beta.rag.managedIndexes.search()`, `sdk.beta.rag.managedIndexes.navigate()`, `sdk.beta.rag.managedIndexes.read()`, `sdk.beta.rag.managedIndexes.grep()`, `sdk.beta.rag.managedIndexes.getChunk()`, `sdk.beta.rag.managedIndexes.getIndexSummary()`, and `sdk.beta.rag.managedIndexes.setIndexSummary()`.
+
+#### Added operations
+
+Stable:
+
+- `sdk.workflows.addWorkflowTags()`
+- `sdk.workflows.deployments.getDeploymentArchive()`
+
+Beta:
+
+- `sdk.beta.context.searchIndexes.list()`
+- `sdk.beta.context.searchIndexes.create()`
+- `sdk.beta.context.searchIndexes.get()`
+- `sdk.beta.context.searchIndexes.update()`
+- `sdk.beta.context.searchIndexes.delete()`
+- `sdk.beta.context.searchIndexes.ingestDocuments()`
+- `sdk.beta.context.searchIndexes.deleteDocuments()`
+- `sdk.beta.context.searchIndexes.search()`
+- `sdk.beta.context.searchIndexes.navigate()`
+- `sdk.beta.context.searchIndexes.read()`
+- `sdk.beta.context.searchIndexes.grep()`
+- `sdk.beta.context.searchIndexes.getChunk()`
+- `sdk.beta.context.searchIndexes.getIndexSummary()`
+- `sdk.beta.context.searchIndexes.setIndexSummary()`
+- `sdk.beta.triggers.list()`
+- `sdk.beta.triggers.create()`
+- `sdk.beta.triggers.get()`
+- `sdk.beta.triggers.delete()`
+- `sdk.beta.triggers.listEvents()`
+- `sdk.beta.webhooks.list()`
+- `sdk.beta.webhooks.create()`
+- `sdk.beta.webhooks.get()`
+- `sdk.beta.webhooks.delete()`
+- `sdk.beta.webhooks.getSigningSecret()`
+
+#### Schema changes
+
+- Added response fields `kind` and `spec` in `sdk.beta.observability.evaluations.runs.search()`, `sdk.beta.observability.evaluations.runs.searchAll()`, `sdk.beta.observability.evaluations.runs.get()`, and `sdk.beta.observability.evaluations.optimizations.listTrials()`.
+- Added response field `serviceAccountId` across beta observability logs, beta observability traces, beta observability spans (8 operations).
+- Added response field `openapiSpec` in `sdk.beta.connectors.list()`, `sdk.beta.connectors.create()`, `sdk.beta.connectors.get()`, and `sdk.beta.connectors.update()`.
+- Added response field `archiveId` across workflows deployments (8 operations).
+- Added field `requestedRoles` across workflows deployments (8 operations).
+- Added request field `archiveId` in `sdk.workflows.deployments.createDeployment()` and `sdk.workflows.deployments.updateDeployment()`.
+- Changed request field `githubUrl` in `sdk.workflows.deployments.createDeployment()`.
+- Changed request field `spec` in `sdk.workflows.deployments.updateDeployment()`.
+
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.796.4 (2.935.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.5.0] .
+### Releases
+- [NPM v3.5.0] https://www.npmjs.com/package/@mistralai/mistralai/v/3.5.0 - .
