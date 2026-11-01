@@ -13,6 +13,7 @@ export type GetSpanEvaluation = {
   organizationId: string;
   workspaceId: string;
   userId: string;
+  serviceAccountId: string;
   traceId: string;
   spanId: string;
   responseId: string;
@@ -34,6 +35,7 @@ export const GetSpanEvaluation$inboundSchema: z.ZodType<
   organization_id: z.string(),
   workspace_id: z.string(),
   user_id: z.string(),
+  service_account_id: z.string().default(""),
   trace_id: z.string(),
   span_id: z.string(),
   response_id: z.string(),
@@ -50,6 +52,7 @@ export const GetSpanEvaluation$inboundSchema: z.ZodType<
     "organization_id": "organizationId",
     "workspace_id": "workspaceId",
     "user_id": "userId",
+    "service_account_id": "serviceAccountId",
     "trace_id": "traceId",
     "span_id": "spanId",
     "response_id": "responseId",

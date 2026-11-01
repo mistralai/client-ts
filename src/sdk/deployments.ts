@@ -5,6 +5,7 @@
 import { workflowsDeploymentsCreateDeployment } from "../funcs/workflowsDeploymentsCreateDeployment.js";
 import { workflowsDeploymentsDeleteDeployment } from "../funcs/workflowsDeploymentsDeleteDeployment.js";
 import { workflowsDeploymentsGetDeployment } from "../funcs/workflowsDeploymentsGetDeployment.js";
+import { workflowsDeploymentsGetDeploymentArchive } from "../funcs/workflowsDeploymentsGetDeploymentArchive.js";
 import { workflowsDeploymentsGetDeploymentLogs } from "../funcs/workflowsDeploymentsGetDeploymentLogs.js";
 import { workflowsDeploymentsListDeployments } from "../funcs/workflowsDeploymentsListDeployments.js";
 import { workflowsDeploymentsListDeploymentWorkers } from "../funcs/workflowsDeploymentsListDeploymentWorkers.js";
@@ -161,6 +162,27 @@ export class Deployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.DeploymentWorkerListResponse> {
     return unwrapAsync(workflowsDeploymentsListDeploymentWorkers(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get Deployment Archive
+   *
+   * @remarks
+   * Get the archive a managed deployment builds from, with a signed URL to download it.
+   *
+   * `download_url` expires within 24 hours, and is null once Mistral Cloud has deleted the archive.
+   * A deployment that builds from a repository answers 404.
+   */
+  async getDeploymentArchive(
+    request:
+      operations.GetDeploymentArchiveV1WorkflowsDeploymentsNameArchiveGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeploymentArchiveResponse> {
+    return unwrapAsync(workflowsDeploymentsGetDeploymentArchive(
       this,
       request,
       options,

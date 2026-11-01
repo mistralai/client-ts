@@ -13,6 +13,7 @@
 * [getWorkflowRegistration](#getworkflowregistration) - Get Workflow Registration
 * [bulkArchiveWorkflows](#bulkarchiveworkflows) - Bulk Archive Workflows
 * [bulkUnarchiveWorkflows](#bulkunarchiveworkflows) - Bulk Unarchive Workflows
+* [addWorkflowTags](#addworkflowtags) - Add Workflow Tags
 * [archiveWorkflow](#archiveworkflow) - Archive Workflow
 * [unarchiveWorkflow](#unarchiveworkflow) - Unarchive Workflow
 
@@ -678,6 +679,86 @@ run();
 ### Response
 
 **Promise\<[components.WorkflowBulkUnarchiveResponse](../../models/components/workflowbulkunarchiveresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## addWorkflowTags
+
+Add Workflow Tags
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="add_workflow_tags_v1_workflows__workflow_identifier__tags_post" method="post" path="/v1/workflows/{workflow_identifier}/tags" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  await mistral.workflows.addWorkflowTags({
+    workflowIdentifier: "<value>",
+    workflowTagsAddRequest: {
+      tags: [],
+    },
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { workflowsAddWorkflowTags } from "@mistralai/mistralai/funcs/workflowsAddWorkflowTags.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await workflowsAddWorkflowTags(mistral, {
+    workflowIdentifier: "<value>",
+    workflowTagsAddRequest: {
+      tags: [],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("workflowsAddWorkflowTags failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.AddWorkflowTagsV1WorkflowsWorkflowIdentifierTagsPostRequest](../../models/operations/addworkflowtagsv1workflowsworkflowidentifiertagspostrequest.md)               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
 
 ### Errors
 

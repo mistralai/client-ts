@@ -6,7 +6,7 @@
 ### `components.BuiltInConnectors`
 
 ```typescript
-const value: components.BuiltInConnectors = "image_generation";
+const value: components.BuiltInConnectors = "document_library";
 ```
 
 ### `string`

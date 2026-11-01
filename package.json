@@ -1,29 +1,23 @@
 {
   "name": "@mistralai/mistralai",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "author": "Mistral AI",
   "description": "TypeScript client library for the Mistral AI API",
   "license": "Apache-2.0",
   "peerDependenciesMeta": {
-    "@opentelemetry/resources": {
+    "@azure/identity": {
       "optional": true
     },
     "@hpcc-js/wasm-zstd": {
       "optional": true
     },
+    "@msgpack/msgpack": {
+      "optional": true
+    },
     "@opentelemetry/api": {
       "optional": true
     },
-    "@opentelemetry/sdk-trace-base": {
-      "optional": true
-    },
     "livekit-client": {
-      "optional": true
-    },
-    "@aws-sdk/client-s3": {
-      "optional": true
-    },
-    "@azure/identity": {
       "optional": true
     },
     "@azure/storage-blob": {
@@ -35,10 +29,16 @@
     "@livekit/rtc-node": {
       "optional": true
     },
-    "@msgpack/msgpack": {
+    "@opentelemetry/exporter-trace-otlp-http": {
       "optional": true
     },
-    "@opentelemetry/exporter-trace-otlp-http": {
+    "@opentelemetry/resources": {
+      "optional": true
+    },
+    "@opentelemetry/sdk-trace-base": {
+      "optional": true
+    },
+    "@aws-sdk/client-s3": {
       "optional": true
     }
   },
@@ -115,9 +115,6 @@
     "@livekit/rtc-node": "^0.13.28",
     "@msgpack/msgpack": "^3.1.3",
     "@opentelemetry/api": "^1.9.0",
-    "@opentelemetry/exporter-trace-otlp-http": "^0.220.0",
-    "@opentelemetry/resources": "^2.12.0",
-    "@opentelemetry/sdk-trace-base": "^2.12.0",
     "@types/node": "^22.0.0",
     "@types/ws": "^8.5.13",
     "@typescript/native-preview": "7.0.0-dev.20260302.1",

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { VoiceGender, VoiceGender$outboundSchema } from "./voicegender.js";
 
 /**
  * Request model for partially updating voice metadata.
@@ -11,7 +12,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type VoiceUpdateRequest = {
   name?: string | null | undefined;
   languages?: Array<string> | null | undefined;
-  gender?: string | null | undefined;
+  gender?: VoiceGender | null | undefined;
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   description?: string | null | undefined;
@@ -36,7 +37,7 @@ export const VoiceUpdateRequest$outboundSchema: z.ZodType<
 > = z.object({
   name: z.nullable(z.string()).optional(),
   languages: z.nullable(z.array(z.string())).optional(),
-  gender: z.nullable(z.string()).optional(),
+  gender: z.nullable(VoiceGender$outboundSchema).optional(),
   age: z.nullable(z.int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   description: z.nullable(z.string()).optional(),

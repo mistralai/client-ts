@@ -14,6 +14,7 @@
 * [startDeployment](#startdeployment) - Start Deployment
 * [restartDeployment](#restartdeployment) - Restart Deployment
 * [listDeploymentWorkers](#listdeploymentworkers) - List Deployment Workers
+* [getDeploymentArchive](#getdeploymentarchive) - Get Deployment Archive
 * [getDeploymentLogs](#getdeploymentlogs) - Get Deployment Logs
 * [streamDeploymentLogs](#streamdeploymentlogs) - Stream Deployment Logs
 
@@ -177,9 +178,7 @@ const mistral = new Mistral({
 async function run() {
   const result = await mistral.workflows.deployments.createDeployment({
     name: "<value>",
-    spec: {
-      githubUrl: "https://ugly-parade.com",
-    },
+    spec: {},
   });
 
   console.log(result);
@@ -205,9 +204,7 @@ const mistral = new MistralCore({
 async function run() {
   const res = await workflowsDeploymentsCreateDeployment(mistral, {
     name: "<value>",
-    spec: {
-      githubUrl: "https://ugly-parade.com",
-    },
+    spec: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -752,6 +749,83 @@ run();
 ### Response
 
 **Promise\<[components.DeploymentWorkerListResponse](../../models/components/deploymentworkerlistresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.HTTPValidationError | 422                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## getDeploymentArchive
+
+Get the archive a managed deployment builds from, with a signed URL to download it.
+
+`download_url` expires within 24 hours, and is null once Mistral Cloud has deleted the archive.
+A deployment that builds from a repository answers 404.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get_deployment_archive_v1_workflows_deployments__name__archive_get" method="get" path="/v1/workflows/deployments/{name}/archive" -->
+```typescript
+import { Mistral } from "@mistralai/mistralai";
+
+const mistral = new Mistral({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await mistral.workflows.deployments.getDeploymentArchive({
+    name: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { MistralCore } from "@mistralai/mistralai/core.js";
+import { workflowsDeploymentsGetDeploymentArchive } from "@mistralai/mistralai/funcs/workflowsDeploymentsGetDeploymentArchive.js";
+
+// Use `MistralCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const mistral = new MistralCore({
+  apiKey: process.env["MISTRAL_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await workflowsDeploymentsGetDeploymentArchive(mistral, {
+    name: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workflowsDeploymentsGetDeploymentArchive failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetDeploymentArchiveV1WorkflowsDeploymentsNameArchiveGetRequest](../../models/operations/getdeploymentarchivev1workflowsdeploymentsnamearchivegetrequest.md)       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.DeploymentArchiveResponse](../../models/components/deploymentarchiveresponse.md)\>**
 
 ### Errors
 
