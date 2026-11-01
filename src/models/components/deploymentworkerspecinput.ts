@@ -11,19 +11,32 @@ import {
 } from "./deploymentmistralcloudbackendspec.js";
 
 export type DeploymentWorkerSpecInput = {
-  githubUrl: string;
+  /**
+   * GitHub repository to build the worker from. Set this or 'archive_id', not both.
+   */
+  githubUrl?: string | null | undefined;
   revision?: string | null | undefined;
+  /**
+   * Mistral Cloud archive to build the worker from instead of a repository. The archive is the whole build context: 'dockerfile_path' is relative to its root, and 'build_directory' must be unset.
+   */
+  archiveId?: string | null | undefined;
   /**
    * Backend-specific configuration for the Mistral Cloud backend.
    */
   backendSpec?: DeploymentMistralCloudBackendSpec | null | undefined;
+  /**
+   * Workspace roles, by name, that the deployment's service account holds beyond `workflow_executor`. Granted only if the deploying user holds them.
+   */
+  requestedRoles?: Array<string> | null | undefined;
 };
 
 /** @internal */
 export type DeploymentWorkerSpecInput$Outbound = {
-  github_url: string;
+  github_url?: string | null | undefined;
   revision?: string | null | undefined;
+  archive_id?: string | null | undefined;
   backend_spec?: DeploymentMistralCloudBackendSpec$Outbound | null | undefined;
+  requested_roles?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -31,14 +44,18 @@ export const DeploymentWorkerSpecInput$outboundSchema: z.ZodType<
   DeploymentWorkerSpecInput$Outbound,
   DeploymentWorkerSpecInput
 > = z.object({
-  githubUrl: z.string(),
+  githubUrl: z.nullable(z.string()).optional(),
   revision: z.nullable(z.string()).optional(),
+  archiveId: z.nullable(z.string()).optional(),
   backendSpec: z.nullable(DeploymentMistralCloudBackendSpec$outboundSchema)
     .optional(),
+  requestedRoles: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     githubUrl: "github_url",
+    archiveId: "archive_id",
     backendSpec: "backend_spec",
+    requestedRoles: "requested_roles",
   });
 });
 

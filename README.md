@@ -322,6 +322,24 @@ We have dedicated SDKs for the following providers:
 * [update](docs/sdks/connectors/README.md#update) - Update a connector.
 * [delete](docs/sdks/connectors/README.md#delete) - Delete a connector.
 
+### [Beta.Context.SearchIndexes](docs/sdks/contextsearchindexes/README.md)
+
+* [create](docs/sdks/contextsearchindexes/README.md#create) - Create a managed index
+* [list](docs/sdks/contextsearchindexes/README.md#list) - List managed indexes
+* [get](docs/sdks/contextsearchindexes/README.md#get) - Get a managed index
+* [update](docs/sdks/contextsearchindexes/README.md#update) - Update a managed index schema
+* [delete](docs/sdks/contextsearchindexes/README.md#delete) - Delete a managed index
+* [ingestDocuments](docs/sdks/contextsearchindexes/README.md#ingestdocuments) - Ingest documents into a managed index
+* [deleteDocuments](docs/sdks/contextsearchindexes/README.md#deletedocuments) - Delete documents from a managed index
+* [search](docs/sdks/contextsearchindexes/README.md#search) - Search a managed index
+* [navigate](docs/sdks/contextsearchindexes/README.md#navigate) - Navigate to adjacent chunks
+* [read](docs/sdks/contextsearchindexes/README.md#read) - Read chunks within a span
+* [grep](docs/sdks/contextsearchindexes/README.md#grep) - Grep for a pattern within a source
+* [getChunk](docs/sdks/contextsearchindexes/README.md#getchunk) - Get a single chunk by id
+* [getIndexSummary](docs/sdks/contextsearchindexes/README.md#getindexsummary) - Get Managed Index Summary
+* [generateIndexSummary](docs/sdks/contextsearchindexes/README.md#generateindexsummary) - Generate a summary field for a managed index
+* [setIndexSummary](docs/sdks/contextsearchindexes/README.md#setindexsummary) - Set Managed Index Summary
+
 ### [Beta.Conversations](docs/sdks/conversations/README.md)
 
 * [start](docs/sdks/conversations/README.md#start) - Create a conversation and append entries to it.
@@ -481,30 +499,12 @@ We have dedicated SDKs for the following providers:
 * [register](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 * [updateRunInfo](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
 
-### [Beta.Rag.ManagedIndexes](docs/sdks/managedindexes/README.md)
+### [Beta.Rag.SearchIndexes](docs/sdks/ragsearchindexes/README.md)
 
-* [create](docs/sdks/managedindexes/README.md#create) - Create a managed index
-* [list](docs/sdks/managedindexes/README.md#list) - List managed indexes
-* [get](docs/sdks/managedindexes/README.md#get) - Get a managed index
-* [update](docs/sdks/managedindexes/README.md#update) - Update a managed index schema
-* [delete](docs/sdks/managedindexes/README.md#delete) - Delete a managed index
-* [ingestDocuments](docs/sdks/managedindexes/README.md#ingestdocuments) - Ingest documents into a managed index
-* [deleteDocuments](docs/sdks/managedindexes/README.md#deletedocuments) - Delete documents from a managed index
-* [search](docs/sdks/managedindexes/README.md#search) - Search a managed index
-* [navigate](docs/sdks/managedindexes/README.md#navigate) - Navigate to adjacent chunks
-* [read](docs/sdks/managedindexes/README.md#read) - Read chunks within a span
-* [grep](docs/sdks/managedindexes/README.md#grep) - Grep for a pattern within a source
-* [getChunk](docs/sdks/managedindexes/README.md#getchunk) - Get a single chunk by id
-* [getIndexSummary](docs/sdks/managedindexes/README.md#getindexsummary) - Get Managed Index Summary
-* [generateIndexSummary](docs/sdks/managedindexes/README.md#generateindexsummary) - Generate a summary field for a managed index
-* [setIndexSummary](docs/sdks/managedindexes/README.md#setindexsummary) - Set Managed Index Summary
-
-### [Beta.Rag.SearchIndexes](docs/sdks/searchindexes/README.md)
-
-* [getDeploymentSummaries](docs/sdks/searchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
-* [registerDeployment](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
-* [unregisterDeployment](docs/sdks/searchindexes/README.md#unregisterdeployment) - Unregister Deployment
-* [updateIndexMetrics](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
+* [getDeploymentSummaries](docs/sdks/ragsearchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
+* [registerDeployment](docs/sdks/ragsearchindexes/README.md#registerdeployment) - Register (or re-register) a search index
+* [unregisterDeployment](docs/sdks/ragsearchindexes/README.md#unregisterdeployment) - Unregister Deployment
+* [updateIndexMetrics](docs/sdks/ragsearchindexes/README.md#updateindexmetrics) - Update Index Metrics
 
 ### [Beta.ServiceAccounts](docs/sdks/serviceaccounts/README.md)
 
@@ -529,12 +529,28 @@ We have dedicated SDKs for the following providers:
 * [getVersion](docs/sdks/skills/README.md#getversion) - GetSkillVersion
 * [updateVersionMetadata](docs/sdks/skills/README.md#updateversionmetadata) - UpdateSkillVersionMetadata
 
+### [Beta.Triggers](docs/sdks/triggers/README.md)
+
+* [create](docs/sdks/triggers/README.md#create) - Create Trigger
+* [list](docs/sdks/triggers/README.md#list) - List Triggers
+* [get](docs/sdks/triggers/README.md#get) - Get Trigger
+* [delete](docs/sdks/triggers/README.md#delete) - Delete Trigger
+* [listEvents](docs/sdks/triggers/README.md#listevents) - List Trigger Events
+
 ### [Beta.Users](docs/sdks/users/README.md)
 
 * [getIdentity](docs/sdks/users/README.md#getidentity) - Get Identity
 * [listOrganizations](docs/sdks/users/README.md#listorganizations) - List Organizations
 * [listWorkspaces](docs/sdks/users/README.md#listworkspaces) - List Workspaces
 * [whoami](docs/sdks/users/README.md#whoami) - Whoami
+
+### [Beta.Webhooks](docs/sdks/webhooks/README.md)
+
+* [list](docs/sdks/webhooks/README.md#list) - List Webhooks
+* [create](docs/sdks/webhooks/README.md#create) - Create Webhook
+* [get](docs/sdks/webhooks/README.md#get) - Get Webhook
+* [delete](docs/sdks/webhooks/README.md#delete) - Delete Webhook
+* [getSigningSecret](docs/sdks/webhooks/README.md#getsigningsecret) - Get Webhook Signing Secret
 
 ### [Chat](docs/sdks/chat/README.md)
 
@@ -604,6 +620,7 @@ We have dedicated SDKs for the following providers:
 * [getWorkflowRegistration](docs/sdks/workflows/README.md#getworkflowregistration) - Get Workflow Registration
 * [bulkArchiveWorkflows](docs/sdks/workflows/README.md#bulkarchiveworkflows) - Bulk Archive Workflows
 * [bulkUnarchiveWorkflows](docs/sdks/workflows/README.md#bulkunarchiveworkflows) - Bulk Unarchive Workflows
+* [addWorkflowTags](docs/sdks/workflows/README.md#addworkflowtags) - Add Workflow Tags
 * [archiveWorkflow](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
 * [unarchiveWorkflow](docs/sdks/workflows/README.md#unarchiveworkflow) - Unarchive Workflow
 
@@ -619,6 +636,7 @@ We have dedicated SDKs for the following providers:
 * [startDeployment](docs/sdks/deployments/README.md#startdeployment) - Start Deployment
 * [restartDeployment](docs/sdks/deployments/README.md#restartdeployment) - Restart Deployment
 * [listDeploymentWorkers](docs/sdks/deployments/README.md#listdeploymentworkers) - List Deployment Workers
+* [getDeploymentArchive](docs/sdks/deployments/README.md#getdeploymentarchive) - Get Deployment Archive
 * [getDeploymentLogs](docs/sdks/deployments/README.md#getdeploymentlogs) - Get Deployment Logs
 * [streamDeploymentLogs](docs/sdks/deployments/README.md#streamdeploymentlogs) - Stream Deployment Logs
 
@@ -734,7 +752,7 @@ const mistral = new Mistral({
 });
 
 async function run() {
-  const result = await mistral.beta.rag.managedIndexes.generateIndexSummary({
+  const result = await mistral.beta.context.searchIndexes.generateIndexSummary({
     language: "en",
     indexName: "<value>",
   });
@@ -959,8 +977,8 @@ run();
 
 
 **Inherit from [`MistralError`](./src/models/errors/mistralerror.ts)**:
-* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 178 of 290 methods.*
-* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 65 of 290 methods.*
+* [`HTTPValidationError`](./src/models/errors/httpvalidationerror.ts): Validation Error. Status code `422`. Applicable to 189 of 302 methods.*
+* [`ObservabilityError`](./src/models/errors/observabilityerror.ts): Bad Request - Invalid request parameters or data. Applicable to 65 of 302 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1204,6 +1222,21 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaConnectorsUnshareFromOrganization`](docs/sdks/connectors/README.md#unsharefromorganization) - Unshare a connector from the current organization.
 - [`betaConnectorsUpdate`](docs/sdks/connectors/README.md#update) - Update a connector.
 - [`betaConnectorsUpdateCredentials`](docs/sdks/connectors/README.md#updatecredentials) - Create or update consumer credentials for a connector.
+- [`betaContextSearchIndexesCreate`](docs/sdks/contextsearchindexes/README.md#create) - Create a managed index
+- [`betaContextSearchIndexesDelete`](docs/sdks/contextsearchindexes/README.md#delete) - Delete a managed index
+- [`betaContextSearchIndexesDeleteDocuments`](docs/sdks/contextsearchindexes/README.md#deletedocuments) - Delete documents from a managed index
+- [`betaContextSearchIndexesGenerateIndexSummary`](docs/sdks/contextsearchindexes/README.md#generateindexsummary) - Generate a summary field for a managed index
+- [`betaContextSearchIndexesGet`](docs/sdks/contextsearchindexes/README.md#get) - Get a managed index
+- [`betaContextSearchIndexesGetChunk`](docs/sdks/contextsearchindexes/README.md#getchunk) - Get a single chunk by id
+- [`betaContextSearchIndexesGetIndexSummary`](docs/sdks/contextsearchindexes/README.md#getindexsummary) - Get Managed Index Summary
+- [`betaContextSearchIndexesGrep`](docs/sdks/contextsearchindexes/README.md#grep) - Grep for a pattern within a source
+- [`betaContextSearchIndexesIngestDocuments`](docs/sdks/contextsearchindexes/README.md#ingestdocuments) - Ingest documents into a managed index
+- [`betaContextSearchIndexesList`](docs/sdks/contextsearchindexes/README.md#list) - List managed indexes
+- [`betaContextSearchIndexesNavigate`](docs/sdks/contextsearchindexes/README.md#navigate) - Navigate to adjacent chunks
+- [`betaContextSearchIndexesRead`](docs/sdks/contextsearchindexes/README.md#read) - Read chunks within a span
+- [`betaContextSearchIndexesSearch`](docs/sdks/contextsearchindexes/README.md#search) - Search a managed index
+- [`betaContextSearchIndexesSetIndexSummary`](docs/sdks/contextsearchindexes/README.md#setindexsummary) - Set Managed Index Summary
+- [`betaContextSearchIndexesUpdate`](docs/sdks/contextsearchindexes/README.md#update) - Update a managed index schema
 - [`betaConversationsAppend`](docs/sdks/conversations/README.md#append) - Append new entries to an existing conversation.
 - [`betaConversationsAppendStream`](docs/sdks/conversations/README.md#appendstream) - Append new entries to an existing conversation.
 - [`betaConversationsDelete`](docs/sdks/conversations/README.md#delete) - Delete a conversation.
@@ -1310,25 +1343,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaRagIngestionPipelineConfigurationsList`](docs/sdks/ingestionpipelineconfigurations/README.md#list) - List ingestion pipeline configurations
 - [`betaRagIngestionPipelineConfigurationsRegister`](docs/sdks/ingestionpipelineconfigurations/README.md#register) - Register Config
 - [`betaRagIngestionPipelineConfigurationsUpdateRunInfo`](docs/sdks/ingestionpipelineconfigurations/README.md#updateruninfo) - Update Run Info
-- [`betaRagManagedIndexesCreate`](docs/sdks/managedindexes/README.md#create) - Create a managed index
-- [`betaRagManagedIndexesDelete`](docs/sdks/managedindexes/README.md#delete) - Delete a managed index
-- [`betaRagManagedIndexesDeleteDocuments`](docs/sdks/managedindexes/README.md#deletedocuments) - Delete documents from a managed index
-- [`betaRagManagedIndexesGenerateIndexSummary`](docs/sdks/managedindexes/README.md#generateindexsummary) - Generate a summary field for a managed index
-- [`betaRagManagedIndexesGet`](docs/sdks/managedindexes/README.md#get) - Get a managed index
-- [`betaRagManagedIndexesGetChunk`](docs/sdks/managedindexes/README.md#getchunk) - Get a single chunk by id
-- [`betaRagManagedIndexesGetIndexSummary`](docs/sdks/managedindexes/README.md#getindexsummary) - Get Managed Index Summary
-- [`betaRagManagedIndexesGrep`](docs/sdks/managedindexes/README.md#grep) - Grep for a pattern within a source
-- [`betaRagManagedIndexesIngestDocuments`](docs/sdks/managedindexes/README.md#ingestdocuments) - Ingest documents into a managed index
-- [`betaRagManagedIndexesList`](docs/sdks/managedindexes/README.md#list) - List managed indexes
-- [`betaRagManagedIndexesNavigate`](docs/sdks/managedindexes/README.md#navigate) - Navigate to adjacent chunks
-- [`betaRagManagedIndexesRead`](docs/sdks/managedindexes/README.md#read) - Read chunks within a span
-- [`betaRagManagedIndexesSearch`](docs/sdks/managedindexes/README.md#search) - Search a managed index
-- [`betaRagManagedIndexesSetIndexSummary`](docs/sdks/managedindexes/README.md#setindexsummary) - Set Managed Index Summary
-- [`betaRagManagedIndexesUpdate`](docs/sdks/managedindexes/README.md#update) - Update a managed index schema
-- [`betaRagSearchIndexesGetDeploymentSummaries`](docs/sdks/searchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
-- [`betaRagSearchIndexesRegisterDeployment`](docs/sdks/searchindexes/README.md#registerdeployment) - Register (or re-register) a search index
-- [`betaRagSearchIndexesUnregisterDeployment`](docs/sdks/searchindexes/README.md#unregisterdeployment) - Unregister Deployment
-- [`betaRagSearchIndexesUpdateIndexMetrics`](docs/sdks/searchindexes/README.md#updateindexmetrics) - Update Index Metrics
+- [`betaRagSearchIndexesGetDeploymentSummaries`](docs/sdks/ragsearchindexes/README.md#getdeploymentsummaries) - Get Deployment Summaries
+- [`betaRagSearchIndexesRegisterDeployment`](docs/sdks/ragsearchindexes/README.md#registerdeployment) - Register (or re-register) a search index
+- [`betaRagSearchIndexesUnregisterDeployment`](docs/sdks/ragsearchindexes/README.md#unregisterdeployment) - Unregister Deployment
+- [`betaRagSearchIndexesUpdateIndexMetrics`](docs/sdks/ragsearchindexes/README.md#updateindexmetrics) - Update Index Metrics
 - [`betaServiceAccountsCreate`](docs/sdks/serviceaccounts/README.md#create) - Create Service Account
 - [`betaServiceAccountsDelete`](docs/sdks/serviceaccounts/README.md#delete) - Delete Service Account
 - [`betaServiceAccountsGet`](docs/sdks/serviceaccounts/README.md#get) - Get Service Account
@@ -1346,10 +1364,20 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`betaSkillsListVersions`](docs/sdks/skills/README.md#listversions) - ListSkillVersions
 - [`betaSkillsUpdateMetadata`](docs/sdks/skills/README.md#updatemetadata) - UpdateSkill
 - [`betaSkillsUpdateVersionMetadata`](docs/sdks/skills/README.md#updateversionmetadata) - UpdateSkillVersionMetadata
+- [`betaTriggersCreate`](docs/sdks/triggers/README.md#create) - Create Trigger
+- [`betaTriggersDelete`](docs/sdks/triggers/README.md#delete) - Delete Trigger
+- [`betaTriggersGet`](docs/sdks/triggers/README.md#get) - Get Trigger
+- [`betaTriggersList`](docs/sdks/triggers/README.md#list) - List Triggers
+- [`betaTriggersListEvents`](docs/sdks/triggers/README.md#listevents) - List Trigger Events
 - [`betaUsersGetIdentity`](docs/sdks/users/README.md#getidentity) - Get Identity
 - [`betaUsersListOrganizations`](docs/sdks/users/README.md#listorganizations) - List Organizations
 - [`betaUsersListWorkspaces`](docs/sdks/users/README.md#listworkspaces) - List Workspaces
 - [`betaUsersWhoami`](docs/sdks/users/README.md#whoami) - Whoami
+- [`betaWebhooksCreate`](docs/sdks/webhooks/README.md#create) - Create Webhook
+- [`betaWebhooksDelete`](docs/sdks/webhooks/README.md#delete) - Delete Webhook
+- [`betaWebhooksGet`](docs/sdks/webhooks/README.md#get) - Get Webhook
+- [`betaWebhooksGetSigningSecret`](docs/sdks/webhooks/README.md#getsigningsecret) - Get Webhook Signing Secret
+- [`betaWebhooksList`](docs/sdks/webhooks/README.md#list) - List Webhooks
 - [`chatComplete`](docs/sdks/chat/README.md#complete) - Chat Completion
 - [`chatStream`](docs/sdks/chat/README.md#stream) - Stream chat completion
 - [`classifiersClassify`](docs/sdks/classifiers/README.md#classify) - Classifications
@@ -1379,12 +1407,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`realtimeSessionsCreate`](docs/sdks/realtimesessions/README.md#create) - Create Client Session
 - [`responsesCountInputTokens`](docs/sdks/responses/README.md#countinputtokens) - Count Input Tokens
 - [`responsesCreate`](docs/sdks/responses/README.md#create) - Create Response
+- [`workflowsAddWorkflowTags`](docs/sdks/workflows/README.md#addworkflowtags) - Add Workflow Tags
 - [`workflowsArchiveWorkflow`](docs/sdks/workflows/README.md#archiveworkflow) - Archive Workflow
 - [`workflowsBulkArchiveWorkflows`](docs/sdks/workflows/README.md#bulkarchiveworkflows) - Bulk Archive Workflows
 - [`workflowsBulkUnarchiveWorkflows`](docs/sdks/workflows/README.md#bulkunarchiveworkflows) - Bulk Unarchive Workflows
 - [`workflowsDeploymentsCreateDeployment`](docs/sdks/deployments/README.md#createdeployment) - Create Deployment
 - [`workflowsDeploymentsDeleteDeployment`](docs/sdks/deployments/README.md#deletedeployment) - Delete Deployment
 - [`workflowsDeploymentsGetDeployment`](docs/sdks/deployments/README.md#getdeployment) - Get Deployment
+- [`workflowsDeploymentsGetDeploymentArchive`](docs/sdks/deployments/README.md#getdeploymentarchive) - Get Deployment Archive
 - [`workflowsDeploymentsGetDeploymentLogs`](docs/sdks/deployments/README.md#getdeploymentlogs) - Get Deployment Logs
 - [`workflowsDeploymentsListDeployments`](docs/sdks/deployments/README.md#listdeployments) - List Deployments
 - [`workflowsDeploymentsListDeploymentWorkers`](docs/sdks/deployments/README.md#listdeploymentworkers) - List Deployment Workers
@@ -1501,8 +1531,6 @@ const response = await client.chat.complete({
 });
 ```
 
-In dedicated mode, traces go to `/telemetry/v1/traces` on the client's `serverURL` if one is set (e.g. a self-hosted or other non-default deployment), otherwise to `https://api.mistral.ai`, including for the named `eu`/`us` servers. Set `MISTRAL_OTLP_TRACES_ENDPOINT` to send traces to a separate collector.
-
 ### Provider modes
 
 `configureTelemetry(client, provider)` selects where spans go and who owns the export pipeline:
@@ -1587,7 +1615,7 @@ await configureTelemetry(client, "dedicated", {
 | Variable | Description | Default |
 | -------- | ----------- | ------- |
 | `MISTRAL_SDK_TELEMETRY` | Auto-enable telemetry: `dedicated`, `global`, or `false`. | unset (disabled) |
-| `MISTRAL_OTLP_TRACES_ENDPOINT` | Override the OTLP traces endpoint used in dedicated mode. | Client `serverURL` + `/telemetry/v1/traces` if set, otherwise `https://api.mistral.ai/telemetry/v1/traces` |
+| `MISTRAL_OTLP_TRACES_ENDPOINT` | Override the OTLP traces endpoint used in dedicated mode. | `https://api.mistral.ai/telemetry/v1/traces` |
 | `MISTRAL_API_KEY` | Used as the bearer token for the dedicated-mode exporter. | — |
 
 Runnable examples live in [`examples/src/observability`](/examples/src/observability).

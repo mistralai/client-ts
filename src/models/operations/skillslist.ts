@@ -13,6 +13,9 @@ export type SkillsListRequest = {
   pageSize?: number | undefined;
   pageToken?: string | undefined;
   alias?: string | undefined;
+  /**
+   * Projection over each listed Skill. definition.description is the only definition path a list accepts; body and assets are read one skill at a time with GetSkill.
+   */
   fields?: Array<string> | undefined;
   /**
    * Defaults to created_at when omitted.

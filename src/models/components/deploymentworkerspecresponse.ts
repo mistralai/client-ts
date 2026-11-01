@@ -32,9 +32,16 @@ export type BackendSpec =
   | discriminatedUnionTypes.Unknown<"type">;
 
 export type DeploymentWorkerSpecResponse = {
+  /**
+   * GitHub repository the worker builds from. Empty for a worker built from an archive.
+   */
   githubUrl: string;
   type: string;
   revision?: string | null | undefined;
+  /**
+   * Archive the worker builds from, if any.
+   */
+  archiveId?: string | null | undefined;
   /**
    * Backend-specific configuration. 'mistral_cloud' is Mistral Cloud; 'kubernetes' is a deployment that already runs on Kubernetes.
    */
@@ -45,6 +52,7 @@ export type DeploymentWorkerSpecResponse = {
     | discriminatedUnionTypes.Unknown<"type">;
   restartedAt?: string | null | undefined;
   commit?: GitCommitMetadata | null | undefined;
+  requestedRoles?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -77,6 +85,7 @@ export const DeploymentWorkerSpecResponse$inboundSchema: z.ZodType<
   github_url: z.string(),
   type: z.string().default("workflows_worker"),
   revision: z.nullable(z.string()).optional(),
+  archive_id: z.nullable(z.string()).optional(),
   backend_spec: discriminatedUnion("type", {
     koyeb: DeploymentMistralCloudBackendSpec$inboundSchema.and(
       z.object({ type: z.literal("koyeb") }),
@@ -88,11 +97,14 @@ export const DeploymentWorkerSpecResponse$inboundSchema: z.ZodType<
   }),
   restarted_at: z.nullable(z.string()).optional(),
   commit: z.nullable(GitCommitMetadata$inboundSchema).optional(),
+  requested_roles: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "github_url": "githubUrl",
+    "archive_id": "archiveId",
     "backend_spec": "backendSpec",
     "restarted_at": "restartedAt",
+    "requested_roles": "requestedRoles",
   });
 });
 

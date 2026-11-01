@@ -18,6 +18,8 @@ export type SystemV2 = {
   deletedAt: Date | null;
   name: string;
   params: { [k: string]: string | number | number | boolean };
+  kind: string;
+  spec?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -51,6 +53,8 @@ export const SystemV2$inboundSchema: z.ZodType<SystemV2, unknown> = z.object({
     z.string(),
     smartUnion([z.string(), z.int(), z.number(), z.boolean()]),
   ),
+  kind: z.string().default("custom"),
+  spec: z.nullable(z.record(z.string(), z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

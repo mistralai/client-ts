@@ -21,6 +21,7 @@ export type GetTrace = {
   organizationId: string;
   workspaceId: string;
   userId: string;
+  serviceAccountId: string;
   traceId: string;
   rootSpanId: string;
   rootSpanName: string;
@@ -65,6 +66,7 @@ export const GetTrace$inboundSchema: z.ZodType<GetTrace, unknown> = z.object({
   organization_id: z.string(),
   workspace_id: z.string(),
   user_id: z.string(),
+  service_account_id: z.string().default(""),
   trace_id: z.string(),
   root_span_id: z.string(),
   root_span_name: z.string(),
@@ -101,6 +103,7 @@ export const GetTrace$inboundSchema: z.ZodType<GetTrace, unknown> = z.object({
     "organization_id": "organizationId",
     "workspace_id": "workspaceId",
     "user_id": "userId",
+    "service_account_id": "serviceAccountId",
     "trace_id": "traceId",
     "root_span_id": "rootSpanId",
     "root_span_name": "rootSpanName",

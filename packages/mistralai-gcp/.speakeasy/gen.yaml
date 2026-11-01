@@ -30,19 +30,21 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 2.0.0
+  version: 2.1.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
       google-auth-library: ^10.6.2
       zod: ^4.3.6
-    devDependencies: {}
+    devDependencies:
+      oxlint: 1.78.0
     peerDependencies: {}
   additionalPackageJSON:
     description: TypeScript client library for Mistral AI on Google Cloud
     license: Apache-2.0
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
   author: Mistral AI
   baseErrorName: MistralGCPError
   clientServerStatusCodesAsErrors: true
@@ -52,6 +54,7 @@ typescript:
   enableMCPServer: false
   enableReactQuery: false
   enumFormat: union
+  eventStreamClassName: EventStream
   exportZodModelNamespace: false
   fixEnumNameSanitization: false
   flatAdditionalProperties: true
@@ -83,6 +86,8 @@ typescript:
   packageName: '@mistralai/mistralai-gcp'
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
+  requestExtras: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2

@@ -4,15 +4,15 @@
 
 import * as z from "zod/v4";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { VoiceGender, VoiceGender$outboundSchema } from "./voicegender.js";
 
 /**
  * Request model for creating a new voice with base64 audio.
  */
 export type VoiceCreateRequest = {
   name: string;
-  slug?: string | null | undefined;
   languages?: Array<string> | undefined;
-  gender?: string | null | undefined;
+  gender?: VoiceGender | null | undefined;
   age?: number | null | undefined;
   tags?: Array<string> | null | undefined;
   color?: string | null | undefined;
@@ -31,7 +31,6 @@ export type VoiceCreateRequest = {
 /** @internal */
 export type VoiceCreateRequest$Outbound = {
   name: string;
-  slug?: string | null | undefined;
   languages?: Array<string> | undefined;
   gender?: string | null | undefined;
   age?: number | null | undefined;
@@ -49,9 +48,8 @@ export const VoiceCreateRequest$outboundSchema: z.ZodType<
   VoiceCreateRequest
 > = z.object({
   name: z.string(),
-  slug: z.nullable(z.string()).optional(),
   languages: z.array(z.string()).optional(),
-  gender: z.nullable(z.string()).optional(),
+  gender: z.nullable(VoiceGender$outboundSchema).optional(),
   age: z.nullable(z.int()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   color: z.nullable(z.string()).optional(),

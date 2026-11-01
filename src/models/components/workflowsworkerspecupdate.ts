@@ -14,16 +14,26 @@ export type WorkflowsWorkerSpecUpdate = {
   githubUrl?: string | null | undefined;
   revision?: string | null | undefined;
   /**
+   * Rebuild the worker from this archive, dropping 'github_url' and 'revision'. Sending 'github_url' instead moves it back to a repository.
+   */
+  archiveId?: string | null | undefined;
+  /**
    * Backend-specific configuration for the Mistral Cloud backend.
    */
   backendSpec?: DeploymentMistralCloudBackendSpec | null | undefined;
+  /**
+   * The complete workspace-role set after the update, beyond `workflow_executor`. Replaces the current roles; omit it to leave them unchanged, send an empty list to drop all extras. Granted only if the deploying user holds them.
+   */
+  requestedRoles?: Array<string> | null | undefined;
 };
 
 /** @internal */
 export type WorkflowsWorkerSpecUpdate$Outbound = {
   github_url?: string | null | undefined;
   revision?: string | null | undefined;
+  archive_id?: string | null | undefined;
   backend_spec?: DeploymentMistralCloudBackendSpec$Outbound | null | undefined;
+  requested_roles?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -33,12 +43,16 @@ export const WorkflowsWorkerSpecUpdate$outboundSchema: z.ZodType<
 > = z.object({
   githubUrl: z.nullable(z.string()).optional(),
   revision: z.nullable(z.string()).optional(),
+  archiveId: z.nullable(z.string()).optional(),
   backendSpec: z.nullable(DeploymentMistralCloudBackendSpec$outboundSchema)
     .optional(),
+  requestedRoles: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     githubUrl: "github_url",
+    archiveId: "archive_id",
     backendSpec: "backend_spec",
+    requestedRoles: "requested_roles",
   });
 });
 

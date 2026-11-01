@@ -13,6 +13,7 @@ export type GetLog = {
   organizationId: string;
   workspaceId: string;
   userId: string;
+  serviceAccountId: string;
   timestamp: Date;
   traceId: string;
   spanId: string;
@@ -37,6 +38,7 @@ export const GetLog$inboundSchema: z.ZodType<GetLog, unknown> = z.object({
   organization_id: z.string(),
   workspace_id: z.string(),
   user_id: z.string(),
+  service_account_id: z.string().default(""),
   timestamp: z.iso.datetime({ offset: true }).transform(v => new Date(v)),
   trace_id: z.string(),
   span_id: z.string(),
@@ -59,6 +61,7 @@ export const GetLog$inboundSchema: z.ZodType<GetLog, unknown> = z.object({
     "organization_id": "organizationId",
     "workspace_id": "workspaceId",
     "user_id": "userId",
+    "service_account_id": "serviceAccountId",
     "trace_id": "traceId",
     "span_id": "spanId",
     "trace_flags": "traceFlags",
