@@ -37,11 +37,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: "24"
+          node-version-file: .nvmrc
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npx -y -p npm@11.15.0 npm install --ignore-scripts --min-release-age=2
+        run: npm install --ignore-scripts --min-release-age=2
 
       - name: Build package
         run: npm run build
@@ -62,7 +62,7 @@ jobs:
           fi
 
           echo "Staging under dist-tag: $TAG"
-          npx -y -p npm@11.15.0 npm stage publish --tag "$TAG" --access public --provenance
+          npm stage publish --tag "$TAG" --access public --provenance
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
